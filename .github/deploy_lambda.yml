@@ -1,0 +1,51 @@
+name: 🚀 Deploy RomaChatHandler to AWS
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    name: Deploy Roma Lambda
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: 📦 Install Dependencies & Package Lambda
+        run: |
+          mkdir -p package
+
+          pip install --platform manylinux2014_x86_64 \
+                      --target package/ \
+                      --implementation cp \
+                      --python-version 3.11 \
+                      --only-binary=:all: \
+                      --upgrade -r requirements.txt
+
+          cp -r src package/src
+
+          # ✅ Copy Lambda handler to package root
+          cp src/lambda_chat_handler.py package/
+
+          cd package
+          zip -r ../deployment.zip . -x "**/__pycache__/*" "*.git*"
+
+      - name: 🔑 Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ vars.AWS_REGION }}
+
+      - name: 🚀 Deploy RomaChatHandler
+        run: |
+          aws lambda update-function-code \
+            --function-name ${{ vars.LAMBDA_ROMA_HANDLER_NAME }} \
+            --zip-file fileb://deployment.zip \
+            --region ${{ vars.AWS_REGION }}
+
+      - name: ✅ Deployment Complete
+        run: echo "RomaChatHandler successfully deployed!"

@@ -1,0 +1,46 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+
+# Environment variables
+.env
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# IDEs
+.vscode/
+.idea/
+
+# Byte-compiled / cache
+*.egg-info/
+.eggs/
+*.log
+
+# AWS & deployment
+.aws-sam/
+.build/
+dist/
+package.zip
+
+# Pip dependency lock files (optional)
+Pipfile.lock
+poetry.lock
+
+# Test coverage
+htmlcov/
+coverage.xml
+.cache/
+
+# PyInstaller
+*.spec
