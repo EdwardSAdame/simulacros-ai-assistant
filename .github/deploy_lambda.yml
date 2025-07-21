@@ -4,6 +4,10 @@ on:
   push:
     branches:
       - main
+    paths:
+      - "src/**"
+      - "requirements.txt"
+      - ".github/workflows/deploy_lambda.yml"
 
 jobs:
   deploy:
@@ -25,10 +29,8 @@ jobs:
                       --only-binary=:all: \
                       --upgrade -r requirements.txt
 
-          cp -r src package/src
-
-          # ✅ Copy Lambda handler to package root
-          cp src/lambda_chat_handler.py package/
+          # ✅ Copy all contents of src/ directly into package/
+          cp -r src/* package/
 
           cd package
           zip -r ../deployment.zip . -x "**/__pycache__/*" "*.git*"
