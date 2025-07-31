@@ -1,7 +1,8 @@
 from src.assistant.assistant_client import send_message_to_assistant
 from src.assistant.thread_manager import get_or_create_thread
 from src.assistant.file_uploader import upload_file_if_needed
-from src.storage.conversations_table import save_conversation  # ✅ Import new module
+from src.storage.conversations_table import save_conversation
+from src.storage.messages_table import save_message  # ✅ New import
 
 def get_ai_response(message, file_url, user_id, name, email, page, thread_id=None):
     """
@@ -37,5 +38,10 @@ def get_ai_response(message, file_url, user_id, name, email, page, thread_id=Non
         page=page
     )
 
-    # Step 5: Return reply, thread ID, and conversation ID
-    return assistant_reply, thread_id, conversation_data["ConversationId"]
+    # ✅ Step 5: Save messages to DynamoDB
+    conversation_id = conversation_data["ConversationId"]
+    save_message(conversation_id, role="user", message_text=message)
+    save_message(conversation_id, role="assistant", message_text=assistant_reply)
+
+    # Step 6: Return reply, thread ID, and conversation ID
+    return assistant_reply, thread_id, conversation_id
