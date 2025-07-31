@@ -22,6 +22,7 @@ jobs:
         run: |
           mkdir -p package
 
+          # ✅ Install dependencies with Lambda-compatible binaries
           pip install --platform manylinux2014_x86_64 \
                       --target package/ \
                       --implementation cp \
@@ -29,9 +30,13 @@ jobs:
                       --only-binary=:all: \
                       --upgrade -r requirements.txt
 
-          # ✅ Copy all contents of src/ directly into package/
-          cp -r src/* package/
+          # ✅ Copy the full src folder (preserve module structure)
+          cp -r src package/src
 
+          # ✅ Copy the Lambda entrypoint to the root of ZIP
+          cp src/lambda_chat_handler.py package/
+
+          # ✅ Create zip
           cd package
           zip -r ../deployment.zip . -x "**/__pycache__/*" "*.git*"
 
