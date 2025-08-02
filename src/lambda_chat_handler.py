@@ -12,26 +12,29 @@ def lambda_handler(event, context):
         # Parse request body
         body = json.loads(event.get("body", "{}"))
 
-        message = body.get("message")          # User input (text)
-        file_url = body.get("fileUrl")         # Optional (audio/image)
-        user_id = body.get("userId")           # null for guests
-        name = body.get("name")                # ✅ New: user's name
-        email = body.get("email")              # ✅ New: user's email
-        page = body.get("page")                # Page path (e.g., "/simulacro-icfes/ingles")
-        thread_id = body.get("threadId")       # null for new thread
+        message = body.get("message")              # Optional text
+        image_urls = body.get("imageUrls", [])     # Optional list of image URLs
+        audio_url = body.get("audioUrl")           # Optional single audio URL
+        user_id = body.get("userId")               # Null for guests
+        name = body.get("name")
+        email = body.get("email")
+        page = body.get("page")
+        thread_id = body.get("threadId")           # Optional thread reuse
 
-        if not message and not file_url:
-            return response(400, {"error": "Missing message or fileUrl"})
+        # Validate input: at least one of the three must be present
+        if not message and not image_urls and not audio_url:
+            return response(400, {"error": "Missing message, imageUrls, or audioUrl"})
 
-        # Get AI response + thread info + conversation metadata
+        # Call service layer
         ai_reply, new_thread_id, conversation_id = get_ai_response(
             message=message,
-            file_url=file_url,
             user_id=user_id,
             name=name,
             email=email,
             page=page,
-            thread_id=thread_id
+            thread_id=thread_id,
+            image_urls=image_urls,
+            audio_url=audio_url
         )
 
         return response(200, {
