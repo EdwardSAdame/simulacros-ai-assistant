@@ -1,6 +1,7 @@
 import json
 import logging
 from src.services.chat_service import get_ai_response
+from src.utils.logging_utils import log_event  # ✅ Structured logger
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
@@ -9,7 +10,10 @@ def lambda_handler(event, context):
     """
     Triggered by SQS DLQ messages. Reprocesses failed chatbot requests.
     """
-    logger.info("🔁 DLQ event received: %s", json.dumps(event))
+
+    log_event("dlq_event_received", {
+        "record_count": len(event.get("Records", []))
+    })
 
     for record in event.get("Records", []):
         try:
@@ -26,7 +30,10 @@ def lambda_handler(event, context):
             thread_id = body.get("threadId")
 
             if not message and not image_urls and not audio_url:
-                logger.warning("🟡 Skipping invalid DLQ message: %s", record["body"])
+                log_event("dlq_skipped_message", {
+                    "reason": "No valid content",
+                    "payload": body
+                }, level="warning")
                 continue
 
             # Retry processing the failed message
@@ -41,7 +48,15 @@ def lambda_handler(event, context):
                 audio_url=audio_url
             )
 
-            logger.info("✅ Reprocessed DLQ message successfully. Reply: %s", ai_reply)
+            log_event("dlq_reprocess_success", {
+                "user_id": user_id,
+                "page": page,
+                "conversation_id": conversation_id,
+                "reply_snippet": ai_reply[:100]
+            })
 
         except Exception as e:
-            logger.exception("❌ Failed to reprocess DLQ message: %s", record["body"])
+            log_event("dlq_reprocess_failed", {
+                "error": str(e),
+                "record": record.get("body")
+            }, level="error")

@@ -1,13 +1,18 @@
 import json
 import logging
 from src.services.chat_service import get_ai_response
+from src.utils.logging_utils import log_event  # ✅ NEW: structured logger
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
 def lambda_handler(event, context):
     try:
-        logger.info("Event received: %s", event)
+        # Log raw event
+        log_event("lambda_invocation", {
+            "source": "RomaChatHandler",
+            "event": event
+        })
 
         # Parse request body
         body = json.loads(event.get("body", "{}"))
@@ -23,6 +28,11 @@ def lambda_handler(event, context):
 
         # Validate input: at least one of the three must be present
         if not message and not image_urls and not audio_url:
+            log_event("input_validation_failed", {
+                "message": message,
+                "image_urls": image_urls,
+                "audio_url": audio_url
+            }, level="warning")
             return response(400, {"error": "Missing message, imageUrls, or audioUrl"})
 
         # Call service layer
@@ -37,6 +47,13 @@ def lambda_handler(event, context):
             audio_url=audio_url
         )
 
+        log_event("chat_response_success", {
+            "user_id": user_id,
+            "thread_id": new_thread_id,
+            "conversation_id": conversation_id,
+            "reply_snippet": ai_reply[:100]
+        })
+
         return response(200, {
             "reply": ai_reply,
             "threadId": new_thread_id,
@@ -44,7 +61,9 @@ def lambda_handler(event, context):
         })
 
     except Exception as e:
-        logger.exception("Error in lambda_handler")
+        log_event("lambda_exception", {
+            "error": str(e)
+        }, level="error")
         return response(500, {"error": str(e)})
 
 def response(status_code, body):
