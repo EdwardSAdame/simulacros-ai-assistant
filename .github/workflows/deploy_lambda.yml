@@ -1,4 +1,4 @@
-name: 🚀 Deploy RomaChatHandler to AWS
+name: 🚀 Deploy Roma Chatbot Functions to AWS
 
 on:
   push:
@@ -11,7 +11,7 @@ on:
 
 jobs:
   deploy:
-    name: Deploy Roma Lambda
+    name: Deploy Roma Lambda Functions
     runs-on: ubuntu-latest
 
     steps:
@@ -22,7 +22,6 @@ jobs:
         run: |
           mkdir -p package
 
-          # ✅ Install dependencies with Lambda-compatible binaries
           pip install --platform manylinux2014_x86_64 \
                       --target package/ \
                       --implementation cp \
@@ -30,13 +29,12 @@ jobs:
                       --only-binary=:all: \
                       --upgrade -r requirements.txt
 
-          # ✅ Copy the full src folder (preserve module structure)
           cp -r src package/src
 
-          # ✅ Copy the Lambda entrypoint to the root of ZIP
+          # Copy BOTH Lambda entrypoints
           cp src/lambda_chat_handler.py package/
+          cp src/lambda_dlq_reprocessor.py package/
 
-          # ✅ Create zip
           cd package
           zip -r ../deployment.zip . -x "**/__pycache__/*" "*.git*"
 
@@ -54,5 +52,12 @@ jobs:
             --zip-file fileb://deployment.zip \
             --region ${{ vars.AWS_REGION }}
 
+      - name: 🚀 Deploy RomaDLQReprocessor
+        run: |
+          aws lambda update-function-code \
+            --function-name ${{ vars.LAMBDA_ROMA_DLQ_NAME }} \
+            --zip-file fileb://deployment.zip \
+            --region ${{ vars.AWS_REGION }}
+
       - name: ✅ Deployment Complete
-        run: echo "RomaChatHandler successfully deployed!"
+        run: echo "Both Roma Lambda functions deployed successfully!"
