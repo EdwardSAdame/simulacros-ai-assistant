@@ -1,5 +1,3 @@
-# src/assistant/image_handler.py
-
 def format_image_urls_for_openai(image_urls: list[str]) -> list[dict]:
     """
     Formats image URLs into OpenAI-compatible content blocks.
