@@ -2,24 +2,30 @@
 
 import boto3
 from datetime import datetime
-import uuid
 
 # DynamoDB setup
 dynamodb = boto3.resource("dynamodb")
 table = dynamodb.Table("ConversationMessages")
 
-def save_message(conversation_id, role, message_text):
+def save_message(conversation_id: str, role: str, message_text: str, thread_id: str):
     """
-    Saves a single message to the ConversationMessages table.
-    Role can be 'user' or 'assistant'.
+    Save a single message to the ConversationMessages table.
+
+    PK  = ConversationId
+    SK  = Timestamp (ISO8601)
+    Attrs: Role ('user' | 'assistant'), MessageText, ThreadId
+
+    Adding ThreadId lets you later create a GSI (ThreadId, Timestamp)
+    to fetch a whole thread in one query.
     """
     timestamp = datetime.utcnow().isoformat()
 
     item = {
-        "ConversationId": conversation_id,  # Partition key
-        "Timestamp": timestamp,             # Sort key
+        "ConversationId": conversation_id,  # PK
+        "Timestamp": timestamp,             # SK
         "Role": role,
-        "MessageText": message_text
+        "MessageText": message_text,
+        "ThreadId": thread_id               # ✅ new attribute
     }
 
     table.put_item(Item=item)
