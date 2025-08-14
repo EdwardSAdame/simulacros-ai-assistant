@@ -101,7 +101,7 @@ def get_ai_response(
         content_parts.append({"type": "text", "text": f"Transcripción del audio: {audio_text}"})
     content_parts += image_blocks
 
-    # Step 6: Send to assistant (same thread)
+    # Step 6: Send to assistant (same thread) — now passing name/email for context
     try:
         log_event("openai_request_sent", {
             "user_id": user_id,
@@ -113,7 +113,9 @@ def get_ai_response(
             content_parts=content_parts,
             thread_id=thread_id,
             user_id=user_id,
-            page=page
+            page=page,
+            name=(name or None),
+            email=_normalize_email_for_storage(email)  # None for guests; fine for context
         )
     except Exception as e:
         raise RuntimeError(f"❌ OpenAI Assistant failed: {e}")
