@@ -7,6 +7,16 @@ from src.storage.conversations_table import save_conversation
 from src.storage.messages_table import save_message
 from src.utils.logging_utils import log_event  # ✅ structured logger
 
+
+def _normalize_email_for_storage(val):
+    """Return None for empty strings/whitespace so DynamoDB never gets an empty Email."""
+    if val is None:
+        return None
+    if isinstance(val, str) and val.strip() == "":
+        return None
+    return val
+
+
 def get_ai_response(
     message,
     user_id,
@@ -14,7 +24,7 @@ def get_ai_response(
     email,
     page,
     thread_id=None,
-    conversation_id=None,   # ✅ NEW: allow reuse
+    conversation_id=None,   # ✅ allow reuse
     image_urls=None,
     audio_url=None
 ):
@@ -42,12 +52,13 @@ def get_ai_response(
             })
         else:
             # First turn → create a new conversation row
+            sanitized_email = _normalize_email_for_storage(email)  # <— IMPORTANT
             conversation_data = save_conversation(
                 user_id=user_id,
-                name=name,
-                email=email,
+                name=name or "",  # name can be empty string; it's not a key
+                email=sanitized_email,
                 title=(message or "[Sin texto]")[:40],
-                page=page,
+                page=page or "/",
                 thread_id=thread_id
             )
             conversation_id = conversation_data["ConversationId"]
@@ -118,12 +129,12 @@ def get_ai_response(
     # Step 7: Log messages (now include thread_id in each message item)
     try:
         if message:
-            save_message(conversation_id, role="user",      message_text=message,            thread_id=thread_id)
+            save_message(conversation_id, role="user",      message_text=message,                 thread_id=thread_id)
         if audio_text:
             save_message(conversation_id, role="user",      message_text=f"[Audio] {audio_text}", thread_id=thread_id)
         for img in image_urls or []:
-            save_message(conversation_id, role="user",      message_text=f"[Imagen] {img}",  thread_id=thread_id)
-        save_message(conversation_id,     role="assistant", message_text=assistant_reply,     thread_id=thread_id)
+            save_message(conversation_id, role="user",      message_text=f"[Imagen] {img}",       thread_id=thread_id)
+        save_message(conversation_id,     role="assistant", message_text=assistant_reply,         thread_id=thread_id)
 
         log_event("messages_saved", {
             "conversation_id": conversation_id,

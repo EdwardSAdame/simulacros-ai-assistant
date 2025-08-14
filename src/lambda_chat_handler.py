@@ -1,3 +1,4 @@
+# src/lambda_chat_handler.py
 import json
 import logging
 from src.services.chat_service import get_ai_response
@@ -5,6 +6,16 @@ from src.utils.logging_utils import log_event  # ✅ structured logger
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
+
+
+def _none_if_empty(val):
+    """Return None for empty strings/whitespace; pass through other values."""
+    if val is None:
+        return None
+    if isinstance(val, str) and val.strip() == "":
+        return None
+    return val
+
 
 def lambda_handler(event, context):
     try:
@@ -17,15 +28,24 @@ def lambda_handler(event, context):
         # Parse request body
         body = json.loads(event.get("body", "{}"))
 
-        message     = body.get("message")              # Optional text
-        image_urls  = body.get("imageUrls", [])        # Optional list of image URLs
-        audio_url   = body.get("audioUrl")             # Optional single audio URL
-        user_id     = body.get("userId")               # Null for guests
+        # ---- Raw inputs from client ----
+        message     = body.get("message")               # Optional text
+        image_urls  = body.get("imageUrls", [])         # Optional list of image URLs
+        audio_url   = body.get("audioUrl")              # Optional single audio URL
+        user_id     = body.get("userId")                # Null/None for guests
         name        = body.get("name")
         email       = body.get("email")
         page        = body.get("page")
-        thread_id   = body.get("threadId")             # Optional thread reuse
-        conversation_id_in = body.get("conversationId")  # ✅ NEW: conversation reuse
+        thread_id   = body.get("threadId")              # Optional thread reuse
+        conversation_id_in = body.get("conversationId") # Optional conversation reuse
+
+        # ---- Normalize / sanitize ----
+        user_id = user_id or "anonymous"
+        name = name if isinstance(name, str) else (name or "")
+        email = _none_if_empty(email)   # <— IMPORTANT: '' -> None so we can omit Email in Dynamo
+        page = page or "/"
+        if not isinstance(image_urls, list):
+            image_urls = []
 
         # Validate input: at least one of the three must be present
         if not message and not image_urls and not audio_url:
@@ -36,15 +56,15 @@ def lambda_handler(event, context):
             }, level="warning")
             return response(400, {"error": "Missing message, imageUrls, or audioUrl"})
 
-        # Call service layer (now passes conversation_id)
+        # Call service layer
         ai_reply, new_thread_id, conversation_id = get_ai_response(
             message=message,
             user_id=user_id,
             name=name,
-            email=email,
+            email=email,                    # already normalized
             page=page,
             thread_id=thread_id,
-            conversation_id=conversation_id_in,   # ✅ pass through
+            conversation_id=conversation_id_in,
             image_urls=image_urls,
             audio_url=audio_url
         )
@@ -65,6 +85,7 @@ def lambda_handler(event, context):
     except Exception as e:
         log_event("lambda_exception", {"error": str(e)}, level="error")
         return response(500, {"error": str(e)})
+
 
 def response(status_code, body):
     return {
