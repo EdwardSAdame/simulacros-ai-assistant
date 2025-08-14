@@ -4,24 +4,30 @@ import boto3
 import uuid
 from datetime import datetime
 
-# Initialize DynamoDB resource
 dynamodb = boto3.resource("dynamodb")
 table = dynamodb.Table("UserConversations")
 
+# Only these attrs must NOT be empty (because of keys/GSIs)
+KEYS_DISALLOW_EMPTY = {"Email"}
 
-def _omit_empty_attrs(item: dict) -> dict:
+def _omit_invalid_attrs(item: dict) -> dict:
     """
-    Remove attributes that DynamoDB shouldn't store:
-    - None
-    - empty strings
-    - empty lists/dicts
+    Remove attributes that are None.
+    Remove empty strings ONLY for attributes listed in KEYS_DISALLOW_EMPTY.
+    Keep empty strings for non-key, informational fields like Name.
     """
     cleaned = {}
     for k, v in item.items():
         if v is None:
             continue
-        if isinstance(v, str) and v.strip() == "":
-            continue
+        if isinstance(v, str):
+            # Trim whitespace
+            v = v.strip()
+            # For keys like Email (on a GSI), drop if empty
+            if k in KEYS_DISALLOW_EMPTY and v == "":
+                continue
+            # For non-key fields (e.g., Name), allow "" to persist if you prefer;
+            # DynamoDB permits empty strings for non-key attributes.
         if v == [] or v == {}:
             continue
         cleaned[k] = v
@@ -31,21 +37,19 @@ def _omit_empty_attrs(item: dict) -> dict:
 def save_conversation(user_id, name, email, title, page, thread_id):
     """
     Inserts a new conversation row into the UserConversations table.
-
-    NOTE:
-    - Email is OPTIONAL. If it's empty/None, it will be omitted so that
-      your EmailIndex (GSI) remains sparse and you avoid ValidationException.
+    Email is OPTIONAL; it will be omitted if empty/None to keep the EmailIndex sparse.
+    Name is PRESERVED even if empty, so the attribute always exists if you pass "".
     """
     if not user_id or (isinstance(user_id, str) and user_id.strip() == ""):
         raise ValueError("user_id must be a non-empty string")
 
-    conversation_id = str(uuid.uuid4())  # Sort key
+    conversation_id = str(uuid.uuid4())
     timestamp = datetime.utcnow().isoformat()
 
     item = {
         "UserId": user_id,                 # PK
         "ConversationId": conversation_id, # SK
-        "Name": name,
+        "Name": (name if name is not None else ""),  # keep "" if unresolved
         "Email": email,                    # will be omitted if empty/None
         "Title": title,
         "Page": page,
@@ -53,15 +57,14 @@ def save_conversation(user_id, name, email, title, page, thread_id):
         "Timestamp": timestamp,
     }
 
-    safe_item = _omit_empty_attrs(item)
+    safe_item = _omit_invalid_attrs(item)
     table.put_item(Item=safe_item)
 
-    # Return original values (even if some were omitted in DynamoDB)
     return {
         "ConversationId": conversation_id,
         "ThreadId": thread_id,
         "Timestamp": timestamp,
-        "Name": name,
+        "Name": item["Name"],  # return what we attempted to save
         "Email": email,
         "Title": title,
         "Page": page,
