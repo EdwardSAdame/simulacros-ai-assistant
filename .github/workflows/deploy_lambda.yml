@@ -31,9 +31,10 @@ jobs:
 
           cp -r src package/src
 
-          # Copy BOTH Lambda entrypoints
+          # Copy ALL Lambda entrypoints
           cp src/lambda_chat_handler.py package/
           cp src/lambda_dlq_reprocessor.py package/
+          cp src/lambda_feedback_handler.py package/
 
           cd package
           zip -r ../deployment.zip . -x "**/__pycache__/*" "*.git*"
@@ -59,5 +60,12 @@ jobs:
             --zip-file fileb://deployment.zip \
             --region ${{ vars.AWS_REGION }}
 
+      - name: 🚀 Deploy FeedBackHandler
+        run: |
+          aws lambda update-function-code \
+            --function-name ${{ vars.LAMBDA_FEEDBACK_HANDLER_NAME }} \
+            --zip-file fileb://deployment.zip \
+            --region ${{ vars.AWS_REGION }}
+
       - name: ✅ Deployment Complete
-        run: echo "Both Roma Lambda functions deployed successfully!"
+        run: echo "All Lambda functions deployed successfully!"
