@@ -1,3 +1,4 @@
+# src/lambda_dlq_reprocessor.py
 import json
 import logging
 from src.services.chat_service import get_ai_response
@@ -20,18 +21,19 @@ def lambda_handler(event, context):
             # Body contains the original event as JSON
             body = json.loads(record["body"])
 
-            message = body.get("message")
-            image_urls = body.get("imageUrls", [])
-            audio_url = body.get("audioUrl")
-            user_id = body.get("userId")
-            name = body.get("name")
-            email = body.get("email")
-            page = body.get("page")
-            thread_id = body.get("threadId")
+            message     = body.get("message")
+            image_urls  = body.get("imageUrls", [])
+            user_id     = body.get("userId")
+            name        = body.get("name")
+            email       = body.get("email")
+            page        = body.get("page")
+            thread_id   = body.get("threadId")
+            conv_id_in  = body.get("conversationId")
 
-            if not message and not image_urls and not audio_url:
+            # Validate: require at least text or images
+            if not message and not image_urls:
                 log_event("dlq_skipped_message", {
-                    "reason": "No valid content",
+                    "reason": "No valid content (missing message and imageUrls)",
                     "payload": body
                 }, level="warning")
                 continue
@@ -44,15 +46,15 @@ def lambda_handler(event, context):
                 email=email,
                 page=page,
                 thread_id=thread_id,
-                image_urls=image_urls,
-                audio_url=audio_url
+                conversation_id=conv_id_in,
+                image_urls=image_urls
             )
 
             log_event("dlq_reprocess_success", {
                 "user_id": user_id,
                 "page": page,
                 "conversation_id": conversation_id,
-                "reply_snippet": ai_reply[:100]
+                "reply_snippet": (ai_reply or "")[:100]
             })
 
         except Exception as e:

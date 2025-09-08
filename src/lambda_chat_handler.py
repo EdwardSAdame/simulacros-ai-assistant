@@ -31,7 +31,6 @@ def lambda_handler(event, context):
         # ---- Raw inputs from client ----
         message     = body.get("message")               # Optional text
         image_urls  = body.get("imageUrls", [])         # Optional list of image URLs
-        audio_url   = body.get("audioUrl")              # Optional single audio URL
         user_id     = body.get("userId")                # Null/None for guests
         name        = body.get("name")
         email       = body.get("email")
@@ -47,14 +46,13 @@ def lambda_handler(event, context):
         if not isinstance(image_urls, list):
             image_urls = []
 
-        # Validate input: at least one of the three must be present
-        if not message and not image_urls and not audio_url:
+        # Validate input: require at least message or images
+        if not message and not image_urls:
             log_event("input_validation_failed", {
                 "message": message,
-                "image_urls": image_urls,
-                "audio_url": audio_url
+                "image_urls": image_urls
             }, level="warning")
-            return response(400, {"error": "Missing message, imageUrls, or audioUrl"})
+            return response(400, {"error": "Missing message or imageUrls"})
 
         # Call service layer
         ai_reply, new_thread_id, conversation_id = get_ai_response(
@@ -65,8 +63,7 @@ def lambda_handler(event, context):
             page=page,
             thread_id=thread_id,
             conversation_id=conversation_id_in,
-            image_urls=image_urls,
-            audio_url=audio_url
+            image_urls=image_urls
         )
 
         log_event("chat_response_success", {

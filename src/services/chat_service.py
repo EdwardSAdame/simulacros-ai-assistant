@@ -1,7 +1,6 @@
 # src/services/chat_service.py
 from src.assistant.assistant_client import send_message_to_assistant
 from src.assistant.thread_manager import get_or_create_thread
-from src.assistant.audio_transcriber import transcribe_audio_url
 from src.assistant.image_handler import format_image_urls_for_openai
 from src.storage.conversations_table import save_conversation
 from src.storage.messages_table import save_message
@@ -25,11 +24,11 @@ def get_ai_response(
     page,
     thread_id=None,
     conversation_id=None,   # ✅ allow reuse
-    image_urls=None,
-    audio_url=None
+    image_urls=None
 ):
     """
-    Handles user input (text, images, or audio) and returns AI response.
+    Handles user input (text + images) and returns AI response.
+    (Audio path removed — transcriptions handled via Realtime API on the client.)
     Raises exceptions if any key step fails, to support DLQ-based retries.
     """
 
@@ -71,19 +70,7 @@ def get_ai_response(
     except Exception as e:
         raise RuntimeError(f"❌ Failed to save/reuse conversation: {e}")
 
-    # Step 3: Transcribe audio if provided
-    audio_text = None
-    if audio_url:
-        try:
-            audio_text = transcribe_audio_url(audio_url)
-            log_event("audio_transcribed", {
-                "user_id": user_id,
-                "audio_snippet": (audio_text or "")[:100]
-            })
-        except Exception as e:
-            raise RuntimeError(f"❌ Failed to transcribe audio: {e}")
-
-    # Step 4: Format image blocks
+    # Step 3: Format image blocks
     try:
         image_blocks = format_image_urls_for_openai(image_urls or [])
         log_event("image_blocks_formatted", {
@@ -93,15 +80,13 @@ def get_ai_response(
     except Exception as e:
         raise RuntimeError(f"❌ Failed to format image URLs: {e}")
 
-    # Step 5: Build content_parts
+    # Step 4: Build content_parts
     content_parts = []
     if message:
         content_parts.append({"type": "text", "text": message})
-    if audio_text:
-        content_parts.append({"type": "text", "text": f"Transcripción del audio: {audio_text}"})
     content_parts += image_blocks
 
-    # Step 6: Send to assistant (same thread) — now passing name/email for context
+    # Step 5: Send to assistant (same thread) — passing name/email for context
     try:
         log_event("openai_request_sent", {
             "user_id": user_id,
@@ -128,15 +113,13 @@ def get_ai_response(
         "reply_snippet": assistant_reply[:100]
     })
 
-    # Step 7: Log messages (now include thread_id in each message item)
+    # Step 6: Log messages (now include thread_id in each message item)
     try:
         if message:
-            save_message(conversation_id, role="user",      message_text=message,                 thread_id=thread_id)
-        if audio_text:
-            save_message(conversation_id, role="user",      message_text=f"[Audio] {audio_text}", thread_id=thread_id)
+            save_message(conversation_id, role="user",      message_text=message,           thread_id=thread_id)
         for img in image_urls or []:
-            save_message(conversation_id, role="user",      message_text=f"[Imagen] {img}",       thread_id=thread_id)
-        save_message(conversation_id,     role="assistant", message_text=assistant_reply,         thread_id=thread_id)
+            save_message(conversation_id, role="user",      message_text=f"[Imagen] {img}", thread_id=thread_id)
+        save_message(conversation_id,     role="assistant", message_text=assistant_reply,   thread_id=thread_id)
 
         log_event("messages_saved", {
             "conversation_id": conversation_id,
