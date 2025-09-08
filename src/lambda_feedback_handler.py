@@ -3,7 +3,7 @@ import json
 import logging
 
 from src.storage.feedback_table import save_feedback
-from src.utils.logging_utils import log_event  # ✅ same structured logger you already use
+from src.utils.logging_utils import log_event, set_invocation_context  # 👈 add context hook
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
@@ -21,11 +21,14 @@ def _none_if_empty(val):
 
 
 def lambda_handler(event, context):
+    # Attach AWS context to logs (function, request_id, etc.)
+    set_invocation_context(context)
+
     try:
-        # Log raw invocation
+        # Lightweight invocation log (avoid dumping full event)
         log_event("feedback_lambda_invocation", {
             "source": "FeedBackHandler",
-            "event": event
+            "has_body": "body" in (event or {}),
         })
 
         # Parse API Gateway body
@@ -52,8 +55,16 @@ def lambda_handler(event, context):
 
         # Validate
         if not conversation_id:
+            log_event("feedback_validation_failed", {
+                "reason": "missing conversationId"
+            }, level="warning")
             return _response(400, {"error": "conversationId is required"})
+
         if rating not in ("up", "down"):
+            log_event("feedback_validation_failed", {
+                "reason": "invalid rating",
+                "rating": rating
+            }, level="warning")
             return _response(400, {"error": 'rating must be "up" or "down"'})
 
         # Business rule:
@@ -88,8 +99,11 @@ def lambda_handler(event, context):
         return _response(200, {"ok": True, "saved": item})
 
     except Exception as e:
-        log_event("feedback_lambda_exception", {"error": str(e)}, level="error")
-        return _response(500, {"error": str(e)})
+        # Include stack trace via logging_utils
+        log_event("feedback_lambda_exception", {
+            "source": "FeedBackHandler"
+        }, level="error", error=e)
+        return _response(500, {"error": "Internal error"})
 
 
 def _response(status_code, body):

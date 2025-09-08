@@ -2,7 +2,7 @@
 import json
 import logging
 from src.services.chat_service import get_ai_response
-from src.utils.logging_utils import log_event  # ✅ structured logger
+from src.utils.logging_utils import log_event, set_invocation_context  # 👈 add context hook
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
@@ -18,30 +18,33 @@ def _none_if_empty(val):
 
 
 def lambda_handler(event, context):
+    # Attach AWS context to all subsequent logs (function, request_id, etc.)
+    set_invocation_context(context)
+
     try:
-        # Log raw event
+        # Log raw event (lightweight)
         log_event("lambda_invocation", {
             "source": "RomaChatHandler",
-            "event": event
+            "has_body": "body" in (event or {}),
         })
 
         # Parse request body
         body = json.loads(event.get("body", "{}"))
 
         # ---- Raw inputs from client ----
-        message     = body.get("message")               # Optional text
-        image_urls  = body.get("imageUrls", [])         # Optional list of image URLs
-        user_id     = body.get("userId")                # Null/None for guests
+        message     = body.get("message")                # Optional text
+        image_urls  = body.get("imageUrls", [])          # Optional list of image URLs
+        user_id     = body.get("userId")                 # Null/None for guests
         name        = body.get("name")
         email       = body.get("email")
         page        = body.get("page")
-        thread_id   = body.get("threadId")              # Optional thread reuse
-        conversation_id_in = body.get("conversationId") # Optional conversation reuse
+        thread_id   = body.get("threadId")               # Optional thread reuse
+        conversation_id_in = body.get("conversationId")  # Optional conversation reuse
 
         # ---- Normalize / sanitize ----
         user_id = user_id or "anonymous"
         name = name if isinstance(name, str) else (name or "")
-        email = _none_if_empty(email)   # <— IMPORTANT: '' -> None so we can omit Email in Dynamo
+        email = _none_if_empty(email)  # '' -> None so we can omit Email in Dynamo
         page = page or "/"
         if not isinstance(image_urls, list):
             image_urls = []
@@ -49,8 +52,9 @@ def lambda_handler(event, context):
         # Validate input: require at least message or images
         if not message and not image_urls:
             log_event("input_validation_failed", {
-                "message": message,
-                "image_urls": image_urls
+                "reason": "Missing message or imageUrls",
+                "has_message": bool(message),
+                "image_count": len(image_urls or []),
             }, level="warning")
             return response(400, {"error": "Missing message or imageUrls"})
 
@@ -80,8 +84,11 @@ def lambda_handler(event, context):
         })
 
     except Exception as e:
-        log_event("lambda_exception", {"error": str(e)}, level="error")
-        return response(500, {"error": str(e)})
+        # Capture stack trace in CloudWatch (via logging_utils)
+        log_event("lambda_exception", {
+            "source": "RomaChatHandler"
+        }, level="error", error=e)
+        return response(500, {"error": "Internal error"})
 
 
 def response(status_code, body):
