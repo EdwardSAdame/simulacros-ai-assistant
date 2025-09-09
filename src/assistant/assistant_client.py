@@ -67,7 +67,7 @@ def build_context_instructions(user_id=None, page=None, name=None, email=None):
 
     lines = [
         f"Today is {time_info['full_human']}.",
-        f"The user is on the page: {page or '/'}."
+        f"The user is on the page: {page or '/'}. Respond strictly according to the context of that page."
     ]
 
     # Identity
