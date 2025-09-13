@@ -60,28 +60,33 @@ def send_message_to_assistant(
 
 def build_context_instructions(user_id=None, page=None, name=None, email=None):
     """
-    Dynamically generates context-aware instructions for the assistant.
-    Includes page, user identity (if any), current date/time info, and (optionally) name/email.
+    Minimal, strict: always ground answers in the current page's vector-store content.
+    Assumes `page` is the FULL URL coming from the frontend (getFullUrl()).
     """
     time_info = get_current_time_info()
+    page_url = page or "/"
 
     lines = [
         f"Today is {time_info['full_human']}.",
-        f"The user is on the page: {page or '/'}. Respond strictly according to the context of that page."
+        # Core requirement: ALWAYS ground in the current page
+        f"The user is currently on this page URL: {page_url}",
+        "Always use only the authoritative Invicto vector-store content associated with THIS exact page.",
+        "Ignore any retrieved content that belongs to other pages, even if it looks relevant.",
+        "Do not ask the user where they are — you already have the page URL.",
+        # UX rule we’re keeping
+        "If the user asks about a specific question, provide only the explanation; "
+        "do not re-render the full question unless the user explicitly asks.",
     ]
 
-    # Identity
-    if not user_id or user_id == "anonymous":
+    # Identity (unchanged)
+    if not user_id or user_id == 'anonymous':
         lines.append("They are browsing as a guest.")
     else:
         lines.append(f"Their user ID is {user_id}.")
 
-    # Optional enrichments
     if name:
         lines.append(f"The user's display name is {name}.")
     if email:
         lines.append(f"The user's email is {email}.")
-
-    # You can also add any guardrails or preferences here if needed.
 
     return "\n".join(lines)
