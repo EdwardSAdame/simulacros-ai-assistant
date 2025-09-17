@@ -1,5 +1,3 @@
-# src/storage/conversations_table.py
-
 import boto3
 import uuid
 from datetime import datetime
