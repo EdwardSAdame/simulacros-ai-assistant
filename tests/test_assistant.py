@@ -1,60 +1,58 @@
-import os
-import time
-from openai import OpenAI
-from dotenv import load_dotenv
-
-# ✅ Load environment variables
-load_dotenv()
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
-ASSISTANT_ID = os.getenv("OPENAI_ASSISTANT_ID")
-
-# ✅ Initialize OpenAI client
-client = OpenAI(api_key=OPENAI_API_KEY)
+# test_assistant.py
+from src.config.settings import get_openai_client
+from src.config.model_config import get_model_config
+from src.config.system_instructions import build_system_instructions
+from src.utils.time_utils import get_current_time_info
 
 
-def test_assistant():
-    """Test OpenAI Assistant with dynamic user input."""
-    try:
-        thread = client.beta.threads.create()
-        print("\n🔹 Test your Assistant (type 'exit' to stop):\n")
+def main():
+    client = get_openai_client()
+    cfg = get_model_config()
 
-        while True:
-            user_input = input("👤 You: ").strip()
-            if user_input.lower() == "exit":
-                print("👋 Session ended.\n")
-                break
+    # Dummy context
+    user_id = "test-user"
+    page = "simulacro-unal/ciencias-naturales"
+    name = "Test User"
+    email = "test@example.com"
 
-            # Send user message
-            client.beta.threads.messages.create(
-                thread_id=thread.id,
-                role="user",
-                content=user_input
-            )
+    # Build runtime signals
+    tinfo = get_current_time_info()
+    signals = [
+        f"Today is {tinfo['full_human']}.",
+        f"The user is on the page: {page}.",
+        f"Their user ID is {user_id}.",
+        f"Display name: {name}.",
+        f"Email: {email}.",
+    ]
+    system_text = build_system_instructions(extras=signals)
 
-            # Run Assistant (no extra instructions)
-            run = client.beta.threads.runs.create(
-                thread_id=thread.id,
-                assistant_id=ASSISTANT_ID
-            )
+    print("\n🔹 Simple Roma test (type 'exit' to stop)\n")
 
-            # Wait for completion
-            while True:
-                run = client.beta.threads.runs.retrieve(
-                    thread_id=thread.id, run_id=run.id
-                )
-                if run.status in ["completed", "failed"]:
-                    break
-                time.sleep(0.5)
+    while True:
+        user_input = input("👤 You: ").strip()
+        if user_input.lower() == "exit":
+            print("👋 Session ended.\n")
+            break
+        if not user_input:
+            continue
 
-            # Retrieve response
-            messages = client.beta.threads.messages.list(thread_id=thread.id)
-            latest_response = messages.data[0].content[0].text.value.strip()
+        resp = client.responses.create(
+            model=cfg.model,
+            temperature=cfg.temperature,
+            top_p=cfg.top_p,
+            input=[
+                {"role": "system", "content": [{"type": "input_text", "text": system_text}]},
+                {"role": "user", "content": [{"type": "input_text", "text": user_input}]},
+            ],
+        )
 
-            print(f"🤖 Roma AI: {latest_response}\n")
+        # Extract assistant text
+        text = getattr(resp, "output_text", None)
+        if not text:
+            text = "[No assistant response found]"
 
-    except Exception as err:
-        print(f"❌ Error during assistant test: {err}")
+        print(f"\n🤖 Roma AI: {text}\n")
 
 
 if __name__ == "__main__":
-    test_assistant()
+    main()

@@ -38,7 +38,6 @@ def lambda_handler(event, context):
         name        = body.get("name")
         email       = body.get("email")
         page        = body.get("page")
-        thread_id   = body.get("threadId")               # Optional thread reuse
         conversation_id_in = body.get("conversationId")  # Optional conversation reuse
 
         # ---- Normalize / sanitize ----
@@ -58,28 +57,25 @@ def lambda_handler(event, context):
             }, level="warning")
             return response(400, {"error": "Missing message or imageUrls"})
 
-        # Call service layer
-        ai_reply, new_thread_id, conversation_id = get_ai_response(
+        # Call service layer (thread_id deprecated → not passed)
+        ai_reply, _, conversation_id = get_ai_response(
             message=message,
             user_id=user_id,
             name=name,
             email=email,                    # already normalized
             page=page,
-            thread_id=thread_id,
             conversation_id=conversation_id_in,
             image_urls=image_urls
         )
 
         log_event("chat_response_success", {
             "user_id": user_id,
-            "thread_id": new_thread_id,
             "conversation_id": conversation_id,
             "reply_snippet": (ai_reply or "")[:100]
         })
 
         return response(200, {
             "reply": ai_reply,
-            "threadId": new_thread_id,
             "conversationId": conversation_id
         })
 

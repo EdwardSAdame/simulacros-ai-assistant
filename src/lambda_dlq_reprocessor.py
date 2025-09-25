@@ -32,7 +32,6 @@ def lambda_handler(event, context):
             name        = body.get("name")
             email       = body.get("email")
             page        = body.get("page")
-            thread_id   = body.get("threadId")
             conv_id_in  = body.get("conversationId")
 
             # Validate: require at least text or images
@@ -44,14 +43,13 @@ def lambda_handler(event, context):
                 }, level="warning")
                 continue
 
-            # Retry processing the failed message
-            ai_reply, new_thread_id, conversation_id = get_ai_response(
+            # Retry processing the failed message (no thread_id anymore)
+            ai_reply, _, conversation_id = get_ai_response(
                 message=message,
                 user_id=user_id,
                 name=name,
                 email=email,
                 page=page,
-                thread_id=thread_id,
                 conversation_id=conv_id_in,
                 image_urls=image_urls
             )
