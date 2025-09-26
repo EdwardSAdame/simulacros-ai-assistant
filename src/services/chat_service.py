@@ -41,19 +41,18 @@ def _build_history_block(conversation_id: str, max_turns: int = 8, max_chars_per
 
 
 def get_ai_response(
-    message,
-    user_id,
-    name,
-    email,
-    page,
-    thread_id=None,          # kept for compatibility with lambda; ignored
-    conversation_id=None,    # ✅ allow reuse
-    image_urls=None
+    message: str | None,
+    user_id: str | None,
+    name: str | None,
+    email: str | None,
+    page: str | None,
+    conversation_id: str | None = None,   # ✅ reuse if provided
+    image_urls: list[str] | None = None,
 ):
     """
-    Handles user input (text + images) and returns AI response.
-    (Audio path removed — transcriptions handled via Realtime API on the client.)
-    Raises exceptions if any key step fails, to support DLQ-based retries.
+    Handles user input (text + images) and returns AI response using the Responses API.
+    No threads/runs are used. Raises exceptions for DLQ-friendly retries.
+    Returns: (assistant_reply: str, conversation_id: str)
     """
 
     # Step 1: Find-or-create conversation (REUSE if conversation_id provided)
@@ -114,7 +113,6 @@ def get_ai_response(
         })
         assistant_reply = send_message_to_assistant(
             content_parts=content_parts,
-            thread_id=None,                 # 🧹 no longer used
             user_id=user_id,
             page=page,
             name=(name or None),
@@ -131,7 +129,7 @@ def get_ai_response(
         "reply_snippet": assistant_reply[:100]
     })
 
-    # Step 5: Persist messages (no ThreadId)
+    # Step 5: Persist messages
     try:
         if message:
             save_message(conversation_id, role="user",      message_text=message)
@@ -146,5 +144,4 @@ def get_ai_response(
     except Exception as e:
         raise RuntimeError(f"❌ Failed to save messages to DynamoDB: {e}")
 
-    # Keep return shape for lambda compatibility (thread_id now None)
-    return assistant_reply, None, conversation_id
+    return assistant_reply, conversation_id

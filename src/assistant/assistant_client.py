@@ -45,7 +45,7 @@ def _to_responses_content(parts: List[Dict[str, Any]] | None) -> List[Dict[str, 
 
 def _build_runtime_signals(user_id: str | None, page: str | None, name: str | None, email: str | None) -> str:
     """
-    Build the runtime 'RUNTIME SIGNALS' block that gets appended to the base system prompt.
+    Build the runtime 'RUNTIME SIGNALS' block appended to the base system prompt.
     """
     tinfo = get_current_time_info()
     signals = [
@@ -63,15 +63,14 @@ def _build_runtime_signals(user_id: str | None, page: str | None, name: str | No
 
 def send_message_to_assistant(
     content_parts,
-    thread_id,          # kept for interface compatibility; not used with Responses API
-    user_id=None,
-    page=None,
-    name=None,
-    email=None
-):
+    user_id: str | None = None,
+    page: str | None = None,
+    name: str | None = None,
+    email: str | None = None,
+) -> str:
     """
     Sends structured content (text + images) via OpenAI Responses API and
-    returns the assistant's reply text. No assistant_id / runs / threads.
+    returns the assistant's reply text. No threads/runs used.
     """
     client = get_openai_client()
     cfg = get_model_config()

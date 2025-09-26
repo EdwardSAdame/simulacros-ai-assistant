@@ -41,7 +41,6 @@ def lambda_handler(event, context):
         # Optional fields
         tag             = body.get("tag")  # e.g., "btnIncorrect" | "btnOther"
         custom_text_in  = body.get("customText")  # only valid when tag == OTHER_TAG_ID
-        thread_id       = body.get("threadId")
         user_id         = body.get("userId")
         page            = body.get("page") or "/"
         message_id      = body.get("messageId")
@@ -70,19 +69,18 @@ def lambda_handler(event, context):
         # Business rule:
         # - If tag == OTHER_TAG_ID → allow customText (empty string allowed).
         # - If tag is anything else → ignore customText (store only predefined tag).
-        # - If no tag (e.g., user clicked UP without panel) → store rating only.
+        # - If no tag → store rating only.
         if tag == OTHER_TAG_ID:
             custom_text = custom_text_in if custom_text_in is not None else ""
         else:
             custom_text = None
 
-        # Save
+        # Save (no thread_id anymore)
         item = save_feedback(
             conversation_id=conversation_id,
             rating=rating,
             tag=tag,
             custom_text=custom_text,
-            thread_id=thread_id,
             user_id=user_id,
             page=page,
             message_id=message_id,

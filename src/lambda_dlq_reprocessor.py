@@ -16,9 +16,7 @@ def lambda_handler(event, context):
     set_invocation_context(context)
 
     records = (event or {}).get("Records", []) or []
-    log_event("dlq_event_received", {
-        "record_count": len(records)
-    })
+    log_event("dlq_event_received", {"record_count": len(records)})
 
     for record in records:
         try:
@@ -43,8 +41,8 @@ def lambda_handler(event, context):
                 }, level="warning")
                 continue
 
-            # Retry processing the failed message (no thread_id anymore)
-            ai_reply, _, conversation_id = get_ai_response(
+            # Retry processing the failed message
+            ai_reply, conversation_id = get_ai_response(
                 message=message,
                 user_id=user_id,
                 name=name,

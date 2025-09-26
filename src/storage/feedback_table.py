@@ -7,13 +7,13 @@ from datetime import datetime
 dynamodb = boto3.resource("dynamodb")
 table = dynamodb.Table("MessageFeedback")  # existing table name
 
+
 def save_feedback(
     conversation_id: str,
     rating: str,                    # "up" | "down"
     *,
     tag: str | None = None,         # single tag id (e.g., "btnIncorrect", "btnOther")
     custom_text: str | None = None, # free text (only for "Otro" per handler rule)
-    thread_id: str | None = None,
     user_id: str | None = None,
     page: str | None = None,
     message_id: str | None = None,  # optional: per-message id
@@ -46,8 +46,6 @@ def save_feedback(
         item["Tag"] = tag.strip()
     if custom_text is not None:  # allow empty string if user opened the box
         item["CustomText"] = str(custom_text)
-    if thread_id:
-        item["ThreadId"] = thread_id
     if user_id:
         item["UserId"] = user_id
     if page:

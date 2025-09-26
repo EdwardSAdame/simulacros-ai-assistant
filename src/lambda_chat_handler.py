@@ -57,8 +57,8 @@ def lambda_handler(event, context):
             }, level="warning")
             return response(400, {"error": "Missing message or imageUrls"})
 
-        # Call service layer (thread_id deprecated → not passed)
-        ai_reply, _, conversation_id = get_ai_response(
+        # Call service layer
+        ai_reply, conversation_id = get_ai_response(
             message=message,
             user_id=user_id,
             name=name,
