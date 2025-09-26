@@ -1,0 +1,390 @@
+[
+  {
+    "id": "simulacro-unal/ciencias-sociales/context_bastilla01",
+    "type": "context",
+    "title": "La toma de la Bastilla (1789)",
+    "text": "El 14 de julio de 1789, en busca de armas, la multitud parisina atacó y capturó la armería real conocida como la Bastilla. Esta había sido una prisión del Estado y su caída marcó el triunfo de la 'libertad' sobre el despotismo. De esta forma, la intervención del pueblo parisino salvó al Tercer Estado de los intentos antirrevolucionarios de Luis XVI.\n\nRelato de un periódico parisino sobre la toma de la Bastilla\nPrimero, la gente trató de entrar a la armería a través de la Rue St. Antonie, esa fortaleza que nadie contrario a los deseos de este despotismo espantoso había podido penetrar y que era el lugar en donde aún residía el monstruo. El traidor gobernador había puesto afuera una bandera en señal de paz. Así que se realizó un confiado avance; un destacamento de guardias franceses, con unos 6,000 burgueses armados, penetró en los patios exteriores de la Bastilla, pero en el momento en que unos 600 personas hubieron traspasado el primer puente levadizo, lo levantaron y el fuego de la artillería cayó sobre algunos soldados y varios guardias franceses; el cañón disparó sobre la ciudad, y la gente se sobresaltó; un gran número de individuos resultaron heridos o muertos, pero luego se recuperaron y se pusieron a salvo del fuego [...]. Mientras tanto, trataron de localizar algún cañón, atacaron desde la orilla del canal a través de los jardines del arsenal y desde ahí llevaron a cabo un asedio ordenado; avanzaron desde varias direcciones bajo un incesante tiroteo. Fue una escena terrible [...]. La lucha se intensificaba cada vez más, los ciudadanos se habían endurecido contra los disparos, por todos lados empezaron a trepar hacia los techos y hacia las habitaciones. Tan pronto un enemigo aparecía de entre las almenas de las torres, era blanco de cientos de disparos y derribado en un instante. Mientras tanto, los cañones eran dirigidos apresuradamente hacia el segundo puente levadizo, se perforó y se rompieron las cadenas; fue en vano la respuesta de los cañones de la torre debido a que casi toda la gente se hallaba protegida de sus disparos. La furia estaba en su punto más candente; la gente enfrentaba valientemente a la muerte y a toda clase de peligro. En su afán por ayudar, las mujeres lo hicieron con su mejor esfuerzo e incluso los niños, después de la descarga de fuego desde la fortaleza, corrían aquí y allá recogiendo las balas y disparando [...] así cayó la Bastilla y su gobernador, De Launay, fue capturado [...] Serena y bendita libertad, por primera vez ha sido introducida en esta morada de los horrores, en este espantoso refugio del monstruoso despotismo y sus crímenes.\n\nMientras tanto, se alistan para marchar y se van en medio de una enorme multitud; los aplausos, los arrebatos de alegría, los insultos, los juramentos arrojados a los prisioneros de guerra traidores, todos ido confusos; gritos de venganza y de placer salen de los corazones. Los vencedores, gloriosos y cubiertos de honor, portan sus armas y el botín de los vencidos, las banderas de victoria, y la milicia se mezcla entre los soldados de la madre patria, laureles de la victoria les eran ofrecidos por todos lados; esto creó un estremecedor y espléndido espectáculo. Al llegar a la plaza, la gente ansiosa de tomar venganza por su propia mano no permitió a De Launay ni a los oficiales llegar al lugar del juicio; los arrebató de las manos de sus conquistadores y los pisoteó uno tras otro. De Launay recibió miles de golpes, hasta que le cortaron la cabeza y la llevaron prendida en la punta de una lanza mientras la sangre corría por todos lados [...]. Este glorioso día debe asombrar a nuestros enemigos y traernos finalmente el triunfo de la justicia y la libertad. Al anochecer, hubo celebraciones.\n\nFuente: The Press in the French Revolution: A Selection of Documents Taken from the Press of the Revolution for the Years 1789-1794, ed. de John Thomas Gilchrist y William J. Murray, Londres, Ginn, 1971.",
+    "visual_description": "Imagen con texto fuente (relato de periódico) sobre la toma de la Bastilla.",
+    "page": "https://www.invicto.com.co/simulacro-unal/ciencias-sociales"
+  },
+  {
+    "id": "simulacro-unal/ciencias-sociales/q01",
+    "type": "question",
+    "component": "ciencias-sociales",
+    "number": 1,
+    "context_id": "context_bastilla01",
+    "stem_text": "¿Por qué la toma de la Bastilla marcó el triunfo de la sociedad francesa y de la 'libertad' sobre el despotismo?",
+    "choices": [
+      "Porque el rey Luis XVI apoyó abiertamente la toma de la Bastilla como un acto de justicia.",
+      "Porque todos los presos políticos fueron liberados y se restauró la paz inmediata en París.",
+      "Porque la Bastilla era un símbolo del poder despótico y su caída significó la derrota de la tiranía en favor del pueblo.",
+      "Porque la Bastilla contenía un gran arsenal de armas que fue decisivo para la revolución."
+    ],
+    "correct_choice": "Porque la Bastilla era un símbolo del poder despótico y su caída significó la derrota de la tiranía en favor del pueblo.",
+    "visual_description": "Usa context_bastilla01",
+    "explanation_expert": "La Bastilla representaba el poder despótico del monarca. Su toma simbolizó la derrota de la tiranía en favor del pueblo, más allá de la liberación de presos o la obtención de armas.",
+    "difficulty": "easy",
+    "tags": ["unal", "ciencias sociales", "Revolución Francesa", "Bastilla", "despotismo", "historia europea"],
+    "page": "https://www.invicto.com.co/simulacro-unal/ciencias-sociales"
+  },
+  {
+  "id": "simulacro-unal/ciencias-sociales/q02",
+  "type": "question",
+  "component": "ciencias-sociales",
+  "number": 2,
+  "context_id": "context_bastilla01",
+  "stem_text": "¿Crees que los hechos que narra este periódico francés puedan ser tendenciosos? ¿Por qué sí o por qué no?",
+  "choices": ["Porque el rey Luis XVI apoyó abiertamente la toma de la Bastilla como un acto de justicia.",
+    "No, porque se limita a describir los eventos de manera objetiva y sin juicios de valor.",
+    "Sí, porque el relato exagera la valentía y la justicia del pueblo para glorificar la revolución.",
+    "Sí, porque minimiza la violencia y los excesos cometidos por los revolucionarios durante la toma.",
+    "No, porque proporciona una visión equilibrada de los acontecimientos, incluyendo las acciones de ambos bandos."
+  ],
+  "correct_choice": "Sí, porque el relato exagera la valentía y la justicia del pueblo para glorificar la revolución.",
+  "visual_description": "Usa context_bastilla01",
+  "explanation_expert": "El texto tiene un tono evidentemente exaltado: describe al pueblo como valiente y justo, y resalta la gloria de la libertad mientras minimiza los excesos cometidos. Esto muestra un sesgo a favor de la revolución.",
+  "difficulty": "medium",
+  "tags": ["unal", "ciencias sociales", "Revolución Francesa", "Bastilla", "fuentes históricas", "análisis crítico"],
+  "page": "https://www.invicto.com.co/simulacro-unal/ciencias-sociales"
+},
+{
+  "id": "simulacro-unal/ciencias-sociales/q03",
+  "type": "question",
+  "component": "ciencias-sociales",
+  "number": 3,
+  "context_id": "context_bastilla01",
+  "stem_text": "¿Qué papel juegan las emociones en la manera en que se describe la toma de la Bastilla en este relato?",
+  "choices": [
+    "Las emociones son mínimas, el relato se centra principalmente en los hechos concretos.",
+    "Las emociones son irrelevantes, ya que el relato pretende ser una crónica objetiva de los acontecimientos.",
+    "Las emociones son exageradas, lo que lleva a una descripción distorsionada de los hechos.",
+    "Las emociones juegan un papel central, ya que el relato busca inspirar un sentimiento de orgullo y justicia entre los lectores."
+  ],
+  "correct_choice": "Las emociones juegan un papel central, ya que el relato busca inspirar un sentimiento de orgullo y justicia entre los lectores.",
+  "visual_description": "Usa context_bastilla01",
+  "explanation_expert": "El texto está cargado de un lenguaje emocional, exaltando la valentía y la gloria de la libertad. Esto evidencia que las emociones cumplen un rol central en la narrativa para generar identificación y orgullo colectivo.",
+  "difficulty": "medium",
+  "tags": ["unal", "ciencias sociales", "Revolución Francesa", "Bastilla", "emociones", "análisis de fuentes"],
+  "page": "https://www.invicto.com.co/simulacro-unal/ciencias-sociales"
+},
+{
+  "id": "simulacro-unal/ciencias-sociales/context_napoleon01",
+  "type": "context",
+  "title": "Napoleón y la guerra psicológica (1796)",
+  "text": "En 1796, a la edad de 27 años, a Napoleón Bonaparte le fue otorgado el mando del ejército francés en Italia, donde ganó una serie de increíbles victorias. Su uso de la velocidad, el engaño y la sorpresa para agobiar a sus adversarios son bien conocidos. En esta selección de una proclamación a sus tropas en Italia, Napoleón también parece ser un maestro de la guerra psicológica.\n\nNapoleón Bonaparte, Proclamación a las tropas francesas en Italia (el 26 de abril de 1796)\n\nSoldados:\nEn 15 días ustedes han ganado seis victorias, han tomado 21 estandartes, 55 piezas de artillería, varias posiciones clave y han conquistado la región más rica del Piamonte [en el norte de Italia]; han capturado a 15,000 prisioneros y han matado o han herido a más de 10,000 hombres [...]. Han ganado batallas sin cañón, cruzado los ríos sin puentes, avanzado a marchas forzadas sin zapatos; acamparon sin brandy y a menudo sin pan. Soldados de la libertad, sólo las tropas republicanas podrían haber soportado lo que ustedes han aguantado. ¡Soldados, ustedes tienen nuestras gracias! La agradecida Patria [la nación] les deberá su prosperidad. [...]\n\nLos dos ejércitos que recientemente los atacaron con audacia huyen ante ustedes con terror; los hombres malvados que se reían de su miseria y se alegraban ante la idea de los triunfos de sus enemigos están confundidos y tiemblan.\n\nPero soldados, todavía no han hecho nada comparado con lo que queda por hacer. [...]. Indudablemente los obstáculos más grandes han sido vencidos; pero todavía tienen batallas por luchar, ciudades por capturar, ríos por cruzar. ¿Hay alguno entre ustedes cuyo valor disminuya? No. [...]. Todos están consumidos en un deseo de extender la gloria de los franceses; todos desean humillar a esos reyes arrogantes que osan imaginar que se nos colocarán grilletes; todos desean imponer una paz gloriosa, una paz que indemnice a la Patria por los inmensos sacrificios que ha hecho; todos ustedes desean poder decir con orgullo cuando regresen a sus aldeas: '¡estuve con el ejército victorioso de Italia!'\n\nFuente:\nJohn Hall Stewart, A Documentary Survey of the French Revolution, Nueva York, Macmillan, 1951. D.R. © 1951, Macmillan Publishing Company, renovado en 1979 por John Hall Stewart. Reimpreso con autorización de Prentice-Hall, Inc., Pearson Education Company.",
+  "visual_description": "Keizer Napoleon I en zijn staf te paard",
+  "page": "https://www.invicto.com.co/simulacro-unal/ciencias-sociales"
+},
+{
+  "id": "simulacro-unal/ciencias-sociales/q04",
+  "type": "question",
+  "component": "ciencias-sociales",
+  "number": 4,
+  "context_id": "context_napoleon01",
+  "stem_text": "¿Qué temas utilizó Napoleón para jugar con las emociones de sus tropas e inspirarlos a más grandes esfuerzos?",
+  "choices": [
+    "La promesa de recompensas materiales inmediatas.",
+    "La gloria, el honor y el sacrificio por la patria.",
+    "El miedo a la derrota y al castigo de los superiores.",
+    "El deseo de venganza personal contra los enemigos."
+  ],
+  "correct_choice": "La gloria, el honor y el sacrificio por la patria.",
+  "visual_description": "Usa context_napoleon01",
+  "explanation_expert": "Napoleón apeló a valores colectivos como la gloria, el honor y la patria. No prometía beneficios materiales inmediatos ni se basaba en el miedo, sino en el orgullo y la grandeza nacional.",
+  "difficulty": "easy",
+  "tags": ["unal", "ciencias sociales", "Napoleón", "guerra psicológica", "motivación militar"],
+  "page": "https://www.invicto.com.co/simulacro-unal/ciencias-sociales"
+},
+{
+  "id": "simulacro-unal/ciencias-sociales/q05",
+  "type": "question",
+  "component": "ciencias-sociales",
+  "number": 5,
+  "context_id": "context_napoleon01",
+  "stem_text": "¿Piensas que Napoleón creyó en estas palabras? ¿Por qué sí o por qué no?",
+  "choices": [
+    "Sí, porque Napoleón tenía una visión clara de la grandeza de Francia y realmente creía en la misión de su ejército.",
+    "No, porque Napoleón solo quería manipular a sus tropas y no creía en los ideales que predicaba.",
+    "Sí, porque sabía que la única forma de mantener a sus tropas unidas era apelando a su patriotismo y lealtad.",
+    "No, porque su único interés era mantener el control sobre sus soldados y no le importaban los ideales."
+  ],
+  "correct_choice": "Sí, porque Napoleón tenía una visión clara de la grandeza de Francia y realmente creía en la misión de su ejército.",
+  "visual_description": "Usa context_napoleon01",
+  "explanation_expert": "La retórica de Napoleón no era solo manipulación: su fe en la misión francesa y en la gloria nacional estaba alineada con sus palabras, lo que aumentaba su credibilidad frente a las tropas.",
+  "difficulty": "medium",
+  "tags": ["unal", "ciencias sociales", "Napoleón", "guerra psicológica", "ideología", "historia europea"],
+  "page": "https://www.invicto.com.co/simulacro-unal/ciencias-sociales"
+},
+{
+  "id": "simulacro-unal/ciencias-sociales/context_textil01",
+  "type": "context",
+  "title": "El trabajo de los niños: la disciplina en los molinos textiles",
+  "text": "El trabajo de los niños no era nada nuevo, pero a principios de la Revolución Industrial fue explotado de forma sistemática. Estos extractos se tomaron del reporte del comité de Sadler, un documento que fue encargado por el gobierno en 1832 para indagar sobre las condiciones de los infantes trabajadores en las fábricas.\n\nMantener a los niños despiertos\n\nEs algo muy frecuente en la fábrica del señor Marshall (en Shrewsbury), donde se empleaba a mínimo de niños (ya había muchos de seis años trabajando), que el señor Horseman arranque el molino más temprano de lo que anteriormente lo hacía, y suponiendo que un chiquillo pueda estar mareado, el vigilante camina por la habitación con una vara en la mano y le toca en el hombro y dice 'ven acá'. En la esquina de la habitación hay una cisterna de hierro que está llena de agua; toma al niño por las piernas y le hunde la cabeza en la cisterna y lo envía a trabajar por el resto del día [...]\n—¿Qué medidas se tomaban para tener a los niños trabajando?\n—A veces les daban un coscorrón en la cabeza o les apretaban la nariz o les daban un pellizco o les arrojaban agua en la cara o los sacaban de donde estuvieran para mantenerlos trabajando hasta el amanecer.\n\nEl vigilante sádico\n\nSamuel Downe, 29 años de edad, trabajador de fábrica que vive cerca de Leeds. A la edad de 10 años comenzó a trabajar en los molinos del señor Marshall en Shrewsbury, donde las horas normales de trabajo eran generalmente de 5 a.m. a 8 p.m., algunas veces de 5:30 a.m. a 8 o 9 p.m.\n—¿Qué medios se empleaban para mantener a los niños despiertos y vigilantes, especialmente al final de un día de trabajo como lo ha descrito?\n—Generalmente había un silbato o una bofetada o un golpe con una correa o, a veces, con la mano.\n—¿Alguna vez fuiste azotado?\n—Sí, varias veces, hasta que ya no pude soportar sentarme en una silla sin almohadas; después de eso me fui. Fui golpeado en ambas piernas y luego me pusieron en la espalda de un hombre y me pegaron y me amarraron con dos correas a una columna y me azotaron y todo lo hizo un vigilante; después tomó la cuerda de un remolque y la puso en mi boca y la amarró atrás de mi cabeza.\n—¿Te amordazó?\n—Sí, y luego me ordenó correr alrededor de la maquinaria que estaba vigilando y se paró de un lado, y cada vez que pasaba cerca de él me golpeaba con una vara que yo creía que era de fresno y que generalmente traía consigo, y algunas veces me pegaba y otras no; uno de los hombres de la habitación vio y me preguntó y me dejó ir y no me pegó más; pero constantemente lo hizo.\n—¿Te han golpeado con extraordinaria severidad?\n—Sí, una vez me golpearon tanto que no tenía fuerzas para llorar o hablar.\n—¿Qué edad tenías?\n—Entre 10 y 11 años.\n\nFuente:\nEdgar Royston Pike, Human Documents of the Industrial Revolution in Britain, Londres, Unwin & Hyman, 1966.",
+  "visual_description": "Ilustración en blanco y negro que muestra a un hombre adulto enfrentando a un niño, mientras varios niños observan sentados en un banco; una mujer está de pie al fondo. La escena refleja disciplina estricta en un contexto infantil de la Revolución Industrial.",
+  "page": "https://www.invicto.com.co/simulacro-unal/ciencias-sociales"
+},
+{
+  "id": "simulacro-unal/ciencias-sociales/q06",
+  "type": "question",
+  "component": "ciencias-sociales",
+  "number": 6,
+  "context_id": "context_textil01",
+  "stem_text": "¿Qué clase de condiciones de trabajo enfrentaron los niños en los molinos textiles a principios de la Revolución Industrial?",
+  "choices": [
+    "Condiciones extremadamente duras y abusivas, donde los niños eran sometidos a jornadas largas y castigos físicos.",
+    "Condiciones moderadas, donde los niños trabajaban, pero con descansos adecuados y sin castigos físicos.",
+    "Condiciones favorables, con jornadas cortas y un ambiente de trabajo seguro.",
+    "Condiciones peligrosas, pero con una preocupación por la seguridad de los niños."
+  ],
+  "correct_choice": "Condiciones extremadamente duras y abusivas, donde los niños eran sometidos a jornadas largas y castigos físicos.",
+  "visual_description": "Usa context_textil01",
+  "explanation_expert": "Los testimonios del comité de Sadler revelan que los niños trabajaban jornadas muy largas bajo castigos físicos y abusos constantes, lo que evidencia condiciones extremadamente duras y abusivas.",
+  "difficulty": "easy",
+  "tags": ["unal", "ciencias sociales", "Revolución Industrial", "trabajo infantil", "condiciones laborales", "historia social"],
+  "page": "https://www.invicto.com.co/simulacro-unal/ciencias-sociales"
+},
+{
+  "id": "simulacro-unal/ciencias-sociales/q07",
+  "type": "question",
+  "component": "ciencias-sociales",
+  "number": 7,
+  "context_id": "context_textil01",
+  "stem_text": "¿Por qué crees que los niños eran golpeados mientras trabajaban en los molinos textiles?",
+  "choices": [
+    "Para mantenerlos despiertos y vigilantes durante las largas jornadas de trabajo.",
+    "Para castigar su mala conducta y asegurar que aprendieran la lección.",
+    "Para reducir su entusiasmo y evitar que disfrutaran del trabajo.",
+    "Para enseñarles disciplina y respeto hacia los adultos."
+  ],
+  "correct_choice": "Para mantenerlos despiertos y vigilantes durante las largas jornadas de trabajo.",
+  "visual_description": "Usa context_textil01",
+  "explanation_expert": "Los testimonios indican que los golpes no se daban principalmente como castigo moral, sino como un medio para forzar a los niños a mantenerse despiertos y productivos durante extensas y agotadoras jornadas laborales.",
+  "difficulty": "medium",
+  "tags": ["unal", "ciencias sociales", "Revolución Industrial", "trabajo infantil", "castigos físicos", "historia social"],
+  "page": "https://www.invicto.com.co/simulacro-unal/ciencias-sociales"
+},
+{
+  "id": "simulacro-unal/ciencias-sociales/q08",
+  "type": "question",
+  "component": "ciencias-sociales",
+  "number": 8,
+  "context_id": "context_textil01",
+  "stem_text": "¿Qué impacto emocional y físico crees que tuvo este tratamiento en los niños que trabajaban en los molinos?",
+  "choices": [
+    "Los fortaleció y les enseñó a soportar el dolor y las dificultades de la vida.",
+    "No tuvo un impacto significativo, ya que los niños se acostumbraron a estas condiciones.",
+    "Los motivó a trabajar más duro para evitar los castigos.",
+    "Los dejó físicamente agotados y emocionalmente traumatizados, incapaces de resistir o quejarse."
+  ],
+  "correct_choice": "Los dejó físicamente agotados y emocionalmente traumatizados, incapaces de resistir o quejarse.",
+  "visual_description": "Usa context_textil01",
+  "explanation_expert": "El maltrato prolongado tuvo graves consecuencias: no fortalecía ni motivaba a los niños, sino que los debilitaba física y emocionalmente, generando trauma y agotamiento que anulaban su capacidad de resistencia.",
+  "difficulty": "medium",
+  "tags": ["unal", "ciencias sociales", "Revolución Industrial", "trabajo infantil", "impacto psicológico", "historia social"],
+  "page": "https://www.invicto.com.co/simulacro-unal/ciencias-sociales"
+},
+{
+  "id": "simulacro-unal/ciencias-sociales/context_canciones01",
+  "type": "context",
+  "title": "Las canciones de la Primera Guerra Mundial",
+  "text": "En la marcha, en los bares, en los trenes e incluso en las trincheras, los soldados de la Primera Guerra Mundial pasaban cantando buena parte de su tiempo libre. Las canciones entonadas por hombres de diferentes nacionalidades variaban considerablemente. Una de las letras favoritas alemanas, 'La guardia del Rin', se centró en el heroísmo y el patriotismo. Las coplas inglesas de la guerra a menudo se caracterizaban por un humor negro, como sucede en 'La vieja alambrada de púas'. Una favorita de los estadounidenses fue la entusiasta canción 'Por allá', escrita por el compositor profesional George M. Cohan.\n\nDe 'La guardia del Rin'\nAllá suena un llamado como el rugido del trueno,\ncomo el choque de las espadas, como el vaivén de las olas.\n¡Oh Rin, el Rin, el Rin alemán!\n¿Quién será el defensor de la corriente?\nQuerida patria, descansa tranquila.\nSeguro y real se yergue el vigilante,\nel vigilante en el Rin.\nAl cielo él mira.\nLos espíritus de los héroes miran hacia abajo.\n¡Oh, Rin! ¡Permanecerás tan alemán como mi pecho!\nQuerida patria… [etc.]\nIncluso si mi corazón se detiene en la muerte,\ntú nunca serás francés.\nLo mismo que tú eres rico en agua\nAlemania es rica en sangre de héroes.\nQuerida patria… [etc.]\nMientras que aún resplandezca una gota de sangre,\nmientras que una mano una daga pueda empuñar,\nmientras que un brazo el rifle pueda sujetar,\nnunca un enemigo tocará tus ribetes.\nQuerida patria… [etc.]\n\nDe 'La vieja alambrada de púas'\nSi quieres encontrar al viejo batallón,\nyo sé dónde está,\nyo sé dónde está,\nsi quieres encontrar al batallón,\nyo sé dónde está.\nEllos cuelgan en la vieja alambrada de púas,\nlos he visto, los he visto,\ncolgando en la vieja alambrada de púas.\n\nGeorge M. Cohan, 'Por allá'\nPor allá,\nPor allá.\nCorran la voz,\ncorran la voz.\nPor allá,\nque los yanquis ya vienen,\nlos yanquis ya vienen,\nlos tambores redoblan por doquier.\nAsí que prepárate, di una oración,\ncorran la voz.\nCorran la voz.\nPara que tengan cuidado.\nAcabaremos.\nVamos a acabar.\nY no regresaremos hasta que acabe.\nPor allá.\nJohnny, toma tu fusil.\nToma tu fusil.\nToma tu fusil.\nTómalo y corre.\nCorre, corre.\nÓyelos llamándonos a ti y a mí,\na cada hijo de la libertad.\nApresúrate de inmediato,\nno tardes,\nve ahora,\nhaz feliz a tu papá,\npor tener a tal muchacho.\nDile a tu amor que no llore,\nque esté orgullosa\nde que su muchacho esté en el frente.\n\nFuentes:\n'Die Wacht am Rhein', Max Schneckenburger, 1840; 'The Old Barbed Wire', letra anónima; 'Over There', George M. Cohan, 1917.",
+  "visual_description": "Forward!, 1943, Gelatin silver print,",
+  "page": "https://www.invicto.com.co/simulacro-unal/ciencias-sociales"
+},
+{
+  "id": "simulacro-unal/ciencias-sociales/q09",
+  "type": "question",
+  "component": "ciencias-sociales",
+  "number": 9,
+  "context_id": "context_canciones01",
+  "stem_text": "¿Qué ideas o temas crees que mantuvieron la voluntad de los soldados de todos los bandos para luchar, según las canciones presentadas?",
+  "choices": [
+    "El deseo de gloria personal y reconocimiento.",
+    "El miedo al castigo por desobedecer órdenes.",
+    "El patriotismo y la defensa de la patria.",
+    "La esperanza de regresar rápidamente a casa."
+  ],
+  "correct_choice": "El patriotismo y la defensa de la patria.",
+  "visual_description": "Usa context_canciones01",
+  "explanation_expert": "Las canciones de la Primera Guerra Mundial exaltaban el amor a la patria y la defensa nacional como valores centrales, reforzando la moral de los soldados en medio del conflicto.",
+  "difficulty": "easy",
+  "tags": ["unal", "ciencias sociales", "Primera Guerra Mundial", "patriotismo", "canciones de guerra", "historia cultural"],
+  "page": "https://www.invicto.com.co/simulacro-unal/ciencias-sociales"
+},
+{
+  "id": "simulacro-unal/ciencias-sociales/q10",
+  "type": "question",
+  "component": "ciencias-sociales",
+  "number": 10,
+  "context_id": "context_canciones01",
+  "stem_text": "¿Cómo crees que la letra y la interpretación de estas canciones lograron dar forma a la psicología de los cantantes?",
+  "choices": [
+    "Desmotivaron a los soldados al hacerles recordar los horrores de la guerra.",
+    "Reforzaron la identidad grupal y el sentido de propósito entre los soldados.",
+    "Crearon un sentido de aislamiento al centrarse en la desesperanza y la muerte.",
+    "Distraían a los soldados de la realidad de la guerra, haciéndoles perder el enfoque."
+  ],
+  "correct_choice": "Reforzaron la identidad grupal y el sentido de propósito entre los soldados.",
+  "visual_description": "Usa context_canciones01",
+  "explanation_expert": "Las canciones fortalecían la cohesión del grupo y recordaban a los soldados que formaban parte de una causa compartida, generando un sentido de propósito colectivo en lugar de aislamiento o desmotivación.",
+  "difficulty": "medium",
+  "tags": ["unal", "ciencias sociales", "Primera Guerra Mundial", "psicología militar", "canciones de guerra", "cohesión grupal"],
+  "page": "https://www.invicto.com.co/simulacro-unal/ciencias-sociales"
+},
+{
+  "id": "simulacro-unal/ciencias-sociales/q11",
+  "type": "question",
+  "component": "ciencias-sociales",
+  "number": 11,
+  "context_id": "context_canciones01",
+  "stem_text": "¿Reflejan o eluden tales canciones el contenido real y profundo de los conflictos?",
+  "choices": [
+    "Reflejan, ya que abordan temas de sacrificio, patriotismo y la crudeza de la guerra.",
+    "Eluden, ya que minimizan el sufrimiento y las dificultades reales del conflicto.",
+    "Reflejan parcialmente, mencionando aspectos heroicos, pero dejando de lado la realidad más brutal.",
+    "Eluden completamente, centrándose solo en los aspectos positivos y evitando toda referencia al dolor."
+  ],
+  "correct_choice": "Reflejan, ya que abordan temas de sacrificio, patriotismo y la crudeza de la guerra.",
+  "visual_description": "Usa context_canciones01",
+  "explanation_expert": "Las canciones no se limitaban a la exaltación patriótica, sino que también transmitían el sacrificio y la dureza de la guerra, mostrando una conexión directa con la experiencia real de los soldados.",
+  "difficulty": "medium",
+  "tags": ["unal", "ciencias sociales", "Primera Guerra Mundial", "canciones de guerra", "sacrificio", "patriotismo"],
+  "page": "https://www.invicto.com.co/simulacro-unal/ciencias-sociales"
+},
+{
+  "id": "simulacro-unal/ciencias-sociales/context_hitler01",
+  "type": "context",
+  "title": "El odio de Adolf Hitler hacia los judíos",
+  "text": "Adolf Hitler, que era un creyente de la supremacía racial aria, veía a los judíos como los archienemigos de los arios. Él creía que la primera tarea de un verdadero Estado ario sería la eliminación de la amenaza judía. Por ello, la carrera política de Hitler comenzó y terminó con una advertencia hacia los judíos. En este fragmento de su autobiografía, Mein Kampf, Hitler describe cómo se volvió antisemita cuando tenía poco más de 20 años de edad y vivía en Viena.\n\nAdolf Hitler, Mein Kampf\n\nPor lo tanto, mi opinión con respecto al antisemitismo sucumbió al paso del tiempo, y ésta fue mi mayor transformación de todas [...]\nUna vez, mientras paseaba por el centro de la ciudad [de Viena], me encontré de repente con una aparición que vestía un caftán negro y bucles en su cabello negro. Mi primer pensamiento fue: ¿es un judío?\nPorque, con seguridad, los judíos no se veían así en Linz. Observé al hombre disimuladamente y con cautela, pero entre más miraba fijamente esta cara extraña, escrutaba característica por característica, más cambiaba en su forma mi primera pregunta:\n¿Es un alemán?\nComo siempre en casos como éste, comencé ahora a aclarar mis dudas mediante libros. Con algunos centavos compré el primer panfleto antisemita de mi vida [...]\nYa no pude dudar más tiempo de que los objetos de mi estudio no eran alemanes con una religión diferente, sino eran un pueblo en sí mismo, porque desde que había comenzado a preocuparme por esta cuestión y a conocer a los judíos, Viena apareció ante mí con una luz diferente a la de antes. Empecé a ver judíos por todos lados y, entre más me fijaba, más drásticamente se distinguían ante mis ojos del resto de la humanidad [...]\nEn poco tiempo, medité más que nunca gracias a mi lenta y creciente comprensión sobre el tipo de actividades que los judíos llevaban a cabo en ciertos campos.\n¿Había alguna forma de inmundicia o depravación, particularmente en la vida cultural, en la que no estuviera involucrado al menos un judío? [...]\nA veces me quedaba ahí parado pasmado. No sabía de qué sorprenderme más: si de la agilidad de sus lenguas o de su virtuoso uso para mentir.\nPoco a poco comencé a odiarlos.\n\nFuente:\nAdolf Hitler, Mein Kampf, trad. de Ralph Manheim, Boston, Houghton Mifflin Company, 1943. D.R., 1943, renovados en 1971, Houghton Mifflin Company. Usado con permiso de Houghton Mifflin Company y Random House Group Limited.",
+  "visual_description": "Portada del libro 'Mein Kampf' de Adolf Hitler, con tipografía grande en rojo y negro, y elementos gráficos asociados al partido nacionalsocialista.",
+  "page": "https://www.invicto.com.co/simulacro-unal/ciencias-sociales"
+},
+{
+  "id": "simulacro-unal/ciencias-sociales/q12",
+  "type": "question",
+  "component": "ciencias-sociales",
+  "number": 12,
+  "context_id": "context_hitler01",
+  "stem_text": "¿Cuál fue la actitud de Hitler hacia los judíos según este texto?",
+  "choices": [
+    "Una creciente desconfianza y eventual odio hacia los judíos, a quienes consideraba responsables de inmoralidad y corrupción.",
+    "Una aceptación y respeto hacia los judíos, considerándolos una parte valiosa de la sociedad.",
+    "Una indiferencia inicial que se mantuvo sin cambios a lo largo del tiempo.",
+    "Una admiración por la cultura y religión judía, lo que influyó en sus políticas futuras."
+  ],
+  "correct_choice": "Una creciente desconfianza y eventual odio hacia los judíos, a quienes consideraba responsables de inmoralidad y corrupción.",
+  "visual_description": "Usa context_hitler01",
+  "explanation_expert": "En su autobiografía, Hitler narra cómo pasó de la indiferencia a una creciente hostilidad contra los judíos, atribuyéndoles la corrupción cultural y moral, hasta consolidar un odio abierto hacia ellos.",
+  "difficulty": "easy",
+  "tags": ["unal", "ciencias sociales", "Hitler", "antisemitismo", "nazismo", "Mein Kampf"],
+  "page": "https://www.invicto.com.co/simulacro-unal/ciencias-sociales"
+},
+{
+  "id": "simulacro-unal/ciencias-sociales/q13",
+  "type": "question",
+  "component": "ciencias-sociales",
+  "number": 13,
+  "context_id": "context_hitler01",
+  "stem_text": "¿Por qué crees que un gran número de alemanes comunes y corrientes aceptaron (o por lo menos toleraron) estas opiniones dementes después de la Primera Guerra Mundial?",
+  "choices": [
+    "Por la crisis económica, social y política que enfrentaba Alemania, que llevó a muchos a buscar chivos expiatorios para sus problemas.",
+    "Porque los alemanes compartían una larga tradición de respeto hacia los judíos y querían protegerlos.",
+    "Porque los alemanes no estaban al tanto de las opiniones antisemitas de Hitler y no les importaba.",
+    "Porque Hitler era desconocido en la sociedad alemana, por lo que sus ideas no tuvieron impacto."
+  ],
+  "correct_choice": "Por la crisis económica, social y política que enfrentaba Alemania, que llevó a muchos a buscar chivos expiatorios para sus problemas.",
+  "visual_description": "Usa context_hitler01",
+  "explanation_expert": "Tras la derrota de la Primera Guerra Mundial y las duras condiciones impuestas por el Tratado de Versalles, muchos alemanes enfrentaban hambre, desempleo e inestabilidad, lo que facilitó que aceptaran las posturas antisemitas de Hitler como una forma de encontrar culpables.",
+  "difficulty": "medium",
+  "tags": ["unal", "ciencias sociales", "Hitler", "antisemitismo", "Primera Guerra Mundial", "nazismo"],
+  "page": "https://www.invicto.com.co/simulacro-unal/ciencias-sociales"
+},
+{
+  "id": "simulacro-unal/ciencias-sociales/q14",
+  "type": "question",
+  "component": "ciencias-sociales",
+  "number": 14,
+  "context_id": "context_hitler01",
+  "stem_text": "¿Cómo justifica Hitler su odio hacia los judíos en este fragmento?",
+  "choices": [
+    "A través de observaciones personales y lecturas que lo convencieron de que los judíos eran una amenaza para la sociedad.",
+    "Basándose en experiencias positivas que tuvo con los judíos en su juventud.",
+    "Apoyándose en enseñanzas religiosas que promovían la convivencia pacífica entre diferentes grupos étnicos.",
+    "Debido a su falta de interés en las diferencias culturales y étnicas, lo que lo llevó a ser tolerante."
+  ],
+  "correct_choice": "A través de observaciones personales y lecturas que lo convencieron de que los judíos eran una amenaza para la sociedad.",
+  "visual_description": "Usa context_hitler01",
+  "explanation_expert": "Hitler describe cómo sus experiencias en Viena y sus primeras lecturas antisemitas lo convencieron de que los judíos no eran simplemente diferentes en religión o cultura, sino una amenaza para la sociedad, lo que consolidó su odio hacia ellos.",
+  "difficulty": "medium",
+  "tags": ["unal", "ciencias sociales", "Hitler", "antisemitismo", "Mein Kampf", "nazismo"],
+  "page": "https://www.invicto.com.co/simulacro-unal/ciencias-sociales"
+},
+{
+  "id": "simulacro-unal/ciencias-sociales/context_stalingrado01",
+  "type": "context",
+  "title": "Un soldado alemán en Stalingrado",
+  "text": "La victoria soviética en Stalingrado fue un punto crítico de viraje en la Segunda Guerra Mundial. Este fragmento se tomó del diario de un soldado alemán que luchó y murió en la épica Batalla de Stalingrado. Sus sueños de victoria y de un regreso a casa con medallas pronto se desvanecieron por la realidad de la resistencia y el vigoroso contraataque triunfal soviético.\n\nDiario de un soldado alemán\n\n29 de julio. El comandante de la compañía dice que las tropas rusas están completamente destrozadas y que ya no pueden resistir más. Llegar al Volga y tomar Stalingrado no es difícil para nosotros. El Führer sabe cuál es el punto débil de los rusos. La victoria no está lejos [...]\n\n10 de agosto. Nos leyeron las órdenes del Führer. Espera que alcancemos la victoria. Estamos todos convencidos de que no pueden detenernos.\n\n12 de agosto. Esta mañana, los mejores soldados fueron condecorados [...] ¿En verdad regresaré con Elsa sin ninguna condecoración? Creo que, por Stalingrado, el Führer incluso a mí me condecorará.\n\n4 de septiembre. Nos están mandando hacia el norte, a lo largo del frente de batalla hacia Stalingrado. Marchamos toda la noche y hacia el amanecer llegamos a la estación Voroponovo. Ya podemos ver la ciudad humeante. Es un pensamiento alegre saber que el fin de la guerra se está acercando. Eso es lo que todo el mundo comenta [...]\n\n8 de septiembre. Dos días de una lucha ininterrumpida. Los rusos se están defendiendo con una terquedad enferma. Nuestro regimiento ha perdido muchos hombres [...]\n\n16 de septiembre. Nuestro batallón, más algunos tanques, están atacando el elevador [de almacén de grano], del cual sale humo, el grano en él se está quemando, parece ser que los rusos lo incendiaron. Barbarie. El batallón está sufriendo severas bajas [...]\n\n10 de octubre. Los rusos están tan cerca de nosotros que nuestros aviones no pueden bombardearlos. Nos estamos preparando para un ataque decisivo. El Führer nos ha ordenado que tomemos la ciudad de Stalingrado lo antes posible [...]\n\n22 de octubre. Nuestro regimiento fracasó en su intento por entrar a la fábrica. Hemos perdido muchos hombres, cada vez que te mueves de lugar tienes que saltar sobre cadáveres [...]\n\n10 de noviembre. Hoy llegó una carta de Elsa. Todos nos esperan en casa para Navidad. En Alemania todo el mundo cree que tomamos Stalingrado. Qué equivocados están. Si sólo pudieran ver lo que Stalingrado le ha hecho a nuestro ejército [...]\n\n21 de noviembre. Los rusos se han acercado a la ofensiva a lo largo del frente entero. Continúa una pelea encarnizada. Así que ahí está: el Volga, la victoria y pronto de regreso a casa con nuestras familias. Nosotros obviamente les veremos después en el otro mundo.\n\n29 de noviembre. Estamos rodeados. En la mañana se nos anunció que el Führer había dicho: 'El ejército puede confiar que haré todo lo necesario para asegurar los suministros y romper el sitio con rapidez'.\n\n3 de diciembre. Estamos a raciones de hambre, en la espera del rescate que nos prometió el Führer [...]\n\n14 de diciembre. A todos les atormenta el hambre. La mejor comida son las papas congeladas, pero sacarlas de la tierra cubierta de hielo bajo una lluvia de balas rusas no es tan fácil [...]\n\n26 de diciembre. Ya nos hemos comido los caballos. Me comí una bota, dicen que su carne también es sabrosa. Los soldados parecen cadáveres o lunáticos, buscando algo qué llevarse a la boca. Ya no se cubren de los proyectiles de los rusos, no tienen la fuerza para caminar, huir o esconderse. ¡Maldita sea esta guerra!\n\nFuente:\nVasili Chuikov, The Battle for Stalingrad, trad. del ruso de Harold Silver, Nueva York, Holt, Rinehart and Winston, 1964.",
+  "visual_description": "Near Stalingrad, 1941, Gelatin silver print",
+  "page": "https://www.invicto.com.co/simulacro-unal/ciencias-sociales"
+},
+{
+  "id": "simulacro-unal/ciencias-sociales/q15",
+  "type": "question",
+  "component": "ciencias-sociales",
+  "number": 15,
+  "context_id": "context_stalingrado01",
+  "stem_text": "¿Qué pensaban del Führer estos soldados? ¿Por qué?",
+  "choices": [
+    "Siempre tuvieron fe ciega en el Führer, independientemente de las circunstancias.",
+    "Nunca confiaron en el Führer y se opusieron a sus órdenes desde el inicio.",
+    "Al principio, confiaban plenamente en él, pero su confianza se desmoronó a medida que se dieron cuenta de que sus promesas no se cumplían.",
+    "No tenían una opinión sobre el Führer, ya que estaban más enfocados en sobrevivir."
+  ],
+  "correct_choice": "Al principio, confiaban plenamente en él, pero su confianza se desmoronó a medida que se dieron cuenta de que sus promesas no se cumplían.",
+  "visual_description": "Usa context_stalingrado01",
+  "explanation_expert": "Los diarios muestran cómo los soldados inicialmente confiaban en las promesas de Hitler, pero la realidad de las derrotas, el hambre y la falta de auxilio quebraron esa fe y los dejaron desilusionados.",
+  "difficulty": "medium",
+  "tags": ["unal", "ciencias sociales", "Segunda Guerra Mundial", "Stalingrado", "soldados alemanes", "Führer"],
+  "page": "https://www.invicto.com.co/simulacro-unal/ciencias-sociales"
+},
+{
+  "id": "simulacro-unal/ciencias-sociales/q16",
+  "type": "question",
+  "component": "ciencias-sociales",
+  "number": 16,
+  "context_id": "context_stalingrado01",
+  "stem_text": "¿Cuál era la fuente de su información? ¿Por qué es importante esto?",
+  "choices": [
+    "La propaganda soviética, que utilizaban para mantenerse informados.",
+    "Las órdenes y promesas del Führer, que moldearon sus expectativas y su moral.",
+    "Las noticias que llegaban de Alemania a través de cartas y periódicos.",
+    "Los informes de inteligencia militar aliados."
+  ],
+  "correct_choice": "Las órdenes y promesas del Führer, que moldearon sus expectativas y su moral.",
+  "visual_description": "Usa context_stalingrado01",
+  "explanation_expert": "Los soldados dependían de las órdenes y promesas del Führer como principal fuente de información, lo cual elevaba o quebraba su moral. Esto muestra cómo la manipulación y la propaganda oficial eran decisivas en su percepción de la guerra.",
+  "difficulty": "medium",
+  "tags": ["unal", "ciencias sociales", "Segunda Guerra Mundial", "Stalingrado", "propaganda", "Führer"],
+  "page": "https://www.invicto.com.co/simulacro-unal/ciencias-sociales"
+},
+{
+  "id": "simulacro-unal/ciencias-sociales/q17",
+  "type": "question",
+  "component": "ciencias-sociales",
+  "number": 17,
+  "context_id": "context_stalingrado01",
+  "stem_text": "¿Por qué se considera que la batalla de Stalingrado fue el punto decisivo de la Segunda Guerra Mundial?",
+  "choices": [
+    "Porque permitió a Alemania consolidar su control sobre Europa del Este.",
+    "Porque llevó a una paz negociada entre Alemania y la Unión Soviética.",
+    "Porque detuvo el avance alemán y marcó el comienzo de la ofensiva soviética que eventualmente llevaría a la derrota de Alemania.",
+    "Porque aseguró el dominio alemán sobre el frente oriental durante el resto de la guerra."
+  ],
+  "correct_choice": "Porque detuvo el avance alemán y marcó el comienzo de la ofensiva soviética que eventualmente llevaría a la derrota de Alemania.",
+  "visual_description": "Usa context_stalingrado01",
+  "explanation_expert": "La batalla de Stalingrado fue un punto de inflexión estratégico: el fracaso alemán detuvo su avance en el frente oriental y permitió a la Unión Soviética iniciar una contraofensiva que debilitó progresivamente al ejército alemán hasta su derrota final.",
+  "difficulty": "medium",
+  "tags": ["unal", "ciencias sociales", "Segunda Guerra Mundial", "Stalingrado", "batalla decisiva", "ofensiva soviética"],
+  "page": "https://www.invicto.com.co/simulacro-unal/ciencias-sociales"
+}
+]

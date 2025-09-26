@@ -1,0 +1,414 @@
+[
+  {
+    "id": "simulacro-icfes/lectura-critica/context_shakespeare01",
+    "type": "context",
+    "title": "William Shakespeare: en elogio de Inglaterra",
+    "text": "William Shakespeare es uno de los dramaturgos más famosos del mundo occidental. Fue un genio universal que superó a todos los demás literatos de su época en intuición psicológica, profundidad de carácter, habilidad imaginativa y versatilidad. Sus obras teatrales históricas reflejaron el entusiasmo patriótico de los ingleses en la era isabelina, como lo ilustra este extracto de Ricardo II.\\n\\nWilliam Shakespeare, Ricardo II\\nEste trono real de reyes, esta isla por el cetro consagrada,\\nesta tierra majestuosa, esta sede de Marte,\\neste otro Edén, semiparaíso,\\nesta fortaleza, levantada por Natura para sí\\ncontra la infección y la mano de la guerra,\\nesta raza afortunada, este mundo en pequeño,\\nesta preciosa piedra puesta en el mar de plata\\nque le sirve como muralla defensora\\no como foso protector de una casa\\ncontra la envidia de países menos venturosos;\\nesta bienaventurada parcela, esta tierra, este reino, esta Inglaterra,\\nesta nodriza, este feroz vientre de reyes,\\ntemidos por su raza y famosos por su cuna,\\nrenombrados por sus hazañas lejos del hogar\\npor servicio cristiano y leal caballería,\\ncomo el sepulcro en la tenaz judería, el Santo Sepulcro en Jerusalén,\\nde la redención del mundo, bendecido hijo de María;\\nesta tierra de almas tan queridas, esta querida, querida tierra,\\nquerida por su reputación en todo el mundo,\\nestá ahora dada en arriendo, muero al decirlo,\\ncomo cualquier propiedad o triste finca.\\nInglaterra, ceñida por el triunfante mar,\\ncuyas costas rocosas repelen el envidioso asedio\\ndel acuoso Neptuno, ahora la ciñen la deshonra,\\ncon manchas entintadas y lazos de corruptos pergaminos.\\nEsta Inglaterra, que estaba acostumbrada a conquistar a otros,\\nse ha infligido a sí misma una vergonzosa derrota.\\n¡Ah, si acaso se desvaneciera el escándalo con mi vida,\\nqué feliz sería entonces mi propia muerte!\\n\\nFuente: \"Richard II\" (fragmento), en William Shakespeare (1952). The Complete Works. Edición de George Bagshawe Harrison. Nueva York: Harcourt Brace & World.",
+    "visual_description": "Retrato de William Shakespeare, con barba corta y cabello oscuro, vestido con un jubón negro ornamentado y un gran cuello isabelino de encaje blanco.",
+    "page": "https://www.invicto.com.co/simulacro-icfes/lectura-critica"
+  },
+  {
+  "id": "simulacro-icfes/lectura-critica/q01",
+  "type": "question",
+  "component": "lectura-critica",
+  "number": 1,
+  "context_id": "context_shakespeare01",
+  "stem_text": "¿Qué recurso literario predomina en el fragmento de Shakespeare para exaltar la imagen de Inglaterra?",
+  "choices": [
+    "Metáfora",
+    "Hipérbole",
+    "Ironía",
+    "Paradoja"
+  ],
+  "correct_choice": "Metáfora",
+  "visual_description": "Usa context_shakespeare01",
+  "explanation_expert": "En el fragmento predominan las metáforas, ya que Inglaterra es comparada con un Edén, una fortaleza o una piedra preciosa rodeada por el mar, imágenes simbólicas que exaltan su grandeza.",
+  "difficulty": "medium",
+  "tags": ["icfes", "lectura critica", "Shakespeare", "metáfora", "literatura inglesa"],
+  "page": "https://www.invicto.com.co/simulacro-icfes/lectura-critica"
+},
+{
+  "id": "simulacro-icfes/lectura-critica/q02",
+  "type": "question",
+  "component": "lectura-critica",
+  "number": 2,
+  "context_id": "context_shakespeare01",
+  "stem_text": "En el fragmento, Shakespeare describe a Inglaterra como “esta nodriza, este feroz vientre de reyes”. ¿Qué implica esta metáfora?",
+  "choices": [
+    "La vulnerabilidad de Inglaterra frente a otras naciones",
+    "El poder de Inglaterra para alimentar y formar líderes",
+    "El sufrimiento de los monarcas ingleses debido a las guerras",
+    "El desprecio de los ingleses hacia sus propios monarcas"
+  ],
+  "correct_choice": "El poder de Inglaterra para alimentar y formar líderes",
+  "visual_description": "Usa context_shakespeare01",
+  "explanation_expert": "La metáfora sugiere que Inglaterra es una tierra fértil que nutre y produce monarcas poderosos, capaces de influir y liderar, reforzando la imagen de fortaleza y prestigio del país.",
+  "difficulty": "medium",
+  "tags": ["icfes", "lectura critica", "Shakespeare", "metáfora", "literatura inglesa"],
+  "page": "https://www.invicto.com.co/simulacro-icfes/lectura-critica"
+},
+{
+  "id": "simulacro-icfes/lectura-critica/q03",
+  "type": "question",
+  "component": "lectura-critica",
+  "number": 3,
+  "context_id": "context_shakespeare01",
+  "stem_text": "En la frase “cuyas costas rocosas repelen el envidioso asedio del acuoso Neptuno”, ¿qué función cumple la personificación de Neptuno?",
+  "choices": [
+    "Sugerir que Inglaterra tiene una relación mística con el océano",
+    "Destacar el poder protector del mar sobre Inglaterra",
+    "Reflejar la furia de los océanos contra el dominio inglés",
+    "Criticar la vulnerabilidad de Inglaterra ante ataques navales"
+  ],
+  "correct_choice": "Destacar el poder protector del mar sobre Inglaterra",
+  "visual_description": "Usa context_shakespeare01",
+  "explanation_expert": "La personificación de Neptuno como un enemigo envidioso resalta la idea de que el mar protege a Inglaterra, al convertir sus costas en un muro natural contra la invasión.",
+  "difficulty": "medium",
+  "tags": ["icfes", "lectura critica", "Shakespeare", "personificación", "literatura inglesa"],
+  "page": "https://www.invicto.com.co/simulacro-icfes/lectura-critica"
+},
+{
+  "id": "simulacro-icfes/lectura-critica/q04",
+  "type": "question",
+  "component": "lectura-critica",
+  "number": 4,
+  "context_id": "context_shakespeare01",
+  "stem_text": "¿Por qué se describe a William Shakespeare no como un simple dramaturgo, sino como “un hombre de teatro completo”?",
+  "choices": [
+    "Porque escribía exclusivamente tragedias y comedias, géneros clave del teatro isabelino.",
+    "Porque inventó el teatro moderno y estableció todas sus reglas.",
+    "Porque se destacó como el mejor actor de su época, además de dramaturgo.",
+    "Porque además de escribir, comprendía la puesta en escena y la actuación"
+  ],
+  "correct_choice": "Porque además de escribir, comprendía la puesta en escena y la actuación",
+  "visual_description": "Usa context_shakespeare01",
+  "explanation_expert": "Shakespeare no solo fue dramaturgo, sino que también comprendía la dinámica del teatro en su totalidad: la actuación, la puesta en escena y la experiencia teatral completa, lo que le dio un lugar único en la historia del teatro.",
+  "difficulty": "medium",
+  "tags": ["icfes", "lectura critica", "Shakespeare", "teatro isabelino", "literatura inglesa"],
+  "page": "https://www.invicto.com.co/simulacro-icfes/lectura-critica"
+},
+{
+  "id": "simulacro-icfes/lectura-critica/q05",
+  "type": "question",
+  "component": "lectura-critica",
+  "number": 5,
+  "context_id": "context_shakespeare01",
+  "stem_text": "¿Qué países pudo sugerir Shakespeare con la frase “la envidia de países menos venturosos”?",
+  "choices": [
+    "Italia y Alemania, que eran potencias económicas en la época.",
+    "Portugal y los Países Bajos, debido a sus rivalidades marítimas con Inglaterra.",
+    "Grecia y Roma, porque Shakespeare admiraba su legado cultural.",
+    "Francia y España, rivales históricos de Inglaterra en política y expansión territorial."
+  ],
+  "correct_choice": "Francia y España, rivales históricos de Inglaterra en política y expansión territorial.",
+  "visual_description": "Usa context_shakespeare01",
+  "explanation_expert": "La referencia apunta a Francia y España, principales competidores políticos y militares de Inglaterra en la época isabelina, lo que resalta la posición envidiada del país frente a sus rivales europeos.",
+  "difficulty": "medium",
+  "tags": ["icfes", "lectura critica", "Shakespeare", "historia europea", "literatura inglesa"],
+  "page": "https://www.invicto.com.co/simulacro-icfes/lectura-critica"
+},
+{
+  "id": "simulacro-icfes/lectura-critica/context_hesse01",
+  "type": "context",
+  "title": "Hesse y el inconsciente",
+  "text": "Las novelas de Hermann Hesse causaron un gran impacto en la gente joven, primero en Alemania durante la década de 1920 y luego en Estados Unidos durante la década de 1960, después de que se tradujeran al inglés. Muchos de estos jóvenes compartían la fascinación de Hesse por el inconsciente y su desdén por la civilización industrial moderna. Este pasaje de Demian se dirigía directamente a muchos de ellos.\\n\\nHermann Hesse, Demian\\nLa siguiente primavera estaba a punto de salir de la escuela preparatoria e ingresar a la universidad. Sin embargo, todavía estaba indeciso sobre dónde y qué iba a estudiar. Me había crecido un fino bigote, era un hombre hecho, y sin embargo estaba completamente desvalido y sin una meta en la vida. Sólo una cosa era certera: la voz dentro de mí, la imagen del sueño. Sentí el deber de seguir ciegamente esta voz a dondequiera que me llevara. Pero era difícil y cada día me rebelaba contra ella de nuevo. Tal vez estaba loco, como pensé por momentos; ¿tal vez no era como los otros hombres? Pero podía hacer las mismas cosas que los otros hacían; con un poco de esfuerzo y diligencia podía leer a Platón, resolver problemas de trigonometría o seguir un análisis químico. Sólo había una cosa que no podía hacer: arrancarme la oscura y secreta meta de mí mismo y mantenerla delante de mí como lo hacían otros que sabían exactamente lo que querían ser: profesores, abogados, médicos, artistas, sin importar cuánto tiempo les tomaría ni las dificultades y ventajas que esta decisión les haría soportar en su vigilia. No podía hacer esto. Tal vez llegaría a ser algo parecido, pero ¿cómo iba a saberlo? Tal vez tendría que seguir mi búsqueda durante años y no llegaría a ser nada y no alcanzaría ninguna meta. Tal vez alcanzaría esta meta pero sería mala, peligrosa y horrible.\\n\\nSólo quería intentar vivir de acuerdo con los impulsos que provenían de mi verdadero ser. ¿Por qué era eso tan díficil?\\n\\nFuente: Hermann Hesse, Demian, trad. de Michael Roloff y Michael Lebeck, Nueva York, Bantam Books, 1966, p. 30.",
+  "visual_description": "",
+  "page": "https://www.invicto.com.co/simulacro-icfes/lectura-critica"
+},
+{
+  "id": "simulacro-icfes/lectura-critica/q06",
+  "type": "question",
+  "component": "lectura-critica",
+  "number": 6,
+  "context_id": "context_hesse01",
+  "stem_text": "¿Cómo se refleja en el protagonista la influencia del inconsciente según el fragmento?",
+  "choices": [
+    "En la dificultad para aprender trigonometría y resolver problemas científicos.",
+    "En su admiración por Platón y la filosofía clásica.",
+    "En su deseo de encajar en la sociedad y ser como los demás.",
+    "A través de la voz interna que le impulsa a seguir su verdadero camino."
+  ],
+  "correct_choice": "A través de la voz interna que le impulsa a seguir su verdadero camino.",
+  "visual_description": "N/A",
+  "explanation_expert": "El protagonista experimenta la influencia del inconsciente como una voz interna que lo orienta hacia su verdadera esencia, aunque esta fuerza lo hace sentir diferente y en conflicto con las expectativas sociales.",
+  "difficulty": "medium",
+  "tags": ["icfes", "lectura critica", "Hesse", "inconsciente", "literatura alemana"],
+  "page": "https://www.invicto.com.co/simulacro-icfes/lectura-critica"
+},
+{
+  "id": "simulacro-icfes/lectura-critica/q07",
+  "type": "question",
+  "component": "lectura-critica",
+  "number": 7,
+  "context_id": "context_hesse01",
+  "stem_text": "¿Qué simboliza la imposibilidad del protagonista de “arrancarse la oscura y secreta meta de sí mismo”?",
+  "choices": [
+    "Su falta de voluntad para enfrentar las dificultades de la vida.",
+    "El miedo a fracasar en sus estudios universitarios.",
+    "Su rechazo absoluto a la civilización y la cultura occidental.",
+    "La lucha interna entre el destino impuesto por la sociedad y su verdadera esencia."
+  ],
+  "correct_choice": "La lucha interna entre el destino impuesto por la sociedad y su verdadera esencia.",
+  "visual_description": "N/A",
+  "explanation_expert": "El pasaje refleja la imposibilidad de abandonar la meta interior como símbolo de la tensión entre las exigencias sociales externas y la voz interna del inconsciente que lo empuja hacia su verdadera identidad.",
+  "difficulty": "medium",
+  "tags": ["icfes", "lectura critica", "Hesse", "inconsciente", "literatura alemana"],
+  "page": "https://www.invicto.com.co/simulacro-icfes/lectura-critica"
+},
+{
+  "id": "simulacro-icfes/lectura-critica/q08",
+  "type": "question",
+  "component": "lectura-critica",
+  "number": 8,
+  "context_id": "context_hesse01",
+  "stem_text": "¿Por qué Hesse intensificó su crítica a la sociedad mecanizada tras la Primera Guerra Mundial?",
+  "choices": [
+    "Porque fue testigo de la industrialización y los avances tecnológicos en Alemania.",
+    "Porque se vio obligado a dejar su país debido a la guerra.",
+    "Porque la guerra mostró el peligro de una sociedad controlada por la razón y la tecnología.",
+    "Porque su obra fue censurada por la sociedad mecanizada."
+  ],
+  "correct_choice": "Porque la guerra mostró el peligro de una sociedad controlada por la razón y la tecnología.",
+  "visual_description": "N/A",
+  "explanation_expert": "Tras la Primera Guerra Mundial, Hesse advirtió que la racionalidad técnica y la mecanización podían llevar a la destrucción y a la pérdida de la esencia humana, por lo que intensificó su crítica a la sociedad industrializada.",
+  "difficulty": "medium",
+  "tags": ["icfes", "lectura critica", "Hesse", "Primera Guerra Mundial", "sociedad mecanizada"],
+  "page": "https://www.invicto.com.co/simulacro-icfes/lectura-critica"
+},
+{
+  "id": "simulacro-icfes/lectura-critica/q09",
+  "type": "question",
+  "component": "lectura-critica",
+  "number": 9,
+  "context_id": "context_hesse01",
+  "stem_text": "¿De qué manera se manifiesta el interés de Hesse por el inconsciente en este pasaje?",
+  "choices": [
+    "Mediante su obsesión con Platón y la filosofía clásica, que lo lleva a dudar de su futuro.",
+    "A través de la voz interna del protagonista, que guía sus decisiones sin una lógica clara.",
+    "A través de su miedo a fracasar en la universidad y la presión social por tener un plan definido.",
+    "Por su deseo de convertirse en un científico y resolver problemas racionalmente."
+  ],
+  "correct_choice": "A través de la voz interna del protagonista, que guía sus decisiones sin una lógica clara.",
+  "visual_description": "N/A",
+  "explanation_expert": "El interés de Hesse por el inconsciente se refleja en la voz interior del protagonista, que lo orienta hacia un camino existencial sin seguir la racionalidad tradicional, subrayando la importancia de la intuición y lo oculto.",
+  "difficulty": "medium",
+  "tags": ["icfes", "lectura critica", "Hesse", "inconsciente", "literatura alemana"],
+  "page": "https://www.invicto.com.co/simulacro-icfes/lectura-critica"
+},
+{
+  "id": "simulacro-icfes/lectura-critica/q10",
+  "type": "question",
+  "component": "lectura-critica",
+  "number": 10,
+  "context_id": "context_hesse01",
+  "stem_text": "¿Por qué fue particularmente intenso el desdén por la sociedad mecanizada después de la Primera Guerra Mundial?",
+  "choices": [
+    "Porque la Primera Guerra Mundial obligó a Hesse a abandonar Alemania y exiliarse.",
+    "Porque la sociedad mecanizada limitaba la creatividad y el pensamiento filosófico.",
+    "Porque el avance tecnológico después de la guerra mejoró la calidad de vida de las personas.",
+    "Porque la guerra mostró el peligro de una sociedad dominada por la razón y la tecnología sin humanidad."
+  ],
+  "correct_choice": "Porque la guerra mostró el peligro de una sociedad dominada por la razón y la tecnología sin humanidad.",
+  "visual_description": "N/A",
+  "explanation_expert": "El desdén de Hesse se intensificó porque la Primera Guerra Mundial evidenció cómo la razón instrumental y la tecnología podían conducir a la destrucción y deshumanización, confirmando sus críticas a la sociedad mecanizada.",
+  "difficulty": "medium",
+  "tags": ["icfes", "lectura critica", "Hesse", "sociedad mecanizada", "Primera Guerra Mundial"],
+  "page": "https://www.invicto.com.co/simulacro-icfes/lectura-critica"
+},
+{
+  "id": "simulacro-icfes/lectura-critica/context_darwin01",
+  "type": "context",
+  "title": "La teoría de la selección sexual de Darwin",
+  "text": "Darwin tenía un maravilloso hábito científico de notar hechos que parecían inconsistentes con sus teorías. Observó varios que parecían contradecir su teoría de la selección natural, a la que a veces se refería como la teoría de la 'selección por supervivencia'. Primero, notó estructuras extrañas que aparentemente no tenían ninguna relación con la supervivencia; el brillante plumaje de los pavos reales era un ejemplo destacado. ¿Cómo pudo haber evolucionado esta extraña estructura luminosa? El plumaje es, obviamente, metabólicamente costoso para el pavo real. Además, parece una invitación abierta para los depredadores. Darwin se obsesionó tanto con esta aparente anomalía que una vez comentó: 'La vista de una pluma en la cola de un pavo real, cada vez que la miro, me enferma' (citado en Cronin, 1991, p. 113).\\n\\nDarwin también observó que, en algunas especies, los sexos diferían drásticamente en tamaño y estructura. ¿Por qué diferían tanto los sexos, se preguntaba Darwin, si tanto los machos como las hembras enfrentan esencialmente los mismos problemas de supervivencia, como alimentarse, defenderse de los depredadores y combatir enfermedades?\\n\\nDarwin se enfermaba al ver un pavo real porque, al principio, el brillante plumaje parecía no tener ningún valor para la supervivencia y, por lo tanto, no podía explicarse con su teoría original de la selección natural. Finalmente, desarrolló la teoría de la selección sexual, que podría explicar el plumaje del pavo real, y probablemente dejó de enfermarse cuando entendió su propósito.",
+  "visual_description": "Un pavo real con su plumaje desplegado en abanico, mostrando plumas verdes y azules con patrones en forma de ojos que cubren toda la extensión.",
+  "page": "https://www.invicto.com.co/simulacro-icfes/lectura-critica"
+},
+{
+  "id": "simulacro-icfes/lectura-critica/q11",
+  "type": "question",
+  "component": "lectura-critica",
+  "number": 11,
+  "context_id": "context_darwin01",
+  "stem_text": "¿Por qué la teoría original de la selección natural no podía explicar el plumaje del pavo real?",
+  "choices": [
+    "Porque las plumas del pavo real eran un subproducto de la evolución, sin propósito específico.",
+    "Porque no ofrecía ninguna ventaja en la lucha contra depredadores.",
+    "Porque el plumaje ayudaba a regular la temperatura corporal del pavo real.",
+    "Porque el plumaje solo beneficiaba a las hembras, no a los machos."
+  ],
+  "correct_choice": "Porque no ofrecía ninguna ventaja en la lucha contra depredadores.",
+  "visual_description": "Usa context_darwin01",
+  "explanation_expert": "El plumaje del pavo real parecía ser un gasto energético y un riesgo frente a depredadores, por lo que no encajaba en la lógica de la selección natural centrada en la supervivencia, lo que obligó a Darwin a desarrollar la teoría de la selección sexual.",
+  "difficulty": "medium",
+  "tags": ["icfes", "lectura critica", "Darwin", "selección natural", "selección sexual"],
+  "page": "https://www.invicto.com.co/simulacro-icfes/lectura-critica"
+},
+{
+  "id": "simulacro-icfes/lectura-critica/q12",
+  "type": "question",
+  "component": "lectura-critica",
+  "number": 12,
+  "context_id": "context_darwin01",
+  "stem_text": "¿Cuál fue la solución de Darwin para explicar la aparente desventaja del plumaje del pavo real?",
+  "choices": [
+    "Cambió su teoría de la selección natural para incluir características estéticas.",
+    "Concluyó que el plumaje del pavo real era una anomalía sin explicación evolutiva.",
+    "Sugirió que los depredadores evitaban pavos reales con plumaje brillante.",
+    "Propuso la teoría de la selección sexual."
+  ],
+  "correct_choice": "Propuso la teoría de la selección sexual.",
+  "visual_description": "Usa context_darwin01",
+  "explanation_expert": "Darwin resolvió la paradoja del plumaje del pavo real introduciendo la teoría de la selección sexual, que explica cómo ciertos rasgos costosos para la supervivencia pueden evolucionar porque aumentan el éxito reproductivo.",
+  "difficulty": "medium",
+  "tags": ["icfes", "lectura critica", "Darwin", "selección sexual", "evolución"],
+  "page": "https://www.invicto.com.co/simulacro-icfes/lectura-critica"
+},
+{
+  "id": "simulacro-icfes/lectura-critica/q13",
+  "type": "question",
+  "component": "lectura-critica",
+  "number": 13,
+  "context_id": "context_darwin01",
+  "stem_text": "¿Por qué la selección sexual puede favorecer rasgos que parecen desventajosos para la supervivencia?",
+  "choices": [
+    "Porque la evolución no siempre sigue un propósito lógico.",
+    "Porque los rasgos llamativos confunden a los depredadores y ayudan a escapar.",
+    "Porque los organismos con características inútiles desaparecen de la población.",
+    "Porque esos rasgos aumentan el éxito reproductivo, aunque reduzcan la supervivencia."
+  ],
+  "correct_choice": "Porque esos rasgos aumentan el éxito reproductivo, aunque reduzcan la supervivencia.",
+  "visual_description": "Usa context_darwin01",
+  "explanation_expert": "La selección sexual explica que ciertos rasgos persisten porque otorgan una ventaja en la reproducción, aunque impliquen costos para la supervivencia. El éxito reproductivo asegura la transmisión de esos rasgos a futuras generaciones.",
+  "difficulty": "medium",
+  "tags": ["icfes", "lectura critica", "Darwin", "selección sexual", "evolución"],
+  "page": "https://www.invicto.com.co/simulacro-icfes/lectura-critica"
+},
+{
+  "id": "simulacro-icfes/lectura-critica/q14",
+  "type": "question",
+  "component": "lectura-critica",
+  "number": 14,
+  "context_id": "context_darwin01",
+  "stem_text": "¿Por qué Darwin se sintió 'enfermo' al ver una pluma de pavo real?",
+  "choices": [
+    "Porque pensaba que los pavos reales eran un error de la evolución.",
+    "Porque los colores brillantes de la pluma lo mareaban.",
+    "Porque pensaba que las plumas del pavo real eran perjudiciales para la especie.",
+    "Porque parecía contradecir su teoría de la selección natural."
+  ],
+  "correct_choice": "Porque parecía contradecir su teoría de la selección natural.",
+  "visual_description": "Usa context_darwin01",
+  "explanation_expert": "Darwin expresó sentirse enfermo al ver una pluma de pavo real porque no podía reconciliarla con su teoría de la selección natural, ya que el plumaje parecía inútil e incluso desventajoso para la supervivencia.",
+  "difficulty": "medium",
+  "tags": ["icfes", "lectura critica", "Darwin", "selección natural", "pavo real"],
+  "page": "https://www.invicto.com.co/simulacro-icfes/lectura-critica"
+},
+{
+  "id": "simulacro-icfes/lectura-critica/q15",
+  "type": "question",
+  "component": "lectura-critica",
+  "number": 15,
+  "context_id": "context_darwin01",
+  "stem_text": "Si tanto hombres como mujeres enfrentaban los mismos desafíos evolutivos en la antigüedad —como buscar alimento, defenderse de depredadores y sobrevivir en ambientes hostiles—, ¿por qué los hombres desarrollaron mayor fuerza física en promedio, mientras que las mujeres no evolucionaron con la misma musculatura y agresividad?",
+  "choices": [
+    "Porque la selección sexual favoreció en los hombres características físicas que aumentaban su éxito en la competencia por parejas.",
+    "Porque las mujeres eran biológicamente incapaces de desarrollar fuerza muscular.",
+    "Porque la selección natural eliminó a las mujeres con mayor musculatura, ya que esto las hacía menos atractivas para los hombres.",
+    "Porque las mujeres no enfrentaban los mismos desafíos de supervivencia que los hombres."
+  ],
+  "correct_choice": "Porque la selección sexual favoreció en los hombres características físicas que aumentaban su éxito en la competencia por parejas.",
+  "visual_description": "Usa context_darwin01",
+  "explanation_expert": "La selección sexual explica que los hombres desarrollaran mayor fuerza y agresividad, ya que estas características les daban ventajas en la competencia por parejas y en el éxito reproductivo, aunque ambos sexos enfrentaran los mismos retos de supervivencia.",
+  "difficulty": "medium",
+  "tags": ["icfes", "lectura critica", "Darwin", "selección sexual", "evolución humana"],
+  "page": "https://www.invicto.com.co/simulacro-icfes/lectura-critica"
+},
+{
+  "id": "simulacro-icfes/lectura-critica/context_esparta01",
+  "type": "context",
+  "title": "Esparta: La educación más dura de la historia",
+  "text": "Las reformas de Licurgo: Para conservar el control sobre los ilotas, los espartanos instituyeron las reformas que crearon un Estado militar. En este informe sobre el legislador Licurgo, el historiador griego Plutarco analiza el efecto de estas reformas en el trato y la educación de los niños.\\n\\nPlutarco, Licurgo\\nMas a los jóvenes de Esparta no los entregó Licurgo a la enseñanza de ayos comprados o mercenarios, ni aun era permitido cada uno criar y educar a sus hijos como gustase, sino que él mismo, entregándoselos de todos a la edad de siete años, los repartió en clases, y haciéndolos compañeros y camaradas, los acostumbró a entretenerse y holgarse juntos. En cada clase puso por cabo el de allá que manifestaba más juicio y era más alentado y corajudo en sus luchas, al cual los otros le tenían respeto, y le obedecían y sufrían sus castigos, siendo aquella una escuela de obediencia. Los más ancianos los veían jugar y a propósito movían entre ellos disputas y riñas, notando así de paso la índole y naturaleza de cada uno en cuanto al valor y al perseverar en las luchas. De letras no aprendían más que lo preciso y toda la educación se dirigía a que fuesen bien mandados, sufridores del trabajo y vencedores en la guerra; por eso, según crecía en edad, crecían también las pruebas: rapándoles hasta la piel, haciéndoles andar descalzos y jugar por lo común desnudos.\\n\\nCuando ya tenían doce años no gastaban túnica, ni se les daba más que una ropilla para todo el año; así macilentos y delgados en sus cuerpos, no usaban ni de baños ni de aceites, y sólo algunos días se les permitía disfrutar de este regalo. Dormían juntos en fila y por clases sobre mullido de ramas que ellos mismos traían, rompiendo con la mano sin hierro alguno las puntas de las cuñas que se crían a la orilla del Eurotas, y en el invierno echaban también de los que se llaman matalobos y los mezclaban con las cañas porque se creía que eran de naturaleza cálida. Cuando ya habían venido a este estado, los ancianos se manifestaban apasionados y amadores de los jóvenes que más resaltaban, concurriendo más a menudo a sus gimnasios, y hallándose en sus luchas y sus chanzas, no de paso, sino en términos de parecer que todos eran padres, ayo y superiores también de todos [...] no había momento vacío, ni lugar libre de amonestador y castigador del que en algo errase.\\n\\n[A los jóvenes espartanos se les alentaba a robar su comida.] Robaban también lo que podían de las cosas de comer y estaban en acecho de los que dormían o se descuidaban en su custodia, siendo la pena del que era cogido azotes y no comer, y en general su comida era escasa, para que por sí mismos remediasen esta penuria y se vieran precisados a ser resueltos y mañosos. Y este era el objeto de la comida tan tasada; pero dicen que además servía para que los cuerpos creciesen. Este era el designio principal de su dura fortuna.\\n\\nFuente: Plutarco, Vidas paralelas [Licurgo] (tomo I, pp. 99-101). Traducido por Antonio Ranz Romanillos (1879). Madrid: Imprenta Central.",
+  "visual_description": "",
+  "page": "https://www.invicto.com.co/simulacro-icfes/lectura-critica"
+},
+{
+  "id": "simulacro-icfes/lectura-critica/q16",
+  "type": "question",
+  "component": "lectura-critica",
+  "number": 16,
+  "context_id": "context_esparta01",
+  "stem_text": "¿Qué te dice este pasaje de Plutarco sobre el informe de Licurgo acerca de la naturaleza del Estado espartano?",
+  "choices": [
+    "Promovía la libertad individual y la creatividad en los niños.",
+    "Era un Estado militarista que formaba ciudadanos obedientes y resistentes.",
+    "Favorecía la educación filosófica y artística como base de la sociedad.",
+    "Se centraba en la formación de políticos y diplomáticos hábiles."
+  ],
+  "correct_choice": "Era un Estado militarista que formaba ciudadanos obedientes y resistentes.",
+  "visual_description": "N/A",
+  "explanation_expert": "El texto de Plutarco muestra cómo la educación espartana estaba diseñada para moldear a los jóvenes en disciplina, resistencia y obediencia, pilares de un Estado militarista centrado en la guerra y el control social.",
+  "difficulty": "medium",
+  "tags": ["icfes", "lectura critica", "Esparta", "educación", "Estado militarista"],
+  "page": "https://www.invicto.com.co/simulacro-icfes/lectura-critica"
+},
+{
+  "id": "simulacro-icfes/lectura-critica/q17",
+  "type": "question",
+  "component": "lectura-critica",
+  "number": 17,
+  "context_id": "context_esparta01",
+  "stem_text": "¿Por qué les parecía de mal gusto el programa completo a los atenienses?",
+  "choices": [
+    "Porque consideraban la educación espartana como demasiado laxa y sin disciplina.",
+    "Porque valoraban la educación intelectual y artística sobre el entrenamiento militar.",
+    "Porque los atenienses tenían una cultura aún más militarista que Esparta.",
+    "Porque Atenas despreciaba cualquier tipo de educación en la antigua Grecia."
+  ],
+  "correct_choice": "Porque valoraban la educación intelectual y artística sobre el entrenamiento militar.",
+  "visual_description": "N/A",
+  "explanation_expert": "Los atenienses valoraban una educación centrada en la filosofía, las artes y la retórica, por lo que consideraban de mal gusto el énfasis exclusivo en la disciplina y el entrenamiento militar de Esparta.",
+  "difficulty": "medium",
+  "tags": ["icfes", "lectura critica", "Esparta", "Atenas", "educación"],
+  "page": "https://www.invicto.com.co/simulacro-icfes/lectura-critica"
+},
+{
+  "id": "simulacro-icfes/lectura-critica/q18",
+  "type": "question",
+  "component": "lectura-critica",
+  "number": 18,
+  "context_id": "context_esparta01",
+  "stem_text": "¿Cuál era la razón por la que los jóvenes espartanos eran alentados a robar comida?",
+  "choices": [
+    "Para desarrollar astucia y supervivencia en situaciones extremas.",
+    "Porque en Esparta había escasez de alimentos y se permitía el robo.",
+    "Porque querían inculcarles la cultura de la deshonestidad.",
+    "Porque los adultos eran irresponsables y no los alimentaban bien."
+  ],
+  "correct_choice": "Para desarrollar astucia y supervivencia en situaciones extremas.",
+  "visual_description": "N/A",
+  "explanation_expert": "El robo de alimentos en Esparta no respondía a la escasez ni a la deshonestidad, sino a un método pedagógico para fomentar la astucia, la habilidad y la capacidad de sobrevivir en condiciones difíciles.",
+  "difficulty": "medium",
+  "tags": ["icfes", "lectura critica", "Esparta", "educación", "supervivencia"],
+  "page": "https://www.invicto.com.co/simulacro-icfes/lectura-critica"
+},
+{
+  "id": "simulacro-icfes/lectura-critica/q19",
+  "type": "question",
+  "component": "lectura-critica",
+  "number": 19,
+  "context_id": "context_esparta01",
+  "stem_text": "¿Qué implicaciones podría tener el hecho de que los ancianos espartanos observaran a los niños pelear desnudos dentro del modelo educativo y social de Esparta?",
+  "choices": [
+    "Demostraba una cultura que no entendía la infancia como una etapa diferenciada de la adultez, sino como un periodo de preparación en el que los niños debían ser tratados como adultos en formación.",
+    "Sugería una estructura de poder basada en la sumisión, donde la vigilancia de los ancianos tenía el propósito de generar obediencia a través del miedo y la humillación.",
+    "Era una práctica que tenía motivaciones subyacentes más allá del entrenamiento físico, lo que podría indicar una normalización de relaciones de poder problemáticas en la sociedad espartana.",
+    "Reflejaba una forma de control social donde los ancianos no solo supervisaban el entrenamiento, sino que también moldeaban la identidad de los jóvenes a través de la vigilancia constante."
+  ],
+  "correct_choice": "Reflejaba una forma de control social donde los ancianos no solo supervisaban el entrenamiento, sino que también moldeaban la identidad de los jóvenes a través de la vigilancia constante.",
+  "visual_description": "N/A",
+  "explanation_expert": "La vigilancia de los ancianos sobre las actividades de los jóvenes simbolizaba un control social que buscaba moldear disciplina, obediencia y valores militares desde la infancia, asegurando la continuidad del modelo espartano.",
+  "difficulty": "medium",
+  "tags": ["icfes", "lectura critica", "Esparta", "educación", "control social"],
+  "page": "https://www.invicto.com.co/simulacro-icfes/lectura-critica"
+}
+]

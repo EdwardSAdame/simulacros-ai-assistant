@@ -1,0 +1,558 @@
+[
+  {
+    "id": "simulacro-icfes/ciencias-naturales/context_nat01",
+    "type": "context",
+    "title": "Efectos de las hormonas en la probabilidad de embarazo",
+    "text": "En el grupo de los mamíferos se presentan dos tipos de ciclos reproductivos: el menstrual (de 24 a 35 días), exclusivo de primates y humanos; y el ciclo estral (entre estaciones), en el resto de mamíferos. La diferencia entre estos tipos de ciclos radica en el periodo de receptividad sexual. En el ciclo estral, la hembra solo es sexualmente receptiva durante el estro u ovulación; en el ciclo menstrual, la hembra muestra receptividad sexual durante casi todo el ciclo. Los modelos de la figura muestran cada ciclo de reproducción. La mayoría de las pastillas anticonceptivas se basan en una mezcla de hormonas con una combinación estratégica de estrógeno y progesterona.",
+    "visual_description": "Gráfico comparativo de los ciclos reproductivos en mamíferos. A la izquierda se muestra el ciclo menstrual de 28 días, con curvas de niveles hormonales (estrógeno, progesterona, hormona folículo estimulante y luteinizante) y las fases folicular, ovulación y lútea. A la derecha se ilustra el ciclo estral, indicando picos de LH, estrógeno, progesterona y prostaglandina F, junto con las etapas de celo, ovulación, regresión de cuerpos lúteos y desarrollo folicular.",
+    "page": "https://www.invicto.com.co/simulacro-icfes/ciencias-naturales"
+  },
+  {
+  "id": "simulacro-icfes/ciencias-naturales/q01",
+  "type": "question",
+  "component": "ciencias-naturales",
+  "number": 1,
+  "context_id": "context_nat01",
+  "stem_text": "Con base en la información anterior, ¿por qué una mujer que utiliza este método anticonceptivo tiene menor probabilidad de quedar embarazada?",
+  "choices": [
+    "Porque restringirá a unos días específicos su receptividad sexual, lo cual disminuye la posibilidad de quedar embarazada.",
+    "Porque estas hormonas permanecerán en altas concentraciones durante todo el ciclo, lo cual impide la ovulación.",
+    "Porque este método eliminará los espermatozoides durante su trayecto hacia el óvulo, lo cual impide la fecundación.",
+    "Porque este método aumentará el número de días que dura el ciclo menstrual, lo cual altera los días fértiles."
+  ],
+  "correct_choice": "Porque estas hormonas permanecerán en altas concentraciones durante todo el ciclo, lo cual impide la ovulación.",
+  "visual_description": "Usa context_nat01",
+  "explanation_expert": "Las pastillas anticonceptivas mantienen niveles constantes de estrógeno y progesterona que impiden el pico de la hormona luteinizante (LH) y, por lo tanto, bloquean la ovulación. No afectan directamente a los espermatozoides ni prolongan la duración del ciclo menstrual.",
+  "difficulty": "medium",
+  "tags": ["icfes", "ciencias-naturales", "reproducción", "hormonas"],
+  "page": "https://www.invicto.com.co/simulacro-icfes/ciencias-naturales"
+},
+{
+  "id": "simulacro-icfes/ciencias-naturales/q02",
+  "type": "question",
+  "component": "ciencias-naturales",
+  "number": 2,
+  "context_id": "context_nat01",
+  "stem_text": "En la tabla se muestra la duración en días de los ciclos reproductivos de algunas especies de mamíferos: ¿Cuáles corresponden a ciclos menstruales?",
+  "choices": [
+    "Los de las especies 1 y 4.",
+    "Los de las especies 1 y 3.",
+    "Los de las especies 2 y 3.",
+    "Los de las especies 3 y 4."
+  ],
+  "correct_choice": "Los de las especies 1 y 4.",
+  "visual_description": "Tabla comparativa de especies de mamíferos con la duración de sus ciclos reproductivos en días y el número de ciclos al año: 1) Ateles belzebuth: 24-27 días, 12 ciclos; 2) Bos primigenius taurus: 21-23 días, 6 ciclos; 3) Equus ferus caballus: 23-26 días, 4 ciclos; 4) Papio hamadryas: 31-35 días, 11 ciclos.",
+  "explanation_expert": "Los ciclos menstruales en mamíferos tienen una duración de 24 a 35 días y son característicos de primates. Las especies 1 (Ateles belzebuth) y 4 (Papio hamadryas) cumplen con estos rangos y, por lo tanto, corresponden a ciclos menstruales.",
+  "difficulty": "medium",
+  "tags": ["icfes", "ciencias-naturales", "reproducción", "ciclos-menstruales"],
+  "page": "https://www.invicto.com.co/simulacro-icfes/ciencias-naturales"
+},
+{
+  "id": "simulacro-icfes/ciencias-naturales/q03",
+  "type": "question",
+  "component": "ciencias-naturales",
+  "number": 3,
+  "context_id": "context_nat01",
+  "stem_text": "En un zoológico necesitan regular la natalidad de las hembras del mono ardilla. Se ha diseñado el siguiente experimento para probar la efectividad de un nuevo método anticonceptivo:\n\n1. Formación de dos grupos de hembras en edad reproductiva.\n2. Suministro del anticonceptivo a todas las hembras de los dos grupos.\n3. Reunión con machos de la especie.\n4. Se repite cada mes el procedimiento y se contabiliza el número de embarazos por cada grupo.\n\nCon base en la información anterior: ¿El experimento planteado permitirá reconocer la efectividad del anticonceptivo en la población de monos ardilla?",
+  "choices": [
+    "No, porque faltan grupos similares a los que no se les suministre el anticonceptivo para comparar los resultados.",
+    "Sí, porque el experimento planteado es similar al que se realiza en humanos, donde es más fácil reconocer el embarazo.",
+    "No, porque al reunir los animales estos podrán estresarse por no estar en su ambiente natural.",
+    "Sí, porque el anticonceptivo modifica los niveles hormonales de las hembras y esto las hace más agresivas."
+  ],
+  "correct_choice": "No, porque faltan grupos similares a los que no se les suministre el anticonceptivo para comparar los resultados.",
+  "visual_description": "Texto con el diseño experimental aplicado a hembras de mono ardilla en un zoológico, detallando los pasos del procedimiento: formación de grupos, suministro de anticonceptivo, reunión con machos y conteo mensual de embarazos.",
+  "explanation_expert": "El experimento carece de un grupo control, indispensable para comparar los resultados. Al administrar el anticonceptivo a todas las hembras no hay manera de diferenciar si los embarazos se reducen por el tratamiento o por otros factores.",
+  "difficulty": "medium",
+  "tags": ["icfes", "ciencias-naturales", "experimentación", "control", "reproducción"],
+  "page": "https://www.invicto.com.co/simulacro-icfes/ciencias-naturales"
+},
+{
+  "id": "simulacro-icfes/ciencias-naturales/context_nat02",
+  "type": "context",
+  "title": "Genotipos en el cruce de ratones",
+  "text": "La figura representa el cruce entre dos ratones, para una característica dada por un solo gen.",
+  "visual_description": "Esquema de cruce genético en ratones. Se observa un ratón marrón (Parental 1) y un ratón beige (Parental 2), cuyo cruce da como resultado una descendencia de color marrón.",
+  "page": "https://www.invicto.com.co/simulacro-icfes/ciencias-naturales"
+},
+{
+  "id": "simulacro-icfes/ciencias-naturales/q04",
+  "type": "question",
+  "component": "ciencias-naturales",
+  "number": 4,
+  "context_id": "context_nat02",
+  "stem_text": "¿Cuál de las siguientes tablas muestra los genotipos de los parentales y del descendiente para esta característica?",
+  "choices": [
+    "Parental 1 = MM, Parental 2 = mm, Descendencia = MM",
+    "Parental 1 = mm, Parental 2 = mm, Descendencia = Mm",
+    "Parental 1 = MM, Parental 2 = mm, Descendencia = mm",
+    "Parental 1 = MM, Parental 2 = mm, Descendencia = Mm"
+  ],
+  "correct_choice": "Parental 1 = MM, Parental 2 = mm, Descendencia = Mm",
+  "visual_description": "Cuatro tablas comparativas de genotipos para parentales y descendencia. Cada una presenta combinaciones diferentes de MM, mm y Mm para los individuos parentales y el descendiente.",
+  "explanation_expert": "El color marrón corresponde a un rasgo dominante (M). Si un parental es homocigoto dominante (MM) y el otro homocigoto recesivo (mm), la descendencia será heterocigota (Mm), manifestando el fenotipo dominante.",
+  "difficulty": "medium",
+  "tags": ["icfes", "ciencias-naturales", "genética", "cruces-genéticos"],
+  "page": "https://www.invicto.com.co/simulacro-icfes/ciencias-naturales"
+},
+{
+  "id": "simulacro-icfes/ciencias-naturales/context_nat03",
+  "type": "context",
+  "title": "Impacto del bloqueo de H⁺ en la generación de corriente eléctrica bacteriana",
+  "text": "Shewanella oneidensis es una bacteria anaeróbica que se encuentra en los suelos de los ríos a grandes profundidades. Esta bacteria puede ser utilizada para la producción de energía eléctrica mediante el siguiente proceso: La bacteria oxida materia orgánica y produce electrones (e⁻) que se transfieren a un electrodo mediante el compuesto químico riboflavina. Luego, mediante un material conductor, los electrones viajan a un segundo electrodo, en donde ocurre una reacción de reducción y, de esta forma, se genera una corriente eléctrica. Estos electrodos se encuentran en dos cámaras comunicadas por una membrana que permite solamente el paso de iones H⁺, como se muestra en la figura. En la cámara catódica (aerobia) se lleva a cabo la reducción de O₂ en presencia de iones H⁺ para producir agua, y en la cámara anódica (anaeróbica) se oxida la materia orgánica para producir dióxido de carbono.",
+  "visual_description": "Esquema del sistema de producción de corriente eléctrica con Shewanella oneidensis. A la izquierda, en la cámara anódica, la bacteria oxida materia orgánica y libera electrones que se transfieren al primer electrodo mediante riboflavina, produciendo CO₂. Los electrones viajan a través de un cable con resistencia hasta el segundo electrodo en la cámara catódica, mientras que los iones H⁺ atraviesan una membrana semipermeable. En la cámara catódica, el oxígeno se combina con H⁺ y electrones para formar agua.",
+  "page": "https://www.invicto.com.co/simulacro-icfes/ciencias-naturales"
+},
+{
+  "id": "simulacro-icfes/ciencias-naturales/q05",
+  "type": "question",
+  "component": "ciencias-naturales",
+  "number": 5,
+  "context_id": "context_nat03",
+  "stem_text": "Teniendo en cuenta la información anterior, si se bloquea el paso de H⁺ por la membrana, ¿la corriente que recorre el cable?",
+  "choices": [
+    "Aumenta, porque la cantidad de electrones y H⁺ en la cámara anódica se incrementaría y ambos viajarían por el cable.",
+    "Aumenta, porque los H⁺ acumulados en la cámara anódica repelerán a los electrones y viajarán más electrones por el cable.",
+    "Se anula, porque los H⁺ no podrían reaccionar con los electrones en la cámara anódica y los H⁺ viajarían por el cable.",
+    "Se anula, porque los H⁺ acumulados en la cámara anódica atraerán a los electrones y estos últimos no viajarán por el cable."
+  ],
+  "correct_choice": "Se anula, porque los H⁺ acumulados en la cámara anódica atraerán a los electrones y estos últimos no viajarán por el cable.",
+  "visual_description": "Pregunta basada en el diagrama del sistema bacteriano con membrana que permite el paso de H⁺. Se analiza qué ocurre si la membrana se bloquea y los H⁺ no pueden cruzar entre cámaras.",
+  "explanation_expert": "Si los iones H⁺ no pueden atravesar la membrana, se acumulan en la cámara anódica y neutralizan la diferencia de carga que impulsa el flujo de electrones. Como resultado, la corriente eléctrica se interrumpe y los electrones dejan de circular por el cable.",
+  "difficulty": "medium",
+  "tags": ["icfes", "ciencias-naturales", "bioelectricidad", "membranas", "electrones"],
+  "page": "https://www.invicto.com.co/simulacro-icfes/ciencias-naturales"
+},
+{
+  "id": "simulacro-icfes/ciencias-naturales/q06",
+  "type": "question",
+  "component": "ciencias-naturales",
+  "number": 6,
+  "context_id": "context_nat03",
+  "stem_text": "Teniendo en cuenta que en cualquier reacción química se conserva la masa, ¿cuál de las siguientes ecuaciones químicas describe la reacción balanceada de la cámara catódica?",
+  "choices": [
+    "O₂ + 4H⁺ + 4e⁻ → 2H₂O",
+    "O₂ + H⁺ + 4e⁻ → 2H₂O",
+    "2O₂ + 2H⁺ + 4e⁻ → 4H₂O",
+    "O₂ + H⁺ + 4e⁻ → H₂O"
+  ],
+  "correct_choice": "O₂ + 4H⁺ + 4e⁻ → 2H₂O",
+  "visual_description": "Usa context_nat03",
+  "explanation_expert": "En la cámara catódica ocurre la reducción del oxígeno en medio ácido: cada molécula de O₂ acepta 4 electrones y reacciona con 4 protones para formar 2 moléculas de H₂O. Esta ecuación conserva átomos y carga; las otras opciones no están balanceadas.",
+  "difficulty": "medium",
+  "tags": ["icfes", "ciencias-naturales", "electroquímica", "balanceo", "reducción"],
+  "page": "https://www.invicto.com.co/simulacro-icfes/ciencias-naturales"
+},
+{
+  "id": "simulacro-icfes/ciencias-naturales/q06",
+  "type": "question",
+  "component": "ciencias-naturales",
+  "number": 6,
+  "context_id": "context_nat03",
+  "stem_text": "Teniendo en cuenta que en cualquier reacción química se conserva la masa, ¿cuál de las siguientes ecuaciones químicas describe la reacción balanceada de la cámara catódica?",
+  "choices": [
+    "\\( O_{2} + 4H^{+} + 4e^{-} \\rightarrow 2H_{2}O \\)",
+    "\\( O_{2} + H^{+} + 4e^{-} \\rightarrow 2H_{2}O \\)",
+    "\\( 2O_{2} + 2H^{+} + 4e^{-} \\rightarrow 4H_{2}O \\)",
+    "\\( O_{2} + H^{+} + 4e^{-} \\rightarrow H_{2}O \\)"
+  ],
+  "correct_choice": "\\( O_{2} + 4H^{+} + 4e^{-} \\rightarrow 2H_{2}O \\)",
+  "visual_description": "Usa context_nat03",
+  "explanation_expert": "La reacción catódica balanceada es la reducción del oxígeno: una molécula de O₂ acepta 4 electrones y 4 protones para formar 2 moléculas de agua. Esta ecuación conserva átomos y carga, mientras que las demás opciones no cumplen el balance.",
+  "difficulty": "medium",
+  "tags": ["icfes", "ciencias-naturales", "electroquímica", "balanceo", "reducción"],
+  "page": "https://www.invicto.com.co/simulacro-icfes/ciencias-naturales"
+},
+{
+  "id": "simulacro-icfes/ciencias-naturales/q07",
+  "type": "question",
+  "component": "ciencias-naturales",
+  "number": 7,
+  "context_id": "context_nat03",
+  "stem_text": "La nueva tecnología para la producción de energía eléctrica a partir de la bacteria Shewanella oneidensis promueve la conservación del medio ambiente, porque:",
+  "choices": [
+    "Se pueden realizar los procesos de descomposición de la materia orgánica utilizando la bacteria Shewanella oneidensis y, a su vez, producir energía eléctrica.",
+    "Los productos obtenidos por la descomposición de la materia orgánica no producen gases de invernadero, y se puede obtener energía eléctrica.",
+    "La técnica no necesita instalaciones especiales y, desde que haya oxígeno ambiental, se puede obtener energía eléctrica directamente de los ríos.",
+    "Se podrían extraer todas las bacterias Shewanella oneidensis de suelos de los ríos para la producción a gran escala de energía eléctrica, sin alterar el equilibrio de la naturaleza."
+  ],
+  "correct_choice": "Se pueden realizar los procesos de descomposición de la materia orgánica utilizando la bacteria Shewanella oneidensis y, a su vez, producir energía eléctrica.",
+  "visual_description": "Pregunta sobre el impacto ambiental de la tecnología con Shewanella oneidensis en la producción de energía eléctrica.",
+  "explanation_expert": "La bacteria Shewanella oneidensis aprovecha la materia orgánica para descomponerla y al mismo tiempo generar electricidad, un proceso que contribuye a la conservación ambiental al transformar desechos en energía útil.",
+  "difficulty": "medium",
+  "tags": ["icfes", "ciencias-naturales", "bioenergía", "medio-ambiente", "Shewanella"],
+  "page": "https://www.invicto.com.co/simulacro-icfes/ciencias-naturales"
+},
+{
+  "id": "simulacro-icfes/ciencias-naturales/context_nat04",
+  "type": "context",
+  "title": "Impacto de la extinción de tiburones en una red trófica marina",
+  "text": "El modelo muestra una red trófica marina.",
+  "visual_description": "Diagrama de una red trófica marina. El tiburón se alimenta del atún, que a su vez consume sardinas y calamares. Las sardinas y el calamar se alimentan de zooplancton, que a su vez consume fitoplancton. El pez loro se alimenta de pastos marinos y también de zooplancton, mientras que el calamar se alimenta del pez loro. Las flechas indican la dirección del flujo de energía alimentaria.",
+  "page": "https://www.invicto.com.co/simulacro-icfes/ciencias-naturales"
+},
+{
+  "id": "simulacro-icfes/ciencias-naturales/q08",
+  "type": "question",
+  "component": "ciencias-naturales",
+  "number": 8,
+  "context_id": "context_nat04",
+  "stem_text": "Teniendo en cuenta la red trófica anterior, ¿qué pasaría si se extinguen los tiburones?",
+  "choices": [
+    "Disminuirá la población de calamares por el aumento en la población de atunes.",
+    "Aumentaría la población de sardinas al no ser depredadas por los tiburones.",
+    "Disminuirá la cantidad de zooplancton porque los atunes comenzarían a depredarlos.",
+    "Los pastos marinos y el fitoplancton se disminuirán al ser productores primarios."
+  ],
+  "correct_choice": "Disminuirá la población de calamares por el aumento en la población de atunes.",
+  "visual_description": "Pregunta sobre el efecto de la extinción de tiburones en la red trófica marina, considerando la relación entre tiburones, atunes y calamares.",
+  "explanation_expert": "La desaparición de los tiburones elimina un depredador tope de los atunes. Como consecuencia, la población de atunes crecería y ejercerían mayor presión sobre los calamares, disminuyendo así su población.",
+  "difficulty": "medium",
+  "tags": ["icfes", "ciencias-naturales", "ecología", "red-trófica", "tiburones"],
+  "page": "https://www.invicto.com.co/simulacro-icfes/ciencias-naturales"
+},
+{
+  "id": "simulacro-icfes/ciencias-naturales/context_nat05",
+  "type": "context",
+  "title": "Movimiento magnético de un carro de plástico",
+  "text": "Un estudiante cuenta con los siguientes materiales: ",
+  "visual_description": "Ilustración de materiales: un borrador rectangular, una tapa de gaseosa negra, una bola de pimpón azul y una puntilla metálica.",
+  "page": "https://www.invicto.com.co/simulacro-icfes/ciencias-naturales"
+},
+{
+  "id": "simulacro-icfes/ciencias-naturales/q09",
+  "type": "question",
+  "component": "ciencias-naturales",
+  "number": 9,
+  "context_id": "context_nat05",
+  "stem_text": "El estudiante quiere mover un carro de plástico colocando un imán por debajo de una mesa, como se muestra en la figura. Para mover el carro, el estudiante debe colocar en su interior:",
+  "choices": [
+    "La puntilla, porque esta presenta mayores propiedades magnéticas.",
+    "La bola de pimpón, porque esta no presenta propiedades magnéticas.",
+    "La tapa de gaseosa, porque esta no presenta propiedades magnéticas.",
+    "El borrador, porque este presenta mayores propiedades magnéticas."
+  ],
+  "correct_choice": "La puntilla, porque esta presenta mayores propiedades magnéticas.",
+  "visual_description": "Diagrama de un carro de plástico desplazándose sobre una mesa, movido por la atracción de un imán situado debajo. Se muestran las posiciones sucesivas del imán y el movimiento del carro.",
+  "explanation_expert": "Para que el carro de plástico responda al campo magnético, se debe colocar en su interior un material ferromagnético. La puntilla, al ser metálica y presentar propiedades magnéticas, permite que el imán atraiga y mueva el carro.",
+  "difficulty": "easy",
+  "tags": ["icfes", "ciencias-naturales", "magnetismo", "fuerza-magnética"],
+  "page": "https://www.invicto.com.co/simulacro-icfes/ciencias-naturales"
+},
+{
+  "id": "simulacro-icfes/ciencias-naturales/context_nat06",
+  "type": "context",
+  "title": "Representación gráfica de valores de pH",
+  "text": "Un estudiante tomó los valores de pH de las sustancias que se muestran en la siguiente tabla:",
+  "visual_description": "Tabla con valores de pH de diferentes sustancias: Jugo de limón (2,3), Jugo de naranja (3,5), Enjuague bucal (5,8), Sangre humana (7,4), Refresco (3,0) y Agua de mar (8,0).",
+  "page": "https://www.invicto.com.co/simulacro-icfes/ciencias-naturales"
+},
+{
+  "id": "simulacro-icfes/ciencias-naturales/q10",
+  "type": "question",
+  "component": "ciencias-naturales",
+  "number": 10,
+  "context_id": "context_nat06",
+  "stem_text": "¿Cuál de los siguientes gráficos representa correctamente los valores de pH de las sustancias dadas en la tabla?",
+  "choices": [
+    "Gráfico lineal que ordena correctamente las sustancias pero representa los valores de pH de manera incorrecta (solo entre 1 y 6).",
+    "Gráfico de barras que usa números en el eje x en lugar de nombres de sustancias y muestra valores de pH que no corresponden (ejemplo: agua de mar con pH ≈ 10).",
+    "Gráfico lineal que ubica las sustancias en orden, pero representa de forma errónea valores como el del refresco (≈1 en vez de 3,0) y el agua de mar (≈4 en vez de 8,0).",
+    "Gráfico de barras con nombres de sustancias que representa correctamente los valores: limón (≈2,3), naranja (≈3,5), enjuague bucal (≈5,8), sangre humana (≈7,4), refresco (≈3,0) y agua de mar (≈8,0)."
+  ],
+  "correct_choice": "Gráfico de barras con nombres de sustancias que representa correctamente los valores: limón (≈2,3), naranja (≈3,5), enjuague bucal (≈5,8), sangre humana (≈7,4), refresco (≈3,0) y agua de mar (≈8,0).",
+  "visual_description": "Cuatro gráficos distintos (dos lineales y dos de barras) que comparan los valores de pH de jugo de limón, jugo de naranja, enjuague bucal, sangre humana, refresco y agua de mar.",
+  "explanation_expert": "El gráfico correcto es el de barras con nombres de sustancias y valores aproximados a los de la tabla, porque respeta el orden y la magnitud de cada pH. Los demás gráficos presentan errores en los valores o en la identificación de las sustancias.",
+  "difficulty": "medium",
+  "tags": ["icfes", "ciencias-naturales", "pH", "representación-gráfica"],
+  "page": "https://www.invicto.com.co/simulacro-icfes/ciencias-naturales"
+},
+{
+  "id": "simulacro-icfes/ciencias-naturales/context_nat07",
+  "type": "context",
+  "title": "Impacto de bacterias en el crecimiento de plantas",
+  "text": "En un experimento, se midió el peso de dos grupos de una misma especie de planta que creció en condiciones normales de luz, temperatura y nutrientes. Uno de los grupos creció en presencia de una bacteria y el otro grupo creció en ausencia de esta. El estudiante tenía la hipótesis de que la presencia de la bacteria beneficiaría el crecimiento de la planta.",
+  "visual_description": "Leyenda de un gráfico experimental: una línea continua representa plantas que crecieron solas, y una línea punteada representa plantas que crecieron en presencia de la bacteria.",
+  "page": "https://www.invicto.com.co/simulacro-icfes/ciencias-naturales"
+},
+{
+  "id": "simulacro-icfes/ciencias-naturales/q11",
+  "type": "question",
+  "component": "ciencias-naturales",
+  "number": 11,
+  "context_id": "context_nat07",
+  "stem_text": "¿Cuál gráfica representa la hipótesis del estudiante?",
+  "choices": [
+    "Gráfica A: La planta con bacteria (línea punteada) disminuye su peso con el tiempo, mientras que la planta sola (línea continua) crece lentamente.",
+    "Gráfica B: La planta sola crece más que la planta en presencia de la bacteria.",
+    "Gráfica C: La planta sola crece, mientras que la planta en presencia de la bacteria no aumenta su peso.",
+    "Gráfica D: La planta en presencia de la bacteria (línea punteada) crece más que la planta sola (línea continua)."
+  ],
+  "correct_choice": "Gráfica D: La planta en presencia de la bacteria (línea punteada) crece más que la planta sola (línea continua).",
+  "visual_description": "Cuatro gráficas que comparan el peso de las plantas en función del tiempo. La línea punteada representa las plantas en presencia de la bacteria y la línea continua las plantas solas.",
+  "explanation_expert": "La hipótesis del estudiante era que la bacteria beneficiaría el crecimiento de la planta. Esto se cumple en la gráfica D, donde las plantas con la bacteria muestran un mayor crecimiento en comparación con las plantas solas.",
+  "difficulty": "medium",
+  "tags": ["icfes", "ciencias-naturales", "bacterias", "crecimiento-de-plantas", "gráficas"],
+  "page": "https://www.invicto.com.co/simulacro-icfes/ciencias-naturales"
+},
+{
+  "id": "simulacro-icfes/ciencias-naturales/context_nat08",
+  "type": "context",
+  "title": "Formación de minerales en el ciclo del oxígeno",
+  "text": "El siguiente modelo muestra parte del ciclo del oxígeno.",
+  "visual_description": "Esquema del ciclo del oxígeno. En la atmósfera, la radiación ultravioleta de alta energía transforma O₂ en O₃ y radicales, protegiendo mediante la capa de ozono. En el océano, el CO₂ disuelto reacciona con agua formando ácido carbónico y posteriormente iones bicarbonato (HCO₃⁻) y carbonato (CO₃²⁻), que junto con Ca²⁺ forman carbonato de calcio (CaCO₃) en los sedimentos. En el continente ocurre meteorización oxidante, donde el hierro (Fe²⁺) se oxida con oxígeno para formar óxidos de hierro (Fe₂O₃).",
+  "page": "https://www.invicto.com.co/simulacro-icfes/ciencias-naturales"
+},
+{
+  "id": "simulacro-icfes/ciencias-naturales/q12",
+  "type": "question",
+  "component": "ciencias-naturales",
+  "number": 12,
+  "context_id": "context_nat08",
+  "stem_text": "Con base en este modelo, ¿cuál mineral se forma a partir de las reacciones (entre compuestos que contengan carbono y oxígeno) que pueden darse entre los organismos marinos?",
+  "choices": [
+    "La caliza, compuesta por carbonato de calcio (\\(CaCO_{3}\\)).",
+    "El ozono (\\(O_{3}\\)), formado por tres oxígenos.",
+    "La hematita, compuesta por óxido férrico (\\(Fe_{2}O_{3}\\)).",
+    "El agua (\\(H_{2}O\\)), compuesta por dos hidrógenos y un oxígeno."
+  ],
+  "correct_choice": "La caliza, compuesta por carbonato de calcio (\\(CaCO_{3}\\)).",
+  "visual_description": "Pregunta de selección múltiple sobre el mineral que se forma en los océanos. Incluye opciones como caliza, ozono, hematita y agua.",
+  "explanation_expert": "En el mar, el CO₂ disuelto reacciona con agua para formar carbonato, que junto con iones de calcio produce carbonato de calcio (CaCO₃). Este se acumula en los sedimentos formando caliza. Las otras opciones no corresponden a minerales marinos formados en este proceso.",
+  "difficulty": "easy",
+  "tags": ["icfes", "ciencias-naturales", "ciclo-del-oxígeno", "minerales", "carbonato-de-calcio"],
+  "page": "https://www.invicto.com.co/simulacro-icfes/ciencias-naturales"
+},
+{
+  "id": "simulacro-icfes/ciencias-naturales/context_nat09",
+  "type": "context",
+  "title": "Geometría molecular del ion amonio (NH₄⁺)",
+  "text": "Los compuestos químicos pueden adoptar distintas geometrías, dependiendo del número de enlaces que posea el átomo central y del número de pares de electrones libres, como se muestra en la tabla.",
+  "visual_description": "Tabla que relaciona geometrías moleculares con número de enlaces y pares de electrones libres en el átomo central. Incluye: Tetraédrica (4 enlaces, 0 pares libres), Pirámide trigonal (3 enlaces, 1 par libre), Angular (2 enlaces, 2 pares libres) y Lineal (2 enlaces, 0 pares libres). Se usan esferas para representar átomos y puntos para pares de electrones libres.",
+  "page": "https://www.invicto.com.co/simulacro-icfes/ciencias-naturales"
+},
+{
+  "id": "simulacro-icfes/ciencias-naturales/q13",
+  "type": "question",
+  "component": "ciencias-naturales",
+  "number": 13,
+  "context_id": "context_nat09",
+  "stem_text": "El amoníaco (NH₃) tiene la estructura H-N-HH-N-H, en la cual se observa que el nitrógeno (N) tiene 3 enlaces con 3 hidrógenos (H) y un par de electrones libres; por esta razón, su geometría es de pirámide trigonal.\n\n¿Qué geometría se obtendrá si el nitrógeno del amoníaco se enlaza con otro hidrógeno para formar NH₄⁺?",
+  "choices": [
+    "Tetraédrica, porque habría 4 átomos de hidrógeno unidos al nitrógeno (N) y ningún par de electrones libre.",
+    "Pirámide trigonal, porque seguirá teniendo la misma configuración del NH₃.",
+    "Angular, porque dos hidrógenos se enlazarían con el nitrógeno (N) y dos hidrógenos quedarían libres.",
+    "Lineal, porque cada enlace del nitrógeno se uniría a dos hidrógenos."
+  ],
+  "correct_choice": "Tetraédrica, porque habría 4 átomos de hidrógeno unidos al nitrógeno (N) y ningún par de electrones libre.",
+  "visual_description": "Ilustración de la molécula de amoníaco (NH₃) con tres átomos de hidrógeno alrededor del nitrógeno central y un par de electrones libres representado como puntos.",
+  "explanation_expert": "Al unirse un cuarto hidrógeno al nitrógeno, se reemplaza el par de electrones libres por un enlace adicional, formando una geometría tetraédrica típica de moléculas con cuatro enlaces y sin pares libres.",
+  "difficulty": "medium",
+  "tags": ["icfes", "ciencias-naturales", "geometría-molecular", "NH₄⁺", "química"],
+  "page": "https://www.invicto.com.co/simulacro-icfes/ciencias-naturales"
+},
+{
+  "id": "simulacro-icfes/ciencias-naturales/context_nat10",
+  "type": "context",
+  "title": "Evolución de la morfología del caballo a través del tiempo",
+  "text": "Durante varios siglos, se creyó que el caballo había tenido la misma morfología desde que apareció en la Tierra. Sin embargo, algunos científicos encontraron fósiles reconocidos como antepasados del caballo y, ahora, se trabaja con la idea de que los cambios que se dieron en estas especies dieron lugar a la formación del caballo moderno. La tabla muestra los antepasados del caballo moderno.",
+  "visual_description": "Esquema de la evolución de las patas de caballos a lo largo del tiempo. Se muestran fósiles de cuatro especies extintas: hace 60 millones de años (con varios dedos), hace 30 millones de años, hace 20 millones de años y hace 10 millones de años (con menos dedos). A la derecha, el caballo moderno (Equus sp.) con una sola pezuña, presente desde hace 1,8 millones de años hasta la actualidad.",
+  "page": "https://www.invicto.com.co/simulacro-icfes/ciencias-naturales"
+},
+{
+  "id": "simulacro-icfes/ciencias-naturales/q14",
+  "type": "question",
+  "component": "ciencias-naturales",
+  "number": 14,
+  "context_id": "context_nat10",
+  "stem_text": "De acuerdo con lo anterior, ¿por qué se modificó la idea de que el caballo tenía la misma morfología desde que apareció en la Tierra?",
+  "choices": [
+    "Porque los fósiles se formaron hace pocos años y no pudieron estudiarse en la antigüedad.",
+    "Porque al domesticar al caballo moderno se pudo estudiar con mayor profundidad su morfología.",
+    "Porque se lograron establecer relaciones entre estos animales a través del análisis de los fósiles.",
+    "Porque los caballos en la antigüedad no pudieron estudiarse debido a su pequeño tamaño."
+  ],
+  "correct_choice": "Porque se lograron establecer relaciones entre estos animales a través del análisis de los fósiles.",
+  "visual_description": "Pregunta de selección múltiple con cuatro opciones sobre la evolución del caballo y el papel del análisis fósil.",
+  "explanation_expert": "El estudio de fósiles permitió reconstruir la evolución del caballo y reconocer que su morfología ha cambiado a lo largo del tiempo, pasando de formas con varios dedos hasta llegar al caballo moderno con una sola pezuña.",
+  "difficulty": "medium",
+  "tags": ["icfes", "ciencias-naturales", "evolución", "caballo", "fósiles"],
+  "page": "https://www.invicto.com.co/simulacro-icfes/ciencias-naturales"
+},
+{
+  "id": "simulacro-icfes/ciencias-naturales/context_nat11",
+  "type": "context",
+  "title": "Etapas de la formación del carbón",
+  "text": "La figura muestra las etapas de la formación del carbón.",
+  "visual_description": "Esquema de las etapas de formación del carbón. Inicia con vegetación cercana al mar, que muere por aumento del nivel del agua. Los restos vegetales quedan cubiertos por sedimentos marinos, arena y arcilla. Con el paso de millones de años, los restos se descomponen y luego son sometidos al calor y presión de la Tierra, transformándose finalmente en carbón.",
+  "page": "https://www.invicto.com.co/simulacro-icfes/ciencias-naturales"
+},
+{
+  "id": "simulacro-icfes/ciencias-naturales/q15",
+  "type": "question",
+  "component": "ciencias-naturales",
+  "number": 15,
+  "context_id": "context_nat11",
+  "stem_text": "De acuerdo con la información anterior, ¿a partir de cuál(es) material(es) se forma el carbón?",
+  "choices": [
+    "De las arenas y las arcillas.",
+    "De los restos vegetales.",
+    "De las sales del mar.",
+    "De la presión y la temperatura de la Tierra."
+  ],
+  "correct_choice": "De los restos vegetales.",
+  "visual_description": "Pregunta de selección múltiple con cuatro opciones sobre el origen del carbón, que enfatiza los restos vegetales frente a otros materiales como arena, arcilla, sales o condiciones físicas.",
+  "explanation_expert": "El carbón se forma a partir de restos vegetales que, enterrados bajo sedimentos, se descomponen y, con el tiempo, se transforman bajo calor y presión en capas de carbón. Otros materiales como arenas, arcillas o sales no generan carbón.",
+  "difficulty": "easy",
+  "tags": ["icfes", "ciencias-naturales", "carbón", "geología", "restos-vegetales"],
+  "page": "https://www.invicto.com.co/simulacro-icfes/ciencias-naturales"
+},
+{
+  "id": "simulacro-icfes/ciencias-naturales/context_nat12",
+  "type": "context",
+  "title": "Transición de fases del agua en el diagrama de fases",
+  "text": "Un diagrama de fases muestra cómo cambian los diferentes estados de una sustancia al variar la presión y la temperatura. A continuación, se muestra un modelo general para el diagrama de fases del agua y un estado M en el que el agua está en fase líquida y gaseosa de forma simultánea.",
+  "visual_description": "Diagrama de fases del agua (Presión vs. Temperatura) con las regiones Sólido, Líquido y Gaseoso. El punto M está ubicado sobre la curva de equilibrio líquido–gaseoso (línea de ebullición), indicando coexistencia líquido–vapor; no corresponde al punto triple.",
+  "page": "https://www.invicto.com.co/simulacro-icfes/ciencias-naturales"
+},
+{
+  "id": "simulacro-icfes/ciencias-naturales/q16",
+  "type": "question",
+  "component": "ciencias-naturales",
+  "number": 16,
+  "context_id": "context_transicion_fases_agua",
+  "stem_text": "Teniendo en cuenta el modelo anterior, si se parte del estado M y se aumenta la temperatura manteniendo la presión constante, ¿cuál de los siguientes dibujos representa la(s) fase(s) en la que se encontrará el agua?",
+  "choices": [
+    "Solo agua en estado líquido.",
+    "Agua en estado líquido y gaseoso coexistiendo.",
+    "Agua principalmente en estado gaseoso con una pequeña fracción líquida.",
+    "Solo agua en estado gaseoso."
+  ],
+  "correct_choice": "Solo agua en estado gaseoso.",
+  "visual_description": "Cuatro diagramas rectangulares representan un recipiente con agua. El color azul indica agua líquida y el fondo con puntos negros representa agua en estado gaseoso. Opción A: solo azul (líquido). Opción B: mitad azul y mitad con puntos (mezcla líquido-gaseoso). Opción C: principalmente puntos con una delgada capa azul en la parte superior. Opción D: solo puntos (gaseoso).",
+  "explanation_expert": "El estado M se encuentra en la línea de equilibrio líquido-gaseoso. Si se aumenta la temperatura manteniendo constante la presión, el agua pasará de la fase líquida a la fase gaseosa, terminando completamente en estado gaseoso.",
+  "difficulty": "medium",
+  "tags": ["icfes", "ciencias-naturales", "cambio-de-fase", "agua"],
+  "page": "https://www.invicto.com.co/simulacro-icfes/ciencias-naturales"
+},
+{
+  "id": "simulacro-icfes/ciencias-naturales/context_nat13",
+  "type": "context",
+  "title": "Diseño experimental para verificar hipótesis sobre el crecimiento de girasoles",
+  "text": "Texto completo del contexto (placeholder).",
+  "visual_description": "Descripción visual del recurso (placeholder).",
+  "page": "https://www.invicto.com.co/simulacro-icfes/ciencias-naturales"
+},
+{
+  "id": "simulacro-icfes/ciencias-naturales/context_nat13",
+  "type": "context",
+  "title": "Diseño experimental para verificar hipótesis sobre el crecimiento de girasoles",
+  "text": "Un estudiante tiene la siguiente hipótesis: \"Las plantas de girasol crecen mejor en climas cálidos, y el nitrógeno (N) y el fósforo (P) son nutrientes fundamentales para el éxito en el crecimiento de las flores.\" Si él quiere comprobar su hipótesis,",
+  "visual_description": "",
+  "page": "https://www.invicto.com.co/simulacro-icfes/ciencias-naturales"
+},
+{
+  "id": "simulacro-icfes/ciencias-naturales/q17",
+  "type": "question",
+  "component": "ciencias-naturales",
+  "number": 17,
+  "context_id": "context_girasoles01",
+  "stem_text": "¿Cuál es el mejor procedimiento para verificar la hipótesis del estudiante sobre el crecimiento de girasoles?",
+  "choices": [
+    "Dos grupos de girasoles, uno en clima frío y otro en clima cálido, cada grupo con una planta con nutrientes N y P y otra sin nutrientes. En ambos climas se mide la temperatura. Se registran semanalmente peso y tamaño durante 6 meses, se cuentan hojas y se observa la coloración de las flores.",
+    "Dos girasoles en clima frío, uno con N y otro con P, ambos con medición de temperatura. Se elaboran tablas comparativas de peso y número de hojas durante 6 meses.",
+    "Dos girasoles en clima frío, ambos con N y P, y dos girasoles en clima cálido, ambos sin nutrientes. Se mide la temperatura en ambos ambientes. Se registran semanalmente peso y tamaño durante 6 meses, se cuentan hojas y se observa la coloración de las flores.",
+    "Un girasol en clima frío con N y otro en clima cálido con P, ambos con medición de temperatura. Se repite el experimento varias veces durante el año y se anotan observaciones."
+  ],
+  "correct_choice": "Dos grupos de girasoles, uno en clima frío y otro en clima cálido, cada grupo con una planta con nutrientes N y P y otra sin nutrientes. En ambos climas se mide la temperatura. Se registran semanalmente peso y tamaño durante 6 meses, se cuentan hojas y se observa la coloración de las flores.",
+  "visual_description": "Cuatro imágenes experimentales que representan distintos diseños de prueba con girasoles. La primera muestra clima frío y cálido con plantas con y sin nutrientes, incluyendo mediciones periódicas de peso, tamaño y coloración. La segunda se limita a clima frío con plantas separadas para N y P. La tercera combina plantas en clima frío con nutrientes y en clima cálido sin nutrientes. La cuarta representa una planta en clima frío con N y otra en clima cálido con P, repitiendo el experimento varias veces al año.",
+  "explanation_expert": "La hipótesis del estudiante establece que los girasoles crecen mejor en climas cálidos y que N y P son nutrientes fundamentales. El único procedimiento que permite verificar ambas variables (clima y nutrientes) de forma controlada es el que evalúa condiciones con y sin nutrientes en dos climas distintos y además hace mediciones sistemáticas durante un periodo prolongado.",
+  "difficulty": "medium",
+  "tags": ["biología", "diseño experimental", "nutrientes", "plantas", "ciencias naturales"],
+  "page": "https://www.invicto.com.co/simulacro-icfes/ciencias-naturales"
+},
+{
+  "id": "simulacro-icfes/ciencias-naturales/context_vapor01",
+  "type": "context",
+  "title": "Comportamiento del vapor en una locomotora de vapor",
+  "text": "Una locomotora de vapor utiliza el vapor de agua, el cual entra en un cilindro por medio de la válvula de admisión y mueve el pistón. Cuando el pistón alcanza su máximo desplazamiento, el vapor comienza a salir por la válvula de escape. Finalmente, el pistón regresa a su posición inicial, como se muestra en la figura.",
+  "visual_description": "Diagrama en tres pasos del funcionamiento de una locomotora de vapor. En el Paso 1, el vapor a presión entra por la válvula de admisión hacia el cilindro, desplazando el pistón. En el Paso 2, el pistón alcanza su máxima expansión y comienza a salir vapor por la válvula de escape. En el Paso 3, el pistón regresa a su posición inicial mientras se reinicia la entrada de vapor a presión por la válvula de admisión.",
+  "page": "https://www.invicto.com.co/simulacro-icfes/ciencias-naturales"
+},
+{
+  "id": "simulacro-icfes/ciencias-naturales/q18",
+  "type": "question",
+  "component": "ciencias-naturales",
+  "number": 18,
+  "context_id": "context_vapor01",
+  "stem_text": "¿Qué le pasa al vapor de agua cuando empieza a salir, al abrirse la válvula de escape en el paso 2?",
+  "choices": [
+    "Su presión permanece constante.",
+    "Su presión aumenta.",
+    "Su volumen se mantiene constante.",
+    "Su presión disminuye."
+  ],
+  "correct_choice": "Su presión disminuye.",
+  "visual_description": "Usa context_vapor01",
+  "explanation_expert": "Cuando el vapor comienza a salir por la válvula de escape, la presión dentro del cilindro disminuye, lo que permite el regreso del pistón a su posición inicial.",
+  "difficulty": "easy",
+  "tags": ["icfes", "ciencias-naturales", "vapor", "presión"],
+  "page": "https://www.invicto.com.co/simulacro-icfes/ciencias-naturales"
+},
+{
+  "id": "simulacro-icfes/ciencias-naturales/context_ester01",
+  "type": "context",
+  "title": "Hidrólisis de un éster",
+  "text": "A continuación, se muestra la ecuación que describe la formación de un ácido carboxílico y un alcohol a partir de un éster, en presencia de H+.",
+  "visual_description": "La imagen muestra la reacción de hidrólisis ácida de un éster. A la izquierda aparece el éster pentanoato de etilo (C₅H₁₀O₂), representado con todos sus átomos y enlaces. La reacción ocurre en presencia de un catalizador ácido (H⁺), indicado sobre la flecha. A la derecha se observan los productos: un ácido carboxílico, ácido propanoico (C₃H₆O₂), con grupo –COOH, y un alcohol, etanol (C₂H₆O), con grupo –OH. Cada molécula está dibujada mostrando la disposición de sus átomos de carbono, oxígeno e hidrógeno.",
+  "page": "https://www.invicto.com.co/simulacro-icfes/ciencias-naturales"
+},
+{
+  "id": "simulacro-icfes/ciencias-naturales/q19",
+  "type": "question",
+  "component": "ciencias-naturales",
+  "number": 19,
+  "context_id": "context_hidrolisis01",
+  "stem_text": "Con base en la información anterior, si se parte de la siguiente molécula en presencia de H⁺, ¿cuál será uno de los productos de la reacción?",
+  "choices": [
+    "C3H6O2 (Ácido propanoico)",
+    "C4H8O2 (Ácido butanoico)",
+    "C2H6O (Etanol)",
+    "C3H8O (Propanol)"
+  ],
+  "correct_choice": "C3H8O (Propanol)",
+  "visual_description": "La imagen muestra la estructura molecular de un éster con fórmula C5H10O2, donde un grupo acetilo (CH3–C(=O)–) está enlazado a una cadena propílica (–O–CH2–CH2–CH3).",
+  "explanation_expert": "La hidrólisis ácida del éster rompe el enlace éster produciendo un ácido carboxílico y un alcohol. En este caso, uno de los productos identificables es el propanol (C3H8O).",
+  "difficulty": "medium",
+  "tags": ["icfes", "ciencias-naturales", "química", "hidrólisis", "ésteres"],
+  "page": "https://www.invicto.com.co/simulacro-icfes/ciencias-naturales"
+},
+{
+  "id": "context_gravedad01",
+  "type": "context",
+  "component": "ciencias-naturales",
+  "title": "Fuerzas gravitatorias entre la Tierra y un satélite",
+  "text": "Un estudiante investiga sobre la rotación de los satélites alrededor de la Tierra y encuentra en la siguiente aplicación las posibles fuerzas gravitatorias (1, 2, 3, 4, 5 y 6) que se ejercen entre un satélite y la Tierra, teniendo en cuenta que ambos cuerpos experimentan fuerzas de atracción iguales y opuestas.",
+  "visual_description": "La imagen muestra la Tierra en el centro y un satélite en la parte superior derecha. A la izquierda aparecen seis flechas rojas numeradas (Fuerza 1 a Fuerza 6), representando posibles direcciones de la fuerza gravitatoria entre la Tierra y el satélite. - Fuerza 1: flecha diagonal ascendente hacia la derecha, tamaño grande. - Fuerza 2: flecha diagonal descendente hacia la izquierda, tamaño pequeño. - Fuerza 3: flecha diagonal ascendente hacia la derecha, tamaño grande. - Fuerza 4: flecha diagonal descendente hacia la izquierda, tamaño pequeño-mediano. - Fuerza 5: flecha diagonal descendente hacia la izquierda, tamaño grande. - Fuerza 6: flecha vertical descendente hacia abajo, tamaño pequeño. El satélite está ubicado en la parte superior derecha de la Tierra, por lo que la fuerza gravitatoria real debería estar dirigida hacia el centro de la Tierra."
+},
+{
+  "id": "simulacro-icfes/ciencias-naturales/q20",
+  "type": "question",
+  "component": "ciencias-naturales",
+  "number": 20,
+  "context_id": "context_gravedad01",
+  "stem_text": "Según la anterior información, ¿cuál de las siguientes imágenes representa correctamente las fuerzas gravitatorias sobre el satélite y la Tierra?",
+  "choices": [
+    "Fuerza 3 para la Tierra y Fuerza 1 para el satélite.",
+    "Fuerza 1 para la Tierra y Fuerza 5 para el satélite.",
+    "Fuerza 2 y Fuerza 6 aplicadas sobre el satélite.",
+    "Fuerza 2 para la Tierra y Fuerza 4 para el satélite."
+  ],
+  "correct_choice": "Fuerza 1 para la Tierra y Fuerza 5 para el satélite.",
+  "visual_description": "Seis flechas representan fuerzas posibles: Fuerza 1 y Fuerza 3 son diagonales ascendentes hacia la derecha, grandes; Fuerza 2 es diagonal descendente hacia la izquierda, pequeña; Fuerza 4 es diagonal descendente hacia la izquierda, tamaño pequeño-mediano; Fuerza 5 es diagonal descendente hacia la izquierda, grande; Fuerza 6 es descendente hacia abajo, pequeña-mediana. La opción correcta muestra Fuerza 1 apuntando hacia el centro de la Tierra y Fuerza 5 apuntando desde el satélite en dirección opuesta, representando acción y reacción de igual magnitud.",
+  "explanation_expert": "Las fuerzas gravitatorias entre la Tierra y el satélite son un par de acción y reacción: iguales en magnitud y opuestas en dirección. Solo la opción B (Fuerza 1 para la Tierra y Fuerza 5 para el satélite) cumple con esta condición, mostrando correctamente la interacción gravitatoria.",
+  "difficulty": "medium",
+  "tags": ["icfes", "ciencias-naturales", "fuerza", "gravedad", "satélite"],
+  "page": "https://www.invicto.com.co/simulacro-icfes/ciencias-naturales"
+}
+]

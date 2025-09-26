@@ -1,0 +1,430 @@
+[
+  {
+    "id": "simulacro-unal/ciencias-naturales/context_movimiento01",
+    "type": "context",
+    "title": "Análisis del Movimiento de una Partícula",
+    "text": "Un gráfico de posición-tiempo para una partícula que se mueve a lo largo del eje x se muestra en la Figura.",
+    "visual_description": "Gráfico de posición x (m) en función del tiempo t (s). - Ejes: horizontal t en segundos, visible de 0 a 6 y extrapolado hasta 7; vertical x en metros, visible de 0 a 12 y extrapolado hasta 13. - Recta verde: segmento definido solo en 0 ≤ t ≤ 3.5. Corta el eje vertical en (t=0, x=13) y el eje horizontal en (t≈3.5, x=0). - Parábola marrón: segmento definido solo en 1 ≤ t ≤ 6.5. Cóncava hacia arriba, con mínimo en (t=4, x=2). Se intersecta con la recta verde en (t=2, x=6).",
+    "page": "https://www.invicto.com.co/simulacro-unal/ciencias-naturales"
+  },
+  {
+  "id": "simulacro-unal/ciencias-naturales/q01",
+  "type": "question",
+  "component": "ciencias-naturales",
+  "number": 1,
+  "context_id": "context_movimiento01",
+  "stem_text": "¿Cuál es la velocidad promedio en el intervalo de tiempo \\(1.5\\,s \\leq t \\leq 4.0\\,s\\)?",
+  "choices": [
+    "2.4 m/s",
+    "-2.4 m/s",
+    "-4.0 m/s",
+    "4.0 m/s"
+  ],
+  "correct_choice": "-2.4 m/s",
+  "visual_description": "Usa context_movimiento01",
+  "explanation_expert": "La velocidad promedio se obtiene como la pendiente de la recta secante que une los puntos \\((1.5\\,s, 8\\,m)\\) y \\((4.0\\,s, 2\\,m)\\). El cálculo es: \\[ v = \\frac{2 - 8}{4 - 1.5} = \\frac{-6}{2.5} = -2.4\\,m/s \\]. El signo negativo indica que la partícula se desplaza en dirección decreciente del eje x. Las demás opciones no corresponden al resultado correcto.",
+  "difficulty": "medium",
+  "tags": ["unal", "ciencias naturales", "cinemática", "velocidad promedio", "gráfico posición-tiempo"],
+  "page": "https://www.invicto.com.co/simulacro-unal/ciencias-naturales"
+},
+{
+  "id": "simulacro-unal/ciencias-naturales/q02",
+  "type": "question",
+  "component": "ciencias-naturales",
+  "number": 2,
+  "context_id": "context_movimiento01",
+  "stem_text": "¿Cuál es la velocidad instantánea en \\(t = 2\\,s\\) que se representa con la pendiente de la línea tangente mostrada en el gráfico?",
+  "choices": [
+    "-2.4 m/s",
+    "-6.0 m/s",
+    "6.0 m/s",
+    "-3.7 m/s"
+  ],
+  "correct_choice": "-3.7 m/s",
+  "visual_description": "Usa context_movimiento01",
+  "explanation_expert": "La velocidad instantánea se determina como la pendiente de la línea tangente a la curva de posición en el punto \\(t=2\\,s\\). La tangente mostrada en el gráfico pasa aproximadamente por los puntos (0, 13) y (3.5, 0), de modo que su pendiente es \\[ v = \\frac{0 - 13}{3.5 - 0} = -3.7\\,m/s \\]. Por lo tanto, la opción correcta es -3.7 m/s.",
+  "difficulty": "medium",
+  "tags": ["unal", "ciencias naturales", "cinemática", "velocidad instantánea", "gráfico posición-tiempo"],
+  "page": "https://www.invicto.com.co/simulacro-unal/ciencias-naturales"
+},
+{
+  "id": "simulacro-unal/ciencias-naturales/q03",
+  "type": "question",
+  "component": "ciencias-naturales",
+  "number": 3,
+  "context_id": "context_movimiento01",
+  "stem_text": "¿En qué valor de \\(t\\) la velocidad es cero? Es decir, \\(v=0\\,\\tfrac{m}{s}\\).",
+  "choices": [
+    "t = 1.00 s",
+    "t = 7.00 s",
+    "t = 4.00 s",
+    "t = 0.00 s"
+  ],
+  "correct_choice": "t = 4.00 s",
+  "visual_description": "Usa context_movimiento01",
+  "explanation_expert": "La velocidad instantánea es \\(v(t)=\\tfrac{dx}{dt}\\); se anula cuando la tangente al gráfico \\(x(t)\\) es horizontal. En la parábola mostrada, el vértice (mínimo) ocurre en \\(t=4.00\\,s\\), por lo que \\(v(4.00\\,s)=0\\). Las demás opciones no corresponden a un extremo de la curva.",
+  "difficulty": "easy",
+  "tags": ["unal", "ciencias naturales", "cinemática", "velocidad instantánea", "derivada", "gráfico posición-tiempo"],
+  "page": "https://www.invicto.com.co/simulacro-unal/ciencias-naturales"
+},
+{
+  "id": "simulacro-unal/ciencias-naturales/context_motociclista01",
+  "type": "context",
+  "title": "Movimiento de un Motociclista",
+  "text": "La Figura muestra un gráfico de velocidad versus t para el movimiento de un motociclista que comienza desde el reposo y se mueve en línea recta.",
+  "visual_description": "Gráfico de velocidad v_x (m/s) en función del tiempo t (s). - Eje horizontal: tiempo t de 0 a 12 s. - Eje vertical: velocidad v_x de 0 a 10 m/s. - La curva parte en (0,0), crece suavemente hasta un máximo de ~8 m/s en t≈6 s, luego desciende hasta estabilizarse en ~4 m/s alrededor de t=10 s y se mantiene constante hasta t=12 s. La velocidad siempre se mantiene positiva.",
+  "page": "https://www.invicto.com.co/simulacro-unal/ciencias-naturales"
+},
+{
+  "id": "simulacro-unal/ciencias-naturales/q04",
+  "type": "question",
+  "component": "ciencias-naturales",
+  "number": 4,
+  "context_id": "context_motociclista01",
+  "stem_text": "¿Cuál es la aceleración promedio en el siguiente intervalo de tiempo? \\(0.0\\,s \\leq t \\leq 6.0\\,s\\)",
+  "choices": [
+    "\\(\\tfrac{4}{3}\\, m/s^{2}\\)",
+    "4\\, m/s^{2}",
+    "4\\, m/s^{2}",
+    "\\(\\tfrac{4}{3}\\, m/s\\)"
+  ],
+  "correct_choice": "\\(\\tfrac{4}{3}\\, m/s^{2}\\)",
+  "visual_description": "Usa context_motociclista01",
+  "explanation_expert": "La aceleración promedio se calcula como el cociente entre el cambio de velocidad y el cambio de tiempo: \\[ a_{prom} = \\frac{v_2 - v_1}{t_2 - t_1} = \\frac{8 - 0}{6 - 0} = \\tfrac{8}{6} = \\tfrac{4}{3}\\, m/s^{2} \\]. La opción correcta es \\(\\tfrac{4}{3}\\, m/s^{2}\\).",
+  "difficulty": "medium",
+  "tags": ["unal", "ciencias naturales", "cinemática", "aceleración promedio", "gráfico velocidad-tiempo"],
+  "page": "https://www.invicto.com.co/simulacro-unal/ciencias-naturales"
+},
+{
+  "id": "simulacro-unal/ciencias-naturales/q05",
+  "type": "question",
+  "component": "ciencias-naturales",
+  "number": 5,
+  "context_id": "context_motociclista01",
+  "stem_text": "¿En qué tiempo ocurre la mayor aceleración positiva?",
+  "choices": [
+    "t = 3.0 s",
+    "t = 6.0 s",
+    "t = 5.0 s",
+    "t = 8.0 s"
+  ],
+  "correct_choice": "t = 3.0 s",
+  "visual_description": "Usa context_motociclista01",
+  "explanation_expert": "La aceleración corresponde a la pendiente de la curva velocidad-tiempo. La mayor pendiente positiva se observa alrededor de t = 3.0 s, cuando la velocidad crece más rápidamente. Las demás opciones corresponden a zonas donde la pendiente es menor o incluso negativa.",
+  "difficulty": "medium",
+  "tags": ["unal", "ciencias naturales", "cinemática", "aceleración instantánea", "gráfico velocidad-tiempo"],
+  "page": "https://www.invicto.com.co/simulacro-unal/ciencias-naturales"
+},
+{
+  "id": "simulacro-unal/ciencias-naturales/q06",
+  "type": "question",
+  "component": "ciencias-naturales",
+  "number": 6,
+  "context_id": "context_motociclista01",
+  "stem_text": "¿Cuándo es la aceleración cero? Es decir, \\(a = 0\\,\\tfrac{m}{s^{2}}\\).",
+  "choices": [
+    "t = 0.0 s",
+    "t = 6.0 s",
+    "t = 6 s y 10 ≤ t ≤ 12",
+    "t = 6 s, t = 10 s, y t = 12 s"
+  ],
+  "correct_choice": "t = 6 s y 10 ≤ t ≤ 12",
+  "visual_description": "Usa context_motociclista01",
+  "explanation_expert": "La aceleración se anula cuando la pendiente del gráfico velocidad-tiempo es horizontal. Esto ocurre en el máximo de la curva en t = 6 s y durante el intervalo donde la velocidad permanece constante, entre 10 y 12 s. En esos tramos, la variación de la velocidad es nula y por lo tanto a = 0.",
+  "difficulty": "medium",
+  "tags": ["unal", "ciencias naturales", "cinemática", "aceleración cero", "gráfico velocidad-tiempo"],
+  "page": "https://www.invicto.com.co/simulacro-unal/ciencias-naturales"
+},
+{
+  "id": "simulacro-unal/ciencias-naturales/context_particula01",
+  "type": "context",
+  "title": "Partícula a Velocidad Constante",
+  "text": "Una partícula parte desde el reposo y se acelera como se muestra en la Figura.",
+  "visual_description": "Gráfico de aceleración a_x (m/s^2) en función del tiempo t (s). - Eje horizontal: tiempo de 0 a 20 s. - Eje vertical: aceleración de -3 a 2 m/s^2. - Segmentos: (0 ≤ t < 10) con a_x = +2 m/s^2; (10 ≤ t < 15) con a_x = 0; (15 ≤ t < 20) con a_x = -3 m/s^2.",
+  "page": "https://www.invicto.com.co/simulacro-unal/ciencias-naturales"
+},
+{
+  "id": "simulacro-unal/ciencias-naturales/q07",
+  "type": "question",
+  "component": "ciencias-naturales",
+  "number": 7,
+  "context_id": "context_particula01",
+  "stem_text": "Determine la velocidad de la partícula en el instante \\(t = 10\\,s\\).",
+  "choices": [
+    "20 m/s",
+    "2 m/s",
+    "0 m/s",
+    "10 m/s"
+  ],
+  "correct_choice": "20 m/s",
+  "visual_description": "Usa context_particula01",
+  "explanation_expert": "Como la aceleración es constante de \\(0 \\leq t < 10\\,s\\) con \\(a = 2\\,m/s^2\\) y la partícula parte desde el reposo \\(v_0 = 0\\), la velocidad se calcula con \\(v = v_0 + a \\cdot t = 0 + (2)(10) = 20\\,m/s\\). También puede encontrarse hallando el área bajo la curva en el gráfico de aceleración vs. tiempo, ya que el área (aceleración multiplicada por tiempo) tiene unidades de velocidad.",
+  "difficulty": "medium",
+  "tags": ["unal", "ciencias naturales", "cinemática", "velocidad", "gráfico aceleración-tiempo"],
+  "page": "https://www.invicto.com.co/simulacro-unal/ciencias-naturales"
+},
+{
+  "id": "simulacro-unal/ciencias-naturales/q08",
+  "type": "question",
+  "component": "ciencias-naturales",
+  "number": 8,
+  "context_id": "context_particula01",
+  "stem_text": "¿Cuál es el desplazamiento durante los primeros 10 segundos?",
+  "choices": [
+    "50 m",
+    "100 m",
+    "200 m",
+    "150 m"
+  ],
+  "correct_choice": "100 m",
+  "visual_description": "Usa context_particula01",
+  "explanation_expert": "En \\(0\\le t\\le10\\,s\\) la aceleración es constante \\(a=2\\,m/s^2\\), así que la velocidad crece linealmente desde \\(v_0=0\\) hasta \\(v_f=20\\,m/s\\). Con aceleración constante, la velocidad promedio es \\(v_{prom}=\\tfrac{v_0+v_f}{2}=\\tfrac{0+20}{2}=10\\,m/s\\). El desplazamiento es \\(\\Delta x=v_{prom}\\,t=10\\,m/s\\cdot10\\,s=100\\,m\\). Equivalente al área bajo la curva \\(v\\)–\\(t\\): triángulo de base 10 s y altura 20 m/s, \\(\\tfrac{1}{2}\\cdot10\\cdot20=100\\,m\\).",
+  "difficulty": "medium",
+  "tags": ["unal", "ciencias naturales", "cinemática", "desplazamiento", "aceleración constante", "velocidad-tiempo"],
+  "page": "https://www.invicto.com.co/simulacro-unal/ciencias-naturales"
+},
+{
+  "id": "simulacro-unal/ciencias-naturales/context_co2_01",
+  "type": "context",
+  "title": "¿Es el dióxido de carbono tan malo como se cree?",
+  "text": "Las plantas y otros fotosintetizadores requieren dióxido de carbono para producir azúcares en el ciclo de Calvin-Benson.",
+  "visual_description": "Gráfico de concentración de CO₂ (ppm) en función del tiempo. - Eje horizontal: año, de 1700 a 2000. - Eje vertical: concentración de CO₂ en ppm, de 260 a 380. - Serie de puntos negros que muestra un incremento gradual desde ~275 ppm en 1700 hasta ~300 ppm en 1900, seguido por un aumento acelerado que supera los 380 ppm hacia el año 2000. Forma general: curva ascendente, más pronunciada en el siglo XX.",
+  "page": "https://www.invicto.com.co/simulacro-unal/ciencias-naturales"
+},
+{
+  "id": "simulacro-unal/ciencias-naturales/q09",
+  "type": "question",
+  "component": "ciencias-naturales",
+  "number": 9,
+  "context_id": "context_co2_01",
+  "stem_text": "¿Cómo crees que el aumento actual en el contenido atmosférico de CO₂ afectará las reacciones dependientes de la luz en los organismos fotosintéticos?",
+  "choices": [
+    "Aumentará la eficiencia de las reacciones dependientes de la luz.",
+    "No tendrá efecto directo en las reacciones dependientes de la luz.",
+    "Disminuirá la eficiencia de las reacciones dependientes de la luz.",
+    "Producirá una mayor cantidad de oxígeno."
+  ],
+  "correct_choice": "No tendrá efecto directo en las reacciones dependientes de la luz.",
+  "visual_description": "Usa context_co2_01",
+  "explanation_expert": "El CO₂ participa en las reacciones independientes de la luz (ciclo de Calvin-Benson), no en las dependientes de la luz. Estas últimas consisten en la captura de energía luminosa y la producción de ATP, NADPH y oxígeno. Por tanto, un aumento en el contenido de CO₂ atmosférico no afecta directamente estas reacciones.",
+  "difficulty": "medium",
+  "tags": ["unal", "ciencias naturales", "fotosíntesis", "reacciones dependientes de la luz", "ciclo de Calvin-Benson", "CO₂"],
+  "page": "https://www.invicto.com.co/simulacro-unal/ciencias-naturales"
+},
+{
+  "id": "simulacro-unal/ciencias-naturales/context_planta01",
+  "type": "context",
+  "title": "¿Cómo gana una planta realmente su peso?",
+  "text": "Hace unos 200 años, Jan Baptista van Helmont quería saber de dónde obtienen las plantas en crecimiento los materiales necesarios para aumentar de tamaño. Plantó una plántula de árbol que pesaba 2.2 kilogramos (5 libras) en un barril lleno de 90 kilogramos (200 libras) de tierra y luego regó el árbol regularmente. Después de cinco años, el árbol había ganado casi 75 kilogramos (164 libras) y el peso del suelo no había cambiado. Incorrectamente concluyó que el árbol había ganado todo su peso adicional absorbiendo agua.",
+  "visual_description": "Imagen de un árbol creciendo en una maceta, representando el experimento histórico de Jan Baptista van Helmont sobre el origen del peso de las plantas.",
+  "page": "https://www.invicto.com.co/simulacro-unal/ciencias-naturales"
+},
+{
+  "id": "simulacro-unal/ciencias-naturales/q10",
+  "type": "question",
+  "component": "ciencias-naturales",
+  "number": 10,
+  "context_id": "context_planta01",
+  "stem_text": "¿Cómo ganó el árbol realmente la mayor parte de su peso?",
+  "choices": [
+    "A partir del agua absorbida del suelo.",
+    "A partir de los nutrientes absorbidos del suelo.",
+    "A partir del dióxido de carbono absorbido del aire.",
+    "A partir del oxígeno absorbido del aire."
+  ],
+  "correct_choice": "A partir del dióxido de carbono absorbido del aire.",
+  "visual_description": "Usa context_planta01",
+  "explanation_expert": "Aunque Van Helmont concluyó que el peso provenía del agua, en realidad la mayor parte de la biomasa vegetal se forma a partir del carbono fijado del CO₂ atmosférico durante la fotosíntesis. Los nutrientes y el agua del suelo son necesarios, pero no explican el aumento principal de peso.",
+  "difficulty": "easy",
+  "tags": ["unal", "ciencias naturales", "fotosíntesis", "ciclo de Calvin-Benson", "biomasa vegetal", "CO₂"],
+  "page": "https://www.invicto.com.co/simulacro-unal/ciencias-naturales"
+},
+{
+  "id": "simulacro-unal/ciencias-naturales/context_burbujas01",
+  "type": "context",
+  "title": "¿De qué están hechas estas burbujas?",
+  "text": "Mientras observas un acuario, ves burbujas que provienen de una planta acuática.",
+  "visual_description": "Imagen de una planta acuática verde con pequeñas burbujas transparentes adheridas a sus hojas, representando el oxígeno liberado como subproducto de la fotosíntesis.",
+  "page": "https://www.invicto.com.co/simulacro-unal/ciencias-naturales"
+},
+{
+  "id": "simulacro-unal/ciencias-naturales/q11",
+  "type": "question",
+  "component": "ciencias-naturales",
+  "number": 11,
+  "context_id": "context_burbujas01",
+  "stem_text": "¿Qué son las burbujas?",
+  "choices": [
+    "Burbujas de dióxido de carbono.",
+    "Burbujas de oxígeno.",
+    "Burbujas de nitrógeno.",
+    "Burbujas de metano."
+  ],
+  "correct_choice": "Burbujas de oxígeno.",
+  "visual_description": "Usa context_burbujas01",
+  "explanation_expert": "Las burbujas observadas provienen del oxígeno liberado durante la fotosíntesis. En las reacciones dependientes de la luz, la molécula de agua se divide (fotólisis) liberando oxígeno como subproducto, el cual se acumula en forma de burbujas visibles.",
+  "difficulty": "easy",
+  "tags": ["unal", "ciencias naturales", "fotosíntesis", "oxígeno", "reacciones dependientes de la luz", "plantas acuáticas"],
+  "page": "https://www.invicto.com.co/simulacro-unal/ciencias-naturales"
+},
+{
+  "id": "simulacro-unal/ciencias-naturales/context_carburo01",
+  "type": "context",
+  "title": "El carburo de silicio",
+  "text": "El carburo de silicio o carborundo es un material cerámico utilizado ampliamente en los frenos de los automóviles y los chalecos antibalas, debido a su dureza. El carburo se encuentra naturalmente en el mineral moissanita, pero la demanda excede el suministro. Por esta razón, generalmente se sintetiza en el laboratorio. La reacción es: SiO₂ + 3C → SiC + 2CO",
+  "visual_description": "Ecuación química balanceada que muestra la síntesis del carburo de silicio: SiO₂ + 3C produce SiC y 2CO. Acompañada de texto que explica el uso del carburo de silicio como material cerámico resistente, común en frenos de automóviles y chalecos antibalas.",
+  "page": "https://www.invicto.com.co/simulacro-unal/ciencias-naturales"
+},
+{
+  "id": "simulacro-unal/ciencias-naturales/q12",
+  "type": "question",
+  "component": "ciencias-naturales",
+  "number": 12,
+  "context_id": "context_carburo01",
+  "stem_text": "¿Cuántos kilogramos de carburo de silicio se pueden formar por la reacción de 250.0 kg de arena (SiO₂) con carbono en exceso?\\nSi: 28 u.m.a  O: 16 u.m.a  C: 12 u.m.a",
+  "choices": [
+    "125 kg",
+    "166 kg",
+    "200 kg",
+    "215 kg"
+  ],
+  "correct_choice": "166 kg",
+  "visual_description": "Usa context_carburo01",
+  "explanation_expert": "Ecuación: SiO₂ + 3C → SiC + 2CO (relación 1:1 entre SiO₂ y SiC). Usando kmoles y trabajando en kg: \\(M_{SiO_2}=60\\,kg/kmol\\), \\(M_{SiC}=40\\,kg/kmol\\). Kmoles de SiO₂: \\(n=250/60=4.1667\\,kmol\\). Entonces \\(n_{SiC}=4.1667\\,kmol\\) y la masa producida es \\(m=n\\,M=4.1667\\times40=166.7\\,kg\\), que se redondea a 166 kg.",
+  "difficulty": "medium",
+  "tags": ["unal", "ciencias naturales", "estequiometría", "reacciones químicas", "kmol", "carburo de silicio"],
+  "page": "https://www.invicto.com.co/simulacro-unal/ciencias-naturales"
+},
+{
+  "id": "simulacro-unal/ciencias-naturales/q13",
+  "type": "question",
+  "component": "ciencias-naturales",
+  "number": 13,
+  "context_id": "context_carburo01",
+  "stem_text": "¿Cuál es el elemento que se oxida en la reacción?",
+  "choices": [
+    "Silicio (Si)",
+    "Oxígeno (O)",
+    "Carbono (C)",
+    "Ninguno"
+  ],
+  "correct_choice": "Carbono (C)",
+  "visual_description": "Usa context_carburo01",
+  "explanation_expert": "En la reacción SiO₂ + 3C → SiC + 2CO, el carbono pasa de estado de oxidación 0 (elemental) a +2 en el monóxido de carbono. Esto implica pérdida de electrones, es decir, oxidación. Por lo tanto, el elemento que se oxida es el carbono.",
+  "difficulty": "medium",
+  "tags": ["unal", "ciencias naturales", "reacciones redox", "oxidación", "carburo de silicio"],
+  "page": "https://www.invicto.com.co/simulacro-unal/ciencias-naturales"
+},
+{
+  "id": "simulacro-unal/ciencias-naturales/q14",
+  "type": "question",
+  "component": "ciencias-naturales",
+  "number": 14,
+  "context_id": "context_carburo01",
+  "stem_text": "¿Cuántos electrones gana el carbono en SiC al reducirse?",
+  "choices": [
+    "1",
+    "2",
+    "3",
+    "4"
+  ],
+  "correct_choice": "4",
+  "visual_description": "Usa context_carburo01",
+  "explanation_expert": "En los reactivos el carbono elemental está en estado de oxidación 0. En SiC, el carbono tiene estado de oxidación -4, ya que el silicio se oxida a +4. Esto implica que el carbono gana 4 electrones al reducirse: C⁰ + 4e⁻ → C⁻⁴.",
+  "difficulty": "medium",
+  "tags": ["unal", "ciencias naturales", "reacciones redox", "reducción", "carburo de silicio"],
+  "page": "https://www.invicto.com.co/simulacro-unal/ciencias-naturales"
+},
+{
+  "id": "simulacro-unal/ciencias-naturales/q15",
+  "type": "question",
+  "component": "ciencias-naturales",
+  "number": 15,
+  "context_id": "context_carburo01",
+  "stem_text": "¿Cuál es la configuración electrónica de un átomo de carbono en el compuesto SiC al ganar 4 electrones?",
+  "choices": [
+    "1s² 2s² 2p²",
+    "1s² 2s² 2p⁴",
+    "1s² 2s² 2p⁶",
+    "1s² 2p⁶ 3s²"
+  ],
+  "correct_choice": "1s² 2s² 2p⁶",
+  "visual_description": "Usa context_carburo01",
+  "explanation_expert": "El carbono neutro (Z=6) tiene la configuración 1s² 2s² 2p². En el compuesto SiC gana 4 electrones, convirtiéndose en C⁴⁻. La configuración resultante es 1s² 2s² 2p⁶, idéntica a la del neón, lo que refleja la estabilidad alcanzada.",
+  "difficulty": "medium",
+  "tags": ["unal", "ciencias naturales", "configuración electrónica", "reducción", "carburo de silicio"],
+  "page": "https://www.invicto.com.co/simulacro-unal/ciencias-naturales"
+},
+{
+  "id": "simulacro-unal/ciencias-naturales/q16",
+  "type": "question",
+  "component": "ciencias-naturales",
+  "number": 16,
+  "context_id": "context_carburo01",
+  "stem_text": "¿Qué nombre se le da al siguiente compuesto? SiO₂",
+  "choices": [
+    "Óxido de silicio (IV)",
+    "Óxido de silicio (II)",
+    "Óxido de silicato",
+    "Óxido silioso"
+  ],
+  "correct_choice": "Óxido de silicio (IV)",
+  "visual_description": "Usa context_carburo01",
+  "explanation_expert": "En el compuesto SiO₂, el oxígeno tiene número de oxidación -2. Con dos oxígenos, la suma es -4. Para neutralizar, el silicio debe estar en +4. Según la nomenclatura stock, el nombre correcto es Óxido de silicio (IV).",
+  "difficulty": "easy",
+  "tags": ["unal", "ciencias naturales", "nomenclatura química", "óxidos", "compuestos inorgánicos"],
+  "page": "https://www.invicto.com.co/simulacro-unal/ciencias-naturales"
+},
+{
+  "id": "simulacro-unal/ciencias-naturales/context_carbono01",
+  "type": "context",
+  "title": "Estructura de un átomo de carbono neutro",
+  "text": "La siguiente imagen muestra un átomo de carbono neutro, el cual contiene protones y neutrones en su núcleo, rodeado por una nube de electrones.",
+  "visual_description": "Ilustración de un átomo de carbono neutro. En el centro hay un núcleo compuesto por protones (partículas moradas) y neutrones (partículas azules). Alrededor se observa la nube de electrones, representada como un halo amarillo difuso.",
+  "page": "https://www.invicto.com.co/simulacro-unal/ciencias-naturales"
+},
+{
+  "id": "simulacro-unal/ciencias-naturales/q17",
+  "type": "question",
+  "component": "ciencias-naturales",
+  "number": 17,
+  "context_id": "context_carbono01",
+  "stem_text": "La siguiente imagen representa un átomo de carbono neutro, ¿cuántos electrones tiene este?",
+  "choices": [
+    "4",
+    "6",
+    "8",
+    "12"
+  ],
+  "correct_choice": "6",
+  "visual_description": "Usa context_carbono01",
+  "explanation_expert": "El número atómico del carbono es 6, lo que significa que tiene 6 protones en el núcleo. En un átomo neutro, el número de electrones es igual al de protones, por lo tanto un carbono neutro tiene 6 electrones.",
+  "difficulty": "easy",
+  "tags": ["unal", "ciencias naturales", "átomo", "carbono", "electrones", "estructura atómica"],
+  "page": "https://www.invicto.com.co/simulacro-unal/ciencias-naturales"
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+]

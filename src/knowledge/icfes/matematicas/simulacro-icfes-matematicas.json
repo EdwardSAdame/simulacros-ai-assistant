@@ -1,0 +1,517 @@
+[
+  {
+    "id": "simulacro-icfes/matematicas/context_mat01",
+    "type": "context",
+    "title": "Ángulos en la Torre de Pisa",
+    "text": "La Torre de Pisa en Toscana es uno de los sitios turísticos más representativos de Italia. En la tabla se relaciona la cantidad de personas que ingresó cada día durante una semana, según el tipo de entrada que pagó. Se pagan 17 euros de entrada y 5,5 más si se realiza reserva.",
+    "visual_description": "Tabla titulada 'Cantidad de personas que ingresaron'. Tiene dos filas: 'Sin reserva' y 'Con reserva', y siete columnas con los días de la semana. Los valores son: Sin reserva → Lunes 300, Martes 300, Miércoles 500, Jueves 700, Viernes 300, Sábado 300, Domingo 700. Con reserva → Lunes 700, Martes 800, Miércoles 200, Jueves 600, Viernes 500, Sábado 500, Domingo 600.",
+    "page": "https://www.invicto.com.co/simulacro-icfes/matematicas"
+  },
+  {
+  "id": "simulacro-icfes/matematicas/q01",
+  "type": "question",
+  "component": "matematicas",
+  "number": 1,
+  "context_id": "context_mat01",
+  "stem_text": "Con respecto a la vertical, la torre se ha inclinado 4° como se muestra en la gráfica. ¿Cuánto mide el otro ángulo?",
+  "choices": [
+    "4°",
+    "14°",
+    "86°",
+    "90°"
+  ],
+  "correct_choice": "86°",
+  "visual_description": "Esquema de la Torre de Pisa inclinada hacia la derecha. Una línea vertical de referencia muestra un ángulo de 4° entre la torre y la vertical. En la base, sobre el suelo horizontal, aparece un arco con signo de interrogación que representa el ángulo buscado entre la torre y el piso.",
+  "explanation_expert": "El ángulo entre la vertical y la torre es 4°. Como la vertical es perpendicular al suelo, el ángulo entre la torre y el suelo es complementario de 4°. Por tanto, 90° − 4° = 86°. Las demás opciones no satisfacen la relación de complementariedad.",
+  "difficulty": "easy",
+  "tags": ["icfes", "matematicas", "geometria", "ángulos", "complementarios"],
+  "page": "https://www.invicto.com.co/simulacro-icfes/matematicas"
+},
+{
+  "id": "simulacro-icfes/matematicas/q02",
+  "type": "question",
+  "component": "matematicas",
+  "number": 2,
+  "context_id": "context_mat01",
+  "stem_text": "Aproximadamente, ¿qué porcentaje del total de personas que visitaron la torre esa semana entraron sin hacer reserva?",
+  "choices": [
+    "56%",
+    "50%",
+    "44%",
+    "40%"
+  ],
+  "correct_choice": "44%",
+  "visual_description": "Usa context_mat01",
+  "explanation_expert": "El número total de visitantes sin reserva fue 3100 y el total de visitantes fue 7000. El cálculo 3100 ÷ 7000 ≈ 0,44 corresponde al 44%.",
+  "difficulty": "medium",
+  "tags": ["icfes", "matematicas", "porcentajes", "razones", "estadistica"],
+  "page": "https://www.invicto.com.co/simulacro-icfes/matematicas"
+},
+{
+  "id": "simulacro-icfes/matematicas/q03",
+  "type": "question",
+  "component": "matematicas",
+  "number": 3,
+  "context_id": "context_mat01",
+  "stem_text": "El proceso que muestra cómo se obtiene el dinero recaudado en la semana, de cada forma de venta, se muestra en el siguiente diagrama: ¿Cuál de las siguientes preguntas NO se puede resolver empleando una parte del proceso anterior?",
+  "choices": [
+    "¿Con cuál tipo de entrada se recaudó más dinero?",
+    "¿Cuántas personas ingresaron en la semana?",
+    "¿Cuál es la ganancia total del sitio turístico?",
+    "¿Cuánto dinero se recaudó por tipo de entrada?"
+  ],
+  "correct_choice": "¿Cuál es la ganancia total del sitio turístico?",
+  "visual_description": "Diagrama de flujo con tres pasos: 1) Sumar la cantidad de personas que entraron con y sin reserva durante la semana. 2) Multiplicar la cantidad con reserva por 22,5 y la cantidad sin reserva por 17. 3) Comparar los resultados de ambas operaciones.",
+  "explanation_expert": "El diagrama permite calcular el número de personas, el dinero recaudado por cada tipo de entrada y comparar los ingresos. Sin embargo, no es posible calcular la ganancia total del sitio turístico porque no se incluyen los costos o gastos, solo los ingresos.",
+  "difficulty": "medium",
+  "tags": ["icfes", "matematicas", "diagramas", "razonamiento", "ingresos"],
+  "page": "https://www.invicto.com.co/simulacro-icfes/matematicas"
+},
+{
+  "id": "simulacro-icfes/matematicas/q04",
+  "type": "question",
+  "component": "matematicas",
+  "number": 4,
+  "context_id": "context_mat01",
+  "stem_text": "El recaudo total de la semana, registrada en la tabla, fue aproximadamente de:",
+  "choices": [
+    "14 mil euros.",
+    "140 mil euros.",
+    "120 euros.",
+    "120.000 euros."
+  ],
+  "correct_choice": "140 mil euros.",
+  "visual_description": "Usa context_mat01",
+  "explanation_expert": "El total de ingresos se obtiene multiplicando los 3100 visitantes sin reserva por 17 € (52.700 €) y los 3900 visitantes con reserva por 22,5 € (87.750 €). La suma es 140.450 €, lo que corresponde aproximadamente a 140 mil euros.",
+  "difficulty": "medium",
+  "tags": ["icfes", "matematicas", "porcentajes", "razonamiento", "dinero"],
+  "page": "https://www.invicto.com.co/simulacro-icfes/matematicas"
+},
+{
+  "id": "simulacro-icfes/matematicas/q05",
+  "type": "question",
+  "component": "matematicas",
+  "number": 5,
+  "context_id": "context_mat01",
+  "stem_text": "La mediana de la cantidad de turistas sin reserva que ingresan a la torre es 300; la de los que ingresan con reserva es 600. Solamente teniendo esto en cuenta, ¿es correcto afirmar que entran el doble de turistas con reserva que sin ella?",
+  "choices": [
+    "No, la mediana es una medida de localización central.",
+    "No, la mediana muestra la dispersión de los datos.",
+    "Sí, la mediana me da el promedio de los datos.",
+    "Sí, la mediana me da la mitad de los datos."
+  ],
+  "correct_choice": "No, la mediana es una medida de localización central.",
+  "visual_description": "Pregunta con texto y cuatro opciones de respuesta, sin gráfico adicional.",
+  "explanation_expert": "La mediana es una medida de tendencia central que indica el valor que ocupa la posición intermedia en un conjunto de datos ordenados. No se utiliza para comparar totales ni promedios, por lo que no permite afirmar que con reserva ingresen el doble de turistas que sin ella.",
+  "difficulty": "medium",
+  "tags": ["icfes", "matematicas", "estadistica", "mediana", "tendencia central"],
+  "page": "https://www.invicto.com.co/simulacro-icfes/matematicas"
+},
+{
+  "id": "simulacro-icfes/matematicas/context_mat02",
+  "type": "context",
+  "title": "Exportaciones Industriales",
+  "text": "La gráfica presenta las exportaciones en millones de dólares de determinados productos del sector industrial en Ecuador, Venezuela, Estados Unidos y el resto del mundo en tres años.",
+  "visual_description": "Gráfico de barras horizontales por año (2008, 2009 y 2010), con cuatro barras por fila que representan los destinos: Resto del mundo (naranja con líneas), Ecuador (celeste con damero), Venezuela (celeste con líneas verticales) y Estados Unidos (blanco con puntos). Valores mostrados: 2010 → Resto del mundo 825, Ecuador 184, Venezuela 210, EE. UU. 253; 2009 → Resto del mundo 712, Ecuador 189, Venezuela 801, EE. UU. 237; 2008 → Resto del mundo 848, Ecuador 169, Venezuela 849, EE. UU. 330. Eje horizontal en millones de dólares.",
+  "page": "https://www.invicto.com.co/simulacro-icfes/matematicas"
+},
+{
+  "id": "simulacro-icfes/matematicas/q06",
+  "type": "question",
+  "component": "matematicas",
+  "number": 6,
+  "context_id": "context_mat02",
+  "stem_text": "Otra representación que muestra toda la información de la gráfica anterior es:",
+  "choices": [
+    "Gráfico de barras horizontales apiladas que muestra los valores de 2008, 2009 y 2010 para Resto del mundo, Ecuador, Venezuela y Estados Unidos.",
+    "Gráfico circular del año 2008 con la participación de Resto del mundo (848), Ecuador (169), Venezuela (849) y Estados Unidos (330).",
+    "Gráfico de líneas comparando exportaciones de Resto del mundo, Ecuador, Venezuela y Estados Unidos en dos años distintos.",
+    "Gráfico de barras verticales apiladas de 2008 a 2010 solo con Ecuador, Venezuela y Estados Unidos, sin incluir Resto del mundo."
+  ],
+  "correct_choice": "Gráfico de barras horizontales apiladas que muestra los valores de 2008, 2009 y 2010 para Resto del mundo, Ecuador, Venezuela y Estados Unidos.",
+  "visual_description": "Cuatro representaciones gráficas alternativas de las exportaciones industriales: 1) barras horizontales apiladas con los cuatro destinos y tres años; 2) gráfico circular de 2008; 3) gráfico de líneas comparando destinos en dos años; 4) barras verticales apiladas para 2008-2010 con tres destinos, omitiendo Resto del mundo.",
+  "explanation_expert": "La única representación que conserva toda la información de la gráfica original (años 2008-2010 y los cuatro destinos: Resto del mundo, Ecuador, Venezuela y Estados Unidos) es la de barras horizontales apiladas. Las demás omiten información o solo muestran un año específico.",
+  "difficulty": "medium",
+  "tags": ["icfes", "matematicas", "estadistica", "graficos", "interpretacion"],
+  "page": "https://www.invicto.com.co/simulacro-icfes/matematicas"
+},
+{
+  "id": "simulacro-icfes/matematicas/context_mat03",
+  "type": "context",
+  "title": "Análisis de ingresos y variación porcentual en ventas",
+  "text": "La gráfica muestra la cantidad de productos vendidos en una tienda, en marzo y abril.",
+  "visual_description": "Gráfico de barras verticales que compara la cantidad de productos vendidos en marzo (barras celestes) y abril (barras naranjas). Valores aproximados: Billeteras: marzo 5, abril 15; Carteras: marzo 20, abril 25; Correas: marzo 30, abril 10; Chaquetas: marzo 5, abril 10. El eje vertical muestra cantidades de 0 a 35 y el eje horizontal los tipos de producto.",
+  "page": "https://www.invicto.com.co/simulacro-icfes/matematicas"
+},
+{
+  "id": "simulacro-icfes/matematicas/q07",
+  "type": "question",
+  "component": "matematicas",
+  "number": 7,
+  "context_id": "context_mat03",
+  "stem_text": "Una persona afirma que en los dos meses la tienda tuvo los mismos ingresos totales. ¿La información de la gráfica es suficiente para determinar la veracidad de la afirmación?",
+  "choices": [
+    "No, porque los ingresos dependen del precio de cada producto.",
+    "No, porque los ingresos dependen de la variación de la cantidad de productos vendidos.",
+    "Sí, porque los ingresos en marzo fueron mayores por la venta de correas.",
+    "Sí, porque en los dos meses se vendió la misma cantidad de productos."
+  ],
+  "correct_choice": "No, porque los ingresos dependen del precio de cada producto.",
+  "visual_description": "Usa context_mat03",
+  "explanation_expert": "La gráfica solo muestra cantidades vendidas, no precios. Para determinar los ingresos es necesario conocer el precio unitario de cada producto. Por lo tanto, no es posible verificar si los ingresos fueron iguales en ambos meses únicamente con esta información.",
+  "difficulty": "medium",
+  "tags": ["icfes", "matematicas", "estadistica", "razonamiento", "ingresos"],
+  "page": "https://www.invicto.com.co/simulacro-icfes/matematicas"
+},
+{
+  "id": "simulacro-icfes/matematicas/q08",
+  "type": "question",
+  "component": "matematicas",
+  "number": 8,
+  "context_id": "context_mat03",
+  "stem_text": "Para calcular el cambio porcentual del número de ventas de un producto, se toma el valor absoluto de la diferencia entre las cantidades de unidades vendidas en marzo y en abril, se divide entre el número de unidades vendidas en marzo, y se multiplica por 100. El producto que tuvo un mayor cambio porcentual entre los dos meses fue:",
+  "choices": [
+    "Billeteras.",
+    "Carteras.",
+    "Correas.",
+    "Chaquetas."
+  ],
+  "correct_choice": "Billeteras.",
+  "visual_description": "Usa context_mat03",
+  "explanation_expert": "El cambio porcentual para cada producto es: Billeteras 200%, Carteras 25%, Correas 66,7% y Chaquetas 100%. El mayor cambio se presenta en billeteras, con un 200%.",
+  "difficulty": "medium",
+  "tags": ["icfes", "matematicas", "porcentajes", "variacion", "ventas"],
+  "page": "https://www.invicto.com.co/simulacro-icfes/matematicas"
+},
+{
+  "id": "simulacro-icfes/matematicas/context_mat04",
+  "type": "context",
+  "title": "¿Cuánto cuesta ir al cine según tu edad?",
+  "text": "El costo de la boleta en un cinema depende de la edad de la persona, como lo muestra la tabla:",
+  "visual_description": "Tabla con dos columnas: 'Edad en años (X)' y 'Costo en pesos (Y)'. Filas: 0 a 8 años → 5.000 pesos; más de 8 y hasta 16 años → 7.000 pesos; más de 16 y hasta 56 años → 10.000 pesos; más de 56 años → 6.000 pesos.",
+  "page": "https://www.invicto.com.co/simulacro-icfes/matematicas"
+},
+{
+  "id": "simulacro-icfes/matematicas/q09",
+  "type": "question",
+  "component": "matematicas",
+  "number": 9,
+  "context_id": "context_mat04",
+  "stem_text": "La gráfica que representa esta función es:",
+  "choices": [
+    "Gráfico de función escalonada con intervalos: 0 a 8 → 5.000; más de 8 a 16 → 7.000; más de 16 a 56 → 10.000; más de 56 → 6.000, usando círculos abiertos y cerrados para extremos.",
+    "Gráfico de línea quebrada continua que une los puntos (0,5.000), (8,7.000), (16,10.000) y desciende hasta (56,6.000).",
+    "Gráfico de escalones continuos que representa los intervalos de manera horizontal, pero sin usar puntos abiertos o cerrados en los extremos.",
+    "Gráfico de dispersión con puntos en (0,5.000), (8,5.000), (8,7.000), (16,7.000), (16,10.000), (56,10.000) y (56,6.000), sin líneas horizontales."
+  ],
+  "correct_choice": "Gráfico de función escalonada con intervalos: 0 a 8 → 5.000; más de 8 a 16 → 7.000; más de 16 a 56 → 10.000; más de 56 → 6.000, usando círculos abiertos y cerrados para extremos.",
+  "visual_description": "Cuatro opciones gráficas: 1) función escalonada con extremos abiertos y cerrados que representan correctamente la tabla de costos; 2) línea quebrada continua que une puntos con segmentos inclinados; 3) escalones continuos sin distinción de intervalos abiertos/cerrados; 4) gráfico de puntos aislados que muestran coordenadas pero no la función completa.",
+  "explanation_expert": "La tabla de precios según edades se representa con una función escalonada: cada intervalo mantiene un valor constante y se distinguen los límites con puntos abiertos o cerrados para indicar inclusión o exclusión. Solo la primera opción reproduce correctamente esta relación.",
+  "difficulty": "medium",
+  "tags": ["icfes", "matematicas", "funciones", "gráficas", "piecewise"],
+  "page": "https://www.invicto.com.co/simulacro-icfes/matematicas"
+},
+{
+  "id": "simulacro-icfes/matematicas/context_mat05",
+  "type": "context",
+  "title": "Dividiendo un segmento",
+  "text": "En una clase de Matemáticas se plantea la siguiente actividad: Para su construcción, un estudiante efectuó de manera correcta el siguiente procedimiento: Se construyen dos triángulos equiláteros MNP y MNQ. Luego se traza el segmento PQ, intersecando a MN en R. Los ángulos ∠MPR y ∠RPN son congruentes entre sí. Como los triángulos MRP y PRN que se forman son congruentes, entonces MR es congruente con RN. Por tanto, MN se ha dividido en dos partes congruentes en el punto R.",
+  "visual_description": "Imagen con la frase: 'Quisiéramos dividir el segmento MN en dos partes congruentes'. Se muestra un segmento recto con extremos en los puntos M y N, representados por dos puntos negros unidos por una línea.",
+  "page": "https://www.invicto.com.co/simulacro-icfes/matematicas"
+},
+{
+  "id": "simulacro-icfes/matematicas/q10",
+  "type": "question",
+  "component": "matematicas",
+  "number": 10,
+  "context_id": "context_mat05",
+  "stem_text": "De acuerdo con la información anterior, la construcción geométrica que debió hacer el estudiante para realizar la actividad fue:",
+  "choices": [
+    "Figura con un único triángulo equilátero sombreado que incluye al punto R y dos puntos distintos de M, N y Q; no se distinguen los dos equiláteros sobre MN.",
+    "Figura con un único triángulo equilátero sombreado que usa el punto P junto con otros dos puntos distintos de M, N, R o Q; no aparecen los dos equiláteros solicitados sobre MN.",
+    "Figura con dos triángulos equiláteros sombreados MNP y MNR; el punto Q no forma ningún triángulo equilátero.",
+    "Figura con dos triángulos equiláteros sombreados MNP y MNQ construidos sobre el segmento MN y el segmento PQ trazado intersectando a MN en R."
+  ],
+  "correct_choice": "Figura con dos triángulos equiláteros sombreados MNP y MNQ construidos sobre el segmento MN y el segmento PQ trazado intersectando a MN en R.",
+  "visual_description": "Cuatro diagramas de construcción: (1) solo un equilátero con vértice en R y sin MNP/MNQ; (2) solo un equilátero con vértice en P, sin mostrar ambos sobre MN; (3) dos equiláteros MNP y MNR, Q queda interno y no participa; (4) dos equiláteros MNP y MNQ sobre MN y el segmento PQ corta a MN en R.",
+  "explanation_expert": "El procedimiento correcto consiste en construir dos triángulos equiláteros MNP y MNQ sobre el segmento MN y trazar el segmento PQ. Por simetría, los triángulos MRP y PRN resultan congruentes, de modo que R es el punto medio de MN. Las opciones que muestran un solo equilátero o reemplazan MNQ por MNR no realizan la construcción pedida.",
+  "difficulty": "medium",
+  "tags": ["icfes", "matematicas", "geometria", "congruencia", "construcciones"],
+  "page": "https://www.invicto.com.co/simulacro-icfes/matematicas"
+},
+{
+  "id": "simulacro-icfes/matematicas/context_mat06",
+  "type": "context",
+  "title": "Análisis de consumo y costos adicionales en un plan telefónico",
+  "text": "La gráfica y la tabla muestran parte de la información que recibe la familia Ramírez en su factura telefónica del mes de enero.",
+  "visual_description": "La imagen está dividida en dos secciones. A la izquierda, un diagrama de barras muestra los minutos de voz consumidos entre julio y enero: Jul. 148, Ago. 171, Sep. 321, Oct. 205, Nov. 214, Dic. 389, Ene. 331. Se indica que el plan local actual es de 220 minutos. A la derecha, un estado de cuenta de enero: saldo anterior $49.610, pago recibido -$49.610, saldo $0. Cargos del mes $35.416,83, IVA $6.378,70, subtotal $41.795,53, ajuste por decena -$5,53, total a pagar $41.790,00. Detalle de cargos: plan local $20.086,21, consumo adicional $14.065,92 y llamada en espera $1.264,70, con total cargos del mes $35.416,83.",
+  "page": "https://www.invicto.com.co/simulacro-icfes/matematicas"
+},
+{
+  "id": "simulacro-icfes/matematicas/q11",
+  "type": "question",
+  "component": "matematicas",
+  "number": 11,
+  "context_id": "context_mat06",
+  "stem_text": "El tiempo adicional consumido por la familia Ramírez en enero fue:",
+  "choices": [
+    "1 hora y 11 minutos.",
+    "1 hora y 51 minutos.",
+    "3 horas y 40 minutos.",
+    "5 horas y 31 minutos."
+  ],
+  "correct_choice": "1 hora y 51 minutos.",
+  "visual_description": "Usa context_mat06",
+  "explanation_expert": "El plan local incluye 220 minutos y en enero se consumieron 331. La diferencia es 111 minutos, equivalentes a 1 hora y 51 minutos.",
+  "difficulty": "medium",
+  "tags": ["icfes", "matematicas", "razonamiento", "tiempo", "planes"],
+  "page": "https://www.invicto.com.co/simulacro-icfes/matematicas"
+},
+{
+  "id": "simulacro-icfes/matematicas/q12",
+  "type": "question",
+  "component": "matematicas",
+  "number": 12,
+  "context_id": "context_mat06",
+  "stem_text": "El señor Ramírez considera que el valor del minuto adicional del mes de enero fue excesivo. Su hija asegura que la diferencia entre el valor del minuto del plan y el valor del minuto adicional es de $35,42. ¿Cuál de los siguientes datos NO se necesita para hallar esta diferencia?",
+  "choices": [
+    "La cantidad de minutos del plan.",
+    "El valor del consumo adicional.",
+    "El total de cargos del mes.",
+    "El valor del plan local."
+  ],
+  "correct_choice": "El total de cargos del mes.",
+  "visual_description": "Usa context_mat06",
+  "explanation_expert": "Para hallar la diferencia se requiere: la cantidad de minutos del plan, el valor del plan local y el valor del consumo adicional. Con esos datos se obtiene el costo por minuto del plan y del adicional. El total de cargos del mes incluye otros conceptos como IVA o llamadas en espera y no es necesario para este cálculo.",
+  "difficulty": "medium",
+  "tags": ["icfes", "matematicas", "razonamiento", "planes", "proporciones"],
+  "page": "https://www.invicto.com.co/simulacro-icfes/matematicas"
+},
+{
+  "id": "simulacro-icfes/matematicas/context_mat07",
+  "type": "context",
+  "title": "Eligiendo canciones al azar para una reunión",
+  "text": "Para ambientar musicalmente una reunión, se cuenta con tres CD, cada uno de ellos tiene canciones de salsa (S) y merengue (M).",
+  "visual_description": "",
+  "page": "https://www.invicto.com.co/simulacro-icfes/matematicas"
+},
+{
+  "id": "simulacro-icfes/matematicas/q13",
+  "type": "question",
+  "component": "matematicas",
+  "number": 13,
+  "context_id": "context_mat07",
+  "stem_text": "¿Cuál de los siguientes diagramas representa la situación de seleccionar al azar una canción del CD1, luego una del CD2 y finalmente una del CD3?",
+  "choices": [
+    "Diagrama en árbol único con tres niveles conectados: desde CD1 (S/M) se ramifica a CD2 (S/M) y cada rama de CD2 se ramifica a CD3 (S/M), mostrando todas las combinaciones posibles.",
+    "Árbol donde, si en CD1 se elige S, en CD2 y CD3 solo aparecen S; y si en CD1 se elige M, en CD2 y CD3 solo aparecen M; no muestra combinaciones cruzadas.",
+    "Tres árboles separados para CD1, CD2 y CD3 sin conexión entre sí; cada bloque muestra opciones, pero no la secuencia CD1→CD2→CD3.",
+    "Tres árboles separados (uno por CD) donde cada bloque se ramifica en S y M; siguen sin estar conectados entre sí y no representan la selección secuencial."
+  ],
+  "correct_choice": "Diagrama en árbol único con tres niveles conectados: desde CD1 (S/M) se ramifica a CD2 (S/M) y cada rama de CD2 se ramifica a CD3 (S/M), mostrando todas las combinaciones posibles.",
+  "visual_description": "Cuatro diagramas: (1) árbol conectado CD1→CD2→CD3 con ramas S y M en cada nivel; (2) árbol que fuerza la misma letra en CD2 y CD3 según la elección inicial en CD1; (3) tres árboles aislados, uno por CD, sin conexiones; (4) tres árboles aislados con ramificaciones S/M en cada CD.",
+  "explanation_expert": "La situación es un experimento secuencial con tres etapas (CD1, CD2 y CD3). La representación correcta es un árbol con tres niveles conectados que enumera todas las combinaciones S/M para cada etapa. Los diagramas que imponen la misma letra o separan los árboles por CD no modelan la selección secuencial completa.",
+  "difficulty": "medium",
+  "tags": ["icfes", "matematicas", "probabilidad", "diagrama de árbol", "conteo"],
+  "page": "https://www.invicto.com.co/simulacro-icfes/matematicas"
+},
+{
+  "id": "simulacro-icfes/matematicas/context_mat08",
+  "type": "context",
+  "title": "Elecciones en grado 9no",
+  "text": "Los estudiantes del grado noveno votan para escoger al representante estudiantil del grado. Los resultados de lavotación para los tres candidatos fueron los siguientes:",
+  "visual_description": "La imagen muestra los resultados de elecciones en dos cursos. Para el curso 901 aparece un gráfico circular con: Gonzalo 13 votos (32%) en azul, Lucía 18 votos (45%) en rojo y Eduardo 9 votos (23%) en verde. Para el curso 902 se presenta un gráfico de barras con: Gonzalo 4 votos en azul, Lucía 28 votos en rojo y Eduardo 8 votos en verde. Los colores y patrones son consistentes entre ambos gráficos.",
+  "page": "https://www.invicto.com.co/simulacro-icfes/matematicas"
+},
+{
+  "id": "simulacro-icfes/matematicas/q14",
+  "type": "question",
+  "component": "matematicas",
+  "number": 14,
+  "context_id": "context_mat08",
+  "stem_text": "¿Cuál de las siguientes representaciones muestra el resultado final de las votaciones en los dos grupos de grado noveno?",
+  "choices": [
+    "Gráfico circular con porcentajes: Lucía 70%, Eduardo 20% y Gonzalo 10%.",
+    "Gráfico de barras con votos totales: Gonzalo 21, Lucía 46, Eduardo 13.",
+    "Gráfico de área sombreada con valores: Eduardo 46 votos (57,5%), Gonzalo 17 votos (21,25%), Lucía 17 votos (21,25%).",
+    "Tabla con totales: Gonzalo 17 votos, Lucía 46 votos, Eduardo 17 votos."
+  ],
+  "correct_choice": "Gráfico de barras con votos totales: Gonzalo 21, Lucía 46, Eduardo 13.",
+  "visual_description": "Cuatro representaciones: (1) gráfico circular con mayoría para Lucía en 70%, (2) gráfico de barras con los resultados reales Gonzalo 21, Lucía 46 y Eduardo 13, (3) gráfico de área sombreada con porcentajes que no coinciden con la votación real, (4) tabla con cifras alteradas que asigna 17 votos a Gonzalo y Eduardo y 46 a Lucía.",
+  "explanation_expert": "El resultado final de las votaciones de los cursos 901 y 902 es: Gonzalo 21 votos, Lucía 46 votos y Eduardo 13 votos. La representación que muestra exactamente estos valores es el gráfico de barras (opción B).",
+  "difficulty": "medium",
+  "tags": ["icfes", "matematicas", "estadistica", "graficos", "conteo"],
+  "page": "https://www.invicto.com.co/simulacro-icfes/matematicas"
+},
+{
+  "id": "simulacro-icfes/matematicas/context_mat09",
+  "type": "context",
+  "title": "Analizando la pesca durante la migración del atún",
+  "text": "Una vez inicia la migración del atún en una cierta región del país, su pesca varía diariamente según la expresión:Donde P representa la pesca, en toneladas, y d los días transcurridos después de iniciada la migración.",
+  "visual_description": "Expresión algebraica cuadrática que representa la pesca en función de la distancia: P = -d^2 + 10d - 15.",
+  "page": "https://www.invicto.com.co/simulacro-icfes/matematicas"
+},
+{
+  "id": "simulacro-icfes/matematicas/q15",
+  "type": "question",
+  "component": "matematicas",
+  "number": 15,
+  "context_id": "context_mat09",
+  "stem_text": "¿Cuál de las siguientes gráficas muestra correctamente la relación entre la pesca y los días transcurridos después de iniciada la migración?",
+  "choices": [
+    "Gráfico de dispersión con tendencia lineal creciente: desde 35 toneladas en el día 2 hasta 95 toneladas en el día 8, pasando por valores intermedios (día 5: 65, día 6: 75).",
+    "Gráfico de dispersión con trayectoria parabólica invertida: la pesca aumenta de 1 tonelada en el día 2 hasta 10 toneladas en el día 5, y luego desciende a 1 tonelada en el día 8.",
+    "Gráfico de dispersión con tendencia lineal decreciente: inicia en 13 toneladas en el día 2 y desciende progresivamente hasta 3 toneladas en el día 8.",
+    "Gráfico de dispersión irregular: puntos distribuidos sin patrón claro, con valores de 9 toneladas en los días 2 y 8, y mínimos de 0 toneladas en el día 5."
+  ],
+  "correct_choice": "Gráfico de dispersión con trayectoria parabólica invertida: la pesca aumenta de 1 tonelada en el día 2 hasta 10 toneladas en el día 5, y luego desciende a 1 tonelada en el día 8.",
+  "visual_description": "Cuatro gráficos de dispersión que representan la relación entre días transcurridos y toneladas de pesca: A con tendencia lineal creciente, B con parábola invertida, C con tendencia lineal decreciente y D con distribución irregular.",
+  "explanation_expert": "La ecuación P = -d^2 + 10d - 15 corresponde a una parábola invertida. La gráfica correcta refleja este comportamiento: la pesca aumenta al inicio hasta un máximo en el día 5 y luego disminuye, representando adecuadamente la relación matemática entre pesca y días.",
+  "difficulty": "medium",
+  "tags": ["icfes", "matemáticas", "funciones cuadráticas", "gráficas"],
+  "page": "https://www.invicto.com.co/simulacro-icfes/matematicas"
+},
+{
+  "id": "simulacro-icfes/matematicas/context_mat10",
+  "type": "context",
+  "title": "Representando gráficamente una función cuadrática",
+  "text": "Un profesor escribe en el tablero la función que se muestra en la imagen y pide a los estudiantes que dibujen la gráfica que corresponde a la función.",
+  "visual_description": "Ecuación cuadrática mostrada en el enunciado: y = x^2 + 5.",
+  "page": "https://www.invicto.com.co/simulacro-icfes/matematicas"
+},
+{
+  "id": "simulacro-icfes/matematicas/q16",
+  "type": "question",
+  "component": "matematicas",
+  "number": 16,
+  "context_id": "context_mat10",
+  "stem_text": "¿Cuál es la gráfica que deberían dibujar los estudiantes?",
+  "choices": [
+    "Gráfica de una parábola con concavidad hacia arriba. El vértice está en el punto (0, 5), y pasa por (-1, 6), (1, 6), (-2, 9) y (2, 9). Representa correctamente la ecuación y = x^2 + 5.",
+    "Gráfica de una parábola con concavidad hacia abajo. El vértice está en (5, 15) y pasa por (1, 6), (3, 13), (7, 13) y (9, 6). No corresponde a y = x^2 + 5.",
+    "Gráfica de una parábola con concavidad hacia arriba. El vértice está en (5, 0) y pasa por (0, 5) y (10, 5). No corresponde a y = x^2 + 5.",
+    "Gráfica de una parábola con concavidad hacia abajo. El vértice está en (5, 5) y pasa por (0, 0) y (10, 0). No corresponde a y = x^2 + 5."
+  ],
+  "correct_choice": "Gráfica de una parábola con concavidad hacia arriba. El vértice está en el punto (0, 5), y pasa por (-1, 6), (1, 6), (-2, 9) y (2, 9). Representa correctamente la ecuación y = x^2 + 5.",
+  "visual_description": "Cuatro gráficas de parábolas: A con vértice en (0,5) y concavidad hacia arriba, B con vértice en (5,15) y concavidad hacia abajo, C con vértice en (5,0) y concavidad hacia arriba, y D con vértice en (5,5) y concavidad hacia abajo.",
+  "explanation_expert": "La ecuación y = x^2 + 5 corresponde a una parábola con concavidad hacia arriba y vértice en (0, 5). La gráfica correcta muestra este comportamiento, representando adecuadamente la función cuadrática.",
+  "difficulty": "medium",
+  "tags": ["icfes", "matemáticas", "funciones cuadráticas", "gráficas"],
+  "page": "https://www.invicto.com.co/simulacro-icfes/matematicas"
+},
+{
+  "id": "context_mat11",
+  "type": "context",
+  "component": "matematicas",
+  "title": "Para observar los efectos de un medicamento, este se inyecta en un animal y se registra el comportamiento de la temperatura (°C) en función del tiempo (horas), como lo muestra la gráfica.",
+  "text": "Se estudia la variación de la temperatura corporal de un animal en función del tiempo. Para ello, se propone un modelo matemático que describe cómo cambia la temperatura según las horas transcurridas después de iniciar la observación.",
+  "visual_description": "Curva sinusoidal que representa la temperatura corporal de un animal en función del tiempo. Inicia en el punto (0, 36), alcanza un máximo de 38 °C, un mínimo de 34 °C y completa un período de 3 horas."
+},
+{
+  "id": "simulacro-icfes/matematicas/q17",
+  "type": "question",
+  "component": "matematicas",
+  "number": 17,
+  "context_id": "context_mat11",
+  "stem_text": "¿Cuál de las siguientes expresiones corresponde a la curva que describe la temperatura del animal en función del tiempo?",
+  "choices": [
+    "F(t) = 2cos((2π/3)t) + 36",
+    "F(t) = 3cos((2π/3)t) + 38",
+    "F(t) = 2sen((2π/3)t) + 36",
+    "F(t) = 3sen((2π/3)t) + 38"
+  ],
+  "correct_choice": "F(t) = 2sen((2π/3)t) + 36",
+  "visual_description": "Gráfica de una función sinusoidal que modela la temperatura corporal de un animal en función del tiempo. El eje vertical representa la temperatura en °C, con un mínimo de 34°C y un máximo de 38°C. La curva inicia en el punto (0,36), alcanza su máximo de 38°C alrededor de t=1, su mínimo de 34°C alrededor de t=2 y vuelve a subir a 37°C en t=3. El período total de la función es de 3 unidades de tiempo.",
+  "explanation_expert": "La curva tiene forma sinusoidal con un período de 3 unidades de tiempo, un valor mínimo de 34°C y un máximo de 38°C. Esto indica una amplitud de 2°C y una línea media en 36°C. Además, la gráfica comienza en el valor medio (36°C) y sube inicialmente, lo que coincide con una función seno positiva. Por lo tanto, la expresión correcta es F(t) = 2sen((2π/3)t) + 36.",
+  "difficulty": "medium",
+  "tags": ["icfes", "matemáticas", "funciones trigonométricas", "modelos de temperatura"],
+  "page": "https://www.invicto.com.co/simulacro-icfes/matematicas"
+},
+{
+  "id": "simulacro-icfes/matematicas/context_mat12",
+  "type": "context",
+  "component": "matematicas",
+  "title": "Visualizando las preferencias de adopción de mascotas",
+  "text": "El líder de un programa de adopción de mascotas encuestó a 120 personas para conocer qué animal les interesaría adoptar. Del total de encuestados, el 30 % adoptaría un loro, el 40 % adoptaría un perro y el 30 % adoptaría un gato.",
+  "visual_description": "",
+  "page": "https://www.invicto.com.co/simulacro-icfes/matematicas"
+},
+{
+  "id": "simulacro-icfes/matematicas/q18",
+  "type": "question",
+  "component": "matematicas",
+  "number": 18,
+  "context_id": "context_mat12",
+  "stem_text": "¿Cuál de las siguientes representaciones muestra correctamente la información recolectada en la encuesta?",
+  "choices": [
+    "Tabla con tres filas: Loro (36 personas), Perro (48 personas) y Gato (36 personas).",
+    "Gráfico de barras verticales: Loro 30, Perro 40 y Gato 30 personas.",
+    "Gráfico circular dividido en tres sectores: Loro 36, Perro 48 y Gato 36 personas.",
+    "Gráfico de barras horizontales: Loro 40, Perro 30 y Gato 40 personas."
+  ],
+  "correct_choice": "Tabla con tres filas: Loro (36 personas), Perro (48 personas) y Gato (36 personas).",
+  "visual_description": "",
+  "explanation_expert": "Aunque los valores calculados para cada animal son correctos, la representación circular dada es incorrecta porque visualmente todos los sectores tienen el mismo tamaño, lo cual implica porcentajes iguales. Esto no refleja la distribución real de los datos. La tabla presenta los datos de manera precisa sin inducir a error.",
+  "difficulty": "medium",
+  "tags": ["icfes", "matemáticas", "estadística", "gráficas"],
+  "page": "https://www.invicto.com.co/simulacro-icfes/matematicas"
+},
+{
+  "id": "simulacro-icfes/matematicas/context_mat13",
+  "type": "context",
+  "component": "matematicas",
+  "title": "Simplificando un polinomio en una montaña rusa",
+  "text": "Para modelar la curva de una montaña rusa que se planea construir, se utiliza el siguiente polinomio:",
+  "visual_description": "Expresión algebraica de un polinomio racional: en el numerador aparece (1/100)x^4 − (12/10)x^3 + 36x^2 + 100x, y en el denominador 10x. Todo el numerador está encerrado en una fracción sobre el denominador.",
+  "page": "https://www.invicto.com.co/simulacro-icfes/matematicas"
+},
+{
+  "id": "simulacro-icfes/matematicas/q19",
+  "type": "question",
+  "component": "matematicas",
+  "number": 19,
+  "context_id": "context_mat13",
+  "stem_text": "¿Cuál de las siguientes expresiones es equivalente al polinomio p(x) utilizado para valores de x distintos de 0?",
+  "choices": [
+    "\\( \\frac{1}{1000}x^3 - \\frac{12}{100}x^2 + \\frac{36}{10}x + 10 \\)",
+    "\\( \\frac{1}{1000}x^4 - \\frac{12}{100}x^3 + \\frac{36}{10}x^2 + 10 \\)",
+    "\\( \\frac{1}{100}x^3 - \\frac{12}{10}x^2 + 36x + 100 \\)",
+    "\\( \\frac{1}{100}x^4 - \\frac{120}{10}x^3 + \\frac{36}{10}x^2 + 10x \\)"
+  ],
+  "correct_choice": "\\( \\frac{1}{1000}x^3 - \\frac{12}{100}x^2 + \\frac{36}{10}x + 10 \\)",
+  "visual_description": "",
+  "explanation_expert": "Se simplifica el polinomio dividiendo cada término del numerador \\( \\frac{1}{100}x^4 - \\frac{12}{10}x^3 + 36x^2 + 100x \\) entre \\( 10x \\). Esto reduce los exponentes y factores, resultando en \\( \\frac{1}{1000}x^3 - \\frac{12}{100}x^2 + \\frac{36}{10}x + 10 \\).",
+  "difficulty": "medium",
+  "tags": ["icfes", "matemáticas", "polinomios", "simplificación"],
+  "page": "https://www.invicto.com.co/simulacro-icfes/matematicas"
+},
+{
+  "id": "simulacro-icfes/matematicas/context_mat14",
+  "type": "context",
+  "component": "matematicas",
+  "title": "Transformaciones geométricas de un cuadrilátero",
+  "text": "Cada uno de los lados del cuadrilátero de la figura se traslada una unidad hacia la izquierda; luego se amplía esta al doble de su tamaño, manteniéndose fijo el vértice inferior. Dos de los vértices del cuadrilátero ampliado son (-5,7) y (-1,1).",
+  "visual_description": "Cuadrilátero en el plano cartesiano con vértices en (-2,4), (2,4), (0,3) y (0,1). El vértice inferior se ubica en (0,1) y actúa como punto fijo para la transformación. El cuadrilátero tiene forma de 'V' invertida con base en los puntos (-2,4) y (2,4).",
+  "page": "https://www.invicto.com.co/simulacro-icfes/matematicas"
+},
+{
+  "id": "simulacro-icfes/matematicas/q20",
+  "type": "question",
+  "component": "matematicas",
+  "number": 20,
+  "context_id": "context_mat14",
+  "stem_text": "¿Cuáles son las coordenadas de los otros dos vértices?",
+  "choices": [
+    "(-1,5) y (3,7).",
+    "(5,-1) y (7,3).",
+    "(5,7) y (1,1).",
+    "(1,5) y (-5,-7)."
+  ],
+  "correct_choice": "(-1,5) y (3,7).",
+  "visual_description": "Usa context_mat14",
+  "explanation_expert": "Primero se traslada 1 unidad a la izquierda: (-2,4)→(-3,4), (2,4)→(1,4), (0,3)→(-1,3) y (0,1)→(-1,1). Luego se amplía al doble con centro fijo en (-1,1): P' = (-1,1) + 2(P - (-1,1)). Así, (-3,4)→(-5,7), (1,4)→(3,7), (-1,3)→(-1,5) y (-1,1) permanece. Dado que ya se dan (-5,7) y (-1,1), los otros dos vértices son (-1,5) y (3,7).",
+  "difficulty": "medium",
+  "tags": ["icfes", "matematicas", "transformaciones", "traslación", "dilatación", "coordenadas"],
+  "page": "https://www.invicto.com.co/simulacro-icfes/matematicas"
+}
+]

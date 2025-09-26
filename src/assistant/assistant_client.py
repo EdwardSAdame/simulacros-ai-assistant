@@ -5,6 +5,7 @@ from typing import List, Dict, Any
 from src.config.settings import get_openai_client
 from src.config.model_config import get_model_config
 from src.config.system_instructions import build_system_instructions
+from src.config.page_vectorstores import get_stores_for_page  # ✅ now only global + specific
 from src.utils.time_utils import get_current_time_info
 
 
@@ -79,7 +80,10 @@ def send_message_to_assistant(
     system_text = _build_runtime_signals(user_id=user_id, page=page, name=name, email=email)
     user_content = _to_responses_content(content_parts)
 
-    # 2) Call Responses API
+    # 2) Resolve vector stores for this page
+    vector_store_ids = get_stores_for_page(page)
+
+    # 3) Call Responses API with file_search tool
     resp = client.responses.create(
         model=cfg.model,
         temperature=cfg.temperature,
@@ -88,9 +92,14 @@ def send_message_to_assistant(
             {"role": "system", "content": [{"type": "input_text", "text": system_text}]},
             {"role": "user",   "content": user_content},
         ],
+        tools=[{
+            "type": "file_search",
+            "vector_store_ids": vector_store_ids,
+            "max_num_results": 6,
+        }],
     )
 
-    # 3) Extract text safely
+    # 4) Extract text safely
     text = getattr(resp, "output_text", None)
     if not text:
         try:

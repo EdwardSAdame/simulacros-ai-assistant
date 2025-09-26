@@ -1,0 +1,347 @@
+[
+  {
+    "id": "simulacro-icfes/sociales-y-cuidadanas/context_colon01",
+    "type": "context",
+    "title": "Cristóbal Colón: Carta a Rafael Sánchez",
+    "text": "A su regreso de América, que él creía era la costa de Asia, Cristóbal Colón escribió sus experiencias. En este fragmento de una carta que describe su primer viaje, habla sobre su llegada a La Española (actual Haití y República Dominicana). Los historiadores creen que Colón escribió esta carta para la lectura pública.\n\nCarta a Rafael Sánchez, tesorero del rey y la reina de España\n\nTreinta y tres días después de mi partida de Cádiz, llegué al Mar Índico, donde descubrí muchas islas densamente pobladas, de las que tomé posesión sin resistencia en el nombre de nuestro ilustre monarca, por medio de la proclamación pública con los estandartes desplegados. A la primera de estas islas le di el nombre del bendito Salvador –San Salvador–, confiando en que con su protección había llegado a ésta, así como a las otras islas; di a cada una de ellas un nombre […].\n\nLos habitantes de ambos sexos de esta isla y de todas las otras que he visto o de las cuales recibí información siempre van desnudos como cuando nacieron, a excepción de algunas mujeres, que se tapan con una hoja, una pequeña rama o un delantal de algodón que preparan para este propósito. Ninguno de ellos posee hierro ni armas, no están familiarizados con ellas y, de hecho, se muestran incompetentes al usarlas, no por deformidad alguna del cuerpo (ya que están bien formados), sino porque son tímidos y temerosos […]. Sin embargo, tan pronto como se ven a salvo dejan a un lado el miedo, son muy sencillos y honestos, y en exceso generosos con todo lo que tienen; ninguno de ellos se ha rehusado a dar lo que se le pida […]. Tampoco poseen objetos de gran valor, sino que suponen que sus cosas son insignificantes y se conforman con muy poco o con nada a cambio.\n\nNo obstante, prohibí que estos artículos de poco valor (como pedazos de platos, placas y vidrio, llaves o correas de piel) les fueran dados, aunque, si podían obtenerlos, se imaginaban que poseían las más hermosas chucherías del mundo […]. Por tanto, intercambiaban, como idiotas, algodón y oro por fragmentos de arcos, pedazos de vidrio, botellas y jarrones […].\n\nEn todas estas islas no existen diferencias de fisonomía, modales o lenguaje; es así que se entienden claramente entre sí, una circunstancia muy propicia para la realización de lo que yo creo sería el deseo principal de nuestro más sereno Rey: la conversión de estos pueblos a la fe sagrada de Cristo; a saber, por lo que puedo juzgar, están muy dispuestos y a favor de ella […].\n\nFinalmente, para expresar en pocas palabras el resumen completo de mi viaje, de mi rápido regreso y de las ventajas que se derivan de ello, prometo que con un poco de ayuda de parte de mis invencibles soberanos les procuraré tanto oro como necesiten e igual cantidad de especias y algodón […].\n\nDejemos que Cristo se regocije en la tierra como lo hace en el cielo ante la esperanza de la salvación de las almas de tantas naciones hasta ahora perdidas. Regocijémonos también con el pretexto de la exaltación de nuestra fe, así como con el de la acrecentada prosperidad, de la que no sólo España sino toda la cristiandad será partícipe.",
+    "visual_description": "Mapa mundial de Ptolomeo del siglo XV, con continentes representados de forma alargada y esquemática. Se observan Europa, Asia y África rodeados por mares en azul intenso, atravesados por líneas rojas de latitud y longitud. En los bordes del mapa aparecen figuras humanas soplando, que simbolizan los vientos.",
+    "page": "https://www.invicto.com.co/simulacro-icfes/sociales-y-cuidadanas"
+  },
+  {
+  "id": "simulacro-icfes/sociales-y-cuidadanas/q01",
+  "type": "question",
+  "component": "sociales-y-cuidadanas",
+  "number": 1,
+  "context_id": "context_colon01",
+  "stem_text": "¿Qué elementos en la carta de Colón sugieren que su mensaje estaba dirigido a una audiencia más amplia y no solo a la corte española?",
+  "choices": [
+    "Hace referencia tanto a la evangelización como al comercio, temas que interesaban tanto a la monarquía como a otros sectores de la sociedad.",
+    "Utiliza un lenguaje formal y técnico propio de documentos oficiales, lo que indica que estaba dirigido exclusivamente a la nobleza.",
+    "Describe los paisajes y costumbres indígenas con gran detalle, lo que sugiere que su intención era meramente etnográfica.",
+    "Se enfoca solo en describir los beneficios comerciales, sin mencionar la conversión religiosa."
+  ],
+  "correct_choice": "Hace referencia tanto a la evangelización como al comercio, temas que interesaban tanto a la monarquía como a otros sectores de la sociedad.",
+  "visual_description": "Usa context_colon01",
+  "explanation_expert": "La carta menciona tanto la posibilidad de obtener riquezas y productos comerciales como la conversión religiosa de los pueblos indígenas, lo que evidencia que Colón buscaba captar la atención de distintos grupos: la corona, los comerciantes y el clero.",
+  "difficulty": "medium",
+  "tags": ["icfes", "sociales y ciudadanas", "Colón", "conquista", "evangelización", "comercio"],
+  "page": "https://www.invicto.com.co/simulacro-icfes/sociales-y-cuidadanas"
+},
+{
+  "id": "simulacro-icfes/sociales-y-cuidadanas/q02",
+  "type": "question",
+  "component": "sociales-y-cuidadanas",
+  "number": 2,
+  "context_id": "context_colon01",
+  "stem_text": "¿Qué intención tiene Colón al enfatizar la supuesta docilidad y generosidad de los indígenas?",
+  "choices": [
+    "Presentarlos como pueblos fáciles de someter y evangelizar, justificando la colonización.",
+    "Mostrar admiración por su modo de vida simple y proponer su inclusión como ciudadanos españoles.",
+    "Advertir sobre su peligro latente, insinuando que su sumisión es una estrategia para ocultar su verdadera naturaleza.",
+    "Dibujar una imagen utópica del Nuevo Mundo, sugiriendo que los indígenas son superiores moralmente a los europeos."
+  ],
+  "correct_choice": "Presentarlos como pueblos fáciles de someter y evangelizar, justificando la colonización.",
+  "visual_description": "Usa context_colon01",
+  "explanation_expert": "Colón describe a los indígenas como dóciles, generosos y sin armas, con el fin de mostrar que eran pueblos fáciles de dominar y evangelizar. Este recurso buscaba legitimar la colonización y atraer el apoyo de la monarquía y del clero.",
+  "difficulty": "medium",
+  "tags": ["icfes", "sociales y ciudadanas", "Colón", "indígenas", "colonización", "evangelización"],
+  "page": "https://www.invicto.com.co/simulacro-icfes/sociales-y-cuidadanas"
+},
+{
+  "id": "simulacro-icfes/sociales-y-cuidadanas/q03",
+  "type": "question",
+  "component": "sociales-y-cuidadanas",
+  "number": 3,
+  "context_id": "context_colon01",
+  "stem_text": "¿Por qué Colón destaca la carencia de armas entre los indígenas en su carta?",
+  "choices": [
+    "Para justificar la necesidad de una conquista militar preventiva antes de que adquieran armamento europeo.",
+    "Para reforzar la idea de que son inofensivos y facilitar su sometimiento.",
+    "Para resaltar que su civilización es avanzada moralmente al no necesitar la guerra.",
+    "Para contrastarlos con los europeos y demostrar que su cultura es completamente opuesta."
+  ],
+  "correct_choice": "Para reforzar la idea de que son inofensivos y facilitar su sometimiento.",
+  "visual_description": "Usa context_colon01",
+  "explanation_expert": "Al subrayar que los indígenas carecen de armas y desconocen su uso, Colón buscaba mostrar que no representaban una amenaza y que serían fáciles de someter, lo que reforzaba la conveniencia de la colonización.",
+  "difficulty": "medium",
+  "tags": ["icfes", "sociales y ciudadanas", "Colón", "indígenas", "armas", "colonización"],
+  "page": "https://www.invicto.com.co/simulacro-icfes/sociales-y-cuidadanas"
+},
+{
+  "id": "simulacro-icfes/sociales-y-cuidadanas/q04",
+  "type": "question",
+  "component": "sociales-y-cuidadanas",
+  "number": 4,
+  "context_id": "context_colon01",
+  "stem_text": "¿Cómo se puede interpretar el uso de la palabra \"idiotas\" en la descripción del intercambio de bienes entre los indígenas y los europeos?",
+  "choices": [
+    "Es un insulto directo, reflejando su desprecio absoluto por la cultura indígena.",
+    "Lo usa irónicamente para criticar la codicia europea al explotar la ignorancia de los nativos.",
+    "Sugiere que los indígenas estaban fingiendo ignorancia para engañar a los europeos y obtener ventaja.",
+    "Colón los percibe como ingenuos y carentes de comprensión sobre el valor real de los objetos."
+  ],
+  "correct_choice": "Colón los percibe como ingenuos y carentes de comprensión sobre el valor real de los objetos.",
+  "visual_description": "Usa context_colon01",
+  "explanation_expert": "Al utilizar la palabra 'idiotas', Colón no busca insultar directamente, sino señalar que los indígenas no comprendían el valor comercial de los bienes. Esto reforzaba la idea de que eran pueblos fáciles de manipular e integrar en el sistema colonial.",
+  "difficulty": "medium",
+  "tags": ["icfes", "sociales y ciudadanas", "Colón", "intercambio", "indígenas", "economía colonial"],
+  "page": "https://www.invicto.com.co/simulacro-icfes/sociales-y-cuidadanas"
+},
+
+  {
+    "id": "simulacro-icfes/sociales-y-cuidadanas/context_milgram01",
+    "type": "context",
+    "title": "El Experimento de Milgram y la Obediencia a la Autoridad",
+    "text": "En 1961, el psicólogo social Stanley Milgram llevó a cabo un experimento en la Universidad de Yale para investigar hasta qué punto las personas están dispuestas a obedecer órdenes de una figura de autoridad, incluso si esto implica causar daño a otros. El estudio se inspiró en los juicios de Nuremberg, donde oficiales nazis justificaban sus crímenes argumentando que solo seguían órdenes. Milgram quería entender si la obediencia ciega a la autoridad era una característica común en los seres humanos.\n\nDiseño del experimento: Milgram reclutó a participantes a través de anuncios en periódicos, ofreciéndoles una compensación económica por participar en un estudio sobre \"memoria y aprendizaje\". Al llegar al laboratorio, los participantes eran recibidos por un experimentador con bata blanca (la figura de autoridad). Luego, se les presentaba a otro \"participante\", quien en realidad era un actor colaborador del experimento. Los verdaderos participantes fueron asignados siempre al rol de \"maestros\", mientras que el actor era el \"aprendiz\". Se les explicó que el aprendiz debía memorizar pares de palabras y que el maestro debía aplicar una descarga eléctrica cada vez que cometiera un error. Lo que los participantes no sabían era que las descargas eran falsas y que el actor solo simulaba sentir dolor.\n\nEl maestro se sentaba frente a un panel con interruptores de voltaje, que iban desde 15 hasta 450 voltios, con etiquetas como \"Peligro: descarga severa\" y \"XXX\". A medida que avanzaba el experimento, el aprendiz (actor) comenzaba a fingir dolor, gritar y pedir que lo liberaran. Si el participante dudaba en continuar aplicando descargas, el experimentador le decía frases como:\n\"El experimento requiere que continúe\".\n\"No tiene otra opción, debe continuar\".\n\"Es absolutamente esencial que siga adelante\".\n\nA pesar de los gritos y la aparente angustia del aprendiz, el 65% de los participantes llegó hasta la descarga máxima de 450 voltios, obedeciendo las órdenes del experimentador. La mayoría mostró señales de estrés, sudoración y nerviosismo, pero aun así continuaron.",
+    "visual_description": "Fotografía en blanco y negro del experimento de Milgram. Se observa a un hombre sentado en una silla, con electrodos atados a sus brazos, representando al 'aprendiz'. A su lado, dos hombres con bata blanca ajustan los cables y equipos, simbolizando la autoridad científica y el montaje experimental.",
+    "page": "https://www.invicto.com.co/simulacro-icfes/sociales-y-cuidadanas"
+  },
+  {
+  "id": "simulacro-icfes/sociales-y-cuidadanas/q06",
+  "type": "question",
+  "component": "sociales-y-cuidadanas",
+  "number": 6,
+  "context_id": "context_milgram01",
+  "stem_text": "¿Cuál fue el principal hallazgo del experimento de Milgram sobre la obediencia a la autoridad?",
+  "choices": [
+    "Que la mayoría de las personas se niega a obedecer órdenes que implican dañar a otros, priorizando su ética personal.",
+    "Que un alto porcentaje de personas está dispuesto a obedecer órdenes de una figura de autoridad incluso si esto implica causar daño a otros.",
+    "Que las personas tienden a desobedecer a la autoridad cuando se sienten presionadas socialmente por otros participantes.",
+    "Que la obediencia depende únicamente de la personalidad previa de los participantes y no del contexto del experimento."
+  ],
+  "correct_choice": "Que un alto porcentaje de personas está dispuesto a obedecer órdenes de una figura de autoridad incluso si esto implica causar daño a otros.",
+  "visual_description": "Usa context_milgram01",
+  "explanation_expert": "El experimento mostró que el 65% de los participantes llegó a aplicar la descarga máxima de 450 voltios, lo que evidenció que la mayoría de las personas tiende a obedecer a figuras de autoridad incluso en contra de sus principios morales.",
+  "difficulty": "medium",
+  "tags": ["icfes", "sociales y ciudadanas", "Milgram", "obediencia", "psicología social"],
+  "page": "https://www.invicto.com.co/simulacro-icfes/sociales-y-cuidadanas"
+},
+{
+  "id": "simulacro-icfes/sociales-y-cuidadanas/q07",
+  "type": "question",
+  "component": "sociales-y-cuidadanas",
+  "number": 7,
+  "context_id": "context_milgram01",
+  "stem_text": "¿Cuál de los siguientes factores aumentaba la obediencia en el experimento de Milgram?",
+  "choices": [
+    "La cercanía del experimentador y el uso de una bata blanca.",
+    "La certeza de que el aprendiz no sufría daño real.",
+    "El hecho de que los participantes podían consultar a otros antes de decidir.",
+    "La existencia de normas claras que prohibían causar daño."
+  ],
+  "correct_choice": "La cercanía del experimentador y el uso de una bata blanca.",
+  "visual_description": "Usa context_milgram01",
+  "explanation_expert": "Uno de los factores clave que incrementaba la obediencia era la presencia física del experimentador con bata blanca, símbolo de autoridad científica. Esto reforzaba la percepción de legitimidad y aumentaba la disposición de los participantes a obedecer.",
+  "difficulty": "medium",
+  "tags": ["icfes", "sociales y ciudadanas", "Milgram", "obediencia", "autoridad"],
+  "page": "https://www.invicto.com.co/simulacro-icfes/sociales-y-cuidadanas"
+},
+{
+  "id": "simulacro-icfes/sociales-y-cuidadanas/q08",
+  "type": "question",
+  "component": "sociales-y-cuidadanas",
+  "number": 8,
+  "context_id": "context_milgram01",
+  "stem_text": "¿Qué enseñanza clave dejó el experimento de Milgram?",
+  "choices": [
+    "La mayoría de las personas rechazan la obediencia ciega en situaciones de autoridad.",
+    "La obediencia es un comportamiento innato que no puede ser modificado.",
+    "La presión de la autoridad puede hacer que personas comunes cometan actos inmorales.",
+    "La gente solo sigue órdenes si recibe recompensas económicas."
+  ],
+  "correct_choice": "La presión de la autoridad puede hacer que personas comunes cometan actos inmorales.",
+  "visual_description": "Usa context_milgram01",
+  "explanation_expert": "El experimento demostró que bajo la presión de una figura de autoridad, personas comunes pueden llegar a realizar acciones que contradicen sus principios morales, evidenciando el poder de la obediencia ciega.",
+  "difficulty": "medium",
+  "tags": ["icfes", "sociales y ciudadanas", "Milgram", "obediencia", "autoridad", "ética"],
+  "page": "https://www.invicto.com.co/simulacro-icfes/sociales-y-cuidadanas"
+},
+{
+  "id": "simulacro-icfes/sociales-y-cuidadanas/q09",
+  "type": "question",
+  "component": "sociales-y-cuidadanas",
+  "number": 9,
+  "context_id": "context_milgram01",
+  "stem_text": "¿Por qué el experimento de Milgram generó preocupaciones éticas?",
+  "choices": [
+    "Porque engañó a los participantes y los sometió a un estrés psicológico intenso.",
+    "Porque los participantes realmente lastimaban al aprendiz con descargas eléctricas.",
+    "Porque Milgram obligó a los participantes a seguir el experimento contra su voluntad.",
+    "Porque el experimento no tenía ninguna aplicación en la vida real."
+  ],
+  "correct_choice": "Porque engañó a los participantes y los sometió a un estrés psicológico intenso.",
+  "visual_description": "Usa context_milgram01",
+  "explanation_expert": "El estudio fue cuestionado éticamente porque recurrió al engaño: los participantes creían que estaban causando dolor real, lo que les generó altos niveles de ansiedad y estrés emocional. Esto abrió debates sobre los límites de la investigación psicológica.",
+  "difficulty": "medium",
+  "tags": ["icfes", "sociales y ciudadanas", "Milgram", "ética", "psicología social"],
+  "page": "https://www.invicto.com.co/simulacro-icfes/sociales-y-cuidadanas"
+},
+{
+  "id": "simulacro-icfes/sociales-y-cuidadanas/q10",
+  "type": "question",
+  "component": "sociales-y-cuidadanas",
+  "number": 10,
+  "context_id": "context_milgram01",
+  "stem_text": "¿Cómo se relaciona el experimento de Milgram con el análisis de perspectivas en problemas sociales?",
+  "choices": [
+    "Muestra cómo las personas siempre actúan con autonomía y racionalidad.",
+    "Explica cómo las estructuras de poder pueden influir en el comportamiento individual.",
+    "Refleja que las figuras de autoridad siempre toman decisiones correctas.",
+    "Prueba que la obediencia no tiene relación con el contexto social."
+  ],
+  "correct_choice": "Explica cómo las estructuras de poder pueden influir en el comportamiento individual.",
+  "visual_description": "Usa context_milgram01",
+  "explanation_expert": "El experimento de Milgram demuestra que las relaciones de poder y autoridad pueden condicionar el comportamiento individual, incluso llevándolo a actuar en contra de su conciencia moral. Esto es clave para comprender fenómenos sociales y políticos de obediencia colectiva.",
+  "difficulty": "medium",
+  "tags": ["icfes", "sociales y ciudadanas", "Milgram", "obediencia", "poder", "problemas sociales"],
+  "page": "https://www.invicto.com.co/simulacro-icfes/sociales-y-cuidadanas"
+},
+{
+  "id": "simulacro-icfes/sociales-y-cuidadanas/q11",
+  "type": "question",
+  "component": "sociales-y-cuidadanas",
+  "number": 11,
+  "context_id": "context_milgram01",
+  "stem_text": "¿Cómo se relaciona el experimento de Milgram con el uso de drones militares en la guerra en Ucrania-Rusia?",
+  "choices": [
+    "En ambos casos, las personas actúan libremente sin influencia de la autoridad.",
+    "Ambos casos muestran cómo la distancia física reduce la percepción de responsabilidad.",
+    "Los pilotos de drones siempre desobedecen órdenes si sienten culpa.",
+    "Milgram y la guerra moderna no tienen relación alguna."
+  ],
+  "correct_choice": "Ambos casos muestran cómo la distancia física reduce la percepción de responsabilidad.",
+  "visual_description": "Usa context_milgram01",
+  "explanation_expert": "El experimento de Milgram evidenció que aumentar la distancia entre quien obedece y quien sufre las consecuencias facilita la obediencia ciega. De forma análoga, el uso de drones en la guerra reduce la percepción directa de daño, diluyendo la responsabilidad moral de los operadores.",
+  "difficulty": "hard",
+  "tags": ["icfes", "sociales y ciudadanas", "Milgram", "obediencia", "drones", "Ucrania", "responsabilidad"],
+  "page": "https://www.invicto.com.co/simulacro-icfes/sociales-y-cuidadanas"
+},
+{
+  "id": "simulacro-icfes/sociales-y-cuidadanas/context_responsabilidad01",
+  "type": "context",
+  "title": "La Difusión de la Responsabilidad y su Impacto en la Conducta Humana",
+  "text": "La difusión de la responsabilidad es un fenómeno psicológico y social que ocurre cuando la presencia de múltiples personas en una situación de emergencia o toma de decisiones disminuye la sensación de responsabilidad individual. En otras palabras, mientras más personas estén presentes, menos probable es que alguien intervenga o asuma la responsabilidad de actuar.\n\nEste concepto fue popularizado a raíz del caso de Kitty Genovese en 1964, cuando una joven fue asesinada en Nueva York mientras 38 personas presenciaban el crimen sin intervenir ni llamar a la policía. Investigaciones posteriores mostraron que ninguno de los testigos sintió la responsabilidad individual de actuar, pues asumieron que \"alguien más lo haría\".\n\nLos psicólogos John Darley y Bibb Latané realizaron experimentos para estudiar este fenómeno. En uno de ellos, colocaron a un participante en una habitación donde escuchaba lo que parecía ser una persona sufriendo un ataque epiléptico. Cuando el participante creía estar solo con la víctima, el 85% buscó ayuda rápidamente. Sin embargo, cuando el participante pensaba que había más personas presentes, solo el 31% intentó ayudar, pues asumían que alguien más lo haría.\n\nFactores que influyen en la difusión de la responsabilidad:\n- Tamaño del grupo → Mientras más personas haya, menos probabilidad de que alguien actúe.\n- Ambigüedad de la situación → Si no es claro que se necesita ayuda, las personas dudan en actuar.\n- Presión social → La gente observa cómo reaccionan los demás antes de decidir qué hacer.\n- Percepción de competencia → Si alguien cree que otra persona está más capacitada para ayudar, se abstendrá de intervenir.\n\nEste fenómeno tiene profundas implicaciones en la vida cotidiana, desde la falta de reacción ante emergencias hasta la inacción frente a problemas sociales. Comprender la difusión de la responsabilidad es clave para fomentar la acción colectiva y el pensamiento crítico.",
+  "visual_description": "Fotografía en color de una joven con vestido amarillo claro, de pie en un jardín junto a una cerca de madera y una maceta sobre un muro de ladrillos. Se trata de Kitty Genovese, cuyo caso en 1964 popularizó el estudio de la difusión de la responsabilidad.",
+  "page": "https://www.invicto.com.co/simulacro-icfes/sociales-y-cuidadanas"
+},
+{
+  "id": "simulacro-icfes/sociales-y-cuidadanas/q12",
+  "type": "question",
+  "component": "sociales-y-cuidadanas",
+  "number": 12,
+  "context_id": "context_responsabilidad01",
+  "stem_text": "¿Cómo se define la difusión de la responsabilidad?",
+  "choices": [
+    "Es la tendencia a actuar con más urgencia en grupos grandes.",
+    "Es la reducción de la responsabilidad individual cuando hay más personas presentes.",
+    "Es el fenómeno donde las personas asumen automáticamente la responsabilidad en situaciones de emergencia.",
+    "Es el impulso de actuar inmediatamente sin importar cuántas personas estén presentes."
+  ],
+  "correct_choice": "Es la reducción de la responsabilidad individual cuando hay más personas presentes.",
+  "visual_description": "Usa context_responsabilidad01",
+  "explanation_expert": "La difusión de la responsabilidad se refiere a que, mientras más personas estén presentes en una situación, menor es la probabilidad de que alguien intervenga, ya que cada individuo siente que la responsabilidad recae en los demás.",
+  "difficulty": "easy",
+  "tags": ["icfes", "sociales y ciudadanas", "difusión de la responsabilidad", "psicología social"],
+  "page": "https://www.invicto.com.co/simulacro-icfes/sociales-y-cuidadanas"
+},
+{
+  "id": "simulacro-icfes/sociales-y-cuidadanas/q13",
+  "type": "question",
+  "component": "sociales-y-cuidadanas",
+  "number": 13,
+  "context_id": "context_responsabilidad01",
+  "stem_text": "¿Qué caso real ayudó a popularizar el estudio de la difusión de la responsabilidad?",
+  "choices": [
+    "El experimento de obediencia de Milgram.",
+    "El asesinato de Kitty Genovese en 1964.",
+    "El accidente nuclear de Chernóbil.",
+    "La crisis financiera de 2008."
+  ],
+  "correct_choice": "El asesinato de Kitty Genovese en 1964.",
+  "visual_description": "Usa context_responsabilidad01",
+  "explanation_expert": "El asesinato de Kitty Genovese en 1964, presenciado por 38 testigos que no intervinieron ni llamaron a la policía, puso en evidencia cómo la responsabilidad individual se diluye en grupos. Este caso inspiró las investigaciones de Darley y Latané sobre el fenómeno.",
+  "difficulty": "easy",
+  "tags": ["icfes", "sociales y ciudadanas", "difusión de la responsabilidad", "Kitty Genovese", "psicología social"],
+  "page": "https://www.invicto.com.co/simulacro-icfes/sociales-y-cuidadanas"
+},
+{
+  "id": "simulacro-icfes/sociales-y-cuidadanas/q14",
+  "type": "question",
+  "component": "sociales-y-ciudadanas",
+  "number": 14,
+  "context_id": "context_responsabilidad01",
+  "stem_text": "Según los estudios de Darley y Latané, ¿qué aumenta la probabilidad de que alguien ayude en una emergencia?",
+  "choices": [
+    "Creer que hay más personas presentes.",
+    "Ser parte de un grupo grande y observar pasividad en los demás.",
+    "Percibir que uno es el único responsable de actuar.",
+    "Ser consciente de la difusión de la responsabilidad."
+  ],
+  "correct_choice": "Percibir que uno es el único responsable de actuar.",
+  "visual_description": "Usa context_responsabilidad01",
+  "explanation_expert": "Darley y Latané demostraron que cuando una persona percibe que es la única responsable de ayudar, la probabilidad de intervención aumenta significativamente. En cambio, cuando cree que otros también pueden actuar, la responsabilidad se diluye.",
+  "difficulty": "medium",
+  "tags": ["icfes", "sociales y ciudadanas", "difusión de la responsabilidad", "Darley", "Latané", "psicología social"],
+  "page": "https://www.invicto.com.co/simulacro-icfes/sociales-y-cuidadanas"
+},
+{
+  "id": "simulacro-icfes/sociales-y-cuidadanas/q15",
+  "type": "question",
+  "component": "sociales-y-ciudadanas",
+  "number": 15,
+  "context_id": "context_responsabilidad01",
+  "stem_text": "¿Cuál de los siguientes factores contribuye a la difusión de la responsabilidad?",
+  "choices": [
+    "La ambigüedad de la situación.",
+    "La ausencia de una figura de autoridad.",
+    "La existencia de normas que obligan a ayudar.",
+    "La falta de conocimiento sobre primeros auxilios."
+  ],
+  "correct_choice": "La ambigüedad de la situación.",
+  "visual_description": "Usa context_responsabilidad01",
+  "explanation_expert": "La ambigüedad de la situación reduce la claridad sobre si realmente se requiere ayuda, lo que genera dudas y facilita que las personas asuman que otros intervendrán, aumentando la difusión de la responsabilidad.",
+  "difficulty": "medium",
+  "tags": ["icfes", "sociales y ciudadanas", "difusión de la responsabilidad", "psicología social", "ambigüedad"],
+  "page": "https://www.invicto.com.co/simulacro-icfes/sociales-y-cuidadanas"
+},
+{
+  "id": "simulacro-icfes/sociales-y-cuidadanas/q16",
+  "type": "question",
+  "component": "sociales-y-ciudadanas",
+  "number": 16,
+  "context_id": "context_responsabilidad01",
+  "stem_text": "¿Cómo se relaciona la difusión de la responsabilidad con el pensamiento social?",
+  "choices": [
+    "Demuestra que la gente siempre actúa racionalmente en situaciones de emergencia.",
+    "Explica cómo la inacción colectiva puede afectar la resolución de problemas sociales.",
+    "Confirma que las sociedades con más personas son más eficientes para resolver problemas.",
+    "Refleja que la cooperación es automática en situaciones de crisis."
+  ],
+  "correct_choice": "Explica cómo la inacción colectiva puede afectar la resolución de problemas sociales.",
+  "visual_description": "Usa context_responsabilidad01",
+  "explanation_expert": "La difusión de la responsabilidad revela cómo la inacción de los individuos en un grupo puede obstaculizar la resolución de problemas colectivos, lo que constituye un tema central del pensamiento social y la psicología de masas.",
+  "difficulty": "medium",
+  "tags": ["icfes", "sociales y ciudadanas", "difusión de la responsabilidad", "pensamiento social", "psicología colectiva"],
+  "page": "https://www.invicto.com.co/simulacro-icfes/sociales-y-cuidadanas"
+},
+{
+  "id": "simulacro-icfes/sociales-y-cuidadanas/q17",
+  "type": "question",
+  "component": "sociales-y-ciudadanas",
+  "number": 17,
+  "context_id": "context_responsabilidad01",
+  "stem_text": "Si necesitas ayuda en una emergencia, ¿cuál es la mejor estrategia para evitar la difusión de la responsabilidad?",
+  "choices": [
+    "Pedir ayuda directamente a una persona específica en lugar de un grupo.",
+    "Enviar un mensaje masivo y esperar a que alguien responda.",
+    "No pedir ayuda, porque es poco probable que alguien intervenga.",
+    "Depender solo de la autoridad para recibir asistencia."
+  ],
+  "correct_choice": "Pedir ayuda directamente a una persona específica en lugar de un grupo.",
+  "visual_description": "Usa context_responsabilidad01",
+  "explanation_expert": "La investigación muestra que asignar la responsabilidad a una persona en particular reduce la posibilidad de que ésta se diluya en el grupo, aumentando la probabilidad de recibir ayuda en una emergencia.",
+  "difficulty": "medium",
+  "tags": ["icfes", "sociales y ciudadanas", "difusión de la responsabilidad", "emergencias", "psicología social"],
+  "page": "https://www.invicto.com.co/simulacro-icfes/sociales-y-cuidadanas"
+}
+]

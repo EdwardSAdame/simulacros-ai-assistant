@@ -1,0 +1,77 @@
+{
+  "exam": "UNAL",
+  "name": "Examen de Admisión - Universidad Nacional de Colombia",
+  "language": "es-CO",
+  "duration_minutes": 210,
+  "total_questions": 120,
+  "components": [
+    {
+      "key": "analisis_textual",
+      "name": "Análisis textual",
+      "questions": 25,
+      "summary": "Comprensión e interpretación de textos referenciales y poético-literarios en niveles literal, inferencial y crítico-intertextual.",
+      "areas": [
+        "Textos referenciales (ciencias naturales, ciencias humanas, tecnología y artes)",
+        "Textos poético-literarios (poemas, cuentos, fragmentos de novelas, ensayos, crónicas)"
+      ],
+      "skills": [
+        "Comprensión literal",
+        "Comprensión inferencial",
+        "Comprensión crítico-intertextual"
+      ]
+    },
+    {
+      "key": "matematicas",
+      "name": "Matemáticas",
+      "questions": 25,
+      "summary": "Resolución de problemas en contextos variados que movilizan pensamiento numérico, espacial-métrico, aleatorio y variacional.",
+      "areas": [
+        "Pensamiento numérico",
+        "Pensamiento espacial y métrico",
+        "Pensamiento aleatorio",
+        "Pensamiento variacional"
+      ]
+    },
+    {
+      "key": "ciencias_naturales",
+      "name": "Ciencias naturales",
+      "questions": 25,
+      "areas": ["Física", "Química", "Biología"],
+      "summary": "Problemas contextualizados con apoyo de gráficas y tablas para reconocer, interpretar y aplicar conceptos básicos.",
+      "skills": [
+        "Reconocimiento de conceptos básicos",
+        "Interpretación de gráficos y tablas",
+        "Análisis, síntesis y deducción"
+      ]
+    },
+    {
+      "key": "ciencias_sociales",
+      "name": "Ciencias sociales",
+      "questions": 25,
+      "areas": ["Geografía", "Historia", "Filosofía"],
+      "summary": "Análisis e interpretación de procesos y conceptos sociales en distintos contextos."
+    },
+    {
+      "key": "analisis_imagen",
+      "name": "Análisis de imagen",
+      "questions": 20,
+      "summary": "Reconocimiento de formas, movimientos/transformaciones e intencionalidades; relaciones de causalidad lógica y asociación semántica entre imagen y palabra.",
+      "areas": [
+        "Reconocimiento de constancia de formas",
+        "Movimientos y transformaciones",
+        "Intencionalidades de la imagen",
+        "Relaciones de causalidad lógica",
+        "Asociación semántica entre imagen y palabra"
+      ]
+    }
+  ],
+  "scoring": {
+    "model": "Rasch (Teoría de Respuesta al Ítem)",
+    "component_scale": { "mean": 10, "sd": 1 },
+    "global_scale": { "mean": 500, "sd": 100 },
+    "notes": "Lectura óptica de hojas de respuesta; el puntaje global estandarizado se usa en el proceso de admisión."
+  },
+  "related_files": {
+    "dates_file": "unal_dates.json"
+  }
+}

@@ -1,0 +1,390 @@
+[
+  {
+    "id": "simulacro-unal/tematica-comun/context_ovidio01",
+    "type": "context",
+    "title": "Ovidio y el Arte de amar: La polémica de un poeta",
+    "text": "Ovidio se ha denominado el último gran poeta de la época dorada de la literatura en tiempos de Augusto. Una de sus obras célebres fue el Arte de amar, una guía para la seducción de la mujer. Desafortunadamente para Ovidio, el escrito apareció en un momento en el que Augusto estaba ansioso por mejorar la moral de la clase alta romana. El emperador consideró el poema ofensivo y Ovidio pronto se vio en el exilio.\\n\\nOvidio, Arte de amar\\n\\nAhora te enseñaré los hábiles recursos que necesitas poner en juego para vencer a la que te seduzca. Quienesquiera que sean, de esta o de la otra tierra, présteme todos dócil atención, y tú, pueblo, oye mi palabra, pues me dispongo a cumplir lo prometido.\\n\\nPrimeramente has de abrigar la certeza de que todas pueden ser conquistadas, y las conquistarás preparando astuto las redes. Antes cesarán de cantar los pájaros en primavera, en estío las cigarras [...] que una joven rechace las solícitas pretensiones de su amador.\\n\\nAnte todo haz por conocer a la criada de la joven que intentas seducir, para que te facilite el primer acceso, y averigua si obtiene la confianza de su señora y es la confidente de sus secretos placeres; inclínala en tu favor con las promesas y abláudala con los ruegos; como ella quiera, conseguirás fácilmente tus deseos. [...]\\n\\nExplota el camino por medio de la cera que barniza las elegantes tablillas, y que ella sea la primer anunciadora de la disposición de tu ánimo, que ella le diga tus ternuras con las expresiones que usan los amantes [...] No economices el prometer, que al fin no arruina a nadie, y todo el mundo puede ser rico en promesas. [...] Si no recibe tu carta y la devuelve sin leerla, confía en que la leerá más adelante y permanece firme en tu propósito. [...]\\n\\nTampoco te detengas demasiado en rizarte el cabello con el hierro [...] y tanto éste como la barba entrégalos a una hábil mano. No lleves largas las uñas, que han de estar siempre limpias, ni menos asomen los pelos por las ventanas de tu nariz, ni te huela mal la boca, recordando el fétido olor del macho cabrío. [...]\\n\\nCuando asistieres a un festín en que abunden los dones de Baco, si una muchacha que te atrae se coloca cerca de ti en el lecho, ruega a este padre de la alegría, cuyos misterios se celebran por la noche, que los vapores del vino no lleguen a trastornar tu cabeza. Allí te será permitido dirigir a tu bella insinuantes discursos con palabras veladas que no escaparán a su perspicacia [...]\\n\\nEsfuérzate por apoderarte de su albedrío con discretas lisonjas, como el arroyo filtra sus claras ondas en las riberas que lo dominan. Prodiga sin vacilación tus alabanzas a la belleza de su rostro, a la profusión de sus cabellos, a sus finos dedos y su pie diminuto [...] También son provechosas las lágrimas, capaces de ablandar al diamante: si te es posible, que vea húmedas tus mejillas, y si te faltan las lágrimas, porque no siempre acuden al tenor de nuestros deseos, restriégate los ojos con los dedos mojados.\\n\\nFuente: Salinas, Germán (trad.). (1917). Obras de Ovidio. Los poemas eróticos de Ovidio (pp. 191 y ss.). Madrid: Librería de los Sucesores de Hernando.",
+    "visual_description": "Pintura 'Aphrodite' de Briton Rivière, que representa a una figura femenina vestida en tonos rojos, rodeada por leones y lobos en un bosque, con un ave blanca volando sobre ella.",
+    "page": "https://www.invicto.com.co/simulacro-unal/tematica-comun"
+  },
+  {
+  "id": "simulacro-unal/tematica-comun/q01",
+  "type": "question",
+  "component": "tematica-comun",
+  "number": 1,
+  "context_id": "context_ovidio01",
+  "stem_text": "¿Cuáles eran los principios del amor de Ovidio? ¿Por qué cree que Augusto encontró el *Arte de amar* tan ofensivo?",
+  "choices": [
+    "Ovidio promovía la conquista astuta y la manipulación emocional de las mujeres.",
+    "Ovidio valoraba la sinceridad y la transparencia en las relaciones amorosas.",
+    "Ovidio aconsejaba a los hombres evitar cualquier forma de engaño en el amor.",
+    "Ovidio creía que el amor debía basarse en el respeto mutuo y la honestidad."
+  ],
+  "correct_choice": "Ovidio promovía la conquista astuta y la manipulación emocional de las mujeres.",
+  "visual_description": "Usa context_ovidio01",
+  "explanation_expert": "El *Arte de amar* presentaba estrategias para la seducción que incluían manipulación y tácticas calculadas, lo cual chocaba con la política moralizante de Augusto. El emperador lo consideró un texto peligroso porque contradecía su intento de imponer disciplina y valores tradicionales en la aristocracia romana.",
+  "difficulty": "medium",
+  "tags": ["unal", "tematica-comun", "Ovidio", "Arte de amar", "Roma", "Augusto", "literatura"],
+  "page": "https://www.invicto.com.co/simulacro-unal/tematica-comun"
+},
+{
+  "id": "simulacro-unal/tematica-comun/q02",
+  "type": "question",
+  "component": "tematica-comun",
+  "number": 2,
+  "context_id": "context_ovidio01",
+  "stem_text": "¿Qué elementos del *Arte de amar* podrían haber sido vistos como una amenaza para las reformas morales de Augusto?",
+  "choices": [
+    "La promoción de la libertad individual en el amor, desafiando las normas sociales.",
+    "El fomento del engaño y la manipulación en las relaciones amorosas.",
+    "La defensa de la igualdad de género en las relaciones amorosas.",
+    "La crítica abierta a las políticas de Augusto en relación con la moral pública."
+  ],
+  "correct_choice": "El fomento del engaño y la manipulación en las relaciones amorosas.",
+  "visual_description": "Usa context_ovidio01",
+  "explanation_expert": "El *Arte de amar* proponía prácticas de seducción basadas en el engaño y la manipulación, lo que iba en contra del ideal moralizador de Augusto. Estas recomendaciones resultaban una amenaza para las reformas que buscaban imponer disciplina y virtudes tradicionales en la sociedad romana.",
+  "difficulty": "medium",
+  "tags": ["unal", "tematica-comun", "Ovidio", "Arte de amar", "Roma", "Augusto", "literatura"],
+  "page": "https://www.invicto.com.co/simulacro-unal/tematica-comun"
+},
+{
+  "id": "simulacro-unal/tematica-comun/context_vesubio01",
+  "type": "context",
+  "title": "La erupción del Monte Vesubio: Una tragedia narrada por Plinio el Joven",
+  "text": "Plinio el Joven escribió una carta al historiador romano Tácito donde describía la muerte de su tío, Plinio el Viejo, como resultado de la erupción del Monte Vesubio. Plinio el Viejo era el comandante de una flota en Miseno. Cuando ocurrió la erupción, su curiosidad lo llevó a separarse de su flota y dirigirse al lugar de los hechos. Tocó tierra en Estabia, donde murió a causa de los gases tóxicos.\\n\\nCarta de Plinio a su amigo Tácito\\n\\nMe pides te refiera exactamente la muerte de mi tío, para instruir tú de ello a la posteridad. Te lo agradezco [...] Aunque pereció en una desgracia que desoló hermosos países, y aunque su pérdida, causada por accidente memorable, que le fue común con ciudades y pueblos enteros, debe eternizar su memoria.\\n\\nSe encontraba en Miseno, donde mandaba la flota. Era el nueve de las calendas de septiembre [24 de agosto], cerca de la hora séptima, cuando le advirtió mi madre que se descubría una nube de magnitud y forma extraordinarias. [...] Se levantó y subió a un punto desde donde podía observar bien aquel prodigio. Difícil era distinguir de qué montaña brotaba aquella nube; después se supo que del monte Vesubio. La nube tenía figura de árbol, pareciéndose a un pino más que a otro cualquiera, porque después de elevarse mucho en forma de tronco, se extendía a manera de rama: creo que un viento subterráneo la impulsaba enérgicamente y la sostenía, y que su impulso amenguase poco a poco, sea que le hiciese perder a su propio peso, se la veía dilatarse y extenderse, apareciendo en tanto blanca, en tanto negruzca, en tanto de colores diferentes, según que se encontrase más recargada de ceniza o de tierra. Este prodigio sorprendió a mi tío, que era muy sabio, y lo creyó digno de ser examinado de cerca. Dispuso en seguida que preparasen su nave [...].\\n\\n[Incapaz de ir más lejos por mar, tocó tierra en Estabia.]\\n\\nSin embargo, se veían brillar en muchos puntos del monte Vesubio grandes llamas y resplandores, cuya intensidad aumentaba las tinieblas. Para tranquilizar mi tío a los que le acompañaban, les dijo que lo que veían arder eran caseríos abandonados por los temerosos campesinos y que habían quedado sin auxilio. [...].\\n\\nCelebraron consejo y deliberaron si se encerrarían en la casa o si marcharían al campo, porque las casas estaban tan quebrantadas por los frecuentes terremotos que parecían arrancadas de sus cimientos, y lanzadas en tanto a un lado, en tanto a otro, y después colocadas de nuevo en su puesto. Fuera de la ciudad era temible la caída de piedras, aunque ligeras y desecadas por el fuego. Entre estos dos peligros, optaron por el campo. En los de su comitiva, un temor venció al otro; en él la razón más fuerte dominó a la más débil. Salieron, pues, y se cubrieron la cabeza con almohadas atadas con pañuelos, única precaución que tomaron contra lo que caía.\\n\\nEl día despuntaba por otro lado, pero en el paraje donde se encontraban continuaba una oscuridad la más densa y espantosa de todas, apenas interrumpida por la luz de multitud de relámpagos y de otros resplandores. Consideraron conveniente acercarse a la playa y examinar de cerca lo que el mar permitiría intentar, pero lo encontraron muy levantado todavía y agitado por viento contrario. Mi tío, habiendo pedido mil y algo de bebidas, se tendió sobre un manto que hizo extender, pero enseguida pusieron a todos en fuga llamas que parecían más grandes y de olor que anunciaba su proximidad. Se levantó, apoyado en dos criados, y en el momento mismo cayó muerto. Creo que le sofocó la humareda demasiado densa, y esto con tanta mayor facilidad cuanto que tenía el pecho delicado y frecuentemente difícil la respiración.\\n\\nCuando comenzó a volver la luz (y esto sólo fue tres días después), se encontró en el mismo punto su cadáver entero, cubierto con la misma ropa que llevaba al morir, y más en la posición de hombre que descansa que en la de muerto.",
+  "visual_description": "Grabado histórico titulado 'Plinio il giovane sull’eruzione del Vesuvio', que muestra el Monte Vesubio en erupción con columnas de humo y ceniza sobre la bahía de Nápoles, acompañado de barcos en el mar y ciudades en primer plano.",
+  "page": "https://www.invicto.com.co/simulacro-unal/tematica-comun"
+},
+{
+  "id": "simulacro-unal/tematica-comun/q03",
+  "type": "question",
+  "component": "tematica-comun",
+  "number": 3,
+  "context_id": "context_vesubio01",
+  "stem_text": "¿Qué aspectos del carácter de Plinio el Viejo se pueden inferir de su reacción ante la erupción del Vesubio?",
+  "choices": [
+    "Era un hombre curioso y valiente, dispuesto a arriesgar su vida por el conocimiento.",
+    "Era imprudente, ya que subestimó el peligro de la situación.",
+    "Era obediente a las órdenes, siguiendo su deber militar sin cuestionar los riesgos.",
+    "Era indiferente al peligro, mostrando una falta de preocupación por su seguridad."
+  ],
+  "correct_choice": "Era un hombre curioso y valiente, dispuesto a arriesgar su vida por el conocimiento.",
+  "visual_description": "Usa context_vesubio01",
+  "explanation_expert": "La carta de Plinio el Joven describe a su tío como un hombre que, movido por la curiosidad científica, decidió acercarse al Vesubio para observar el fenómeno. Su reacción evidencia valor y un compromiso con el conocimiento, aunque lo llevó a arriesgar su vida.",
+  "difficulty": "medium",
+  "tags": ["unal", "tematica-comun", "Plinio el Viejo", "Vesubio", "curiosidad científica", "valentía", "Roma"],
+  "page": "https://www.invicto.com.co/simulacro-unal/tematica-comun"
+},
+{
+  "id": "simulacro-unal/tematica-comun/q04",
+  "type": "question",
+  "component": "tematica-comun",
+  "number": 4,
+  "context_id": "context_vesubio01",
+  "stem_text": "¿Qué efectos emocionales crees que tuvo la descripción de la muerte de su tío en Plinio el Joven?",
+  "choices": [
+    "Orgullo por el valor demostrado por su tío en una situación tan peligrosa.",
+    "Tristeza profunda por la pérdida de un ser querido en circunstancias tan terribles.",
+    "Resignación ante la inevitabilidad de la muerte, especialmente en tiempos de crisis.",
+    "Una mezcla de orgullo y tristeza, apreciando el valor de su tío pero lamentando su pérdida."
+  ],
+  "correct_choice": "Una mezcla de orgullo y tristeza, apreciando el valor de su tío pero lamentando su pérdida.",
+  "visual_description": "Usa context_vesubio01",
+  "explanation_expert": "La carta de Plinio el Joven transmite tanto orgullo por la valentía de su tío como tristeza por su muerte. Su relato equilibra la admiración hacia Plinio el Viejo con el dolor personal por haber perdido a un familiar cercano en un desastre natural.",
+  "difficulty": "medium",
+  "tags": ["unal", "tematica-comun", "Plinio el Joven", "Plinio el Viejo", "Vesubio", "emociones", "Roma"],
+  "page": "https://www.invicto.com.co/simulacro-unal/tematica-comun"
+},
+{
+  "id": "simulacro-unal/tematica-comun/q05",
+  "type": "question",
+  "component": "tematica-comun",
+  "number": 5,
+  "context_id": "context_vesubio01",
+  "stem_text": "Describe la secuencia de eventos que llevaron a la muerte de Plinio el Viejo según lo narrado en la carta.",
+  "choices": [
+    "Plinio decidió investigar la nube, se acercó al Vesubio, pero murió debido a los gases tóxicos y el colapso de las estructuras en Estabia.",
+    "Plinio partió de Miseno, fue atrapado por la erupción en alta mar y murió debido al colapso de su nave.",
+    "Plinio observó la nube desde Miseno, decidió no acercarse, pero murió en su hogar a causa del humo que llegó hasta allí.",
+    "Plinio intentó evacuar a las personas de Estabia, pero fue aplastado por una lluvia de piedras durante la erupción."
+  ],
+  "correct_choice": "Plinio decidió investigar la nube, se acercó al Vesubio, pero murió debido a los gases tóxicos y el colapso de las estructuras en Estabia.",
+  "visual_description": "Usa context_vesubio01",
+  "explanation_expert": "Plinio el Viejo, movido por su interés en estudiar el fenómeno, decidió acercarse al Vesubio. Al llegar a Estabia, fue víctima de los gases tóxicos liberados por la erupción, lo que provocó su muerte. El relato refleja cómo su curiosidad científica lo llevó a arriesgarse hasta quedar atrapado en la tragedia.",
+  "difficulty": "medium",
+  "tags": ["unal", "tematica-comun", "Plinio el Viejo", "Vesubio", "erupción", "Roma", "historia"],
+  "page": "https://www.invicto.com.co/simulacro-unal/tematica-comun"
+},
+{
+  "id": "simulacro-unal/tematica-comun/context_ordalia01",
+  "type": "context",
+  "title": "Ley consuetudinaria germana: la ordalía",
+  "text": "Según la ley consuetudinaria germana, la ordalía era el medio por el cual los acusados podían ser absueltos. Aunque tuvo varias formas, todas involucraban el sufrimiento físico, como sostener un hierro candente, por ejemplo. Se creía que Dios protegería a los inocentes y les permitiría salir del juicio sin sufrir daño. El relato del siglo VI de Gregorio de Tours describe una ordalía de agua caliente.\\n\\nGregorio de Tours, Una ordalía de agua caliente (ca. 580)\\n\\nUn sacerdote arriano, que discutía con un diácono sobre nuestra religión, hizo escandalosas declaraciones contra el Hijo de Dios y el Espíritu Santo, tal y como es el hábito de esa secta (los arrianos). Pero cuando el diácono le hubo hablado por un largo tiempo sobre lo irrefutable de nuestra fe, el hereje, cegado por la niebla de la infidelidad, continuaba rechazando la verdad [...] y a continuación, le dijo al diácono: \\\"¿Para qué cansarnos con discusiones necias? Dejemos que los actos nos demuestren la verdad; pongamos agua a hervir en un caldero y que alguien ponga su anillo dentro. Que aquel que logre sacarlo del líquido hirviente sea considerado portador de la verdad y después dejemos que el otro sea convertido al conocimiento de la verdad. Y también debes comprender, oh hereje, que nuestra religión ha de cumplir las condiciones con la ayuda del Espíritu Santo. Tú habrás de confesar que no hay discordancia, ni disimulado alguna en la Santísima Trinidad (creencia en que Dios, Jesús, hijo de Dios, y el Espíritu Santo, son tres manifestaciones de la misma y única deidad).\\\" El hereje sintió la proposición y quedaron en verse a la mañana siguiente para el juicio. Pero la fe inquebrantable, bajo la cual el diácono había propuesto el juicio, comenzó a flaquear en él al recordar su semana. Se levantó al alba y untó su brazo con aceite y lo frotó con ungüento. Por si acaso, visitó los lugares sagrados y elevó plegarias al Señor [...].\\n\\nA la hora tercia se encontraron en el mercado. La gente se acercó para ver el juicio. Se encendió un fuego y el caldero fue puesto con agua dentro al fuego, en donde se bogaba muy caliente. El anillo fue arrojado al agua hirviente. El diácono invitó al hereje a que lo sacara primero del agua, pero él, en el acto, se negó diciéndole: \\\"Tú fuiste el que propuso este juicio, así que debes sacarlo tú.\\\" El diácono temblando, se desnudó el brazo y cuando el hereje lo vio untado de ungüentos le gritó: \\\"Con artes mágicas has pretendido protegerte, ya que has empleado estos bálsamos, pero lo que has hecho no te servirá.\\\"\\n\\nY mientras discutían los dos, acertó a pasar por ahí un diácono de Rávena llamado Jacinto y preguntó cuál era el motivo de la discusión. Cuando se enteró de lo que sucedía, sacó su brazo por debajo de su túnica en el acto y sumergió su mano derecha en el caldero. El anillo que antes había sido introducido, ahora era muy pequeño y ligero, flotaba en el agua como una hojuelita que se mueve al impulso del viento y buscándolo durante un largo rato lo encontró después de una hora. Mientras, la flama debajo del caldero abrasaba a éste poderosamente haciendo quizá aún más difícil atraparlo con la mano, debido al intenso calor, pero finalmente, el diácono logró sacarlo con su mano sin haber sufrido ningún daño, sino más bien quejándose de que al fondo del caldero estaba el agua fría y en la superficie agradablemente caliente.\\n\\nCuando el hereje escuchó esto quedó muy confundido y metió audazmente su mano en el caldero diciendo: \\\"Mi fe me ayudará\\\" y tan pronto como hubo introducido su mano toda la carne se le encogió dejando sus huesos expuestos hasta el codo. Y así terminó la discusión.\\n\\nFuente: Howland, A.C. (trad.). (1898). Translations and Reprints from the Original Sources of European History (serie I, vol. 4). Filadelfia: University of Pennsylvania Press.",
+  "visual_description": "",
+  "page": "https://www.invicto.com.co/simulacro-unal/tematica-comun"
+},
+{
+  "id": "simulacro-unal/tematica-comun/q06",
+  "type": "question",
+  "component": "tematica-comun",
+  "number": 6,
+  "context_id": "context_ordalia01",
+  "stem_text": "¿Cuál era el propósito de la ordalía de agua caliente según la ley consuetudinaria germana?",
+  "choices": [
+    "Determinar la verdad divina y revelar la culpabilidad o inocencia de las personas a través de pruebas físicas.",
+    "Fortalecer la fe de los creyentes sometiéndolos a pruebas que solo los devotos podían superar.",
+    "Mostrar la superioridad de la religión dominante sobre las herejías a través de demostraciones públicas.",
+    "Resolver disputas legales rápidamente, evitando largos juicios y pruebas."
+  ],
+  "correct_choice": "Determinar la verdad divina y revelar la culpabilidad o inocencia de las personas a través de pruebas físicas.",
+  "visual_description": "Usa context_ordalia01",
+  "explanation_expert": "La ordalía era vista como un juicio divino: se creía que Dios intervendría para proteger a los inocentes en las pruebas físicas. De este modo, el resultado de la ordalía servía para determinar la culpabilidad o inocencia más allá de la justicia humana.",
+  "difficulty": "medium",
+  "tags": ["unal", "tematica-comun", "ordalía", "ley consuetudinaria", "Edad Media", "juicio divino", "Germania"],
+  "page": "https://www.invicto.com.co/simulacro-unal/tematica-comun"
+},
+{
+  "id": "simulacro-unal/tematica-comun/q07",
+  "type": "question",
+  "component": "tematica-comun",
+  "number": 7,
+  "context_id": "context_ordalia01",
+  "stem_text": "¿Qué nos revela la práctica de la ordalía acerca de la naturaleza de la sociedad que recurría a ella?",
+  "choices": [
+    "Era una sociedad que confiaba en la intervención divina para resolver conflictos y determinar la verdad.",
+    "Era una sociedad basada en la razón y la lógica, que valoraba las pruebas científicas por encima de la fe.",
+    "Era una sociedad que favorecía la violencia y el sufrimiento como forma de castigo y control social.",
+    "Era una sociedad que prefería los juicios rápidos y eficientes, sin importar los métodos utilizados."
+  ],
+  "correct_choice": "Era una sociedad que confiaba en la intervención divina para resolver conflictos y determinar la verdad.",
+  "visual_description": "Usa context_ordalia01",
+  "explanation_expert": "El recurso a la ordalía refleja una sociedad que atribuía a la divinidad la capacidad de intervenir directamente en los juicios humanos. La justicia se entendía como un acto en el que Dios revelaba la verdad a través del resultado de las pruebas físicas.",
+  "difficulty": "medium",
+  "tags": ["unal", "tematica-comun", "ordalía", "sociedad germana", "juicio divino", "Edad Media", "creencias"],
+  "page": "https://www.invicto.com.co/simulacro-unal/tematica-comun"
+},
+{
+  "id": "simulacro-unal/tematica-comun/q08",
+  "type": "question",
+  "component": "tematica-comun",
+  "number": 8,
+  "context_id": "context_ordalia01",
+  "stem_text": "Según el relato de Gregorio de Tours, ¿qué concepto de justicia crees que tenía la sociedad germana que practicaba la ordalía?",
+  "choices": [
+    "Justicia divina, donde Dios decidiría quién era culpable o inocente.",
+    "Justicia humana, basada en la evaluación racional de pruebas y testimonios.",
+    "Justicia punitiva, enfocada en castigar físicamente a los acusados para mantener el orden social.",
+    "Justicia arbitraria, donde el resultado dependía más de la suerte que de la verdad."
+  ],
+  "correct_choice": "Justicia divina, donde Dios decidiría quién era culpable o inocente.",
+  "visual_description": "Usa context_ordalia01",
+  "explanation_expert": "La ordalía expresaba una concepción de justicia en la que la divinidad era la máxima autoridad para revelar la verdad. Según este pensamiento, el juicio humano debía ceder ante la intervención de Dios, quien demostraba la inocencia o culpabilidad a través del resultado de la prueba.",
+  "difficulty": "medium",
+  "tags": ["unal", "tematica-comun", "ordalía", "justicia divina", "sociedad germana", "Edad Media"],
+  "page": "https://www.invicto.com.co/simulacro-unal/tematica-comun"
+},
+{
+  "id": "simulacro-unal/tematica-comun/context_sanantonio01",
+  "type": "context",
+  "title": "La vida de San Antonio",
+  "text": "En el siglo III y principios del IV, las vidas de los mártires habían aportado importantes ejemplos para los primeros cristianos. Pero en el curso del siglo IV los monjes, que pretendían adquirir la perfección espiritual mediante el ascetismo, la negación de la vida terrena y la lucha contra los demonios, llegaron a ser el nuevo ideal para la religión cristiana. En consecuencia, las hagiografías espirituales de los primeros monjes fueron una nueva y significativa forma de literatura cristiana. Digna de especial mención es La vida de San Antonio, de San Atanasio, el defensor de la ortodoxia católica contra los arrianos. Su obra se había traducido al latín antes del año 386. Este extracto describe cómo Antonio luchó por alejar las tentaciones de Satán.\\n\\nAtanasio, La vida de San Antonio\\n\\nAhora, cuando el Enemigo (Satán) vio que sus afanes en esta materia no rendían frutos y entre más provocaba a tentación a San Antonio más se empeñaba el santo en protegerse contra él con la armadura de la rectitud, él lo atacó con los vicios de la temprana pubescencia, que están tan estrechamente ligados con la naturaleza de nuestra humanidad. Con las incitaciones a la pasión solía perturbar por la noche y durante el día también habría de molestar y lastimarlo con lo mismo, a tal extremo que incluso aquellos que lo veían sabían por su apariencia que libraba una batalla con el Adversario. Pero entre más sucios e impiadosos pensamientos le provocaba el Maligno, más se refugiaba San Antonio en la oración y en la vigilancia, y su alma permanecía completamente casta. Y el Maligno infligía sobre él toda acción vergonzosa de acuerdo con su costumbre, e incluso, a la distancia, se le apareció a San Antonio en forma de mujer; y hacía otras cosas parecidas con facilidad, porque tales cosas eran cuestión de jactancia para él.\\n\\nPero el bendito Antonio se ponía sobre sus rodillas en el suelo y rezaba ante Aquel que decía: \\\"Antes de que llores ante mí yo te responderé\\\" y decía \\\"Oh, Señor, esto te imploro. No permitas que Tu amor sea arrojado de mi mente y considera que yo soy, por Tu gracia, inocente ante Ti.\\\" Y de nuevo el Enemigo multiplicaba en él los pensamientos de lujuria, hasta que San Antonio parecía un hombre que se estaba quemando, no a través del Maligno, sino a través de su propia lascivia; sin embargo, se angustiaba a sí mismo con el pensamiento amenazador del Juicio y de las torturas del Gehena (infierno) y del gusano que no muere. Y mientras meditaba en los pensamientos que podían ser dirigidos contra el Maligno, rezaba por los pensamientos que pudieran ser hostiles a él. Así, para reproche y vergüenza del Enemigo, estas cosas no llegaba a cometerlas; porque aquel que imaginaba que podía ser Dios había sido burlado por un hombre joven, aquel que se jactaba de la carne y la sangre fue vencido por un hombre que iba vestido de carne.\\n\\nFuente: Freemantle, Anne (1953). A Treasury of Early Christianity. Nueva York: Viking Press. D.R. © 1953 por Mentor Books.",
+  "visual_description": "",
+  "page": "https://www.invicto.com.co/simulacro-unal/tematica-comun"
+},
+{
+  "id": "simulacro-unal/tematica-comun/q09",
+  "type": "question",
+  "component": "tematica-comun",
+  "number": 9,
+  "context_id": "context_sanantonio01",
+  "stem_text": "Basado en el relato de Atanasio, ¿cómo caracterizarías los ideales ascéticos de los primeros monjes cristianos?",
+  "choices": [
+    "Como una lucha constante contra las tentaciones físicas y espirituales.",
+    "Como una búsqueda de la perfección física y espiritual a través del aislamiento completo.",
+    "Como un rechazo total de la vida terrenal y la humanidad.",
+    "Como una aceptación pasiva de las pruebas que Dios les envía."
+  ],
+  "correct_choice": "Como una lucha constante contra las tentaciones físicas y espirituales.",
+  "visual_description": "Usa context_sanantonio01",
+  "explanation_expert": "El relato de Atanasio muestra cómo San Antonio se enfrentaba a constantes tentaciones enviadas por el Maligno, recurriendo a la oración y la disciplina espiritual. Esto refleja que el ideal ascético no era el aislamiento pasivo, sino una lucha activa y permanente contra las tentaciones.",
+  "difficulty": "medium",
+  "tags": ["unal", "tematica-comun", "San Antonio", "ascetismo", "Atanasio", "primeros monjes cristianos"],
+  "page": "https://www.invicto.com.co/simulacro-unal/tematica-comun"
+},
+{
+  "id": "simulacro-unal/tematica-comun/q10",
+  "type": "question",
+  "component": "tematica-comun",
+  "number": 10,
+  "context_id": "context_sanantonio01",
+  "stem_text": "¿Cuán importantes fueron esos ideales para el desarrollo del cristianismo temprano?",
+  "choices": [
+    "Fueron fundamentales, ya que los monjes como San Antonio establecieron un modelo de resistencia a las tentaciones que influyó en la espiritualidad cristiana.",
+    "Fueron marginales, ya que la mayoría de los cristianos se enfocaba en la vida comunitaria y no en el ascetismo individual.",
+    "Fueron importantes solo para aquellos que vivían en el desierto y no para el cristianismo en general.",
+    "Fueron secundarios, ya que el cristianismo se centró más en la conversión de nuevos creyentes que en la vida ascética."
+  ],
+  "correct_choice": "Fueron fundamentales, ya que los monjes como San Antonio establecieron un modelo de resistencia a las tentaciones que influyó en la espiritualidad cristiana.",
+  "visual_description": "Usa context_sanantonio01",
+  "explanation_expert": "Los ideales ascéticos de San Antonio y otros monjes se convirtieron en un modelo de vida espiritual que marcó profundamente la identidad del cristianismo temprano. Su ejemplo consolidó la idea de que la lucha contra las tentaciones era esencial para la perfección espiritual, influyendo en generaciones posteriores de cristianos.",
+  "difficulty": "medium",
+  "tags": ["unal", "tematica-comun", "San Antonio", "ascetismo", "cristianismo temprano", "espiritualidad"],
+  "page": "https://www.invicto.com.co/simulacro-unal/tematica-comun"
+},
+{
+  "id": "simulacro-unal/tematica-comun/q11",
+  "type": "question",
+  "component": "tematica-comun",
+  "number": 11,
+  "context_id": "context_sanantonio01",
+  "stem_text": "¿Cuáles serían los efectos culturales a gran escala del odio cristiano por el cuerpo humano?",
+  "choices": [
+    "La perpetuación de la culpa y la vergüenza asociadas a las necesidades y deseos físicos.",
+    "La creación de una cultura que valora el autocontrol y la disciplina personal por encima del placer físico.",
+    "La formación de una sociedad que ve el cuerpo como una barrera para la salvación espiritual.",
+    "Todas las anteriores."
+  ],
+  "correct_choice": "Todas las anteriores.",
+  "visual_description": "Usa context_sanantonio01",
+  "explanation_expert": "El ascetismo cristiano temprano promovió una visión negativa del cuerpo que tuvo efectos culturales profundos: se asoció la culpa a los deseos físicos, se valoró el autocontrol y la disciplina por encima del placer, y se consolidó la idea de que el cuerpo era un obstáculo para la salvación espiritual.",
+  "difficulty": "medium",
+  "tags": ["unal", "tematica-comun", "San Antonio", "ascetismo", "cristianismo temprano", "cultura cristiana"],
+  "page": "https://www.invicto.com.co/simulacro-unal/tematica-comun"
+},
+{
+  "id": "simulacro-unal/tematica-comun/context_banquete01",
+  "type": "context",
+  "title": "Un banquete renacentista",
+  "text": "Al igual que en la sociedad griega y romana, el banquete renacentista representaba una ocasión para disfrutar de una buena comida, conversación agradable, música y baile. En la sociedad renacentista también era un símbolo de estatus y una oportunidad para impresionar a los que tenían el poder y la riqueza en la familia. Los banquetes se llevaban a cabo para celebrar las festividades públicas y religiosas, las visitas oficiales, los aniversarios y las bodas. El siguiente menú describe los platillos servidos en un gran banquete ofrecido por el Papa Pío V en el siglo XVI.\\n\\nUn banquete del siglo XVI\\n\\nPrimer plato\\nDelicias frías del aparador\\nPedazos de mazapán y bolas de mazapán\\nPasteles napolitanos de especias\\nVino de Málaga y bizcochos de Pisa\\nUvas frescas\\nProsciutto guisado en vino y servido con alcaparras y pulpa de uva\\nLenguas de cerdo rebanadas, salteadas al vino\\nAves cantoras asadas, frías, con sus lenguas en rebanadas cubiertas de mostaza dulce\\n\\nSegundo plato\\nAlimentos fríos y calientes de la cocina, asados\\nMolleja de hígados de ternera fritos\\nAlondra asada con salsa de lima\\nCodornices asadas con rebanadas de berenjena\\nPichones asados rellenos, salpicados con alcaparras\\nConejos asados, con salsa y piña molidas\\nPerdices mechadas y asadas servidas con limón\\nAves de corral muy condimentadas, con rebanadas de limón\\nRebanadas de ternera asadas, con salsa hecha con sus jugos\\nSopa de pasta de almendra, con la carne de tres pichones en cada ración\\n\\nTercer plato\\nAlimentos calientes de la cocina, carnes hervidas y estofadas\\nGansos gordos rellenos, hervidos al estilo lombardo y cubiertos con almendras rebanadas\\nPecho de ternera relleno, hervido y decorado con flores\\nTernera muy joven, hervida y decorada con perejil\\nAlmendras en salsa de ajo\\nArroz con leche al estilo turco y salpicado con canela\\nPichones estofados con salchicha de mortadela y cebollas enteras\\nSopa de calabaza con salchichas\\nPastel de aves de corral, dos pollos por cada pastel\\nFricasé de pecho de cabra, con cebollas fritas\\nPasteles rellenos de crema de natilla\\nPatas de ternero hervidas, con queso y huevo\\n\\nCuarto plato\\nExquisiteces del aparador\\nTartas de habas\\nPastelillos de membrillo\\nTartas de pera, las peras cubiertas de mazapán\\nQueso parmesano y queso de la Riviera\\nAlmendras frescas sobre hojas de parra\\nCastañas asadas al carbón y servidas con sal y pimienta\\nRequesón de leche\\nPasteles en forma de anillo\\nObleas hechas con grano silvestre\\n\\nFuente: Reay Tannahill (1988). Food in History. Nueva York: Three Rivers Press. D.R. © 1973, 1988, Reay Tannahill.",
+  "visual_description": "",
+  "page": "https://www.invicto.com.co/simulacro-unal/tematica-comun"
+},
+{
+  "id": "simulacro-unal/tematica-comun/q12",
+  "type": "question",
+  "component": "tematica-comun",
+  "number": 12,
+  "context_id": "context_banquete01",
+  "stem_text": "¿Qué clase de personas estarían presentes en un banquete en el que se ofrece la comida que aparece en este menú?",
+  "choices": [
+    "Comerciantes ricos y artesanos.",
+    "Campesinos y obreros.",
+    "Miembros de la alta sociedad, nobles y clérigos de alto rango.",
+    "Soldados y guardias reales."
+  ],
+  "correct_choice": "Miembros de la alta sociedad, nobles y clérigos de alto rango.",
+  "visual_description": "Usa context_banquete01",
+  "explanation_expert": "Los banquetes renacentistas, como el descrito en el menú del Papa Pío V, estaban reservados para las élites sociales y religiosas. La sofisticación de los platillos y la ostentación reflejaban un evento destinado a nobles y altos clérigos, no a las clases trabajadoras.",
+  "difficulty": "medium",
+  "tags": ["unal", "tematica-comun", "Renacimiento", "banquete", "alta sociedad", "cultura"],
+  "page": "https://www.invicto.com.co/simulacro-unal/tematica-comun"
+},
+{
+  "id": "simulacro-unal/tematica-comun/q13",
+  "type": "question",
+  "component": "tematica-comun",
+  "number": 13,
+  "context_id": "context_banquete01",
+  "stem_text": "¿Qué nos dice este extracto acerca de la cultura del Renacimiento y la relación de la comida con el estatus social?",
+  "choices": [
+    "La comida era simplemente una necesidad básica y no tenía relación con el estatus social.",
+    "La comida en el Renacimiento era un símbolo de poder y estatus, utilizada para impresionar y mostrar riqueza.",
+    "Los banquetes eran comunes para todas las clases sociales, con comidas elaboradas accesibles para todos.",
+    "Los menús renacentistas se enfocaban principalmente en la simplicidad y la moderación."
+  ],
+  "correct_choice": "La comida en el Renacimiento era un símbolo de poder y estatus, utilizada para impresionar y mostrar riqueza.",
+  "visual_description": "Usa context_banquete01",
+  "explanation_expert": "En el Renacimiento, los banquetes eran eventos diseñados para ostentar la riqueza y el poder de la élite. Los platos elaborados, ingredientes exóticos y la abundancia de comida eran símbolos de prestigio y servían para impresionar a invitados y aliados políticos.",
+  "difficulty": "medium",
+  "tags": ["unal", "tematica-comun", "Renacimiento", "banquete", "estatus social", "cultura"],
+  "page": "https://www.invicto.com.co/simulacro-unal/tematica-comun"
+},
+{
+  "id": "simulacro-unal/tematica-comun/q14",
+  "type": "question",
+  "component": "tematica-comun",
+  "number": 14,
+  "context_id": "context_banquete01",
+  "stem_text": "¿Qué información nos proporciona el menú sobre las influencias culturales en la cocina renacentista?",
+  "choices": [
+    "La cocina renacentista era puramente local, con ingredientes y platos típicos de una sola región.",
+    "La cocina renacentista evitaba influencias externas y se centraba en la tradición medieval.",
+    "La comida renacentista se basaba únicamente en los ingredientes que estaban disponibles localmente en ese momento.",
+    "La cocina renacentista estaba influenciada por diversas culturas, incluyendo ingredientes y estilos de diferentes regiones."
+  ],
+  "correct_choice": "La cocina renacentista estaba influenciada por diversas culturas, incluyendo ingredientes y estilos de diferentes regiones.",
+  "visual_description": "Usa context_banquete01",
+  "explanation_expert": "El menú del Papa Pío V muestra una notable diversidad cultural en la cocina renacentista, incluyendo vinos españoles, bizcochos italianos, arroz al estilo turco y especias exóticas. Esto evidencia que la gastronomía renacentista estaba abierta a influencias externas y reflejaba un intercambio cultural amplio.",
+  "difficulty": "medium",
+  "tags": ["unal", "tematica-comun", "Renacimiento", "banquete", "cultura", "gastronomía"],
+  "page": "https://www.invicto.com.co/simulacro-unal/tematica-comun"
+},
+{
+  "id": "simulacro-unal/tematica-comun/context_isabel01",
+  "type": "context",
+  "title": "Isabel I: \"Tengo el corazón de un rey\"",
+  "text": "La reina Isabel I gobernó en Inglaterra de 1558 a 1603 con una consumada habilidad que sus contemporáneos consideraban poco común en una mujer. A pesar de ser astuta y paternalista, su poder, como el de otros monarcas del siglo XVI, dependía del favor del pueblo. Cuando Inglaterra hizo frente a la amenaza invasora de la armada española de Felipe II, Isabel intentó animar a sus tropas con un discurso en Tilbury, una ciudad a orillas del río Támesis. Esta selección se ha tomado de ese discurso.\\n\\nIsabel I, Discurso a las tropas en Tilbury\\n\\nMi amado pueblo, hemos sido persuadidos por algunos, que cuidan de nuestra seguridad, para tener cuidado sobre cómo nos exponemos ante las multitudes armadas, por temor a la traición; pero le aseguro que yo no deseo vivir para desconfiar de mi fiel y amado pueblo. Dejad que los tiranos teman; yo me he comportado siempre así y, después de Dios, mi fuerza principal y salvaguarda radica en los corazones leales y la buena voluntad de mis súbditos. Por ello vengo ante ustedes esta vez, como pueden ver, no para mi recreación y entretenimiento, sino resuelta a vivir o morir entre todos ustedes en medio del calor de la batalla, dispuesta a dar mi honor y mi sangre por mi Dios, por mi reino y por mi pueblo, incluso sobre el polvo.\\n\\nSé que tengo el cuerpo de una mujer débil y frágil, pero tengo el corazón y el estómago de un rey y de un rey de Inglaterra también, y considero despreciable que Parma o España, o cualquier príncipe de Europa, se atreva a invadir las fronteras de mi reino; si tal cosa sucediera, antes de que cualquier deshonra caiga sobre mí, yo misma tomaré las armas, yo misma seré su general, su juez y recompensaré cada una de sus virtudes en el campo de batalla. Sé que merecen recompensas y coronas por su disposición. Y les aseguro, con la palabra de una reina, que les serán debidamente pagadas.\\n\\nPor el momento, mi teniente general, al que ningún príncipe mandó a un objetivo más noble o más digno, estará en mi lugar. Y sin dudar de su obediencia, de su concordia ni de su valor en el campo de batalla, en breve tendremos una famosa victoria sobre los enemigos de mi Dios, de mi reino y de mi pueblo.\\n\\nFuente: John E. Neale (1953). Elizabeth I and Her Parliaments. Londres: Jonathan Cape.",
+  "visual_description": "",
+  "page": "https://www.invicto.com.co/simulacro-unal/tematica-comun"
+},
+{
+  "id": "simulacro-unal/tematica-comun/q15",
+  "type": "question",
+  "component": "tematica-comun",
+  "number": 15,
+  "context_id": "context_isabel01",
+  "stem_text": "¿Qué cualidades evidentes en el discurso de Isabel le harían ganar el cariño de sus oyentes?",
+  "choices": [
+    "Su valentía al querer participar en la batalla junto a sus tropas.",
+    "Su humildad al reconocer su debilidad como mujer.",
+    "Su determinación al prometer recompensas justas a sus soldados.",
+    "Todas las anteriores."
+  ],
+  "correct_choice": "Todas las anteriores.",
+  "visual_description": "Usa context_isabel01",
+  "explanation_expert": "El discurso de Isabel en Tilbury combina valentía, humildad y determinación. Se presenta dispuesta a luchar con sus soldados, reconoce sus limitaciones físicas como mujer pero reafirma su fuerza como líder, y promete recompensas justas, ganándose así el afecto y la lealtad de sus oyentes.",
+  "difficulty": "medium",
+  "tags": ["unal", "tematica-comun", "Isabel I", "Renacimiento", "discurso", "liderazgo"],
+  "page": "https://www.invicto.com.co/simulacro-unal/tematica-comun"
+},
+{
+  "id": "simulacro-unal/tematica-comun/q16",
+  "type": "question",
+  "component": "tematica-comun",
+  "number": 16,
+  "context_id": "context_isabel01",
+  "stem_text": "¿Cómo se refleja en el discurso de Isabel la relación entre su popularidad y los eventos ocurridos a finales del siglo XVI?",
+  "choices": [
+    "Isabel menciona que su popularidad es consecuencia de su habilidad para evitar conflictos bélicos.",
+    "Isabel sugiere que su popularidad proviene principalmente de su origen noble y su derecho divino a gobernar.",
+    "Isabel vincula su popularidad con su capacidad para liderar en tiempos de crisis, como la amenaza de la Armada Española.",
+    "Isabel argumenta que su popularidad se debe a su apariencia física y habilidades diplomáticas."
+  ],
+  "correct_choice": "Isabel vincula su popularidad con su capacidad para liderar en tiempos de crisis, como la amenaza de la Armada Española.",
+  "visual_description": "Usa context_isabel01",
+  "explanation_expert": "En su discurso en Tilbury, Isabel I resalta que su autoridad y apoyo popular se consolidan en el contexto de crisis nacional. Al presentarse como líder en la amenaza de la Armada Española, muestra que su popularidad estaba vinculada a su capacidad de inspirar confianza y valor en tiempos de peligro.",
+  "difficulty": "medium",
+  "tags": ["unal", "tematica-comun", "Isabel I", "Renacimiento", "Armada Española", "liderazgo", "popularidad"],
+  "page": "https://www.invicto.com.co/simulacro-unal/tematica-comun"
+},
+{
+  "id": "simulacro-unal/tematica-comun/q17",
+  "type": "question",
+  "component": "tematica-comun",
+  "number": 17,
+  "context_id": "context_isabel01",
+  "stem_text": "¿Por qué Isabel enfatiza su \"corazón de rey\" en lugar de su \"cuerpo de mujer\"?",
+  "choices": [
+    "Para asegurar a sus tropas que no necesita la ayuda de sus generales ni consejeros.",
+    "Para demostrar que, a pesar de ser mujer, posee la fuerza y la determinación necesarias para gobernar y liderar en la guerra.",
+    "Para subrayar que su origen noble es lo que le da legitimidad como gobernante.",
+    "Para minimizar la importancia de su género en un contexto dominado por hombres."
+  ],
+  "correct_choice": "Para demostrar que, a pesar de ser mujer, posee la fuerza y la determinación necesarias para gobernar y liderar en la guerra.",
+  "visual_description": "Usa context_isabel01",
+  "explanation_expert": "Al hablar de tener un \"corazón de rey\", Isabel I buscaba superar las percepciones de debilidad asociadas a su género. Reforzaba así su imagen como líder fuerte y decidido, capaz de comandar en un contexto bélico y político dominado por hombres.",
+  "difficulty": "medium",
+  "tags": ["unal", "tematica-comun", "Isabel I", "Renacimiento", "liderazgo femenino", "género", "monarquía"],
+  "page": "https://www.invicto.com.co/simulacro-unal/tematica-comun"
+}
+]

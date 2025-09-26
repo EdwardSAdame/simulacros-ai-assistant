@@ -1,0 +1,455 @@
+[
+  {
+    "id": "simulacro-icfes/ingles/context_llm01",
+    "type": "context",
+    "title": "Large Language Models",
+    "text": "Large Language Models (LLMs) are advanced artificial intelligence systems capable of processing and generating human-like text. These models are trained using vast amounts of data from books, articles, and the internet. One of the most well-known LLMs is GPT (Generative Pre-trained Transformer), developed by OpenAI.\nLLMs work by predicting the next word in a sentence based on the context of the words before it. This process is powered by neural networks with billions of parameters, which allow the model to understand nuances in language, such as tone, style, and meaning.\nDespite their capabilities, LLMs have limitations. They rely heavily on their training data and may generate incorrect or biased information if the data is flawed. To address this, researchers constantly update and refine these models to make them more reliable and accurate.\nLLMs are used in various fields, including education, customer service, and content creation. For instance, they can help students learn by providing explanations or answering questions. They are also used in businesses to automate customer support through chatbots, saving time and resources.\nThe future of LLMs is promising, with researchers working on making them even more advanced. However, there are also concerns about their misuse, such as generating misleading information or being used in unethical ways. This raises important questions about the need for responsible AI development and regulation.",
+    "visual_description": "Imagen digital en tonos púrpura que muestra una cápsula brillante con texto en inglés que dice: 'How do large language models work?'. El fondo tiene formas geométricas y patrones abstractos.",
+    "page": "https://www.invicto.com.co/simulacro-icfes/ingles"
+  },
+  {
+  "id": "simulacro-icfes/ingles/q01",
+  "type": "question",
+  "component": "ingles",
+  "number": 1,
+  "context_id": "context_llm01",
+  "stem_text": "Large Language Models (LLMs) are capable of",
+  "choices": [
+    "predicting the future.",
+    "generating human-like text.",
+    "solving all problems.",
+    "creating physical objects."
+  ],
+  "correct_choice": "generating human-like text.",
+  "visual_description": "Usa context_llm01",
+  "explanation_expert": "LLMs are designed to process and generate text similar to human language, not to predict the future or create physical objects. They also cannot solve every problem, as their capabilities depend on the training data and context.",
+  "difficulty": "easy",
+  "tags": ["icfes", "ingles", "LLMs", "AI"],
+  "page": "https://www.invicto.com.co/simulacro-icfes/ingles"
+},
+{
+  "id": "simulacro-icfes/ingles/q02",
+  "type": "question",
+  "component": "ingles",
+  "number": 2,
+  "context_id": "context_llm01",
+  "stem_text": "The primary function of an LLM is to",
+  "choices": [
+    "translate images into words.",
+    "predict the next word in a sentence.",
+    "generate computer code.",
+    "store large amounts of data."
+  ],
+  "correct_choice": "predict the next word in a sentence.",
+  "visual_description": "Usa context_llm01",
+  "explanation_expert": "The core mechanism of an LLM is next-word prediction, which allows it to generate coherent text. While some LLMs can assist with code or image tasks through extensions, their fundamental function is not storing data or translating images.",
+  "difficulty": "easy",
+  "tags": ["icfes", "ingles", "LLMs", "AI"],
+  "page": "https://www.invicto.com.co/simulacro-icfes/ingles"
+},
+{
+  "id": "simulacro-icfes/ingles/q03",
+  "type": "question",
+  "component": "ingles",
+  "number": 3,
+  "context_id": "context_llm01",
+  "stem_text": "One limitation of LLMs is that they",
+  "choices": [
+    "cannot process text.",
+    "rely on flawed data.",
+    "are not used in businesses.",
+    "only work with images."
+  ],
+  "correct_choice": "rely on flawed data.",
+  "visual_description": "Usa context_llm01",
+  "explanation_expert": "LLMs depend heavily on the data they are trained on. If the training data contains errors or biases, the model will reproduce them. They can process text effectively, are widely used in businesses, and do not exclusively work with images.",
+  "difficulty": "medium",
+  "tags": ["icfes", "ingles", "LLMs", "AI", "limitations"],
+  "page": "https://www.invicto.com.co/simulacro-icfes/ingles"
+},
+{
+  "id": "simulacro-icfes/ingles/q04",
+  "type": "question",
+  "component": "ingles",
+  "number": 4,
+  "context_id": "context_llm01",
+  "stem_text": "In customer service, LLMs are commonly used to",
+  "choices": [
+    "automate chatbots.",
+    "design products.",
+    "process financial transactions.",
+    "translate legal documents."
+  ],
+  "correct_choice": "automate chatbots.",
+  "visual_description": "Usa context_llm01",
+  "explanation_expert": "A common application of LLMs in customer service is powering chatbots that interact with clients, answering questions and saving resources. They are not primarily used to design products, handle financial transactions, or translate legal texts in this context.",
+  "difficulty": "easy",
+  "tags": ["icfes", "ingles", "LLMs", "AI", "customer service"],
+  "page": "https://www.invicto.com.co/simulacro-icfes/ingles"
+},
+{
+  "id": "simulacro-icfes/ingles/q05",
+  "type": "question",
+  "component": "ingles",
+  "number": 5,
+  "context_id": "context_llm01",
+  "stem_text": "Researchers are improving LLMs to make them",
+  "choices": [
+    "less reliable.",
+    "more biased.",
+    "more advanced.",
+    "less accessible."
+  ],
+  "correct_choice": "more advanced.",
+  "visual_description": "Usa context_llm01",
+  "explanation_expert": "The goal of researchers is to enhance LLMs, making them more advanced in terms of accuracy, reliability, and functionality. The aim is not to reduce reliability, increase bias, or restrict access.",
+  "difficulty": "medium",
+  "tags": ["icfes", "ingles", "LLMs", "AI", "research"],
+  "page": "https://www.invicto.com.co/simulacro-icfes/ingles"
+},
+{
+  "id": "simulacro-icfes/ingles/context_ai01",
+  "type": "context",
+  "title": "Talking About Artificial Intelligence",
+  "text": "Read each statement or question carefully and choose the most appropriate response.",
+  "visual_description": "N/A",
+  "page": "https://www.invicto.com.co/simulacro-icfes/ingles"
+},
+{
+  "id": "simulacro-icfes/ingles/q06",
+  "type": "question",
+  "component": "ingles",
+  "number": 6,
+  "context_id": "context_ai01",
+  "stem_text": "I heard that AI can now create realistic paintings in seconds!",
+  "choices": [
+    "That’s amazing!",
+    "How boring.",
+    "What’s for lunch?"
+  ],
+  "correct_choice": "That’s amazing!",
+  "visual_description": "Usa context_ai01",
+  "explanation_expert": "The most suitable response to a statement about AI's impressive abilities is 'That’s amazing!'. The other options are irrelevant or dismissive in this context.",
+  "difficulty": "easy",
+  "tags": ["icfes", "ingles", "AI", "conversation"],
+  "page": "https://www.invicto.com.co/simulacro-icfes/ingles"
+},
+{
+  "id": "simulacro-icfes/ingles/q07",
+  "type": "question",
+  "component": "ingles",
+  "number": 7,
+  "context_id": "context_ai01",
+  "stem_text": "Do you think AI will replace teachers in the future?",
+  "choices": [
+    "Yes, they will stop working.",
+    "I don’t think so.",
+    "I’m hungry."
+  ],
+  "correct_choice": "I don’t think so.",
+  "visual_description": "Usa context_ai01",
+  "explanation_expert": "The most appropriate response in this context is 'I don’t think so.', as it engages with the question seriously. The other options are either unrealistic or irrelevant.",
+  "difficulty": "medium",
+  "tags": ["icfes", "ingles", "AI", "conversation"],
+  "page": "https://www.invicto.com.co/simulacro-icfes/ingles"
+},
+{
+  "id": "simulacro-icfes/ingles/q08",
+  "type": "question",
+  "component": "ingles",
+  "number": 8,
+  "context_id": "context_ai01",
+  "stem_text": "The AI chatbot gave me advice that really helped!",
+  "choices": [
+    "That’s so useful!",
+    "Why not?",
+    "I didn’t listen."
+  ],
+  "correct_choice": "That’s so useful!",
+  "visual_description": "Usa context_ai01",
+  "explanation_expert": "The appropriate response is 'That’s so useful!' because it acknowledges the benefit of the chatbot's advice. The other responses are dismissive or irrelevant.",
+  "difficulty": "easy",
+  "tags": ["icfes", "ingles", "AI", "conversation"],
+  "page": "https://www.invicto.com.co/simulacro-icfes/ingles"
+},
+{
+  "id": "simulacro-icfes/ingles/context_nn01",
+  "type": "context",
+  "title": "Neural Networks: Understanding the Machine Brain",
+  "text": "Neural networks are computer systems inspired by the human brain. They consist of layers of interconnected nodes, or “neurons,” that process information. Each connection between neurons has a weight, which adjusts as the network learns, enabling it to improve its predictions over time. Neural networks are the foundation of many artificial intelligence (AI) applications, such as image recognition, natural language processing, and even self-driving cars.\n\nHow do they work? Imagine teaching a machine to recognize a cat in a photo. First, the network is trained with thousands of images of cats and non-cats. Each image is broken down into patterns—shapes, colors, and textures. The network analyzes these features and assigns probabilities to determine whether the image contains a cat. If the guess is wrong, the network adjusts its weights and tries again. Over time, it learns to make more accurate predictions.\n\nLet’s break this process down:\n\nInput Layer: The image is transformed into data that enters the neural network.\nHidden Layers: These layers process the data, identifying patterns like whiskers or fur.\nOutput Layer: The network produces a prediction, such as “90% probability this is a cat.”\n\nNeural networks are powerful because they can generalize from examples, allowing machines to perform tasks that once required human intelligence.",
+  "visual_description": "Ilustración de una red neuronal artificial representada en capas. Un gato real es observado por sensores que transmiten señales a través de nodos conectados en varias capas ocultas, produciendo como salida la imagen digital estilizada de un gato en una pantalla.",
+  "page": "https://www.invicto.com.co/simulacro-icfes/ingles"
+},
+{
+  "id": "simulacro-icfes/ingles/q09",
+  "type": "question",
+  "component": "ingles",
+  "number": 9,
+  "context_id": "context_nn01",
+  "stem_text": "What is the main idea of the text?",
+  "choices": [
+    "Explaining how neural networks simulate the human brain to perform tasks.",
+    "Discussing how computers can replace humans in all tasks.",
+    "Describing how neural networks can only be used for image recognition.",
+    "Criticizing artificial intelligence as unreliable for complex tasks."
+  ],
+  "correct_choice": "Explaining how neural networks simulate the human brain to perform tasks.",
+  "visual_description": "Usa context_nn01",
+  "explanation_expert": "The text explains how neural networks work by simulating the human brain to process information and perform tasks. It does not claim that computers replace humans in everything, nor does it limit neural networks to image recognition or criticize AI.",
+  "difficulty": "medium",
+  "tags": ["icfes", "ingles", "neural networks", "AI", "main idea"],
+  "page": "https://www.invicto.com.co/simulacro-icfes/ingles"
+},
+{
+  "id": "simulacro-icfes/ingles/q10",
+  "type": "question",
+  "component": "ingles",
+  "number": 10,
+  "context_id": "context_nn01",
+  "stem_text": "What happens in the hidden layers of a neural network?",
+  "choices": [
+    "Images are converted into data for the network to analyze.",
+    "Patterns are identified, such as shapes and textures.",
+    "Predictions are made about the input data.",
+    "Errors are corrected to avoid future mistakes."
+  ],
+  "correct_choice": "Patterns are identified, such as shapes and textures.",
+  "visual_description": "Usa context_nn01",
+  "explanation_expert": "In the hidden layers, the neural network identifies features and patterns within the data, such as shapes, colors, or textures. The input layer handles data conversion, the output layer makes predictions, and error correction happens during training, not in the hidden layers directly.",
+  "difficulty": "medium",
+  "tags": ["icfes", "ingles", "neural networks", "AI", "hidden layers"],
+  "page": "https://www.invicto.com.co/simulacro-icfes/ingles"
+},
+{
+  "id": "simulacro-icfes/ingles/q11",
+  "type": "question",
+  "component": "ingles",
+  "number": 11,
+  "context_id": "context_nn01",
+  "stem_text": "Why are neural networks considered powerful tools?",
+  "choices": [
+    "They only need a few examples to learn a task.",
+    "They mimic human intelligence and generalize from data.",
+    "They are error-free when analyzing data.",
+    "They require no human supervision to function."
+  ],
+  "correct_choice": "They mimic human intelligence and generalize from data.",
+  "visual_description": "Usa context_nn01",
+  "explanation_expert": "Neural networks are powerful because they can generalize from examples, allowing machines to perform tasks that resemble human intelligence. They do not always learn from few examples, are not error-free, and often require human supervision for training.",
+  "difficulty": "medium",
+  "tags": ["icfes", "ingles", "neural networks", "AI", "generalization"],
+  "page": "https://www.invicto.com.co/simulacro-icfes/ingles"
+},
+{
+  "id": "simulacro-icfes/ingles/q12",
+  "type": "question",
+  "component": "ingles",
+  "number": 12,
+  "context_id": "context_nn01",
+  "stem_text": "What is an example of how neural networks learn to identify a cat?",
+  "choices": [
+    "By memorizing every possible image of a cat.",
+    "By assigning weights to patterns like whiskers and fur.",
+    "By guessing randomly until it gets it right.",
+    "By comparing every new image with stored pictures of cats."
+  ],
+  "correct_choice": "By assigning weights to patterns like whiskers and fur.",
+  "visual_description": "Usa context_nn01",
+  "explanation_expert": "Neural networks learn by adjusting weights on connections to detect patterns like whiskers, fur, or shapes. They do not memorize every image, guess randomly, or compare only to stored examples.",
+  "difficulty": "medium",
+  "tags": ["icfes", "ingles", "neural networks", "AI", "learning process"],
+  "page": "https://www.invicto.com.co/simulacro-icfes/ingles"
+},
+{
+  "id": "simulacro-icfes/ingles/q13",
+  "type": "question",
+  "component": "ingles",
+  "number": 13,
+  "context_id": "context_nn01",
+  "stem_text": "What does the output layer of a neural network do?",
+  "choices": [
+    "Processes data into patterns like shapes or textures.",
+    "Converts images into data for the network to analyze.",
+    "Adjusts weights to improve predictions.",
+    "Produces the final prediction, like identifying a cat."
+  ],
+  "correct_choice": "Produces the final prediction, like identifying a cat.",
+  "visual_description": "Usa context_nn01",
+  "explanation_expert": "The output layer is responsible for producing the final prediction, such as identifying an image as a cat with a probability. The hidden layers detect patterns, the input layer converts data, and weight adjustments occur during training.",
+  "difficulty": "medium",
+  "tags": ["icfes", "ingles", "neural networks", "AI", "output layer"],
+  "page": "https://www.invicto.com.co/simulacro-icfes/ingles"
+},
+{
+  "id": "simulacro-icfes/ingles/context_transformers01",
+  "type": "context",
+  "title": "A Story of Transformers",
+  "text": "Transformers are among the most (14) ______ advancements in artificial intelligence, revolutionizing how machines process language and information. They wouldn’t exist without the innovation of their unique attention mechanism, which allows them to excel in complex tasks.\n(15) ______ Transformers, machines can analyze entire pieces of information simultaneously instead of step by step. Unlike older models, which (16) ______ data sequentially, Transformers identify relationships across a text instantly, making them faster and more effective.\nOne key feature of Transformers is their ability to focus on the most important parts of the input using their attention mechanism. This (17) ______ them to excel at tasks such as language translation, summarizing information, and even generating creative text.\nModern Transformers, like GPT and PaLM, (18) ______ into increasingly powerful versions. GPT (19) ______ on creating accurate and context-aware text, while PaLM (20) ______ in solving logical problems and advanced reasoning tasks.",
+  "visual_description": "Logotipo estilizado de OpenAI en blanco, compuesto por formas entrelazadas, ubicado sobre un fondo con círculos concéntricos y colores superpuestos en tonos verde, amarillo, púrpura y azul.",
+  "page": "https://www.invicto.com.co/simulacro-icfes/ingles"
+},
+{
+  "id": "simulacro-icfes/ingles/q14",
+  "type": "question",
+  "component": "ingles",
+  "number": 14,
+  "context_id": "context_transformers01",
+  "stem_text": "Transformers are among the most (14) ______ advancements in artificial intelligence.",
+  "choices": [
+    "recognized",
+    "remembered",
+    "celebrated",
+    "advanced"
+  ],
+  "correct_choice": "celebrated",
+  "visual_description": "Usa context_transformers01",
+  "explanation_expert": "The correct option is 'celebrated' because the sentence emphasizes how Transformers are widely praised and acknowledged as major advancements. The other options do not convey the same meaning of prominence and importance.",
+  "difficulty": "medium",
+  "tags": ["icfes", "ingles", "transformers", "AI", "vocabulary"],
+  "page": "https://www.invicto.com.co/simulacro-icfes/ingles"
+},
+{
+  "id": "simulacro-icfes/ingles/q15",
+  "type": "question",
+  "component": "ingles",
+  "number": 15,
+  "context_id": "context_transformers01",
+  "stem_text": "(15) ______ Transformers, machines can analyze entire pieces of information simultaneously instead of step by step.",
+  "choices": [
+    "With",
+    "Using",
+    "For",
+    "During"
+  ],
+  "correct_choice": "Using",
+  "visual_description": "Usa context_transformers01",
+  "explanation_expert": "The correct word is 'Using' because the sentence refers to machines analyzing information by making use of Transformers. The other options ('With', 'For', 'During') do not fit grammatically or semantically in this context.",
+  "difficulty": "medium",
+  "tags": ["icfes", "ingles", "transformers", "AI", "grammar"],
+  "page": "https://www.invicto.com.co/simulacro-icfes/ingles"
+},
+{
+  "id": "simulacro-icfes/ingles/q16",
+  "type": "question",
+  "component": "ingles",
+  "number": 16,
+  "context_id": "context_transformers01",
+  "stem_text": "Unlike older models, which (16) ______ data sequentially, Transformers identify relationships across a text instantly.",
+  "choices": [
+    "shared",
+    "processed",
+    "used",
+    "avoided"
+  ],
+  "correct_choice": "processed",
+  "visual_description": "Usa context_transformers01",
+  "explanation_expert": "The best answer is 'processed' because older models handled data step by step, i.e., sequentially. The other options ('shared', 'used', 'avoided') do not correctly describe the function of older models in this context.",
+  "difficulty": "medium",
+  "tags": ["icfes", "ingles", "transformers", "AI", "vocabulary"],
+  "page": "https://www.invicto.com.co/simulacro-icfes/ingles"
+},
+{
+  "id": "simulacro-icfes/ingles/q17",
+  "type": "question",
+  "component": "ingles",
+  "number": 17,
+  "context_id": "context_transformers01",
+  "stem_text": "This (17) ______ them to excel at tasks such as language translation, summarizing information, and generating creative text.",
+  "choices": [
+    "The attention mechanism allowed them to focus on important parts of the input.",
+    "“Prevented” contradicts the explanation.",
+    "“Delayed” doesn’t make sense here.",
+    "“Taught” doesn’t fit the context."
+  ],
+  "correct_choice": "The attention mechanism allowed them to focus on important parts of the input.",
+  "visual_description": "Usa context_transformers01",
+  "explanation_expert": "The correct choice explains how the attention mechanism works: it 'allowed them to focus on important parts of the input.' The other options are explanations of why certain words do not fit, not the right completion for the blank.",
+  "difficulty": "medium",
+  "tags": ["icfes", "ingles", "transformers", "AI", "attention mechanism"],
+  "page": "https://www.invicto.com.co/simulacro-icfes/ingles"
+},
+{
+  "id": "simulacro-icfes/ingles/q18",
+  "type": "question",
+  "component": "ingles",
+  "number": 18,
+  "context_id": "context_transformers01",
+  "stem_text": "Modern Transformers, like GPT and PaLM, (18) ______ into increasingly powerful versions.",
+  "choices": [
+    "grew",
+    "shrank",
+    "disappeared",
+    "adapted"
+  ],
+  "correct_choice": "grew",
+  "visual_description": "Usa context_transformers01",
+  "explanation_expert": "The best answer is 'grew' because it reflects how Transformers developed into more powerful versions over time. The other options ('shrank', 'disappeared', 'adapted') do not correctly express the intended progress and expansion.",
+  "difficulty": "medium",
+  "tags": ["icfes", "ingles", "transformers", "AI", "growth"],
+  "page": "https://www.invicto.com.co/simulacro-icfes/ingles"
+},
+{
+  "id": "simulacro-icfes/ingles/q19",
+  "type": "question",
+  "component": "ingles",
+  "number": 19,
+  "context_id": "context_transformers01",
+  "stem_text": "GPT (19) ______ on creating accurate and context-aware text.",
+  "choices": [
+    "focused",
+    "developed",
+    "remained",
+    "experimented"
+  ],
+  "correct_choice": "focused",
+  "visual_description": "Usa context_transformers01",
+  "explanation_expert": "The best option is 'focused' because GPT specializes in generating accurate and context-aware text. The other options do not fit grammatically or semantically in this context.",
+  "difficulty": "medium",
+  "tags": ["icfes", "ingles", "transformers", "AI", "GPT"],
+  "page": "https://www.invicto.com.co/simulacro-icfes/ingles"
+},
+{
+  "id": "simulacro-icfes/ingles/q20",
+  "type": "question",
+  "component": "ingles",
+  "number": 20,
+  "context_id": "context_transformers01",
+  "stem_text": "PaLM (20) ______ in solving logical problems and advanced reasoning tasks.",
+  "choices": [
+    "fails",
+    "excels",
+    "avoids",
+    "registers"
+  ],
+  "correct_choice": "excels",
+  "visual_description": "Usa context_transformers01",
+  "explanation_expert": "The correct choice is 'excels' because PaLM is designed to perform strongly in logical problem-solving and advanced reasoning. The other options ('fails', 'avoids', 'registers') do not fit the meaning or grammar of the sentence.",
+  "difficulty": "medium",
+  "tags": ["icfes", "ingles", "transformers", "AI", "PaLM"],
+  "page": "https://www.invicto.com.co/simulacro-icfes/ingles"
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+]

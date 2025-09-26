@@ -1,0 +1,151 @@
+{
+  "exam": "UNAL",
+  "timezone": "America/Bogota",
+  "cycles": [
+    {
+      "cycle_id": "2026-01",
+      "year": 2025,
+      "events": [
+        {
+          "id": "fees_payment",
+          "name": "Pagar derechos de inscripción",
+          "type": "range",
+          "start_date": "2025-07-07",
+          "end_date": "2025-08-13",
+          "applies_to": "all"
+        },
+        {
+          "id": "registration_formalize",
+          "name": "Formalizar la inscripción",
+          "type": "range",
+          "start_date": "2025-07-07",
+          "end_date": "2025-08-13",
+          "applies_to": "all"
+        },
+        {
+          "id": "admission_citation_available",
+          "name": "Consultar citación para prueba de admisión",
+          "type": "from",
+          "start_date": "2025-09-01",
+          "applies_to": "all"
+        },
+        {
+          "id": "admission_exam",
+          "name": "Presentar la prueba de admisión",
+          "type": "single",
+          "date": "2025-09-21",
+          "weekday_hint": "Sunday",
+          "applies_to": "all"
+        },
+        {
+          "id": "score_release",
+          "name": "Consultar puntaje de la prueba",
+          "type": "single",
+          "date": "2025-10-01",
+          "applies_to": "all"
+        },
+        {
+          "id": "program_enrollment",
+          "name": "Inscribir programa curricular",
+          "type": "range",
+          "start_date": "2025-10-01",
+          "end_date": "2025-10-06",
+          "applies_to": "all"
+        },
+        {
+          "id": "admission_results",
+          "name": "Consultar resultados de admisión",
+          "type": "single",
+          "date": "2025-10-09",
+          "applies_to": "all"
+        },
+        {
+          "id": "documents_and_systematization",
+          "name": "Entrega de documentos y pago de sistematización (admitidos)",
+          "type": "range",
+          "start_date": "2025-10-11",
+          "end_date": "2025-10-21",
+          "applies_to": "all"
+        }
+      ],
+      "special_programs": [
+        {
+          "program_group": "Música y Música Instrumental",
+          "events": [
+            {
+              "id": "music_specific_citation_1",
+              "name": "Consultar citación - Prueba específica (Primera)",
+              "type": "single",
+              "date": "2025-08-22"
+            },
+            {
+              "id": "music_specific_citation_2",
+              "name": "Consultar citación - Prueba específica (Segunda)",
+              "type": "single",
+              "date": "2025-09-04"
+            },
+            {
+              "id": "music_specific_exam_1",
+              "name": "Presentar prueba específica (Primera)",
+              "type": "choices",
+              "choices": ["2025-09-01", "2025-09-02"]
+            },
+            {
+              "id": "music_specific_exam_2",
+              "name": "Presentar prueba específica (Segunda)",
+              "type": "single",
+              "date": "2025-09-05"
+            },
+            {
+              "id": "music_results",
+              "name": "Resultados de admisión Música",
+              "type": "single",
+              "date": "2025-10-09"
+            },
+            {
+              "id": "music_docs",
+              "name": "Entrega de documentos y sistematización (admitidos)",
+              "type": "range",
+              "start_date": "2025-10-11",
+              "end_date": "2025-10-21"
+            }
+          ]
+        },
+        {
+          "program_group": "Artes Plásticas y Cine y Televisión",
+          "events": [
+            {
+              "id": "arts_specific_call_check",
+              "name": "Consultar citación/convocatoria a pruebas específicas",
+              "type": "single",
+              "date": "2025-10-01"
+            },
+            {
+              "id": "arts_specific_exam",
+              "name": "Presentar pruebas específicas",
+              "type": "single",
+              "date": "2025-10-10"
+            },
+            {
+              "id": "arts_results",
+              "name": "Resultados de admisión Artes Plásticas y Cine y Televisión",
+              "type": "single",
+              "date": "2025-10-17"
+            },
+            {
+              "id": "arts_docs",
+              "name": "Entrega de documentos y sistematización (admitidos)",
+              "type": "range",
+              "start_date": "2025-10-24",
+              "end_date": "2025-10-30"
+            }
+          ]
+        }
+      ],
+      "source": {
+        "notes": "Fechas tomadas de piezas oficiales del proceso 2026-01.",
+        "retrieved_from": ["unal_calendar_images"]
+      }
+    }
+  ]
+}

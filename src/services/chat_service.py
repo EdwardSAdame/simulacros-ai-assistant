@@ -3,6 +3,7 @@ from src.assistant.assistant_client import send_message_to_assistant
 from src.assistant.image_handler import format_image_urls_for_openai
 from src.storage.conversations_table import save_conversation
 from src.storage.messages_table import save_message, get_recent_messages
+from src.config.page_vectorstores import get_stores_for_page  # ✅ visibility/debug
 from src.utils.logging_utils import log_event  # ✅ structured logger
 
 
@@ -12,6 +13,13 @@ def _normalize_email_for_storage(val):
         return None
     if isinstance(val, str) and val.strip() == "":
         return None
+    return val
+
+
+def _normalize_page(val: str | None) -> str:
+    """Default to '/' if empty; pass full URL or path through (assistant_client resolves)."""
+    if not val or (isinstance(val, str) and val.strip() == ""):
+        return "/"
     return val
 
 
@@ -54,6 +62,7 @@ def get_ai_response(
     No threads/runs are used. Raises exceptions for DLQ-friendly retries.
     Returns: (assistant_reply: str, conversation_id: str)
     """
+    page = _normalize_page(page)
 
     # Step 1: Find-or-create conversation (REUSE if conversation_id provided)
     try:
@@ -62,22 +71,23 @@ def get_ai_response(
                 "conversation_id": conversation_id,
                 "user_id": user_id,
                 "page": page,
+                "vector_stores": get_stores_for_page(page),  # ✅ visibility
             })
         else:
-            # First turn → create a new conversation row
-            sanitized_email = _normalize_email_for_storage(email)  # <— IMPORTANT
+            sanitized_email = _normalize_email_for_storage(email)
             conversation_data = save_conversation(
                 user_id=user_id,
-                name=name or "",  # name can be empty string; it's not a key
+                name=name or "",
                 email=sanitized_email,
                 title=(message or "[Sin texto]")[:40],
-                page=page or "/",
+                page=page,
             )
             conversation_id = conversation_data["ConversationId"]
             log_event("conversation_created", {
                 "conversation_id": conversation_id,
                 "user_id": user_id,
                 "page": page,
+                "vector_stores": get_stores_for_page(page),  # ✅ visibility
             })
     except Exception as e:
         raise RuntimeError(f"❌ Failed to save/reuse conversation: {e}")
@@ -102,21 +112,22 @@ def get_ai_response(
     if message:
         content_parts.append({"type": "text", "text": message})
 
-    content_parts += image_blocks  # images after the text content
+    content_parts += image_blocks
 
-    # Step 4: Send to model — passing name/email/page for runtime signals
+    # Step 4: Send to model
     try:
         log_event("openai_request_sent", {
             "user_id": user_id,
             "page": page,
-            "content_parts_count": len(content_parts)
+            "content_parts_count": len(content_parts),
+            "vector_stores": get_stores_for_page(page),  # ✅ visibility
         })
         assistant_reply = send_message_to_assistant(
             content_parts=content_parts,
             user_id=user_id,
             page=page,
             name=(name or None),
-            email=_normalize_email_for_storage(email)  # None for guests; fine for context
+            email=_normalize_email_for_storage(email),
         )
     except Exception as e:
         raise RuntimeError(f"❌ OpenAI Responses API failed: {e}")
@@ -126,16 +137,16 @@ def get_ai_response(
 
     log_event("openai_response_received", {
         "conversation_id": conversation_id,
-        "reply_snippet": assistant_reply[:100]
+        "reply_snippet": assistant_reply[:100],
     })
 
     # Step 5: Persist messages
     try:
         if message:
-            save_message(conversation_id, role="user",      message_text=message)
+            save_message(conversation_id, role="user", message_text=message)
         for img in image_urls or []:
-            save_message(conversation_id, role="user",      message_text=f"[Imagen] {img}")
-        save_message(conversation_id,     role="assistant", message_text=assistant_reply)
+            save_message(conversation_id, role="user", message_text=f"[Imagen] {img}")
+        save_message(conversation_id, role="assistant", message_text=assistant_reply)
 
         log_event("messages_saved", {
             "conversation_id": conversation_id,

@@ -1,0 +1,397 @@
+[
+  {
+    "id": "simulacro-unal/analisis-de-imagen/context_figuras01",
+    "type": "context",
+    "title": "Razonamiento abstracto: comparación de figuras",
+    "text": "Se presentan dos figuras iniciales. El objetivo es identificar una cualidad o característica que ambas comparten y, posteriormente, seleccionar de entre tres opciones cuál otra figura también posee esa misma cualidad.",
+    "visual_description": "",
+    "page": "https://www.invicto.com.co/simulacro-unal/analisis-de-imagen"
+  },
+  {
+  "id": "simulacro-unal/analisis-de-imagen/q01",
+  "type": "question",
+  "component": "analisis-de-imagen",
+  "number": 1,
+  "context_id": "context_figuras01",
+  "stem_text": "Identifica la característica que comparten las dos figuras superiores y selecciona, entre las tres opciones dadas (A, B, C), cuál figura también posee esa característica.",
+  "choices": [
+    "Opción A: Conjunto de 8 triángulos (número par), de los cuales 5 están sombreados.",
+    "Opción B: Conjunto de 4 triángulos (número par), de los cuales 2 están sombreados.",
+    "Opción C: Conjunto de 9 triángulos (número impar), de los cuales 5 están sombreados."
+  ],
+  "correct_choice": "Opción C: Conjunto de 9 triángulos (número impar), de los cuales 5 están sombreados.",
+  "visual_description": "En la parte superior se muestran dos conjuntos de triángulos. El primero tiene 5 triángulos, 3 sombreados; el segundo tiene 7 triángulos, 4 sombreados. En ambos casos, el número total de triángulos es impar y la mayoría está sombreada. Debajo se muestran las opciones A, B y C, cada una con diferentes cantidades de triángulos sombreados y no sombreados.",
+  "explanation_expert": "Las dos figuras iniciales tienen en común un número impar de triángulos y que la mayoría de ellos están sombreados. La opción C cumple con esta característica al mostrar 9 triángulos (impar), de los cuales 5 están sombreados. La opción A presenta mayoría de sombreados, pero el número total es par (8). La opción B tiene 4 triángulos, la mitad sombreados y la mitad no, además de ser un número par.",
+  "difficulty": "medium",
+  "tags": ["unal", "analisis de imagen"],
+  "page": "https://www.invicto.com.co/simulacro-unal/analisis-de-imagen"
+},
+{
+  "id": "simulacro-unal/analisis-de-imagen/q02",
+  "type": "question",
+  "component": "analisis-de-imagen",
+  "number": 2,
+  "context_id": "context_figuras01",
+  "stem_text": "Observa las dos cuadrículas superiores (2×2). Identifica la regla que transforma la primera en la segunda y elige (A, B o C) cuál cuadrícula continúa la secuencia.",
+  "choices": [
+    "Opción A: Sup. izq. ondas; sup. der. triángulo invertido; inf. izq. círculo; inf. der. rombo sobre fondo negro.",
+    "Opción B: Sup. izq. triángulo invertido; sup. der. rombo sobre fondo negro; inf. izq. ondas; inf. der. círculo.",
+    "Opción C: Sup. izq. círculo; sup. der. rombo sobre fondo negro; inf. izq. triángulo invertido; inf. der. ondas."
+  ],
+  "correct_choice": "Opción C: Sup. izq. círculo; sup. der. rombo sobre fondo negro; inf. izq. triángulo invertido; inf. der. ondas.",
+  "visual_description": "Cuadrícula 1 (arriba izquierda): ondas en sup. izq., triángulo invertido en sup. der., rombo blanco sobre fondo negro en inf. izq., círculo negro en inf. der. Cuadrícula 2 (arriba derecha): cada diseño se desplazó una celda en sentido horario respecto a la primera. La opción correcta debe aplicar otra rotación horaria: círculo a sup. izq., rombo a sup. der., triángulo a inf. izq., ondas a inf. der.",
+  "explanation_expert": "Entre la primera y la segunda cuadrícula, cada diseño rota 90° en sentido horario. Aplicando la misma regla una vez más se obtiene la disposición de la opción C. Las opciones A y B no respetan el desplazamiento horario uniforme de las cuatro celdas.",
+  "difficulty": "medium",
+  "tags": ["unal", "analisis de imagen"],
+  "page": "https://www.invicto.com.co/simulacro-unal/analisis-de-imagen"
+},
+{
+  "id": "simulacro-unal/analisis-de-imagen/q03",
+  "type": "question",
+  "component": "analisis-de-imagen",
+  "number": 3,
+  "context_id": "context_figuras01",
+  "stem_text": "Observa las dos secuencias diagonales de círculos en la parte superior. Identifica la característica que comparten y selecciona (A, B o C) cuál de las opciones también cumple con esa característica.",
+  "choices": [
+    "Opción A: Secuencia diagonal que inicia con un círculo blanco en la parte superior.",
+    "Opción B: Secuencia diagonal que inicia con un círculo negro en la parte superior.",
+    "Opción C: Secuencia diagonal que inicia con un círculo blanco en la parte superior."
+  ],
+  "correct_choice": "Opción B: Secuencia diagonal que inicia con un círculo negro en la parte superior.",
+  "visual_description": "Figura 1 (arriba izquierda): secuencia diagonal descendente de círculos, comenzando con un círculo negro seguido de círculos blancos. Figura 2 (arriba derecha): secuencia diagonal descendente de círculos, comenzando con un círculo negro seguido de varios negros y terminando con un círculo blanco. Opciones A, B y C muestran nuevas secuencias diagonales; solo la opción B inicia con un círculo negro en la parte superior, igual que las figuras de referencia.",
+  "explanation_expert": "Las dos figuras superiores tienen en común que la secuencia diagonal comienza con un círculo sombreado en la parte superior. Entre las opciones, únicamente la opción B cumple con esta característica. La opción A y la opción C comienzan con un círculo blanco, por lo que no son correctas.",
+  "difficulty": "easy",
+  "tags": ["unal", "analisis de imagen"],
+  "page": "https://www.invicto.com.co/simulacro-unal/analisis-de-imagen"
+},
+{
+    "id": "simulacro-unal/analisis-de-imagen/context_secuencia01",
+    "type": "context",
+    "title": "Razonamiento abstracto: completar secuencias",
+    "text": "Este tipo de preguntas consiste en completar una serie o secuencia de formas identificando cuál de las respuestas sugeridas debe colocarse en el espacio vacío.",
+    "visual_description": "Se muestran secuencias lineales o en cuadrícula de figuras geométricas o abstractas, con una posición vacía. El estudiante debe analizar el patrón de transformación (rotación, repetición, alternancia, etc.) y seleccionar entre varias opciones cuál figura completa correctamente la serie.",
+    "page": "https://www.invicto.com.co/simulacro-unal/analisis-de-imagen"
+},
+{
+  "id": "simulacro-unal/analisis-de-imagen/q04",
+  "type": "question",
+  "component": "analisis-de-imagen",
+  "number": 4,
+  "context_id": "context_secuencia01",
+  "stem_text": "Completa la secuencia ubicando el círculo pequeño exterior en la posición correcta alrededor del círculo grande.",
+  "choices": [
+    "Opción A: Círculo pequeño a la izquierda del círculo grande.",
+    "Opción B: Círculo pequeño debajo del círculo grande.",
+    "Opción C: Círculo pequeño a la derecha del círculo grande."
+  ],
+  "correct_choice": "Opción C: Círculo pequeño a la derecha del círculo grande.",
+  "visual_description": "Matriz 2×2 con círculos grandes. Sup-izq: círculo pequeño en la zona arriba-derecha. Sup-der: celda vacía (?). Inf-izq: círculo pequeño a la izquierda. Inf-der: círculo pequeño abajo-derecha. La órbita del círculo pequeño progresa en sentido horario en cada paso.",
+  "explanation_expert": "El círculo pequeño exterior se desplaza en sentido horario alrededor del círculo grande cuando se avanza por la matriz en orden de lectura. Desde la posición arriba-derecha (sup-izq) el siguiente paso para la casilla sup-der es ‘derecha’. Las opciones A (izquierda) y B (abajo) no respetan ese giro horario.",
+  "difficulty": "easy",
+  "tags": ["unal", "analisis de imagen"],
+  "page": "https://www.invicto.com.co/simulacro-unal/analisis-de-imagen"
+},
+{
+  "id": "simulacro-unal/analisis-de-imagen/q05",
+  "type": "question",
+  "component": "analisis-de-imagen",
+  "number": 5,
+  "context_id": "context_secuencia01",
+  "stem_text": "En la matriz 2×2, una ‘L’ delgada rota 90° en sentido antihorario entre casillas y a veces queda parcialmente cubierta por las formas negras. ¿Cuál opción completa correctamente la casilla faltante (abajo-derecha)?",
+  "choices": [
+    "Opción A: Solo trazo vertical izquierdo visible; sin trazo horizontal inferior.",
+    "Opción B: Solo trazo vertical derecho visible; sin trazo horizontal inferior.",
+    "Opción C: Trazos horizontal inferior y vertical derecho visibles (esquina inferior-derecha)."
+  ],
+  "correct_choice": "Opción C: Trazos horizontal inferior y vertical derecho visibles (esquina inferior-derecha).",
+  "visual_description": "Matriz 2×2 con un bloque negro en la esquina sup-izq y una cuña negra en la sup-der. Debajo se insinúan segmentos finos que forman una ‘L’ mayúscula. Casilla 1: se ve el trazo vertical derecho. Casilla 2: se ve el trazo vertical izquierdo. Casilla 4: se ven el trazo horizontal inferior y el vertical izquierdo. La casilla faltante (3) debe mostrar el horizontal inferior y el vertical derecho.",
+  "explanation_expert": "La ‘L’ delgada rota 90° en sentido antihorario a cada paso: (1) vertical derecho; (2) vertical izquierdo; (4) horizontal inferior + vertical izquierdo; por lo tanto (3) debe ser horizontal inferior + vertical derecho. Las opciones A y B omiten uno de los brazos requeridos.",
+  "difficulty": "medium",
+  "tags": ["unal", "analisis de imagen"],
+  "page": "https://www.invicto.com.co/simulacro-unal/analisis-de-imagen"
+},
+{
+  "id": "simulacro-unal/analisis-de-imagen/q06",
+  "type": "question",
+  "component": "analisis-de-imagen",
+  "number": 6,
+  "context_id": "context_secuencia01",
+  "stem_text": "Completa la matriz 2×2. Observa cómo evoluciona el número de triángulos en cada celda y elige la figura que debe ir en la casilla vacía.",
+  "choices": [
+    "Opción A: Subdivisiones que generan ~10 triángulos.",
+    "Opción B: Patrón radial de 8 triángulos iguales.",
+    "Opción C: Subdivisiones que generan 12 triángulos."
+  ],
+  "correct_choice": "Opción C: Subdivisiones que generan 12 triángulos.",
+  "visual_description": "Matriz 2×2. Celda 1 (arriba-izq): cuadrado con 8 triángulos. Celda 2 (arriba-der): cuadrado con 10 triángulos. Celda 3 (abajo-izq): vacía (?). Celda 4 (abajo-der): cuadrado con 14 triángulos. Debajo, tres opciones (A, B, C) con diferentes subdivisiones; la opción C muestra 12 triángulos.",
+  "explanation_expert": "El conteo de triángulos sigue una progresión aritmética que aumenta de 2 en 2: 8 → 10 → 12 → 14. La casilla faltante debe contener 12 triángulos, lo que coincide con la opción C. La opción B tiene 8 triángulos; la opción A no llega a 12 (≈10).",
+  "difficulty": "medium",
+  "tags": ["unal", "analisis de imagen"],
+  "page": "https://www.invicto.com.co/simulacro-unal/analisis-de-imagen"
+},
+{
+  "id": "simulacro-unal/analisis-de-imagen/context_espacial01",
+  "type": "context",
+  "title": "Razonamiento espacial: redes de sólidos",
+  "text": "Identifica en qué se convierte una forma tridimensional si se 'despliega' a una forma plana (red o desarrollo de un sólido). Se debe elegir entre varias opciones cuál red corresponde correctamente a la figura tridimensional presentada.",
+  "visual_description": "Se muestran figuras tridimensionales (cubos, prismas, pirámides, etc.) junto con diferentes posibles desarrollos planos. El estudiante debe determinar cuál de las opciones corresponde al net correcto de la figura en 3D.",
+  "page": "https://www.invicto.com.co/simulacro-unal/analisis-de-imagen"
+},
+{
+  "id": "simulacro-unal/analisis-de-imagen/q07",
+  "type": "question",
+  "component": "analisis-de-imagen",
+  "number": 7,
+  "context_id": "context_espacial01",
+  "stem_text": "Identifica cuál de los desarrollos planos corresponde correctamente al cubo tridimensional mostrado.",
+  "choices": [
+    "Opción A: Red con 5 cuadrados.",
+    "Opción B: Red con 6 cuadrados en disposición de cruz.",
+    "Opción C: Red con rectángulos alargados que no forman un cubo.",
+    "Opción D: Red con 7 cuadrados."
+  ],
+  "correct_choice": "Opción B: Red con 6 cuadrados en disposición de cruz.",
+  "visual_description": "Figura inicial: cubo tridimensional. Opción A: cruz incompleta con 5 cuadrados. Opción B: cruz completa con 6 cuadrados. Opción C: disposición de rectángulos irregulares. Opción D: red extendida con 7 cuadrados.",
+  "explanation_expert": "Un cubo tiene exactamente 6 caras. La opción A es incorrecta porque tiene solo 5, la opción D porque tiene 7, y la opción C porque no muestra 6 cuadrados idénticos. La opción B presenta una cruz con 6 cuadrados que sí puede plegarse para formar el cubo.",
+  "difficulty": "easy",
+  "tags": ["unal", "analisis de imagen"],
+  "page": "https://www.invicto.com.co/simulacro-unal/analisis-de-imagen"
+},
+{
+  "id": "simulacro-unal/analisis-de-imagen/q08",
+  "type": "question",
+  "component": "analisis-de-imagen",
+  "number": 8,
+  "context_id": "context_espacial01",
+  "stem_text": "Identifica cuál de las redes planas corresponde correctamente a la pirámide tridimensional de base cuadrada mostrada.",
+  "choices": [
+    "Opción A: Red con base cuadrada y cuatro triángulos iguales unidos a cada lado.",
+    "Opción B: Red con base rectangular y triángulos en los bordes.",
+    "Opción C: Otra red con base rectangular y triángulos en los bordes.",
+    "Opción D: Red con base triangular y tres triángulos iguales (tetraedro)."
+  ],
+  "correct_choice": "Opción A: Red con base cuadrada y cuatro triángulos iguales unidos a cada lado.",
+  "visual_description": "Figura inicial: pirámide de base cuadrada. Opción A: cuadrado central rodeado por cuatro triángulos idénticos, formando la red correcta. Opción B y Opción C: muestran bases rectangulares, por lo que no corresponden a una pirámide cuadrada. Opción D: presenta una base triangular típica de un tetraedro.",
+  "explanation_expert": "Una pirámide cuadrada tiene una base cuadrada y cuatro caras laterales triangulares iguales. Solo la opción A cumple con estas condiciones. Las opciones B y C tienen bases rectangulares y no pueden plegarse correctamente. La opción D representa una figura con base triangular, que corresponde a un tetraedro.",
+  "difficulty": "medium",
+  "tags": ["unal", "analisis de imagen"],
+  "page": "https://www.invicto.com.co/simulacro-unal/analisis-de-imagen"
+},
+{
+  "id": "simulacro-unal/analisis-de-imagen/q09",
+  "type": "question",
+  "component": "analisis-de-imagen",
+  "number": 9,
+  "context_id": "context_espacial01",
+  "stem_text": "Elige la red (net) que se pliega correctamente para formar la figura tridimensional mostrada, la cual posee 7 caras en total: base central, cuatro rectángulos laterales y dos 'alas' triangulares opuestas.",
+  "choices": [
+    "Opción A: Red con 8 caras totales (una más de las necesarias).",
+    "Opción B: Red con 7 caras; dos 'alas' triangulares opuestas y rectángulos alineados correctamente alrededor de la base.",
+    "Opción C: Red con 7 caras; el ala izquierda está reflejada y no encaja al plegar.",
+    "Opción D: Red con 7 caras; el ala inferior está reflejada y no encaja al plegar."
+  ],
+  "correct_choice": "Opción B: Red con 7 caras; dos 'alas' triangulares opuestas y rectángulos alineados correctamente alrededor de la base.",
+  "visual_description": "Figura 3D irregular con base prismática y dos 'alas' triangulares elevadas. Cuatro propuestas de red: A exhibe una tira con demasiados cuadrados; B muestra base central, cuatro rectángulos adyacentes y dos triángulos opuestos correctos; C y D presentan 7 caras pero con una de las alas reflejada, impidiendo el plegado correcto.",
+  "explanation_expert": "La figura tiene 7 caras. A es inválida por tener 8. Aunque C y D tienen 7, una de sus 'alas' triangulares está reflejada respecto a la orientación necesaria, por lo que no cierran. B mantiene el número de caras y la orientación adecuada de las alas, permitiendo el plegado correcto.",
+  "difficulty": "medium",
+  "tags": ["unal", "analisis de imagen"],
+  "page": "https://www.invicto.com.co/simulacro-unal/analisis-de-imagen"
+},
+{
+  "id": "simulacro-unal/analisis-de-imagen/context_plano01",
+  "type": "context",
+  "title": "Razonamiento espacial: vista en planta",
+  "text": "En estas preguntas debes identificar la ‘planta’ de la forma tridimensional: la vista superior mirando exactamente hacia abajo. Selecciona la figura que representa correctamente cómo se ve la parte superior de la forma geométrica.",
+  "visual_description": "Se presenta una figura 3D junto con varias opciones 2D. El estudiante debe analizar la disposición relativa de caras, bordes y proporciones para elegir la vista superior correcta (planta).",
+  "page": "https://www.invicto.com.co/simulacro-unal/analisis-de-imagen"
+},
+{
+  "id": "simulacro-unal/analisis-de-imagen/q10",
+  "type": "question",
+  "component": "analisis-de-imagen",
+  "number": 10,
+  "context_id": "context_plano01",
+  "stem_text": "Identifica la vista en planta (desde arriba) del conjunto de cubos mostrado.",
+  "choices": [
+    "Opción A: Vista lateral izquierda (no planta).",
+    "Opción B: Vista lateral derecha (no planta).",
+    "Opción C: Vista superior en forma de 'L' (dos cuadros alineados y uno hacia abajo en el extremo izquierdo)."
+  ],
+  "correct_choice": "Opción C: Vista superior en forma de 'L' (dos cuadros alineados y uno hacia abajo en el extremo izquierdo).",
+  "visual_description": "Bloque de cubos con un cubo central, uno apilado sobre él y prolongaciones hacia la derecha y hacia el frente. La silueta en planta es una 'L'. Las opciones A y B corresponden a elevaciones laterales; la opción C coincide con la huella superior.",
+  "explanation_expert": "En planta solo se consideran las huellas de los cubos. La disposición produce una 'L'. Las opciones A y B son vistas laterales (izquierda y derecha, respectivamente), por lo que no representan la planta. La opción C coincide con la vista superior correcta.",
+  "difficulty": "easy",
+  "tags": ["unal", "analisis de imagen"],
+  "page": "https://www.invicto.com.co/simulacro-unal/analisis-de-imagen"
+},
+{
+  "id": "simulacro-unal/analisis-de-imagen/q11",
+  "type": "question",
+  "component": "analisis-de-imagen",
+  "number": 11,
+  "context_id": "context_plano01",
+  "stem_text": "Elige la vista en planta (desde arriba) de la figura mostrada.",
+  "choices": [
+    "Opción A: Tres cuadrados alineados con subdivisiones internas (tipo prisma).",
+    "Opción B: Cuadrado con diagonales y dos triángulos isósceles adosados a izquierda y derecha.",
+    "Opción C: Cuadrado con círculo interno y triángulos laterales (indica un cono)."
+  ],
+  "correct_choice": "Opción B: Cuadrado con diagonales y dos triángulos isósceles adosados a izquierda y derecha.",
+  "visual_description": "Figura 3D: cubo con una pirámide de base cuadrada encima y faldones triangulares a izquierda y derecha. En planta: el cubo es un cuadrado; la pirámide se sugiere con diagonales; los faldones se ven como triángulos laterales. La opción B coincide con esta silueta.",
+  "explanation_expert": "La planta de una pirámide sobre un cubo es un cuadrado; las diagonales representan las aristas que suben al vértice. Los faldones laterales aparecen como dos triángulos simétricos. A muestra tres cuadrados (prisma), y C representa un cono (círculo), por lo que no corresponden.",
+  "difficulty": "medium",
+  "tags": ["unal", "analisis de imagen"],
+  "page": "https://www.invicto.com.co/simulacro-unal/analisis-de-imagen"
+},
+{
+  "id": "simulacro-unal/analisis-de-imagen/q12",
+  "type": "question",
+  "component": "analisis-de-imagen",
+  "number": 12,
+  "context_id": "context_plano01",
+  "stem_text": "Elige la vista en planta (desde arriba) del sólido mostrado: bloque central con pirámide superior, un cubo adosado y dos elementos inclinados.",
+  "choices": [
+    "Opción A: Planta formada por cuadrados iguales (las rampas tienen la misma huella que un cubo).",
+    "Opción B: Planta con una pieza rectangular alargada (la rampa se ve más larga que un cubo).",
+    "Opción C: Planta con subdivisiones/diagonales visibles en las partes inclinadas."
+  ],
+  "correct_choice": "Opción A: Planta formada por cuadrados iguales (las rampas tienen la misma huella que un cubo).",
+  "visual_description": "Figura 3D compuesta por un cubo con pirámide encima, un cubo lateral y dos rampas. En planta, todas las piezas proyectan huellas cuadradas del mismo tamaño; no se ven caras laterales ni diagonales internas.",
+  "explanation_expert": "En vista superior, las rampas no se alargan: su proyección tiene la misma huella que un cubo. Por eso A es correcta. B es errónea porque alarga la rampa en planta; C es errónea porque muestra aristas internas que no son visibles desde arriba.",
+  "difficulty": "medium",
+  "tags": ["unal", "analisis de imagen"],
+  "page": "https://www.invicto.com.co/simulacro-unal/analisis-de-imagen"
+},
+{
+  "id": "simulacro-unal/analisis-de-imagen/context_simetria01",
+  "type": "context",
+  "title": "Simetría: imagen en espejo",
+  "text": "Identifica la imagen especular exacta de la figura dada. Si la imagen reflejada también está rotada, es incorrecta.",
+  "visual_description": "Se muestra una figura base y varias opciones que aparentan ser su reflejo en un espejo plano (usualmente respecto de un eje vertical u horizontal indicado o implícito). Debe elegirse el reflejo exacto sin rotaciones adicionales ni cambios de escala.",
+  "page": "https://www.invicto.com.co/simulacro-unal/analisis-de-imagen"
+},
+{
+  "id": "simulacro-unal/analisis-de-imagen/q13",
+  "type": "question",
+  "component": "analisis-de-imagen",
+  "number": 13,
+  "context_id": "context_simetria01",
+  "stem_text": "Identifica la imagen en espejo (respecto a un eje vertical) de la figura dada. Recuerda: si además está rotada, es incorrecta.",
+  "choices": [
+    "Opción A: Reflejado como si el espejo fuera horizontal (arriba–abajo); el triángulo alargado rayado permanece a la derecha.",
+    "Opción B: Misma figura que el original (sin inversión).",
+    "Opción C: Reflejo vertical correcto: el triángulo alargado rayado queda a la izquierda y las diagonales invierten su inclinación."
+  ],
+  "correct_choice": "Opción C: Reflejo vertical correcto: el triángulo alargado rayado queda a la izquierda y las diagonales invierten su inclinación.",
+  "visual_description": "Figura poligonal con subdivisiones triangulares y zonas rayadas. A la derecha se indica un eje de espejo vertical. La opción correcta debe intercambiar izquierda–derecha (el triángulo alargado rayado pasa del lado derecho al izquierdo) sin rotar la figura.",
+  "explanation_expert": "El espejo es vertical, por lo que la inversión debe ser izquierda–derecha. La opción A corresponde a un reflejo en eje horizontal; la opción B reproduce la figura original. La opción C invierte correctamente las posiciones laterales y la inclinación de las diagonales sin rotación adicional.",
+  "difficulty": "easy",
+  "tags": ["unal", "analisis de imagen"],
+  "page": "https://www.invicto.com.co/simulacro-unal/analisis-de-imagen"
+},
+{
+  "id": "simulacro-unal/analisis-de-imagen/q14",
+  "type": "question",
+  "component": "analisis-de-imagen",
+  "number": 14,
+  "context_id": "context_simetria01",
+  "stem_text": "Identifica la imagen en espejo (respecto a un eje vertical). Recuerda: no debe haber rotación.",
+  "choices": [
+    "Opción A: Reflejo vertical correcto; la flecha grande sigue apuntando hacia abajo.",
+    "Opción B: Figura rotada; la flecha grande ya no apunta hacia abajo.",
+    "Opción C: Reflejada y además rotada; la flecha grande cambia de orientación."
+  ],
+  "correct_choice": "Opción A: Reflejo vertical correcto; la flecha grande sigue apuntando hacia abajo.",
+  "visual_description": "Figura original: dos trazos curvos entrelazados con tres flechas; una flecha grande apunta claramente hacia abajo. Eje de espejo vertical a la derecha. La opción correcta debe intercambiar izquierda–derecha sin cambiar arriba–abajo, por lo que la flecha grande debe seguir apuntando hacia abajo.",
+  "explanation_expert": "En un reflejo vertical solo se invierte izquierda–derecha; la orientación vertical se conserva. Por lo tanto, la flecha grande debe permanecer apuntando hacia abajo. A lo cumple; B está rotada y C está reflejada y rotada.",
+  "difficulty": "easy",
+  "tags": ["unal", "analisis de imagen"],
+  "page": "https://www.invicto.com.co/simulacro-unal/analisis-de-imagen"
+},
+{
+  "id": "simulacro-unal/analisis-de-imagen/q15",
+  "type": "question",
+  "component": "analisis-de-imagen",
+  "number": 15,
+  "context_id": "context_simetria01",
+  "stem_text": "Identifica la imagen en espejo respecto a un eje vertical. Recuerda: el reflejo no debe estar rotado.",
+  "choices": [
+    "Opción A: Algunas partes horizontales no se invierten y el tramo vertical aparece como rotado.",
+    "Opción B: Todas las partes se invierten izquierda–derecha sin rotación adicional (reflejo exacto).",
+    "Opción C: La barra horizontal central no se invierte; conserva la orientación del original."
+  ],
+  "correct_choice": "Opción B: Todas las partes se invierten izquierda–derecha sin rotación adicional (reflejo exacto).",
+  "visual_description": "Figura en forma de entramado de barras con un eje de espejo vertical a la derecha. El reflejo correcto debe cambiar de lado el ‘codo’ superior, las pestañas de la barra central y el pie inferior, manteniendo arriba/abajo. La opción B cumple exactamente; A y C dejan la barra horizontal central sin invertir (y A además sugiere rotación).",
+  "explanation_expert": "En un espejo vertical se invierte izquierda–derecha en todas las características sin rotar. La opción B realiza esa inversión en los tres rasgos clave. En A la horizontal no se refleja correctamente y el tramo vertical parece rotado; en C la horizontal central tampoco se invierte.",
+  "difficulty": "medium",
+  "tags": ["unal", "analisis de imagen"],
+  "page": "https://www.invicto.com.co/simulacro-unal/analisis-de-imagen"
+},
+{
+  "id": "simulacro-unal/analisis-de-imagen/context_rotacion01",
+  "type": "context",
+  "title": "Razonamiento espacial: figuras rotadas",
+  "text": "La figura de la pregunta está rotada. Tu tarea es identificar, entre las opciones, la figura que es idéntica a la original pero rotada (puede variar el ángulo y el sentido). No se permiten reflejos en espejo, cambios de escala ni deformaciones.",
+  "visual_description": "Se muestra una figura base y varias alternativas muy similares. Solo una coincide exactamente con la forma original tras aplicar una rotación (horaria o antihoraria) sin reflejar ni alterar proporciones.",
+  "page": "https://www.invicto.com.co/simulacro-unal/analisis-de-imagen"
+},
+{
+  "id": "simulacro-unal/analisis-de-imagen/q16",
+  "type": "question",
+  "component": "analisis-de-imagen",
+  "number": 16,
+  "context_id": "context_rotacion01",
+  "stem_text": "La figura de la pregunta ha sido rotada. Elige la opción que es idéntica a la original salvo por una rotación (sin traslaciones de piezas, reflejos ni cambios de unión).",
+  "choices": [
+    "Opción A: Las piezas se ven reubicadas; el prisma rectangular largo cambia su posición relativa.",
+    "Opción B: El prisma rectangular largo se ha movido respecto al prisma vertical y el ala cambia de lado.",
+    "Opción C: El prisma rectangular largo atraviesa el conjunto en otra posición; el ala se reubica.",
+    "Opción D: Misma disposición de prisma largo, prisma vertical y ala triangular; solo hay rotación del conjunto."
+  ],
+  "correct_choice": "Opción D: Misma disposición de prisma largo, prisma vertical y ala triangular; solo hay rotación del conjunto.",
+  "visual_description": "Conjunto 3D con un prisma rectangular largo horizontal unido a un prisma vertical en un extremo y un ala prismática/triangular en el otro. Las opciones A–C alteran la posición relativa del prisma largo respecto al vertical y/o el ala. La opción D conserva la misma configuración y difiere únicamente por una rotación global.",
+  "explanation_expert": "Para ser la misma figura rotada, las posiciones relativas de las tres piezas (prisma largo, prisma vertical y ala) deben mantenerse. En A, B y C el prisma largo ha sido movido, por lo que no son rotaciones puras. D conserva la configuración y únicamente rota el conjunto.",
+  "difficulty": "medium",
+  "tags": ["unal", "analisis de imagen"],
+  "page": "https://www.invicto.com.co/simulacro-unal/analisis-de-imagen"
+},
+{
+  "id": "simulacro-unal/analisis-de-imagen/q17",
+  "type": "question",
+  "component": "analisis-de-imagen",
+  "number": 17,
+  "context_id": "context_rotacion01",
+  "stem_text": "Elige la opción que es idéntica a la figura dada salvo por una rotación (sin reflejos ni piezas movidas).",
+  "choices": [
+    "Opción A: Conserva el cuerpo central en forma de 'T' y los salientes en las mismas posiciones relativas (rotación pura).",
+    "Opción B: El brazo superior presenta quiebres formando una 'W'.",
+    "Opción C: El brazo superior presenta un quiebre en zigzag formando una 'Z'."
+  ],
+  "correct_choice": "Opción A: Conserva el cuerpo central en forma de 'T' y los salientes en las mismas posiciones relativas (rotación pura).",
+  "visual_description": "Sólido compuesto con brazo horizontal largo y pilar central (silueta de 'T'); dos cubitos escalonados a la izquierda y un saliente único al extremo derecho. La opción correcta debe mantener esa T y la ubicación relativa de los salientes; B convierte la parte superior en 'W' y C en 'Z'.",
+  "explanation_expert": "Para ser la misma figura rotada, la silueta y las conexiones deben permanecer idénticas. A respeta la 'T' central y los salientes. B modifica el contorno a una 'W' y C a una 'Z', por lo que no son rotaciones de la original.",
+  "difficulty": "medium",
+  "tags": ["unal", "analisis de imagen"],
+  "page": "https://www.invicto.com.co/simulacro-unal/analisis-de-imagen"
+},
+{
+  "id": "simulacro-unal/analisis-de-imagen/q18",
+  "type": "question",
+  "component": "analisis-de-imagen",
+  "number": 18,
+  "context_id": "context_rotacion01",
+  "stem_text": "Elige la opción que corresponde a la misma figura que la dada, pero solo rotada (sin deformar piezas ni alterar sus conexiones).",
+  "choices": [
+    "Opción A: Presenta el bloque pequeño junto al ‘techo’ con forma/ángulo diferente (deformado).",
+    "Opción B: También deforma el bloque pequeño junto al ‘techo’ y cambia su relación con la arista inclinada.",
+    "Opción C: Conserva pilar, brazo, arriostre triangular y el bloque pequeño junto al ‘techo’ sin cambios; únicamente rota el conjunto."
+  ],
+  "correct_choice": "Opción C: Conserva pilar, brazo, arriostre triangular y el bloque pequeño junto al ‘techo’ sin cambios; únicamente rota el conjunto.",
+  "visual_description": "Sólido con gran pilar vertical a la izquierda, brazo horizontal central, arriostre triangular inferior y un volumen tipo ‘techo’ inclinado en el extremo derecho con un paralelepípedo pequeño adosado. A y B alteran la forma/posición del bloque pequeño; C mantiene todas las proporciones y uniones, cambiando solo la orientación global.",
+  "explanation_expert": "La invariancia clave es el pequeño paralelepípedo junto al ‘techo’. En A y B está deformado o reorientado, por lo que no son rotaciones puras. C preserva dimensiones y conexiones de todas las piezas; por eso es la misma figura rotada.",
+  "difficulty": "medium",
+  "tags": ["unal", "analisis de imagen"],
+  "page": "https://www.invicto.com.co/simulacro-unal/analisis-de-imagen"
+}
+]
+

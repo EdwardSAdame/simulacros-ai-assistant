@@ -1,0 +1,105 @@
+{
+  "exam": "ICFES_SABER_11",
+  "name": "Examen Saber 11°",
+  "language": "es-CO",
+  "sessions": 2,
+  "session_duration_minutes": 270,
+  "total_duration_minutes": 540,
+  "components": [
+    {
+      "key": "matematicas",
+      "name": "Matemáticas",
+      "questions": 50,
+      "domains": ["Álgebra y cálculo", "Geometría", "Estadística"],
+      "competencies": ["Interpretación y representación", "Formulación y ejecución", "Argumentación"],
+      "notes": ["Incluye herramientas genéricas y no genéricas del quehacer matemático escolar"]
+    },
+    {
+      "key": "lectura_critica",
+      "name": "Lectura Crítica",
+      "questions": 41,
+      "text_types": {
+        "continuos": ["Literarios (cuentos, novelas)", "Informativos (ensayos, artículos de prensa)", "Filosóficos (textos argumentativos)"],
+        "discontinuos": ["Infografías", "Cómics", "Tablas", "Gráficos"]
+      },
+      "competencies": [
+        "Identificar y entender contenidos locales",
+        "Comprender la articulación para el sentido global",
+        "Reflexionar y evaluar críticamente el contenido"
+      ]
+    },
+    {
+      "key": "sociales_ciudadanas",
+      "name": "Sociales y Ciudadanas",
+      "questions": 50,
+      "competencies": [
+        "Pensamiento social",
+        "Interpretación y análisis de perspectivas",
+        "Pensamiento reflexivo y sistémico"
+      ]
+    },
+    {
+      "key": "ciencias_naturales",
+      "name": "Ciencias Naturales",
+      "questions": 58,
+      "competencies": ["Explicación de fenómenos", "Uso comprensivo del conocimiento científico", "Indagación"],
+      "components": [
+        {
+          "name": "Físico",
+          "topics": ["Cinemática", "Dinámica", "Energía mecánica", "Ondas", "Energía térmica", "Electromagnetismo", "Campo gravitacional", "Transformación y conservación de energía"]
+        },
+        {
+          "name": "Químico",
+          "topics": ["Cambios químicos", "Átomo", "Enlaces", "Propiedades de la materia", "Estequiometría", "Separación de mezclas", "Solubilidad", "Gases ideales", "Transformación y conservación de energía"]
+        },
+        {
+          "name": "Biológico",
+          "topics": ["Homeóstasis", "Herencia y reproducción", "Relaciones ecológicas", "Evolución", "Conservación de energía en sistemas biológicos"]
+        },
+        {
+          "name": "Ciencia, Tecnología y Sociedad (CTS)",
+          "topics": ["Temáticas interdisciplinares globales y locales relacionadas con las ciencias naturales"]
+        }
+      ]
+    },
+    {
+      "key": "ingles",
+      "name": "Inglés",
+      "questions": 55,
+      "focus": "Competencia comunicativa según MCER (lectura, gramática y léxico)",
+      "parts": [
+        {"part": 1, "description": "Relación de 5 descripciones con 8 palabras (1 ejemplo, 2 sobran)"},
+        {"part": 2, "description": "Avisos: decidir a qué sitio corresponde cada aviso"},
+        {"part": 3, "description": "Conversaciones cortas: completar con la respuesta correcta"},
+        {"part": 4, "description": "Texto con espacios: completar con la forma/estructura correcta"},
+        {"part": 5, "description": "Comprensión de lectura (texto nivel básico)"},
+        {"part": 6, "description": "Comprensión de lectura (texto más complejo)"},
+        {"part": 7, "description": "Texto con espacios: completar por significado o estructura"}
+      ]
+    }
+  ],
+  "additional_questionnaire": {
+    "questions": 24,
+    "affects_score": false,
+    "notes": "Cuestionario complementario que no afecta el resultado del examen"
+  },
+  "scoring": {
+    "model": "Teoría de Respuesta al Ítem (TRI), modelo logístico de tres parámetros (3PL)",
+    "parameters": {
+      "a": "discriminación",
+      "b": "dificultad",
+      "c": "acierto casual"
+    },
+    "ability_scale": {
+      "mean": 0,
+      "sd": 1,
+      "range": [-4, 4]
+    },
+    "transformed_scale": {
+      "mean": 250,
+      "sd": 50,
+      "range": [0, 500]
+    },
+    "notes": "Los puntajes se calculan estimando la habilidad latente θ y transformándola a una escala definida para asegurar comparabilidad entre aplicaciones."
+  }
+}

@@ -1,0 +1,513 @@
+[
+  {
+    "id": "simulacro-unal/matematicas/context_paquete01",
+    "type": "context",
+    "title": "Enviando un paquete",
+    "text": "La oficina de correos aceptará solo paquetes cuyo largo más el \"contorno\" (la distancia alrededor) no sea mayor a 108 pulgadas.",
+    "visual_description": "Caja rectangular con largo L; sección transversal con lados de 6 in y 8 in. Flechas alrededor de la sección indican el “contorno”. A la derecha se muestra un paquete con largo de 5 ft = 60 in, altura de 6 in y ancho de 8 in.",
+    "page": "https://www.invicto.com.co/simulacro-unal/matematicas"
+  },
+  {
+  "id": "simulacro-unal/matematicas/q01",
+  "type": "question",
+  "component": "matematicas",
+  "number": 1,
+  "context_id": "context_paquete01",
+  "stem_text": "¿Aceptará la oficina de correos un paquete que mide 6 pulgadas de ancho, 8 pulgadas de profundidad y 5 pies de largo sabiendo que? \\(L + 2(x + y) \\leq 108\\)",
+  "choices": [
+    "Sí será aceptado",
+    "No será aceptado",
+    "No, el paquete excede el límite por 20 in.",
+    "Sí, el paquete apenas cumple con el límite."
+  ],
+  "correct_choice": "Sí será aceptado",
+  "visual_description": "Usa context_paquete01",
+  "explanation_expert": "Convertimos 5 pies a pulgadas: \\(L = 60\\). Calculamos el contorno: \\(2(x+y) = 2(6+8) = 28\\). Luego \\(L + 2(x + y) = 60 + 28 = 88\\). Como \\(88 \\leq 108\\), el paquete será aceptado. Las demás opciones son incorrectas por no cumplir la condición o por errores en el cálculo.",
+  "difficulty": "easy",
+  "tags": ["unal", "matematicas", "simulacro", "unal", "matematicas"],
+  "page": "https://www.invicto.com.co/simulacro-unal/matematicas"
+},
+{
+  "id": "simulacro-unal/matematicas/q02",
+  "type": "question",
+  "component": "matematicas",
+  "number": 2,
+  "context_id": "context_paquete01",
+  "stem_text": "¿Cuál es el mayor largo aceptable para un paquete que tiene una base cuadrada que mide 9 pulgadas por 9 pulgadas? \\(L + 2(x + y) \\leq 108\\)",
+  "choices": [
+    "81 in",
+    "54 in",
+    "63 in",
+    "72 in"
+  ],
+  "correct_choice": "72 in",
+  "visual_description": "Usa context_paquete01",
+  "explanation_expert": "Dado que la base es cuadrada con lados de 9 in, se tiene \\(2(x+y) = 2(9+9) = 36\\). La restricción es \\(L + 36 \\leq 108\\), de donde \\(L \\leq 72\\). Por tanto, el mayor largo aceptable es 72 in. Las demás opciones no cumplen la condición.",
+  "difficulty": "easy",
+  "tags": ["unal", "matematicas"],
+  "page": "https://www.invicto.com.co/simulacro-unal/matematicas"
+},
+{
+    "id": "simulacro-unal/matematicas/context_pi01",
+    "type": "context",
+    "title": "Pi",
+    "text": "Usando la figura explica",
+    "visual_description": "En el eje horizontal se muestran marcas en 0 y π. Un círculo rojo con radio 1 está ubicado con su centro en 0. A la derecha se ven tres posiciones intermedias translúcidas del círculo que rueda sin deslizarse, hasta llegar a una posición final en π. Una flecha curva negra indica el movimiento desde la posición inicial hasta la final.",
+    "page": "https://www.invicto.com.co/simulacro-unal/matematicas"
+  },
+  {
+  "id": "simulacro-unal/matematicas/q03",
+  "type": "question",
+  "component": "matematicas",
+  "number": 3,
+  "context_id": "context_pi01",
+  "stem_text": "¿Cuánto tuvo que girar el círculo de la imagen de radio 1 para recorrer una distancia \\(\\pi\\)? \\(\\text{perímetro} = 2\\pi r\\)",
+  "choices": [
+    "1 vuelta",
+    "\\(\\frac{1}{2}\\) de vuelta",
+    "El círculo tuvo que girar un cuarto de vuelta.",
+    "\\(\\frac{1}{3}\\) de vuelta"
+  ],
+  "correct_choice": "\\(\\frac{1}{2}\\) de vuelta",
+  "visual_description": "Usa context_pi01",
+  "explanation_expert": "El perímetro de un círculo de radio 1 es \\(2\\pi\\). Si el círculo rueda una distancia \\(\\pi\\), la fracción de vuelta es \\(\\pi / 2\\pi = 1/2\\). Por tanto, el círculo giró medio giro. Las demás opciones no corresponden a la fracción correcta.",
+  "difficulty": "easy",
+  "tags": ["unal", "matematicas"],
+  "page": "https://www.invicto.com.co/simulacro-unal/matematicas"
+},
+{
+  "id": "simulacro-unal/matematicas/q04",
+  "type": "question",
+  "component": "matematicas",
+  "number": 4,
+  "context_id": "context_pi01",
+  "stem_text": "¿Cuánto tuvo que girar el círculo de la imagen de radio 1 para recorrer una distancia \\(2\\pi\\)? \\(\\text{perímetro} = 2\\pi r\\)",
+  "choices": [
+    "1 vuelta completa.",
+    "\\(\\tfrac{1}{2}\\) de vuelta",
+    "\\(\\tfrac{1}{4}\\) de vuelta",
+    "\\(\\tfrac{1}{3}\\) de vuelta"
+  ],
+  "correct_choice": "1 vuelta completa.",
+  "visual_description": "Usa context_pi01",
+  "explanation_expert": "El perímetro de un círculo de radio 1 es \\(2\\pi\\). Si el círculo rueda una distancia de \\(2\\pi\\), entonces ha recorrido exactamente una longitud igual a su perímetro, lo que corresponde a una vuelta completa. Las demás opciones representan fracciones incorrectas de la rotación.",
+  "difficulty": "easy",
+  "tags": ["unal", "matematicas"],
+  "page": "https://www.invicto.com.co/simulacro-unal/matematicas"
+},
+{
+  "id": "simulacro-unal/matematicas/context_kepler01",
+  "type": "context",
+  "title": "Distancia de la Tierra al Sol",
+  "text": "De acuerdo con la Tercera Ley de Kepler del movimiento planetario, la distancia promedio de un planeta al sol (en metros) está dada por la siguiente ecuación, donde M es la masa del sol, G es la constante gravitacional y T es el período de la órbita del planeta (en segundos).",
+  "visual_description": "Se muestra la ecuación d = ((GM)/(4π^2))^(1/3) * T^(2/3), que relaciona la distancia promedio d con la constante gravitacional G, la masa del sol M, y el período orbital T.",
+  "page": "https://www.invicto.com.co/simulacro-unal/matematicas"
+},
+{
+  "id": "simulacro-unal/matematicas/q05",
+  "type": "question",
+  "component": "matematicas",
+  "number": 5,
+  "context_id": "context_kepler01",
+  "stem_text": "Utiliza el hecho de que el período de la órbita de la Tierra es aproximadamente 365.25 días para encontrar el período de la órbita de la Tierra.",
+  "choices": [
+    "3.15 × 10^7 s",
+    "3.15 × 10^-7 s",
+    "3.15 × 10^4 s",
+    "3.15 × 10^-4 s"
+  ],
+  "correct_choice": "3.15 × 10^7 s",
+  "visual_description": "Usa context_kepler01",
+  "explanation_expert": "Este ejercicio no requiere usar la fórmula de Kepler, sino convertir 365.25 días a segundos: 365.25 × 24 × 3600 ≈ 3.15 × 10^7 s. Las demás opciones corresponden a órdenes de magnitud incorrectos.",
+  "difficulty": "easy",
+  "tags": ["unal", "matematicas"],
+  "page": "https://www.invicto.com.co/simulacro-unal/matematicas"
+},
+{
+  "id": "simulacro-unal/matematicas/q06",
+  "type": "question",
+  "component": "matematicas",
+  "number": 6,
+  "context_id": "context_kepler01",
+  "stem_text": "¿Cuál es la distancia promedio de la Tierra al Sol usando la fórmula dada? \\(T = 3.15 \\times 10^7 s, \\; M = 1.99 \\times 10^{30} kg, \\; G = 6.67 \\times 10^{-11} \\; Nm^2/kg^2\\)",
+  "choices": [
+    "1.50 × 10^11 m",
+    "1.00 × 10^14 m",
+    "1.00 × 10^8 m",
+    "9.50 × 10^11 m"
+  ],
+  "correct_choice": "1.50 × 10^11 m",
+  "visual_description": "Usa context_kepler01",
+  "explanation_expert": "Podemos resolverlo por aproximación usando leyes de exponentes. Primero, \\(GM \\sim 10^{19}\\) y al dividir entre \\(4π^2 \\sim 10^1\\), se obtiene \\(10^{18}\\). La raíz cúbica da \\(10^6\\). Luego, \\(T \\sim 10^7\\) y \\(T^{2/3} \\sim 10^5\\). Multiplicando: \\(10^6 \\times 10^5 = 10^{11}\\). Así, la distancia está en el orden de \\(10^{11}\\) metros, lo que corresponde a \\(1.50 × 10^{11} m\\).",
+  "difficulty": "medium",
+  "tags": ["unal", "matematicas"],
+  "page": "https://www.invicto.com.co/simulacro-unal/matematicas"
+},
+{
+  "id": "simulacro-unal/matematicas/q07",
+  "type": "question",
+  "component": "matematicas",
+  "number": 7,
+  "context_id": "context_potencias01",
+  "stem_text": "Simplifica las siguientes expresiones a un número natural: \\(20^6 \\times (0.5)^6\\)",
+  "choices": [
+    "1 000 000",
+    "10^6",
+    "100 000",
+    "20 000 000"
+  ],
+  "correct_choice": "1 000 000",
+  "visual_description": "Usa context_potencias01",
+  "explanation_expert": "Aplicamos la ley de exponentes: \\(a^n \\times b^n = (a \\times b)^n\\). Así, \\(20^6 \\times (0.5)^6 = (20 \\times 0.5)^6 = 10^6 = 1 000 000\\).",
+  "difficulty": "easy",
+  "tags": ["unal", "matematicas"],
+  "page": "https://www.invicto.com.co/simulacro-unal/matematicas"
+},
+{
+  "id": "simulacro-unal/matematicas/q08",
+  "type": "question",
+  "component": "matematicas",
+  "number": 8,
+  "context_id": "context_potencias01",
+  "stem_text": "Simplifica las siguientes expresiones a un número natural: \\(\\frac{18^5}{9^5}\\)",
+  "choices": [
+    "2",
+    "2^5",
+    "32",
+    "1"
+  ],
+  "correct_choice": "32",
+  "visual_description": "Usa context_potencias01",
+  "explanation_expert": "Como las potencias tienen el mismo exponente, se simplifica así: \\(\\frac{18^5}{9^5} = (\\frac{18}{9})^5 = 2^5 = 32\\).",
+  "difficulty": "easy",
+  "tags": ["unal", "matematicas"],
+  "page": "https://www.invicto.com.co/simulacro-unal/matematicas"
+},
+{
+  "id": "simulacro-unal/matematicas/context_concreto01",
+  "type": "context",
+  "title": "Volumen de concreto",
+  "text": "Se muestra un cilindro hueco con radio exterior R, radio interior r y altura h. A la derecha, se representa el mismo volumen desplegado como un prisma rectangular para visualizar el cálculo del volumen del material.",
+  "visual_description": "A la izquierda, un cilindro hueco con radios R y r y altura h marcada con flechas verticales. A la derecha, un prisma rectangular del mismo volumen y altura h, que representa el material del cilindro.",
+  "page": "https://www.invicto.com.co/simulacro-unal/matematicas"
+},
+{
+  "id": "simulacro-unal/matematicas/q09",
+  "type": "question",
+  "component": "matematicas",
+  "number": 9,
+  "context_id": "context_concreto01",
+  "stem_text": "Usando la fórmula para el volumen de un cilindro, encuentre el volumen del cilíndrico que se muestra en la figura. \\(V_{cilindro} = \\pi r^2 h\\)",
+  "choices": [
+    "V = πR^2h",
+    "V = πR^2h - πr^2h",
+    "V = πr^2h - πR^2h",
+    "V = πr^2h"
+  ],
+  "correct_choice": "V = πR^2h - πr^2h",
+  "visual_description": "Usa context_concreto01",
+  "explanation_expert": "El volumen se obtiene restando el volumen del cilindro interior al exterior: \\(V = πR^2h - πr^2h\\). Las demás opciones no representan la geometría del cilindro hueco.",
+  "difficulty": "medium",
+  "tags": ["unal", "matematicas"],
+  "page": "https://www.invicto.com.co/simulacro-unal/matematicas"
+},
+{
+  "id": "simulacro-unal/matematicas/context_podar01",
+  "type": "context",
+  "title": "Podar un campo",
+  "text": "Cada semana, un campo cuadrado de cierto parque estatal es podado alrededor de los bordes. El resto del campo se mantiene sin podar para que sirva como hábitat para aves y animales pequeños (vea la figura). El campo mide b metros por b metros, y la franja podada es de x metros de ancho.",
+  "visual_description": "Imagen de un campo cuadrado con longitud total b. En el centro, un cuadrado más pequeño sin podar. Alrededor, una franja de ancho x que representa la parte podada, indicada con flechas en los cuatro lados.",
+  "page": "https://www.invicto.com.co/simulacro-unal/matematicas"
+},
+{
+  "id": "simulacro-unal/matematicas/q10",
+  "type": "question",
+  "component": "matematicas",
+  "number": 10,
+  "context_id": "context_podar01",
+  "stem_text": "¿Cuál es el área de la parte podada?",
+  "choices": [
+    "b^2 - x^2",
+    "b^2 - (b - 2x)^2",
+    "(b - x)^2",
+    "b^2 - (b - x)^2"
+  ],
+  "correct_choice": "b^2 - (b - 2x)^2",
+  "visual_description": "Usa context_podar01",
+  "explanation_expert": "El área total del campo es b^2. El área sin podar en el centro mide (b - 2x)^2, porque se resta x de cada lado. El área podada es la diferencia: b^2 - (b - 2x)^2.",
+  "difficulty": "medium",
+  "tags": ["unal", "matematicas"],
+  "page": "https://www.invicto.com.co/simulacro-unal/matematicas"
+},
+{
+  "id": "simulacro-unal/matematicas/context_costo01",
+  "type": "context",
+  "title": "Costo promedio",
+  "text": "",
+  "visual_description": "",
+  "page": "https://www.invicto.com.co/simulacro-unal/matematicas"
+},
+{
+  "id": "simulacro-unal/matematicas/q11",
+  "type": "question",
+  "component": "matematicas",
+  "number": 11,
+  "context_id": "context_costo01",
+  "stem_text": "Un fabricante de ropa encuentra que el costo de producir x camisas C(x) es el que se muestra en la ecuación: C(x) = 500 + 6x + 0.01x^2. ¿Cuál sería el costo promedio por camiseta?",
+  "choices": [
+    "C_promedio = (500 + 6x + 0.01x^2)/x",
+    "C_promedio = 500 + 6x + 0.01x^2",
+    "C_promedio = 500 + 6 + 0.01x",
+    "C_promedio = 6 + 0.01x"
+  ],
+  "correct_choice": "C_promedio = (500 + 6x + 0.01x^2)/x",
+  "visual_description": "Usa context_costo01",
+  "explanation_expert": "El costo promedio se obtiene dividiendo el costo total C(x) entre la cantidad x. Así, C_promedio = (500 + 6x + 0.01x^2)/x. Las demás opciones corresponden a expresiones incorrectas donde no se aplica la división por x.",
+  "difficulty": "medium",
+  "tags": ["unal", "matematicas"],
+  "page": "https://www.invicto.com.co/simulacro-unal/matematicas"
+},
+{
+  "id": "simulacro-unal/matematicas/context_gravedad01",
+  "type": "context",
+  "title": "Gravedad",
+  "text": "Si se dibuja un segmento de línea imaginario entre los centros de la Tierra y la Luna, entonces la fuerza gravitacional neta F que actúa sobre un objeto situado en este segmento de línea es como se muestra en la figura. Donde K > 0 es una constante y x es la distancia del objeto desde el centro de la Tierra, medida en miles de millas.",
+  "visual_description": "Se presenta la fórmula F = -K/x^2 + 0.012K/(239 - x)^2 con la condición 0 < x < 239, que representa la suma de las fuerzas gravitacionales de la Tierra y la Luna sobre un objeto ubicado entre ambos cuerpos.",
+  "page": "https://www.invicto.com.co/simulacro-unal/matematicas"
+},
+{
+  "id": "simulacro-unal/matematicas/q12",
+  "type": "question",
+  "component": "matematicas",
+  "number": 12,
+  "context_id": "context_gravedad01",
+  "stem_text": "¿A qué distancia del centro de la Tierra se encuentra el 'punto muerto' donde no actúa ninguna fuerza gravitacional neta sobre el objeto? (Exprésalo en la unidad de mil millas más cercana).",
+  "choices": [
+    "20,000 millas",
+    "215,000 millas",
+    "30,000 millas",
+    "15,000 millas"
+  ],
+  "correct_choice": "215,000 millas",
+  "visual_description": "Usa context_gravedad01",
+  "explanation_expert": "Se puede razonar de dos formas. (1) Matemáticamente: se igualan las fuerzas de la Tierra y la Luna: 1/x^2 = 0.012/(239 - x)^2. Al resolver se obtiene x ≈ 215, lo que equivale a 215,000 millas. (2) Lógicamente: como la Tierra es mucho más masiva que la Luna, su atracción domina incluso a grandes distancias. Por lo tanto, para que ambas fuerzas se equilibren, el punto muerto debe ubicarse mucho más cerca de la Luna, compensando así su menor masa con una distancia mucho menor.",
+  "difficulty": "hard",
+  "tags": ["unal", "matematicas"],
+  "page": "https://www.invicto.com.co/simulacro-unal/matematicas"
+},
+{
+  "id": "simulacro-unal/matematicas/context_prueba01",
+  "type": "context",
+  "title": "Prueba que 0 = 1?",
+  "text": "Los pasos que se muestran parecen dar ecuaciones equivalentes, lo que lleva a la aparente conclusión de que 1 = 0. El objetivo es identificar dónde se comete el error lógico o algebraico.",
+  "visual_description": "Se muestra una secuencia de pasos algebraicos: 1) x = 1 (dado x), 2) x^2 = x (multiplica por x), 3) x^2 - x = 0 (resta x), 4) x(x - 1) = 0 (factoriza), 5) x(x - 1)/(x - 1) = 0/(x - 1) (divide por x - 1), 6) x = 0 (simplifica), 7) 1 = 0 (dado que x = 1).",
+  "page": "https://www.invicto.com.co/simulacro-unal/matematicas"
+},
+{
+  "id": "simulacro-unal/matematicas/q13",
+  "type": "question",
+  "component": "matematicas",
+  "number": 13,
+  "context_id": "context_prueba01",
+  "stem_text": "¿En qué paso está el error?",
+  "choices": [
+    "Multiplicar por x",
+    "Dividir por x - 1",
+    "Restar x",
+    "Factorizar x(x - 1)"
+  ],
+  "correct_choice": "Dividir por x - 1",
+  "visual_description": "Usa context_prueba01",
+  "explanation_expert": "El error ocurre al dividir entre (x - 1). Dado que se partió de x = 1, entonces (x - 1) = 0, y la división por cero no está definida. Todos los pasos anteriores son algebraicamente válidos.",
+  "difficulty": "easy",
+  "tags": ["unal", "matematicas"],
+  "page": "https://www.invicto.com.co/simulacro-unal/matematicas"
+},
+{
+  "id": "simulacro-unal/matematicas/context_jardin01",
+  "type": "context",
+  "title": "Longitud de un Jardín",
+  "text": "Un jardín rectangular tiene un ancho fijo de 25 pies y una longitud variable x. El problema consiste en encontrar relaciones matemáticas utilizando estas dimensiones.",
+  "visual_description": "La imagen muestra un jardín rectangular con plantas, donde el lado corto está etiquetado como 25 ft y el lado largo como x ft.",
+  "page": "https://www.invicto.com.co/simulacro-unal/matematicas"
+},
+{
+  "id": "simulacro-unal/matematicas/q14",
+  "type": "question",
+  "component": "matematicas",
+  "number": 14,
+  "context_id": "context_jardin01",
+  "stem_text": "Si su área es de 1125 pies cuadrados, ¿cuál es la longitud del jardín?",
+  "choices": [
+    "45 ft",
+    "50 ft",
+    "40 ft",
+    "25 ft"
+  ],
+  "correct_choice": "45 ft",
+  "visual_description": "Usa context_jardin01",
+  "explanation_expert": "El área de un rectángulo se calcula como A = ancho × longitud. Sustituyendo A = 1125 y ancho = 25, se despeja longitud: x = 1125 ÷ 25 = 45 ft.",
+  "difficulty": "easy",
+  "tags": ["unal", "matematicas"],
+  "page": "https://www.invicto.com.co/simulacro-unal/matematicas"
+},
+{
+  "id": "simulacro-unal/matematicas/context_arbol01",
+  "type": "context",
+  "title": "Altura de un Árbol",
+  "text": "Un leñador determina la altura de un árbol alto primero midiendo la altura de uno más pequeño, a 125 pies de distancia, y luego moviéndose para que las copas de los dos árboles estén en la misma línea de visión. Supongamos que el árbol pequeño mide 20 pies de altura, el leñador está a 25 pies del árbol pequeño y el nivel de los ojos del leñador está a 5 pies del suelo.",
+  "page": "https://www.invicto.com.co/simulacro-unal/matematicas"
+},
+{
+  "id": "simulacro-unal/matematicas/q15",
+  "type": "question",
+  "component": "matematicas",
+  "number": 15,
+  "context_id": "context_arbol01",
+  "stem_text": "Con los datos del contexto, ¿cuál es la altura del árbol grande?",
+  "choices": [
+    "90 ft",
+    "95 ft",
+    "100 ft",
+    "105 ft"
+  ],
+  "correct_choice": "95 ft",
+  "visual_description": "Usa context_arbol01",
+  "explanation_expert": "La línea de visión pasa por los ojos del leñador (5 ft), la punta del árbol pequeño (20 ft) y la punta del árbol grande, formando triángulos semejantes. Altura sobre los ojos para el árbol pequeño: 20 − 5 = 15 ft a 25 ft de distancia. Para el árbol grande a 150 ft: (H − 5)/150 = 15/25 ⇒ H − 5 = 90 ⇒ H = 95 ft.",
+  "difficulty": "medium",
+  "tags": ["unal", "matematicas"],
+  "page": "https://www.invicto.com.co/simulacro-unal/matematicas"
+},
+{
+  "id": "simulacro-unal/matematicas/q16",
+  "type": "question",
+  "component": "matematicas",
+  "number": 16,
+  "context_id": "context_bambu01",
+  "stem_text": "Un tallo de bambú de 10 ft se rompe de modo que su punta toca el suelo a 3 ft de la base. ¿Qué altura del tallo queda en pie?",
+  "choices": [
+    "91/20 ft",
+    "√91 ft",
+    "9.54 ft",
+    "5 ft"
+  ],
+  "correct_choice": "91/20 ft",
+  "visual_description": "Tallo vertical con parte superior quebrada tocando el suelo a 3 ft de la base; se forma un triángulo rectángulo con catetos 3 ft y h, e hipotenusa la parte quebrada.",
+  "explanation_expert": "Sea h la parte vertical que queda y y la parte quebrada. Se cumple y^2 = h^2 + 3^2 y h + y = 10. Sustituyendo y = 10 − h: (10 − h)^2 = h^2 + 9 ⇒ 100 − 20h = 9 ⇒ 20h = 91 ⇒ h = 91/20 ≈ 4.55 ft.",
+  "difficulty": "medium",
+  "tags": ["unal", "matematicas"],
+  "page": "https://www.invicto.com.co/simulacro-unal/matematicas"
+},
+{
+  "id": "simulacro-unal/matematicas/context_bambu01",
+  "type": "context",
+  "title": "Un Problema Antiguo Chino",
+  "text": "Este problema proviene de un texto chino de matemáticas (Chui-chang suan-shu, «Nueve Capítulos sobre el Arte Matemático», ca. 250 a. C.). Un tallo de bambú de 10 pies de largo se rompe de tal manera que su punta toca el suelo a 3 pies de la base del tallo.",
+  "visual_description": "Ilustración de un tallo de bambú vertical cuya parte superior rota cae formando un triángulo con el suelo; la distancia horizontal desde la base del tallo hasta la punta es 3 ft y la longitud original del tallo es 10 ft.",
+  "page": "https://www.invicto.com.co/simulacro-unal/matematicas"
+},
+{
+  "id": "simulacro-unal/matematicas/q16",
+  "type": "question",
+  "component": "matematicas",
+  "number": 16,
+  "context_id": "context_bambu01",
+  "stem_text": "¿Cuál es la altura de la rotura?",
+  "choices": [
+    "8.0 ft",
+    "7.5 ft",
+    "4.5 ft",
+    "6.0 ft"
+  ],
+  "correct_choice": "4.5 ft",
+  "visual_description": "Usa context_bambu01",
+  "explanation_expert": "Sea h la altura de la rotura. La parte rota mide 10 − h y la distancia horizontal es 3. Por Pitágoras: h^2 + 3^2 = (10 − h)^2 ⇒ h = 91/20 ≈ 4.5 ft.",
+  "difficulty": "medium",
+  "tags": ["unal", "matematicas"],
+  "page": "https://www.invicto.com.co/simulacro-unal/matematicas"
+},
+{
+  "id": "simulacro-unal/matematicas/context_fogata01",
+  "type": "context",
+  "title": "Temperatura de la Fogata",
+  "text": "En la proximidad de una fogata, la temperatura T en °C a una distancia de x metros del centro del fuego está dada por la ecuación T = 600,000 / (x^2 + 300).",
+  "visual_description": "Ecuación T = 600,000 / (x^2 + 300) que modela cómo disminuye la temperatura en función de la distancia x desde el centro del fuego.",
+  "page": "https://www.invicto.com.co/simulacro-unal/matematicas"
+},
+{
+  "id": "simulacro-unal/matematicas/q17",
+  "type": "question",
+  "component": "matematicas",
+  "number": 17,
+  "context_id": "context_fogata01",
+  "stem_text": "¿A qué rango de distancias desde el centro del fuego la temperatura es menor a 500°C?",
+  "choices": [
+    "x > 20 m",
+    "x < 20 m",
+    "x > 30 m",
+    "x < 30 m"
+  ],
+  "correct_choice": "x > 30 m",
+  "visual_description": "Usa context_fogata01",
+  "explanation_expert": "Se plantea la desigualdad 600,000 / (x^2 + 300) < 500. Al resolver: 600,000 < 500(x^2 + 300) ⇒ 1200 < x^2 + 300 ⇒ x^2 > 900 ⇒ x > 30. Por lo tanto, la temperatura es menor a 500°C para distancias mayores a 30 m.",
+  "difficulty": "medium",
+  "tags": ["unal", "matematicas"],
+  "page": "https://www.invicto.com.co/simulacro-unal/matematicas"
+},
+{
+  "id": "simulacro-unal/matematicas/context_coordenadas01",
+  "type": "context",
+  "title": "Desplazando el plano de coordenadas",
+  "text": "Se muestra un triángulo en el plano cartesiano con vértices A(−5, −1), B(−3, 2) y C(2, 1). Luego de un desplazamiento, el triángulo se traslada a nuevas posiciones A′, B′ y C′. En la figura, B′ está sobre el eje y (x = 0) y A′ está a la misma altura que C(2, 1), por lo que ambas tienen coordenada y = 1.",
+  "visual_description": "Plano cartesiano con dos triángulos. El triángulo original es rojo con vértices A(−5, −1), B(−3, 2) y C(2, 1). El triángulo trasladado es azul: B′ se ubica sobre el eje y (x = 0) y A′ comparte la altura y = 1 con el punto C(2, 1).",
+  "page": "https://www.invicto.com.co/simulacro-unal/matematicas"
+},
+{
+  "id": "simulacro-unal/matematicas/q18",
+  "type": "question",
+  "component": "matematicas",
+  "number": 18,
+  "context_id": "context_coordenadas01",
+  "stem_text": "Triángulo ABC en la figura ha sido desplazado al triángulo A'B'C'. Encuentra las coordenadas del punto C'.",
+  "choices": [
+    "(4, 3)",
+    "(5, 3)",
+    "(3, 2)",
+    "(4, 2)"
+  ],
+  "correct_choice": "(5, 3)",
+  "visual_description": "Usa context_coordenadas01",
+  "explanation_expert": "El desplazamiento corresponde al vector (3, 2), obtenido al comparar A con A' y B con B'. Al aplicar este vector a C(2, 1) resulta C' = (2 + 3, 1 + 2) = (5, 3).",
+  "difficulty": "medium",
+  "tags": ["unal", "matematicas"],
+  "page": "https://www.invicto.com.co/simulacro-unal/matematicas"
+},
+{
+  "id": "simulacro-unal/matematicas/context_circulo01",
+  "type": "context",
+  "title": "Línea Tangente a un Círculo",
+  "text": "El círculo de la figura tiene un diámetro de 10 metros. Se observa el círculo centrado en el origen, con radio de 5 metros, y una línea tangente que toca al círculo en el punto (3, −4).",
+  "visual_description": "Plano cartesiano con un círculo rojo centrado en el origen de radio 5. El punto de tangencia es (3, −4), donde se traza una línea tangente azul perpendicular al radio que conecta el origen con el punto de tangencia.",
+  "page": "https://www.invicto.com.co/simulacro-unal/matematicas"
+},
+{
+  "id": "simulacro-unal/matematicas/q19",
+  "type": "question",
+  "component": "matematicas",
+  "number": 19,
+  "context_id": "context_circulo01",
+  "stem_text": "¿En qué otro punto del círculo habrá una línea tangente paralela a la línea tangente ya dada?",
+  "choices": [
+    "(-3, 4)",
+    "(-3, -4)",
+    "(3, 4)",
+    "(3, -4)"
+  ],
+  "correct_choice": "(-3, 4)",
+  "visual_description": "Usa context_circulo01",
+  "explanation_expert": "Dos tangentes son paralelas cuando los radios que llegan a esos puntos tienen la misma pendiente. El radio al punto (3, -4) tiene pendiente -4/3. El único punto simétrico que genera el mismo ángulo, pero en dirección opuesta, es (-3, 4).",
+  "difficulty": "medium",
+  "tags": ["unal", "matematicas"],
+  "page": "https://www.invicto.com.co/simulacro-unal/matematicas"
+}
+]
