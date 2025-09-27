@@ -11,7 +11,7 @@
   "id": "simulacro-unal/ciencias-naturales/q01",
   "type": "question",
   "component": "ciencias-naturales",
-  "number": 1,
+  "question": 1,
   "context_id": "context_movimiento01",
   "stem_text": "¿Cuál es la velocidad promedio en el intervalo de tiempo \\(1.5\\,s \\leq t \\leq 4.0\\,s\\)?",
   "choices": [
@@ -31,7 +31,7 @@
   "id": "simulacro-unal/ciencias-naturales/q02",
   "type": "question",
   "component": "ciencias-naturales",
-  "number": 2,
+  "question": 2,
   "context_id": "context_movimiento01",
   "stem_text": "¿Cuál es la velocidad instantánea en \\(t = 2\\,s\\) que se representa con la pendiente de la línea tangente mostrada en el gráfico?",
   "choices": [
@@ -51,7 +51,7 @@
   "id": "simulacro-unal/ciencias-naturales/q03",
   "type": "question",
   "component": "ciencias-naturales",
-  "number": 3,
+  "question": 3,
   "context_id": "context_movimiento01",
   "stem_text": "¿En qué valor de \\(t\\) la velocidad es cero? Es decir, \\(v=0\\,\\tfrac{m}{s}\\).",
   "choices": [
@@ -79,7 +79,7 @@
   "id": "simulacro-unal/ciencias-naturales/q04",
   "type": "question",
   "component": "ciencias-naturales",
-  "number": 4,
+  "question": 4,
   "context_id": "context_motociclista01",
   "stem_text": "¿Cuál es la aceleración promedio en el siguiente intervalo de tiempo? \\(0.0\\,s \\leq t \\leq 6.0\\,s\\)",
   "choices": [
@@ -99,7 +99,7 @@
   "id": "simulacro-unal/ciencias-naturales/q05",
   "type": "question",
   "component": "ciencias-naturales",
-  "number": 5,
+  "question": 5,
   "context_id": "context_motociclista01",
   "stem_text": "¿En qué tiempo ocurre la mayor aceleración positiva?",
   "choices": [
@@ -119,7 +119,7 @@
   "id": "simulacro-unal/ciencias-naturales/q06",
   "type": "question",
   "component": "ciencias-naturales",
-  "number": 6,
+  "question": 6,
   "context_id": "context_motociclista01",
   "stem_text": "¿Cuándo es la aceleración cero? Es decir, \\(a = 0\\,\\tfrac{m}{s^{2}}\\).",
   "choices": [
@@ -147,7 +147,7 @@
   "id": "simulacro-unal/ciencias-naturales/q07",
   "type": "question",
   "component": "ciencias-naturales",
-  "number": 7,
+  "question": 7,
   "context_id": "context_particula01",
   "stem_text": "Determine la velocidad de la partícula en el instante \\(t = 10\\,s\\).",
   "choices": [
@@ -167,7 +167,7 @@
   "id": "simulacro-unal/ciencias-naturales/q08",
   "type": "question",
   "component": "ciencias-naturales",
-  "number": 8,
+  "question": 8,
   "context_id": "context_particula01",
   "stem_text": "¿Cuál es el desplazamiento durante los primeros 10 segundos?",
   "choices": [
@@ -195,7 +195,7 @@
   "id": "simulacro-unal/ciencias-naturales/q09",
   "type": "question",
   "component": "ciencias-naturales",
-  "number": 9,
+  "question": 9,
   "context_id": "context_co2_01",
   "stem_text": "¿Cómo crees que el aumento actual en el contenido atmosférico de CO₂ afectará las reacciones dependientes de la luz en los organismos fotosintéticos?",
   "choices": [
@@ -223,7 +223,7 @@
   "id": "simulacro-unal/ciencias-naturales/q10",
   "type": "question",
   "component": "ciencias-naturales",
-  "number": 10,
+  "question": 10,
   "context_id": "context_planta01",
   "stem_text": "¿Cómo ganó el árbol realmente la mayor parte de su peso?",
   "choices": [
@@ -251,7 +251,7 @@
   "id": "simulacro-unal/ciencias-naturales/q11",
   "type": "question",
   "component": "ciencias-naturales",
-  "number": 11,
+  "question": 11,
   "context_id": "context_burbujas01",
   "stem_text": "¿Qué son las burbujas?",
   "choices": [
@@ -279,7 +279,7 @@
   "id": "simulacro-unal/ciencias-naturales/q12",
   "type": "question",
   "component": "ciencias-naturales",
-  "number": 12,
+  "question": 12,
   "context_id": "context_carburo01",
   "stem_text": "¿Cuántos kilogramos de carburo de silicio se pueden formar por la reacción de 250.0 kg de arena (SiO₂) con carbono en exceso?\\nSi: 28 u.m.a  O: 16 u.m.a  C: 12 u.m.a",
   "choices": [
@@ -299,7 +299,7 @@
   "id": "simulacro-unal/ciencias-naturales/q13",
   "type": "question",
   "component": "ciencias-naturales",
-  "number": 13,
+  "question": 13,
   "context_id": "context_carburo01",
   "stem_text": "¿Cuál es el elemento que se oxida en la reacción?",
   "choices": [
@@ -319,7 +319,7 @@
   "id": "simulacro-unal/ciencias-naturales/q14",
   "type": "question",
   "component": "ciencias-naturales",
-  "number": 14,
+  "question": 14,
   "context_id": "context_carburo01",
   "stem_text": "¿Cuántos electrones gana el carbono en SiC al reducirse?",
   "choices": [
@@ -339,7 +339,7 @@
   "id": "simulacro-unal/ciencias-naturales/q15",
   "type": "question",
   "component": "ciencias-naturales",
-  "number": 15,
+  "question": 15,
   "context_id": "context_carburo01",
   "stem_text": "¿Cuál es la configuración electrónica de un átomo de carbono en el compuesto SiC al ganar 4 electrones?",
   "choices": [
@@ -359,7 +359,7 @@
   "id": "simulacro-unal/ciencias-naturales/q16",
   "type": "question",
   "component": "ciencias-naturales",
-  "number": 16,
+  "question": 16,
   "context_id": "context_carburo01",
   "stem_text": "¿Qué nombre se le da al siguiente compuesto? SiO₂",
   "choices": [
@@ -387,7 +387,7 @@
   "id": "simulacro-unal/ciencias-naturales/q17",
   "type": "question",
   "component": "ciencias-naturales",
-  "number": 17,
+  "question": 17,
   "context_id": "context_carbono01",
   "stem_text": "La siguiente imagen representa un átomo de carbono neutro, ¿cuántos electrones tiene este?",
   "choices": [

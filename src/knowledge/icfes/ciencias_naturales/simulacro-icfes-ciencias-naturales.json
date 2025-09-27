@@ -11,7 +11,7 @@
   "id": "simulacro-icfes/ciencias-naturales/q01",
   "type": "question",
   "component": "ciencias-naturales",
-  "number": 1,
+  "question": 1,
   "context_id": "context_nat01",
   "stem_text": "Con base en la información anterior, ¿por qué una mujer que utiliza este método anticonceptivo tiene menor probabilidad de quedar embarazada?",
   "choices": [
@@ -31,7 +31,7 @@
   "id": "simulacro-icfes/ciencias-naturales/q02",
   "type": "question",
   "component": "ciencias-naturales",
-  "number": 2,
+  "question": 2,
   "context_id": "context_nat01",
   "stem_text": "En la tabla se muestra la duración en días de los ciclos reproductivos de algunas especies de mamíferos: ¿Cuáles corresponden a ciclos menstruales?",
   "choices": [
@@ -51,7 +51,7 @@
   "id": "simulacro-icfes/ciencias-naturales/q03",
   "type": "question",
   "component": "ciencias-naturales",
-  "number": 3,
+  "question": 3,
   "context_id": "context_nat01",
   "stem_text": "En un zoológico necesitan regular la natalidad de las hembras del mono ardilla. Se ha diseñado el siguiente experimento para probar la efectividad de un nuevo método anticonceptivo:\n\n1. Formación de dos grupos de hembras en edad reproductiva.\n2. Suministro del anticonceptivo a todas las hembras de los dos grupos.\n3. Reunión con machos de la especie.\n4. Se repite cada mes el procedimiento y se contabiliza el número de embarazos por cada grupo.\n\nCon base en la información anterior: ¿El experimento planteado permitirá reconocer la efectividad del anticonceptivo en la población de monos ardilla?",
   "choices": [
@@ -79,7 +79,7 @@
   "id": "simulacro-icfes/ciencias-naturales/q04",
   "type": "question",
   "component": "ciencias-naturales",
-  "number": 4,
+  "question": 4,
   "context_id": "context_nat02",
   "stem_text": "¿Cuál de las siguientes tablas muestra los genotipos de los parentales y del descendiente para esta característica?",
   "choices": [
@@ -107,7 +107,7 @@
   "id": "simulacro-icfes/ciencias-naturales/q05",
   "type": "question",
   "component": "ciencias-naturales",
-  "number": 5,
+  "question": 5,
   "context_id": "context_nat03",
   "stem_text": "Teniendo en cuenta la información anterior, si se bloquea el paso de H⁺ por la membrana, ¿la corriente que recorre el cable?",
   "choices": [
@@ -127,7 +127,7 @@
   "id": "simulacro-icfes/ciencias-naturales/q06",
   "type": "question",
   "component": "ciencias-naturales",
-  "number": 6,
+  "question": 6,
   "context_id": "context_nat03",
   "stem_text": "Teniendo en cuenta que en cualquier reacción química se conserva la masa, ¿cuál de las siguientes ecuaciones químicas describe la reacción balanceada de la cámara catódica?",
   "choices": [
@@ -147,7 +147,7 @@
   "id": "simulacro-icfes/ciencias-naturales/q06",
   "type": "question",
   "component": "ciencias-naturales",
-  "number": 6,
+  "question": 6,
   "context_id": "context_nat03",
   "stem_text": "Teniendo en cuenta que en cualquier reacción química se conserva la masa, ¿cuál de las siguientes ecuaciones químicas describe la reacción balanceada de la cámara catódica?",
   "choices": [
@@ -167,7 +167,7 @@
   "id": "simulacro-icfes/ciencias-naturales/q07",
   "type": "question",
   "component": "ciencias-naturales",
-  "number": 7,
+  "question": 7,
   "context_id": "context_nat03",
   "stem_text": "La nueva tecnología para la producción de energía eléctrica a partir de la bacteria Shewanella oneidensis promueve la conservación del medio ambiente, porque:",
   "choices": [
@@ -195,7 +195,7 @@
   "id": "simulacro-icfes/ciencias-naturales/q08",
   "type": "question",
   "component": "ciencias-naturales",
-  "number": 8,
+  "question": 8,
   "context_id": "context_nat04",
   "stem_text": "Teniendo en cuenta la red trófica anterior, ¿qué pasaría si se extinguen los tiburones?",
   "choices": [
@@ -223,7 +223,7 @@
   "id": "simulacro-icfes/ciencias-naturales/q09",
   "type": "question",
   "component": "ciencias-naturales",
-  "number": 9,
+  "question": 9,
   "context_id": "context_nat05",
   "stem_text": "El estudiante quiere mover un carro de plástico colocando un imán por debajo de una mesa, como se muestra en la figura. Para mover el carro, el estudiante debe colocar en su interior:",
   "choices": [
@@ -251,7 +251,7 @@
   "id": "simulacro-icfes/ciencias-naturales/q10",
   "type": "question",
   "component": "ciencias-naturales",
-  "number": 10,
+  "question": 10,
   "context_id": "context_nat06",
   "stem_text": "¿Cuál de los siguientes gráficos representa correctamente los valores de pH de las sustancias dadas en la tabla?",
   "choices": [
@@ -279,7 +279,7 @@
   "id": "simulacro-icfes/ciencias-naturales/q11",
   "type": "question",
   "component": "ciencias-naturales",
-  "number": 11,
+  "question": 11,
   "context_id": "context_nat07",
   "stem_text": "¿Cuál gráfica representa la hipótesis del estudiante?",
   "choices": [
@@ -307,7 +307,7 @@
   "id": "simulacro-icfes/ciencias-naturales/q12",
   "type": "question",
   "component": "ciencias-naturales",
-  "number": 12,
+  "question": 12,
   "context_id": "context_nat08",
   "stem_text": "Con base en este modelo, ¿cuál mineral se forma a partir de las reacciones (entre compuestos que contengan carbono y oxígeno) que pueden darse entre los organismos marinos?",
   "choices": [
@@ -335,7 +335,7 @@
   "id": "simulacro-icfes/ciencias-naturales/q13",
   "type": "question",
   "component": "ciencias-naturales",
-  "number": 13,
+  "question": 13,
   "context_id": "context_nat09",
   "stem_text": "El amoníaco (NH₃) tiene la estructura H-N-HH-N-H, en la cual se observa que el nitrógeno (N) tiene 3 enlaces con 3 hidrógenos (H) y un par de electrones libres; por esta razón, su geometría es de pirámide trigonal.\n\n¿Qué geometría se obtendrá si el nitrógeno del amoníaco se enlaza con otro hidrógeno para formar NH₄⁺?",
   "choices": [
@@ -363,7 +363,7 @@
   "id": "simulacro-icfes/ciencias-naturales/q14",
   "type": "question",
   "component": "ciencias-naturales",
-  "number": 14,
+  "question": 14,
   "context_id": "context_nat10",
   "stem_text": "De acuerdo con lo anterior, ¿por qué se modificó la idea de que el caballo tenía la misma morfología desde que apareció en la Tierra?",
   "choices": [
@@ -391,7 +391,7 @@
   "id": "simulacro-icfes/ciencias-naturales/q15",
   "type": "question",
   "component": "ciencias-naturales",
-  "number": 15,
+  "question": 15,
   "context_id": "context_nat11",
   "stem_text": "De acuerdo con la información anterior, ¿a partir de cuál(es) material(es) se forma el carbón?",
   "choices": [
@@ -419,7 +419,7 @@
   "id": "simulacro-icfes/ciencias-naturales/q16",
   "type": "question",
   "component": "ciencias-naturales",
-  "number": 16,
+  "question": 16,
   "context_id": "context_transicion_fases_agua",
   "stem_text": "Teniendo en cuenta el modelo anterior, si se parte del estado M y se aumenta la temperatura manteniendo la presión constante, ¿cuál de los siguientes dibujos representa la(s) fase(s) en la que se encontrará el agua?",
   "choices": [
@@ -455,7 +455,7 @@
   "id": "simulacro-icfes/ciencias-naturales/q17",
   "type": "question",
   "component": "ciencias-naturales",
-  "number": 17,
+  "question": 17,
   "context_id": "context_girasoles01",
   "stem_text": "¿Cuál es el mejor procedimiento para verificar la hipótesis del estudiante sobre el crecimiento de girasoles?",
   "choices": [
@@ -483,7 +483,7 @@
   "id": "simulacro-icfes/ciencias-naturales/q18",
   "type": "question",
   "component": "ciencias-naturales",
-  "number": 18,
+  "question": 18,
   "context_id": "context_vapor01",
   "stem_text": "¿Qué le pasa al vapor de agua cuando empieza a salir, al abrirse la válvula de escape en el paso 2?",
   "choices": [
@@ -511,7 +511,7 @@
   "id": "simulacro-icfes/ciencias-naturales/q19",
   "type": "question",
   "component": "ciencias-naturales",
-  "number": 19,
+  "question": 19,
   "context_id": "context_hidrolisis01",
   "stem_text": "Con base en la información anterior, si se parte de la siguiente molécula en presencia de H⁺, ¿cuál será uno de los productos de la reacción?",
   "choices": [
@@ -539,7 +539,7 @@
   "id": "simulacro-icfes/ciencias-naturales/q20",
   "type": "question",
   "component": "ciencias-naturales",
-  "number": 20,
+  "question": 20,
   "context_id": "context_gravedad01",
   "stem_text": "Según la anterior información, ¿cuál de las siguientes imágenes representa correctamente las fuerzas gravitatorias sobre el satélite y la Tierra?",
   "choices": [

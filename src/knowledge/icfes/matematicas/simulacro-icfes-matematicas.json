@@ -11,7 +11,7 @@
   "id": "simulacro-icfes/matematicas/q01",
   "type": "question",
   "component": "matematicas",
-  "number": 1,
+  "question": 1,
   "context_id": "context_mat01",
   "stem_text": "Con respecto a la vertical, la torre se ha inclinado 4° como se muestra en la gráfica. ¿Cuánto mide el otro ángulo?",
   "choices": [
@@ -31,7 +31,7 @@
   "id": "simulacro-icfes/matematicas/q02",
   "type": "question",
   "component": "matematicas",
-  "number": 2,
+  "question": 2,
   "context_id": "context_mat01",
   "stem_text": "Aproximadamente, ¿qué porcentaje del total de personas que visitaron la torre esa semana entraron sin hacer reserva?",
   "choices": [
@@ -51,7 +51,7 @@
   "id": "simulacro-icfes/matematicas/q03",
   "type": "question",
   "component": "matematicas",
-  "number": 3,
+  "question": 3,
   "context_id": "context_mat01",
   "stem_text": "El proceso que muestra cómo se obtiene el dinero recaudado en la semana, de cada forma de venta, se muestra en el siguiente diagrama: ¿Cuál de las siguientes preguntas NO se puede resolver empleando una parte del proceso anterior?",
   "choices": [
@@ -71,7 +71,7 @@
   "id": "simulacro-icfes/matematicas/q04",
   "type": "question",
   "component": "matematicas",
-  "number": 4,
+  "question": 4,
   "context_id": "context_mat01",
   "stem_text": "El recaudo total de la semana, registrada en la tabla, fue aproximadamente de:",
   "choices": [
@@ -91,7 +91,7 @@
   "id": "simulacro-icfes/matematicas/q05",
   "type": "question",
   "component": "matematicas",
-  "number": 5,
+  "question": 5,
   "context_id": "context_mat01",
   "stem_text": "La mediana de la cantidad de turistas sin reserva que ingresan a la torre es 300; la de los que ingresan con reserva es 600. Solamente teniendo esto en cuenta, ¿es correcto afirmar que entran el doble de turistas con reserva que sin ella?",
   "choices": [
@@ -119,7 +119,7 @@
   "id": "simulacro-icfes/matematicas/q06",
   "type": "question",
   "component": "matematicas",
-  "number": 6,
+  "question": 6,
   "context_id": "context_mat02",
   "stem_text": "Otra representación que muestra toda la información de la gráfica anterior es:",
   "choices": [
@@ -147,7 +147,7 @@
   "id": "simulacro-icfes/matematicas/q07",
   "type": "question",
   "component": "matematicas",
-  "number": 7,
+  "question": 7,
   "context_id": "context_mat03",
   "stem_text": "Una persona afirma que en los dos meses la tienda tuvo los mismos ingresos totales. ¿La información de la gráfica es suficiente para determinar la veracidad de la afirmación?",
   "choices": [
@@ -167,7 +167,7 @@
   "id": "simulacro-icfes/matematicas/q08",
   "type": "question",
   "component": "matematicas",
-  "number": 8,
+  "question": 8,
   "context_id": "context_mat03",
   "stem_text": "Para calcular el cambio porcentual del número de ventas de un producto, se toma el valor absoluto de la diferencia entre las cantidades de unidades vendidas en marzo y en abril, se divide entre el número de unidades vendidas en marzo, y se multiplica por 100. El producto que tuvo un mayor cambio porcentual entre los dos meses fue:",
   "choices": [
@@ -195,7 +195,7 @@
   "id": "simulacro-icfes/matematicas/q09",
   "type": "question",
   "component": "matematicas",
-  "number": 9,
+  "question": 9,
   "context_id": "context_mat04",
   "stem_text": "La gráfica que representa esta función es:",
   "choices": [
@@ -223,7 +223,7 @@
   "id": "simulacro-icfes/matematicas/q10",
   "type": "question",
   "component": "matematicas",
-  "number": 10,
+  "question": 10,
   "context_id": "context_mat05",
   "stem_text": "De acuerdo con la información anterior, la construcción geométrica que debió hacer el estudiante para realizar la actividad fue:",
   "choices": [
@@ -251,7 +251,7 @@
   "id": "simulacro-icfes/matematicas/q11",
   "type": "question",
   "component": "matematicas",
-  "number": 11,
+  "question": 11,
   "context_id": "context_mat06",
   "stem_text": "El tiempo adicional consumido por la familia Ramírez en enero fue:",
   "choices": [
@@ -271,7 +271,7 @@
   "id": "simulacro-icfes/matematicas/q12",
   "type": "question",
   "component": "matematicas",
-  "number": 12,
+  "question": 12,
   "context_id": "context_mat06",
   "stem_text": "El señor Ramírez considera que el valor del minuto adicional del mes de enero fue excesivo. Su hija asegura que la diferencia entre el valor del minuto del plan y el valor del minuto adicional es de $35,42. ¿Cuál de los siguientes datos NO se necesita para hallar esta diferencia?",
   "choices": [
@@ -299,7 +299,7 @@
   "id": "simulacro-icfes/matematicas/q13",
   "type": "question",
   "component": "matematicas",
-  "number": 13,
+  "question": 13,
   "context_id": "context_mat07",
   "stem_text": "¿Cuál de los siguientes diagramas representa la situación de seleccionar al azar una canción del CD1, luego una del CD2 y finalmente una del CD3?",
   "choices": [
@@ -327,7 +327,7 @@
   "id": "simulacro-icfes/matematicas/q14",
   "type": "question",
   "component": "matematicas",
-  "number": 14,
+  "question": 14,
   "context_id": "context_mat08",
   "stem_text": "¿Cuál de las siguientes representaciones muestra el resultado final de las votaciones en los dos grupos de grado noveno?",
   "choices": [
@@ -355,7 +355,7 @@
   "id": "simulacro-icfes/matematicas/q15",
   "type": "question",
   "component": "matematicas",
-  "number": 15,
+  "question": 15,
   "context_id": "context_mat09",
   "stem_text": "¿Cuál de las siguientes gráficas muestra correctamente la relación entre la pesca y los días transcurridos después de iniciada la migración?",
   "choices": [
@@ -383,7 +383,7 @@
   "id": "simulacro-icfes/matematicas/q16",
   "type": "question",
   "component": "matematicas",
-  "number": 16,
+  "question": 16,
   "context_id": "context_mat10",
   "stem_text": "¿Cuál es la gráfica que deberían dibujar los estudiantes?",
   "choices": [
@@ -411,7 +411,7 @@
   "id": "simulacro-icfes/matematicas/q17",
   "type": "question",
   "component": "matematicas",
-  "number": 17,
+  "question": 17,
   "context_id": "context_mat11",
   "stem_text": "¿Cuál de las siguientes expresiones corresponde a la curva que describe la temperatura del animal en función del tiempo?",
   "choices": [
@@ -440,7 +440,7 @@
   "id": "simulacro-icfes/matematicas/q18",
   "type": "question",
   "component": "matematicas",
-  "number": 18,
+  "question": 18,
   "context_id": "context_mat12",
   "stem_text": "¿Cuál de las siguientes representaciones muestra correctamente la información recolectada en la encuesta?",
   "choices": [
@@ -469,7 +469,7 @@
   "id": "simulacro-icfes/matematicas/q19",
   "type": "question",
   "component": "matematicas",
-  "number": 19,
+  "question": 19,
   "context_id": "context_mat13",
   "stem_text": "¿Cuál de las siguientes expresiones es equivalente al polinomio p(x) utilizado para valores de x distintos de 0?",
   "choices": [
@@ -498,7 +498,7 @@
   "id": "simulacro-icfes/matematicas/q20",
   "type": "question",
   "component": "matematicas",
-  "number": 20,
+  "question": 20,
   "context_id": "context_mat14",
   "stem_text": "¿Cuáles son las coordenadas de los otros dos vértices?",
   "choices": [

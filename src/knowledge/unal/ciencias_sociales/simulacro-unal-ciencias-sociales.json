@@ -11,7 +11,7 @@
     "id": "simulacro-unal/ciencias-sociales/q01",
     "type": "question",
     "component": "ciencias-sociales",
-    "number": 1,
+    "question": 1,
     "context_id": "context_bastilla01",
     "stem_text": "¿Por qué la toma de la Bastilla marcó el triunfo de la sociedad francesa y de la 'libertad' sobre el despotismo?",
     "choices": [
@@ -31,7 +31,7 @@
   "id": "simulacro-unal/ciencias-sociales/q02",
   "type": "question",
   "component": "ciencias-sociales",
-  "number": 2,
+  "question": 2,
   "context_id": "context_bastilla01",
   "stem_text": "¿Crees que los hechos que narra este periódico francés puedan ser tendenciosos? ¿Por qué sí o por qué no?",
   "choices": ["Porque el rey Luis XVI apoyó abiertamente la toma de la Bastilla como un acto de justicia.",
@@ -51,7 +51,7 @@
   "id": "simulacro-unal/ciencias-sociales/q03",
   "type": "question",
   "component": "ciencias-sociales",
-  "number": 3,
+  "question": 3,
   "context_id": "context_bastilla01",
   "stem_text": "¿Qué papel juegan las emociones en la manera en que se describe la toma de la Bastilla en este relato?",
   "choices": [
@@ -79,7 +79,7 @@
   "id": "simulacro-unal/ciencias-sociales/q04",
   "type": "question",
   "component": "ciencias-sociales",
-  "number": 4,
+  "question": 4,
   "context_id": "context_napoleon01",
   "stem_text": "¿Qué temas utilizó Napoleón para jugar con las emociones de sus tropas e inspirarlos a más grandes esfuerzos?",
   "choices": [
@@ -99,7 +99,7 @@
   "id": "simulacro-unal/ciencias-sociales/q05",
   "type": "question",
   "component": "ciencias-sociales",
-  "number": 5,
+  "question": 5,
   "context_id": "context_napoleon01",
   "stem_text": "¿Piensas que Napoleón creyó en estas palabras? ¿Por qué sí o por qué no?",
   "choices": [
@@ -127,7 +127,7 @@
   "id": "simulacro-unal/ciencias-sociales/q06",
   "type": "question",
   "component": "ciencias-sociales",
-  "number": 6,
+  "question": 6,
   "context_id": "context_textil01",
   "stem_text": "¿Qué clase de condiciones de trabajo enfrentaron los niños en los molinos textiles a principios de la Revolución Industrial?",
   "choices": [
@@ -147,7 +147,7 @@
   "id": "simulacro-unal/ciencias-sociales/q07",
   "type": "question",
   "component": "ciencias-sociales",
-  "number": 7,
+  "question": 7,
   "context_id": "context_textil01",
   "stem_text": "¿Por qué crees que los niños eran golpeados mientras trabajaban en los molinos textiles?",
   "choices": [
@@ -167,7 +167,7 @@
   "id": "simulacro-unal/ciencias-sociales/q08",
   "type": "question",
   "component": "ciencias-sociales",
-  "number": 8,
+  "question": 8,
   "context_id": "context_textil01",
   "stem_text": "¿Qué impacto emocional y físico crees que tuvo este tratamiento en los niños que trabajaban en los molinos?",
   "choices": [
@@ -195,7 +195,7 @@
   "id": "simulacro-unal/ciencias-sociales/q09",
   "type": "question",
   "component": "ciencias-sociales",
-  "number": 9,
+  "question": 9,
   "context_id": "context_canciones01",
   "stem_text": "¿Qué ideas o temas crees que mantuvieron la voluntad de los soldados de todos los bandos para luchar, según las canciones presentadas?",
   "choices": [
@@ -215,7 +215,7 @@
   "id": "simulacro-unal/ciencias-sociales/q10",
   "type": "question",
   "component": "ciencias-sociales",
-  "number": 10,
+  "question": 10,
   "context_id": "context_canciones01",
   "stem_text": "¿Cómo crees que la letra y la interpretación de estas canciones lograron dar forma a la psicología de los cantantes?",
   "choices": [
@@ -235,7 +235,7 @@
   "id": "simulacro-unal/ciencias-sociales/q11",
   "type": "question",
   "component": "ciencias-sociales",
-  "number": 11,
+  "question": 11,
   "context_id": "context_canciones01",
   "stem_text": "¿Reflejan o eluden tales canciones el contenido real y profundo de los conflictos?",
   "choices": [
@@ -263,7 +263,7 @@
   "id": "simulacro-unal/ciencias-sociales/q12",
   "type": "question",
   "component": "ciencias-sociales",
-  "number": 12,
+  "question": 12,
   "context_id": "context_hitler01",
   "stem_text": "¿Cuál fue la actitud de Hitler hacia los judíos según este texto?",
   "choices": [
@@ -283,7 +283,7 @@
   "id": "simulacro-unal/ciencias-sociales/q13",
   "type": "question",
   "component": "ciencias-sociales",
-  "number": 13,
+  "question": 13,
   "context_id": "context_hitler01",
   "stem_text": "¿Por qué crees que un gran número de alemanes comunes y corrientes aceptaron (o por lo menos toleraron) estas opiniones dementes después de la Primera Guerra Mundial?",
   "choices": [
@@ -303,7 +303,7 @@
   "id": "simulacro-unal/ciencias-sociales/q14",
   "type": "question",
   "component": "ciencias-sociales",
-  "number": 14,
+  "question": 14,
   "context_id": "context_hitler01",
   "stem_text": "¿Cómo justifica Hitler su odio hacia los judíos en este fragmento?",
   "choices": [
@@ -331,7 +331,7 @@
   "id": "simulacro-unal/ciencias-sociales/q15",
   "type": "question",
   "component": "ciencias-sociales",
-  "number": 15,
+  "question": 15,
   "context_id": "context_stalingrado01",
   "stem_text": "¿Qué pensaban del Führer estos soldados? ¿Por qué?",
   "choices": [
@@ -351,7 +351,7 @@
   "id": "simulacro-unal/ciencias-sociales/q16",
   "type": "question",
   "component": "ciencias-sociales",
-  "number": 16,
+  "question": 16,
   "context_id": "context_stalingrado01",
   "stem_text": "¿Cuál era la fuente de su información? ¿Por qué es importante esto?",
   "choices": [
@@ -371,7 +371,7 @@
   "id": "simulacro-unal/ciencias-sociales/q17",
   "type": "question",
   "component": "ciencias-sociales",
-  "number": 17,
+  "question": 17,
   "context_id": "context_stalingrado01",
   "stem_text": "¿Por qué se considera que la batalla de Stalingrado fue el punto decisivo de la Segunda Guerra Mundial?",
   "choices": [

@@ -11,7 +11,7 @@
   "id": "simulacro-unal/matematicas/q01",
   "type": "question",
   "component": "matematicas",
-  "number": 1,
+  "question": 1,
   "context_id": "context_paquete01",
   "stem_text": "¿Aceptará la oficina de correos un paquete que mide 6 pulgadas de ancho, 8 pulgadas de profundidad y 5 pies de largo sabiendo que? \\(L + 2(x + y) \\leq 108\\)",
   "choices": [
@@ -31,7 +31,7 @@
   "id": "simulacro-unal/matematicas/q02",
   "type": "question",
   "component": "matematicas",
-  "number": 2,
+  "question": 2,
   "context_id": "context_paquete01",
   "stem_text": "¿Cuál es el mayor largo aceptable para un paquete que tiene una base cuadrada que mide 9 pulgadas por 9 pulgadas? \\(L + 2(x + y) \\leq 108\\)",
   "choices": [
@@ -59,7 +59,7 @@
   "id": "simulacro-unal/matematicas/q03",
   "type": "question",
   "component": "matematicas",
-  "number": 3,
+  "question": 3,
   "context_id": "context_pi01",
   "stem_text": "¿Cuánto tuvo que girar el círculo de la imagen de radio 1 para recorrer una distancia \\(\\pi\\)? \\(\\text{perímetro} = 2\\pi r\\)",
   "choices": [
@@ -79,7 +79,7 @@
   "id": "simulacro-unal/matematicas/q04",
   "type": "question",
   "component": "matematicas",
-  "number": 4,
+  "question": 4,
   "context_id": "context_pi01",
   "stem_text": "¿Cuánto tuvo que girar el círculo de la imagen de radio 1 para recorrer una distancia \\(2\\pi\\)? \\(\\text{perímetro} = 2\\pi r\\)",
   "choices": [
@@ -107,7 +107,7 @@
   "id": "simulacro-unal/matematicas/q05",
   "type": "question",
   "component": "matematicas",
-  "number": 5,
+  "question": 5,
   "context_id": "context_kepler01",
   "stem_text": "Utiliza el hecho de que el período de la órbita de la Tierra es aproximadamente 365.25 días para encontrar el período de la órbita de la Tierra.",
   "choices": [
@@ -127,7 +127,7 @@
   "id": "simulacro-unal/matematicas/q06",
   "type": "question",
   "component": "matematicas",
-  "number": 6,
+  "question": 6,
   "context_id": "context_kepler01",
   "stem_text": "¿Cuál es la distancia promedio de la Tierra al Sol usando la fórmula dada? \\(T = 3.15 \\times 10^7 s, \\; M = 1.99 \\times 10^{30} kg, \\; G = 6.67 \\times 10^{-11} \\; Nm^2/kg^2\\)",
   "choices": [
@@ -147,7 +147,7 @@
   "id": "simulacro-unal/matematicas/q07",
   "type": "question",
   "component": "matematicas",
-  "number": 7,
+  "question": 7,
   "context_id": "context_potencias01",
   "stem_text": "Simplifica las siguientes expresiones a un número natural: \\(20^6 \\times (0.5)^6\\)",
   "choices": [
@@ -167,7 +167,7 @@
   "id": "simulacro-unal/matematicas/q08",
   "type": "question",
   "component": "matematicas",
-  "number": 8,
+  "question": 8,
   "context_id": "context_potencias01",
   "stem_text": "Simplifica las siguientes expresiones a un número natural: \\(\\frac{18^5}{9^5}\\)",
   "choices": [
@@ -195,7 +195,7 @@
   "id": "simulacro-unal/matematicas/q09",
   "type": "question",
   "component": "matematicas",
-  "number": 9,
+  "question": 9,
   "context_id": "context_concreto01",
   "stem_text": "Usando la fórmula para el volumen de un cilindro, encuentre el volumen del cilíndrico que se muestra en la figura. \\(V_{cilindro} = \\pi r^2 h\\)",
   "choices": [
@@ -223,7 +223,7 @@
   "id": "simulacro-unal/matematicas/q10",
   "type": "question",
   "component": "matematicas",
-  "number": 10,
+  "question": 10,
   "context_id": "context_podar01",
   "stem_text": "¿Cuál es el área de la parte podada?",
   "choices": [
@@ -251,7 +251,7 @@
   "id": "simulacro-unal/matematicas/q11",
   "type": "question",
   "component": "matematicas",
-  "number": 11,
+  "question": 11,
   "context_id": "context_costo01",
   "stem_text": "Un fabricante de ropa encuentra que el costo de producir x camisas C(x) es el que se muestra en la ecuación: C(x) = 500 + 6x + 0.01x^2. ¿Cuál sería el costo promedio por camiseta?",
   "choices": [
@@ -279,7 +279,7 @@
   "id": "simulacro-unal/matematicas/q12",
   "type": "question",
   "component": "matematicas",
-  "number": 12,
+  "question": 12,
   "context_id": "context_gravedad01",
   "stem_text": "¿A qué distancia del centro de la Tierra se encuentra el 'punto muerto' donde no actúa ninguna fuerza gravitacional neta sobre el objeto? (Exprésalo en la unidad de mil millas más cercana).",
   "choices": [
@@ -307,7 +307,7 @@
   "id": "simulacro-unal/matematicas/q13",
   "type": "question",
   "component": "matematicas",
-  "number": 13,
+  "question": 13,
   "context_id": "context_prueba01",
   "stem_text": "¿En qué paso está el error?",
   "choices": [
@@ -335,7 +335,7 @@
   "id": "simulacro-unal/matematicas/q14",
   "type": "question",
   "component": "matematicas",
-  "number": 14,
+  "question": 14,
   "context_id": "context_jardin01",
   "stem_text": "Si su área es de 1125 pies cuadrados, ¿cuál es la longitud del jardín?",
   "choices": [
@@ -362,7 +362,7 @@
   "id": "simulacro-unal/matematicas/q15",
   "type": "question",
   "component": "matematicas",
-  "number": 15,
+  "question": 15,
   "context_id": "context_arbol01",
   "stem_text": "Con los datos del contexto, ¿cuál es la altura del árbol grande?",
   "choices": [
@@ -382,7 +382,7 @@
   "id": "simulacro-unal/matematicas/q16",
   "type": "question",
   "component": "matematicas",
-  "number": 16,
+  "question": 16,
   "context_id": "context_bambu01",
   "stem_text": "Un tallo de bambú de 10 ft se rompe de modo que su punta toca el suelo a 3 ft de la base. ¿Qué altura del tallo queda en pie?",
   "choices": [
@@ -410,7 +410,7 @@
   "id": "simulacro-unal/matematicas/q16",
   "type": "question",
   "component": "matematicas",
-  "number": 16,
+  "question": 16,
   "context_id": "context_bambu01",
   "stem_text": "¿Cuál es la altura de la rotura?",
   "choices": [
@@ -438,7 +438,7 @@
   "id": "simulacro-unal/matematicas/q17",
   "type": "question",
   "component": "matematicas",
-  "number": 17,
+  "question": 17,
   "context_id": "context_fogata01",
   "stem_text": "¿A qué rango de distancias desde el centro del fuego la temperatura es menor a 500°C?",
   "choices": [
@@ -466,7 +466,7 @@
   "id": "simulacro-unal/matematicas/q18",
   "type": "question",
   "component": "matematicas",
-  "number": 18,
+  "question": 18,
   "context_id": "context_coordenadas01",
   "stem_text": "Triángulo ABC en la figura ha sido desplazado al triángulo A'B'C'. Encuentra las coordenadas del punto C'.",
   "choices": [
@@ -494,7 +494,7 @@
   "id": "simulacro-unal/matematicas/q19",
   "type": "question",
   "component": "matematicas",
-  "number": 19,
+  "question": 19,
   "context_id": "context_circulo01",
   "stem_text": "¿En qué otro punto del círculo habrá una línea tangente paralela a la línea tangente ya dada?",
   "choices": [

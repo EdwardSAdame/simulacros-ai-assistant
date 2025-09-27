@@ -11,7 +11,7 @@
   "id": "simulacro-unal/analisis-de-imagen/q01",
   "type": "question",
   "component": "analisis-de-imagen",
-  "number": 1,
+  "question": 1,
   "context_id": "context_figuras01",
   "stem_text": "Identifica la característica que comparten las dos figuras superiores y selecciona, entre las tres opciones dadas (A, B, C), cuál figura también posee esa característica.",
   "choices": [
@@ -30,7 +30,7 @@
   "id": "simulacro-unal/analisis-de-imagen/q02",
   "type": "question",
   "component": "analisis-de-imagen",
-  "number": 2,
+  "question": 2,
   "context_id": "context_figuras01",
   "stem_text": "Observa las dos cuadrículas superiores (2×2). Identifica la regla que transforma la primera en la segunda y elige (A, B o C) cuál cuadrícula continúa la secuencia.",
   "choices": [
@@ -49,7 +49,7 @@
   "id": "simulacro-unal/analisis-de-imagen/q03",
   "type": "question",
   "component": "analisis-de-imagen",
-  "number": 3,
+  "question": 3,
   "context_id": "context_figuras01",
   "stem_text": "Observa las dos secuencias diagonales de círculos en la parte superior. Identifica la característica que comparten y selecciona (A, B o C) cuál de las opciones también cumple con esa característica.",
   "choices": [
@@ -76,7 +76,7 @@
   "id": "simulacro-unal/analisis-de-imagen/q04",
   "type": "question",
   "component": "analisis-de-imagen",
-  "number": 4,
+  "question": 4,
   "context_id": "context_secuencia01",
   "stem_text": "Completa la secuencia ubicando el círculo pequeño exterior en la posición correcta alrededor del círculo grande.",
   "choices": [
@@ -95,7 +95,7 @@
   "id": "simulacro-unal/analisis-de-imagen/q05",
   "type": "question",
   "component": "analisis-de-imagen",
-  "number": 5,
+  "question": 5,
   "context_id": "context_secuencia01",
   "stem_text": "En la matriz 2×2, una ‘L’ delgada rota 90° en sentido antihorario entre casillas y a veces queda parcialmente cubierta por las formas negras. ¿Cuál opción completa correctamente la casilla faltante (abajo-derecha)?",
   "choices": [
@@ -114,7 +114,7 @@
   "id": "simulacro-unal/analisis-de-imagen/q06",
   "type": "question",
   "component": "analisis-de-imagen",
-  "number": 6,
+  "question": 6,
   "context_id": "context_secuencia01",
   "stem_text": "Completa la matriz 2×2. Observa cómo evoluciona el número de triángulos en cada celda y elige la figura que debe ir en la casilla vacía.",
   "choices": [
@@ -141,7 +141,7 @@
   "id": "simulacro-unal/analisis-de-imagen/q07",
   "type": "question",
   "component": "analisis-de-imagen",
-  "number": 7,
+  "question": 7,
   "context_id": "context_espacial01",
   "stem_text": "Identifica cuál de los desarrollos planos corresponde correctamente al cubo tridimensional mostrado.",
   "choices": [
@@ -161,7 +161,7 @@
   "id": "simulacro-unal/analisis-de-imagen/q08",
   "type": "question",
   "component": "analisis-de-imagen",
-  "number": 8,
+  "question": 8,
   "context_id": "context_espacial01",
   "stem_text": "Identifica cuál de las redes planas corresponde correctamente a la pirámide tridimensional de base cuadrada mostrada.",
   "choices": [
@@ -181,7 +181,7 @@
   "id": "simulacro-unal/analisis-de-imagen/q09",
   "type": "question",
   "component": "analisis-de-imagen",
-  "number": 9,
+  "question": 9,
   "context_id": "context_espacial01",
   "stem_text": "Elige la red (net) que se pliega correctamente para formar la figura tridimensional mostrada, la cual posee 7 caras en total: base central, cuatro rectángulos laterales y dos 'alas' triangulares opuestas.",
   "choices": [
@@ -209,7 +209,7 @@
   "id": "simulacro-unal/analisis-de-imagen/q10",
   "type": "question",
   "component": "analisis-de-imagen",
-  "number": 10,
+  "question": 10,
   "context_id": "context_plano01",
   "stem_text": "Identifica la vista en planta (desde arriba) del conjunto de cubos mostrado.",
   "choices": [
@@ -228,7 +228,7 @@
   "id": "simulacro-unal/analisis-de-imagen/q11",
   "type": "question",
   "component": "analisis-de-imagen",
-  "number": 11,
+  "question": 11,
   "context_id": "context_plano01",
   "stem_text": "Elige la vista en planta (desde arriba) de la figura mostrada.",
   "choices": [
@@ -247,7 +247,7 @@
   "id": "simulacro-unal/analisis-de-imagen/q12",
   "type": "question",
   "component": "analisis-de-imagen",
-  "number": 12,
+  "question": 12,
   "context_id": "context_plano01",
   "stem_text": "Elige la vista en planta (desde arriba) del sólido mostrado: bloque central con pirámide superior, un cubo adosado y dos elementos inclinados.",
   "choices": [
@@ -274,7 +274,7 @@
   "id": "simulacro-unal/analisis-de-imagen/q13",
   "type": "question",
   "component": "analisis-de-imagen",
-  "number": 13,
+  "question": 13,
   "context_id": "context_simetria01",
   "stem_text": "Identifica la imagen en espejo (respecto a un eje vertical) de la figura dada. Recuerda: si además está rotada, es incorrecta.",
   "choices": [
@@ -293,7 +293,7 @@
   "id": "simulacro-unal/analisis-de-imagen/q14",
   "type": "question",
   "component": "analisis-de-imagen",
-  "number": 14,
+  "question": 14,
   "context_id": "context_simetria01",
   "stem_text": "Identifica la imagen en espejo (respecto a un eje vertical). Recuerda: no debe haber rotación.",
   "choices": [
@@ -312,7 +312,7 @@
   "id": "simulacro-unal/analisis-de-imagen/q15",
   "type": "question",
   "component": "analisis-de-imagen",
-  "number": 15,
+  "question": 15,
   "context_id": "context_simetria01",
   "stem_text": "Identifica la imagen en espejo respecto a un eje vertical. Recuerda: el reflejo no debe estar rotado.",
   "choices": [
@@ -339,7 +339,7 @@
   "id": "simulacro-unal/analisis-de-imagen/q16",
   "type": "question",
   "component": "analisis-de-imagen",
-  "number": 16,
+  "question": 16,
   "context_id": "context_rotacion01",
   "stem_text": "La figura de la pregunta ha sido rotada. Elige la opción que es idéntica a la original salvo por una rotación (sin traslaciones de piezas, reflejos ni cambios de unión).",
   "choices": [
@@ -359,7 +359,7 @@
   "id": "simulacro-unal/analisis-de-imagen/q17",
   "type": "question",
   "component": "analisis-de-imagen",
-  "number": 17,
+  "question": 17,
   "context_id": "context_rotacion01",
   "stem_text": "Elige la opción que es idéntica a la figura dada salvo por una rotación (sin reflejos ni piezas movidas).",
   "choices": [
@@ -378,7 +378,7 @@
   "id": "simulacro-unal/analisis-de-imagen/q18",
   "type": "question",
   "component": "analisis-de-imagen",
-  "number": 18,
+  "question": 18,
   "context_id": "context_rotacion01",
   "stem_text": "Elige la opción que corresponde a la misma figura que la dada, pero solo rotada (sin deformar piezas ni alterar sus conexiones).",
   "choices": [

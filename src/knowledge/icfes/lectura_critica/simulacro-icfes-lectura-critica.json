@@ -11,7 +11,7 @@
   "id": "simulacro-icfes/lectura-critica/q01",
   "type": "question",
   "component": "lectura-critica",
-  "number": 1,
+  "question": 1,
   "context_id": "context_shakespeare01",
   "stem_text": "¿Qué recurso literario predomina en el fragmento de Shakespeare para exaltar la imagen de Inglaterra?",
   "choices": [
@@ -31,7 +31,7 @@
   "id": "simulacro-icfes/lectura-critica/q02",
   "type": "question",
   "component": "lectura-critica",
-  "number": 2,
+  "question": 2,
   "context_id": "context_shakespeare01",
   "stem_text": "En el fragmento, Shakespeare describe a Inglaterra como “esta nodriza, este feroz vientre de reyes”. ¿Qué implica esta metáfora?",
   "choices": [
@@ -51,7 +51,7 @@
   "id": "simulacro-icfes/lectura-critica/q03",
   "type": "question",
   "component": "lectura-critica",
-  "number": 3,
+  "question": 3,
   "context_id": "context_shakespeare01",
   "stem_text": "En la frase “cuyas costas rocosas repelen el envidioso asedio del acuoso Neptuno”, ¿qué función cumple la personificación de Neptuno?",
   "choices": [
@@ -71,7 +71,7 @@
   "id": "simulacro-icfes/lectura-critica/q04",
   "type": "question",
   "component": "lectura-critica",
-  "number": 4,
+  "question": 4,
   "context_id": "context_shakespeare01",
   "stem_text": "¿Por qué se describe a William Shakespeare no como un simple dramaturgo, sino como “un hombre de teatro completo”?",
   "choices": [
@@ -91,7 +91,7 @@
   "id": "simulacro-icfes/lectura-critica/q05",
   "type": "question",
   "component": "lectura-critica",
-  "number": 5,
+  "question": 5,
   "context_id": "context_shakespeare01",
   "stem_text": "¿Qué países pudo sugerir Shakespeare con la frase “la envidia de países menos venturosos”?",
   "choices": [
@@ -119,7 +119,7 @@
   "id": "simulacro-icfes/lectura-critica/q06",
   "type": "question",
   "component": "lectura-critica",
-  "number": 6,
+  "question": 6,
   "context_id": "context_hesse01",
   "stem_text": "¿Cómo se refleja en el protagonista la influencia del inconsciente según el fragmento?",
   "choices": [
@@ -139,7 +139,7 @@
   "id": "simulacro-icfes/lectura-critica/q07",
   "type": "question",
   "component": "lectura-critica",
-  "number": 7,
+  "question": 7,
   "context_id": "context_hesse01",
   "stem_text": "¿Qué simboliza la imposibilidad del protagonista de “arrancarse la oscura y secreta meta de sí mismo”?",
   "choices": [
@@ -159,7 +159,7 @@
   "id": "simulacro-icfes/lectura-critica/q08",
   "type": "question",
   "component": "lectura-critica",
-  "number": 8,
+  "question": 8,
   "context_id": "context_hesse01",
   "stem_text": "¿Por qué Hesse intensificó su crítica a la sociedad mecanizada tras la Primera Guerra Mundial?",
   "choices": [
@@ -179,7 +179,7 @@
   "id": "simulacro-icfes/lectura-critica/q09",
   "type": "question",
   "component": "lectura-critica",
-  "number": 9,
+  "question": 9,
   "context_id": "context_hesse01",
   "stem_text": "¿De qué manera se manifiesta el interés de Hesse por el inconsciente en este pasaje?",
   "choices": [
@@ -199,7 +199,7 @@
   "id": "simulacro-icfes/lectura-critica/q10",
   "type": "question",
   "component": "lectura-critica",
-  "number": 10,
+  "question": 10,
   "context_id": "context_hesse01",
   "stem_text": "¿Por qué fue particularmente intenso el desdén por la sociedad mecanizada después de la Primera Guerra Mundial?",
   "choices": [
@@ -227,7 +227,7 @@
   "id": "simulacro-icfes/lectura-critica/q11",
   "type": "question",
   "component": "lectura-critica",
-  "number": 11,
+  "question": 11,
   "context_id": "context_darwin01",
   "stem_text": "¿Por qué la teoría original de la selección natural no podía explicar el plumaje del pavo real?",
   "choices": [
@@ -247,7 +247,7 @@
   "id": "simulacro-icfes/lectura-critica/q12",
   "type": "question",
   "component": "lectura-critica",
-  "number": 12,
+  "question": 12,
   "context_id": "context_darwin01",
   "stem_text": "¿Cuál fue la solución de Darwin para explicar la aparente desventaja del plumaje del pavo real?",
   "choices": [
@@ -267,7 +267,7 @@
   "id": "simulacro-icfes/lectura-critica/q13",
   "type": "question",
   "component": "lectura-critica",
-  "number": 13,
+  "question": 13,
   "context_id": "context_darwin01",
   "stem_text": "¿Por qué la selección sexual puede favorecer rasgos que parecen desventajosos para la supervivencia?",
   "choices": [
@@ -287,7 +287,7 @@
   "id": "simulacro-icfes/lectura-critica/q14",
   "type": "question",
   "component": "lectura-critica",
-  "number": 14,
+  "question": 14,
   "context_id": "context_darwin01",
   "stem_text": "¿Por qué Darwin se sintió 'enfermo' al ver una pluma de pavo real?",
   "choices": [
@@ -307,7 +307,7 @@
   "id": "simulacro-icfes/lectura-critica/q15",
   "type": "question",
   "component": "lectura-critica",
-  "number": 15,
+  "question": 15,
   "context_id": "context_darwin01",
   "stem_text": "Si tanto hombres como mujeres enfrentaban los mismos desafíos evolutivos en la antigüedad —como buscar alimento, defenderse de depredadores y sobrevivir en ambientes hostiles—, ¿por qué los hombres desarrollaron mayor fuerza física en promedio, mientras que las mujeres no evolucionaron con la misma musculatura y agresividad?",
   "choices": [
@@ -335,7 +335,7 @@
   "id": "simulacro-icfes/lectura-critica/q16",
   "type": "question",
   "component": "lectura-critica",
-  "number": 16,
+  "question": 16,
   "context_id": "context_esparta01",
   "stem_text": "¿Qué te dice este pasaje de Plutarco sobre el informe de Licurgo acerca de la naturaleza del Estado espartano?",
   "choices": [
@@ -355,7 +355,7 @@
   "id": "simulacro-icfes/lectura-critica/q17",
   "type": "question",
   "component": "lectura-critica",
-  "number": 17,
+  "question": 17,
   "context_id": "context_esparta01",
   "stem_text": "¿Por qué les parecía de mal gusto el programa completo a los atenienses?",
   "choices": [
@@ -375,7 +375,7 @@
   "id": "simulacro-icfes/lectura-critica/q18",
   "type": "question",
   "component": "lectura-critica",
-  "number": 18,
+  "question": 18,
   "context_id": "context_esparta01",
   "stem_text": "¿Cuál era la razón por la que los jóvenes espartanos eran alentados a robar comida?",
   "choices": [
@@ -395,7 +395,7 @@
   "id": "simulacro-icfes/lectura-critica/q19",
   "type": "question",
   "component": "lectura-critica",
-  "number": 19,
+  "question": 19,
   "context_id": "context_esparta01",
   "stem_text": "¿Qué implicaciones podría tener el hecho de que los ancianos espartanos observaran a los niños pelear desnudos dentro del modelo educativo y social de Esparta?",
   "choices": [

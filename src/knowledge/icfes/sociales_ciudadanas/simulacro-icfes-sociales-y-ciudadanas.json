@@ -11,7 +11,7 @@
   "id": "simulacro-icfes/sociales-y-cuidadanas/q01",
   "type": "question",
   "component": "sociales-y-cuidadanas",
-  "number": 1,
+  "question": 1,
   "context_id": "context_colon01",
   "stem_text": "¿Qué elementos en la carta de Colón sugieren que su mensaje estaba dirigido a una audiencia más amplia y no solo a la corte española?",
   "choices": [
@@ -31,7 +31,7 @@
   "id": "simulacro-icfes/sociales-y-cuidadanas/q02",
   "type": "question",
   "component": "sociales-y-cuidadanas",
-  "number": 2,
+  "question": 2,
   "context_id": "context_colon01",
   "stem_text": "¿Qué intención tiene Colón al enfatizar la supuesta docilidad y generosidad de los indígenas?",
   "choices": [
@@ -51,7 +51,7 @@
   "id": "simulacro-icfes/sociales-y-cuidadanas/q03",
   "type": "question",
   "component": "sociales-y-cuidadanas",
-  "number": 3,
+  "question": 3,
   "context_id": "context_colon01",
   "stem_text": "¿Por qué Colón destaca la carencia de armas entre los indígenas en su carta?",
   "choices": [
@@ -71,7 +71,7 @@
   "id": "simulacro-icfes/sociales-y-cuidadanas/q04",
   "type": "question",
   "component": "sociales-y-cuidadanas",
-  "number": 4,
+  "question": 4,
   "context_id": "context_colon01",
   "stem_text": "¿Cómo se puede interpretar el uso de la palabra \"idiotas\" en la descripción del intercambio de bienes entre los indígenas y los europeos?",
   "choices": [
@@ -100,7 +100,7 @@
   "id": "simulacro-icfes/sociales-y-cuidadanas/q06",
   "type": "question",
   "component": "sociales-y-cuidadanas",
-  "number": 6,
+  "question": 6,
   "context_id": "context_milgram01",
   "stem_text": "¿Cuál fue el principal hallazgo del experimento de Milgram sobre la obediencia a la autoridad?",
   "choices": [
@@ -120,7 +120,7 @@
   "id": "simulacro-icfes/sociales-y-cuidadanas/q07",
   "type": "question",
   "component": "sociales-y-cuidadanas",
-  "number": 7,
+  "question": 7,
   "context_id": "context_milgram01",
   "stem_text": "¿Cuál de los siguientes factores aumentaba la obediencia en el experimento de Milgram?",
   "choices": [
@@ -140,7 +140,7 @@
   "id": "simulacro-icfes/sociales-y-cuidadanas/q08",
   "type": "question",
   "component": "sociales-y-cuidadanas",
-  "number": 8,
+  "question": 8,
   "context_id": "context_milgram01",
   "stem_text": "¿Qué enseñanza clave dejó el experimento de Milgram?",
   "choices": [
@@ -160,7 +160,7 @@
   "id": "simulacro-icfes/sociales-y-cuidadanas/q09",
   "type": "question",
   "component": "sociales-y-cuidadanas",
-  "number": 9,
+  "question": 9,
   "context_id": "context_milgram01",
   "stem_text": "¿Por qué el experimento de Milgram generó preocupaciones éticas?",
   "choices": [
@@ -180,7 +180,7 @@
   "id": "simulacro-icfes/sociales-y-cuidadanas/q10",
   "type": "question",
   "component": "sociales-y-cuidadanas",
-  "number": 10,
+  "question": 10,
   "context_id": "context_milgram01",
   "stem_text": "¿Cómo se relaciona el experimento de Milgram con el análisis de perspectivas en problemas sociales?",
   "choices": [
@@ -200,7 +200,7 @@
   "id": "simulacro-icfes/sociales-y-cuidadanas/q11",
   "type": "question",
   "component": "sociales-y-cuidadanas",
-  "number": 11,
+  "question": 11,
   "context_id": "context_milgram01",
   "stem_text": "¿Cómo se relaciona el experimento de Milgram con el uso de drones militares en la guerra en Ucrania-Rusia?",
   "choices": [
@@ -228,7 +228,7 @@
   "id": "simulacro-icfes/sociales-y-cuidadanas/q12",
   "type": "question",
   "component": "sociales-y-cuidadanas",
-  "number": 12,
+  "question": 12,
   "context_id": "context_responsabilidad01",
   "stem_text": "¿Cómo se define la difusión de la responsabilidad?",
   "choices": [
@@ -248,7 +248,7 @@
   "id": "simulacro-icfes/sociales-y-cuidadanas/q13",
   "type": "question",
   "component": "sociales-y-cuidadanas",
-  "number": 13,
+  "question": 13,
   "context_id": "context_responsabilidad01",
   "stem_text": "¿Qué caso real ayudó a popularizar el estudio de la difusión de la responsabilidad?",
   "choices": [
@@ -268,7 +268,7 @@
   "id": "simulacro-icfes/sociales-y-cuidadanas/q14",
   "type": "question",
   "component": "sociales-y-ciudadanas",
-  "number": 14,
+  "question": 14,
   "context_id": "context_responsabilidad01",
   "stem_text": "Según los estudios de Darley y Latané, ¿qué aumenta la probabilidad de que alguien ayude en una emergencia?",
   "choices": [
@@ -288,7 +288,7 @@
   "id": "simulacro-icfes/sociales-y-cuidadanas/q15",
   "type": "question",
   "component": "sociales-y-ciudadanas",
-  "number": 15,
+  "question": 15,
   "context_id": "context_responsabilidad01",
   "stem_text": "¿Cuál de los siguientes factores contribuye a la difusión de la responsabilidad?",
   "choices": [
@@ -308,7 +308,7 @@
   "id": "simulacro-icfes/sociales-y-cuidadanas/q16",
   "type": "question",
   "component": "sociales-y-ciudadanas",
-  "number": 16,
+  "question": 16,
   "context_id": "context_responsabilidad01",
   "stem_text": "¿Cómo se relaciona la difusión de la responsabilidad con el pensamiento social?",
   "choices": [
@@ -328,7 +328,7 @@
   "id": "simulacro-icfes/sociales-y-cuidadanas/q17",
   "type": "question",
   "component": "sociales-y-ciudadanas",
-  "number": 17,
+  "question": 17,
   "context_id": "context_responsabilidad01",
   "stem_text": "Si necesitas ayuda en una emergencia, ¿cuál es la mejor estrategia para evitar la difusión de la responsabilidad?",
   "choices": [

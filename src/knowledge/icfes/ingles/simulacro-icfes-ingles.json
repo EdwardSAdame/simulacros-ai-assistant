@@ -11,7 +11,7 @@
   "id": "simulacro-icfes/ingles/q01",
   "type": "question",
   "component": "ingles",
-  "number": 1,
+  "question": 1,
   "context_id": "context_llm01",
   "stem_text": "Large Language Models (LLMs) are capable of",
   "choices": [
@@ -31,7 +31,7 @@
   "id": "simulacro-icfes/ingles/q02",
   "type": "question",
   "component": "ingles",
-  "number": 2,
+  "question": 2,
   "context_id": "context_llm01",
   "stem_text": "The primary function of an LLM is to",
   "choices": [
@@ -51,7 +51,7 @@
   "id": "simulacro-icfes/ingles/q03",
   "type": "question",
   "component": "ingles",
-  "number": 3,
+  "question": 3,
   "context_id": "context_llm01",
   "stem_text": "One limitation of LLMs is that they",
   "choices": [
@@ -71,7 +71,7 @@
   "id": "simulacro-icfes/ingles/q04",
   "type": "question",
   "component": "ingles",
-  "number": 4,
+  "question": 4,
   "context_id": "context_llm01",
   "stem_text": "In customer service, LLMs are commonly used to",
   "choices": [
@@ -91,7 +91,7 @@
   "id": "simulacro-icfes/ingles/q05",
   "type": "question",
   "component": "ingles",
-  "number": 5,
+  "question": 5,
   "context_id": "context_llm01",
   "stem_text": "Researchers are improving LLMs to make them",
   "choices": [
@@ -119,7 +119,7 @@
   "id": "simulacro-icfes/ingles/q06",
   "type": "question",
   "component": "ingles",
-  "number": 6,
+  "question": 6,
   "context_id": "context_ai01",
   "stem_text": "I heard that AI can now create realistic paintings in seconds!",
   "choices": [
@@ -138,7 +138,7 @@
   "id": "simulacro-icfes/ingles/q07",
   "type": "question",
   "component": "ingles",
-  "number": 7,
+  "question": 7,
   "context_id": "context_ai01",
   "stem_text": "Do you think AI will replace teachers in the future?",
   "choices": [
@@ -157,7 +157,7 @@
   "id": "simulacro-icfes/ingles/q08",
   "type": "question",
   "component": "ingles",
-  "number": 8,
+  "question": 8,
   "context_id": "context_ai01",
   "stem_text": "The AI chatbot gave me advice that really helped!",
   "choices": [
@@ -184,7 +184,7 @@
   "id": "simulacro-icfes/ingles/q09",
   "type": "question",
   "component": "ingles",
-  "number": 9,
+  "question": 9,
   "context_id": "context_nn01",
   "stem_text": "What is the main idea of the text?",
   "choices": [
@@ -204,7 +204,7 @@
   "id": "simulacro-icfes/ingles/q10",
   "type": "question",
   "component": "ingles",
-  "number": 10,
+  "question": 10,
   "context_id": "context_nn01",
   "stem_text": "What happens in the hidden layers of a neural network?",
   "choices": [
@@ -224,7 +224,7 @@
   "id": "simulacro-icfes/ingles/q11",
   "type": "question",
   "component": "ingles",
-  "number": 11,
+  "question": 11,
   "context_id": "context_nn01",
   "stem_text": "Why are neural networks considered powerful tools?",
   "choices": [
@@ -244,7 +244,7 @@
   "id": "simulacro-icfes/ingles/q12",
   "type": "question",
   "component": "ingles",
-  "number": 12,
+  "question": 12,
   "context_id": "context_nn01",
   "stem_text": "What is an example of how neural networks learn to identify a cat?",
   "choices": [
@@ -264,7 +264,7 @@
   "id": "simulacro-icfes/ingles/q13",
   "type": "question",
   "component": "ingles",
-  "number": 13,
+  "question": 13,
   "context_id": "context_nn01",
   "stem_text": "What does the output layer of a neural network do?",
   "choices": [
@@ -292,7 +292,7 @@
   "id": "simulacro-icfes/ingles/q14",
   "type": "question",
   "component": "ingles",
-  "number": 14,
+  "question": 14,
   "context_id": "context_transformers01",
   "stem_text": "Transformers are among the most (14) ______ advancements in artificial intelligence.",
   "choices": [
@@ -312,7 +312,7 @@
   "id": "simulacro-icfes/ingles/q15",
   "type": "question",
   "component": "ingles",
-  "number": 15,
+  "question": 15,
   "context_id": "context_transformers01",
   "stem_text": "(15) ______ Transformers, machines can analyze entire pieces of information simultaneously instead of step by step.",
   "choices": [
@@ -332,7 +332,7 @@
   "id": "simulacro-icfes/ingles/q16",
   "type": "question",
   "component": "ingles",
-  "number": 16,
+  "question": 16,
   "context_id": "context_transformers01",
   "stem_text": "Unlike older models, which (16) ______ data sequentially, Transformers identify relationships across a text instantly.",
   "choices": [
@@ -352,7 +352,7 @@
   "id": "simulacro-icfes/ingles/q17",
   "type": "question",
   "component": "ingles",
-  "number": 17,
+  "question": 17,
   "context_id": "context_transformers01",
   "stem_text": "This (17) ______ them to excel at tasks such as language translation, summarizing information, and generating creative text.",
   "choices": [
@@ -372,7 +372,7 @@
   "id": "simulacro-icfes/ingles/q18",
   "type": "question",
   "component": "ingles",
-  "number": 18,
+  "question": 18,
   "context_id": "context_transformers01",
   "stem_text": "Modern Transformers, like GPT and PaLM, (18) ______ into increasingly powerful versions.",
   "choices": [
@@ -392,7 +392,7 @@
   "id": "simulacro-icfes/ingles/q19",
   "type": "question",
   "component": "ingles",
-  "number": 19,
+  "question": 19,
   "context_id": "context_transformers01",
   "stem_text": "GPT (19) ______ on creating accurate and context-aware text.",
   "choices": [
@@ -412,7 +412,7 @@
   "id": "simulacro-icfes/ingles/q20",
   "type": "question",
   "component": "ingles",
-  "number": 20,
+  "question": 20,
   "context_id": "context_transformers01",
   "stem_text": "PaLM (20) ______ in solving logical problems and advanced reasoning tasks.",
   "choices": [

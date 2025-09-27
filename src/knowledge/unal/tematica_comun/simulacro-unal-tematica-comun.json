@@ -11,7 +11,7 @@
   "id": "simulacro-unal/tematica-comun/q01",
   "type": "question",
   "component": "tematica-comun",
-  "number": 1,
+  "question": 1,
   "context_id": "context_ovidio01",
   "stem_text": "¿Cuáles eran los principios del amor de Ovidio? ¿Por qué cree que Augusto encontró el *Arte de amar* tan ofensivo?",
   "choices": [
@@ -31,7 +31,7 @@
   "id": "simulacro-unal/tematica-comun/q02",
   "type": "question",
   "component": "tematica-comun",
-  "number": 2,
+  "question": 2,
   "context_id": "context_ovidio01",
   "stem_text": "¿Qué elementos del *Arte de amar* podrían haber sido vistos como una amenaza para las reformas morales de Augusto?",
   "choices": [
@@ -59,7 +59,7 @@
   "id": "simulacro-unal/tematica-comun/q03",
   "type": "question",
   "component": "tematica-comun",
-  "number": 3,
+  "question": 3,
   "context_id": "context_vesubio01",
   "stem_text": "¿Qué aspectos del carácter de Plinio el Viejo se pueden inferir de su reacción ante la erupción del Vesubio?",
   "choices": [
@@ -79,7 +79,7 @@
   "id": "simulacro-unal/tematica-comun/q04",
   "type": "question",
   "component": "tematica-comun",
-  "number": 4,
+  "question": 4,
   "context_id": "context_vesubio01",
   "stem_text": "¿Qué efectos emocionales crees que tuvo la descripción de la muerte de su tío en Plinio el Joven?",
   "choices": [
@@ -99,7 +99,7 @@
   "id": "simulacro-unal/tematica-comun/q05",
   "type": "question",
   "component": "tematica-comun",
-  "number": 5,
+  "question": 5,
   "context_id": "context_vesubio01",
   "stem_text": "Describe la secuencia de eventos que llevaron a la muerte de Plinio el Viejo según lo narrado en la carta.",
   "choices": [
@@ -127,7 +127,7 @@
   "id": "simulacro-unal/tematica-comun/q06",
   "type": "question",
   "component": "tematica-comun",
-  "number": 6,
+  "question": 6,
   "context_id": "context_ordalia01",
   "stem_text": "¿Cuál era el propósito de la ordalía de agua caliente según la ley consuetudinaria germana?",
   "choices": [
@@ -147,7 +147,7 @@
   "id": "simulacro-unal/tematica-comun/q07",
   "type": "question",
   "component": "tematica-comun",
-  "number": 7,
+  "question": 7,
   "context_id": "context_ordalia01",
   "stem_text": "¿Qué nos revela la práctica de la ordalía acerca de la naturaleza de la sociedad que recurría a ella?",
   "choices": [
@@ -167,7 +167,7 @@
   "id": "simulacro-unal/tematica-comun/q08",
   "type": "question",
   "component": "tematica-comun",
-  "number": 8,
+  "question": 8,
   "context_id": "context_ordalia01",
   "stem_text": "Según el relato de Gregorio de Tours, ¿qué concepto de justicia crees que tenía la sociedad germana que practicaba la ordalía?",
   "choices": [
@@ -195,7 +195,7 @@
   "id": "simulacro-unal/tematica-comun/q09",
   "type": "question",
   "component": "tematica-comun",
-  "number": 9,
+  "question": 9,
   "context_id": "context_sanantonio01",
   "stem_text": "Basado en el relato de Atanasio, ¿cómo caracterizarías los ideales ascéticos de los primeros monjes cristianos?",
   "choices": [
@@ -215,7 +215,7 @@
   "id": "simulacro-unal/tematica-comun/q10",
   "type": "question",
   "component": "tematica-comun",
-  "number": 10,
+  "question": 10,
   "context_id": "context_sanantonio01",
   "stem_text": "¿Cuán importantes fueron esos ideales para el desarrollo del cristianismo temprano?",
   "choices": [
@@ -235,7 +235,7 @@
   "id": "simulacro-unal/tematica-comun/q11",
   "type": "question",
   "component": "tematica-comun",
-  "number": 11,
+  "question": 11,
   "context_id": "context_sanantonio01",
   "stem_text": "¿Cuáles serían los efectos culturales a gran escala del odio cristiano por el cuerpo humano?",
   "choices": [
@@ -263,7 +263,7 @@
   "id": "simulacro-unal/tematica-comun/q12",
   "type": "question",
   "component": "tematica-comun",
-  "number": 12,
+  "question": 12,
   "context_id": "context_banquete01",
   "stem_text": "¿Qué clase de personas estarían presentes en un banquete en el que se ofrece la comida que aparece en este menú?",
   "choices": [
@@ -283,7 +283,7 @@
   "id": "simulacro-unal/tematica-comun/q13",
   "type": "question",
   "component": "tematica-comun",
-  "number": 13,
+  "question": 13,
   "context_id": "context_banquete01",
   "stem_text": "¿Qué nos dice este extracto acerca de la cultura del Renacimiento y la relación de la comida con el estatus social?",
   "choices": [
@@ -303,7 +303,7 @@
   "id": "simulacro-unal/tematica-comun/q14",
   "type": "question",
   "component": "tematica-comun",
-  "number": 14,
+  "question": 14,
   "context_id": "context_banquete01",
   "stem_text": "¿Qué información nos proporciona el menú sobre las influencias culturales en la cocina renacentista?",
   "choices": [
@@ -331,7 +331,7 @@
   "id": "simulacro-unal/tematica-comun/q15",
   "type": "question",
   "component": "tematica-comun",
-  "number": 15,
+  "question": 15,
   "context_id": "context_isabel01",
   "stem_text": "¿Qué cualidades evidentes en el discurso de Isabel le harían ganar el cariño de sus oyentes?",
   "choices": [
@@ -351,7 +351,7 @@
   "id": "simulacro-unal/tematica-comun/q16",
   "type": "question",
   "component": "tematica-comun",
-  "number": 16,
+  "question": 16,
   "context_id": "context_isabel01",
   "stem_text": "¿Cómo se refleja en el discurso de Isabel la relación entre su popularidad y los eventos ocurridos a finales del siglo XVI?",
   "choices": [
@@ -371,7 +371,7 @@
   "id": "simulacro-unal/tematica-comun/q17",
   "type": "question",
   "component": "tematica-comun",
-  "number": 17,
+  "question": 17,
   "context_id": "context_isabel01",
   "stem_text": "¿Por qué Isabel enfatiza su \"corazón de rey\" en lugar de su \"cuerpo de mujer\"?",
   "choices": [
