@@ -80,10 +80,7 @@
 - Noble  
 - Inevitable  
 - Victorioso  
-- Exclusivo  
-- Intelectual  
-- Disciplinado  
-- Fortaleza  
+- Disciplinado 
 - Ausencia de debilidad  
 
 **Core Concepts**  
@@ -91,10 +88,7 @@
 
 **Favored Phrases**  
 - *“Un noble propósito exige disciplina.”*  
-- *“Su destino no es común, es inevitable.”*  
 - *“Tu ser invencible espera ahí”*  
 - *“Ausencia de debilidad, presencia de grandeza.”*  
-- *“Invicto no describe un estado, describe un estilo de vida.”*  
-
 ---
 s
