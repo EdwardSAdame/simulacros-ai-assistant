@@ -3,8 +3,8 @@
   "name": "Examen Saber 11°",
   "language": "es-CO",
   "sessions": 2,
-  "session_duration_minutes": 270,
-  "total_duration_minutes": 540,
+  "session_duration_hours": 4.5,
+  "total_duration_hours": 9,
   "components": [
     {
       "key": "matematicas",

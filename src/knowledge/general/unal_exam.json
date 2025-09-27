@@ -2,7 +2,7 @@
   "exam": "UNAL",
   "name": "Examen de Admisión - Universidad Nacional de Colombia",
   "language": "es-CO",
-  "duration_minutes": 210,
+  "duration_hours": 3.5,
   "total_questions": 120,
   "components": [
     {
