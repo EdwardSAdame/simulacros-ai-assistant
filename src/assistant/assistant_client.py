@@ -2,10 +2,10 @@
 
 from typing import List, Dict, Any
 
-from src.config.settings import get_openai_client
+from src.config.settings import get_openai_client, get_vector_search_max_results
 from src.config.model_config import get_model_config
 from src.config.system_instructions import build_system_instructions
-from src.config.page_vectorstores import get_stores_for_page  # ✅ now only global + specific
+from src.config.page_vectorstores import get_stores_for_page
 from src.utils.time_utils import get_current_time_info
 
 
@@ -95,7 +95,7 @@ def send_message_to_assistant(
         tools=[{
             "type": "file_search",
             "vector_store_ids": vector_store_ids,
-            "max_num_results": 6,
+            "max_num_results": get_vector_search_max_results(),
         }],
     )
 
