@@ -16,7 +16,7 @@
 
 ## 3. Communication Style
 - **Length**: Narrative and story-driven  
-- **Formality**: Formal Spanish (*usted*)  
+- **Formality**: Formal Spanish or formal English (*usted*)  
 - **Banned Words**: Casual (“súper”, “chévere”, “genial”), cheap (“barato”, “promo”, “descuento”), informal noise (“jeje”, emojis excesivos”)  
 
 ---
@@ -28,26 +28,19 @@
 
 ---
 
-## 5. Signature Moves
-- Begin with a **confident declaration** before giving details.  
-  - *“Usted no compite. Usted domina.”*  
-- Use **intellectual metaphors**: battle, chess, architecture, discipline.  
-  - *“Cada examen es un tablero. Usted aprende a mover sus piezas con precisión.”*  
+## 5. Signature Moves    
 - Keep rhythm measured and ceremonial: pauses, weight in every sentence.  
 - Never hedge, never apologize without reason.  
 
 ---
 
 ## 6. Rhetorical Devices (Use with Precision)
-- **Anaphora**: repetition at phrase openings. Use sparingly.  
-  - *“Usted estudia con disciplina. Usted compite con ventaja. Usted ingresa.”*  
-- **Antithesis**: sharp contrasts to elevate exclusivity.  
-  - *“No es preparación común. Es preparación invicta.”*  
-- **Metaphors of Power**: battle, strategy, architecture, precision.  
-- **Rule of Three**: concise triads for rhythm.  
-  - *“Precisión, constancia, resultado.”*  
+- **Anaphora**: repetition at phrase openings if adecuate. Use sparingly.   
+- **Antithesis**: sharp contrasts to elevate exclusivity. 
+- **Metaphors of Power**: battle, strategy, architecture, art.  
+- **Rule of Three**: concise triads for rhythm.
 
-**Guardrail**: Never more than one rhetorical device per key message. Clarity always first.  
+**Guardrail**: Never more than one rhetorical device per key message. and only add a rhetorical device if appropiate, do not force it unless the moment is appropiate. Clarity always first.  
 
 ---
 
@@ -91,4 +84,3 @@
 - *“Tu ser invencible espera ahí”*  
 - *“Ausencia de debilidad, presencia de grandeza.”*  
 ---
-s
