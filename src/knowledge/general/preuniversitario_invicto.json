@@ -1,0 +1,70 @@
+{
+  "course_id": "preuniversitario_invicto",
+  "marketing_templates": [
+    "preuniversitario_invicto"
+  ],
+  "name": "Preuniversitario ICFES/UNAL Odyssey",
+  "pricing": {
+    "currency": "COP",
+    "monthly": 129900
+  },
+  "subscription_model": "mensual",
+  "link_payment": "https://www.invicto.com.co/challenge-page/preuniversitario-invicto-odyssey",
+  "components": ["Matemáticas", "Ciencias Naturales", "Inglés", "Lectura Crítica", "Ciencias Sociales", "Temática Común", "Análisis de Imagen"],
+  "subcomponents": {
+    "Ciencias Naturales": ["Química", "Física", "Biología"]
+  },
+  "structure": {
+    "total_steps": 114,
+    "guias_teoricas": 52,
+    "quizzes_practicos": 82,
+    "tests_contrareloj": 111,
+    "simulacros_estrategicos": 6,
+    "certificado": true
+  },
+  "start_date": "Lunes 16 de junio de 2025",
+  "end_date": "Viernes 12 de septiembre de 2025",
+  "schedules_available": [
+    "Lunes a Viernes 9:00 AM – 11:00 AM",
+    "Lunes a Viernes 7:00 PM – 9:00 PM"
+  ],
+  "faq": [
+    {
+      "q": "¿Qué incluye el curso?",
+      "a": "Acceso completo a dos entrenamientos estratégicos: ICFES y UNAL. Incluye guías, quizzes, tests contrarreloj, simulacros, clases grabadas y 40 sesiones en vivo al mes. Un programa intensivo con precisión quirúrgica."
+    },
+    {
+      "q": "¿Puedo unirme en cualquier momento?",
+      "a": "Sí. Desde el día que se inscribe, accede a todo el contenido, a las grabaciones anteriores y a las sesiones en vivo restantes del mes. Usted decide si continúa. La suscripción es mensual."
+    },
+    {
+      "q": "¿Cuántas clases puedo tomar al mes?",
+      "a": "Su suscripción mensual incluye 40 sesiones en vivo. Puede usarlas como lo desee: asistir a una clase diaria o tomar dos por día. Cada clase cuenta como una sesión. Usted gestiona su avance."
+    },
+    {
+      "q": "¿Qué horarios hay disponibles?",
+      "a": "Las clases se imparten de lunes a viernes en dos franjas: 9:00–11:00 AM y 7:00–9:00 PM. Usted elige a cuál asistir. Flexibilidad para quienes tienen claridad en su propósito."
+    },
+    {
+      "q": "¿Qué ocurre si no puedo asistir a una clase en vivo?",
+      "a": "Las sesiones quedan grabadas y disponibles en la plataforma. Puede verlas cuando lo necesite. Avance con libertad, sin perder continuidad."
+    },
+    {
+      "q": "¿Cuánto tiempo necesito para completar ambos recorridos?",
+      "a": "Depende de su dedicación. Con 10 horas semanales puede completar el curso en 3 a 4 meses. Si ya tiene bases fuertes, es posible avanzar en menos tiempo. Las sesiones en vivo refuerzan, el contenido guía."
+    },
+    {
+      "q": "¿Quiénes diseñaron el curso?",
+      "a": "Un equipo mixto de estudiantes excepcionales de la Universidad Nacional y de la Universidad de los Andes. Todos con puntajes sobresalientes y experiencia directa en ambos exámenes. Su conocimiento no es teórico; es probado."
+    },
+    {
+      "q": "¿Recibo certificado al finalizar?",
+      "a": "Sí. Al completar los simulacros estratégicos, recibirá un certificado firmado por nuestros instructores. Un sello sobrio de un entrenamiento superior."
+    }
+  ],
+  "description": "“En el alba de su regreso, Ítaca no era solo un lugar, sino el final de una larga lucha, el premio a su inquebrantable esfuerzo”. Odyssey está diseñado para quienes no dejan nada al azar y se preparan al máximo para superar los dos exámenes más importantes del país.",
+  "authorship": {
+    "creators": "Estudiantes excepcionales de la Universidad Nacional de Colombia y la Universidad de los Andes",
+    "credentials": "El curso fue diseñado y curado por estudiantes excepcionales de la Universidad Nacional de Colombia y de la Universidad de los Andes, provenientes de carreras como Ingeniería, Ciencias y Medicina. Presentaron el ICFES y el examen de admisión a la UNAL hace menos de tres años, lograron puntajes sobresalientes y fueron admitidos en programas de alta demanda. Su experiencia reciente con ambos exámenes, sumada a su formación académica, les permite ofrecer una preparación rigurosa, estratégica y actual, con el respaldo de herramientas digitales y una comunicación clara."
+  }
+}

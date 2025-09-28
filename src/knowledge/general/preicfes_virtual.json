@@ -1,0 +1,82 @@
+{
+  "course_id": "preicfes_virtual",
+  "marketing_templates": [
+    "clase_gratis_icfes",
+    "preicfes_virtual"
+  ],
+  "name": "PreIcfes Virtual Athena",
+  "pricing": {
+    "currency": "COP",
+    "monthly": 69900
+  },
+  "subscription_model": "mensual",
+  "link_payment": "https://www.invicto.com.co/challenge-page/preicfes-virtual-athena",
+  "components": [
+    "Matemáticas",
+    "Ciencias Naturales",
+    "Inglés",
+    "Sociales",
+    "Lectura Crítica"
+  ],
+  "subcomponents": {
+    "Ciencias Naturales": [
+      "Química",
+      "Física",
+      "Biología"
+    ]
+  },
+  "structure": {
+    "total_steps": 64,
+    "guias_teoricas": 37,
+    "quizzes_practicos": 45,
+    "tests_contrareloj": 50,
+    "simulacros_estrategicos": 3,
+    "certificado": true,
+    "modelo_inteligencia_artificial": true
+  },
+  "start_date": "Lunes 16 de junio de 2025",
+  "end_date": "Viernes 8 de agosto de 2025",
+  "schedules_available": [
+    "Lunes a Viernes 9:00 AM – 11:00 AM",
+    "Lunes a Viernes 7:00 PM – 9:00 PM"
+  ],
+  "faq": [
+    {
+      "q": "¿Qué incluye el curso?",
+      "a": "Acceso inmediato a todo el material académico: guías teóricas, ejercicios prácticos, simulacros y clases grabadas. También incluye 20 sesiones en vivo al mes, organizadas con precisión para un entrenamiento riguroso."
+    },
+    {
+      "q": "¿Puedo unirme en cualquier momento?",
+      "a": "Sí. Puede integrarse en el momento que lo considere adecuado. Desde el primer día, tendrá acceso al contenido completo del curso, a las grabaciones previas y a las sesiones en vivo restantes del mes. La suscripción es mensual. Usted decide si continúa."
+    },
+    {
+      "q": "¿Cuántas clases puedo tomar al mes?",
+      "a": "Su suscripción mensual le otorga 20 sesiones en vivo. Puede usarlas como prefiera: mañana, noche o ambas en un mismo día. Cada clase equivale a una sesión. El control es suyo."
+    },
+    {
+      "q": "¿Qué horarios hay disponibles para las clases en vivo?",
+      "a": "Las sesiones se imparten de lunes a viernes, en dos franjas: 9:00–11:00 AM y 7:00–9:00 PM. Usted elige su ritmo. Puede asistir a cualquiera según su agenda."
+    },
+    {
+      "q": "¿Qué pasa si no puedo asistir a una clase en vivo?",
+      "a": "Cada sesión queda grabada y disponible en la plataforma. Puede retomarla en cualquier momento, sin pérdida de contenido ni continuidad."
+    },
+    {
+      "q": "¿Cuánto tiempo necesito para completar el curso?",
+      "a": "El avance depende de su dedicación. Si organiza 10 horas semanales de estudio, puede completar el recorrido en 2 a 3 meses. Con experiencia previa, es posible finalizar en 1 mes. Las clases en vivo acompañan; el contenido impulsa."
+    },
+    {
+      "q": "¿Quiénes dictan las clases y cómo se organizan?",
+      "a": "Cinco profesores destacados de la Universidad de los Andes dictan el curso. Cada uno tiene una clase fija por semana en horario de mañana y noche. Así puede conocer diferentes enfoques según el día. Todos superaron los 400 puntos en el ICFES y enseñan con un estilo claro y eficaz."
+    },
+    {
+      "q": "¿Recibo certificado al finalizar?",
+      "a": "Sí. Una vez haya completado los simulacros finales, obtendrá un certificado firmado por nuestros instructores. Un reconocimiento sobrio y legítimo de su esfuerzo."
+    }
+  ],
+  "description": "PreIcfes Virtual Athena es un programa creado por estudiantes de élite de la Universidad de los Andes. Cada PDF, quiz y simulacro ha sido destilado con precisión a partir de los materiales más actualizados, seleccionados como si nuestros instructores tuvieran que presentar de nuevo el examen: sin exceso, solo lo esencial. Además, el curso incluye acceso directo a Invicto Roma, un Legacy Model de última generación entrenado con gigabytes de datos del ICFES. Roma está disponible en todo momento para responder dudas, explicar conceptos y guiar la preparación con exactitud implacable, en un entrenamiento académico respaldado por inteligencia artificial de última generación.",
+  "authorship": {
+    "creators": "Estudiantes excepcionales de la Universidad de los Andes",
+    "credentials": "El curso fue diseñado y curado por estudiantes excepcionales de la Universidad de los Andes, provenientes de carreras como Ingeniería y Ciencias. Presentaron el ICFES hace menos de tres años y superaron los 400 puntos, logrando ingresar a programas de alta demanda. Su experiencia reciente con el examen, junto con su juventud, les permite una comunicación más flexible, cercana y actual, basada en herramientas digitales y un lenguaje claro."
+  }
+}

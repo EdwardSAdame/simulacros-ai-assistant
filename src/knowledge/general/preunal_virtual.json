@@ -1,0 +1,82 @@
+{
+  "course_id": "preunal_virtual",
+  "marketing_templates": [
+    "clase_gratis_unal",
+    "preunal_virtual"
+  ],
+  "name": "Preunal Virtual Invicto",
+  "pricing": {
+    "currency": "COP",
+    "monthly": 89900
+  },
+  "subscription_model": "mensual",
+  "link_payment": "https://www.invicto.com.co/challenge-page/preunal-virtual-invicto",
+  "components": [
+    "Matemáticas",
+    "Ciencias Naturales",
+    "Análisis de Imagen",
+    "Ciencias Sociales",
+    "Temática Común"
+  ],
+  "subcomponents": {
+    "Ciencias Naturales": [
+      "Química",
+      "Física",
+      "Biología"
+    ]
+  },
+  "structure": {
+    "total_steps": 94,
+    "guias_teoricas": 52,
+    "quizzes_practicos": 82,
+    "tests_contrareloj": 91,
+    "simulacros_estrategicos": 3,
+    "certificado": false,
+    "modelo_inteligencia_artificial": true
+  },
+  "start_date": "Martes 15 de julio de 2025",
+  "end_date": "Viernes 12 de septiembre de 2025",
+  "schedules_available": [
+    "Lunes a Viernes 9:00 AM – 11:00 AM",
+    "Lunes a Viernes 7:00 PM – 9:00 PM"
+  ],
+  "faq": [
+    {
+      "q": "¿Qué incluye el curso?",
+      "a": "Acceso inmediato al material estratégico: guías teóricas, ejercicios prácticos, tests contrarreloj, simulacros y clases grabadas. Además, incluye 20 sesiones en vivo al mes, organizadas para entrenar con disciplina y enfoque."
+    },
+    {
+      "q": "¿Puedo unirme en cualquier momento?",
+      "a": "Sí. Puede integrarse cuando lo considere pertinente. Desde el primer día tendrá acceso al contenido completo, a todas las grabaciones previas y a las sesiones en vivo restantes del mes. La suscripción es mensual. Usted decide si continúa."
+    },
+    {
+      "q": "¿Cuántas clases puedo tomar al mes?",
+      "a": "Su suscripción mensual le otorga 20 sesiones en vivo. Puede tomarlas como prefiera: mañana, noche o ambas en un mismo día. Cada sesión cuenta. La elección es suya."
+    },
+    {
+      "q": "¿Qué horarios hay disponibles para las clases en vivo?",
+      "a": "Las clases se dictan de lunes a viernes en dos horarios: 9:00–11:00 AM y 7:00–9:00 PM. Usted puede asistir al que mejor se ajuste a su agenda. La estructura es firme; el acceso, flexible."
+    },
+    {
+      "q": "¿Qué pasa si no puedo asistir a una clase en vivo?",
+      "a": "Todas las sesiones se graban y quedan disponibles en la plataforma. Puede retomarlas con precisión, en el momento que usted elija. El curso avanza con usted."
+    },
+    {
+      "q": "¿Cuánto tiempo necesito para completar el curso?",
+      "a": "El progreso depende de su constancia. Si dedica 10 horas semanales al contenido, podrá recorrerlo en 2 a 3 meses. Si ya posee bases sólidas, es posible completarlo en menos. Las sesiones en vivo acompañan; el contenido dirige."
+    },
+    {
+      "q": "¿Quiénes dictan las clases y cómo se organizan?",
+      "a": "El equipo está conformado por estudiantes sobresalientes de la Universidad Nacional de Colombia. Cada instructor dicta su clase fija semanal, compartiendo metodologías probadas, directas y rigurosas."
+    },
+    {
+      "q": "¿Este curso otorga certificado?",
+      "a": "No. Este curso no está diseñado para certificar. Está hecho para rendir. El resultado se mide en el examen. Y en su admisión."
+    }
+  ],
+  "description": "Preunal Virtual Invicto es un programa creado por estudiantes de élite de la Universidad Nacional de Colombia. Cada guía, quiz y simulacro ha sido destilado con precisión a partir de los materiales más actualizados, seleccionados como si nuestros instructores tuvieran que presentar de nuevo el examen de admisión a la UNAL: sin exceso, solo lo esencial. Además, el curso incluye acceso directo a Invicto Roma, un Legacy Model de última generación entrenado con gigabytes de datos del examen UNAL. Roma está disponible en todo momento para responder dudas, explicar conceptos y guiar la preparación con exactitud implacable, en un entrenamiento académico respaldado por inteligencia artificial de última generación.",
+  "authorship": {
+    "creators": "Estudiantes de la Universidad Nacional de Colombia – Sede Bogotá",
+    "credentials": "El curso fue diseñado y curado por estudiantes excepcionales de la Universidad Nacional de Colombia, provenientes de carreras como Ingeniería, Ciencias y Medicina. Presentaron el examen de admisión hace menos de tres años y lograron puntajes sobresalientes, ingresando a programas altamente competitivos. Su experiencia reciente con el proceso, combinada con su formación académica, les permite ofrecer una preparación rigurosa, cercana y adaptada a los desafíos reales del examen."
+  }
+}
