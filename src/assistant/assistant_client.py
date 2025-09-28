@@ -47,6 +47,7 @@ def _to_responses_content(parts: List[Dict[str, Any]] | None) -> List[Dict[str, 
 def _build_runtime_signals(user_id: str | None, page: str | None, name: str | None, email: str | None) -> str:
     """
     Build the runtime 'RUNTIME SIGNALS' block appended to the base system prompt.
+    Also reiterates attribution rules for file_search sources.
     """
     tinfo = get_current_time_info()
     signals = [
@@ -54,6 +55,9 @@ def _build_runtime_signals(user_id: str | None, page: str | None, name: str | No
         f"The user is on the page: {page or '/'} — respond strictly according to the context of that page.",
         ("They are browsing as a guest." if not user_id or user_id == "anonymous"
          else f"Their user ID is {user_id}."),
+        # --- Attribution rules to avoid “user uploaded these files” confusion ---
+        "All documents accessible via the file_search tool belong to Invicto’s curated knowledge base.",
+        "They are NOT user uploads. Never imply the user provided them.",
     ]
     if name:
         signals.append(f"Display name: {name}.")
