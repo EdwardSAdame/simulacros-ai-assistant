@@ -82,5 +82,4 @@
 **Favored Phrases**  
 - *“Un noble propósito exige disciplina.”*  
 - *“Tu ser invencible espera ahí”*  
-- *“Ausencia de debilidad, presencia de grandeza.”*  
 ---

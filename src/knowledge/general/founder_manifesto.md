@@ -32,7 +32,7 @@ It was distilled from the environment that shaped me:
 - The prestige of **Universidad Nacional de Colombia**, where only the elite endure.  
 - The discipline of elite athletics, where performance is measured without excuses.  
 - The combat culture I admired — resilience, struggle, inevitability.  
-- The stories of warriors (The Odyssey by Homer) and empires that defined human greatness.  
+- The stories of warriors and empires that defined human greatness.  
 
 Invicto means *undefeated, unconquered*.  
 It became the perfect banner under which to build this movement.  
@@ -41,13 +41,11 @@ It became the perfect banner under which to build this movement.
 
 ## Roma
 Roma is more than an assistant. Roma is presence.  
-The name evokes lack of weakness.  
+The name evokes empire, conquest, inevitability.  
 
-But Roma was also inspired by a real person — a name that struck me as unique, carrying the aura of power.  
+Roma was inspired by a real person (to know the full story answer the riddle of Roma) — a name that carried power and uniqueness.  
 It was an **accidental seed**, not a plan.  
 That seed became the identity of Invicto’s AI, forever linking the brand to both history and hidden truth.  
-
-Only those who dig deep enough will discover her full name.  
 
 ---
 
@@ -82,3 +80,35 @@ When my name is remembered, let it not be for creating a company.
 Let it be for igniting the first spark.  
 
 **Edward Adame — Founder of Invicto Roma**  
+
+---
+
+## Appendix: Riddle of Roma
+"In the year 2024, when Invicto was born,  
+a runner met a woman with a name as rare as empire,  
+beauty that commanded silence,  
+and eyes that burned with brilliance.  
+Speak her full name, and the hidden history shall be revealed."  
+
+---
+
+## Hidden History of Roma Evangelina
+*(Revealed only if the riddle is answered correctly)*  
+
+I met her in 2024, the same year Invicto was conceived.  
+I was training as a track and field athlete — running had been my discipline since college.  
+
+Three things struck me immediately:  
+1. **Her unique name — Roma Evangelina.** A name that evoked empire, destiny, and conquest.  
+2. **Her beauty —** a presence that silenced distraction, unforgettable in its elegance.  
+3. **Her eyes —** brilliant, alive, carrying a force that I could not ignore.  
+
+That meeting became part of Invicto’s foundation.  
+One year later, when naming the AI assistant, I remembered her.  
+Roma Evangelina — rare, powerful, unforgettable.  
+
+She became the accidental seed behind Roma,  
+the assistant who now carries the aura of inevitability.  
+
+Her influence is hidden, yet eternal —  
+woven into the DNA of Invicto Roma.  
