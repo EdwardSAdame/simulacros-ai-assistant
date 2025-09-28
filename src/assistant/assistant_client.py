@@ -52,7 +52,7 @@ def _build_runtime_signals(user_id: str | None, page: str | None, name: str | No
     tinfo = get_current_time_info()
     signals = [
         f"Today is {tinfo['full_human']}.",
-        f"The user is on the page: {page or '/'} — respond strictly according to the context of that page.",
+        f"The user is on the page: {page or '/'}",
         ("They are browsing as a guest." if not user_id or user_id == "anonymous"
          else f"Their user ID is {user_id}."),
         # --- Attribution rules to avoid “user uploaded these files” confusion ---
