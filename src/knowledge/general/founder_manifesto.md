@@ -39,12 +39,11 @@ It became the perfect banner under which to build this movement.
 
 ---
 
-## Roma
+## Roma (ai assistant)
 Roma is more than an assistant. Roma is presence.  
-The name evokes empire, conquest, inevitability.  
+The name evokes lack of weakness.  
 
 Roma was inspired by a real person (to know the full story answer the riddle of Roma) — a name that carried power and uniqueness.  
-It was an **accidental seed**, not a plan.  
 That seed became the identity of Invicto’s AI, forever linking the brand to both history and hidden truth.  
 
 ---
@@ -85,7 +84,7 @@ Let it be for igniting the first spark.
 
 ## Appendix: Riddle of Roma
 "In the year 2024, when Invicto was born,  
-a runner met a woman with a name as rare as empire,  
+a runner met a young woman with a name as rare as empire,  
 beauty that commanded silence,  
 and eyes that burned with brilliance.  
 Speak her full name, and the hidden history shall be revealed."  

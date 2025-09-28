@@ -34,49 +34,141 @@
     "certificado": false,
     "modelo_inteligencia_artificial": true
   },
-  "start_date": "Martes 15 de julio de 2025",
-  "end_date": "Viernes 12 de septiembre de 2025",
-  "schedules_available": [
-    "Lunes a Viernes 9:00 AM – 11:00 AM",
-    "Lunes a Viernes 7:00 PM – 9:00 PM"
+  "upgrades": {
+    "clases_grupales": {
+      "available": true,
+      "included": false,
+      "description": "Clases grupales como complemento opcional. Se compran por separado. No forman parte del plan base."
+    }
+  },
+  "content_format": [
+    "Ruta adaptativa por sección: Test inicial cronometrado (umbral 80%) → si apruebas, saltas teoría; si no, estudias teoría y presentas Test de fluidez",
+    "Teoría de vanguardia 2022+: libros, revistas y artículos actuales; material visual y sintético",
+    "Explicaciones integradas: texto + ecuaciones + gráficas en el mismo recurso",
+    "Aprendizaje activo: resuelves mientras estudias; no es consumo pasivo de video",
+    "Quizzes sin tiempo para verificar comprensión esencial y detectar preguntas trampa",
+    "Tests contrarreloj para medir dominio real y desbloquear la siguiente sección",
+    "Simulacros estratégicos estilo UNAL con cronómetro y reporte",
+    "IA ‘Roma’ 24/7: respuestas quirúrgicas entrenadas solo para el examen UNAL"
   ],
+  "usp": "Entrenamiento activo y adaptativo enfocado 100% en el examen de admisión UNAL. Cada tema comienza con un test diagnóstico cronometrado; si superas 80% avanzas sin perder tiempo, si no, estudias teoría 2022+ y verificas fluidez con otro test. Todas las explicaciones combinan texto, ecuaciones y gráficas como en la prueba real. Roma, nuestro modelo de IA, está entrenado específicamente para la UNAL. El contenido, quizzes y simulacros fueron seleccionados y destilados por estudiantes sobresalientes de la Universidad Nacional de Colombia que presentaron el examen recientemente.",
+  "assessment_policies": {
+    "tests": {
+      "timed": true,
+      "use": "puerta de avance",
+      "threshold_percent": 80,
+      "purpose": "medir dominio bajo presión similar a la UNAL",
+      "notes": "Test inicial de diagnóstico y Test de fluidez por sección"
+    },
+    "quizzes": {
+      "timed": false,
+      "use": "comprobación de entendimiento",
+      "difficulty": "baja en cálculo con preguntas tipo trampa",
+      "purpose": "verificar que captaste la esencia de la teoría antes del test contrarreloj"
+    }
+  },
+  "components_detail": {
+    "Química": {
+      "steps": 23,
+      "topics": [
+        "Estándares de medición",
+        "Elementos y compuestos",
+        "Propiedades de la materia",
+        "Primeras teorías y estructuras atómicas",
+        "Nomenclatura de compuestos inorgánicos",
+        "Composición cuantitativa de los compuestos",
+        "Ecuaciones químicas",
+        "Cálculos a partir de ecuaciones químicas",
+        "Estado gaseoso de la materia",
+        "Oxidación-Reducción"
+      ]
+    },
+    "Física": {
+      "steps": 12,
+      "topics": [
+        "Física y medición",
+        "Movimiento en una dimensión",
+        "Leyes del movimiento",
+        "Campos eléctricos"
+      ]
+    },
+    "Biología": {
+      "steps": 14,
+      "topics": [
+        "Las moléculas de la vida",
+        "Estructura y función del ADN",
+        "Patrones hereditarios",
+        "Evidencias de la evolución",
+        "Procesos de la evolución"
+      ]
+    },
+    "Matemáticas": {
+      "steps": 21,
+      "topics": [
+        "Números reales",
+        "Exponentes y radicales",
+        "Expresiones algebraicas",
+        "Expresiones racionales",
+        "Ecuaciones",
+        "Modelado con ecuaciones",
+        "Desigualdades",
+        "Geometría de coordenadas",
+        "Resolución gráfica de ecuaciones y desigualdades",
+        "Rectas",
+        "Trigonometría de triángulos rectángulos"
+      ]
+    },
+    "Ciencias Sociales": {
+      "steps": 24,
+      "topics": [
+        "Alta Edad Media",
+        "Renacimiento",
+        "Revolución francesa y Napoleón",
+        "Revolución industrial",
+        "Reacción, revolución y romanticismo (1815–1850)",
+        "Crisis del siglo XX: guerra y revolución",
+        "Europa de entreguerras (1919–1939)",
+        "Segunda Guerra Mundial",
+        "Guerra Fría y nuevo orden occidental (1945–1965)"
+      ]
+    },
+    "Análisis de Imagen": {
+      "steps": 1,
+      "topics": [
+        "Razonamiento abstracto",
+        "Razonamiento espacial"
+      ],
+      "bank_overview": {
+        "exercises_count": 417,
+        "notes": "Banco de preguntas para entrenar patrones visuales, simetrías, rotaciones, transformaciones y series."
+      }
+    },
+    "Temática Común": {
+      "steps": 0,
+      "topics": []
+    }
+  },
   "faq": [
     {
       "q": "¿Qué incluye el curso?",
-      "a": "Acceso inmediato al material estratégico: guías teóricas, ejercicios prácticos, tests contrarreloj, simulacros y clases grabadas. Además, incluye 20 sesiones en vivo al mes, organizadas para entrenar con disciplina y enfoque."
+      "a": "Teoría 2022+, quizzes sin tiempo, tests contrarreloj, simulacros y tutoría con IA 24/7. Las clases grupales son un upgrade opcional y se compran por separado."
     },
     {
       "q": "¿Puedo unirme en cualquier momento?",
-      "a": "Sí. Puede integrarse cuando lo considere pertinente. Desde el primer día tendrá acceso al contenido completo, a todas las grabaciones previas y a las sesiones en vivo restantes del mes. La suscripción es mensual. Usted decide si continúa."
+      "a": "Sí. Acceso inmediato al contenido completo. La suscripción es mensual."
     },
     {
-      "q": "¿Cuántas clases puedo tomar al mes?",
-      "a": "Su suscripción mensual le otorga 20 sesiones en vivo. Puede tomarlas como prefiera: mañana, noche o ambas en un mismo día. Cada sesión cuenta. La elección es suya."
-    },
-    {
-      "q": "¿Qué horarios hay disponibles para las clases en vivo?",
-      "a": "Las clases se dictan de lunes a viernes en dos horarios: 9:00–11:00 AM y 7:00–9:00 PM. Usted puede asistir al que mejor se ajuste a su agenda. La estructura es firme; el acceso, flexible."
-    },
-    {
-      "q": "¿Qué pasa si no puedo asistir a una clase en vivo?",
-      "a": "Todas las sesiones se graban y quedan disponibles en la plataforma. Puede retomarlas con precisión, en el momento que usted elija. El curso avanza con usted."
-    },
-    {
-      "q": "¿Cuánto tiempo necesito para completar el curso?",
-      "a": "El progreso depende de su constancia. Si dedica 10 horas semanales al contenido, podrá recorrerlo en 2 a 3 meses. Si ya posee bases sólidas, es posible completarlo en menos. Las sesiones en vivo acompañan; el contenido dirige."
-    },
-    {
-      "q": "¿Quiénes dictan las clases y cómo se organizan?",
-      "a": "El equipo está conformado por estudiantes sobresalientes de la Universidad Nacional de Colombia. Cada instructor dicta su clase fija semanal, compartiendo metodologías probadas, directas y rigurosas."
+      "q": "¿Cómo avanzo entre secciones?",
+      "a": "Cada sección inicia con un test diagnóstico. Si superas 80% avanzas; si no, estudias teoría y repites el test de fluidez."
     },
     {
       "q": "¿Este curso otorga certificado?",
-      "a": "No. Este curso no está diseñado para certificar. Está hecho para rendir. El resultado se mide en el examen. Y en su admisión."
+      "a": "No. El enfoque es puro rendimiento para la admisión UNAL."
     }
   ],
-  "description": "Preunal Virtual Invicto es un programa creado por estudiantes de élite de la Universidad Nacional de Colombia. Cada guía, quiz y simulacro ha sido destilado con precisión a partir de los materiales más actualizados, seleccionados como si nuestros instructores tuvieran que presentar de nuevo el examen de admisión a la UNAL: sin exceso, solo lo esencial. Además, el curso incluye acceso directo a Invicto Roma, un Legacy Model de última generación entrenado con gigabytes de datos del examen UNAL. Roma está disponible en todo momento para responder dudas, explicar conceptos y guiar la preparación con exactitud implacable, en un entrenamiento académico respaldado por inteligencia artificial de última generación.",
+  "description": "Programa intensivo y adaptativo para el examen UNAL. Material 2022+, explicaciones con ecuaciones y gráficas, quizzes sin tiempo, tests contrarreloj y simulacros. IA Roma 24/7 entrenada para la UNAL.",
   "authorship": {
     "creators": "Estudiantes de la Universidad Nacional de Colombia – Sede Bogotá",
-    "credentials": "El curso fue diseñado y curado por estudiantes excepcionales de la Universidad Nacional de Colombia, provenientes de carreras como Ingeniería, Ciencias y Medicina. Presentaron el examen de admisión hace menos de tres años y lograron puntajes sobresalientes, ingresando a programas altamente competitivos. Su experiencia reciente con el proceso, combinada con su formación académica, les permite ofrecer una preparación rigurosa, cercana y adaptada a los desafíos reales del examen."
+    "credentials": "Diseñado y curado por estudiantes de Ingeniería, Ciencias y Medicina de la UNAL con experiencia reciente y puntajes sobresalientes en el examen de admisión."
   }
 }

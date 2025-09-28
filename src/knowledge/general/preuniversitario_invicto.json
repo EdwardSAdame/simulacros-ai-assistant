@@ -1,8 +1,6 @@
 {
   "course_id": "preuniversitario_invicto",
-  "marketing_templates": [
-    "preuniversitario_invicto"
-  ],
+  "marketing_templates": ["preuniversitario_invicto"],
   "name": "Preuniversitario ICFES/UNAL Odyssey",
   "pricing": {
     "currency": "COP",
@@ -10,7 +8,15 @@
   },
   "subscription_model": "mensual",
   "link_payment": "https://www.invicto.com.co/challenge-page/preuniversitario-invicto-odyssey",
-  "components": ["Matemáticas", "Ciencias Naturales", "Inglés", "Lectura Crítica", "Ciencias Sociales", "Temática Común", "Análisis de Imagen"],
+  "components": [
+    "Matemáticas",
+    "Ciencias Naturales",
+    "Inglés",
+    "Lectura Crítica",
+    "Ciencias Sociales",
+    "Temática Común",
+    "Análisis de Imagen"
+  ],
   "subcomponents": {
     "Ciencias Naturales": ["Química", "Física", "Biología"]
   },
@@ -20,51 +26,163 @@
     "quizzes_practicos": 82,
     "tests_contrareloj": 111,
     "simulacros_estrategicos": 6,
-    "certificado": true
+    "certificado": true,
+    "modelo_inteligencia_artificial": true
   },
-  "start_date": "Lunes 16 de junio de 2025",
-  "end_date": "Viernes 12 de septiembre de 2025",
-  "schedules_available": [
-    "Lunes a Viernes 9:00 AM – 11:00 AM",
-    "Lunes a Viernes 7:00 PM – 9:00 PM"
+  "upgrades": {
+    "clases_grupales": {
+      "available": true,
+      "included": false,
+      "description": "Clases grupales opcionales para reforzar el aprendizaje, se compran por separado."
+    }
+  },
+  "content_format": [
+    "Ruta adaptativa por sección: Test inicial cronometrado (umbral 80%) → si apruebas, saltas teoría; si no, estudias teoría y presentas Test de fluidez",
+    "Teoría de vanguardia 2022+: libros y revistas actuales; material visual y sintético",
+    "Explicaciones integradas: texto + ecuaciones + gráficas",
+    "Aprendizaje activo: resuelves mientras estudias; no es consumo pasivo",
+    "Quizzes sin tiempo para validar comprensión y detectar preguntas trampa",
+    "Tests contrarreloj para desbloquear la siguiente sección",
+    "Simulacros estratégicos estilo ICFES y UNAL con reporte",
+    "IA ‘Roma’ 24/7: respuestas enfocadas exclusivamente en ICFES y UNAL"
   ],
+  "usp": "Un solo programa para dominar ICFES y UNAL con entrenamiento activo y adaptativo. Cada tema se valida con test cronometrado (80%). Si no alcanzas el umbral, estudias teoría 2022+ y vuelves a medir fluidez. Todo combina texto, ecuaciones y gráficas. Roma, la IA de Invicto, responde con precisión según el examen objetivo. Contenido y simulacros curados por estudiantes de UNAL y Los Andes con resultados sobresalientes.",
+  "assessment_policies": {
+    "tests": {
+      "timed": true,
+      "use": "puerta de avance",
+      "threshold_percent": 80,
+      "purpose": "medir dominio bajo presión tipo ICFES/UNAL",
+      "notes": "Test diagnóstico y Test de fluidez por sección"
+    },
+    "quizzes": {
+      "timed": false,
+      "use": "comprobación de entendimiento",
+      "difficulty": "baja en cálculo con preguntas tipo trampa",
+      "purpose": "verificar la esencia antes del test contrarreloj"
+    }
+  },
+  "components_detail": {
+    "Química": {
+      "steps": 29,
+      "topics": [
+        "Introducción a la química",
+        "Estándares de medición",
+        "Elementos y compuestos",
+        "Propiedades de la materia",
+        "Primeras teorías y estructuras atómicas",
+        "Nomenclatura de compuestos inorgánicos",
+        "Composición cuantitativa de los compuestos",
+        "Ecuaciones químicas",
+        "Cálculos a partir de ecuaciones químicas",
+        "Teoría atómica moderna y tabla periódica",
+        "Estado gaseoso de la materia",
+        "Líquidos",
+        "Oxidación-Reducción"
+      ]
+    },
+    "Física": {
+      "steps": 12,
+      "topics": [
+        "Física y medición",
+        "Movimiento en una dimensión",
+        "Leyes del movimiento",
+        "Campos eléctricos"
+      ]
+    },
+    "Biología": {
+      "steps": 30,
+      "topics": [
+        "Invitación a la biología",
+        "Moléculas de la vida",
+        "Fotosíntesis",
+        "Estructura y función del ADN",
+        "Patrones hereditarios",
+        "Evidencias de la evolución",
+        "Procesos de la evolución",
+        "Ecología de poblaciones",
+        "Ecología de comunidades",
+        "Ecosistemas"
+      ]
+    },
+    "Matemáticas": {
+      "steps": 21,
+      "topics": [
+        "Números reales",
+        "Exponentes y radicales",
+        "Expresiones algebraicas",
+        "Expresiones racionales",
+        "Ecuaciones",
+        "Modelado con ecuaciones",
+        "Desigualdades",
+        "Geometría de coordenadas",
+        "Resolución gráfica de ecuaciones y desigualdades",
+        "Rectas",
+        "Trigonometría de triángulos rectángulos"
+      ]
+    },
+    "Ciencias Sociales": {
+      "steps": 24,
+      "topics": [
+        "La civilización europea en la alta edad media",
+        "Renacimiento",
+        "Europa y el mundo: 1500–1800",
+        "Hacia un nuevo cielo y una nueva Tierra",
+        "Revolución francesa y Napoleón",
+        "Revolución industrial",
+        "Reacción, revolución y romanticismo (1815–1850)",
+        "Crisis del siglo XX: guerra y revolución",
+        "Europa de entreguerras (1919–1939)",
+        "Segunda Guerra Mundial",
+        "Guerra Fría y nuevo orden occidental (1945–1965)"
+      ]
+    },
+    "Inglés": {
+      "steps": 1,
+      "topics": ["English"]
+    },
+    "Lectura Crítica": {
+      "steps": 0,
+      "topics": []
+    },
+    "Análisis de Imagen": {
+      "steps": 1,
+      "topics": ["Razonamiento abstracto", "Razonamiento espacial"],
+      "bank_overview": {
+        "exercises_count": 417,
+        "notes": "Banco para entrenar patrones visuales, simetrías, rotaciones, transformaciones y series."
+      }
+    },
+    "Temática Común": {
+      "steps": 0,
+      "topics": []
+    }
+  },
   "faq": [
     {
       "q": "¿Qué incluye el curso?",
-      "a": "Acceso completo a dos entrenamientos estratégicos: ICFES y UNAL. Incluye guías, quizzes, tests contrarreloj, simulacros, clases grabadas y 40 sesiones en vivo al mes. Un programa intensivo con precisión quirúrgica."
+      "a": "Acceso completo a entrenamientos ICFES y UNAL: teoría 2022+, quizzes sin tiempo, tests contrarreloj, simulacros y tutoría con IA 24/7."
     },
     {
       "q": "¿Puedo unirme en cualquier momento?",
-      "a": "Sí. Desde el día que se inscribe, accede a todo el contenido, a las grabaciones anteriores y a las sesiones en vivo restantes del mes. Usted decide si continúa. La suscripción es mensual."
+      "a": "Sí. Acceso inmediato al contenido. Suscripción mensual."
     },
     {
-      "q": "¿Cuántas clases puedo tomar al mes?",
-      "a": "Su suscripción mensual incluye 40 sesiones en vivo. Puede usarlas como lo desee: asistir a una clase diaria o tomar dos por día. Cada clase cuenta como una sesión. Usted gestiona su avance."
+      "q": "¿Cómo avanzo entre secciones?",
+      "a": "Con test diagnóstico cronometrado. Si superas 80% avanzas; si no, teoría y test de fluidez."
     },
     {
-      "q": "¿Qué horarios hay disponibles?",
-      "a": "Las clases se imparten de lunes a viernes en dos franjas: 9:00–11:00 AM y 7:00–9:00 PM. Usted elige a cuál asistir. Flexibilidad para quienes tienen claridad en su propósito."
-    },
-    {
-      "q": "¿Qué ocurre si no puedo asistir a una clase en vivo?",
-      "a": "Las sesiones quedan grabadas y disponibles en la plataforma. Puede verlas cuando lo necesite. Avance con libertad, sin perder continuidad."
-    },
-    {
-      "q": "¿Cuánto tiempo necesito para completar ambos recorridos?",
-      "a": "Depende de su dedicación. Con 10 horas semanales puede completar el curso en 3 a 4 meses. Si ya tiene bases fuertes, es posible avanzar en menos tiempo. Las sesiones en vivo refuerzan, el contenido guía."
-    },
-    {
-      "q": "¿Quiénes diseñaron el curso?",
-      "a": "Un equipo mixto de estudiantes excepcionales de la Universidad Nacional y de la Universidad de los Andes. Todos con puntajes sobresalientes y experiencia directa en ambos exámenes. Su conocimiento no es teórico; es probado."
+      "q": "¿Las clases grupales están incluidas?",
+      "a": "No. Son un upgrade opcional, no hacen parte del plan base."
     },
     {
       "q": "¿Recibo certificado al finalizar?",
-      "a": "Sí. Al completar los simulacros estratégicos, recibirá un certificado firmado por nuestros instructores. Un sello sobrio de un entrenamiento superior."
+      "a": "Sí. Al completar los simulacros estratégicos."
     }
   ],
-  "description": "“En el alba de su regreso, Ítaca no era solo un lugar, sino el final de una larga lucha, el premio a su inquebrantable esfuerzo”. Odyssey está diseñado para quienes no dejan nada al azar y se preparan al máximo para superar los dos exámenes más importantes del país.",
+  "description": "Entrenamiento intensivo y adaptativo para ICFES y UNAL. Material 2022+, explicaciones con ecuaciones y gráficas, quizzes sin tiempo, tests contrarreloj y simulacros. IA Roma 24/7 enfocada al examen que elijas.",
   "authorship": {
-    "creators": "Estudiantes excepcionales de la Universidad Nacional de Colombia y la Universidad de los Andes",
-    "credentials": "El curso fue diseñado y curado por estudiantes excepcionales de la Universidad Nacional de Colombia y de la Universidad de los Andes, provenientes de carreras como Ingeniería, Ciencias y Medicina. Presentaron el ICFES y el examen de admisión a la UNAL hace menos de tres años, lograron puntajes sobresalientes y fueron admitidos en programas de alta demanda. Su experiencia reciente con ambos exámenes, sumada a su formación académica, les permite ofrecer una preparación rigurosa, estratégica y actual, con el respaldo de herramientas digitales y una comunicación clara."
+    "creators": "Estudiantes de la Universidad Nacional de Colombia y de la Universidad de los Andes",
+    "credentials": "Diseñado y curado por equipos de UNAL y Los Andes con puntajes sobresalientes y experiencia reciente en ambos exámenes."
   }
 }

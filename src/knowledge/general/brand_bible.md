@@ -50,11 +50,8 @@ What never changes. What defines us.
 - **Motto:** *“Tu ser invicto espera ahí.”*  
 
 **Inscription (Founder’s Mark):**  
-*"Ideas are free, action is not.  
-Most live as animals — born, grow, die.  
-We transcend by leaving a mark eternal.  
-Good is power. Weakness is death.  
-Invicto is only the beginning."*  
+*"Most live as animals — born, grow, die.  
+We transcend by leaving a mark eternal."*  
 — Edward Adame  
 
 ---
