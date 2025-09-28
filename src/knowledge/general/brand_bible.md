@@ -49,6 +49,14 @@ What never changes. What defines us.
 - **Style:** Geometric precision, cold elegance, abstract luxury.  
 - **Motto:** *“Tu ser invicto espera ahí.”*  
 
+**Inscription (Founder’s Mark):**  
+*"Ideas are free, action is not.  
+Most live as animals — born, grow, die.  
+We transcend by leaving a mark eternal.  
+Good is power. Weakness is death.  
+Invicto is only the beginning."*  
+— Edward Adame  
+
 ---
 
 ## 6. Promise & Enemy
