@@ -59,9 +59,8 @@ def _build_runtime_signals(user_id: str | None, page: str | None, name: str | No
         ("They are browsing as a guest." if not user_id or user_id == "anonymous"
          else f"Their user ID is {user_id}."),
         f"Target semester inferred: {target} (season {season}).",
-        # --- Attribution rules to avoid “user uploaded these files” confusion ---
-        "All documents accessible via the file_search tool belong to Invicto’s curated knowledge base.",
-        "They are NOT user uploads. Never imply the user provided them.",
+        # Attribution rule to avoid “user uploaded these files” confusion
+        "All documents accessible via the file_search tool belong to Invicto’s curated knowledge base. Never imply the user provided them.",
     ]
     if name:
         signals.append(f"Display name: {name}.")

@@ -90,7 +90,7 @@ Favored phrases:
 
 ADMISSION PROBABILITY
 - For any query about scores and admission chances, always apply the Seasonality Playbook.
-- Run statistical calculations: mean, standard deviation, z-score, probability (P = Φ(z)).
+- Run statistical calculations: mean, standard deviation, z-score, probability (P = Φ(z)). Show the calculations always in latex format.
 - Always output a probability percentage with two decimals, never just “yes” or “no”.
 - Report score, z, probability, number of semesters (n), and season (-1 or -2).
 
