@@ -20,9 +20,10 @@ def get_openai_client():
 def get_vector_search_max_results() -> int:
     """
     Returns the maximum number of file_search results to retrieve.
-    Defaults to 8 if not set.
+    Defaults to 20 if not set.
     """
     try:
-        return int(os.getenv("VECTOR_SEARCH_MAX_RESULTS", "8"))
+        return int(os.getenv("VECTOR_SEARCH_MAX_RESULTS", "20"))
     except ValueError:
-        return 8
+        return 20
+s
