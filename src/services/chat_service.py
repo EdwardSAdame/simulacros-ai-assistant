@@ -23,27 +23,36 @@ def _normalize_page(val: str | None) -> str:
     return val
 
 
-def _build_history_block(conversation_id: str, max_turns: int = 8, max_chars_per_msg: int = 600) -> str | None:
+def _build_history_block(conversation_id: str, max_user: int = 3, max_assistant: int = 3, max_chars_per_msg: int = 600) -> str | None:
     """
-    Fetch last N messages and return a compact Spanish transcript.
-    Oldest→newest order to preserve coherence. Truncates long messages.
+    Fetch recent messages and keep a balanced history:
+    - Last 3 user messages
+    - Last 3 assistant messages
+    Merge oldest→newest to preserve coherence.
     """
     try:
-        msgs = get_recent_messages(conversation_id=conversation_id, limit=max_turns * 2, ascending=True)
+        # fetch more than needed to ensure coverage
+        msgs = get_recent_messages(conversation_id=conversation_id, limit=20, ascending=True)
         if not msgs:
             return None
 
+        user_msgs = [m for m in msgs if m.get("Role") == "user"][-max_user:]
+        asst_msgs = [m for m in msgs if m.get("Role") == "assistant"][-max_assistant:]
+
+        # merge and sort by Timestamp
+        merged = sorted(user_msgs + asst_msgs, key=lambda m: m["Timestamp"])
+
         lines = ["[HISTORIAL RECIENTE]"]
-        for m in msgs:
+        for m in merged:
             role = m.get("Role", "user")
             text = m.get("MessageText", "")
             if max_chars_per_msg and len(text) > max_chars_per_msg:
                 text = text[:max_chars_per_msg] + "…"
             speaker = "Usuario" if role == "user" else "Roma"
             lines.append(f"{speaker}: {text}")
-        return "\n".join(lines)
+
+        return "\n".join(lines) if len(lines) > 1 else None
     except Exception as e:
-        # Don't fail the request if history fetch fails; just skip history
         log_event("history_fetch_failed", {"conversation_id": conversation_id}, level="warning", error=e)
         return None
 
@@ -71,7 +80,7 @@ def get_ai_response(
                 "conversation_id": conversation_id,
                 "user_id": user_id,
                 "page": page,
-                "vector_stores": get_stores_for_page(page),  # ✅ visibility
+                "vector_stores": get_stores_for_page(page),
             })
         else:
             sanitized_email = _normalize_email_for_storage(email)
@@ -87,7 +96,7 @@ def get_ai_response(
                 "conversation_id": conversation_id,
                 "user_id": user_id,
                 "page": page,
-                "vector_stores": get_stores_for_page(page),  # ✅ visibility
+                "vector_stores": get_stores_for_page(page),
             })
     except Exception as e:
         raise RuntimeError(f"❌ Failed to save/reuse conversation: {e}")
@@ -102,10 +111,10 @@ def get_ai_response(
     except Exception as e:
         raise RuntimeError(f"❌ Failed to format image URLs: {e}")
 
-    # Step 3: Build content_parts (include recent history as first block)
+    # Step 3: Build content_parts (balanced context)
     content_parts = []
 
-    history_block = _build_history_block(conversation_id, max_turns=8, max_chars_per_msg=600)
+    history_block = _build_history_block(conversation_id, max_user=3, max_assistant=3, max_chars_per_msg=600)
     if history_block:
         content_parts.append({"type": "text", "text": history_block})
 
@@ -120,7 +129,7 @@ def get_ai_response(
             "user_id": user_id,
             "page": page,
             "content_parts_count": len(content_parts),
-            "vector_stores": get_stores_for_page(page),  # ✅ visibility
+            "vector_stores": get_stores_for_page(page),
         })
         assistant_reply = send_message_to_assistant(
             content_parts=content_parts,
