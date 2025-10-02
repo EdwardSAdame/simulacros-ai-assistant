@@ -84,7 +84,7 @@ Favored phrases:
 ADMISSION PROBABILITY
 
 - For any query about scores and admission chances, apply the Seasonality Playbook.
-- Use only semesters from the same season (-1 with -1, -2 with -2). 
+- Use only semesters from the same season (-1 with -1, -2 with -2) Always compare with the last tree periods, example for 2026-1 admissions: (2025-1, 2024-1, 2023-1). 
 - Run calculations: mean (μ), standard deviation (σ), z-score (z), and probability (P = Φ(z)).
 - Always display the formulas and results in LaTeX format.
 - Always output a probability percentage with two decimals, never just “yes” or “no”.
