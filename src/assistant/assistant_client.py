@@ -1,6 +1,6 @@
 # src/assistant/assistant_client.py
 
-from typing import List, Dict, Any, Optional, Tuple
+from typing import List, Dict, Any
 
 from src.config.settings import get_openai_client, get_vector_search_max_results
 from src.config.model_config import get_model_config
@@ -44,74 +44,22 @@ def _to_responses_content(parts: List[Dict[str, Any]] | None) -> List[Dict[str, 
     return converted
 
 
-def _normalize_page(page: Optional[str]) -> str:
-    """
-    Normalize page for consistent routing and context:
-    - keep only path (strip domain)
-    - ensure leading '/'
-    - remove trailing '/' (except root)
-    - lowercase
-    """
-    if not page:
-        return "/"
-    p = page.strip()
-    if "://" in p:
-        try:
-            p = p.split("://", 1)[1]
-            p = p[p.find("/"):] if "/" in p else "/"
-        except Exception:
-            p = "/"
-    if not p.startswith("/"):
-        p = "/" + p
-    if len(p) > 1 and p.endswith("/"):
-        p = p[:-1]
-    return p.lower()
-
-
-def _derive_context_from_page(page: str) -> Optional[Tuple[str, str]]:
-    """
-    From a normalized page like '/simulacro-icfes/ingles' return ('ICFES', 'Inglés').
-    Returns None if it cannot be derived.
-    """
-    parts = [s for s in page.split("/") if s]
-    if len(parts) >= 2 and parts[0] == "simulacro-icfes":
-        exam = "ICFES"
-        comp = parts[1]
-    elif len(parts) >= 2 and parts[0] == "simulacro-unal":
-        exam = "UNAL"
-        comp = parts[1]
-    else:
-        return None
-
-    # Humanize component label
-    comp_label = comp.replace("-", " ").title()
-    return (exam, comp_label)
-
-
 def _build_runtime_signals(user_id: str | None, page: str | None, name: str | None, email: str | None) -> str:
     """
     Build the runtime 'RUNTIME SIGNALS' block appended to the base system prompt.
     Also reiterates attribution rules for file_search sources.
     """
-    norm_page = _normalize_page(page)
     tinfo = get_current_time_info()
     target = infer_target_semester()
     season = semester_season(target)
 
-    header = []
-    derived = _derive_context_from_page(norm_page)
-    if derived:
-        exam, comp = derived
-        header.append(f"Contexto: {exam} · {comp}")
-
     signals = [
-        *(header or []),
         f"Today is {tinfo['full_human']}.",
-        f"The user is on the page: {norm_page}",
+        f"The user is on the page: {page or '/'}",
         ("They are browsing as a guest." if not user_id or user_id == "anonymous"
          else f"Their user ID is {user_id}."),
         f"Target semester inferred: {target} (season {season}).",
-        # Attribution rules to avoid implying user uploads
+        # --- Attribution rules to avoid “user uploaded these files” confusion ---
         "All documents accessible via the file_search tool belong to Invicto’s curated knowledge base.",
         "They are NOT user uploads. Never imply the user provided them.",
     ]
@@ -140,7 +88,7 @@ def send_message_to_assistant(
     system_text = _build_runtime_signals(user_id=user_id, page=page, name=name, email=email)
     user_content = _to_responses_content(content_parts)
 
-    # 2) Resolve vector stores for this page (after normalization inside get_stores_for_page)
+    # 2) Resolve vector stores for this page
     vector_store_ids = get_stores_for_page(page)
 
     # 3) Call Responses API with file_search tool
