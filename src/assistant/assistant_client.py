@@ -6,7 +6,7 @@ from src.config.settings import get_openai_client, get_vector_search_max_results
 from src.config.model_config import get_model_config
 from src.config.system_instructions import build_system_instructions
 from src.config.page_vectorstores import get_stores_for_page
-from src.utils.time_utils import get_current_time_info
+from src.utils.time_utils import get_current_time_info, infer_target_semester, semester_season
 
 
 def _to_responses_content(parts: List[Dict[str, Any]] | None) -> List[Dict[str, Any]]:
@@ -50,11 +50,15 @@ def _build_runtime_signals(user_id: str | None, page: str | None, name: str | No
     Also reiterates attribution rules for file_search sources.
     """
     tinfo = get_current_time_info()
+    target = infer_target_semester()
+    season = semester_season(target)
+
     signals = [
         f"Today is {tinfo['full_human']}.",
         f"The user is on the page: {page or '/'}",
         ("They are browsing as a guest." if not user_id or user_id == "anonymous"
          else f"Their user ID is {user_id}."),
+        f"Target semester inferred: {target} (season {season}).",
         # --- Attribution rules to avoid “user uploaded these files” confusion ---
         "All documents accessible via the file_search tool belong to Invicto’s curated knowledge base.",
         "They are NOT user uploads. Never imply the user provided them.",
