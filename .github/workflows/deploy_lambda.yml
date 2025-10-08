@@ -1,4 +1,4 @@
-name: 🚀 Deploy Roma Chatbot Functions to AWS
+name: Deploy Roma Chatbot Functions to AWS
 
 on:
   push:
@@ -15,10 +15,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: 📥 Checkout Repository
+      - name: Checkout Repository
         uses: actions/checkout@v3
 
-      - name: 📦 Install Dependencies & Package Lambda
+      - name: Install Dependencies and Package Lambda
         run: |
           mkdir -p package
 
@@ -31,41 +31,49 @@ jobs:
 
           cp -r src package/src
 
-          # Copy ALL Lambda entrypoints
+          # Copy all Lambda entrypoints
           cp src/lambda_chat_handler.py package/
           cp src/lambda_dlq_reprocessor.py package/
           cp src/lambda_feedback_handler.py package/
+          cp src/lambda_ai_worker_handler.py package/
 
           cd package
           zip -r ../deployment.zip . -x "**/__pycache__/*" "*.git*"
 
-      - name: 🔑 Configure AWS Credentials
+      - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v2
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ vars.AWS_REGION }}
 
-      - name: 🚀 Deploy RomaChatHandler
+      - name: Deploy RomaChatHandler
         run: |
           aws lambda update-function-code \
             --function-name ${{ vars.LAMBDA_ROMA_HANDLER_NAME }} \
             --zip-file fileb://deployment.zip \
             --region ${{ vars.AWS_REGION }}
 
-      - name: 🚀 Deploy RomaDLQReprocessor
+      - name: Deploy RomaAIWorkerHandler
+        run: |
+          aws lambda update-function-code \
+            --function-name ${{ vars.LAMBDA_AI_WORKER_HANDLER_NAME }} \
+            --zip-file fileb://deployment.zip \
+            --region ${{ vars.AWS_REGION }}
+
+      - name: Deploy RomaDLQReprocessor
         run: |
           aws lambda update-function-code \
             --function-name ${{ vars.LAMBDA_ROMA_DLQ_NAME }} \
             --zip-file fileb://deployment.zip \
             --region ${{ vars.AWS_REGION }}
 
-      - name: 🚀 Deploy FeedBackHandler
+      - name: Deploy FeedBackHandler
         run: |
           aws lambda update-function-code \
             --function-name ${{ vars.LAMBDA_FEEDBACK_HANDLER_NAME }} \
             --zip-file fileb://deployment.zip \
             --region ${{ vars.AWS_REGION }}
 
-      - name: ✅ Deployment Complete
+      - name: Deployment Complete
         run: echo "All Lambda functions deployed successfully!"

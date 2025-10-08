@@ -1,98 +1,89 @@
 # src/lambda_chat_handler.py
 import json
 import logging
-from src.services.chat_service import get_ai_response
-from src.utils.logging_utils import log_event, set_invocation_context  # 👈 add context hook
+import boto3  # <-- Added boto3 to interact with AWS services
+import os     # <-- Added os to get environment variables
+
+from src.utils.logging_utils import log_event, set_invocation_context
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
+# --- NEW: Initialize SQS client ---
+sqs = boto3.client('sqs')
+QUEUE_URL = os.environ.get('SQS_QUEUE_URL') # We will set this environment variable in the Lambda config
 
 def _none_if_empty(val):
-    """Return None for empty strings/whitespace; pass through other values."""
-    if val is None:
-        return None
-    if isinstance(val, str) and val.strip() == "":
-        return None
+    if val is None: return None
+    if isinstance(val, str) and val.strip() == "": return None
     return val
 
-
 def lambda_handler(event, context):
-    # Attach AWS context to all subsequent logs (function, request_id, etc.)
     set_invocation_context(context)
 
     try:
-        # Log raw event (lightweight)
-        log_event("lambda_invocation", {
-            "source": "RomaChatHandler",
-            "has_body": "body" in (event or {}),
-        })
-
-        # Parse request body
+        log_event("lambda_invocation", {"source": "RomaChatHandler", "has_body": "body" in (event or {})})
         body = json.loads(event.get("body", "{}"))
 
-        # ---- Raw inputs from client ----
-        message     = body.get("message")                # Optional text
-        image_urls  = body.get("imageUrls", [])          # Optional list of image URLs
-        user_id     = body.get("userId")                 # Null/None for guests
-        name        = body.get("name")
-        email       = body.get("email")
-        page        = body.get("page")
-        conversation_id_in = body.get("conversationId")  # Optional conversation reuse
+        # ---- Raw inputs from client (this part remains the same) ----
+        message = body.get("message")
+        image_urls = body.get("imageUrls", [])
+        user_id = body.get("userId")
+        name = body.get("name")
+        email = body.get("email")
+        page = body.get("page")
+        conversation_id_in = body.get("conversationId")
 
-        # ---- Normalize / sanitize ----
+        # ---- Normalize / sanitize (this part remains the same) ----
         user_id = user_id or "anonymous"
         name = name if isinstance(name, str) else (name or "")
-        email = _none_if_empty(email)  # '' -> None so we can omit Email in Dynamo
+        email = _none_if_empty(email)
         page = page or "/"
         if not isinstance(image_urls, list):
             image_urls = []
 
-        # Validate input: require at least message or images
+        # ---- Input Validation (this part remains the same) ----
         if not message and not image_urls:
-            log_event("input_validation_failed", {
-                "reason": "Missing message or imageUrls",
-                "has_message": bool(message),
-                "image_count": len(image_urls or []),
-            }, level="warning")
+            log_event("input_validation_failed", {"reason": "Missing message or imageUrls"}, level="warning")
             return response(400, {"error": "Missing message or imageUrls"})
 
-        # Call service layer
-        ai_reply, conversation_id = get_ai_response(
-            message=message,
-            user_id=user_id,
-            name=name,
-            email=email,                    # already normalized
-            page=page,
-            conversation_id=conversation_id_in,
-            image_urls=image_urls
+        # --- MODIFIED: Instead of calling the AI service, send to SQS ---
+        # 1. Construct the message payload
+        payload = {
+            "message": message,
+            "user_id": user_id,
+            "name": name,
+            "email": email,
+            "page": page,
+            "conversation_id": conversation_id_in,
+            "image_urls": image_urls
+        }
+
+        # 2. Send the message to the SQS queue
+        sqs.send_message(
+            QueueUrl=QUEUE_URL,
+            MessageBody=json.dumps(payload)
         )
 
-        log_event("chat_response_success", {
+        log_event("message_queued_for_ai_processing", {
             "user_id": user_id,
-            "conversation_id": conversation_id,
-            "reply_snippet": (ai_reply or "")[:100]
+            "conversation_id": conversation_id_in
         })
 
-        return response(200, {
-            "reply": ai_reply,
-            "conversationId": conversation_id
-        })
+        # 3. Return an immediate success response to the user
+        # This makes the frontend feel instantaneous.
+        return response(202, {"status": "accepted", "message": "Request is being processed."})
 
     except Exception as e:
-        # Capture stack trace in CloudWatch (via logging_utils)
-        log_event("lambda_exception", {
-            "source": "RomaChatHandler"
-        }, level="error", error=e)
+        log_event("lambda_exception", {"source": "RomaChatHandler"}, level="error", error=e)
         return response(500, {"error": "Internal error"})
-
 
 def response(status_code, body):
     return {
         "statusCode": status_code,
         "headers": {
             "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*"  # Allow Wix to call this from browser
+            "Access-Control-Allow-Origin": "*"
         },
         "body": json.dumps(body)
     }
