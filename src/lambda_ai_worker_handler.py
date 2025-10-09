@@ -1,29 +1,56 @@
 # src/lambda_ai_worker_handler.py
 import json
 import logging
+import boto3
+import os
 from src.services.chat_service import get_ai_response
+from src.storage.ws_connections_table import WsConnectionsTable # <-- Import the new table manager
 from src.utils.logging_utils import log_event, set_invocation_context
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
+# --- Instantiate the DynamoDB table manager ---
+ws_connections_table = WsConnectionsTable()
+
+# --- NEW: Get the WebSocket API endpoint from environment variables ---
+# You must set this in your Lambda's configuration.
+WEBSOCKET_API_ENDPOINT = os.environ.get('WEBSOCKET_API_ENDPOINT')
+
+# It's more efficient to create the client outside the handler if the
+# execution environment is reused, but we need the endpoint which might vary.
+# A helper function keeps it clean.
+def get_api_gateway_management_client(endpoint_url):
+    """Creates a client for the API Gateway Management API."""
+    return boto3.client(
+        'apigatewaymanagementapi',
+        endpoint_url=endpoint_url
+    )
+
 def lambda_handler(event, context):
     """
-    Triggered by SQS messages from RomaChatQueue.
-    Processes the message payload to generate and save an AI response.
+    Triggered by SQS. Gets AI response and sends it back to the user via WebSocket.
     """
     set_invocation_context(context)
+
+    # --- NEW: Create the API Gateway client ---
+    # This client is used to post messages back to connected clients.
+    if not WEBSOCKET_API_ENDPOINT:
+        log_event("ai_worker_config_error", {"reason": "WEBSOCKET_API_ENDPOINT is not set"}, level="error")
+        # Fail the function if the endpoint isn't configured. SQS will retry.
+        raise ValueError("WEBSOCKET_API_ENDPOINT environment variable not set.")
+        
+    api_gateway_client = get_api_gateway_management_client(WEBSOCKET_API_ENDPOINT)
 
     records = (event or {}).get("Records", [])
     log_event("ai_worker_invocation", {"record_count": len(records)})
 
     for record in records:
         try:
-            # The 'body' of the SQS record contains the JSON payload from the first Lambda
             body_raw = record.get("body", "{}")
             payload = json.loads(body_raw)
 
-            # --- Extract data from the payload ---
+            # --- Extract data from the payload (remains the same) ---
             message = payload.get("message")
             image_urls = payload.get("image_urls", [])
             user_id = payload.get("user_id")
@@ -32,8 +59,7 @@ def lambda_handler(event, context):
             page = payload.get("page")
             conv_id_in = payload.get("conversation_id")
 
-            # --- Call the existing chat service to get the AI response ---
-            # This is the heavy lifting part that now runs asynchronously
+            # --- Get the AI response (remains the same) ---
             ai_reply, conversation_id = get_ai_response(
                 message=message,
                 user_id=user_id,
@@ -44,28 +70,39 @@ def lambda_handler(event, context):
                 image_urls=image_urls
             )
 
-            log_event("ai_worker_success", {
-                "user_id": user_id,
-                "page": page,
-                "conversation_id": conversation_id,
-                "reply_snippet": (ai_reply or "")[:100]
-            })
+            # --- NEW: Send the reply back via WebSocket ---
+            # 1. Look up the user's current connectionId
+            connection_id = ws_connections_table.get_connection_id(user_id)
 
-            # --- TODO: Send the reply back to the user via WebSocket ---
-            # For now, we are just logging the success. The next step in our
-            # architecture will be to implement this delivery mechanism.
+            if connection_id:
+                try:
+                    # 2. Construct the payload to send to the frontend
+                    response_payload = json.dumps({
+                        "action": "ai_reply", # Good practice to include an action
+                        "ai_reply": ai_reply,
+                        "conversation_id": conversation_id
+                    })
+                    
+                    # 3. Post the message to the specific connection
+                    api_gateway_client.post_to_connection(
+                        ConnectionId=connection_id,
+                        Data=response_payload
+                    )
+                    log_event("ai_worker_response_sent", {"user_id": user_id, "connection_id": connection_id})
+
+                except api_gateway_client.exceptions.GoneException:
+                    # This happens if the user disconnected between the lookup and now.
+                    # It's safe to ignore, but good to log.
+                    log_event("ws_send_failed_gone", {"user_id": user_id, "connection_id": connection_id}, level="warning")
+                except Exception as e:
+                    # Handle other potential errors during sending
+                    log_event("ws_send_failed_exception", {"user_id": user_id}, level="error", error=e)
+            else:
+                # This can happen if the user disconnects before the AI replies.
+                log_event("ws_connection_not_found", {"user_id": user_id}, level="warning")
 
         except Exception as e:
-            # If this fails, SQS will automatically retry based on our queue config.
-            # After enough failures, the message will go to the DLQ (once we configure it).
-            log_event("ai_worker_failed", {
-                "record_id": record.get("messageId"),
-                "approx_receive_count": record.get("attributes", {}).get("ApproximateReceiveCount")
-            }, level="error", error=e)
-            
-            # Re-raise the exception to signal SQS that this message failed processing
+            log_event("ai_worker_failed", { "record_id": record.get("messageId") }, level="error", error=e)
             raise e
 
-    # A successful run (no exceptions) implies messages are processed.
-    # Lambda will automatically delete them from the SQS queue.
     return {"status": "ok", "processed_records": len(records)}
