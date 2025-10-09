@@ -33,9 +33,11 @@ jobs:
 
           # Copy all Lambda entrypoints
           cp src/lambda_chat_handler.py package/
+          cp src/lambda_ai_worker_handler.py package/
           cp src/lambda_dlq_reprocessor.py package/
           cp src/lambda_feedback_handler.py package/
-          cp src/lambda_ai_worker_handler.py package/
+          cp src/lambda_ws_connect_handler.py package/
+          cp src/lambda_ws_disconnect_handler.py package/
 
           cd package
           zip -r ../deployment.zip . -x "**/__pycache__/*" "*.git*"
@@ -72,6 +74,20 @@ jobs:
         run: |
           aws lambda update-function-code \
             --function-name ${{ vars.LAMBDA_FEEDBACK_HANDLER_NAME }} \
+            --zip-file fileb://deployment.zip \
+            --region ${{ vars.AWS_REGION }}
+
+      - name: Deploy RomaWSOnConnectHandler
+        run: |
+          aws lambda update-function-code \
+            --function-name ${{ vars.LAMBDA_WS_CONNECT_HANDLER_NAME }} \
+            --zip-file fileb://deployment.zip \
+            --region ${{ vars.AWS_REGION }}
+
+      - name: Deploy RomaWSOnDisconnectHandler
+        run: |
+          aws lambda update-function-code \
+            --function-name ${{ vars.LAMBDA_WS_DISCONNECT_HANDLER_NAME }} \
             --zip-file fileb://deployment.zip \
             --region ${{ vars.AWS_REGION }}
 
