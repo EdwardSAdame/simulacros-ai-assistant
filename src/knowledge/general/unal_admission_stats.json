@@ -1,0 +1,36 @@
+{
+  "exam": "UNAL",
+  "summary": "Datos históricos de admisión para la sede de Bogotá.",
+  "semesters": [
+    {
+      "semester": "2025-1",
+      "applicants": 40054,
+      "admitted": 2612,
+      "admission_rate": "6.52%"
+    },
+    {
+      "semester": "2024-1",
+      "applicants": 42585,
+      "admitted": 2729,
+      "admission_rate": "6.41%"
+    },
+    {
+      "semester": "2023-1",
+      "applicants": 40796,
+      "admitted": 2740,
+      "admission_rate": "6.72%"
+    },
+    {
+      "semester": "2023-2",
+      "applicants": 31121,
+      "admitted": 2635,
+      "admission_rate": "8.47%"
+    },
+    {
+      "semester": "2022-2",
+      "applicants": 45291,
+      "admitted": 2770,
+      "admission_rate": "6.12%"
+    }
+  ]
+}

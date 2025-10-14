@@ -1,5 +1,4 @@
 # src/assistant/assistant_client.py
-
 from typing import List, Dict, Any
 
 from src.config.settings import get_openai_client, get_vector_search_max_results
@@ -7,41 +6,6 @@ from src.config.model_config import get_model_config
 from src.config.system_instructions import build_system_instructions
 from src.config.page_vectorstores import get_stores_for_page
 from src.utils.time_utils import get_current_time_info, infer_target_semester, semester_season
-
-
-def _to_responses_content(parts: List[Dict[str, Any]] | None) -> List[Dict[str, Any]]:
-    """
-    Convert legacy content parts ({"type":"text"|"image_url"}) to Responses API format
-    ({"type":"input_text"|"input_image"}). Already-correct items pass through.
-    """
-    converted: List[Dict[str, Any]] = []
-    for p in parts or []:
-        t = p.get("type")
-
-        # Pass-through if already in Responses shape
-        if t in ("input_text", "input_image"):
-            converted.append(p)
-            continue
-
-        # Legacy text
-        if t == "text" and "text" in p:
-            converted.append({"type": "input_text", "text": p["text"]})
-            continue
-
-        # Legacy image_url
-        if t == "image_url":
-            url = None
-            if isinstance(p.get("image_url"), dict):
-                url = p["image_url"].get("url")
-            elif isinstance(p.get("image_url"), str):
-                url = p["image_url"]
-            if url:
-                converted.append({"type": "input_image", "image_url": url})
-            continue
-
-        # Fallback: stringify anything unknown
-        converted.append({"type": "input_text", "text": str(p)})
-    return converted
 
 
 def _build_runtime_signals(user_id: str | None, page: str | None, name: str | None, email: str | None) -> str:
@@ -70,35 +34,38 @@ def _build_runtime_signals(user_id: str | None, page: str | None, name: str | No
 
 
 def send_message_to_assistant(
-    content_parts,
+    conversation_input: List[Dict[str, Any]],
     user_id: str | None = None,
     page: str | None = None,
     name: str | None = None,
     email: str | None = None,
 ) -> str:
     """
-    Sends structured content (text + images) via OpenAI Responses API and
-    returns the assistant's reply text. No threads/runs used.
+    Sends a structured conversation to the OpenAI Responses API and
+    returns the assistant's reply text.
     """
     client = get_openai_client()
     cfg = get_model_config()
 
-    # 1) System + user content
+    # 1) Build system instructions
     system_text = _build_runtime_signals(user_id=user_id, page=page, name=name, email=email)
-    user_content = _to_responses_content(content_parts)
+    
+    # 2) Construct the full API input, starting with the system prompt
+    api_input = [
+        {"role": "system", "content": [{"type": "input_text", "text": system_text}]}
+    ]
+    # Add the structured conversation history (user and assistant turns)
+    api_input.extend(conversation_input)
 
-    # 2) Resolve vector stores for this page
+    # 3) Resolve vector stores for this page
     vector_store_ids = get_stores_for_page(page)
 
-    # 3) Call Responses API with file_search tool
+    # 4) Call Responses API with the structured input and file_search tool
     resp = client.responses.create(
         model=cfg.model,
         temperature=cfg.temperature,
         top_p=cfg.top_p,
-        input=[
-            {"role": "system", "content": [{"type": "input_text", "text": system_text}]},
-            {"role": "user",   "content": user_content},
-        ],
+        input=api_input,
         tools=[{
             "type": "file_search",
             "vector_store_ids": vector_store_ids,
@@ -106,7 +73,7 @@ def send_message_to_assistant(
         }],
     )
 
-    # 4) Extract text safely
+    # 5) Extract text safely
     text = getattr(resp, "output_text", None)
     if not text:
         try:
