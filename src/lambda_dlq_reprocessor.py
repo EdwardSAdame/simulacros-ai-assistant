@@ -2,7 +2,7 @@
 import json
 import logging
 from src.services.chat_service import get_ai_response
-from src.utils.logging_utils import log_event, set_invocation_context  # 👈 add context hook
+from src.utils.logging_utils import log_event, set_invocation_context
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
@@ -24,18 +24,19 @@ def lambda_handler(event, context):
             body_raw = record.get("body", "{}")
             body = json.loads(body_raw)
 
+            # --- CORRECTED: Use snake_case to match the SQS payload ---
             message     = body.get("message")
-            image_urls  = body.get("imageUrls", [])
-            user_id     = body.get("userId")
+            image_urls  = body.get("image_urls", []) # Corrected from imageUrls
+            user_id     = body.get("user_id")       # Corrected from userId
             name        = body.get("name")
             email       = body.get("email")
             page        = body.get("page")
-            conv_id_in  = body.get("conversationId")
+            conv_id_in  = body.get("conversation_id") # Corrected from conversationId
 
             # Validate: require at least text or images
             if not message and not image_urls:
                 log_event("dlq_skipped_message", {
-                    "reason": "No valid content (missing message and imageUrls)",
+                    "reason": "No valid content (missing message and image_urls)",
                     "has_message": bool(message),
                     "image_count": len(image_urls or [])
                 }, level="warning")
