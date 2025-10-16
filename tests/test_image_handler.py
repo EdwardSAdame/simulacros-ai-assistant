@@ -5,8 +5,8 @@ def test_format_image_urls():
     result = format_image_urls_for_openai(urls)
 
     assert len(result) == 2
-    assert result[0]["type"] == "image_url"
-    assert result[0]["image_url"]["url"] == urls[0]
+    assert result[0]["type"] == "input_image"
+    assert result[0]["input_image"]["url"] == urls[0]
     print("✅ Formatted image content:", result)
 
 # This makes it executable directly:
