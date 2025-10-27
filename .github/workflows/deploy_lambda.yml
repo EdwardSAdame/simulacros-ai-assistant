@@ -1,4 +1,4 @@
-name: Deploy Roma Chatbot Functions to AWS
+name: 🚀 Deploy Roma Chatbot Functions to AWS
 
 on:
   push:
@@ -15,10 +15,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repository
+      - name: 📥 Checkout Repository
         uses: actions/checkout@v3
 
-      - name: Install Dependencies and Package Lambda
+      - name: 📦 Install Dependencies & Package Lambda
         run: |
           mkdir -p package
 
@@ -29,67 +29,91 @@ jobs:
                       --only-binary=:all: \
                       --upgrade -r requirements.txt
 
+          # Copy the src directory (contains storage, services, utils, etc.)
           cp -r src package/src
 
-          # Copy all Lambda entrypoints
+          # Copy ALL Lambda entrypoint files to the root of the package
           cp src/lambda_chat_handler.py package/
           cp src/lambda_ai_worker_handler.py package/
           cp src/lambda_dlq_reprocessor.py package/
           cp src/lambda_feedback_handler.py package/
           cp src/lambda_ws_connect_handler.py package/
           cp src/lambda_ws_disconnect_handler.py package/
+          # --- ADDED: Copy new history handlers ---
+          cp src/lambda_get_conversations_handler.py package/
+          cp src/lambda_get_messages_handler.py package/
+          # --- ---
 
+          # Zip the contents of the package directory
           cd package
           zip -r ../deployment.zip . -x "**/__pycache__/*" "*.git*"
 
-      - name: Configure AWS Credentials
+      - name: 🔑 Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v2
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ vars.AWS_REGION }}
 
-      - name: Deploy RomaChatHandler
+      - name: 🚀 Deploy RomaChatHandler
         run: |
           aws lambda update-function-code \
             --function-name ${{ vars.LAMBDA_ROMA_HANDLER_NAME }} \
             --zip-file fileb://deployment.zip \
             --region ${{ vars.AWS_REGION }}
 
-      - name: Deploy RomaAIWorkerHandler
+      - name: 🚀 Deploy RomaAIWorkerHandler
         run: |
           aws lambda update-function-code \
             --function-name ${{ vars.LAMBDA_AI_WORKER_HANDLER_NAME }} \
             --zip-file fileb://deployment.zip \
             --region ${{ vars.AWS_REGION }}
 
-      - name: Deploy RomaDLQReprocessor
+      - name: 🚀 Deploy RomaDLQReprocessor
         run: |
           aws lambda update-function-code \
             --function-name ${{ vars.LAMBDA_ROMA_DLQ_NAME }} \
             --zip-file fileb://deployment.zip \
             --region ${{ vars.AWS_REGION }}
 
-      - name: Deploy FeedBackHandler
+      - name: 🚀 Deploy FeedBackHandler
         run: |
           aws lambda update-function-code \
             --function-name ${{ vars.LAMBDA_FEEDBACK_HANDLER_NAME }} \
             --zip-file fileb://deployment.zip \
             --region ${{ vars.AWS_REGION }}
 
-      - name: Deploy RomaWSOnConnectHandler
+      - name: 🚀 Deploy RomaWSOnConnectHandler
         run: |
           aws lambda update-function-code \
             --function-name ${{ vars.LAMBDA_WS_CONNECT_HANDLER_NAME }} \
             --zip-file fileb://deployment.zip \
             --region ${{ vars.AWS_REGION }}
 
-      - name: Deploy RomaWSOnDisconnectHandler
+      - name: 🚀 Deploy RomaWSOnDisconnectHandler
         run: |
           aws lambda update-function-code \
             --function-name ${{ vars.LAMBDA_WS_DISCONNECT_HANDLER_NAME }} \
             --zip-file fileb://deployment.zip \
             --region ${{ vars.AWS_REGION }}
 
-      - name: Deployment Complete
+      # --- ADDED: Deploy step for GetConversationsHandler ---
+      - name: 🚀 Deploy GetConversationsHandler
+        run: |
+          aws lambda update-function-code \
+            --function-name ${{ vars.LAMBDA_GET_CONVERSATIONS_HANDLER_NAME }} \
+            --zip-file fileb://deployment.zip \
+            --region ${{ vars.AWS_REGION }}
+      # --- ---
+
+      # --- ADDED: Deploy step for GetMessagesHandler ---
+      - name: 🚀 Deploy GetMessagesHandler
+        run: |
+          aws lambda update-function-code \
+            --function-name ${{ vars.LAMBDA_GET_MESSAGES_HANDLER_NAME }} \
+            --zip-file fileb://deployment.zip \
+            --region ${{ vars.AWS_REGION }}
+      # --- ---
+
+      - name: ✅ Deployment Complete
         run: echo "All Lambda functions deployed successfully!"

@@ -2,7 +2,8 @@
 import boto3
 import uuid
 from datetime import datetime
-from typing import Optional
+from typing import Optional, List, Dict, Any # Added List, Dict, Any
+from boto3.dynamodb.conditions import Key # Added Key for querying
 
 dynamodb = boto3.resource("dynamodb")
 table = dynamodb.Table("UserConversations")
@@ -24,8 +25,9 @@ def _omit_invalid_attrs(item: dict) -> dict:
             v = v.strip()
             if k in KEYS_DISALLOW_EMPTY and v == "":
                 continue
-        if v == [] or v == {}:
-            continue
+        # Keep empty lists/dicts if they are not keys causing issues
+        # if v == [] or v == {}:
+        #    continue
         cleaned[k] = v
     return cleaned
 
@@ -80,3 +82,43 @@ def save_conversation(
         "Title": title,
         "Page": page,
     }
+
+# --- NEW FUNCTION ---
+def get_conversations_for_user(
+    user_id: str,
+    limit: int = 50,
+    ascending: bool = False
+) -> List[Dict[str, Any]]:
+    """
+    Fetch conversation headers for a specific user.
+
+    :param user_id: The ID of the user whose conversations to fetch.
+    :param limit: Maximum number of conversations to return.
+    :param ascending: If True, return oldest first; if False (default), return newest first.
+    :return: A list of conversation header items (dictionaries).
+    """
+    if not user_id:
+        raise ValueError("user_id must be provided")
+
+    response = table.query(
+        KeyConditionExpression=Key('UserId').eq(user_id),
+        ScanIndexForward=ascending, # False = Sort Key descending (newest first)
+        Limit=limit,
+        # ProjectionExpression can be used to only fetch specific attributes if needed
+        # e.g., "ConversationId, Title, Timestamp"
+        ProjectionExpression="ConversationId, Title, Timestamp" # Fetch only needed fields
+    )
+    
+    conversations = response.get("Items", [])
+    
+    # Note: DynamoDB Query results are already sorted by the sort key (Timestamp)
+    # based on ScanIndexForward. No extra sorting needed here.
+    
+    # Handle pagination if you expect more than 'limit' or > 1MB of data
+    # (For simplicity, pagination is omitted here but might be needed for large histories)
+    # while 'LastEvaluatedKey' in response:
+    #     response = table.query(...)
+    #     conversations.extend(response.get('Items', []))
+
+    return conversations
+# --- END NEW FUNCTION ---
