@@ -34,10 +34,8 @@ def lambda_handler(event, context):
     set_invocation_context(context)
 
     # --- NEW: Create the API Gateway client ---
-    # This client is used to post messages back to connected clients.
     if not WEBSOCKET_API_ENDPOINT:
         log_event("ai_worker_config_error", {"reason": "WEBSOCKET_API_ENDPOINT is not set"}, level="error")
-        # Fail the function if the endpoint isn't configured. SQS will retry.
         raise ValueError("WEBSOCKET_API_ENDPOINT environment variable not set.")
         
     api_gateway_client = get_api_gateway_management_client(WEBSOCKET_API_ENDPOINT)
@@ -50,7 +48,7 @@ def lambda_handler(event, context):
             body_raw = record.get("body", "{}")
             payload = json.loads(body_raw)
 
-            # --- Extract data from the payload (remains the same) ---
+            # --- Extract data from the payload ---
             message = payload.get("message")
             image_urls = payload.get("image_urls", [])
             user_id = payload.get("user_id")
@@ -58,6 +56,9 @@ def lambda_handler(event, context):
             email = payload.get("email")
             page = payload.get("page")
             conv_id_in = payload.get("conversation_id")
+            
+            # 🔹 MODIFICATION: Extract the client's row ID from the payload
+            client_row_id = payload.get("client_row_id")
 
             # --- Get the AI response (remains the same) ---
             ai_reply, conversation_id = get_ai_response(
@@ -80,7 +81,10 @@ def lambda_handler(event, context):
                     response_payload = json.dumps({
                         "action": "ai_reply", # Good practice to include an action
                         "ai_reply": ai_reply,
-                        "conversation_id": conversation_id
+                        "conversation_id": conversation_id,
+                        
+                        # 🔹 MODIFICATION: Echo the client_row_id back
+                        "client_row_id": client_row_id
                     })
                     
                     # 3. Post the message to the specific connection
@@ -88,17 +92,17 @@ def lambda_handler(event, context):
                         ConnectionId=connection_id,
                         Data=response_payload
                     )
-                    log_event("ai_worker_response_sent", {"user_id": user_id, "connection_id": connection_id})
+                    log_event("ai_worker_response_sent", {
+                        "user_id": user_id, 
+                        "connection_id": connection_id,
+                        "client_row_id": client_row_id # Added for logging
+                    })
 
                 except api_gateway_client.exceptions.GoneException:
-                    # This happens if the user disconnected between the lookup and now.
-                    # It's safe to ignore, but good to log.
                     log_event("ws_send_failed_gone", {"user_id": user_id, "connection_id": connection_id}, level="warning")
                 except Exception as e:
-                    # Handle other potential errors during sending
                     log_event("ws_send_failed_exception", {"user_id": user_id}, level="error", error=e)
             else:
-                # This can happen if the user disconnects before the AI replies.
                 log_event("ws_connection_not_found", {"user_id": user_id}, level="warning")
 
         except Exception as e:

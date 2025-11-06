@@ -25,7 +25,7 @@ def lambda_handler(event, context):
         log_event("lambda_invocation", {"source": "RomaChatHandler", "has_body": "body" in (event or {})})
         body = json.loads(event.get("body", "{}"))
 
-        # ---- Raw inputs from client (this part remains the same) ----
+        # ---- Raw inputs from client ----
         message = body.get("message")
         image_urls = body.get("imageUrls", [])
         user_id = body.get("userId")
@@ -33,6 +33,9 @@ def lambda_handler(event, context):
         email = body.get("email")
         page = body.get("page")
         conversation_id_in = body.get("conversationId")
+        
+        # 🔹 MODIFICATION: Get the client's row ID
+        client_row_id = body.get("clientRowId") # e.g., "17123456789.12345"
 
         # ---- Normalize / sanitize (this part remains the same) ----
         user_id = user_id or "anonymous"
@@ -56,7 +59,10 @@ def lambda_handler(event, context):
             "email": email,
             "page": page,
             "conversation_id": conversation_id_in,
-            "image_urls": image_urls
+            "image_urls": image_urls,
+            
+            # 🔹 MODIFICATION: Add the clientRowId to the SQS message
+            "client_row_id": client_row_id 
         }
 
         # 2. Send the message to the SQS queue
@@ -67,11 +73,11 @@ def lambda_handler(event, context):
 
         log_event("message_queued_for_ai_processing", {
             "user_id": user_id,
-            "conversation_id": conversation_id_in
+            "conversation_id": conversation_id_in,
+            "client_row_id": client_row_id # Added for logging
         })
 
         # 3. Return an immediate success response to the user
-        # This makes the frontend feel instantaneous.
         return response(202, {"status": "accepted", "message": "Request is being processed."})
 
     except Exception as e:
