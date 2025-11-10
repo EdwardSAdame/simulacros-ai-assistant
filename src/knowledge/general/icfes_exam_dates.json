@@ -1,0 +1,56 @@
+{
+  "exam": "ICFES_SABER_11",
+  "year": 2026,
+  "schedules": [
+    {
+      "calendar": "A",
+      "status": "Pendiente de confirmación",
+      "key_dates": [
+        {
+          "event": "Registro y recaudo",
+          "status": "Pendiente de confirmación"
+        },
+        {
+          "event": "Publicación de citaciones",
+          "status": "Pendiente de confirmación"
+        },
+        {
+          "event": "Aplicación del examen",
+          "status": "Pendiente de confirmación"
+        },
+        {
+          "event": "Publicación de resultados",
+          "status": "Pendiente de confirmación"
+        }
+      ]
+    },
+    {
+      "calendar": "B",
+      "status": "Confirmado",
+      "key_dates": [
+        {
+          "event": "Registro y recaudo ordinario",
+          "start_date": "2025-11-04",
+          "end_date": "2025-12-19"
+        },
+        {
+          "event": "Registro y recaudo extraordinario",
+          "start_date": "2025-12-22",
+          "end_date": "2026-01-16"
+        },
+        {
+          "event": "Publicación de citaciones",
+          "date": "2026-02-27"
+        },
+        {
+          "event": "Aplicación del examen",
+          "date": "2026-03-15"
+        },
+        {
+          "event": "Publicación de resultados Saber 11",
+          "date": "2026-05-15"
+        }
+      ]
+    }
+  ]
+}
