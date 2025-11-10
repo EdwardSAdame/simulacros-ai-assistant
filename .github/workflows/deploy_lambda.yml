@@ -45,6 +45,7 @@ jobs:
           # --- ADDED: Copy new WsAudio handlers ---
           cp src/lambda_audio_connect_handler.py package/
           cp src/lambda_audio_disconnect_handler.py package/
+          cp src/lambda_audio_token_handler.py package/
           # --- ---
 
           # Zip the contents of the package directory
@@ -128,6 +129,15 @@ jobs:
         run: |
           aws lambda update-function-code \
             --function-name ${{ vars.LAMBDA_AUDIO_DISCONNECT_HANDLER_NAME }} \
+            --zip-file fileb://deployment.zip \
+            --region ${{ vars.AWS_REGION }}
+      # --- ---
+      
+      # --- ADDED: Deploy step for WsAudioTokenHandler ---
+      - name: 🚀 Deploy WsAudioTokenHandler
+        run: |
+          aws lambda update-function-code \
+            --function-name ${{ vars.LAMBDA_AUDIO_TOKEN_HANDLER_NAME }} \
             --zip-file fileb://deployment.zip \
             --region ${{ vars.AWS_REGION }}
       # --- ---
