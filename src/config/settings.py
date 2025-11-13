@@ -39,6 +39,10 @@ class Settings:
         self.WS_AUDIO_TABLE_NAME: str = os.getenv("WS_AUDIO_TABLE_NAME", "WsAudio")
         # ----------------------------------------------------
 
+        # --- THIS IS THE NEWLY ADDED AUDIO MODEL CONFIGURATION ---
+        self.OPENAI_AUDIO_MODEL: str = os.getenv("OPENAI_AUDIO_MODEL", "gpt-4o-mini-transcribe")
+        # ---------------------------------------------------------
+
     def get_openai_client(self) -> openai.Client:
         """
         Returns an authenticated OpenAI client instance.

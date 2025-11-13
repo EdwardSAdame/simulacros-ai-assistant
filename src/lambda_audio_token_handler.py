@@ -2,7 +2,7 @@ import json
 import logging
 import boto3
 import os
-import requests  # ❗ REMEMBER: Add 'requests' to your requirements.txt
+import requests  # REMEMBER: Add 'requests' to your requirements.txt
 from src.config.settings import settings # Imports your settings object
 
 # Set up logging
@@ -37,8 +37,10 @@ def handler(event, context):
     logger.info(f"Received token request from {connection_id}")
 
     try:
-        # 1. Get OpenAI API Key from our settings
+        # 1. Get OpenAI API Key and Audio Model from our settings
         api_key = settings.OPENAI_API_KEY
+        audio_model = settings.OPENAI_AUDIO_MODEL  # <-- MODIFICATION: Get model from settings
+
         if not api_key:
             raise ValueError("OPENAI_API_KEY not configured in backend")
 
@@ -46,11 +48,11 @@ def handler(event, context):
             "Authorization": f"Bearer {api_key}"
         }
         
-        # 2. Define the session payload (using the cheaper model)
+        # 2. Define the session payload (using the configured model)
         payload = {
             "input_audio_format": "pcm16",
             "input_audio_transcription": {
-                "model": "gpt-4o-mini-transcribe"  # Using the cost-effective model
+                "model": audio_model  # <-- MODIFICATION: Use variable
             },
             "turn_detection": {
                 "type": "server_vad"
