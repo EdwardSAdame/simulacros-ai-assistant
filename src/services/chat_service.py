@@ -5,7 +5,7 @@ from src.storage.conversations_table import save_conversation
 from src.storage.messages_table import save_message, get_recent_messages
 from src.config.page_vectorstores import get_stores_for_page
 from src.utils.logging_utils import log_event
-from typing import List, Dict, Any
+from typing import List, Dict, Any, Tuple # 🔹 MODIFIED: Added Tuple
 
 def _normalize_email_for_storage(val):
     """Return None for empty strings/whitespace so DynamoDB never gets an empty Email."""
@@ -58,9 +58,11 @@ def get_ai_response(
     page: str | None,
     conversation_id: str | None = None,
     image_urls: list[str] | None = None,
-):
+) -> Tuple[str, str, str]: # 🔹 MODIFIED: Return type now includes a 3rd string
     """
     Handles user input (text + images) and returns AI response using the Responses API.
+    
+    🔹 MODIFIED: Now returns (assistant_reply, conversation_id, assistant_timestamp)
     """
     page = _normalize_page(page)
 
@@ -130,9 +132,28 @@ def get_ai_response(
             save_message(conversation_id, role="user", message_text=message)
         for img in image_urls or []:
             save_message(conversation_id, role="user", message_text=f"[Imagen] {img}")
-        save_message(conversation_id, role="assistant", message_text=assistant_reply)
+        
+        # --- 🔹 NEW LOGIC START 🔹 ---
+        # 1. Save the assistant message AND capture the returned item
+        assistant_message_item = save_message(
+            conversation_id, 
+            role="assistant", 
+            message_text=assistant_reply
+        )
+        
+        # 2. Extract the timestamp (the Sort Key) from the item
+        assistant_timestamp = assistant_message_item.get("Timestamp")
+        if not assistant_timestamp:
+            # This should almost never happen, but it's good to log
+            log_event("save_message_no_timestamp", {
+                "conversation_id": conversation_id
+            }, level="error")
+            
+        # --- 🔹 NEW LOGIC END 🔹 ---
+            
         log_event("messages_saved", {"conversation_id": conversation_id, "user_id": user_id})
     except Exception as e:
         raise RuntimeError(f"❌ Failed to save messages to DynamoDB: {e}")
 
-    return assistant_reply, conversation_id
+    # 🔹 MODIFIED: Return the new timestamp along with the other data
+    return assistant_reply, conversation_id, assistant_timestamp

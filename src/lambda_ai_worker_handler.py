@@ -3,8 +3,9 @@ import json
 import logging
 import boto3
 import os
+# 🔹 MODIFIED: Import statements now relative to src
 from src.services.chat_service import get_ai_response
-from src.storage.ws_connections_table import WsConnectionsTable # <-- Import the new table manager
+from src.storage.ws_connections_table import WsConnectionsTable
 from src.utils.logging_utils import log_event, set_invocation_context
 
 logger = logging.getLogger()
@@ -60,8 +61,9 @@ def lambda_handler(event, context):
             # 🔹 MODIFICATION: Extract the client's row ID from the payload
             client_row_id = payload.get("client_row_id")
 
-            # --- Get the AI response (remains the same) ---
-            ai_reply, conversation_id = get_ai_response(
+            # --- 🔹 MODIFIED: Get the AI response AND the new timestamp ---
+            # get_ai_response now returns three values
+            ai_reply, conversation_id, assistant_timestamp = get_ai_response(
                 message=message,
                 user_id=user_id,
                 name=name,
@@ -84,7 +86,13 @@ def lambda_handler(event, context):
                         "conversation_id": conversation_id,
                         
                         # 🔹 MODIFICATION: Echo the client_row_id back
-                        "client_row_id": client_row_id
+                        "client_row_id": client_row_id,
+                        
+                        # --- 🔹 NEWLY ADDED 🔹 ---
+                        # Add the DynamoDB timestamp (Sort Key) to the payload
+                        # This is the key your frontend was missing.
+                        "timestamp": assistant_timestamp
+                        # --- 🔹 END NEW 🔹 ---
                     })
                     
                     # 3. Post the message to the specific connection
@@ -95,7 +103,8 @@ def lambda_handler(event, context):
                     log_event("ai_worker_response_sent", {
                         "user_id": user_id, 
                         "connection_id": connection_id,
-                        "client_row_id": client_row_id # Added for logging
+                        "client_row_id": client_row_id, # Added for logging
+                        "timestamp": assistant_timestamp # Added for logging
                     })
 
                 except api_gateway_client.exceptions.GoneException:
