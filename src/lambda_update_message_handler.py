@@ -2,12 +2,12 @@
 
 import json
 import os
-# 🔹 FIXED IMPORT: Tell Python to look inside the 'src' folder
+import logging  # 🔹 CORRECTED: Import the standard logging module
 from src.storage import messages_table
-from src.utils.logging_utils import get_logger
 
-# Setup logger
-logger = get_logger("lambda_update_message_handler")
+# 🔹 CORRECTED: Setup logger using the standard pattern
+logger = logging.getLogger()
+logger.setLevel(logging.INFO)
 
 # CORS Headers (to allow requests from your Wix site)
 cors_headers = {
