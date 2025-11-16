@@ -2,8 +2,9 @@
 
 import json
 import os
-from storage import messages_table  # Import the messages_table module
-from utils.logging_utils import get_logger
+# 🔹 FIXED IMPORT: Tell Python to look inside the 'src' folder
+from src.storage import messages_table
+from src.utils.logging_utils import get_logger
 
 # Setup logger
 logger = get_logger("lambda_update_message_handler")
