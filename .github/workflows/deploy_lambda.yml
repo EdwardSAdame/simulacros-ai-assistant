@@ -48,6 +48,10 @@ jobs:
           cp src/lambda_audio_token_handler.py package/
           # --- ---
 
+          # --- 🔹 ADDED: Copy new UpdateMessageHandler ---
+          cp src/lambda_update_message_handler.py package/
+          # --- 🔹 ---
+
           # Zip the contents of the package directory
           cd package
           zip -r ../deployment.zip . -x "**/__pycache__/*" "*.git*"
@@ -141,6 +145,15 @@ jobs:
             --zip-file fileb://deployment.zip \
             --region ${{ vars.AWS_REGION }}
       # --- ---
+
+      # --- 🔹 ADDED: Deploy step for UpdateMessageHandler ---
+      - name: 🚀 Deploy UpdateMessageHandler
+        run: |
+          aws lambda update-function-code \
+            --function-name ${{ vars.LAMBDA_UPDATE_MESSAGE_HANDLER_NAME }} \
+            --zip-file fileb://deployment.zip \
+            --region ${{ vars.AWS_REGION }}
+      # --- 🔹 ---
 
       - name: ✅ Deployment Complete
         run: echo "All Lambda functions deployed successfully!"
