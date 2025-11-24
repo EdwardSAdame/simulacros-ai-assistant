@@ -42,14 +42,16 @@ jobs:
           cp src/lambda_get_conversations_handler.py package/
           cp src/lambda_get_messages_handler.py package/
           
-          # --- ADDED: Copy new WsAudio handlers ---
+          # WsAudio handlers
           cp src/lambda_audio_connect_handler.py package/
           cp src/lambda_audio_disconnect_handler.py package/
           cp src/lambda_audio_token_handler.py package/
-          # --- ---
 
-          # --- 🔹 ADDED: Copy new UpdateMessageHandler ---
+          # Update Message Handler
           cp src/lambda_update_message_handler.py package/
+
+          # --- 🔹 ADDED: Copy new ManageConversationsHandler ---
+          cp src/lambda_manage_conversations_handler.py package/
           # --- 🔹 ---
 
           # Zip the contents of the package directory
@@ -119,38 +121,39 @@ jobs:
             --zip-file fileb://deployment.zip \
             --region ${{ vars.AWS_REGION }}
 
-      # --- ADDED: Deploy step for WsAudioOnConnectHandler ---
       - name: 🚀 Deploy WsAudioOnConnectHandler
         run: |
           aws lambda update-function-code \
             --function-name ${{ vars.LAMBDA_AUDIO_CONNECT_HANDLER_NAME }} \
             --zip-file fileb://deployment.zip \
             --region ${{ vars.AWS_REGION }}
-      # --- ---
 
-      # --- ADDED: Deploy step for WsAudioOnDisconnectHandler ---
       - name: 🚀 Deploy WsAudioOnDisconnectHandler
         run: |
           aws lambda update-function-code \
             --function-name ${{ vars.LAMBDA_AUDIO_DISCONNECT_HANDLER_NAME }} \
             --zip-file fileb://deployment.zip \
             --region ${{ vars.AWS_REGION }}
-      # --- ---
       
-      # --- ADDED: Deploy step for WsAudioTokenHandler ---
       - name: 🚀 Deploy WsAudioTokenHandler
         run: |
           aws lambda update-function-code \
             --function-name ${{ vars.LAMBDA_AUDIO_TOKEN_HANDLER_NAME }} \
             --zip-file fileb://deployment.zip \
             --region ${{ vars.AWS_REGION }}
-      # --- ---
 
-      # --- 🔹 ADDED: Deploy step for UpdateMessageHandler ---
       - name: 🚀 Deploy UpdateMessageHandler
         run: |
           aws lambda update-function-code \
             --function-name ${{ vars.LAMBDA_UPDATE_MESSAGE_HANDLER_NAME }} \
+            --zip-file fileb://deployment.zip \
+            --region ${{ vars.AWS_REGION }}
+
+      # --- 🔹 ADDED: Deploy step for ManageConversationsHandler ---
+      - name: 🚀 Deploy ManageConversationsHandler
+        run: |
+          aws lambda update-function-code \
+            --function-name ${{ vars.LAMBDA_MANAGE_CONVERSATIONS_HANDLER_NAME }} \
             --zip-file fileb://deployment.zip \
             --region ${{ vars.AWS_REGION }}
       # --- 🔹 ---
