@@ -2,7 +2,8 @@
 import json
 import logging
 import os
-from src.storage import conversations_table
+# 🔹 UPDATE: Import messages_table so we can delete history
+from src.storage import conversations_table, messages_table
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
@@ -11,7 +12,7 @@ def lambda_handler(event, context):
     """
     Handles management operations for conversations:
     - PUT: Rename or Pin
-    - DELETE: Delete conversation
+    - DELETE: Delete conversation AND its message history
     """
     # CORS Headers
     headers = {
@@ -24,12 +25,11 @@ def lambda_handler(event, context):
         return { 'statusCode': 200, 'headers': headers, 'body': '' }
 
     try:
-        # 1. Extract User ID (Assuming passed via Query Param for now, similar to your GET handler)
-        # Ideally this comes from the Authorizer context in a production app.
+        # 1. Extract User ID
         query_params = event.get('queryStringParameters') or {}
         user_id = query_params.get('userId')
         
-        # Fallback: Check body if not in query params (for POST/PUT calls)
+        # Fallback: Check body
         body = {}
         if event.get('body'):
             body = json.loads(event['body'])
@@ -47,23 +47,28 @@ def lambda_handler(event, context):
 
         # --- HANDLE DELETE ---
         if method == 'DELETE':
-            # Path parameters usually contain the ID: /conversations/{id}
             path_params = event.get('pathParameters') or {}
             conversation_id = path_params.get('id') or query_params.get('conversationId') or body.get('conversationId')
 
             if not conversation_id:
                 return {'statusCode': 400, 'headers': headers, 'body': json.dumps({'error': 'Missing conversationId'})}
 
+            # 1. Delete the Conversation Header (UserConversations table)
             conversations_table.delete_conversation(user_id, conversation_id)
+
+            # 2. 🔹 NEW: Delete the Message History (ConversationMessages table)
+            # This cleans up all messages associated with this ID.
+            messages_table.delete_messages_for_conversation(conversation_id)
+
             return {
                 'statusCode': 200,
                 'headers': headers,
-                'body': json.dumps({'message': 'Deleted successfully'})
+                'body': json.dumps({'message': 'Deleted successfully (Header and Messages)'})
             }
 
         # --- HANDLE PUT (Rename / Pin) ---
         elif method == 'PUT':
-            action = body.get('action') # 'rename' or 'pin'
+            action = body.get('action') 
             conversation_id = body.get('conversationId')
 
             if not conversation_id:
