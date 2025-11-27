@@ -27,21 +27,23 @@ class Settings:
             self.VECTOR_SEARCH_MAX_RESULTS: int = 8
 
         # --- DynamoDB Table Names ---
-        # These are read by your existing storage files (like ws_connections_table.py, messages_table.py, etc.)
-        # We provide defaults so you don't have to add them to your .env file.
+        # These are read by your existing storage files
         self.WS_CONNECTIONS_TABLE_NAME: str = os.getenv("WS_CONNECTIONS_TABLE_NAME", "WsConnectionsTable")
         self.MESSAGES_TABLE_NAME: str = os.getenv("MESSAGES_TABLE_NAME", "Messages")
         self.CONVERSATIONS_TABLE_NAME: str = os.getenv("CONVERSATIONS_TABLE_NAME", "Conversations")
         self.FEEDBACK_TABLE_NAME: str = os.getenv("FEEDBACK_TABLE_NAME", "Feedback")
         
-        # --- THIS IS THE NEW LINE FOR THE AUDIO WEBSOCKET ---
-        # It reads WS_AUDIO_TABLE_NAME from your Lambda's environment variables
+        # Audio WebSocket Table
         self.WS_AUDIO_TABLE_NAME: str = os.getenv("WS_AUDIO_TABLE_NAME", "WsAudio")
-        # ----------------------------------------------------
 
-        # --- THIS IS THE NEWLY ADDED AUDIO MODEL CONFIGURATION ---
+        # --- OpenAI Models ---
+        # Audio Model
         self.OPENAI_AUDIO_MODEL: str = os.getenv("OPENAI_AUDIO_MODEL", "gpt-4o-mini-transcribe")
-        # ---------------------------------------------------------
+        
+        # 🔹 NEW: Router Model Configuration 🔹
+        # Defines which fast model to use for the semantic router (classification).
+        # Defaults to "gpt-4o-mini" if not set in env.
+        self.OPENAI_ROUTER_MODEL: str = os.getenv("OPENAI_ROUTER_MODEL", "gpt-4o-mini")
 
     def get_openai_client(self) -> openai.Client:
         """
@@ -58,16 +60,11 @@ class Settings:
         """
         return self.VECTOR_SEARCH_MAX_RESULTS
 
-# --- THIS IS THE FIX ---
 # Create a single, importable instance for the rest of the app.
-# Files like `lambda_audio_connect_handler.py` will import this `settings` object.
 settings = Settings()
 
 
 # --- Legacy Function Support ---
-# We keep these functions at the bottom for backward compatibility.
-# Files like `assistant_client.py` import these functions directly.
-
 def get_openai_client() -> openai.Client:
     """
     Legacy support: Returns an authenticated OpenAI client instance.

@@ -3,10 +3,12 @@ import json
 import logging
 import boto3
 import os
-# 🔹 MODIFIED: Import statements now relative to src
 from src.services.chat_service import get_ai_response
 from src.storage.ws_connections_table import WsConnectionsTable
 from src.utils.logging_utils import log_event, set_invocation_context
+
+# 🔹 NEW IMPORT: The Hybrid Semantic Router
+from src.services.semantic_router import semantic_router
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
@@ -14,13 +16,9 @@ logger.setLevel(logging.INFO)
 # --- Instantiate the DynamoDB table manager ---
 ws_connections_table = WsConnectionsTable()
 
-# --- NEW: Get the WebSocket API endpoint from environment variables ---
-# You must set this in your Lambda's configuration.
+# --- Get the WebSocket API endpoint from environment variables ---
 WEBSOCKET_API_ENDPOINT = os.environ.get('WEBSOCKET_API_ENDPOINT')
 
-# It's more efficient to create the client outside the handler if the
-# execution environment is reused, but we need the endpoint which might vary.
-# A helper function keeps it clean.
 def get_api_gateway_management_client(endpoint_url):
     """Creates a client for the API Gateway Management API."""
     return boto3.client(
@@ -30,11 +28,14 @@ def get_api_gateway_management_client(endpoint_url):
 
 def lambda_handler(event, context):
     """
-    Triggered by SQS. Gets AI response and sends it back to the user via WebSocket.
+    Triggered by SQS. 
+    1. Determines status (Fast Regex -> Fallback AI).
+    2. Sends Visual Feedback.
+    3. Generates Response.
+    4. Sends Final Answer.
     """
     set_invocation_context(context)
 
-    # --- NEW: Create the API Gateway client ---
     if not WEBSOCKET_API_ENDPOINT:
         log_event("ai_worker_config_error", {"reason": "WEBSOCKET_API_ENDPOINT is not set"}, level="error")
         raise ValueError("WEBSOCKET_API_ENDPOINT environment variable not set.")
@@ -57,12 +58,32 @@ def lambda_handler(event, context):
             email = payload.get("email")
             page = payload.get("page")
             conv_id_in = payload.get("conversation_id")
-            
-            # 🔹 MODIFICATION: Extract the client's row ID from the payload
             client_row_id = payload.get("client_row_id")
 
-            # --- 🔹 MODIFIED: Get the AI response AND the new timestamp ---
-            # get_ai_response now returns three values
+            # --- 1. Get Connection ID ---
+            connection_id = ws_connections_table.get_connection_id(user_id)
+
+            # --- 2. Send Visual Feedback (The "Thinking" Phase) ---
+            # This calls our new Hybrid Router (0ms Regex -> 400ms AI Fallback)
+            if connection_id:
+                try:
+                    status_text = semantic_router.determine_status(message)
+                    
+                    status_payload = json.dumps({
+                        "action": "status_update",
+                        "status_text": status_text,
+                        "client_row_id": client_row_id
+                    })
+                    
+                    api_gateway_client.post_to_connection(
+                        ConnectionId=connection_id,
+                        Data=status_payload
+                    )
+                except Exception as e:
+                    # Don't fail the whole process if just the status update fails
+                    log_event("ws_status_send_failed", {"user_id": user_id}, level="warning", error=e)
+
+            # --- 3. Get the AI response (Heavy Processing) ---
             ai_reply, conversation_id, assistant_timestamp = get_ai_response(
                 message=message,
                 user_id=user_id,
@@ -73,29 +94,17 @@ def lambda_handler(event, context):
                 image_urls=image_urls
             )
 
-            # --- NEW: Send the reply back via WebSocket ---
-            # 1. Look up the user's current connectionId
-            connection_id = ws_connections_table.get_connection_id(user_id)
-
+            # --- 4. Send Final Reply ---
             if connection_id:
                 try:
-                    # 2. Construct the payload to send to the frontend
                     response_payload = json.dumps({
-                        "action": "ai_reply", # Good practice to include an action
+                        "action": "ai_reply",
                         "ai_reply": ai_reply,
                         "conversation_id": conversation_id,
-                        
-                        # 🔹 MODIFICATION: Echo the client_row_id back
                         "client_row_id": client_row_id,
-                        
-                        # --- 🔹 NEWLY ADDED 🔹 ---
-                        # Add the DynamoDB timestamp (Sort Key) to the payload
-                        # This is the key your frontend was missing.
                         "timestamp": assistant_timestamp
-                        # --- 🔹 END NEW 🔹 ---
                     })
                     
-                    # 3. Post the message to the specific connection
                     api_gateway_client.post_to_connection(
                         ConnectionId=connection_id,
                         Data=response_payload
@@ -103,8 +112,8 @@ def lambda_handler(event, context):
                     log_event("ai_worker_response_sent", {
                         "user_id": user_id, 
                         "connection_id": connection_id,
-                        "client_row_id": client_row_id, # Added for logging
-                        "timestamp": assistant_timestamp # Added for logging
+                        "client_row_id": client_row_id,
+                        "timestamp": assistant_timestamp
                     })
 
                 except api_gateway_client.exceptions.GoneException:
