@@ -7,8 +7,7 @@ logger = logging.getLogger(__name__)
 class SemanticRouter:
     """
     Determines the intent/category of a user message.
-    Returns a CATEGORY KEY (e.g., 'biologia', 'matematicas') 
-    which the frontend will use to trigger a visual narrative script.
+    Returns a dict with 'category' and 'source' (regex/ai).
     """
     
     def __init__(self):
@@ -17,63 +16,57 @@ class SemanticRouter:
         # 1. Define categories and their keywords
         self.keyword_map = {
             "biologia": [
-                # Spanish
                 "celula", "célula", "biolog", "genétic", "adn", "ecosistema", 
                 "plant", "animal", "mitosis", "meiosis", "protein", "enzim", 
                 "bacteria", "virus", "inmune", "nervioso", "vida", "organismo",
                 "mitocondria", 
-                # English
                 "cell", "dna", "mitochondria", "life", "organism"
             ],
             "matematicas": [
-                # Spanish
                 "calcul", "deriv", "integr", "ecuacion", "física", "química", 
                 "molar", "átomo", "numero", "algebra", "trigonometr", "velocidad", 
                 "fuerza", "energía", "sumar", "restar", "multiplicar", "dividir", 
                 "logaritmo", "exponente", "soluci", "suma", "resta", "angul", 
-                # English
                 "math", "equation", "solve", "physics", "chemistry", "atom", "speed", "force",
                 "angle"
             ],
             "historia": [
-                # Spanish
                 "historia", "guerra", "constitución", "siglo", "quién fue", 
                 "colombia", "president", "revolución", "independencia", 
                 "democracia", "derecho", "ciudadan", "imperio", "batalla", "gobierno",
-                # English
                 "history", "war", "century", "who was", "revolution", "government"
             ],
             "ingles": [
-                # Spanish
                 "traduc", "ingles", "significado", "resumen", "verbo", "gramatica", "ortografía",
-                # English
                 "english", "translate", "meaning", "essay", "verb", "grammar", "spelling"
             ]
         }
-        
-        # Note: We no longer need 'self.status_messages' here because 
-        # the frontend will hold the text scripts.
 
-    def determine_category(self, text: str) -> str:
+    def determine_category(self, text: str) -> dict:
         """
-        Main entry point. Returns the CATEGORY KEY (not the text).
+        Main entry point. Returns a dict:
+        {
+            "category": "biologia" | "matematicas" | ... | "general",
+            "source": "regex" | "ai"
+        }
         """
         if not text:
-            return "general"
+            return {"category": "general", "source": "regex"}
             
         # --- STEP 1: FAST CHECK (Regex/Keywords) ---
         text_lower = text.lower()
         for category, keywords in self.keyword_map.items():
             if any(k in text_lower for k in keywords):
                 logger.info(f"Router: Keyword match found for '{category}'")
-                return category 
+                return {"category": category, "source": "regex"}
                 
         # --- STEP 2: SMART CHECK (LLM Fallback) ---
         try:
-            return self._classify_with_llm(text)
+            category = self._classify_with_llm(text)
+            return {"category": category, "source": "ai"}
         except Exception as e:
             logger.warning(f"Router: LLM classification failed: {e}")
-            return "general"
+            return {"category": "general", "source": "error_fallback"}
 
     def _classify_with_llm(self, text: str) -> str:
         """
@@ -101,7 +94,6 @@ class SemanticRouter:
             
             category = response.choices[0].message.content.strip().lower()
             
-            # Validate that the AI returned a real category
             if category not in categories:
                 logger.warning(f"Router: AI returned invalid category '{category}', defaulting to 'general'")
                 return "general"

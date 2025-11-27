@@ -29,8 +29,8 @@ def get_api_gateway_management_client(endpoint_url):
 def lambda_handler(event, context):
     """
     Triggered by SQS. 
-    1. Determines status (Fast Regex -> Fallback AI).
-    2. Sends Visual Feedback.
+    1. Determines status/category (Fast Regex -> Fallback AI).
+    2. Sends Visual Feedback (Category + Source).
     3. Generates Response.
     4. Sends Final Answer.
     """
@@ -64,16 +64,17 @@ def lambda_handler(event, context):
             connection_id = ws_connections_table.get_connection_id(user_id)
 
             # --- 2. Send Visual Feedback (The "Thinking" Phase) ---
-            # This calls our new Hybrid Router (0ms Regex -> 400ms AI Fallback)
             if connection_id:
                 try:
-                    # 🔹 CHANGED: Call determine_category instead of determine_status
-                    category_key = semantic_router.determine_category(message)
+                    # 🔹 ROUTER CALL: Get category AND source (regex vs ai)
+                    routing_result = semantic_router.determine_category(message)
+                    category_key = routing_result.get("category", "general")
+                    source_type = routing_result.get("source", "unknown")
                     
                     status_payload = json.dumps({
                         "action": "status_update",
-                        # 🔹 CHANGED: Send 'category' instead of 'status_text'
-                        "category": category_key,
+                        "category": category_key, # Used by frontend loop
+                        "source": source_type,    # Useful for debugging/analytics
                         "client_row_id": client_row_id
                     })
                     
@@ -81,6 +82,14 @@ def lambda_handler(event, context):
                         ConnectionId=connection_id,
                         Data=status_payload
                     )
+                    
+                    # Log which method was used (Regex vs AI)
+                    log_event("visual_feedback_sent", {
+                        "user_id": user_id, 
+                        "category": category_key,
+                        "source": source_type
+                    })
+
                 except Exception as e:
                     # Don't fail the whole process if just the status update fails
                     log_event("ws_status_send_failed", {"user_id": user_id}, level="warning", error=e)
