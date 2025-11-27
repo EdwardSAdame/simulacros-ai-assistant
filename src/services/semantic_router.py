@@ -6,18 +6,15 @@ logger = logging.getLogger(__name__)
 
 class SemanticRouter:
     """
-    Determines the intent/category of a user message to provide immediate
-    visual feedback. Uses a Hybrid approach:
-    1. Fast Regex/Keyword check (Zero Latency)
-    2. LLM Classification (Low Latency Fallback)
+    Determines the intent/category of a user message.
+    Returns a CATEGORY KEY (e.g., 'biologia', 'matematicas') 
+    which the frontend will use to trigger a visual narrative script.
     """
     
     def __init__(self):
-        # We use the shared client helper
         self.client = get_openai_client()
         
-        # 1. Define categories and their keywords for the ZERO LATENCY check
-        # These are roots/stems to catch variations (e.g., "biolog" catches "biology", "biológico")
+        # 1. Define categories and their keywords
         self.keyword_map = {
             "biologia": [
                 # Spanish
@@ -33,9 +30,7 @@ class SemanticRouter:
                 "calcul", "deriv", "integr", "ecuacion", "física", "química", 
                 "molar", "átomo", "numero", "algebra", "trigonometr", "velocidad", 
                 "fuerza", "energía", "sumar", "restar", "multiplicar", "dividir", 
-                "logaritmo", "exponente", "soluci",
-                # New additions for robustness:
-                "suma", "resta", "angul", 
+                "logaritmo", "exponente", "soluci", "suma", "resta", "angul", 
                 # English
                 "math", "equation", "solve", "physics", "chemistry", "atom", "speed", "force",
                 "angle"
@@ -56,48 +51,35 @@ class SemanticRouter:
             ]
         }
         
-        # 2. Map categories to user-facing status messages (The Visual Feedback)
-        self.status_messages = {
-            "biologia": "Consultando base de datos biológica...",
-            "matematicas": "Analizando lógica matemática...",
-            "historia": "Consultando archivos históricos...",
-            "ingles": "Procesando análisis lingüístico...",
-            "general": "Analizando tu pregunta..."
-        }
+        # Note: We no longer need 'self.status_messages' here because 
+        # the frontend will hold the text scripts.
 
-    def determine_status(self, text: str) -> str:
+    def determine_category(self, text: str) -> str:
         """
-        Main entry point. Returns the status text to show the user.
+        Main entry point. Returns the CATEGORY KEY (not the text).
         """
         if not text:
-            return "Procesando..."
+            return "general"
             
         # --- STEP 1: FAST CHECK (Regex/Keywords) ---
-        # Latency: ~0.01 seconds
         text_lower = text.lower()
         for category, keywords in self.keyword_map.items():
             if any(k in text_lower for k in keywords):
                 logger.info(f"Router: Keyword match found for '{category}'")
-                return self.status_messages.get(category)
+                return category 
                 
         # --- STEP 2: SMART CHECK (LLM Fallback) ---
-        # Latency: ~0.5 seconds (depends on model)
-        # Only runs if no keywords matched (e.g., user asked about "dolphins")
         try:
             return self._classify_with_llm(text)
         except Exception as e:
             logger.warning(f"Router: LLM classification failed: {e}")
-            return self.status_messages["general"]
+            return "general"
 
     def _classify_with_llm(self, text: str) -> str:
         """
         Asks a small, fast model to classify the text.
-        Uses the model defined in settings (OPENAI_ROUTER_MODEL).
         """
-        # Define the valid categories for the AI
-        categories = ["biologia", "matematicas", "historia", "ingles", "general"]
-        
-        # Use the model configured in settings (defaults to gpt-4o-mini)
+        categories = list(self.keyword_map.keys()) + ["general"]
         router_model = settings.OPENAI_ROUTER_MODEL
         
         try:
@@ -113,19 +95,23 @@ class SemanticRouter:
                     },
                     {"role": "user", "content": text}
                 ],
-                max_tokens=10, # We only need one word
-                temperature=0.0 # Deterministic results
+                max_tokens=10,
+                temperature=0.0
             )
             
             category = response.choices[0].message.content.strip().lower()
-            logger.info(f"Router: AI classified as '{category}' using {router_model}")
             
-            # Return the mapped message, or default if the AI hallucinated a new category
-            return self.status_messages.get(category, self.status_messages["general"])
+            # Validate that the AI returned a real category
+            if category not in categories:
+                logger.warning(f"Router: AI returned invalid category '{category}', defaulting to 'general'")
+                return "general"
+                
+            logger.info(f"Router: AI classified as '{category}' using {router_model}")
+            return category
             
         except Exception as e:
             logger.error(f"Router: Error calling OpenAI: {e}")
             raise e
 
-# Singleton instance for easy import
+# Singleton instance
 semantic_router = SemanticRouter()

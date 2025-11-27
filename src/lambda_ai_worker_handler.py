@@ -67,11 +67,13 @@ def lambda_handler(event, context):
             # This calls our new Hybrid Router (0ms Regex -> 400ms AI Fallback)
             if connection_id:
                 try:
-                    status_text = semantic_router.determine_status(message)
+                    # 🔹 CHANGED: Call determine_category instead of determine_status
+                    category_key = semantic_router.determine_category(message)
                     
                     status_payload = json.dumps({
                         "action": "status_update",
-                        "status_text": status_text,
+                        # 🔹 CHANGED: Send 'category' instead of 'status_text'
+                        "category": category_key,
                         "client_row_id": client_row_id
                     })
                     
