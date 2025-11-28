@@ -14,31 +14,59 @@ class SemanticRouter:
         self.client = get_openai_client()
         
         # 1. Define categories and their keywords
+        # Spanish terms are prioritized.
         self.keyword_map = {
             "biologia": [
                 "celula", "célula", "biolog", "genétic", "adn", "ecosistema", 
                 "plant", "animal", "mitosis", "meiosis", "protein", "enzim", 
                 "bacteria", "virus", "inmune", "nervioso", "vida", "organismo",
-                "mitocondria", 
+                "mitocondria", "fotosíntesis", "respiración", "ecolog",
                 "cell", "dna", "mitochondria", "life", "organism"
             ],
-            "matematicas": [
-                "calcul", "deriv", "integr", "ecuacion", "física", "química", 
-                "molar", "átomo", "numero", "algebra", "trigonometr", "velocidad", 
-                "fuerza", "energía", "sumar", "restar", "multiplicar", "dividir", 
-                "logaritmo", "exponente", "soluci", "suma", "resta", "angul", 
-                "math", "equation", "solve", "physics", "chemistry", "atom", "speed", "force",
-                "angle"
+            "quimica": [
+                "química", "quimica", "átomo", "atomo", "molécula", "molecula", 
+                "reacción", "reaccion", "enlace", "estequiometría", "molar", 
+                "solución", "ácido", "base", "ph", "electrón", "protón", "neutrón", 
+                "tabla periódica", "orgánica", "inorgánica", "gas", "oxidación",
+                "chemistry", "molecule", "reaction", "bond", "atom"
             ],
-            "historia": [
+            "fisica": [
+                "física", "fisica", "velocidad", "fuerza", "energía", "energia", 
+                "vector", "cinemática", "dinámica", "newton", "trabajo", "potencia", 
+                "termodinámica", "fluido", "onda", "luz", "sonido", "eléctrico", 
+                "magnético", "circuito", "voltaje", "corriente", "gravedad",
+                "physics", "force", "energy", "velocity", "kinematics"
+            ],
+            "matematicas": [
+                "matemática", "calcul", "deriv", "integr", "ecuacion", "ecuación", 
+                "numero", "álgebra", "algebra", "trigonometr", "sumar", "restar", 
+                "multiplicar", "dividir", "logaritmo", "exponente", "soluci", 
+                "suma", "resta", "angul", "ángulo", "geometr", "estadística", 
+                "probabilidad", "función", "limite", 
+                "math", "equation", "solve", "number"
+            ],
+            "sociales": [
                 "historia", "guerra", "constitución", "siglo", "quién fue", 
                 "colombia", "president", "revolución", "independencia", 
-                "democracia", "derecho", "ciudadan", "imperio", "batalla", "gobierno",
-                "history", "war", "century", "who was", "revolution", "government"
+                "democracia", "derecho", "ciudadan", "imperio", "batalla", "gobierno", 
+                "geografía", "mapa", "política", "economía",
+                "history", "war", "century", "government", "geography"
+            ],
+            "lectura_critica": [
+                "texto", "lectura", "crítica", "critica", "argumento", "tesis", 
+                "autor", "inferencia", "conclusión", "párrafo", "intención", 
+                "literario", "cuento", "ensayo", "poema", "gramática", "ortografía",
+                "reading", "text", "argument", "thesis"
+            ],
+            "analisis_imagen": [
+                "imagen", "figura", "vista", "perspectiva", "rotación", "rotacion", 
+                "plano", "proyección", "isometría", "doblez", "patrón", "secuencia", 
+                "espacial", "cubo", "armar", "desplegar",
+                "image", "figure", "view", "perspective", "rotation"
             ],
             "ingles": [
-                "traduc", "ingles", "significado", "resumen", "verbo", "gramatica", "ortografía",
-                "english", "translate", "meaning", "essay", "verb", "grammar", "spelling"
+                "traduc", "ingles", "english", "significado", "translate", "meaning", 
+                "verb", "vocabulary", "speaking", "listening"
             ]
         }
 
@@ -46,7 +74,8 @@ class SemanticRouter:
         """
         Main entry point. Returns a dict:
         {
-            "category": "biologia" | "matematicas" | ... | "general",
+            "category": "biologia" | "quimica" | "fisica" | "matematicas" | 
+                        "sociales" | "lectura_critica" | "analisis_imagen" | "ingles" | "general",
             "source": "regex" | "ai"
         }
         """
@@ -72,7 +101,9 @@ class SemanticRouter:
         """
         Asks a small, fast model to classify the text.
         """
+        # Define the valid categories for the AI
         categories = list(self.keyword_map.keys()) + ["general"]
+        
         router_model = settings.OPENAI_ROUTER_MODEL
         
         try:
@@ -88,12 +119,13 @@ class SemanticRouter:
                     },
                     {"role": "user", "content": text}
                 ],
-                max_tokens=10,
-                temperature=0.0
+                max_tokens=10, # We only need one word
+                temperature=0.0 # Deterministic results
             )
             
             category = response.choices[0].message.content.strip().lower()
             
+            # Validate return value
             if category not in categories:
                 logger.warning(f"Router: AI returned invalid category '{category}', defaulting to 'general'")
                 return "general"
