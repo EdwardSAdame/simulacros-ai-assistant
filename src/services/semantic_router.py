@@ -7,15 +7,15 @@ logger = logging.getLogger(__name__)
 
 class SemanticRouter:
     """
-    Determines the intent/category of a user message and extracts the main topic.
-    Returns a dict with 'category', 'topic', and 'source'.
+    Determines the intent/category of a user message and generates dynamic
+    visual feedback phrases.
+    Returns a dict with 'category', 'loading_phrases', and 'source'.
     """
     
     def __init__(self):
         self.client = get_openai_client()
         
         # 1. Define categories and their keywords
-        # Spanish terms are prioritized.
         self.keyword_map = {
             "biologia": [
                 "celula", "célula", "biolog", "genétic", "adn", "ecosistema", 
@@ -73,15 +73,19 @@ class SemanticRouter:
 
     def determine_category(self, text: str) -> dict:
         """
-        Main entry point. Returns a dict:
+        Main entry point. Returns:
         {
-            "category": "biologia" | ... | "general",
-            "topic": str (e.g., "mitochondria" or "nostalgia"),
-            "source": "regex" | "ai"
+            "category": str,
+            "loading_phrases": [str, str, str],
+            "source": "regex" | "ai" | "fallback"
         }
         """
         if not text:
-            return {"category": "general", "topic": "general", "source": "regex"}
+            return {
+                "category": "general", 
+                "loading_phrases": ["Procesando...", "Esperando datos..."], 
+                "source": "regex"
+            }
             
         # --- STEP 1: FAST CHECK (Regex/Keywords) ---
         text_lower = text.lower()
@@ -89,36 +93,46 @@ class SemanticRouter:
             for k in keywords:
                 if k in text_lower:
                     logger.info(f"Router: Keyword match found for '{category}' -> '{k}'")
-                    # Return the specific keyword found as the topic
-                    return {"category": category, "topic": k, "source": "regex"}
+                    # Create semi-dynamic phrases based on the keyword found
+                    phrases = [
+                        f"Detectando concepto: {k}...",
+                        f"Consultando base de {category}...",
+                        "Optimizando respuesta..."
+                    ]
+                    return {"category": category, "loading_phrases": phrases, "source": "regex"}
                 
-        # --- STEP 2: SMART CHECK (LLM Extraction) ---
+        # --- STEP 2: SMART CHECK (LLM Generation) ---
         try:
             result = self._classify_with_llm(text)
             return {
                 "category": result.get("category", "general"),
-                "topic": result.get("topic", "general"),
+                "loading_phrases": result.get("loading_phrases", ["Analizando...", "Pensando..."]),
                 "source": "ai"
             }
         except Exception as e:
             logger.warning(f"Router: LLM classification failed: {e}")
-            # Fallback
-            return {"category": "general", "topic": "general", "source": "error_fallback"}
+            return {
+                "category": "general", 
+                "loading_phrases": ["Analizando contexto...", "Generando respuesta..."],
+                "source": "error_fallback"
+            }
 
     def _classify_with_llm(self, text: str) -> dict:
         """
-        Asks a small, fast model to classify the text AND extract the main subject.
-        Returns: {"category": "...", "topic": "..."}
+        Asks the AI to classify AND generate creative status messages.
         """
         categories = list(self.keyword_map.keys()) + ["general"]
         router_model = settings.OPENAI_ROUTER_MODEL
         
-        # We force the model to return JSON for easier parsing
+        # Prompt designed for creativity and awareness of the user's language
         system_prompt = (
-            f"You are a semantic classifier. "
-            f"1. Classify the input into one of these categories: {', '.join(categories)}. "
-            f"2. Extract the main subject/topic (max 3 words) of the user's query (e.g. 'nostalgia', 'quadratic equation'). "
-            f"Return JSON format: {{ 'category': '...', 'topic': '...' }}."
+            f"You are the brain of an advanced AI tutor named Roma. "
+            f"1. Classify the input into one of: {', '.join(categories)}. "
+            f"2. Generate 3 short, authoritative, 'tech-noir' style status messages (max 4 words each) "
+            f"that describe the thinking process for this specific query. "
+            f"Use the same language as the user's input (Spanish or English). "
+            f"Example for 'nostalgia': ['Analyzing emotional depth...', 'Decoding human memory...', 'Synthesizing context...']. "
+            f"Return JSON: {{ 'category': '...', 'loading_phrases': ['str', 'str', 'str'] }}."
         )
 
         try:
@@ -128,22 +142,25 @@ class SemanticRouter:
                     {"role": "system", "content": system_prompt},
                     {"role": "user", "content": text}
                 ],
-                max_tokens=45, 
-                temperature=0.0,
-                response_format={"type": "json_object"} # Ensures valid JSON
+                max_tokens=80, 
+                temperature=0.7, # Slightly higher temp for creativity
+                response_format={"type": "json_object"}
             )
             
             content = response.choices[0].message.content.strip()
             data = json.loads(content)
             
             category = data.get("category", "general").lower()
-            topic = data.get("topic", "context").strip()
-
             if category not in categories:
                 category = "general"
+                
+            phrases = data.get("loading_phrases", [])
+            # Ensure we have a list of strings
+            if not isinstance(phrases, list) or not phrases:
+                phrases = ["Procesando...", "Analizando..."]
 
-            logger.info(f"Router: AI classified as '{category}' with topic '{topic}'")
-            return {"category": category, "topic": topic}
+            logger.info(f"Router: AI classified as '{category}' with phrases {phrases}")
+            return {"category": category, "loading_phrases": phrases}
             
         except Exception as e:
             logger.error(f"Router: Error calling OpenAI: {e}")

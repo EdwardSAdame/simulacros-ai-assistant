@@ -7,7 +7,7 @@ from src.services.chat_service import get_ai_response
 from src.storage.ws_connections_table import WsConnectionsTable
 from src.utils.logging_utils import log_event, set_invocation_context
 
-# 🔹 NEW IMPORT: The Hybrid Semantic Router
+# 🔹 IMPORT: The Hybrid Semantic Router
 from src.services.semantic_router import semantic_router
 
 logger = logging.getLogger()
@@ -29,8 +29,8 @@ def get_api_gateway_management_client(endpoint_url):
 def lambda_handler(event, context):
     """
     Triggered by SQS. 
-    1. Determines status/category (Fast Regex -> Fallback AI).
-    2. Sends Visual Feedback (Category + Topic + Source).
+    1. Determines status/category + Creative Loading Phrases.
+    2. Sends Visual Feedback (Action: status_update).
     3. Generates Response.
     4. Sends Final Answer.
     """
@@ -66,17 +66,18 @@ def lambda_handler(event, context):
             # --- 2. Send Visual Feedback (The "Thinking" Phase) ---
             if connection_id:
                 try:
-                    # 🔹 ROUTER CALL: Get category AND topic
+                    # 🔹 ROUTER CALL: Get category AND creative phrases
                     routing_result = semantic_router.determine_category(message)
                     
                     category_key = routing_result.get("category", "general")
-                    topic_str = routing_result.get("topic", "") # Extract topic
+                    # Extract the list of creative phrases
+                    loading_phrases = routing_result.get("loading_phrases", []) 
                     source_type = routing_result.get("source", "unknown")
                     
                     status_payload = json.dumps({
                         "action": "status_update",
                         "category": category_key, 
-                        "topic": topic_str,       # <--- NEW FIELD
+                        "loading_phrases": loading_phrases, # <--- SENDING THE LIST TO FRONTEND
                         "source": source_type,    
                         "client_row_id": client_row_id
                     })
@@ -89,7 +90,7 @@ def lambda_handler(event, context):
                     log_event("visual_feedback_sent", {
                         "user_id": user_id, 
                         "category": category_key,
-                        "topic": topic_str,
+                        "phrases_count": len(loading_phrases),
                         "source": source_type
                     })
 
