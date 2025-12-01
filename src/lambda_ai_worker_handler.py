@@ -30,7 +30,7 @@ def lambda_handler(event, context):
     """
     Triggered by SQS. 
     1. Determines status/category (Fast Regex -> Fallback AI).
-    2. Sends Visual Feedback (Category + Source).
+    2. Sends Visual Feedback (Category + Topic + Source).
     3. Generates Response.
     4. Sends Final Answer.
     """
@@ -66,15 +66,18 @@ def lambda_handler(event, context):
             # --- 2. Send Visual Feedback (The "Thinking" Phase) ---
             if connection_id:
                 try:
-                    # 🔹 ROUTER CALL: Get category AND source (regex vs ai)
+                    # 🔹 ROUTER CALL: Get category AND topic
                     routing_result = semantic_router.determine_category(message)
+                    
                     category_key = routing_result.get("category", "general")
+                    topic_str = routing_result.get("topic", "") # Extract topic
                     source_type = routing_result.get("source", "unknown")
                     
                     status_payload = json.dumps({
                         "action": "status_update",
-                        "category": category_key, # Used by frontend loop
-                        "source": source_type,    # Useful for debugging/analytics
+                        "category": category_key, 
+                        "topic": topic_str,       # <--- NEW FIELD
+                        "source": source_type,    
                         "client_row_id": client_row_id
                     })
                     
@@ -83,10 +86,10 @@ def lambda_handler(event, context):
                         Data=status_payload
                     )
                     
-                    # Log which method was used (Regex vs AI)
                     log_event("visual_feedback_sent", {
                         "user_id": user_id, 
                         "category": category_key,
+                        "topic": topic_str,
                         "source": source_type
                     })
 

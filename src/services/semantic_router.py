@@ -1,13 +1,14 @@
 # src/services/semantic_router.py
 import logging
+import json
 from src.config.settings import settings, get_openai_client
 
 logger = logging.getLogger(__name__)
 
 class SemanticRouter:
     """
-    Determines the intent/category of a user message.
-    Returns a dict with 'category' and 'source' (regex/ai).
+    Determines the intent/category of a user message and extracts the main topic.
+    Returns a dict with 'category', 'topic', and 'source'.
     """
     
     def __init__(self):
@@ -74,64 +75,75 @@ class SemanticRouter:
         """
         Main entry point. Returns a dict:
         {
-            "category": "biologia" | "quimica" | "fisica" | "matematicas" | 
-                        "sociales" | "lectura_critica" | "analisis_imagen" | "ingles" | "general",
+            "category": "biologia" | ... | "general",
+            "topic": str (e.g., "mitochondria" or "nostalgia"),
             "source": "regex" | "ai"
         }
         """
         if not text:
-            return {"category": "general", "source": "regex"}
+            return {"category": "general", "topic": "general", "source": "regex"}
             
         # --- STEP 1: FAST CHECK (Regex/Keywords) ---
         text_lower = text.lower()
         for category, keywords in self.keyword_map.items():
-            if any(k in text_lower for k in keywords):
-                logger.info(f"Router: Keyword match found for '{category}'")
-                return {"category": category, "source": "regex"}
+            for k in keywords:
+                if k in text_lower:
+                    logger.info(f"Router: Keyword match found for '{category}' -> '{k}'")
+                    # Return the specific keyword found as the topic
+                    return {"category": category, "topic": k, "source": "regex"}
                 
-        # --- STEP 2: SMART CHECK (LLM Fallback) ---
+        # --- STEP 2: SMART CHECK (LLM Extraction) ---
         try:
-            category = self._classify_with_llm(text)
-            return {"category": category, "source": "ai"}
+            result = self._classify_with_llm(text)
+            return {
+                "category": result.get("category", "general"),
+                "topic": result.get("topic", "general"),
+                "source": "ai"
+            }
         except Exception as e:
             logger.warning(f"Router: LLM classification failed: {e}")
-            return {"category": "general", "source": "error_fallback"}
+            # Fallback
+            return {"category": "general", "topic": "general", "source": "error_fallback"}
 
-    def _classify_with_llm(self, text: str) -> str:
+    def _classify_with_llm(self, text: str) -> dict:
         """
-        Asks a small, fast model to classify the text.
+        Asks a small, fast model to classify the text AND extract the main subject.
+        Returns: {"category": "...", "topic": "..."}
         """
-        # Define the valid categories for the AI
         categories = list(self.keyword_map.keys()) + ["general"]
-        
         router_model = settings.OPENAI_ROUTER_MODEL
         
+        # We force the model to return JSON for easier parsing
+        system_prompt = (
+            f"You are a semantic classifier. "
+            f"1. Classify the input into one of these categories: {', '.join(categories)}. "
+            f"2. Extract the main subject/topic (max 3 words) of the user's query (e.g. 'nostalgia', 'quadratic equation'). "
+            f"Return JSON format: {{ 'category': '...', 'topic': '...' }}."
+        )
+
         try:
             response = self.client.chat.completions.create(
-                model=router_model, 
+                model=router_model,
                 messages=[
-                    {
-                        "role": "system", 
-                        "content": (
-                            f"Classify the user input into one of these categories: {', '.join(categories)}. "
-                            "Return ONLY the category name. If unsure or off-topic, return 'general'."
-                        )
-                    },
+                    {"role": "system", "content": system_prompt},
                     {"role": "user", "content": text}
                 ],
-                max_tokens=10, # We only need one word
-                temperature=0.0 # Deterministic results
+                max_tokens=45, 
+                temperature=0.0,
+                response_format={"type": "json_object"} # Ensures valid JSON
             )
             
-            category = response.choices[0].message.content.strip().lower()
+            content = response.choices[0].message.content.strip()
+            data = json.loads(content)
             
-            # Validate return value
+            category = data.get("category", "general").lower()
+            topic = data.get("topic", "context").strip()
+
             if category not in categories:
-                logger.warning(f"Router: AI returned invalid category '{category}', defaulting to 'general'")
-                return "general"
-                
-            logger.info(f"Router: AI classified as '{category}' using {router_model}")
-            return category
+                category = "general"
+
+            logger.info(f"Router: AI classified as '{category}' with topic '{topic}'")
+            return {"category": category, "topic": topic}
             
         except Exception as e:
             logger.error(f"Router: Error calling OpenAI: {e}")
