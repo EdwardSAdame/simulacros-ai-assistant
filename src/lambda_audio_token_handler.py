@@ -1,9 +1,8 @@
-# src/lambda_audio_token_handler.py
 import json
 import logging
 import boto3
 import os
-import requests  # REMEMBER: Add 'requests' to your requirements.txt
+import requests
 from src.config.settings import settings
 
 # Set up logging
@@ -20,13 +19,13 @@ apigw_management_client = boto3.client(
     endpoint_url=APIGW_ENDPOINT_URL
 )
 
-# Use the standard Realtime Sessions endpoint to ensure full config support
+# Standard Realtime Sessions endpoint
 OPENAI_TOKEN_URL = "https://api.openai.com/v1/realtime/sessions"
 
 def handler(event, context):
     """
     Handles a 'request_token' action by generating an ephemeral OpenAI
-    Realtime session token with tuned VAD and intelligence instructions.
+    Realtime session token with LIGHTNING FAST settings.
     """
     connection_id = event.get('requestContext', {}).get('connectionId')
     if not connection_id:
@@ -39,7 +38,7 @@ def handler(event, context):
         # 1. Get OpenAI API Key
         api_key = settings.OPENAI_API_KEY
         
-        # Use the specific realtime model that supports these instructions well
+        # Use the preview model for best performance
         model_name = "gpt-4o-realtime-preview-2024-10-01" 
 
         if not api_key:
@@ -55,23 +54,28 @@ def handler(event, context):
             "model": model_name,
             "modalities": ["audio", "text"],
             
-            # Instructions: Forces the model to fix grammar and join fragmented thoughts
+            # Instructions help mitigate fragmentation by forcing context awareness
             "instructions": (
                 "You are a professional transcriber. "
-                "Output the user's speech as clean, grammatically correct text. "
-                "Fix stutters, partial words, and fragmented sentences into coherent thoughts. "
-                "Do not respond to the user, just transcribe what they say."
+                "Transcribe the user's speech accurately and quickly. "
+                "If the audio is a fragment, do your best to punctuate it logically."
             ),
             
-            # VAD Tuning:
-            # - threshold 0.6: Ignores background noise.
-            # - prefix_padding_ms 1000: Captures audio 1s BEFORE detection (fixes cut-off start).
-            # - silence_duration_ms 1200: Waits 1.2s before finishing sentence (fixes chopped sentences).
+            # --- LIGHTNING FAST CONFIGURATION ---
             "turn_detection": {
                 "type": "server_vad",
-                "threshold": 0.6,             
-                "prefix_padding_ms": 1000,    
-                "silence_duration_ms": 1200   
+                
+                # 0.5 is more sensitive. It keeps the turn alive during soft speech/short pauses.
+                "threshold": 0.5,
+                
+                # 1000ms buffer ensures the FIRST word (e.g., "Roma") is never lost.
+                # This does NOT slow down the response; it just sends more past audio.
+                "prefix_padding_ms": 1000,
+                
+                # 500ms wait time. 
+                # This makes the AI respond INSTANTLY (0.5s) after you stop speaking.
+                # TRADE-OFF: You must speak fluidly. If you pause > 0.5s, it will cut you off.
+                "silence_duration_ms": 500   
             },
             "input_audio_format": "pcm16",
             "input_audio_transcription": {
@@ -88,7 +92,7 @@ def handler(event, context):
         
         data = response.json()
         
-        # Extract client_secret (structure varies slightly by endpoint version)
+        # Extract client_secret
         client_secret = data.get("client_secret", {}).get("value")
         if not client_secret:
             client_secret = data.get("client_secret")
@@ -111,7 +115,6 @@ def handler(event, context):
 
     except Exception as e:
         logger.error(f"Internal error: {e}", exc_info=True)
-        # Attempt to send error to client
         try:
             apigw_management_client.post_to_connection(
                 ConnectionId=connection_id,
