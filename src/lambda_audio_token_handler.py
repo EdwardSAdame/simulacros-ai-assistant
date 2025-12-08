@@ -4,7 +4,7 @@ import logging
 import boto3
 import os
 import requests  # REMEMBER: Add 'requests' to your requirements.txt
-from src.config.settings import settings # Imports your settings object
+from src.config.settings import settings
 
 # Set up logging
 logger = logging.getLogger(__name__)
@@ -20,7 +20,7 @@ apigw_management_client = boto3.client(
     endpoint_url=APIGW_ENDPOINT_URL
 )
 
-# 🔹 CHANGED: Use the standard Realtime Sessions endpoint to ensure full config support
+# Use the standard Realtime Sessions endpoint to ensure full config support
 OPENAI_TOKEN_URL = "https://api.openai.com/v1/realtime/sessions"
 
 def handler(event, context):
@@ -39,9 +39,7 @@ def handler(event, context):
         # 1. Get OpenAI API Key
         api_key = settings.OPENAI_API_KEY
         
-        # 🔹 TIP: For smart grammar correction, 'gpt-4o-realtime-preview-2024-10-01' is recommended
-        # If your settings.OPENAI_AUDIO_MODEL is 'whisper-1', this might still work, 
-        # but using the specific realtime model ensures 'instructions' are obeyed.
+        # Use the specific realtime model that supports these instructions well
         model_name = "gpt-4o-realtime-preview-2024-10-01" 
 
         if not api_key:
@@ -57,8 +55,7 @@ def handler(event, context):
             "model": model_name,
             "modalities": ["audio", "text"],
             
-            # 🔹 CRITICAL FIX 1: Instructions for "Post-processing" on the fly
-            # This tells the model to fix grammar/stuttering instantly.
+            # Instructions: Forces the model to fix grammar and join fragmented thoughts
             "instructions": (
                 "You are a professional transcriber. "
                 "Output the user's speech as clean, grammatically correct text. "
@@ -66,12 +63,15 @@ def handler(event, context):
                 "Do not respond to the user, just transcribe what they say."
             ),
             
-            # 🔹 CRITICAL FIX 2: VAD Tuning to prevent chopping sentences
+            # VAD Tuning:
+            # - threshold 0.6: Ignores background noise.
+            # - prefix_padding_ms 1000: Captures audio 1s BEFORE detection (fixes cut-off start).
+            # - silence_duration_ms 1200: Waits 1.2s before finishing sentence (fixes chopped sentences).
             "turn_detection": {
                 "type": "server_vad",
-                "threshold": 0.6,             # Slightly higher threshold to ignore background noise
-                "prefix_padding_ms": 300,
-                "silence_duration_ms": 1200   # WAIT 1.2 SECONDS of silence before finalizing the sentence
+                "threshold": 0.6,             
+                "prefix_padding_ms": 1000,    
+                "silence_duration_ms": 1200   
             },
             "input_audio_format": "pcm16",
             "input_audio_transcription": {
@@ -88,10 +88,8 @@ def handler(event, context):
         
         data = response.json()
         
-        # The ephemeral token is usually in 'client_secret' -> 'value' for /sessions
+        # Extract client_secret (structure varies slightly by endpoint version)
         client_secret = data.get("client_secret", {}).get("value")
-        
-        # Fallback if structure is flat (older API versions)
         if not client_secret:
             client_secret = data.get("client_secret")
 
@@ -113,7 +111,7 @@ def handler(event, context):
 
     except Exception as e:
         logger.error(f"Internal error: {e}", exc_info=True)
-        # Send a descriptive error back to the client
+        # Attempt to send error to client
         try:
             apigw_management_client.post_to_connection(
                 ConnectionId=connection_id,
