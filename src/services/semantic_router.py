@@ -1,6 +1,7 @@
 # src/services/semantic_router.py
 import logging
 import json
+import re  # 🔹 NEW: Added for word boundary checks
 from src.config.settings import settings, get_openai_client
 
 logger = logging.getLogger(__name__)
@@ -89,11 +90,25 @@ class SemanticRouter:
             
         # --- STEP 1: FAST CHECK (Regex/Keywords) ---
         text_lower = text.lower()
+        
         for category, keywords in self.keyword_map.items():
             for k in keywords:
-                if k in text_lower:
+                # 🔹 NEW LOGIC: Smart matching
+                match_found = False
+                
+                # A. Short keywords (<= 3 chars) MUST be whole words (e.g. "ph", "gas", "adn")
+                if len(k) <= 3:
+                    # Look for 'k' surrounded by non-word characters (or start/end of string)
+                    if re.search(rf"\b{re.escape(k)}\b", text_lower):
+                        match_found = True
+                
+                # B. Long keywords (> 3 chars) can use substring matching (e.g. "biolog" matches "biologia")
+                else:
+                    if k in text_lower:
+                        match_found = True
+
+                if match_found:
                     logger.info(f"Router: Keyword match found for '{category}' -> '{k}'")
-                    # Create semi-dynamic phrases based on the keyword found
                     phrases = [
                         f"Detectando concepto: {k}...",
                         f"Consultando base de {category}...",
