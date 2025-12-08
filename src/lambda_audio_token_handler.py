@@ -1,3 +1,4 @@
+# src/lambda_audio_token_handler.py
 import json
 import logging
 import boto3
@@ -10,24 +11,22 @@ logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
 # Get API Gateway endpoint URL from environment variables
-# This must be set in your Lambda configuration
 APIGW_ENDPOINT_URL = os.environ.get('APIGW_AUDIO_ENDPOINT_URL')
 if not APIGW_ENDPOINT_URL:
     logger.error("Missing APIGW_AUDIO_ENDPOINT_URL environment variable!")
-    # This is a critical failure, but we'll let it try to proceed
-    # so the error appears in the apigatewaymanagementapi call
     
 apigw_management_client = boto3.client(
     'apigatewaymanagementapi',
     endpoint_url=APIGW_ENDPOINT_URL
 )
 
-OPENAI_TOKEN_URL = "https://api.openai.com/v1/realtime/transcription_sessions"
+# 🔹 CHANGED: Use the standard Realtime Sessions endpoint to ensure full config support
+OPENAI_TOKEN_URL = "https://api.openai.com/v1/realtime/sessions"
 
 def handler(event, context):
     """
     Handles a 'request_token' action by generating an ephemeral OpenAI
-    transcription token and sending it back to the client.
+    Realtime session token with tuned VAD and intelligence instructions.
     """
     connection_id = event.get('requestContext', {}).get('connectionId')
     if not connection_id:
@@ -37,45 +36,72 @@ def handler(event, context):
     logger.info(f"Received token request from {connection_id}")
 
     try:
-        # 1. Get OpenAI API Key and Audio Model from our settings
+        # 1. Get OpenAI API Key
         api_key = settings.OPENAI_API_KEY
-        audio_model = settings.OPENAI_AUDIO_MODEL  # <-- MODIFICATION: Get model from settings
+        
+        # 🔹 TIP: For smart grammar correction, 'gpt-4o-realtime-preview-2024-10-01' is recommended
+        # If your settings.OPENAI_AUDIO_MODEL is 'whisper-1', this might still work, 
+        # but using the specific realtime model ensures 'instructions' are obeyed.
+        model_name = "gpt-4o-realtime-preview-2024-10-01" 
 
         if not api_key:
             raise ValueError("OPENAI_API_KEY not configured in backend")
 
         headers = {
-            "Authorization": f"Bearer {api_key}"
+            "Authorization": f"Bearer {api_key}",
+            "Content-Type": "application/json"
         }
         
-        # 2. Define the session payload (using the configured model)
+        # 2. Define the session payload
         payload = {
+            "model": model_name,
+            "modalities": ["audio", "text"],
+            
+            # 🔹 CRITICAL FIX 1: Instructions for "Post-processing" on the fly
+            # This tells the model to fix grammar/stuttering instantly.
+            "instructions": (
+                "You are a professional transcriber. "
+                "Output the user's speech as clean, grammatically correct text. "
+                "Fix stutters, partial words, and fragmented sentences into coherent thoughts. "
+                "Do not respond to the user, just transcribe what they say."
+            ),
+            
+            # 🔹 CRITICAL FIX 2: VAD Tuning to prevent chopping sentences
+            "turn_detection": {
+                "type": "server_vad",
+                "threshold": 0.6,             # Slightly higher threshold to ignore background noise
+                "prefix_padding_ms": 300,
+                "silence_duration_ms": 1200   # WAIT 1.2 SECONDS of silence before finalizing the sentence
+            },
             "input_audio_format": "pcm16",
             "input_audio_transcription": {
-                "model": audio_model  # <-- MODIFICATION: Use variable
-            },
-            "turn_detection": {
-                "type": "server_vad"
-            },
-            "input_audio_noise_reduction": {
-                "type": "near_field"
+                "model": "whisper-1"
             }
         }
 
-        # 3. Make the POST request to OpenAI to get an ephemeral token
+        # 3. Make the POST request to OpenAI
         response = requests.post(OPENAI_TOKEN_URL, headers=headers, json=payload)
-        response.raise_for_status()  # Raise an exception for bad status codes
+        
+        if response.status_code != 200:
+            logger.error(f"OpenAI Error: {response.text}")
+            raise ValueError(f"OpenAI returned status {response.status_code}")
         
         data = response.json()
-        token = data.get("client_secret") # This is the ephemeral token
+        
+        # The ephemeral token is usually in 'client_secret' -> 'value' for /sessions
+        client_secret = data.get("client_secret", {}).get("value")
+        
+        # Fallback if structure is flat (older API versions)
+        if not client_secret:
+            client_secret = data.get("client_secret")
 
-        if not token:
+        if not client_secret:
             raise ValueError("OpenAI did not return a client_secret")
 
         # 4. Send the token back to the frontend
         response_data = {
             "action": "session_token",
-            "token": token
+            "token": client_secret
         }
         
         apigw_management_client.post_to_connection(
@@ -85,26 +111,14 @@ def handler(event, context):
         
         return {'statusCode': 200, 'body': 'Token generated.'}
 
-    except requests.exceptions.RequestException as e:
-        logger.error(f"Failed to call OpenAI for token: {e}")
-        # Send a descriptive error back to the client
-        try:
-            apigw_management_client.post_to_connection(
-                ConnectionId=connection_id,
-                Data=json.dumps({"action": "error", "message": "Failed to get token from provider."})
-            )
-        except Exception:
-            pass # Ignore if we can't send error
-        return {'statusCode': 502, 'body': 'Failed to get token from provider.'}
-    
     except Exception as e:
-        logger.error(f"Internal error: {e}")
+        logger.error(f"Internal error: {e}", exc_info=True)
         # Send a descriptive error back to the client
         try:
             apigw_management_client.post_to_connection(
                 ConnectionId=connection_id,
-                Data=json.dumps({"action": "error", "message": "Internal server error."})
+                Data=json.dumps({"action": "error", "message": "Failed to generate AI token."})
             )
         except Exception:
-            pass # Ignore if we can't send error
+            pass 
         return {'statusCode': 500, 'body': 'Internal server error.'}
