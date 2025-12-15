@@ -59,6 +59,9 @@ def lambda_handler(event, context):
             page = payload.get("page")
             conv_id_in = payload.get("conversation_id")
             client_row_id = payload.get("client_row_id")
+            
+            # 🔹 NEW: Extract the AI mode (sent by chat_handler)
+            ai_mode = payload.get("mode", "omega")
 
             # --- 1. Get Connection ID ---
             connection_id = ws_connections_table.get_connection_id(user_id)
@@ -91,7 +94,8 @@ def lambda_handler(event, context):
                         "user_id": user_id, 
                         "category": category_key,
                         "phrases_count": len(loading_phrases),
-                        "source": source_type
+                        "source": source_type,
+                        "mode": ai_mode
                     })
 
                 except Exception as e:
@@ -106,7 +110,8 @@ def lambda_handler(event, context):
                 email=email,
                 page=page,
                 conversation_id=conv_id_in,
-                image_urls=image_urls
+                image_urls=image_urls,
+                mode=ai_mode  # 🔹 Pass the mode to the service layer
             )
 
             # --- 4. Send Final Reply ---

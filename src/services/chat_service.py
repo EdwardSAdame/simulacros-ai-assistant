@@ -5,7 +5,7 @@ from src.storage.conversations_table import save_conversation
 from src.storage.messages_table import save_message, get_recent_messages
 from src.config.page_vectorstores import get_stores_for_page
 from src.utils.logging_utils import log_event
-from typing import List, Dict, Any, Tuple # 🔹 MODIFIED: Added Tuple
+from typing import List, Dict, Any, Tuple
 
 def _normalize_email_for_storage(val):
     """Return None for empty strings/whitespace so DynamoDB never gets an empty Email."""
@@ -58,11 +58,12 @@ def get_ai_response(
     page: str | None,
     conversation_id: str | None = None,
     image_urls: list[str] | None = None,
-) -> Tuple[str, str, str]: # 🔹 MODIFIED: Return type now includes a 3rd string
+    mode: str = "omega",  # 🔹 NEW: Accept the AI mode
+) -> Tuple[str, str, str]:
     """
     Handles user input (text + images) and returns AI response using the Responses API.
     
-    🔹 MODIFIED: Now returns (assistant_reply, conversation_id, assistant_timestamp)
+    Returns: (assistant_reply, conversation_id, assistant_timestamp)
     """
     page = _normalize_page(page)
 
@@ -72,6 +73,7 @@ def get_ai_response(
             log_event("conversation_reused", {
                 "conversation_id": conversation_id, "user_id": user_id, "page": page,
                 "vector_stores": get_stores_for_page(page),
+                "mode": mode  # Log the mode
             })
         else:
             sanitized_email = _normalize_email_for_storage(email)
@@ -83,12 +85,12 @@ def get_ai_response(
             log_event("conversation_created", {
                 "conversation_id": conversation_id, "user_id": user_id, "page": page,
                 "vector_stores": get_stores_for_page(page),
+                "mode": mode
             })
     except Exception as e:
         raise RuntimeError(f"❌ Failed to save/reuse conversation: {e}")
 
     # Step 2: Build the full conversation input for the API
-    # This now starts with the structured history list
     conversation_input = _build_history_list(conversation_id)
 
     # Step 3: Add the current user message and images as a new, separate turn
@@ -108,13 +110,17 @@ def get_ai_response(
             "user_id": user_id, "page": page,
             "conversation_length": len(conversation_input),
             "vector_stores": get_stores_for_page(page),
+            "mode": mode
         })
+        
+        # 🔹 Pass the mode to the assistant client
         assistant_reply = send_message_to_assistant(
             conversation_input=conversation_input,
             user_id=user_id,
             page=page,
             name=(name or None),
             email=_normalize_email_for_storage(email),
+            mode=mode 
         )
     except Exception as e:
         raise RuntimeError(f"❌ OpenAI Responses API failed: {e}")
@@ -133,7 +139,6 @@ def get_ai_response(
         for img in image_urls or []:
             save_message(conversation_id, role="user", message_text=f"[Imagen] {img}")
         
-        # --- 🔹 NEW LOGIC START 🔹 ---
         # 1. Save the assistant message AND capture the returned item
         assistant_message_item = save_message(
             conversation_id, 
@@ -144,16 +149,12 @@ def get_ai_response(
         # 2. Extract the timestamp (the Sort Key) from the item
         assistant_timestamp = assistant_message_item.get("Timestamp")
         if not assistant_timestamp:
-            # This should almost never happen, but it's good to log
             log_event("save_message_no_timestamp", {
                 "conversation_id": conversation_id
             }, level="error")
-            
-        # --- 🔹 NEW LOGIC END 🔹 ---
             
         log_event("messages_saved", {"conversation_id": conversation_id, "user_id": user_id})
     except Exception as e:
         raise RuntimeError(f"❌ Failed to save messages to DynamoDB: {e}")
 
-    # 🔹 MODIFIED: Return the new timestamp along with the other data
     return assistant_reply, conversation_id, assistant_timestamp

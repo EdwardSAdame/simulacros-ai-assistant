@@ -1,17 +1,17 @@
 # src/lambda_chat_handler.py
 import json
 import logging
-import boto3  # <-- Added boto3 to interact with AWS services
-import os     # <-- Added os to get environment variables
+import boto3
+import os
 
 from src.utils.logging_utils import log_event, set_invocation_context
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
-# --- NEW: Initialize SQS client ---
+# --- Initialize SQS client ---
 sqs = boto3.client('sqs')
-QUEUE_URL = os.environ.get('SQS_QUEUE_URL') # We will set this environment variable in the Lambda config
+QUEUE_URL = os.environ.get('SQS_QUEUE_URL') 
 
 def _none_if_empty(val):
     if val is None: return None
@@ -33,11 +33,13 @@ def lambda_handler(event, context):
         email = body.get("email")
         page = body.get("page")
         conversation_id_in = body.get("conversationId")
+        client_row_id = body.get("clientRowId")
         
-        # 🔹 MODIFICATION: Get the client's row ID
-        client_row_id = body.get("clientRowId") # e.g., "17123456789.12345"
+        # 🔹 NEW: Extract the 'mode' (Omega vs Alpha)
+        # Default to 'omega' (Fast) if the frontend doesn't send it.
+        ai_mode = body.get("mode", "omega")
 
-        # ---- Normalize / sanitize (this part remains the same) ----
+        # ---- Normalize / sanitize ----
         user_id = user_id or "anonymous"
         name = name if isinstance(name, str) else (name or "")
         email = _none_if_empty(email)
@@ -45,13 +47,12 @@ def lambda_handler(event, context):
         if not isinstance(image_urls, list):
             image_urls = []
 
-        # ---- Input Validation (this part remains the same) ----
+        # ---- Input Validation ----
         if not message and not image_urls:
             log_event("input_validation_failed", {"reason": "Missing message or imageUrls"}, level="warning")
             return response(400, {"error": "Missing message or imageUrls"})
 
-        # --- MODIFIED: Instead of calling the AI service, send to SQS ---
-        # 1. Construct the message payload
+        # --- Construct Payload for SQS ---
         payload = {
             "message": message,
             "user_id": user_id,
@@ -60,12 +61,13 @@ def lambda_handler(event, context):
             "page": page,
             "conversation_id": conversation_id_in,
             "image_urls": image_urls,
+            "client_row_id": client_row_id,
             
-            # 🔹 MODIFICATION: Add the clientRowId to the SQS message
-            "client_row_id": client_row_id 
+            # 🔹 Pass the mode to the worker
+            "mode": ai_mode
         }
 
-        # 2. Send the message to the SQS queue
+        # Send the message to the SQS queue
         sqs.send_message(
             QueueUrl=QUEUE_URL,
             MessageBody=json.dumps(payload)
@@ -74,10 +76,10 @@ def lambda_handler(event, context):
         log_event("message_queued_for_ai_processing", {
             "user_id": user_id,
             "conversation_id": conversation_id_in,
-            "client_row_id": client_row_id # Added for logging
+            "mode": ai_mode  # Log the mode
         })
 
-        # 3. Return an immediate success response to the user
+        # Return success
         return response(202, {"status": "accepted", "message": "Request is being processed."})
 
     except Exception as e:

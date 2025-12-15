@@ -39,13 +39,17 @@ def send_message_to_assistant(
     page: str | None = None,
     name: str | None = None,
     email: str | None = None,
+    mode: str = "omega",  # 🔹 NEW: Accept the AI mode (default: omega)
 ) -> str:
     """
     Sends a structured conversation to the OpenAI Responses API and
     returns the assistant's reply text.
     """
     client = get_openai_client()
-    cfg = get_model_config()
+    
+    # 🔹 Fetch the specific configuration for the requested mode
+    # This resolves the model name (e.g., gpt-5-nano) and temperature from env vars.
+    cfg = get_model_config(mode)
 
     # 1) Build system instructions
     system_text = _build_runtime_signals(user_id=user_id, page=page, name=name, email=email)
@@ -60,7 +64,7 @@ def send_message_to_assistant(
     # 3) Resolve vector stores for this page
     vector_store_ids = get_stores_for_page(page)
 
-    # 4) Call Responses API with the structured input and file_search tool
+    # 4) Call Responses API using the selected configuration (model, temp, top_p)
     resp = client.responses.create(
         model=cfg.model,
         temperature=cfg.temperature,
