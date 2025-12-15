@@ -27,7 +27,6 @@ class Settings:
             self.VECTOR_SEARCH_MAX_RESULTS: int = 8
 
         # --- DynamoDB Table Names ---
-        # These are read by your existing storage files
         self.WS_CONNECTIONS_TABLE_NAME: str = os.getenv("WS_CONNECTIONS_TABLE_NAME", "WsConnectionsTable")
         self.MESSAGES_TABLE_NAME: str = os.getenv("MESSAGES_TABLE_NAME", "Messages")
         self.CONVERSATIONS_TABLE_NAME: str = os.getenv("CONVERSATIONS_TABLE_NAME", "Conversations")
@@ -40,24 +39,36 @@ class Settings:
         # Audio Model
         self.OPENAI_AUDIO_MODEL: str = os.getenv("OPENAI_AUDIO_MODEL", "gpt-4o-mini-transcribe")
         
-        # 🔹 NEW: Router Model Configuration 🔹
-        # Defines which fast model to use for the semantic router (classification).
-        # Defaults to "gpt-4o-mini" if not set in env.
+        # 🔹 Router Model Configuration 🔹
         self.OPENAI_ROUTER_MODEL: str = os.getenv("OPENAI_ROUTER_MODEL", "gpt-4o-mini")
+        
+        # 💡 FIX: ADD MISSING ROUTER SAMPLING PARAMETERS 💡
+        try:
+            # OPENAI_ROUTER_TEMP (Default 0.3 for low creativity/high reliability)
+            temp_str = os.getenv("OPENAI_ROUTER_TEMP")
+            self.OPENAI_ROUTER_TEMP: float = float(temp_str) if temp_str is not None else 0.3
+        except ValueError:
+            logger.warning("OPENAI_ROUTER_TEMP in .env is not a valid float. Defaulting to 0.3.")
+            self.OPENAI_ROUTER_TEMP: float = 0.3
+
+        try:
+            # OPENAI_ROUTER_TOP_P (Default 1.0 for broad sampling)
+            top_p_str = os.getenv("OPENAI_ROUTER_TOP_P")
+            self.OPENAI_ROUTER_TOP_P: float = float(top_p_str) if top_p_str is not None else 1.0
+        except ValueError:
+            logger.warning("OPENAI_ROUTER_TOP_P in .env is not a valid float. Defaulting to 1.0.")
+            self.OPENAI_ROUTER_TOP_P: float = 1.0
+
 
     def get_openai_client(self) -> openai.Client:
-        """
-        Returns an authenticated OpenAI client instance.
-        """
+        # ... (content remains unchanged)
         if not self.OPENAI_API_KEY:
             raise ValueError("Cannot create OpenAI client: OPENAI_API_KEY is not set.")
         
         return openai.Client(api_key=self.OPENAI_API_KEY)
 
     def get_vector_search_max_results(self) -> int:
-        """
-        Returns the maximum number of file_search results to retrieve.
-        """
+        # ... (content remains unchanged)
         return self.VECTOR_SEARCH_MAX_RESULTS
 
 # Create a single, importable instance for the rest of the app.
@@ -66,13 +77,9 @@ settings = Settings()
 
 # --- Legacy Function Support ---
 def get_openai_client() -> openai.Client:
-    """
-    Legacy support: Returns an authenticated OpenAI client instance.
-    """
+    # ... (content remains unchanged)
     return settings.get_openai_client()
 
 def get_vector_search_max_results() -> int:
-    """
-    Legacy support: Returns the maximum number of file_search results.
-    """
+    # ... (content remains unchanged)
     return settings.get_vector_search_max_results()

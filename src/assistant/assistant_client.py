@@ -9,10 +9,7 @@ from src.utils.time_utils import get_current_time_info, infer_target_semester, s
 
 
 def _build_runtime_signals(user_id: str | None, page: str | None, name: str | None, email: str | None) -> str:
-    """
-    Build the runtime 'RUNTIME SIGNALS' block appended to the base system prompt.
-    Also reiterates attribution rules for file_search sources.
-    """
+    # ... (function content remains unchanged)
     tinfo = get_current_time_info()
     target = infer_target_semester()
     season = semester_season(target)
@@ -39,7 +36,7 @@ def send_message_to_assistant(
     page: str | None = None,
     name: str | None = None,
     email: str | None = None,
-    mode: str = "omega",  # 🔹 NEW: Accept the AI mode (default: omega)
+    mode: str = "omega",
 ) -> str:
     """
     Sends a structured conversation to the OpenAI Responses API and
@@ -47,41 +44,60 @@ def send_message_to_assistant(
     """
     client = get_openai_client()
     
-    # 🔹 Fetch the specific configuration for the requested mode
-    # This resolves the model name (e.g., gpt-5-nano) and temperature from env vars.
     cfg = get_model_config(mode)
+    
+    # 🔹 Check if the model is a reasoning model
+    model_name_lower = cfg.model.lower()
+    is_reasoning_model = (
+        model_name_lower.startswith("o") or 
+        "nano" in model_name_lower or 
+        "reasoning" in model_name_lower
+    )
 
     # 1) Build system instructions
     system_text = _build_runtime_signals(user_id=user_id, page=page, name=name, email=email)
     
-    # 2) Construct the full API input, starting with the system prompt
+    # 2) Construct the full API input
     api_input = [
         {"role": "system", "content": [{"type": "input_text", "text": system_text}]}
     ]
-    # Add the structured conversation history (user and assistant turns)
     api_input.extend(conversation_input)
 
-    # 3) Resolve vector stores for this page
+    # 3) Resolve vector stores
     vector_store_ids = get_stores_for_page(page)
-
-    # 4) Call Responses API using the selected configuration (model, temp, top_p)
-    resp = client.responses.create(
-        model=cfg.model,
-        temperature=cfg.temperature,
-        top_p=cfg.top_p,
-        input=api_input,
-        tools=[{
+    
+    # 4) Construct the base parameters for the Responses API call (UNIVERSAL PARAMS ONLY)
+    request_kwargs = {
+        "model": cfg.model,
+        "input": api_input,
+        "tools": [{
             "type": "file_search",
             "vector_store_ids": vector_store_ids,
             "max_num_results": get_vector_search_max_results(),
         }],
-    )
+        # 💡 FIX: Use the universal Responses API token limit parameter for ALL models
+        "max_output_tokens": 4096, 
+    }
+    
+    # 🔹 CONDITIONAL PARAMETER SWITCH 
+    if is_reasoning_model:
+        # Alpha Mode (o1) logic: Add the reasoning control parameter
+        request_kwargs["reasoning"] = {"effort": "medium"} 
+        # OMIT temperature and top_p entirely for o1.
+    else:
+        # Omega Mode (gpt-4o-mini) logic: Add standard sampling parameters
+        request_kwargs["temperature"] = cfg.temperature
+        request_kwargs["top_p"] = cfg.top_p
 
-    # 5) Extract text safely
+    # 5) Call Responses API using the selected configuration
+    resp = client.responses.create(**request_kwargs)
+
+    # 6) Extract text safely
     text = getattr(resp, "output_text", None)
     if not text:
         try:
             chunks = []
+            # Fallback parsing logic
             for block in getattr(resp, "output", []) or []:
                 for c in block.get("content", []) or []:
                     if c.get("type") in ("output_text", "text"):

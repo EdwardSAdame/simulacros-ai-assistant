@@ -25,12 +25,6 @@ class SemanticRouter:
     def determine_category(self, text: str) -> dict:
         """
         Main entry point. Now purely uses AI to classify.
-        Returns:
-        {
-            "category": str,
-            "loading_phrases": [str, str, str],
-            "source": "ai" | "error_fallback"
-        }
         """
         if not text:
             return {
@@ -39,16 +33,16 @@ class SemanticRouter:
                 "source": "fallback"
             }
             
-        # --- DIRECT LLM CALL (No Regex) ---
         try:
             result = self._classify_with_llm(text)
             return {
                 "category": result.get("category", "general"),
+                # Ensure we pull the corrected key, or fall back safely
                 "loading_phrases": result.get("loading_phrases", ["Analizando...", "Pensando..."]),
                 "source": "ai"
             }
         except Exception as e:
-            logger.warning(f"Router: LLM classification failed: {e}")
+            logger.error(f"Router: CRITICAL LLM classification failed: {e}")
             return {
                 "category": "general", 
                 "loading_phrases": ["Analizando solicitud...", "Procesando información..."],
@@ -58,11 +52,11 @@ class SemanticRouter:
     def _classify_with_llm(self, text: str) -> dict:
         """
         Asks the AI to classify AND generate creative status messages.
+        Includes dynamic handling for model-specific parameters.
         """
-        router_model = settings.OPENAI_ROUTER_MODEL
-        categories_str = ", ".join(self.valid_categories)
+        router_model = settings.OPENAI_ROUTER_MODEL.lower() # Ensure model is lowercase for checks
+        categories_str = ", ".join(self.valid_categories) 
         
-        # Prompt designed for creativity and awareness of the user's language
         system_prompt = (
             f"You are the brain of an advanced AI tutor named Roma. "
             f"1. Classify the input into one of: {categories_str}. "
@@ -73,27 +67,62 @@ class SemanticRouter:
             f"Return JSON: {{ 'category': '...', 'loading_phrases': ['str', 'str', 'str'] }}."
         )
 
+        messages = [
+            {"role": "system", "content": system_prompt},
+            {"role": "user", "content": text}
+        ]
+        
+        # 🔹 NEW/UPDATED: Check for all Reasoning Models
+        # This includes any model starting with 'o' (o1, o3, o4-mini, etc.), plus 'nano' and 'reasoning'.
+        is_reasoning_model = (
+            router_model.startswith("o") or 
+            "nano" in router_model or 
+            "reasoning" in router_model
+        )
+        
+        # 🔹 DYNAMIC ARGUMENT BUILDER 
+        request_kwargs = {
+            "model": router_model,
+            "messages": messages,
+            "response_format": {"type": "json_object"},
+        }
+
+        # 🔹 CONDITIONAL PARAMETER SWITCH
+        if is_reasoning_model:
+            # Reasoning models (like o1) use 'max_completion_tokens'
+            request_kwargs["max_completion_tokens"] = 100 
+            # Suppress temperature/top_p by omission, as is best practice for these models
+            logger.info(f"Router TRACER: Model '{router_model}' is reasoning; using max_completion_tokens.")
+
+        else:
+            # Standard models (gpt-4o, gpt-4.1-mini) use 'max_tokens' 
+            # and accept configurable temperature/top_p.
+            request_kwargs["max_tokens"] = 100 
+            request_kwargs["temperature"] = settings.OPENAI_ROUTER_TEMP
+            request_kwargs["top_p"] = settings.OPENAI_ROUTER_TOP_P
+            logger.info(f"Router TRACER: Calling {router_model} with Temp={settings.OPENAI_ROUTER_TEMP}")
+
+
         try:
-            response = self.client.chat.completions.create(
-                model=router_model,
-                messages=[
-                    {"role": "system", "content": system_prompt},
-                    {"role": "user", "content": text}
-                ],
-                max_tokens=100, 
-                temperature=0.7, 
-                response_format={"type": "json_object"}
-            )
+            # 🔹 TRACER: Log the model being used
+            temp_value = request_kwargs.get("temperature", "N/A (suppressed)")
+            logger.info(f"Router TRACER: Calling {router_model} with Temp={temp_value}")
+            
+            response = self.client.chat.completions.create(**request_kwargs)
             
             content = response.choices[0].message.content.strip()
             data = json.loads(content)
             
+            # 🔹 FIX 2: Handle known model hallucination/typo in JSON key 
+            if "loading_phounces" in data and "loading_phrases" not in data:
+                 data["loading_phrases"] = data.pop("loading_phounces") 
+                 logger.warning("Router: Corrected model typo: 'loading_phounces' to 'loading_phrases'")
+
             category = data.get("category", "general").lower()
             if category not in self.valid_categories:
                 category = "general"
                 
             phrases = data.get("loading_phrases", [])
-            # Ensure we have a list of strings
             if not isinstance(phrases, list) or not phrases:
                 phrases = ["Procesando...", "Analizando..."]
 
@@ -101,6 +130,7 @@ class SemanticRouter:
             return {"category": category, "loading_phrases": phrases}
             
         except Exception as e:
+            # Log the full error and re-raise it for the top-level error handler
             logger.error(f"Router: Error calling OpenAI: {e}")
             raise e
 
