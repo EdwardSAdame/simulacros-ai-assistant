@@ -29,8 +29,8 @@ def get_api_gateway_management_client(endpoint_url):
 def lambda_handler(event, context):
     """
     Triggered by SQS. 
-    1. Determines status/category + Creative Loading Phrases.
-    2. Sends Visual Feedback (Action: status_update).
+    1. Determines status/category + Creative Loading Phrases + INTENT.
+    2. Sends Visual Feedback (Action: status_update) containing CLIENT ACTIONS.
     3. Generates Response.
     4. Sends Final Answer.
     """
@@ -67,22 +67,32 @@ def lambda_handler(event, context):
             connection_id = ws_connections_table.get_connection_id(user_id)
 
             # --- 2. Send Visual Feedback (The "Thinking" Phase) ---
+            # We initialize these here so they are available for the AI response step even if connection_id is missing
+            intent = "chat" 
+            
             if connection_id:
                 try:
-                    # 🔹 ROUTER CALL: Get category AND creative phrases
+                    # 🔹 ROUTER CALL: Get category, creative phrases, AND intent
                     routing_result = semantic_router.determine_category(message)
                     
                     category_key = routing_result.get("category", "general")
-                    # Extract the list of creative phrases
                     loading_phrases = routing_result.get("loading_phrases", []) 
                     source_type = routing_result.get("source", "unknown")
+                    intent = routing_result.get("intent", "chat") # <--- CAPTURE INTENT
                     
+                    # 🔹 DETERMINE CLIENT ACTION
+                    # This is the "Switch" trigger. If it's a quiz, we tell the frontend to OPEN the panel.
+                    client_action = None
+                    if intent == "quiz":
+                        client_action = "OPEN_QUIZ_PANEL"
+
                     status_payload = json.dumps({
                         "action": "status_update",
                         "category": category_key, 
-                        "loading_phrases": loading_phrases, # <--- SENDING THE LIST TO FRONTEND
-                        "source": source_type,    
-                        "client_row_id": client_row_id
+                        "loading_phrases": loading_phrases,
+                        "source": "source_type",
+                        "client_row_id": client_row_id,
+                        "client_action": client_action # <--- SEND SIGNAL TO FRONTEND
                     })
                     
                     api_gateway_client.post_to_connection(
@@ -93,6 +103,8 @@ def lambda_handler(event, context):
                     log_event("visual_feedback_sent", {
                         "user_id": user_id, 
                         "category": category_key,
+                        "intent": intent, # Log the intent
+                        "client_action": client_action,
                         "phrases_count": len(loading_phrases),
                         "source": source_type,
                         "mode": ai_mode
@@ -111,7 +123,8 @@ def lambda_handler(event, context):
                 page=page,
                 conversation_id=conv_id_in,
                 image_urls=image_urls,
-                mode=ai_mode  # 🔹 Pass the mode to the service layer
+                mode=ai_mode,
+                intent=intent # 🔹 NEW: Pass the intent to the Chat Service
             )
 
             # --- 4. Send Final Reply ---

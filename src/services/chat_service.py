@@ -58,7 +58,8 @@ def get_ai_response(
     page: str | None,
     conversation_id: str | None = None,
     image_urls: list[str] | None = None,
-    mode: str = "omega",  # 🔹 NEW: Accept the AI mode
+    mode: str = "omega",
+    intent: str = "chat" # 🔹 NEW: Accept the intent (chat vs quiz)
 ) -> Tuple[str, str, str]:
     """
     Handles user input (text + images) and returns AI response using the Responses API.
@@ -73,7 +74,8 @@ def get_ai_response(
             log_event("conversation_reused", {
                 "conversation_id": conversation_id, "user_id": user_id, "page": page,
                 "vector_stores": get_stores_for_page(page),
-                "mode": mode  # Log the mode
+                "mode": mode,
+                "intent": intent
             })
         else:
             sanitized_email = _normalize_email_for_storage(email)
@@ -85,7 +87,8 @@ def get_ai_response(
             log_event("conversation_created", {
                 "conversation_id": conversation_id, "user_id": user_id, "page": page,
                 "vector_stores": get_stores_for_page(page),
-                "mode": mode
+                "mode": mode,
+                "intent": intent
             })
     except Exception as e:
         raise RuntimeError(f"❌ Failed to save/reuse conversation: {e}")
@@ -104,16 +107,39 @@ def get_ai_response(
     if current_user_content:
         conversation_input.append({"role": "user", "content": current_user_content})
 
+    # 🔹 NEW: INJECT BEHAVIORAL OVERRIDE FOR QUIZZES
+    # If the intent is 'quiz', we insert a SYSTEM message to force the AI to behave correctly.
+    # We want it to confirm the UI action, NOT generate a text quiz.
+    if intent == "quiz":
+        log_event("injecting_quiz_system_prompt", {"conversation_id": conversation_id})
+        system_override = {
+            "role": "model", # Using 'model' or 'developer' role depending on API, but 'user' with instructions often works best for immediate turn control if 'system' isn't available in this list structure.
+            # However, since this list goes to `assistant_client`, let's assume standard role structure.
+            # We will append it as a "System Note" to the conversation.
+            "content": [{
+                "type": "input_text", 
+                "text": (
+                    "SYSTEM NOTIFICATION: The user has requested a quiz/exam. "
+                    "The system is AUTOMATICALLY opening a dedicated side-panel UI for this. "
+                    "DO NOT generate quiz questions in this chat. "
+                    "DO NOT ask the user if they are ready. "
+                    "Simply confirm that you are opening the quiz interface for the requested topic."
+                )
+            }]
+        }
+        # We append this AFTER the user message to ensure it's the last instruction the model sees
+        conversation_input.append(system_override)
+
     # Step 4: Send to model
     try:
         log_event("openai_request_sent", {
             "user_id": user_id, "page": page,
             "conversation_length": len(conversation_input),
             "vector_stores": get_stores_for_page(page),
-            "mode": mode
+            "mode": mode,
+            "intent": intent
         })
         
-        # 🔹 Pass the mode to the assistant client
         assistant_reply = send_message_to_assistant(
             conversation_input=conversation_input,
             user_id=user_id,
