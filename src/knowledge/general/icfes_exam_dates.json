@@ -4,23 +4,29 @@
   "schedules": [
     {
       "calendar": "A",
-      "status": "Pendiente de confirmación",
+      "status": "Confirmado",
       "key_dates": [
         {
-          "event": "Registro y recaudo",
-          "status": "Pendiente de confirmación"
+          "event": "Registro y recaudo ordinario",
+          "start_date": "2026-03-09",
+          "end_date": "2026-05-01"
+        },
+        {
+          "event": "Registro y recaudo extraordinario",
+          "start_date": "2026-05-04",
+          "end_date": "2026-05-22"
         },
         {
           "event": "Publicación de citaciones",
-          "status": "Pendiente de confirmación"
+          "date": "2026-07-10"
         },
         {
           "event": "Aplicación del examen",
-          "status": "Pendiente de confirmación"
+          "date": "2026-07-26"
         },
         {
           "event": "Publicación de resultados",
-          "status": "Pendiente de confirmación"
+          "date": "2026-09-25"
         }
       ]
     },
