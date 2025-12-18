@@ -1,0 +1,66 @@
+# src/services/quiz_service.py
+import json
+import re
+import logging
+from typing import Dict, Optional, Any
+
+logger = logging.getLogger(__name__)
+
+class QuizService:
+    """
+    Encapsulates all logic related to generating and parsing Quiz content.
+    """
+
+    @staticmethod
+    def get_system_instruction() -> Dict[str, Any]:
+        """
+        Returns the specific system instruction to force the AI to generate a structured JSON quiz.
+        """
+        instruction_text = (
+            "SYSTEM INSTRUCTION: The user has requested a quiz/exam. "
+            "You must generate a SINGLE JSON object containing the question data, "
+            "AND a short conversational text confirmation. \n\n"
+            "Output Format:\n"
+            "```json\n"
+            "{\n"
+            "  \"question_title\": \"Question 1\",\n"
+            "  \"question_text\": \"The actual question stem here...\",\n"
+            "  \"options\": [\"Option A\", \"Option B\", \"Option C\", \"Option D\"],\n"
+            "  \"correct_option_index\": 0,\n"
+            "  \"image_query\": \"Visual search query for the question topic\",\n"
+            "  \"reply_text\": \"I have generated a question about [topic] for you.\"\n"
+            "}\n"
+            "```\n"
+            "Ensure the JSON is valid. Do not output any text outside the JSON block."
+        )
+
+        # Structure matches the conversation list expected by assistant_client
+        return {
+            "role": "model", 
+            "content": [{"type": "input_text", "text": instruction_text}]
+        }
+
+    @staticmethod
+    def extract_quiz_data(raw_text: str) -> Optional[Dict[str, Any]]:
+        """
+        Parses the AI response to extract the embedded JSON object.
+        Returns None if extraction fails.
+        """
+        try:
+            # 1. Attempt to find JSON within Markdown code fences
+            match = re.search(r"```json\s*(.*?)\s*```", raw_text, re.DOTALL)
+            if match:
+                return json.loads(match.group(1))
+            
+            # 2. Fallback: Attempt to find raw JSON object brackets
+            match = re.search(r"\{.*\}", raw_text, re.DOTALL)
+            if match:
+                return json.loads(match.group(0))
+                
+            return None
+        except json.JSONDecodeError:
+            logger.warning(f"QuizService: Failed to decode JSON from text: {raw_text[:50]}...")
+            return None
+        except Exception as e:
+            logger.error(f"QuizService: Extraction error: {e}")
+            return None

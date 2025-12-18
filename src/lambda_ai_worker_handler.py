@@ -31,8 +31,8 @@ def lambda_handler(event, context):
     Triggered by SQS. 
     1. Determines status/category + Creative Loading Phrases + INTENT.
     2. Sends Visual Feedback (Action: status_update) containing CLIENT ACTIONS.
-    3. Generates Response.
-    4. Sends Final Answer.
+    3. Generates Response (Text + Optional Quiz JSON).
+    4. Sends Final Answer (Text Bubble + Quiz Event).
     """
     set_invocation_context(context)
 
@@ -60,14 +60,13 @@ def lambda_handler(event, context):
             conv_id_in = payload.get("conversation_id")
             client_row_id = payload.get("client_row_id")
             
-            # 🔹 NEW: Extract the AI mode (sent by chat_handler)
+            # Extract the AI mode (sent by chat_handler)
             ai_mode = payload.get("mode", "omega")
 
             # --- 1. Get Connection ID ---
             connection_id = ws_connections_table.get_connection_id(user_id)
 
             # --- 2. Send Visual Feedback (The "Thinking" Phase) ---
-            # We initialize these here so they are available for the AI response step even if connection_id is missing
             intent = "chat" 
             
             if connection_id:
@@ -81,7 +80,7 @@ def lambda_handler(event, context):
                     intent = routing_result.get("intent", "chat") # <--- CAPTURE INTENT
                     
                     # 🔹 DETERMINE CLIENT ACTION
-                    # This is the "Switch" trigger. If it's a quiz, we tell the frontend to OPEN the panel.
+                    # This tells the frontend to expand the panel (Animation 70vw/30vw)
                     client_action = None
                     if intent == "quiz":
                         client_action = "OPEN_QUIZ_PANEL"
@@ -90,9 +89,9 @@ def lambda_handler(event, context):
                         "action": "status_update",
                         "category": category_key, 
                         "loading_phrases": loading_phrases,
-                        "source": "source_type",
+                        "source": source_type,
                         "client_row_id": client_row_id,
-                        "client_action": client_action # <--- SEND SIGNAL TO FRONTEND
+                        "client_action": client_action 
                     })
                     
                     api_gateway_client.post_to_connection(
@@ -103,7 +102,7 @@ def lambda_handler(event, context):
                     log_event("visual_feedback_sent", {
                         "user_id": user_id, 
                         "category": category_key,
-                        "intent": intent, # Log the intent
+                        "intent": intent, 
                         "client_action": client_action,
                         "phrases_count": len(loading_phrases),
                         "source": source_type,
@@ -115,7 +114,8 @@ def lambda_handler(event, context):
                     log_event("ws_status_send_failed", {"user_id": user_id}, level="warning", error=e)
 
             # --- 3. Get the AI response (Heavy Processing) ---
-            ai_reply, conversation_id, assistant_timestamp = get_ai_response(
+            # 🔹 UPDATE: Unpack 4 values (Text + Quiz Data)
+            ai_reply, conversation_id, assistant_timestamp, quiz_data = get_ai_response(
                 message=message,
                 user_id=user_id,
                 name=name,
@@ -124,12 +124,13 @@ def lambda_handler(event, context):
                 conversation_id=conv_id_in,
                 image_urls=image_urls,
                 mode=ai_mode,
-                intent=intent # 🔹 NEW: Pass the intent to the Chat Service
+                intent=intent 
             )
 
             # --- 4. Send Final Reply ---
             if connection_id:
                 try:
+                    # A. Send Standard Text Reply (The Chat Bubble)
                     response_payload = json.dumps({
                         "action": "ai_reply",
                         "ai_reply": ai_reply,
@@ -142,11 +143,27 @@ def lambda_handler(event, context):
                         ConnectionId=connection_id,
                         Data=response_payload
                     )
+
+                    # B. 🔹 NEW: Send Quiz Data (If available)
+                    # This event triggers the population of the #quizUi
+                    if quiz_data:
+                        quiz_payload = json.dumps({
+                            "action": "quiz_data_update",
+                            "data": quiz_data,
+                            "conversation_id": conversation_id
+                        })
+                        api_gateway_client.post_to_connection(
+                            ConnectionId=connection_id,
+                            Data=quiz_payload
+                        )
+                        log_event("quiz_data_pushed_to_client", {"conversation_id": conversation_id})
+
                     log_event("ai_worker_response_sent", {
                         "user_id": user_id, 
                         "connection_id": connection_id,
                         "client_row_id": client_row_id,
-                        "timestamp": assistant_timestamp
+                        "timestamp": assistant_timestamp,
+                        "has_quiz_data": bool(quiz_data)
                     })
 
                 except api_gateway_client.exceptions.GoneException:

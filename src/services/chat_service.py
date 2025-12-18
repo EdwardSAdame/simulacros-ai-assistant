@@ -5,50 +5,38 @@ from src.storage.conversations_table import save_conversation
 from src.storage.messages_table import save_message, get_recent_messages
 from src.config.page_vectorstores import get_stores_for_page
 from src.utils.logging_utils import log_event
+from src.services.quiz_service import QuizService  # <--- NEW IMPORT
 from typing import List, Dict, Any, Tuple
 
+# ... [Keep helper functions: _normalize_email_for_storage, _normalize_page, _build_history_list UNCHANGED] ...
+# (I am omitting them here to save space, but ensure they remain in the file)
+
 def _normalize_email_for_storage(val):
-    """Return None for empty strings/whitespace so DynamoDB never gets an empty Email."""
-    if val is None:
-        return None
-    if isinstance(val, str) and val.strip() == "":
-        return None
+    if val is None: return None
+    if isinstance(val, str) and val.strip() == "": return None
     return val
 
-
 def _normalize_page(val: str | None) -> str:
-    """Default to '/' if empty; pass full URL or path through (assistant_client resolves)."""
     if not val or (isinstance(val, str) and val.strip() == ""):
         return "/"
     return val
 
-
 def _build_history_list(conversation_id: str, max_user: int = 3, max_assistant: int = 3) -> List[Dict[str, Any]]:
-    """
-    Fetch recent messages and return them as a structured list for the API.
-    """
     try:
         msgs = get_recent_messages(conversation_id=conversation_id, limit=20, ascending=True)
-        if not msgs:
-            return []
-
+        if not msgs: return []
         user_msgs = [m for m in msgs if m.get("Role") == "user"][-max_user:]
         asst_msgs = [m for m in msgs if m.get("Role") == "assistant"][-max_assistant:]
-
         merged = sorted(user_msgs + asst_msgs, key=lambda m: m["Timestamp"])
-
         history_list = []
         for m in merged:
             role = m.get("Role", "user")
-            # Format to match the structure expected by the OpenAI Responses API
             content = [{"type": "input_text" if role == "user" else "output_text", "text": m.get("MessageText", "")}]
             history_list.append({"role": role, "content": content})
-        
         return history_list
     except Exception as e:
         log_event("history_fetch_failed", {"conversation_id": conversation_id}, level="warning", error=e)
         return []
-
 
 def get_ai_response(
     message: str | None,
@@ -59,88 +47,44 @@ def get_ai_response(
     conversation_id: str | None = None,
     image_urls: list[str] | None = None,
     mode: str = "omega",
-    intent: str = "chat" # 🔹 NEW: Accept the intent (chat vs quiz)
-) -> Tuple[str, str, str]:
+    intent: str = "chat"
+) -> Tuple[str, str, str, Dict | None]: # <--- RETURNS 4 VALUES NOW
     """
-    Handles user input (text + images) and returns AI response using the Responses API.
-    
-    Returns: (assistant_reply, conversation_id, assistant_timestamp)
+    Returns: (assistant_reply_text, conversation_id, assistant_timestamp, quiz_data_json)
     """
     page = _normalize_page(page)
 
     # Step 1: Find-or-create conversation
     try:
-        if conversation_id:
-            log_event("conversation_reused", {
-                "conversation_id": conversation_id, "user_id": user_id, "page": page,
-                "vector_stores": get_stores_for_page(page),
-                "mode": mode,
-                "intent": intent
-            })
-        else:
+        if not conversation_id:
             sanitized_email = _normalize_email_for_storage(email)
             conversation_data = save_conversation(
                 user_id=user_id, name=name or "", email=sanitized_email,
                 title=(message or "[Sin texto]")[:40], page=page,
             )
             conversation_id = conversation_data["ConversationId"]
-            log_event("conversation_created", {
-                "conversation_id": conversation_id, "user_id": user_id, "page": page,
-                "vector_stores": get_stores_for_page(page),
-                "mode": mode,
-                "intent": intent
-            })
     except Exception as e:
         raise RuntimeError(f"❌ Failed to save/reuse conversation: {e}")
 
-    # Step 2: Build the full conversation input for the API
+    # Step 2: Build Input
     conversation_input = _build_history_list(conversation_id)
 
-    # Step 3: Add the current user message and images as a new, separate turn
+    # Step 3: Add current message
     current_user_content = []
     if message:
         current_user_content.append({"type": "input_text", "text": message})
-    
-    image_blocks = format_image_urls_for_openai(image_urls or [])
-    current_user_content.extend(image_blocks)
+    current_user_content.extend(format_image_urls_for_openai(image_urls or []))
 
     if current_user_content:
         conversation_input.append({"role": "user", "content": current_user_content})
 
-    # 🔹 NEW: INJECT BEHAVIORAL OVERRIDE FOR QUIZZES
-    # If the intent is 'quiz', we insert a SYSTEM message to force the AI to behave correctly.
-    # We want it to confirm the UI action, NOT generate a text quiz.
+    # 🔹 SRP: Delegate prompt injection to QuizService
     if intent == "quiz":
-        log_event("injecting_quiz_system_prompt", {"conversation_id": conversation_id})
-        system_override = {
-            "role": "model", # Using 'model' or 'developer' role depending on API, but 'user' with instructions often works best for immediate turn control if 'system' isn't available in this list structure.
-            # However, since this list goes to `assistant_client`, let's assume standard role structure.
-            # We will append it as a "System Note" to the conversation.
-            "content": [{
-                "type": "input_text", 
-                "text": (
-                    "SYSTEM NOTIFICATION: The user has requested a quiz/exam. "
-                    "The system is AUTOMATICALLY opening a dedicated side-panel UI for this. "
-                    "DO NOT generate quiz questions in this chat. "
-                    "DO NOT ask the user if they are ready. "
-                    "Simply confirm that you are opening the quiz interface for the requested topic."
-                )
-            }]
-        }
-        # We append this AFTER the user message to ensure it's the last instruction the model sees
-        conversation_input.append(system_override)
+        conversation_input.append(QuizService.get_system_instruction())
 
     # Step 4: Send to model
     try:
-        log_event("openai_request_sent", {
-            "user_id": user_id, "page": page,
-            "conversation_length": len(conversation_input),
-            "vector_stores": get_stores_for_page(page),
-            "mode": mode,
-            "intent": intent
-        })
-        
-        assistant_reply = send_message_to_assistant(
+        raw_response = send_message_to_assistant(
             conversation_input=conversation_input,
             user_id=user_id,
             page=page,
@@ -151,36 +95,37 @@ def get_ai_response(
     except Exception as e:
         raise RuntimeError(f"❌ OpenAI Responses API failed: {e}")
 
-    if not assistant_reply or "No assistant response" in assistant_reply:
+    if not raw_response or "No assistant response" in raw_response:
         raise ValueError("❌ Assistant returned an empty or invalid response.")
 
-    log_event("openai_response_received", {
-        "conversation_id": conversation_id, "reply_snippet": assistant_reply[:100],
-    })
+    # 🔹 SRP: Delegate parsing to QuizService
+    final_reply_text = raw_response
+    quiz_data = None
 
-    # Step 5: Persist messages
+    if intent == "quiz":
+        extracted_data = QuizService.extract_quiz_data(raw_response)
+        if extracted_data:
+            quiz_data = extracted_data
+            # Use the cleaner text intended for the chat bubble
+            final_reply_text = extracted_data.get("reply_text", "Here is your question.")
+        else:
+            log_event("quiz_extraction_failed", {"raw": raw_response}, level="error")
+            # Fallback: text is just raw response
+
+    # Step 5: Persist (Save only the TEXT to DB, the JSON goes to frontend ephemeral)
     try:
         if message:
             save_message(conversation_id, role="user", message_text=message)
         for img in image_urls or []:
             save_message(conversation_id, role="user", message_text=f"[Imagen] {img}")
         
-        # 1. Save the assistant message AND capture the returned item
         assistant_message_item = save_message(
             conversation_id, 
             role="assistant", 
-            message_text=assistant_reply
+            message_text=final_reply_text
         )
-        
-        # 2. Extract the timestamp (the Sort Key) from the item
         assistant_timestamp = assistant_message_item.get("Timestamp")
-        if not assistant_timestamp:
-            log_event("save_message_no_timestamp", {
-                "conversation_id": conversation_id
-            }, level="error")
-            
-        log_event("messages_saved", {"conversation_id": conversation_id, "user_id": user_id})
     except Exception as e:
         raise RuntimeError(f"❌ Failed to save messages to DynamoDB: {e}")
 
-    return assistant_reply, conversation_id, assistant_timestamp
+    return final_reply_text, conversation_id, assistant_timestamp, quiz_data
