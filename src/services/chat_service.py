@@ -5,11 +5,11 @@ from src.storage.conversations_table import save_conversation
 from src.storage.messages_table import save_message, get_recent_messages
 from src.config.page_vectorstores import get_stores_for_page
 from src.utils.logging_utils import log_event
-from src.services.quiz_service import QuizService  # <--- NEW IMPORT
+from src.services.quiz_service import QuizService 
 from typing import List, Dict, Any, Tuple
+import json
 
-# ... [Keep helper functions: _normalize_email_for_storage, _normalize_page, _build_history_list UNCHANGED] ...
-# (I am omitting them here to save space, but ensure they remain in the file)
+# ... [Helper functions: _normalize_email_for_storage, _normalize_page UNCHANGED] ...
 
 def _normalize_email_for_storage(val):
     if val is None: return None
@@ -25,14 +25,27 @@ def _build_history_list(conversation_id: str, max_user: int = 3, max_assistant: 
     try:
         msgs = get_recent_messages(conversation_id=conversation_id, limit=20, ascending=True)
         if not msgs: return []
+        
         user_msgs = [m for m in msgs if m.get("Role") == "user"][-max_user:]
         asst_msgs = [m for m in msgs if m.get("Role") == "assistant"][-max_assistant:]
         merged = sorted(user_msgs + asst_msgs, key=lambda m: m["Timestamp"])
+        
         history_list = []
         for m in merged:
             role = m.get("Role", "user")
-            content = [{"type": "input_text" if role == "user" else "output_text", "text": m.get("MessageText", "")}]
+            text_content = m.get("MessageText", "")
+            
+            # 🔹 NEW: INJECT HIDDEN CONTEXT (Quiz Memory)
+            # If this message has metadata (Quiz JSON), append it to the text 
+            # so the AI can "remember" what it generated.
+            metadata = m.get("Metadata")
+            if role == "assistant" and metadata:
+                # We add a formatted string that the User NEVER sees, but the AI DOES see.
+                text_content += f"\n\n[SYSTEM MEMORY: I generated this interactive element: {json.dumps(metadata)}]"
+
+            content = [{"type": "input_text" if role == "user" else "output_text", "text": text_content}]
             history_list.append({"role": role, "content": content})
+            
         return history_list
     except Exception as e:
         log_event("history_fetch_failed", {"conversation_id": conversation_id}, level="warning", error=e)
@@ -48,7 +61,7 @@ def get_ai_response(
     image_urls: list[str] | None = None,
     mode: str = "omega",
     intent: str = "chat"
-) -> Tuple[str, str, str, Dict | None]: # <--- RETURNS 4 VALUES NOW
+) -> Tuple[str, str, str, Dict | None]: 
     """
     Returns: (assistant_reply_text, conversation_id, assistant_timestamp, quiz_data_json)
     """
@@ -106,23 +119,25 @@ def get_ai_response(
         extracted_data = QuizService.extract_quiz_data(raw_response)
         if extracted_data:
             quiz_data = extracted_data
-            # Use the cleaner text intended for the chat bubble
+            # Show a nice short message in the chat, not the raw JSON
             final_reply_text = extracted_data.get("reply_text", "Here is your question.")
         else:
             log_event("quiz_extraction_failed", {"raw": raw_response}, level="error")
             # Fallback: text is just raw response
 
-    # Step 5: Persist (Save only the TEXT to DB, the JSON goes to frontend ephemeral)
+    # Step 5: Persist (Save TEXT and METADATA to DB)
     try:
         if message:
             save_message(conversation_id, role="user", message_text=message)
         for img in image_urls or []:
             save_message(conversation_id, role="user", message_text=f"[Imagen] {img}")
         
+        # 🔹 MODIFIED: We pass 'quiz_data' as metadata so context is saved
         assistant_message_item = save_message(
             conversation_id, 
             role="assistant", 
-            message_text=final_reply_text
+            message_text=final_reply_text,
+            metadata=quiz_data 
         )
         assistant_timestamp = assistant_message_item.get("Timestamp")
     except Exception as e:

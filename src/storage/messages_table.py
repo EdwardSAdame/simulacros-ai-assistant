@@ -19,10 +19,11 @@ def save_message(
     role: str,
     message_text: str,
     *,
-    meta: Optional[Dict[str, Any]] = None,
+    metadata: Optional[Dict[str, Any]] = None, # 🔹 Renamed 'meta' to 'metadata' for clarity
 ):
     """
     Save a single message to the ConversationMessages table.
+    Now supports saving structured 'Metadata' (like Quiz JSON) alongside the text.
     """
     timestamp = datetime.utcnow().isoformat()
 
@@ -33,8 +34,9 @@ def save_message(
         "MessageText": message_text,
     }
 
-    if meta:
-        item["Meta"] = meta
+    # 🔹 NEW: Save structured context if provided
+    if metadata:
+        item["Metadata"] = metadata
 
     try:
         table.put_item(Item=item)
@@ -131,7 +133,7 @@ def update_message_text(conversation_id: str, timestamp: str, partial_text: str)
         raise
 
 
-# --- 🔹 NEW: BATCH DELETE FUNCTION 🔹 ---
+# --- 🔹 BATCH DELETE FUNCTION ---
 def delete_messages_for_conversation(conversation_id: str):
     """
     Deletes ALL messages associated with a specific ConversationId using BatchWrite.
@@ -177,7 +179,7 @@ def delete_messages_for_conversation(conversation_id: str):
                 # Check for next page
                 last_evaluated_key = response.get('LastEvaluatedKey')
                 if not last_evaluated_key:
-                    break
+                    break 
         
         logger.info(f"Successfully deleted all messages for ConversationId: {conversation_id}")
         return True
