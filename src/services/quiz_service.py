@@ -34,9 +34,9 @@ class QuizService:
             "Ensure the JSON is valid. Do not output any text outside the JSON block."
         )
 
-        # Structure matches the conversation list expected by assistant_client
+        # 🔹 FIX: Changed 'role' from 'model' to 'system'
         return {
-            "role": "model", 
+            "role": "system", 
             "content": [{"type": "input_text", "text": instruction_text}]
         }
 
