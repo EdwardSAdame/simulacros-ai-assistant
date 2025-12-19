@@ -9,6 +9,7 @@ from src.services.quiz_service import QuizService
 from typing import List, Dict, Any, Tuple
 from decimal import Decimal
 import json
+import re # <--- Added regex import
 
 def _normalize_email_for_storage(val):
     if val is None: return None
@@ -102,10 +103,22 @@ def get_ai_response(
         conversation_input.append({"role": "user", "content": current_user_content})
 
     # 🔹 SRP: Delegate prompt injection to QuizService
-    # We pass the user's message as the 'topic' hint
     if intent == "quiz":
         topic_hint = message if message else "General Knowledge"
-        conversation_input.append(QuizService.get_system_instruction(topic=topic_hint, num_questions=5))
+        
+        # 🔹 DYNAMIC COUNT DETECTION
+        # Default to 5
+        num_questions = 5
+        if message:
+            # Look for digits (e.g. "3 questions", "10 preguntas", or just "3")
+            # We limit to reasonably small numbers (max 20) to prevent token overflow
+            match = re.search(r'\b(\d+)\b', message)
+            if match:
+                parsed_num = int(match.group(1))
+                if 1 <= parsed_num <= 20:
+                    num_questions = parsed_num
+        
+        conversation_input.append(QuizService.get_system_instruction(topic=topic_hint, num_questions=num_questions))
 
     # Step 4: Send to model
     try:
@@ -131,8 +144,13 @@ def get_ai_response(
         extracted_data = QuizService.extract_quiz_data(raw_response)
         if extracted_data:
             quiz_data = extracted_data
-            # Set a generic message for the chat bubble, since the real content is in the quiz UI
-            final_reply_text = "I have generated a 5-question quiz for you. Good luck!"
+            
+            # Determine count for reply text
+            count = 0
+            if isinstance(quiz_data.get("questions"), list):
+                count = len(quiz_data["questions"])
+            
+            final_reply_text = f"I have generated a {count}-question quiz for you. Good luck!"
         else:
             log_event("quiz_extraction_failed", {"raw": raw_response}, level="error")
             # Fallback: text is just raw response
