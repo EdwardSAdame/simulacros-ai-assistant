@@ -7,6 +7,7 @@ from src.config.page_vectorstores import get_stores_for_page
 from src.utils.logging_utils import log_event
 from src.services.quiz_service import QuizService 
 from typing import List, Dict, Any, Tuple
+from decimal import Decimal # <--- IMPORTED DECIMAL
 import json
 
 # ... [Helper functions: _normalize_email_for_storage, _normalize_page UNCHANGED] ...
@@ -20,6 +21,13 @@ def _normalize_page(val: str | None) -> str:
     if not val or (isinstance(val, str) and val.strip() == ""):
         return "/"
     return val
+
+# 🔹 NEW HELPER: Handles DynamoDB Decimal types for JSON
+def decimal_default(obj):
+    if isinstance(obj, Decimal):
+        # Convert Decimal to int if it's a whole number, else float
+        return int(obj) if obj % 1 == 0 else float(obj)
+    raise TypeError
 
 def _build_history_list(conversation_id: str, max_user: int = 3, max_assistant: int = 3) -> List[Dict[str, Any]]:
     try:
@@ -36,18 +44,22 @@ def _build_history_list(conversation_id: str, max_user: int = 3, max_assistant: 
             text_content = m.get("MessageText", "")
             
             # 🔹 NEW: INJECT HIDDEN CONTEXT (Quiz Memory)
-            # Check both 'Metadata' (new standard) and 'Meta' (legacy fallback)
             metadata = m.get("Metadata") or m.get("Meta")
             
             if role == "assistant" and metadata:
-                # We add a formatted string that the User NEVER sees, but the AI DOES see.
-                # This explicitly tells the AI what interactive content it generated.
-                hidden_context = (
-                    f"\n\n[SYSTEM CONTEXT: User cannot see this. "
-                    f"I previously generated this interactive quiz: {json.dumps(metadata)}. "
-                    f"I must use this data to answer follow-up questions about the quiz.]"
-                )
-                text_content += hidden_context
+                try:
+                    # 🔹 FIX: Use 'default=decimal_default' to safely serialize DynamoDB numbers
+                    metadata_str = json.dumps(metadata, default=decimal_default)
+                    
+                    hidden_context = (
+                        f"\n\n[SYSTEM CONTEXT: User cannot see this. "
+                        f"I previously generated this interactive quiz: {metadata_str}. "
+                        f"I must use this data to answer follow-up questions about the quiz.]"
+                    )
+                    text_content += hidden_context
+                except Exception as json_err:
+                    # Fallback if serialization fails, so we don't crash the whole chat
+                    log_event("metadata_serialization_error", {"error": str(json_err)}, level="error")
 
             content = [{"type": "input_text" if role == "user" else "output_text", "text": text_content}]
             history_list.append({"role": role, "content": content})
