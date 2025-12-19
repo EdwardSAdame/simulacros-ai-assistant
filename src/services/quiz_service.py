@@ -20,21 +20,32 @@ class QuizService:
             "SYSTEM INSTRUCTION: The user has requested a quiz/exam. "
             "You must generate a SINGLE JSON object containing the question data, "
             "AND a short conversational text confirmation. \n\n"
-            "Output Format:\n"
+            
+            "## Formatting Rules (STRICT):\n"
+            "1. **LaTeX Required**: You MUST use LaTeX formatting (enclosed in `$`) for ALL mathematical expressions, numbers, variables, and chemical formulas.\n"
+            "2. **Apply to ALL Fields**: This applies to both the `question_text` AND every string inside the `options` array.\n"
+            "   - Bad: \"H2O + O2 -> H2O2\"\n"
+            "   - Good: \"$H_2O + O_2 \\rightarrow H_2O_2$\"\n\n"
+
+            "## Output Format:\n"
             "```json\n"
             "{\n"
             "  \"question_title\": \"Question 1\",\n"
-            "  \"question_text\": \"The actual question stem here...\",\n"
-            "  \"options\": [\"Option A\", \"Option B\", \"Option C\", \"Option D\"],\n"
+            "  \"question_text\": \"The actual question stem here... (e.g. Balance $Fe + O_2$)\",\n"
+            "  \"options\": [\n"
+            "    \"$2Fe_2O_3$\",\n"
+            "    \"$4Fe + 3O_2$\",\n"
+            "    \"Option C\",\n"
+            "    \"Option D\"\n"
+            "  ],\n"
             "  \"correct_option_index\": 0,\n"
             "  \"image_query\": \"Visual search query for the question topic\",\n"
-            "  \"reply_text\": \"I have generated a question about [topic] for you.\"\n"
+            "  \"reply_text\": \"I have generated a complex question about [topic] for you.\"\n"
             "}\n"
             "```\n"
             "Ensure the JSON is valid. Do not output any text outside the JSON block."
         )
 
-        # 🔹 FIX: Changed 'role' from 'model' to 'system'
         return {
             "role": "system", 
             "content": [{"type": "input_text", "text": instruction_text}]
