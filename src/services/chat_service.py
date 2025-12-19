@@ -36,12 +36,18 @@ def _build_history_list(conversation_id: str, max_user: int = 3, max_assistant: 
             text_content = m.get("MessageText", "")
             
             # 🔹 NEW: INJECT HIDDEN CONTEXT (Quiz Memory)
-            # If this message has metadata (Quiz JSON), append it to the text 
-            # so the AI can "remember" what it generated.
-            metadata = m.get("Metadata")
+            # Check both 'Metadata' (new standard) and 'Meta' (legacy fallback)
+            metadata = m.get("Metadata") or m.get("Meta")
+            
             if role == "assistant" and metadata:
                 # We add a formatted string that the User NEVER sees, but the AI DOES see.
-                text_content += f"\n\n[SYSTEM MEMORY: I generated this interactive element: {json.dumps(metadata)}]"
+                # This explicitly tells the AI what interactive content it generated.
+                hidden_context = (
+                    f"\n\n[SYSTEM CONTEXT: User cannot see this. "
+                    f"I previously generated this interactive quiz: {json.dumps(metadata)}. "
+                    f"I must use this data to answer follow-up questions about the quiz.]"
+                )
+                text_content += hidden_context
 
             content = [{"type": "input_text" if role == "user" else "output_text", "text": text_content}]
             history_list.append({"role": role, "content": content})
