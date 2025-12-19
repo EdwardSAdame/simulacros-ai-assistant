@@ -19,7 +19,7 @@ class QuizService:
         instruction_text = (
             "SYSTEM INSTRUCTION: The user has requested a quiz/exam. "
             "You must generate a SINGLE JSON object containing the question data, "
-            "AND a short conversational text confirmation. \n\n"
+            "AND a short conversational text confirmation inside the JSON 'reply_text' field. \n\n"
             
             "## Formatting Rules (STRICT):\n"
             "1. **LaTeX Required**: You MUST use standard LaTeX delimiters for ALL math:\n"
@@ -61,23 +61,36 @@ class QuizService:
     def extract_quiz_data(raw_text: str) -> Optional[Dict[str, Any]]:
         """
         Parses the AI response to extract the embedded JSON object.
-        Returns None if extraction fails.
+        Uses a robust 'Seek and Destroy' strategy to ignore conversational filler.
         """
-        try:
-            # 1. Attempt to find JSON within Markdown code fences
-            match = re.search(r"```json\s*(.*?)\s*```", raw_text, re.DOTALL)
-            if match:
-                return json.loads(match.group(1))
-            
-            # 2. Fallback: Attempt to find raw JSON object brackets
-            match = re.search(r"\{.*\}", raw_text, re.DOTALL)
-            if match:
-                return json.loads(match.group(0))
-                
+        if not raw_text:
             return None
-        except json.JSONDecodeError:
-            logger.warning(f"QuizService: Failed to decode JSON from text: {raw_text[:50]}...")
+
+        try:
+            # Strategy 1: Fast Regex for standard Markdown code blocks
+            # Matches ```json ... ``` OR just ``` ... ```
+            code_block_match = re.search(r"```(?:json)?\s*(.*?)\s*```", raw_text, re.DOTALL)
+            if code_block_match:
+                try:
+                    return json.loads(code_block_match.group(1))
+                except json.JSONDecodeError:
+                    pass # Fall through to Strategy 2 if the block wasn't valid JSON
+
+            # Strategy 2: Robust Brute Force (The "Seek and Destroy" method)
+            # Find the first '{' and the last '}' in the entire string.
+            # This ignores "Sure! Here is the JSON:" at the start and "Hope this helps!" at the end.
+            start_index = raw_text.find('{')
+            end_index = raw_text.rfind('}')
+
+            if start_index != -1 and end_index != -1 and end_index > start_index:
+                potential_json = raw_text[start_index : end_index + 1]
+                return json.loads(potential_json)
+            
+            return None
+
+        except json.JSONDecodeError as e:
+            logger.warning(f"QuizService: JSON Decode failed. Text: {raw_text[:100]}... Error: {str(e)}")
             return None
         except Exception as e:
-            logger.error(f"QuizService: Extraction error: {e}")
+            logger.error(f"QuizService: Critical Extraction error: {str(e)}")
             return None
