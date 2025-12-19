@@ -2,7 +2,7 @@
 import json
 import re
 import logging
-from typing import Dict, Optional, Any
+from typing import Dict, List, Optional, Any, Union
 
 logger = logging.getLogger(__name__)
 
@@ -13,41 +13,40 @@ class QuizService:
     """
 
     @staticmethod
-    def get_system_instruction() -> Dict[str, Any]:
+    def get_system_instruction(topic: str = "general", num_questions: int = 5) -> Dict[str, Any]:
         """
-        Returns the specific system instruction to force the AI to generate a structured JSON quiz.
+        Returns the specific system instruction to force the AI to generate a structured JSON ARRAY of questions.
         """
         instruction_text = (
-            "SYSTEM INSTRUCTION: The user has requested a quiz/exam. "
-            "You must generate a SINGLE JSON object containing the question data, "
-            "AND a short conversational text confirmation inside the JSON 'reply_text' field. \n\n"
+            f"SYSTEM INSTRUCTION: The user has requested a quiz/exam about '{topic}'. "
+            f"You must generate a JSON ARRAY containing exactly {num_questions} distinct questions. \n\n"
             
             "## Formatting Rules (STRICT):\n"
-            "1. **Double Escaping for JSON**: You are outputting a JSON string. ALL backslashes for LaTeX must be DOUBLE ESCAPED.\n"
-            "   - Wrong: \"\\( x^2 \\)\" (This is invalid JSON string syntax)\n"
-            "   - Right: \"\\\\( x^2 \\\\)\" (This is valid JSON)\n"
-            "2. **LaTeX Delimiters**: \n"
-            "   - Use `\\\\(` and `\\\\)` for inline math.\n"
-            "   - Use `\\\\[` and `\\\\]` for block math.\n"
-            "3. **Descriptive Titles (H1 Format)**: The `question_title` MUST be a short, 3-5 word summary of the specific topic, formatted as a Markdown H1 Header (start with `# `).\n\n"
+            "1. **Output Format**: You must return a LIST (Array) of objects, not a single object.\n"
+            "2. **Double Escaping**: ALL backslashes for LaTeX must be DOUBLE ESCAPED (e.g., `\\\\( x^2 \\\\)`).\n"
+            "3. **Math Syntax**: Use `\\\\(` and `\\\\)` for inline math.\n"
+            "4. **Difficulty**: Progressive difficulty (Question 1 is easy, Question 5 is hard).\n"
+            "5. **Content**: \n"
+            "   - `question_title`: Short H1 Markdown title (# Topic).\n"
+            "   - `question_text`: The question stem.\n"
+            "   - `options`: Array of 4 strings.\n"
+            "   - `correct_option_index`: 0-3.\n"
+            "   - `explanation`: Short text explaining why the answer is correct.\n\n"
 
-            "## Output Format:\n"
+            "## Expected JSON Output:\n"
             "```json\n"
-            "{\n"
-            "  \"question_title\": \"# Short Topic Title\",\n"
-            "  \"question_text\": \"The actual question stem here... (e.g. Calculate \\\\( \\\\int x dx \\\\))\",\n"
-            "  \"options\": [\n"
-            "    \"\\\\( \\\\frac{x^2}{2} + C \\\\)\",\n"
-            "    \"\\\\( x^2 \\\\)\",\n"
-            "    \"Option C\",\n"
-            "    \"Option D\"\n"
-            "  ],\n"
-            "  \"correct_option_index\": 0,\n"
-            "  \"image_query\": \"Visual search query for the question topic\",\n"
-            "  \"reply_text\": \"I have generated a calculus question for you.\"\n"
-            "}\n"
+            "[\n"
+            "  {\n"
+            "    \"question_title\": \"# Basic Integration\",\n"
+            "    \"question_text\": \"Solve \\\\( \\\\int x dx \\\\)\",\n"
+            "    \"options\": [\"\\\\( x^2/2 \\\\)\", \"\\\\( x \\\\)\", \"\\\\( 2x \\\\)\", \"\\\\( x^2 \\\\)\"],\n"
+            "    \"correct_option_index\": 0,\n"
+            "    \"explanation\": \"Power rule of integration.\"\n"
+            "  },\n"
+            "  { ... next question ... }\n"
+            "]\n"
             "```\n"
-            "Ensure the JSON is valid. Do not output any text outside the JSON block."
+            "Ensure the output is a valid JSON List. Do not output conversational text outside the JSON block."
         )
 
         return {
@@ -56,10 +55,11 @@ class QuizService:
         }
 
     @staticmethod
-    def extract_quiz_data(raw_text: str) -> Optional[Dict[str, Any]]:
+    def extract_quiz_data(raw_text: str) -> Optional[Union[List[Dict], Dict]]:
         """
-        Parses the AI response to extract the embedded JSON object.
-        Uses a robust 'Seek and Destroy' strategy and attempts to REPAIR malformed JSON/LaTeX.
+        Parses the AI response. 
+        Prioritizes extracting a LIST (Array) of quizzes.
+        Falls back to a single object if necessary.
         """
         if not raw_text:
             return None
@@ -67,45 +67,52 @@ class QuizService:
         # Helper to attempt parsing
         def try_parse(text_chunk):
             try:
-                return json.loads(text_chunk)
-            except json.JSONDecodeError:
-                # ATTEMPT REPAIR: Fix common LaTeX backslash issues in JSON
-                # Replace single \( with \\( and \[ with \\[ if they aren't already escaped
-                # This is a naive regex repair but catches 90% of LLM mistakes
-                try:
-                    logger.info("QuizService: JSON decode failed. Attempting LaTeX backslash repair.")
-                    # Replace unescaped backslashes before ( ) [ ]
-                    # Look for \ but not \\ followed by specific chars
-                    repaired = text_chunk
-                    # Fix inline math \( -> \\(
-                    repaired = re.sub(r'(?<!\\)\\\(', r'\\\\(', repaired)
-                    repaired = re.sub(r'(?<!\\)\\\)', r'\\\\)', repaired)
-                    # Fix block math \[ -> \\[
-                    repaired = re.sub(r'(?<!\\)\\\[', r'\\\\[', repaired)
-                    repaired = re.sub(r'(?<!\\)\\\]', r'\\\\]', repaired)
-                    
-                    return json.loads(repaired)
-                except Exception as e:
-                    return None
+                # Naive repair for common LaTeX backslash issues
+                repaired = text_chunk
+                # Fix inline math \( -> \\(
+                repaired = re.sub(r'(?<!\\)\\\(', r'\\\\(', repaired)
+                repaired = re.sub(r'(?<!\\)\\\)', r'\\\\)', repaired)
+                # Fix block math \[ -> \\[
+                repaired = re.sub(r'(?<!\\)\\\[', r'\\\\[', repaired)
+                repaired = re.sub(r'(?<!\\)\\\]', r'\\\\]', repaired)
+                
+                return json.loads(repaired)
+            except Exception:
+                return None
 
         try:
-            # Strategy 1: Fast Regex for standard Markdown code blocks
-            code_block_match = re.search(r"```(?:json)?\s*(.*?)\s*```", raw_text, re.DOTALL)
-            if code_block_match:
-                result = try_parse(code_block_match.group(1))
-                if result: return result
+            # 1. Try to find a JSON Array [...]
+            match_list = re.search(r"\[\s*\{.*\}\s*\]", raw_text, re.DOTALL)
+            if match_list:
+                data = try_parse(match_list.group(0))
+                if data and isinstance(data, list):
+                    return {"quiz_mode": "batch", "questions": data}
 
-            # Strategy 2: Robust Brute Force (The "Seek and Destroy" method)
-            # Find the first '{' and the last '}' in the entire string.
+            # 2. Try to find a code block containing an Array
+            code_block = re.search(r"```(?:json)?\s*(\[\s*\{.*\}\s*\])\s*```", raw_text, re.DOTALL)
+            if code_block:
+                data = try_parse(code_block.group(1))
+                if data and isinstance(data, list):
+                    return {"quiz_mode": "batch", "questions": data}
+
+            # 3. Fallback: Try to find a Single Object (Old behavior)
+            # Find the first '{' and the last '}'
             start_index = raw_text.find('{')
             end_index = raw_text.rfind('}')
 
             if start_index != -1 and end_index != -1 and end_index > start_index:
                 potential_json = raw_text[start_index : end_index + 1]
-                result = try_parse(potential_json)
-                if result: return result
-            
-            logger.warning(f"QuizService: Final Extraction Failed. Content snippet: {raw_text[:50]}...")
+                data = try_parse(potential_json)
+                
+                if data and isinstance(data, dict):
+                    # Check if it looks like a question
+                    if "question_text" in data:
+                        return {"quiz_mode": "single", "questions": [data]}
+                    # Or if it is a list wrapped in dict (rare)
+                    if "questions" in data and isinstance(data["questions"], list):
+                        return {"quiz_mode": "batch", "questions": data["questions"]}
+
+            logger.warning(f"QuizService: Failed to extract JSON array or object. Text: {raw_text[:50]}...")
             return None
 
         except Exception as e:
