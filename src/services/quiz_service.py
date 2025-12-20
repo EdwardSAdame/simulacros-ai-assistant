@@ -3,31 +3,40 @@ import json
 import re
 import logging
 from typing import Dict, List, Optional, Any, Union
+from src.config.system_instructions import BASE_SYSTEM_INSTRUCTIONS  # <--- 🟢 USE EXISTING PERSONA
 
 logger = logging.getLogger(__name__)
 
 class QuizService:
     """
     Encapsulates all logic related to generating and parsing Quiz content.
-    Includes robust error handling and JSON repair mechanisms.
     """
 
     @staticmethod
     def get_system_instruction(topic: str = "general", num_questions: int = 5) -> Dict[str, Any]:
         """
         Returns the specific system instruction to force the AI to generate a structured JSON ARRAY of questions.
+        Combines the site's canonical PERSONA (Roma) with the specific TECHNICAL rules for the quiz.
         """
+        
         instruction_text = (
-            f"SYSTEM INSTRUCTION: The user has requested a quiz/exam about '{topic}'. "
+            f"{BASE_SYSTEM_INSTRUCTIONS}\n\n"  # <--- 🟢 INJECT ROMA'S IDENTITY
+            
+            f"## IMMEDIATE RUNTIME MISSION: QUIZ GENERATION\n"
+            f"The user has requested a quiz/exam about '{topic}'. "
             f"You must generate a JSON ARRAY containing exactly {num_questions} distinct questions. \n\n"
             
-            "## Formatting Rules:\n"
-            "1. **Output Format**: You must return a LIST (Array) of objects inside a JSON block.\n"
-            "2. **Conversational Text**: You MAY include a brief, encouraging message or summary *before* or *after* the JSON block. Do not be robotic.\n"
-            "3. **Double Escaping**: ALL backslashes for LaTeX must be DOUBLE ESCAPED (e.g., `\\\\( x^2 \\\\)`).\n"
-            "4. **Math Syntax**: Use `\\\\(` and `\\\\)` for inline math.\n"
-            "5. **Difficulty**: Progressive difficulty (Question 1 is easy, Question 5 is hard).\n"
-            "6. **Content**: \n"
+            "## Execution Protocol:\n"
+            "1. **Voice Enforced**: You are Roma. Do NOT be a generic helpful assistant. Be cold, precise, and demanding. Do not say 'Good luck' or 'Happy studying'. Instead, challenge the user to prove their worth.\n"
+            "2. **Conversational Header**: Start with a brief, authoritative statement introducing the material. Pivot immediately to the test.\n"
+            "3. **JSON Payload**: Follow the text immediately with the JSON block.\n\n"
+
+            "## JSON Formatting Rules (STRICT):\n"
+            "1. **Output Format**: Return a LIST (Array) of objects.\n"
+            "2. **Double Escaping**: ALL backslashes for LaTeX must be DOUBLE ESCAPED (e.g., `\\\\( x^2 \\\\)`).\n"
+            "3. **Math Syntax**: Use `\\\\(` and `\\\\)` for inline math.\n"
+            "4. **Difficulty**: Progressive difficulty (Question 1 is easy, Last Question is hard).\n"
+            "5. **Content**: \n"
             "   - `question_title`: Short H1 Markdown title (# Topic).\n"
             "   - `question_text`: The question stem.\n"
             "   - `options`: Array of 4 strings.\n"
@@ -35,7 +44,7 @@ class QuizService:
             "   - `explanation`: Short text explaining why the answer is correct.\n\n"
 
             "## Expected Output Structure:\n"
-            "Here is a quiz about [Topic]...\n\n"
+            "Here is the challenge regarding [Topic]. Prove your competence.\n"
             "```json\n"
             "[\n"
             "  {\n"
@@ -47,7 +56,6 @@ class QuizService:
             "  }\n"
             "]\n"
             "```\n"
-            "Good luck with your study session!"
         )
 
         return {
@@ -125,7 +133,6 @@ class QuizService:
         cleaned = re.sub(r"```.*?```", "", raw_text, flags=re.DOTALL)
         
         # 2. Remove raw JSON arrays if they are not inside code blocks: [ { ... } ]
-        # We look for a bracket, followed by a brace, greedy match, closing brace/bracket
         cleaned = re.sub(r"\[\s*\{.*\}\s*\]", "", cleaned, flags=re.DOTALL)
         
         # 3. Clean up extra whitespace/newlines created by the removal
