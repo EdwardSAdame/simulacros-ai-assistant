@@ -67,17 +67,18 @@ class SemanticRouter:
         router_model = settings.OPENAI_ROUTER_MODEL.lower()
         categories_str = ", ".join(self.valid_categories)
         
-        # 🔹 UPDATED PROMPT: Now asks for 'intent'
+        # 🔹 UPDATED PROMPT: Stronger instructions for dynamic phrases
         system_prompt = (
             f"You are the brain of an advanced AI tutor named Roma. "
             f"1. Classify the input into one of: {categories_str}. "
             f"2. Determine the INTENT. Is the user explicitly asking to take a quiz, exam, test, or simulacrum? "
             f"   - If yes -> intent: 'quiz' "
             f"   - If they are just asking a question or chatting -> intent: 'chat' "
-            f"3. Generate 3 short, authoritative, 'tech-noir' style status messages (max 4 words each) "
-            f"that describe the thinking process for this specific query. "
-            f"Use the same language as the user's input (Spanish or English). "
-            f"Example: ['Analyzing request...', 'Detecting quiz intent...', 'Initiating protocol...']. "
+            f"3. Generate 3 short, authoritative, 'tech-noir' style status messages (max 4 words each). "
+            f"   - **STRICT RULE**: The phrases must be 100% UNIQUE and specific to the detected category/topic. "
+            f"   - **FORBIDDEN**: Do NOT use generic phrases like 'Analyzing request', 'Detecting intent', or 'Initiating protocol'. "
+            f"   - If the intent is 'quiz', the phrases should sound like you are constructing an exam (e.g., 'Compiling test banks...', 'Calibrating difficulty...'). "
+            f"   - Use the same language as the user's input (Spanish or English). "
             f"Return JSON: {{ 'category': '...', 'intent': 'quiz' | 'chat', 'loading_phrases': ['str', 'str', 'str'] }}."
         )
 
