@@ -3,13 +3,14 @@ import json
 import re
 import logging
 from typing import Dict, List, Optional, Any, Union
-from src.config.system_instructions import BASE_SYSTEM_INSTRUCTIONS  # <--- 🟢 USE EXISTING PERSONA
+from src.config.system_instructions import BASE_SYSTEM_INSTRUCTIONS
 
 logger = logging.getLogger(__name__)
 
 class QuizService:
     """
     Encapsulates all logic related to generating and parsing Quiz content.
+    Includes robust error handling and JSON repair mechanisms.
     """
 
     @staticmethod
@@ -20,25 +21,26 @@ class QuizService:
         """
         
         instruction_text = (
-            f"{BASE_SYSTEM_INSTRUCTIONS}\n\n"  # <--- 🟢 INJECT ROMA'S IDENTITY
+            f"{BASE_SYSTEM_INSTRUCTIONS}\n\n"
             
             f"## IMMEDIATE RUNTIME MISSION: QUIZ GENERATION\n"
             f"The user has requested a quiz/exam about '{topic}'. "
             f"You must generate a JSON ARRAY containing exactly {num_questions} distinct questions. \n\n"
             
             "## Execution Protocol:\n"
-            "1. **Voice Enforced**: You are Roma. Do NOT be a generic helpful assistant. Be cold, precise, and demanding. Do not say 'Good luck' or 'Happy studying'. Instead, challenge the user to prove their worth.\n"
+            "1. **Voice Enforced**: You are Roma. Do NOT be a generic helpful assistant. Be cold, precise, and demanding. Do not say 'Good luck'. Challenge the user.\n"
             "2. **Conversational Header**: Start with a brief, authoritative statement introducing the material. Pivot immediately to the test.\n"
             "3. **JSON Payload**: Follow the text immediately with the JSON block.\n\n"
 
-            "## JSON Formatting Rules (STRICT):\n"
+            "## JSON Formatting & Content Rules (STRICT):\n"
             "1. **Output Format**: Return a LIST (Array) of objects.\n"
             "2. **Double Escaping**: ALL backslashes for LaTeX must be DOUBLE ESCAPED (e.g., `\\\\( x^2 \\\\)`).\n"
             "3. **Math Syntax**: Use `\\\\(` and `\\\\)` for inline math.\n"
-            "4. **Difficulty**: Progressive difficulty (Question 1 is easy, Last Question is hard).\n"
-            "5. **Content**: \n"
+            "4. **Difficulty & Style**: Questions must be **challenging, intriguing, and non-trivial**. Avoid generic or cliché examples. Every question should test deep conceptual understanding or complex application.\n"
+            "5. **Numbering**: You MUST prefix the `question_text` with the question number (e.g., '1. Calculate...', '2. Define...').\n"
+            "6. **Content Fields**: \n"
             "   - `question_title`: Short H1 Markdown title (# Topic).\n"
-            "   - `question_text`: The question stem.\n"
+            "   - `question_text`: The question stem (numbered).\n"
             "   - `options`: Array of 4 strings.\n"
             "   - `correct_option_index`: 0-3.\n"
             "   - `explanation`: Short text explaining why the answer is correct.\n\n"
@@ -48,11 +50,11 @@ class QuizService:
             "```json\n"
             "[\n"
             "  {\n"
-            "    \"question_title\": \"# Basic Integration\",\n"
-            "    \"question_text\": \"Solve \\\\( \\\\int x dx \\\\)\",\n"
-            "    \"options\": [\"\\\\( x^2/2 \\\\)\", \"\\\\( x \\\\)\", \"\\\\( 2x \\\\)\", \"\\\\( x^2 \\\\)\"],\n"
+            "    \"question_title\": \"# Integration by Parts\",\n"
+            "    \"question_text\": \"1. Solve the integral \\\\( \\\\int x e^x dx \\\\) and identify the correct methodology.\",\n"
+            "    \"options\": [\"\\\\( e^x(x-1) + C \\\\)\", \"\\\\( xe^x + C \\\\)\", \"\\\\( e^x(x+1) + C \\\\)\", \"\\\\( x^2e^x + C \\\\)\"],\n"
             "    \"correct_option_index\": 0,\n"
-            "    \"explanation\": \"Power rule of integration.\"\n"
+            "    \"explanation\": \"Using integration by parts with u=x and dv=e^x dx.\"\n"
             "  }\n"
             "]\n"
             "```\n"
