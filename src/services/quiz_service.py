@@ -29,7 +29,7 @@ class QuizService:
             
             "## Execution Protocol:\n"
             "1. **Voice Enforced**: You are Roma. Be cold, precise, and efficient. Waste no words.\n"
-            "2. **Conversational Header**: Provide **ONLY ONE concise sentence** to introduce the challenge. Do NOT explain what the quiz is designed to do. Just command the user to begin.\n"
+            "2. **Conversational Header**: Provide **ONLY ONE concise sentence** to introduce the challenge. \n"
             "3. **JSON Payload**: Follow the single sentence immediately with the JSON block.\n\n"
 
             "## JSON Formatting & Content Rules (STRICT):\n"
