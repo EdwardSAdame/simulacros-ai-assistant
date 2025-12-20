@@ -3,13 +3,12 @@ from src.assistant.assistant_client import send_message_to_assistant
 from src.assistant.image_handler import format_image_urls_for_openai
 from src.storage.conversations_table import save_conversation
 from src.storage.messages_table import save_message, get_recent_messages
-from src.config.page_vectorstores import get_stores_for_page
 from src.utils.logging_utils import log_event
 from src.services.quiz_service import QuizService 
 from typing import List, Dict, Any, Tuple
 from decimal import Decimal
 import json
-import re # <--- Added regex import
+import re
 
 def _normalize_email_for_storage(val):
     if val is None: return None
@@ -73,9 +72,7 @@ def get_ai_response(
     mode: str = "omega",
     intent: str = "chat"
 ) -> Tuple[str, str, str, Dict | None]: 
-    """
-    Returns: (assistant_reply_text, conversation_id, assistant_timestamp, quiz_data_json)
-    """
+    
     page = _normalize_page(page)
 
     # Step 1: Find-or-create conversation
@@ -106,12 +103,9 @@ def get_ai_response(
     if intent == "quiz":
         topic_hint = message if message else "General Knowledge"
         
-        # 🔹 DYNAMIC COUNT DETECTION
-        # Default to 5
+        # Dynamic Count Detection
         num_questions = 5
         if message:
-            # Look for digits (e.g. "3 questions", "10 preguntas", or just "3")
-            # We limit to reasonably small numbers (max 20) to prevent token overflow
             match = re.search(r'\b(\d+)\b', message)
             if match:
                 parsed_num = int(match.group(1))
@@ -145,12 +139,15 @@ def get_ai_response(
         if extracted_data:
             quiz_data = extracted_data
             
-            # Determine count for reply text
-            count = 0
-            if isinstance(quiz_data.get("questions"), list):
-                count = len(quiz_data["questions"])
+            # 🟢 UPDATED LOGIC:
+            # We strip the JSON from the response and keep the conversational text the AI wrote.
+            cleaned_text = QuizService.clean_response_text(raw_response)
             
-            final_reply_text = f"I have generated a {count}-question quiz for you. Good luck!"
+            # If the AI only wrote JSON (no text), provide a minimal fallback.
+            if cleaned_text:
+                final_reply_text = cleaned_text
+            else:
+                final_reply_text = "Here is the quiz you requested."
         else:
             log_event("quiz_extraction_failed", {"raw": raw_response}, level="error")
             # Fallback: text is just raw response
