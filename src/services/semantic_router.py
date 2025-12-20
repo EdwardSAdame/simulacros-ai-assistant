@@ -75,9 +75,9 @@ class SemanticRouter:
             f"   - If yes -> intent: 'quiz' "
             f"   - If they are just asking a question or chatting -> intent: 'chat' "
             f"3. Generate 3 short, authoritative, 'tech-noir' style status messages (max 4 words each). "
-            f"   - **STRICT RULE**: The phrases must be 100% UNIQUE and specific to the detected category/topic. "
-            f"   - **FORBIDDEN**: Do NOT use generic phrases like 'Analyzing request', 'Detecting intent', or 'Initiating protocol'. "
-            f"   - If the intent is 'quiz', the phrases should sound like you are constructing an exam (e.g., 'Compiling test banks...', 'Calibrating difficulty...'). "
+            f"   - **STRICT RULE**: The phrases must be 100 percent UNIQUE and specific to the detected category/topic. "
+            f"   - **FORBIDDEN**: Do NOT use generic phrases"
+            f"   - If the intent is 'quiz', the phrases should sound like you are constructing an exam"
             f"   - Use the same language as the user's input (Spanish or English). "
             f"Return JSON: {{ 'category': '...', 'intent': 'quiz' | 'chat', 'loading_phrases': ['str', 'str', 'str'] }}."
         )
