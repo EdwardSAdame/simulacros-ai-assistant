@@ -102,10 +102,21 @@ def get_ai_response(
     if current_user_content:
         conversation_input.append({"role": "user", "content": current_user_content})
 
-    # 4. Inject Quiz Instructions (Using High Token Count from Omega Profile)
+    # 4. Inject Quiz Instructions
     if intent == "quiz":
         topic_hint = message if message else "General Knowledge"
-        num_questions = 5 # Safe now with Omega's high token limit
+        
+        # 🟢 FIX: Default to 3 questions to prevent truncation.
+        num_questions = 3 
+        
+        # Allow explicit user override (e.g. "dame 5 preguntas") but cap it safely
+        if message:
+            match = re.search(r'\b(\d+)\b', message)
+            if match:
+                parsed_num = int(match.group(1))
+                if 1 <= parsed_num <= 5: # Cap at 5 for safety
+                    num_questions = parsed_num
+
         conversation_input.append(QuizService.get_system_instruction(topic=topic_hint, num_questions=num_questions))
 
     # Step 5: Send to model (Passing Mode)
@@ -116,7 +127,7 @@ def get_ai_response(
             page=page,
             name=(name or None),
             email=_normalize_email_for_storage(email),
-            mode=mode # 🟢 Pass the mode to select the profile
+            mode=mode 
         )
     except Exception as e:
         raise RuntimeError(f"❌ OpenAI Responses API failed: {e}")
@@ -136,6 +147,7 @@ def get_ai_response(
             final_reply_text = cleaned if cleaned else "Aquí tienes el simulacro."
         else:
             log_event("quiz_extraction_failed", {"preview": assistant_reply[:50]}, level="error")
+            # Safety Message: Don't show raw broken code
             final_reply_text = (
                 "⚠️ **Error de Generación**: El simulacro no se pudo procesar correctamente (respuesta incompleta). "
                 "Intenta usar el modo 'Omega' o pedir menos preguntas."

@@ -52,9 +52,6 @@ def send_message_to_assistant(
     system_text = _build_runtime_signals(user_id=user_id, page=page, name=name, email=email)
     
     # 2) Construct input
-    # Note: 'o1' models currently process 'system' messages as 'user' messages under the hood,
-    # but the API now accepts 'developer' or 'system' roles in newer versions.
-    # We stick to standard 'system' for compatibility.
     api_input = [
         {"role": "system", "content": [{"type": "input_text", "text": system_text}]}
     ]
@@ -63,51 +60,36 @@ def send_message_to_assistant(
     # 3) Resolve vector stores
     vector_store_ids = get_stores_for_page(page)
 
-    # ------------------------------------------------------------------
-    # 🟢 4) DYNAMIC PARAMETER SANITIZATION (The Fix)
-    # ------------------------------------------------------------------
+    # 4) Detect Reasoning Models (o1)
     is_reasoning_model = cfg.model.startswith("o1") or "reasoning" in cfg.model
-
-    # Base arguments common to all models
+    
+    # Base arguments (No max_tokens)
     request_kwargs = {
         "model": cfg.model,
-        "input": api_input, # Assuming your custom client uses 'input'
+        "input": api_input,
+        "temperature": cfg.temperature,
+        "top_p": cfg.top_p,
     }
 
     if is_reasoning_model:
-        # ⚠️ REASONING MODEL RULES (o1-preview, o1-mini)
-        logger.info(f"Assistant Client: Detected reasoning model '{cfg.model}'. Adjusting params.")
+        logger.info(f"Assistant Client: Detected reasoning model '{cfg.model}'.")
+        # Reasoning models don't support temp/top_p in some versions
+        request_kwargs.pop("temperature", None)
+        request_kwargs.pop("top_p", None)
         
-        # Rule A: Use max_completion_tokens, NOT max_tokens
-        request_kwargs["max_completion_tokens"] = cfg.max_tokens
-        
-        # Rule B: Temperature and Top P are NOT supported (or fixed at 1)
-        # We deliberately OMIT them to avoid 400 Errors.
-        
-        # Rule C: Tools (File Search) might not be supported in Beta
-        # We attempt to send them, but if it fails, we catch it.
-        # Currently, o1 DOES NOT support tools. We omit them to prevent crash.
-        logger.warning("Assistant Client: Tools (File Search) disabled for reasoning model.")
+        logger.warning("Assistant Client: Tools disabled for reasoning model.")
         request_kwargs["tools"] = None 
-
     else:
-        # ✅ STANDARD MODEL RULES (gpt-4o, gpt-3.5)
-        request_kwargs["max_tokens"] = cfg.max_tokens
-        request_kwargs["temperature"] = cfg.temperature
-        request_kwargs["top_p"] = cfg.top_p
-        
-        # Include Tools
+        # Standard models get tools
         request_kwargs["tools"] = [{
             "type": "file_search",
             "vector_store_ids": vector_store_ids,
             "max_num_results": get_vector_search_max_results(),
         }]
 
-    # ------------------------------------------------------------------
-    # 5) Call the API with sanitized arguments
-    # ------------------------------------------------------------------
+    # 5) Call the API
     try:
-        # Clean up None values (like tools if omitted)
+        # Clean up None values
         final_kwargs = {k: v for k, v in request_kwargs.items() if v is not None}
         
         resp = client.responses.create(**final_kwargs)
