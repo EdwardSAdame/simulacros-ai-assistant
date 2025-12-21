@@ -1,23 +1,19 @@
 # src/services/quiz_service.py
-import json
-import re
-import logging
-from typing import Dict, List, Optional, Any, Union
+from typing import Dict, Any
 from src.config.system_instructions import BASE_SYSTEM_INSTRUCTIONS
-
-logger = logging.getLogger(__name__)
 
 class QuizService:
     """
-    Encapsulates all logic related to generating and parsing Quiz content.
-    Includes robust error handling and JSON repair mechanisms.
+    Encapsulates logic for Quiz Prompts. 
+    Parsing is now handled by the Assistant Client via Structured Outputs.
     """
 
     @staticmethod
     def get_system_instruction(topic: str = "general", num_questions: int = 5) -> Dict[str, Any]:
         """
-        Returns the specific system instruction to force the AI to generate a structured JSON ARRAY of questions.
-        Combines the site's canonical PERSONA (Roma) with the specific TECHNICAL rules for the quiz.
+        Returns the simplified system instruction.
+        We no longer need to force JSON syntax/escaping here, as the Schema handles it.
+        We focus on CONTENT QUALITY.
         """
         
         instruction_text = (
@@ -25,124 +21,19 @@ class QuizService:
             
             f"## IMMEDIATE RUNTIME MISSION: QUIZ GENERATION\n"
             f"The user has requested a quiz/exam about '{topic}'. "
-            f"You must generate a JSON ARRAY containing exactly {num_questions} distinct questions. \n\n"
+            f"You must generate exactly {num_questions} distinct questions. \n\n"
             
-            "## Execution Protocol:\n"
-            "1. **Voice Enforced**: You are Roma. Be cold, precise, and efficient. Waste no words.\n"
-            "2. **Conversational Header**: Provide **ONLY ONE concise sentence** to introduce the challenge. \n"
-            "3. **JSON Payload**: Follow the single sentence immediately with the JSON block.\n\n"
-
-            "## JSON Formatting & Content Rules (STRICT):\n"
-            "1. **Output Format**: Return a LIST (Array) of objects.\n"
-            "2. **Double Escaping**: ALL backslashes for LaTeX must be DOUBLE ESCAPED (e.g., `\\\\( x^2 \\\\)`).\n"
-            "3. **Math Syntax**: Use `\\\\(` and `\\\\)` for inline math.\n"
-            "4. **Difficulty & Style**: Questions must be **challenging, intriguing, and non-trivial**.\n"
-            "5. **Numbering & Titles**: You MUST include the question number in the `question_title` (e.g., '# 1. Integration').\n"
-            "6. **Content Fields**: \n"
-            "   - `question_title`: H1 Markdown title with Number + Topic (e.g., '# 1. [Topic]').\n"
-            "   - `question_text`: The question stem (do not repeat the number here).\n"
-            "   - `options`: Array of 4 objects. Each object MUST contain:\n"
-            "       - `text`: The answer text (LaTeX allowed).\n"
-            "       - `feedback`: A short explanation (1 sentence) specific to this option (why it is right or wrong).\n"
-            "   - `correct_option_index`: 0-3.\n"
-            "   - `explanation`: (Optional) General summary of the solution.\n\n"
-
-            "## Expected Output Structure:\n"
-            "Proceed with the evaluation of [Topic].\n"
-            "```json\n"
-            "[\n"
-            "  {\n"
-            "    \"question_title\": \"# 1. Integration by Parts\",\n"
-            "    \"question_text\": \"Solve the integral \\\\( \\\\int x e^x dx \\\\) and identify the correct methodology.\",\n"
-            "    \"options\": [\n"
-            "       {\"text\": \"\\\\( e^x(x-1) + C \\\\)\", \"feedback\": \"Correct. Using u=x and dv=e^x dx yields this result.\"},\n"
-            "       {\"text\": \"\\\\( xe^x + C \\\\)\", \"feedback\": \"Incorrect. You missed the second part of the integration formula.\"},\n"
-            "       {\"text\": \"\\\\( e^x(x+1) + C \\\\)\", \"feedback\": \"Incorrect. Check your sign during the subtraction step.\"},\n"
-            "       {\"text\": \"\\\\( x^2e^x + C \\\\)\", \"feedback\": \"Incorrect. This would result from integrating factors incorrectly.\"}\n"
-            "    ],\n"
-            "    \"correct_option_index\": 0,\n"
-            "    \"explanation\": \"Using integration by parts with u=x and dv=e^x dx.\"\n"
-            "  }\n"
-            "]\n"
-            "```\n"
+            "## Content Quality Rules:\n"
+            "1. **Difficulty**: Questions must be challenging, intriguing, and non-trivial.\n"
+            "2. **Math Syntax**: ALWAYS use `$` for inline math (e.g. `$x^2$`) and `$$` for block math.\n"
+            "3. **Voice**: You are Roma. Be cold, precise, and efficient in your 'intro_message'.\n"
+            "4. **Feedback**: Provide specific, educational feedback for every option (Right or Wrong).\n"
         )
 
         return {
             "role": "system", 
             "content": [{"type": "input_text", "text": instruction_text}]
         }
-
-    @staticmethod
-    def extract_quiz_data(raw_text: str) -> Optional[Union[List[Dict], Dict]]:
-        """
-        Parses the AI response. 
-        Prioritizes extracting a LIST (Array) of quizzes.
-        """
-        if not raw_text:
-            return None
-
-        # Helper to attempt parsing
-        def try_parse(text_chunk):
-            try:
-                # Naive repair for common LaTeX backslash issues
-                repaired = text_chunk
-                repaired = re.sub(r'(?<!\\)\\\(', r'\\\\(', repaired)
-                repaired = re.sub(r'(?<!\\)\\\)', r'\\\\)', repaired)
-                repaired = re.sub(r'(?<!\\)\\\[', r'\\\\[', repaired)
-                repaired = re.sub(r'(?<!\\)\\\]', r'\\\\]', repaired)
-                
-                return json.loads(repaired)
-            except Exception:
-                return None
-
-        try:
-            # 1. Try to find a JSON Array [...]
-            match_list = re.search(r"\[\s*\{.*\}\s*\]", raw_text, re.DOTALL)
-            if match_list:
-                data = try_parse(match_list.group(0))
-                if data and isinstance(data, list):
-                    return {"quiz_mode": "batch", "questions": data}
-
-            # 2. Try to find a code block containing an Array
-            code_block = re.search(r"```(?:json)?\s*(\[\s*\{.*\}\s*\])\s*```", raw_text, re.DOTALL)
-            if code_block:
-                data = try_parse(code_block.group(1))
-                if data and isinstance(data, list):
-                    return {"quiz_mode": "batch", "questions": data}
-
-            # 3. Fallback: Try to find a Single Object
-            start_index = raw_text.find('{')
-            end_index = raw_text.rfind('}')
-
-            if start_index != -1 and end_index != -1 and end_index > start_index:
-                potential_json = raw_text[start_index : end_index + 1]
-                data = try_parse(potential_json)
-                
-                if data and isinstance(data, dict):
-                    if "questions" in data and isinstance(data["questions"], list):
-                        return {"quiz_mode": "batch", "questions": data["questions"]}
-                    return {"quiz_mode": "single", "questions": [data]}
-
-            logger.warning(f"QuizService: Failed to extract JSON array or object. Text: {raw_text[:50]}...")
-            return None
-
-        except Exception as e:
-            logger.error(f"QuizService: Critical Extraction error: {str(e)}")
-            return None
-
-    @staticmethod
-    def clean_response_text(raw_text: str) -> str:
-        """
-        Removes the JSON block (and code fences) from the AI's response,
-        returning ONLY the conversational text generated by the AI.
-        """
-        if not raw_text: return ""
-        
-        # 1. Remove markdown code blocks that contain the JSON: ```json ... ```
-        cleaned = re.sub(r"```.*?```", "", raw_text, flags=re.DOTALL)
-        
-        # 2. Remove raw JSON arrays if they are not inside code blocks: [ { ... } ]
-        cleaned = re.sub(r"\[\s*\{.*\}\s*\]", "", cleaned, flags=re.DOTALL)
-        
-        # 3. Clean up extra whitespace/newlines created by the removal
-        return cleaned.strip()
+    
+    # 🟢 DELETED: extract_quiz_data (No longer needed)
+    # 🟢 DELETED: clean_response_text (No longer needed)

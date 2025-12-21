@@ -1,5 +1,5 @@
 # src/services/chat_service.py
-from src.assistant.assistant_client import send_message_to_assistant
+from src.assistant.assistant_client import send_message_to_assistant, generate_structured_quiz
 from src.assistant.image_handler import format_image_urls_for_openai
 from src.storage.conversations_table import save_conversation
 from src.storage.messages_table import save_message, get_recent_messages
@@ -92,8 +92,7 @@ def get_ai_response(
 
     # Step 2: Build Input
     conversation_input = _build_history_list(conversation_id)
-
-    # Step 3: Add current message
+    
     current_user_content = []
     if message:
         current_user_content.append({"type": "input_text", "text": message})
@@ -102,15 +101,16 @@ def get_ai_response(
     if current_user_content:
         conversation_input.append({"role": "user", "content": current_user_content})
 
-    # 4. Inject Quiz Instructions
+    # ------------------------------------------------------------------
+    # 🟢 BRANCH: QUIZ (Structured) vs CHAT (Standard)
+    # ------------------------------------------------------------------
+    quiz_data = None
+    final_reply_text = ""
+    
     if intent == "quiz":
+        # A. Setup Quiz Instructions
         topic_hint = message if message else "General Knowledge"
-        
-        # 🟢 REVERT: Default back to 5 questions
-        num_questions = 5 
-        
-        # 🟢 ALLOW OVERRIDE: If user asks for "10 questions", we try to do it.
-        # We cap at 10 to prevent extreme timeouts.
+        num_questions = 5
         if message:
             match = re.search(r'\b(\d+)\b', message)
             if match:
@@ -120,59 +120,66 @@ def get_ai_response(
 
         conversation_input.append(QuizService.get_system_instruction(topic=topic_hint, num_questions=num_questions))
 
-    # Step 5: Send to model (Passing Mode)
-    try:
-        assistant_reply = send_message_to_assistant(
-            conversation_input=conversation_input,
-            user_id=user_id,
-            page=page,
-            name=(name or None),
-            email=_normalize_email_for_storage(email),
-            mode=mode 
-        )
-    except Exception as e:
-        raise RuntimeError(f"❌ OpenAI Responses API failed: {e}")
-
-    if not assistant_reply or "No assistant response" in assistant_reply:
-        raise ValueError("❌ Assistant returned an empty or invalid response.")
-
-    # 6. Extract & Clean Quiz Data (The "Safety Catch")
-    quiz_data = None
-    final_reply_text = assistant_reply
-
-    if intent == "quiz":
-        extracted_data = QuizService.extract_quiz_data(assistant_reply)
-        
-        if extracted_data:
-            # ✅ SUCCESS: JSON is valid
-            quiz_data = extracted_data
-            cleaned = QuizService.clean_response_text(assistant_reply)
-            final_reply_text = cleaned if cleaned else "Aquí tienes el simulacro."
-        else:
-            # ❌ FAILURE: JSON is broken/truncated
-            log_event("quiz_extraction_failed", {"preview": assistant_reply[:50]}, level="error")
+        # B. Call Structured API
+        try:
+            # This returns a Pydantic Model (QuizResponse)
+            quiz_model = generate_structured_quiz(
+                conversation_input=conversation_input,
+                user_id=user_id,
+                page=page,
+                name=(name or None),
+                email=_normalize_email_for_storage(email),
+                mode=mode 
+            )
             
-            # 🟢 CRITICAL FIX: Hide the broken text. Show a polite error instead.
+            # C. Extract Data
+            # 'questions' is a list of Pydantic models, so we convert them to dicts
+            quiz_data = {
+                "quiz_mode": "batch", 
+                "questions": [q.dict() for q in quiz_model.questions]
+            }
+            final_reply_text = quiz_model.intro_message
+
+        except Exception as e:
+            log_event("quiz_generation_failed", {"error": str(e)}, level="error")
             final_reply_text = (
-                "⚠️ **Error de Generación**: El simulacro no se pudo procesar correctamente (posiblemente la respuesta fue demasiado larga). "
-                "Por favor intenta pedir menos preguntas (ej: '3 preguntas') o dividir el tema."
+                "⚠️ **Error de Generación**: No pudimos generar el simulacro estructurado. "
+                "Por favor intenta de nuevo o prueba con menos preguntas."
             )
             quiz_data = None
 
+    else:
+        # Standard Chat Mode
+        try:
+            final_reply_text = send_message_to_assistant(
+                conversation_input=conversation_input,
+                user_id=user_id,
+                page=page,
+                name=(name or None),
+                email=_normalize_email_for_storage(email),
+                mode=mode 
+            )
+        except Exception as e:
+            raise RuntimeError(f"❌ OpenAI Chat API failed: {e}")
+
     # Step 7: Persist
+    assistant_timestamp = ""
     try:
         if message:
             save_message(conversation_id, role="user", message_text=message)
         for img in image_urls or []:
             save_message(conversation_id, role="user", message_text=f"[Imagen] {img}")
         
-        assistant_message_item = save_message(
+        saved_item = save_message(
             conversation_id, 
             role="assistant", 
-            message_text=final_reply_text, # Saves the clean text OR the error message
+            message_text=final_reply_text,
             metadata=quiz_data 
         )
-        assistant_timestamp = assistant_message_item.get("Timestamp")
+        # Safely retrieve timestamp if returned, otherwise empty string (prevents crash)
+        if saved_item and isinstance(saved_item, dict):
+            assistant_timestamp = saved_item.get("Timestamp", "")
+
     except Exception as e:
         raise RuntimeError(f"❌ Failed to save messages: {e}")
 
