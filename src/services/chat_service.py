@@ -1,296 +1,272 @@
-# src/assistant/assistant_client.py
-from typing import List, Dict, Any, Type, Generator
-import logging
+# src/services/chat_service.py
 import json
 import re
-from pydantic import BaseModel
+import logging
+from decimal import Decimal
+from typing import List, Dict, Any, Tuple, Optional
 
+# 🟢 CONFIG & UTILS (Safe to keep at top)
 from src.config.settings import get_openai_client, get_vector_search_max_results
 from src.config.model_config import get_model_config
 from src.config.system_instructions import build_system_instructions
 from src.config.page_vectorstores import get_stores_for_page
+from src.utils.logging_utils import log_event
 from src.utils.time_utils import get_current_time_info, infer_target_semester, semester_season
 
-# 🟢 Import the Schema
-from src.schemas.quiz_schemas import QuizResponse, QuizQuestion
+# 🟢 STORAGE (Safe to keep at top)
+from src.storage.conversations_table import save_conversation
+from src.storage.messages_table import save_message, get_recent_messages
 
 logger = logging.getLogger(__name__)
 
-def _build_runtime_signals(user_id: str | None, page: str | None, name: str | None, email: str | None) -> str:
-    """
-    Build the runtime 'RUNTIME SIGNALS' block appended to the base system prompt.
-    """
-    tinfo = get_current_time_info()
-    target = infer_target_semester()
-    season = semester_season(target)
+def _normalize_email_for_storage(val):
+    if val is None: return None
+    if isinstance(val, str) and val.strip() == "": return None
+    return val
 
-    signals = [
-        f"Today is {tinfo['full_human']}.",
-        f"The user is on the page: {page or '/'}",
-        ("They are browsing as a guest." if not user_id or user_id == "anonymous"
-         else f"Their user ID is {user_id}."),
-        f"Target semester inferred: {target} (season {season}).",
-        "All documents accessible via the file_search tool belong to Invicto’s curated knowledge base. Never imply the user provided them.",
-    ]
-    if name:
-        signals.append(f"Display name: {name}.")
-    if email:
-        signals.append(f"Email: {email}.")
-    return build_system_instructions(extras=signals)
+def _normalize_page(val: str | None) -> str:
+    if not val or (isinstance(val, str) and val.strip() == ""):
+        return "/"
+    return val
 
-# ------------------------------------------------------------------
-# 🟢 STANDARD CHAT
-# ------------------------------------------------------------------
-def send_message_to_assistant(
-    conversation_input: List[Dict[str, Any]],
-    user_id: str | None = None,
-    page: str | None = None,
-    name: str | None = None,
-    email: str | None = None,
-    mode: str = "omega"
-) -> str:
-    """
-    Standard text-based chat response.
-    """
-    client = get_openai_client()
-    cfg = get_model_config(mode)
+def decimal_default(obj):
+    if isinstance(obj, Decimal):
+        return int(obj) if obj % 1 == 0 else float(obj)
+    raise TypeError
 
-    system_text = _build_runtime_signals(user_id=user_id, page=page, name=name, email=email)
-    
-    api_input = [
-        {"role": "system", "content": [{"type": "input_text", "text": system_text}]}
-    ]
-    api_input.extend(conversation_input)
-
-    vector_store_ids = get_stores_for_page(page)
-    is_reasoning_model = cfg.model.startswith("o1") or "reasoning" in cfg.model or "o4" in cfg.model
-    
-    request_kwargs = {
-        "model": cfg.model,
-        "input": api_input,
-        "temperature": cfg.temperature,
-        "top_p": cfg.top_p,
-    }
-
-    if is_reasoning_model:
-        logger.info(f"Assistant Client: Detected reasoning model '{cfg.model}'.")
-        request_kwargs.pop("temperature", None)
-        request_kwargs.pop("top_p", None)
-        request_kwargs["tools"] = None 
-    else:
-        request_kwargs["tools"] = [{
-            "type": "file_search",
-            "vector_store_ids": vector_store_ids,
-            "max_num_results": get_vector_search_max_results(),
-        }]
-
+def _build_history_list(conversation_id: str, max_user: int = 3, max_assistant: int = 3) -> List[Dict[str, Any]]:
     try:
-        final_kwargs = {k: v for k, v in request_kwargs.items() if v is not None}
-        resp = client.responses.create(**final_kwargs)
+        msgs = get_recent_messages(conversation_id=conversation_id, limit=20, ascending=True)
+        if not msgs: return []
 
-        text = getattr(resp, "output_text", None)
-        if not text:
-            try:
-                chunks = []
-                for block in getattr(resp, "output", []) or []:
-                    for c in block.get("content", []) or []:
-                        if c.get("type") in ("output_text", "text"):
-                            chunks.append(c.get("text", ""))
-                text = "\n".join([s for s in chunks if s]).strip()
-            except Exception:
-                text = ""
+        user_msgs = [m for m in msgs if m.get("Role") == "user"][-max_user:]
+        asst_msgs = [m for m in msgs if m.get("Role") == "assistant"][-max_assistant:]
+        merged = sorted(user_msgs + asst_msgs, key=lambda m: m["Timestamp"])
 
-        return text or "[No assistant response found]"
-
-    except Exception as e:
-        logger.error(f"OpenAI Chat Request Failed. Model: {cfg.model}. Error: {e}")
-        raise e
-
-
-# ------------------------------------------------------------------
-# 🟢 BATCH STRUCTURED QUIZ
-# ------------------------------------------------------------------
-def generate_structured_quiz(
-    conversation_input: List[Dict[str, Any]],
-    user_id: str | None = None,
-    page: str | None = None,
-    name: str | None = None,
-    email: str | None = None,
-    mode: str = "omega"
-) -> QuizResponse:
-    """
-    Generates a Quiz strictly adhering to the QuizResponse schema (Batch Mode).
-    """
-    client = get_openai_client()
-    cfg = get_model_config(mode)
-
-    system_text = _build_runtime_signals(user_id=user_id, page=page, name=name, email=email)
-    
-    api_input = [
-        {"role": "system", "content": [{"type": "input_text", "text": system_text}]}
-    ]
-    api_input.extend(conversation_input)
-
-    request_kwargs = {
-        "model": cfg.model,
-        "input": api_input,
-        "temperature": cfg.temperature,
-        "top_p": cfg.top_p,
-        "text_format": QuizResponse
-    }
-
-    if cfg.model.startswith("o1") or "o4" in cfg.model:
-         request_kwargs.pop("temperature", None)
-         request_kwargs.pop("top_p", None)
-
-    try:
-        final_kwargs = {k: v for k, v in request_kwargs.items() if v is not None}
-        resp = client.responses.parse(**final_kwargs)
-        return resp.output_parsed
-    except Exception as e:
-        logger.error(f"Structured Quiz Generation Failed. Model: {cfg.model}. Error: {e}")
-        raise e
-
-# ------------------------------------------------------------------
-# 🟢 NEW: STREAMING STRUCTURED QUIZ (WITH LOGGING & FIX)
-# ------------------------------------------------------------------
-def stream_structured_quiz(
-    conversation_input: List[Dict[str, Any]],
-    user_id: str | None = None,
-    page: str | None = None,
-    name: str | None = None,
-    email: str | None = None,
-    mode: str = "omega"
-) -> Generator[Dict[str, Any], None, None]:
-    """
-    Generates a Quiz strictly adhering to schema, but YIELDS chunks as they are ready.
-    """
-    client = get_openai_client()
-    cfg = get_model_config(mode)
-
-    system_text = _build_runtime_signals(user_id=user_id, page=page, name=name, email=email)
-    
-    api_input = [
-        {"role": "system", "content": [{"type": "input_text", "text": system_text}]}
-    ]
-    api_input.extend(conversation_input)
-
-    request_kwargs = {
-        "model": cfg.model,
-        "input": api_input,
-        "temperature": cfg.temperature,
-        "top_p": cfg.top_p,
-        "text_format": QuizResponse
-    }
-
-    if cfg.model.startswith("o1") or "o4" in cfg.model:
-         request_kwargs.pop("temperature", None)
-         request_kwargs.pop("top_p", None)
-
-    final_kwargs = {k: v for k, v in request_kwargs.items() if v is not None}
-
-    # -- Internal Parser State --
-    buffer = ""
-    intro_yielded = False
-    question_count = 0
-    
-    brace_depth = 0 
-    in_string = False
-    escape = False
-    
-    object_buffer_start = -1
-
-    try:
-        with client.responses.stream(**final_kwargs) as stream:
-            for event in stream:
-                if event.type == "response.output_text.delta":
-                    chunk = event.delta
-                    buffer += chunk
-                    
-                    # 1. Try to find/yield Intro Message
-                    if not intro_yielded:
-                        if '"questions"' in buffer:
-                            intro_match = re.search(r'"intro_message"\s*:\s*"(.*?)"', buffer, re.DOTALL)
-                            if intro_match:
-                                intro_text = intro_match.group(1)
-                                intro_text = intro_text.replace('\\"', '"')
-                                logger.info("StreamParser: Intro message detected.")
-                                yield {"type": "intro", "text": intro_text}
-                                intro_yielded = True
-                    
-                    # 2. Track Objects in the Stream
-                    questions_marker = buffer.find('"questions"')
-                    if questions_marker != -1:
-                        
-                        # Robust scan from start of questions array
-                        scan_start = max(questions_marker, len(buffer) - len(chunk) - 20) 
-                        
-                        q_brace_depth = 0
-                        q_in_string = False
-                        q_escape = False
-                        q_array_open = False
-                        
-                        # Find the first '[' after "questions"
-                        array_start = buffer.find('[', questions_marker)
-                        if array_start != -1:
-                            q_array_open = True
-                            
-                            if 'last_parsed_index' not in locals():
-                                last_parsed_index = array_start
-                            
-                            current_scan_idx = last_parsed_index
-                            
-                            while current_scan_idx < len(buffer):
-                                char = buffer[current_scan_idx]
-                                
-                                if not q_in_string:
-                                    if char == '"':
-                                        q_in_string = True
-                                    elif char == '{':
-                                        if q_brace_depth == 0:
-                                            object_start_idx = current_scan_idx
-                                        q_brace_depth += 1
-                                    elif char == '}':
-                                        q_brace_depth -= 1
-                                        if q_brace_depth == 0:
-                                            # We just closed a question object!
-                                            raw_obj_str = buffer[object_start_idx : current_scan_idx + 1]
-                                            try:
-                                                q_data = json.loads(raw_obj_str)
-                                                q_obj = QuizQuestion(**q_data)
-                                                
-                                                logger.info(f"StreamParser: Extracted Question {question_count} from stream.")
-                                                
-                                                yield {"type": "question", "index": question_count, "data": q_obj}
-                                                question_count += 1
-                                                last_parsed_index = current_scan_idx
-                                            except Exception as parse_err:
-                                                pass
-                                    elif char == '\\':
-                                        q_escape = True 
-                                else:
-                                    if q_escape:
-                                        q_escape = False
-                                    elif char == '\\':
-                                        q_escape = True
-                                    elif char == '"':
-                                        q_in_string = False
-                                
-                                current_scan_idx += 1
-
-            # 3. Final Result - 🟢 THE FIX
-            final_wrapper = stream.get_final_response()
-            logger.info("StreamParser: Stream finished. Validating final full response.")
+        history_list = []
+        for m in merged:
+            role = m.get("Role", "user")
+            text_content = m.get("MessageText", "")
             
-            # The SDK returns a wrapper. We must access the '.parsed' property 
-            # to get the actual QuizResponse Pydantic model.
-            if hasattr(final_wrapper, 'parsed'):
-                yield {"type": "done", "full_response": final_wrapper.parsed}
+            metadata = m.get("Metadata") or m.get("Meta")
+            if role == "assistant" and metadata:
+                try:
+                    metadata_str = json.dumps(metadata, default=decimal_default)
+                    hidden_context = (
+                        f"\n\n[SYSTEM CONTEXT: User cannot see this. "
+                        f"I previously generated this interactive quiz: {metadata_str}. "
+                        f"I must use this data to answer follow-up questions about the quiz.]"
+                    )
+                    text_content += hidden_context
+                except Exception:
+                    pass
+
+            content = [{"type": "input_text" if role == "user" else "output_text", "text": text_content}]
+            history_list.append({"role": role, "content": content})
+        
+        return history_list
+    except Exception as e:
+        log_event("history_fetch_failed", {"conversation_id": conversation_id}, level="warning", error=e)
+        return []
+
+# ------------------------------------------------------------------
+# MAIN FUNCTION
+# ------------------------------------------------------------------
+def get_ai_response(
+    message: str | None,
+    user_id: str | None,
+    name: str | None,
+    email: str | None,
+    page: str | None,
+    conversation_id: str | None = None,
+    image_urls: list[str] | None = None,
+    mode: str = "omega",
+    intent: str = "chat",
+    stream_manager: Any | None = None 
+) -> Tuple[str, str, str, Dict | None]: 
+    
+    # 🟢 LAZY IMPORTS TO PREVENT CIRCULAR DEPENDENCIES
+    # This fixes the "ImportModuleError" you saw in AWS logs
+    from src.assistant.assistant_client import send_message_to_assistant, generate_structured_quiz, stream_structured_quiz
+    from src.assistant.image_handler import format_image_urls_for_openai
+    from src.services.quiz_service import QuizService
+
+    page = _normalize_page(page)
+
+    # Step 1: Find-or-create conversation
+    try:
+        if conversation_id:
+            log_event("conversation_reused", {"conversation_id": conversation_id})
+        else:
+            sanitized_email = _normalize_email_for_storage(email)
+            conversation_data = save_conversation(
+                user_id=user_id, name=name or "", email=sanitized_email,
+                title=(message or "[Sin texto]")[:40], page=page,
+            )
+            conversation_id = conversation_data["ConversationId"]
+    except Exception as e:
+        raise RuntimeError(f"❌ Failed to save/reuse conversation: {e}")
+
+    # Step 2: Build Input
+    conversation_input = _build_history_list(conversation_id)
+    
+    current_user_content = []
+    if message:
+        current_user_content.append({"type": "input_text", "text": message})
+    current_user_content.extend(format_image_urls_for_openai(image_urls or []))
+
+    if current_user_content:
+        conversation_input.append({"role": "user", "content": current_user_content})
+
+    # ------------------------------------------------------------------
+    # 🟢 BRANCH: QUIZ (Structured) vs CHAT (Standard)
+    # ------------------------------------------------------------------
+    quiz_data = None
+    final_reply_text = ""
+    
+    if intent == "quiz":
+        # A. Setup Quiz Instructions
+        topic_hint = message if message else "General Knowledge"
+        num_questions = 5
+        if message:
+            match = re.search(r'\b(\d+)\b', message)
+            if match:
+                parsed_num = int(match.group(1))
+                if 1 <= parsed_num <= 10: 
+                    num_questions = parsed_num
+
+        conversation_input.append(QuizService.get_system_instruction(topic=topic_hint, num_questions=num_questions))
+
+        # B. Call API (Streaming or Batch)
+        try:
+            # 🟢 STREAMING PATH
+            if stream_manager:
+                log_event("quiz_streaming_started", {"user_id": user_id, "mode": mode})
+                
+                stream_gen = stream_structured_quiz(
+                    conversation_input=conversation_input,
+                    user_id=user_id,
+                    page=page,
+                    name=(name or None),
+                    email=_normalize_email_for_storage(email),
+                    mode=mode 
+                )
+                
+                # Internal accumulators
+                seen_indices = set()
+                accumulated_questions = []
+                final_reply_text = "Aquí tienes tu simulacro." 
+
+                # Iterate over generator events
+                for event in stream_gen:
+                    evt_type = event.get("type")
+                    
+                    if evt_type == "intro":
+                        text = event.get("text", "")
+                        logger.info(f"ChatService: Intro received: {text[:30]}...")
+                        final_reply_text = text
+                        
+                    elif evt_type == "question":
+                        q_data = event.get("data") 
+                        q_dict = q_data.dict()     
+                        idx = event.get("index", 0)
+                        
+                        # 🚀 Send to WebSocket immediately
+                        stream_manager.send_quiz_item(question_data=q_dict, index=idx)
+                        logger.info(f"ChatService: Pushed Question {idx} to client.")
+                        
+                        # Safe accumulation
+                        if idx not in seen_indices:
+                            accumulated_questions.append(q_dict)
+                            seen_indices.add(idx)
+                        
+                    elif evt_type == "done":
+                        # 🟢 THE FIX: Handle the SDK Wrapper
+                        final_obj = event.get("full_response")
+                        
+                        # Check if it's the wrapped ParsedResponse or the model directly
+                        final_model = getattr(final_obj, 'parsed', final_obj)
+                        
+                        if final_model and hasattr(final_model, 'questions'):
+                            logger.info(f"ChatService: Stream Done. Saving {len(final_model.questions)} questions.")
+                            final_reply_text = final_model.intro_message
+                            # Overwrite accumulation with the perfect list from SDK
+                            accumulated_questions = [q.dict() for q in final_model.questions]
+                        else:
+                            # Fallback if structure is unexpected, use what we accumulated manually
+                            logger.warning(f"Stream Done but format unexpected (Attrs: {dir(final_obj)}). Using accumulated.")
+
+                    elif evt_type == "error":
+                        error_msg = event.get("error", "Unknown stream error")
+                        log_event("quiz_stream_error", {"error": error_msg}, level="error")
+                        stream_manager.send_error(error_msg)
+
+                # Final Data Construction
+                quiz_data = {
+                    "quiz_mode": "batch", 
+                    "questions": accumulated_questions
+                }
+                log_event("quiz_streaming_completed", {"count": len(accumulated_questions)})
+
+            # 🟢 BATCH PATH (Fallback)
             else:
-                logger.warning(f"StreamParser: Wrapper missing .parsed! Attrs: {dir(final_wrapper)}")
-                # Attempt fallback or yield as is (which likely caused the error, but logging will help debug)
-                yield {"type": "done", "full_response": final_wrapper}
+                quiz_model = generate_structured_quiz(
+                    conversation_input=conversation_input,
+                    user_id=user_id,
+                    page=page,
+                    name=(name or None),
+                    email=_normalize_email_for_storage(email),
+                    mode=mode 
+                )
+                
+                quiz_data = {
+                    "quiz_mode": "batch", 
+                    "questions": [q.dict() for q in quiz_model.questions]
+                }
+                final_reply_text = quiz_model.intro_message
+
+        except Exception as e:
+            logger.error(f"Quiz Generation Error: {e}")
+            log_event("quiz_generation_failed", {"error": str(e)}, level="error")
+            final_reply_text = (
+                "⚠️ **Error de Generación**: No pudimos generar el simulacro. "
+                "Por favor intenta de nuevo."
+            )
+            quiz_data = None
+
+    else:
+        # Standard Chat Mode
+        try:
+            final_reply_text = send_message_to_assistant(
+                conversation_input=conversation_input,
+                user_id=user_id,
+                page=page,
+                name=(name or None),
+                email=_normalize_email_for_storage(email),
+                mode=mode 
+            )
+        except Exception as e:
+            raise RuntimeError(f"❌ OpenAI Chat API failed: {e}")
+
+    # Step 7: Persist
+    assistant_timestamp = ""
+    try:
+        if message:
+            save_message(conversation_id, role="user", message_text=message)
+        for img in image_urls or []:
+            save_message(conversation_id, role="user", message_text=f"[Imagen] {img}")
+        
+        # Save the final data (now guaranteed to be complete)
+        saved_item = save_message(
+            conversation_id, 
+            role="assistant", 
+            message_text=final_reply_text,
+            metadata=quiz_data 
+        )
+        if saved_item and isinstance(saved_item, dict):
+            assistant_timestamp = saved_item.get("Timestamp", "")
 
     except Exception as e:
-        logger.error(f"Streaming Quiz Failed: {e}")
-        yield {"type": "error", "error": str(e)}
+        raise RuntimeError(f"❌ Failed to save messages: {e}")
+
+    return final_reply_text, conversation_id, assistant_timestamp, quiz_data
