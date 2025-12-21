@@ -1,12 +1,12 @@
 # src/services/chat_service.py
-from src.assistant.assistant_client import send_message_to_assistant, generate_structured_quiz
+from src.assistant.assistant_client import send_message_to_assistant, generate_structured_quiz, stream_structured_quiz
 from src.assistant.image_handler import format_image_urls_for_openai
 from src.storage.conversations_table import save_conversation
 from src.storage.messages_table import save_message, get_recent_messages
 from src.config.page_vectorstores import get_stores_for_page
 from src.utils.logging_utils import log_event
 from src.services.quiz_service import QuizService
-from typing import List, Dict, Any, Tuple
+from typing import List, Dict, Any, Tuple, Optional
 from decimal import Decimal
 import json
 import re
@@ -71,7 +71,8 @@ def get_ai_response(
     conversation_id: str | None = None,
     image_urls: list[str] | None = None,
     mode: str = "omega",
-    intent: str = "chat"
+    intent: str = "chat",
+    stream_manager: Any | None = None # 🟢 NEW: Optional StreamManager
 ) -> Tuple[str, str, str, Dict | None]: 
     
     page = _normalize_page(page)
@@ -120,31 +121,82 @@ def get_ai_response(
 
         conversation_input.append(QuizService.get_system_instruction(topic=topic_hint, num_questions=num_questions))
 
-        # B. Call Structured API
+        # B. Call API (Streaming or Batch)
         try:
-            # This returns a Pydantic Model (QuizResponse)
-            quiz_model = generate_structured_quiz(
-                conversation_input=conversation_input,
-                user_id=user_id,
-                page=page,
-                name=(name or None),
-                email=_normalize_email_for_storage(email),
-                mode=mode 
-            )
-            
-            # C. Extract Data
-            # 'questions' is a list of Pydantic models, so we convert them to dicts
-            quiz_data = {
-                "quiz_mode": "batch", 
-                "questions": [q.dict() for q in quiz_model.questions]
-            }
-            final_reply_text = quiz_model.intro_message
+            # 🟢 STREAMING PATH
+            if stream_manager:
+                log_event("quiz_streaming_started", {"user_id": user_id, "mode": mode})
+                
+                # 1. Start the generator
+                stream_gen = stream_structured_quiz(
+                    conversation_input=conversation_input,
+                    user_id=user_id,
+                    page=page,
+                    name=(name or None),
+                    email=_normalize_email_for_storage(email),
+                    mode=mode 
+                )
+                
+                accumulated_questions = []
+                final_reply_text = "" # Will be filled by 'intro' event
+
+                # 2. Iterate over events
+                for event in stream_gen:
+                    evt_type = event.get("type")
+                    
+                    if evt_type == "intro":
+                        # We received the introduction text
+                        final_reply_text = event.get("text", "")
+                        # We could send this immediately, but usually we send the text bubble at the end.
+                        
+                    elif evt_type == "question":
+                        # 🚀 REAL-TIME PUSH: Send this question to WebSocket immediately
+                        q_data = event.get("data") # QuizQuestion object
+                        q_dict = q_data.dict()     # Convert Pydantic to Dict
+                        index = event.get("index", 0)
+                        
+                        stream_manager.send_quiz_item(question_data=q_dict, index=index)
+                        
+                        # Store for saving to DB later
+                        accumulated_questions.append(q_dict)
+                        
+                    elif evt_type == "error":
+                        error_msg = event.get("error", "Unknown stream error")
+                        log_event("quiz_stream_error", {"error": error_msg}, level="error")
+                        stream_manager.send_error(error_msg)
+
+                # 3. Finalize Data
+                if not final_reply_text:
+                    final_reply_text = "Aquí tienes tu simulacro."
+                
+                quiz_data = {
+                    "quiz_mode": "batch", 
+                    "questions": accumulated_questions
+                }
+                log_event("quiz_streaming_completed", {"count": len(accumulated_questions)})
+
+            # 🟢 BATCH PATH (Fallback if no stream_manager)
+            else:
+                quiz_model = generate_structured_quiz(
+                    conversation_input=conversation_input,
+                    user_id=user_id,
+                    page=page,
+                    name=(name or None),
+                    email=_normalize_email_for_storage(email),
+                    mode=mode 
+                )
+                
+                quiz_data = {
+                    "quiz_mode": "batch", 
+                    "questions": [q.dict() for q in quiz_model.questions]
+                }
+                final_reply_text = quiz_model.intro_message
 
         except Exception as e:
             log_event("quiz_generation_failed", {"error": str(e)}, level="error")
             final_reply_text = (
-                "⚠️ **Error de Generación**: No pudimos generar el simulacro estructurado. "
-                "Por favor intenta de nuevo o prueba con menos preguntas."
+                "⚠️ **Error de Generación**: No pudimos generar el simulacro. "
+                "Por favor intenta de nuevo."
             )
             quiz_data = None
 
@@ -176,7 +228,6 @@ def get_ai_response(
             message_text=final_reply_text,
             metadata=quiz_data 
         )
-        # Safely retrieve timestamp if returned, otherwise empty string (prevents crash)
         if saved_item and isinstance(saved_item, dict):
             assistant_timestamp = saved_item.get("Timestamp", "")
 

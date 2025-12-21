@@ -7,6 +7,9 @@ from src.services.chat_service import get_ai_response
 from src.storage.ws_connections_table import WsConnectionsTable
 from src.utils.logging_utils import log_event, set_invocation_context
 
+# 🟢 IMPORT: The Stream Manager
+from src.streaming.stream_manager import StreamManager
+
 # 🔹 IMPORT: The Hybrid Semantic Router
 from src.services.semantic_router import semantic_router
 
@@ -66,6 +69,11 @@ def lambda_handler(event, context):
             # --- 1. Get Connection ID ---
             connection_id = ws_connections_table.get_connection_id(user_id)
 
+            # 🟢 Initialize Stream Manager (if connected)
+            stream_manager = None
+            if connection_id:
+                stream_manager = StreamManager(connection_id, api_gateway_client)
+
             # --- 2. Send Visual Feedback (The "Thinking" Phase) ---
             intent = "chat" 
             
@@ -114,7 +122,7 @@ def lambda_handler(event, context):
                     log_event("ws_status_send_failed", {"user_id": user_id}, level="warning", error=e)
 
             # --- 3. Get the AI response (Heavy Processing) ---
-            # 🔹 UPDATE: Unpack 4 values (Text + Quiz Data)
+            # 🟢 PASS THE STREAM MANAGER
             ai_reply, conversation_id, assistant_timestamp, quiz_data = get_ai_response(
                 message=message,
                 user_id=user_id,
@@ -124,7 +132,8 @@ def lambda_handler(event, context):
                 conversation_id=conv_id_in,
                 image_urls=image_urls,
                 mode=ai_mode,
-                intent=intent 
+                intent=intent,
+                stream_manager=stream_manager # <--- 🟢 PASSED HERE
             )
 
             # --- 4. Send Final Reply ---
@@ -144,8 +153,9 @@ def lambda_handler(event, context):
                         Data=response_payload
                     )
 
-                    # B. 🔹 NEW: Send Quiz Data (If available)
-                    # This event triggers the population of the #quizUi
+                    # B. Send Quiz Data (Consistency Check)
+                    # Even if we streamed the questions, sending this "Final" update guarantees
+                    # the client has the complete, correct state stored in the DB.
                     if quiz_data:
                         quiz_payload = json.dumps({
                             "action": "quiz_data_update",

@@ -1,6 +1,8 @@
 # src/assistant/assistant_client.py
-from typing import List, Dict, Any, Type
+from typing import List, Dict, Any, Type, Generator
 import logging
+import json
+import re
 from pydantic import BaseModel
 
 from src.config.settings import get_openai_client, get_vector_search_max_results
@@ -10,7 +12,7 @@ from src.config.page_vectorstores import get_stores_for_page
 from src.utils.time_utils import get_current_time_info, infer_target_semester, semester_season
 
 # 🟢 Import the Schema
-from src.schemas.quiz_schemas import QuizResponse
+from src.schemas.quiz_schemas import QuizResponse, QuizQuestion
 
 logger = logging.getLogger(__name__)
 
@@ -37,7 +39,7 @@ def _build_runtime_signals(user_id: str | None, page: str | None, name: str | No
     return build_system_instructions(extras=signals)
 
 # ------------------------------------------------------------------
-# 🟢 OLD FUNCTION (Kept for Chat Mode)
+# 🟢 STANDARD CHAT
 # ------------------------------------------------------------------
 def send_message_to_assistant(
     conversation_input: List[Dict[str, Any]],
@@ -106,7 +108,7 @@ def send_message_to_assistant(
 
 
 # ------------------------------------------------------------------
-# 🟢 NEW FUNCTION (Structured Outputs for Quizzes)
+# 🟢 BATCH STRUCTURED QUIZ
 # ------------------------------------------------------------------
 def generate_structured_quiz(
     conversation_input: List[Dict[str, Any]],
@@ -117,8 +119,7 @@ def generate_structured_quiz(
     mode: str = "omega"
 ) -> QuizResponse:
     """
-    Generates a Quiz strictly adhering to the QuizResponse schema.
-    Uses 'client.responses.parse' for strict validation.
+    Generates a Quiz strictly adhering to the QuizResponse schema (Batch Mode).
     """
     client = get_openai_client()
     cfg = get_model_config(mode)
@@ -130,31 +131,185 @@ def generate_structured_quiz(
     ]
     api_input.extend(conversation_input)
 
-    # Note: We disable Tools/FileSearch for Structured Outputs usually to reduce complexity,
-    # unless you explicitly need RAG for the quiz generation. For now, let's keep it simple.
-    
     request_kwargs = {
         "model": cfg.model,
         "input": api_input,
         "temperature": cfg.temperature,
         "top_p": cfg.top_p,
-        "text_format": QuizResponse # 🟢 PASSING THE PYDANTIC MODEL
+        "text_format": QuizResponse
     }
 
-    # Handle Reasoning Models
     if cfg.model.startswith("o1") or "o4" in cfg.model:
          request_kwargs.pop("temperature", None)
          request_kwargs.pop("top_p", None)
 
     try:
         final_kwargs = {k: v for k, v in request_kwargs.items() if v is not None}
-        
-        # 🟢 Using the .parse() method as per your documentation
         resp = client.responses.parse(**final_kwargs)
-        
-        # The result is automatically parsed into your Pydantic model
         return resp.output_parsed
-
     except Exception as e:
         logger.error(f"Structured Quiz Generation Failed. Model: {cfg.model}. Error: {e}")
         raise e
+
+# ------------------------------------------------------------------
+# 🟢 NEW: STREAMING STRUCTURED QUIZ
+# ------------------------------------------------------------------
+def stream_structured_quiz(
+    conversation_input: List[Dict[str, Any]],
+    user_id: str | None = None,
+    page: str | None = None,
+    name: str | None = None,
+    email: str | None = None,
+    mode: str = "omega"
+) -> Generator[Dict[str, Any], None, None]:
+    """
+    Generates a Quiz strictly adhering to schema, but YIELDS chunks as they are ready.
+    Yields dicts with format:
+      - {"type": "intro", "text": "..."}
+      - {"type": "question", "index": 0, "data": QuizQuestion(...)}
+      - {"type": "done", "full_response": QuizResponse(...)}
+    """
+    client = get_openai_client()
+    cfg = get_model_config(mode)
+
+    system_text = _build_runtime_signals(user_id=user_id, page=page, name=name, email=email)
+    
+    api_input = [
+        {"role": "system", "content": [{"type": "input_text", "text": system_text}]}
+    ]
+    api_input.extend(conversation_input)
+
+    request_kwargs = {
+        "model": cfg.model,
+        "input": api_input,
+        "temperature": cfg.temperature,
+        "top_p": cfg.top_p,
+        "text_format": QuizResponse
+    }
+
+    if cfg.model.startswith("o1") or "o4" in cfg.model:
+         request_kwargs.pop("temperature", None)
+         request_kwargs.pop("top_p", None)
+
+    final_kwargs = {k: v for k, v in request_kwargs.items() if v is not None}
+
+    # -- Internal Parser State --
+    buffer = ""
+    intro_yielded = False
+    question_count = 0
+    
+    # Track JSON structure depth to identify complete objects
+    # Depth 0: Root {}
+    # Depth 1: Inside Root {"intro": ..., "questions": [ ... ]}
+    # Depth 2: Inside Question { ... }
+    brace_depth = 0 
+    in_string = False
+    escape = False
+    
+    # We buffer just the current object being built
+    object_buffer_start = -1
+
+    try:
+        with client.responses.stream(**final_kwargs) as stream:
+            for event in stream:
+                if event.type == "response.output_text.delta":
+                    chunk = event.delta
+                    buffer += chunk
+                    
+                    # 1. Try to find/yield Intro Message (Heuristic: it comes before 'questions')
+                    if not intro_yielded:
+                        # Look for the pattern: "intro_message": "..."
+                        # We wait until we see "questions" to be sure the intro string is closed
+                        if '"questions"' in buffer:
+                            intro_match = re.search(r'"intro_message"\s*:\s*"(.*?)"', buffer, re.DOTALL)
+                            if intro_match:
+                                intro_text = intro_match.group(1)
+                                # Clean up escaped quotes just in case
+                                intro_text = intro_text.replace('\\"', '"')
+                                yield {"type": "intro", "text": intro_text}
+                                intro_yielded = True
+                    
+                    # 2. Track Objects in the Stream
+                    # We iterate strictly over the new characters to update state
+                    # (In a production loop we might optimize this, but for 200 chars/sec it's fine)
+                    
+                    # We only care about parsing "questions" array content.
+                    # The "questions" array starts after "intro".
+                    questions_marker = buffer.find('"questions"')
+                    if questions_marker != -1:
+                        # Start parsing objects AFTER the marker
+                        scan_start = max(questions_marker, len(buffer) - len(chunk) - 20) # Look at recent addition
+                        # Actually, re-scanning the whole buffer from marker is safer for correct depth tracking
+                        # unless optimized. Let's do a robust scan from the marker.
+                        
+                        # Reset state for the scan (we scan the whole buffer part relevant to questions)
+                        # To avoid O(N^2), we could keep state, but Python strings are immutable anyway.
+                        # Let's simple-scan the buffer from the start of questions array.
+                        
+                        q_brace_depth = 0
+                        q_in_string = False
+                        q_escape = False
+                        q_array_open = False
+                        
+                        # Find the first '[' after "questions"
+                        array_start = buffer.find('[', questions_marker)
+                        if array_start != -1:
+                            q_array_open = True
+                            
+                            # Determine where the last successfully parsed question ended
+                            # We can keep a 'last_parsed_index' state.
+                            if 'last_parsed_index' not in locals():
+                                last_parsed_index = array_start
+                            
+                            current_scan_idx = last_parsed_index
+                            
+                            while current_scan_idx < len(buffer):
+                                char = buffer[current_scan_idx]
+                                
+                                if not q_in_string:
+                                    if char == '"':
+                                        q_in_string = True
+                                    elif char == '{':
+                                        if q_brace_depth == 0:
+                                            # Potential start of a question object
+                                            object_start_idx = current_scan_idx
+                                        q_brace_depth += 1
+                                    elif char == '}':
+                                        q_brace_depth -= 1
+                                        if q_brace_depth == 0:
+                                            # We just closed a question object!
+                                            raw_obj_str = buffer[object_start_idx : current_scan_idx + 1]
+                                            try:
+                                                # Try to parse this chunk as a QuizQuestion
+                                                # We might need to unescape json if it was extracted raw
+                                                q_data = json.loads(raw_obj_str)
+                                                # Validate with Pydantic
+                                                q_obj = QuizQuestion(**q_data)
+                                                
+                                                yield {"type": "question", "index": question_count, "data": q_obj}
+                                                question_count += 1
+                                                last_parsed_index = current_scan_idx
+                                            except Exception as parse_err:
+                                                # Incomplete or malformed (maybe inside a string?), ignore and wait for more data
+                                                pass
+                                    elif char == '\\':
+                                        q_escape = True # Should not happen outside string but safety
+                                else:
+                                    # Inside string
+                                    if q_escape:
+                                        q_escape = False
+                                    elif char == '\\':
+                                        q_escape = True
+                                    elif char == '"':
+                                        q_in_string = False
+                                
+                                current_scan_idx += 1
+
+            # 3. Final Result
+            # At the end, we get the fully parsed object from the SDK to ensure data integrity
+            final_response = stream.get_final_response()
+            yield {"type": "done", "full_response": final_response}
+
+    except Exception as e:
+        logger.error(f"Streaming Quiz Failed: {e}")
+        yield {"type": "error", "error": str(e)}
