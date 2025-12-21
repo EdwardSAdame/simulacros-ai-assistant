@@ -34,9 +34,8 @@ class QuizService:
 
             "## JSON Formatting & Content Rules (STRICT):\n"
             "1. **Output Format**: Return a LIST (Array) of objects.\n"
-            "2. **Double Escaping**: ALL backslashes for LaTeX must be DOUBLE ESCAPED (e.g., `\\\\frac{a}{b}`).\n"
-            # 🟢 CHANGE 1: Force standard '$' syntax instead of '\('
-            "3. **Math Syntax**: ALWAYS use `$` for inline math (e.g. `$x^2$`) and `$$` for block math.\n"
+            "2. **Double Escaping**: ALL backslashes for LaTeX must be DOUBLE ESCAPED (e.g., `\\\\( x^2 \\\\)`).\n"
+            "3. **Math Syntax**: Use `\\\\(` and `\\\\)` for inline math.\n"
             "4. **Difficulty & Style**: Questions must be **challenging, intriguing, and non-trivial**.\n"
             "5. **Numbering & Titles**: You MUST include the question number in the `question_title` (e.g., '# 1. Integration').\n"
             "6. **Content Fields**: \n"
@@ -54,13 +53,12 @@ class QuizService:
             "[\n"
             "  {\n"
             "    \"question_title\": \"# 1. Integration by Parts\",\n"
-            # 🟢 CHANGE 2: Update example to use '$'
-            "    \"question_text\": \"Solve the integral $\\\\int x e^x dx$ and identify the correct methodology.\",\n"
+            "    \"question_text\": \"Solve the integral \\\\( \\\\int x e^x dx \\\\) and identify the correct methodology.\",\n"
             "    \"options\": [\n"
-            "       {\"text\": \"$e^x(x-1) + C$\", \"feedback\": \"Correct. Using u=x and dv=e^x dx yields this result.\"},\n"
-            "       {\"text\": \"$xe^x + C$\", \"feedback\": \"Incorrect. You missed the second part of the integration formula.\"},\n"
-            "       {\"text\": \"$e^x(x+1) + C$\", \"feedback\": \"Incorrect. Check your sign during the subtraction step.\"},\n"
-            "       {\"text\": \"$x^2e^x + C$\", \"feedback\": \"Incorrect. This would result from integrating factors incorrectly.\"}\n"
+            "       {\"text\": \"\\\\( e^x(x-1) + C \\\\)\", \"feedback\": \"Correct. Using u=x and dv=e^x dx yields this result.\"},\n"
+            "       {\"text\": \"\\\\( xe^x + C \\\\)\", \"feedback\": \"Incorrect. You missed the second part of the integration formula.\"},\n"
+            "       {\"text\": \"\\\\( e^x(x+1) + C \\\\)\", \"feedback\": \"Incorrect. Check your sign during the subtraction step.\"},\n"
+            "       {\"text\": \"\\\\( x^2e^x + C \\\\)\", \"feedback\": \"Incorrect. This would result from integrating factors incorrectly.\"}\n"
             "    ],\n"
             "    \"correct_option_index\": 0,\n"
             "    \"explanation\": \"Using integration by parts with u=x and dv=e^x dx.\"\n"
@@ -88,9 +86,8 @@ class QuizService:
             try:
                 # Naive repair for common LaTeX backslash issues
                 repaired = text_chunk
-                
-                # 🟢 CHANGE 3: Remove the \( replacement logic since we use $ now
-                # We still keep basic array bracket cleanup if needed
+                repaired = re.sub(r'(?<!\\)\\\(', r'\\\\(', repaired)
+                repaired = re.sub(r'(?<!\\)\\\)', r'\\\\)', repaired)
                 repaired = re.sub(r'(?<!\\)\\\[', r'\\\\[', repaired)
                 repaired = re.sub(r'(?<!\\)\\\]', r'\\\\]', repaired)
                 
