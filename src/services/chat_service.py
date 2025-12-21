@@ -106,15 +106,16 @@ def get_ai_response(
     if intent == "quiz":
         topic_hint = message if message else "General Knowledge"
         
-        # 🟢 FIX: Default to 3 questions to prevent truncation.
-        num_questions = 3 
+        # 🟢 REVERT: Default back to 5 questions
+        num_questions = 5 
         
-        # Allow explicit user override (e.g. "dame 5 preguntas") but cap it safely
+        # 🟢 ALLOW OVERRIDE: If user asks for "10 questions", we try to do it.
+        # We cap at 10 to prevent extreme timeouts.
         if message:
             match = re.search(r'\b(\d+)\b', message)
             if match:
                 parsed_num = int(match.group(1))
-                if 1 <= parsed_num <= 5: # Cap at 5 for safety
+                if 1 <= parsed_num <= 10: 
                     num_questions = parsed_num
 
         conversation_input.append(QuizService.get_system_instruction(topic=topic_hint, num_questions=num_questions))
@@ -135,22 +136,26 @@ def get_ai_response(
     if not assistant_reply or "No assistant response" in assistant_reply:
         raise ValueError("❌ Assistant returned an empty or invalid response.")
 
-    # 6. Extract & Clean Quiz Data
+    # 6. Extract & Clean Quiz Data (The "Safety Catch")
     quiz_data = None
     final_reply_text = assistant_reply
 
     if intent == "quiz":
         extracted_data = QuizService.extract_quiz_data(assistant_reply)
+        
         if extracted_data:
+            # ✅ SUCCESS: JSON is valid
             quiz_data = extracted_data
             cleaned = QuizService.clean_response_text(assistant_reply)
             final_reply_text = cleaned if cleaned else "Aquí tienes el simulacro."
         else:
+            # ❌ FAILURE: JSON is broken/truncated
             log_event("quiz_extraction_failed", {"preview": assistant_reply[:50]}, level="error")
-            # Safety Message: Don't show raw broken code
+            
+            # 🟢 CRITICAL FIX: Hide the broken text. Show a polite error instead.
             final_reply_text = (
-                "⚠️ **Error de Generación**: El simulacro no se pudo procesar correctamente (respuesta incompleta). "
-                "Intenta usar el modo 'Omega' o pedir menos preguntas."
+                "⚠️ **Error de Generación**: El simulacro no se pudo procesar correctamente (posiblemente la respuesta fue demasiado larga). "
+                "Por favor intenta pedir menos preguntas (ej: '3 preguntas') o dividir el tema."
             )
             quiz_data = None
 
@@ -164,7 +169,7 @@ def get_ai_response(
         assistant_message_item = save_message(
             conversation_id, 
             role="assistant", 
-            message_text=final_reply_text,
+            message_text=final_reply_text, # Saves the clean text OR the error message
             metadata=quiz_data 
         )
         assistant_timestamp = assistant_message_item.get("Timestamp")
