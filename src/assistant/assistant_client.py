@@ -152,7 +152,7 @@ def generate_structured_quiz(
         raise e
 
 # ------------------------------------------------------------------
-# 🟢 NEW: STREAMING STRUCTURED QUIZ
+# 🟢 NEW: STREAMING STRUCTURED QUIZ (WITH LOGGING)
 # ------------------------------------------------------------------
 def stream_structured_quiz(
     conversation_input: List[Dict[str, Any]],
@@ -164,10 +164,6 @@ def stream_structured_quiz(
 ) -> Generator[Dict[str, Any], None, None]:
     """
     Generates a Quiz strictly adhering to schema, but YIELDS chunks as they are ready.
-    Yields dicts with format:
-      - {"type": "intro", "text": "..."}
-      - {"type": "question", "index": 0, "data": QuizQuestion(...)}
-      - {"type": "done", "full_response": QuizResponse(...)}
     """
     client = get_openai_client()
     cfg = get_model_config(mode)
@@ -198,15 +194,10 @@ def stream_structured_quiz(
     intro_yielded = False
     question_count = 0
     
-    # Track JSON structure depth to identify complete objects
-    # Depth 0: Root {}
-    # Depth 1: Inside Root {"intro": ..., "questions": [ ... ]}
-    # Depth 2: Inside Question { ... }
     brace_depth = 0 
     in_string = False
     escape = False
     
-    # We buffer just the current object being built
     object_buffer_start = -1
 
     try:
@@ -216,35 +207,23 @@ def stream_structured_quiz(
                     chunk = event.delta
                     buffer += chunk
                     
-                    # 1. Try to find/yield Intro Message (Heuristic: it comes before 'questions')
+                    # 1. Try to find/yield Intro Message
                     if not intro_yielded:
-                        # Look for the pattern: "intro_message": "..."
-                        # We wait until we see "questions" to be sure the intro string is closed
                         if '"questions"' in buffer:
                             intro_match = re.search(r'"intro_message"\s*:\s*"(.*?)"', buffer, re.DOTALL)
                             if intro_match:
                                 intro_text = intro_match.group(1)
-                                # Clean up escaped quotes just in case
                                 intro_text = intro_text.replace('\\"', '"')
+                                logger.info("StreamParser: Intro message detected.")
                                 yield {"type": "intro", "text": intro_text}
                                 intro_yielded = True
                     
                     # 2. Track Objects in the Stream
-                    # We iterate strictly over the new characters to update state
-                    # (In a production loop we might optimize this, but for 200 chars/sec it's fine)
-                    
-                    # We only care about parsing "questions" array content.
-                    # The "questions" array starts after "intro".
                     questions_marker = buffer.find('"questions"')
                     if questions_marker != -1:
-                        # Start parsing objects AFTER the marker
-                        scan_start = max(questions_marker, len(buffer) - len(chunk) - 20) # Look at recent addition
-                        # Actually, re-scanning the whole buffer from marker is safer for correct depth tracking
-                        # unless optimized. Let's do a robust scan from the marker.
                         
-                        # Reset state for the scan (we scan the whole buffer part relevant to questions)
-                        # To avoid O(N^2), we could keep state, but Python strings are immutable anyway.
-                        # Let's simple-scan the buffer from the start of questions array.
+                        # Robust scan from start of questions array
+                        scan_start = max(questions_marker, len(buffer) - len(chunk) - 20) 
                         
                         q_brace_depth = 0
                         q_in_string = False
@@ -256,8 +235,6 @@ def stream_structured_quiz(
                         if array_start != -1:
                             q_array_open = True
                             
-                            # Determine where the last successfully parsed question ended
-                            # We can keep a 'last_parsed_index' state.
                             if 'last_parsed_index' not in locals():
                                 last_parsed_index = array_start
                             
@@ -271,7 +248,6 @@ def stream_structured_quiz(
                                         q_in_string = True
                                     elif char == '{':
                                         if q_brace_depth == 0:
-                                            # Potential start of a question object
                                             object_start_idx = current_scan_idx
                                         q_brace_depth += 1
                                     elif char == '}':
@@ -280,22 +256,20 @@ def stream_structured_quiz(
                                             # We just closed a question object!
                                             raw_obj_str = buffer[object_start_idx : current_scan_idx + 1]
                                             try:
-                                                # Try to parse this chunk as a QuizQuestion
-                                                # We might need to unescape json if it was extracted raw
                                                 q_data = json.loads(raw_obj_str)
-                                                # Validate with Pydantic
                                                 q_obj = QuizQuestion(**q_data)
+                                                
+                                                # 🟢 LOGGING
+                                                logger.info(f"StreamParser: Extracted Question {question_count} from stream.")
                                                 
                                                 yield {"type": "question", "index": question_count, "data": q_obj}
                                                 question_count += 1
                                                 last_parsed_index = current_scan_idx
                                             except Exception as parse_err:
-                                                # Incomplete or malformed (maybe inside a string?), ignore and wait for more data
                                                 pass
                                     elif char == '\\':
-                                        q_escape = True # Should not happen outside string but safety
+                                        q_escape = True 
                                 else:
-                                    # Inside string
                                     if q_escape:
                                         q_escape = False
                                     elif char == '\\':
@@ -306,8 +280,8 @@ def stream_structured_quiz(
                                 current_scan_idx += 1
 
             # 3. Final Result
-            # At the end, we get the fully parsed object from the SDK to ensure data integrity
             final_response = stream.get_final_response()
+            logger.info("StreamParser: Stream finished. Validating final full response.")
             yield {"type": "done", "full_response": final_response}
 
     except Exception as e:

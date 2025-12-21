@@ -10,6 +10,9 @@ from typing import List, Dict, Any, Tuple, Optional
 from decimal import Decimal
 import json
 import re
+import logging
+
+logger = logging.getLogger(__name__)
 
 def _normalize_email_for_storage(val):
     if val is None: return None
@@ -72,7 +75,7 @@ def get_ai_response(
     image_urls: list[str] | None = None,
     mode: str = "omega",
     intent: str = "chat",
-    stream_manager: Any | None = None # 🟢 NEW: Optional StreamManager
+    stream_manager: Any | None = None # 🟢 Optional StreamManager
 ) -> Tuple[str, str, str, Dict | None]: 
     
     page = _normalize_page(page)
@@ -127,7 +130,6 @@ def get_ai_response(
             if stream_manager:
                 log_event("quiz_streaming_started", {"user_id": user_id, "mode": mode})
                 
-                # 1. Start the generator
                 stream_gen = stream_structured_quiz(
                     conversation_input=conversation_input,
                     user_id=user_id,
@@ -137,45 +139,57 @@ def get_ai_response(
                     mode=mode 
                 )
                 
+                # Internal accumulators
+                seen_indices = set()
                 accumulated_questions = []
-                final_reply_text = "" # Will be filled by 'intro' event
+                final_reply_text = "Aquí tienes tu simulacro." # Default backup
 
-                # 2. Iterate over events
+                # Iterate over generator events
                 for event in stream_gen:
                     evt_type = event.get("type")
                     
                     if evt_type == "intro":
-                        # We received the introduction text
-                        final_reply_text = event.get("text", "")
-                        # We could send this immediately, but usually we send the text bubble at the end.
+                        text = event.get("text", "")
+                        logger.info(f"ChatService: Intro received: {text[:30]}...")
+                        final_reply_text = text
                         
                     elif evt_type == "question":
-                        # 🚀 REAL-TIME PUSH: Send this question to WebSocket immediately
-                        q_data = event.get("data") # QuizQuestion object
-                        q_dict = q_data.dict()     # Convert Pydantic to Dict
-                        index = event.get("index", 0)
+                        q_data = event.get("data") # Pydantic model
+                        q_dict = q_data.dict()     # Convert to dict
+                        idx = event.get("index", 0)
                         
-                        stream_manager.send_quiz_item(question_data=q_dict, index=index)
+                        # 🚀 Send to WebSocket immediately
+                        stream_manager.send_quiz_item(question_data=q_dict, index=idx)
+                        logger.info(f"ChatService: Pushed Question {idx} to client.")
                         
-                        # Store for saving to DB later
-                        accumulated_questions.append(q_dict)
+                        # Accumulate locally (safely)
+                        if idx not in seen_indices:
+                            accumulated_questions.append(q_dict)
+                            seen_indices.add(idx)
+                        
+                    elif evt_type == "done":
+                        # 🟢 CRITICAL FIX: Use the SDK's final validated object
+                        # This ensures we save the COMPLETE list to DynamoDB
+                        final_model = event.get("full_response")
+                        if final_model:
+                            logger.info(f"ChatService: Stream Done. SDK reports {len(final_model.questions)} questions.")
+                            final_reply_text = final_model.intro_message
+                            # Overwrite local accumulation with the perfect list
+                            accumulated_questions = [q.dict() for q in final_model.questions]
                         
                     elif evt_type == "error":
                         error_msg = event.get("error", "Unknown stream error")
                         log_event("quiz_stream_error", {"error": error_msg}, level="error")
                         stream_manager.send_error(error_msg)
 
-                # 3. Finalize Data
-                if not final_reply_text:
-                    final_reply_text = "Aquí tienes tu simulacro."
-                
+                # Final Data Construction
                 quiz_data = {
                     "quiz_mode": "batch", 
                     "questions": accumulated_questions
                 }
                 log_event("quiz_streaming_completed", {"count": len(accumulated_questions)})
 
-            # 🟢 BATCH PATH (Fallback if no stream_manager)
+            # 🟢 BATCH PATH (Fallback)
             else:
                 quiz_model = generate_structured_quiz(
                     conversation_input=conversation_input,
@@ -222,6 +236,7 @@ def get_ai_response(
         for img in image_urls or []:
             save_message(conversation_id, role="user", message_text=f"[Imagen] {img}")
         
+        # Save the FINAL, complete data
         saved_item = save_message(
             conversation_id, 
             role="assistant", 
