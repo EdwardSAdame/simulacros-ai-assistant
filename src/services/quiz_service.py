@@ -12,8 +12,6 @@ class QuizService:
     def get_system_instruction(topic: str = "general", num_questions: int = 5) -> Dict[str, Any]:
         """
         Returns the simplified system instruction.
-        We no longer need to force JSON syntax/escaping here, as the Schema handles it.
-        We focus on CONTENT QUALITY.
         """
         
         instruction_text = (
@@ -25,7 +23,8 @@ class QuizService:
             
             "## Content Quality Rules:\n"
             "1. **Difficulty**: Questions must be challenging, intriguing, and non-trivial.\n"
-            "2. **Math Syntax**: ALWAYS use `$` for inline math (e.g. `$x^2$`) and `$$` for block math.\n"
+            # 🟢 CHANGED: Force \( \) syntax
+            "2. **Math Syntax**: ALWAYS use `\\(` and `\\)` for inline math (e.g. `\\( x^2 \\)`) and `\\[` and `\\]` for block math.\n"
             "3. **Voice**: You are Roma. Be cold, precise, and efficient in your 'intro_message'.\n"
             "4. **Feedback**: Provide specific, educational feedback for every option (Right or Wrong).\n"
         )
@@ -34,6 +33,3 @@ class QuizService:
             "role": "system", 
             "content": [{"type": "input_text", "text": instruction_text}]
         }
-    
-    # 🟢 DELETED: extract_quiz_data (No longer needed)
-    # 🟢 DELETED: clean_response_text (No longer needed)
