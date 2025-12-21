@@ -3,7 +3,7 @@ from typing import List, Dict, Any, Type, Generator
 import logging
 import json
 import re
-from pydantic import BaseModel
+from pydantic import BaseModel, ValidationError
 
 from src.config.settings import get_openai_client, get_vector_search_max_results
 from src.config.model_config import get_model_config
@@ -152,7 +152,7 @@ def generate_structured_quiz(
         raise e
 
 # ------------------------------------------------------------------
-# 🟢 NEW: STREAMING STRUCTURED QUIZ (WITH LOGGING)
+# 🟢 NEW: STREAMING STRUCTURED QUIZ (FORGIVING PARSER)
 # ------------------------------------------------------------------
 def stream_structured_quiz(
     conversation_input: List[Dict[str, Any]],
@@ -199,6 +199,9 @@ def stream_structured_quiz(
     escape = False
     
     object_buffer_start = -1
+    
+    # 🟢 Initialize State outside the loop
+    last_parsed_index = -1
 
     try:
         with client.responses.stream(**final_kwargs) as stream:
@@ -222,20 +225,12 @@ def stream_structured_quiz(
                     questions_marker = buffer.find('"questions"')
                     if questions_marker != -1:
                         
-                        # Robust scan from start of questions array
-                        scan_start = max(questions_marker, len(buffer) - len(chunk) - 20) 
-                        
-                        q_brace_depth = 0
-                        q_in_string = False
-                        q_escape = False
-                        q_array_open = False
-                        
                         # Find the first '[' after "questions"
                         array_start = buffer.find('[', questions_marker)
                         if array_start != -1:
-                            q_array_open = True
                             
-                            if 'last_parsed_index' not in locals():
+                            # Initialize scan pointer correctly
+                            if last_parsed_index == -1:
                                 last_parsed_index = array_start
                             
                             current_scan_idx = last_parsed_index
@@ -247,42 +242,68 @@ def stream_structured_quiz(
                                     if char == '"':
                                         q_in_string = True
                                     elif char == '{':
-                                        if q_brace_depth == 0:
+                                        if brace_depth == 0:
                                             object_start_idx = current_scan_idx
-                                        q_brace_depth += 1
+                                        brace_depth += 1
                                     elif char == '}':
-                                        q_brace_depth -= 1
-                                        if q_brace_depth == 0:
+                                        brace_depth -= 1
+                                        if brace_depth == 0:
                                             # We just closed a question object!
                                             raw_obj_str = buffer[object_start_idx : current_scan_idx + 1]
                                             try:
                                                 q_data = json.loads(raw_obj_str)
-                                                q_obj = QuizQuestion(**q_data)
                                                 
-                                                # 🟢 LOGGING
-                                                logger.info(f"StreamParser: Extracted Question {question_count} from stream.")
+                                                # 🟢 FORGIVING VALIDATION
+                                                # Try to validate with Pydantic for correctness
+                                                try:
+                                                    q_obj = QuizQuestion(**q_data)
+                                                except ValidationError as ve:
+                                                    # If validation fails, we still yield the raw data for UI speed
+                                                    # The DB save will fix it later via final response
+                                                    logger.warning(f"StreamParser: Validation failed for Q{question_count} (sending anyway): {ve}")
+                                                    # Create a dummy object or just pass raw dict if downstream supports it
+                                                    # Since our ChatService expects .dict(), let's wrap it in a pseudo-object
+                                                    class DictWrapper:
+                                                        def __init__(self, d): self.d = d
+                                                        def dict(self): return self.d
+                                                    q_obj = DictWrapper(q_data)
+
+                                                logger.info(f"StreamParser: Yielding Question {question_count}")
                                                 
                                                 yield {"type": "question", "index": question_count, "data": q_obj}
+                                                
                                                 question_count += 1
                                                 last_parsed_index = current_scan_idx
-                                            except Exception as parse_err:
+                                                
+                                            except json.JSONDecodeError:
+                                                # Not valid JSON yet (maybe just coincidental braces)
                                                 pass
                                     elif char == '\\':
-                                        q_escape = True 
+                                        escape = True 
                                 else:
-                                    if q_escape:
-                                        q_escape = False
+                                    if escape:
+                                        escape = False
                                     elif char == '\\':
-                                        q_escape = True
+                                        escape = True
                                     elif char == '"':
-                                        q_in_string = False
+                                        in_string = False
                                 
                                 current_scan_idx += 1
 
             # 3. Final Result
-            final_response = stream.get_final_response()
-            logger.info("StreamParser: Stream finished. Validating final full response.")
-            yield {"type": "done", "full_response": final_response}
+            final_obj = stream.get_final_response()
+            logger.info("StreamParser: Stream finished.")
+            
+            # Use 'output_parsed' property if available, otherwise fallback
+            parsed_response = None
+            if hasattr(final_obj, 'output_parsed'):
+                parsed_response = final_obj.output_parsed
+            elif hasattr(final_obj, 'parsed'):
+                parsed_response = final_obj.parsed
+            else:
+                parsed_response = final_obj # Fallback
+
+            yield {"type": "done", "full_response": parsed_response}
 
     except Exception as e:
         logger.error(f"Streaming Quiz Failed: {e}")
