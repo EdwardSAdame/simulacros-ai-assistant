@@ -5,7 +5,7 @@ import logging
 from decimal import Decimal
 from typing import List, Dict, Any, Tuple, Optional
 
-# 🟢 CONFIG & UTILS (Safe to keep at top)
+# 🟢 CONFIG & UTILS
 from src.config.settings import get_openai_client, get_vector_search_max_results
 from src.config.model_config import get_model_config
 from src.config.system_instructions import build_system_instructions
@@ -13,7 +13,7 @@ from src.config.page_vectorstores import get_stores_for_page
 from src.utils.logging_utils import log_event
 from src.utils.time_utils import get_current_time_info, infer_target_semester, semester_season
 
-# 🟢 STORAGE (Safe to keep at top)
+# 🟢 STORAGE
 from src.storage.conversations_table import save_conversation
 from src.storage.messages_table import save_message, get_recent_messages
 
@@ -85,8 +85,7 @@ def get_ai_response(
     stream_manager: Any | None = None 
 ) -> Tuple[str, str, str, Dict | None]: 
     
-    # 🟢 LAZY IMPORTS TO PREVENT CIRCULAR DEPENDENCIES
-    # This fixes the "ImportModuleError" you saw in AWS logs
+    # 🟢 LAZY IMPORTS
     from src.assistant.assistant_client import send_message_to_assistant, generate_structured_quiz, stream_structured_quiz
     from src.assistant.image_handler import format_image_urls_for_openai
     from src.services.quiz_service import QuizService
@@ -125,7 +124,6 @@ def get_ai_response(
     final_reply_text = ""
     
     if intent == "quiz":
-        # A. Setup Quiz Instructions
         topic_hint = message if message else "General Knowledge"
         num_questions = 5
         if message:
@@ -137,9 +135,7 @@ def get_ai_response(
 
         conversation_input.append(QuizService.get_system_instruction(topic=topic_hint, num_questions=num_questions))
 
-        # B. Call API (Streaming or Batch)
         try:
-            # 🟢 STREAMING PATH
             if stream_manager:
                 log_event("quiz_streaming_started", {"user_id": user_id, "mode": mode})
                 
@@ -152,64 +148,66 @@ def get_ai_response(
                     mode=mode 
                 )
                 
-                # Internal accumulators
                 seen_indices = set()
                 accumulated_questions = []
-                final_reply_text = "Aquí tienes tu simulacro." 
+                final_reply_text = "Aquí tienes tu simulacro."
 
-                # Iterate over generator events
                 for event in stream_gen:
                     evt_type = event.get("type")
                     
                     if evt_type == "intro":
-                        text = event.get("text", "")
-                        logger.info(f"ChatService: Intro received: {text[:30]}...")
-                        final_reply_text = text
+                        final_reply_text = event.get("text", "")
                         
                     elif evt_type == "question":
-                        q_data = event.get("data") 
-                        q_dict = q_data.dict()     
+                        q_data = event.get("data")
+                        q_dict = q_data.dict()
                         idx = event.get("index", 0)
                         
-                        # 🚀 Send to WebSocket immediately
                         stream_manager.send_quiz_item(question_data=q_dict, index=idx)
-                        logger.info(f"ChatService: Pushed Question {idx} to client.")
                         
-                        # Safe accumulation
                         if idx not in seen_indices:
                             accumulated_questions.append(q_dict)
                             seen_indices.add(idx)
                         
                     elif evt_type == "done":
-                        # 🟢 THE FIX: Handle the SDK Wrapper
+                        # 🟢 THE FIX: Handle 'output_parsed'
                         final_obj = event.get("full_response")
                         
-                        # Check if it's the wrapped ParsedResponse or the model directly
-                        final_model = getattr(final_obj, 'parsed', final_obj)
+                        # Try to find the parsed model in various known locations
+                        parsed_response = None
                         
-                        if final_model and hasattr(final_model, 'questions'):
-                            logger.info(f"ChatService: Stream Done. Saving {len(final_model.questions)} questions.")
-                            final_reply_text = final_model.intro_message
-                            # Overwrite accumulation with the perfect list from SDK
-                            accumulated_questions = [q.dict() for q in final_model.questions]
+                        # 1. Direct model
+                        if hasattr(final_obj, 'questions'):
+                            parsed_response = final_obj
+                        # 2. .parsed property (some SDK versions)
+                        elif hasattr(final_obj, 'parsed') and hasattr(final_obj.parsed, 'questions'):
+                            parsed_response = final_obj.parsed
+                        # 3. .output_parsed property (seen in your logs)
+                        elif hasattr(final_obj, 'output_parsed') and hasattr(final_obj.output_parsed, 'questions'):
+                            parsed_response = final_obj.output_parsed
+                        
+                        if parsed_response:
+                            count = len(parsed_response.questions)
+                            logger.info(f"ChatService: Stream Done. Saving full set of {count} questions from SDK.")
+                            final_reply_text = parsed_response.intro_message
+                            accumulated_questions = [q.dict() for q in parsed_response.questions]
                         else:
-                            # Fallback if structure is unexpected, use what we accumulated manually
-                            logger.warning(f"Stream Done but format unexpected (Attrs: {dir(final_obj)}). Using accumulated.")
+                            # This is the "only one question" fallback path, hopefully avoided now
+                            logger.warning(f"ChatService: Could not find 'questions' in final object. Attrs: {dir(final_obj)}")
 
                     elif evt_type == "error":
                         error_msg = event.get("error", "Unknown stream error")
                         log_event("quiz_stream_error", {"error": error_msg}, level="error")
                         stream_manager.send_error(error_msg)
 
-                # Final Data Construction
                 quiz_data = {
                     "quiz_mode": "batch", 
                     "questions": accumulated_questions
                 }
                 log_event("quiz_streaming_completed", {"count": len(accumulated_questions)})
 
-            # 🟢 BATCH PATH (Fallback)
             else:
+                # Batch Mode
                 quiz_model = generate_structured_quiz(
                     conversation_input=conversation_input,
                     user_id=user_id,
@@ -228,10 +226,7 @@ def get_ai_response(
         except Exception as e:
             logger.error(f"Quiz Generation Error: {e}")
             log_event("quiz_generation_failed", {"error": str(e)}, level="error")
-            final_reply_text = (
-                "⚠️ **Error de Generación**: No pudimos generar el simulacro. "
-                "Por favor intenta de nuevo."
-            )
+            final_reply_text = "**Error**: No pudimos generar el simulacro."
             quiz_data = None
 
     else:
@@ -246,7 +241,7 @@ def get_ai_response(
                 mode=mode 
             )
         except Exception as e:
-            raise RuntimeError(f"❌ OpenAI Chat API failed: {e}")
+            raise RuntimeError(f"OpenAI Chat API failed: {e}")
 
     # Step 7: Persist
     assistant_timestamp = ""
@@ -256,7 +251,6 @@ def get_ai_response(
         for img in image_urls or []:
             save_message(conversation_id, role="user", message_text=f"[Imagen] {img}")
         
-        # Save the final data (now guaranteed to be complete)
         saved_item = save_message(
             conversation_id, 
             role="assistant", 
@@ -267,6 +261,6 @@ def get_ai_response(
             assistant_timestamp = saved_item.get("Timestamp", "")
 
     except Exception as e:
-        raise RuntimeError(f"❌ Failed to save messages: {e}")
+        raise RuntimeError(f" Failed to save messages: {e}")
 
     return final_reply_text, conversation_id, assistant_timestamp, quiz_data
