@@ -1,79 +1,73 @@
-"""
-Centralized model & generation settings for OpenAI Responses API.
-
-Dynamic Configuration per Mode:
-- OMEGA (Fast): Defaults to gpt-4o-mini, Temp 0.3
-- ALPHA (Reasoning): Defaults to gpt-5-nano, Temp 0.4
-
-You can override ANY parameter via Environment Variables:
-- OPENAI_MODEL_OMEGA, OPENAI_TEMP_OMEGA, OPENAI_TOP_P_OMEGA
-- OPENAI_MODEL_ALPHA, OPENAI_TEMP_ALPHA, OPENAI_TOP_P_ALPHA
-"""
+# src/config/model_config.py
 import os
 from dataclasses import dataclass
+import logging
+
+logger = logging.getLogger(__name__)
 
 @dataclass(frozen=True)
 class ModelConfig:
     model: str
     temperature: float
-    top_p: float
-
-# Default fail-safes (used only if Env Vars are missing)
-DEFAULTS = {
-    "omega": {
-        "model": "gpt-4o-mini",
-        "temp": 0.3,
-        "top_p": 1.0
-    },
-    "alpha": {
-        "model": "gpt-5-nano",
-        "temp": 0.4,
-        "top_p": 1.0
-    }
-}
+    top_p: float      # <--- 🟢 REQUIRED for assistant_client.py
+    max_tokens: int
 
 def get_model_config(mode: str = "omega") -> ModelConfig:
     """
-    Returns ModelConfig based on the selected mode, reading from specific Environment Variables.
+    Returns the configuration for the requested mode (Alpha vs Omega).
+    Values are fetched dynamically from Environment Variables.
     """
-    # 1. Normalize mode
-    safe_mode = mode.lower().strip() if mode else "omega"
-    if safe_mode not in DEFAULTS:
-        safe_mode = "omega"
+    mode_key = mode.lower() if mode else "omega"
     
-    defaults = DEFAULTS[safe_mode]
-    suffix = safe_mode.upper() # e.g., "OMEGA" or "ALPHA"
-
-    # 2. Resolve Model Name
-    # Look for OPENAI_MODEL_OMEGA, else default
-    model_name = os.getenv(f"OPENAI_MODEL_{suffix}", defaults["model"])
-
-    # 3. Resolve Temperature
-    # Look for OPENAI_TEMP_OMEGA, else default
-    try:
-        env_temp = os.getenv(f"OPENAI_TEMP_{suffix}")
-        temperature = float(env_temp) if env_temp is not None else defaults["temp"]
-    except ValueError:
-        temperature = defaults["temp"]
-
-    # 4. Resolve Top P
-    # Look for OPENAI_TOP_P_OMEGA, else fallback to global OPENAI_TOP_P, else default
-    try:
-        env_top_p = os.getenv(f"OPENAI_TOP_P_{suffix}")
-        if env_top_p is None:
-            # Fallback to global setting if specific one isn't set
-            env_top_p = os.getenv("OPENAI_TOP_P")
+    # 1. Define specific keys for this mode
+    if mode_key == "alpha":
+        env_model   = "OPENAI_MODEL_ALPHA"
+        env_tokens  = "OPENAI_MAX_TOKENS_ALPHA"
+        env_temp    = "OPENAI_TEMP_ALPHA"
+        env_top_p   = "OPENAI_TOP_P_ALPHA"     # <--- 🟢 Dynamic Key
         
-        top_p = float(env_top_p) if env_top_p is not None else defaults["top_p"]
-    except ValueError:
-        top_p = defaults["top_p"]
+        # Fallbacks (Generic)
+        fallback_model   = "gpt-4o"
+        fallback_tokens  = 4000
+        fallback_temp    = 0.4
+        fallback_top_p   = 1.0
+    else:
+        # Default to Omega for any unknown mode
+        env_model   = "OPENAI_MODEL_OMEGA"
+        env_tokens  = "OPENAI_MAX_TOKENS_OMEGA"
+        env_temp    = "OPENAI_TEMP_OMEGA"
+        env_top_p   = "OPENAI_TOP_P_OMEGA"     # <--- 🟢 Dynamic Key
 
-    # Clamp values to valid OpenAI ranges
-    temperature = max(0.0, min(2.0, temperature))
-    top_p = max(0.0, min(1.0, top_p))
+        # Fallbacks (Generic)
+        fallback_model   = "gpt-4o-mini"
+        fallback_tokens  = 10000
+        fallback_temp    = 0.3
+        fallback_top_p   = 1.0
+
+    # 2. Load values dynamically
+    model = os.getenv(env_model, fallback_model)
+
+    try:
+        max_tokens = int(os.getenv(env_tokens, str(fallback_tokens)))
+    except ValueError:
+        logger.warning(f"Invalid integer for {env_tokens}. Using fallback: {fallback_tokens}")
+        max_tokens = fallback_tokens
+
+    try:
+        temperature = float(os.getenv(env_temp, str(fallback_temp)))
+    except ValueError:
+        logger.warning(f"Invalid float for {env_temp}. Using fallback: {fallback_temp}")
+        temperature = fallback_temp
+
+    try:
+        top_p = float(os.getenv(env_top_p, str(fallback_top_p))) 
+    except ValueError:
+        logger.warning(f"Invalid float for {env_top_p}. Using fallback: {fallback_top_p}")
+        top_p = fallback_top_p
 
     return ModelConfig(
-        model=model_name, 
-        temperature=temperature, 
-        top_p=top_p
+        model=model,
+        temperature=temperature,
+        top_p=top_p,
+        max_tokens=max_tokens
     )

@@ -1,5 +1,6 @@
 # src/assistant/assistant_client.py
 from typing import List, Dict, Any
+import logging
 
 from src.config.settings import get_openai_client, get_vector_search_max_results
 from src.config.model_config import get_model_config
@@ -7,9 +8,12 @@ from src.config.system_instructions import build_system_instructions
 from src.config.page_vectorstores import get_stores_for_page
 from src.utils.time_utils import get_current_time_info, infer_target_semester, semester_season
 
+logger = logging.getLogger(__name__)
 
 def _build_runtime_signals(user_id: str | None, page: str | None, name: str | None, email: str | None) -> str:
-    # ... (function content remains unchanged)
+    """
+    Build the runtime 'RUNTIME SIGNALS' block appended to the base system prompt.
+    """
     tinfo = get_current_time_info()
     target = infer_target_semester()
     season = semester_season(target)
@@ -20,7 +24,6 @@ def _build_runtime_signals(user_id: str | None, page: str | None, name: str | No
         ("They are browsing as a guest." if not user_id or user_id == "anonymous"
          else f"Their user ID is {user_id}."),
         f"Target semester inferred: {target} (season {season}).",
-        # Attribution rule to avoid “user uploaded these files” confusion
         "All documents accessible via the file_search tool belong to Invicto’s curated knowledge base. Never imply the user provided them.",
     ]
     if name:
@@ -36,28 +39,22 @@ def send_message_to_assistant(
     page: str | None = None,
     name: str | None = None,
     email: str | None = None,
-    mode: str = "omega",
+    mode: str = "omega"
 ) -> str:
     """
-    Sends a structured conversation to the OpenAI Responses API and
-    returns the assistant's reply text.
+    Sends a structured conversation to the OpenAI API.
+    Handles 'Reasoning Model' (o1) constraints automatically.
     """
     client = get_openai_client()
-    
     cfg = get_model_config(mode)
-    
-    # 🔹 Check if the model is a reasoning model
-    model_name_lower = cfg.model.lower()
-    is_reasoning_model = (
-        model_name_lower.startswith("o") or 
-        "nano" in model_name_lower or 
-        "reasoning" in model_name_lower
-    )
 
     # 1) Build system instructions
     system_text = _build_runtime_signals(user_id=user_id, page=page, name=name, email=email)
     
-    # 2) Construct the full API input
+    # 2) Construct input
+    # Note: 'o1' models currently process 'system' messages as 'user' messages under the hood,
+    # but the API now accepts 'developer' or 'system' roles in newer versions.
+    # We stick to standard 'system' for compatibility.
     api_input = [
         {"role": "system", "content": [{"type": "input_text", "text": system_text}]}
     ]
@@ -65,45 +62,71 @@ def send_message_to_assistant(
 
     # 3) Resolve vector stores
     vector_store_ids = get_stores_for_page(page)
-    
-    # 4) Construct the base parameters for the Responses API call (UNIVERSAL PARAMS ONLY)
+
+    # ------------------------------------------------------------------
+    # 🟢 4) DYNAMIC PARAMETER SANITIZATION (The Fix)
+    # ------------------------------------------------------------------
+    is_reasoning_model = cfg.model.startswith("o1") or "reasoning" in cfg.model
+
+    # Base arguments common to all models
     request_kwargs = {
         "model": cfg.model,
-        "input": api_input,
-        "tools": [{
+        "input": api_input, # Assuming your custom client uses 'input'
+    }
+
+    if is_reasoning_model:
+        # ⚠️ REASONING MODEL RULES (o1-preview, o1-mini)
+        logger.info(f"Assistant Client: Detected reasoning model '{cfg.model}'. Adjusting params.")
+        
+        # Rule A: Use max_completion_tokens, NOT max_tokens
+        request_kwargs["max_completion_tokens"] = cfg.max_tokens
+        
+        # Rule B: Temperature and Top P are NOT supported (or fixed at 1)
+        # We deliberately OMIT them to avoid 400 Errors.
+        
+        # Rule C: Tools (File Search) might not be supported in Beta
+        # We attempt to send them, but if it fails, we catch it.
+        # Currently, o1 DOES NOT support tools. We omit them to prevent crash.
+        logger.warning("Assistant Client: Tools (File Search) disabled for reasoning model.")
+        request_kwargs["tools"] = None 
+
+    else:
+        # ✅ STANDARD MODEL RULES (gpt-4o, gpt-3.5)
+        request_kwargs["max_tokens"] = cfg.max_tokens
+        request_kwargs["temperature"] = cfg.temperature
+        request_kwargs["top_p"] = cfg.top_p
+        
+        # Include Tools
+        request_kwargs["tools"] = [{
             "type": "file_search",
             "vector_store_ids": vector_store_ids,
             "max_num_results": get_vector_search_max_results(),
-        }],
-        # 💡 FIX: Use the universal Responses API token limit parameter for ALL models
-        "max_output_tokens": 4096, 
-    }
-    
-    # 🔹 CONDITIONAL PARAMETER SWITCH 
-    if is_reasoning_model:
-        # Alpha Mode (o1) logic: Add the reasoning control parameter
-        request_kwargs["reasoning"] = {"effort": "medium"} 
-        # OMIT temperature and top_p entirely for o1.
-    else:
-        # Omega Mode (gpt-4o-mini) logic: Add standard sampling parameters
-        request_kwargs["temperature"] = cfg.temperature
-        request_kwargs["top_p"] = cfg.top_p
+        }]
 
-    # 5) Call Responses API using the selected configuration
-    resp = client.responses.create(**request_kwargs)
+    # ------------------------------------------------------------------
+    # 5) Call the API with sanitized arguments
+    # ------------------------------------------------------------------
+    try:
+        # Clean up None values (like tools if omitted)
+        final_kwargs = {k: v for k, v in request_kwargs.items() if v is not None}
+        
+        resp = client.responses.create(**final_kwargs)
 
-    # 6) Extract text safely
-    text = getattr(resp, "output_text", None)
-    if not text:
-        try:
-            chunks = []
-            # Fallback parsing logic
-            for block in getattr(resp, "output", []) or []:
-                for c in block.get("content", []) or []:
-                    if c.get("type") in ("output_text", "text"):
-                        chunks.append(c.get("text", ""))
-            text = "\n".join([s for s in chunks if s]).strip()
-        except Exception:
-            text = ""
+        # 6) Extract text safely
+        text = getattr(resp, "output_text", None)
+        if not text:
+            try:
+                chunks = []
+                for block in getattr(resp, "output", []) or []:
+                    for c in block.get("content", []) or []:
+                        if c.get("type") in ("output_text", "text"):
+                            chunks.append(c.get("text", ""))
+                text = "\n".join([s for s in chunks if s]).strip()
+            except Exception:
+                text = ""
 
-    return text or "[No assistant response found]"
+        return text or "[No assistant response found]"
+
+    except Exception as e:
+        logger.error(f"OpenAI Request Failed. Model: {cfg.model}, Mode: {mode}. Error: {e}")
+        raise e
