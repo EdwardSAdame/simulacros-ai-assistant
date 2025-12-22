@@ -49,9 +49,6 @@ def send_message_to_assistant(
     email: str | None = None,
     mode: str = "omega"
 ) -> str:
-    """
-    Standard text-based chat response.
-    """
     client = get_openai_client()
     cfg = get_model_config(mode)
 
@@ -118,9 +115,6 @@ def generate_structured_quiz(
     email: str | None = None,
     mode: str = "omega"
 ) -> QuizResponse:
-    """
-    Generates a Quiz strictly adhering to the QuizResponse schema (Batch Mode).
-    """
     client = get_openai_client()
     cfg = get_model_config(mode)
 
@@ -152,7 +146,7 @@ def generate_structured_quiz(
         raise e
 
 # ------------------------------------------------------------------
-# 🟢 NEW: STREAMING STRUCTURED QUIZ (FORGIVING PARSER)
+# 🟢 NEW: STREAMING STRUCTURED QUIZ (FIXED PARSER)
 # ------------------------------------------------------------------
 def stream_structured_quiz(
     conversation_input: List[Dict[str, Any]],
@@ -164,6 +158,7 @@ def stream_structured_quiz(
 ) -> Generator[Dict[str, Any], None, None]:
     """
     Generates a Quiz strictly adhering to schema, but YIELDS chunks as they are ready.
+    Uses a robust 'Checkpoint Parser' to avoid variable scope errors.
     """
     client = get_openai_client()
     cfg = get_model_config(mode)
@@ -194,14 +189,9 @@ def stream_structured_quiz(
     intro_yielded = False
     question_count = 0
     
-    brace_depth = 0 
-    in_string = False
-    escape = False
-    
-    object_buffer_start = -1
-    
-    # 🟢 Initialize State outside the loop
-    last_parsed_index = -1
+    # Checkpoint: index in 'buffer' where the last successfully parsed object ended
+    # We initialize it to None, and set it once we find the start of the list.
+    last_checkpoint_idx = None 
 
     try:
         with client.responses.stream(**final_kwargs) as stream:
@@ -229,79 +219,85 @@ def stream_structured_quiz(
                         array_start = buffer.find('[', questions_marker)
                         if array_start != -1:
                             
-                            # Initialize scan pointer correctly
-                            if last_parsed_index == -1:
-                                last_parsed_index = array_start
+                            # Initialize checkpoint if this is the first time we see the array start
+                            if last_checkpoint_idx is None:
+                                last_checkpoint_idx = array_start
                             
-                            current_scan_idx = last_parsed_index
+                            # RESUME SCANNING from the last safe checkpoint.
+                            # We reset temporary scan variables every time we loop, 
+                            # because we are re-playing the buffer from the last known good position.
                             
-                            while current_scan_idx < len(buffer):
-                                char = buffer[current_scan_idx]
+                            scan_cursor = last_checkpoint_idx
+                            scan_brace_depth = 0
+                            scan_in_string = False
+                            scan_escape = False
+                            object_start_idx = -1
+                            
+                            while scan_cursor < len(buffer):
+                                char = buffer[scan_cursor]
                                 
-                                if not q_in_string:
+                                if not scan_in_string:
                                     if char == '"':
-                                        q_in_string = True
+                                        scan_in_string = True
                                     elif char == '{':
-                                        if brace_depth == 0:
-                                            object_start_idx = current_scan_idx
-                                        brace_depth += 1
+                                        if scan_brace_depth == 0:
+                                            object_start_idx = scan_cursor
+                                        scan_brace_depth += 1
                                     elif char == '}':
-                                        brace_depth -= 1
-                                        if brace_depth == 0:
-                                            # We just closed a question object!
-                                            raw_obj_str = buffer[object_start_idx : current_scan_idx + 1]
+                                        scan_brace_depth -= 1
+                                        if scan_brace_depth == 0:
+                                            # We found a complete object!
+                                            raw_obj_str = buffer[object_start_idx : scan_cursor + 1]
                                             try:
                                                 q_data = json.loads(raw_obj_str)
                                                 
-                                                # 🟢 FORGIVING VALIDATION
-                                                # Try to validate with Pydantic for correctness
+                                                # FORGIVING VALIDATION
                                                 try:
                                                     q_obj = QuizQuestion(**q_data)
                                                 except ValidationError as ve:
-                                                    # If validation fails, we still yield the raw data for UI speed
-                                                    # The DB save will fix it later via final response
-                                                    logger.warning(f"StreamParser: Validation failed for Q{question_count} (sending anyway): {ve}")
-                                                    # Create a dummy object or just pass raw dict if downstream supports it
-                                                    # Since our ChatService expects .dict(), let's wrap it in a pseudo-object
+                                                    logger.warning(f"StreamParser: Validation soft-fail Q{question_count}: {ve}")
+                                                    # Wrap raw dict to look like Pydantic model for downstream compatibility
                                                     class DictWrapper:
                                                         def __init__(self, d): self.d = d
                                                         def dict(self): return self.d
                                                     q_obj = DictWrapper(q_data)
 
                                                 logger.info(f"StreamParser: Yielding Question {question_count}")
-                                                
                                                 yield {"type": "question", "index": question_count, "data": q_obj}
                                                 
+                                                # UPDATE STATE
                                                 question_count += 1
-                                                last_parsed_index = current_scan_idx
+                                                # Move checkpoint to here, so next loop starts scanning AFTER this object
+                                                last_checkpoint_idx = scan_cursor + 1 
                                                 
                                             except json.JSONDecodeError:
-                                                # Not valid JSON yet (maybe just coincidental braces)
                                                 pass
                                     elif char == '\\':
-                                        escape = True 
+                                        scan_escape = True 
                                 else:
-                                    if escape:
-                                        escape = False
+                                    # Inside string
+                                    if scan_escape:
+                                        scan_escape = False
                                     elif char == '\\':
-                                        escape = True
+                                        scan_escape = True
                                     elif char == '"':
-                                        in_string = False
+                                        scan_in_string = False
                                 
-                                current_scan_idx += 1
+                                scan_cursor += 1
 
             # 3. Final Result
             final_obj = stream.get_final_response()
-            logger.info("StreamParser: Stream finished.")
+            logger.info("StreamParser: Stream finished. Getting final object.")
             
-            # Use 'output_parsed' property if available, otherwise fallback
+            # Use 'output_parsed' property if available (for newer SDKs)
             parsed_response = None
+            
             if hasattr(final_obj, 'output_parsed'):
                 parsed_response = final_obj.output_parsed
             elif hasattr(final_obj, 'parsed'):
                 parsed_response = final_obj.parsed
             else:
-                parsed_response = final_obj # Fallback
+                parsed_response = final_obj 
 
             yield {"type": "done", "full_response": parsed_response}
 
