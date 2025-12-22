@@ -16,17 +16,15 @@ from src.services.storage_service import storage_service
 logger = logging.getLogger(__name__)
 
 # ------------------------------------------------------------------
-# 🔹 HELPER: Handle File Artifacts (Robust Production Version)
+# 🔹 HELPER: Handle File Artifacts (Robust)
 # ------------------------------------------------------------------
 def _get_files_client(client):
     """Locates the container files accessor in the OpenAI client."""
-    # Check Beta (New SDKs)
     if hasattr(client, "beta"):
         if hasattr(client.beta, "containers") and hasattr(client.beta.containers, "files"):
             return getattr(client.beta.containers, "files")
         if hasattr(client.beta, "container_files"):
             return getattr(client.beta, "container_files")
-    # Check Standard
     if hasattr(client, "containers") and hasattr(client.containers, "files"):
         return getattr(client.containers, "files")
     return getattr(client, "container_files", None)
@@ -38,7 +36,6 @@ def _handle_generated_files(client, response_obj) -> List[str]:
     uploaded_urls = []
     container_id = None
     
-    # Locate API Accessor
     cf_client = _get_files_client(client)
     if not cf_client:
         return []
@@ -81,7 +78,6 @@ def _handle_generated_files(client, response_obj) -> List[str]:
                     
                     if not fname: fname = "generated_plot.png"
                     
-                    # If we found a file in the sandbox, download it
                     if fid:
                         _process_file(cf_client, container_id, fid, fname, uploaded_urls)
             except Exception as e:
@@ -97,37 +93,32 @@ def _process_file(cf_client, container_id, file_id, filename, url_list):
     try:
         file_content = None
         
-        # 🟢 Method A: Nested Resource (client.containers.files.content.retrieve)
-        # This is the specific method that worked in your successful test
+        # 🟢 Method A: Nested Resource
         if hasattr(cf_client, "content") and hasattr(cf_client.content, "retrieve"):
             try:
-                # Try Keyword Arguments first (Preferred by SDK)
                 if container_id:
                     file_content = cf_client.content.retrieve(container_id=container_id, file_id=file_id)
                 else:
                     file_content = cf_client.content.retrieve(file_id=file_id)
             except Exception:
-                # Fallback to Positional Arguments
                 try:
                     file_content = cf_client.content.retrieve(container_id, file_id)
                 except Exception:
                     pass
 
-        # 🟢 Method B: Direct Call (Legacy/Alternate SDKs)
+        # 🟢 Method B: Direct Call
         if file_content is None and callable(getattr(cf_client, "content", None)):
             try: file_content = cf_client.content(file_id)
             except: pass
 
         if not file_content:
-            logger.error(f"Could not download content for file {file_id}")
             return
 
-        # Extract bytes from response object
+        # Extract bytes
         if hasattr(file_content, "read"): file_content = file_content.read()
         elif hasattr(file_content, "content"): file_content = file_content.content
         elif hasattr(file_content, "text"): file_content = file_content.text.encode('utf-8')
 
-        # Ensure we have bytes
         if not isinstance(file_content, (bytes, bytearray)):
             try: file_content = bytes(file_content)
             except: pass
@@ -157,10 +148,9 @@ def _assign_urls_to_quiz(quiz_data: QuizResponse, urls: List[str]):
             if idx < len(urls):
                 q.image_url = urls[idx]
                 idx += 1
-                logger.info(f"Assigned Image to Q: {q.question_title}")
 
 # ------------------------------------------------------------------
-# 🟢 RUNTIME INSTRUCTIONS
+# 🟢 RUNTIME INSTRUCTIONS (UPDATED FOR AGGRESSIVE VISUALS)
 # ------------------------------------------------------------------
 def _build_runtime_signals(user_id: str | None, page: str | None, name: str | None, email: str | None) -> str:
     tinfo = get_current_time_info()
@@ -171,7 +161,9 @@ def _build_runtime_signals(user_id: str | None, page: str | None, name: str | No
         f"User: {user_id or 'Guest'}",
         f"Target: {target}",
         "Sources: Invicto Knowledge Base.",
-        "VISUALS: Use the 'python' tool (Code Interpreter) to generate graphs. Output the file. In JSON 'image_url', write 'PENDING_UPLOAD'."
+        
+        # 🟢 AGGRESSIVE VISUAL TRIGGER
+        "VISUALS: Use the 'python' tool (Code Interpreter) to AUTOMATICALLY GENERATE PLOTS for any request involving mathematical functions, geometry, or data trends. Do not just describe the graph—DRAW IT. Output the file. In the JSON 'image_url' field, strictly write the string 'PENDING_UPLOAD'."
     ]
     if name: signals.append(f"Name: {name}.")
     if email: signals.append(f"Email: {email}.")
@@ -296,7 +288,6 @@ def stream_structured_quiz(conversation_input: List[Dict[str, Any]], user_id: st
                                         if depth == 0:
                                             try:
                                                 data = json.loads(buffer[obj_start:cursor+1])
-                                                # Soft validation wrapper
                                                 class Wrapper:
                                                     def __init__(self, d): self.d = d
                                                     def dict(self): return self.d
