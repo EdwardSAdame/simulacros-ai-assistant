@@ -10,297 +10,318 @@ from src.config.model_config import get_model_config
 from src.config.system_instructions import build_system_instructions
 from src.config.page_vectorstores import get_stores_for_page
 from src.utils.time_utils import get_current_time_info, infer_target_semester, semester_season
-
-# 🟢 Import the Schema
 from src.schemas.quiz_schemas import QuizResponse, QuizQuestion
+from src.services.storage_service import storage_service
 
 logger = logging.getLogger(__name__)
 
+# ------------------------------------------------------------------
+# 🔹 HELPER: Handle File Artifacts (Robust Production Version)
+# ------------------------------------------------------------------
+def _get_files_client(client):
+    """Locates the container files accessor in the OpenAI client."""
+    # Check Beta (New SDKs)
+    if hasattr(client, "beta"):
+        if hasattr(client.beta, "containers") and hasattr(client.beta.containers, "files"):
+            return getattr(client.beta.containers, "files")
+        if hasattr(client.beta, "container_files"):
+            return getattr(client.beta, "container_files")
+    # Check Standard
+    if hasattr(client, "containers") and hasattr(client.containers, "files"):
+        return getattr(client.containers, "files")
+    return getattr(client, "container_files", None)
+
+def _handle_generated_files(client, response_obj) -> List[str]:
+    """
+    Scans the OpenAI response for generated files using dual strategies.
+    """
+    uploaded_urls = []
+    container_id = None
+    
+    # Locate API Accessor
+    cf_client = _get_files_client(client)
+    if not cf_client:
+        return []
+
+    try:
+        output_items = getattr(response_obj, "output", []) or []
+
+        for item in output_items:
+            item_type = getattr(item, "type", "")
+            
+            # 1. Capture Container ID
+            if item_type == "code_interpreter_call":
+                cid = getattr(item, "container_id", None)
+                if not cid and hasattr(item, "code_interpreter"):
+                    cid = getattr(item.code_interpreter, "container_id", None)
+                if not cid and hasattr(item, "code_interpreter_call"):
+                    cid = getattr(item.code_interpreter_call, "container_id", None)
+                if cid: container_id = cid
+
+            # 2. Strategy A: Check Citations
+            if item_type == "message":
+                content_list = getattr(item, "content", []) or []
+                if isinstance(content_list, list):
+                    for part in content_list:
+                        annotations = getattr(part, "annotations", []) or []
+                        for ann in annotations:
+                            if getattr(ann, "type", "") == "container_file_citation":
+                                file_id = getattr(ann, "file_id", None)
+                                fname = getattr(ann, "filename", "graph.png")
+                                if file_id:
+                                    _process_file(cf_client, container_id, file_id, fname, uploaded_urls)
+
+        # 3. Strategy B: Manual Scan (Fallback)
+        if not uploaded_urls and container_id:
+            try:
+                container_files = cf_client.list(container_id)
+                for c_file in container_files:
+                    fname = getattr(c_file, "filename", None) or getattr(c_file, "name", None)
+                    fid = getattr(c_file, "id", None) or getattr(c_file, "file_id", None)
+                    
+                    if not fname: fname = "generated_plot.png"
+                    
+                    # If we found a file in the sandbox, download it
+                    if fid:
+                        _process_file(cf_client, container_id, fid, fname, uploaded_urls)
+            except Exception as e:
+                logger.warning(f"Manual container scan failed: {e}")
+
+    except Exception as e:
+        logger.warning(f"Error checking generated files: {e}")
+
+    return uploaded_urls
+
+def _process_file(cf_client, container_id, file_id, filename, url_list):
+    """Downloads content from OpenAI and uploads to AWS S3 (Robust Method)."""
+    try:
+        file_content = None
+        
+        # 🟢 Method A: Nested Resource (client.containers.files.content.retrieve)
+        # This is the specific method that worked in your successful test
+        if hasattr(cf_client, "content") and hasattr(cf_client.content, "retrieve"):
+            try:
+                # Try Keyword Arguments first (Preferred by SDK)
+                if container_id:
+                    file_content = cf_client.content.retrieve(container_id=container_id, file_id=file_id)
+                else:
+                    file_content = cf_client.content.retrieve(file_id=file_id)
+            except Exception:
+                # Fallback to Positional Arguments
+                try:
+                    file_content = cf_client.content.retrieve(container_id, file_id)
+                except Exception:
+                    pass
+
+        # 🟢 Method B: Direct Call (Legacy/Alternate SDKs)
+        if file_content is None and callable(getattr(cf_client, "content", None)):
+            try: file_content = cf_client.content(file_id)
+            except: pass
+
+        if not file_content:
+            logger.error(f"Could not download content for file {file_id}")
+            return
+
+        # Extract bytes from response object
+        if hasattr(file_content, "read"): file_content = file_content.read()
+        elif hasattr(file_content, "content"): file_content = file_content.content
+        elif hasattr(file_content, "text"): file_content = file_content.text.encode('utf-8')
+
+        # Ensure we have bytes
+        if not isinstance(file_content, (bytes, bytearray)):
+            try: file_content = bytes(file_content)
+            except: pass
+
+        # Determine Content Type
+        fname = str(filename).lower()
+        if fname.endswith(".jpg") or fname.endswith(".jpeg"): ctype = "image/jpeg"
+        elif fname.endswith(".pdf"): ctype = "application/pdf"
+        else: 
+            ctype = "image/png"
+            if not fname.endswith(".png"): filename = f"{filename}.png"
+
+        # Upload to S3
+        s3_url = storage_service.upload_image_from_bytes(file_content, ctype)
+        logger.info(f"✅ Asset uploaded to S3: {s3_url}")
+        url_list.append(s3_url)
+
+    except Exception as e:
+        logger.error(f"File transfer failed for {file_id}: {e}")
+
+def _assign_urls_to_quiz(quiz_data: QuizResponse, urls: List[str]):
+    """Injects S3 URLs into the response."""
+    if not urls: return
+    idx = 0
+    for q in quiz_data.questions:
+        if q.image_url == "PENDING_UPLOAD" or (q.image_url and "/mnt/" in q.image_url) or (not q.image_url and idx < len(urls)):
+            if idx < len(urls):
+                q.image_url = urls[idx]
+                idx += 1
+                logger.info(f"Assigned Image to Q: {q.question_title}")
+
+# ------------------------------------------------------------------
+# 🟢 RUNTIME INSTRUCTIONS
+# ------------------------------------------------------------------
 def _build_runtime_signals(user_id: str | None, page: str | None, name: str | None, email: str | None) -> str:
-    """
-    Build the runtime 'RUNTIME SIGNALS' block appended to the base system prompt.
-    """
     tinfo = get_current_time_info()
     target = infer_target_semester()
-    season = semester_season(target)
-
     signals = [
         f"Today is {tinfo['full_human']}.",
-        f"The user is on the page: {page or '/'}",
-        ("They are browsing as a guest." if not user_id or user_id == "anonymous"
-         else f"Their user ID is {user_id}."),
-        f"Target semester inferred: {target} (season {season}).",
-        "All documents accessible via the file_search tool belong to Invicto’s curated knowledge base. Never imply the user provided them.",
+        f"Page: {page or '/'}",
+        f"User: {user_id or 'Guest'}",
+        f"Target: {target}",
+        "Sources: Invicto Knowledge Base.",
+        "VISUALS: Use the 'python' tool (Code Interpreter) to generate graphs. Output the file. In JSON 'image_url', write 'PENDING_UPLOAD'."
     ]
-    if name:
-        signals.append(f"Display name: {name}.")
-    if email:
-        signals.append(f"Email: {email}.")
+    if name: signals.append(f"Name: {name}.")
+    if email: signals.append(f"Email: {email}.")
     return build_system_instructions(extras=signals)
 
 # ------------------------------------------------------------------
 # 🟢 STANDARD CHAT
 # ------------------------------------------------------------------
-def send_message_to_assistant(
-    conversation_input: List[Dict[str, Any]],
-    user_id: str | None = None,
-    page: str | None = None,
-    name: str | None = None,
-    email: str | None = None,
-    mode: str = "omega"
-) -> str:
+def send_message_to_assistant(conversation_input: List[Dict[str, Any]], user_id: str | None = None, page: str | None = None, name: str | None = None, email: str | None = None, mode: str = "omega") -> str:
     client = get_openai_client()
     cfg = get_model_config(mode)
-
-    system_text = _build_runtime_signals(user_id=user_id, page=page, name=name, email=email)
+    system_text = _build_runtime_signals(user_id, page, name, email)
     
-    api_input = [
-        {"role": "system", "content": [{"type": "input_text", "text": system_text}]}
-    ]
+    api_input = [{"role": "system", "content": [{"type": "input_text", "text": system_text}]}]
     api_input.extend(conversation_input)
 
-    vector_store_ids = get_stores_for_page(page)
-    is_reasoning_model = cfg.model.startswith("o1") or "reasoning" in cfg.model or "o4" in cfg.model
-    
-    request_kwargs = {
-        "model": cfg.model,
-        "input": api_input,
-        "temperature": cfg.temperature,
-        "top_p": cfg.top_p,
-    }
+    tools = [{"type": "file_search", "vector_store_ids": get_stores_for_page(page), "max_num_results": get_vector_search_max_results()},
+             {"type": "code_interpreter", "container": {"type": "auto"}}]
 
-    if is_reasoning_model:
-        logger.info(f"Assistant Client: Detected reasoning model '{cfg.model}'.")
-        request_kwargs.pop("temperature", None)
-        request_kwargs.pop("top_p", None)
-        request_kwargs["tools"] = None 
-    else:
-        request_kwargs["tools"] = [{
-            "type": "file_search",
-            "vector_store_ids": vector_store_ids,
-            "max_num_results": get_vector_search_max_results(),
-        }]
+    req = {"model": cfg.model, "input": api_input, "temperature": cfg.temperature, "top_p": cfg.top_p}
+    if not (cfg.model.startswith("o1") or "reasoning" in cfg.model): req["tools"] = tools
+    else: req.pop("temperature", None); req.pop("top_p", None)
 
     try:
-        final_kwargs = {k: v for k, v in request_kwargs.items() if v is not None}
-        resp = client.responses.create(**final_kwargs)
-
+        resp = client.responses.create(**{k: v for k, v in req.items() if v is not None})
         text = getattr(resp, "output_text", None)
         if not text:
-            try:
-                chunks = []
-                for block in getattr(resp, "output", []) or []:
-                    for c in block.get("content", []) or []:
-                        if c.get("type") in ("output_text", "text"):
-                            chunks.append(c.get("text", ""))
-                text = "\n".join([s for s in chunks if s]).strip()
-            except Exception:
-                text = ""
-
-        return text or "[No assistant response found]"
-
+            chunks = []
+            for block in getattr(resp, "output", []) or []:
+                for c in getattr(block, "content", []) or []:
+                    if getattr(c, "type", "") in ("output_text", "text"): chunks.append(getattr(c, "text", ""))
+            text = "\n".join(chunks).strip()
+        return text or "[No response]"
     except Exception as e:
-        logger.error(f"OpenAI Chat Request Failed. Model: {cfg.model}. Error: {e}")
+        logger.error(f"Chat failed: {e}")
         raise e
-
 
 # ------------------------------------------------------------------
 # 🟢 BATCH STRUCTURED QUIZ
 # ------------------------------------------------------------------
-def generate_structured_quiz(
-    conversation_input: List[Dict[str, Any]],
-    user_id: str | None = None,
-    page: str | None = None,
-    name: str | None = None,
-    email: str | None = None,
-    mode: str = "omega"
-) -> QuizResponse:
+def generate_structured_quiz(conversation_input: List[Dict[str, Any]], user_id: str | None = None, page: str | None = None, name: str | None = None, email: str | None = None, mode: str = "omega") -> QuizResponse:
     client = get_openai_client()
     cfg = get_model_config(mode)
-
-    system_text = _build_runtime_signals(user_id=user_id, page=page, name=name, email=email)
+    system_text = _build_runtime_signals(user_id, page, name, email)
     
-    api_input = [
-        {"role": "system", "content": [{"type": "input_text", "text": system_text}]}
-    ]
+    api_input = [{"role": "system", "content": [{"type": "input_text", "text": system_text}]}]
     api_input.extend(conversation_input)
 
-    request_kwargs = {
-        "model": cfg.model,
-        "input": api_input,
-        "temperature": cfg.temperature,
-        "top_p": cfg.top_p,
-        "text_format": QuizResponse
+    req = {
+        "model": cfg.model, "input": api_input, "temperature": cfg.temperature, "top_p": cfg.top_p,
+        "text_format": QuizResponse,
+        "tools": [{"type": "code_interpreter", "container": {"type": "auto"}}]
     }
-
-    if cfg.model.startswith("o1") or "o4" in cfg.model:
-         request_kwargs.pop("temperature", None)
-         request_kwargs.pop("top_p", None)
+    if cfg.model.startswith("o1"): req.pop("temperature", None); req.pop("top_p", None)
 
     try:
-        final_kwargs = {k: v for k, v in request_kwargs.items() if v is not None}
-        resp = client.responses.parse(**final_kwargs)
-        return resp.output_parsed
+        resp = client.responses.parse(**{k: v for k, v in req.items() if v is not None})
+        quiz = resp.output_parsed
+        urls = _handle_generated_files(client, resp)
+        _assign_urls_to_quiz(quiz, urls)
+        return quiz
     except Exception as e:
-        logger.error(f"Structured Quiz Generation Failed. Model: {cfg.model}. Error: {e}")
+        logger.error(f"Quiz generation failed: {e}")
         raise e
 
 # ------------------------------------------------------------------
-# 🟢 NEW: STREAMING STRUCTURED QUIZ (FIXED PARSER)
+# 🟢 STREAMING STRUCTURED QUIZ
 # ------------------------------------------------------------------
-def stream_structured_quiz(
-    conversation_input: List[Dict[str, Any]],
-    user_id: str | None = None,
-    page: str | None = None,
-    name: str | None = None,
-    email: str | None = None,
-    mode: str = "omega"
-) -> Generator[Dict[str, Any], None, None]:
-    """
-    Generates a Quiz strictly adhering to schema, but YIELDS chunks as they are ready.
-    Uses a robust 'Checkpoint Parser' to avoid variable scope errors.
-    """
+def stream_structured_quiz(conversation_input: List[Dict[str, Any]], user_id: str | None = None, page: str | None = None, name: str | None = None, email: str | None = None, mode: str = "omega") -> Generator[Dict[str, Any], None, None]:
     client = get_openai_client()
     cfg = get_model_config(mode)
-
-    system_text = _build_runtime_signals(user_id=user_id, page=page, name=name, email=email)
+    system_text = _build_runtime_signals(user_id, page, name, email)
     
-    api_input = [
-        {"role": "system", "content": [{"type": "input_text", "text": system_text}]}
-    ]
+    api_input = [{"role": "system", "content": [{"type": "input_text", "text": system_text}]}]
     api_input.extend(conversation_input)
 
-    request_kwargs = {
-        "model": cfg.model,
-        "input": api_input,
-        "temperature": cfg.temperature,
-        "top_p": cfg.top_p,
-        "text_format": QuizResponse
+    req = {
+        "model": cfg.model, "input": api_input, "temperature": cfg.temperature, "top_p": cfg.top_p,
+        "text_format": QuizResponse,
+        "tools": [{"type": "code_interpreter", "container": {"type": "auto"}}]
     }
+    if cfg.model.startswith("o1"): req.pop("temperature", None); req.pop("top_p", None)
 
-    if cfg.model.startswith("o1") or "o4" in cfg.model:
-         request_kwargs.pop("temperature", None)
-         request_kwargs.pop("top_p", None)
-
-    final_kwargs = {k: v for k, v in request_kwargs.items() if v is not None}
-
-    # -- Internal Parser State --
     buffer = ""
     intro_yielded = False
     question_count = 0
-    
-    # Checkpoint: index in 'buffer' where the last successfully parsed object ended
-    # We initialize it to None, and set it once we find the start of the list.
-    last_checkpoint_idx = None 
+    last_checkpoint = None 
 
     try:
-        with client.responses.stream(**final_kwargs) as stream:
+        with client.responses.stream(**{k: v for k, v in req.items() if v is not None}) as stream:
             for event in stream:
                 if event.type == "response.output_text.delta":
-                    chunk = event.delta
-                    buffer += chunk
+                    buffer += event.delta
                     
-                    # 1. Try to find/yield Intro Message
-                    if not intro_yielded:
-                        if '"questions"' in buffer:
-                            intro_match = re.search(r'"intro_message"\s*:\s*"(.*?)"', buffer, re.DOTALL)
-                            if intro_match:
-                                intro_text = intro_match.group(1)
-                                intro_text = intro_text.replace('\\"', '"')
-                                logger.info("StreamParser: Intro message detected.")
-                                yield {"type": "intro", "text": intro_text}
-                                intro_yielded = True
+                    if not intro_yielded and '"questions"' in buffer:
+                        match = re.search(r'"intro_message"\s*:\s*"(.*?)"', buffer, re.DOTALL)
+                        if match:
+                            yield {"type": "intro", "text": match.group(1).replace('\\"', '"')}
+                            intro_yielded = True
                     
-                    # 2. Track Objects in the Stream
-                    questions_marker = buffer.find('"questions"')
-                    if questions_marker != -1:
-                        
-                        # Find the first '[' after "questions"
-                        array_start = buffer.find('[', questions_marker)
-                        if array_start != -1:
+                    q_marker = buffer.find('"questions"')
+                    if q_marker != -1:
+                        arr_start = buffer.find('[', q_marker)
+                        if arr_start != -1:
+                            if last_checkpoint is None: last_checkpoint = arr_start
                             
-                            # Initialize checkpoint if this is the first time we see the array start
-                            if last_checkpoint_idx is None:
-                                last_checkpoint_idx = array_start
+                            cursor = last_checkpoint
+                            depth = 0
+                            in_str = False
+                            escape = False
+                            obj_start = -1
                             
-                            # RESUME SCANNING from the last safe checkpoint.
-                            # We reset temporary scan variables every time we loop, 
-                            # because we are re-playing the buffer from the last known good position.
-                            
-                            scan_cursor = last_checkpoint_idx
-                            scan_brace_depth = 0
-                            scan_in_string = False
-                            scan_escape = False
-                            object_start_idx = -1
-                            
-                            while scan_cursor < len(buffer):
-                                char = buffer[scan_cursor]
-                                
-                                if not scan_in_string:
-                                    if char == '"':
-                                        scan_in_string = True
+                            while cursor < len(buffer):
+                                char = buffer[cursor]
+                                if not in_str:
+                                    if char == '"': in_str = True
                                     elif char == '{':
-                                        if scan_brace_depth == 0:
-                                            object_start_idx = scan_cursor
-                                        scan_brace_depth += 1
+                                        if depth == 0: obj_start = cursor
+                                        depth += 1
                                     elif char == '}':
-                                        scan_brace_depth -= 1
-                                        if scan_brace_depth == 0:
-                                            # We found a complete object!
-                                            raw_obj_str = buffer[object_start_idx : scan_cursor + 1]
+                                        depth -= 1
+                                        if depth == 0:
                                             try:
-                                                q_data = json.loads(raw_obj_str)
+                                                data = json.loads(buffer[obj_start:cursor+1])
+                                                # Soft validation wrapper
+                                                class Wrapper:
+                                                    def __init__(self, d): self.d = d
+                                                    def dict(self): return self.d
+                                                try: q_obj = QuizQuestion(**data)
+                                                except: q_obj = Wrapper(data)
                                                 
-                                                # FORGIVING VALIDATION
-                                                try:
-                                                    q_obj = QuizQuestion(**q_data)
-                                                except ValidationError as ve:
-                                                    logger.warning(f"StreamParser: Validation soft-fail Q{question_count}: {ve}")
-                                                    # Wrap raw dict to look like Pydantic model for downstream compatibility
-                                                    class DictWrapper:
-                                                        def __init__(self, d): self.d = d
-                                                        def dict(self): return self.d
-                                                    q_obj = DictWrapper(q_data)
-
-                                                logger.info(f"StreamParser: Yielding Question {question_count}")
                                                 yield {"type": "question", "index": question_count, "data": q_obj}
-                                                
-                                                # UPDATE STATE
                                                 question_count += 1
-                                                # Move checkpoint to here, so next loop starts scanning AFTER this object
-                                                last_checkpoint_idx = scan_cursor + 1 
-                                                
-                                            except json.JSONDecodeError:
-                                                pass
-                                    elif char == '\\':
-                                        scan_escape = True 
+                                                last_checkpoint = cursor + 1
+                                            except: pass
+                                    elif char == '\\': escape = True
                                 else:
-                                    # Inside string
-                                    if scan_escape:
-                                        scan_escape = False
-                                    elif char == '\\':
-                                        scan_escape = True
-                                    elif char == '"':
-                                        scan_in_string = False
-                                
-                                scan_cursor += 1
+                                    if escape: escape = False
+                                    elif char == '\\': escape = True
+                                    elif char == '"': in_str = False
+                                cursor += 1
 
-            # 3. Final Result
-            final_obj = stream.get_final_response()
-            logger.info("StreamParser: Stream finished. Getting final object.")
+            # Finalize
+            final = stream.get_final_response()
+            parsed = getattr(final, 'output_parsed', None) or getattr(final, 'parsed', None) or final
+            urls = _handle_generated_files(client, final)
+            if parsed and urls: _assign_urls_to_quiz(parsed, urls)
             
-            # Use 'output_parsed' property if available (for newer SDKs)
-            parsed_response = None
-            
-            if hasattr(final_obj, 'output_parsed'):
-                parsed_response = final_obj.output_parsed
-            elif hasattr(final_obj, 'parsed'):
-                parsed_response = final_obj.parsed
-            else:
-                parsed_response = final_obj 
-
-            yield {"type": "done", "full_response": parsed_response}
+            yield {"type": "done", "full_response": parsed}
 
     except Exception as e:
-        logger.error(f"Streaming Quiz Failed: {e}")
+        logger.error(f"Streaming failed: {e}")
         yield {"type": "error", "error": str(e)}

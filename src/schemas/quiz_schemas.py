@@ -1,6 +1,6 @@
 # src/schemas/quiz_schemas.py
 from pydantic import BaseModel, Field
-from typing import List
+from typing import List, Optional
 
 class QuizOption(BaseModel):
     # 🟢 CHANGED: Request \( ... \) explicitly
@@ -11,6 +11,10 @@ class QuizQuestion(BaseModel):
     question_title: str = Field(..., description="Title with number, e.g., '# 1. Topic'")
     # 🟢 CHANGED: Request \( ... \) explicitly
     question_text: str = Field(..., description="The question stem. Use '\\(' and '\\)' for inline LaTeX math, and '\\[' and '\\]' for block math.")
+    
+    # 🟢 NEW: Field for the Graph/Image URL
+    image_url: Optional[str] = Field(None, description="URL of the generated image/graph. If you used the python tool to generate a graph, this will be populated.")
+
     options: List[QuizOption] = Field(..., min_items=4, max_items=4, description="Exactly 4 options.")
     correct_option_index: int = Field(..., ge=0, le=3, description="Index of the correct option (0-3).")
     explanation: str = Field(..., description="General explanation of the solution.")

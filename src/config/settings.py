@@ -35,6 +35,13 @@ class Settings:
         # Audio WebSocket Table
         self.WS_AUDIO_TABLE_NAME: str = os.getenv("WS_AUDIO_TABLE_NAME", "WsAudio")
 
+        # 🟢 NEW: AWS S3 Configuration
+        self.S3_BUCKET_NAME: str = os.getenv("S3_BUCKET_NAME", "invicto-quiz-assets")
+        self.AWS_REGION: str = os.getenv("AWS_REGION", "us-east-1")
+        
+        # Base URL for constructing public links (Optional, handy for CDNs)
+        self.S3_CUSTOM_DOMAIN: str = os.getenv("S3_CUSTOM_DOMAIN", "") 
+
         # --- OpenAI Models ---
         # Audio Model
         self.OPENAI_AUDIO_MODEL: str = os.getenv("OPENAI_AUDIO_MODEL", "gpt-4o-mini-transcribe")
