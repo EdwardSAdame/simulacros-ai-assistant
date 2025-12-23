@@ -1,5 +1,4 @@
-# src/assistant/assistant_client.py
-from typing import List, Dict, Any, Type, Generator
+from typing import List, Dict, Any, Type, Generator, Tuple
 import logging
 import json
 import re
@@ -29,9 +28,10 @@ def _get_files_client(client):
         return getattr(client.containers, "files")
     return getattr(client, "container_files", None)
 
-def _handle_generated_files(client, response_obj) -> List[str]:
+def _handle_generated_files(client, response_obj, folder: str = "chat_assets") -> List[str]:
     """
     Scans the OpenAI response for generated files using dual strategies.
+    🟢 Accepts 'folder' to determine S3 destination.
     """
     uploaded_urls = []
     container_id = None
@@ -66,7 +66,7 @@ def _handle_generated_files(client, response_obj) -> List[str]:
                                 file_id = getattr(ann, "file_id", None)
                                 fname = getattr(ann, "filename", "graph.png")
                                 if file_id:
-                                    _process_file(cf_client, container_id, file_id, fname, uploaded_urls)
+                                    _process_file(cf_client, container_id, file_id, fname, uploaded_urls, folder)
 
         # 3. Strategy B: Manual Scan (Fallback)
         if not uploaded_urls and container_id:
@@ -79,7 +79,7 @@ def _handle_generated_files(client, response_obj) -> List[str]:
                     if not fname: fname = "generated_plot.png"
                     
                     if fid:
-                        _process_file(cf_client, container_id, fid, fname, uploaded_urls)
+                        _process_file(cf_client, container_id, fid, fname, uploaded_urls, folder)
             except Exception as e:
                 logger.warning(f"Manual container scan failed: {e}")
 
@@ -88,7 +88,7 @@ def _handle_generated_files(client, response_obj) -> List[str]:
 
     return uploaded_urls
 
-def _process_file(cf_client, container_id, file_id, filename, url_list):
+def _process_file(cf_client, container_id, file_id, filename, url_list, folder: str):
     """Downloads content from OpenAI and uploads to AWS S3 (Robust Method)."""
     try:
         file_content = None
@@ -131,8 +131,8 @@ def _process_file(cf_client, container_id, file_id, filename, url_list):
             ctype = "image/png"
             if not fname.endswith(".png"): filename = f"{filename}.png"
 
-        # Upload to S3
-        s3_url = storage_service.upload_image_from_bytes(file_content, ctype)
+        # 🟢 Upload to S3 with correct FOLDER
+        s3_url = storage_service.upload_image_from_bytes(file_content, ctype, folder=folder)
         logger.info(f"✅ Asset uploaded to S3: {s3_url}")
         url_list.append(s3_url)
 
@@ -170,9 +170,17 @@ def _build_runtime_signals(user_id: str | None, page: str | None, name: str | No
     return build_system_instructions(extras=signals)
 
 # ------------------------------------------------------------------
-# 🟢 STANDARD CHAT
+# 🟢 STANDARD CHAT (UPDATED)
 # ------------------------------------------------------------------
-def send_message_to_assistant(conversation_input: List[Dict[str, Any]], user_id: str | None = None, page: str | None = None, name: str | None = None, email: str | None = None, mode: str = "omega") -> str:
+def send_message_to_assistant(
+    conversation_input: List[Dict[str, Any]], 
+    user_id: str | None = None, 
+    page: str | None = None, 
+    name: str | None = None, 
+    email: str | None = None, 
+    mode: str = "omega"
+) -> Tuple[str, List[str]]: 
+    
     client = get_openai_client()
     cfg = get_model_config(mode)
     system_text = _build_runtime_signals(user_id, page, name, email)
@@ -189,6 +197,8 @@ def send_message_to_assistant(conversation_input: List[Dict[str, Any]], user_id:
 
     try:
         resp = client.responses.create(**{k: v for k, v in req.items() if v is not None})
+        
+        # 1. Extract Text
         text = getattr(resp, "output_text", None)
         if not text:
             chunks = []
@@ -196,7 +206,13 @@ def send_message_to_assistant(conversation_input: List[Dict[str, Any]], user_id:
                 for c in getattr(block, "content", []) or []:
                     if getattr(c, "type", "") in ("output_text", "text"): chunks.append(getattr(c, "text", ""))
             text = "\n".join(chunks).strip()
-        return text or "[No response]"
+
+        # 2. Extract Files (RICH CHAT -> chat_assets)
+        # 🟢 HERE IS THE FIX: Passing 'chat_assets'
+        generated_urls = _handle_generated_files(client, resp, folder="chat_assets")
+
+        return (text or "[No response]", generated_urls)
+
     except Exception as e:
         logger.error(f"Chat failed: {e}")
         raise e
@@ -222,7 +238,11 @@ def generate_structured_quiz(conversation_input: List[Dict[str, Any]], user_id: 
     try:
         resp = client.responses.parse(**{k: v for k, v in req.items() if v is not None})
         quiz = resp.output_parsed
-        urls = _handle_generated_files(client, resp)
+        
+        # 🟢 QUIZ -> quiz_assets
+        # 🟢 HERE IS THE FIX: Passing 'quiz_assets'
+        urls = _handle_generated_files(client, resp, folder="quiz_assets")
+        
         _assign_urls_to_quiz(quiz, urls)
         return quiz
     except Exception as e:
@@ -308,7 +328,11 @@ def stream_structured_quiz(conversation_input: List[Dict[str, Any]], user_id: st
             # Finalize
             final = stream.get_final_response()
             parsed = getattr(final, 'output_parsed', None) or getattr(final, 'parsed', None) or final
-            urls = _handle_generated_files(client, final)
+            
+            # 🟢 STREAM DONE -> quiz_assets
+            # 🟢 HERE IS THE FIX: Passing 'quiz_assets'
+            urls = _handle_generated_files(client, final, folder="quiz_assets")
+            
             if parsed and urls: _assign_urls_to_quiz(parsed, urls)
             
             yield {"type": "done", "full_response": parsed}

@@ -34,8 +34,8 @@ def lambda_handler(event, context):
     Triggered by SQS. 
     1. Determines status/category + Creative Loading Phrases + INTENT.
     2. Sends Visual Feedback (Action: status_update) containing CLIENT ACTIONS.
-    3. Generates Response (Text + Optional Quiz JSON).
-    4. Sends Final Answer (Text Bubble + Quiz Event).
+    3. Generates Response (Text + Optional Meta Payload).
+    4. Sends Final Answer (Text Bubble + Rich Data Event).
     """
     set_invocation_context(context)
 
@@ -122,8 +122,8 @@ def lambda_handler(event, context):
                     log_event("ws_status_send_failed", {"user_id": user_id}, level="warning", error=e)
 
             # --- 3. Get the AI response (Heavy Processing) ---
-            # 🟢 PASS THE STREAM MANAGER
-            ai_reply, conversation_id, assistant_timestamp, quiz_data = get_ai_response(
+            # 🟢 UPDATED: Capture 'meta_payload' (4th return value)
+            ai_reply, conversation_id, assistant_timestamp, meta_payload = get_ai_response(
                 message=message,
                 user_id=user_id,
                 name=name,
@@ -133,7 +133,7 @@ def lambda_handler(event, context):
                 image_urls=image_urls,
                 mode=ai_mode,
                 intent=intent,
-                stream_manager=stream_manager # <--- 🟢 PASSED HERE
+                stream_manager=stream_manager 
             )
 
             # --- 4. Send Final Reply ---
@@ -145,7 +145,9 @@ def lambda_handler(event, context):
                         "ai_reply": ai_reply,
                         "conversation_id": conversation_id,
                         "client_row_id": client_row_id,
-                        "timestamp": assistant_timestamp
+                        "timestamp": assistant_timestamp,
+                        # 🟢 OPTIONAL: Include metadata inline if needed
+                        "metadata": meta_payload 
                     })
                     
                     api_gateway_client.post_to_connection(
@@ -153,27 +155,35 @@ def lambda_handler(event, context):
                         Data=response_payload
                     )
 
-                    # B. Send Quiz Data (Consistency Check)
-                    # Even if we streamed the questions, sending this "Final" update guarantees
-                    # the client has the complete, correct state stored in the DB.
-                    if quiz_data:
-                        quiz_payload = json.dumps({
-                            "action": "quiz_data_update",
-                            "data": quiz_data,
+                    # B. Send Structured Data Update (Quiz OR Images)
+                    if meta_payload:
+                        # Determine action type based on content
+                        action_type = "quiz_data_update" # Default (Backward Compatibility)
+                        
+                        if meta_payload.get("type") == "rich_chat":
+                            action_type = "rich_content_update" # 🟢 New Action for Images/Graphs
+
+                        data_payload = json.dumps({
+                            "action": action_type,
+                            "data": meta_payload,
                             "conversation_id": conversation_id
                         })
+                        
                         api_gateway_client.post_to_connection(
                             ConnectionId=connection_id,
-                            Data=quiz_payload
+                            Data=data_payload
                         )
-                        log_event("quiz_data_pushed_to_client", {"conversation_id": conversation_id})
+                        log_event("rich_data_pushed_to_client", {
+                            "type": action_type, 
+                            "conversation_id": conversation_id
+                        })
 
                     log_event("ai_worker_response_sent", {
                         "user_id": user_id, 
                         "connection_id": connection_id,
                         "client_row_id": client_row_id,
                         "timestamp": assistant_timestamp,
-                        "has_quiz_data": bool(quiz_data)
+                        "has_meta_payload": bool(meta_payload)
                     })
 
                 except api_gateway_client.exceptions.GoneException:

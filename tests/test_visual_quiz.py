@@ -20,9 +20,8 @@ def test_visual_quiz():
         print("❌ ERROR: OPENAI_API_KEY is missing in .env")
         return
     
-    # Check for AWS Credentials (either in .env or ~/.aws/credentials)
-    # We just check if boto3 can find them implicitly, but let's warn if S3 config is missing
-    if not os.getenv("S3_BUCKET_NAME"):
+    bucket_name = os.getenv("S3_BUCKET_NAME")
+    if not bucket_name:
         print("⚠️ WARNING: S3_BUCKET_NAME is missing in .env. Uploads might fail.")
 
     print("\n🚀 STARTING VISUAL QUIZ TEST")
@@ -56,10 +55,15 @@ def test_visual_quiz():
             # THE MOMENT OF TRUTH
             if q.image_url:
                 print(f"    🖼️ IMAGE URL: {q.image_url}")
-                if "invicto-quiz-assets" in q.image_url and "https://" in q.image_url:
-                     print("    🎉 SUCCESS: Valid S3 URL detected!")
+                
+                # 🟢 UPDATED CHECK: Look for the new bucket OR the specific folder
+                # It checks if the URL contains the bucket name AND the 'quiz_assets' folder
+                if (bucket_name in q.image_url or "invicto-ai-assets" in q.image_url) and "quiz_assets" in q.image_url:
+                      print("    🎉 SUCCESS: Valid S3 URL detected in 'quiz_assets' folder!")
                 elif q.image_url == "PENDING_UPLOAD":
-                     print("    ⚠️ PENDING: The AI tagged it, but the upload logic didn't replace it.")
+                      print("    ⚠️ PENDING: The AI tagged it, but the upload logic didn't replace it.")
+                else:
+                      print("    ⚠️ WARNING: URL generated but might be in the wrong bucket/folder.")
             else:
                 print("    ⚪ No image for this question.")
             print("-" * 40)

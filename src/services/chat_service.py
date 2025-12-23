@@ -52,10 +52,11 @@ def _build_history_list(conversation_id: str, max_user: int = 3, max_assistant: 
             if role == "assistant" and metadata:
                 try:
                     metadata_str = json.dumps(metadata, default=decimal_default)
+                    # Context for the AI so it remembers it generated interactive content
                     hidden_context = (
                         f"\n\n[SYSTEM CONTEXT: User cannot see this. "
-                        f"I previously generated this interactive quiz: {metadata_str}. "
-                        f"I must use this data to answer follow-up questions about the quiz.]"
+                        f"I previously generated this interactive content: {metadata_str}. "
+                        f"I must use this data to answer follow-up questions.]"
                     )
                     text_content += hidden_context
                 except Exception:
@@ -122,6 +123,7 @@ def get_ai_response(
     # ------------------------------------------------------------------
     quiz_data = None
     final_reply_text = ""
+    generated_assets = [] # <--- 🟢 NEW: Store generated images/files here
     
     if intent == "quiz":
         topic_hint = message if message else "General Knowledge"
@@ -170,19 +172,14 @@ def get_ai_response(
                             seen_indices.add(idx)
                         
                     elif evt_type == "done":
-                        # 🟢 THE FIX: Handle 'output_parsed'
                         final_obj = event.get("full_response")
-                        
-                        # Try to find the parsed model in various known locations
                         parsed_response = None
                         
-                        # 1. Direct model
+                        # Try to find the parsed model in various known locations
                         if hasattr(final_obj, 'questions'):
                             parsed_response = final_obj
-                        # 2. .parsed property (some SDK versions)
                         elif hasattr(final_obj, 'parsed') and hasattr(final_obj.parsed, 'questions'):
                             parsed_response = final_obj.parsed
-                        # 3. .output_parsed property (seen in your logs)
                         elif hasattr(final_obj, 'output_parsed') and hasattr(final_obj.output_parsed, 'questions'):
                             parsed_response = final_obj.output_parsed
                         
@@ -192,8 +189,7 @@ def get_ai_response(
                             final_reply_text = parsed_response.intro_message
                             accumulated_questions = [q.dict() for q in parsed_response.questions]
                         else:
-                            # This is the "only one question" fallback path, hopefully avoided now
-                            logger.warning(f"ChatService: Could not find 'questions' in final object. Attrs: {dir(final_obj)}")
+                            logger.warning(f"ChatService: Could not find 'questions' in final object.")
 
                     elif evt_type == "error":
                         error_msg = event.get("error", "Unknown stream error")
@@ -232,7 +228,8 @@ def get_ai_response(
     else:
         # Standard Chat Mode
         try:
-            final_reply_text = send_message_to_assistant(
+            # 🟢 UPDATED: Unpack text AND generated_assets (URLs)
+            final_reply_text, generated_assets = send_message_to_assistant(
                 conversation_input=conversation_input,
                 user_id=user_id,
                 page=page,
@@ -251,11 +248,24 @@ def get_ai_response(
         for img in image_urls or []:
             save_message(conversation_id, role="user", message_text=f"[Imagen] {img}")
         
+        # 🟢 CONSTRUCT META PAYLOAD
+        # Priority: 1. Quiz Data, 2. Rich Chat Assets, 3. None
+        meta_payload = quiz_data
+        
+        if not meta_payload and generated_assets:
+            meta_payload = {
+                "type": "rich_chat",
+                "assets": [
+                    {"type": "image", "url": url, "alt": "Generated Visualization"} 
+                    for url in generated_assets
+                ]
+            }
+
         saved_item = save_message(
             conversation_id, 
             role="assistant", 
             message_text=final_reply_text,
-            metadata=quiz_data 
+            metadata=meta_payload # <--- Saves either Quiz JSON or Rich Chat JSON
         )
         if saved_item and isinstance(saved_item, dict):
             assistant_timestamp = saved_item.get("Timestamp", "")
@@ -263,4 +273,5 @@ def get_ai_response(
     except Exception as e:
         raise RuntimeError(f" Failed to save messages: {e}")
 
-    return final_reply_text, conversation_id, assistant_timestamp, quiz_data
+    # 🟢 Return meta_payload as the 4th argument
+    return final_reply_text, conversation_id, assistant_timestamp, meta_payload
