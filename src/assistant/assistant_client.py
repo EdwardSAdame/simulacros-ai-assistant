@@ -14,6 +14,9 @@ from src.services.storage_service import storage_service
 
 logger = logging.getLogger(__name__)
 
+# ... (Keep _get_files_client, _handle_generated_files, _process_file, _assign_urls_to_quiz, _build_runtime_signals as they are) ...
+# (I am omitting them here to keep the response short, assume they remain unchanged)
+
 # ------------------------------------------------------------------
 # 🔹 HELPER: Handle File Artifacts (Robust)
 # ------------------------------------------------------------------
@@ -149,9 +152,6 @@ def _assign_urls_to_quiz(quiz_data: QuizResponse, urls: List[str]):
                 q.image_url = urls[idx]
                 idx += 1
 
-# ------------------------------------------------------------------
-# 🟢 RUNTIME INSTRUCTIONS (UPDATED FOR AGGRESSIVE VISUALS)
-# ------------------------------------------------------------------
 def _build_runtime_signals(user_id: str | None, page: str | None, name: str | None, email: str | None) -> str:
     tinfo = get_current_time_info()
     target = infer_target_semester()
@@ -161,8 +161,6 @@ def _build_runtime_signals(user_id: str | None, page: str | None, name: str | No
         f"User: {user_id or 'Guest'}",
         f"Target: {target}",
         "Sources: Invicto Knowledge Base.",
-        
-        # 🟢 AGGRESSIVE VISUAL TRIGGER
         "VISUALS: Use the 'python' tool (Code Interpreter) to AUTOMATICALLY GENERATE PLOTS for any request involving mathematical functions, geometry, or data trends. Do not just describe the graph—DRAW IT. Output the file. In the JSON 'image_url' field, strictly write the string 'PENDING_UPLOAD'."
     ]
     if name: signals.append(f"Name: {name}.")
@@ -207,8 +205,11 @@ def send_message_to_assistant(
                     if getattr(c, "type", "") in ("output_text", "text"): chunks.append(getattr(c, "text", ""))
             text = "\n".join(chunks).strip()
 
+        # 🟢 CLEANUP: Remove sandbox links (e.g., [Download...](sandbox:/mnt/...))
+        if text:
+            text = re.sub(r'\[.*?\]\(sandbox:/mnt/data/.*?\)', '', text).strip()
+
         # 2. Extract Files (RICH CHAT -> chat_assets)
-        # 🟢 HERE IS THE FIX: Passing 'chat_assets'
         generated_urls = _handle_generated_files(client, resp, folder="chat_assets")
 
         return (text or "[No response]", generated_urls)
@@ -217,9 +218,7 @@ def send_message_to_assistant(
         logger.error(f"Chat failed: {e}")
         raise e
 
-# ------------------------------------------------------------------
-# 🟢 BATCH STRUCTURED QUIZ
-# ------------------------------------------------------------------
+# ... (Keep generate_structured_quiz and stream_structured_quiz as they were) ...
 def generate_structured_quiz(conversation_input: List[Dict[str, Any]], user_id: str | None = None, page: str | None = None, name: str | None = None, email: str | None = None, mode: str = "omega") -> QuizResponse:
     client = get_openai_client()
     cfg = get_model_config(mode)
@@ -238,20 +237,13 @@ def generate_structured_quiz(conversation_input: List[Dict[str, Any]], user_id: 
     try:
         resp = client.responses.parse(**{k: v for k, v in req.items() if v is not None})
         quiz = resp.output_parsed
-        
-        # 🟢 QUIZ -> quiz_assets
-        # 🟢 HERE IS THE FIX: Passing 'quiz_assets'
         urls = _handle_generated_files(client, resp, folder="quiz_assets")
-        
         _assign_urls_to_quiz(quiz, urls)
         return quiz
     except Exception as e:
         logger.error(f"Quiz generation failed: {e}")
         raise e
 
-# ------------------------------------------------------------------
-# 🟢 STREAMING STRUCTURED QUIZ
-# ------------------------------------------------------------------
 def stream_structured_quiz(conversation_input: List[Dict[str, Any]], user_id: str | None = None, page: str | None = None, name: str | None = None, email: str | None = None, mode: str = "omega") -> Generator[Dict[str, Any], None, None]:
     client = get_openai_client()
     cfg = get_model_config(mode)
@@ -325,14 +317,9 @@ def stream_structured_quiz(conversation_input: List[Dict[str, Any]], user_id: st
                                     elif char == '"': in_str = False
                                 cursor += 1
 
-            # Finalize
             final = stream.get_final_response()
             parsed = getattr(final, 'output_parsed', None) or getattr(final, 'parsed', None) or final
-            
-            # 🟢 STREAM DONE -> quiz_assets
-            # 🟢 HERE IS THE FIX: Passing 'quiz_assets'
             urls = _handle_generated_files(client, final, folder="quiz_assets")
-            
             if parsed and urls: _assign_urls_to_quiz(parsed, urls)
             
             yield {"type": "done", "full_response": parsed}
