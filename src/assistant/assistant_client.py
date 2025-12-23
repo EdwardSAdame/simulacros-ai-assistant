@@ -14,9 +14,6 @@ from src.services.storage_service import storage_service
 
 logger = logging.getLogger(__name__)
 
-# ... (Keep _get_files_client, _handle_generated_files, _process_file, _assign_urls_to_quiz, _build_runtime_signals as they are) ...
-# (I am omitting them here to keep the response short, assume they remain unchanged)
-
 # ------------------------------------------------------------------
 # 🔹 HELPER: Handle File Artifacts (Robust)
 # ------------------------------------------------------------------
@@ -155,20 +152,29 @@ def _assign_urls_to_quiz(quiz_data: QuizResponse, urls: List[str]):
 def _build_runtime_signals(user_id: str | None, page: str | None, name: str | None, email: str | None) -> str:
     tinfo = get_current_time_info()
     target = infer_target_semester()
+    
+    # 🟢 UPDATED VISUAL INSTRUCTION: Explicitly forbid download text
+    visuals_instruction = (
+        "VISUALS: Use the 'python' tool (Code Interpreter) to AUTOMATICALLY GENERATE PLOTS for any request involving "
+        "mathematical functions, geometry, or data trends. Do not just describe the graph—DRAW IT. Output the file. "
+        "IMPORTANT: Do NOT mention downloading the file or provide links. The image is automatically displayed to the user. "
+        "Just say 'Here is the graph' or similar."
+    )
+
     signals = [
         f"Today is {tinfo['full_human']}.",
         f"Page: {page or '/'}",
         f"User: {user_id or 'Guest'}",
         f"Target: {target}",
         "Sources: Invicto Knowledge Base.",
-        "VISUALS: Use the 'python' tool (Code Interpreter) to AUTOMATICALLY GENERATE PLOTS for any request involving mathematical functions, geometry, or data trends. Do not just describe the graph—DRAW IT. Output the file. In the JSON 'image_url' field, strictly write the string 'PENDING_UPLOAD'."
+        visuals_instruction
     ]
     if name: signals.append(f"Name: {name}.")
     if email: signals.append(f"Email: {email}.")
     return build_system_instructions(extras=signals)
 
 # ------------------------------------------------------------------
-# 🟢 STANDARD CHAT (UPDATED)
+# 🟢 STANDARD CHAT
 # ------------------------------------------------------------------
 def send_message_to_assistant(
     conversation_input: List[Dict[str, Any]], 
@@ -206,6 +212,7 @@ def send_message_to_assistant(
             text = "\n".join(chunks).strip()
 
         # 🟢 CLEANUP: Remove sandbox links (e.g., [Download...](sandbox:/mnt/...))
+        # We keep this as a safety net even with the prompt fix
         if text:
             text = re.sub(r'\[.*?\]\(sandbox:/mnt/data/.*?\)', '', text).strip()
 
