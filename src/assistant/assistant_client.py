@@ -9,7 +9,8 @@ from src.config.model_config import get_model_config
 from src.config.system_instructions import build_system_instructions
 from src.config.page_vectorstores import get_stores_for_page
 from src.utils.time_utils import get_current_time_info, infer_target_semester, semester_season
-from src.schemas.quiz_schemas import QuizResponse, QuizQuestion
+# 🟢 Ensure this import picks up the NEW schema with 'title'
+from src.schemas.quiz_schemas import QuizResponse, QuizQuestion 
 from src.services.storage_service import storage_service
 
 logger = logging.getLogger(__name__)
@@ -225,7 +226,9 @@ def send_message_to_assistant(
         logger.error(f"Chat failed: {e}")
         raise e
 
-# ... (Keep generate_structured_quiz and stream_structured_quiz as they were) ...
+# ------------------------------------------------------------------
+# 🟢 QUIZ GENERATION
+# ------------------------------------------------------------------
 def generate_structured_quiz(conversation_input: List[Dict[str, Any]], user_id: str | None = None, page: str | None = None, name: str | None = None, email: str | None = None, mode: str = "omega") -> QuizResponse:
     client = get_openai_client()
     cfg = get_model_config(mode)
@@ -236,7 +239,7 @@ def generate_structured_quiz(conversation_input: List[Dict[str, Any]], user_id: 
 
     req = {
         "model": cfg.model, "input": api_input, "temperature": cfg.temperature, "top_p": cfg.top_p,
-        "text_format": QuizResponse,
+        "text_format": QuizResponse, # 🟢 ENFORCES TITLE GENERATION
         "tools": [{"type": "code_interpreter", "container": {"type": "auto"}}]
     }
     if cfg.model.startswith("o1"): req.pop("temperature", None); req.pop("top_p", None)
@@ -261,7 +264,7 @@ def stream_structured_quiz(conversation_input: List[Dict[str, Any]], user_id: st
 
     req = {
         "model": cfg.model, "input": api_input, "temperature": cfg.temperature, "top_p": cfg.top_p,
-        "text_format": QuizResponse,
+        "text_format": QuizResponse, # 🟢 ENFORCES TITLE GENERATION
         "tools": [{"type": "code_interpreter", "container": {"type": "auto"}}]
     }
     if cfg.model.startswith("o1"): req.pop("temperature", None); req.pop("top_p", None)
@@ -277,6 +280,9 @@ def stream_structured_quiz(conversation_input: List[Dict[str, Any]], user_id: st
                 if event.type == "response.output_text.delta":
                     buffer += event.delta
                     
+                    # 🟢 TITLE / INTRO CHECK
+                    # Even if 'title' comes first in JSON, we wait for 'questions' marker 
+                    # to ensure we have enough buffer to regex the intro safely.
                     if not intro_yielded and '"questions"' in buffer:
                         match = re.search(r'"intro_message"\s*:\s*"(.*?)"', buffer, re.DOTALL)
                         if match:
@@ -329,6 +335,7 @@ def stream_structured_quiz(conversation_input: List[Dict[str, Any]], user_id: st
             urls = _handle_generated_files(client, final, folder="quiz_assets")
             if parsed and urls: _assign_urls_to_quiz(parsed, urls)
             
+            # 🟢 The 'parsed' object here will now contain the .title field
             yield {"type": "done", "full_response": parsed}
 
     except Exception as e:
