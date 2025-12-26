@@ -1,7 +1,7 @@
 # src/config/model_config.py
 import os
 from dataclasses import dataclass
-from typing import Optional # 🟢 Added Optional
+from typing import Optional # Added Optional
 import logging
 
 logger = logging.getLogger(__name__)
@@ -9,8 +9,8 @@ logger = logging.getLogger(__name__)
 @dataclass(frozen=True)
 class ModelConfig:
     model: str
-    temperature: Optional[float] # 🟢 Now accepts None
-    top_p: Optional[float]       # 🟢 Now accepts None
+    temperature: Optional[float] # Now accepts None
+    top_p: Optional[float]       # Now accepts None
     # max_tokens was deleted previously
 
 def _parse_float_or_none(value: str | None, default: float) -> Optional[float]:
@@ -62,7 +62,7 @@ def get_model_config(mode: str = "omega") -> ModelConfig:
     # 2. Load values dynamically
     model = os.getenv(env_model, fallback_model)
 
-    # 🟢 Use helper to allow "None"
+    # Use helper to allow "None"
     temperature = _parse_float_or_none(os.getenv(env_temp), fallback_temp)
     top_p = _parse_float_or_none(os.getenv(env_top_p), fallback_top_p)
 
