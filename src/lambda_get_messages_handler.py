@@ -2,6 +2,7 @@
 import json
 import logging
 import os
+from decimal import Decimal
 from src.storage.messages_table import get_all_messages # Import the new function
 from src.utils.logging_utils import log_event, set_invocation_context
 
@@ -15,6 +16,13 @@ CORS_HEADERS = {
     "Access-Control-Allow-Headers": "Content-Type,Authorization",
     "Access-Control-Allow-Methods": "OPTIONS,GET" # Allow GET for fetching data
 }
+
+# 🟢 HELPER: Convert DynamoDB Decimal objects to JSON-compatible types
+def decimal_default(obj):
+    if isinstance(obj, Decimal):
+        # Convert to int if it's a whole number, otherwise float
+        return int(obj) if obj % 1 == 0 else float(obj)
+    raise TypeError
 
 def lambda_handler(event, context):
     """
@@ -57,5 +65,6 @@ def _response(status_code, body):
     return {
         "statusCode": status_code,
         "headers": CORS_HEADERS,
-        "body": json.dumps(body)
+        # 🟢 UPDATED: Use the decimal_default helper to safely serialize DynamoDB data
+        "body": json.dumps(body, default=decimal_default)
     }
