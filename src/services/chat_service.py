@@ -153,6 +153,9 @@ def get_ai_response(
                 seen_indices = set()
                 accumulated_questions = []
                 final_reply_text = "Aquí tienes tu simulacro."
+                
+                # 🟢 FIX: Track the title from the final object
+                ai_generated_title = "Simulacro Generado" 
 
                 for event in stream_gen:
                     evt_type = event.get("type")
@@ -162,7 +165,7 @@ def get_ai_response(
                         
                     elif evt_type == "question":
                         q_data = event.get("data")
-                        q_dict = q_data.dict()
+                        q_dict = q_data.dict() # or model_dump()
                         idx = event.get("index", 0)
                         
                         stream_manager.send_quiz_item(question_data=q_dict, index=idx)
@@ -188,6 +191,12 @@ def get_ai_response(
                             logger.info(f"ChatService: Stream Done. Saving full set of {count} questions from SDK.")
                             final_reply_text = parsed_response.intro_message
                             accumulated_questions = [q.dict() for q in parsed_response.questions]
+                            
+                            # 🟢 1. EXTRACT TITLE HERE
+                            if hasattr(parsed_response, 'title') and parsed_response.title:
+                                ai_generated_title = parsed_response.title
+                            else:
+                                logger.warning("ChatService: 'title' field missing in parsed_response.")
                         else:
                             logger.warning(f"ChatService: Could not find 'questions' in final object.")
 
@@ -196,11 +205,13 @@ def get_ai_response(
                         log_event("quiz_stream_error", {"error": error_msg}, level="error")
                         stream_manager.send_error(error_msg)
 
+                # 🟢 2. SAVE TITLE TO METADATA
                 quiz_data = {
                     "quiz_mode": "batch", 
+                    "topic": ai_generated_title, # <--- 🟢 KEY FIX
                     "questions": accumulated_questions
                 }
-                log_event("quiz_streaming_completed", {"count": len(accumulated_questions)})
+                log_event("quiz_streaming_completed", {"count": len(accumulated_questions), "title": ai_generated_title})
 
             else:
                 # Batch Mode
@@ -213,8 +224,10 @@ def get_ai_response(
                     mode=mode 
                 )
                 
+                # 🟢 FIX: Batch Mode also gets the title
                 quiz_data = {
                     "quiz_mode": "batch", 
+                    "topic": quiz_model.title, # <--- 🟢 KEY FIX
                     "questions": [q.dict() for q in quiz_model.questions]
                 }
                 final_reply_text = quiz_model.intro_message
