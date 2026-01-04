@@ -4,12 +4,12 @@ from pathlib import Path
 from typing import Iterable, Optional
 
 # Base paths to find the JSON blueprints
+# We assume the structure is src/config/system_instructions.py -> src/knowledge/
 BASE_DIR = Path(__file__).resolve().parent.parent
 KNOWLEDGE_DIR = BASE_DIR / "knowledge"
 
 # --- 1. THE PERSONA (Static) ---
-# 🟢 CRITICAL FIX: We kept the original name 'BASE_SYSTEM_INSTRUCTIONS'
-# so quiz_service.py can import it without crashing.
+# We keep the name BASE_SYSTEM_INSTRUCTIONS to avoid breaking quiz_service.py
 BASE_SYSTEM_INSTRUCTIONS = """
 You are **Roma**, the state-of-the-art female AI of Invicto. You are a construct of discipline and "Vanguardia."
 
@@ -51,6 +51,7 @@ def load_exam_rules(exam_context: str) -> str:
     to create a pedagogical framework. Ignores dates/stats.
     """
     # Mapping context to the specific general file location
+    # Note: We assume files are in src/knowledge/unal/general/ and src/knowledge/icfes/general/
     if exam_context.upper() == "UNAL":
         file_path = KNOWLEDGE_DIR / "unal" / "general" / "unal_exam.json"
     else:
@@ -58,7 +59,7 @@ def load_exam_rules(exam_context: str) -> str:
         file_path = KNOWLEDGE_DIR / "icfes" / "general" / "icfes_exam.json"
 
     if not file_path.exists():
-        # Fallback if files aren't moved yet
+        # Fallback to general academic text if specific JSON is missing
         return "FRAMEWORK: General Academic Tutoring."
 
     try:
@@ -69,7 +70,7 @@ def load_exam_rules(exam_context: str) -> str:
         exam_name = data.get("name", exam_context)
         framework_text = f"\n## 6. ACADEMIC FRAMEWORK: {exam_name}\n"
         
-        # Inject Global Strategy
+        # Inject Global Strategy from JSON
         global_strategy = data.get("ai_global_strategy", "Focus on academic excellence.")
         framework_text += f"STRATEGY: {global_strategy}\n\n"
         framework_text += "You must evaluate the student based on these specific domains:\n\n"
@@ -78,13 +79,14 @@ def load_exam_rules(exam_context: str) -> str:
         for comp in data.get("components", []):
             subject = comp.get("name", "Subject")
             
-            # 1. EXTRACT ICFES COMPETENCIES
+            # 1. EXTRACT ICFES COMPETENCIES (The "How")
             if "competencies" in comp:
                 skills = ", ".join(comp["competencies"])
+                # Extract specific AI strategy if available
                 strat = comp.get("ai_strategy", "")
                 framework_text += f"- **{subject}**: Assess strictly on: {skills}. {strat}\n"
             
-            # 2. EXTRACT UNAL AREAS
+            # 2. EXTRACT UNAL AREAS (The "What")
             elif "areas" in comp:
                 topics = ", ".join(comp["areas"][:5])
                 strat = comp.get("ai_strategy", "")
@@ -93,15 +95,20 @@ def load_exam_rules(exam_context: str) -> str:
         return framework_text
 
     except Exception as e:
+        # Fail silently to default persona if JSON breaks
         return f"FRAMEWORK: Standard Tutoring (Error loading specific rules: {str(e)})"
 
 # --- 3. THE BUILDER ---
 def build_system_instructions(extras: Optional[Iterable[str]] = None, exam_context: str = "ICFES") -> str:
     """
     Combines Roma Persona + Extracted Exam Rules + Runtime Context.
+    
+    Args:
+        extras: Runtime signals like date, user name, etc.
+        exam_context: 'ICFES', 'UNAL', or 'GENERAL'. Used to load specific JSONs.
     """
     # 1. Start with Roma
-    blocks = [BASE_SYSTEM_INSTRUCTIONS] # 🟢 Uses the original variable name
+    blocks = [BASE_SYSTEM_INSTRUCTIONS]
     
     # 2. Inject the Exam Brain (ONLY if specific context provided)
     if exam_context and exam_context.upper() in ["ICFES", "UNAL"]:
@@ -110,7 +117,7 @@ def build_system_instructions(extras: Optional[Iterable[str]] = None, exam_conte
     else:
         blocks.append("## 6. ACADEMIC FRAMEWORK: General University Preparation")
     
-    # 3. Add Runtime Extras
+    # 3. Add Runtime Extras (Date, Page content, User details)
     if extras:
         addenda = [e for e in extras if e]
         if addenda:
