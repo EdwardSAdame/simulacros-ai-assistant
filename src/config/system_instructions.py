@@ -7,7 +7,7 @@ from typing import Iterable, Optional
 BASE_DIR = Path(__file__).resolve().parent.parent
 KNOWLEDGE_DIR = BASE_DIR / "knowledge"
 
-# --- 1. THE PERSONA (Static) ---
+# --- 1. THE PERSONA (Main Bot) ---
 BASE_SYSTEM_INSTRUCTIONS = """
 You are **Roma**, the state-of-the-art female AI of Invicto. You are a construct of discipline and "Vanguardia."
 
@@ -42,17 +42,38 @@ You are **Roma**, the state-of-the-art female AI of Invicto. You are a construct
 - **Execution**: Write the Python code to create the plot using `matplotlib`, save it, and let the system handle the display. Do not simply describe the graph in text.
 """
 
+# --- 1.1 THE ROUTER CORTEX (Lightweight) ---
+# 🟢 NEW: Optimized prompt for the semantic router ONLY.
+ROUTER_SYSTEM_INSTRUCTIONS = """
+You are the **Roma Semantic Cortex**, an internal routing system.
+Your sole function is to classify user input and generate system status messages.
+
+## IDENTITY & TONE
+- **Voice**: You are 'Roma'. Be cold, authoritative, technological, and precise. (Cyberpunk/Military aesthetic).
+- **Language**: Strictly mirror the user's language (Spanish or English).
+- **Format**: Output JSON ONLY. No markdown, no conversational filler.
+
+## TASK 1: CLASSIFY CATEGORY
+Choose exactly one: [biologia, quimica, fisica, matematicas, sociales, lectura_critica, analisis_imagen, ingles, general].
+
+## TASK 2: DETERMINE INTENT
+- **'quiz'**: If the user explicitly asks for a simulation, test, exam, questions, or drill.
+- **'chat'**: For everything else (questions, greetings, theory explanation).
+
+## TASK 3: GENERATE STATUS PHRASES
+Create 3 short, unique status messages (max 4 words) reflecting the category.
+- Bad: "Loading...", "Please wait".
+- Good: "Accessing biological archives...", "Calibrating physics engine...", "Roma System: Online."
+"""
+
 # --- 2. THE SMART LOADER (Extracts only the Taxonomy) ---
 def load_exam_rules(exam_context: str) -> str:
     """
     Parses the JSON and extracts the pedagogical framework.
-    Now more robust to ensure no component (like English) is skipped.
     """
-    # Mapping context to the specific general file location
     if exam_context.upper() == "UNAL":
         file_path = KNOWLEDGE_DIR / "unal" / "general" / "unal_exam.json"
     else:
-        # Default to ICFES
         file_path = KNOWLEDGE_DIR / "icfes" / "general" / "icfes_exam.json"
 
     if not file_path.exists():
@@ -62,32 +83,22 @@ def load_exam_rules(exam_context: str) -> str:
         with open(file_path, "r", encoding="utf-8") as f:
             data = json.load(f)
             
-        # START OF THE DYNAMIC PROMPT
         exam_name = data.get("name", exam_context)
         framework_text = f"\n## 6. ACADEMIC FRAMEWORK: {exam_name}\n"
-        
-        # Inject Global Strategy from JSON
         global_strategy = data.get("ai_global_strategy", "Focus on academic excellence.")
         framework_text += f"STRATEGY: {global_strategy}\n\n"
         framework_text += "You must evaluate the student based on these specific domains:\n\n"
 
-        # --- SMART EXTRACTION LOGIC ---
         for comp in data.get("components", []):
             subject = comp.get("name", "Subject")
             strat = comp.get("ai_strategy", "")
             
-            # 1. EXTRACT ICFES COMPETENCIES
             if "competencies" in comp:
                 skills = ", ".join(comp["competencies"])
                 framework_text += f"- **{subject}**: Assess strictly on: {skills}. {strat}\n"
-            
-            # 2. EXTRACT UNAL AREAS
             elif "areas" in comp:
                 topics = ", ".join(comp["areas"][:5])
                 framework_text += f"- **{subject}**: Focus on: {topics}. {strat}\n"
-            
-            # 3. 🟢 FALLBACK FOR "INGLÉS" OR OTHERS (The Fix)
-            # If strictly defined competencies are missing, use description or parts
             else:
                 desc = comp.get("description", "Standard evaluation.")
                 framework_text += f"- **{subject}**: {desc} {strat}\n"
@@ -99,20 +110,13 @@ def load_exam_rules(exam_context: str) -> str:
 
 # --- 3. THE BUILDER ---
 def build_system_instructions(extras: Optional[Iterable[str]] = None, exam_context: str = "ICFES") -> str:
-    """
-    Combines Roma Persona + Extracted Exam Rules + Runtime Context.
-    """
-    # 1. Start with Roma
     blocks = [BASE_SYSTEM_INSTRUCTIONS]
-    
-    # 2. Inject the Exam Brain (ONLY if specific context provided)
     if exam_context and exam_context.upper() in ["ICFES", "UNAL"]:
         exam_framework = load_exam_rules(exam_context)
         blocks.append(exam_framework)
     else:
         blocks.append("## 6. ACADEMIC FRAMEWORK: General University Preparation")
     
-    # 3. Add Runtime Extras (Date, Page content, User details)
     if extras:
         addenda = [e for e in extras if e]
         if addenda:
