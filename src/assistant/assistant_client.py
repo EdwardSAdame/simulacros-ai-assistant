@@ -8,7 +8,6 @@ from pydantic import BaseModel, ValidationError
 from src.config.settings import get_openai_client, get_vector_search_max_results
 from src.config.model_config import get_model_config
 from src.config.system_instructions import build_system_instructions
-# Note: get_stores_for_page is removed here because we pass store_ids explicitly now
 from src.utils.time_utils import get_current_time_info, infer_target_semester, semester_season
 from src.schemas.quiz_schemas import QuizResponse, QuizQuestion 
 from src.services.storage_service import storage_service
@@ -30,24 +29,17 @@ def _get_files_client(client):
     return getattr(client, "container_files", None)
 
 def _handle_generated_files(client, response_obj, folder: str = "chat_assets") -> List[str]:
-    """
-    Scans the OpenAI response for generated files using dual strategies.
-    Accepts 'folder' to determine S3 destination.
-    """
+    """Scans the OpenAI response for generated files."""
     uploaded_urls = []
     container_id = None
     
     cf_client = _get_files_client(client)
-    if not cf_client:
-        return []
+    if not cf_client: return []
 
     try:
         output_items = getattr(response_obj, "output", []) or []
-
         for item in output_items:
             item_type = getattr(item, "type", "")
-            
-            # 1. Capture Container ID
             if item_type == "code_interpreter_call":
                 cid = getattr(item, "container_id", None)
                 if not cid and hasattr(item, "code_interpreter"):
@@ -56,7 +48,6 @@ def _handle_generated_files(client, response_obj, folder: str = "chat_assets") -
                     cid = getattr(item.code_interpreter_call, "container_id", None)
                 if cid: container_id = cid
 
-            # 2. Strategy A: Check Citations
             if item_type == "message":
                 content_list = getattr(item, "content", []) or []
                 if isinstance(content_list, list):
@@ -66,56 +57,36 @@ def _handle_generated_files(client, response_obj, folder: str = "chat_assets") -
                             if getattr(ann, "type", "") == "container_file_citation":
                                 file_id = getattr(ann, "file_id", None)
                                 fname = getattr(ann, "filename", "graph.png")
-                                if file_id:
-                                    _process_file(cf_client, container_id, file_id, fname, uploaded_urls, folder)
+                                if file_id: _process_file(cf_client, container_id, file_id, fname, uploaded_urls, folder)
 
-        # 3. Strategy B: Manual Scan (Fallback)
         if not uploaded_urls and container_id:
             try:
                 container_files = cf_client.list(container_id)
                 for c_file in container_files:
                     fname = getattr(c_file, "filename", None) or getattr(c_file, "name", None)
                     fid = getattr(c_file, "id", None) or getattr(c_file, "file_id", None)
-                    
                     if not fname: fname = "generated_plot.png"
-                    
-                    if fid:
-                        _process_file(cf_client, container_id, fid, fname, uploaded_urls, folder)
-            except Exception as e:
-                logger.warning(f"Manual container scan failed: {e}")
-
-    except Exception as e:
-        logger.warning(f"Error checking generated files: {e}")
-
+                    if fid: _process_file(cf_client, container_id, fid, fname, uploaded_urls, folder)
+            except Exception: pass
+    except Exception: pass
     return uploaded_urls
 
 def _process_file(cf_client, container_id, file_id, filename, url_list, folder: str):
-    """Downloads content from OpenAI and uploads to AWS S3 (Robust Method)."""
+    """Downloads content from OpenAI and uploads to AWS S3."""
     try:
         file_content = None
-        
-        # Method A: Nested Resource
         if hasattr(cf_client, "content") and hasattr(cf_client.content, "retrieve"):
             try:
-                if container_id:
-                    file_content = cf_client.content.retrieve(container_id=container_id, file_id=file_id)
-                else:
-                    file_content = cf_client.content.retrieve(file_id=file_id)
-            except Exception:
-                try:
-                    file_content = cf_client.content.retrieve(container_id, file_id)
-                except Exception:
-                    pass
-
-        # Method B: Direct Call
+                if container_id: file_content = cf_client.content.retrieve(container_id=container_id, file_id=file_id)
+                else: file_content = cf_client.content.retrieve(file_id=file_id)
+            except: pass
+            
         if file_content is None and callable(getattr(cf_client, "content", None)):
             try: file_content = cf_client.content(file_id)
             except: pass
 
-        if not file_content:
-            return
+        if not file_content: return
 
-        # Extract bytes
         if hasattr(file_content, "read"): file_content = file_content.read()
         elif hasattr(file_content, "content"): file_content = file_content.content
         elif hasattr(file_content, "text"): file_content = file_content.text.encode('utf-8')
@@ -124,7 +95,6 @@ def _process_file(cf_client, container_id, file_id, filename, url_list, folder: 
             try: file_content = bytes(file_content)
             except: pass
 
-        # Determine Content Type
         fname = str(filename).lower()
         if fname.endswith(".jpg") or fname.endswith(".jpeg"): ctype = "image/jpeg"
         elif fname.endswith(".pdf"): ctype = "application/pdf"
@@ -132,16 +102,13 @@ def _process_file(cf_client, container_id, file_id, filename, url_list, folder: 
             ctype = "image/png"
             if not fname.endswith(".png"): filename = f"{filename}.png"
 
-        # Upload to S3 with correct FOLDER
         s3_url = storage_service.upload_image_from_bytes(file_content, ctype, folder=folder)
         logger.info(f"✅ Asset uploaded to S3: {s3_url}")
         url_list.append(s3_url)
-
     except Exception as e:
         logger.error(f"File transfer failed for {file_id}: {e}")
 
 def _assign_urls_to_quiz(quiz_data: QuizResponse, urls: List[str]):
-    """Injects S3 URLs into the response."""
     if not urls: return
     idx = 0
     for q in quiz_data.questions:
@@ -150,16 +117,17 @@ def _assign_urls_to_quiz(quiz_data: QuizResponse, urls: List[str]):
                 q.image_url = urls[idx]
                 idx += 1
 
-def _build_runtime_signals(user_id: str | None, page: str | None, name: str | None, email: str | None) -> str:
-    """Helper for Quiz/Legacy calls that don't pass full system instruction."""
+def _build_runtime_signals(user_id: str | None, page: str | None, name: str | None, email: str | None, exam_context: str = "ICFES") -> str:
+    """
+    Helper for Quiz calls. 
+    🟢 CRITICAL FIX: Now accepts 'exam_context' to pass to the System Prompt Builder.
+    """
     tinfo = get_current_time_info()
     target = infer_target_semester()
     
     visuals_instruction = (
         "VISUALS: Use the 'python' tool (Code Interpreter) to AUTOMATICALLY GENERATE PLOTS for any request involving "
-        "mathematical functions, geometry, or data trends. Do not just describe the graph—DRAW IT. Output the file. "
-        "IMPORTANT: Do NOT mention downloading the file or provide links. The image is automatically displayed to the user. "
-        "Just say 'Here is the graph' or similar."
+        "mathematical functions, geometry, or data trends. Do not just describe the graph—DRAW IT. Output the file."
     )
 
     signals = [
@@ -172,7 +140,9 @@ def _build_runtime_signals(user_id: str | None, page: str | None, name: str | No
     ]
     if name: signals.append(f"Name: {name}.")
     if email: signals.append(f"Email: {email}.")
-    return build_system_instructions(extras=signals)
+    
+    # 🟢 PASS THE EXAM CONTEXT HERE
+    return build_system_instructions(extras=signals, exam_context=exam_context)
 
 # ------------------------------------------------------------------
 # 🟢 STANDARD CHAT
@@ -184,7 +154,6 @@ def send_message_to_assistant(
     name: str | None = None, 
     email: str | None = None, 
     mode: str = "omega",
-    # 🟢 NEW: Accept explicit system instructions and vector stores
     system_instruction: str | None = None,
     vector_store_ids: List[str] | None = None
 ) -> Tuple[str, List[str]]: 
@@ -192,43 +161,28 @@ def send_message_to_assistant(
     client = get_openai_client()
     cfg = get_model_config(mode)
 
-    # 🟢 LOGIC UPDATE: Use provided instruction OR build default fallback
     if not system_instruction:
-        system_text = _build_runtime_signals(user_id, page, name, email)
+        # Default fallback (should rarely happen if chat_service does its job)
+        system_text = _build_runtime_signals(user_id, page, name, email, exam_context="ICFES")
     else:
         system_text = system_instruction
     
     api_input = [{"role": "system", "content": [{"type": "input_text", "text": system_text}]}]
     api_input.extend(conversation_input)
 
-    # 🟢 LOGIC UPDATE: Use provided vector stores OR empty list (don't force logic here)
     tool_stores = vector_store_ids if vector_store_ids else []
-    
     tools = []
-    # Only add file_search if we have stores to search
     if tool_stores:
-        tools.append({
-            "type": "file_search", 
-            "vector_store_ids": tool_stores, 
-            "max_num_results": get_vector_search_max_results()
-        })
-    
-    # Always add code interpreter
+        tools.append({"type": "file_search", "vector_store_ids": tool_stores, "max_num_results": get_vector_search_max_results()})
     tools.append({"type": "code_interpreter", "container": {"type": "auto"}})
 
     req = {"model": cfg.model, "input": api_input, "temperature": cfg.temperature, "top_p": cfg.top_p}
-    
-    # Only attach tools for models that support them (non-o1 reasoning models)
-    if not (cfg.model.startswith("o1") or "reasoning" in cfg.model): 
-        req["tools"] = tools
-    else: 
-        req.pop("temperature", None)
-        req.pop("top_p", None)
+    if not (cfg.model.startswith("o1") or "reasoning" in cfg.model): req["tools"] = tools
+    else: req.pop("temperature", None); req.pop("top_p", None)
 
     try:
         resp = client.responses.create(**{k: v for k, v in req.items() if v is not None})
         
-        # 1. Extract Text
         text = getattr(resp, "output_text", None)
         if not text:
             chunks = []
@@ -237,15 +191,10 @@ def send_message_to_assistant(
                     if getattr(c, "type", "") in ("output_text", "text"): chunks.append(getattr(c, "text", ""))
             text = "\n".join(chunks).strip()
 
-        # CLEANUP: Remove sandbox links
-        if text:
-            text = re.sub(r'\[.*?\]\(sandbox:/mnt/data/.*?\)', '', text).strip()
-
-        # 2. Extract Files (RICH CHAT -> chat_assets)
+        if text: text = re.sub(r'\[.*?\]\(sandbox:/mnt/data/.*?\)', '', text).strip()
         generated_urls = _handle_generated_files(client, resp, folder="chat_assets")
 
         return (text or "[No response]", generated_urls)
-
     except Exception as e:
         logger.error(f"Chat failed: {e}")
         raise e
@@ -253,11 +202,21 @@ def send_message_to_assistant(
 # ------------------------------------------------------------------
 # 🟢 QUIZ GENERATION
 # ------------------------------------------------------------------
-def generate_structured_quiz(conversation_input: List[Dict[str, Any]], user_id: str | None = None, page: str | None = None, name: str | None = None, email: str | None = None, mode: str = "omega") -> QuizResponse:
-    # ... (Keep existing implementation identical) ...
+def generate_structured_quiz(
+    conversation_input: List[Dict[str, Any]], 
+    user_id: str | None = None, 
+    page: str | None = None, 
+    name: str | None = None, 
+    email: str | None = None, 
+    mode: str = "omega",
+    exam_context: str = "ICFES" # 🟢 NEW PARAMETER
+) -> QuizResponse:
+    
     client = get_openai_client()
     cfg = get_model_config(mode)
-    system_text = _build_runtime_signals(user_id, page, name, email)
+    
+    # 🟢 PASS THE CONTEXT DOWN
+    system_text = _build_runtime_signals(user_id, page, name, email, exam_context=exam_context)
     
     api_input = [{"role": "system", "content": [{"type": "input_text", "text": system_text}]}]
     api_input.extend(conversation_input)
@@ -279,11 +238,21 @@ def generate_structured_quiz(conversation_input: List[Dict[str, Any]], user_id: 
         logger.error(f"Quiz generation failed: {e}")
         raise e
 
-def stream_structured_quiz(conversation_input: List[Dict[str, Any]], user_id: str | None = None, page: str | None = None, name: str | None = None, email: str | None = None, mode: str = "omega") -> Generator[Dict[str, Any], None, None]:
-    # ... (Keep existing implementation identical) ...
+def stream_structured_quiz(
+    conversation_input: List[Dict[str, Any]], 
+    user_id: str | None = None, 
+    page: str | None = None, 
+    name: str | None = None, 
+    email: str | None = None, 
+    mode: str = "omega",
+    exam_context: str = "ICFES" # 🟢 NEW PARAMETER
+) -> Generator[Dict[str, Any], None, None]:
+    
     client = get_openai_client()
     cfg = get_model_config(mode)
-    system_text = _build_runtime_signals(user_id, page, name, email)
+    
+    # 🟢 PASS THE CONTEXT DOWN
+    system_text = _build_runtime_signals(user_id, page, name, email, exam_context=exam_context)
     
     api_input = [{"role": "system", "content": [{"type": "input_text", "text": system_text}]}]
     api_input.extend(conversation_input)
@@ -317,7 +286,6 @@ def stream_structured_quiz(conversation_input: List[Dict[str, Any]], user_id: st
                         arr_start = buffer.find('[', q_marker)
                         if arr_start != -1:
                             if last_checkpoint is None: last_checkpoint = arr_start
-                            
                             cursor = last_checkpoint
                             depth = 0
                             in_str = False
@@ -341,7 +309,6 @@ def stream_structured_quiz(conversation_input: List[Dict[str, Any]], user_id: st
                                                     def dict(self): return self.d
                                                 try: q_obj = QuizQuestion(**data)
                                                 except: q_obj = Wrapper(data)
-                                                
                                                 yield {"type": "question", "index": question_count, "data": q_obj}
                                                 question_count += 1
                                                 last_checkpoint = cursor + 1
@@ -357,7 +324,6 @@ def stream_structured_quiz(conversation_input: List[Dict[str, Any]], user_id: st
             parsed = getattr(final, 'output_parsed', None) or getattr(final, 'parsed', None) or final
             urls = _handle_generated_files(client, final, folder="quiz_assets")
             if parsed and urls: _assign_urls_to_quiz(parsed, urls)
-            
             yield {"type": "done", "full_response": parsed}
 
     except Exception as e:

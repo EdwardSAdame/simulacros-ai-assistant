@@ -5,15 +5,12 @@ import logging
 from decimal import Decimal
 from typing import List, Dict, Any, Tuple, Optional
 
-# 🟢 CONFIG & UTILS
 from src.config.settings import get_openai_client, get_vector_search_max_results
 from src.config.model_config import get_model_config
 from src.config.system_instructions import build_system_instructions
 from src.config.page_vectorstores import get_stores_for_page
 from src.utils.logging_utils import log_event
 from src.utils.time_utils import get_current_time_info, infer_target_semester, semester_season
-
-# 🟢 STORAGE
 from src.storage.conversations_table import save_conversation
 from src.storage.messages_table import save_message, get_recent_messages
 
@@ -25,32 +22,19 @@ def _normalize_email_for_storage(val):
     return val
 
 def _normalize_page(val: str | None) -> str:
-    if not val or (isinstance(val, str) and val.strip() == ""):
-        return "/"
+    if not val or (isinstance(val, str) and val.strip() == ""): return "/"
     return val
 
 def decimal_default(obj):
-    if isinstance(obj, Decimal):
-        return int(obj) if obj % 1 == 0 else float(obj)
+    if isinstance(obj, Decimal): return int(obj) if obj % 1 == 0 else float(obj)
     raise TypeError
 
 def derive_context_from_url(page_url: str) -> str:
-    """
-    Translates a URL path into an Exam Context for the System Prompt.
-    Example: '/simulacro-unal/matematicas' -> 'UNAL'
-    """
-    if not page_url:
-        return "ICFES" # Default fallback
-        
+    if not page_url: return "ICFES"
     url_lower = page_url.lower()
-    
-    if "unal" in url_lower:
-        return "UNAL"
-    elif "icfes" in url_lower:
-        return "ICFES"
-    
-    # If the user is on the homepage, or a generic dashboard
-    return "GENERAL" 
+    if "unal" in url_lower: return "UNAL"
+    elif "icfes" in url_lower: return "ICFES"
+    return "GENERAL"
 
 def _build_history_list(conversation_id: str, max_user: int = 3, max_assistant: int = 3) -> List[Dict[str, Any]]:
     try:
@@ -65,7 +49,6 @@ def _build_history_list(conversation_id: str, max_user: int = 3, max_assistant: 
         for m in merged:
             role = m.get("Role", "user")
             text_content = m.get("MessageText", "")
-            
             metadata = m.get("Metadata") or m.get("Meta")
             if role == "assistant" and metadata:
                 try:
@@ -76,20 +59,14 @@ def _build_history_list(conversation_id: str, max_user: int = 3, max_assistant: 
                         f"I must use this data to answer follow-up questions.]"
                     )
                     text_content += hidden_context
-                except Exception:
-                    pass
-
+                except Exception: pass
             content = [{"type": "input_text" if role == "user" else "output_text", "text": text_content}]
             history_list.append({"role": role, "content": content})
-        
         return history_list
     except Exception as e:
         log_event("history_fetch_failed", {"conversation_id": conversation_id}, level="warning", error=e)
         return []
 
-# ------------------------------------------------------------------
-# MAIN FUNCTION
-# ------------------------------------------------------------------
 def get_ai_response(
     message: str | None,
     user_id: str | None,
@@ -103,28 +80,24 @@ def get_ai_response(
     stream_manager: Any | None = None 
 ) -> Tuple[str, str, str, Dict | None]: 
     
-    # 🟢 LAZY IMPORTS
     from src.assistant.assistant_client import send_message_to_assistant, generate_structured_quiz, stream_structured_quiz
     from src.assistant.image_handler import format_image_urls_for_openai
     from src.services.quiz_service import QuizService
 
     page = _normalize_page(page)
 
-    # 🟢 1. INTELLIGENCE LAYER: Determine Brain & Memory
-    # This logic was missing in your previous version
+    # 🟢 1. INTELLIGENCE LAYER
     exam_context = derive_context_from_url(page)
     selected_vector_stores = get_stores_for_page(page)
 
-    # 🔍 OBSERVABILITY: LOG THE DECISION (The missing log!)
     log_event("context_resolution", {
         "user_id": user_id,
         "input_url": page,
         "derived_exam": exam_context,
-        "vector_stores_selected": selected_vector_stores,
         "intent": intent
     })
 
-    # Step 2: Find-or-create conversation
+    # Step 2: Conversation Setup
     try:
         if conversation_id:
             log_event("conversation_reused", {"conversation_id": conversation_id})
@@ -140,39 +113,32 @@ def get_ai_response(
 
     # Step 3: Build Input
     conversation_input = _build_history_list(conversation_id)
-    
     current_user_content = []
-    if message:
-        current_user_content.append({"type": "input_text", "text": message})
+    if message: current_user_content.append({"type": "input_text", "text": message})
     current_user_content.extend(format_image_urls_for_openai(image_urls or []))
-
-    if current_user_content:
-        conversation_input.append({"role": "user", "content": current_user_content})
+    if current_user_content: conversation_input.append({"role": "user", "content": current_user_content})
 
     # ------------------------------------------------------------------
-    # 🟢 BRANCH: QUIZ (Structured) vs CHAT (Standard)
+    # 🟢 BRANCH: QUIZ vs CHAT
     # ------------------------------------------------------------------
     quiz_data = None
     final_reply_text = ""
     generated_assets = [] 
     
     if intent == "quiz":
-        # ... (Quiz logic remains the same) ...
         topic_hint = message if message else "General Knowledge"
         num_questions = 5
         if message:
             match = re.search(r'\b(\d+)\b', message)
             if match:
                 parsed_num = int(match.group(1))
-                if 1 <= parsed_num <= 10: 
-                    num_questions = parsed_num
+                if 1 <= parsed_num <= 10: num_questions = parsed_num
 
-        # For Quiz, we still use the QuizService specialized instructions
         conversation_input.append(QuizService.get_system_instruction(topic=topic_hint, num_questions=num_questions))
 
         try:
             if stream_manager:
-                log_event("quiz_streaming_started", {"user_id": user_id, "mode": mode})
+                log_event("quiz_streaming_started", {"user_id": user_id, "mode": mode, "exam_context": exam_context})
                 
                 stream_gen = stream_structured_quiz(
                     conversation_input=conversation_input,
@@ -180,7 +146,8 @@ def get_ai_response(
                     page=page,
                     name=(name or None),
                     email=_normalize_email_for_storage(email),
-                    mode=mode 
+                    mode=mode,
+                    exam_context=exam_context # 🟢 FIXED: Pass the context!
                 )
                 
                 seen_indices = set()
@@ -212,7 +179,6 @@ def get_ai_response(
                             accumulated_questions = [q.dict() for q in parsed_response.questions]
                             if hasattr(parsed_response, 'title') and parsed_response.title:
                                 ai_generated_title = parsed_response.title
-
                     elif evt_type == "error":
                         error_msg = event.get("error", "Unknown stream error")
                         stream_manager.send_error(error_msg)
@@ -222,7 +188,6 @@ def get_ai_response(
                     "topic": ai_generated_title,
                     "questions": accumulated_questions
                 }
-
             else:
                 # Batch Mode
                 quiz_model = generate_structured_quiz(
@@ -231,7 +196,8 @@ def get_ai_response(
                     page=page,
                     name=(name or None),
                     email=_normalize_email_for_storage(email),
-                    mode=mode 
+                    mode=mode,
+                    exam_context=exam_context # 🟢 FIXED: Pass the context!
                 )
                 quiz_data = {
                     "quiz_mode": "batch", 
@@ -246,15 +212,12 @@ def get_ai_response(
             quiz_data = None
 
     else:
-        # 🟢 STANDARD CHAT MODE (Updated Logic)
+        # Standard Chat Mode
         try:
-            # 1. Build the dynamic System Prompt
             system_prompt = build_system_instructions(
                 extras=[f"Current Page: {page}"],
-                exam_context=exam_context # <--- Pass the derived 'ICFES' or 'UNAL' context
+                exam_context=exam_context
             )
-
-            # 2. Call Assistant with Explicit Instructions & Vector Stores
             final_reply_text, generated_assets = send_message_to_assistant(
                 conversation_input=conversation_input,
                 user_id=user_id,
@@ -262,36 +225,24 @@ def get_ai_response(
                 name=(name or None),
                 email=_normalize_email_for_storage(email),
                 mode=mode,
-                # 🟢 Pass the brain and memory explicitly
                 system_instruction=system_prompt,
                 vector_store_ids=selected_vector_stores 
             )
         except Exception as e:
             raise RuntimeError(f"OpenAI Chat API failed: {e}")
 
-    # Step 7: Persist
+    # Persist
     assistant_timestamp = ""
     try:
-        if message:
-            save_message(conversation_id, role="user", message_text=message)
-        for img in image_urls or []:
-            save_message(conversation_id, role="user", message_text=f"[Imagen] {img}")
+        if message: save_message(conversation_id, role="user", message_text=message)
+        for img in image_urls or []: save_message(conversation_id, role="user", message_text=f"[Imagen] {img}")
         
         meta_payload = quiz_data
         if not meta_payload and generated_assets:
-            meta_payload = {
-                "type": "rich_chat",
-                "assets": [{"type": "image", "url": url, "alt": "Generated Visualization"} for url in generated_assets]
-            }
+            meta_payload = {"type": "rich_chat", "assets": [{"type": "image", "url": url, "alt": "Generated Visualization"} for url in generated_assets]}
 
-        saved_item = save_message(
-            conversation_id, 
-            role="assistant", 
-            message_text=final_reply_text,
-            metadata=meta_payload
-        )
-        if saved_item and isinstance(saved_item, dict):
-            assistant_timestamp = saved_item.get("Timestamp", "")
+        saved_item = save_message(conversation_id, role="assistant", message_text=final_reply_text, metadata=meta_payload)
+        if saved_item and isinstance(saved_item, dict): assistant_timestamp = saved_item.get("Timestamp", "")
 
     except Exception as e:
         raise RuntimeError(f" Failed to save messages: {e}")
