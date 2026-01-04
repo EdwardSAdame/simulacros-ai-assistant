@@ -34,25 +34,32 @@ def decimal_default(obj):
         return int(obj) if obj % 1 == 0 else float(obj)
     raise TypeError
 
-# 🟢 CONTEXT LOGIC: The "Chameleon" Sensor
-def derive_context_from_url(page_url: str) -> str:
+# 🟢 NEW LOGIC: Context Resolution Engine
+def determine_exam_context(page_url: str, message_text: str | None = None) -> str:
     """
-    Translates a URL path into an Exam Context.
-    This decides which 'Hat' Roma wears (ICFES vs UNAL).
+    Decides the Exam Context (UNAL vs ICFES vs GENERAL).
+    Priority:
+    1. URL Explicit Context (e.g. user is inside /simulacro-unal)
+    2. User Intent in Message (e.g. user says "quiero unal" on homepage)
+    3. Default (General)
     """
-    if not page_url:
-        return "ICFES" # Default fallback
-        
-    url_lower = page_url.lower()
+    # 1. Analyze URL (The "Room" the user is in)
+    if page_url:
+        url_lower = page_url.lower()
+        if "unal" in url_lower: return "UNAL"
+        if "icfes" in url_lower: return "ICFES"
     
-    # Specific keywords determine the mode
-    if "unal" in url_lower:
-        return "UNAL"
-    elif "icfes" in url_lower:
-        return "ICFES"
-    
-    # If the user is on the homepage or a generic dashboard, 
-    # we return GENERAL so Roma acts as a counselor.
+    # 2. Analyze Message (Only if URL is generic)
+    if message_text:
+        msg_lower = message_text.lower()
+        # Check for UNAL keywords
+        if any(x in msg_lower for x in ["unal", "nacional", "universidad nacional"]):
+            return "UNAL"
+        # Check for ICFES keywords
+        if any(x in msg_lower for x in ["icfes", "saber 11", "saber pro", "estado"]):
+            return "ICFES"
+            
+    # 3. Fallback
     return "GENERAL" 
 
 def _build_history_list(conversation_id: str, max_user: int = 3, max_assistant: int = 3) -> List[Dict[str, Any]]:
@@ -113,17 +120,20 @@ def get_ai_response(
 
     page = _normalize_page(page)
 
-    # 🟢 1. INTELLIGENCE LAYER: Determine Brain (Context) & Memory (Vector Store)
-    exam_context = derive_context_from_url(page)
+    # 🟢 1. INTELLIGENCE LAYER: Check URL AND Message
+    # Now passing 'message' to detect intent even on generic pages
+    exam_context = determine_exam_context(page, message)
+    
     selected_vector_stores = get_stores_for_page(page)
 
     # 🔍 OBSERVABILITY: LOG THE DECISION
     log_event("context_resolution", {
         "user_id": user_id,
         "input_url": page,
-        "derived_exam": exam_context, # <--- We will see "UNAL" or "ICFES" here
+        "derived_exam": exam_context, # Now this should say "UNAL" even if url is /roma
         "vector_stores_selected": selected_vector_stores,
-        "intent": intent
+        "intent": intent,
+        "trigger_message": message[:50] if message else "None"
     })
 
     # Step 2: Find-or-create conversation
@@ -168,8 +178,7 @@ def get_ai_response(
                 if 1 <= parsed_num <= 10: 
                     num_questions = parsed_num
 
-        # Note: QuizService.get_system_instruction generates a generic preamble.
-        # The specific Exam Logic is injected inside stream_structured_quiz via _build_runtime_signals
+        # Only operational rules, no Persona here (fixed in previous step)
         conversation_input.append(QuizService.get_system_instruction(topic=topic_hint, num_questions=num_questions))
 
         try:
@@ -183,7 +192,7 @@ def get_ai_response(
                     name=(name or None),
                     email=_normalize_email_for_storage(email),
                     mode=mode,
-                    exam_context=exam_context # 🟢 PASSED HERE
+                    exam_context=exam_context # 🟢 Passing correct context
                 )
                 
                 seen_indices = set()
@@ -235,7 +244,7 @@ def get_ai_response(
                     name=(name or None),
                     email=_normalize_email_for_storage(email),
                     mode=mode,
-                    exam_context=exam_context # 🟢 PASSED HERE
+                    exam_context=exam_context # 🟢 Passing correct context
                 )
                 quiz_data = {
                     "quiz_mode": "batch", 
@@ -253,13 +262,12 @@ def get_ai_response(
     else:
         # 🟢 STANDARD CHAT MODE
         try:
-            # 1. Build the dynamic System Prompt (The "Hat")
+            # 1. Build the dynamic System Prompt
             system_prompt = build_system_instructions(
                 extras=[f"Current Page: {page}"],
-                exam_context=exam_context # <--- 🟢 KEY: Injects the specific JSON rules (UNAL vs ICFES)
+                exam_context=exam_context # 🟢 Passing correct context
             )
 
-            # 2. Call Assistant with Explicit Instructions & Vector Stores
             final_reply_text, generated_assets = send_message_to_assistant(
                 conversation_input=conversation_input,
                 user_id=user_id,
@@ -267,7 +275,6 @@ def get_ai_response(
                 name=(name or None),
                 email=_normalize_email_for_storage(email),
                 mode=mode,
-                # 🟢 Pass the custom brain (Instructions) and memory (Vector Stores)
                 system_instruction=system_prompt,
                 vector_store_ids=selected_vector_stores 
             )
