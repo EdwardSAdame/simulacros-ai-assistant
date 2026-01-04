@@ -1,6 +1,5 @@
 # src/services/quiz_service.py
 from typing import Dict, Any
-from src.config.system_instructions import BASE_SYSTEM_INSTRUCTIONS
 
 class QuizService:
     """
@@ -12,22 +11,22 @@ class QuizService:
     def get_system_instruction(topic: str = "general", num_questions: int = 5) -> Dict[str, Any]:
         """
         Returns the simplified system instruction.
+        
+        🟢 CRITICAL FIX: Removed BASE_SYSTEM_INSTRUCTIONS from here.
+        The Persona and Context are now injected dynamically by 'assistant_client.py'.
+        This function now ONLY provides the operational rules for the quiz task.
         """
         
         instruction_text = (
-            f"{BASE_SYSTEM_INSTRUCTIONS}\n\n"
-            
             f"## IMMEDIATE RUNTIME MISSION: QUIZ GENERATION\n"
             f"The user has requested a quiz/exam about '{topic}'. "
             f"You must generate exactly {num_questions} distinct questions. \n\n"
             
             "## Content Quality Rules:\n"
             "1. **Content**: Questions must be challenging, intriguing, and non-trivial.\n"
-            # 🟢 CHANGED: Force \( \) syntax
             "2. **Math Syntax**: ALWAYS use `\\(` and `\\)` for inline math (e.g. `\\( x^2 \\)`) and `\\[` and `\\]` for block math.\n"
             "3. **Voice**: You are Roma. Be cold, precise, and efficient in your 'intro_message'.\n"
             "4. **Feedback**: Provide specific, educational feedback for every option (Right or Wrong).\n"
-            # 🟢 NEW: Explicit instruction for difficulty weighting
             "5. **Difficulty Weighting**: Assign a `difficulty` integer to each question based on its cognitive load: 1 (Basic/Recall), 2 (Intermediate/Application), or 3 (Advanced/Analysis). Ensure the difficulty matches the question's complexity.\n"
         )
 
