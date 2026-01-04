@@ -34,6 +34,24 @@ def decimal_default(obj):
         return int(obj) if obj % 1 == 0 else float(obj)
     raise TypeError
 
+def derive_context_from_url(page_url: str) -> str:
+    """
+    Translates a URL path into an Exam Context for the System Prompt.
+    Example: '/simulacro-unal/matematicas' -> 'UNAL'
+    """
+    if not page_url:
+        return "ICFES" # Default fallback
+        
+    url_lower = page_url.lower()
+    
+    if "unal" in url_lower:
+        return "UNAL"
+    elif "icfes" in url_lower:
+        return "ICFES"
+    
+    # If the user is on the homepage, or a generic dashboard
+    return "GENERAL" 
+
 def _build_history_list(conversation_id: str, max_user: int = 3, max_assistant: int = 3) -> List[Dict[str, Any]]:
     try:
         msgs = get_recent_messages(conversation_id=conversation_id, limit=20, ascending=True)
@@ -52,7 +70,6 @@ def _build_history_list(conversation_id: str, max_user: int = 3, max_assistant: 
             if role == "assistant" and metadata:
                 try:
                     metadata_str = json.dumps(metadata, default=decimal_default)
-                    # Context for the AI so it remembers it generated interactive content
                     hidden_context = (
                         f"\n\n[SYSTEM CONTEXT: User cannot see this. "
                         f"I previously generated this interactive content: {metadata_str}. "
@@ -93,7 +110,21 @@ def get_ai_response(
 
     page = _normalize_page(page)
 
-    # Step 1: Find-or-create conversation
+    # 🟢 1. INTELLIGENCE LAYER: Determine Brain & Memory
+    # This logic was missing in your previous version
+    exam_context = derive_context_from_url(page)
+    selected_vector_stores = get_stores_for_page(page)
+
+    # 🔍 OBSERVABILITY: LOG THE DECISION (The missing log!)
+    log_event("context_resolution", {
+        "user_id": user_id,
+        "input_url": page,
+        "derived_exam": exam_context,
+        "vector_stores_selected": selected_vector_stores,
+        "intent": intent
+    })
+
+    # Step 2: Find-or-create conversation
     try:
         if conversation_id:
             log_event("conversation_reused", {"conversation_id": conversation_id})
@@ -107,7 +138,7 @@ def get_ai_response(
     except Exception as e:
         raise RuntimeError(f"❌ Failed to save/reuse conversation: {e}")
 
-    # Step 2: Build Input
+    # Step 3: Build Input
     conversation_input = _build_history_list(conversation_id)
     
     current_user_content = []
@@ -123,9 +154,10 @@ def get_ai_response(
     # ------------------------------------------------------------------
     quiz_data = None
     final_reply_text = ""
-    generated_assets = [] # <--- 🟢 NEW: Store generated images/files here
+    generated_assets = [] 
     
     if intent == "quiz":
+        # ... (Quiz logic remains the same) ...
         topic_hint = message if message else "General Knowledge"
         num_questions = 5
         if message:
@@ -135,6 +167,7 @@ def get_ai_response(
                 if 1 <= parsed_num <= 10: 
                     num_questions = parsed_num
 
+        # For Quiz, we still use the QuizService specialized instructions
         conversation_input.append(QuizService.get_system_instruction(topic=topic_hint, num_questions=num_questions))
 
         try:
@@ -153,65 +186,42 @@ def get_ai_response(
                 seen_indices = set()
                 accumulated_questions = []
                 final_reply_text = "Aquí tienes tu simulacro."
-                
-                # 🟢 FIX: Track the title from the final object
                 ai_generated_title = "Simulacro Generado" 
 
                 for event in stream_gen:
                     evt_type = event.get("type")
-                    
                     if evt_type == "intro":
                         final_reply_text = event.get("text", "")
-                        
                     elif evt_type == "question":
                         q_data = event.get("data")
-                        q_dict = q_data.dict() # or model_dump()
+                        q_dict = q_data.dict()
                         idx = event.get("index", 0)
-                        
                         stream_manager.send_quiz_item(question_data=q_dict, index=idx)
-                        
                         if idx not in seen_indices:
                             accumulated_questions.append(q_dict)
                             seen_indices.add(idx)
-                        
                     elif evt_type == "done":
                         final_obj = event.get("full_response")
                         parsed_response = None
-                        
-                        # Try to find the parsed model in various known locations
-                        if hasattr(final_obj, 'questions'):
-                            parsed_response = final_obj
-                        elif hasattr(final_obj, 'parsed') and hasattr(final_obj.parsed, 'questions'):
-                            parsed_response = final_obj.parsed
-                        elif hasattr(final_obj, 'output_parsed') and hasattr(final_obj.output_parsed, 'questions'):
-                            parsed_response = final_obj.output_parsed
+                        if hasattr(final_obj, 'questions'): parsed_response = final_obj
+                        elif hasattr(final_obj, 'parsed') and hasattr(final_obj.parsed, 'questions'): parsed_response = final_obj.parsed
+                        elif hasattr(final_obj, 'output_parsed') and hasattr(final_obj.output_parsed, 'questions'): parsed_response = final_obj.output_parsed
                         
                         if parsed_response:
-                            count = len(parsed_response.questions)
-                            logger.info(f"ChatService: Stream Done. Saving full set of {count} questions from SDK.")
                             final_reply_text = parsed_response.intro_message
                             accumulated_questions = [q.dict() for q in parsed_response.questions]
-                            
-                            # 🟢 1. EXTRACT TITLE HERE
                             if hasattr(parsed_response, 'title') and parsed_response.title:
                                 ai_generated_title = parsed_response.title
-                            else:
-                                logger.warning("ChatService: 'title' field missing in parsed_response.")
-                        else:
-                            logger.warning(f"ChatService: Could not find 'questions' in final object.")
 
                     elif evt_type == "error":
                         error_msg = event.get("error", "Unknown stream error")
-                        log_event("quiz_stream_error", {"error": error_msg}, level="error")
                         stream_manager.send_error(error_msg)
 
-                # 🟢 2. SAVE TITLE TO METADATA
                 quiz_data = {
                     "quiz_mode": "batch", 
-                    "topic": ai_generated_title, # <--- 🟢 KEY FIX
+                    "topic": ai_generated_title,
                     "questions": accumulated_questions
                 }
-                log_event("quiz_streaming_completed", {"count": len(accumulated_questions), "title": ai_generated_title})
 
             else:
                 # Batch Mode
@@ -223,32 +233,38 @@ def get_ai_response(
                     email=_normalize_email_for_storage(email),
                     mode=mode 
                 )
-                
-                # 🟢 FIX: Batch Mode also gets the title
                 quiz_data = {
                     "quiz_mode": "batch", 
-                    "topic": quiz_model.title, # <--- 🟢 KEY FIX
+                    "topic": quiz_model.title,
                     "questions": [q.dict() for q in quiz_model.questions]
                 }
                 final_reply_text = quiz_model.intro_message
 
         except Exception as e:
             logger.error(f"Quiz Generation Error: {e}")
-            log_event("quiz_generation_failed", {"error": str(e)}, level="error")
             final_reply_text = "**Error**: No pudimos generar el simulacro."
             quiz_data = None
 
     else:
-        # Standard Chat Mode
+        # 🟢 STANDARD CHAT MODE (Updated Logic)
         try:
-            # 🟢 UPDATED: Unpack text AND generated_assets (URLs)
+            # 1. Build the dynamic System Prompt
+            system_prompt = build_system_instructions(
+                extras=[f"Current Page: {page}"],
+                exam_context=exam_context # <--- Pass the derived 'ICFES' or 'UNAL' context
+            )
+
+            # 2. Call Assistant with Explicit Instructions & Vector Stores
             final_reply_text, generated_assets = send_message_to_assistant(
                 conversation_input=conversation_input,
                 user_id=user_id,
                 page=page,
                 name=(name or None),
                 email=_normalize_email_for_storage(email),
-                mode=mode 
+                mode=mode,
+                # 🟢 Pass the brain and memory explicitly
+                system_instruction=system_prompt,
+                vector_store_ids=selected_vector_stores 
             )
         except Exception as e:
             raise RuntimeError(f"OpenAI Chat API failed: {e}")
@@ -261,24 +277,18 @@ def get_ai_response(
         for img in image_urls or []:
             save_message(conversation_id, role="user", message_text=f"[Imagen] {img}")
         
-        # 🟢 CONSTRUCT META PAYLOAD
-        # Priority: 1. Quiz Data, 2. Rich Chat Assets, 3. None
         meta_payload = quiz_data
-        
         if not meta_payload and generated_assets:
             meta_payload = {
                 "type": "rich_chat",
-                "assets": [
-                    {"type": "image", "url": url, "alt": "Generated Visualization"} 
-                    for url in generated_assets
-                ]
+                "assets": [{"type": "image", "url": url, "alt": "Generated Visualization"} for url in generated_assets]
             }
 
         saved_item = save_message(
             conversation_id, 
             role="assistant", 
             message_text=final_reply_text,
-            metadata=meta_payload # <--- Saves either Quiz JSON or Rich Chat JSON
+            metadata=meta_payload
         )
         if saved_item and isinstance(saved_item, dict):
             assistant_timestamp = saved_item.get("Timestamp", "")
@@ -286,5 +296,4 @@ def get_ai_response(
     except Exception as e:
         raise RuntimeError(f" Failed to save messages: {e}")
 
-    # 🟢 Return meta_payload as the 4th argument
     return final_reply_text, conversation_id, assistant_timestamp, meta_payload
