@@ -19,12 +19,10 @@ _context: Dict[str, Any] = {
     "request_id": None,
 }
 
-
 def set_invocation_context(context: Any) -> None:
     """
-    Call at the start of each Lambda:
-        set_invocation_context(context)
-    Stores AWS Lambda request metadata for later logs.
+    Call at the start of each Lambda to capture Request ID.
+    Usage: set_invocation_context(context)
     """
     try:
         _context["function"] = getattr(context, "function_name", _context.get("function"))
@@ -32,19 +30,25 @@ def set_invocation_context(context: Any) -> None:
     except Exception:
         pass
 
-
 # -------- JSON formatter --------
 class JSONFormatter(logging.Formatter):
     def format(self, record: logging.LogRecord) -> str:
+        # 1. Base Payload (Timestamp + Context)
         payload = {
             "ts": datetime.now(timezone.utc).isoformat(timespec="milliseconds"),
             "level": record.levelname,
-            "event": getattr(record, "event", record.getMessage()),
-            "details": getattr(record, "details", None),
             **_context,  # service, stage, region, function, request_id
         }
 
-        # Include exception info if attached
+        # 2. Extract Structured Data (from 'extra' param)
+        # Esto arregla el problema: lee datos inyectados explícitamente
+        if hasattr(record, "structured_data"):
+            payload.update(record.structured_data)
+        else:
+            # Fallback para logs normales (ej. librerías externas)
+            payload["message"] = record.getMessage()
+
+        # 3. Include Exception Info
         if hasattr(record, "exc_info") and record.exc_info:
             payload["error"] = {
                 "type": record.exc_info[0].__name__,
@@ -54,38 +58,40 @@ class JSONFormatter(logging.Formatter):
 
         return json.dumps(payload, ensure_ascii=False)
 
-
-# Attach handler once
+# Attach handler once & clear default AWS handlers to avoid duplication
 if not logger.handlers or not any(isinstance(h.formatter, JSONFormatter) for h in logger.handlers):
+    for h in logger.handlers:
+        logger.removeHandler(h)
+        
     handler = logging.StreamHandler(stream=sys.stdout)
     handler.setFormatter(JSONFormatter())
     logger.addHandler(handler)
 
-
 # -------- Public API --------
 def log_event(event_type: str, details: Optional[dict] = None, level: str = "info", error: Exception = None):
     """
-    Structured logging wrapper.
-
-    Example:
-        log_event("conversation_created", {"conversation_id": "123"})
-        log_event("lambda_exception", {"error": str(e)}, level="error", error=e)
+    Structured logging wrapper optimized for CloudWatch Insights.
+    
+    Usage:
+        log_event("context_resolution", {"url": "/home", "exam": "ICFES"})
     """
-    record = {
+    # Empaquetamos los datos
+    data = {
         "event": event_type,
-        "details": details or {},
+        "details": details or {}
     }
 
+    # CRÍTICO: Usamos 'extra' para pasar el objeto limpio al Formatter
+    extra_payload = {"structured_data": data}
+
     if error:
-        logger.error(record, exc_info=error)
+        logger.error(event_type, exc_info=error, extra=extra_payload)
         return
 
-    level = level.lower()
-    if level == "info":
-        logger.info(record)
-    elif level == "warning":
-        logger.warning(record)
-    elif level == "error":
-        logger.error(record)
+    lvl = level.lower()
+    if lvl == "warning":
+        logger.warning(event_type, extra=extra_payload)
+    elif lvl == "error":
+        logger.error(event_type, extra=extra_payload)
     else:
-        logger.debug(record)
+        logger.info(event_type, extra=extra_payload)

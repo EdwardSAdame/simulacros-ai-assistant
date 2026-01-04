@@ -1,30 +1,21 @@
 # src/config/page_vectorstores.py
-"""
-Page → Vector Store resolver.
-
-- Accepts full URLs or plain paths.
-- If the page matches a known component, return [specific_store, global].
-- Otherwise return [global].
-- Env vars must be set in .env (VECTOR_STORE_*).
-"""
-
 import os
 from urllib.parse import urlparse
 from typing import List
 
-# Single global store (Brand info, prices, contact)
+# Single global store
 VSTORE_GLOBAL = os.getenv("VECTOR_STORE_GLOBAL", "")
 
-# --- ICFES STORES ---
-VSTORE_ICFES_GENERAL             = os.getenv("VECTOR_STORE_ICFES_GENERAL", "") # 🟢 NEW: General Exam Info
+# ICFES STORES
+VSTORE_ICFES_GENERAL             = os.getenv("VECTOR_STORE_ICFES_GENERAL", "")
 VSTORE_ICFES_INGLES              = os.getenv("VECTOR_STORE_ICFES_INGLES", "")
 VSTORE_ICFES_CIENCIAS_NATURALES  = os.getenv("VECTOR_STORE_ICFES_CIENCIAS_NATURALES", "")
 VSTORE_ICFES_MATEMATICAS         = os.getenv("VECTOR_STORE_ICFES_MATEMATICAS", "")
 VSTORE_ICFES_SOCIALES_CIUDADANAS = os.getenv("VECTOR_STORE_ICFES_SOCIALES_CIUDADANAS", "")
 VSTORE_ICFES_LECTURA_CRITICA     = os.getenv("VECTOR_STORE_ICFES_LECTURA_CRITICA", "")
 
-# --- UNAL STORES ---
-VSTORE_UNAL_GENERAL              = os.getenv("VECTOR_STORE_UNAL_GENERAL", "") # 🟢 NEW: General Exam Info
+# UNAL STORES
+VSTORE_UNAL_GENERAL              = os.getenv("VECTOR_STORE_UNAL_GENERAL", "")
 VSTORE_UNAL_ANALISIS_IMAGEN      = os.getenv("VECTOR_STORE_UNAL_ANALISIS_IMAGEN", "")
 VSTORE_UNAL_MATEMATICAS          = os.getenv("VECTOR_STORE_UNAL_MATEMATICAS", "")
 VSTORE_UNAL_TEMATICA_COMUN       = os.getenv("VECTOR_STORE_UNAL_TEMATICA_COMUN", "")
@@ -36,10 +27,14 @@ _PAGE_MAP = {
     # 🟢 BRAND / GLOBAL PAGES
     "/roma":                                         VSTORE_GLOBAL,
     "/challenge-page/preuniversitario-invicto-roma": VSTORE_GLOBAL,
+    "/participant-page/preuniversitario-invicto-roma": VSTORE_GLOBAL, # <--- NEW VARIANT
 
-    # 🟢 GENERAL EXAM LANDING PAGES
+    # 🟢 GENERAL EXAM LANDING PAGES (Landing + Participant View)
     "/challenge-page/preicfes-roma":                 VSTORE_ICFES_GENERAL,
+    "/participant-page/preicfes-roma":               VSTORE_ICFES_GENERAL, # <--- FIXED YOUR BUG HERE
+
     "/challenge-page/preunal-gratis":                VSTORE_UNAL_GENERAL,
+    "/participant-page/preunal-gratis":              VSTORE_UNAL_GENERAL, # <--- NEW VARIANT
 
     # ICFES SPECIFIC SIMULATION ZONES
     "/simulacro-icfes/ingles":                VSTORE_ICFES_INGLES,
@@ -56,27 +51,20 @@ _PAGE_MAP = {
     "/simulacro-unal/ciencias-naturales":     VSTORE_UNAL_CIENCIAS_NATURALES,
 }
 
-
 def _normalize_path(page: str | None) -> str:
-    if not page:
-        return "/"
+    if not page: return "/"
     s = page.strip()
     parsed = urlparse(s)
     path = parsed.path or s
     return path.lower()
 
-
 def get_stores_for_page(page: str | None) -> List[str]:
-    """
-    Returns vector_store_ids ordered by priority.
-    - Known component: [specific, global]
-    - Unknown page:    [global]
-    Ensures at least one id if VECTOR_STORE_GLOBAL is set.
-    """
     path = _normalize_path(page)
-
+    
+    # 1. Try Exact Match
     specific = _PAGE_MAP.get(path)
-    # prefix match for deeper routes
+    
+    # 2. Try Prefix Match (Deep linking)
     if not specific:
         for prefix, sid in _PAGE_MAP.items():
             if sid and (path == prefix or path.startswith(prefix + "/")):
@@ -87,7 +75,6 @@ def get_stores_for_page(page: str | None) -> List[str]:
     if specific:
         stores.append(specific)
 
-    # Always append Global as backup, unless we are already using it
     if VSTORE_GLOBAL and VSTORE_GLOBAL not in stores:
         stores.append(VSTORE_GLOBAL)
 
