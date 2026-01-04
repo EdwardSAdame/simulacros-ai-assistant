@@ -1,25 +1,20 @@
 # src/scripts/knowledge_admin.py
 #!/usr/bin/env python3
 """
-CLI to create vector stores and upload knowledge files for the web chatbot.
+CLI to create/cleanup vector stores and upload knowledge files.
 
 Usage:
-  # Bootstrap all stores from 'knowledge/' and upload all supported files
+  # 1. DELETE ALL existing stores (Start Fresh)
+  python src/scripts/knowledge_admin.py cleanup
+
+  # 2. Bootstrap all stores from 'knowledge/' and upload files
   python src/scripts/knowledge_admin.py bootstrap --root src/knowledge
 
-  # List vector stores
+  # 3. List vector stores to verify
   python src/scripts/knowledge_admin.py list-stores
 
-  # Upload a single file to a specific store name
-  python src/scripts/knowledge_admin.py upload --store "icfes-matematicas" --file src/knowledge/icfes/matematicas.json
-
 Notes:
-- Requires OPENAI_API_KEY in .env at project root
-- Store naming:
-    general               -> "general"
-    icfes/<component>     -> "icfes-<component>"
-    unal/<component>      -> "unal-<component>"
-- Prints a block to paste into .env with VECTOR_STORE_* IDs.
+- Requires OPENAI_API_KEY in .env
 """
 
 import argparse
@@ -32,7 +27,6 @@ from dotenv import load_dotenv
 from openai import OpenAI
 
 # ---------- setup ----------
-# climb two levels up (src/scripts → project root)
 ROOT = Path(__file__).resolve().parents[2]
 load_dotenv(ROOT / ".env", override=True)
 
@@ -47,16 +41,20 @@ SUPPORTED_EXTS = {
     ".json", ".pdf", ".md", ".txt", ".docx", ".pptx", ".html",
 }
 
-# Folder → ENV key mapping (normalized with underscores)
+# 🟢 NEW: Added mappings for 'general' folders
 ENV_KEYS = {
     "general": "VECTOR_STORE_GLOBAL",
+    
     # ICFES
+    "icfes/general": "VECTOR_STORE_ICFES_GENERAL", # <--- NEW
     "icfes/ingles": "VECTOR_STORE_ICFES_INGLES",
     "icfes/ciencias_naturales": "VECTOR_STORE_ICFES_CIENCIAS_NATURALES",
     "icfes/matematicas": "VECTOR_STORE_ICFES_MATEMATICAS",
     "icfes/sociales_ciudadanas": "VECTOR_STORE_ICFES_SOCIALES_CIUDADANAS",
     "icfes/lectura_critica": "VECTOR_STORE_ICFES_LECTURA_CRITICA",
+    
     # UNAL
+    "unal/general": "VECTOR_STORE_UNAL_GENERAL", # <--- NEW
     "unal/analisis_imagen": "VECTOR_STORE_UNAL_ANALISIS_IMAGEN",
     "unal/matematicas": "VECTOR_STORE_UNAL_MATEMATICAS",
     "unal/tematica_comun": "VECTOR_STORE_UNAL_TEMATICA_COMUN",
@@ -69,22 +67,25 @@ def _store_name_for(path: Path) -> Tuple[str, str]:
     """
     Given a folder under knowledge/, return (store_name, env_key).
     """
-    rel = path.as_posix().split("knowledge/")[-1].strip("/")
-    if rel == "general":
-        return "general", ENV_KEYS["general"]
+    # normalize path relative to knowledge root
+    try:
+        rel = path.relative_to(path.parent.parent).as_posix() # e.g. "icfes/matematicas"
+    except ValueError:
+        # fallback for top level
+        rel = path.name
 
-    parts = rel.split("/")
-    if len(parts) == 2 and parts[0] in ("icfes", "unal"):
-        # normalize env key by replacing '-' with '_'
-        folder_key = f"{parts[0]}/{parts[1].replace('-', '_')}"
-        env_key = ENV_KEYS.get(folder_key)
-        if env_key:
-            # store name uses kebab-case
-            store_name = f"{parts[0]}-{parts[1].replace('_', '-')}"
-            return store_name, env_key
+    # Check explicit map first (handles icfes/general, unal/matematicas, etc)
+    if rel in ENV_KEYS:
+        # e.g., "icfes-matematicas"
+        store_name = rel.replace("/", "-")
+        return store_name, ENV_KEYS[rel]
 
-    safe = rel.replace("/", "-").replace("_", "-")
-    return safe, f"VECTOR_STORE_{safe.upper().replace('-', '_')}"
+    # Special case for the root 'general' folder
+    if path.name == "general" and path.parent.name == "knowledge":
+        return "general", "VECTOR_STORE_GLOBAL"
+
+    print(f"⚠️ Warning: No mapping found for folder '{rel}', skipping...")
+    return None, None
 
 
 def _collect_files(dirpath: Path) -> List[Path]:
@@ -96,10 +97,6 @@ def _collect_files(dirpath: Path) -> List[Path]:
 
 
 def _ensure_store(name: str) -> str:
-    """
-    Create a vector store if needed. Return its id.
-    Reuse by name if it already exists.
-    """
     stores = client.vector_stores.list(limit=100)
     for vs in stores.data:
         if getattr(vs, "name", "") == name:
@@ -119,10 +116,32 @@ def _attach_file(store_id: str, file_id: str) -> None:
 
 
 # ----------------- commands -----------------
+
+def cmd_cleanup(_args):
+    """🟢 NEW: Deletes all vector stores created by this bot to start fresh."""
+    print("WARNING: This will delete ALL vector stores in your OpenAI project.")
+    confirm = input("Are you sure? (type 'yes' to confirm): ")
+    if confirm != "yes":
+        print("Aborted.")
+        return
+
+    stores = client.vector_stores.list(limit=100)
+    count = 0
+    for vs in stores.data:
+        # Optional: Filter by name prefix if you share this project
+        # if not vs.name.startswith("icfes") and not vs.name.startswith("unal"): continue
+        print(f"Deleting store: {vs.name} ({vs.id})...")
+        client.vector_stores.delete(vs.id)
+        count += 1
+    print(f"Done. Deleted {count} stores.")
+
+
 def cmd_list_stores(_args):
     stores = client.vector_stores.list(limit=100)
+    print(f"{'ID':<30} | {'NAME'}")
+    print("-" * 50)
     for vs in stores.data:
-        print(f"{vs.id}\t{vs.name}")
+        print(f"{vs.id:<30} | {vs.name}")
 
 
 def cmd_upload(args):
@@ -135,7 +154,6 @@ def cmd_upload(args):
     fid = _upload_file(file_path)
     _attach_file(store_id, fid)
     print(f"Uploaded {file_path.name} -> {store_name} ({store_id})")
-    print(f"file_id: {fid}")
 
 
 def cmd_bootstrap(args):
@@ -146,23 +164,21 @@ def cmd_bootstrap(args):
 
     env_out: Dict[str, str] = {}
 
-    # traverse: knowledge/general, knowledge/icfes/*, knowledge/unal/*
-    for sub in sorted([p for p in root.iterdir() if p.is_dir()]):
-        nested = [p for p in sub.iterdir() if p.is_dir()]
-        targets = nested or [sub]
-        for folder in sorted(targets):
-            files = _collect_files(folder)
-            if not files:
-                continue
-            store_name, env_key = _store_name_for(folder)
-            store_id = _ensure_store(store_name)
+    # Walk through root/general, root/icfes/*, root/unal/*
+    # We use os.walk or just specific glob patterns
+    
+    # 1. Global General
+    global_path = root / "general"
+    if global_path.exists():
+        _process_folder(global_path, root, env_out)
 
-            for fp in files:
-                fid = _upload_file(fp)
-                _attach_file(store_id, fid)
-                print(f"[{store_name}] + {fp.relative_to(root)} (file_id={fid})")
-
-            env_out[env_key] = store_id
+    # 2. Sub-folders (icfes/*, unal/*)
+    for category in ["icfes", "unal"]:
+        cat_path = root / category
+        if cat_path.exists():
+            for sub in cat_path.iterdir():
+                if sub.is_dir():
+                    _process_folder(sub, root, env_out)
 
     # provide a default if you rely on it
     if "VECTOR_STORE_DEFAULT" not in env_out and "VECTOR_STORE_GLOBAL" in env_out:
@@ -172,6 +188,37 @@ def cmd_bootstrap(args):
     for k, v in sorted(env_out.items()):
         print(f"{k}={v}")
 
+def _process_folder(folder_path, root, env_out):
+    files = _collect_files(folder_path)
+    if not files:
+        return
+
+    # Determine store name based on folder structure
+    # e.g. root/icfes/general -> ("icfes-general", "VECTOR_STORE_ICFES_GENERAL")
+    
+    # Calculate relative path string e.g., "icfes/general"
+    rel_path = folder_path.relative_to(root).as_posix()
+    
+    if rel_path in ENV_KEYS:
+        env_key = ENV_KEYS[rel_path]
+        store_name = rel_path.replace("/", "-")
+    elif rel_path == "general":
+        env_key = "VECTOR_STORE_GLOBAL"
+        store_name = "general"
+    else:
+        # Fallback/Skip
+        return
+
+    print(f"\nProcessing [{store_name}]...")
+    store_id = _ensure_store(store_name)
+    
+    for fp in files:
+        fid = _upload_file(fp)
+        _attach_file(store_id, fid)
+        print(f"  + {fp.name}")
+
+    env_out[env_key] = store_id
+
 
 # ----------------- CLI -----------------
 def main():
@@ -179,14 +226,15 @@ def main():
     sub = ap.add_subparsers(dest="cmd")
 
     sub.add_parser("list-stores").set_defaults(func=cmd_list_stores)
+    sub.add_parser("cleanup").set_defaults(func=cmd_cleanup) # <--- Added
 
     up = sub.add_parser("upload")
-    up.add_argument("--store", required=True, help="Target store name (e.g., icfes-matematicas)")
-    up.add_argument("--file", required=True, help="Path to file")
+    up.add_argument("--store", required=True)
+    up.add_argument("--file", required=True)
     up.set_defaults(func=cmd_upload)
 
     boot = sub.add_parser("bootstrap")
-    boot.add_argument("--root", default="src/knowledge", help="Knowledge root folder")
+    boot.add_argument("--root", default="src/knowledge")
     boot.set_defaults(func=cmd_bootstrap)
 
     args = ap.parse_args()

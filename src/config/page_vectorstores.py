@@ -12,17 +12,19 @@ import os
 from urllib.parse import urlparse
 from typing import List
 
-# Single global store
+# Single global store (Brand info, prices, contact)
 VSTORE_GLOBAL = os.getenv("VECTOR_STORE_GLOBAL", "")
 
-# ICFES
+# --- ICFES STORES ---
+VSTORE_ICFES_GENERAL             = os.getenv("VECTOR_STORE_ICFES_GENERAL", "") # 🟢 NEW: General Exam Info
 VSTORE_ICFES_INGLES              = os.getenv("VECTOR_STORE_ICFES_INGLES", "")
 VSTORE_ICFES_CIENCIAS_NATURALES  = os.getenv("VECTOR_STORE_ICFES_CIENCIAS_NATURALES", "")
 VSTORE_ICFES_MATEMATICAS         = os.getenv("VECTOR_STORE_ICFES_MATEMATICAS", "")
 VSTORE_ICFES_SOCIALES_CIUDADANAS = os.getenv("VECTOR_STORE_ICFES_SOCIALES_CIUDADANAS", "")
 VSTORE_ICFES_LECTURA_CRITICA     = os.getenv("VECTOR_STORE_ICFES_LECTURA_CRITICA", "")
 
-# UNAL
+# --- UNAL STORES ---
+VSTORE_UNAL_GENERAL              = os.getenv("VECTOR_STORE_UNAL_GENERAL", "") # 🟢 NEW: General Exam Info
 VSTORE_UNAL_ANALISIS_IMAGEN      = os.getenv("VECTOR_STORE_UNAL_ANALISIS_IMAGEN", "")
 VSTORE_UNAL_MATEMATICAS          = os.getenv("VECTOR_STORE_UNAL_MATEMATICAS", "")
 VSTORE_UNAL_TEMATICA_COMUN       = os.getenv("VECTOR_STORE_UNAL_TEMATICA_COMUN", "")
@@ -31,14 +33,22 @@ VSTORE_UNAL_CIENCIAS_NATURALES   = os.getenv("VECTOR_STORE_UNAL_CIENCIAS_NATURAL
 
 # Path → specific store
 _PAGE_MAP = {
-    # ICFES
+    # 🟢 BRAND / GLOBAL PAGES
+    "/roma":                                         VSTORE_GLOBAL,
+    "/challenge-page/preuniversitario-invicto-roma": VSTORE_GLOBAL,
+
+    # 🟢 GENERAL EXAM LANDING PAGES
+    "/challenge-page/preicfes-roma":                 VSTORE_ICFES_GENERAL,
+    "/challenge-page/preunal-gratis":                VSTORE_UNAL_GENERAL,
+
+    # ICFES SPECIFIC SIMULATION ZONES
     "/simulacro-icfes/ingles":                VSTORE_ICFES_INGLES,
     "/simulacro-icfes/ciencias-naturales":    VSTORE_ICFES_CIENCIAS_NATURALES,
     "/simulacro-icfes/matematicas":           VSTORE_ICFES_MATEMATICAS,
     "/simulacro-icfes/sociales-y-cuidadanas": VSTORE_ICFES_SOCIALES_CIUDADANAS,
     "/simulacro-icfes/lectura-critica":       VSTORE_ICFES_LECTURA_CRITICA,
 
-    # UNAL
+    # UNAL SPECIFIC SIMULATION ZONES
     "/simulacro-unal/analisis-de-imagen":     VSTORE_UNAL_ANALISIS_IMAGEN,
     "/simulacro-unal/matematicas":            VSTORE_UNAL_MATEMATICAS,
     "/simulacro-unal/tematica-comun":         VSTORE_UNAL_TEMATICA_COMUN,
@@ -77,6 +87,7 @@ def get_stores_for_page(page: str | None) -> List[str]:
     if specific:
         stores.append(specific)
 
+    # Always append Global as backup, unless we are already using it
     if VSTORE_GLOBAL and VSTORE_GLOBAL not in stores:
         stores.append(VSTORE_GLOBAL)
 
