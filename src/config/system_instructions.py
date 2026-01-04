@@ -4,12 +4,10 @@ from pathlib import Path
 from typing import Iterable, Optional
 
 # Base paths to find the JSON blueprints
-# We assume the structure is src/config/system_instructions.py -> src/knowledge/
 BASE_DIR = Path(__file__).resolve().parent.parent
 KNOWLEDGE_DIR = BASE_DIR / "knowledge"
 
 # --- 1. THE PERSONA (Static) ---
-# We keep the name BASE_SYSTEM_INSTRUCTIONS to avoid breaking quiz_service.py
 BASE_SYSTEM_INSTRUCTIONS = """
 You are **Roma**, the state-of-the-art female AI of Invicto. You are a construct of discipline and "Vanguardia."
 
@@ -47,11 +45,10 @@ You are **Roma**, the state-of-the-art female AI of Invicto. You are a construct
 # --- 2. THE SMART LOADER (Extracts only the Taxonomy) ---
 def load_exam_rules(exam_context: str) -> str:
     """
-    Parses the JSON and extracts ONLY the 'competencies' or 'areas' 
-    to create a pedagogical framework. Ignores dates/stats.
+    Parses the JSON and extracts the pedagogical framework.
+    Now more robust to ensure no component (like English) is skipped.
     """
     # Mapping context to the specific general file location
-    # Note: We assume files are in src/knowledge/unal/general/ and src/knowledge/icfes/general/
     if exam_context.upper() == "UNAL":
         file_path = KNOWLEDGE_DIR / "unal" / "general" / "unal_exam.json"
     else:
@@ -59,7 +56,6 @@ def load_exam_rules(exam_context: str) -> str:
         file_path = KNOWLEDGE_DIR / "icfes" / "general" / "icfes_exam.json"
 
     if not file_path.exists():
-        # Fallback to general academic text if specific JSON is missing
         return "FRAMEWORK: General Academic Tutoring."
 
     try:
@@ -78,34 +74,33 @@ def load_exam_rules(exam_context: str) -> str:
         # --- SMART EXTRACTION LOGIC ---
         for comp in data.get("components", []):
             subject = comp.get("name", "Subject")
+            strat = comp.get("ai_strategy", "")
             
-            # 1. EXTRACT ICFES COMPETENCIES (The "How")
+            # 1. EXTRACT ICFES COMPETENCIES
             if "competencies" in comp:
                 skills = ", ".join(comp["competencies"])
-                # Extract specific AI strategy if available
-                strat = comp.get("ai_strategy", "")
                 framework_text += f"- **{subject}**: Assess strictly on: {skills}. {strat}\n"
             
-            # 2. EXTRACT UNAL AREAS (The "What")
+            # 2. EXTRACT UNAL AREAS
             elif "areas" in comp:
                 topics = ", ".join(comp["areas"][:5])
-                strat = comp.get("ai_strategy", "")
                 framework_text += f"- **{subject}**: Focus on: {topics}. {strat}\n"
+            
+            # 3. 🟢 FALLBACK FOR "INGLÉS" OR OTHERS (The Fix)
+            # If strictly defined competencies are missing, use description or parts
+            else:
+                desc = comp.get("description", "Standard evaluation.")
+                framework_text += f"- **{subject}**: {desc} {strat}\n"
 
         return framework_text
 
     except Exception as e:
-        # Fail silently to default persona if JSON breaks
         return f"FRAMEWORK: Standard Tutoring (Error loading specific rules: {str(e)})"
 
 # --- 3. THE BUILDER ---
 def build_system_instructions(extras: Optional[Iterable[str]] = None, exam_context: str = "ICFES") -> str:
     """
     Combines Roma Persona + Extracted Exam Rules + Runtime Context.
-    
-    Args:
-        extras: Runtime signals like date, user name, etc.
-        exam_context: 'ICFES', 'UNAL', or 'GENERAL'. Used to load specific JSONs.
     """
     # 1. Start with Roma
     blocks = [BASE_SYSTEM_INSTRUCTIONS]
