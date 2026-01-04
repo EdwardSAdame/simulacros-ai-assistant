@@ -1,4 +1,5 @@
-from typing import List, Dict, Any, Type, Generator, Tuple
+# src/assistant/assistant_client.py
+from typing import List, Dict, Any, Type, Generator, Tuple, Optional
 import logging
 import json
 import re
@@ -7,9 +8,8 @@ from pydantic import BaseModel, ValidationError
 from src.config.settings import get_openai_client, get_vector_search_max_results
 from src.config.model_config import get_model_config
 from src.config.system_instructions import build_system_instructions
-from src.config.page_vectorstores import get_stores_for_page
+# Note: get_stores_for_page is removed here because we pass store_ids explicitly now
 from src.utils.time_utils import get_current_time_info, infer_target_semester, semester_season
-# 🟢 Ensure this import picks up the NEW schema with 'title'
 from src.schemas.quiz_schemas import QuizResponse, QuizQuestion 
 from src.services.storage_service import storage_service
 
@@ -32,7 +32,7 @@ def _get_files_client(client):
 def _handle_generated_files(client, response_obj, folder: str = "chat_assets") -> List[str]:
     """
     Scans the OpenAI response for generated files using dual strategies.
-    🟢 Accepts 'folder' to determine S3 destination.
+    Accepts 'folder' to determine S3 destination.
     """
     uploaded_urls = []
     container_id = None
@@ -94,7 +94,7 @@ def _process_file(cf_client, container_id, file_id, filename, url_list, folder: 
     try:
         file_content = None
         
-        # 🟢 Method A: Nested Resource
+        # Method A: Nested Resource
         if hasattr(cf_client, "content") and hasattr(cf_client.content, "retrieve"):
             try:
                 if container_id:
@@ -107,7 +107,7 @@ def _process_file(cf_client, container_id, file_id, filename, url_list, folder: 
                 except Exception:
                     pass
 
-        # 🟢 Method B: Direct Call
+        # Method B: Direct Call
         if file_content is None and callable(getattr(cf_client, "content", None)):
             try: file_content = cf_client.content(file_id)
             except: pass
@@ -132,7 +132,7 @@ def _process_file(cf_client, container_id, file_id, filename, url_list, folder: 
             ctype = "image/png"
             if not fname.endswith(".png"): filename = f"{filename}.png"
 
-        # 🟢 Upload to S3 with correct FOLDER
+        # Upload to S3 with correct FOLDER
         s3_url = storage_service.upload_image_from_bytes(file_content, ctype, folder=folder)
         logger.info(f"✅ Asset uploaded to S3: {s3_url}")
         url_list.append(s3_url)
@@ -151,10 +151,10 @@ def _assign_urls_to_quiz(quiz_data: QuizResponse, urls: List[str]):
                 idx += 1
 
 def _build_runtime_signals(user_id: str | None, page: str | None, name: str | None, email: str | None) -> str:
+    """Helper for Quiz/Legacy calls that don't pass full system instruction."""
     tinfo = get_current_time_info()
     target = infer_target_semester()
     
-    # 🟢 UPDATED VISUAL INSTRUCTION: Explicitly forbid download text
     visuals_instruction = (
         "VISUALS: Use the 'python' tool (Code Interpreter) to AUTOMATICALLY GENERATE PLOTS for any request involving "
         "mathematical functions, geometry, or data trends. Do not just describe the graph—DRAW IT. Output the file. "
@@ -183,22 +183,47 @@ def send_message_to_assistant(
     page: str | None = None, 
     name: str | None = None, 
     email: str | None = None, 
-    mode: str = "omega"
+    mode: str = "omega",
+    # 🟢 NEW: Accept explicit system instructions and vector stores
+    system_instruction: str | None = None,
+    vector_store_ids: List[str] | None = None
 ) -> Tuple[str, List[str]]: 
     
     client = get_openai_client()
     cfg = get_model_config(mode)
-    system_text = _build_runtime_signals(user_id, page, name, email)
+
+    # 🟢 LOGIC UPDATE: Use provided instruction OR build default fallback
+    if not system_instruction:
+        system_text = _build_runtime_signals(user_id, page, name, email)
+    else:
+        system_text = system_instruction
     
     api_input = [{"role": "system", "content": [{"type": "input_text", "text": system_text}]}]
     api_input.extend(conversation_input)
 
-    tools = [{"type": "file_search", "vector_store_ids": get_stores_for_page(page), "max_num_results": get_vector_search_max_results()},
-             {"type": "code_interpreter", "container": {"type": "auto"}}]
+    # 🟢 LOGIC UPDATE: Use provided vector stores OR empty list (don't force logic here)
+    tool_stores = vector_store_ids if vector_store_ids else []
+    
+    tools = []
+    # Only add file_search if we have stores to search
+    if tool_stores:
+        tools.append({
+            "type": "file_search", 
+            "vector_store_ids": tool_stores, 
+            "max_num_results": get_vector_search_max_results()
+        })
+    
+    # Always add code interpreter
+    tools.append({"type": "code_interpreter", "container": {"type": "auto"}})
 
     req = {"model": cfg.model, "input": api_input, "temperature": cfg.temperature, "top_p": cfg.top_p}
-    if not (cfg.model.startswith("o1") or "reasoning" in cfg.model): req["tools"] = tools
-    else: req.pop("temperature", None); req.pop("top_p", None)
+    
+    # Only attach tools for models that support them (non-o1 reasoning models)
+    if not (cfg.model.startswith("o1") or "reasoning" in cfg.model): 
+        req["tools"] = tools
+    else: 
+        req.pop("temperature", None)
+        req.pop("top_p", None)
 
     try:
         resp = client.responses.create(**{k: v for k, v in req.items() if v is not None})
@@ -212,8 +237,7 @@ def send_message_to_assistant(
                     if getattr(c, "type", "") in ("output_text", "text"): chunks.append(getattr(c, "text", ""))
             text = "\n".join(chunks).strip()
 
-        # 🟢 CLEANUP: Remove sandbox links (e.g., [Download...](sandbox:/mnt/...))
-        # We keep this as a safety net even with the prompt fix
+        # CLEANUP: Remove sandbox links
         if text:
             text = re.sub(r'\[.*?\]\(sandbox:/mnt/data/.*?\)', '', text).strip()
 
@@ -230,6 +254,7 @@ def send_message_to_assistant(
 # 🟢 QUIZ GENERATION
 # ------------------------------------------------------------------
 def generate_structured_quiz(conversation_input: List[Dict[str, Any]], user_id: str | None = None, page: str | None = None, name: str | None = None, email: str | None = None, mode: str = "omega") -> QuizResponse:
+    # ... (Keep existing implementation identical) ...
     client = get_openai_client()
     cfg = get_model_config(mode)
     system_text = _build_runtime_signals(user_id, page, name, email)
@@ -239,7 +264,7 @@ def generate_structured_quiz(conversation_input: List[Dict[str, Any]], user_id: 
 
     req = {
         "model": cfg.model, "input": api_input, "temperature": cfg.temperature, "top_p": cfg.top_p,
-        "text_format": QuizResponse, # 🟢 ENFORCES TITLE GENERATION
+        "text_format": QuizResponse, 
         "tools": [{"type": "code_interpreter", "container": {"type": "auto"}}]
     }
     if cfg.model.startswith("o1"): req.pop("temperature", None); req.pop("top_p", None)
@@ -255,6 +280,7 @@ def generate_structured_quiz(conversation_input: List[Dict[str, Any]], user_id: 
         raise e
 
 def stream_structured_quiz(conversation_input: List[Dict[str, Any]], user_id: str | None = None, page: str | None = None, name: str | None = None, email: str | None = None, mode: str = "omega") -> Generator[Dict[str, Any], None, None]:
+    # ... (Keep existing implementation identical) ...
     client = get_openai_client()
     cfg = get_model_config(mode)
     system_text = _build_runtime_signals(user_id, page, name, email)
@@ -264,7 +290,7 @@ def stream_structured_quiz(conversation_input: List[Dict[str, Any]], user_id: st
 
     req = {
         "model": cfg.model, "input": api_input, "temperature": cfg.temperature, "top_p": cfg.top_p,
-        "text_format": QuizResponse, # 🟢 ENFORCES TITLE GENERATION
+        "text_format": QuizResponse, 
         "tools": [{"type": "code_interpreter", "container": {"type": "auto"}}]
     }
     if cfg.model.startswith("o1"): req.pop("temperature", None); req.pop("top_p", None)
@@ -280,9 +306,6 @@ def stream_structured_quiz(conversation_input: List[Dict[str, Any]], user_id: st
                 if event.type == "response.output_text.delta":
                     buffer += event.delta
                     
-                    # 🟢 TITLE / INTRO CHECK
-                    # Even if 'title' comes first in JSON, we wait for 'questions' marker 
-                    # to ensure we have enough buffer to regex the intro safely.
                     if not intro_yielded and '"questions"' in buffer:
                         match = re.search(r'"intro_message"\s*:\s*"(.*?)"', buffer, re.DOTALL)
                         if match:
@@ -335,7 +358,6 @@ def stream_structured_quiz(conversation_input: List[Dict[str, Any]], user_id: st
             urls = _handle_generated_files(client, final, folder="quiz_assets")
             if parsed and urls: _assign_urls_to_quiz(parsed, urls)
             
-            # 🟢 The 'parsed' object here will now contain the .title field
             yield {"type": "done", "full_response": parsed}
 
     except Exception as e:
