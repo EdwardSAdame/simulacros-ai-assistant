@@ -2,7 +2,6 @@
 import logging
 import json
 from src.config.settings import settings, get_openai_client
-# 🟢 CHANGE: Import the new lightweight instructions
 from src.config.system_instructions import ROUTER_SYSTEM_INSTRUCTIONS 
 
 logger = logging.getLogger(__name__)
@@ -50,7 +49,6 @@ class SemanticRouter:
     def _classify_with_llm(self, text: str) -> dict:
         router_model = settings.OPENAI_ROUTER_MODEL.lower()
         
-        # 🟢 OPTIMIZED: Use the lightweight prompt directly
         system_prompt = (
             f"{ROUTER_SYSTEM_INSTRUCTIONS}\n\n"
             f"User Input to Classify: \"{text}\""
@@ -58,8 +56,6 @@ class SemanticRouter:
 
         messages = [
             {"role": "system", "content": system_prompt},
-            # Note: We include text in system prompt or as user message. 
-            # Keeping it simple: System defines rules, User provides input.
             {"role": "user", "content": text}
         ]
         
@@ -95,10 +91,19 @@ class SemanticRouter:
             intent = data.get("intent", "chat").lower()
             if intent not in ["quiz", "chat"]: intent = "chat"
                 
-            # Sanitize Phrases
-            phrases = data.get("loading_phrases", [])
-            if "loading_phounces" in data and not phrases: phrases = data.pop("loading_phounces")
-            if not isinstance(phrases, list) or not phrases: phrases = ["Procesando...", "Analizando..."]
+            # 🟢 ROBUST EXTRACTION STRATEGY
+            # Try specific key first, then fallback to common hallucinations
+            phrases = data.get("loading_phrases")
+            if not phrases:
+                phrases = data.get("status_messages") # <--- Catches your specific error
+            if not phrases:
+                phrases = data.get("phrases")
+            if not phrases:
+                phrases = data.get("loading_phounces") # Legacy typo fix
+
+            # Final validation
+            if not isinstance(phrases, list) or not phrases:
+                phrases = ["Procesando...", "Analizando..."]
 
             logger.info(f"Router: AI classified as '{category}' (Intent: {intent}) with phrases {phrases}")
             return {"category": category, "intent": intent, "loading_phrases": phrases}
