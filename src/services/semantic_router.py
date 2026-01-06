@@ -2,7 +2,8 @@
 import logging
 import json
 from src.config.settings import settings, get_openai_client
-from src.config.system_instructions import ROUTER_SYSTEM_INSTRUCTIONS 
+# 🟢 UPDATED IMPORT: Pointing to the new dedicated file
+from src.config.router_instructions import ROUTER_SYSTEM_INSTRUCTIONS 
 
 logger = logging.getLogger(__name__)
 
