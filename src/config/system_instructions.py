@@ -42,10 +42,12 @@ You are **Roma**, the state-of-the-art AI of Invicto. You are a construct of "di
 - **Execution**: Write the Python code to create the plot using `matplotlib`, save it, and let the system handle the display. Do not simply describe the graph in text.
 """
 
-# --- 2. THE SMART LOADER (Extracts only the Taxonomy) ---
+# --- 2. THE SMART LOADER (Universal Expert Expansion) ---
 def load_exam_rules(exam_context: str) -> str:
     """
-    Parses the JSON and extracts the pedagogical framework.
+    Parses the JSON and extracts the FULL pedagogical framework for ALL subjects.
+    This creates an 'Omniscient' context where the AI knows the specific rules
+    for every domain simultaneously.
     """
     if exam_context.upper() == "UNAL":
         file_path = KNOWLEDGE_DIR / "unal" / "general" / "unal_exam.json"
@@ -60,24 +62,63 @@ def load_exam_rules(exam_context: str) -> str:
             data = json.load(f)
             
         exam_name = data.get("name", exam_context)
+        
+        # Header Strategy
         framework_text = f"\n## 6. ACADEMIC FRAMEWORK: {exam_name}\n"
-        global_strategy = data.get("ai_global_strategy", "Focus on academic excellence.")
-        framework_text += f"STRATEGY: {global_strategy}\n\n"
-        framework_text += "You must evaluate the student based on these specific domains:\n\n"
+        global_strategy = data.get("ai_global_strategy", "Focus on academic excellence. Diagnose the student's logical gaps ruthlessly.")
+        framework_text += f"GLOBAL STRATEGY: {global_strategy}\n\n"
+        framework_text += "You are now an EXPERT in the following domains. Apply these specific rules based on the user's question:\n"
 
+        # 🟢 EXPANSION LOOP: Iterate through ALL components and inject FULL details
         for comp in data.get("components", []):
-            subject = comp.get("name", "Subject")
-            strat = comp.get("ai_strategy", "")
+            name = comp.get("name", "Subject")
+            framework_text += f"\n### DOMAIN: {name.upper()}\n"
             
-            if "competencies" in comp:
-                skills = ", ".join(comp["competencies"])
-                framework_text += f"- **{subject}**: Assess strictly on: {skills}. {strat}\n"
-            elif "areas" in comp:
-                topics = ", ".join(comp["areas"][:5])
-                framework_text += f"- **{subject}**: Focus on: {topics}. {strat}\n"
+            # 1. Summary / Description / Focus
+            summary = comp.get("summary") or comp.get("focus") or comp.get("description")
+            if summary:
+                framework_text += f"**Overview**: {summary}\n"
+
+            # 2. Competencies / Skills (The "How to Think" part)
+            competencies = comp.get("competencies") or comp.get("skills")
+            if competencies:
+                framework_text += "**Required Skills/Competencies**:\n"
+                for skill in competencies:
+                    framework_text += f"- {skill}\n"
+            
+            # 3. Areas / Domains / Topics / Text Types
+            # Logic: Try standard lists first, then fallback to special cases
+            topics = comp.get("areas") or comp.get("domains")
+            
+            # Handle simple list of strings in 'components' (like ICFES Naturales)
+            if not topics and isinstance(comp.get("components"), list) and isinstance(comp["components"][0], str):
+                 topics = comp["components"]
+            
+            if topics:
+                framework_text += "**Key Topics**:\n"
+                for area in topics:
+                    framework_text += f"- {area}\n"
+
+            # Special dictionary cases (like ICFES Reading Text Types)
+            if "text_types" in comp and isinstance(comp["text_types"], dict):
+                framework_text += "**Text Types**:\n"
+                for type_key, sublist in comp["text_types"].items():
+                    framework_text += f"- {type_key.capitalize()}: {', '.join(sublist)}\n"
+            
+            # 4. Special Case: ICFES English Parts
+            if "parts" in comp and isinstance(comp["parts"], list):
+                framework_text += "**Exam Structure (English)**:\n"
+                for part in comp["parts"]:
+                    p_num = part.get("part", "?")
+                    p_desc = part.get("description", "")
+                    framework_text += f"- Part {p_num}: {p_desc}\n"
+
+            # 5. AI Strategy (The "Roma" Touch)
+            strat = comp.get("ai_strategy")
+            if strat:
+                framework_text += f"**Instructional Strategy**: {strat}\n"
             else:
-                desc = comp.get("description", "Standard evaluation.")
-                framework_text += f"- **{subject}**: {desc} {strat}\n"
+                framework_text += "**Instructional Strategy**: Identify the specific concept the student failed. Do not just give the answer; explain the derivation.\n"
 
         return framework_text
 
@@ -87,6 +128,8 @@ def load_exam_rules(exam_context: str) -> str:
 # --- 3. THE BUILDER ---
 def build_system_instructions(extras: Optional[Iterable[str]] = None, exam_context: str = "ICFES") -> str:
     blocks = [BASE_SYSTEM_INSTRUCTIONS]
+    
+    # Always inject the full exam framework if context is known
     if exam_context and exam_context.upper() in ["ICFES", "UNAL"]:
         exam_framework = load_exam_rules(exam_context)
         blocks.append(exam_framework)
