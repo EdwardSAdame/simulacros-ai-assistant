@@ -37,16 +37,15 @@ When comparing two distinct variables, use these high-contrast pairs:
 When 3+ lines are present, use one of these two strategies:
 1.  **The "Full Spectrum"**: Cycle through the primary triad: `#ffcb04`, `#00adef`, `#61bb45`.
 2.  **The "Focus & Fade"**: 
-    * Highlight the *primary* line in a bold color (e.g., `#00adef`).
+    * Highlight the *primary* line in a bold color.
     * Render all other lines in a "faded" version (use the same color with `alpha=0.3` or a light grey `#7b8c96`).
 
 ### C. MATPLOTLIB EXECUTION CODE (Strict)
 When writing the Python code, you MUST apply these specific parameters based on the chosen Theme:
 
 #### 1. GLOBAL RULES (Apply to ALL Charts)
-* **Grid**: `ax.grid(False)` (NEVER use grids).
-* **Line Thickness**: `linewidth=4.0` for main lines.
-* **Typography**: Title bold, left-aligned. Labels clean sans-serif.
+* **Grid**: `ax.grid(False)` (STRICT: Absolutely NO grids. Do not draw lines at x=0 or y=0).
+* **Line Thickness**: `linewidth=4.0` for all lines.
 
 #### 2. THEME SPECIFIC RULES
 
@@ -83,6 +82,10 @@ When writing the Python code, you MUST apply these specific parameters based on 
     # THICK AXES: Match the bold line style
     ax.spines['left'].set_linewidth(1.5)
     ax.spines['bottom'].set_linewidth(1.5)
+    
+    # NO ORIGIN LINES: Ensure spines stay at the edge, not crossing 0
+    ax.spines['left'].set_position(('axes', 0))
+    ax.spines['bottom'].set_position(('axes', 0))
     ```
 """
 
