@@ -3,6 +3,9 @@ import json
 from pathlib import Path
 from typing import Iterable, Optional
 
+# [NEW] Import the visual builder to keep consistency
+from src.config.visual_instructions import build_visual_instructions
+
 # Base paths to find the JSON blueprints
 BASE_DIR = Path(__file__).resolve().parent.parent
 KNOWLEDGE_DIR = BASE_DIR / "knowledge"
@@ -37,9 +40,9 @@ You are **Roma**, the state-of-the-art AI of Invicto. You are a construct of "di
 - **Variables**: Even single variables in text must be LaTeX formatted (e.g., "Find the value of \\( y \\)").
 - **Structure**: Use Markdown headings and bullet points to organize long explanations.
 
-## 5. Visual Generation Capabilities (Proactive & Precise)
-- **The Visual Mandate**: You are a multi-modal tutor. Text is often insufficient for complex logic.
-- **Trigger Rule (Proactive)**: **Do NOT wait for the user to ask.** If you are explaining a concept that is inherently spatial, statistical, or geometric, you **MUST** proactively use the Python Code Interpreter tool to generate the visualization alongside your text.
+## 5. Visual Generation Capabilities
+- **Graphing**: If a user asks to "graph", "plot", or "visualize" a function or data, **YOU MUST** use the Python Code Interpreter tool to generate the image file. 
+- **Execution**: Write the Python code to create the plot using `matplotlib`, save it, and let the system handle the display. Do not simply describe the graph in text.
 """
 
 # --- 2. THE SMART LOADER (Universal Expert Expansion) ---
@@ -87,10 +90,8 @@ def load_exam_rules(exam_context: str) -> str:
                     framework_text += f"- {skill}\n"
             
             # 3. Areas / Domains / Topics / Text Types
-            # Logic: Try standard lists first, then fallback to special cases
             topics = comp.get("areas") or comp.get("domains")
             
-            # Handle simple list of strings in 'components' (like ICFES Naturales)
             if not topics and isinstance(comp.get("components"), list) and isinstance(comp["components"][0], str):
                  topics = comp["components"]
             
@@ -99,13 +100,11 @@ def load_exam_rules(exam_context: str) -> str:
                 for area in topics:
                     framework_text += f"- {area}\n"
 
-            # Special dictionary cases (like ICFES Reading Text Types)
             if "text_types" in comp and isinstance(comp["text_types"], dict):
                 framework_text += "**Text Types**:\n"
                 for type_key, sublist in comp["text_types"].items():
                     framework_text += f"- {type_key.capitalize()}: {', '.join(sublist)}\n"
             
-            # 4. Special Case: ICFES English Parts
             if "parts" in comp and isinstance(comp["parts"], list):
                 framework_text += "**Exam Structure (English)**:\n"
                 for part in comp["parts"]:
@@ -113,7 +112,6 @@ def load_exam_rules(exam_context: str) -> str:
                     p_desc = part.get("description", "")
                     framework_text += f"- Part {p_num}: {p_desc}\n"
 
-            # 5. AI Strategy (The "Roma" Touch)
             strat = comp.get("ai_strategy")
             if strat:
                 framework_text += f"**Instructional Strategy**: {strat}\n"
@@ -129,6 +127,10 @@ def load_exam_rules(exam_context: str) -> str:
 def build_system_instructions(extras: Optional[Iterable[str]] = None, exam_context: str = "ICFES") -> str:
     blocks = [BASE_SYSTEM_INSTRUCTIONS]
     
+    # [NEW] Inject the Visualization Guidelines
+    # We call the builder function to get the string
+    blocks.append(build_visual_instructions())
+
     # Always inject the full exam framework if context is known
     if exam_context and exam_context.upper() in ["ICFES", "UNAL"]:
         exam_framework = load_exam_rules(exam_context)
