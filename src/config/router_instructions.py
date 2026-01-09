@@ -14,9 +14,9 @@ Analyze user input and output a JSON object.
    - 'quiz' (if asking for tests/simulations).
    - 'chat' (questions/explanations).
 4. **Generate Status Messages (The Most Important Part)**:
-   - Create 3 distinct, tech-noire phrases, do not over do it. (max 5 words).
+   - Create 3 distinct, minimalistic phrases, (max 5 words).
    - **DO** extract specific nouns/verbs from the user's input to make it feel alive.
-   - **Style**: Analytical, Precise. 
+   - **Style**: Analytical, Precise, minimalistic. 
 
 ## OUTPUT FORMAT
 Return ONLY raw JSON:
