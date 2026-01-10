@@ -262,10 +262,23 @@ def get_ai_response(
     else:
         # 🟢 STANDARD CHAT MODE
         try:
-            # 1. Build the dynamic System Prompt
+            # 1. GENERATE DYNAMIC RUNTIME SIGNALS
+            time_info = get_current_time_info()
+            target_semester = infer_target_semester()
+            
+            runtime_signals = [
+                f"Today is {time_info['full_human']}.",
+                f"Page: {page}",
+                f"User: {user_id}",
+                f"Target: {target_semester}",
+                f"Email: {email if email else 'Anonymous'}",
+                "Sources: Invicto Knowledge Base."
+            ]
+            
+            # 2. Build the dynamic System Prompt
             system_prompt = build_system_instructions(
-                extras=[f"Current Page: {page}"],
-                exam_context=exam_context # 🟢 Passing correct context
+                extras=runtime_signals,  # 🟢 INJECT FULL SIGNALS HERE
+                exam_context=exam_context 
             )
 
             final_reply_text, generated_assets = send_message_to_assistant(
