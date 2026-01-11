@@ -9,7 +9,8 @@ def build_runtime_context(
     page: str, 
     user_id: str | None, 
     name: str | None, 
-    email: str | None
+    email: str | None,
+    requires_visuals: bool = False # 🟢 NEW PARAMETER
 ) -> List[str]:
     """
     Constructs the dynamic 'Runtime Signals' list injected into the System Prompt.
@@ -40,6 +41,15 @@ def build_runtime_context(
                 signals.insert(1, f"The user's display name is '{clean_name}'. Use it ONLY if it is a valid human name. If it is numbers, gibberish, or a handle, ignore it.")
         else:
             signals.insert(1, "The user is anonymous. Do NOT refer to them as 'Guest'.")
+
+        # 🟢 4. CONDITIONAL VISUALS (The Optimization)
+        # Only inject this heavy instruction if the Router said "requires_visuals=True"
+        if requires_visuals:
+            signals.append(
+                "VISUALS: The user EXPLICITLY requested a graph/plot. "
+                "You MUST use the 'code_interpreter' tool to generate it. "
+                "Do not describe the plot; create the file."
+            )
 
         return signals
 

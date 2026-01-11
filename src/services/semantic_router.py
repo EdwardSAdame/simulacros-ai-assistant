@@ -26,6 +26,7 @@ class SemanticRouter:
             return {
                 "category": "general", 
                 "intent": "chat",
+                "requires_visuals": False, # Default to False
                 "loading_phrases": ["Procesando...", "Esperando datos..."], 
                 "source": "fallback"
             }
@@ -35,6 +36,7 @@ class SemanticRouter:
             return {
                 "category": result.get("category", "general"),
                 "intent": result.get("intent", "chat"),
+                "requires_visuals": result.get("requires_visuals", False),
                 "loading_phrases": result.get("loading_phrases", ["Analizando...", "Pensando..."]),
                 "source": "ai"
             }
@@ -43,6 +45,7 @@ class SemanticRouter:
             return {
                 "category": "general", 
                 "intent": "chat",
+                "requires_visuals": False, # Safe default on error
                 "loading_phrases": ["Analizando solicitud...", "Procesando información..."],
                 "source": "error_fallback"
             }
@@ -91,23 +94,32 @@ class SemanticRouter:
             # Sanitize Intent
             intent = data.get("intent", "chat").lower()
             if intent not in ["quiz", "chat"]: intent = "chat"
+
+            # 🟢 EXTRACT VISUAL INTENT
+            requires_visuals = data.get("requires_visuals", False)
+            if not isinstance(requires_visuals, bool):
+                requires_visuals = False
                 
-            # 🟢 ROBUST EXTRACTION STRATEGY
-            # Try specific key first, then fallback to common hallucinations
+            # 🟢 ROBUST EXTRACTION STRATEGY for phrases
             phrases = data.get("loading_phrases")
             if not phrases:
-                phrases = data.get("status_messages") # <--- Catches your specific error
+                phrases = data.get("status_messages") 
             if not phrases:
                 phrases = data.get("phrases")
             if not phrases:
-                phrases = data.get("loading_phounces") # Legacy typo fix
+                phrases = data.get("loading_phounces") 
 
             # Final validation
             if not isinstance(phrases, list) or not phrases:
                 phrases = ["Procesando...", "Analizando..."]
 
-            logger.info(f"Router: AI classified as '{category}' (Intent: {intent}) with phrases {phrases}")
-            return {"category": category, "intent": intent, "loading_phrases": phrases}
+            logger.info(f"Router: AI classified as '{category}' (Intent: {intent}, Visuals: {requires_visuals})")
+            return {
+                "category": category, 
+                "intent": intent, 
+                "requires_visuals": requires_visuals, 
+                "loading_phrases": phrases
+            }
             
         except Exception as e:
             logger.error(f"Router: Error calling OpenAI: {e}")

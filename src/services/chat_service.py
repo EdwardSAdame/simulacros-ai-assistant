@@ -36,19 +36,32 @@ def decimal_default(obj):
         return int(obj) if obj % 1 == 0 else float(obj)
     raise TypeError
 
+# 🟢 NEW LOGIC: Context Resolution Engine
 def determine_exam_context(page_url: str, message_text: str | None = None) -> str:
+    """
+    Decides the Exam Context (UNAL vs ICFES vs GENERAL).
+    Priority:
+    1. URL Explicit Context (e.g. user is inside /simulacro-unal)
+    2. User Intent in Message (e.g. user says "quiero unal" on homepage)
+    3. Default (General)
+    """
+    # 1. Analyze URL (The "Room" the user is in)
     if page_url:
         url_lower = page_url.lower()
         if "unal" in url_lower: return "UNAL"
         if "icfes" in url_lower: return "ICFES"
     
+    # 2. Analyze Message (Only if URL is generic)
     if message_text:
         msg_lower = message_text.lower()
+        # Check for UNAL keywords
         if any(x in msg_lower for x in ["unal", "nacional", "universidad nacional"]):
             return "UNAL"
+        # Check for ICFES keywords
         if any(x in msg_lower for x in ["icfes", "saber 11", "saber pro", "estado"]):
             return "ICFES"
             
+    # 3. Fallback
     return "GENERAL" 
 
 def _build_history_list(conversation_id: str, max_user: int = 3, max_assistant: int = 3) -> List[Dict[str, Any]]:
@@ -99,6 +112,7 @@ def get_ai_response(
     image_urls: list[str] | None = None,
     mode: str = "omega",
     intent: str = "chat",
+    requires_visuals: bool = False, # 🟢 NEW PARAMETER
     stream_manager: Any | None = None 
 ) -> Tuple[str, str, str, Dict | None]: 
     
@@ -108,19 +122,25 @@ def get_ai_response(
     from src.services.quiz_service import QuizService
 
     page = _normalize_page(page)
+
+    # 🟢 1. INTELLIGENCE LAYER: Check URL AND Message
+    # Now passing 'message' to detect intent even on generic pages
     exam_context = determine_exam_context(page, message)
+    
     selected_vector_stores = get_stores_for_page(page)
 
+    # 🔍 OBSERVABILITY: LOG THE DECISION
     log_event("context_resolution", {
         "user_id": user_id,
         "input_url": page,
-        "derived_exam": exam_context, 
+        "derived_exam": exam_context, # Now this should say "UNAL" even if url is /roma
         "vector_stores_selected": selected_vector_stores,
         "intent": intent,
+        "requires_visuals": requires_visuals, # 🟢 LOG IT
         "trigger_message": message[:50] if message else "None"
     })
 
-    # 🟢 STEP 2: ROBUST CONVERSATION HANDLING
+    # Step 2: Find-or-create conversation
     actual_conversation_id = conversation_id
     should_create_new = True
 
@@ -142,8 +162,9 @@ def get_ai_response(
             )
             actual_conversation_id = conversation_data["ConversationId"]
     except Exception as e:
-        raise RuntimeError(f"❌ Failed to save conversation: {e}")
+        raise RuntimeError(f"❌ Failed to save/reuse conversation: {e}")
 
+    # Step 3: Build Input
     conversation_input = _build_history_list(actual_conversation_id)
     
     current_user_content = []
@@ -155,7 +176,7 @@ def get_ai_response(
         conversation_input.append({"role": "user", "content": current_user_content})
 
     # ------------------------------------------------------------------
-    # 🟢 BRANCH: QUIZ vs CHAT
+    # 🟢 BRANCH: QUIZ (Structured) vs CHAT (Standard)
     # ------------------------------------------------------------------
     quiz_data = None
     final_reply_text = ""
@@ -171,6 +192,7 @@ def get_ai_response(
                 if 1 <= parsed_num <= 10: 
                     num_questions = parsed_num
 
+        # Only operational rules, no Persona here (fixed in previous step)
         conversation_input.append(QuizService.get_system_instruction(topic=topic_hint, num_questions=num_questions))
 
         try:
@@ -184,7 +206,7 @@ def get_ai_response(
                     name=(name or None),
                     email=_normalize_email_for_storage(email),
                     mode=mode,
-                    exam_context=exam_context 
+                    exam_context=exam_context # 🟢 Passing correct context
                 )
                 
                 seen_indices = set()
@@ -236,7 +258,7 @@ def get_ai_response(
                     name=(name or None),
                     email=_normalize_email_for_storage(email),
                     mode=mode,
-                    exam_context=exam_context 
+                    exam_context=exam_context # 🟢 Passing correct context
                 )
                 quiz_data = {
                     "quiz_mode": "batch", 
@@ -254,14 +276,16 @@ def get_ai_response(
     else:
         # 🟢 STANDARD CHAT MODE
         try:
-            # 🟢 REFACTORED: Use the new Context Builder
+            # 1. Build the dynamic System Prompt
+            # 🟢 UPDATED: Pass 'requires_visuals' to Context Builder
             runtime_signals = build_runtime_context(
                 page=page,
                 user_id=user_id,
                 name=name,
-                email=email
+                email=email,
+                requires_visuals=requires_visuals # 🟢 CONDITIONAL LOGIC
             )
-            
+
             system_prompt = build_system_instructions(
                 extras=runtime_signals,
                 exam_context=exam_context 
@@ -275,7 +299,8 @@ def get_ai_response(
                 email=_normalize_email_for_storage(email),
                 mode=mode,
                 system_instruction=system_prompt,
-                vector_store_ids=selected_vector_stores 
+                vector_store_ids=selected_vector_stores,
+                requires_visuals=requires_visuals # 🟢 PASS FLAG
             )
         except Exception as e:
             raise RuntimeError(f"OpenAI Chat API failed: {e}")

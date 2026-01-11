@@ -76,6 +76,7 @@ def lambda_handler(event, context):
 
             # --- 2. Send Visual Feedback (The "Thinking" Phase) ---
             intent = "chat" 
+            requires_visuals = False # 🟢 Default to False
             
             if connection_id:
                 try:
@@ -86,6 +87,7 @@ def lambda_handler(event, context):
                     loading_phrases = routing_result.get("loading_phrases", []) 
                     source_type = routing_result.get("source", "unknown")
                     intent = routing_result.get("intent", "chat") # <--- CAPTURE INTENT
+                    requires_visuals = routing_result.get("requires_visuals", False) # 🟢 Capture Visual Flag
                     
                     # 🔹 DETERMINE CLIENT ACTION
                     # This tells the frontend to expand the panel (Animation 70vw/30vw)
@@ -110,7 +112,8 @@ def lambda_handler(event, context):
                     log_event("visual_feedback_sent", {
                         "user_id": user_id, 
                         "category": category_key,
-                        "intent": intent, 
+                        "intent": intent,
+                        "requires_visuals": requires_visuals, # 🟢 Log it
                         "client_action": client_action,
                         "phrases_count": len(loading_phrases),
                         "source": source_type,
@@ -133,6 +136,7 @@ def lambda_handler(event, context):
                 image_urls=image_urls,
                 mode=ai_mode,
                 intent=intent,
+                requires_visuals=requires_visuals, # 🟢 Pass the flag to the service
                 stream_manager=stream_manager 
             )
 

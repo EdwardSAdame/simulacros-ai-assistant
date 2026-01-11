@@ -155,7 +155,8 @@ def send_message_to_assistant(
     email: str | None = None, 
     mode: str = "omega",
     system_instruction: str | None = None,
-    vector_store_ids: List[str] | None = None
+    vector_store_ids: List[str] | None = None,
+    requires_visuals: bool = False # 🟢 NEW PARAMETER
 ) -> Tuple[str, List[str]]: 
     
     client = get_openai_client()
@@ -174,11 +175,22 @@ def send_message_to_assistant(
     tools = []
     if tool_stores:
         tools.append({"type": "file_search", "vector_store_ids": tool_stores, "max_num_results": get_vector_search_max_results()})
-    tools.append({"type": "code_interpreter", "container": {"type": "auto"}})
+    
+    # 🟢 CONDITIONAL VISUALS: Only add Code Interpreter if explicitly requested
+    if requires_visuals:
+        tools.append({"type": "code_interpreter", "container": {"type": "auto"}})
 
     req = {"model": cfg.model, "input": api_input, "temperature": cfg.temperature, "top_p": cfg.top_p}
-    if not (cfg.model.startswith("o1") or "reasoning" in cfg.model): req["tools"] = tools
-    else: req.pop("temperature", None); req.pop("top_p", None)
+    
+    # If using reasoning models (o1), remove unsupported params but tools might still be allowed (check specific model support)
+    # Note: o1-preview currently supports very limited tools, but assuming standard GPT-4o usage here.
+    if cfg.model.startswith("o1") or "reasoning" in cfg.model: 
+        req.pop("temperature", None)
+        req.pop("top_p", None)
+        # o1 usually doesn't support tools yet, but we leave the logic in case it's enabled or using o3
+    else:
+        if tools:
+            req["tools"] = tools
 
     try:
         resp = client.responses.create(**{k: v for k, v in req.items() if v is not None})

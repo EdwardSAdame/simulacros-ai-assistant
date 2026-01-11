@@ -13,7 +13,10 @@ Analyze user input and output a JSON object.
 3. **Determine Intent**: 
    - 'quiz' (if asking for tests/simulations).
    - 'chat' (questions/explanations).
-4. **Generate Status Messages (The Most Important Part)**:
+4. **Detect Visual Needs**:
+   - Set "requires_visuals": true ONLY if the user explicitly asks to **graph, plot, draw, visualize functions, or map data**.
+   - Otherwise, set it to false.
+5. **Generate Status Messages (The Most Important Part)**:
    - Create 3 distinct, minimalistic phrases, (max 5 words).
    - **DO** extract specific nouns/verbs from the user's input to make it feel alive.
    - **Style**: Analytical, Precise, minimalistic. 
@@ -23,6 +26,7 @@ Return ONLY raw JSON:
 {
   "category": "string",
   "intent": "chat" | "quiz",
+  "requires_visuals": boolean,
   "loading_phrases": ["string", "string", "string"]
 }
 """
