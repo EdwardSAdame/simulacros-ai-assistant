@@ -28,22 +28,18 @@ def build_runtime_context(
             "Sources: Invicto Knowledge Base."
         ]
 
-        # 3. VALIDATE THE NAME (The Fix)
-        # We explicitly block "Guest", "Visitor", etc. to prevent false positives.
-        has_valid_name = False
+        # 3. Inject Name with LLM Discretion (The Fix)
         if name and name.strip():
-            clean_name = name.strip().lower()
-            # If the name is generic, we treat it as if it doesn't exist
-            if clean_name not in ["guest", "visitor", "user", "anonymous", "undefined"]:
-                has_valid_name = True
-
-        # 4. Inject Logic
-        if has_valid_name:
-            signals.insert(1, f"The user is named {name}.")
+            clean_name = name.strip()
+            
+            # Basic hygiene: still block obvious system defaults
+            if clean_name.lower() in ["guest", "visitor", "user", "anonymous", "undefined"]:
+                signals.insert(1, "The user is anonymous. Do NOT refer to them as 'Guest'.")
+            else:
+                # 🟢 LLM SELF-CORRECTION INSTRUCTION
+                signals.insert(1, f"The user's display name is '{clean_name}'. Use it ONLY if it is a valid human name. If it is numbers, gibberish, or a handle, ignore it.")
         else:
-            # 🟢 STRICT NEGATIVE CONSTRAINT
-            # We tell the bot explicitly: "Do NOT guess."
-            signals.insert(1, "The user is anonymous. Do NOT refer to them as 'Guest'. If asked for their name, state clearly that you do not know it.")
+            signals.insert(1, "The user is anonymous. Do NOT refer to them as 'Guest'.")
 
         return signals
 
