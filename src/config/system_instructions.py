@@ -135,16 +135,16 @@ def build_system_instructions(
 ) -> str:
     blocks = [BASE_SYSTEM_INSTRUCTIONS]
     
-    # 🟢 CONDITIONAL INJECTION: Only add strict Visual Doctrine if required
-    if requires_visuals:
-        blocks.append(build_visual_instructions())
-
-    # Always inject the full exam framework if context is known
+    # 🟢 1. Inject Academic Framework (Section 6) FIRST
     if exam_context and exam_context.upper() in ["ICFES", "UNAL"]:
         exam_framework = load_exam_rules(exam_context)
         blocks.append(exam_framework)
     else:
         blocks.append("## 6. ACADEMIC FRAMEWORK: General University Preparation")
+    
+    # 🟢 2. Inject Visual Doctrine (Section 7) SECOND (and only if required)
+    if requires_visuals:
+        blocks.append(build_visual_instructions())
     
     if extras:
         addenda = [e for e in extras if e]
