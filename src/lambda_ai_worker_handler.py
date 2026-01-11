@@ -76,7 +76,7 @@ def lambda_handler(event, context):
 
             # --- 2. Send Visual Feedback (The "Thinking" Phase) ---
             intent = "chat" 
-            requires_visuals = False # 🟢 Default to False
+            requires_visuals = False # Default
             
             if connection_id:
                 try:
@@ -86,11 +86,10 @@ def lambda_handler(event, context):
                     category_key = routing_result.get("category", "general")
                     loading_phrases = routing_result.get("loading_phrases", []) 
                     source_type = routing_result.get("source", "unknown")
-                    intent = routing_result.get("intent", "chat") # <--- CAPTURE INTENT
-                    requires_visuals = routing_result.get("requires_visuals", False) # 🟢 Capture Visual Flag
+                    intent = routing_result.get("intent", "chat") 
+                    requires_visuals = routing_result.get("requires_visuals", False) 
                     
                     # 🔹 DETERMINE CLIENT ACTION
-                    # This tells the frontend to expand the panel (Animation 70vw/30vw)
                     client_action = None
                     if intent == "quiz":
                         client_action = "OPEN_QUIZ_PANEL"
@@ -101,7 +100,8 @@ def lambda_handler(event, context):
                         "loading_phrases": loading_phrases,
                         "source": source_type,
                         "client_row_id": client_row_id,
-                        "client_action": client_action 
+                        "client_action": client_action,
+                        "requires_visuals": requires_visuals  # 🟢 [CRITICAL FIX] Send the flag to Frontend!
                     })
                     
                     api_gateway_client.post_to_connection(
@@ -113,7 +113,7 @@ def lambda_handler(event, context):
                         "user_id": user_id, 
                         "category": category_key,
                         "intent": intent,
-                        "requires_visuals": requires_visuals, # 🟢 Log it
+                        "requires_visuals": requires_visuals,
                         "client_action": client_action,
                         "phrases_count": len(loading_phrases),
                         "source": source_type,
@@ -125,7 +125,6 @@ def lambda_handler(event, context):
                     log_event("ws_status_send_failed", {"user_id": user_id}, level="warning", error=e)
 
             # --- 3. Get the AI response (Heavy Processing) ---
-            # 🟢 UPDATED: Capture 'meta_payload' (4th return value)
             ai_reply, conversation_id, assistant_timestamp, meta_payload = get_ai_response(
                 message=message,
                 user_id=user_id,
@@ -136,7 +135,7 @@ def lambda_handler(event, context):
                 image_urls=image_urls,
                 mode=ai_mode,
                 intent=intent,
-                requires_visuals=requires_visuals, # 🟢 Pass the flag to the service
+                requires_visuals=requires_visuals, 
                 stream_manager=stream_manager 
             )
 
@@ -150,7 +149,6 @@ def lambda_handler(event, context):
                         "conversation_id": conversation_id,
                         "client_row_id": client_row_id,
                         "timestamp": assistant_timestamp,
-                        # 🟢 OPTIONAL: Include metadata inline if needed
                         "metadata": meta_payload 
                     })
                     
@@ -165,7 +163,7 @@ def lambda_handler(event, context):
                         action_type = "quiz_data_update" # Default (Backward Compatibility)
                         
                         if meta_payload.get("type") == "rich_chat":
-                            action_type = "rich_content_update" # 🟢 New Action for Images/Graphs
+                            action_type = "rich_content_update" 
 
                         data_payload = json.dumps({
                             "action": action_type,
