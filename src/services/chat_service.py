@@ -14,7 +14,6 @@ from src.utils.logging_utils import log_event
 from src.utils.time_utils import get_current_time_info, infer_target_semester, semester_season
 
 # 🟢 STORAGE
-# We import _find_conversation_timestamp to verify existence
 from src.storage.conversations_table import save_conversation, _find_conversation_timestamp
 from src.storage.messages_table import save_message, get_recent_messages
 
@@ -120,21 +119,18 @@ def get_ai_response(
         "trigger_message": message[:50] if message else "None"
     })
 
-    # 🟢 STEP 2: ROBUST CONVERSATION HANDLING (THE FIX)
-    # We verify if the provided conversation_id actually exists.
+    # 🟢 STEP 2: ROBUST CONVERSATION HANDLING
     actual_conversation_id = conversation_id
     should_create_new = True
 
     if conversation_id and user_id:
-        # Check DynamoDB to see if this ID is valid for this user
         exists_timestamp = _find_conversation_timestamp(user_id, conversation_id)
         if exists_timestamp:
             should_create_new = False
             log_event("conversation_verified_and_reused", {"conversation_id": conversation_id})
         else:
-            # If not found, we MUST treat this as a new conversation to ensure data is saved
             log_event("conversation_not_found_forcing_new", {"input_id": conversation_id})
-            actual_conversation_id = None # Reset so we create a new one
+            actual_conversation_id = None 
 
     try:
         if should_create_new:
@@ -147,7 +143,6 @@ def get_ai_response(
     except Exception as e:
         raise RuntimeError(f"❌ Failed to save conversation: {e}")
 
-    # Use the verified ID for history building
     conversation_input = _build_history_list(actual_conversation_id)
     
     current_user_content = []
@@ -261,14 +256,17 @@ def get_ai_response(
             time_info = get_current_time_info()
             target_semester = infer_target_semester()
             
+            # 🛡️ SECURITY UPDATE: Removed Email and ID from Prompt
             runtime_signals = [
                 f"Today is {time_info['full_human']}.",
                 f"Page: {page}",
-                f"User: {user_id}",
                 f"Target: {target_semester}",
-                f"Email: {email if email else 'Anonymous'}",
                 "Sources: Invicto Knowledge Base."
             ]
+
+            # 🟢 Inject Name ONLY if valid
+            if name and name.strip():
+                runtime_signals.insert(2, f"Name: {name}")
             
             system_prompt = build_system_instructions(
                 extras=runtime_signals,
@@ -317,5 +315,4 @@ def get_ai_response(
     except Exception as e:
         raise RuntimeError(f" Failed to save messages: {e}")
 
-    # Return the VERIFIED conversation_id (important!)
     return final_reply_text, actual_conversation_id, assistant_timestamp, meta_payload
