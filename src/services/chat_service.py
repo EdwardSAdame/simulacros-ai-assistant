@@ -286,9 +286,11 @@ def get_ai_response(
                 requires_visuals=requires_visuals # 🟢 CONDITIONAL LOGIC
             )
 
+            # 🟢 NOW CORRECTLY PASSING 'requires_visuals' to system instructions
             system_prompt = build_system_instructions(
                 extras=runtime_signals,
-                exam_context=exam_context 
+                exam_context=exam_context,
+                requires_visuals=requires_visuals # 🟢 CRITICAL FIX
             )
 
             final_reply_text, generated_assets = send_message_to_assistant(

@@ -92,6 +92,7 @@ def load_exam_rules(exam_context: str) -> str:
             # 3. Areas / Domains / Topics / Text Types
             topics = comp.get("areas") or comp.get("domains")
             
+            # Handle simple list of strings in 'components' (like ICFES Naturales)
             if not topics and isinstance(comp.get("components"), list) and isinstance(comp["components"][0], str):
                  topics = comp["components"]
             
@@ -100,11 +101,13 @@ def load_exam_rules(exam_context: str) -> str:
                 for area in topics:
                     framework_text += f"- {area}\n"
 
+            # Special dictionary cases (like ICFES Reading Text Types)
             if "text_types" in comp and isinstance(comp["text_types"], dict):
                 framework_text += "**Text Types**:\n"
                 for type_key, sublist in comp["text_types"].items():
                     framework_text += f"- {type_key.capitalize()}: {', '.join(sublist)}\n"
             
+            # 4. Special Case: ICFES English Parts
             if "parts" in comp and isinstance(comp["parts"], list):
                 framework_text += "**Exam Structure (English)**:\n"
                 for part in comp["parts"]:
@@ -112,6 +115,7 @@ def load_exam_rules(exam_context: str) -> str:
                     p_desc = part.get("description", "")
                     framework_text += f"- Part {p_num}: {p_desc}\n"
 
+            # 5. AI Strategy (The "Roma" Touch)
             strat = comp.get("ai_strategy")
             if strat:
                 framework_text += f"**Instructional Strategy**: {strat}\n"
@@ -124,12 +128,16 @@ def load_exam_rules(exam_context: str) -> str:
         return f"FRAMEWORK: Standard Tutoring (Error loading specific rules: {str(e)})"
 
 # --- 3. THE BUILDER ---
-def build_system_instructions(extras: Optional[Iterable[str]] = None, exam_context: str = "ICFES") -> str:
+def build_system_instructions(
+    extras: Optional[Iterable[str]] = None, 
+    exam_context: str = "ICFES",
+    requires_visuals: bool = False # 🟢 NEW PARAMETER
+) -> str:
     blocks = [BASE_SYSTEM_INSTRUCTIONS]
     
-    # [NEW] Inject the Visualization Guidelines
-    # We call the builder function to get the string
-    blocks.append(build_visual_instructions())
+    # 🟢 CONDITIONAL INJECTION: Only add strict Visual Doctrine if required
+    if requires_visuals:
+        blocks.append(build_visual_instructions())
 
     # Always inject the full exam framework if context is known
     if exam_context and exam_context.upper() in ["ICFES", "UNAL"]:
