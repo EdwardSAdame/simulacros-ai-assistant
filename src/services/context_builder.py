@@ -10,7 +10,7 @@ def build_runtime_context(
     user_id: str | None, 
     name: str | None, 
     email: str | None,
-    requires_visuals: bool = False # 🟢 NEW PARAMETER
+    requires_visuals: bool = False # Kept for compatibility with chat_service call
 ) -> List[str]:
     """
     Constructs the dynamic 'Runtime Signals' list injected into the System Prompt.
@@ -22,14 +22,14 @@ def build_runtime_context(
         target_semester = infer_target_semester()
 
         # 2. Build Base Signals
+        # 🟢 UPDATED: Removed "Sources:..." as requested.
         signals = [
             f"Today is {time_info['full_human']}.",
             f"Page: {page if page else '/'}",
-            f"Target: {target_semester}",
-            "Sources: Invicto Knowledge Base."
+            f"Target: {target_semester}"
         ]
 
-        # 3. Inject Name with LLM Discretion (The Fix)
+        # 3. Inject Name with LLM Discretion
         if name and name.strip():
             clean_name = name.strip()
             
@@ -37,22 +37,16 @@ def build_runtime_context(
             if clean_name.lower() in ["guest", "visitor", "user", "anonymous", "undefined"]:
                 signals.insert(1, "The user is anonymous. Do NOT refer to them as 'Guest'.")
             else:
-                # 🟢 LLM SELF-CORRECTION INSTRUCTION
+                # LLM SELF-CORRECTION INSTRUCTION
                 signals.insert(1, f"The user's display name is '{clean_name}'. Use it ONLY if it is a valid human name. If it is numbers, gibberish, or a handle, ignore it.")
         else:
             signals.insert(1, "The user is anonymous. Do NOT refer to them as 'Guest'.")
 
-        # 🟢 4. CONDITIONAL VISUALS (The Optimization)
-        # Only inject this heavy instruction if the Router said "requires_visuals=True"
-        if requires_visuals:
-            signals.append(
-                "VISUALS: The user EXPLICITLY requested a graph/plot. "
-                "You MUST use the 'code_interpreter' tool to generate it. "
-                "Do not describe the plot; create the file."
-            )
+        # 🟢 UPDATED: The 'VISUALS' block is completely removed from here.
+        # It is now handled cleanly in 'system_instructions.py' via the Gatekeeper logic.
 
         return signals
 
     except Exception as e:
         logger.error(f"Error building runtime context: {e}")
-        return [f"Page: {page}", "Sources: Invicto Knowledge Base."]
+        return [f"Page: {page}"]
