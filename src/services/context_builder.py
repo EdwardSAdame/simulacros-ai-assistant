@@ -38,7 +38,7 @@ def build_runtime_context(
                 signals.insert(1, "The user is anonymous. Do NOT refer to them as 'Guest'.")
             else:
                 # LLM SELF-CORRECTION INSTRUCTION
-                signals.insert(1, f"The user's display name is '{clean_name}'. Use it ONLY if it is a valid human name. If it is numbers, gibberish, or a handle, ignore it.")
+                signals.insert(1, f"The user's name is '{clean_name}'. Use it ONLY if it is a valid human name. If it is numbers, gibberish, or a handle, ignore it.")
         else:
             signals.insert(1, "The user is anonymous. Do NOT refer to them as 'Guest'.")
 
