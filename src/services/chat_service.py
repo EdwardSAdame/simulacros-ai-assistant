@@ -11,7 +11,9 @@ from src.config.model_config import get_model_config
 from src.config.system_instructions import build_system_instructions
 from src.config.page_vectorstores import get_stores_for_page
 from src.utils.logging_utils import log_event
-from src.utils.time_utils import get_current_time_info, infer_target_semester, semester_season
+
+# 🟢 NEW: Import the Context Builder
+from src.services.context_builder import build_runtime_context
 
 # 🟢 STORAGE
 from src.storage.conversations_table import save_conversation, _find_conversation_timestamp
@@ -34,7 +36,6 @@ def decimal_default(obj):
         return int(obj) if obj % 1 == 0 else float(obj)
     raise TypeError
 
-# 🟢 NEW LOGIC: Context Resolution Engine
 def determine_exam_context(page_url: str, message_text: str | None = None) -> str:
     if page_url:
         url_lower = page_url.lower()
@@ -253,20 +254,13 @@ def get_ai_response(
     else:
         # 🟢 STANDARD CHAT MODE
         try:
-            time_info = get_current_time_info()
-            target_semester = infer_target_semester()
-            
-            # 🛡️ SECURITY UPDATE: Removed Email and ID from Prompt
-            runtime_signals = [
-                f"Today is {time_info['full_human']}.",
-                f"Page: {page}",
-                f"Target: {target_semester}",
-                "Sources: Invicto Knowledge Base."
-            ]
-
-            # 🟢 Inject Name ONLY if valid
-            if name and name.strip():
-                runtime_signals.insert(2, f"Name: {name}")
+            # 🟢 REFACTORED: Use the new Context Builder
+            runtime_signals = build_runtime_context(
+                page=page,
+                user_id=user_id,
+                name=name,
+                email=email
+            )
             
             system_prompt = build_system_instructions(
                 extras=runtime_signals,
@@ -289,13 +283,11 @@ def get_ai_response(
     # Step 7: Persist
     assistant_timestamp = ""
     try:
-        # Save User Message
         if message:
             save_message(actual_conversation_id, role="user", message_text=message)
         for img in image_urls or []:
             save_message(actual_conversation_id, role="user", message_text=f"[Imagen] {img}")
         
-        # Save Assistant Message
         meta_payload = quiz_data
         if not meta_payload and generated_assets:
             meta_payload = {
