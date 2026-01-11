@@ -14,7 +14,8 @@ from src.utils.logging_utils import log_event
 from src.utils.time_utils import get_current_time_info, infer_target_semester, semester_season
 
 # 🟢 STORAGE
-from src.storage.conversations_table import save_conversation
+# We import _find_conversation_timestamp to verify existence
+from src.storage.conversations_table import save_conversation, _find_conversation_timestamp
 from src.storage.messages_table import save_message, get_recent_messages
 
 logger = logging.getLogger(__name__)
@@ -36,30 +37,18 @@ def decimal_default(obj):
 
 # 🟢 NEW LOGIC: Context Resolution Engine
 def determine_exam_context(page_url: str, message_text: str | None = None) -> str:
-    """
-    Decides the Exam Context (UNAL vs ICFES vs GENERAL).
-    Priority:
-    1. URL Explicit Context (e.g. user is inside /simulacro-unal)
-    2. User Intent in Message (e.g. user says "quiero unal" on homepage)
-    3. Default (General)
-    """
-    # 1. Analyze URL (The "Room" the user is in)
     if page_url:
         url_lower = page_url.lower()
         if "unal" in url_lower: return "UNAL"
         if "icfes" in url_lower: return "ICFES"
     
-    # 2. Analyze Message (Only if URL is generic)
     if message_text:
         msg_lower = message_text.lower()
-        # Check for UNAL keywords
         if any(x in msg_lower for x in ["unal", "nacional", "universidad nacional"]):
             return "UNAL"
-        # Check for ICFES keywords
         if any(x in msg_lower for x in ["icfes", "saber 11", "saber pro", "estado"]):
             return "ICFES"
             
-    # 3. Fallback
     return "GENERAL" 
 
 def _build_history_list(conversation_id: str, max_user: int = 3, max_assistant: int = 3) -> List[Dict[str, Any]]:
@@ -119,39 +108,47 @@ def get_ai_response(
     from src.services.quiz_service import QuizService
 
     page = _normalize_page(page)
-
-    # 🟢 1. INTELLIGENCE LAYER: Check URL AND Message
-    # Now passing 'message' to detect intent even on generic pages
     exam_context = determine_exam_context(page, message)
-    
     selected_vector_stores = get_stores_for_page(page)
 
-    # 🔍 OBSERVABILITY: LOG THE DECISION
     log_event("context_resolution", {
         "user_id": user_id,
         "input_url": page,
-        "derived_exam": exam_context, # Now this should say "UNAL" even if url is /roma
+        "derived_exam": exam_context, 
         "vector_stores_selected": selected_vector_stores,
         "intent": intent,
         "trigger_message": message[:50] if message else "None"
     })
 
-    # Step 2: Find-or-create conversation
-    try:
-        if conversation_id:
-            log_event("conversation_reused", {"conversation_id": conversation_id})
+    # 🟢 STEP 2: ROBUST CONVERSATION HANDLING (THE FIX)
+    # We verify if the provided conversation_id actually exists.
+    actual_conversation_id = conversation_id
+    should_create_new = True
+
+    if conversation_id and user_id:
+        # Check DynamoDB to see if this ID is valid for this user
+        exists_timestamp = _find_conversation_timestamp(user_id, conversation_id)
+        if exists_timestamp:
+            should_create_new = False
+            log_event("conversation_verified_and_reused", {"conversation_id": conversation_id})
         else:
+            # If not found, we MUST treat this as a new conversation to ensure data is saved
+            log_event("conversation_not_found_forcing_new", {"input_id": conversation_id})
+            actual_conversation_id = None # Reset so we create a new one
+
+    try:
+        if should_create_new:
             sanitized_email = _normalize_email_for_storage(email)
             conversation_data = save_conversation(
                 user_id=user_id, name=name or "", email=sanitized_email,
                 title=(message or "[Sin texto]")[:40], page=page,
             )
-            conversation_id = conversation_data["ConversationId"]
+            actual_conversation_id = conversation_data["ConversationId"]
     except Exception as e:
-        raise RuntimeError(f"❌ Failed to save/reuse conversation: {e}")
+        raise RuntimeError(f"❌ Failed to save conversation: {e}")
 
-    # Step 3: Build Input
-    conversation_input = _build_history_list(conversation_id)
+    # Use the verified ID for history building
+    conversation_input = _build_history_list(actual_conversation_id)
     
     current_user_content = []
     if message:
@@ -162,7 +159,7 @@ def get_ai_response(
         conversation_input.append({"role": "user", "content": current_user_content})
 
     # ------------------------------------------------------------------
-    # 🟢 BRANCH: QUIZ (Structured) vs CHAT (Standard)
+    # 🟢 BRANCH: QUIZ vs CHAT
     # ------------------------------------------------------------------
     quiz_data = None
     final_reply_text = ""
@@ -178,7 +175,6 @@ def get_ai_response(
                 if 1 <= parsed_num <= 10: 
                     num_questions = parsed_num
 
-        # Only operational rules, no Persona here (fixed in previous step)
         conversation_input.append(QuizService.get_system_instruction(topic=topic_hint, num_questions=num_questions))
 
         try:
@@ -192,7 +188,7 @@ def get_ai_response(
                     name=(name or None),
                     email=_normalize_email_for_storage(email),
                     mode=mode,
-                    exam_context=exam_context # 🟢 Passing correct context
+                    exam_context=exam_context 
                 )
                 
                 seen_indices = set()
@@ -244,7 +240,7 @@ def get_ai_response(
                     name=(name or None),
                     email=_normalize_email_for_storage(email),
                     mode=mode,
-                    exam_context=exam_context # 🟢 Passing correct context
+                    exam_context=exam_context 
                 )
                 quiz_data = {
                     "quiz_mode": "batch", 
@@ -262,7 +258,6 @@ def get_ai_response(
     else:
         # 🟢 STANDARD CHAT MODE
         try:
-            # 1. GENERATE DYNAMIC RUNTIME SIGNALS
             time_info = get_current_time_info()
             target_semester = infer_target_semester()
             
@@ -275,9 +270,8 @@ def get_ai_response(
                 "Sources: Invicto Knowledge Base."
             ]
             
-            # 2. Build the dynamic System Prompt
             system_prompt = build_system_instructions(
-                extras=runtime_signals,  # 🟢 INJECT FULL SIGNALS HERE
+                extras=runtime_signals,
                 exam_context=exam_context 
             )
 
@@ -297,11 +291,13 @@ def get_ai_response(
     # Step 7: Persist
     assistant_timestamp = ""
     try:
+        # Save User Message
         if message:
-            save_message(conversation_id, role="user", message_text=message)
+            save_message(actual_conversation_id, role="user", message_text=message)
         for img in image_urls or []:
-            save_message(conversation_id, role="user", message_text=f"[Imagen] {img}")
+            save_message(actual_conversation_id, role="user", message_text=f"[Imagen] {img}")
         
+        # Save Assistant Message
         meta_payload = quiz_data
         if not meta_payload and generated_assets:
             meta_payload = {
@@ -310,7 +306,7 @@ def get_ai_response(
             }
 
         saved_item = save_message(
-            conversation_id, 
+            actual_conversation_id, 
             role="assistant", 
             message_text=final_reply_text,
             metadata=meta_payload
@@ -321,4 +317,5 @@ def get_ai_response(
     except Exception as e:
         raise RuntimeError(f" Failed to save messages: {e}")
 
-    return final_reply_text, conversation_id, assistant_timestamp, meta_payload
+    # Return the VERIFIED conversation_id (important!)
+    return final_reply_text, actual_conversation_id, assistant_timestamp, meta_payload
