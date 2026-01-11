@@ -20,7 +20,7 @@ def build_runtime_context(
         time_info = get_current_time_info()
         target_semester = infer_target_semester()
 
-        # 2. Build Base Signals (Natural Language Style)
+        # 2. Build Base Signals
         signals = [
             f"Today is {time_info['full_human']}.",
             f"Page: {page if page else '/'}",
@@ -28,15 +28,17 @@ def build_runtime_context(
             "Sources: Invicto Knowledge Base."
         ]
 
-        # 3. Inject Name naturally (Personalization)
-        # 🟢 CHANGE: "The user is named..." style
+        # 3. Inject Name (or Anonymity)
         if name and name.strip():
-            # Insert this early in the list (index 1) so the bot knows who it is talking to immediately
+            # ✅ Case A: User is Logged In
             signals.insert(1, f"The user is named {name}.")
+        else:
+            # 🟢 Case B: User is Guest (The Fix)
+            # We explicitly state the name is unknown so the bot doesn't say "Guest"
+            signals.insert(1, "The user has not provided a name. If asked, state that you do not know it.")
 
         return signals
 
     except Exception as e:
         logger.error(f"Error building runtime context: {e}")
-        # Fallback to minimize disruption
         return [f"Page: {page}", "Sources: Invicto Knowledge Base."]
