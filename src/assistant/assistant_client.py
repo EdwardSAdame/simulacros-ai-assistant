@@ -145,6 +145,41 @@ def _build_runtime_signals(user_id: str | None, page: str | None, name: str | No
     return build_system_instructions(extras=signals, exam_context=exam_context)
 
 # ------------------------------------------------------------------
+# 🔹 HELPER: Handle Web Citations
+# ------------------------------------------------------------------
+def _format_citations(text: str, response_obj: Any) -> str:
+    """
+    Extracts URL citations from the response annotations and appends a 
+    Sources section to the text if they exist.
+    """
+    citations = []
+    try:
+        # Iterate through output items to find messages with content
+        output_items = getattr(response_obj, "output", []) or []
+        for item in output_items:
+            if getattr(item, "type", "") == "message":
+                content_list = getattr(item, "content", []) or []
+                for part in content_list:
+                    # Check for annotations in the text content
+                    annotations = getattr(part, "annotations", []) or []
+                    for ann in annotations:
+                        if getattr(ann, "type", "") == "url_citation":
+                            url = getattr(ann, "url", None)
+                            title = getattr(ann, "title", "Fuente")
+                            if url:
+                                citations.append(f"- [{title}]({url})")
+    except Exception as e:
+        logger.error(f"Error extracting citations: {e}")
+
+    # If we found citations, append them neatly
+    if citations:
+        # Deduplicate while preserving order
+        unique_citations = list(dict.fromkeys(citations))
+        text += "\n\n**Fuentes Consultadas:**\n" + "\n".join(unique_citations)
+    
+    return text
+
+# ------------------------------------------------------------------
 # 🟢 STANDARD CHAT
 # ------------------------------------------------------------------
 def send_message_to_assistant(
@@ -156,7 +191,8 @@ def send_message_to_assistant(
     mode: str = "omega",
     system_instruction: str | None = None,
     vector_store_ids: List[str] | None = None,
-    requires_visuals: bool = False # 🟢 NEW PARAMETER
+    requires_visuals: bool = False, # 🟢 NEW PARAMETER
+    web_search_config: Dict[str, Any] | None = None # 🟢 NEW PARAMETER (Web Search)
 ) -> Tuple[str, List[str]]: 
     
     client = get_openai_client()
@@ -173,12 +209,22 @@ def send_message_to_assistant(
 
     tool_stores = vector_store_ids if vector_store_ids else []
     tools = []
+    
+    # 1. Vector Store Tool
     if tool_stores:
         tools.append({"type": "file_search", "vector_store_ids": tool_stores, "max_num_results": get_vector_search_max_results()})
     
-    # 🟢 CONDITIONAL VISUALS: Only add Code Interpreter if explicitly requested
+    # 2. Code Interpreter Tool (Conditional)
     if requires_visuals:
         tools.append({"type": "code_interpreter", "container": {"type": "auto"}})
+
+    # 3. 🟢 Web Search Tool (The new logic)
+    if web_search_config:
+        web_tool = {"type": "web_search"}
+        # Check if we have domain filters
+        if "allowed_domains" in web_search_config and web_search_config["allowed_domains"]:
+             web_tool["filters"] = {"allowed_domains": web_search_config["allowed_domains"]}
+        tools.append(web_tool)
 
     req = {"model": cfg.model, "input": api_input, "temperature": cfg.temperature, "top_p": cfg.top_p}
     
@@ -203,7 +249,11 @@ def send_message_to_assistant(
                     if getattr(c, "type", "") in ("output_text", "text"): chunks.append(getattr(c, "text", ""))
             text = "\n".join(chunks).strip()
 
-        if text: text = re.sub(r'\[.*?\]\(sandbox:/mnt/data/.*?\)', '', text).strip()
+        if text: 
+            text = re.sub(r'\[.*?\]\(sandbox:/mnt/data/.*?\)', '', text).strip()
+            # 🟢 Process Citations
+            text = _format_citations(text, resp)
+
         generated_urls = _handle_generated_files(client, resp, folder="chat_assets")
 
         return (text or "[No response]", generated_urls)

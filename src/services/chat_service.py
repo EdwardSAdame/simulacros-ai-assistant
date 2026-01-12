@@ -10,6 +10,7 @@ from src.config.settings import get_openai_client, get_vector_search_max_results
 from src.config.model_config import get_model_config
 from src.config.system_instructions import build_system_instructions
 from src.config.page_vectorstores import get_stores_for_page
+from src.config.web_search_config import get_search_filters # 🟢 NEW IMPORT
 from src.utils.logging_utils import log_event
 
 # 🟢 NEW: Import the Context Builder
@@ -112,7 +113,7 @@ def get_ai_response(
     image_urls: list[str] | None = None,
     mode: str = "omega",
     intent: str = "chat",
-    requires_visuals: bool = False, # 🟢 NEW PARAMETER
+    requires_visuals: bool = False,
     stream_manager: Any | None = None 
 ) -> Tuple[str, str, str, Dict | None]: 
     
@@ -124,19 +125,28 @@ def get_ai_response(
     page = _normalize_page(page)
 
     # 🟢 1. INTELLIGENCE LAYER: Check URL AND Message
-    # Now passing 'message' to detect intent even on generic pages
     exam_context = determine_exam_context(page, message)
-    
     selected_vector_stores = get_stores_for_page(page)
+
+    # 🟢 2. DETERMINE WEB SEARCH CONFIG
+    # Get filters based on context (ICFES -> icfes.gov.co, etc.)
+    web_search_config = get_search_filters(exam_context)
+    
+    # If config is None (General Context), we still want to ENABLE the tool 
+    # but without domain filters (Open Web Search).
+    # We pass a non-empty dict so the client logic evaluates it as True.
+    if web_search_config is None:
+        web_search_config = {"mode": "unrestricted"}
 
     # 🔍 OBSERVABILITY: LOG THE DECISION
     log_event("context_resolution", {
         "user_id": user_id,
         "input_url": page,
-        "derived_exam": exam_context, # Now this should say "UNAL" even if url is /roma
+        "derived_exam": exam_context, 
         "vector_stores_selected": selected_vector_stores,
         "intent": intent,
-        "requires_visuals": requires_visuals, # 🟢 LOG IT
+        "requires_visuals": requires_visuals,
+        "web_search_config": web_search_config, # 🟢 Log the config
         "trigger_message": message[:50] if message else "None"
     })
 
@@ -206,7 +216,7 @@ def get_ai_response(
                     name=(name or None),
                     email=_normalize_email_for_storage(email),
                     mode=mode,
-                    exam_context=exam_context # 🟢 Passing correct context
+                    exam_context=exam_context 
                 )
                 
                 seen_indices = set()
@@ -258,7 +268,7 @@ def get_ai_response(
                     name=(name or None),
                     email=_normalize_email_for_storage(email),
                     mode=mode,
-                    exam_context=exam_context # 🟢 Passing correct context
+                    exam_context=exam_context 
                 )
                 quiz_data = {
                     "quiz_mode": "batch", 
@@ -277,20 +287,18 @@ def get_ai_response(
         # 🟢 STANDARD CHAT MODE
         try:
             # 1. Build the dynamic System Prompt
-            # 🟢 UPDATED: Pass 'requires_visuals' to Context Builder
             runtime_signals = build_runtime_context(
                 page=page,
                 user_id=user_id,
                 name=name,
                 email=email,
-                requires_visuals=requires_visuals # 🟢 CONDITIONAL LOGIC
+                requires_visuals=requires_visuals 
             )
 
-            # 🟢 NOW CORRECTLY PASSING 'requires_visuals' to system instructions
             system_prompt = build_system_instructions(
                 extras=runtime_signals,
                 exam_context=exam_context,
-                requires_visuals=requires_visuals # 🟢 CRITICAL FIX
+                requires_visuals=requires_visuals 
             )
 
             final_reply_text, generated_assets = send_message_to_assistant(
@@ -302,7 +310,8 @@ def get_ai_response(
                 mode=mode,
                 system_instruction=system_prompt,
                 vector_store_ids=selected_vector_stores,
-                requires_visuals=requires_visuals # 🟢 PASS FLAG
+                requires_visuals=requires_visuals,
+                web_search_config=web_search_config # 🟢 PASS FLAG
             )
         except Exception as e:
             raise RuntimeError(f"OpenAI Chat API failed: {e}")
