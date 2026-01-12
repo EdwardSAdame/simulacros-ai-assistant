@@ -71,3 +71,12 @@ def get_model_config(mode: str = "omega") -> ModelConfig:
         temperature=temperature,
         top_p=top_p
     )
+
+# 🟢 NEW: Helper to get the designated Search Model
+def get_search_model_name() -> str:
+    """
+    Returns the model to use specifically for Web Search tasks.
+    Defaults to 'gpt-4o' if not set in env vars.
+    This enables the Hybrid Routing strategy (Mini for Chat, 4o for Search).
+    """
+    return os.getenv("OPENAI_MODEL_SEARCH", "gpt-4o")

@@ -191,12 +191,16 @@ def send_message_to_assistant(
     mode: str = "omega",
     system_instruction: str | None = None,
     vector_store_ids: List[str] | None = None,
-    requires_visuals: bool = False, # 🟢 NEW PARAMETER
-    web_search_config: Dict[str, Any] | None = None # 🟢 NEW PARAMETER (Web Search)
+    requires_visuals: bool = False,
+    web_search_config: Dict[str, Any] | None = None,
+    model_override: str | None = None # 🟢 NEW PARAMETER
 ) -> Tuple[str, List[str]]: 
     
     client = get_openai_client()
     cfg = get_model_config(mode)
+
+    # 🟢 LOGIC: Use override if provided, otherwise use config model
+    target_model = model_override if model_override else cfg.model
 
     if not system_instruction:
         # Default fallback (should rarely happen if chat_service does its job)
@@ -226,11 +230,12 @@ def send_message_to_assistant(
              web_tool["filters"] = {"allowed_domains": web_search_config["allowed_domains"]}
         tools.append(web_tool)
 
-    req = {"model": cfg.model, "input": api_input, "temperature": cfg.temperature, "top_p": cfg.top_p}
+    # 🟢 Use target_model here
+    req = {"model": target_model, "input": api_input, "temperature": cfg.temperature, "top_p": cfg.top_p}
     
     # If using reasoning models (o1), remove unsupported params but tools might still be allowed (check specific model support)
     # Note: o1-preview currently supports very limited tools, but assuming standard GPT-4o usage here.
-    if cfg.model.startswith("o1") or "reasoning" in cfg.model: 
+    if target_model.startswith("o1") or "reasoning" in target_model: 
         req.pop("temperature", None)
         req.pop("top_p", None)
         # o1 usually doesn't support tools yet, but we leave the logic in case it's enabled or using o3

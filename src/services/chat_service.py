@@ -7,10 +7,11 @@ from typing import List, Dict, Any, Tuple, Optional
 
 # 🟢 CONFIG & UTILS
 from src.config.settings import get_openai_client, get_vector_search_max_results
-from src.config.model_config import get_model_config
+# 🟢 UPDATED IMPORT: Added get_search_model_name
+from src.config.model_config import get_model_config, get_search_model_name
 from src.config.system_instructions import build_system_instructions
 from src.config.page_vectorstores import get_stores_for_page
-from src.config.web_search_config import get_search_filters # 🟢 NEW IMPORT
+from src.config.web_search_config import get_search_filters 
 from src.utils.logging_utils import log_event
 
 # 🟢 NEW: Import the Context Builder
@@ -128,15 +129,18 @@ def get_ai_response(
     exam_context = determine_exam_context(page, message)
     selected_vector_stores = get_stores_for_page(page)
 
-    # 🟢 2. DETERMINE WEB SEARCH CONFIG
+    # 🟢 2. DETERMINE WEB SEARCH CONFIG & MODEL
     # Get filters based on context (ICFES -> icfes.gov.co, etc.)
     web_search_config = get_search_filters(exam_context)
     
-    # If config is None (General Context), we still want to ENABLE the tool 
-    # but without domain filters (Open Web Search).
-    # We pass a non-empty dict so the client logic evaluates it as True.
-    if web_search_config is None:
-        web_search_config = {"mode": "unrestricted"}
+    # 🟢 HYBRID ROUTING LOGIC:
+    # - If filters exist (ICFES/UNAL/Scholarships) -> Force Upgrade to Search Model (gpt-4o)
+    # - If filters are None (General) -> Stay on Default Model (gpt-4o-mini) and DISABLE Search to save cost.
+    
+    actual_model_override = None
+    if web_search_config:
+        # We have a specific search task -> Upgrade model
+        actual_model_override = get_search_model_name()
 
     # 🔍 OBSERVABILITY: LOG THE DECISION
     log_event("context_resolution", {
@@ -146,7 +150,8 @@ def get_ai_response(
         "vector_stores_selected": selected_vector_stores,
         "intent": intent,
         "requires_visuals": requires_visuals,
-        "web_search_config": web_search_config, # 🟢 Log the config
+        "web_search_config": web_search_config, # Will be None for General -> No search
+        "model_override": actual_model_override, # Will show 'gpt-4o' only when searching
         "trigger_message": message[:50] if message else "None"
     })
 
@@ -311,7 +316,8 @@ def get_ai_response(
                 system_instruction=system_prompt,
                 vector_store_ids=selected_vector_stores,
                 requires_visuals=requires_visuals,
-                web_search_config=web_search_config # 🟢 PASS FLAG
+                web_search_config=web_search_config, # 🟢 PASS FLAG
+                model_override=actual_model_override # 🟢 PASS OVERRIDE
             )
         except Exception as e:
             raise RuntimeError(f"OpenAI Chat API failed: {e}")

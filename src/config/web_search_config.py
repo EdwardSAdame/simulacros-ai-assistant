@@ -20,8 +20,7 @@ INVICTO_DOMAINS = [
 # ICFES Context
 # Authorizes: www.icfes.gov.co, mineducacion.gov.co
 ICFES_DOMAINS = [
-    "icfes.gov.co",
-    "mineducacion.gov.co"
+    "icfes.gov.co"
 ]
 
 # UNAL Context
