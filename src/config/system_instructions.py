@@ -3,9 +3,8 @@ import json
 from pathlib import Path
 from typing import Iterable, Optional
 
-# [EXISTING] Visual Instructions
+# 🟢 NEW IMPORTS: Bring in the dynamic modules
 from src.config.visual_instructions import build_visual_instructions
-# [NEW] Search Instructions
 from src.config.search_instructions import build_search_instructions
 
 # Base paths to find the JSON blueprints
@@ -51,8 +50,6 @@ You are **Roma**, the state-of-the-art AI of Invicto. You are a construct of "di
 def load_exam_rules(exam_context: str) -> str:
     """
     Parses the JSON and extracts the FULL pedagogical framework for ALL subjects.
-    This creates an 'Omniscient' context where the AI knows the specific rules
-    for every domain simultaneously.
     """
     if exam_context.upper() == "UNAL":
         file_path = KNOWLEDGE_DIR / "unal" / "general" / "unal_exam.json"
@@ -74,27 +71,25 @@ def load_exam_rules(exam_context: str) -> str:
         framework_text += f"GLOBAL STRATEGY: {global_strategy}\n\n"
         framework_text += "You are now an EXPERT in the following domains. Apply these specific rules based on the user's question:\n"
 
-        # 🟢 EXPANSION LOOP: Iterate through ALL components and inject FULL details
+        # 🟢 EXPANSION LOOP
         for comp in data.get("components", []):
             name = comp.get("name", "Subject")
             framework_text += f"\n### DOMAIN: {name.upper()}\n"
             
-            # 1. Summary / Description / Focus
+            # 1. Summary
             summary = comp.get("summary") or comp.get("focus") or comp.get("description")
             if summary:
                 framework_text += f"**Overview**: {summary}\n"
 
-            # 2. Competencies / Skills (The "How to Think" part)
+            # 2. Competencies
             competencies = comp.get("competencies") or comp.get("skills")
             if competencies:
                 framework_text += "**Required Skills/Competencies**:\n"
                 for skill in competencies:
                     framework_text += f"- {skill}\n"
             
-            # 3. Areas / Domains / Topics / Text Types
+            # 3. Topics
             topics = comp.get("areas") or comp.get("domains")
-            
-            # Handle simple list of strings in 'components' (like ICFES Naturales)
             if not topics and isinstance(comp.get("components"), list) and isinstance(comp["components"][0], str):
                  topics = comp["components"]
             
@@ -103,13 +98,13 @@ def load_exam_rules(exam_context: str) -> str:
                 for area in topics:
                     framework_text += f"- {area}\n"
 
-            # Special dictionary cases (like ICFES Reading Text Types)
+            # 4. Text Types
             if "text_types" in comp and isinstance(comp["text_types"], dict):
                 framework_text += "**Text Types**:\n"
                 for type_key, sublist in comp["text_types"].items():
                     framework_text += f"- {type_key.capitalize()}: {', '.join(sublist)}\n"
             
-            # 4. Special Case: ICFES English Parts
+            # 5. Structure (English)
             if "parts" in comp and isinstance(comp["parts"], list):
                 framework_text += "**Exam Structure (English)**:\n"
                 for part in comp["parts"]:
@@ -117,7 +112,7 @@ def load_exam_rules(exam_context: str) -> str:
                     p_desc = part.get("description", "")
                     framework_text += f"- Part {p_num}: {p_desc}\n"
 
-            # 5. AI Strategy (The "Roma" Touch)
+            # 6. Strategy
             strat = comp.get("ai_strategy")
             if strat:
                 framework_text += f"**Instructional Strategy**: {strat}\n"
@@ -133,7 +128,8 @@ def load_exam_rules(exam_context: str) -> str:
 def build_system_instructions(
     extras: Optional[Iterable[str]] = None, 
     exam_context: str = "ICFES",
-    requires_visuals: bool = False
+    requires_visuals: bool = False, # 🟢 ADDED PARAMETER
+    web_search_active: bool = False # 🟢 ADDED PARAMETER (Fixes your error)
 ) -> str:
     blocks = [BASE_SYSTEM_INSTRUCTIONS]
     
@@ -144,11 +140,11 @@ def build_system_instructions(
     else:
         blocks.append("## 6. ACADEMIC FRAMEWORK: General University Preparation")
     
-    # 🟢 2. Inject Search Protocols (Section 7)
-    # We append this globally because 'Date Awareness' is always critical for a chatbot.
-    blocks.append(build_search_instructions())
+    # 🟢 2. Inject Search Protocols (Section 7) (CONDITIONAL)
+    if web_search_active:
+        blocks.append(build_search_instructions())
     
-    # 🟢 3. Inject Visual Doctrine (Section 8) (Conditional)
+    # 🟢 3. Inject Visual Doctrine (Section 8) (CONDITIONAL)
     if requires_visuals:
         blocks.append(build_visual_instructions())
     
