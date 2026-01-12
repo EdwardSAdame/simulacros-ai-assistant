@@ -3,8 +3,10 @@ import json
 from pathlib import Path
 from typing import Iterable, Optional
 
-# [NEW] Import the visual builder to keep consistency
+# [EXISTING] Visual Instructions
 from src.config.visual_instructions import build_visual_instructions
+# [NEW] Search Instructions
+from src.config.search_instructions import build_search_instructions
 
 # Base paths to find the JSON blueprints
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -131,18 +133,22 @@ def load_exam_rules(exam_context: str) -> str:
 def build_system_instructions(
     extras: Optional[Iterable[str]] = None, 
     exam_context: str = "ICFES",
-    requires_visuals: bool = False # 🟢 NEW PARAMETER
+    requires_visuals: bool = False
 ) -> str:
     blocks = [BASE_SYSTEM_INSTRUCTIONS]
     
-    # 🟢 1. Inject Academic Framework (Section 6) FIRST
+    # 🟢 1. Inject Academic Framework (Section 6)
     if exam_context and exam_context.upper() in ["ICFES", "UNAL"]:
         exam_framework = load_exam_rules(exam_context)
         blocks.append(exam_framework)
     else:
         blocks.append("## 6. ACADEMIC FRAMEWORK: General University Preparation")
     
-    # 🟢 2. Inject Visual Doctrine (Section 7) SECOND (and only if required)
+    # 🟢 2. Inject Search Protocols (Section 7)
+    # We append this globally because 'Date Awareness' is always critical for a chatbot.
+    blocks.append(build_search_instructions())
+    
+    # 🟢 3. Inject Visual Doctrine (Section 8) (Conditional)
     if requires_visuals:
         blocks.append(build_visual_instructions())
     

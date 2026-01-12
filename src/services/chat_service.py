@@ -7,7 +7,6 @@ from typing import List, Dict, Any, Tuple, Optional
 
 # 🟢 CONFIG & UTILS
 from src.config.settings import get_openai_client, get_vector_search_max_results
-# 🟢 UPDATED IMPORT: Added get_search_model_name
 from src.config.model_config import get_model_config, get_search_model_name
 from src.config.system_instructions import build_system_instructions
 from src.config.page_vectorstores import get_stores_for_page
@@ -133,13 +132,17 @@ def get_ai_response(
     # Get filters based on context (ICFES -> icfes.gov.co, etc.)
     web_search_config = get_search_filters(exam_context)
     
-    # 🟢 HYBRID ROUTING LOGIC:
-    # - If filters exist (ICFES/UNAL/Scholarships) -> Force Upgrade to Search Model (gpt-4o)
-    # - If filters are None (General) -> Stay on Default Model (gpt-4o-mini) and DISABLE Search to save cost.
+    # 🟢 HYBRID ROUTING & DYNAMIC INSTRUCTION LOGIC:
+    # - If filters exist -> We are in Search Mode.
+    #   1. Enable the Tool (web_search_config passed).
+    #   2. Upgrade the Model (model_override = gpt-4o).
+    #   3. Inject Search Instructions (web_search_active = True).
+    # - If filters are None -> We are in Standard Mode.
+    
+    is_web_search_active = (web_search_config is not None)
     
     actual_model_override = None
-    if web_search_config:
-        # We have a specific search task -> Upgrade model
+    if is_web_search_active:
         actual_model_override = get_search_model_name()
 
     # 🔍 OBSERVABILITY: LOG THE DECISION
@@ -150,8 +153,9 @@ def get_ai_response(
         "vector_stores_selected": selected_vector_stores,
         "intent": intent,
         "requires_visuals": requires_visuals,
-        "web_search_config": web_search_config, # Will be None for General -> No search
-        "model_override": actual_model_override, # Will show 'gpt-4o' only when searching
+        "web_search_config": web_search_config,
+        "web_search_active": is_web_search_active, # 🟢 Log the flag
+        "model_override": actual_model_override, 
         "trigger_message": message[:50] if message else "None"
     })
 
@@ -303,7 +307,8 @@ def get_ai_response(
             system_prompt = build_system_instructions(
                 extras=runtime_signals,
                 exam_context=exam_context,
-                requires_visuals=requires_visuals 
+                requires_visuals=requires_visuals,
+                web_search_active=is_web_search_active # 🟢 PASSED: Triggers 'search_instructions.py' injection
             )
 
             final_reply_text, generated_assets = send_message_to_assistant(
@@ -316,8 +321,8 @@ def get_ai_response(
                 system_instruction=system_prompt,
                 vector_store_ids=selected_vector_stores,
                 requires_visuals=requires_visuals,
-                web_search_config=web_search_config, # 🟢 PASS FLAG
-                model_override=actual_model_override # 🟢 PASS OVERRIDE
+                web_search_config=web_search_config, # 🟢 PASS FLAG: Enables 'web_search' tool
+                model_override=actual_model_override # 🟢 PASS OVERRIDE: Switches to 'gpt-4o'
             )
         except Exception as e:
             raise RuntimeError(f"OpenAI Chat API failed: {e}")
