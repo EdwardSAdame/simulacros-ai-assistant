@@ -49,6 +49,12 @@ def lambda_handler(event, context):
     log_event("ai_worker_invocation", {"record_count": len(records)})
 
     for record in records:
+        # Initialize variables outside try block for safe error handling
+        user_id = None
+        connection_id = None
+        conv_id_in = None
+        client_row_id = None
+        
         try:
             body_raw = record.get("body", "{}")
             payload = json.loads(body_raw)
@@ -101,7 +107,7 @@ def lambda_handler(event, context):
                         "source": source_type,
                         "client_row_id": client_row_id,
                         "client_action": client_action,
-                        "requires_visuals": requires_visuals  # 🟢 [CRITICAL FIX] Send the flag to Frontend!
+                        "requires_visuals": requires_visuals 
                     })
                     
                     api_gateway_client.post_to_connection(
@@ -196,6 +202,36 @@ def lambda_handler(event, context):
                 log_event("ws_connection_not_found", {"user_id": user_id}, level="warning")
 
         except Exception as e:
+            # 🟢 SOFT LANDING: Quota / Billing Error Handling (429)
+            error_str = str(e).lower()
+            if "429" in error_str or "quota" in error_str or "insufficient" in error_str:
+                log_event("ai_quota_exceeded_handled", {"user_id": user_id, "error": str(e)}, level="warning")
+                
+                # The Iconic Fallback Phrase
+                fallback_msg = "**Señal nula. Vacío de sistema. Intenta luego.**"
+                
+                # Send the "Soft Landing" message to the user
+                if connection_id:
+                    try:
+                        err_payload = json.dumps({
+                            "action": "ai_reply",
+                            "ai_reply": fallback_msg,
+                            "conversation_id": conv_id_in,
+                            "client_row_id": client_row_id,
+                            "timestamp": "", 
+                            "metadata": None
+                        })
+                        api_gateway_client.post_to_connection(
+                            ConnectionId=connection_id,
+                            Data=err_payload
+                        )
+                    except Exception as inner_e:
+                        log_event("failed_to_send_error_fallback", {"error": str(inner_e)}, level="error")
+                
+                # IMPORTANT: Do NOT raise 'e'. Return normally to mark the SQS message as processed.
+                continue 
+            
+            # --- For all other errors, behave normally (Log & Crash/Retry) ---
             log_event("ai_worker_failed", { "record_id": record.get("messageId") }, level="error", error=e)
             raise e
 
