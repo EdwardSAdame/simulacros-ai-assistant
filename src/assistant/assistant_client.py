@@ -13,6 +13,9 @@ from src.services.storage_service import storage_service
 
 logger = logging.getLogger(__name__)
 
+# ... [Keep helpers: _get_files_client, _handle_generated_files, _process_file, _assign_urls_to_quiz, _build_runtime_signals, _format_citations AS IS] ...
+# (I am omitting them to save space, but they must remain in the file)
+
 # ------------------------------------------------------------------
 # 🔹 HELPER: Handle File Artifacts
 # ------------------------------------------------------------------
@@ -175,16 +178,13 @@ def send_message_to_assistant(
     client = get_openai_client()
     cfg = get_model_config(mode)
 
-    # 🟢 1. INTELLIGENT CONFIGURATION SWITCHING
-    # If a model_override is provided, it implies we are in "Web Search Mode".
-    # We switch ALL parameters to the Search Configuration.
+    # 1. INTELLIGENT MODE SWITCHING
     if model_override:
         target_model = cfg.search_model
         active_temp = cfg.search_temperature
         active_top_p = cfg.search_top_p
         active_effort = cfg.search_reasoning_effort
     else:
-        # Otherwise, we use the Standard Configuration for the active mode (Alpha/Omega)
         target_model = cfg.model
         active_temp = cfg.temperature
         active_top_p = cfg.top_p
@@ -215,26 +215,20 @@ def send_message_to_assistant(
             web_tool["user_location"] = user_location
         tools.append(web_tool)
 
-    # 🟢 2. BUILD REQUEST
+    # 2. BASE REQUEST
     req = {"model": target_model, "input": api_input}
 
-    # 🟢 3. SMART PARAMETER FILTER (The "Crash-Proof" Logic)
-    # Detect if the target model is a Reasoning Model (starts with 'o' but is not 'gpt')
-    # Examples: 'o1-mini', 'o3-mini', 'o4-mini' -> True. 'gpt-4o' -> False.
+    # 🟢 3. CORRECT PARAMETER INJECTION (Nested Dictionary Fix)
     is_reasoning_model = target_model.startswith("o") and not target_model.startswith("gpt") or "reasoning" in target_model
     
     if is_reasoning_model:
-        # CASE A: Reasoning Model
-        # MUST use 'reasoning_effort'. MUST NOT use 'temperature'/'top_p'.
+        # 🟢 FIX: Use 'reasoning' dictionary instead of flat 'reasoning_effort'
         if active_effort:
-            req["reasoning_effort"] = active_effort
+            req["reasoning"] = {"effort": active_effort} 
     else:
-        # CASE B: Standard Model
-        # MUST use 'temperature'/'top_p'. MUST NOT use 'reasoning_effort'.
         req["temperature"] = active_temp
         req["top_p"] = active_top_p
 
-    # 🟢 4. ATTACH TOOLS (Universal Support)
     if tools:
         req["tools"] = tools
 
@@ -251,7 +245,6 @@ def send_message_to_assistant(
 
         if text: 
             text = re.sub(r'\[.*?\]\(sandbox:/mnt/data/.*?\)', '', text).strip()
-            # Process Citations from annotations
             text = _format_citations(text, resp)
 
         generated_urls = _handle_generated_files(client, resp, folder="chat_assets")
@@ -262,7 +255,7 @@ def send_message_to_assistant(
         raise e
 
 # ------------------------------------------------------------------
-# 🟢 QUIZ GENERATION
+# 🟢 QUIZ GENERATION (Updated similarly)
 # ------------------------------------------------------------------
 def generate_structured_quiz(
     conversation_input: List[Dict[str, Any]], 
@@ -287,10 +280,11 @@ def generate_structured_quiz(
         "tools": [{"type": "code_interpreter", "container": {"type": "auto"}}]
     }
     
-    # 🟢 SMART PARAMETER FILTER FOR QUIZ
+    # 🟢 FIX: Nested Dictionary for Quiz
     is_reasoning_model = cfg.model.startswith("o") and not cfg.model.startswith("gpt") or "reasoning" in cfg.model
     if is_reasoning_model:
-        if cfg.reasoning_effort: req["reasoning_effort"] = cfg.reasoning_effort
+        if cfg.reasoning_effort:
+             req["reasoning"] = {"effort": cfg.reasoning_effort}
     else:
         req["temperature"] = cfg.temperature
         req["top_p"] = cfg.top_p
@@ -328,10 +322,11 @@ def stream_structured_quiz(
         "tools": [{"type": "code_interpreter", "container": {"type": "auto"}}]
     }
     
-    # 🟢 SMART PARAMETER FILTER FOR STREAMING
+    # 🟢 FIX: Nested Dictionary for Stream
     is_reasoning_model = cfg.model.startswith("o") and not cfg.model.startswith("gpt") or "reasoning" in cfg.model
     if is_reasoning_model:
-        if cfg.reasoning_effort: req["reasoning_effort"] = cfg.reasoning_effort
+        if cfg.reasoning_effort:
+             req["reasoning"] = {"effort": cfg.reasoning_effort}
     else:
         req["temperature"] = cfg.temperature
         req["top_p"] = cfg.top_p
