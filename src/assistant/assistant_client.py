@@ -1,24 +1,22 @@
 # src/assistant/assistant_client.py
-from typing import List, Dict, Any, Type, Generator, Tuple, Optional
+from typing import List, Dict, Any, Tuple, Generator, Optional
 import logging
 import json
 import re
-from pydantic import BaseModel, ValidationError
 
 from src.config.settings import get_openai_client, get_vector_search_max_results
 from src.config.model_config import get_model_config
 from src.config.system_instructions import build_system_instructions
-from src.utils.time_utils import get_current_time_info, infer_target_semester, semester_season
+from src.utils.time_utils import get_current_time_info, infer_target_semester
 from src.schemas.quiz_schemas import QuizResponse, QuizQuestion 
 from src.services.storage_service import storage_service
 
 logger = logging.getLogger(__name__)
 
 # ------------------------------------------------------------------
-# 🔹 HELPER: Handle File Artifacts (Robust)
+# 🔹 HELPER: Handle File Artifacts
 # ------------------------------------------------------------------
 def _get_files_client(client):
-    """Locates the container files accessor in the OpenAI client."""
     if hasattr(client, "beta"):
         if hasattr(client.beta, "containers") and hasattr(client.beta.containers, "files"):
             return getattr(client.beta.containers, "files")
@@ -29,10 +27,8 @@ def _get_files_client(client):
     return getattr(client, "container_files", None)
 
 def _handle_generated_files(client, response_obj, folder: str = "chat_assets") -> List[str]:
-    """Scans the OpenAI response for generated files."""
     uploaded_urls = []
     container_id = None
-    
     cf_client = _get_files_client(client)
     if not cf_client: return []
 
@@ -41,11 +37,9 @@ def _handle_generated_files(client, response_obj, folder: str = "chat_assets") -
         for item in output_items:
             item_type = getattr(item, "type", "")
             if item_type == "code_interpreter_call":
-                cid = getattr(item, "container_id", None)
-                if not cid and hasattr(item, "code_interpreter"):
-                    cid = getattr(item.code_interpreter, "container_id", None)
-                if not cid and hasattr(item, "code_interpreter_call"):
-                    cid = getattr(item.code_interpreter_call, "container_id", None)
+                cid = getattr(item, "container_id", None) or \
+                      (getattr(item.code_interpreter, "container_id", None) if hasattr(item, "code_interpreter") else None) or \
+                      (getattr(item.code_interpreter_call, "container_id", None) if hasattr(item, "code_interpreter_call") else None)
                 if cid: container_id = cid
 
             if item_type == "message":
@@ -72,7 +66,6 @@ def _handle_generated_files(client, response_obj, folder: str = "chat_assets") -
     return uploaded_urls
 
 def _process_file(cf_client, container_id, file_id, filename, url_list, folder: str):
-    """Downloads content from OpenAI and uploads to AWS S3."""
     try:
         file_content = None
         if hasattr(cf_client, "content") and hasattr(cf_client.content, "retrieve"):
@@ -80,7 +73,7 @@ def _process_file(cf_client, container_id, file_id, filename, url_list, folder: 
                 if container_id: file_content = cf_client.content.retrieve(container_id=container_id, file_id=file_id)
                 else: file_content = cf_client.content.retrieve(file_id=file_id)
             except: pass
-            
+        
         if file_content is None and callable(getattr(cf_client, "content", None)):
             try: file_content = cf_client.content(file_id)
             except: pass
@@ -118,18 +111,12 @@ def _assign_urls_to_quiz(quiz_data: QuizResponse, urls: List[str]):
                 idx += 1
 
 def _build_runtime_signals(user_id: str | None, page: str | None, name: str | None, email: str | None, exam_context: str = "ICFES") -> str:
-    """
-    Helper for Quiz calls. 
-    🟢 CRITICAL FIX: Now accepts 'exam_context' to pass to the System Prompt Builder.
-    """
     tinfo = get_current_time_info()
     target = infer_target_semester()
-    
     visuals_instruction = (
         "VISUALS: Use the 'python' tool (Code Interpreter) to AUTOMATICALLY GENERATE PLOTS for any request involving "
         "mathematical functions, geometry, or data trends. Do not just describe the graph—DRAW IT. Output the file."
     )
-
     signals = [
         f"Today is {tinfo['full_human']}.",
         f"Page: {page or '/'}",
@@ -140,27 +127,17 @@ def _build_runtime_signals(user_id: str | None, page: str | None, name: str | No
     ]
     if name: signals.append(f"Name: {name}.")
     if email: signals.append(f"Email: {email}.")
-    
-    # 🟢 PASS THE EXAM CONTEXT HERE
     return build_system_instructions(extras=signals, exam_context=exam_context)
 
-# ------------------------------------------------------------------
-# 🔹 HELPER: Handle Web Citations
-# ------------------------------------------------------------------
 def _format_citations(text: str, response_obj: Any) -> str:
-    """
-    Extracts URL citations from the response annotations and appends a 
-    Sources section to the text if they exist.
-    """
+    """Extracts URL citations and appends Sources section."""
     citations = []
     try:
-        # Iterate through output items to find messages with content
         output_items = getattr(response_obj, "output", []) or []
         for item in output_items:
             if getattr(item, "type", "") == "message":
                 content_list = getattr(item, "content", []) or []
                 for part in content_list:
-                    # Check for annotations in the text content
                     annotations = getattr(part, "annotations", []) or []
                     for ann in annotations:
                         if getattr(ann, "type", "") == "url_citation":
@@ -171,9 +148,7 @@ def _format_citations(text: str, response_obj: Any) -> str:
     except Exception as e:
         logger.error(f"Error extracting citations: {e}")
 
-    # If we found citations, append them neatly
     if citations:
-        # Deduplicate while preserving order
         unique_citations = list(dict.fromkeys(citations))
         text += "\n\n**Fuentes Consultadas:**\n" + "\n".join(unique_citations)
     
@@ -193,17 +168,29 @@ def send_message_to_assistant(
     vector_store_ids: List[str] | None = None,
     requires_visuals: bool = False,
     web_search_config: Dict[str, Any] | None = None,
-    model_override: str | None = None # 🟢 NEW PARAMETER
+    model_override: str | None = None,
+    user_location: Dict[str, str] | None = None 
 ) -> Tuple[str, List[str]]: 
     
     client = get_openai_client()
     cfg = get_model_config(mode)
 
-    # 🟢 LOGIC: Use override if provided, otherwise use config model
-    target_model = model_override if model_override else cfg.model
-
+    # 🟢 1. INTELLIGENT CONFIGURATION SWITCHING
+    # If a model_override is provided, it implies we are in "Web Search Mode".
+    # We switch ALL parameters to the Search Configuration.
+    if model_override:
+        target_model = cfg.search_model
+        active_temp = cfg.search_temperature
+        active_top_p = cfg.search_top_p
+        active_effort = cfg.search_reasoning_effort
+    else:
+        # Otherwise, we use the Standard Configuration for the active mode (Alpha/Omega)
+        target_model = cfg.model
+        active_temp = cfg.temperature
+        active_top_p = cfg.top_p
+        active_effort = cfg.reasoning_effort
+    
     if not system_instruction:
-        # Default fallback (should rarely happen if chat_service does its job)
         system_text = _build_runtime_signals(user_id, page, name, email, exam_context="ICFES")
     else:
         system_text = system_instruction
@@ -214,34 +201,42 @@ def send_message_to_assistant(
     tool_stores = vector_store_ids if vector_store_ids else []
     tools = []
     
-    # 1. Vector Store Tool
     if tool_stores:
         tools.append({"type": "file_search", "vector_store_ids": tool_stores, "max_num_results": get_vector_search_max_results()})
     
-    # 2. Code Interpreter Tool (Conditional)
     if requires_visuals:
         tools.append({"type": "code_interpreter", "container": {"type": "auto"}})
 
-    # 3. 🟢 Web Search Tool (The new logic)
     if web_search_config:
         web_tool = {"type": "web_search"}
-        # Check if we have domain filters
         if "allowed_domains" in web_search_config and web_search_config["allowed_domains"]:
              web_tool["filters"] = {"allowed_domains": web_search_config["allowed_domains"]}
+        if user_location:
+            web_tool["user_location"] = user_location
         tools.append(web_tool)
 
-    # 🟢 Use target_model here
-    req = {"model": target_model, "input": api_input, "temperature": cfg.temperature, "top_p": cfg.top_p}
+    # 🟢 2. BUILD REQUEST
+    req = {"model": target_model, "input": api_input}
+
+    # 🟢 3. SMART PARAMETER FILTER (The "Crash-Proof" Logic)
+    # Detect if the target model is a Reasoning Model (starts with 'o' but is not 'gpt')
+    # Examples: 'o1-mini', 'o3-mini', 'o4-mini' -> True. 'gpt-4o' -> False.
+    is_reasoning_model = target_model.startswith("o") and not target_model.startswith("gpt") or "reasoning" in target_model
     
-    # If using reasoning models (o1), remove unsupported params but tools might still be allowed (check specific model support)
-    # Note: o1-preview currently supports very limited tools, but assuming standard GPT-4o usage here.
-    if target_model.startswith("o1") or "reasoning" in target_model: 
-        req.pop("temperature", None)
-        req.pop("top_p", None)
-        # o1 usually doesn't support tools yet, but we leave the logic in case it's enabled or using o3
+    if is_reasoning_model:
+        # CASE A: Reasoning Model
+        # MUST use 'reasoning_effort'. MUST NOT use 'temperature'/'top_p'.
+        if active_effort:
+            req["reasoning_effort"] = active_effort
     else:
-        if tools:
-            req["tools"] = tools
+        # CASE B: Standard Model
+        # MUST use 'temperature'/'top_p'. MUST NOT use 'reasoning_effort'.
+        req["temperature"] = active_temp
+        req["top_p"] = active_top_p
+
+    # 🟢 4. ATTACH TOOLS (Universal Support)
+    if tools:
+        req["tools"] = tools
 
     try:
         resp = client.responses.create(**{k: v for k, v in req.items() if v is not None})
@@ -256,7 +251,7 @@ def send_message_to_assistant(
 
         if text: 
             text = re.sub(r'\[.*?\]\(sandbox:/mnt/data/.*?\)', '', text).strip()
-            # 🟢 Process Citations
+            # Process Citations from annotations
             text = _format_citations(text, resp)
 
         generated_urls = _handle_generated_files(client, resp, folder="chat_assets")
@@ -276,24 +271,29 @@ def generate_structured_quiz(
     name: str | None = None, 
     email: str | None = None, 
     mode: str = "omega",
-    exam_context: str = "ICFES" # 🟢 NEW PARAMETER
+    exam_context: str = "ICFES" 
 ) -> QuizResponse:
     
     client = get_openai_client()
     cfg = get_model_config(mode)
-    
-    # 🟢 PASS THE CONTEXT DOWN
     system_text = _build_runtime_signals(user_id, page, name, email, exam_context=exam_context)
     
     api_input = [{"role": "system", "content": [{"type": "input_text", "text": system_text}]}]
     api_input.extend(conversation_input)
 
     req = {
-        "model": cfg.model, "input": api_input, "temperature": cfg.temperature, "top_p": cfg.top_p,
+        "model": cfg.model, "input": api_input,
         "text_format": QuizResponse, 
         "tools": [{"type": "code_interpreter", "container": {"type": "auto"}}]
     }
-    if cfg.model.startswith("o1"): req.pop("temperature", None); req.pop("top_p", None)
+    
+    # 🟢 SMART PARAMETER FILTER FOR QUIZ
+    is_reasoning_model = cfg.model.startswith("o") and not cfg.model.startswith("gpt") or "reasoning" in cfg.model
+    if is_reasoning_model:
+        if cfg.reasoning_effort: req["reasoning_effort"] = cfg.reasoning_effort
+    else:
+        req["temperature"] = cfg.temperature
+        req["top_p"] = cfg.top_p
 
     try:
         resp = client.responses.parse(**{k: v for k, v in req.items() if v is not None})
@@ -312,24 +312,29 @@ def stream_structured_quiz(
     name: str | None = None, 
     email: str | None = None, 
     mode: str = "omega",
-    exam_context: str = "ICFES" # 🟢 NEW PARAMETER
+    exam_context: str = "ICFES" 
 ) -> Generator[Dict[str, Any], None, None]:
     
     client = get_openai_client()
     cfg = get_model_config(mode)
-    
-    # 🟢 PASS THE CONTEXT DOWN
     system_text = _build_runtime_signals(user_id, page, name, email, exam_context=exam_context)
     
     api_input = [{"role": "system", "content": [{"type": "input_text", "text": system_text}]}]
     api_input.extend(conversation_input)
 
     req = {
-        "model": cfg.model, "input": api_input, "temperature": cfg.temperature, "top_p": cfg.top_p,
+        "model": cfg.model, "input": api_input,
         "text_format": QuizResponse, 
         "tools": [{"type": "code_interpreter", "container": {"type": "auto"}}]
     }
-    if cfg.model.startswith("o1"): req.pop("temperature", None); req.pop("top_p", None)
+    
+    # 🟢 SMART PARAMETER FILTER FOR STREAMING
+    is_reasoning_model = cfg.model.startswith("o") and not cfg.model.startswith("gpt") or "reasoning" in cfg.model
+    if is_reasoning_model:
+        if cfg.reasoning_effort: req["reasoning_effort"] = cfg.reasoning_effort
+    else:
+        req["temperature"] = cfg.temperature
+        req["top_p"] = cfg.top_p
 
     buffer = ""
     intro_yielded = False
