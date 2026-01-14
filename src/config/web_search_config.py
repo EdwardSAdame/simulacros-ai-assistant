@@ -6,31 +6,24 @@ Defines the allowed domains for the AI's web browsing capabilities.
 """
 
 from typing import Dict, Any, Optional
+from src.config.settings import settings  # 🟢 Import settings to check toggle
 
 # ------------------------------------------------------------------
 # 🔹 TRUSTED DOMAINS (ALLOW-LISTS)
 # ------------------------------------------------------------------
 
-# Your Domain (Always accessible)
-# Covers: https://invicto.com.co/
 INVICTO_DOMAINS = [
     "invicto.com.co"
 ]
 
-# ICFES Context
-# Authorizes: www.icfes.gov.co, mineducacion.gov.co
 ICFES_DOMAINS = [
     "icfes.gov.co"
 ]
 
-# UNAL Context
-# Authorizes: admisiones.unal.edu.co, registro.unal.edu.co, unal.edu.co
 UNAL_DOMAINS = [
     "unal.edu.co"
 ]
 
-# Scholarships / Financial Context (Uniandes)
-# Authorizes: aspirantes.uniandes.edu.co
 UNIANDES_DOMAINS = [
     "uniandes.edu.co"
 ]
@@ -42,9 +35,18 @@ UNIANDES_DOMAINS = [
 def get_search_filters(context: str) -> Optional[Dict[str, Any]]:
     """
     Returns the domain filter configuration based on the conversation context.
-    We inject INVICTO_DOMAINS into every specific context so the bot 
-    can always cross-reference official info with your content.
     """
+    
+    # 🟢 1. CHECK GLOBAL TOGGLE
+    # If Strict Mode is FALSE (set in AWS), we return a dummy truthy dict.
+    # This ensures the assistant_client ADDS the web_search tool,
+    # but applies NO domain filters.
+    if not settings.WEB_SEARCH_STRICT_MODE:
+        return {"scope": "open_web"} 
+
+    # 🟢 2. STRICT MODE LOGIC (Default)
+    # If we are here, we MUST filter by specific domains.
+    
     context_upper = context.upper().strip() if context else ""
     
     # Base list always includes your domain
@@ -62,6 +64,7 @@ def get_search_filters(context: str) -> Optional[Dict[str, Any]]:
         target_domains.extend(UNIANDES_DOMAINS)
         return {"allowed_domains": target_domains}
         
-    # General Context: Return None (Open Web)
-    # The bot can search Wikipedia, News, AND invicto.com.co freely.
+    # General Context in Strict Mode:
+    # If strict mode is ON, "General" usually implies NO search is allowed 
+    # (or search only Invicto). Returning None disables the tool.
     return None

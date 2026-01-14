@@ -41,15 +41,11 @@ class Settings:
         self.OPENAI_AUDIO_MODEL: str = os.getenv("OPENAI_AUDIO_MODEL", "gpt-4o-mini-transcribe")
         
         # 🔹 Router Model Configuration 🔹
-        # 🟢 FIX: Match the AWS Variable Name 'OPENAI_MODEL_ROUTER'
         self.OPENAI_ROUTER_MODEL: str = os.getenv("OPENAI_MODEL_ROUTER", "gpt-4o-mini")
-        
-        # 🟢 FIX: Add Reasoning Effort Support
         self.OPENAI_ROUTER_EFFORT: str = os.getenv("OPENAI_REASONING_EFFORT_ROUTER", "low")
         
-        # 💡 FIX: MATCH AWS VARIABLE NAMES FOR SAMPLING 💡
+        # Router Sampling
         try:
-            # Matches 'OPENAI_TEMP_ROUTER'
             temp_str = os.getenv("OPENAI_TEMP_ROUTER")
             self.OPENAI_ROUTER_TEMP: float = float(temp_str) if temp_str is not None else 0.3
         except ValueError:
@@ -57,12 +53,16 @@ class Settings:
             self.OPENAI_ROUTER_TEMP: float = 0.3
 
         try:
-            # Matches 'OPENAI_TOP_P_ROUTER'
             top_p_str = os.getenv("OPENAI_TOP_P_ROUTER")
             self.OPENAI_ROUTER_TOP_P: float = float(top_p_str) if top_p_str is not None else 1.0
         except ValueError:
             logger.warning("OPENAI_TOP_P_ROUTER in .env is not a valid float. Defaulting to 1.0.")
             self.OPENAI_ROUTER_TOP_P: float = 1.0
+
+        # 🟢 NEW: Web Search Toggle
+        # Default is True (Strict) for safety. Set to "false" in AWS to open the web.
+        strict_mode = os.getenv("WEB_SEARCH_STRICT_MODE", "true").lower()
+        self.WEB_SEARCH_STRICT_MODE: bool = strict_mode == "true"
 
     def get_openai_client(self) -> openai.Client:
         if not self.OPENAI_API_KEY:
