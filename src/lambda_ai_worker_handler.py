@@ -148,7 +148,7 @@ def lambda_handler(event, context):
             # --- 4. Send Final Reply ---
             if connection_id:
                 try:
-                    # A. Send Standard Text Reply (The Chat Bubble)
+                    # A. Send Standard Text Reply (The Chat Bubble + Inline Metadata)
                     response_payload = json.dumps({
                         "action": "ai_reply",
                         "ai_reply": ai_reply,
@@ -163,28 +163,32 @@ def lambda_handler(event, context):
                         Data=response_payload
                     )
 
-                    # B. Send Structured Data Update (Quiz OR Images)
+                    # B. Send Structured Data Update (ONLY if it's Quiz or Rich Chat)
+                    # 🟢 FIX: Do NOT send secondary event for just sources
                     if meta_payload:
-                        # Determine action type based on content
-                        action_type = "quiz_data_update" # Default (Backward Compatibility)
-                        
-                        if meta_payload.get("type") == "rich_chat":
-                            action_type = "rich_content_update" 
+                        action_type = None
 
-                        data_payload = json.dumps({
-                            "action": action_type,
-                            "data": meta_payload,
-                            "conversation_id": conversation_id
-                        })
-                        
-                        api_gateway_client.post_to_connection(
-                            ConnectionId=connection_id,
-                            Data=data_payload
-                        )
-                        log_event("rich_data_pushed_to_client", {
-                            "type": action_type, 
-                            "conversation_id": conversation_id
-                        })
+                        if meta_payload.get("type") == "rich_chat":
+                            action_type = "rich_content_update"
+                        elif meta_payload.get("quiz_mode") or meta_payload.get("questions"):
+                            # Only trigger quiz update if actual quiz data is present
+                            action_type = "quiz_data_update"
+
+                        if action_type:
+                            data_payload = json.dumps({
+                                "action": action_type,
+                                "data": meta_payload,
+                                "conversation_id": conversation_id
+                            })
+                            
+                            api_gateway_client.post_to_connection(
+                                ConnectionId=connection_id,
+                                Data=data_payload
+                            )
+                            log_event("rich_data_pushed_to_client", {
+                                "type": action_type, 
+                                "conversation_id": conversation_id
+                            })
 
                     log_event("ai_worker_response_sent", {
                         "user_id": user_id, 
