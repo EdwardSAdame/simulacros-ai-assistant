@@ -48,13 +48,28 @@ def lambda_handler(event, context):
         # Using the function we added to messages_table.py
         messages = get_all_messages(conversation_id=conversation_id) # Returns oldest first
 
+        # 🟢 NORMALIZATION STEP: Match WebSocket format (Metadata -> metadata)
+        # This fixes the reload mismatch issue.
+        cleaned_messages = []
+        for msg in messages:
+            # Create a shallow copy to modify safely
+            clean_msg = msg.copy()
+            
+            # Rename 'Metadata' (DynamoDB) to 'metadata' (Frontend/WebSocket standard)
+            if "Metadata" in clean_msg:
+                clean_msg["metadata"] = clean_msg.pop("Metadata")
+            elif "Meta" in clean_msg:
+                 clean_msg["metadata"] = clean_msg.pop("Meta")
+                 
+            cleaned_messages.append(clean_msg)
+
         log_event("get_messages_success", {
             "conversation_id": conversation_id,
-            "message_count": len(messages)
+            "message_count": len(cleaned_messages)
         })
 
         # --- Return the list of messages ---
-        return _response(200, {"messages": messages}) # Key is "messages"
+        return _response(200, {"messages": cleaned_messages}) # Key is "messages"
 
     except Exception as e:
         log_event("get_messages_exception", {"conversation_id": conversation_id if conversation_id else 'unknown'}, level="error", error=e)
