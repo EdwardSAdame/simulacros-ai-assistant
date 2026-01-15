@@ -1,3 +1,4 @@
+# tests/test_search_mode.py
 import sys
 import os
 import time
@@ -51,7 +52,6 @@ def main():
             continue
 
         # 🟢 AUTO-CONTEXT LOGIC (Simulating the Router)
-        # We assume 'General' unless keywords are found
         context_key = "General"
         if "icfes" in query.lower():
             context_key = "ICFES"
@@ -80,7 +80,8 @@ def main():
         try:
             conversation_input = [{"role": "user", "content": [{"type": "input_text", "text": query}]}]
             
-            response_text, assets = send_message_to_assistant(
+            # 🟢 UPDATED UNPACKING: NOW EXPECTS 3 VALUES
+            response_text, assets, sources = send_message_to_assistant(
                 conversation_input=conversation_input,
                 user_id="interactive-user",
                 page="test-cli",
@@ -95,8 +96,11 @@ def main():
             print(response_text)
             print("-" * 50)
             
-            if "Fuentes Consultadas" in response_text:
-                print("✅  Sources found.")
+            # 🟢 NEW VALIDATION: Check metadata sources
+            if sources:
+                print(f"✅  Sources found: {len(sources)}")
+                for i, src in enumerate(sources, 1):
+                    print(f"   {i}. [{src['title']}]({src['url']})")
             else:
                 print("ℹ️  No sources cited.")
 

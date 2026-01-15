@@ -13,11 +13,9 @@ from src.services.storage_service import storage_service
 
 logger = logging.getLogger(__name__)
 
-# ... [Keep helpers: _get_files_client, _handle_generated_files, _process_file, _assign_urls_to_quiz, _build_runtime_signals, _format_citations AS IS] ...
-# (I am omitting them to save space, but they must remain in the file)
-
+# ... [Keep helpers: _get_files_client, _handle_generated_files, _process_file, _assign_urls_to_quiz, _build_runtime_signals AS IS] ...
 # ------------------------------------------------------------------
-# 🔹 HELPER: Handle File Artifacts
+# 🔹 HELPER: Handle File Artifacts (Keep AS IS)
 # ------------------------------------------------------------------
 def _get_files_client(client):
     if hasattr(client, "beta"):
@@ -125,6 +123,7 @@ def _build_runtime_signals(user_id: str | None, page: str | None, name: str | No
         f"Page: {page or '/'}",
         f"User: {user_id or 'Guest'}",
         f"Target: {target}",
+        f"Context: {exam_context}",
         "Sources: Invicto Knowledge Base.",
         visuals_instruction
     ]
@@ -132,9 +131,15 @@ def _build_runtime_signals(user_id: str | None, page: str | None, name: str | No
     if email: signals.append(f"Email: {email}.")
     return build_system_instructions(extras=signals, exam_context=exam_context)
 
-def _format_citations(text: str, response_obj: Any) -> str:
-    """Extracts URL citations and appends Sources section."""
-    citations = []
+# ------------------------------------------------------------------
+# 🟢 🔹 HELPER: Extract Sources (UPDATED)
+# ------------------------------------------------------------------
+def _extract_sources(response_obj: Any) -> List[Dict[str, str]]:
+    """
+    Extracts citations from the OpenAI response object.
+    Returns a list of dictionaries: [{'title': '...', 'url': '...'}]
+    """
+    sources = []
     try:
         output_items = getattr(response_obj, "output", []) or []
         for item in output_items:
@@ -147,15 +152,19 @@ def _format_citations(text: str, response_obj: Any) -> str:
                             url = getattr(ann, "url", None)
                             title = getattr(ann, "title", "Fuente")
                             if url:
-                                citations.append(f"- [{title}]({url})")
+                                sources.append({"title": title, "url": url})
     except Exception as e:
-        logger.error(f"Error extracting citations: {e}")
-
-    if citations:
-        unique_citations = list(dict.fromkeys(citations))
-        text += "\n\n**Fuentes Consultadas:**\n" + "\n".join(unique_citations)
+        logger.error(f"Error extracting sources: {e}")
     
-    return text
+    # Deduplicate based on URL
+    unique_sources = []
+    seen_urls = set()
+    for s in sources:
+        if s["url"] not in seen_urls:
+            unique_sources.append(s)
+            seen_urls.add(s["url"])
+            
+    return unique_sources
 
 # ------------------------------------------------------------------
 # 🟢 STANDARD CHAT
@@ -173,7 +182,7 @@ def send_message_to_assistant(
     web_search_config: Dict[str, Any] | None = None,
     model_override: str | None = None,
     user_location: Dict[str, str] | None = None 
-) -> Tuple[str, List[str]]: 
+) -> Tuple[str, List[str], List[Dict[str, str]]]: # 🟢 Updated Return Type
     
     client = get_openai_client()
     cfg = get_model_config(mode)
@@ -222,7 +231,6 @@ def send_message_to_assistant(
     is_reasoning_model = target_model.startswith("o") and not target_model.startswith("gpt") or "reasoning" in target_model
     
     if is_reasoning_model:
-        # 🟢 FIX: Use 'reasoning' dictionary instead of flat 'reasoning_effort'
         if active_effort:
             req["reasoning"] = {"effort": active_effort} 
     else:
@@ -243,19 +251,23 @@ def send_message_to_assistant(
                     if getattr(c, "type", "") in ("output_text", "text"): chunks.append(getattr(c, "text", ""))
             text = "\n".join(chunks).strip()
 
+        # 🟢 Clean Sandbox Links
         if text: 
             text = re.sub(r'\[.*?\]\(sandbox:/mnt/data/.*?\)', '', text).strip()
-            text = _format_citations(text, resp)
+            # 🟢 REMOVED: _format_citations(text, resp) -> We no longer append text here!
 
         generated_urls = _handle_generated_files(client, resp, folder="chat_assets")
+        
+        # 🟢 Extract Sources as Data
+        sources_list = _extract_sources(resp)
 
-        return (text or "[No response]", generated_urls)
+        return (text or "[No response]", generated_urls, sources_list)
     except Exception as e:
         logger.error(f"Chat failed: {e}")
         raise e
 
 # ------------------------------------------------------------------
-# 🟢 QUIZ GENERATION (Updated similarly)
+# 🟢 QUIZ GENERATION (Standard)
 # ------------------------------------------------------------------
 def generate_structured_quiz(
     conversation_input: List[Dict[str, Any]], 
@@ -280,7 +292,6 @@ def generate_structured_quiz(
         "tools": [{"type": "code_interpreter", "container": {"type": "auto"}}]
     }
     
-    # 🟢 FIX: Nested Dictionary for Quiz
     is_reasoning_model = cfg.model.startswith("o") and not cfg.model.startswith("gpt") or "reasoning" in cfg.model
     if is_reasoning_model:
         if cfg.reasoning_effort:
@@ -299,6 +310,9 @@ def generate_structured_quiz(
         logger.error(f"Quiz generation failed: {e}")
         raise e
 
+# ------------------------------------------------------------------
+# 🟢 QUIZ STREAMING (Standard)
+# ------------------------------------------------------------------
 def stream_structured_quiz(
     conversation_input: List[Dict[str, Any]], 
     user_id: str | None = None, 
@@ -322,7 +336,6 @@ def stream_structured_quiz(
         "tools": [{"type": "code_interpreter", "container": {"type": "auto"}}]
     }
     
-    # 🟢 FIX: Nested Dictionary for Stream
     is_reasoning_model = cfg.model.startswith("o") and not cfg.model.startswith("gpt") or "reasoning" in cfg.model
     if is_reasoning_model:
         if cfg.reasoning_effort:

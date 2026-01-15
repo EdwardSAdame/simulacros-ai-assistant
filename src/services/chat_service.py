@@ -41,28 +41,19 @@ def decimal_default(obj):
 def determine_exam_context(page_url: str, message_text: str | None = None) -> str:
     """
     Decides the Exam Context (UNAL vs ICFES vs GENERAL).
-    Priority:
-    1. URL Explicit Context (e.g. user is inside /simulacro-unal)
-    2. User Intent in Message (e.g. user says "quiero unal" on homepage)
-    3. Default (General)
     """
-    # 1. Analyze URL (The "Room" the user is in)
     if page_url:
         url_lower = page_url.lower()
         if "unal" in url_lower: return "UNAL"
         if "icfes" in url_lower: return "ICFES"
     
-    # 2. Analyze Message (Only if URL is generic)
     if message_text:
         msg_lower = message_text.lower()
-        # Check for UNAL keywords
         if any(x in msg_lower for x in ["unal", "nacional", "universidad nacional"]):
             return "UNAL"
-        # Check for ICFES keywords
         if any(x in msg_lower for x in ["icfes", "saber 11", "saber pro", "estado"]):
             return "ICFES"
             
-    # 3. Fallback
     return "GENERAL" 
 
 def _build_history_list(conversation_id: str, max_user: int = 3, max_assistant: int = 3) -> List[Dict[str, Any]]:
@@ -124,20 +115,12 @@ def get_ai_response(
 
     page = _normalize_page(page)
 
-    # 🟢 1. INTELLIGENCE LAYER: Check URL AND Message
+    # 🟢 1. INTELLIGENCE LAYER
     exam_context = determine_exam_context(page, message)
     selected_vector_stores = get_stores_for_page(page)
 
     # 🟢 2. DETERMINE WEB SEARCH CONFIG & MODEL
-    # Get filters based on context (ICFES -> icfes.gov.co, etc.)
     web_search_config = get_search_filters(exam_context)
-    
-    # 🟢 HYBRID ROUTING & DYNAMIC INSTRUCTION LOGIC:
-    # - If filters exist -> We are in Search Mode.
-    #   1. Enable the Tool (web_search_config passed).
-    #   2. Upgrade the Model (model_override = gpt-4o).
-    #   3. Inject Search Instructions (web_search_active = True).
-    # - If filters are None -> We are in Standard Mode.
     
     is_web_search_active = (web_search_config is not None)
     
@@ -145,16 +128,11 @@ def get_ai_response(
     if is_web_search_active:
         actual_model_override = get_search_model_name()
 
-    # 🔍 OBSERVABILITY: LOG THE DECISION
     log_event("context_resolution", {
         "user_id": user_id,
         "input_url": page,
         "derived_exam": exam_context, 
-        "vector_stores_selected": selected_vector_stores,
-        "intent": intent,
-        "requires_visuals": requires_visuals,
-        "web_search_config": web_search_config,
-        "web_search_active": is_web_search_active, # 🟢 Log the flag
+        "web_search_active": is_web_search_active,
         "model_override": actual_model_override, 
         "trigger_message": message[:50] if message else "None"
     })
@@ -167,9 +145,7 @@ def get_ai_response(
         exists_timestamp = _find_conversation_timestamp(user_id, conversation_id)
         if exists_timestamp:
             should_create_new = False
-            log_event("conversation_verified_and_reused", {"conversation_id": conversation_id})
         else:
-            log_event("conversation_not_found_forcing_new", {"input_id": conversation_id})
             actual_conversation_id = None 
 
     try:
@@ -200,6 +176,7 @@ def get_ai_response(
     quiz_data = None
     final_reply_text = ""
     generated_assets = [] 
+    sources_data = [] # 🟢 New container for sources
     
     if intent == "quiz":
         topic_hint = message if message else "General Knowledge"
@@ -211,13 +188,11 @@ def get_ai_response(
                 if 1 <= parsed_num <= 10: 
                     num_questions = parsed_num
 
-        # Only operational rules, no Persona here (fixed in previous step)
         conversation_input.append(QuizService.get_system_instruction(topic=topic_hint, num_questions=num_questions))
 
         try:
             if stream_manager:
-                log_event("quiz_streaming_started", {"user_id": user_id, "mode": mode, "exam_context": exam_context})
-                
+                # ... (Streaming Logic kept as is) ...
                 stream_gen = stream_structured_quiz(
                     conversation_input=conversation_input,
                     user_id=user_id,
@@ -295,7 +270,6 @@ def get_ai_response(
     else:
         # 🟢 STANDARD CHAT MODE
         try:
-            # 1. Build the dynamic System Prompt
             runtime_signals = build_runtime_context(
                 page=page,
                 user_id=user_id,
@@ -308,10 +282,11 @@ def get_ai_response(
                 extras=runtime_signals,
                 exam_context=exam_context,
                 requires_visuals=requires_visuals,
-                web_search_active=is_web_search_active # 🟢 PASSED: Triggers 'search_instructions.py' injection
+                web_search_active=is_web_search_active 
             )
 
-            final_reply_text, generated_assets = send_message_to_assistant(
+            # 🟢 UPDATED: Flexible unpacking to support 3 return values (Text, Assets, Sources)
+            response_tuple = send_message_to_assistant(
                 conversation_input=conversation_input,
                 user_id=user_id,
                 page=page,
@@ -321,9 +296,15 @@ def get_ai_response(
                 system_instruction=system_prompt,
                 vector_store_ids=selected_vector_stores,
                 requires_visuals=requires_visuals,
-                web_search_config=web_search_config, # 🟢 PASS FLAG: Enables 'web_search' tool
-                model_override=actual_model_override # 🟢 PASS OVERRIDE: Switches to 'gpt-4o'
+                web_search_config=web_search_config,
+                model_override=actual_model_override 
             )
+            
+            # Safe unpacking
+            final_reply_text = response_tuple[0]
+            generated_assets = response_tuple[1]
+            sources_data = response_tuple[2] if len(response_tuple) > 2 else []
+
         except Exception as e:
             raise RuntimeError(f"OpenAI Chat API failed: {e}")
 
@@ -336,11 +317,20 @@ def get_ai_response(
             save_message(actual_conversation_id, role="user", message_text=f"[Imagen] {img}")
         
         meta_payload = quiz_data
-        if not meta_payload and generated_assets:
-            meta_payload = {
-                "type": "rich_chat",
-                "assets": [{"type": "image", "url": url, "alt": "Generated Visualization"} for url in generated_assets]
-            }
+        
+        # 🟢 MERGE LOGIC: Combine assets and sources into metadata
+        if not meta_payload:
+            meta_payload = {}
+            
+        if generated_assets:
+            meta_payload["type"] = "rich_chat"
+            meta_payload["assets"] = [{"type": "image", "url": url, "alt": "Generated Visualization"} for url in generated_assets]
+            
+        if sources_data:
+            meta_payload["sources"] = sources_data # 🟢 Save the Clean Sources!
+
+        # Cleanup empty dict
+        if not meta_payload: meta_payload = None
 
         saved_item = save_message(
             actual_conversation_id, 
