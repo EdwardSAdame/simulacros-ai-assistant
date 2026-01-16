@@ -1,117 +1,27 @@
 # src/assistant/assistant_client.py
-from typing import List, Dict, Any, Tuple, Generator, Optional
+from typing import List, Dict, Any, Tuple, Generator
 import logging
-import json
 import re
-import random  # 🟢 ADDED: For shuffling options
 
+# 🔹 Standard Imports
 from src.config.settings import get_openai_client, get_vector_search_max_results
 from src.config.model_config import get_model_config
 from src.config.system_instructions import build_system_instructions
 from src.utils.time_utils import get_current_time_info, infer_target_semester
-from src.schemas.quiz_schemas import QuizResponse, QuizQuestion 
-from src.services.storage_service import storage_service
+from src.schemas.quiz_schemas import QuizResponse
+
+# 🔹 Modular Services (The Clean Up)
+from src.services.ai_assets_service import ai_assets_service
+from src.utils.stream_parser import StreamParser
+from src.utils.quiz_utils import QuizUtils
 
 logger = logging.getLogger(__name__)
 
 # ------------------------------------------------------------------
-# 🔹 HELPER: Handle File Artifacts (Keep AS IS)
+# 🔹 HELPER: Context & Signal Builders
 # ------------------------------------------------------------------
-def _get_files_client(client):
-    if hasattr(client, "beta"):
-        if hasattr(client.beta, "containers") and hasattr(client.beta.containers, "files"):
-            return getattr(client.beta.containers, "files")
-        if hasattr(client.beta, "container_files"):
-            return getattr(client.beta, "container_files")
-    if hasattr(client, "containers") and hasattr(client.containers, "files"):
-        return getattr(client.containers, "files")
-    return getattr(client, "container_files", None)
-
-def _handle_generated_files(client, response_obj, folder: str = "chat_assets") -> List[str]:
-    uploaded_urls = []
-    container_id = None
-    cf_client = _get_files_client(client)
-    if not cf_client: return []
-
-    try:
-        output_items = getattr(response_obj, "output", []) or []
-        for item in output_items:
-            item_type = getattr(item, "type", "")
-            if item_type == "code_interpreter_call":
-                cid = getattr(item, "container_id", None) or \
-                      (getattr(item.code_interpreter, "container_id", None) if hasattr(item, "code_interpreter") else None) or \
-                      (getattr(item.code_interpreter_call, "container_id", None) if hasattr(item, "code_interpreter_call") else None)
-                if cid: container_id = cid
-
-            if item_type == "message":
-                content_list = getattr(item, "content", []) or []
-                if isinstance(content_list, list):
-                    for part in content_list:
-                        annotations = getattr(part, "annotations", []) or []
-                        for ann in annotations:
-                            if getattr(ann, "type", "") == "container_file_citation":
-                                file_id = getattr(ann, "file_id", None)
-                                fname = getattr(ann, "filename", "graph.png")
-                                if file_id: _process_file(cf_client, container_id, file_id, fname, uploaded_urls, folder)
-
-        if not uploaded_urls and container_id:
-            try:
-                container_files = cf_client.list(container_id)
-                for c_file in container_files:
-                    fname = getattr(c_file, "filename", None) or getattr(c_file, "name", None)
-                    fid = getattr(c_file, "id", None) or getattr(c_file, "file_id", None)
-                    if not fname: fname = "generated_plot.png"
-                    if fid: _process_file(cf_client, container_id, fid, fname, uploaded_urls, folder)
-            except Exception: pass
-    except Exception: pass
-    return uploaded_urls
-
-def _process_file(cf_client, container_id, file_id, filename, url_list, folder: str):
-    try:
-        file_content = None
-        if hasattr(cf_client, "content") and hasattr(cf_client.content, "retrieve"):
-            try:
-                if container_id: file_content = cf_client.content.retrieve(container_id=container_id, file_id=file_id)
-                else: file_content = cf_client.content.retrieve(file_id=file_id)
-            except: pass
-            
-        if file_content is None and callable(getattr(cf_client, "content", None)):
-            try: file_content = cf_client.content(file_id)
-            except: pass
-
-        if not file_content: return
-
-        if hasattr(file_content, "read"): file_content = file_content.read()
-        elif hasattr(file_content, "content"): file_content = file_content.content
-        elif hasattr(file_content, "text"): file_content = file_content.text.encode('utf-8')
-
-        if not isinstance(file_content, (bytes, bytearray)):
-            try: file_content = bytes(file_content)
-            except: pass
-
-        fname = str(filename).lower()
-        if fname.endswith(".jpg") or fname.endswith(".jpeg"): ctype = "image/jpeg"
-        elif fname.endswith(".pdf"): ctype = "application/pdf"
-        else: 
-            ctype = "image/png"
-            if not fname.endswith(".png"): filename = f"{filename}.png"
-
-        s3_url = storage_service.upload_image_from_bytes(file_content, ctype, folder=folder)
-        logger.info(f"✅ Asset uploaded to S3: {s3_url}")
-        url_list.append(s3_url)
-    except Exception as e:
-        logger.error(f"File transfer failed for {file_id}: {e}")
-
-def _assign_urls_to_quiz(quiz_data: QuizResponse, urls: List[str]):
-    if not urls: return
-    idx = 0
-    for q in quiz_data.questions:
-        if q.image_url == "PENDING_UPLOAD" or (q.image_url and "/mnt/" in q.image_url) or (not q.image_url and idx < len(urls)):
-            if idx < len(urls):
-                q.image_url = urls[idx]
-                idx += 1
-
 def _build_runtime_signals(user_id: str | None, page: str | None, name: str | None, email: str | None, exam_context: str = "ICFES") -> str:
+    """Generates the dynamic system context for the AI."""
     tinfo = get_current_time_info()
     target = infer_target_semester()
     visuals_instruction = (
@@ -131,14 +41,18 @@ def _build_runtime_signals(user_id: str | None, page: str | None, name: str | No
     if email: signals.append(f"Email: {email}.")
     return build_system_instructions(extras=signals, exam_context=exam_context)
 
-# ------------------------------------------------------------------
-# 🟢 🔹 HELPER: Extract Sources
-# ------------------------------------------------------------------
+def _assign_urls_to_quiz(quiz_data: QuizResponse, urls: List[str]):
+    """Binds generated image URLs to quiz questions."""
+    if not urls or not quiz_data: return
+    idx = 0
+    for q in quiz_data.questions:
+        if q.image_url == "PENDING_UPLOAD" or (q.image_url and "/mnt/" in q.image_url) or (not q.image_url and idx < len(urls)):
+            if idx < len(urls):
+                q.image_url = urls[idx]
+                idx += 1
+
 def _extract_sources(response_obj: Any) -> List[Dict[str, str]]:
-    """
-    Extracts citations from the OpenAI response object.
-    Returns a list of dictionaries: [{'title': '...', 'url': '...'}]
-    """
+    """Extracts citations from the OpenAI response object."""
     sources = []
     try:
         output_items = getattr(response_obj, "output", []) or []
@@ -151,53 +65,18 @@ def _extract_sources(response_obj: Any) -> List[Dict[str, str]]:
                         if getattr(ann, "type", "") == "url_citation":
                             url = getattr(ann, "url", None)
                             title = getattr(ann, "title", "Fuente")
-                            if url:
-                                sources.append({"title": title, "url": url})
+                            if url: sources.append({"title": title, "url": url})
     except Exception as e:
         logger.error(f"Error extracting sources: {e}")
     
+    # Deduplicate
     unique_sources = []
     seen_urls = set()
     for s in sources:
         if s["url"] not in seen_urls:
             unique_sources.append(s)
             seen_urls.add(s["url"])
-            
     return unique_sources
-
-# ------------------------------------------------------------------
-# 🟢 🔹 HELPER: Shuffle Quiz Options (BIAS FIX)
-# ------------------------------------------------------------------
-def _shuffle_question_options(question: QuizQuestion):
-    """
-    Shuffles the options of a question in-place and updates the correct_option_index.
-    This neutralizes the LLM bias of always putting the correct answer first.
-    """
-    try:
-        # 1. Identify the correct option object before shuffling
-        if 0 <= question.correct_option_index < len(question.options):
-            correct_option_obj = question.options[question.correct_option_index]
-        else:
-            # Fallback if index is out of bounds (shouldn't happen with strict schema)
-            return
-
-        # 2. Shuffle the options list
-        random.shuffle(question.options)
-
-        # 3. Find the new index of the correct option
-        # We use 'is' for object identity or compare fields if necessary
-        new_index = -1
-        for i, opt in enumerate(question.options):
-            if opt == correct_option_obj:
-                new_index = i
-                break
-        
-        # 4. Update the index
-        if new_index != -1:
-            question.correct_option_index = new_index
-            
-    except Exception as e:
-        logger.error(f"Error shuffling options: {e}")
 
 # ------------------------------------------------------------------
 # 🟢 STANDARD CHAT
@@ -220,59 +99,49 @@ def send_message_to_assistant(
     client = get_openai_client()
     cfg = get_model_config(mode)
 
+    # 1. Config Model Strategy
     if model_override:
         target_model = cfg.search_model
-        active_temp = cfg.search_temperature
-        active_top_p = cfg.search_top_p
+        active_temp, active_top_p = cfg.search_temperature, cfg.search_top_p
         active_effort = cfg.search_reasoning_effort
     else:
         target_model = cfg.model
-        active_temp = cfg.temperature
-        active_top_p = cfg.top_p
+        active_temp, active_top_p = cfg.temperature, cfg.top_p
         active_effort = cfg.reasoning_effort
     
-    if not system_instruction:
-        system_text = _build_runtime_signals(user_id, page, name, email, exam_context="ICFES")
-    else:
-        system_text = system_instruction
-    
+    # 2. Build Inputs
+    system_text = system_instruction or _build_runtime_signals(user_id, page, name, email, exam_context="ICFES")
     api_input = [{"role": "system", "content": [{"type": "input_text", "text": system_text}]}]
     api_input.extend(conversation_input)
 
-    tool_stores = vector_store_ids if vector_store_ids else []
+    # 3. Configure Tools
     tools = []
-    
-    if tool_stores:
-        tools.append({"type": "file_search", "vector_store_ids": tool_stores, "max_num_results": get_vector_search_max_results()})
-    
+    if vector_store_ids:
+        tools.append({"type": "file_search", "vector_store_ids": vector_store_ids, "max_num_results": get_vector_search_max_results()})
     if requires_visuals:
         tools.append({"type": "code_interpreter", "container": {"type": "auto"}})
-
     if web_search_config:
         web_tool = {"type": "web_search"}
-        if "allowed_domains" in web_search_config and web_search_config["allowed_domains"]:
+        if "allowed_domains" in web_search_config:
              web_tool["filters"] = {"allowed_domains": web_search_config["allowed_domains"]}
-        if user_location:
-            web_tool["user_location"] = user_location
+        if user_location: web_tool["user_location"] = user_location
         tools.append(web_tool)
 
+    # 4. Build Request
     req = {"model": target_model, "input": api_input}
-
-    is_reasoning_model = target_model.startswith("o") and not target_model.startswith("gpt") or "reasoning" in target_model
+    is_reasoning = (target_model.startswith("o") and not target_model.startswith("gpt")) or "reasoning" in target_model
     
-    if is_reasoning_model:
-        if active_effort:
-            req["reasoning"] = {"effort": active_effort} 
+    if is_reasoning:
+        if active_effort: req["reasoning"] = {"effort": active_effort}
     else:
         req["temperature"] = active_temp
         req["top_p"] = active_top_p
-
-    if tools:
-        req["tools"] = tools
+    if tools: req["tools"] = tools
 
     try:
         resp = client.responses.create(**{k: v for k, v in req.items() if v is not None})
         
+        # 5. Extract Text
         text = getattr(resp, "output_text", None)
         if not text:
             chunks = []
@@ -280,12 +149,12 @@ def send_message_to_assistant(
                 for c in getattr(block, "content", []) or []:
                     if getattr(c, "type", "") in ("output_text", "text"): chunks.append(getattr(c, "text", ""))
             text = "\n".join(chunks).strip()
-
+        
         if text: 
             text = re.sub(r'\[.*?\]\(sandbox:/mnt/data/.*?\)', '', text).strip()
 
-        generated_urls = _handle_generated_files(client, resp, folder="chat_assets")
-        
+        # 6. Delegate Heavy Lifting
+        generated_urls = ai_assets_service.handle_generated_files(client, resp, folder="chat_assets")
         sources_list = _extract_sources(resp)
 
         return (text or "[No response]", generated_urls, sources_list)
@@ -319,10 +188,9 @@ def generate_structured_quiz(
         "tools": [{"type": "code_interpreter", "container": {"type": "auto"}}]
     }
     
-    is_reasoning_model = cfg.model.startswith("o") and not cfg.model.startswith("gpt") or "reasoning" in cfg.model
-    if is_reasoning_model:
-        if cfg.reasoning_effort:
-             req["reasoning"] = {"effort": cfg.reasoning_effort}
+    is_reasoning = (cfg.model.startswith("o") and not cfg.model.startswith("gpt")) or "reasoning" in cfg.model
+    if is_reasoning:
+        if cfg.reasoning_effort: req["reasoning"] = {"effort": cfg.reasoning_effort}
     else:
         req["temperature"] = cfg.temperature
         req["top_p"] = cfg.top_p
@@ -330,13 +198,15 @@ def generate_structured_quiz(
     try:
         resp = client.responses.parse(**{k: v for k, v in req.items() if v is not None})
         quiz = resp.output_parsed
-        urls = _handle_generated_files(client, resp, folder="quiz_assets")
+        
+        # Delegate Assets
+        urls = ai_assets_service.handle_generated_files(client, resp, folder="quiz_assets")
         _assign_urls_to_quiz(quiz, urls)
         
-        # 🟢 FIX: Shuffle options before returning to neutralize AI position bias
+        # Delegate Logic (Shuffling)
         if quiz and quiz.questions:
             for q in quiz.questions:
-                _shuffle_question_options(q)
+                QuizUtils.shuffle_options(q)
 
         return quiz
     except Exception as e:
@@ -344,7 +214,7 @@ def generate_structured_quiz(
         raise e
 
 # ------------------------------------------------------------------
-# 🟢 QUIZ STREAMING (Standard)
+# 🟢 QUIZ STREAMING (Refactored)
 # ------------------------------------------------------------------
 def stream_structured_quiz(
     conversation_input: List[Dict[str, Any]], 
@@ -369,99 +239,56 @@ def stream_structured_quiz(
         "tools": [{"type": "code_interpreter", "container": {"type": "auto"}}]
     }
     
-    is_reasoning_model = cfg.model.startswith("o") and not cfg.model.startswith("gpt") or "reasoning" in cfg.model
-    if is_reasoning_model:
-        if cfg.reasoning_effort:
-             req["reasoning"] = {"effort": cfg.reasoning_effort}
+    is_reasoning = (cfg.model.startswith("o") and not cfg.model.startswith("gpt")) or "reasoning" in cfg.model
+    if is_reasoning:
+        if cfg.reasoning_effort: req["reasoning"] = {"effort": cfg.reasoning_effort}
     else:
         req["temperature"] = cfg.temperature
         req["top_p"] = cfg.top_p
 
-    buffer = ""
-    intro_yielded = False
-    question_count = 0
-    last_checkpoint = None 
-    
-    # 🟢 LIST to store the shuffled questions as we stream them
     streamed_questions = []
 
     try:
         with client.responses.stream(**{k: v for k, v in req.items() if v is not None}) as stream:
-            for event in stream:
-                if event.type == "response.output_text.delta":
-                    buffer += event.delta
-                    
-                    if not intro_yielded and '"questions"' in buffer:
-                        match = re.search(r'"intro_message"\s*:\s*"(.*?)"', buffer, re.DOTALL)
-                        if match:
-                            yield {"type": "intro", "text": match.group(1).replace('\\"', '"')}
-                            intro_yielded = True
-                    
-                    q_marker = buffer.find('"questions"')
-                    if q_marker != -1:
-                        arr_start = buffer.find('[', q_marker)
-                        if arr_start != -1:
-                            if last_checkpoint is None: last_checkpoint = arr_start
-                            cursor = last_checkpoint
-                            depth = 0
-                            in_str = False
-                            escape = False
-                            obj_start = -1
-                            
-                            while cursor < len(buffer):
-                                char = buffer[cursor]
-                                if not in_str:
-                                    if char == '"': in_str = True
-                                    elif char == '{':
-                                        if depth == 0: obj_start = cursor
-                                        depth += 1
-                                    elif char == '}':
-                                        depth -= 1
-                                        if depth == 0:
-                                            try:
-                                                data = json.loads(buffer[obj_start:cursor+1])
-                                                class Wrapper:
-                                                    def __init__(self, d): self.d = d
-                                                    def dict(self): return self.d
-                                                try: q_obj = QuizQuestion(**data)
-                                                except: q_obj = Wrapper(data)
-                                                
-                                                # 🟢 FIX: Shuffle BEFORE yielding to stream
-                                                if hasattr(q_obj, 'options') and hasattr(q_obj, 'correct_option_index'):
-                                                    _shuffle_question_options(q_obj)
-                                                    
-                                                # Save for final replacement
-                                                streamed_questions.append(q_obj)
-
-                                                yield {"type": "question", "index": question_count, "data": q_obj}
-                                                question_count += 1
-                                                last_checkpoint = cursor + 1
-                                            except: pass
-                                    elif char == '\\': escape = True
-                                else:
-                                    if escape: escape = False
-                                    elif char == '\\': escape = True
-                                    elif char == '"': in_str = False
-                                cursor += 1
-
-            final = stream.get_final_response()
-            parsed = getattr(final, 'output_parsed', None) or getattr(final, 'parsed', None) or final
-            urls = _handle_generated_files(client, final, folder="quiz_assets")
-            if parsed and urls: _assign_urls_to_quiz(parsed, urls)
             
-            # 🟢 CONSISTENCY FIX:
-            # Overwrite the questions in the final object with the shuffled ones we yielded.
-            # This ensures the DB saves the exact random permutation the user saw.
-            if parsed and hasattr(parsed, 'questions') and streamed_questions:
-                if len(parsed.questions) == len(streamed_questions):
-                    parsed.questions = streamed_questions
-                else:
-                    # Fallback: if stream count mismatches (rare), shuffle the parsed ones newly
-                    # to at least ensure bias is removed in the saved copy.
-                    for q in parsed.questions:
-                        _shuffle_question_options(q)
+            # 🟢 DELEGATED: Use StreamParser for the complex parsing logic
+            parser_generator = StreamParser.parse_quiz_stream(stream)
+            
+            for event in parser_generator:
+                if event["type"] == "intro":
+                    yield event
+                
+                elif event["type"] == "question":
+                    q_obj = event["data"]
+                    
+                    # 🟢 DELEGATED: Use QuizUtils for shuffling
+                    QuizUtils.shuffle_options(q_obj)
+                    
+                    streamed_questions.append(q_obj)
+                    yield event
+                
+                elif event["type"] == "done":
+                    final_parsed = event["full_response"]
+                    
+                    # 🟢 DELEGATED: Use AiAssetsService for file handling
+                    if hasattr(stream, 'get_final_response'):
+                        final_raw = stream.get_final_response()
+                        urls = ai_assets_service.handle_generated_files(client, final_raw, folder="quiz_assets")
+                        if final_parsed: _assign_urls_to_quiz(final_parsed, urls)
 
-            yield {"type": "done", "full_response": parsed}
+                    # Consistency Check: Overwrite final with shuffled list
+                    if final_parsed and hasattr(final_parsed, 'questions') and streamed_questions:
+                        if len(final_parsed.questions) == len(streamed_questions):
+                            final_parsed.questions = streamed_questions
+                        else:
+                             # Fallback shuffle if counts mismatch
+                             for q in final_parsed.questions:
+                                 QuizUtils.shuffle_options(q)
+
+                    yield {"type": "done", "full_response": final_parsed}
+                    
+                elif event["type"] == "error":
+                    yield event
 
     except Exception as e:
         logger.error(f"Streaming failed: {e}")
