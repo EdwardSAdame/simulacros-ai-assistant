@@ -3,6 +3,7 @@ from typing import List, Dict, Any, Tuple, Generator, Optional
 import logging
 import json
 import re
+import random  # 🟢 ADDED: For shuffling options
 
 from src.config.settings import get_openai_client, get_vector_search_max_results
 from src.config.model_config import get_model_config
@@ -13,7 +14,6 @@ from src.services.storage_service import storage_service
 
 logger = logging.getLogger(__name__)
 
-# ... [Keep helpers: _get_files_client, _handle_generated_files, _process_file, _assign_urls_to_quiz, _build_runtime_signals AS IS] ...
 # ------------------------------------------------------------------
 # 🔹 HELPER: Handle File Artifacts (Keep AS IS)
 # ------------------------------------------------------------------
@@ -74,7 +74,7 @@ def _process_file(cf_client, container_id, file_id, filename, url_list, folder: 
                 if container_id: file_content = cf_client.content.retrieve(container_id=container_id, file_id=file_id)
                 else: file_content = cf_client.content.retrieve(file_id=file_id)
             except: pass
-        
+            
         if file_content is None and callable(getattr(cf_client, "content", None)):
             try: file_content = cf_client.content(file_id)
             except: pass
@@ -132,7 +132,7 @@ def _build_runtime_signals(user_id: str | None, page: str | None, name: str | No
     return build_system_instructions(extras=signals, exam_context=exam_context)
 
 # ------------------------------------------------------------------
-# 🟢 🔹 HELPER: Extract Sources (UPDATED)
+# 🟢 🔹 HELPER: Extract Sources
 # ------------------------------------------------------------------
 def _extract_sources(response_obj: Any) -> List[Dict[str, str]]:
     """
@@ -156,7 +156,6 @@ def _extract_sources(response_obj: Any) -> List[Dict[str, str]]:
     except Exception as e:
         logger.error(f"Error extracting sources: {e}")
     
-    # Deduplicate based on URL
     unique_sources = []
     seen_urls = set()
     for s in sources:
@@ -165,6 +164,40 @@ def _extract_sources(response_obj: Any) -> List[Dict[str, str]]:
             seen_urls.add(s["url"])
             
     return unique_sources
+
+# ------------------------------------------------------------------
+# 🟢 🔹 HELPER: Shuffle Quiz Options (BIAS FIX)
+# ------------------------------------------------------------------
+def _shuffle_question_options(question: QuizQuestion):
+    """
+    Shuffles the options of a question in-place and updates the correct_option_index.
+    This neutralizes the LLM bias of always putting the correct answer first.
+    """
+    try:
+        # 1. Identify the correct option object before shuffling
+        if 0 <= question.correct_option_index < len(question.options):
+            correct_option_obj = question.options[question.correct_option_index]
+        else:
+            # Fallback if index is out of bounds (shouldn't happen with strict schema)
+            return
+
+        # 2. Shuffle the options list
+        random.shuffle(question.options)
+
+        # 3. Find the new index of the correct option
+        # We use 'is' for object identity or compare fields if necessary
+        new_index = -1
+        for i, opt in enumerate(question.options):
+            if opt == correct_option_obj:
+                new_index = i
+                break
+        
+        # 4. Update the index
+        if new_index != -1:
+            question.correct_option_index = new_index
+            
+    except Exception as e:
+        logger.error(f"Error shuffling options: {e}")
 
 # ------------------------------------------------------------------
 # 🟢 STANDARD CHAT
@@ -182,12 +215,11 @@ def send_message_to_assistant(
     web_search_config: Dict[str, Any] | None = None,
     model_override: str | None = None,
     user_location: Dict[str, str] | None = None 
-) -> Tuple[str, List[str], List[Dict[str, str]]]: # 🟢 Updated Return Type
+) -> Tuple[str, List[str], List[Dict[str, str]]]:
     
     client = get_openai_client()
     cfg = get_model_config(mode)
 
-    # 1. INTELLIGENT MODE SWITCHING
     if model_override:
         target_model = cfg.search_model
         active_temp = cfg.search_temperature
@@ -224,10 +256,8 @@ def send_message_to_assistant(
             web_tool["user_location"] = user_location
         tools.append(web_tool)
 
-    # 2. BASE REQUEST
     req = {"model": target_model, "input": api_input}
 
-    # 🟢 3. CORRECT PARAMETER INJECTION (Nested Dictionary Fix)
     is_reasoning_model = target_model.startswith("o") and not target_model.startswith("gpt") or "reasoning" in target_model
     
     if is_reasoning_model:
@@ -251,14 +281,11 @@ def send_message_to_assistant(
                     if getattr(c, "type", "") in ("output_text", "text"): chunks.append(getattr(c, "text", ""))
             text = "\n".join(chunks).strip()
 
-        # 🟢 Clean Sandbox Links
         if text: 
             text = re.sub(r'\[.*?\]\(sandbox:/mnt/data/.*?\)', '', text).strip()
-            # 🟢 REMOVED: _format_citations(text, resp) -> We no longer append text here!
 
         generated_urls = _handle_generated_files(client, resp, folder="chat_assets")
         
-        # 🟢 Extract Sources as Data
         sources_list = _extract_sources(resp)
 
         return (text or "[No response]", generated_urls, sources_list)
@@ -305,6 +332,12 @@ def generate_structured_quiz(
         quiz = resp.output_parsed
         urls = _handle_generated_files(client, resp, folder="quiz_assets")
         _assign_urls_to_quiz(quiz, urls)
+        
+        # 🟢 FIX: Shuffle options before returning to neutralize AI position bias
+        if quiz and quiz.questions:
+            for q in quiz.questions:
+                _shuffle_question_options(q)
+
         return quiz
     except Exception as e:
         logger.error(f"Quiz generation failed: {e}")
@@ -348,6 +381,9 @@ def stream_structured_quiz(
     intro_yielded = False
     question_count = 0
     last_checkpoint = None 
+    
+    # 🟢 LIST to store the shuffled questions as we stream them
+    streamed_questions = []
 
     try:
         with client.responses.stream(**{k: v for k, v in req.items() if v is not None}) as stream:
@@ -389,6 +425,14 @@ def stream_structured_quiz(
                                                     def dict(self): return self.d
                                                 try: q_obj = QuizQuestion(**data)
                                                 except: q_obj = Wrapper(data)
+                                                
+                                                # 🟢 FIX: Shuffle BEFORE yielding to stream
+                                                if hasattr(q_obj, 'options') and hasattr(q_obj, 'correct_option_index'):
+                                                    _shuffle_question_options(q_obj)
+                                                    
+                                                # Save for final replacement
+                                                streamed_questions.append(q_obj)
+
                                                 yield {"type": "question", "index": question_count, "data": q_obj}
                                                 question_count += 1
                                                 last_checkpoint = cursor + 1
@@ -404,6 +448,19 @@ def stream_structured_quiz(
             parsed = getattr(final, 'output_parsed', None) or getattr(final, 'parsed', None) or final
             urls = _handle_generated_files(client, final, folder="quiz_assets")
             if parsed and urls: _assign_urls_to_quiz(parsed, urls)
+            
+            # 🟢 CONSISTENCY FIX:
+            # Overwrite the questions in the final object with the shuffled ones we yielded.
+            # This ensures the DB saves the exact random permutation the user saw.
+            if parsed and hasattr(parsed, 'questions') and streamed_questions:
+                if len(parsed.questions) == len(streamed_questions):
+                    parsed.questions = streamed_questions
+                else:
+                    # Fallback: if stream count mismatches (rare), shuffle the parsed ones newly
+                    # to at least ensure bias is removed in the saved copy.
+                    for q in parsed.questions:
+                        _shuffle_question_options(q)
+
             yield {"type": "done", "full_response": parsed}
 
     except Exception as e:
