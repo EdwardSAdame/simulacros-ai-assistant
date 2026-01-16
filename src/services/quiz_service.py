@@ -1,10 +1,20 @@
 # src/services/quiz_service.py
-# ... (imports)
+from typing import Dict, Any
 
 class QuizService:
-    # ...
+    """
+    Encapsulates logic for Quiz Prompts. 
+    Parsing is now handled by the Assistant Client via Structured Outputs.
+    """
+
     @staticmethod
     def get_system_instruction(topic: str = "general", num_questions: int = 5) -> Dict[str, Any]:
+        """
+        Returns the simplified system instruction.
+        
+        CRITICAL FIX: Explicitly links this task to the 'ACADEMIC FRAMEWORK' 
+        injected by the main system prompt.
+        """
         
         instruction_text = (
             f"## IMMEDIATE RUNTIME MISSION: QUIZ GENERATION\n"
@@ -12,7 +22,7 @@ class QuizService:
             f"You must generate exactly {num_questions} distinct questions. \n\n"
             
             "## Content Quality Rules (STRICT):\n"
-            "1. **ORDER OF OPERATIONS**: The schema requires you to provide the `explanation` FIRST. Use this field to fully solve the problem step-by-step. ONLY THEN generate the `options` and `correct_option_index` based on that solution.\n"  # <-- NUEVA REGLA
+            "1. **ORDER OF OPERATIONS**: The schema requires you to provide the `explanation` FIRST. Use this field to fully solve the problem step-by-step. ONLY THEN generate the `options` and `correct_option_index` based on that solution.\n"
             "2. **FRAMEWORK COMPLIANCE**: You MUST generate these questions based on the 'ACADEMIC FRAMEWORK' present in your system context. \n"
             "   - Test the specific 'Required Skills/Competencies' listed there.\n"
             "3. **Content**: Questions must be challenging, intriguing, and non-trivial. Avoid generic questions.\n"
