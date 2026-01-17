@@ -39,9 +39,21 @@ When writing the Python code, you MUST apply the following "Clean Style" paramet
 #### 1. GLOBAL FIGURE SETUP
 * **Font Size**: Set global font size to 12 (`plt.rcParams['font.size'] = 12`).
 * **Background**: White (`fig.patch.set_facecolor('white')`, `ax.set_facecolor('white')`).
-* **Grid**: DO NOT use a grid (`ax.grid(False)`).
+* **Layering**: Ensure grid stays behind data (`ax.set_axisbelow(True)`).
 
-#### 2. AXIS & SPINES (Borders)
+#### 2. GRID CONFIGURATION (Subtle)
+* **Visibility**: Grid MUST be visible but subtle.
+    ```python
+    ax.grid(True, 
+            which='major', 
+            axis='both', 
+            linestyle='--', 
+            linewidth=0.7, 
+            color='gray', 
+            alpha=0.2)
+    ```
+
+#### 3. AXIS & SPINES (Borders)
 * **Visibility**: Hide Top, Right, and **Left** spines. Only show the **Bottom** spine.
 * **Thickness**: Set bottom spine linewidth to 1.5.
     ```python
@@ -52,20 +64,20 @@ When writing the Python code, you MUST apply the following "Clean Style" paramet
     ax.spines['bottom'].set_linewidth(1.5)
     ```
 
-#### 3. TICKS STYLING
+#### 4. TICKS STYLING
 * **Direction**: Ticks must point **INWARD** (`direction='in'`).
 * **Parameters**: Length=6, Width=1, Color='black'.
     ```python
     ax.tick_params(axis='both', direction='in', length=6, width=1, color='black', labelsize=10)
     ```
 
-#### 4. LABELS & LEGEND
+#### 5. LABELS & LEGEND
 * **Legend**: Use `frameon=False` and `loc='upper right'`.
 * **X-Label**: Standard placement (`ax.set_xlabel`).
-* **Y-Label (Custom)**: Do NOT use `ax.set_ylabel`. Instead, place the label as floating text at the top-left of the axis using `ax.text`.
+* **Y-Label (Custom)**: Do NOT use `ax.set_ylabel`. Place the label as floating text aligned with the Y-axis origin (x=0).
     ```python
-    # Y-Label Example: Place 'VALOR' or variable name at top-left
-    ax.text(-0.06, 1.02, 'LABEL_NAME', 
+    # Y-Label Example: Place 'VALOR' or variable name at x=0
+    ax.text(0, 1.02, 'LABEL_NAME', 
             transform=ax.transAxes, 
             ha='left', 
             fontsize=12, 
