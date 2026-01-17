@@ -3,7 +3,7 @@ import json
 from pathlib import Path
 from typing import Iterable, Optional
 
-# 🟢 NEW IMPORTS: Bring in the dynamic modules
+# NEW IMPORTS: Bring in the dynamic modules
 from src.config.visual_instructions import build_visual_instructions
 from src.config.search_instructions import build_search_instructions
 
@@ -41,9 +41,15 @@ You are **Roma**, the state-of-the-art AI of Invicto. You are a construct of "di
 - **Variables**: Even single variables in text must be LaTeX formatted (e.g., "Find the value of \\( y \\)").
 - **Structure**: Use Markdown headings and bullet points to organize long explanations.
 
-## 5. Visual Generation Capabilities
-- **Graphing**: If a user asks to "graph", "plot", or "visualize" a function or data, **YOU MUST** use the Python Code Interpreter tool to generate the image file. 
-- **Execution**: Write the Python code to create the plot using `matplotlib`, save it, and let the system handle the display. Do not simply describe the graph in text.
+## 5. Visual Generation Capabilities & Protocol (STRICT)
+- **Trigger**: If a user asks to "graph", "plot", or "visualize", **YOU MUST** use the Python Code Interpreter tool.
+- **The "Glass Wall" Rule**: The visual generation process is INVISIBLE to the user. The graph simply "appears" in their interface.
+    - **FORBIDDEN (Style)**: NEVER mention the colors used (e.g., "#00adef"), the grid settings, the spines, or the library (Matplotlib).
+    - **FORBIDDEN (Process)**: NEVER say "I have generated the plot," "Here is the graph," or "You can download it."
+    - **FORBIDDEN (Redundancy)**: Do not describe *what* is plotted (e.g., "This is a plot of x^2"). The user has eyes; they can see it.
+- **Mandatory Analysis**: Your text response must **IMMEDIATELY** analyze the mathematical insights derived from the visual.
+    - *Bad Response*: "I have plotted sin(x) in yellow. It is shown below."
+    - *Correct Response*: "Notice how the sine function oscillates between -1 and 1. The periodic nature is visible where the curve crosses the x-axis at every \\( \\pi \\) interval."
 """
 
 # --- 2. THE SMART LOADER (Universal Expert Expansion) ---
@@ -71,7 +77,7 @@ def load_exam_rules(exam_context: str) -> str:
         framework_text += f"GLOBAL STRATEGY: {global_strategy}\n\n"
         framework_text += "You are now an EXPERT in the following domains. Apply these specific rules based on the user's question:\n"
 
-        # 🟢 EXPANSION LOOP
+        # EXPANSION LOOP
         for comp in data.get("components", []):
             name = comp.get("name", "Subject")
             framework_text += f"\n### DOMAIN: {name.upper()}\n"
@@ -128,23 +134,23 @@ def load_exam_rules(exam_context: str) -> str:
 def build_system_instructions(
     extras: Optional[Iterable[str]] = None, 
     exam_context: str = "ICFES",
-    requires_visuals: bool = False, # 🟢 ADDED PARAMETER
-    web_search_active: bool = False # 🟢 ADDED PARAMETER (Fixes your error)
+    requires_visuals: bool = False, # ADDED PARAMETER
+    web_search_active: bool = False # ADDED PARAMETER
 ) -> str:
     blocks = [BASE_SYSTEM_INSTRUCTIONS]
     
-    # 🟢 1. Inject Academic Framework (Section 6)
+    # 1. Inject Academic Framework (Section 6)
     if exam_context and exam_context.upper() in ["ICFES", "UNAL"]:
         exam_framework = load_exam_rules(exam_context)
         blocks.append(exam_framework)
     else:
         blocks.append("## 6. ACADEMIC FRAMEWORK: General University Preparation")
     
-    # 🟢 2. Inject Search Protocols (Section 7) (CONDITIONAL)
+    # 2. Inject Search Protocols (Section 7) (CONDITIONAL)
     if web_search_active:
         blocks.append(build_search_instructions())
     
-    # 🟢 3. Inject Visual Doctrine (Section 8) (CONDITIONAL)
+    # 3. Inject Visual Doctrine (Section 8) (CONDITIONAL)
     if requires_visuals:
         blocks.append(build_visual_instructions())
     
