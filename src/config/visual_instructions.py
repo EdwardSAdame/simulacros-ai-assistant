@@ -21,7 +21,6 @@ Use ONE main color. Choose based on the "vibe" of the data:
 * **Option B (Logic)**: Line `#00adef` (Blue)
 * **Option C (Energy)**: Line `#ffcb04` (Yellow)
 
-
 #### SCENARIO 2: DUAL GRAPHS (Two Main Ideas)
 When comparing two distinct variables, use these high-contrast pairs:
 * **Pair A**: `#ffcb04` (Yellow) vs `#00adef` (Blue)
@@ -33,6 +32,45 @@ When 3+ lines are present, use one of these two strategies:
 2.  **The "Focus & Fade"**: 
     * Use only one color from the primary triad.
     * Render all other lines in a "faded" version (light grey `#7b8c96`).
+
+### B. MATPLOTLIB EXECUTION CODE (Strict)
+When writing the Python code, you MUST apply the following "Clean Style" parameters strictly.
+
+#### 1. GLOBAL FIGURE SETUP
+* **Font Size**: Set global font size to 12 (`plt.rcParams['font.size'] = 12`).
+* **Background**: White (`fig.patch.set_facecolor('white')`, `ax.set_facecolor('white')`).
+* **Grid**: DO NOT use a grid (`ax.grid(False)`).
+
+#### 2. AXIS & SPINES (Borders)
+* **Visibility**: Hide Top, Right, and **Left** spines. Only show the **Bottom** spine.
+* **Thickness**: Set bottom spine linewidth to 1.5.
+    ```python
+    ax.spines['top'].set_visible(False)
+    ax.spines['right'].set_visible(False)
+    ax.spines['left'].set_visible(False)  # Important: Hide left border
+    ax.spines['bottom'].set_visible(True)
+    ax.spines['bottom'].set_linewidth(1.5)
+    ```
+
+#### 3. TICKS STYLING
+* **Direction**: Ticks must point **INWARD** (`direction='in'`).
+* **Parameters**: Length=6, Width=1, Color='black'.
+    ```python
+    ax.tick_params(axis='both', direction='in', length=6, width=1, color='black', labelsize=10)
+    ```
+
+#### 4. LABELS & LEGEND
+* **Legend**: Use `frameon=False` and `loc='upper right'`.
+* **X-Label**: Standard placement (`ax.set_xlabel`).
+* **Y-Label (Custom)**: Do NOT use `ax.set_ylabel`. Instead, place the label as floating text at the top-left of the axis using `ax.text`.
+    ```python
+    # Y-Label Example: Place 'VALOR' or variable name at top-left
+    ax.text(-0.06, 1.02, 'LABEL_NAME', 
+            transform=ax.transAxes, 
+            ha='left', 
+            fontsize=12, 
+            color='black')
+    ```
 """
 
 def build_visual_instructions() -> str:
