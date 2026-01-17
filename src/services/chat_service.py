@@ -119,14 +119,22 @@ def get_ai_response(
     exam_context = determine_exam_context(page, message)
     selected_vector_stores = get_stores_for_page(page)
 
-    # 🟢 2. DETERMINE WEB SEARCH CONFIG & MODEL
+    # 🟢 2. DETERMINE WEB SEARCH CONFIG
+    # Get filters based on context (ICFES -> icfes.gov.co, etc.)
     web_search_config = get_search_filters(exam_context)
     
+    # Is search ENABLED as a tool? Yes, if we have a config.
     is_web_search_active = (web_search_config is not None)
     
+    # 🔴 FIX: Do NOT automatically override the model just because search is active.
+    # We allow the selected mode (Alpha/Omega) to decide which tool to use.
     actual_model_override = None
-    if is_web_search_active:
-        actual_model_override = get_search_model_name()
+    
+    # (Optional) If you ONLY want to trigger the Search Model (o4-mini) when specific 
+    # keywords appear, you could add a mini-router here. But for now, let's respect 
+    # the user's choice (Alpha/Omega).
+    # if is_web_search_active and "buscar" in (message or "").lower():
+    #     actual_model_override = get_search_model_name()
 
     log_event("context_resolution", {
         "user_id": user_id,
@@ -176,7 +184,7 @@ def get_ai_response(
     quiz_data = None
     final_reply_text = ""
     generated_assets = [] 
-    sources_data = [] # 🟢 New container for sources
+    sources_data = [] 
     
     if intent == "quiz":
         topic_hint = message if message else "General Knowledge"
@@ -192,7 +200,6 @@ def get_ai_response(
 
         try:
             if stream_manager:
-                # ... (Streaming Logic kept as is) ...
                 stream_gen = stream_structured_quiz(
                     conversation_input=conversation_input,
                     user_id=user_id,
@@ -285,7 +292,6 @@ def get_ai_response(
                 web_search_active=is_web_search_active 
             )
 
-            # 🟢 UPDATED: Flexible unpacking to support 3 return values (Text, Assets, Sources)
             response_tuple = send_message_to_assistant(
                 conversation_input=conversation_input,
                 user_id=user_id,
@@ -297,10 +303,9 @@ def get_ai_response(
                 vector_store_ids=selected_vector_stores,
                 requires_visuals=requires_visuals,
                 web_search_config=web_search_config,
-                model_override=actual_model_override 
+                model_override=actual_model_override # 🟢 Will now be None unless we explicitly set it
             )
             
-            # Safe unpacking
             final_reply_text = response_tuple[0]
             generated_assets = response_tuple[1]
             sources_data = response_tuple[2] if len(response_tuple) > 2 else []
@@ -318,7 +323,6 @@ def get_ai_response(
         
         meta_payload = quiz_data
         
-        # 🟢 MERGE LOGIC: Combine assets and sources into metadata
         if not meta_payload:
             meta_payload = {}
             
@@ -327,9 +331,8 @@ def get_ai_response(
             meta_payload["assets"] = [{"type": "image", "url": url, "alt": "Generated Visualization"} for url in generated_assets]
             
         if sources_data:
-            meta_payload["sources"] = sources_data # 🟢 Save the Clean Sources!
+            meta_payload["sources"] = sources_data
 
-        # Cleanup empty dict
         if not meta_payload: meta_payload = None
 
         saved_item = save_message(
