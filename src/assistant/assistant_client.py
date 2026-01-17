@@ -34,7 +34,7 @@ def _build_runtime_signals(user_id: str | None, page: str | None, name: str | No
         f"User: {user_id or 'Guest'}",
         f"Target: {target}",
         f"Context: {exam_context}",
-        "Sources: Invicto Knowledge Base.",
+        f"Sources: Invicto Knowledge Base.",
         visuals_instruction
     ]
     if name: signals.append(f"Name: {name}.")
@@ -92,22 +92,16 @@ def send_message_to_assistant(
     vector_store_ids: List[str] | None = None,
     requires_visuals: bool = False,
     web_search_config: Dict[str, Any] | None = None,
-    model_override: str | None = None,
     user_location: Dict[str, str] | None = None 
 ) -> Tuple[str, List[str], List[Dict[str, str]]]:
     
     client = get_openai_client()
     cfg = get_model_config(mode)
 
-    # 1. Config Model Strategy
-    if model_override:
-        target_model = cfg.search_model
-        active_temp, active_top_p = cfg.search_temperature, cfg.search_top_p
-        active_effort = cfg.search_reasoning_effort
-    else:
-        target_model = cfg.model
-        active_temp, active_top_p = cfg.temperature, cfg.top_p
-        active_effort = cfg.reasoning_effort
+    # 1. Config Model Strategy (Simplified: No overrides)
+    target_model = cfg.model
+    active_temp, active_top_p = cfg.temperature, cfg.top_p
+    active_effort = cfg.reasoning_effort
     
     # 2. Build Inputs
     system_text = system_instruction or _build_runtime_signals(user_id, page, name, email, exam_context="ICFES")

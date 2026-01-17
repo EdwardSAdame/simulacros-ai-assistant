@@ -7,7 +7,8 @@ from typing import List, Dict, Any, Tuple, Optional
 
 # 🟢 CONFIG & UTILS
 from src.config.settings import get_openai_client, get_vector_search_max_results
-from src.config.model_config import get_model_config, get_search_model_name
+# 🔴 REMOVED: get_search_model_name
+from src.config.model_config import get_model_config
 from src.config.system_instructions import build_system_instructions
 from src.config.page_vectorstores import get_stores_for_page
 from src.config.web_search_config import get_search_filters 
@@ -126,22 +127,14 @@ def get_ai_response(
     # Is search ENABLED as a tool? Yes, if we have a config.
     is_web_search_active = (web_search_config is not None)
     
-    # 🔴 FIX: Do NOT automatically override the model just because search is active.
-    # We allow the selected mode (Alpha/Omega) to decide which tool to use.
-    actual_model_override = None
-    
-    # (Optional) If you ONLY want to trigger the Search Model (o4-mini) when specific 
-    # keywords appear, you could add a mini-router here. But for now, let's respect 
-    # the user's choice (Alpha/Omega).
-    # if is_web_search_active and "buscar" in (message or "").lower():
-    #     actual_model_override = get_search_model_name()
+    # 🔴 CLEARED: We no longer check for model overrides here.
+    # The active mode (Alpha/Omega) will handle the tools.
 
     log_event("context_resolution", {
         "user_id": user_id,
         "input_url": page,
         "derived_exam": exam_context, 
         "web_search_active": is_web_search_active,
-        "model_override": actual_model_override, 
         "trigger_message": message[:50] if message else "None"
     })
 
@@ -292,6 +285,7 @@ def get_ai_response(
                 web_search_active=is_web_search_active 
             )
 
+            # 🟢 UPDATED: Removed 'model_override' parameter
             response_tuple = send_message_to_assistant(
                 conversation_input=conversation_input,
                 user_id=user_id,
@@ -302,8 +296,7 @@ def get_ai_response(
                 system_instruction=system_prompt,
                 vector_store_ids=selected_vector_stores,
                 requires_visuals=requires_visuals,
-                web_search_config=web_search_config,
-                model_override=actual_model_override # 🟢 Will now be None unless we explicitly set it
+                web_search_config=web_search_config
             )
             
             final_reply_text = response_tuple[0]
