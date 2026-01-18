@@ -7,7 +7,6 @@ from typing import List, Dict, Any, Tuple, Optional
 
 # 🟢 CONFIG & UTILS
 from src.config.settings import get_openai_client, get_vector_search_max_results
-# 🔴 REMOVED: get_search_model_name
 from src.config.model_config import get_model_config
 from src.config.system_instructions import build_system_instructions
 from src.config.page_vectorstores import get_stores_for_page
@@ -38,7 +37,6 @@ def decimal_default(obj):
         return int(obj) if obj % 1 == 0 else float(obj)
     raise TypeError
 
-# 🟢 NEW LOGIC: Context Resolution Engine
 def determine_exam_context(page_url: str, message_text: str | None = None) -> str:
     """
     Decides the Exam Context (UNAL vs ICFES vs GENERAL).
@@ -121,14 +119,8 @@ def get_ai_response(
     selected_vector_stores = get_stores_for_page(page)
 
     # 🟢 2. DETERMINE WEB SEARCH CONFIG
-    # Get filters based on context (ICFES -> icfes.gov.co, etc.)
     web_search_config = get_search_filters(exam_context)
-    
-    # Is search ENABLED as a tool? Yes, if we have a config.
     is_web_search_active = (web_search_config is not None)
-    
-    # 🔴 CLEARED: We no longer check for model overrides here.
-    # The active mode (Alpha/Omega) will handle the tools.
 
     log_event("context_resolution", {
         "user_id": user_id,
@@ -237,12 +229,12 @@ def get_ai_response(
                         error_msg = event.get("error", "Unknown stream error")
                         stream_manager.send_error(error_msg)
 
-                # 🟢 CRITICAL FIX: Explicitly count questions for Frontend
+                # 🟢 CRITICAL FIX FOR STREAMING: Calculate and add question_count
                 quiz_data = {
                     "quiz_mode": "batch", 
                     "topic": ai_generated_title,
                     "questions": accumulated_questions,
-                    "question_count": len(accumulated_questions)  # <-- ADDED THIS LINE
+                    "question_count": len(accumulated_questions)  # <-- THIS WAS MISSING
                 }
 
             else:
@@ -257,12 +249,12 @@ def get_ai_response(
                     exam_context=exam_context 
                 )
                 
-                # 🟢 CRITICAL FIX: Explicitly count questions for Frontend
+                # 🟢 CRITICAL FIX FOR BATCH: Calculate and add question_count
                 quiz_data = {
                     "quiz_mode": "batch", 
                     "topic": quiz_model.title,
                     "questions": [q.dict() for q in quiz_model.questions],
-                    "question_count": len(quiz_model.questions) # <-- ADDED THIS LINE
+                    "question_count": len(quiz_model.questions) # <-- THIS WAS MISSING
                 }
                 final_reply_text = quiz_model.intro_message
 
@@ -290,7 +282,6 @@ def get_ai_response(
                 web_search_active=is_web_search_active 
             )
 
-            # 🟢 UPDATED: Removed 'model_override' parameter
             response_tuple = send_message_to_assistant(
                 conversation_input=conversation_input,
                 user_id=user_id,
