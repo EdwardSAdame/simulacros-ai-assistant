@@ -237,10 +237,12 @@ def get_ai_response(
                         error_msg = event.get("error", "Unknown stream error")
                         stream_manager.send_error(error_msg)
 
+                # 🟢 CRITICAL FIX: Explicitly count questions for Frontend
                 quiz_data = {
                     "quiz_mode": "batch", 
                     "topic": ai_generated_title,
-                    "questions": accumulated_questions
+                    "questions": accumulated_questions,
+                    "question_count": len(accumulated_questions)  # <-- ADDED THIS LINE
                 }
 
             else:
@@ -254,10 +256,13 @@ def get_ai_response(
                     mode=mode,
                     exam_context=exam_context 
                 )
+                
+                # 🟢 CRITICAL FIX: Explicitly count questions for Frontend
                 quiz_data = {
                     "quiz_mode": "batch", 
                     "topic": quiz_model.title,
-                    "questions": [q.dict() for q in quiz_model.questions]
+                    "questions": [q.dict() for q in quiz_model.questions],
+                    "question_count": len(quiz_model.questions) # <-- ADDED THIS LINE
                 }
                 final_reply_text = quiz_model.intro_message
 
