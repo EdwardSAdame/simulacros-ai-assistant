@@ -49,7 +49,13 @@ class AiAssetsService:
             if not uploaded_urls and container_id:
                 try:
                     container_files = cf_client.list(container_id)
-                    for c_file in container_files:
+                    
+                    # 🟢 FIX: OpenAI lists files Newest-First (Descending).
+                    # We must sort them Oldest-First (Ascending) to match the Question order (Q1, Q2, Q3...).
+                    all_files = [f for f in container_files]
+                    all_files.sort(key=lambda f: getattr(f, "created_at", 0))
+
+                    for c_file in all_files:
                         fname = getattr(c_file, "filename", None) or getattr(c_file, "name", None)
                         fid = getattr(c_file, "id", None) or getattr(c_file, "file_id", None)
                         if not fname: fname = "generated_plot.png"
