@@ -22,31 +22,40 @@ def build_runtime_context(
         target_semester = infer_target_semester()
 
         # 2. Build Base Signals
-        # 🟢 UPDATED: Removed "Sources:..." as requested.
         signals = [
-            f"Today is {time_info['full_human']}.",
-            f"Page: {page if page else '/'}",
-            f"Target: {target_semester}"
+            f"Current Date: {time_info['full_human']}."
         ]
 
-        # 3. Inject Name with LLM Discretion
+        # 3. Contextual Page Signal (Narrative)
+        if page and page != "/" and page.strip():
+            signals.append(f"Context: The user is currently browsing the page '{page}'. Tailor your answers to this specific section if relevant.")
+        else:
+            signals.append("Context: The user is on the home page.")
+
+        # 4. Meaningful Target Signal (Goal-Oriented)
+        if target_semester:
+            signals.append(f"Goal: The user is likely preparing now to pass the admission exam and begin their university studies in semester {target_semester}.")
+
+        # 5. Smart Identity Logic (AI-Driven Name Parsing)
         if name and name.strip():
             clean_name = name.strip()
             
             # Basic hygiene: still block obvious system defaults
             if clean_name.lower() in ["guest", "visitor", "user", "anonymous", "undefined"]:
-                signals.insert(1, "The user is anonymous. Do NOT refer to them as 'Guest'.")
+                signals.append("User Identity: The user is anonymous. Do NOT refer to them as 'Guest'.")
             else:
-                # LLM SELF-CORRECTION INSTRUCTION
-                signals.insert(1, f"The user's name is '{clean_name}'. Use it ONLY if it is a valid human name. If it is numbers, gibberish, or a handle, ignore it.")
+                # 🟢 LOGIC: Give the AI the full name but instruct it to be smart.
+                # It handles "EdwardAdame" -> "Edward", "123User" -> Ignore, etc.
+                signals.append(
+                    f"User Identity: The user's name is '{clean_name}'. "
+                    "Use it ONLY if it is a valid human name. If it is numbers, gibberish, or a handle, ignore it. "
+                    "Address them naturally by their first name."
+                )
         else:
-            signals.insert(1, "The user is anonymous. Do NOT refer to them as 'Guest'.")
-
-        # 🟢 UPDATED: The 'VISUALS' block is completely removed from here.
-        # It is now handled cleanly in 'system_instructions.py' via the Gatekeeper logic.
+            signals.append("User Identity: The user is anonymous. Do NOT refer to them as 'Guest'.")
 
         return signals
 
     except Exception as e:
         logger.error(f"Error building runtime context: {e}")
-        return [f"Page: {page}"]
+        return [f"Page: {page}", f"Date: {get_current_time_info()['full_human']}"]
