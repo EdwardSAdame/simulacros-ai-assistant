@@ -14,6 +14,8 @@ from src.schemas.quiz_schemas import QuizResponse
 
 # 🔹 Modular Services
 from src.services.ai_assets_service import ai_assets_service
+# 🟢 NEW IMPORT: Context Builder (To fix the disconnect)
+from src.services.context_builder import build_runtime_context
 from src.utils.stream_parser import StreamParser
 from src.utils.quiz_utils import QuizUtils
 
@@ -28,22 +30,20 @@ def _build_runtime_signals(
     name: str | None, 
     email: str | None, 
     exam_context: str = "ICFES",
-    requires_visuals: bool = False  # 🟢 NEW PARAMETER
+    requires_visuals: bool = False
 ) -> str:
     """Generates the dynamic system context for the AI."""
-    tinfo = get_current_time_info()
-    target = infer_target_semester()
     
-    signals = [
-        f"Today is {tinfo['full_human']}.",
-        f"Page: {page or '/'}",
-        f"User: {user_id or 'Guest'}",
-        f"Target: {target}",
-        f"Context: {exam_context}",
-        f"Sources: Invicto Knowledge Base."
-    ]
+    # 🟢 1. DELEGATE TO CENTRALIZED BUILDER
+    # This aligns the Quiz Flow with the Chat Flow (Smart Name, No UserID/Email)
+    signals = build_runtime_context(
+        page=page,
+        user_id=user_id, 
+        name=name,
+        email=email
+    )
 
-    # 🟢 CONDITIONAL INJECTION: Only if visuals are required
+    # 🟢 2. INJECT QUIZ-SPECIFIC VISUALS (If needed)
     if requires_visuals:
         visuals_trigger = (
             "VISUALS: Use the 'python' tool (Code Interpreter) to AUTOMATICALLY GENERATE PLOTS for any request involving "
@@ -52,9 +52,8 @@ def _build_runtime_signals(
         visual_style_guide = build_visual_instructions()
         signals.append(visuals_trigger)
         signals.append(visual_style_guide)
-
-    if name: signals.append(f"Name: {name}.")
-    if email: signals.append(f"Email: {email}.")
+    
+    # Note: 'Context: GENERAL' and 'Sources: ...' are removed as they are not in build_runtime_context
     
     return build_system_instructions(extras=signals, exam_context=exam_context)
 
@@ -118,6 +117,7 @@ def send_message_to_assistant(
     active_effort = cfg.reasoning_effort
     
     # 2. Build Inputs
+    # Note: We pass requires_visuals here to ensure correct signaling
     system_text = system_instruction or _build_runtime_signals(
         user_id, page, name, email, exam_context="ICFES", requires_visuals=requires_visuals
     )
@@ -129,7 +129,6 @@ def send_message_to_assistant(
     if vector_store_ids:
         tools.append({"type": "file_search", "vector_store_ids": vector_store_ids, "max_num_results": get_vector_search_max_results()})
     
-    # 🟢 CONDITIONAL TOOL: Only attach Code Interpreter if needed
     if requires_visuals:
         tools.append({"type": "code_interpreter", "container": {"type": "auto"}})
         
@@ -184,13 +183,12 @@ def generate_structured_quiz(
     email: str | None = None, 
     mode: str = "omega",
     exam_context: str = "ICFES",
-    requires_visuals: bool = False # 🟢 NEW PARAMETER
+    requires_visuals: bool = False
 ) -> QuizResponse:
     
     client = get_openai_client()
     cfg = get_model_config(mode)
     
-    # 🟢 PASS THE FLAG DOWN
     system_text = _build_runtime_signals(
         user_id, page, name, email, exam_context=exam_context, requires_visuals=requires_visuals
     )
@@ -201,10 +199,8 @@ def generate_structured_quiz(
     req = {
         "model": cfg.model, "input": api_input,
         "text_format": QuizResponse, 
-        # "tools": ... (We will add tools conditionally below)
     }
     
-    # 🟢 CONDITIONAL TOOL
     if requires_visuals:
         req["tools"] = [{"type": "code_interpreter", "container": {"type": "auto"}}]
     
@@ -242,13 +238,12 @@ def stream_structured_quiz(
     email: str | None = None, 
     mode: str = "omega",
     exam_context: str = "ICFES",
-    requires_visuals: bool = False # 🟢 NEW PARAMETER
+    requires_visuals: bool = False
 ) -> Generator[Dict[str, Any], None, None]:
     
     client = get_openai_client()
     cfg = get_model_config(mode)
     
-    # 🟢 PASS THE FLAG DOWN
     system_text = _build_runtime_signals(
         user_id, page, name, email, exam_context=exam_context, requires_visuals=requires_visuals
     )
@@ -259,10 +254,8 @@ def stream_structured_quiz(
     req = {
         "model": cfg.model, "input": api_input,
         "text_format": QuizResponse, 
-        # "tools": ... (Conditional below)
     }
     
-    # 🟢 CONDITIONAL TOOL
     if requires_visuals:
         req["tools"] = [{"type": "code_interpreter", "container": {"type": "auto"}}]
     
