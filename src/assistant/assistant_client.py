@@ -265,19 +265,24 @@ def stream_structured_quiz(
                     final_parsed = event["full_response"]
                     
                     # 🟢 DELEGATED: Use AiAssetsService for file handling
+                    urls = []
                     if hasattr(stream, 'get_final_response'):
                         final_raw = stream.get_final_response()
                         urls = ai_assets_service.handle_generated_files(client, final_raw, folder="quiz_assets")
-                        if final_parsed: _assign_urls_to_quiz(final_parsed, urls)
-
-                    # Consistency Check: Overwrite final with shuffled list
+                        # ⚠️ WAS REMOVED HERE to avoid overwrite issue
+                    
+                    # Consistency Check: Overwrite final with shuffled list (Good Options, Bad URLs)
                     if final_parsed and hasattr(final_parsed, 'questions') and streamed_questions:
                         if len(final_parsed.questions) == len(streamed_questions):
-                            final_parsed.questions = streamed_questions
+                            final_parsed.questions = streamed_questions 
                         else:
                              # Fallback shuffle if counts mismatch
-                             for q in final_parsed.questions:
+                            for q in final_parsed.questions:
                                  QuizUtils.shuffle_options(q)
+
+                    # 🟢 FIX: Apply URL assignment AFTER the overwrite (Good Options, Good URLs)
+                    if final_parsed and urls:
+                        _assign_urls_to_quiz(final_parsed, urls)
 
                     yield {"type": "done", "full_response": final_parsed}
                     
