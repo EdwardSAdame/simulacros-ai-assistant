@@ -192,7 +192,8 @@ def get_ai_response(
                     name=(name or None),
                     email=_normalize_email_for_storage(email),
                     mode=mode,
-                    exam_context=exam_context 
+                    exam_context=exam_context,
+                    requires_visuals=requires_visuals  # 🟢 FIX: PASS THE FLAG
                 )
                 
                 seen_indices = set()
@@ -246,7 +247,8 @@ def get_ai_response(
                     name=(name or None),
                     email=_normalize_email_for_storage(email),
                     mode=mode,
-                    exam_context=exam_context 
+                    exam_context=exam_context,
+                    requires_visuals=requires_visuals # 🟢 FIX: PASS THE FLAG
                 )
                 
                 # 🟢 CRITICAL FIX FOR BATCH: Calculate and add question_count

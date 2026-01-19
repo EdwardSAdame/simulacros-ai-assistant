@@ -7,10 +7,12 @@ import re
 from src.config.settings import get_openai_client, get_vector_search_max_results
 from src.config.model_config import get_model_config
 from src.config.system_instructions import build_system_instructions
+# 🟢 NEW IMPORT: Visual Guidelines
+from src.config.visual_instructions import build_visual_instructions
 from src.utils.time_utils import get_current_time_info, infer_target_semester
 from src.schemas.quiz_schemas import QuizResponse
 
-# 🔹 Modular Services (The Clean Up)
+# 🔹 Modular Services
 from src.services.ai_assets_service import ai_assets_service
 from src.utils.stream_parser import StreamParser
 from src.utils.quiz_utils import QuizUtils
@@ -20,25 +22,40 @@ logger = logging.getLogger(__name__)
 # ------------------------------------------------------------------
 # 🔹 HELPER: Context & Signal Builders
 # ------------------------------------------------------------------
-def _build_runtime_signals(user_id: str | None, page: str | None, name: str | None, email: str | None, exam_context: str = "ICFES") -> str:
+def _build_runtime_signals(
+    user_id: str | None, 
+    page: str | None, 
+    name: str | None, 
+    email: str | None, 
+    exam_context: str = "ICFES",
+    requires_visuals: bool = False  # 🟢 NEW PARAMETER
+) -> str:
     """Generates the dynamic system context for the AI."""
     tinfo = get_current_time_info()
     target = infer_target_semester()
-    visuals_instruction = (
-        "VISUALS: Use the 'python' tool (Code Interpreter) to AUTOMATICALLY GENERATE PLOTS for any request involving "
-        "mathematical functions, geometry, or data trends. Do not just describe the graph—DRAW IT. Output the file."
-    )
+    
     signals = [
         f"Today is {tinfo['full_human']}.",
         f"Page: {page or '/'}",
         f"User: {user_id or 'Guest'}",
         f"Target: {target}",
         f"Context: {exam_context}",
-        f"Sources: Invicto Knowledge Base.",
-        visuals_instruction
+        f"Sources: Invicto Knowledge Base."
     ]
+
+    # 🟢 CONDITIONAL INJECTION: Only if visuals are required
+    if requires_visuals:
+        visuals_trigger = (
+            "VISUALS: Use the 'python' tool (Code Interpreter) to AUTOMATICALLY GENERATE PLOTS for any request involving "
+            "mathematical functions, geometry, or data trends. Do not just describe the graph—DRAW IT. Output the file."
+        )
+        visual_style_guide = build_visual_instructions()
+        signals.append(visuals_trigger)
+        signals.append(visual_style_guide)
+
     if name: signals.append(f"Name: {name}.")
     if email: signals.append(f"Email: {email}.")
+    
     return build_system_instructions(extras=signals, exam_context=exam_context)
 
 def _assign_urls_to_quiz(quiz_data: QuizResponse, urls: List[str]):
@@ -69,7 +86,6 @@ def _extract_sources(response_obj: Any) -> List[Dict[str, str]]:
     except Exception as e:
         logger.error(f"Error extracting sources: {e}")
     
-    # Deduplicate
     unique_sources = []
     seen_urls = set()
     for s in sources:
@@ -97,14 +113,14 @@ def send_message_to_assistant(
     
     client = get_openai_client()
     cfg = get_model_config(mode)
-
-    # 1. Config Model Strategy (Simplified: No overrides)
     target_model = cfg.model
     active_temp, active_top_p = cfg.temperature, cfg.top_p
     active_effort = cfg.reasoning_effort
     
     # 2. Build Inputs
-    system_text = system_instruction or _build_runtime_signals(user_id, page, name, email, exam_context="ICFES")
+    system_text = system_instruction or _build_runtime_signals(
+        user_id, page, name, email, exam_context="ICFES", requires_visuals=requires_visuals
+    )
     api_input = [{"role": "system", "content": [{"type": "input_text", "text": system_text}]}]
     api_input.extend(conversation_input)
 
@@ -112,8 +128,11 @@ def send_message_to_assistant(
     tools = []
     if vector_store_ids:
         tools.append({"type": "file_search", "vector_store_ids": vector_store_ids, "max_num_results": get_vector_search_max_results()})
+    
+    # 🟢 CONDITIONAL TOOL: Only attach Code Interpreter if needed
     if requires_visuals:
         tools.append({"type": "code_interpreter", "container": {"type": "auto"}})
+        
     if web_search_config:
         web_tool = {"type": "web_search"}
         if "allowed_domains" in web_search_config:
@@ -135,7 +154,6 @@ def send_message_to_assistant(
     try:
         resp = client.responses.create(**{k: v for k, v in req.items() if v is not None})
         
-        # 5. Extract Text
         text = getattr(resp, "output_text", None)
         if not text:
             chunks = []
@@ -147,7 +165,6 @@ def send_message_to_assistant(
         if text: 
             text = re.sub(r'\[.*?\]\(sandbox:/mnt/data/.*?\)', '', text).strip()
 
-        # 6. Delegate Heavy Lifting
         generated_urls = ai_assets_service.handle_generated_files(client, resp, folder="chat_assets")
         sources_list = _extract_sources(resp)
 
@@ -166,12 +183,17 @@ def generate_structured_quiz(
     name: str | None = None, 
     email: str | None = None, 
     mode: str = "omega",
-    exam_context: str = "ICFES" 
+    exam_context: str = "ICFES",
+    requires_visuals: bool = False # 🟢 NEW PARAMETER
 ) -> QuizResponse:
     
     client = get_openai_client()
     cfg = get_model_config(mode)
-    system_text = _build_runtime_signals(user_id, page, name, email, exam_context=exam_context)
+    
+    # 🟢 PASS THE FLAG DOWN
+    system_text = _build_runtime_signals(
+        user_id, page, name, email, exam_context=exam_context, requires_visuals=requires_visuals
+    )
     
     api_input = [{"role": "system", "content": [{"type": "input_text", "text": system_text}]}]
     api_input.extend(conversation_input)
@@ -179,8 +201,12 @@ def generate_structured_quiz(
     req = {
         "model": cfg.model, "input": api_input,
         "text_format": QuizResponse, 
-        "tools": [{"type": "code_interpreter", "container": {"type": "auto"}}]
+        # "tools": ... (We will add tools conditionally below)
     }
+    
+    # 🟢 CONDITIONAL TOOL
+    if requires_visuals:
+        req["tools"] = [{"type": "code_interpreter", "container": {"type": "auto"}}]
     
     is_reasoning = (cfg.model.startswith("o") and not cfg.model.startswith("gpt")) or "reasoning" in cfg.model
     if is_reasoning:
@@ -193,11 +219,9 @@ def generate_structured_quiz(
         resp = client.responses.parse(**{k: v for k, v in req.items() if v is not None})
         quiz = resp.output_parsed
         
-        # Delegate Assets
         urls = ai_assets_service.handle_generated_files(client, resp, folder="quiz_assets")
         _assign_urls_to_quiz(quiz, urls)
         
-        # Delegate Logic (Shuffling)
         if quiz and quiz.questions:
             for q in quiz.questions:
                 QuizUtils.shuffle_options(q)
@@ -217,12 +241,17 @@ def stream_structured_quiz(
     name: str | None = None, 
     email: str | None = None, 
     mode: str = "omega",
-    exam_context: str = "ICFES" 
+    exam_context: str = "ICFES",
+    requires_visuals: bool = False # 🟢 NEW PARAMETER
 ) -> Generator[Dict[str, Any], None, None]:
     
     client = get_openai_client()
     cfg = get_model_config(mode)
-    system_text = _build_runtime_signals(user_id, page, name, email, exam_context=exam_context)
+    
+    # 🟢 PASS THE FLAG DOWN
+    system_text = _build_runtime_signals(
+        user_id, page, name, email, exam_context=exam_context, requires_visuals=requires_visuals
+    )
     
     api_input = [{"role": "system", "content": [{"type": "input_text", "text": system_text}]}]
     api_input.extend(conversation_input)
@@ -230,8 +259,12 @@ def stream_structured_quiz(
     req = {
         "model": cfg.model, "input": api_input,
         "text_format": QuizResponse, 
-        "tools": [{"type": "code_interpreter", "container": {"type": "auto"}}]
+        # "tools": ... (Conditional below)
     }
+    
+    # 🟢 CONDITIONAL TOOL
+    if requires_visuals:
+        req["tools"] = [{"type": "code_interpreter", "container": {"type": "auto"}}]
     
     is_reasoning = (cfg.model.startswith("o") and not cfg.model.startswith("gpt")) or "reasoning" in cfg.model
     if is_reasoning:
@@ -245,7 +278,6 @@ def stream_structured_quiz(
     try:
         with client.responses.stream(**{k: v for k, v in req.items() if v is not None}) as stream:
             
-            # 🟢 DELEGATED: Use StreamParser for the complex parsing logic
             parser_generator = StreamParser.parse_quiz_stream(stream)
             
             for event in parser_generator:
@@ -254,33 +286,25 @@ def stream_structured_quiz(
                 
                 elif event["type"] == "question":
                     q_obj = event["data"]
-                    
-                    # 🟢 DELEGATED: Use QuizUtils for shuffling
                     QuizUtils.shuffle_options(q_obj)
-                    
                     streamed_questions.append(q_obj)
                     yield event
                 
                 elif event["type"] == "done":
                     final_parsed = event["full_response"]
                     
-                    # 🟢 DELEGATED: Use AiAssetsService for file handling
                     urls = []
                     if hasattr(stream, 'get_final_response'):
                         final_raw = stream.get_final_response()
                         urls = ai_assets_service.handle_generated_files(client, final_raw, folder="quiz_assets")
-                        # ⚠️ WAS REMOVED HERE to avoid overwrite issue
                     
-                    # Consistency Check: Overwrite final with shuffled list (Good Options, Bad URLs)
                     if final_parsed and hasattr(final_parsed, 'questions') and streamed_questions:
                         if len(final_parsed.questions) == len(streamed_questions):
                             final_parsed.questions = streamed_questions 
                         else:
-                             # Fallback shuffle if counts mismatch
                             for q in final_parsed.questions:
                                  QuizUtils.shuffle_options(q)
 
-                    # 🟢 FIX: Apply URL assignment AFTER the overwrite (Good Options, Good URLs)
                     if final_parsed and urls:
                         _assign_urls_to_quiz(final_parsed, urls)
 
