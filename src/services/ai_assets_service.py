@@ -32,7 +32,7 @@ class AiAssetsService:
                           (getattr(item.code_interpreter_call, "container_id", None) if hasattr(item, "code_interpreter_call") else None)
                     if cid: container_id = cid
 
-                # Detect File Citations
+                # Detect File Citations (Explicitly linked files)
                 if item_type == "message":
                     content_list = getattr(item, "content", []) or []
                     if isinstance(content_list, list):
@@ -46,13 +46,16 @@ class AiAssetsService:
                                         AiAssetsService._process_file(cf_client, container_id, file_id, fname, uploaded_urls, folder)
 
             # Fallback: List files in container if ID exists but no specific citation found
+            # 🟢 CRITICAL FIX: Sort files by creation time to ensure Q1 gets Image1, Q2 gets Image2
             if not uploaded_urls and container_id:
                 try:
                     container_files = cf_client.list(container_id)
                     
-                    # 🟢 FIX: OpenAI lists files Newest-First (Descending).
-                    # We must sort them Oldest-First (Ascending) to match the Question order (Q1, Q2, Q3...).
+                    # Convert iterator/generator to list
                     all_files = [f for f in container_files]
+                    
+                    # 🟢 SORT ASCENDING (Oldest First)
+                    # OpenAI returns Newest First by default. We reverse that.
                     all_files.sort(key=lambda f: getattr(f, "created_at", 0))
 
                     for c_file in all_files:
@@ -61,8 +64,12 @@ class AiAssetsService:
                         if not fname: fname = "generated_plot.png"
                         if fid: 
                             AiAssetsService._process_file(cf_client, container_id, fid, fname, uploaded_urls, folder)
-                except Exception: pass
-        except Exception: pass
+                except Exception as e:
+                    logger.warning(f"Failed to list container files: {e}")
+
+        except Exception as e:
+            logger.error(f"Error handling generated files: {e}")
+            
         return uploaded_urls
 
     @staticmethod
@@ -82,18 +89,21 @@ class AiAssetsService:
         """Downloads content from OpenAI and uploads to AWS S3."""
         try:
             file_content = None
+            # Attempt retrieval
             if hasattr(cf_client, "content") and hasattr(cf_client.content, "retrieve"):
                 try:
                     if container_id: file_content = cf_client.content.retrieve(container_id=container_id, file_id=file_id)
                     else: file_content = cf_client.content.retrieve(file_id=file_id)
                 except: pass
-                
+            
+            # Fallback retrieval style
             if file_content is None and callable(getattr(cf_client, "content", None)):
                 try: file_content = cf_client.content(file_id)
                 except: pass
 
             if not file_content: return
 
+            # Extract bytes
             if hasattr(file_content, "read"): file_content = file_content.read()
             elif hasattr(file_content, "content"): file_content = file_content.content
             elif hasattr(file_content, "text"): file_content = file_content.text.encode('utf-8')
@@ -102,6 +112,7 @@ class AiAssetsService:
                 try: file_content = bytes(file_content)
                 except: pass
 
+            # Determine Content Type
             fname = str(filename).lower()
             if fname.endswith(".jpg") or fname.endswith(".jpeg"): ctype = "image/jpeg"
             elif fname.endswith(".pdf"): ctype = "application/pdf"
@@ -109,6 +120,7 @@ class AiAssetsService:
                 ctype = "image/png"
                 if not fname.endswith(".png"): filename = f"{filename}.png"
 
+            # Upload
             s3_url = storage_service.upload_image_from_bytes(file_content, ctype, folder=folder)
             logger.info(f"✅ Asset uploaded to S3: {s3_url}")
             url_list.append(s3_url)
