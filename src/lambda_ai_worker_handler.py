@@ -107,7 +107,8 @@ def lambda_handler(event, context):
                         "source": source_type,
                         "client_row_id": client_row_id,
                         "client_action": client_action,
-                        "requires_visuals": requires_visuals 
+                        "requires_visuals": requires_visuals,
+                        "intent": intent  # 🟢 FIX: Send intent so frontend can block the loader!
                     })
                     
                     api_gateway_client.post_to_connection(
