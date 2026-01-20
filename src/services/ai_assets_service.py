@@ -33,7 +33,7 @@ class AiAssetsService:
                           (getattr(item.code_interpreter_call, "container_id", None) if hasattr(item, "code_interpreter_call") else None)
                     if cid: container_id = cid
 
-                # Detect File Citations (Explicitly linked files)
+                # Detect File Citations (Strategy A: Explicit Citations)
                 if item_type == "message":
                     content_list = getattr(item, "content", []) or []
                     if isinstance(content_list, list):
@@ -47,22 +47,25 @@ class AiAssetsService:
                                         s3_url = AiAssetsService._process_file(cf_client, container_id, file_id, fname, folder)
                                         if s3_url: uploaded_map[fname] = s3_url
 
-            # Fallback: List files in container if ID exists but no specific citation found
-            if not uploaded_map and container_id:
+            # Fallback: List files in container (Strategy B: List All)
+            # 🟢 FIX: Eliminamos 'if not uploaded_map'. Siempre listamos los archivos si hay un container_id.
+            if container_id:
                 try:
                     container_files = cf_client.list(container_id)
                     all_files = [f for f in container_files]
                     
-                    # Note: We removed the sort logic because we now match by filename.
-
                     for c_file in all_files:
                         fname = getattr(c_file, "filename", None) or getattr(c_file, "name", None)
                         fid = getattr(c_file, "id", None) or getattr(c_file, "file_id", None)
+                        
                         if not fname: fname = "generated_plot.png"
-                        if fid: 
+                        
+                        # Optimization: Solo procesamos si NO lo tenemos ya en el mapa
+                        if fid and fname not in uploaded_map:
                             s3_url = AiAssetsService._process_file(cf_client, container_id, fid, fname, folder)
                             if s3_url:
                                 uploaded_map[fname] = s3_url
+                                
                 except Exception as e:
                     logger.warning(f"Failed to list container files: {e}")
 
@@ -127,5 +130,4 @@ class AiAssetsService:
             logger.error(f"File transfer failed for {file_id}: {e}")
             return None
 
-# 🔴 IMPORTANT: This singleton was missing in the previous version
 ai_assets_service = AiAssetsService()
