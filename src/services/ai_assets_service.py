@@ -1,7 +1,6 @@
 # src/services/ai_assets_service.py
 import logging
-import os
-from typing import Dict, List, Any
+from typing import List, Any
 from src.services.storage_service import storage_service
 
 logger = logging.getLogger(__name__)
@@ -13,28 +12,31 @@ class AiAssetsService:
     """
 
     @staticmethod
-    def handle_generated_files(client, response_obj, folder: str = "chat_assets") -> Dict[str, str]:
-        """Scans the OpenAI response, uploads files, and returns a map of {filename: s3_url}."""
-        uploaded_map = {} 
+    def handle_generated_files(client, response_obj, folder: str = "chat_assets") -> List[str]:
+        """
+        Scans the OpenAI response for generated files, sorts them by creation time,
+        uploads them, and returns a sequential list of S3 URLs.
+        """
+        uploaded_urls = [] # Final ordered list of URLs
+        processed_file_ids = set() # Prevent duplicate uploads
         container_id = None
         
         cf_client = AiAssetsService._get_files_client(client)
-        if not cf_client: return {}
+        if not cf_client: return []
 
         try:
             output_items = getattr(response_obj, "output", []) or []
             for item in output_items:
                 item_type = getattr(item, "type", "")
                 
-                # 1. Try to detect Container ID from a Tool Call (Standard)
+                # 1. Detect Container ID (from Tool Call or Message)
                 if item_type == "code_interpreter_call":
                     cid = getattr(item, "container_id", None) or \
                           (getattr(item.code_interpreter, "container_id", None) if hasattr(item, "code_interpreter") else None) or \
                           (getattr(item.code_interpreter_call, "container_id", None) if hasattr(item, "code_interpreter_call") else None)
                     if cid: container_id = cid
 
-                # 2. Try to detect Container ID from Annotations (Critical Fallback)
-                # Often, structured outputs hide the container_id inside the citation itself.
+                # 2. Detect explicit citations (and grab container_id if we missed it)
                 if item_type == "message":
                     content_list = getattr(item, "content", []) or []
                     if isinstance(content_list, list):
@@ -42,42 +44,42 @@ class AiAssetsService:
                             annotations = getattr(part, "annotations", []) or []
                             for ann in annotations:
                                 if getattr(ann, "type", "") == "container_file_citation":
-                                    # 🟢 CRITICAL FIX: Extract container_id from the citation if we missed it earlier
                                     if not container_id:
                                         container_id = getattr(ann, "container_id", None)
-                                    
-                                    file_id = getattr(ann, "file_id", None)
-                                    fname = getattr(ann, "filename", "graph.png")
-                                    if file_id: 
-                                        s3_url = AiAssetsService._process_file(cf_client, container_id, file_id, fname, folder)
-                                        if s3_url: uploaded_map[fname] = s3_url
+                                    # We do NOT process files here anymore to avoid ordering issues.
+                                    # We strictly use the container listing below for sorting.
 
-            # 3. Strategy B: List all files in the container (The "Catch-All")
-            # This is now guaranteed to run because we grabbed the container_id from the annotation above.
+            # 3. STRATEGY: List, Sort, and Upload
+            # We strictly list the container contents and sort by 'created_at' to ensure
+            # the images match the logical order of the quiz questions (Q1 -> Image 1).
             if container_id:
                 try:
                     container_files = cf_client.list(container_id)
+                    
+                    # Convert iterator to list
                     all_files = [f for f in container_files]
                     
+                    # 🟢 CRITICAL FIX: Sort Ascending (Oldest First)
+                    # OpenAI returns Newest First. We reverse this to match Q1, Q2, Q3 sequence.
+                    all_files.sort(key=lambda f: getattr(f, "created_at", 0))
+
                     for c_file in all_files:
-                        fname = getattr(c_file, "filename", None) or getattr(c_file, "name", None)
                         fid = getattr(c_file, "id", None) or getattr(c_file, "file_id", None)
+                        fname = getattr(c_file, "filename", None) or getattr(c_file, "name", None) or "plot.png"
                         
-                        if not fname: fname = "generated_plot.png"
-                        
-                        # Optimization: Only process if we haven't uploaded it yet
-                        if fid and fname not in uploaded_map:
+                        if fid and fid not in processed_file_ids: 
                             s3_url = AiAssetsService._process_file(cf_client, container_id, fid, fname, folder)
                             if s3_url:
-                                uploaded_map[fname] = s3_url
-                                
+                                uploaded_urls.append(s3_url)
+                                processed_file_ids.add(fid)
+                            
                 except Exception as e:
                     logger.warning(f"Failed to list container files: {e}")
 
         except Exception as e:
             logger.error(f"Error handling generated files: {e}")
             
-        return uploaded_map
+        return uploaded_urls
 
     @staticmethod
     def _get_files_client(client):
@@ -135,5 +137,5 @@ class AiAssetsService:
             logger.error(f"File transfer failed for {file_id}: {e}")
             return None
 
-# Singleton instantiation
+# Expose a simple singleton
 ai_assets_service = AiAssetsService()

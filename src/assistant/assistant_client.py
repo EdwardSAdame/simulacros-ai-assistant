@@ -57,42 +57,20 @@ def _build_runtime_signals(
     
     return build_system_instructions(extras=signals, exam_context=exam_context)
 
-def _assign_urls_to_quiz(quiz_data: QuizResponse, url_map: Dict[str, str]):
+def _assign_urls_to_quiz(quiz_data: QuizResponse, urls: List[str]):
     """
-    Binds generated image URLs to quiz questions using EXACT FILENAME MATCHING.
-    Fixes the issue where images were assigned in reverse order.
-    
-    :param quiz_data: The parsed Pydantic object containing questions.
-    :param url_map: Dictionary { 'filename.png': 'https://s3.../url' } returned by ai_assets_service.
+    Binds generated image URLs to quiz questions sequentially.
+    The urls list is expected to be sorted by creation time (Oldest -> Q1).
     """
-    if not url_map or not quiz_data: return
-    
-    # Fallback list for legacy behavior or unmatched files
-    fallback_urls = list(url_map.values())
-    fallback_idx = 0
-
+    if not urls or not quiz_data: return
+    idx = 0
     for q in quiz_data.questions:
-        # Check if the question expects an image (OpenAI usually returns 'sandbox:/mnt/data/filename')
-        if q.image_url and ("/mnt/" in q.image_url or "sandbox:" in q.image_url):
-            
-            # 1. Extract the clean filename (e.g., "vt_graph.png" from "sandbox:/mnt/data/vt_graph.png")
-            raw_path = q.image_url
-            filename = raw_path.split("/")[-1]
-            
-            # 2. Try to find the EXACT match in our map
-            if filename in url_map:
-                q.image_url = url_map[filename]
-            
-            # 3. Fallback: If filename mismatch (rare), assign sequentially to avoid broken images
-            elif fallback_idx < len(fallback_urls):
-                logger.warning(f"Image match failed for {filename}, using fallback index.")
-                q.image_url = fallback_urls[fallback_idx]
-                fallback_idx += 1
-                
-        # Handle cases where image_url might be empty but we have files (Legacy support)
-        elif not q.image_url and fallback_idx < len(fallback_urls):
-             q.image_url = fallback_urls[fallback_idx]
-             fallback_idx += 1
+        # Check if question needs an image (either explicitly requested or placeholder present)
+        # We assign strictly sequentially to ensure Q1 gets Image 1
+        if q.image_url == "PENDING_UPLOAD" or (q.image_url and ("/mnt/" in q.image_url or "sandbox:" in q.image_url)) or (not q.image_url and idx < len(urls)):
+            if idx < len(urls):
+                q.image_url = urls[idx]
+                idx += 1
 
 def _extract_sources(response_obj: Any) -> List[Dict[str, str]]:
     """Extracts citations from the OpenAI response object."""
@@ -191,9 +169,8 @@ def send_message_to_assistant(
         if text: 
             text = re.sub(r'\[.*?\]\(sandbox:/mnt/data/.*?\)', '', text).strip()
 
-        # NOTE: For Chat, handle_generated_files returns a Dict, but we just need the values list here.
-        generated_map = ai_assets_service.handle_generated_files(client, resp, folder="chat_assets")
-        generated_urls = list(generated_map.values()) if generated_map else []
+        # NOTE: ai_assets_service now returns a List[str]
+        generated_urls = ai_assets_service.handle_generated_files(client, resp, folder="chat_assets")
         
         sources_list = _extract_sources(resp)
 
@@ -245,11 +222,9 @@ def generate_structured_quiz(
         resp = client.responses.parse(**{k: v for k, v in req.items() if v is not None})
         quiz = resp.output_parsed
         
-        # 🟢 UPDATED: This now returns a Dict {filename: url}
-        url_map = ai_assets_service.handle_generated_files(client, resp, folder="quiz_assets")
-        
-        # 🟢 UPDATED: Mapping logic handles the assignment by filename
-        _assign_urls_to_quiz(quiz, url_map)
+        # 🟢 UPDATED: Expects a List[str] (Sorted by creation time)
+        urls = ai_assets_service.handle_generated_files(client, resp, folder="quiz_assets")
+        _assign_urls_to_quiz(quiz, urls)
         
         if quiz and quiz.questions:
             for q in quiz.questions:
@@ -319,23 +294,21 @@ def stream_structured_quiz(
                 elif event["type"] == "done":
                     final_parsed = event["full_response"]
                     
-                    url_map = {}
+                    urls = []
                     if hasattr(stream, 'get_final_response'):
                         final_raw = stream.get_final_response()
-                        # 🟢 UPDATED: Get Dict {filename: url}
-                        url_map = ai_assets_service.handle_generated_files(client, final_raw, folder="quiz_assets")
+                        # 🟢 UPDATED: Expect List[str]
+                        urls = ai_assets_service.handle_generated_files(client, final_raw, folder="quiz_assets")
                     
                     if final_parsed and hasattr(final_parsed, 'questions') and streamed_questions:
-                        # Sync questions from the stream
                         if len(final_parsed.questions) == len(streamed_questions):
                             final_parsed.questions = streamed_questions 
                         else:
                             for q in final_parsed.questions:
                                  QuizUtils.shuffle_options(q)
 
-                    if final_parsed and url_map:
-                        # 🟢 UPDATED: Assign by filename
-                        _assign_urls_to_quiz(final_parsed, url_map)
+                    if final_parsed and urls:
+                        _assign_urls_to_quiz(final_parsed, urls)
 
                     yield {"type": "done", "full_response": final_parsed}
                     
