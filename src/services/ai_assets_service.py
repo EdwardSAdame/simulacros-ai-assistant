@@ -26,14 +26,15 @@ class AiAssetsService:
             for item in output_items:
                 item_type = getattr(item, "type", "")
                 
-                # Detect Container ID
+                # 1. Try to detect Container ID from a Tool Call (Standard)
                 if item_type == "code_interpreter_call":
                     cid = getattr(item, "container_id", None) or \
                           (getattr(item.code_interpreter, "container_id", None) if hasattr(item, "code_interpreter") else None) or \
                           (getattr(item.code_interpreter_call, "container_id", None) if hasattr(item, "code_interpreter_call") else None)
                     if cid: container_id = cid
 
-                # Detect File Citations (Strategy A: Explicit Citations)
+                # 2. Try to detect Container ID from Annotations (Critical Fallback)
+                # Often, structured outputs hide the container_id inside the citation itself.
                 if item_type == "message":
                     content_list = getattr(item, "content", []) or []
                     if isinstance(content_list, list):
@@ -41,14 +42,18 @@ class AiAssetsService:
                             annotations = getattr(part, "annotations", []) or []
                             for ann in annotations:
                                 if getattr(ann, "type", "") == "container_file_citation":
+                                    # 🟢 CRITICAL FIX: Extract container_id from the citation if we missed it earlier
+                                    if not container_id:
+                                        container_id = getattr(ann, "container_id", None)
+                                    
                                     file_id = getattr(ann, "file_id", None)
                                     fname = getattr(ann, "filename", "graph.png")
                                     if file_id: 
                                         s3_url = AiAssetsService._process_file(cf_client, container_id, file_id, fname, folder)
                                         if s3_url: uploaded_map[fname] = s3_url
 
-            # Fallback: List files in container (Strategy B: List All)
-            # 🟢 FIX: Eliminamos 'if not uploaded_map'. Siempre listamos los archivos si hay un container_id.
+            # 3. Strategy B: List all files in the container (The "Catch-All")
+            # This is now guaranteed to run because we grabbed the container_id from the annotation above.
             if container_id:
                 try:
                     container_files = cf_client.list(container_id)
@@ -60,7 +65,7 @@ class AiAssetsService:
                         
                         if not fname: fname = "generated_plot.png"
                         
-                        # Optimization: Solo procesamos si NO lo tenemos ya en el mapa
+                        # Optimization: Only process if we haven't uploaded it yet
                         if fid and fname not in uploaded_map:
                             s3_url = AiAssetsService._process_file(cf_client, container_id, fid, fname, folder)
                             if s3_url:
@@ -130,4 +135,5 @@ class AiAssetsService:
             logger.error(f"File transfer failed for {file_id}: {e}")
             return None
 
+# Singleton instantiation
 ai_assets_service = AiAssetsService()
