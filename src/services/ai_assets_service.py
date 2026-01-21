@@ -54,13 +54,23 @@ class AiAssetsService:
                     container_files = cf_client.list(container_id)
                     all_files = [f for f in container_files]
                     
-                    # Note: We don't strictly need to sort here because we are using a Dict map,
-                    # but sorting helps the Fallback mechanism (see AssistantClient) behave predictably.
+                    # Sort by creation time to ensure Fallback Sequence matches Question Sequence
                     all_files.sort(key=lambda f: getattr(f, "created_at", 0))
 
                     for c_file in all_files:
                         fid = getattr(c_file, "id", None) or getattr(c_file, "file_id", None)
                         fname = getattr(c_file, "filename", None) or getattr(c_file, "name", None) or "plot.png"
+                        
+                        # -------------------------------------------------------
+                        # FIX: Handle Duplicate Filenames to prevent Map Collapse
+                        # -------------------------------------------------------
+                        original_fname = fname
+                        counter = 1
+                        while fname in uploaded_map:
+                            # If "plot.png" exists, try "plot_1.png", "plot_2.png"...
+                            name_part, ext_part = os.path.splitext(original_fname)
+                            fname = f"{name_part}_{counter}{ext_part}"
+                            counter += 1
                         
                         if fid and fid not in processed_file_ids: 
                             s3_url = AiAssetsService._process_file(cf_client, container_id, fid, fname, folder)
