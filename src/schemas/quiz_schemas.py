@@ -11,18 +11,17 @@ class QuizQuestion(BaseModel):
     question_title: str = Field(..., description="Title with number, e.g., '# 1. Topic'")
     
     # -------------------------------------------------------------------------
-    # CRITICAL CHANGE: The 'explanation' field now requires distinct sections.
-    # We force the AI to plan the 'Traps' here before generating options.
+    # CRITICAL CHANGE: Added 'THE SETUP' phase to force variable consistency.
     # -------------------------------------------------------------------------
     explanation: str = Field(..., description=(
-        "Detailed reasoning plan containing two parts:\n"
-        "1. THE SOLUTION: Step-by-step derivation of the correct answer.\n"
-        "2. THE TRAPS: Identify 3 specific common misconceptions or calculation errors "
-        "relevant to this specific problem. Explain how each error leads to a plausible distractor."
+        "Detailed reasoning plan. YOU MUST FOLLOW THIS STRUCTURE:\n"
+        "1. THE SETUP: Define the EXACT numbers and units you will use (e.g., 'Mass = 5kg', 'Time = 10s').\n"
+        "2. THE SOLUTION: Solve the problem step-by-step using ONLY the numbers from THE SETUP.\n"
+        "3. THE TRAPS: Identify 3 failure paths based on these specific numbers."
     ))
 
     # CHANGED: Request \( ... \) explicitly
-    question_text: str = Field(..., description="The question stem. Use '\\(' and '\\)' for inline LaTeX math, and '\\[' and '\\]' for block math.")
+    question_text: str = Field(..., description="The question stem. It MUST use the EXACT SAME numbers defined in 'THE SETUP' of the explanation. Do not change values.")
     
     # EXISTING: Field for the Graph/Image URL
     image_url: Optional[str] = Field(None, description="URL of the generated image/graph. If you used the python tool to generate a graph, this will be populated.")

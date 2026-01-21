@@ -11,10 +11,7 @@ class QuizService:
     def get_system_instruction(topic: str = "general", num_questions: int = 5) -> Dict[str, Any]:
         """
         Returns the simplified system instruction with ENHANCED DISTRACTOR LOGIC
-        and CALCULATOR-FREE CONSTRAINTS.
-        
-        CRITICAL FIX: Explicitly links this task to the 'ACADEMIC FRAMEWORK' 
-        injected by the main system prompt.
+        and NUMERIC CONSISTENCY LOCKS.
         """
         
         instruction_text = (
@@ -32,19 +29,25 @@ class QuizService:
             "6. **Feedback**: Provide specific, educational feedback for every option (Right or Wrong).\n"
             "7. **Difficulty Weighting**: Assign a `difficulty` integer to each question based on its cognitive load: 1 (Basic/Recall), 2 (Intermediate/Application), or 3 (Advanced/Analysis).\n\n"
             
+            "## CONSISTENCY PROTOCOL (CRITICAL):\n"
+            "- **Variable Locking**: In the `explanation` field, you MUST explicitly define the numbers you will use (Step 1: THE SETUP). \n"
+            "- **Synchronization**: The `question_text` MUST use those EXACT numbers. You are FORBIDDEN from changing the values between the explanation and the question text.\n"
+            "- **Validation**: If the explanation says '0.5 Liters', the question text cannot say '1 Liter'. Check this before outputting.\n\n"
+            
             "## DISTRACTOR GENERATION PROTOCOL (HIGH PRIORITY):\n"
             "You are forbidden from generating random wrong options. You must use 'Plausible Distractor' logic:\n"
-            "- **Step A (In 'explanation')**: Identify the Correct Path to the solution.\n"
-            "- **Step B (In 'explanation')**: Identify 3 distinct 'Failure Paths' (Common Misconceptions, Calculation Errors, or Logical Fallacies) that a student might fall into regarding this specific problem.\n"
-            "- **Step C (In 'options')**: The wrong options MUST be the result of these specific Failure Paths. They should represent the exact incorrect value or conclusion a student would reach if they made that specific error.\n"
-            "- **Step D (In 'feedback')**: For each wrong option, explicitly explain *why* the student might have chosen it (e.g., pointing out the specific misconception or calculation error that leads to that distractor).\n\n"
+            "- **Step A (In 'explanation')**: Identify the Correct Path to the solution using the numbers from THE SETUP.\n"
+            "- **Step B (In 'explanation')**: Identify 3 distinct 'Failure Paths' (Common Misconceptions, Calculation Errors, or Logical Fallacies) that a student might fall into.\n"
+            "- **Step C (In 'options')**: The wrong options MUST be the result of these specific Failure Paths.\n"
+            "- **Step D (In 'feedback')**: For each wrong option, explicitly explain *why* the student might have chosen it.\n\n"
             
-            "## CALCULATOR-FREE CONSTRAINT (CRITICAL):\n"
+            "## CALCULATOR-FREE CONSTRAINT:\n"
             "Most users DO NOT have access to a calculator. You must design questions that assess **CONCEPTUAL UNDERSTANDING** rather than arithmetic endurance.\n"
             "1. **Clean Numbers**: Use integers, simple fractions, or well-known constants (e.g., g=10, pi cancels out, sqrt(144)). Avoid messy decimals (e.g., 8.34 * 9.12).\n"
             "2. **Simplification Over Calculation**: Design problems where terms cancel out algebraically if the student uses the correct 'Mathematical Trick' or identity.\n"
             "3. **Estimation**: For physics/chemistry, answers should be solvable by order-of-magnitude estimation if exact calculation is too hard.\n"
-            "4. **Visuals/Logic**: Prioritize questions that require reading a graph, interpreting a function's behavior, or logical deduction over brute-force calculation."
+            "4. **Visuals/Logic**: Prioritize questions that require reading a graph, interpreting a function's behavior, or logical deduction over brute-force calculation.\n"
+            "5. **Validation**: Before outputting, ask yourself: 'Can this be solved in 60 seconds with just a pencil?' If no, simplify the numbers."
         )
 
         return {
