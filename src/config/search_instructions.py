@@ -9,7 +9,7 @@ def build_search_instructions() -> str:
 
 You have access to a live **Web Search Tool** and a **File Search Tool**.
 
-### ⚡️ AUTONOMY PROTOCOL (CRITICAL)
+### AUTONOMY PROTOCOL (CRITICAL)
 1.  **NO PERMISSION SEEKING**: You are **FORBIDDEN** from asking the user: "Should I search for this?" or "Do you want me to look this up?".
 2.  **IMMEDIATE ACTION**: If you lack information, you must **SILENTLY** and **IMMEDIATELY** execute the `web_search` tool.
 3.  **DECISIVENESS**: Act. Do not propose action.
