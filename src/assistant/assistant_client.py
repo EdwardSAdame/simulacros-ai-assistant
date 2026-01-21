@@ -59,41 +59,50 @@ def _build_runtime_signals(
 
 def _assign_urls_to_quiz(quiz_data: QuizResponse, url_map: Dict[str, str]):
     """
-    Binds generated image URLs to quiz questions using EXACT FILENAME MATCHING.
-    Fixes the issue where images were assigned incorrectly due to simultaneous creation timestamps.
-    
-    :param quiz_data: The parsed Pydantic object containing questions.
-    :param url_map: Dictionary { 'filename.png': 'https://s3.../url' } returned by ai_assets_service.
+    Binds generated image URLs to quiz questions using EXACT or NORMALIZED MATCHING.
     """
     if not url_map or not quiz_data: return
     
-    # Fallback list for rare cases where filenames don't match
+    # 1. Create a Normalized Map (Lowercase Keys) for fuzzy matching
+    normalized_map = {k.lower(): v for k, v in url_map.items()}
+    
+    # Fallback list (Queue)
+    # Since url_map values are inserted in Stable Sort order (Time + Name), 
+    # this list preserves that order.
     fallback_urls = list(url_map.values())
     fallback_idx = 0
 
     for q in quiz_data.questions:
-        # Check if the question expects an image (OpenAI usually returns 'sandbox:/mnt/data/filename')
+        # Check if the question expects an image
         if q.image_url and ("/mnt/" in q.image_url or "sandbox:" in q.image_url):
             
-            # 1. Extract the clean filename (e.g., "quadratic_function.png" from path)
+            # Extract clean filename
             raw_path = q.image_url
             filename = raw_path.split("/")[-1]
+            filename_lower = filename.lower()
             
-            # 2. Try to find the EXACT match in our map
+            # Strategy A: Exact Match
             if filename in url_map:
                 q.image_url = url_map[filename]
-                # Remove used URL from fallback pool to avoid duplicates in fallback scenario (optional but cleaner)
+                # Remove from fallback pool
                 if url_map[filename] in fallback_urls:
                     fallback_urls.remove(url_map[filename])
+
+            # Strategy B: Case-Insensitive Match
+            elif filename_lower in normalized_map:
+                q.image_url = normalized_map[filename_lower]
+                if normalized_map[filename_lower] in fallback_urls:
+                    fallback_urls.remove(normalized_map[filename_lower])
             
-            # 3. Fallback: If filename mismatch, assign sequentially
+            # Strategy C: Sequential Fallback (The Safety Net)
             elif fallback_idx < len(fallback_urls):
-                logger.warning(f"Image match failed for {filename}, using fallback index.")
+                logger.warning(f"Image match failed for {filename}, using fallback index {fallback_idx}.")
                 q.image_url = fallback_urls[fallback_idx]
                 fallback_idx += 1
                 
-        # Handle cases where image_url might be empty but we have files (Legacy support)
+        # Handle cases where image_url is empty/null but we have leftover images
         elif not q.image_url and fallback_idx < len(fallback_urls):
+             # Only assign if it's likely part of the set (heuristic)
              q.image_url = fallback_urls[fallback_idx]
              fallback_idx += 1
 
