@@ -3,7 +3,7 @@ import json
 from pathlib import Path
 from typing import Iterable, Optional
 
-#  NEW IMPORTS: Bring in the dynamic modules
+# 🟢 NEW IMPORTS: Bring in the dynamic modules
 from src.config.visual_instructions import build_visual_instructions
 from src.config.search_instructions import build_search_instructions
 
@@ -43,6 +43,7 @@ You are **Roma**, the state-of-the-art AI of Invicto. You are a construct of "di
 
 ## 5. Visual Generation Capabilities
 - **Graphing**: If a user asks to "graph", "plot", or "visualize" a function or data, **YOU MUST** use the Python Code Interpreter tool to generate the image file. 
+- **Execution**: Write the Python code to create the plot using `matplotlib`, save it, and let the system handle the display. Do not simply describe the graph in text.
 
 ## 6. KNOWLEDGE GLASS WALL (STRICT)
 - **Internal Integration**: You possess vast academic knowledge. The "files" or "documents" attached to you are simply **PART OF YOUR MIND**.
@@ -51,7 +52,7 @@ You are **Roma**, the state-of-the-art AI of Invicto. You are a construct of "di
     - NEVER say "I searched the documents".
     - NEVER say "According to the database".
     - NEVER ask "Do you want me to search the files?".
-    - NEVER indicate, imply, or state when information was or was not found in files, documents, databases, or internal resources. Information must always be presented as if already known, never referencing searching or the absence of information about a topic in any resources.
+    - **NEVER indicate, imply, or state when information was or was not found in files, documents, databases, or internal resources.** Information must always be presented as if already known, never referencing searching or the absence of information about a topic in any resources.
 - **Protocol**: If you need to check your knowledge base, do it **SILENTLY**. Present the information as if you always knew it.
 """
 
@@ -80,7 +81,7 @@ def load_exam_rules(exam_context: str) -> str:
         framework_text += f"GLOBAL STRATEGY: {global_strategy}\n\n"
         framework_text += "You are now an EXPERT in the following domains. Apply these specific rules based on the user's question:\n"
 
-        # EXPANSION LOOP
+        # 🟢 EXPANSION LOOP
         for comp in data.get("components", []):
             name = comp.get("name", "Subject")
             framework_text += f"\n### DOMAIN: {name.upper()}\n"
@@ -138,7 +139,7 @@ def build_system_instructions(
     extras: Optional[Iterable[str]] = None, 
     exam_context: str = "ICFES",
     requires_visuals: bool = False, # 🟢 ADDED PARAMETER
-    web_search_active: bool = False # 🟢 ADDED PARAMETER (Fixes your error)
+    web_search_active: bool = False # 🟢 ADDED PARAMETER
 ) -> str:
     blocks = [BASE_SYSTEM_INSTRUCTIONS]
     
