@@ -10,7 +10,8 @@ class QuizService:
     @staticmethod
     def get_system_instruction(topic: str = "general", num_questions: int = 5) -> Dict[str, Any]:
         """
-        Returns the simplified system instruction with ENHANCED DISTRACTOR LOGIC.
+        Returns the simplified system instruction with ENHANCED DISTRACTOR LOGIC
+        and CALCULATOR-FREE CONSTRAINTS.
         
         CRITICAL FIX: Explicitly links this task to the 'ACADEMIC FRAMEWORK' 
         injected by the main system prompt.
@@ -36,7 +37,14 @@ class QuizService:
             "- **Step A (In 'explanation')**: Identify the Correct Path to the solution.\n"
             "- **Step B (In 'explanation')**: Identify 3 distinct 'Failure Paths' (Common Misconceptions, Calculation Errors, or Logical Fallacies) that a student might fall into regarding this specific problem.\n"
             "- **Step C (In 'options')**: The wrong options MUST be the result of these specific Failure Paths. They should represent the exact incorrect value or conclusion a student would reach if they made that specific error.\n"
-            "- **Step D (In 'feedback')**: For each wrong option, explicitly explain *why* the student might have chosen it (e.g., pointing out the specific misconception or calculation error that leads to that distractor)."
+            "- **Step D (In 'feedback')**: For each wrong option, explicitly explain *why* the student might have chosen it (e.g., pointing out the specific misconception or calculation error that leads to that distractor).\n\n"
+            
+            "## CALCULATOR-FREE CONSTRAINT (CRITICAL):\n"
+            "Most users DO NOT have access to a calculator. You must design questions that assess **CONCEPTUAL UNDERSTANDING** rather than arithmetic endurance.\n"
+            "1. **Clean Numbers**: Use integers, simple fractions, or well-known constants (e.g., g=10, pi cancels out, sqrt(144)). Avoid messy decimals (e.g., 8.34 * 9.12).\n"
+            "2. **Simplification Over Calculation**: Design problems where terms cancel out algebraically if the student uses the correct 'Mathematical Trick' or identity.\n"
+            "3. **Estimation**: For physics/chemistry, answers should be solvable by order-of-magnitude estimation if exact calculation is too hard.\n"
+            "4. **Visuals/Logic**: Prioritize questions that require reading a graph, interpreting a function's behavior, or logical deduction over brute-force calculation."
         )
 
         return {
