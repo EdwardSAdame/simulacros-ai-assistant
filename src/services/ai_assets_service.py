@@ -55,26 +55,26 @@ class AiAssetsService:
                     all_files = [f for f in container_files]
                     
                     # ------------------------------------------------------------------
-                    # FIX: STABLE SORTING
-                    # Use (Time, Filename) tuple. If times are equal, Filename decides order.
-                    # This prevents random shuffling when images are created in the same second.
+                    # FIX: REVERSE-THEN-SORT (The "Stack Effect" Solution)
+                    # 1. Reverse the list first. OpenAI returns Newest-First. We want Oldest-First.
+                    # 2. Sort by time. Since sort is stable, tied timestamps will keep the Reversed order.
                     # ------------------------------------------------------------------
-                    all_files.sort(key=lambda f: (getattr(f, "created_at", 0), getattr(f, "filename", "")))
+                    all_files.reverse() 
+                    all_files.sort(key=lambda f: getattr(f, "created_at", 0))
 
                     for c_file in all_files:
                         fid = getattr(c_file, "id", None) or getattr(c_file, "file_id", None)
                         
-                        # Get raw filename and normalize it slightly for consistency
+                        # Get raw filename 
                         raw_fname = getattr(c_file, "filename", None) or getattr(c_file, "name", None) or "plot.png"
                         
                         # -------------------------------------------------------
-                        # FIX: Handle Duplicate Filenames to prevent Map Collapse
+                        # Handle Duplicate Filenames (Collision Protection)
+                        # We still keep this to ensure we don't lose data if names are identical
                         # -------------------------------------------------------
                         fname = raw_fname
                         counter = 1
                         
-                        # Check collision against existing keys (case-insensitive check could be added here, 
-                        # but we stick to exact keys for the map, relying on AssistantClient for loose lookup)
                         while fname in uploaded_map:
                             name_part, ext_part = os.path.splitext(raw_fname)
                             fname = f"{name_part}_{counter}{ext_part}"
