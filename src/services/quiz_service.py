@@ -41,21 +41,16 @@ class QuizService:
             "- **Step C (In 'options')**: The wrong options MUST be the result of these specific Failure Paths.\n"
             "- **Step D (In 'feedback')**: For each wrong option, explicitly explain *why* the student might have chosen it.\n\n"
             
-            "## CALCULATOR-FREE CONSTRAINT:\n"
-            "Most users DO NOT have access to a calculator. You must design questions that assess **CONCEPTUAL UNDERSTANDING** rather than arithmetic endurance.\n"
-            "1. **Clean Numbers**: Use integers, simple fractions, or well-known constants (e.g., g=10, pi cancels out, sqrt(144)). Avoid messy decimals (e.g., 8.34 * 9.12).\n"
-            "2. **Simplification Over Calculation**: Design problems where terms cancel out algebraically if the student uses the correct 'Mathematical Trick' or identity.\n"
-            "3. **Estimation**: For physics/chemistry, answers should be solvable by order-of-magnitude estimation if exact calculation is too hard.\n"
-            "4. **Visuals/Logic**: Prioritize questions that require reading a graph, interpreting a function's behavior, or logical deduction over brute-force calculation.\n\n"
-
             "## SMART FOLLOW-UP PROTOCOL (NEXT STEPS):\n"
             "You must generate 3 'Ghost Prompts' (payloads) that represent what the user might ask next based on this specific quiz topic. These will be hidden in the buttons.\n"
-            "1. **easier_payload**: Write a command for the user to ask for an EASIER version of this specific topic. \n"
-            "   - Format: 'Genera un quiz más fácil (Nivel 1) sobre [Specific Topic]'.\n"
-            "2. **harder_payload**: Write a command for the user to ask for a HARDER/ADVANCED version of this specific topic. \n"
-            "   - Format: 'Genera un examen avanzado (Nivel 3) sobre [Specific Topic]'.\n"
-            "3. **retry_payload**: Write a command for the user to ask for a NEW quiz on the SAME TOPIC and SAME DIFFICULTY. \n"
-            "   - Format: 'Genera otro quiz sobre [Specific Topic] para practicar más'.\n"
+            "**CRITICAL RULES FOR GHOST PROMPTS:**\n"
+            "- **Terminology Mirroring**: Analyze the conversation history. If the user asked for a 'quiz', use the word 'quiz'. If they asked for an 'examen', use 'examen'. If 'simulacro', use 'simulacro'. If the term is unclear, infer the most natural term from context.\n"
+            "- **No Internal Jargon**: NEVER use words like '(Nivel 1)', 'Difficulty: 2', or 'Mode'. Use natural language only.\n"
+            "- **Tone**: Write these sentences in the First Person, as if YOU were the student asking for help.\n\n"
+            
+            "1. **easier_payload**: Write a natural request for a SIMPLER version of this specific topic. Express that the previous one was too hard.\n"
+            "2. **harder_payload**: Write a natural request for a MORE ADVANCED/CHALLENGING version of this specific topic. Express that the previous one was too easy.\n"
+            "3. **retry_payload**: Write a natural request to practice the SAME TOPIC again at a similar difficulty level.\n"
         )
 
         return {
