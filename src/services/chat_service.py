@@ -200,6 +200,11 @@ def get_ai_response(
                 accumulated_questions = []
                 final_reply_text = "Aquí tienes tu simulacro."
                 ai_generated_title = "Simulacro Generado" 
+                
+                # 🟢 NEW: Variables to hold ghost prompts
+                ghost_easier = None
+                ghost_harder = None
+                ghost_retry = None
 
                 for event in stream_gen:
                     evt_type = event.get("type")
@@ -225,17 +230,26 @@ def get_ai_response(
                             accumulated_questions = [q.dict() for q in parsed_response.questions]
                             if hasattr(parsed_response, 'title') and parsed_response.title:
                                 ai_generated_title = parsed_response.title
+                            
+                            # 🟢 NEW: Extract Ghost Prompts from Final Response
+                            if hasattr(parsed_response, 'easier_payload'): ghost_easier = parsed_response.easier_payload
+                            if hasattr(parsed_response, 'harder_payload'): ghost_harder = parsed_response.harder_payload
+                            if hasattr(parsed_response, 'retry_payload'): ghost_retry = parsed_response.retry_payload
 
                     elif evt_type == "error":
                         error_msg = event.get("error", "Unknown stream error")
                         stream_manager.send_error(error_msg)
 
-                # 🟢 CRITICAL FIX FOR STREAMING: Calculate and add question_count
+                # 🟢 CRITICAL FIX FOR STREAMING: Pack the new payloads into quiz_data
                 quiz_data = {
                     "quiz_mode": "batch", 
                     "topic": ai_generated_title,
                     "questions": accumulated_questions,
-                    "question_count": len(accumulated_questions)  # <-- THIS WAS MISSING
+                    "question_count": len(accumulated_questions),
+                    # 🟢 INJECT GHOST PROMPTS
+                    "easier_payload": ghost_easier,
+                    "harder_payload": ghost_harder,
+                    "retry_payload": ghost_retry
                 }
 
             else:
@@ -251,12 +265,16 @@ def get_ai_response(
                     requires_visuals=requires_visuals # 🟢 FIX: PASS THE FLAG
                 )
                 
-                # 🟢 CRITICAL FIX FOR BATCH: Calculate and add question_count
+                # 🟢 CRITICAL FIX FOR BATCH: Pack the new payloads
                 quiz_data = {
                     "quiz_mode": "batch", 
                     "topic": quiz_model.title,
                     "questions": [q.dict() for q in quiz_model.questions],
-                    "question_count": len(quiz_model.questions) # <-- THIS WAS MISSING
+                    "question_count": len(quiz_model.questions),
+                    # 🟢 INJECT GHOST PROMPTS
+                    "easier_payload": getattr(quiz_model, 'easier_payload', None),
+                    "harder_payload": getattr(quiz_model, 'harder_payload', None),
+                    "retry_payload": getattr(quiz_model, 'retry_payload', None)
                 }
                 final_reply_text = quiz_model.intro_message
 

@@ -41,3 +41,8 @@ class QuizResponse(BaseModel):
     question_count: int = Field(..., description="The total number of questions generated in this quiz.")
     
     questions: List[QuizQuestion]
+
+    # 🟢 NEW: Ghost Prompt Payloads (The "Next Steps")
+    easier_payload: str = Field(..., description="A specific user command to generate an EASIER version of this quiz. E.g., 'Hazme un quiz más fácil sobre [Topic]'.")
+    harder_payload: str = Field(..., description="A specific user command to generate a HARDER/ADVANCED version of this quiz. E.g., 'Hazme un examen avanzado sobre [Topic]'.")
+    retry_payload: str = Field(..., description="A specific user command to generate a NEW quiz on the SAME TOPIC and SAME DIFFICULTY. E.g., 'Dame otro quiz sobre [Topic]'.")

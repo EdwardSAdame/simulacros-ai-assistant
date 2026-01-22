@@ -11,7 +11,7 @@ class QuizService:
     def get_system_instruction(topic: str = "general", num_questions: int = 5) -> Dict[str, Any]:
         """
         Returns the simplified system instruction with ENHANCED DISTRACTOR LOGIC
-        and NUMERIC CONSISTENCY LOCKS.
+        and NUMERIC CONSISTENCY LOCKS, plus the new SMART FOLLOW-UP PROTOCOL.
         """
         
         instruction_text = (
@@ -46,7 +46,16 @@ class QuizService:
             "1. **Clean Numbers**: Use integers, simple fractions, or well-known constants (e.g., g=10, pi cancels out, sqrt(144)). Avoid messy decimals (e.g., 8.34 * 9.12).\n"
             "2. **Simplification Over Calculation**: Design problems where terms cancel out algebraically if the student uses the correct 'Mathematical Trick' or identity.\n"
             "3. **Estimation**: For physics/chemistry, answers should be solvable by order-of-magnitude estimation if exact calculation is too hard.\n"
-            "4. **Visuals/Logic**: Prioritize questions that require reading a graph, interpreting a function's behavior, or logical deduction over brute-force calculation."
+            "4. **Visuals/Logic**: Prioritize questions that require reading a graph, interpreting a function's behavior, or logical deduction over brute-force calculation.\n\n"
+
+            "## SMART FOLLOW-UP PROTOCOL (NEXT STEPS):\n"
+            "You must generate 3 'Ghost Prompts' (payloads) that represent what the user might ask next based on this specific quiz topic. These will be hidden in the buttons.\n"
+            "1. **easier_payload**: Write a command for the user to ask for an EASIER version of this specific topic. \n"
+            "   - Format: 'Genera un quiz más fácil (Nivel 1) sobre [Specific Topic]'.\n"
+            "2. **harder_payload**: Write a command for the user to ask for a HARDER/ADVANCED version of this specific topic. \n"
+            "   - Format: 'Genera un examen avanzado (Nivel 3) sobre [Specific Topic]'.\n"
+            "3. **retry_payload**: Write a command for the user to ask for a NEW quiz on the SAME TOPIC and SAME DIFFICULTY. \n"
+            "   - Format: 'Genera otro quiz sobre [Specific Topic] para practicar más'.\n"
         )
 
         return {
