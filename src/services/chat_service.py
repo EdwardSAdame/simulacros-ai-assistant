@@ -101,6 +101,7 @@ def get_ai_response(
     page: str | None,
     conversation_id: str | None = None,
     image_urls: list[str] | None = None,
+    pdf_urls: list[str] | None = None, # 🟢 NEW: Accept PDF URLs
     mode: str = "omega",
     intent: str = "chat",
     requires_visuals: bool = False,
@@ -127,7 +128,8 @@ def get_ai_response(
         "input_url": page,
         "derived_exam": exam_context, 
         "web_search_active": is_web_search_active,
-        "trigger_message": message[:50] if message else "None"
+        "trigger_message": message[:50] if message else "None",
+        "pdf_count": len(pdf_urls) if pdf_urls else 0
     })
 
     # Step 2: Find-or-create conversation
@@ -312,7 +314,8 @@ def get_ai_response(
                 system_instruction=system_prompt,
                 vector_store_ids=selected_vector_stores,
                 requires_visuals=requires_visuals,
-                web_search_config=web_search_config
+                web_search_config=web_search_config,
+                pdf_urls=pdf_urls # 🟢 NEW: Pass PDF URLs to the client
             )
             
             final_reply_text = response_tuple[0]
@@ -329,6 +332,10 @@ def get_ai_response(
             save_message(actual_conversation_id, role="user", message_text=message)
         for img in image_urls or []:
             save_message(actual_conversation_id, role="user", message_text=f"[Imagen] {img}")
+        
+        # 🟢 NEW: Save PDF URLs to history
+        for pdf in pdf_urls or []:
+            save_message(actual_conversation_id, role="user", message_text=f"[PDF] {pdf}")
         
         meta_payload = quiz_data
         

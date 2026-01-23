@@ -62,6 +62,9 @@ def lambda_handler(event, context):
             # --- Extract data from the payload ---
             message = payload.get("message")
             image_urls = payload.get("image_urls", [])
+            # 🟢 NEW: Extract PDF URLs from SQS payload
+            pdf_urls = payload.get("pdf_urls", [])
+
             user_id = payload.get("user_id")
             name = payload.get("name")
             email = payload.get("email")
@@ -132,11 +135,6 @@ def lambda_handler(event, context):
                     log_event("ws_status_send_failed", {"user_id": user_id}, level="warning", error=e)
 
             # --- 3. Get the AI response (Heavy Processing) ---
-            # NOTE: get_ai_response calls chat_service, which constructs the 'meta_payload' (quiz_data)
-            # We assume chat_service.py handles the extraction now, OR we need to update chat_service.py too.
-            # WAIT: In your architecture, get_ai_response returns 'meta_payload'.
-            # Looking at your chat_service.py, it constructs 'quiz_data' inside get_ai_response.
-            # SO THE FILE WE ACTUALLY NEED TO UPDATE IS NOT LAMBDA, BUT CHAT_SERVICE.PY.
             
             ai_reply, conversation_id, assistant_timestamp, meta_payload = get_ai_response(
                 message=message,
@@ -146,6 +144,7 @@ def lambda_handler(event, context):
                 page=page,
                 conversation_id=conv_id_in,
                 image_urls=image_urls,
+                pdf_urls=pdf_urls, # 🟢 NEW: Pass PDF URLs to service
                 mode=ai_mode,
                 intent=intent,
                 requires_visuals=requires_visuals, 

@@ -7,14 +7,14 @@ import re
 from src.config.settings import get_openai_client, get_vector_search_max_results
 from src.config.model_config import get_model_config
 from src.config.system_instructions import build_system_instructions
-# 🟢 NEW IMPORT: Visual Guidelines
+# 🟢 Visual Guidelines
 from src.config.visual_instructions import build_visual_instructions
 from src.utils.time_utils import get_current_time_info, infer_target_semester
 from src.schemas.quiz_schemas import QuizResponse
 
 # 🔹 Modular Services
 from src.services.ai_assets_service import ai_assets_service
-# 🟢 NEW IMPORT: Context Builder (To fix the disconnect)
+# 🟢 Context Builder
 from src.services.context_builder import build_runtime_context
 from src.utils.stream_parser import StreamParser
 from src.utils.quiz_utils import QuizUtils
@@ -35,7 +35,6 @@ def _build_runtime_signals(
     """Generates the dynamic system context for the AI."""
     
     # 🟢 1. DELEGATE TO CENTRALIZED BUILDER
-    # This aligns the Quiz Flow with the Chat Flow (Smart Name, No UserID/Email)
     signals = build_runtime_context(
         page=page,
         user_id=user_id, 
@@ -53,8 +52,6 @@ def _build_runtime_signals(
         signals.append(visuals_trigger)
         signals.append(visual_style_guide)
     
-    # Note: 'Context: GENERAL' and 'Sources: ...' are removed as they are not in build_runtime_context
-    
     return build_system_instructions(extras=signals, exam_context=exam_context)
 
 def _assign_urls_to_quiz(quiz_data: QuizResponse, url_map: Dict[str, str]):
@@ -67,16 +64,11 @@ def _assign_urls_to_quiz(quiz_data: QuizResponse, url_map: Dict[str, str]):
     normalized_map = {k.lower(): v for k, v in url_map.items()}
     
     # Fallback list (Queue)
-    # Since url_map values are inserted in Stable Sort order (Time + Name), 
-    # this list preserves that order.
     fallback_urls = list(url_map.values())
     fallback_idx = 0
 
     for q in quiz_data.questions:
-        # Check if the question expects an image
         if q.image_url and ("/mnt/" in q.image_url or "sandbox:" in q.image_url):
-            
-            # Extract clean filename
             raw_path = q.image_url
             filename = raw_path.split("/")[-1]
             filename_lower = filename.lower()
@@ -84,7 +76,6 @@ def _assign_urls_to_quiz(quiz_data: QuizResponse, url_map: Dict[str, str]):
             # Strategy A: Exact Match
             if filename in url_map:
                 q.image_url = url_map[filename]
-                # Remove from fallback pool
                 if url_map[filename] in fallback_urls:
                     fallback_urls.remove(url_map[filename])
 
@@ -94,15 +85,13 @@ def _assign_urls_to_quiz(quiz_data: QuizResponse, url_map: Dict[str, str]):
                 if normalized_map[filename_lower] in fallback_urls:
                     fallback_urls.remove(normalized_map[filename_lower])
             
-            # Strategy C: Sequential Fallback (The Safety Net)
+            # Strategy C: Sequential Fallback
             elif fallback_idx < len(fallback_urls):
                 logger.warning(f"Image match failed for {filename}, using fallback index {fallback_idx}.")
                 q.image_url = fallback_urls[fallback_idx]
                 fallback_idx += 1
                 
-        # Handle cases where image_url is empty/null but we have leftover images
         elif not q.image_url and fallback_idx < len(fallback_urls):
-             # Only assign if it's likely part of the set (heuristic)
              q.image_url = fallback_urls[fallback_idx]
              fallback_idx += 1
 
@@ -146,7 +135,8 @@ def send_message_to_assistant(
     vector_store_ids: List[str] | None = None,
     requires_visuals: bool = False,
     web_search_config: Dict[str, Any] | None = None,
-    user_location: Dict[str, str] | None = None 
+    user_location: Dict[str, str] | None = None,
+    pdf_urls: List[str] | None = None  # 🟢 NEW: Added this parameter
 ) -> Tuple[str, List[str], List[Dict[str, str]]]:
     
     client = get_openai_client()
@@ -156,12 +146,24 @@ def send_message_to_assistant(
     active_effort = cfg.reasoning_effort
     
     # 2. Build Inputs
-    # Note: We pass requires_visuals here to ensure correct signaling
     system_text = system_instruction or _build_runtime_signals(
         user_id, page, name, email, exam_context="ICFES", requires_visuals=requires_visuals
     )
     api_input = [{"role": "system", "content": [{"type": "input_text", "text": system_text}]}]
     api_input.extend(conversation_input)
+
+    # 🟢 NEW: Inject PDF Inputs into the last user message
+    if pdf_urls:
+        last_item = api_input[-1]
+        file_inputs = [{"type": "input_file", "file_url": url} for url in pdf_urls]
+            
+        if last_item.get("role") == "user":
+            if isinstance(last_item["content"], list):
+                last_item["content"].extend(file_inputs)
+            else:
+                last_item["content"] = [{"type": "input_text", "text": last_item["content"]}] + file_inputs
+        else:
+            api_input.append({"role": "user", "content": file_inputs})
 
     # 3. Configure Tools
     tools = []
@@ -203,7 +205,7 @@ def send_message_to_assistant(
         if text: 
             text = re.sub(r'\[.*?\]\(sandbox:/mnt/data/.*?\)', '', text).strip()
 
-        # NOTE: For Chat, handle_generated_files returns a Dict, but we just need the values list here.
+        # Handle generated files (Visuals)
         generated_map = ai_assets_service.handle_generated_files(client, resp, folder="chat_assets")
         generated_urls = list(generated_map.values()) if generated_map else []
         
@@ -257,7 +259,6 @@ def generate_structured_quiz(
         resp = client.responses.parse(**{k: v for k, v in req.items() if v is not None})
         quiz = resp.output_parsed
         
-        # 🟢 UPDATED: Expects Dict {filename: url}
         url_map = ai_assets_service.handle_generated_files(client, resp, folder="quiz_assets")
         _assign_urls_to_quiz(quiz, url_map)
         
@@ -332,7 +333,6 @@ def stream_structured_quiz(
                     url_map = {}
                     if hasattr(stream, 'get_final_response'):
                         final_raw = stream.get_final_response()
-                        # 🟢 UPDATED: Expect Dict {filename: url}
                         url_map = ai_assets_service.handle_generated_files(client, final_raw, folder="quiz_assets")
                     
                     if final_parsed and hasattr(final_parsed, 'questions') and streamed_questions:

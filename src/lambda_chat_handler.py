@@ -28,6 +28,9 @@ def lambda_handler(event, context):
         # ---- Raw inputs from client ----
         message = body.get("message")
         image_urls = body.get("imageUrls", [])
+        # 🟢 NEW: Extract PDF URLs from the request
+        pdf_urls = body.get("pdfUrls", [])
+
         user_id = body.get("userId")
         name = body.get("name")
         email = body.get("email")
@@ -35,8 +38,7 @@ def lambda_handler(event, context):
         conversation_id_in = body.get("conversationId")
         client_row_id = body.get("clientRowId")
         
-        # 🔹 NEW: Extract the 'mode' (Omega vs Alpha)
-        # Default to 'omega' (Fast) if the frontend doesn't send it.
+        # 🔹 Extract the 'mode' (Omega vs Alpha)
         ai_mode = body.get("mode", "omega")
 
         # ---- Normalize / sanitize ----
@@ -44,13 +46,19 @@ def lambda_handler(event, context):
         name = name if isinstance(name, str) else (name or "")
         email = _none_if_empty(email)
         page = page or "/"
+        
         if not isinstance(image_urls, list):
             image_urls = []
+            
+        # 🟢 NEW: Validation for PDF list
+        if not isinstance(pdf_urls, list): 
+            pdf_urls = []
 
         # ---- Input Validation ----
-        if not message and not image_urls:
-            log_event("input_validation_failed", {"reason": "Missing message or imageUrls"}, level="warning")
-            return response(400, {"error": "Missing message or imageUrls"})
+        # 🟢 NEW: Allow request if it has message OR images OR pdfs
+        if not message and not image_urls and not pdf_urls:
+            log_event("input_validation_failed", {"reason": "Missing message or media"}, level="warning")
+            return response(400, {"error": "Missing message or media"})
 
         # --- Construct Payload for SQS ---
         payload = {
@@ -61,6 +69,7 @@ def lambda_handler(event, context):
             "page": page,
             "conversation_id": conversation_id_in,
             "image_urls": image_urls,
+            "pdf_urls": pdf_urls, # 🟢 NEW: Pass to Worker
             "client_row_id": client_row_id,
             
             # 🔹 Pass the mode to the worker
@@ -76,7 +85,8 @@ def lambda_handler(event, context):
         log_event("message_queued_for_ai_processing", {
             "user_id": user_id,
             "conversation_id": conversation_id_in,
-            "mode": ai_mode  # Log the mode
+            "mode": ai_mode,
+            "has_pdfs": bool(pdf_urls) # 🟢 Log this
         })
 
         # Return success
