@@ -152,25 +152,39 @@ def send_message_to_assistant(
     api_input = [{"role": "system", "content": [{"type": "input_text", "text": system_text}]}]
     api_input.extend(conversation_input)
 
-    # 🟢 NEW: Inject PDF Inputs into the last user message
+    # 🟢 NEW: Inject PDF URLs as TEXT + Context for Code Interpreter
     if pdf_urls:
         last_item = api_input[-1]
-        file_inputs = [{"type": "input_file", "file_url": url} for url in pdf_urls]
-            
+        
+        # Build a clear instruction block
+        pdf_prompt = "\n\n[USER UPLOADED DOCUMENTS]:\n"
+        for url in pdf_urls:
+            pdf_prompt += f"- {url}\n"
+        pdf_prompt += "(Please use the Code Interpreter tool to download and analyze these files if necessary.)"
+
         if last_item.get("role") == "user":
-            if isinstance(last_item["content"], list):
-                last_item["content"].extend(file_inputs)
+            content = last_item.get("content", "")
+            if isinstance(content, list):
+                # Find the text part and append to it
+                text_part = next((item for item in content if item["type"] == "text" or item["type"] == "input_text"), None)
+                if text_part:
+                    text_part["text"] += pdf_prompt
+                else:
+                    content.append({"type": "input_text", "text": pdf_prompt})
             else:
-                last_item["content"] = [{"type": "input_text", "text": last_item["content"]}] + file_inputs
+                # String content
+                last_item["content"] += pdf_prompt
         else:
-            api_input.append({"role": "user", "content": file_inputs})
+            # Fallback if last message wasn't user
+            api_input.append({"role": "user", "content": [{"type": "input_text", "text": pdf_prompt}]})
 
     # 3. Configure Tools
     tools = []
     if vector_store_ids:
         tools.append({"type": "file_search", "vector_store_ids": vector_store_ids, "max_num_results": get_vector_search_max_results()})
     
-    if requires_visuals:
+    # 🟢 FIX: Ensure Code Interpreter is active if PDFs are present OR visuals required
+    if requires_visuals or (pdf_urls and len(pdf_urls) > 0):
         tools.append({"type": "code_interpreter", "container": {"type": "auto"}})
         
     if web_search_config:
