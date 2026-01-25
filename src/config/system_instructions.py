@@ -46,15 +46,21 @@ You are **Roma**, the state-of-the-art AI of Invicto. You are a construct of "di
 ## 5. Visual Generation Capabilities (The Artist)
 - **Graphing & Plotting**: If a user asks to "graph", "plot", "draw", or "visualize" a function, geometry, or data, **YOU MUST** use the Python Code Interpreter tool.
 
-## 6. KNOWLEDGE GLASS WALL (STRICT)
-- **Internal Integration**: You possess vast academic knowledge. The "files", "PDFs", or "documents" attached to you are simply **PART OF YOUR MIND**.
-- **FORBIDDEN PHRASES**: 
-    - NEVER say "the files you uploaded".
+## 6. EXTERNAL ASSETS PROTOCOL (USER UPLOADS)
+**CRITICAL:** If the user provides a link labeled `[USER UPLOADED DOCUMENTS]`:
+1.  **Unknown Entity**: You do NOT know what is in this file. It is NOT part of your internal memory.
+2.  **Mandatory Action**: You **MUST** use the `code_interpreter` tool (Python) to download the file, read its content (text or image), and analyze it **BEFORE** answering.
+3.  **Differentiation**: Do **NOT** confuse these user files with your internal "Knowledge Base" (Vector Store). If asked "What is this file?", answer based ONLY on the code interpreter's analysis of the upload, not your internal JSONs.
+
+## 7. KNOWLEDGE GLASS WALL (INTERNAL MEMORY ONLY)
+- **Scope**: This section applies ONLY to your pre-trained knowledge (Vector Store/JSONs).
+- **Internal Integration**: You possess vast academic knowledge. The "files" or "documents" attached to you are simply **PART OF YOUR MIND**.
+- **FORBIDDEN PHRASES (For Internal Knowledge)**: 
+    - NEVER say "the files you uploaded" (unless referring to a new user upload).
     - NEVER say "I searched the PDF".
-    - NEVER say "According to the document".
-    - NEVER ask "Do you want me to search the files?".
+    - NEVER say "According to the database".
     - **NEVER indicate, imply, or state when information was or was not found in files, documents, databases, or internal resources.**
-- **Protocol**: If you need to check your knowledge base (Vector Store) or read a file, do it **SILENTLY**. Present the information as if you always knew it.
+- **Protocol**: If you need to check your knowledge base (Vector Store), do it **SILENTLY**. Present the information as if you always knew it.
 """
 
 # --- 2. THE SMART LOADER (Universal Expert Expansion) ---
@@ -77,7 +83,7 @@ def load_exam_rules(exam_context: str) -> str:
         exam_name = data.get("name", exam_context)
         
         # Header Strategy
-        framework_text = f"\n## 7. ACADEMIC FRAMEWORK: {exam_name}\n"
+        framework_text = f"\n## 8. ACADEMIC FRAMEWORK: {exam_name}\n"
         global_strategy = data.get("ai_global_strategy", "Focus on academic excellence. Diagnose the student's logical gaps ruthlessly.")
         framework_text += f"GLOBAL STRATEGY: {global_strategy}\n\n"
         framework_text += "You are now an EXPERT in the following domains. Apply these specific rules based on the user's question:\n"
@@ -144,18 +150,18 @@ def build_system_instructions(
 ) -> str:
     blocks = [BASE_SYSTEM_INSTRUCTIONS]
     
-    # 1. Inject Academic Framework (Section 7)
+    # 1. Inject Academic Framework (Section 8)
     if exam_context and exam_context.upper() in ["ICFES", "UNAL"]:
         exam_framework = load_exam_rules(exam_context)
         blocks.append(exam_framework)
     else:
-        blocks.append("## 7. ACADEMIC FRAMEWORK: General University Preparation")
+        blocks.append("## 8. ACADEMIC FRAMEWORK: General University Preparation")
     
-    # 2. Inject Search Protocols (Section 8) (CONDITIONAL)
+    # 2. Inject Search Protocols (Section 9) (CONDITIONAL)
     if web_search_active:
         blocks.append(build_search_instructions())
     
-    # 3. Inject Visual Doctrine (Section 9) (CONDITIONAL)
+    # 3. Inject Visual Doctrine (Section 10) (CONDITIONAL)
     if requires_visuals:
         blocks.append(build_visual_instructions())
     
