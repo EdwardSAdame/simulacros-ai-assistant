@@ -3,18 +3,18 @@ from typing import List, Dict, Any, Tuple, Generator
 import logging
 import re
 
-# 🔹 Standard Imports
+# Standard Imports
 from src.config.settings import get_openai_client, get_vector_search_max_results
 from src.config.model_config import get_model_config
 from src.config.system_instructions import build_system_instructions
-# 🟢 Visual Guidelines
+# Visual Guidelines
 from src.config.visual_instructions import build_visual_instructions
 from src.utils.time_utils import get_current_time_info, infer_target_semester
 from src.schemas.quiz_schemas import QuizResponse
 
-# 🔹 Modular Services
+# Modular Services
 from src.services.ai_assets_service import ai_assets_service
-# 🟢 Context Builder
+# Context Builder
 from src.services.context_builder import build_runtime_context
 from src.utils.stream_parser import StreamParser
 from src.utils.quiz_utils import QuizUtils
@@ -22,7 +22,7 @@ from src.utils.quiz_utils import QuizUtils
 logger = logging.getLogger(__name__)
 
 # ------------------------------------------------------------------
-# 🔹 HELPER: Context & Signal Builders
+# HELPER: Context & Signal Builders
 # ------------------------------------------------------------------
 def _build_runtime_signals(
     user_id: str | None, 
@@ -34,7 +34,7 @@ def _build_runtime_signals(
 ) -> str:
     """Generates the dynamic system context for the AI."""
     
-    # 🟢 1. DELEGATE TO CENTRALIZED BUILDER
+    # 1. DELEGATE TO CENTRALIZED BUILDER
     signals = build_runtime_context(
         page=page,
         user_id=user_id, 
@@ -42,7 +42,7 @@ def _build_runtime_signals(
         email=email
     )
 
-    # 🟢 2. INJECT QUIZ-SPECIFIC VISUALS (If needed)
+    # 2. INJECT QUIZ-SPECIFIC VISUALS (If needed)
     if requires_visuals:
         visuals_trigger = (
             "VISUALS: Use the 'python' tool (Code Interpreter) to AUTOMATICALLY GENERATE PLOTS for any request involving "
@@ -122,7 +122,7 @@ def _extract_sources(response_obj: Any) -> List[Dict[str, str]]:
     return unique_sources
 
 # ------------------------------------------------------------------
-# 🟢 STANDARD CHAT
+# STANDARD CHAT
 # ------------------------------------------------------------------
 def send_message_to_assistant(
     conversation_input: List[Dict[str, Any]], 
@@ -136,7 +136,7 @@ def send_message_to_assistant(
     requires_visuals: bool = False,
     web_search_config: Dict[str, Any] | None = None,
     user_location: Dict[str, str] | None = None,
-    pdf_urls: List[str] | None = None  # 🟢 NEW: Added this parameter
+    pdf_urls: List[str] | None = None  # NEW: Added this parameter
 ) -> Tuple[str, List[str], List[Dict[str, str]]]:
     
     client = get_openai_client()
@@ -152,38 +152,39 @@ def send_message_to_assistant(
     api_input = [{"role": "system", "content": [{"type": "input_text", "text": system_text}]}]
     api_input.extend(conversation_input)
 
-    # 🟢 NEW: Inject PDF URLs as TEXT + Context for Code Interpreter
+    # UPDATED: Inject PDF URLs as NATIVE 'input_file'
+    # We stopped using the "Text Injection" method because it forced the AI to try (and fail) 
+    # to download the file via Python/Network. Now we use the native input.
     if pdf_urls:
-        last_item = api_input[-1]
-        
-        # Build a clear instruction block
-        pdf_prompt = "\n\n[USER UPLOADED DOCUMENTS]:\n"
-        for url in pdf_urls:
-            pdf_prompt += f"- {url}\n"
-        pdf_prompt += "(Please use the Code Interpreter tool to download and analyze these files if necessary.)"
-
-        if last_item.get("role") == "user":
-            content = last_item.get("content", "")
-            if isinstance(content, list):
-                # Find the text part and append to it
-                text_part = next((item for item in content if item["type"] == "text" or item["type"] == "input_text"), None)
-                if text_part:
-                    text_part["text"] += pdf_prompt
-                else:
-                    content.append({"type": "input_text", "text": pdf_prompt})
-            else:
-                # String content
-                last_item["content"] += pdf_prompt
+        # A. Determine Target Message (Append to last User message if possible)
+        target_message = None
+        if api_input and api_input[-1].get("role") == "user":
+            target_message = api_input[-1]
         else:
-            # Fallback if last message wasn't user
-            api_input.append({"role": "user", "content": [{"type": "input_text", "text": pdf_prompt}]})
+            # If last message wasn't user, create a new user message block
+            target_message = {"role": "user", "content": []}
+            api_input.append(target_message)
+        
+        # B. Standardize 'content' to be a list
+        current_content = target_message.get("content")
+        if isinstance(current_content, str):
+            target_message["content"] = [{"type": "input_text", "text": current_content}]
+        elif current_content is None:
+             target_message["content"] = []
+             
+        # C. Append the PDF files natively
+        for url in pdf_urls:
+            target_message["content"].append({
+                "type": "input_file",
+                "file_url": url
+            })
 
     # 3. Configure Tools
     tools = []
     if vector_store_ids:
         tools.append({"type": "file_search", "vector_store_ids": vector_store_ids, "max_num_results": get_vector_search_max_results()})
     
-    # 🟢 FIX: Ensure Code Interpreter is active if PDFs are present OR visuals required
+    # Ensure Code Interpreter is active (It helps analyze the DATA inside the PDF, even if it doesn't download it)
     if requires_visuals or (pdf_urls and len(pdf_urls) > 0):
         tools.append({"type": "code_interpreter", "container": {"type": "auto"}})
         
@@ -231,7 +232,7 @@ def send_message_to_assistant(
         raise e
 
 # ------------------------------------------------------------------
-# 🟢 QUIZ GENERATION (Standard)
+# QUIZ GENERATION (Standard)
 # ------------------------------------------------------------------
 def generate_structured_quiz(
     conversation_input: List[Dict[str, Any]], 
@@ -286,7 +287,7 @@ def generate_structured_quiz(
         raise e
 
 # ------------------------------------------------------------------
-# 🟢 QUIZ STREAMING (Refactored)
+# QUIZ STREAMING (Refactored)
 # ------------------------------------------------------------------
 def stream_structured_quiz(
     conversation_input: List[Dict[str, Any]], 
