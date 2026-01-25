@@ -195,7 +195,8 @@ def get_ai_response(
                     email=_normalize_email_for_storage(email),
                     mode=mode,
                     exam_context=exam_context,
-                    requires_visuals=requires_visuals  # 🟢 FIX: PASS THE FLAG
+                    requires_visuals=requires_visuals,  # 🟢 FIX: PASS THE FLAG
+                    pdf_urls=pdf_urls  # 🟢 CRITICAL: Pass PDF URLs for Streaming Quiz
                 )
                 
                 seen_indices = set()
@@ -264,7 +265,8 @@ def get_ai_response(
                     email=_normalize_email_for_storage(email),
                     mode=mode,
                     exam_context=exam_context,
-                    requires_visuals=requires_visuals # 🟢 FIX: PASS THE FLAG
+                    requires_visuals=requires_visuals, # 🟢 FIX: PASS THE FLAG
+                    pdf_urls=pdf_urls  # 🟢 CRITICAL: Pass PDF URLs for Batch Quiz
                 )
                 
                 # 🟢 CRITICAL FIX FOR BATCH: Pack the new payloads
