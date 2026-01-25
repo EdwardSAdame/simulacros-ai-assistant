@@ -136,7 +136,7 @@ def send_message_to_assistant(
     requires_visuals: bool = False,
     web_search_config: Dict[str, Any] | None = None,
     user_location: Dict[str, str] | None = None,
-    pdf_urls: List[str] | None = None  # NEW: Added this parameter
+    pdf_urls: List[str] | None = None
 ) -> Tuple[str, List[str], List[Dict[str, str]]]:
     
     client = get_openai_client()
@@ -152,27 +152,21 @@ def send_message_to_assistant(
     api_input = [{"role": "system", "content": [{"type": "input_text", "text": system_text}]}]
     api_input.extend(conversation_input)
 
-    # UPDATED: Inject PDF URLs as NATIVE 'input_file'
-    # We stopped using the "Text Injection" method because it forced the AI to try (and fail) 
-    # to download the file via Python/Network. Now we use the native input.
+    # Inject PDF URLs as NATIVE 'input_file'
     if pdf_urls:
-        # A. Determine Target Message (Append to last User message if possible)
         target_message = None
         if api_input and api_input[-1].get("role") == "user":
             target_message = api_input[-1]
         else:
-            # If last message wasn't user, create a new user message block
             target_message = {"role": "user", "content": []}
             api_input.append(target_message)
         
-        # B. Standardize 'content' to be a list
         current_content = target_message.get("content")
         if isinstance(current_content, str):
             target_message["content"] = [{"type": "input_text", "text": current_content}]
         elif current_content is None:
              target_message["content"] = []
              
-        # C. Append the PDF files natively
         for url in pdf_urls:
             target_message["content"].append({
                 "type": "input_file",
@@ -184,7 +178,6 @@ def send_message_to_assistant(
     if vector_store_ids:
         tools.append({"type": "file_search", "vector_store_ids": vector_store_ids, "max_num_results": get_vector_search_max_results()})
     
-    # Ensure Code Interpreter is active (It helps analyze the DATA inside the PDF, even if it doesn't download it)
     if requires_visuals or (pdf_urls and len(pdf_urls) > 0):
         tools.append({"type": "code_interpreter", "container": {"type": "auto"}})
         
@@ -242,7 +235,8 @@ def generate_structured_quiz(
     email: str | None = None, 
     mode: str = "omega",
     exam_context: str = "ICFES",
-    requires_visuals: bool = False
+    requires_visuals: bool = False,
+    pdf_urls: List[str] | None = None  # ADDED PDF SUPPORT
 ) -> QuizResponse:
     
     client = get_openai_client()
@@ -255,12 +249,34 @@ def generate_structured_quiz(
     api_input = [{"role": "system", "content": [{"type": "input_text", "text": system_text}]}]
     api_input.extend(conversation_input)
 
+    # Inject PDF URLs as NATIVE 'input_file' for QUIZ
+    if pdf_urls:
+        target_message = None
+        if api_input and api_input[-1].get("role") == "user":
+            target_message = api_input[-1]
+        else:
+            target_message = {"role": "user", "content": []}
+            api_input.append(target_message)
+        
+        current_content = target_message.get("content")
+        if isinstance(current_content, str):
+            target_message["content"] = [{"type": "input_text", "text": current_content}]
+        elif current_content is None:
+             target_message["content"] = []
+             
+        for url in pdf_urls:
+            target_message["content"].append({
+                "type": "input_file",
+                "file_url": url
+            })
+
     req = {
         "model": cfg.model, "input": api_input,
         "text_format": QuizResponse, 
     }
     
-    if requires_visuals:
+    # Enable Code Interpreter if PDFs or Visuals are present
+    if requires_visuals or (pdf_urls and len(pdf_urls) > 0):
         req["tools"] = [{"type": "code_interpreter", "container": {"type": "auto"}}]
     
     is_reasoning = (cfg.model.startswith("o") and not cfg.model.startswith("gpt")) or "reasoning" in cfg.model
@@ -297,7 +313,8 @@ def stream_structured_quiz(
     email: str | None = None, 
     mode: str = "omega",
     exam_context: str = "ICFES",
-    requires_visuals: bool = False
+    requires_visuals: bool = False,
+    pdf_urls: List[str] | None = None  # ADDED PDF SUPPORT
 ) -> Generator[Dict[str, Any], None, None]:
     
     client = get_openai_client()
@@ -310,12 +327,34 @@ def stream_structured_quiz(
     api_input = [{"role": "system", "content": [{"type": "input_text", "text": system_text}]}]
     api_input.extend(conversation_input)
 
+    # Inject PDF URLs as NATIVE 'input_file' for QUIZ STREAMING
+    if pdf_urls:
+        target_message = None
+        if api_input and api_input[-1].get("role") == "user":
+            target_message = api_input[-1]
+        else:
+            target_message = {"role": "user", "content": []}
+            api_input.append(target_message)
+        
+        current_content = target_message.get("content")
+        if isinstance(current_content, str):
+            target_message["content"] = [{"type": "input_text", "text": current_content}]
+        elif current_content is None:
+             target_message["content"] = []
+             
+        for url in pdf_urls:
+            target_message["content"].append({
+                "type": "input_file",
+                "file_url": url
+            })
+
     req = {
         "model": cfg.model, "input": api_input,
         "text_format": QuizResponse, 
     }
     
-    if requires_visuals:
+    # Enable Code Interpreter if PDFs or Visuals are present
+    if requires_visuals or (pdf_urls and len(pdf_urls) > 0):
         req["tools"] = [{"type": "code_interpreter", "container": {"type": "auto"}}]
     
     is_reasoning = (cfg.model.startswith("o") and not cfg.model.startswith("gpt")) or "reasoning" in cfg.model
