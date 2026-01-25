@@ -3,7 +3,7 @@ import json
 from pathlib import Path
 from typing import Iterable, Optional
 
-# 🟢 NEW IMPORTS: Bring in the dynamic modules
+# NEW IMPORTS: Bring in the dynamic modules
 from src.config.visual_instructions import build_visual_instructions
 from src.config.search_instructions import build_search_instructions
 
@@ -35,8 +35,8 @@ You are **Roma**, the state-of-the-art AI of Invicto. You are a construct of "di
         - **Block Math**: Use `\\[` and `\\]`. Example: `\\[ E=mc^2 \\]`.
         - **NEVER use `$` signs for math.**
     3.  **Multimodal Mastery (Images & Files)**: You possess advanced perception.
-        - **Visual Analysis**: If the user provides an image (graph, equation, text), **ANALYZE IT INSTANTLY**. Extract the data, solve the problem, or explain the concept. Never refuse to analyze an image.
-        - **Document Integration**: If the user asks about a PDF or file content, access it immediately and integrate the answer seamlessy.
+        - **Visual Analysis**: If the user provides an image, **ANALYZE IT INSTANTLY**. Extract the data, solve the problem, or explain the concept. Never refuse to analyze an image.
+        - **Document Integration**: If the user asks about a PDF or file content, access it immediately and integrate the answer seamlessly.
 
 ## 4. Visual & Formatting Standards (STRICT)
 - **Mathematical Expressions**: NEVER use plain text for math (e.g., do NOT write "x^2", "3x + 5"). ALWAYS use the LaTeX delimiters specified above.
@@ -82,7 +82,7 @@ def load_exam_rules(exam_context: str) -> str:
         framework_text += f"GLOBAL STRATEGY: {global_strategy}\n\n"
         framework_text += "You are now an EXPERT in the following domains. Apply these specific rules based on the user's question:\n"
 
-        # 🟢 EXPANSION LOOP
+        # EXPANSION LOOP
         for comp in data.get("components", []):
             name = comp.get("name", "Subject")
             framework_text += f"\n### DOMAIN: {name.upper()}\n"
@@ -139,23 +139,23 @@ def load_exam_rules(exam_context: str) -> str:
 def build_system_instructions(
     extras: Optional[Iterable[str]] = None, 
     exam_context: str = "ICFES",
-    requires_visuals: bool = False, # 🟢 ADDED PARAMETER
-    web_search_active: bool = False # 🟢 ADDED PARAMETER
+    requires_visuals: bool = False, # ADDED PARAMETER
+    web_search_active: bool = False # ADDED PARAMETER
 ) -> str:
     blocks = [BASE_SYSTEM_INSTRUCTIONS]
     
-    # 🟢 1. Inject Academic Framework (Section 7)
+    # 1. Inject Academic Framework (Section 7)
     if exam_context and exam_context.upper() in ["ICFES", "UNAL"]:
         exam_framework = load_exam_rules(exam_context)
         blocks.append(exam_framework)
     else:
         blocks.append("## 7. ACADEMIC FRAMEWORK: General University Preparation")
     
-    # 🟢 2. Inject Search Protocols (Section 8) (CONDITIONAL)
+    # 2. Inject Search Protocols (Section 8) (CONDITIONAL)
     if web_search_active:
         blocks.append(build_search_instructions())
     
-    # 🟢 3. Inject Visual Doctrine (Section 9) (CONDITIONAL)
+    # 3. Inject Visual Doctrine (Section 9) (CONDITIONAL)
     if requires_visuals:
         blocks.append(build_visual_instructions())
     
