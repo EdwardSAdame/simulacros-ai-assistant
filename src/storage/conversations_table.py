@@ -55,14 +55,19 @@ def save_conversation(
     email: Optional[str],
     title: str,
     page: str,
+    conversation_id: Optional[str] = None # 🟢 NEW: Allow passing an existing ID
 ) -> Dict[str, Any]:
     """
     Creates a new conversation record in DynamoDB.
+    If conversation_id is provided, it uses it; otherwise generates a new one.
     """
     if not user_id or (isinstance(user_id, str) and user_id.strip() == ""):
         raise ValueError("user_id must be a non-empty string")
 
-    conversation_id = str(uuid.uuid4())
+    # 🟢 IDEMPOTENCY FIX: Use provided ID or generate new
+    if not conversation_id:
+        conversation_id = str(uuid.uuid4())
+        
     timestamp = datetime.utcnow().isoformat()
 
     # 🟢 CRITICAL: Ensure Name has a fallback if it's None or Empty

@@ -3,6 +3,7 @@ import json
 import logging
 import boto3
 import os
+import uuid  # 🟢 ADDED: Required for generating IDs
 
 from src.utils.logging_utils import log_event, set_invocation_context
 
@@ -35,11 +36,19 @@ def lambda_handler(event, context):
         name = body.get("name")
         email = body.get("email")
         page = body.get("page")
+        
         conversation_id_in = body.get("conversationId")
+        
         client_row_id = body.get("clientRowId")
         
         # 🔹 Extract the 'mode' (Omega vs Alpha)
         ai_mode = body.get("mode", "omega")
+
+        # 🟢 IDEMPOTENCY FIX: 
+        # If client didn't send a conversationId (New Chat), generate it NOW.
+        # This ensures that if SQS retries this message, the worker keeps using this SAME ID.
+        if not conversation_id_in:
+            conversation_id_in = str(uuid.uuid4())
 
         # ---- Normalize / sanitize ----
         user_id = user_id or "anonymous"
@@ -67,7 +76,7 @@ def lambda_handler(event, context):
             "name": name,
             "email": email,
             "page": page,
-            "conversation_id": conversation_id_in,
+            "conversation_id": conversation_id_in, # 🟢 Now guaranteed to be populated
             "image_urls": image_urls,
             "pdf_urls": pdf_urls, # 🟢 NEW: Pass to Worker
             "client_row_id": client_row_id,
@@ -86,7 +95,7 @@ def lambda_handler(event, context):
             "user_id": user_id,
             "conversation_id": conversation_id_in,
             "mode": ai_mode,
-            "has_pdfs": bool(pdf_urls) # 🟢 Log this
+            "has_pdfs": bool(pdf_urls)
         })
 
         # Return success

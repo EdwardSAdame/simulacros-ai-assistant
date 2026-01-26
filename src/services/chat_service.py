@@ -140,15 +140,23 @@ def get_ai_response(
         exists_timestamp = _find_conversation_timestamp(user_id, conversation_id)
         if exists_timestamp:
             should_create_new = False
+            log_event("conversation_verified_and_reused", {"conversation_id": conversation_id})
         else:
-            actual_conversation_id = None 
+            # 🟢 IDEMPOTENCY FIX: If ID provided but not found, TRUST IT.
+            log_event("conversation_not_found_using_provided_id", {"input_id": conversation_id})
+            actual_conversation_id = conversation_id 
+            # REMOVED: actual_conversation_id = None
 
     try:
         if should_create_new:
             sanitized_email = _normalize_email_for_storage(email)
             conversation_data = save_conversation(
-                user_id=user_id, name=name or "", email=sanitized_email,
-                title=(message or "[Sin texto]")[:40], page=page,
+                user_id=user_id, 
+                name=name or "", 
+                email=sanitized_email,
+                title=(message or "[Sin texto]")[:40], 
+                page=page,
+                conversation_id=actual_conversation_id # 🟢 PASS THE ID HERE
             )
             actual_conversation_id = conversation_data["ConversationId"]
     except Exception as e:
@@ -195,8 +203,8 @@ def get_ai_response(
                     email=_normalize_email_for_storage(email),
                     mode=mode,
                     exam_context=exam_context,
-                    requires_visuals=requires_visuals,  # 🟢 FIX: PASS THE FLAG
-                    pdf_urls=pdf_urls  # 🟢 CRITICAL: Pass PDF URLs for Streaming Quiz
+                    requires_visuals=requires_visuals, 
+                    pdf_urls=pdf_urls 
                 )
                 
                 seen_indices = set()
@@ -265,8 +273,8 @@ def get_ai_response(
                     email=_normalize_email_for_storage(email),
                     mode=mode,
                     exam_context=exam_context,
-                    requires_visuals=requires_visuals, # 🟢 FIX: PASS THE FLAG
-                    pdf_urls=pdf_urls  # 🟢 CRITICAL: Pass PDF URLs for Batch Quiz
+                    requires_visuals=requires_visuals, 
+                    pdf_urls=pdf_urls 
                 )
                 
                 # 🟢 CRITICAL FIX FOR BATCH: Pack the new payloads
@@ -317,7 +325,7 @@ def get_ai_response(
                 vector_store_ids=selected_vector_stores,
                 requires_visuals=requires_visuals,
                 web_search_config=web_search_config,
-                pdf_urls=pdf_urls # 🟢 NEW: Pass PDF URLs to the client
+                pdf_urls=pdf_urls 
             )
             
             final_reply_text = response_tuple[0]
