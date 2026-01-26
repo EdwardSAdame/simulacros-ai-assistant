@@ -11,7 +11,7 @@ class QuizService:
     def get_system_instruction(topic: str = "general", num_questions: int = 5) -> Dict[str, Any]:
         """
         Returns the simplified system instruction with DYNAMIC LANGUAGE MIRRORING,
-        ENHANCED DISTRACTOR LOGIC, and NUMERIC CONSISTENCY LOCKS.
+        ENHANCED DISTRACTOR LOGIC, NUMERIC CONSISTENCY, and UTF-8 ENFORCEMENT.
         """
         
         instruction_text = (
@@ -32,7 +32,8 @@ class QuizService:
             "5. **Math Syntax**: ALWAYS use `\\(` and `\\)` for inline math (e.g. `\\( x^2 \\)`) and `\\[` and `\\]` for block math.\n"
             "6. **Voice**: You are Roma. Be cold, precise, and efficient in your 'intro_message'.\n"
             "7. **Feedback**: Provide specific, educational feedback for every option (Right or Wrong).\n"
-            "8. **Difficulty Weighting**: Assign a `difficulty` integer to each question based on its cognitive load: 1 (Basic/Recall), 2 (Intermediate/Application), or 3 (Advanced/Analysis).\n\n"
+            "8. **Difficulty Weighting**: Assign a `difficulty` integer to each question based on its cognitive load: 1 (Basic/Recall), 2 (Intermediate/Application), or 3 (Advanced/Analysis).\n"
+            "9. **ENCODING SAFETY (CRITICAL)**: Output ALL special characters directly as legitimate UTF-8 characters. DO NOT use Unicode escape sequences or ASCII control codes. Verify the text is readable before outputting.\n\n"
             
             "## CONSISTENCY PROTOCOL (CRITICAL):\n"
             "- **Variable Locking**: In the `explanation` field, you MUST explicitly define the numbers you will use (Step 1: THE SETUP). \n"
