@@ -21,33 +21,64 @@ def _build_response(status_code: int, body: Any) -> Dict[str, Any]:
         "body": json.dumps(body)
     }
 
-def _get_user_id(event):
+def _parse_body(event):
+    """Safely parses the body from JSON string to Dictionary"""
+    try:
+        if 'body' in event and event['body']:
+            if isinstance(event['body'], str):
+                return json.loads(event['body'])
+            return event['body']
+        return {}
+    except Exception:
+        return {}
+
+def _get_user_id(event, parsed_body):
     """
     Extracts User ID from the event. 
-    Adjust this depending on if you use Cognito, Custom Auth, or pass it in the body.
+    Checks Cognito claims first, then falls back to request body (for testing).
     """
     # Option A: Cognito Authorizer
     if 'requestContext' in event and 'authorizer' in event['requestContext']:
         claims = event['requestContext']['authorizer'].get('claims', {})
-        return claims.get('sub') or claims.get('username')
+        sub = claims.get('sub') or claims.get('username')
+        if sub:
+            return sub
     
-    # Option B: For testing (passed in body/query) - REMOVE IN PRODUCTION
-    body = json.loads(event.get('body', '{}') or '{}')
-    if 'user_id' in body:
-        return body['user_id']
+    # Option B: For testing (passed in body)
+    # Check for both snake_case and camelCase
+    if parsed_body:
+        return parsed_body.get('user_id') or parsed_body.get('userId')
     
     return None
 
 def lambda_handler(event, context):
     """
     CRUD Handler for Arenas (Folders).
+    Supports HTTP API v2 and REST API v1 payloads.
     """
+    # 1. Determine HTTP Method (Support v1 and v2)
     method = event.get('httpMethod')
+    if not method and 'requestContext' in event:
+        http_context = event['requestContext'].get('http', {})
+        method = http_context.get('method')
+
+    # 2. Get Path Parameters
     path_params = event.get('pathParameters') or {}
     arena_id = path_params.get('id')  # e.g. /arenas/{id}
     
+    # 3. Parse Body
+    body = _parse_body(event)
+
+    # 4. Handle OPTIONS (CORS Preflight)
+    if method == 'OPTIONS':
+        return _build_response(200, "")
+
     try:
-        user_id = _get_user_id(event)
+        user_id = _get_user_id(event, body)
+        
+        # Log the request for debugging
+        logger.info(f"Method: {method}, User: {user_id}, ArenaID: {arena_id}")
+
         if not user_id:
             return _build_response(401, {"error": "Unauthorized: No user_id found"})
 
@@ -65,20 +96,17 @@ def lambda_handler(event, context):
 
         # --- 3. CREATE ARENA (POST /arenas) ---
         if method == 'POST':
-            body = json.loads(event.get('body', '{}'))
-            
             new_arena = arena_service.create_arena_folder(
                 user_id=user_id,
                 title=body.get('title'),
                 description=body.get('description'),
-                system_instructions=body.get('system_instructions'),
-                files=body.get('files', []) # List of {name, url}
+                system_instructions=body.get('system_instructions') or body.get('systemInstructions'),
+                files=body.get('files', []) 
             )
             return _build_response(201, new_arena)
 
         # --- 4. UPDATE ARENA (PUT /arenas/{id}) ---
         if method == 'PUT' and arena_id:
-            body = json.loads(event.get('body', '{}'))
             updated = arena_service.update_arena_details(user_id, arena_id, body)
             return _build_response(200, updated)
 
