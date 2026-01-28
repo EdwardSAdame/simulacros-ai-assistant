@@ -10,8 +10,7 @@ dynamodb = boto3.resource("dynamodb")
 table = dynamodb.Table("UserConversations")
 
 # These keys will be REMOVED if they are empty strings.
-# Other keys (like Name) will be kept even if empty, unless we fix them below.
-KEYS_DISALLOW_EMPTY = {"Email"} 
+KEYS_DISALLOW_EMPTY = {"Email", "ArenaId"} 
 
 def _omit_invalid_attrs(item: dict) -> dict:
     """
@@ -55,7 +54,8 @@ def save_conversation(
     email: Optional[str],
     title: str,
     page: str,
-    conversation_id: Optional[str] = None # 🟢 NEW: Allow passing an existing ID
+    conversation_id: Optional[str] = None, # Allow passing an existing ID
+    arena_id: Optional[str] = None # 🟢 NEW: Link to an Arena
 ) -> Dict[str, Any]:
     """
     Creates a new conversation record in DynamoDB.
@@ -64,13 +64,13 @@ def save_conversation(
     if not user_id or (isinstance(user_id, str) and user_id.strip() == ""):
         raise ValueError("user_id must be a non-empty string")
 
-    # 🟢 IDEMPOTENCY FIX: Use provided ID or generate new
+    # IDEMPOTENCY FIX: Use provided ID or generate new
     if not conversation_id:
         conversation_id = str(uuid.uuid4())
         
     timestamp = datetime.utcnow().isoformat()
 
-    # 🟢 CRITICAL: Ensure Name has a fallback if it's None or Empty
+    # CRITICAL: Ensure Name has a fallback if it's None or Empty
     safe_name = name.strip() if name and name.strip() else "Guest"
 
     item = {
@@ -81,15 +81,16 @@ def save_conversation(
         "Email": email,
         "Title": title,
         "Page": page,
-        "IsPinned": False # Default to false
+        "IsPinned": False, # Default to false
+        "ArenaId": arena_id # 🟢 NEW: Save the Arena ID
     }
 
-    # Clean up (removes empty email, etc.)
+    # Clean up (removes empty email, empty arena_id, etc.)
     safe_item = _omit_invalid_attrs(item)
 
     try:
         table.put_item(Item=safe_item)
-        print(f"✅ Conversation saved: {conversation_id} for {safe_name}")
+        print(f"✅ Conversation saved: {conversation_id} (Arena: {arena_id})")
     except Exception as e:
         print(f"❌ Error saving conversation: {e}")
         raise e
@@ -98,6 +99,7 @@ def save_conversation(
         "ConversationId": conversation_id,
         "Timestamp": timestamp,
         "Title": title,
+        "ArenaId": arena_id
     }
 
 def get_conversations_for_user(
@@ -111,12 +113,13 @@ def get_conversations_for_user(
     if not user_id:
         raise ValueError("user_id must be provided")
 
-    # Projecting relevant fields
+    # Projecting relevant fields (Added ArenaId)
     expression_attribute_names = {
         '#ts': 'Timestamp',
         '#n': 'Name'
     }
-    projection_expression = "ConversationId, Title, #ts, IsPinned, #n, Page"
+    # 🟢 UPDATED: Projecting ArenaId so frontend can group them
+    projection_expression = "ConversationId, Title, #ts, IsPinned, #n, Page, ArenaId"
 
     try:
         response = table.query(
@@ -164,5 +167,38 @@ def update_conversation_pin(user_id: str, conversation_id: str, is_pinned: bool)
         Key={'UserId': user_id, 'Timestamp': timestamp},
         UpdateExpression="set IsPinned = :p",
         ExpressionAttributeValues={':p': is_pinned}
+    )
+    return True
+
+def get_conversation_metadata(user_id: str, conversation_id: str) -> Optional[Dict[str, Any]]:
+    """
+    Fetches basic metadata (Title, ArenaId) for a conversation.
+    """
+    timestamp = _find_conversation_timestamp(user_id, conversation_id)
+    if not timestamp:
+        return None
+
+    try:
+        response = table.get_item(
+            Key={'UserId': user_id, 'Timestamp': timestamp},
+            ProjectionExpression="ConversationId, Title, ArenaId"
+        )
+        return response.get('Item')
+    except Exception as e:
+        print(f"Error fetching metadata for {conversation_id}: {e}")
+        return None
+
+def update_conversation_arena(user_id: str, conversation_id: str, arena_id: Optional[str]):
+    """
+    Updates the ArenaId for a conversation (Moves it to a folder or removes it).
+    """
+    timestamp = _find_conversation_timestamp(user_id, conversation_id)
+    if not timestamp:
+        raise ValueError("Conversation not found")
+
+    table.update_item(
+        Key={'UserId': user_id, 'Timestamp': timestamp},
+        UpdateExpression="set ArenaId = :a",
+        ExpressionAttributeValues={':a': arena_id}
     )
     return True

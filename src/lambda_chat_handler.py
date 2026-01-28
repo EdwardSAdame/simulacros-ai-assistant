@@ -3,7 +3,7 @@ import json
 import logging
 import boto3
 import os
-import uuid  # 🟢 ADDED: Required for generating IDs
+import uuid  # Required for generating IDs
 
 from src.utils.logging_utils import log_event, set_invocation_context
 
@@ -29,8 +29,10 @@ def lambda_handler(event, context):
         # ---- Raw inputs from client ----
         message = body.get("message")
         image_urls = body.get("imageUrls", [])
-        # 🟢 NEW: Extract PDF URLs from the request
         pdf_urls = body.get("pdfUrls", [])
+        
+        # 🟢 NEW: Extract Arena ID from request
+        arena_id = body.get("arenaId")
 
         user_id = body.get("userId")
         name = body.get("name")
@@ -41,12 +43,11 @@ def lambda_handler(event, context):
         
         client_row_id = body.get("clientRowId")
         
-        # 🔹 Extract the 'mode' (Omega vs Alpha)
+        # Extract the 'mode' (Omega vs Alpha)
         ai_mode = body.get("mode", "omega")
 
-        # 🟢 IDEMPOTENCY FIX: 
+        # IDEMPOTENCY FIX: 
         # If client didn't send a conversationId (New Chat), generate it NOW.
-        # This ensures that if SQS retries this message, the worker keeps using this SAME ID.
         if not conversation_id_in:
             conversation_id_in = str(uuid.uuid4())
 
@@ -59,12 +60,10 @@ def lambda_handler(event, context):
         if not isinstance(image_urls, list):
             image_urls = []
             
-        # 🟢 NEW: Validation for PDF list
         if not isinstance(pdf_urls, list): 
             pdf_urls = []
 
         # ---- Input Validation ----
-        # 🟢 NEW: Allow request if it has message OR images OR pdfs
         if not message and not image_urls and not pdf_urls:
             log_event("input_validation_failed", {"reason": "Missing message or media"}, level="warning")
             return response(400, {"error": "Missing message or media"})
@@ -76,13 +75,13 @@ def lambda_handler(event, context):
             "name": name,
             "email": email,
             "page": page,
-            "conversation_id": conversation_id_in, # 🟢 Now guaranteed to be populated
+            "conversation_id": conversation_id_in, 
             "image_urls": image_urls,
-            "pdf_urls": pdf_urls, # 🟢 NEW: Pass to Worker
+            "pdf_urls": pdf_urls,
             "client_row_id": client_row_id,
             
-            # 🔹 Pass the mode to the worker
-            "mode": ai_mode
+            "mode": ai_mode,
+            "arena_id": arena_id # 🟢 NEW: Pass Arena ID to Worker
         }
 
         # Send the message to the SQS queue
@@ -95,7 +94,8 @@ def lambda_handler(event, context):
             "user_id": user_id,
             "conversation_id": conversation_id_in,
             "mode": ai_mode,
-            "has_pdfs": bool(pdf_urls)
+            "has_pdfs": bool(pdf_urls),
+            "arena_id": arena_id # 🟢 Log for debugging
         })
 
         # Return success

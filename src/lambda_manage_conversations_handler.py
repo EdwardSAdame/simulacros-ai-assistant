@@ -2,7 +2,6 @@
 import json
 import logging
 import os
-# 🔹 UPDATE: Import messages_table so we can delete history
 from src.storage import conversations_table, messages_table
 
 logger = logging.getLogger()
@@ -11,7 +10,7 @@ logger.setLevel(logging.INFO)
 def lambda_handler(event, context):
     """
     Handles management operations for conversations:
-    - PUT: Rename or Pin
+    - PUT: Rename, Pin, or Move to Arena
     - DELETE: Delete conversation AND its message history
     """
     # CORS Headers
@@ -53,20 +52,19 @@ def lambda_handler(event, context):
             if not conversation_id:
                 return {'statusCode': 400, 'headers': headers, 'body': json.dumps({'error': 'Missing conversationId'})}
 
-            # 1. Delete the Conversation Header (UserConversations table)
+            # 1. Delete the Conversation Header
             conversations_table.delete_conversation(user_id, conversation_id)
 
-            # 2. 🔹 NEW: Delete the Message History (ConversationMessages table)
-            # This cleans up all messages associated with this ID.
+            # 2. Delete the Message History
             messages_table.delete_messages_for_conversation(conversation_id)
 
             return {
                 'statusCode': 200,
                 'headers': headers,
-                'body': json.dumps({'message': 'Deleted successfully (Header and Messages)'})
+                'body': json.dumps({'message': 'Deleted successfully'})
             }
 
-        # --- HANDLE PUT (Rename / Pin) ---
+        # --- HANDLE PUT (Rename / Pin / Move) ---
         elif method == 'PUT':
             action = body.get('action') 
             conversation_id = body.get('conversationId')
@@ -74,6 +72,7 @@ def lambda_handler(event, context):
             if not conversation_id:
                 return {'statusCode': 400, 'headers': headers, 'body': json.dumps({'error': 'Missing conversationId'})}
 
+            # ACTION: RENAME
             if action == 'rename':
                 new_title = body.get('title')
                 if not new_title:
@@ -86,6 +85,7 @@ def lambda_handler(event, context):
                     'body': json.dumps({'message': 'Renamed successfully', 'title': new_title})
                 }
 
+            # ACTION: PIN
             elif action == 'pin':
                 is_pinned = body.get('isPinned', False)
                 conversations_table.update_conversation_pin(user_id, conversation_id, is_pinned)
@@ -93,6 +93,16 @@ def lambda_handler(event, context):
                     'statusCode': 200,
                     'headers': headers,
                     'body': json.dumps({'message': 'Pin status updated', 'isPinned': is_pinned})
+                }
+            
+            # 🟢 NEW ACTION: MOVE TO ARENA
+            elif action == 'move_to_arena':
+                arena_id = body.get('arenaId') # Can be None to remove from arena
+                conversations_table.update_conversation_arena(user_id, conversation_id, arena_id)
+                return {
+                    'statusCode': 200,
+                    'headers': headers,
+                    'body': json.dumps({'message': 'Conversation moved', 'arenaId': arena_id})
                 }
             
             else:

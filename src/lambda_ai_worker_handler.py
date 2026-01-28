@@ -62,8 +62,10 @@ def lambda_handler(event, context):
             # --- Extract data from the payload ---
             message = payload.get("message")
             image_urls = payload.get("image_urls", [])
-            # 🟢 NEW: Extract PDF URLs from SQS payload
             pdf_urls = payload.get("pdf_urls", [])
+
+            # 🟢 NEW: Extract Arena ID from SQS
+            arena_id = payload.get("arena_id")
 
             user_id = payload.get("user_id")
             name = payload.get("name")
@@ -111,7 +113,7 @@ def lambda_handler(event, context):
                         "client_row_id": client_row_id,
                         "client_action": client_action,
                         "requires_visuals": requires_visuals,
-                        "intent": intent  # 🟢 FIX: Send intent so frontend can block the loader!
+                        "intent": intent  
                     })
                     
                     api_gateway_client.post_to_connection(
@@ -127,7 +129,8 @@ def lambda_handler(event, context):
                         "client_action": client_action,
                         "phrases_count": len(loading_phrases),
                         "source": source_type,
-                        "mode": ai_mode
+                        "mode": ai_mode,
+                        "arena_id": arena_id # Log this
                     })
 
                 except Exception as e:
@@ -144,11 +147,12 @@ def lambda_handler(event, context):
                 page=page,
                 conversation_id=conv_id_in,
                 image_urls=image_urls,
-                pdf_urls=pdf_urls, # 🟢 NEW: Pass PDF URLs to service
+                pdf_urls=pdf_urls,
                 mode=ai_mode,
                 intent=intent,
                 requires_visuals=requires_visuals, 
-                stream_manager=stream_manager 
+                stream_manager=stream_manager,
+                arena_id=arena_id  # 🟢 NEW: Pass Arena ID to the brain
             )
 
             # --- 4. Send Final Reply ---
@@ -170,7 +174,6 @@ def lambda_handler(event, context):
                     )
 
                     # B. Send Structured Data Update (ONLY if it's Quiz or Rich Chat)
-                    # 🟢 FIX: Do NOT send secondary event for just sources
                     if meta_payload:
                         action_type = None
 
@@ -212,7 +215,7 @@ def lambda_handler(event, context):
                 log_event("ws_connection_not_found", {"user_id": user_id}, level="warning")
 
         except Exception as e:
-            # 🟢 SOFT LANDING: Quota / Billing Error Handling (429)
+            # SOFT LANDING: Quota / Billing Error Handling (429)
             error_str = str(e).lower()
             if "429" in error_str or "quota" in error_str or "insufficient" in error_str:
                 log_event("ai_quota_exceeded_handled", {"user_id": user_id, "error": str(e)}, level="warning")

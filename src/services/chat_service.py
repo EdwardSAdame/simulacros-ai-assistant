@@ -13,11 +13,12 @@ from src.config.page_vectorstores import get_stores_for_page
 from src.config.web_search_config import get_search_filters 
 from src.utils.logging_utils import log_event
 
-# 🟢 NEW: Import the Context Builder
+# 🟢 SERVICES
 from src.services.context_builder import build_runtime_context
+from src.services.arena_service import arena_service  # 🟢 NEW: Import Arena Service
 
 # 🟢 STORAGE
-from src.storage.conversations_table import save_conversation, _find_conversation_timestamp
+from src.storage.conversations_table import save_conversation, _find_conversation_timestamp, get_conversation_metadata
 from src.storage.messages_table import save_message, get_recent_messages
 
 logger = logging.getLogger(__name__)
@@ -101,11 +102,12 @@ def get_ai_response(
     page: str | None,
     conversation_id: str | None = None,
     image_urls: list[str] | None = None,
-    pdf_urls: list[str] | None = None, # 🟢 NEW: Accept PDF URLs
+    pdf_urls: list[str] | None = None, 
     mode: str = "omega",
     intent: str = "chat",
     requires_visuals: bool = False,
-    stream_manager: Any | None = None 
+    stream_manager: Any | None = None,
+    arena_id: str | None = None  # 🟢 NEW: Accept Arena ID from frontend
 ) -> Tuple[str, str, str, Dict | None]: 
     
     # 🟢 LAZY IMPORTS
@@ -115,11 +117,9 @@ def get_ai_response(
 
     page = _normalize_page(page)
 
-    # 🟢 1. INTELLIGENCE LAYER
+    # 1. INTELLIGENCE LAYER
     exam_context = determine_exam_context(page, message)
     selected_vector_stores = get_stores_for_page(page)
-
-    # 🟢 2. DETERMINE WEB SEARCH CONFIG
     web_search_config = get_search_filters(exam_context)
     is_web_search_active = (web_search_config is not None)
 
@@ -140,12 +140,20 @@ def get_ai_response(
         exists_timestamp = _find_conversation_timestamp(user_id, conversation_id)
         if exists_timestamp:
             should_create_new = False
+            
+            # 🟢 ARENA RESOLUTION: If frontend didn't send arena_id, try to fetch it from DB
+            # This handles page refreshes where frontend only knows the conversation_id
+            if not arena_id:
+                existing_meta = get_conversation_metadata(user_id, conversation_id)
+                if existing_meta and existing_meta.get("ArenaId"):
+                    arena_id = existing_meta.get("ArenaId")
+                    log_event("arena_context_resolved_from_db", {"arena_id": arena_id})
+
             log_event("conversation_verified_and_reused", {"conversation_id": conversation_id})
         else:
-            # 🟢 IDEMPOTENCY FIX: If ID provided but not found, TRUST IT.
+            # IDEMPOTENCY FIX: If ID provided but not found, TRUST IT.
             log_event("conversation_not_found_using_provided_id", {"input_id": conversation_id})
             actual_conversation_id = conversation_id 
-            # REMOVED: actual_conversation_id = None
 
     try:
         if should_create_new:
@@ -156,13 +164,14 @@ def get_ai_response(
                 email=sanitized_email,
                 title=(message or "[Sin texto]")[:40], 
                 page=page,
-                conversation_id=actual_conversation_id # 🟢 PASS THE ID HERE
+                conversation_id=actual_conversation_id,
+                arena_id=arena_id  # 🟢 SAVE THE LINK
             )
             actual_conversation_id = conversation_data["ConversationId"]
     except Exception as e:
         raise RuntimeError(f"❌ Failed to save/reuse conversation: {e}")
 
-    # Step 3: Build Input
+    # Step 3: Build Input History
     conversation_input = _build_history_list(actual_conversation_id)
     
     current_user_content = []
@@ -212,7 +221,6 @@ def get_ai_response(
                 final_reply_text = "Aquí tienes tu simulacro."
                 ai_generated_title = "Simulacro Generado" 
                 
-                # 🟢 NEW: Variables to hold ghost prompts
                 ghost_easier = None
                 ghost_harder = None
                 ghost_retry = None
@@ -242,7 +250,6 @@ def get_ai_response(
                             if hasattr(parsed_response, 'title') and parsed_response.title:
                                 ai_generated_title = parsed_response.title
                             
-                            # 🟢 NEW: Extract Ghost Prompts from Final Response
                             if hasattr(parsed_response, 'easier_payload'): ghost_easier = parsed_response.easier_payload
                             if hasattr(parsed_response, 'harder_payload'): ghost_harder = parsed_response.harder_payload
                             if hasattr(parsed_response, 'retry_payload'): ghost_retry = parsed_response.retry_payload
@@ -251,13 +258,11 @@ def get_ai_response(
                         error_msg = event.get("error", "Unknown stream error")
                         stream_manager.send_error(error_msg)
 
-                # 🟢 CRITICAL FIX FOR STREAMING: Pack the new payloads into quiz_data
                 quiz_data = {
                     "quiz_mode": "batch", 
                     "topic": ai_generated_title,
                     "questions": accumulated_questions,
                     "question_count": len(accumulated_questions),
-                    # 🟢 INJECT GHOST PROMPTS
                     "easier_payload": ghost_easier,
                     "harder_payload": ghost_harder,
                     "retry_payload": ghost_retry
@@ -277,13 +282,11 @@ def get_ai_response(
                     pdf_urls=pdf_urls 
                 )
                 
-                # 🟢 CRITICAL FIX FOR BATCH: Pack the new payloads
                 quiz_data = {
                     "quiz_mode": "batch", 
                     "topic": quiz_model.title,
                     "questions": [q.dict() for q in quiz_model.questions],
                     "question_count": len(quiz_model.questions),
-                    # 🟢 INJECT GHOST PROMPTS
                     "easier_payload": getattr(quiz_model, 'easier_payload', None),
                     "harder_payload": getattr(quiz_model, 'harder_payload', None),
                     "retry_payload": getattr(quiz_model, 'retry_payload', None)
@@ -297,7 +300,7 @@ def get_ai_response(
             quiz_data = None
 
     else:
-        # 🟢 STANDARD CHAT MODE
+        # 🟢 STANDARD CHAT MODE (UPDATED FOR ARENAS)
         try:
             runtime_signals = build_runtime_context(
                 page=page,
@@ -307,6 +310,7 @@ def get_ai_response(
                 requires_visuals=requires_visuals 
             )
 
+            # 1. Build Base System Prompt
             system_prompt = build_system_instructions(
                 extras=runtime_signals,
                 exam_context=exam_context,
@@ -314,6 +318,32 @@ def get_ai_response(
                 web_search_active=is_web_search_active 
             )
 
+            # 🟢 2. INJECT ARENA CONTEXT (The Magic)
+            if arena_id:
+                try:
+                    arena_context = arena_service.get_arena_context(user_id, arena_id)
+                    if arena_context:
+                        arena_title = arena_context.get('Title', 'Custom Arena')
+                        arena_instructions = arena_context.get('SystemInstructions', '')
+                        
+                        if arena_instructions.strip():
+                            logger.info(f"Injecting Arena Context: {arena_title}")
+                            
+                            # Append the custom instructions to the system prompt
+                            # We frame it clearly so the AI knows this overrides defaults
+                            injection = (
+                                f"\n\n--- [CUSTOM ARENA MODE: {arena_title}] ---\n"
+                                f"IMPORTANT: You are now acting within a specific study arena.\n"
+                                f"ADOPT THE FOLLOWING PERSONA AND INSTRUCTIONS:\n"
+                                f"{arena_instructions}\n"
+                                f"--- [END OF ARENA CONSTRUCTIONS] ---"
+                            )
+                            system_prompt += injection
+                            
+                except Exception as e:
+                    logger.error(f"Failed to inject arena context: {e}")
+
+            # 3. Call AI
             response_tuple = send_message_to_assistant(
                 conversation_input=conversation_input,
                 user_id=user_id,
@@ -321,7 +351,7 @@ def get_ai_response(
                 name=(name or None),
                 email=_normalize_email_for_storage(email),
                 mode=mode,
-                system_instruction=system_prompt,
+                system_instruction=system_prompt, # 🟢 Now includes Arena Prompt
                 vector_store_ids=selected_vector_stores,
                 requires_visuals=requires_visuals,
                 web_search_config=web_search_config,
