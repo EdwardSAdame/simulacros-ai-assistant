@@ -5,7 +5,7 @@ import logging
 from decimal import Decimal
 from typing import List, Dict, Any, Tuple, Optional
 
-# 🟢 CONFIG & UTILS
+# CONFIG & UTILS
 from src.config.settings import get_openai_client, get_vector_search_max_results
 from src.config.model_config import get_model_config
 from src.config.system_instructions import build_system_instructions
@@ -13,11 +13,11 @@ from src.config.page_vectorstores import get_stores_for_page
 from src.config.web_search_config import get_search_filters 
 from src.utils.logging_utils import log_event
 
-# 🟢 SERVICES
+# SERVICES
 from src.services.context_builder import build_runtime_context
-from src.services.arena_service import arena_service  # 🟢 NEW: Import Arena Service
+from src.services.arena_service import arena_service
 
-# 🟢 STORAGE
+# STORAGE
 from src.storage.conversations_table import save_conversation, _find_conversation_timestamp, get_conversation_metadata
 from src.storage.messages_table import save_message, get_recent_messages
 
@@ -39,9 +39,7 @@ def decimal_default(obj):
     raise TypeError
 
 def determine_exam_context(page_url: str, message_text: str | None = None) -> str:
-    """
-    Decides the Exam Context (UNAL vs ICFES vs GENERAL).
-    """
+    """Decides the Exam Context (UNAL vs ICFES vs GENERAL)."""
     if page_url:
         url_lower = page_url.lower()
         if "unal" in url_lower: return "UNAL"
@@ -107,17 +105,17 @@ def get_ai_response(
     intent: str = "chat",
     requires_visuals: bool = False,
     stream_manager: Any | None = None,
-    arena_id: str | None = None  # 🟢 NEW: Accept Arena ID from frontend
+    arena_id: str | None = None  
 ) -> Tuple[str, str, str, Dict | None]: 
     
-    # 🟢 LAZY IMPORTS
+    # Lazy Imports
     from src.assistant.assistant_client import send_message_to_assistant, generate_structured_quiz, stream_structured_quiz
     from src.assistant.image_handler import format_image_urls_for_openai
     from src.services.quiz_service import QuizService
 
     page = _normalize_page(page)
 
-    # 1. INTELLIGENCE LAYER
+    # 1. Intelligence Layer
     exam_context = determine_exam_context(page, message)
     selected_vector_stores = get_stores_for_page(page)
     web_search_config = get_search_filters(exam_context)
@@ -141,8 +139,7 @@ def get_ai_response(
         if exists_timestamp:
             should_create_new = False
             
-            # 🟢 ARENA RESOLUTION: If frontend didn't send arena_id, try to fetch it from DB
-            # This handles page refreshes where frontend only knows the conversation_id
+            # ARENA RESOLUTION: If frontend didn't send arena_id, try to fetch it from DB
             if not arena_id:
                 existing_meta = get_conversation_metadata(user_id, conversation_id)
                 if existing_meta and existing_meta.get("ArenaId"):
@@ -151,8 +148,7 @@ def get_ai_response(
 
             log_event("conversation_verified_and_reused", {"conversation_id": conversation_id})
         else:
-            # IDEMPOTENCY FIX: If ID provided but not found, TRUST IT.
-            log_event("conversation_not_found_using_provided_id", {"input_id": conversation_id})
+            # Trust the ID provided
             actual_conversation_id = conversation_id 
 
     try:
@@ -165,11 +161,11 @@ def get_ai_response(
                 title=(message or "[Sin texto]")[:40], 
                 page=page,
                 conversation_id=actual_conversation_id,
-                arena_id=arena_id  # 🟢 SAVE THE LINK
+                arena_id=arena_id  
             )
             actual_conversation_id = conversation_data["ConversationId"]
     except Exception as e:
-        raise RuntimeError(f"❌ Failed to save/reuse conversation: {e}")
+        raise RuntimeError(f"Failed to save/reuse conversation: {e}")
 
     # Step 3: Build Input History
     conversation_input = _build_history_list(actual_conversation_id)
@@ -183,7 +179,7 @@ def get_ai_response(
         conversation_input.append({"role": "user", "content": current_user_content})
 
     # ------------------------------------------------------------------
-    # 🟢 BRANCH: QUIZ (Structured) vs CHAT (Standard)
+    # BRANCH: QUIZ vs CHAT
     # ------------------------------------------------------------------
     quiz_data = None
     final_reply_text = ""
@@ -218,7 +214,7 @@ def get_ai_response(
                 
                 seen_indices = set()
                 accumulated_questions = []
-                final_reply_text = "Aquí tienes tu simulacro."
+                final_reply_text = "Aqui tienes tu simulacro."
                 ai_generated_title = "Simulacro Generado" 
                 
                 ghost_easier = None
@@ -300,7 +296,7 @@ def get_ai_response(
             quiz_data = None
 
     else:
-        # 🟢 STANDARD CHAT MODE (UPDATED FOR ARENAS)
+        # STANDARD CHAT MODE (UPDATED FOR ARENAS)
         try:
             runtime_signals = build_runtime_context(
                 page=page,
@@ -310,15 +306,11 @@ def get_ai_response(
                 requires_visuals=requires_visuals 
             )
 
-            # 1. Build Base System Prompt
-            system_prompt = build_system_instructions(
-                extras=runtime_signals,
-                exam_context=exam_context,
-                requires_visuals=requires_visuals,
-                web_search_active=is_web_search_active 
-            )
-
-            # 🟢 2. INJECT ARENA CONTEXT (The Magic)
+            # LOGIC CHANGE: 
+            # Check for Arena FIRST. If present, use Exclusive Mode.
+            
+            system_prompt = ""
+            
             if arena_id:
                 try:
                     arena_context = arena_service.get_arena_context(user_id, arena_id)
@@ -327,21 +319,45 @@ def get_ai_response(
                         arena_instructions = arena_context.get('SystemInstructions', '')
                         
                         if arena_instructions.strip():
-                            logger.info(f"Injecting Arena Context: {arena_title}")
+                            logger.info(f"Using Exclusive Arena Context: {arena_title}")
                             
-                            # Append the custom instructions to the system prompt
-                            # We frame it clearly so the AI knows this overrides defaults
-                            injection = (
-                                f"\n\n--- [CUSTOM ARENA MODE: {arena_title}] ---\n"
-                                f"IMPORTANT: You are now acting within a specific study arena.\n"
-                                f"ADOPT THE FOLLOWING PERSONA AND INSTRUCTIONS:\n"
-                                f"{arena_instructions}\n"
-                                f"--- [END OF ARENA CONSTRUCTIONS] ---"
+                            # 1. Technical Baseline (Minimal rules for formatting)
+                            # We strip out the identity "I am Roma" and just keep functional rules
+                            base_tech_prompt = (
+                                "You are an advanced AI Assistant. \n"
+                                "OUTPUT RULES:\n"
+                                "- Use Markdown for formatting.\n"
+                                "- Use LaTeX for math equations (e.g. $E=mc^2$).\n"
+                                "- Be helpful, clear, and accurate.\n"
                             )
-                            system_prompt += injection
+                            
+                            # 2. Add Runtime Signals (Name, Context)
+                            if runtime_signals:
+                                base_tech_prompt += f"\nCONTEXT: {runtime_signals}"
+
+                            # 3. The Arena Identity (The "Main" Instructions)
+                            injection = (
+                                f"\n\n--- [ARENA IDENTITY: {arena_title}] ---\n"
+                                f"Your Core Identity and Instructions are defined below.\n"
+                                f"IGNORE any previous default identity instructions.\n"
+                                f"INSTRUCTIONS:\n"
+                                f"{arena_instructions}\n"
+                                f"--- [END OF ARENA INSTRUCTIONS] ---"
+                            )
+                            
+                            system_prompt = base_tech_prompt + injection
                             
                 except Exception as e:
-                    logger.error(f"Failed to inject arena context: {e}")
+                    logger.error(f"Failed to load arena context: {e}")
+
+            # FALLBACK: If no Arena (or load failed), use Default Roma Instructions
+            if not system_prompt:
+                system_prompt = build_system_instructions(
+                    extras=runtime_signals,
+                    exam_context=exam_context,
+                    requires_visuals=requires_visuals,
+                    web_search_active=is_web_search_active 
+                )
 
             # 3. Call AI
             response_tuple = send_message_to_assistant(
@@ -351,7 +367,7 @@ def get_ai_response(
                 name=(name or None),
                 email=_normalize_email_for_storage(email),
                 mode=mode,
-                system_instruction=system_prompt, # 🟢 Now includes Arena Prompt
+                system_instruction=system_prompt, # Now holds the Clean Arena Prompt
                 vector_store_ids=selected_vector_stores,
                 requires_visuals=requires_visuals,
                 web_search_config=web_search_config,
@@ -372,23 +388,16 @@ def get_ai_response(
             save_message(actual_conversation_id, role="user", message_text=message)
         for img in image_urls or []:
             save_message(actual_conversation_id, role="user", message_text=f"[Imagen] {img}")
-        
-        # 🟢 NEW: Save PDF URLs to history
         for pdf in pdf_urls or []:
             save_message(actual_conversation_id, role="user", message_text=f"[PDF] {pdf}")
         
         meta_payload = quiz_data
-        
-        if not meta_payload:
-            meta_payload = {}
-            
+        if not meta_payload: meta_payload = {}  
         if generated_assets:
             meta_payload["type"] = "rich_chat"
             meta_payload["assets"] = [{"type": "image", "url": url, "alt": "Generated Visualization"} for url in generated_assets]
-            
         if sources_data:
             meta_payload["sources"] = sources_data
-
         if not meta_payload: meta_payload = None
 
         saved_item = save_message(
