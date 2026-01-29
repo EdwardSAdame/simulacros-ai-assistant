@@ -4,8 +4,9 @@ import uuid
 from datetime import datetime
 from typing import Optional, List, Dict, Any
 from boto3.dynamodb.conditions import Key, Attr
+from botocore.exceptions import ClientError
 
-# 🟢 CONFIG
+# CONFIG
 dynamodb = boto3.resource("dynamodb")
 table = dynamodb.Table("UserArenas")
 
@@ -23,7 +24,6 @@ def _omit_invalid_attrs(item: dict) -> dict:
             continue
         if isinstance(v, str):
             v = v.strip()
-            # If forbidden to be empty, skip adding it
             if k in KEYS_DISALLOW_EMPTY and v == "":
                 continue
         cleaned[k] = v
@@ -34,8 +34,8 @@ def create_arena(
     title: str,
     description: Optional[str] = None,
     system_instructions: Optional[str] = None,
-    icon: Optional[str] = "folder", # Default icon
-    files: Optional[List[Dict[str, str]]] = None # List of {name, url}
+    icon: Optional[str] = "folder", 
+    files: Optional[List[Dict[str, str]]] = None 
 ) -> Dict[str, Any]:
     """
     Creates a new Arena (Folder) configuration.
@@ -48,7 +48,6 @@ def create_arena(
     arena_id = str(uuid.uuid4())
     timestamp = datetime.utcnow().isoformat()
     
-    # Default empty list if no files provided
     safe_files = files if files else []
 
     item = {
@@ -63,30 +62,29 @@ def create_arena(
         "Files": safe_files
     }
 
-    # Clean up (remove empty descriptions, etc.)
     safe_item = _omit_invalid_attrs(item)
 
     try:
         table.put_item(Item=safe_item)
-        print(f"✅ Arena created: {title} ({arena_id})")
+        print(f"Arena created: {title} ({arena_id})")
     except Exception as e:
-        print(f"❌ Error creating arena: {e}")
+        print(f"Error creating arena: {e}")
         raise e
 
     return safe_item
 
 def get_arenas_for_user(user_id: str) -> List[Dict[str, Any]]:
     """
-    Fetches all Arenas created by a specific user.
+    Fetches all Arenas created by a specific user using the GSI.
     """
     if not user_id:
         raise ValueError("user_id must be provided")
 
     try:
+        # CRITICAL UPDATE: Uses the IndexName to query by UserId
         response = table.query(
-            KeyConditionExpression=Key('UserId').eq(user_id),
-            # We assume you might want them sorted by creation time (default behavior of Sort Key if string)
-            # If ArenaId is UUID, this order is random. You might need client-side sorting.
+            IndexName='UserId-Index',
+            KeyConditionExpression=Key('UserId').eq(user_id)
         )
         return response.get("Items", [])
     except Exception as e:
@@ -95,17 +93,19 @@ def get_arenas_for_user(user_id: str) -> List[Dict[str, Any]]:
 
 def get_arena_details(user_id: str, arena_id: str) -> Optional[Dict[str, Any]]:
     """
-    Fetches the full configuration (Instructions, Files) for a specific Arena.
-    Used when a Chat starts to inject context.
+    Fetches the full configuration for a specific Arena.
     """
     try:
+        # Assumes ArenaId is the Primary Key
         response = table.get_item(
-            Key={
-                'UserId': user_id,
-                'ArenaId': arena_id
-            }
+            Key={'ArenaId': arena_id}
         )
-        return response.get('Item')
+        item = response.get('Item')
+
+        # Security Check: Ensure the user owns this arena
+        if item and item.get('UserId') == user_id:
+            return item
+        return None
     except Exception as e:
         print(f"Error fetching arena details {arena_id}: {e}")
         return None
@@ -116,23 +116,19 @@ def update_arena(
     updates: Dict[str, Any]
 ) -> Dict[str, Any]:
     """
-    Updates specific fields of an Arena (e.g. changing instructions or adding a file).
-    'updates' should be a dictionary like {'Title': 'New Name', 'SystemInstructions': '...'}
+    Updates specific fields of an Arena.
     """
     allowed_keys = {"Title", "Description", "SystemInstructions", "Icon", "Files"}
     
-    # Filter only allowed updates
     filtered_updates = {k: v for k, v in updates.items() if k in allowed_keys}
     if not filtered_updates:
         return {}
 
-    # Build the UpdateExpression dynamically
     update_parts = []
-    expression_values = {':ts': datetime.utcnow().isoformat()}
+    expression_values = {':ts': datetime.utcnow().isoformat(), ':uid': user_id}
     expression_names = {'#ts': 'UpdatedAt'}
 
     for key, value in filtered_updates.items():
-        # DynamoDB Reserved words handling (if any)
         attr_name = f"#{key}"
         val_name = f":{key}"
         
@@ -143,28 +139,37 @@ def update_arena(
     update_expression = "SET " + ", ".join(update_parts) + ", #ts = :ts"
 
     try:
+        # ConditionExpression ensures we only update if the UserId matches
         response = table.update_item(
-            Key={'UserId': user_id, 'ArenaId': arena_id},
+            Key={'ArenaId': arena_id},
             UpdateExpression=update_expression,
+            ConditionExpression="UserId = :uid",
             ExpressionAttributeNames=expression_names,
             ExpressionAttributeValues=expression_values,
             ReturnValues="ALL_NEW"
         )
         return response.get("Attributes", {})
-    except Exception as e:
+    except ClientError as e:
+        if e.response['Error']['Code'] == "ConditionalCheckFailedException":
+            print(f"Unauthorized update attempt for Arena {arena_id}")
+            return {}
         print(f"Error updating arena {arena_id}: {e}")
         raise e
 
 def delete_arena(user_id: str, arena_id: str):
     """
-    Deletes an Arena configuration. 
-    Note: This does NOT delete the chats inside it (unless we add specific logic later).
+    Deletes an Arena configuration if the user owns it.
     """
     try:
         table.delete_item(
-            Key={'UserId': user_id, 'ArenaId': arena_id}
+            Key={'ArenaId': arena_id},
+            ConditionExpression="UserId = :uid",
+            ExpressionAttributeValues={':uid': user_id}
         )
         return True
-    except Exception as e:
+    except ClientError as e:
+        if e.response['Error']['Code'] == "ConditionalCheckFailedException":
+            print(f"Unauthorized delete attempt for Arena {arena_id}")
+            return False
         print(f"Error deleting arena {arena_id}: {e}")
         return False

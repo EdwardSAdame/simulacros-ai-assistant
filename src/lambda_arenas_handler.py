@@ -34,8 +34,10 @@ def _parse_body(event):
 
 def _get_user_id(event, parsed_body):
     """
-    Extracts User ID from the event. 
-    Checks Cognito claims first, then falls back to request body (for testing).
+    Extracts User ID from:
+    1. Cognito Claims (Production)
+    2. Query String Parameters (GET requests)
+    3. Request Body (POST/PUT requests)
     """
     # Option A: Cognito Authorizer
     if 'requestContext' in event and 'authorizer' in event['requestContext']:
@@ -44,8 +46,14 @@ def _get_user_id(event, parsed_body):
         if sub:
             return sub
     
-    # Option B: For testing (passed in body)
-    # Check for both snake_case and camelCase
+    # Option B: Query String Parameters (CRITICAL FOR GET REQUESTS)
+    query_params = event.get('queryStringParameters') or {}
+    if 'userId' in query_params:
+        return query_params['userId']
+    if 'user_id' in query_params:
+        return query_params['user_id']
+    
+    # Option C: Request Body (For POST/PUT)
     if parsed_body:
         return parsed_body.get('user_id') or parsed_body.get('userId')
     
@@ -64,7 +72,7 @@ def lambda_handler(event, context):
 
     # 2. Get Path Parameters
     path_params = event.get('pathParameters') or {}
-    arena_id = path_params.get('id')  # e.g. /arenas/{id}
+    arena_id = path_params.get('id')
     
     # 3. Parse Body
     body = _parse_body(event)
