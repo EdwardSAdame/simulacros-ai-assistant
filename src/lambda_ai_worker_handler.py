@@ -7,10 +7,10 @@ from src.services.chat_service import get_ai_response
 from src.storage.ws_connections_table import WsConnectionsTable
 from src.utils.logging_utils import log_event, set_invocation_context
 
-# 🟢 IMPORT: The Stream Manager
+# IMPORT: The Stream Manager
 from src.streaming.stream_manager import StreamManager
 
-# 🔹 IMPORT: The Hybrid Semantic Router
+# IMPORT: The Hybrid Semantic Router
 from src.services.semantic_router import semantic_router
 
 logger = logging.getLogger()
@@ -64,7 +64,7 @@ def lambda_handler(event, context):
             image_urls = payload.get("image_urls", [])
             pdf_urls = payload.get("pdf_urls", [])
 
-            # 🟢 NEW: Extract Arena ID from SQS
+            # NEW: Extract Arena ID from SQS
             arena_id = payload.get("arena_id")
 
             user_id = payload.get("user_id")
@@ -80,7 +80,7 @@ def lambda_handler(event, context):
             # --- 1. Get Connection ID ---
             connection_id = ws_connections_table.get_connection_id(user_id)
 
-            # 🟢 Initialize Stream Manager (if connected)
+            # Initialize Stream Manager (if connected)
             stream_manager = None
             if connection_id:
                 stream_manager = StreamManager(connection_id, api_gateway_client)
@@ -91,7 +91,7 @@ def lambda_handler(event, context):
             
             if connection_id:
                 try:
-                    # 🔹 ROUTER CALL: Get category, creative phrases, AND intent
+                    # ROUTER CALL: Get category, creative phrases, AND intent
                     routing_result = semantic_router.determine_category(message)
                     
                     category_key = routing_result.get("category", "general")
@@ -100,7 +100,7 @@ def lambda_handler(event, context):
                     intent = routing_result.get("intent", "chat") 
                     requires_visuals = routing_result.get("requires_visuals", False) 
                     
-                    # 🔹 DETERMINE CLIENT ACTION
+                    # DETERMINE CLIENT ACTION
                     client_action = None
                     if intent == "quiz":
                         client_action = "OPEN_QUIZ_PANEL"
@@ -152,7 +152,7 @@ def lambda_handler(event, context):
                 intent=intent,
                 requires_visuals=requires_visuals, 
                 stream_manager=stream_manager,
-                arena_id=arena_id  # 🟢 NEW: Pass Arena ID to the brain
+                arena_id=arena_id  # NEW: Pass Arena ID to the brain
             )
 
             # --- 4. Send Final Reply ---
