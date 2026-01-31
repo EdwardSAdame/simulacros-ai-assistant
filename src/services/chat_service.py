@@ -81,7 +81,7 @@ def _build_history_list(conversation_id: str, max_user: int = 3, max_assistant: 
                 except Exception:
                     pass
 
-            content = [{"type": "input_text" if role == "user" else "output_text", "text": text_content}]
+            content = [{"type": "text", "text": text_content}] # Simplified to text for history
             history_list.append({"role": role, "content": content})
         
         return history_list
@@ -170,9 +170,21 @@ def get_ai_response(
     # Step 3: Build Input History
     conversation_input = _build_history_list(actual_conversation_id)
     
+    # 🟢 FIX START: Append PDF URLs to text instead of image list
+    if pdf_urls:
+        if not message: message = "Review these documents:"
+        message += "\n\n[Attached Documents:]"
+        for p_url in pdf_urls:
+            message += f"\n- {p_url}"
+        
+        log_event("pdf_urls_appended", {"count": len(pdf_urls)})
+    # 🟢 FIX END
+
     current_user_content = []
     if message:
-        current_user_content.append({"type": "input_text", "text": message})
+        current_user_content.append({"type": "text", "text": message}) # Changed input_text to text for consistency
+    
+    # Only process actual images here
     current_user_content.extend(format_image_urls_for_openai(image_urls or []))
 
     if current_user_content:
@@ -377,7 +389,7 @@ def get_ai_response(
                 name=(name or None),
                 email=_normalize_email_for_storage(email),
                 mode=mode,
-                system_instruction=system_prompt, # Now holds the Clean Arena Prompt
+                system_instruction=system_prompt, 
                 vector_store_ids=selected_vector_stores,
                 requires_visuals=requires_visuals,
                 web_search_config=web_search_config,

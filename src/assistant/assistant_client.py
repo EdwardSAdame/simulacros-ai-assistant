@@ -1,5 +1,5 @@
 # src/assistant/assistant_client.py
-from typing import List, Dict, Any, Tuple, Generator
+from typing import List, Dict, Any, Tuple, Generator, Optional
 import logging
 import re
 
@@ -20,6 +20,20 @@ from src.utils.stream_parser import StreamParser
 from src.utils.quiz_utils import QuizUtils
 
 logger = logging.getLogger(__name__)
+
+# 🟢 NEW: Validation Helper
+def is_valid_image_url(url: str) -> bool:
+    """Returns True if the URL looks like a supported image format."""
+    if not url or not isinstance(url, str):
+        return False
+    # OpenAI supports: png, jpeg, gif, webp
+    # We check typical extensions. 
+    # Note: Wix URLs often don't have extensions, but if it starts with wix:image, we assume processed.
+    if url.startswith("wix:image"): 
+        return True # Wix images are valid once processed by frontend (usually)
+    
+    clean = url.lower().split('?')[0]
+    return clean.endswith(('.png', '.jpg', '.jpeg', '.gif', '.webp'))
 
 # ------------------------------------------------------------------
 # HELPER: Context & Signal Builders
@@ -136,7 +150,10 @@ def send_message_to_assistant(
     requires_visuals: bool = False,
     web_search_config: Dict[str, Any] | None = None,
     user_location: Dict[str, str] | None = None,
-    pdf_urls: List[str] | None = None
+    pdf_urls: List[str] | None = None,
+    # 🟢 NEW: Separate image_urls param if needed internally, or rely on conversation_input
+    # Ideally conversation_input already has formatted images, but this is a safety net
+    image_urls: List[str] | None = None 
 ) -> Tuple[str, List[str], List[Dict[str, str]]]:
     
     client = get_openai_client()
@@ -152,7 +169,8 @@ def send_message_to_assistant(
     api_input = [{"role": "system", "content": [{"type": "input_text", "text": system_text}]}]
     api_input.extend(conversation_input)
 
-    # Inject PDF URLs as NATIVE 'input_file'
+    # 🟢 FIX: Inject PDF URLs as NATIVE 'input_file'
+    # Ensure they are valid URLs before adding
     if pdf_urls:
         target_message = None
         if api_input and api_input[-1].get("role") == "user":
@@ -168,10 +186,12 @@ def send_message_to_assistant(
              target_message["content"] = []
              
         for url in pdf_urls:
-            target_message["content"].append({
-                "type": "input_file",
-                "file_url": url
-            })
+            # Basic URL validation
+            if url and isinstance(url, str) and url.startswith("http"):
+                target_message["content"].append({
+                    "type": "input_file",
+                    "file_url": url
+                })
 
     # 3. Configure Tools
     tools = []
@@ -265,10 +285,11 @@ def generate_structured_quiz(
              target_message["content"] = []
              
         for url in pdf_urls:
-            target_message["content"].append({
-                "type": "input_file",
-                "file_url": url
-            })
+            if url and isinstance(url, str) and url.startswith("http"):
+                target_message["content"].append({
+                    "type": "input_file",
+                    "file_url": url
+                })
 
     req = {
         "model": cfg.model, "input": api_input,
@@ -343,10 +364,11 @@ def stream_structured_quiz(
              target_message["content"] = []
              
         for url in pdf_urls:
-            target_message["content"].append({
-                "type": "input_file",
-                "file_url": url
-            })
+            if url and isinstance(url, str) and url.startswith("http"):
+                target_message["content"].append({
+                    "type": "input_file",
+                    "file_url": url
+                })
 
     req = {
         "model": cfg.model, "input": api_input,
