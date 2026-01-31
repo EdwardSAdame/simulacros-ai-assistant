@@ -81,7 +81,9 @@ def _build_history_list(conversation_id: str, max_user: int = 3, max_assistant: 
                 except Exception:
                     pass
 
-            content = [{"type": "text", "text": text_content}] # Simplified to text for history
+            # 🟢 FIX: Use 'input_text' or 'output_text', NOT 'text'
+            msg_type = "input_text" if role == "user" else "output_text"
+            content = [{"type": msg_type, "text": text_content}] 
             history_list.append({"role": role, "content": content})
         
         return history_list
@@ -170,7 +172,7 @@ def get_ai_response(
     # Step 3: Build Input History
     conversation_input = _build_history_list(actual_conversation_id)
     
-    # 🟢 FIX START: Append PDF URLs to text instead of image list
+    # Append PDF URLs to text instead of image list
     if pdf_urls:
         if not message: message = "Review these documents:"
         message += "\n\n[Attached Documents:]"
@@ -178,11 +180,11 @@ def get_ai_response(
             message += f"\n- {p_url}"
         
         log_event("pdf_urls_appended", {"count": len(pdf_urls)})
-    # 🟢 FIX END
 
     current_user_content = []
     if message:
-        current_user_content.append({"type": "text", "text": message}) # Changed input_text to text for consistency
+        # 🟢 FIX: Use 'input_text', NOT 'text'
+        current_user_content.append({"type": "input_text", "text": message})
     
     # Only process actual images here
     current_user_content.extend(format_image_urls_for_openai(image_urls or []))
@@ -200,7 +202,6 @@ def get_ai_response(
     
     if intent == "quiz":
         # ... (Quiz logic remains unchanged) ...
-        # [Truncated for brevity - logic identical to previous file]
         topic_hint = message if message else "General Knowledge"
         num_questions = 5
         if message:
@@ -310,7 +311,7 @@ def get_ai_response(
             quiz_data = None
 
     else:
-        # STANDARD CHAT MODE (UPDATED FOR ARENAS)
+        # STANDARD CHAT MODE
         try:
             runtime_signals = build_runtime_context(
                 page=page,
@@ -320,9 +321,7 @@ def get_ai_response(
                 requires_visuals=requires_visuals 
             )
 
-            # LOGIC CHANGE: 
             # Check for Arena FIRST. If present, use Exclusive Mode.
-            
             system_prompt = ""
             
             if arena_id:
@@ -338,7 +337,6 @@ def get_ai_response(
                             logger.info(f"✅ Using Exclusive Arena Context: {arena_title}")
                             
                             # 1. Technical Baseline (Minimal rules for formatting)
-                            # We strip out the identity "I am Roma" and just keep functional rules
                             base_tech_prompt = (
                                 "You are an advanced AI Assistant. \n"
                                 "OUTPUT RULES:\n"
