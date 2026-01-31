@@ -81,7 +81,8 @@ def get_arenas_for_user(user_id: str) -> List[Dict[str, Any]]:
         raise ValueError("user_id must be provided")
 
     try:
-        # CRITICAL UPDATE: Uses the IndexName to query by UserId
+        # Note: If UserId is the Partition Key, we could query the table directly.
+        # But keeping IndexName in case your table design specifically uses it for ordering.
         response = table.query(
             IndexName='UserId-Index',
             KeyConditionExpression=Key('UserId').eq(user_id)
@@ -96,16 +97,15 @@ def get_arena_details(user_id: str, arena_id: str) -> Optional[Dict[str, Any]]:
     Fetches the full configuration for a specific Arena.
     """
     try:
-        # Assumes ArenaId is the Primary Key
+        #  FIX: Provide BOTH keys (Composite Key schema)
         response = table.get_item(
-            Key={'ArenaId': arena_id}
+            Key={
+                'UserId': user_id,
+                'ArenaId': arena_id
+            }
         )
         item = response.get('Item')
-
-        # Security Check: Ensure the user owns this arena
-        if item and item.get('UserId') == user_id:
-            return item
-        return None
+        return item
     except Exception as e:
         print(f"Error fetching arena details {arena_id}: {e}")
         return None
@@ -125,7 +125,7 @@ def update_arena(
         return {}
 
     update_parts = []
-    expression_values = {':ts': datetime.utcnow().isoformat(), ':uid': user_id}
+    expression_values = {':ts': datetime.utcnow().isoformat()}
     expression_names = {'#ts': 'UpdatedAt'}
 
     for key, value in filtered_updates.items():
@@ -139,20 +139,21 @@ def update_arena(
     update_expression = "SET " + ", ".join(update_parts) + ", #ts = :ts"
 
     try:
-        # ConditionExpression ensures we only update if the UserId matches
+        #  FIX: Provide BOTH keys in Key parameter
+        # Note: ConditionExpression 'UserId = :uid' is redundant if UserId is part of Key, 
+        # but safe to keep or remove. I'll remove it as Key guarantees targeting the right user's item.
         response = table.update_item(
-            Key={'ArenaId': arena_id},
+            Key={
+                'UserId': user_id,
+                'ArenaId': arena_id
+            },
             UpdateExpression=update_expression,
-            ConditionExpression="UserId = :uid",
             ExpressionAttributeNames=expression_names,
             ExpressionAttributeValues=expression_values,
             ReturnValues="ALL_NEW"
         )
         return response.get("Attributes", {})
     except ClientError as e:
-        if e.response['Error']['Code'] == "ConditionalCheckFailedException":
-            print(f"Unauthorized update attempt for Arena {arena_id}")
-            return {}
         print(f"Error updating arena {arena_id}: {e}")
         raise e
 
@@ -161,15 +162,14 @@ def delete_arena(user_id: str, arena_id: str):
     Deletes an Arena configuration if the user owns it.
     """
     try:
+        #  FIX: Provide BOTH keys
         table.delete_item(
-            Key={'ArenaId': arena_id},
-            ConditionExpression="UserId = :uid",
-            ExpressionAttributeValues={':uid': user_id}
+            Key={
+                'UserId': user_id,
+                'ArenaId': arena_id
+            }
         )
         return True
     except ClientError as e:
-        if e.response['Error']['Code'] == "ConditionalCheckFailedException":
-            print(f"Unauthorized delete attempt for Arena {arena_id}")
-            return False
         print(f"Error deleting arena {arena_id}: {e}")
         return False
