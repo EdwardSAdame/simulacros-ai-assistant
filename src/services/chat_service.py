@@ -187,6 +187,8 @@ def get_ai_response(
     sources_data = [] 
     
     if intent == "quiz":
+        # ... (Quiz logic remains unchanged) ...
+        # [Truncated for brevity - logic identical to previous file]
         topic_hint = message if message else "General Knowledge"
         num_questions = 5
         if message:
@@ -313,13 +315,15 @@ def get_ai_response(
             
             if arena_id:
                 try:
+                    logger.info(f"Attempting to fetch context for Arena: {arena_id}")
                     arena_context = arena_service.get_arena_context(user_id, arena_id)
+                    
                     if arena_context:
                         arena_title = arena_context.get('Title', 'Custom Arena')
                         arena_instructions = arena_context.get('SystemInstructions', '')
                         
-                        if arena_instructions.strip():
-                            logger.info(f"Using Exclusive Arena Context: {arena_title}")
+                        if arena_instructions and str(arena_instructions).strip():
+                            logger.info(f"✅ Using Exclusive Arena Context: {arena_title}")
                             
                             # 1. Technical Baseline (Minimal rules for formatting)
                             # We strip out the identity "I am Roma" and just keep functional rules
@@ -333,25 +337,31 @@ def get_ai_response(
                             
                             # 2. Add Runtime Signals (Name, Context)
                             if runtime_signals:
-                                base_tech_prompt += f"\nCONTEXT: {runtime_signals}"
+                                context_str = "\n".join(runtime_signals)
+                                base_tech_prompt += f"\nCONTEXT:\n{context_str}\n"
 
                             # 3. The Arena Identity (The "Main" Instructions)
                             injection = (
                                 f"\n\n--- [ARENA IDENTITY: {arena_title}] ---\n"
                                 f"Your Core Identity and Instructions are defined below.\n"
-                                f"IGNORE any previous default identity instructions.\n"
+                                f"IMPORTANT: Ignore any previous default identity instructions.\n"
                                 f"INSTRUCTIONS:\n"
                                 f"{arena_instructions}\n"
                                 f"--- [END OF ARENA INSTRUCTIONS] ---"
                             )
                             
                             system_prompt = base_tech_prompt + injection
+                        else:
+                            logger.warning(f"⚠️ Arena {arena_id} found, but SystemInstructions is empty.")
+                    else:
+                        logger.warning(f"⚠️ Arena {arena_id} context not found in DB.")
                             
                 except Exception as e:
-                    logger.error(f"Failed to load arena context: {e}")
+                    logger.error(f"❌ Failed to load arena context: {e}")
 
             # FALLBACK: If no Arena (or load failed), use Default Roma Instructions
             if not system_prompt:
+                logger.info("Using Default System Instructions (Roma).")
                 system_prompt = build_system_instructions(
                     extras=runtime_signals,
                     exam_context=exam_context,
