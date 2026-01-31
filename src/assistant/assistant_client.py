@@ -26,12 +26,8 @@ def is_valid_image_url(url: str) -> bool:
     """Returns True if the URL looks like a supported image format."""
     if not url or not isinstance(url, str):
         return False
-    # OpenAI supports: png, jpeg, gif, webp
-    # We check typical extensions. 
-    # Note: Wix URLs often don't have extensions, but if it starts with wix:image, we assume processed.
     if url.startswith("wix:image"): 
-        return True # Wix images are valid once processed by frontend (usually)
-    
+        return True 
     clean = url.lower().split('?')[0]
     return clean.endswith(('.png', '.jpg', '.jpeg', '.gif', '.webp'))
 
@@ -48,7 +44,6 @@ def _build_runtime_signals(
 ) -> str:
     """Generates the dynamic system context for the AI."""
     
-    # 1. DELEGATE TO CENTRALIZED BUILDER
     signals = build_runtime_context(
         page=page,
         user_id=user_id, 
@@ -56,7 +51,6 @@ def _build_runtime_signals(
         email=email
     )
 
-    # 2. INJECT QUIZ-SPECIFIC VISUALS (If needed)
     if requires_visuals:
         visuals_trigger = (
             "VISUALS: Use the 'python' tool (Code Interpreter) to AUTOMATICALLY GENERATE PLOTS for any request involving "
@@ -69,15 +63,9 @@ def _build_runtime_signals(
     return build_system_instructions(extras=signals, exam_context=exam_context)
 
 def _assign_urls_to_quiz(quiz_data: QuizResponse, url_map: Dict[str, str]):
-    """
-    Binds generated image URLs to quiz questions using EXACT or NORMALIZED MATCHING.
-    """
     if not url_map or not quiz_data: return
     
-    # 1. Create a Normalized Map (Lowercase Keys) for fuzzy matching
     normalized_map = {k.lower(): v for k, v in url_map.items()}
-    
-    # Fallback list (Queue)
     fallback_urls = list(url_map.values())
     fallback_idx = 0
 
@@ -87,19 +75,16 @@ def _assign_urls_to_quiz(quiz_data: QuizResponse, url_map: Dict[str, str]):
             filename = raw_path.split("/")[-1]
             filename_lower = filename.lower()
             
-            # Strategy A: Exact Match
             if filename in url_map:
                 q.image_url = url_map[filename]
                 if url_map[filename] in fallback_urls:
                     fallback_urls.remove(url_map[filename])
 
-            # Strategy B: Case-Insensitive Match
             elif filename_lower in normalized_map:
                 q.image_url = normalized_map[filename_lower]
                 if normalized_map[filename_lower] in fallback_urls:
                     fallback_urls.remove(normalized_map[filename_lower])
             
-            # Strategy C: Sequential Fallback
             elif fallback_idx < len(fallback_urls):
                 logger.warning(f"Image match failed for {filename}, using fallback index {fallback_idx}.")
                 q.image_url = fallback_urls[fallback_idx]
@@ -110,7 +95,6 @@ def _assign_urls_to_quiz(quiz_data: QuizResponse, url_map: Dict[str, str]):
              fallback_idx += 1
 
 def _extract_sources(response_obj: Any) -> List[Dict[str, str]]:
-    """Extracts citations from the OpenAI response object."""
     sources = []
     try:
         output_items = getattr(response_obj, "output", []) or []
@@ -150,10 +134,7 @@ def send_message_to_assistant(
     requires_visuals: bool = False,
     web_search_config: Dict[str, Any] | None = None,
     user_location: Dict[str, str] | None = None,
-    pdf_urls: List[str] | None = None,
-    # 🟢 NEW: Separate image_urls param if needed internally, or rely on conversation_input
-    # Ideally conversation_input already has formatted images, but this is a safety net
-    image_urls: List[str] | None = None 
+    pdf_urls: List[str] | None = None
 ) -> Tuple[str, List[str], List[Dict[str, str]]]:
     
     client = get_openai_client()
@@ -163,6 +144,8 @@ def send_message_to_assistant(
     active_effort = cfg.reasoning_effort
     
     # 2. Build Inputs
+    # Note: System prompt uses "text" inside "content" list for standard Chat, 
+    # but "input_text" for the new /v1/responses. We stick to "input_text" as you are using the new API.
     system_text = system_instruction or _build_runtime_signals(
         user_id, page, name, email, exam_context="ICFES", requires_visuals=requires_visuals
     )
@@ -170,7 +153,6 @@ def send_message_to_assistant(
     api_input.extend(conversation_input)
 
     # 🟢 FIX: Inject PDF URLs as NATIVE 'input_file'
-    # Ensure they are valid URLs before adding
     if pdf_urls:
         target_message = None
         if api_input and api_input[-1].get("role") == "user":
@@ -180,13 +162,14 @@ def send_message_to_assistant(
             api_input.append(target_message)
         
         current_content = target_message.get("content")
+        # Ensure content is a list before appending
         if isinstance(current_content, str):
             target_message["content"] = [{"type": "input_text", "text": current_content}]
         elif current_content is None:
              target_message["content"] = []
              
         for url in pdf_urls:
-            # Basic URL validation
+            # 🟢 Basic URL validation for PDF
             if url and isinstance(url, str) and url.startswith("http"):
                 target_message["content"].append({
                     "type": "input_file",
@@ -209,7 +192,9 @@ def send_message_to_assistant(
         tools.append(web_tool)
 
     # 4. Build Request
+    # Use "input" key for the new Responses API
     req = {"model": target_model, "input": api_input}
+    
     is_reasoning = (target_model.startswith("o") and not target_model.startswith("gpt")) or "reasoning" in target_model
     
     if is_reasoning:
@@ -225,18 +210,20 @@ def send_message_to_assistant(
         text = getattr(resp, "output_text", None)
         if not text:
             chunks = []
-            for block in getattr(resp, "output", []) or []:
-                for c in getattr(block, "content", []) or []:
-                    if getattr(c, "type", "") in ("output_text", "text"): chunks.append(getattr(c, "text", ""))
+            output_list = getattr(resp, "output", []) or []
+            for item in output_list:
+                content_list = getattr(item, "content", []) or []
+                for c in content_list:
+                    # Output text type is 'text' in the response object
+                    if getattr(c, "type", "") == "text": 
+                        chunks.append(getattr(c, "text", ""))
             text = "\n".join(chunks).strip()
         
         if text: 
             text = re.sub(r'\[.*?\]\(sandbox:/mnt/data/.*?\)', '', text).strip()
 
-        # Handle generated files (Visuals)
         generated_map = ai_assets_service.handle_generated_files(client, resp, folder="chat_assets")
         generated_urls = list(generated_map.values()) if generated_map else []
-        
         sources_list = _extract_sources(resp)
 
         return (text or "[No response]", generated_urls, sources_list)
@@ -256,7 +243,7 @@ def generate_structured_quiz(
     mode: str = "omega",
     exam_context: str = "ICFES",
     requires_visuals: bool = False,
-    pdf_urls: List[str] | None = None  # ADDED PDF SUPPORT
+    pdf_urls: List[str] | None = None 
 ) -> QuizResponse:
     
     client = get_openai_client()
@@ -269,7 +256,6 @@ def generate_structured_quiz(
     api_input = [{"role": "system", "content": [{"type": "input_text", "text": system_text}]}]
     api_input.extend(conversation_input)
 
-    # Inject PDF URLs as NATIVE 'input_file' for QUIZ
     if pdf_urls:
         target_message = None
         if api_input and api_input[-1].get("role") == "user":
@@ -296,7 +282,6 @@ def generate_structured_quiz(
         "text_format": QuizResponse, 
     }
     
-    # Enable Code Interpreter if PDFs or Visuals are present
     if requires_visuals or (pdf_urls and len(pdf_urls) > 0):
         req["tools"] = [{"type": "code_interpreter", "container": {"type": "auto"}}]
     
@@ -335,7 +320,7 @@ def stream_structured_quiz(
     mode: str = "omega",
     exam_context: str = "ICFES",
     requires_visuals: bool = False,
-    pdf_urls: List[str] | None = None  # ADDED PDF SUPPORT
+    pdf_urls: List[str] | None = None 
 ) -> Generator[Dict[str, Any], None, None]:
     
     client = get_openai_client()
@@ -348,7 +333,6 @@ def stream_structured_quiz(
     api_input = [{"role": "system", "content": [{"type": "input_text", "text": system_text}]}]
     api_input.extend(conversation_input)
 
-    # Inject PDF URLs as NATIVE 'input_file' for QUIZ STREAMING
     if pdf_urls:
         target_message = None
         if api_input and api_input[-1].get("role") == "user":
@@ -375,7 +359,6 @@ def stream_structured_quiz(
         "text_format": QuizResponse, 
     }
     
-    # Enable Code Interpreter if PDFs or Visuals are present
     if requires_visuals or (pdf_urls and len(pdf_urls) > 0):
         req["tools"] = [{"type": "code_interpreter", "container": {"type": "auto"}}]
     

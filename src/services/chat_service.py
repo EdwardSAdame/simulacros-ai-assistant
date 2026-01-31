@@ -81,7 +81,7 @@ def _build_history_list(conversation_id: str, max_user: int = 3, max_assistant: 
                 except Exception:
                     pass
 
-            # 🟢 FIX: Use 'input_text' or 'output_text', NOT 'text'
+            # 🟢 FIX: Use 'input_text' or 'output_text' for strict API compliance
             msg_type = "input_text" if role == "user" else "output_text"
             content = [{"type": msg_type, "text": text_content}] 
             history_list.append({"role": role, "content": content})
@@ -172,22 +172,30 @@ def get_ai_response(
     # Step 3: Build Input History
     conversation_input = _build_history_list(actual_conversation_id)
     
-    # Append PDF URLs to text instead of image list
-    if pdf_urls:
-        if not message: message = "Review these documents:"
-        message += "\n\n[Attached Documents:]"
-        for p_url in pdf_urls:
-            message += f"\n- {p_url}"
-        
-        log_event("pdf_urls_appended", {"count": len(pdf_urls)})
+    # 🟢 CRITICAL LOGIC: Separate PDFs from Images
+    # We create two clean lists. Any "image" URL that looks like a PDF gets moved to the PDF list.
+    clean_images = []
+    clean_pdfs = pdf_urls or []
+
+    if image_urls:
+        for url in image_urls:
+            lower = url.lower()
+            # Check if this "image" is actually a PDF
+            if '.pdf' in lower or 'docs.wixstatic.com' in lower:
+                if url not in clean_pdfs:
+                    clean_pdfs.append(url)
+            else:
+                clean_images.append(url)
 
     current_user_content = []
     if message:
-        # 🟢 FIX: Use 'input_text', NOT 'text'
+        # 🟢 FIX: Use 'input_text' to match OpenAI Responses API requirements
         current_user_content.append({"type": "input_text", "text": message})
     
-    # Only process actual images here
-    current_user_content.extend(format_image_urls_for_openai(image_urls or []))
+    # Only process actual images here (Vision API)
+    # format_image_urls_for_openai handles the {"type": "image_url", ...} structure
+    if clean_images:
+        current_user_content.extend(format_image_urls_for_openai(clean_images))
 
     if current_user_content:
         conversation_input.append({"role": "user", "content": current_user_content})
@@ -201,7 +209,7 @@ def get_ai_response(
     sources_data = [] 
     
     if intent == "quiz":
-        # ... (Quiz logic remains unchanged) ...
+        # ... (Quiz logic remains unchanged, but passes clean_pdfs) ...
         topic_hint = message if message else "General Knowledge"
         num_questions = 5
         if message:
@@ -224,7 +232,7 @@ def get_ai_response(
                     mode=mode,
                     exam_context=exam_context,
                     requires_visuals=requires_visuals, 
-                    pdf_urls=pdf_urls 
+                    pdf_urls=clean_pdfs # 🟢 Pass clean list
                 )
                 
                 seen_indices = set()
@@ -290,7 +298,7 @@ def get_ai_response(
                     mode=mode,
                     exam_context=exam_context,
                     requires_visuals=requires_visuals, 
-                    pdf_urls=pdf_urls 
+                    pdf_urls=clean_pdfs # 🟢 Pass clean list
                 )
                 
                 quiz_data = {
@@ -311,7 +319,7 @@ def get_ai_response(
             quiz_data = None
 
     else:
-        # STANDARD CHAT MODE
+        # STANDARD CHAT MODE (UPDATED FOR ARENAS)
         try:
             runtime_signals = build_runtime_context(
                 page=page,
@@ -391,7 +399,7 @@ def get_ai_response(
                 vector_store_ids=selected_vector_stores,
                 requires_visuals=requires_visuals,
                 web_search_config=web_search_config,
-                pdf_urls=pdf_urls 
+                pdf_urls=clean_pdfs # 🟢 Pass clean list
             )
             
             final_reply_text = response_tuple[0]
@@ -406,9 +414,9 @@ def get_ai_response(
     try:
         if message:
             save_message(actual_conversation_id, role="user", message_text=message)
-        for img in image_urls or []:
+        for img in clean_images:
             save_message(actual_conversation_id, role="user", message_text=f"[Imagen] {img}")
-        for pdf in pdf_urls or []:
+        for pdf in clean_pdfs:
             save_message(actual_conversation_id, role="user", message_text=f"[PDF] {pdf}")
         
         meta_payload = quiz_data
