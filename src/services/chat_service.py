@@ -22,9 +22,11 @@ from src.storage.conversations_table import (
     save_conversation, 
     _find_conversation_timestamp, 
     get_conversation_metadata,
-    update_conversation_last_active # NEW IMPORT
+    update_conversation_last_active
 )
 from src.storage.messages_table import save_message, get_recent_messages
+# NEW IMPORT: To update Arena recency
+from src.storage.arenas_table import update_arena_last_active
 
 logger = logging.getLogger(__name__)
 
@@ -171,9 +173,13 @@ def get_ai_response(
             )
             actual_conversation_id = conversation_data["ConversationId"]
         
-        # Always touch the LastUpdated field when active
+        # Always touch the LastUpdated field for the Conversation
         if user_id and actual_conversation_id:
             update_conversation_last_active(user_id, actual_conversation_id)
+            
+            # NEW: If this chat belongs to an Arena, update the Arena's LastActive too
+            if arena_id:
+                 update_arena_last_active(user_id, arena_id)
 
     except Exception as e:
         raise RuntimeError(f"Failed to save/reuse conversation: {e}")
@@ -182,14 +188,12 @@ def get_ai_response(
     conversation_input = _build_history_list(actual_conversation_id)
     
     # CRITICAL LOGIC: Separate PDFs from Images
-    # We create two clean lists. Any "image" URL that looks like a PDF gets moved to the PDF list.
     clean_images = []
     clean_pdfs = pdf_urls or []
 
     if image_urls:
         for url in image_urls:
             lower = url.lower()
-            # Check if this "image" is actually a PDF
             if '.pdf' in lower or 'docs.wixstatic.com' in lower:
                 if url not in clean_pdfs:
                     clean_pdfs.append(url)
@@ -200,8 +204,6 @@ def get_ai_response(
     if message:
         current_user_content.append({"type": "input_text", "text": message})
     
-    # Only process actual images here (Vision API)
-    # format_image_urls_for_openai handles the {"type": "image_url", ...} structure
     if clean_images:
         current_user_content.extend(format_image_urls_for_openai(clean_images))
 
@@ -217,7 +219,7 @@ def get_ai_response(
     sources_data = [] 
     
     if intent == "quiz":
-        # ... (Quiz logic remains unchanged, but passes clean_pdfs) ...
+        # ... (Quiz logic remains unchanged) ...
         topic_hint = message if message else "General Knowledge"
         num_questions = 5
         if message:
@@ -240,7 +242,7 @@ def get_ai_response(
                     mode=mode,
                     exam_context=exam_context,
                     requires_visuals=requires_visuals, 
-                    pdf_urls=clean_pdfs # Pass clean list
+                    pdf_urls=clean_pdfs
                 )
                 
                 seen_indices = set()
@@ -306,7 +308,7 @@ def get_ai_response(
                     mode=mode,
                     exam_context=exam_context,
                     requires_visuals=requires_visuals, 
-                    pdf_urls=clean_pdfs # Pass clean list
+                    pdf_urls=clean_pdfs
                 )
                 
                 quiz_data = {
@@ -327,7 +329,7 @@ def get_ai_response(
             quiz_data = None
 
     else:
-        # STANDARD CHAT MODE (UPDATED FOR ARENAS)
+        # STANDARD CHAT MODE
         try:
             runtime_signals = build_runtime_context(
                 page=page,
@@ -337,7 +339,7 @@ def get_ai_response(
                 requires_visuals=requires_visuals 
             )
 
-            # Check for Arena FIRST. If present, use Exclusive Mode.
+            # Check for Arena FIRST.
             system_prompt = ""
             
             if arena_id:
@@ -352,7 +354,7 @@ def get_ai_response(
                         if arena_instructions and str(arena_instructions).strip():
                             logger.info(f"Using Exclusive Arena Context: {arena_title}")
                             
-                            # 1. Technical Baseline (Minimal rules for formatting)
+                            # 1. Technical Baseline
                             base_tech_prompt = (
                                 "You are an advanced AI Assistant. \n"
                                 "OUTPUT RULES:\n"
@@ -361,12 +363,10 @@ def get_ai_response(
                                 "- Be helpful, clear, and accurate.\n"
                             )
                             
-                            # 2. Add Runtime Signals (Name, Context)
                             if runtime_signals:
                                 context_str = "\n".join(runtime_signals)
                                 base_tech_prompt += f"\nCONTEXT:\n{context_str}\n"
 
-                            # 3. The Arena Identity (The "Main" Instructions)
                             injection = (
                                 f"\n\n--- [ARENA IDENTITY: {arena_title}] ---\n"
                                 f"Your Core Identity and Instructions are defined below.\n"
@@ -385,7 +385,7 @@ def get_ai_response(
                 except Exception as e:
                     logger.error(f"Failed to load arena context: {e}")
 
-            # FALLBACK: If no Arena (or load failed), use Default Roma Instructions
+            # FALLBACK
             if not system_prompt:
                 logger.info("Using Default System Instructions (Roma).")
                 system_prompt = build_system_instructions(
@@ -407,7 +407,7 @@ def get_ai_response(
                 vector_store_ids=selected_vector_stores,
                 requires_visuals=requires_visuals,
                 web_search_config=web_search_config,
-                pdf_urls=clean_pdfs # Pass clean list
+                pdf_urls=clean_pdfs
             )
             
             final_reply_text = response_tuple[0]

@@ -55,6 +55,7 @@ def create_arena(
         "ArenaId": arena_id,
         "CreatedAt": timestamp,
         "UpdatedAt": timestamp,
+        "LastActive": timestamp, # 🟢 NEW: Initialize LastActive
         "Title": title.strip(),
         "Description": description,
         "SystemInstructions": system_instructions,
@@ -73,21 +74,48 @@ def create_arena(
 
     return safe_item
 
+def update_arena_last_active(user_id: str, arena_id: str):
+    """
+    🟢 NEW: Updates the 'LastActive' field to the current time.
+    Call this whenever a chat occurs inside this Arena.
+    """
+    now_iso = datetime.utcnow().isoformat()
+    try:
+        table.update_item(
+            Key={
+                'UserId': user_id,
+                'ArenaId': arena_id
+            },
+            UpdateExpression="set LastActive = :t",
+            ExpressionAttributeValues={':t': now_iso}
+        )
+    except Exception as e:
+        print(f"Error updating LastActive for Arena {arena_id}: {e}")
+
 def get_arenas_for_user(user_id: str) -> List[Dict[str, Any]]:
     """
     Fetches all Arenas created by a specific user using the GSI.
+    Sorted by LastActive (Recency).
     """
     if not user_id:
         raise ValueError("user_id must be provided")
 
     try:
-        # Note: If UserId is the Partition Key, we could query the table directly.
-        # But keeping IndexName in case your table design specifically uses it for ordering.
         response = table.query(
             IndexName='UserId-Index',
             KeyConditionExpression=Key('UserId').eq(user_id)
         )
-        return response.get("Items", [])
+        items = response.get("Items", [])
+
+        # 🟢 MANUAL SORT: Re-sort by 'LastActive' (fallback to 'UpdatedAt')
+        def get_sort_key(x):
+            return x.get('LastActive', x.get('UpdatedAt', ''))
+
+        # Sort Descending (Newest First)
+        items.sort(key=get_sort_key, reverse=True)
+
+        return items
+
     except Exception as e:
         print(f"Error fetching arenas for {user_id}: {e}")
         return []
@@ -97,7 +125,6 @@ def get_arena_details(user_id: str, arena_id: str) -> Optional[Dict[str, Any]]:
     Fetches the full configuration for a specific Arena.
     """
     try:
-        #  FIX: Provide BOTH keys (Composite Key schema)
         response = table.get_item(
             Key={
                 'UserId': user_id,
@@ -125,8 +152,11 @@ def update_arena(
         return {}
 
     update_parts = []
-    expression_values = {':ts': datetime.utcnow().isoformat()}
-    expression_names = {'#ts': 'UpdatedAt'}
+    
+    # Update both UpdatedAt AND LastActive when editing
+    now_iso = datetime.utcnow().isoformat()
+    expression_values = {':ts': now_iso}
+    expression_names = {'#ts': 'UpdatedAt', '#la': 'LastActive'}
 
     for key, value in filtered_updates.items():
         attr_name = f"#{key}"
@@ -136,12 +166,10 @@ def update_arena(
         expression_names[attr_name] = key
         expression_values[val_name] = value
 
-    update_expression = "SET " + ", ".join(update_parts) + ", #ts = :ts"
+    # We update LastActive too, because editing an Arena makes it "relevant" again
+    update_expression = "SET " + ", ".join(update_parts) + ", #ts = :ts, #la = :ts"
 
     try:
-        #  FIX: Provide BOTH keys in Key parameter
-        # Note: ConditionExpression 'UserId = :uid' is redundant if UserId is part of Key, 
-        # but safe to keep or remove. I'll remove it as Key guarantees targeting the right user's item.
         response = table.update_item(
             Key={
                 'UserId': user_id,
@@ -162,7 +190,6 @@ def delete_arena(user_id: str, arena_id: str):
     Deletes an Arena configuration if the user owns it.
     """
     try:
-        #  FIX: Provide BOTH keys
         table.delete_item(
             Key={
                 'UserId': user_id,
