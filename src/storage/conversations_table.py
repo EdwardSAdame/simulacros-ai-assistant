@@ -5,7 +5,7 @@ from datetime import datetime
 from typing import Optional, List, Dict, Any
 from boto3.dynamodb.conditions import Key, Attr
 
-# 🟢 CONFIG
+# CONFIG
 dynamodb = boto3.resource("dynamodb")
 table = dynamodb.Table("UserConversations")
 
@@ -55,7 +55,7 @@ def save_conversation(
     title: str,
     page: str,
     conversation_id: Optional[str] = None, # Allow passing an existing ID
-    arena_id: Optional[str] = None # 🟢 NEW: Link to an Arena
+    arena_id: Optional[str] = None # Link to an Arena
 ) -> Dict[str, Any]:
     """
     Creates a new conversation record in DynamoDB.
@@ -82,7 +82,8 @@ def save_conversation(
         "Title": title,
         "Page": page,
         "IsPinned": False, # Default to false
-        "ArenaId": arena_id # 🟢 NEW: Save the Arena ID
+        "ArenaId": arena_id,
+        "LastUpdated": timestamp # Initialize LastUpdated same as creation
     }
 
     # Clean up (removes empty email, empty arena_id, etc.)
@@ -90,9 +91,9 @@ def save_conversation(
 
     try:
         table.put_item(Item=safe_item)
-        print(f"✅ Conversation saved: {conversation_id} (Arena: {arena_id})")
+        print(f"Conversation saved: {conversation_id} (Arena: {arena_id})")
     except Exception as e:
-        print(f"❌ Error saving conversation: {e}")
+        print(f"Error saving conversation: {e}")
         raise e
 
     return {
@@ -101,6 +102,27 @@ def save_conversation(
         "Title": title,
         "ArenaId": arena_id
     }
+
+def update_conversation_last_active(user_id: str, conversation_id: str):
+    """
+    Updates the 'LastUpdated' field to the current time.
+    Call this whenever a new message is sent.
+    """
+    timestamp = _find_conversation_timestamp(user_id, conversation_id)
+    if not timestamp:
+        print(f"Cannot update LastActive: Conversation {conversation_id} not found.")
+        return
+
+    now_iso = datetime.utcnow().isoformat()
+
+    try:
+        table.update_item(
+            Key={'UserId': user_id, 'Timestamp': timestamp},
+            UpdateExpression="set LastUpdated = :t",
+            ExpressionAttributeValues={':t': now_iso}
+        )
+    except Exception as e:
+        print(f"Error updating LastActive: {e}")
 
 def get_conversations_for_user(
     user_id: str,
@@ -113,13 +135,13 @@ def get_conversations_for_user(
     if not user_id:
         raise ValueError("user_id must be provided")
 
-    # Projecting relevant fields (Added ArenaId)
+    # Projecting relevant fields (Added ArenaId and LastUpdated)
     expression_attribute_names = {
         '#ts': 'Timestamp',
         '#n': 'Name'
     }
-    # 🟢 UPDATED: Projecting ArenaId so frontend can group them
-    projection_expression = "ConversationId, Title, #ts, IsPinned, #n, Page, ArenaId"
+    
+    projection_expression = "ConversationId, Title, #ts, IsPinned, #n, Page, ArenaId, LastUpdated"
 
     try:
         response = table.query(
@@ -129,7 +151,18 @@ def get_conversations_for_user(
             ProjectionExpression=projection_expression,
             ExpressionAttributeNames=expression_attribute_names
         )
-        return response.get("Items", [])
+        items = response.get("Items", [])
+
+        # MANUAL SORT: Re-sort by 'LastUpdated' (fallback to 'Timestamp')
+        def get_sort_key(x):
+            return x.get('LastUpdated', x.get('Timestamp', ''))
+
+        # If we asked for descending (newest first), reverse=True
+        should_reverse = not ascending
+        
+        items.sort(key=get_sort_key, reverse=should_reverse)
+
+        return items
     except Exception as e:
         print(f"Error fetching conversations for {user_id}: {e}")
         return []

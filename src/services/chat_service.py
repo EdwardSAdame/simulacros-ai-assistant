@@ -18,7 +18,12 @@ from src.services.context_builder import build_runtime_context
 from src.services.arena_service import arena_service
 
 # STORAGE
-from src.storage.conversations_table import save_conversation, _find_conversation_timestamp, get_conversation_metadata
+from src.storage.conversations_table import (
+    save_conversation, 
+    _find_conversation_timestamp, 
+    get_conversation_metadata,
+    update_conversation_last_active # NEW IMPORT
+)
 from src.storage.messages_table import save_message, get_recent_messages
 
 logger = logging.getLogger(__name__)
@@ -81,7 +86,6 @@ def _build_history_list(conversation_id: str, max_user: int = 3, max_assistant: 
                 except Exception:
                     pass
 
-            # 🟢 FIX: Use 'input_text' or 'output_text' for strict API compliance
             msg_type = "input_text" if role == "user" else "output_text"
             content = [{"type": msg_type, "text": text_content}] 
             history_list.append({"role": role, "content": content})
@@ -166,13 +170,18 @@ def get_ai_response(
                 arena_id=arena_id  
             )
             actual_conversation_id = conversation_data["ConversationId"]
+        
+        # Always touch the LastUpdated field when active
+        if user_id and actual_conversation_id:
+            update_conversation_last_active(user_id, actual_conversation_id)
+
     except Exception as e:
         raise RuntimeError(f"Failed to save/reuse conversation: {e}")
 
     # Step 3: Build Input History
     conversation_input = _build_history_list(actual_conversation_id)
     
-    # 🟢 CRITICAL LOGIC: Separate PDFs from Images
+    # CRITICAL LOGIC: Separate PDFs from Images
     # We create two clean lists. Any "image" URL that looks like a PDF gets moved to the PDF list.
     clean_images = []
     clean_pdfs = pdf_urls or []
@@ -189,7 +198,6 @@ def get_ai_response(
 
     current_user_content = []
     if message:
-        # 🟢 FIX: Use 'input_text' to match OpenAI Responses API requirements
         current_user_content.append({"type": "input_text", "text": message})
     
     # Only process actual images here (Vision API)
@@ -232,7 +240,7 @@ def get_ai_response(
                     mode=mode,
                     exam_context=exam_context,
                     requires_visuals=requires_visuals, 
-                    pdf_urls=clean_pdfs # 🟢 Pass clean list
+                    pdf_urls=clean_pdfs # Pass clean list
                 )
                 
                 seen_indices = set()
@@ -298,7 +306,7 @@ def get_ai_response(
                     mode=mode,
                     exam_context=exam_context,
                     requires_visuals=requires_visuals, 
-                    pdf_urls=clean_pdfs # 🟢 Pass clean list
+                    pdf_urls=clean_pdfs # Pass clean list
                 )
                 
                 quiz_data = {
@@ -342,7 +350,7 @@ def get_ai_response(
                         arena_instructions = arena_context.get('SystemInstructions', '')
                         
                         if arena_instructions and str(arena_instructions).strip():
-                            logger.info(f"✅ Using Exclusive Arena Context: {arena_title}")
+                            logger.info(f"Using Exclusive Arena Context: {arena_title}")
                             
                             # 1. Technical Baseline (Minimal rules for formatting)
                             base_tech_prompt = (
@@ -370,12 +378,12 @@ def get_ai_response(
                             
                             system_prompt = base_tech_prompt + injection
                         else:
-                            logger.warning(f"⚠️ Arena {arena_id} found, but SystemInstructions is empty.")
+                            logger.warning(f"Arena {arena_id} found, but SystemInstructions is empty.")
                     else:
-                        logger.warning(f"⚠️ Arena {arena_id} context not found in DB.")
+                        logger.warning(f"Arena {arena_id} context not found in DB.")
                             
                 except Exception as e:
-                    logger.error(f"❌ Failed to load arena context: {e}")
+                    logger.error(f"Failed to load arena context: {e}")
 
             # FALLBACK: If no Arena (or load failed), use Default Roma Instructions
             if not system_prompt:
@@ -399,7 +407,7 @@ def get_ai_response(
                 vector_store_ids=selected_vector_stores,
                 requires_visuals=requires_visuals,
                 web_search_config=web_search_config,
-                pdf_urls=clean_pdfs # 🟢 Pass clean list
+                pdf_urls=clean_pdfs # Pass clean list
             )
             
             final_reply_text = response_tuple[0]
