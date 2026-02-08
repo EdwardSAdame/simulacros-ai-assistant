@@ -1,14 +1,10 @@
 # src/services/chat_service.py
-import json
 import re
 import logging
-from decimal import Decimal
-from typing import List, Dict, Any, Tuple, Optional
+from typing import Tuple, Dict, Any
 
-# CONFIG & UTILS
-from src.config.settings import get_openai_client, get_vector_search_max_results
-from src.config.model_config import get_model_config
-from src.config.system_instructions import build_system_instructions
+# CONFIG
+from src.config.settings import get_vector_search_max_results
 from src.config.page_vectorstores import get_stores_for_page
 from src.config.web_search_config import get_search_filters 
 from src.utils.logging_utils import log_event
@@ -16,6 +12,8 @@ from src.utils.logging_utils import log_event
 # SERVICES
 from src.services.context_builder import build_runtime_context
 from src.services.arena_service import arena_service
+from src.services.context_resolution import determine_exam_context
+from src.services.history_service import build_history_list
 
 # STORAGE
 from src.storage.conversations_table import (
@@ -24,12 +22,14 @@ from src.storage.conversations_table import (
     get_conversation_metadata,
     update_conversation_last_active
 )
-from src.storage.messages_table import save_message, get_recent_messages
-# NEW IMPORT: To update Arena recency
+from src.storage.messages_table import save_message
 from src.storage.arenas_table import update_arena_last_active
 
 logger = logging.getLogger(__name__)
 
+# ------------------------------------------------------------------
+# HELPER: Input Normalization
+# ------------------------------------------------------------------
 def _normalize_email_for_storage(val):
     if val is None: return None
     if isinstance(val, str) and val.strip() == "": return None
@@ -39,63 +39,6 @@ def _normalize_page(val: str | None) -> str:
     if not val or (isinstance(val, str) and val.strip() == ""):
         return "/"
     return val
-
-def decimal_default(obj):
-    if isinstance(obj, Decimal):
-        return int(obj) if obj % 1 == 0 else float(obj)
-    raise TypeError
-
-def determine_exam_context(page_url: str, message_text: str | None = None) -> str:
-    """Decides the Exam Context (UNAL vs ICFES vs GENERAL)."""
-    if page_url:
-        url_lower = page_url.lower()
-        if "unal" in url_lower: return "UNAL"
-        if "icfes" in url_lower: return "ICFES"
-    
-    if message_text:
-        msg_lower = message_text.lower()
-        if any(x in msg_lower for x in ["unal", "nacional", "universidad nacional"]):
-            return "UNAL"
-        if any(x in msg_lower for x in ["icfes", "saber 11", "saber pro", "estado"]):
-            return "ICFES"
-            
-    return "GENERAL" 
-
-def _build_history_list(conversation_id: str, max_user: int = 3, max_assistant: int = 3) -> List[Dict[str, Any]]:
-    try:
-        msgs = get_recent_messages(conversation_id=conversation_id, limit=20, ascending=True)
-        if not msgs: return []
-
-        user_msgs = [m for m in msgs if m.get("Role") == "user"][-max_user:]
-        asst_msgs = [m for m in msgs if m.get("Role") == "assistant"][-max_assistant:]
-        merged = sorted(user_msgs + asst_msgs, key=lambda m: m["Timestamp"])
-
-        history_list = []
-        for m in merged:
-            role = m.get("Role", "user")
-            text_content = m.get("MessageText", "")
-            
-            metadata = m.get("Metadata") or m.get("Meta")
-            if role == "assistant" and metadata:
-                try:
-                    metadata_str = json.dumps(metadata, default=decimal_default)
-                    hidden_context = (
-                        f"\n\n[SYSTEM CONTEXT: User cannot see this. "
-                        f"I previously generated this interactive content: {metadata_str}. "
-                        f"I must use this data to answer follow-up questions.]"
-                    )
-                    text_content += hidden_context
-                except Exception:
-                    pass
-
-            msg_type = "input_text" if role == "user" else "output_text"
-            content = [{"type": msg_type, "text": text_content}] 
-            history_list.append({"role": role, "content": content})
-        
-        return history_list
-    except Exception as e:
-        log_event("history_fetch_failed", {"conversation_id": conversation_id}, level="warning", error=e)
-        return []
 
 # ------------------------------------------------------------------
 # MAIN FUNCTION
@@ -116,14 +59,15 @@ def get_ai_response(
     arena_id: str | None = None  
 ) -> Tuple[str, str, str, Dict | None]: 
     
-    # Lazy Imports
+    # Lazy Imports to avoid circular deps
     from src.assistant.assistant_client import send_message_to_assistant, generate_structured_quiz, stream_structured_quiz
     from src.assistant.image_handler import format_image_urls_for_openai
     from src.services.quiz_service import QuizService
+    from src.config.system_instructions import build_system_instructions
 
     page = _normalize_page(page)
 
-    # 1. Intelligence Layer
+    # 1. Intelligence Layer: Context & Search Config
     exam_context = determine_exam_context(page, message)
     selected_vector_stores = get_stores_for_page(page)
     web_search_config = get_search_filters(exam_context)
@@ -138,7 +82,7 @@ def get_ai_response(
         "pdf_count": len(pdf_urls) if pdf_urls else 0
     })
 
-    # Step 2: Find-or-create conversation
+    # 2. Conversation Management (Find or Create)
     actual_conversation_id = conversation_id
     should_create_new = True
 
@@ -146,8 +90,7 @@ def get_ai_response(
         exists_timestamp = _find_conversation_timestamp(user_id, conversation_id)
         if exists_timestamp:
             should_create_new = False
-            
-            # ARENA RESOLUTION: If frontend didn't send arena_id, try to fetch it from DB
+            # Resolve Arena ID from DB if not provided
             if not arena_id:
                 existing_meta = get_conversation_metadata(user_id, conversation_id)
                 if existing_meta and existing_meta.get("ArenaId"):
@@ -156,7 +99,6 @@ def get_ai_response(
 
             log_event("conversation_verified_and_reused", {"conversation_id": conversation_id})
         else:
-            # Trust the ID provided
             actual_conversation_id = conversation_id 
 
     try:
@@ -173,24 +115,22 @@ def get_ai_response(
             )
             actual_conversation_id = conversation_data["ConversationId"]
         
-        # Always touch the LastUpdated field for the Conversation
+        # Update Recency
         if user_id and actual_conversation_id:
             update_conversation_last_active(user_id, actual_conversation_id)
-            
-            # NEW: If this chat belongs to an Arena, update the Arena's LastActive too
             if arena_id:
                  update_arena_last_active(user_id, arena_id)
 
     except Exception as e:
         raise RuntimeError(f"Failed to save/reuse conversation: {e}")
 
-    # Step 3: Build Input History
-    conversation_input = _build_history_list(actual_conversation_id)
+    # 3. Build History & Inputs
+    conversation_input = build_history_list(actual_conversation_id)
     
-    # CRITICAL LOGIC: Separate PDFs from Images
     clean_images = []
     clean_pdfs = pdf_urls or []
 
+    # Separate PDFs from Images if mixed in image_urls
     if image_urls:
         for url in image_urls:
             lower = url.lower()
@@ -219,7 +159,6 @@ def get_ai_response(
     sources_data = [] 
     
     if intent == "quiz":
-        # ... (Quiz logic remains unchanged) ...
         topic_hint = message if message else "General Knowledge"
         num_questions = 5
         if message:
@@ -247,7 +186,7 @@ def get_ai_response(
                 
                 seen_indices = set()
                 accumulated_questions = []
-                final_reply_text = "Aqui tienes tu simulacro."
+                final_reply_text = "Aquí tienes tu simulacro."
                 ai_generated_title = "Simulacro Generado" 
                 
                 ghost_easier = None
@@ -387,7 +326,6 @@ def get_ai_response(
 
             # FALLBACK
             if not system_prompt:
-                logger.info("Using Default System Instructions (Roma).")
                 system_prompt = build_system_instructions(
                     extras=runtime_signals,
                     exam_context=exam_context,

@@ -1,123 +1,21 @@
 # src/assistant/assistant_client.py
-from typing import List, Dict, Any, Tuple, Generator, Optional
 import logging
 import re
+from typing import List, Dict, Any, Tuple, Generator
 
-# Standard Imports
+# CONFIG & CLIENT
 from src.config.settings import get_openai_client, get_vector_search_max_results
 from src.config.model_config import get_model_config
-from src.config.system_instructions import build_system_instructions
-# Visual Guidelines
-from src.config.visual_instructions import build_visual_instructions
-from src.utils.time_utils import get_current_time_info, infer_target_semester
 from src.schemas.quiz_schemas import QuizResponse
 
-# Modular Services
-from src.services.ai_assets_service import ai_assets_service
-# Context Builder
-from src.services.context_builder import build_runtime_context
+# NEW REFACTORED MODULES
+from src.services.signal_service import build_runtime_signals
+from src.assistant.artifact_handler import handle_generated_files, assign_urls_to_quiz
+from src.utils.response_parser import extract_sources
 from src.utils.stream_parser import StreamParser
 from src.utils.quiz_utils import QuizUtils
 
 logger = logging.getLogger(__name__)
-
-# 🟢 NEW: Validation Helper
-def is_valid_image_url(url: str) -> bool:
-    """Returns True if the URL looks like a supported image format."""
-    if not url or not isinstance(url, str):
-        return False
-    if url.startswith("wix:image"): 
-        return True 
-    clean = url.lower().split('?')[0]
-    return clean.endswith(('.png', '.jpg', '.jpeg', '.gif', '.webp'))
-
-# ------------------------------------------------------------------
-# HELPER: Context & Signal Builders
-# ------------------------------------------------------------------
-def _build_runtime_signals(
-    user_id: str | None, 
-    page: str | None, 
-    name: str | None, 
-    email: str | None, 
-    exam_context: str = "ICFES",
-    requires_visuals: bool = False
-) -> str:
-    """Generates the dynamic system context for the AI."""
-    
-    signals = build_runtime_context(
-        page=page,
-        user_id=user_id, 
-        name=name,
-        email=email
-    )
-
-    if requires_visuals:
-        visuals_trigger = (
-            "VISUALS: Use the 'python' tool (Code Interpreter) to AUTOMATICALLY GENERATE PLOTS for any request involving "
-            "mathematical functions, geometry, or data trends. Do not just describe the graph—DRAW IT. Output the file."
-        )
-        visual_style_guide = build_visual_instructions()
-        signals.append(visuals_trigger)
-        signals.append(visual_style_guide)
-    
-    return build_system_instructions(extras=signals, exam_context=exam_context)
-
-def _assign_urls_to_quiz(quiz_data: QuizResponse, url_map: Dict[str, str]):
-    if not url_map or not quiz_data: return
-    
-    normalized_map = {k.lower(): v for k, v in url_map.items()}
-    fallback_urls = list(url_map.values())
-    fallback_idx = 0
-
-    for q in quiz_data.questions:
-        if q.image_url and ("/mnt/" in q.image_url or "sandbox:" in q.image_url):
-            raw_path = q.image_url
-            filename = raw_path.split("/")[-1]
-            filename_lower = filename.lower()
-            
-            if filename in url_map:
-                q.image_url = url_map[filename]
-                if url_map[filename] in fallback_urls:
-                    fallback_urls.remove(url_map[filename])
-
-            elif filename_lower in normalized_map:
-                q.image_url = normalized_map[filename_lower]
-                if normalized_map[filename_lower] in fallback_urls:
-                    fallback_urls.remove(normalized_map[filename_lower])
-            
-            elif fallback_idx < len(fallback_urls):
-                logger.warning(f"Image match failed for {filename}, using fallback index {fallback_idx}.")
-                q.image_url = fallback_urls[fallback_idx]
-                fallback_idx += 1
-                
-        elif not q.image_url and fallback_idx < len(fallback_urls):
-             q.image_url = fallback_urls[fallback_idx]
-             fallback_idx += 1
-
-def _extract_sources(response_obj: Any) -> List[Dict[str, str]]:
-    sources = []
-    try:
-        output_items = getattr(response_obj, "output", []) or []
-        for item in output_items:
-            if getattr(item, "type", "") == "message":
-                content_list = getattr(item, "content", []) or []
-                for part in content_list:
-                    annotations = getattr(part, "annotations", []) or []
-                    for ann in annotations:
-                        if getattr(ann, "type", "") == "url_citation":
-                            url = getattr(ann, "url", None)
-                            title = getattr(ann, "title", "Fuente")
-                            if url: sources.append({"title": title, "url": url})
-    except Exception as e:
-        logger.error(f"Error extracting sources: {e}")
-    
-    unique_sources = []
-    seen_urls = set()
-    for s in sources:
-        if s["url"] not in seen_urls:
-            unique_sources.append(s)
-            seen_urls.add(s["url"])
-    return unique_sources
 
 # ------------------------------------------------------------------
 # STANDARD CHAT
@@ -139,74 +37,28 @@ def send_message_to_assistant(
     
     client = get_openai_client()
     cfg = get_model_config(mode)
-    target_model = cfg.model
-    active_temp, active_top_p = cfg.temperature, cfg.top_p
-    active_effort = cfg.reasoning_effort
     
-    # 2. Build Inputs
-    # Note: System prompt uses "text" inside "content" list for standard Chat, 
-    # but "input_text" for the new /v1/responses. We stick to "input_text" as you are using the new API.
-    system_text = system_instruction or _build_runtime_signals(
+    # 1. Build System Signal
+    system_text = system_instruction or build_runtime_signals(
         user_id, page, name, email, exam_context="ICFES", requires_visuals=requires_visuals
     )
     api_input = [{"role": "system", "content": [{"type": "input_text", "text": system_text}]}]
     api_input.extend(conversation_input)
 
-    # 🟢 FIX: Inject PDF URLs as NATIVE 'input_file'
+    # 2. Inject PDFs
     if pdf_urls:
-        target_message = None
-        if api_input and api_input[-1].get("role") == "user":
-            target_message = api_input[-1]
-        else:
-            target_message = {"role": "user", "content": []}
-            api_input.append(target_message)
-        
-        current_content = target_message.get("content")
-        # Ensure content is a list before appending
-        if isinstance(current_content, str):
-            target_message["content"] = [{"type": "input_text", "text": current_content}]
-        elif current_content is None:
-             target_message["content"] = []
-             
-        for url in pdf_urls:
-            # 🟢 Basic URL validation for PDF
-            if url and isinstance(url, str) and url.startswith("http"):
-                target_message["content"].append({
-                    "type": "input_file",
-                    "file_url": url
-                })
+        _inject_pdf_inputs(api_input, pdf_urls)
 
     # 3. Configure Tools
-    tools = []
-    if vector_store_ids:
-        tools.append({"type": "file_search", "vector_store_ids": vector_store_ids, "max_num_results": get_vector_search_max_results()})
-    
-    if requires_visuals or (pdf_urls and len(pdf_urls) > 0):
-        tools.append({"type": "code_interpreter", "container": {"type": "auto"}})
-        
-    if web_search_config:
-        web_tool = {"type": "web_search"}
-        if "allowed_domains" in web_search_config:
-             web_tool["filters"] = {"allowed_domains": web_search_config["allowed_domains"]}
-        if user_location: web_tool["user_location"] = user_location
-        tools.append(web_tool)
+    tools = _configure_tools(vector_store_ids, requires_visuals, pdf_urls, web_search_config, user_location)
 
     # 4. Build Request
-    # Use "input" key for the new Responses API
-    req = {"model": target_model, "input": api_input}
-    
-    is_reasoning = (target_model.startswith("o") and not target_model.startswith("gpt")) or "reasoning" in target_model
-    
-    if is_reasoning:
-        if active_effort: req["reasoning"] = {"effort": active_effort}
-    else:
-        req["temperature"] = active_temp
-        req["top_p"] = active_top_p
-    if tools: req["tools"] = tools
+    req = _build_request_payload(cfg, api_input, tools)
 
     try:
-        resp = client.responses.create(**{k: v for k, v in req.items() if v is not None})
+        resp = client.responses.create(**req)
         
+        # 5. Process Text
         text = getattr(resp, "output_text", None)
         if not text:
             chunks = []
@@ -214,7 +66,6 @@ def send_message_to_assistant(
             for item in output_list:
                 content_list = getattr(item, "content", []) or []
                 for c in content_list:
-                    # Output text type is 'text' in the response object
                     if getattr(c, "type", "") == "text": 
                         chunks.append(getattr(c, "text", ""))
             text = "\n".join(chunks).strip()
@@ -222,9 +73,9 @@ def send_message_to_assistant(
         if text: 
             text = re.sub(r'\[.*?\]\(sandbox:/mnt/data/.*?\)', '', text).strip()
 
-        generated_map = ai_assets_service.handle_generated_files(client, resp, folder="chat_assets")
-        generated_urls = list(generated_map.values()) if generated_map else []
-        sources_list = _extract_sources(resp)
+        # 6. Process Artifacts & Sources (Delegated)
+        generated_urls = handle_generated_files(client, resp, folder="chat_assets")
+        sources_list = extract_sources(resp)
 
         return (text or "[No response]", generated_urls, sources_list)
     except Exception as e:
@@ -249,7 +100,7 @@ def generate_structured_quiz(
     client = get_openai_client()
     cfg = get_model_config(mode)
     
-    system_text = _build_runtime_signals(
+    system_text = build_runtime_signals(
         user_id, page, name, email, exam_context=exam_context, requires_visuals=requires_visuals
     )
     
@@ -257,47 +108,21 @@ def generate_structured_quiz(
     api_input.extend(conversation_input)
 
     if pdf_urls:
-        target_message = None
-        if api_input and api_input[-1].get("role") == "user":
-            target_message = api_input[-1]
-        else:
-            target_message = {"role": "user", "content": []}
-            api_input.append(target_message)
-        
-        current_content = target_message.get("content")
-        if isinstance(current_content, str):
-            target_message["content"] = [{"type": "input_text", "text": current_content}]
-        elif current_content is None:
-             target_message["content"] = []
-             
-        for url in pdf_urls:
-            if url and isinstance(url, str) and url.startswith("http"):
-                target_message["content"].append({
-                    "type": "input_file",
-                    "file_url": url
-                })
+        _inject_pdf_inputs(api_input, pdf_urls)
 
-    req = {
-        "model": cfg.model, "input": api_input,
-        "text_format": QuizResponse, 
-    }
+    req = _build_request_payload(cfg, api_input, tools=None)
+    req["text_format"] = QuizResponse
     
     if requires_visuals or (pdf_urls and len(pdf_urls) > 0):
         req["tools"] = [{"type": "code_interpreter", "container": {"type": "auto"}}]
-    
-    is_reasoning = (cfg.model.startswith("o") and not cfg.model.startswith("gpt")) or "reasoning" in cfg.model
-    if is_reasoning:
-        if cfg.reasoning_effort: req["reasoning"] = {"effort": cfg.reasoning_effort}
-    else:
-        req["temperature"] = cfg.temperature
-        req["top_p"] = cfg.top_p
 
     try:
-        resp = client.responses.parse(**{k: v for k, v in req.items() if v is not None})
+        resp = client.responses.parse(**req)
         quiz = resp.output_parsed
         
-        url_map = ai_assets_service.handle_generated_files(client, resp, folder="quiz_assets")
-        _assign_urls_to_quiz(quiz, url_map)
+        # Artifact Handling
+        generated_urls = handle_generated_files(client, resp, folder="quiz_assets")
+        assign_urls_to_quiz(quiz, generated_urls)
         
         if quiz and quiz.questions:
             for q in quiz.questions:
@@ -326,7 +151,7 @@ def stream_structured_quiz(
     client = get_openai_client()
     cfg = get_model_config(mode)
     
-    system_text = _build_runtime_signals(
+    system_text = build_runtime_signals(
         user_id, page, name, email, exam_context=exam_context, requires_visuals=requires_visuals
     )
     
@@ -334,53 +159,22 @@ def stream_structured_quiz(
     api_input.extend(conversation_input)
 
     if pdf_urls:
-        target_message = None
-        if api_input and api_input[-1].get("role") == "user":
-            target_message = api_input[-1]
-        else:
-            target_message = {"role": "user", "content": []}
-            api_input.append(target_message)
-        
-        current_content = target_message.get("content")
-        if isinstance(current_content, str):
-            target_message["content"] = [{"type": "input_text", "text": current_content}]
-        elif current_content is None:
-             target_message["content"] = []
-             
-        for url in pdf_urls:
-            if url and isinstance(url, str) and url.startswith("http"):
-                target_message["content"].append({
-                    "type": "input_file",
-                    "file_url": url
-                })
+        _inject_pdf_inputs(api_input, pdf_urls)
 
-    req = {
-        "model": cfg.model, "input": api_input,
-        "text_format": QuizResponse, 
-    }
+    req = _build_request_payload(cfg, api_input, tools=None)
+    req["text_format"] = QuizResponse
     
     if requires_visuals or (pdf_urls and len(pdf_urls) > 0):
         req["tools"] = [{"type": "code_interpreter", "container": {"type": "auto"}}]
-    
-    is_reasoning = (cfg.model.startswith("o") and not cfg.model.startswith("gpt")) or "reasoning" in cfg.model
-    if is_reasoning:
-        if cfg.reasoning_effort: req["reasoning"] = {"effort": cfg.reasoning_effort}
-    else:
-        req["temperature"] = cfg.temperature
-        req["top_p"] = cfg.top_p
 
     streamed_questions = []
 
     try:
-        with client.responses.stream(**{k: v for k, v in req.items() if v is not None}) as stream:
-            
+        with client.responses.stream(**req) as stream:
             parser_generator = StreamParser.parse_quiz_stream(stream)
             
             for event in parser_generator:
-                if event["type"] == "intro":
-                    yield event
-                
-                elif event["type"] == "question":
+                if event["type"] == "question":
                     q_obj = event["data"]
                     QuizUtils.shuffle_options(q_obj)
                     streamed_questions.append(q_obj)
@@ -389,26 +183,82 @@ def stream_structured_quiz(
                 elif event["type"] == "done":
                     final_parsed = event["full_response"]
                     
-                    url_map = {}
+                    # Handle Artifacts on Stream Completion
+                    generated_urls = []
                     if hasattr(stream, 'get_final_response'):
                         final_raw = stream.get_final_response()
-                        url_map = ai_assets_service.handle_generated_files(client, final_raw, folder="quiz_assets")
+                        generated_urls = handle_generated_files(client, final_raw, folder="quiz_assets")
                     
                     if final_parsed and hasattr(final_parsed, 'questions') and streamed_questions:
+                        # Sync streamed questions with final object
                         if len(final_parsed.questions) == len(streamed_questions):
                             final_parsed.questions = streamed_questions 
                         else:
                             for q in final_parsed.questions:
-                                 QuizUtils.shuffle_options(q)
+                                QuizUtils.shuffle_options(q)
 
-                    if final_parsed and url_map:
-                        _assign_urls_to_quiz(final_parsed, url_map)
+                    if final_parsed and generated_urls:
+                        assign_urls_to_quiz(final_parsed, generated_urls)
 
                     yield {"type": "done", "full_response": final_parsed}
                     
-                elif event["type"] == "error":
+                else:
                     yield event
 
     except Exception as e:
         logger.error(f"Streaming failed: {e}")
         yield {"type": "error", "error": str(e)}
+
+# ------------------------------------------------------------------
+# INTERNAL HELPERS
+# ------------------------------------------------------------------
+def _inject_pdf_inputs(api_input, pdf_urls):
+    """Mutates api_input to attach PDF files."""
+    target_message = None
+    if api_input and api_input[-1].get("role") == "user":
+        target_message = api_input[-1]
+    else:
+        target_message = {"role": "user", "content": []}
+        api_input.append(target_message)
+    
+    current_content = target_message.get("content")
+    if isinstance(current_content, str):
+        target_message["content"] = [{"type": "input_text", "text": current_content}]
+    elif current_content is None:
+         target_message["content"] = []
+         
+    for url in pdf_urls:
+        if url and isinstance(url, str) and url.startswith("http"):
+            target_message["content"].append({
+                "type": "input_file",
+                "file_url": url
+            })
+
+def _configure_tools(vector_store_ids, requires_visuals, pdf_urls, web_search_config, user_location):
+    tools = []
+    if vector_store_ids:
+        tools.append({"type": "file_search", "vector_store_ids": vector_store_ids, "max_num_results": get_vector_search_max_results()})
+    
+    if requires_visuals or (pdf_urls and len(pdf_urls) > 0):
+        tools.append({"type": "code_interpreter", "container": {"type": "auto"}})
+        
+    if web_search_config:
+        web_tool = {"type": "web_search"}
+        if "allowed_domains" in web_search_config:
+             web_tool["filters"] = {"allowed_domains": web_search_config["allowed_domains"]}
+        if user_location: web_tool["user_location"] = user_location
+        tools.append(web_tool)
+    return tools
+
+def _build_request_payload(cfg, api_input, tools):
+    req = {"model": cfg.model, "input": api_input}
+    is_reasoning = (cfg.model.startswith("o") and not cfg.model.startswith("gpt")) or "reasoning" in cfg.model
+    
+    if is_reasoning:
+        if cfg.reasoning_effort: req["reasoning"] = {"effort": cfg.reasoning_effort}
+    else:
+        req["temperature"] = cfg.temperature
+        req["top_p"] = cfg.top_p
+    
+    if tools: req["tools"] = tools
+    return {k: v for k, v in req.items() if v is not None}
