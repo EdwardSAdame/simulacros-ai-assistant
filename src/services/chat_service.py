@@ -290,6 +290,15 @@ def get_ai_response(
                         arena_title = arena_context.get('Title', 'Custom Arena')
                         arena_instructions = arena_context.get('SystemInstructions', '')
                         
+                        # 🟢 NEW: Check for Arena-Specific Knowledge Base (Vector Store)
+                        arena_vector_store = arena_context.get('VectorStoreId')
+                        if arena_vector_store:
+                            # Ensure we have a list to append to
+                            if not selected_vector_stores:
+                                selected_vector_stores = []
+                            selected_vector_stores.append(arena_vector_store)
+                            logger.info(f"Attached Arena Vector Store: {arena_vector_store}")
+
                         if arena_instructions and str(arena_instructions).strip():
                             logger.info(f"Using Exclusive Arena Context: {arena_title}")
                             

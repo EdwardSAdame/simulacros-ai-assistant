@@ -11,7 +11,8 @@ dynamodb = boto3.resource("dynamodb")
 table = dynamodb.Table("UserArenas")
 
 # Keys that should be removed if they are empty strings
-KEYS_DISALLOW_EMPTY = {"Description", "SystemInstructions", "Icon"} 
+# 🟢 UPDATED: Added "VectorStoreId" to prevent empty string storage
+KEYS_DISALLOW_EMPTY = {"Description", "SystemInstructions", "Icon", "VectorStoreId"} 
 
 def _omit_invalid_attrs(item: dict) -> dict:
     """
@@ -35,7 +36,8 @@ def create_arena(
     description: Optional[str] = None,
     system_instructions: Optional[str] = None,
     icon: Optional[str] = "folder", 
-    files: Optional[List[Dict[str, str]]] = None 
+    files: Optional[List[Dict[str, str]]] = None,
+    vector_store_id: Optional[str] = None  # 🟢 NEW: Accept VectorStoreId
 ) -> Dict[str, Any]:
     """
     Creates a new Arena (Folder) configuration.
@@ -55,12 +57,13 @@ def create_arena(
         "ArenaId": arena_id,
         "CreatedAt": timestamp,
         "UpdatedAt": timestamp,
-        "LastActive": timestamp, # 🟢 NEW: Initialize LastActive
+        "LastActive": timestamp, 
         "Title": title.strip(),
         "Description": description,
         "SystemInstructions": system_instructions,
         "Icon": icon,
-        "Files": safe_files
+        "Files": safe_files,
+        "VectorStoreId": vector_store_id  # 🟢 NEW: Save the Vector Store ID
     }
 
     safe_item = _omit_invalid_attrs(item)
@@ -76,7 +79,7 @@ def create_arena(
 
 def update_arena_last_active(user_id: str, arena_id: str):
     """
-    🟢 NEW: Updates the 'LastActive' field to the current time.
+    Updates the 'LastActive' field to the current time.
     Call this whenever a chat occurs inside this Arena.
     """
     now_iso = datetime.utcnow().isoformat()
@@ -107,7 +110,7 @@ def get_arenas_for_user(user_id: str) -> List[Dict[str, Any]]:
         )
         items = response.get("Items", [])
 
-        # 🟢 MANUAL SORT: Re-sort by 'LastActive' (fallback to 'UpdatedAt')
+        # MANUAL SORT: Re-sort by 'LastActive' (fallback to 'UpdatedAt')
         def get_sort_key(x):
             return x.get('LastActive', x.get('UpdatedAt', ''))
 
@@ -145,7 +148,8 @@ def update_arena(
     """
     Updates specific fields of an Arena.
     """
-    allowed_keys = {"Title", "Description", "SystemInstructions", "Icon", "Files"}
+    # 🟢 UPDATED: Included 'VectorStoreId' in allowed keys
+    allowed_keys = {"Title", "Description", "SystemInstructions", "Icon", "Files", "VectorStoreId"}
     
     filtered_updates = {k: v for k, v in updates.items() if k in allowed_keys}
     if not filtered_updates:
@@ -199,4 +203,4 @@ def delete_arena(user_id: str, arena_id: str):
         return True
     except ClientError as e:
         print(f"Error deleting arena {arena_id}: {e}")
-        return False
+        return Falses
