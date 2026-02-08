@@ -1,0 +1,138 @@
+# src/assistant/artifact_handler.py
+import logging
+from typing import List, Any
+from src.services.storage_service import storage_service
+from src.schemas.quiz_schemas import QuizResponse
+
+logger = logging.getLogger(__name__)
+
+def get_files_client(client):
+    """Locates the container files accessor in the OpenAI client."""
+    if hasattr(client, "beta"):
+        if hasattr(client.beta, "containers") and hasattr(client.beta.containers, "files"):
+            return getattr(client.beta.containers, "files")
+        if hasattr(client.beta, "container_files"):
+            return getattr(client.beta, "container_files")
+    if hasattr(client, "containers") and hasattr(client.containers, "files"):
+        return getattr(client.containers, "files")
+    return getattr(client, "container_files", None)
+
+def process_file(cf_client, container_id, file_id, filename, url_list, folder: str):
+    """Downloads content from OpenAI and uploads to AWS S3."""
+    try:
+        file_content = None
+        if hasattr(cf_client, "content") and hasattr(cf_client.content, "retrieve"):
+            try:
+                if container_id: 
+                    file_content = cf_client.content.retrieve(container_id=container_id, file_id=file_id)
+                else: 
+                    file_content = cf_client.content.retrieve(file_id=file_id)
+            except Exception: 
+                pass
+            
+        if file_content is None and callable(getattr(cf_client, "content", None)):
+            try: 
+                file_content = cf_client.content(file_id)
+            except Exception: 
+                pass
+
+        if not file_content: 
+            return
+
+        # Normalize content to bytes
+        if hasattr(file_content, "read"): 
+            file_content = file_content.read()
+        elif hasattr(file_content, "content"): 
+            file_content = file_content.content
+        elif hasattr(file_content, "text"): 
+            file_content = file_content.text.encode('utf-8')
+
+        if not isinstance(file_content, (bytes, bytearray)):
+            try: 
+                file_content = bytes(file_content)
+            except Exception: 
+                pass
+
+        fname = str(filename).lower()
+        if fname.endswith(".jpg") or fname.endswith(".jpeg"): 
+            ctype = "image/jpeg"
+        elif fname.endswith(".pdf"): 
+            ctype = "application/pdf"
+        else: 
+            ctype = "image/png"
+            if not fname.endswith(".png"): 
+                filename = f"{filename}.png"
+
+        # Upload using the existing storage service
+        s3_url = storage_service.upload_image_from_bytes(file_content, ctype, folder=folder)
+        logger.info(f"✅ Asset uploaded to S3: {s3_url}")
+        url_list.append(s3_url)
+    except Exception as e:
+        logger.error(f"File transfer failed for {file_id}: {e}")
+
+def handle_generated_files(client, response_obj, folder: str = "chat_assets") -> List[str]:
+    """Scans the OpenAI response for generated files and uploads them."""
+    uploaded_urls = []
+    container_id = None
+    
+    cf_client = get_files_client(client)
+    if not cf_client: 
+        return []
+
+    try:
+        output_items = getattr(response_obj, "output", []) or []
+        for item in output_items:
+            item_type = getattr(item, "type", "")
+            
+            # Detect Container ID
+            if item_type == "code_interpreter_call":
+                cid = getattr(item, "container_id", None)
+                if not cid and hasattr(item, "code_interpreter"):
+                    cid = getattr(item.code_interpreter, "container_id", None)
+                if not cid and hasattr(item, "code_interpreter_call"):
+                    cid = getattr(item.code_interpreter_call, "container_id", None)
+                if cid: 
+                    container_id = cid
+
+            # Detect Files in Messages
+            if item_type == "message":
+                content_list = getattr(item, "content", []) or []
+                if isinstance(content_list, list):
+                    for part in content_list:
+                        annotations = getattr(part, "annotations", []) or []
+                        for ann in annotations:
+                            if getattr(ann, "type", "") == "container_file_citation":
+                                file_id = getattr(ann, "file_id", None)
+                                fname = getattr(ann, "filename", "graph.png")
+                                if file_id: 
+                                    process_file(cf_client, container_id, file_id, fname, uploaded_urls, folder)
+
+        # Fallback: List files in container if no direct citations found but container exists
+        if not uploaded_urls and container_id:
+            try:
+                container_files = cf_client.list(container_id)
+                for c_file in container_files:
+                    fname = getattr(c_file, "filename", None) or getattr(c_file, "name", None)
+                    fid = getattr(c_file, "id", None) or getattr(c_file, "file_id", None)
+                    if not fname: 
+                        fname = "generated_plot.png"
+                    if fid: 
+                        process_file(cf_client, container_id, fid, fname, uploaded_urls, folder)
+            except Exception: 
+                pass
+    except Exception: 
+        pass
+    
+    return uploaded_urls
+
+def assign_urls_to_quiz(quiz_data: QuizResponse, urls: List[str]):
+    """Maps generated image URLs to quiz questions."""
+    if not urls: 
+        return
+    idx = 0
+    for q in quiz_data.questions:
+        # Check if question needs an image (PENDING_UPLOAD) or has a local path
+        if q.image_url == "PENDING_UPLOAD" or (q.image_url and "/mnt/" in q.image_url) or (not q.image_url and idx < len(urls)):
+            if idx < len(urls):
+                q.image_url = urls[idx]
+                idx += 1
