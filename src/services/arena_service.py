@@ -90,9 +90,30 @@ class ArenaService:
 
     def delete_arena_folder(self, user_id: str, arena_id: str) -> bool:
         """
-        Deletes the arena configuration.
+        Deletes the arena configuration and cleans up the Vector Store from OpenAI.
         """
         logger.info(f"Deleting Arena {arena_id}")
+        
+        # 1. Fetch the arena FIRST to see if it has a Vector Store
+        try:
+            arena = self.get_arena_context(user_id, arena_id)
+            if arena:
+                vector_store_id = arena.get("VectorStoreId")
+                if vector_store_id:
+                    logger.info(f"Found associated Vector Store: {vector_store_id}. Deleting...")
+                    
+                    # 2. Delete from OpenAI
+                    success = vector_store_manager.delete_vector_store(vector_store_id)
+                    
+                    if success:
+                        logger.info(f"Successfully deleted vector store {vector_store_id}")
+                    else:
+                        logger.warning(f"Could not delete vector store {vector_store_id} (it might be already gone)")
+        except Exception as e:
+            # We catch errors here so the DB deletion still happens (preventing zombies in the app)
+            logger.error(f"Error while trying to cleanup vector store for arena {arena_id}: {e}")
+
+        # 3. Delete from DynamoDB
         return arenas_table.delete_arena(user_id, arena_id)
 
 # Singleton instance
