@@ -23,37 +23,24 @@ def lambda_handler(event, context):
     set_invocation_context(context)
 
     try:
+        log_event("lambda_invocation", {"source": "RomaChatHandler", "has_body": "body" in (event or {})})
+        
         # 1. Parse Body
         body_str = event.get("body", "{}")
         if not body_str:
             body_str = "{}"
         body = json.loads(body_str)
 
-        # 🔍 DEBUG LOG 1: Print the Raw Meta Object
-        # We need to see if the frontend is actually sending the 'meta' wrapper
+        # 2. Extract Meta Wrapper
         meta = body.get("meta", {})
-        print(f"🔍 [DEBUG] RAW META RECEIVED: {json.dumps(meta)}")
 
         # 3. Extract Data
         message = body.get("message") or body.get("text") or meta.get("text")
         
-        # 🔍 DEBUG LOG 2: Extract Media specifically
-        # We check both locations (meta.media and body.media)
-        media_from_meta = meta.get("media")
-        media_from_body = body.get("media")
+        # Extract Structured Media (Check meta first, then body)
+        media_items = meta.get("media") or body.get("media", [])
         
-        print(f"🔍 [DEBUG] Media in Meta: {type(media_from_meta)} - Count: {len(media_from_meta) if isinstance(media_from_meta, list) else 'N/A'}")
-        print(f"🔍 [DEBUG] Media in Body: {type(media_from_body)} - Count: {len(media_from_body) if isinstance(media_from_body, list) else 'N/A'}")
-
-        # Consolidate logic
-        media_items = media_from_meta or media_from_body or []
-        
-        if len(media_items) > 0:
-            print(f"🔍 [DEBUG] First Item content: {media_items[0]}")
-        else:
-            print("🔍 [DEBUG] No media items found in extraction.")
-
-        # Legacy Fallbacks
+        # Legacy: Extract simple URL lists
         image_urls = meta.get("imageUrls") or body.get("imageUrls", [])
         pdf_urls = meta.get("pdfUrls") or body.get("pdfUrls", [])
         
@@ -68,22 +55,26 @@ def lambda_handler(event, context):
         
         conversation_id_in = body.get("conversationId") or meta.get("conversationId")
         client_row_id = body.get("clientRowId") or meta.get("clientRowId")
+        
+        # Extract Mode
         ai_mode = body.get("mode") or meta.get("mode", "omega")
 
+        # Idempotency: Generate conversation ID if missing
         if not conversation_id_in:
             conversation_id_in = str(uuid.uuid4())
 
-        # Normalize
+        # ---- Normalize / sanitize ----
         user_id = user_id or "anonymous"
         name = name if isinstance(name, str) else (name or "")
         email = _none_if_empty(email)
         page = page or "/"
         
+        if not isinstance(image_urls, list): image_urls = []
+        if not isinstance(pdf_urls, list): pdf_urls = []
         if not isinstance(media_items, list): media_items = []
 
         # ---- Input Validation ----
         if not message and not image_urls and not pdf_urls and not media_items:
-            print("🔍 [DEBUG] Input validation failed. Nothing to process.")
             log_event("input_validation_failed", {"reason": "Missing message or media"}, level="warning")
             return response(400, {"error": "Missing message or media"})
 
@@ -95,26 +86,36 @@ def lambda_handler(event, context):
             "email": email,
             "page": page,
             "conversation_id": conversation_id_in, 
+            
+            # Pass all media types to Worker
             "image_urls": image_urls,
             "pdf_urls": pdf_urls,
-            "media_items": media_items, # Passing to Worker
+            "media_items": media_items, 
+            
             "client_row_id": client_row_id,
             "mode": ai_mode,
             "arena_id": arena_id 
         }
 
-        # 🔍 DEBUG LOG 3: Confirm Payload before sending to SQS
-        print(f"🔍 [DEBUG] Sending to SQS Queue ({QUEUE_URL}). Payload media_items count: {len(payload['media_items'])}")
-
+        # Send the message to the SQS queue
         sqs.send_message(
             QueueUrl=QUEUE_URL,
             MessageBody=json.dumps(payload)
         )
 
+        log_event("message_queued_for_ai_processing", {
+            "user_id": user_id,
+            "conversation_id": conversation_id_in,
+            "mode": ai_mode,
+            "has_media_items": bool(media_items),
+            "media_count": len(media_items),
+            "arena_id": arena_id 
+        })
+
+        # Return success
         return response(202, {"status": "accepted", "message": "Request is being processed."})
 
     except Exception as e:
-        print(f"🔍 [DEBUG] CRITICAL ERROR: {str(e)}")
         log_event("lambda_exception", {"source": "RomaChatHandler"}, level="error", error=e)
         return response(500, {"error": "Internal error"})
 
