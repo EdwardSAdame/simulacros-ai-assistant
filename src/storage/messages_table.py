@@ -19,11 +19,11 @@ def save_message(
     role: str,
     message_text: str,
     *,
-    metadata: Optional[Dict[str, Any]] = None, # 🔹 Renamed 'meta' to 'metadata' for clarity
+    metadata: Optional[Dict[str, Any]] = None,
 ):
     """
     Save a single message to the ConversationMessages table.
-    Now supports saving structured 'Metadata' (like Quiz JSON) alongside the text.
+    Now supports saving structured 'Metadata' and promoting sent images to top-level.
     """
     timestamp = datetime.utcnow().isoformat()
 
@@ -34,9 +34,18 @@ def save_message(
         "MessageText": message_text,
     }
 
-    # 🔹 NEW: Save structured context if provided
     if metadata:
-        item["Metadata"] = metadata
+        # 🟢 NEW: Promote 'sentImages' to top-level attribute if present
+        # This ensures the frontend (which expects item.sentImages) receives the data correctly.
+        if "sentImages" in metadata:
+            item["sentImages"] = metadata["sentImages"]
+            # Optional: Remove it from metadata to avoid duplication, or keep it.
+            # Keeping it in metadata doesn't hurt, but let's be efficient.
+            del metadata["sentImages"]
+
+        # Save remaining metadata if any
+        if metadata:
+            item["Metadata"] = metadata
 
     try:
         table.put_item(Item=item)
@@ -186,4 +195,3 @@ def delete_messages_for_conversation(conversation_id: str):
 
     except Exception as e:
         logger.error(f"Failed to batch delete messages for {conversation_id}: {e}")
-        raise

@@ -1,7 +1,7 @@
 # src/services/chat_service.py
 import re
 import logging
-from typing import Tuple, Dict, Any
+from typing import Tuple, Dict, Any, List
 
 # CONFIG
 from src.config.settings import get_vector_search_max_results
@@ -27,9 +27,6 @@ from src.storage.arenas_table import update_arena_last_active
 
 logger = logging.getLogger(__name__)
 
-# ------------------------------------------------------------------
-# HELPER: Input Normalization
-# ------------------------------------------------------------------
 def _normalize_email_for_storage(val):
     if val is None: return None
     if isinstance(val, str) and val.strip() == "": return None
@@ -40,9 +37,6 @@ def _normalize_page(val: str | None) -> str:
         return "/"
     return val
 
-# ------------------------------------------------------------------
-# MAIN FUNCTION
-# ------------------------------------------------------------------
 def get_ai_response(
     message: str | None,
     user_id: str | None,
@@ -52,6 +46,8 @@ def get_ai_response(
     conversation_id: str | None = None,
     image_urls: list[str] | None = None,
     pdf_urls: list[str] | None = None, 
+    # 🟢 NEW: Structured Media Items
+    media_items: List[Dict[str, Any]] | None = None,
     mode: str = "omega",
     intent: str = "chat",
     requires_visuals: bool = False,
@@ -59,7 +55,7 @@ def get_ai_response(
     arena_id: str | None = None  
 ) -> Tuple[str, str, str, Dict | None]: 
     
-    # Lazy Imports to avoid circular deps
+    # Lazy Imports
     from src.assistant.assistant_client import send_message_to_assistant, generate_structured_quiz, stream_structured_quiz
     from src.assistant.image_handler import format_image_urls_for_openai
     from src.services.quiz_service import QuizService
@@ -67,7 +63,22 @@ def get_ai_response(
 
     page = _normalize_page(page)
 
-    # 1. Intelligence Layer: Context & Search Config
+    # 1. Normalize Media
+    # Combine legacy URLs into media_items if media_items is empty
+    if not media_items:
+        media_items = []
+        if image_urls:
+            for url in image_urls:
+                media_items.append({"url": url, "type": "image", "name": "image"})
+        if pdf_urls:
+            for url in pdf_urls:
+                media_items.append({"url": url, "type": "application/pdf", "name": "document.pdf"})
+
+    # Separate for internal logic (OpenAI still needs simple URL lists for now)
+    clean_images = [m["url"] for m in media_items if "image" in m.get("type", "").lower() or not ".pdf" in m["url"].lower()]
+    clean_pdfs   = [m["url"] for m in media_items if "pdf" in m.get("type", "").lower() or ".pdf" in m["url"].lower()]
+
+    # 2. Intelligence Layer
     exam_context = determine_exam_context(page, message)
     selected_vector_stores = get_stores_for_page(page)
     web_search_config = get_search_filters(exam_context)
@@ -79,7 +90,7 @@ def get_ai_response(
         "derived_exam": exam_context, 
         "web_search_active": is_web_search_active,
         "trigger_message": message[:50] if message else "None",
-        "pdf_count": len(pdf_urls) if pdf_urls else 0
+        "media_count": len(media_items)
     })
 
     # 2. Conversation Management (Find or Create)
@@ -90,13 +101,11 @@ def get_ai_response(
         exists_timestamp = _find_conversation_timestamp(user_id, conversation_id)
         if exists_timestamp:
             should_create_new = False
-            # Resolve Arena ID from DB if not provided
             if not arena_id:
                 existing_meta = get_conversation_metadata(user_id, conversation_id)
                 if existing_meta and existing_meta.get("ArenaId"):
                     arena_id = existing_meta.get("ArenaId")
                     log_event("arena_context_resolved_from_db", {"arena_id": arena_id})
-
             log_event("conversation_verified_and_reused", {"conversation_id": conversation_id})
         else:
             actual_conversation_id = conversation_id 
@@ -115,7 +124,6 @@ def get_ai_response(
             )
             actual_conversation_id = conversation_data["ConversationId"]
         
-        # Update Recency
         if user_id and actual_conversation_id:
             update_conversation_last_active(user_id, actual_conversation_id)
             if arena_id:
@@ -127,19 +135,6 @@ def get_ai_response(
     # 3. Build History & Inputs
     conversation_input = build_history_list(actual_conversation_id)
     
-    clean_images = []
-    clean_pdfs = pdf_urls or []
-
-    # Separate PDFs from Images if mixed in image_urls
-    if image_urls:
-        for url in image_urls:
-            lower = url.lower()
-            if '.pdf' in lower or 'docs.wixstatic.com' in lower:
-                if url not in clean_pdfs:
-                    clean_pdfs.append(url)
-            else:
-                clean_images.append(url)
-
     current_user_content = []
     if message:
         current_user_content.append({"type": "input_text", "text": message})
@@ -364,16 +359,20 @@ def get_ai_response(
         except Exception as e:
             raise RuntimeError(f"OpenAI Chat API failed: {e}")
 
-    # Step 7: Persist
+    # Step 7: Persist (THE FIX)
     assistant_timestamp = ""
     try:
-        if message:
-            save_message(actual_conversation_id, role="user", message_text=message)
-        for img in clean_images:
-            save_message(actual_conversation_id, role="user", message_text=f"[Imagen] {img}")
-        for pdf in clean_pdfs:
-            save_message(actual_conversation_id, role="user", message_text=f"[PDF] {pdf}")
+        # 🟢 UPDATED: Save user message WITH 'sentImages' inside metadata
+        # messages_table.py will detect 'sentImages' inside metadata and promote it to the root item.
         
+        save_message(
+            actual_conversation_id, 
+            role="user", 
+            message_text=message if message else "[Archivo adjunto]",
+            metadata={"sentImages": media_items} # This passes the structured objects
+        )
+        
+        # Save Assistant Response
         meta_payload = quiz_data
         if not meta_payload: meta_payload = {}  
         if generated_assets:

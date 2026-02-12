@@ -24,30 +24,42 @@ def lambda_handler(event, context):
 
     try:
         log_event("lambda_invocation", {"source": "RomaChatHandler", "has_body": "body" in (event or {})})
-        body = json.loads(event.get("body", "{}"))
+        
+        # 1. Parse Body
+        body_str = event.get("body", "{}")
+        if not body_str:
+            body_str = "{}"
+        body = json.loads(body_str)
 
-        # ---- Raw inputs from client ----
-        message = body.get("message")
-        image_urls = body.get("imageUrls", [])
-        pdf_urls = body.get("pdfUrls", [])
-        
-        # 🟢 NEW: Extract Arena ID from request
-        arena_id = body.get("arenaId")
+        # 2. Extract Meta Wrapper (Frontend textAIService.js sends structured metadata here)
+        meta = body.get("meta", {})
 
-        user_id = body.get("userId")
-        name = body.get("name")
-        email = body.get("email")
-        page = body.get("page")
+        # 3. Extract Data (Check both body and meta for robustness)
+        message = body.get("message") or body.get("text") or meta.get("text")
         
-        conversation_id_in = body.get("conversationId")
+        # 🟢 NEW: Extract Structured Media (The objects with names)
+        media_items = meta.get("media") or body.get("media", [])
         
-        client_row_id = body.get("clientRowId")
+        # Legacy: Extract simple URL lists
+        image_urls = meta.get("imageUrls") or body.get("imageUrls", [])
+        pdf_urls = meta.get("pdfUrls") or body.get("pdfUrls", [])
         
-        # Extract the 'mode' (Omega vs Alpha)
-        ai_mode = body.get("mode", "omega")
+        # Extract Context
+        arena_id = meta.get("arenaId") or body.get("arenaId")
+        
+        # Extract Identity
+        user_id = body.get("userId") or meta.get("debugClient", {}).get("clientUserId")
+        name = body.get("name") or meta.get("name") or meta.get("debugClient", {}).get("clientName")
+        email = body.get("email") or meta.get("debugClient", {}).get("clientEmail")
+        page = body.get("page") or meta.get("page")
+        
+        conversation_id_in = body.get("conversationId") or meta.get("conversationId")
+        client_row_id = body.get("clientRowId") or meta.get("clientRowId")
+        
+        # Extract Mode
+        ai_mode = body.get("mode") or meta.get("mode", "omega")
 
         # IDEMPOTENCY FIX: 
-        # If client didn't send a conversationId (New Chat), generate it NOW.
         if not conversation_id_in:
             conversation_id_in = str(uuid.uuid4())
 
@@ -57,14 +69,12 @@ def lambda_handler(event, context):
         email = _none_if_empty(email)
         page = page or "/"
         
-        if not isinstance(image_urls, list):
-            image_urls = []
-            
-        if not isinstance(pdf_urls, list): 
-            pdf_urls = []
+        if not isinstance(image_urls, list): image_urls = []
+        if not isinstance(pdf_urls, list): pdf_urls = []
+        if not isinstance(media_items, list): media_items = []
 
         # ---- Input Validation ----
-        if not message and not image_urls and not pdf_urls:
+        if not message and not image_urls and not pdf_urls and not media_items:
             log_event("input_validation_failed", {"reason": "Missing message or media"}, level="warning")
             return response(400, {"error": "Missing message or media"})
 
@@ -76,12 +86,15 @@ def lambda_handler(event, context):
             "email": email,
             "page": page,
             "conversation_id": conversation_id_in, 
+            
+            # Pass all media types to Worker
             "image_urls": image_urls,
             "pdf_urls": pdf_urls,
-            "client_row_id": client_row_id,
+            "media_items": media_items, # 🟢 NEW FIELD
             
+            "client_row_id": client_row_id,
             "mode": ai_mode,
-            "arena_id": arena_id # 🟢 NEW: Pass Arena ID to Worker
+            "arena_id": arena_id 
         }
 
         # Send the message to the SQS queue
@@ -94,8 +107,9 @@ def lambda_handler(event, context):
             "user_id": user_id,
             "conversation_id": conversation_id_in,
             "mode": ai_mode,
-            "has_pdfs": bool(pdf_urls),
-            "arena_id": arena_id # 🟢 Log for debugging
+            "has_media_items": bool(media_items),
+            "media_count": len(media_items),
+            "arena_id": arena_id 
         })
 
         # Return success

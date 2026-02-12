@@ -63,6 +63,9 @@ def lambda_handler(event, context):
             message = payload.get("message")
             image_urls = payload.get("image_urls", [])
             pdf_urls = payload.get("pdf_urls", [])
+            
+            # 🟢 NEW: Extract structured media items sent by chat_handler
+            media_items = payload.get("media_items", [])
 
             # NEW: Extract Arena ID from SQS
             arena_id = payload.get("arena_id")
@@ -148,11 +151,13 @@ def lambda_handler(event, context):
                 conversation_id=conv_id_in,
                 image_urls=image_urls,
                 pdf_urls=pdf_urls,
+                # 🟢 NEW: Pass structured media items to the brain
+                media_items=media_items, 
                 mode=ai_mode,
                 intent=intent,
                 requires_visuals=requires_visuals, 
                 stream_manager=stream_manager,
-                arena_id=arena_id  # NEW: Pass Arena ID to the brain
+                arena_id=arena_id  
             )
 
             # --- 4. Send Final Reply ---
