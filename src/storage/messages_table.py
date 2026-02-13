@@ -35,15 +35,15 @@ def save_message(
     }
 
     if metadata:
-        # 🟢 NEW: Promote 'sentImages' to top-level attribute if present
-        # This ensures the frontend (which expects item.sentImages) receives the data correctly.
+        # UPDATED: Promote 'sentImages' to top-level ONLY if it is not empty.
         if "sentImages" in metadata:
-            item["sentImages"] = metadata["sentImages"]
-            # Optional: Remove it from metadata to avoid duplication, or keep it.
-            # Keeping it in metadata doesn't hurt, but let's be efficient.
+            if metadata["sentImages"]:  # Evaluates to True only if the list has 1 or more items
+                item["sentImages"] = metadata["sentImages"]
+            
+            # Always remove it from metadata to avoid duplication or saving empty arrays
             del metadata["sentImages"]
 
-        # Save remaining metadata if any
+        # Save remaining metadata if any (and if it's not empty after deleting sentImages)
         if metadata:
             item["Metadata"] = metadata
 
