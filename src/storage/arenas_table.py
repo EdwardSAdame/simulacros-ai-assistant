@@ -11,7 +11,6 @@ dynamodb = boto3.resource("dynamodb")
 table = dynamodb.Table("UserArenas")
 
 # Keys that should be removed if they are empty strings
-# 🟢 UPDATED: Added "VectorStoreId" to prevent empty string storage
 KEYS_DISALLOW_EMPTY = {"Description", "SystemInstructions", "Icon", "VectorStoreId"} 
 
 def _omit_invalid_attrs(item: dict) -> dict:
@@ -36,8 +35,9 @@ def create_arena(
     description: Optional[str] = None,
     system_instructions: Optional[str] = None,
     icon: Optional[str] = "folder", 
-    files: Optional[List[Dict[str, str]]] = None,
-    vector_store_id: Optional[str] = None  # 🟢 NEW: Accept VectorStoreId
+    # 🟢 UPDATED: Type hint now reflects the rich object structure
+    files: Optional[List[Dict[str, Any]]] = None,
+    vector_store_id: Optional[str] = None
 ) -> Dict[str, Any]:
     """
     Creates a new Arena (Folder) configuration.
@@ -50,6 +50,7 @@ def create_arena(
     arena_id = str(uuid.uuid4())
     timestamp = datetime.utcnow().isoformat()
     
+    # 🟢 ENSURE LIST: Defaults to empty list if None
     safe_files = files if files else []
 
     item = {
@@ -62,8 +63,8 @@ def create_arena(
         "Description": description,
         "SystemInstructions": system_instructions,
         "Icon": icon,
-        "Files": safe_files,
-        "VectorStoreId": vector_store_id  # 🟢 NEW: Save the Vector Store ID
+        "Files": safe_files, # 🟢 Stores [{'name': '...', 'url': '...', 'type': '...'}]
+        "VectorStoreId": vector_store_id 
     }
 
     safe_item = _omit_invalid_attrs(item)
@@ -148,7 +149,6 @@ def update_arena(
     """
     Updates specific fields of an Arena.
     """
-    # 🟢 UPDATED: Included 'VectorStoreId' in allowed keys
     allowed_keys = {"Title", "Description", "SystemInstructions", "Icon", "Files", "VectorStoreId"}
     
     filtered_updates = {k: v for k, v in updates.items() if k in allowed_keys}
@@ -203,4 +203,4 @@ def delete_arena(user_id: str, arena_id: str):
         return True
     except ClientError as e:
         print(f"Error deleting arena {arena_id}: {e}")
-        return Falses
+        return False
