@@ -78,14 +78,44 @@ class ArenaService:
     def update_arena_details(self, user_id: str, arena_id: str, updates: Dict[str, Any]) -> Dict[str, Any]:
         """
         Updates arena configuration. 
+        Synchronizes file changes with OpenAI Vector Store if 'files' key is present.
         """
         logger.info(f"Updating Arena {arena_id} for user {user_id}")
         
-        # NOTE: If we wanted to support ADDING files to an existing arena, 
-        # we would check for 'files' in `updates`, calculate the difference, 
-        # and call vector_store_manager.add_files_to_arena().
-        # For this step, we are keeping it simple (Creation Only).
-        
+        # 1. Handle File Synchronization if files are being updated
+        if 'files' in updates:
+            new_files = updates['files'] or []
+            
+            # Fetch current state to get the VectorStoreId
+            current_arena = self.get_arena_context(user_id, arena_id)
+            
+            if current_arena:
+                vector_store_id = current_arena.get('VectorStoreId')
+                
+                # Case A: Vector Store exists -> Sync it
+                if vector_store_id:
+                    try:
+                        logger.info(f"Syncing files for existing Vector Store: {vector_store_id}")
+                        vector_store_manager.sync_arena_files(vector_store_id, new_files)
+                    except Exception as e:
+                        logger.error(f"Failed to sync vector store files: {e}")
+                
+                # Case B: No Vector Store yet, but user added files -> Create one
+                elif new_files and not vector_store_id:
+                    try:
+                        logger.info("Creating new Vector Store for updated Arena...")
+                        file_urls = [f.get('url') for f in new_files if f.get('url')]
+                        if file_urls:
+                            # Use the title from updates or fallback to existing title
+                            title = updates.get('title') or current_arena.get('Title') or "Updated Arena"
+                            new_vs_id = vector_store_manager.create_arena_knowledge_base(title, file_urls)
+                            
+                            if new_vs_id:
+                                updates['vector_store_id'] = new_vs_id # Add to updates to save to DB
+                    except Exception as e:
+                        logger.error(f"Failed to create new vector store on update: {e}")
+
+        # 2. Persist updates to DynamoDB
         return arenas_table.update_arena(user_id, arena_id, updates)
 
     def delete_arena_folder(self, user_id: str, arena_id: str) -> bool:

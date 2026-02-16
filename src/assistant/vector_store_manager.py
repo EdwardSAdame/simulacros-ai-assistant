@@ -2,7 +2,7 @@
 import logging
 import requests
 from io import BytesIO
-from typing import List, Optional, Tuple
+from typing import List, Optional, Tuple, Dict, Set
 from src.config.settings import get_openai_client
 
 logger = logging.getLogger(__name__)
@@ -24,6 +24,7 @@ class VectorStoreManager:
             response.raise_for_status()
             
             # Extract filename from URL or default to generic
+            # Clean query params: document.pdf?token=123 -> document.pdf
             filename = url.split("/")[-1].split("?")[0]
             if not filename:
                 filename = "document.pdf"
@@ -104,10 +105,92 @@ class VectorStoreManager:
         except Exception as e:
             logger.error(f"Failed to add files to store {vector_store_id}: {e}")
 
+    def sync_arena_files(self, vector_store_id: str, new_files: List[Dict[str, str]]):
+        """
+        Synchronizes the Vector Store with the provided list of files.
+        - Deletes files that are no longer in 'new_files'.
+        - Uploads files that are new.
+        
+        Args:
+            vector_store_id: The ID of the OpenAI Vector Store.
+            new_files: A list of dicts [{'name': 'foo.pdf', 'url': 'https://...'}]
+        """
+        if not vector_store_id:
+            return
+
+        try:
+            logger.info(f"Syncing files for Vector Store: {vector_store_id}")
+
+            # 1. Fetch CURRENT files from OpenAI
+            # We paginate just in case, though 100 is usually enough for an arena
+            openai_files = self.client.vector_stores.files.list(
+                vector_store_id=vector_store_id,
+                limit=100
+            )
+            
+            # Map Filename -> FileID (OpenAI doesn't store URLs, so we match by Name)
+            # NOTE: Matching by name is imperfect but the best we can do without storing OpenAI IDs in DynamoDB yet.
+            existing_file_map = {} 
+            for f in openai_files.data:
+                # We need to fetch the file details to get the actual filename
+                # optimizing: the list object usually has the id, but we need the name.
+                # The file object in the list might not have the name directly depending on SDK version,
+                # but usually we can retrieve the file object itself.
+                try:
+                    file_details = self.client.files.retrieve(f.id)
+                    existing_file_map[file_details.filename] = f.id
+                except Exception:
+                    continue
+
+            # 2. Analyze NEW state
+            new_filenames = set()
+            urls_to_upload = []
+
+            for nf in new_files:
+                # Clean name logic must match _download_file_content logic
+                # Ideally, we trust the 'name' sent from frontend, or fallback to URL derivation
+                name = nf.get('name')
+                url = nf.get('url')
+                
+                if not name and url:
+                    name = url.split("/")[-1].split("?")[0]
+                
+                if name:
+                    new_filenames.add(name)
+                    # If this name is NOT in OpenAI, we need to upload it
+                    if name not in existing_file_map:
+                        urls_to_upload.append(url)
+
+            # 3. DELETE removed files
+            files_to_delete_ids = []
+            for existing_name, existing_id in existing_file_map.items():
+                if existing_name not in new_filenames:
+                    files_to_delete_ids.append(existing_id)
+
+            if files_to_delete_ids:
+                logger.info(f"Deleting {len(files_to_delete_ids)} removed files from Vector Store...")
+                for fid in files_to_delete_ids:
+                    try:
+                        self.client.vector_stores.files.delete(
+                            vector_store_id=vector_store_id,
+                            file_id=fid
+                        )
+                    except Exception as e:
+                        logger.warning(f"Failed to delete file {fid}: {e}")
+
+            # 4. UPLOAD added files
+            if urls_to_upload:
+                logger.info(f"Uploading {len(urls_to_upload)} new files to Vector Store...")
+                self.add_files_to_arena(vector_store_id, urls_to_upload)
+
+            logger.info("Vector Store Sync Complete.")
+
+        except Exception as e:
+            logger.error(f"Error syncing Vector Store: {e}", exc_info=True)
+
     def delete_vector_store(self, vector_store_id: str) -> bool:
         """
         Permanently deletes a Vector Store from OpenAI.
-        Used when an Arena is deleted to prevent orphaned resources and costs.
         """
         if not vector_store_id:
             return False
