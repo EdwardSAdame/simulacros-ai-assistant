@@ -41,12 +41,9 @@ SUPPORTED_EXTS = {
     ".json", ".pdf", ".md", ".txt", ".docx", ".pptx", ".html",
 }
 
-# 🟢 NEW: Added mappings for 'general' folders
+# 🟢 UPDATED: Removed 'general', 'icfes/general', and 'unal/general'
 ENV_KEYS = {
-    "general": "VECTOR_STORE_GLOBAL",
-    
     # ICFES
-    "icfes/general": "VECTOR_STORE_ICFES_GENERAL", # <--- NEW
     "icfes/ingles": "VECTOR_STORE_ICFES_INGLES",
     "icfes/ciencias_naturales": "VECTOR_STORE_ICFES_CIENCIAS_NATURALES",
     "icfes/matematicas": "VECTOR_STORE_ICFES_MATEMATICAS",
@@ -54,7 +51,6 @@ ENV_KEYS = {
     "icfes/lectura_critica": "VECTOR_STORE_ICFES_LECTURA_CRITICA",
     
     # UNAL
-    "unal/general": "VECTOR_STORE_UNAL_GENERAL", # <--- NEW
     "unal/analisis_imagen": "VECTOR_STORE_UNAL_ANALISIS_IMAGEN",
     "unal/matematicas": "VECTOR_STORE_UNAL_MATEMATICAS",
     "unal/tematica_comun": "VECTOR_STORE_UNAL_TEMATICA_COMUN",
@@ -74,15 +70,11 @@ def _store_name_for(path: Path) -> Tuple[str, str]:
         # fallback for top level
         rel = path.name
 
-    # Check explicit map first (handles icfes/general, unal/matematicas, etc)
+    # Check explicit map first (handles icfes/matematicas, etc)
     if rel in ENV_KEYS:
         # e.g., "icfes-matematicas"
         store_name = rel.replace("/", "-")
         return store_name, ENV_KEYS[rel]
-
-    # Special case for the root 'general' folder
-    if path.name == "general" and path.parent.name == "knowledge":
-        return "general", "VECTOR_STORE_GLOBAL"
 
     print(f"⚠️ Warning: No mapping found for folder '{rel}', skipping...")
     return None, None
@@ -118,7 +110,7 @@ def _attach_file(store_id: str, file_id: str) -> None:
 # ----------------- commands -----------------
 
 def cmd_cleanup(_args):
-    """🟢 NEW: Deletes all vector stores created by this bot to start fresh."""
+    """Deletes all vector stores created by this bot to start fresh."""
     print("WARNING: This will delete ALL vector stores in your OpenAI project.")
     confirm = input("Are you sure? (type 'yes' to confirm): ")
     if confirm != "yes":
@@ -164,15 +156,8 @@ def cmd_bootstrap(args):
 
     env_out: Dict[str, str] = {}
 
-    # Walk through root/general, root/icfes/*, root/unal/*
-    # We use os.walk or just specific glob patterns
-    
-    # 1. Global General
-    global_path = root / "general"
-    if global_path.exists():
-        _process_folder(global_path, root, env_out)
-
-    # 2. Sub-folders (icfes/*, unal/*)
+    # 1. Sub-folders (icfes/*, unal/*)
+    # We now strictly iterate only these folders looking for keys in ENV_KEYS
     for category in ["icfes", "unal"]:
         cat_path = root / category
         if cat_path.exists():
@@ -180,33 +165,23 @@ def cmd_bootstrap(args):
                 if sub.is_dir():
                     _process_folder(sub, root, env_out)
 
-    # provide a default if you rely on it
-    if "VECTOR_STORE_DEFAULT" not in env_out and "VECTOR_STORE_GLOBAL" in env_out:
-        env_out["VECTOR_STORE_DEFAULT"] = env_out["VECTOR_STORE_GLOBAL"]
-
     print("\n# ---- Paste into .env ----")
     for k, v in sorted(env_out.items()):
         print(f"{k}={v}")
 
 def _process_folder(folder_path, root, env_out):
-    files = _collect_files(folder_path)
-    if not files:
-        return
-
-    # Determine store name based on folder structure
-    # e.g. root/icfes/general -> ("icfes-general", "VECTOR_STORE_ICFES_GENERAL")
-    
-    # Calculate relative path string e.g., "icfes/general"
+    # Calculate relative path string e.g., "icfes/matematicas"
     rel_path = folder_path.relative_to(root).as_posix()
     
     if rel_path in ENV_KEYS:
         env_key = ENV_KEYS[rel_path]
         store_name = rel_path.replace("/", "-")
-    elif rel_path == "general":
-        env_key = "VECTOR_STORE_GLOBAL"
-        store_name = "general"
     else:
-        # Fallback/Skip
+        # Skip obsolete general folders or unknown folders
+        return
+
+    files = _collect_files(folder_path)
+    if not files:
         return
 
     print(f"\nProcessing [{store_name}]...")
@@ -226,7 +201,7 @@ def main():
     sub = ap.add_subparsers(dest="cmd")
 
     sub.add_parser("list-stores").set_defaults(func=cmd_list_stores)
-    sub.add_parser("cleanup").set_defaults(func=cmd_cleanup) # <--- Added
+    sub.add_parser("cleanup").set_defaults(func=cmd_cleanup)
 
     up = sub.add_parser("upload")
     up.add_argument("--store", required=True)

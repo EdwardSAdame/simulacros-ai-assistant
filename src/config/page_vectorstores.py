@@ -3,39 +3,22 @@ import os
 from urllib.parse import urlparse
 from typing import List
 
-# Single global store
-VSTORE_GLOBAL = os.getenv("VECTOR_STORE_GLOBAL", "")
-
-# ICFES STORES
-VSTORE_ICFES_GENERAL             = os.getenv("VECTOR_STORE_ICFES_GENERAL", "")
+# --- ICFES SPECIFIC STORES ---
 VSTORE_ICFES_INGLES              = os.getenv("VECTOR_STORE_ICFES_INGLES", "")
 VSTORE_ICFES_CIENCIAS_NATURALES  = os.getenv("VECTOR_STORE_ICFES_CIENCIAS_NATURALES", "")
 VSTORE_ICFES_MATEMATICAS         = os.getenv("VECTOR_STORE_ICFES_MATEMATICAS", "")
 VSTORE_ICFES_SOCIALES_CIUDADANAS = os.getenv("VECTOR_STORE_ICFES_SOCIALES_CIUDADANAS", "")
 VSTORE_ICFES_LECTURA_CRITICA     = os.getenv("VECTOR_STORE_ICFES_LECTURA_CRITICA", "")
 
-# UNAL STORES
-VSTORE_UNAL_GENERAL              = os.getenv("VECTOR_STORE_UNAL_GENERAL", "")
+# --- UNAL SPECIFIC STORES ---
 VSTORE_UNAL_ANALISIS_IMAGEN      = os.getenv("VECTOR_STORE_UNAL_ANALISIS_IMAGEN", "")
 VSTORE_UNAL_MATEMATICAS          = os.getenv("VECTOR_STORE_UNAL_MATEMATICAS", "")
 VSTORE_UNAL_TEMATICA_COMUN       = os.getenv("VECTOR_STORE_UNAL_TEMATICA_COMUN", "")
 VSTORE_UNAL_CIENCIAS_SOCIALES    = os.getenv("VECTOR_STORE_UNAL_CIENCIAS_SOCIALES", "")
 VSTORE_UNAL_CIENCIAS_NATURALES   = os.getenv("VECTOR_STORE_UNAL_CIENCIAS_NATURALES", "")
 
-# Path → specific store
+# Mapping ONLY for specific simulation zones
 _PAGE_MAP = {
-    # 🟢 BRAND / GLOBAL PAGES
-    "/roma":                                         VSTORE_GLOBAL,
-    "/challenge-page/preuniversitario-invicto-roma": VSTORE_GLOBAL,
-    "/participant-page/preuniversitario-invicto-roma": VSTORE_GLOBAL, # <--- NEW VARIANT
-
-    # 🟢 GENERAL EXAM LANDING PAGES (Landing + Participant View)
-    "/challenge-page/preicfes-roma":                 VSTORE_ICFES_GENERAL,
-    "/participant-page/preicfes-roma":               VSTORE_ICFES_GENERAL, # <--- FIXED YOUR BUG HERE
-
-    "/challenge-page/preunal-gratis":                VSTORE_UNAL_GENERAL,
-    "/participant-page/preunal-gratis":              VSTORE_UNAL_GENERAL, # <--- NEW VARIANT
-
     # ICFES SPECIFIC SIMULATION ZONES
     "/simulacro-icfes/ingles":                VSTORE_ICFES_INGLES,
     "/simulacro-icfes/ciencias-naturales":    VSTORE_ICFES_CIENCIAS_NATURALES,
@@ -65,6 +48,7 @@ def get_stores_for_page(page: str | None) -> List[str]:
     specific = _PAGE_MAP.get(path)
     
     # 2. Try Prefix Match (Deep linking)
+    # This allows /simulacro-icfes/matematicas/pregunta-1 to still catch the vector store
     if not specific:
         for prefix, sid in _PAGE_MAP.items():
             if sid and (path == prefix or path.startswith(prefix + "/")):
@@ -72,10 +56,11 @@ def get_stores_for_page(page: str | None) -> List[str]:
                 break
 
     stores: List[str] = []
+    
+    # Only append if we found a specific store for this simulation zone
     if specific:
         stores.append(specific)
 
-    if VSTORE_GLOBAL and VSTORE_GLOBAL not in stores:
-        stores.append(VSTORE_GLOBAL)
-
+    # NOTE: Global/General stores logic has been removed as requested.
+    
     return stores
