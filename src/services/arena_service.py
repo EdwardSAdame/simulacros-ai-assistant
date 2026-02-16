@@ -111,9 +111,12 @@ class ArenaService:
                             new_vs_id = vector_store_manager.create_arena_knowledge_base(title, file_urls)
                             
                             if new_vs_id:
-                                updates['vector_store_id'] = new_vs_id # Add to updates to save to DB
+                                updates['VectorStoreId'] = new_vs_id # Save New ID to DB
                     except Exception as e:
                         logger.error(f"Failed to create new vector store on update: {e}")
+
+            # 🟢 CRITICAL FIX: Map lowercase 'files' to Capitalized 'Files' for DynamoDB
+            updates['Files'] = new_files
 
         # 2. Persist updates to DynamoDB
         return arenas_table.update_arena(user_id, arena_id, updates)
@@ -140,7 +143,7 @@ class ArenaService:
                     else:
                         logger.warning(f"Could not delete vector store {vector_store_id} (it might be already gone)")
         except Exception as e:
-            # We catch errors here so the DB deletion still happens (preventing zombies in the app)
+            # We catch errors here so the DB deletion still happens
             logger.error(f"Error while trying to cleanup vector store for arena {arena_id}: {e}")
 
         # 3. Delete from DynamoDB
