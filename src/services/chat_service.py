@@ -46,7 +46,6 @@ def get_ai_response(
     conversation_id: str | None = None,
     image_urls: list[str] | None = None,
     pdf_urls: list[str] | None = None, 
-    # 🟢 NEW: Structured Media Items
     media_items: List[Dict[str, Any]] | None = None,
     mode: str = "omega",
     intent: str = "chat",
@@ -64,7 +63,6 @@ def get_ai_response(
     page = _normalize_page(page)
 
     # 1. Normalize Media
-    # Combine legacy URLs into media_items if media_items is empty
     if not media_items:
         media_items = []
         if image_urls:
@@ -74,7 +72,6 @@ def get_ai_response(
             for url in pdf_urls:
                 media_items.append({"url": url, "type": "application/pdf", "name": "document.pdf"})
 
-    # Separate for internal logic (OpenAI still needs simple URL lists for now)
     clean_images = [m["url"] for m in media_items if "image" in m.get("type", "").lower() or not ".pdf" in m["url"].lower()]
     clean_pdfs   = [m["url"] for m in media_items if "pdf" in m.get("type", "").lower() or ".pdf" in m["url"].lower()]
 
@@ -93,7 +90,7 @@ def get_ai_response(
         "media_count": len(media_items)
     })
 
-    # 2. Conversation Management (Find or Create)
+    # 2. Conversation Management
     actual_conversation_id = conversation_id
     should_create_new = True
 
@@ -285,10 +282,8 @@ def get_ai_response(
                         arena_title = arena_context.get('Title', 'Custom Arena')
                         arena_instructions = arena_context.get('SystemInstructions', '')
                         
-                        # 🟢 NEW: Check for Arena-Specific Knowledge Base (Vector Store)
                         arena_vector_store = arena_context.get('VectorStoreId')
                         if arena_vector_store:
-                            # Ensure we have a list to append to
                             if not selected_vector_stores:
                                 selected_vector_stores = []
                             selected_vector_stores.append(arena_vector_store)
@@ -359,25 +354,27 @@ def get_ai_response(
         except Exception as e:
             raise RuntimeError(f"OpenAI Chat API failed: {e}")
 
-    # Step 7: Persist (THE FIX)
+    # Step 7: Persist
     assistant_timestamp = ""
     try:
-        # 🟢 UPDATED: Save user message WITH 'sentImages' inside metadata
-        # messages_table.py will detect 'sentImages' inside metadata and promote it to the root item.
-        
+        # Save user message WITH 'sentImages'
         save_message(
             actual_conversation_id, 
             role="user", 
             message_text=message if message else "[Archivo adjunto]",
-            metadata={"sentImages": media_items} # This passes the structured objects
+            metadata={"sentImages": media_items} 
         )
         
         # Save Assistant Response
         meta_payload = quiz_data
         if not meta_payload: meta_payload = {}  
-        if generated_assets:
+        
+        # 🟢 FIX: Only save generated assets if visual generation was EXPLICITLY requested.
+        # This prevents PDF thumbnails (context echoes) from showing up as "Generated Visualizations".
+        if generated_assets and requires_visuals:
             meta_payload["type"] = "rich_chat"
             meta_payload["assets"] = [{"type": "image", "url": url, "alt": "Generated Visualization"} for url in generated_assets]
+        
         if sources_data:
             meta_payload["sources"] = sources_data
         if not meta_payload: meta_payload = None
