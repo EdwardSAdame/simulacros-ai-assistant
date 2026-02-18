@@ -305,13 +305,10 @@ def get_ai_response(
                                 context_str = "\n".join(runtime_signals)
                                 base_tech_prompt += f"\nCONTEXT:\n{context_str}\n"
 
+                            #  UPDATED: Cleaner Injection (Removed ASCII Boxes)
                             injection = (
-                                f"\n\n--- [ARENA IDENTITY: {arena_title}] ---\n"
-                                f"Your Core Identity and Instructions are defined below.\n"
-                                f"IMPORTANT: Ignore any previous default identity instructions.\n"
-                                f"INSTRUCTIONS:\n"
-                                f"{arena_instructions}\n"
-                                f"--- [END OF ARENA INSTRUCTIONS] ---"
+                                f"\n\n## Identity: {arena_title}\n"
+                                f"{arena_instructions}"
                             )
                             
                             system_prompt = base_tech_prompt + injection
