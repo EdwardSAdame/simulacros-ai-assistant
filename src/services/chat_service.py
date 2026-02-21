@@ -20,7 +20,8 @@ from src.storage.conversations_table import (
     save_conversation, 
     _find_conversation_timestamp, 
     get_conversation_metadata,
-    update_conversation_last_active
+    update_conversation_last_active,
+    update_conversation_mode  # 🔹 NEW: Imported our new update function
 )
 from src.storage.messages_table import save_message
 from src.storage.arenas_table import update_arena_last_active
@@ -99,14 +100,18 @@ def get_ai_response(
         if exists_timestamp:
             should_create_new = False
             
-            # 🔹 NEW: Always fetch existing_meta to restore AiMode and ArenaId
             existing_meta = get_conversation_metadata(user_id, conversation_id)
             if existing_meta:
-                # Restore persisted mode (Overrides the frontend parameter)
+                # 🔹 FIX: Compare frontend mode with DB mode to allow mid-chat changes
                 persisted_mode = existing_meta.get("AiMode")
                 if persisted_mode:
-                    mode = persisted_mode
-                    log_event("ai_mode_restored_from_db", {"mode": mode})
+                    if mode != persisted_mode:
+                        # User changed the dropdown mid-chat! Trust the frontend and update DB.
+                        update_conversation_mode(user_id, conversation_id, mode)
+                        log_event("ai_mode_updated_in_db", {"old_mode": persisted_mode, "new_mode": mode})
+                    else:
+                        # They match, everything is good.
+                        log_event("ai_mode_verified_with_db", {"mode": mode})
 
                 # Restore ArenaId if not provided in the current request
                 if not arena_id and existing_meta.get("ArenaId"):
@@ -128,7 +133,7 @@ def get_ai_response(
                 page=page,
                 conversation_id=actual_conversation_id,
                 arena_id=arena_id,
-                ai_mode=mode  # 🔹 NEW: Persist the selected mode in DynamoDB
+                ai_mode=mode  
             )
             actual_conversation_id = conversation_data["ConversationId"]
         
@@ -181,7 +186,7 @@ def get_ai_response(
                     page=page,
                     name=(name or None),
                     email=_normalize_email_for_storage(email),
-                    mode=mode, # 🔹 mode is now guaranteed to be the DB persisted mode for old chats
+                    mode=mode, # 🔹 Correctly uses whatever mode is now active
                     exam_context=exam_context,
                     requires_visuals=requires_visuals, 
                     pdf_urls=clean_pdfs
@@ -247,7 +252,7 @@ def get_ai_response(
                     page=page,
                     name=(name or None),
                     email=_normalize_email_for_storage(email),
-                    mode=mode, # 🔹 correctly uses DB persisted mode
+                    mode=mode, # 🔹 Correctly uses whatever mode is now active
                     exam_context=exam_context,
                     requires_visuals=requires_visuals, 
                     pdf_urls=clean_pdfs
@@ -305,7 +310,7 @@ def get_ai_response(
                             
                             # 1. Technical Baseline
                             base_tech_prompt = (
-                                "You are an advanced AI Assistant engineered by Invicto. \n"
+                                "You are an advanced AI Assistant. \n"
                                 "OUTPUT RULES:\n"
                                 "- Use Markdown for formatting.\n"
                                 "- Use LaTeX for math equations (e.g. $E=mc^2$).\n"
@@ -316,7 +321,7 @@ def get_ai_response(
                                 context_str = "\n".join(runtime_signals)
                                 base_tech_prompt += f"\nCONTEXT:\n{context_str}\n"
 
-                            #  UPDATED: Cleaner Injection
+                            # Cleaner Injection
                             injection = (
                                 f"\n\n## Identity: {arena_title}\n"
                                 f"{arena_instructions}"
@@ -347,7 +352,7 @@ def get_ai_response(
                 page=page,
                 name=(name or None),
                 email=_normalize_email_for_storage(email),
-                mode=mode, # 🔹 correctly uses DB persisted mode
+                mode=mode, # 🔹 Correctly uses whatever mode is now active
                 system_instruction=system_prompt, 
                 vector_store_ids=selected_vector_stores,
                 requires_visuals=requires_visuals,
@@ -377,8 +382,6 @@ def get_ai_response(
         meta_payload = quiz_data
         if not meta_payload: meta_payload = {}  
         
-        # 🟢 FIX: Only save generated assets if visual generation was EXPLICITLY requested.
-        # This prevents PDF thumbnails (context echoes) from showing up as "Generated Visualizations".
         if generated_assets and requires_visuals:
             meta_payload["type"] = "rich_chat"
             meta_payload["assets"] = [{"type": "image", "url": url, "alt": "Generated Visualization"} for url in generated_assets]

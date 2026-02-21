@@ -56,7 +56,7 @@ def save_conversation(
     page: str,
     conversation_id: Optional[str] = None, # Allow passing an existing ID
     arena_id: Optional[str] = None,        # Link to an Arena
-    ai_mode: str = "omega"                 # 🔹 NEW: Persist the selected mode
+    ai_mode: str = "omega"                 # 🔹 Persist the selected mode
 ) -> Dict[str, Any]:
     """
     Creates a new conversation record in DynamoDB.
@@ -85,7 +85,7 @@ def save_conversation(
         "IsPinned": False, # Default to false
         "ArenaId": arena_id,
         "LastUpdated": timestamp, # Initialize LastUpdated same as creation
-        "AiMode": ai_mode         # 🔹 NEW: Save the mode
+        "AiMode": ai_mode         # 🔹 Save the mode
     }
 
     # Clean up (removes empty email, empty arena_id, etc.)
@@ -144,7 +144,7 @@ def get_conversations_for_user(
         '#n': 'Name'
     }
     
-    # 🔹 NEW: Added AiMode to the projection expression
+    # 🔹 Added AiMode to the projection expression
     projection_expression = "ConversationId, Title, #ts, IsPinned, #n, Page, ArenaId, LastUpdated, AiMode"
 
     try:
@@ -218,7 +218,6 @@ def get_conversation_metadata(user_id: str, conversation_id: str) -> Optional[Di
     try:
         response = table.get_item(
             Key={'UserId': user_id, 'Timestamp': timestamp},
-            # 🔹 NEW: Added AiMode so the Chat Service can retrieve the original mode
             ProjectionExpression="ConversationId, Title, ArenaId, AiMode"
         )
         return response.get('Item')
@@ -240,3 +239,25 @@ def update_conversation_arena(user_id: str, conversation_id: str, arena_id: Opti
         ExpressionAttributeValues={':a': arena_id}
     )
     return True
+
+# 🔹 NEW FUNCTION: Allows updating the AiMode mid-conversation
+def update_conversation_mode(user_id: str, conversation_id: str, new_mode: str):
+    """
+    Updates the AiMode for an existing conversation.
+    """
+    timestamp = _find_conversation_timestamp(user_id, conversation_id)
+    if not timestamp:
+        print(f"Cannot update AiMode: Conversation {conversation_id} not found.")
+        return False
+
+    try:
+        table.update_item(
+            Key={'UserId': user_id, 'Timestamp': timestamp},
+            UpdateExpression="set AiMode = :m",
+            ExpressionAttributeValues={':m': new_mode}
+        )
+        print(f"Successfully updated conversation {conversation_id} to mode: {new_mode}")
+        return True
+    except Exception as e:
+        print(f"Error updating AiMode for {conversation_id}: {e}")
+        return False
