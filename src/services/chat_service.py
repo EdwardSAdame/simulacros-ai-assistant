@@ -50,6 +50,7 @@ def get_ai_response(
     media_items: List[Dict[str, Any]] | None = None,
     mode: str = "omega",
     intent: str = "chat",
+    category: str = "general", # 🟢 SECURITY: Added category parameter here
     requires_visuals: bool = False,
     stream_manager: Any | None = None,
     arena_id: str | None = None  
@@ -278,91 +279,100 @@ def get_ai_response(
     else:
         # STANDARD CHAT MODE
         try:
-            runtime_signals = build_runtime_context(
-                page=page,
-                user_id=user_id,
-                name=name,
-                email=email,
-                requires_visuals=requires_visuals 
-            )
-
-            # Check for Arena FIRST.
-            system_prompt = ""
+            # 🟢 SECURITY INTERCEPTOR: Bypass OpenAI entirely for identity questions
+            if category == "identity_protection":
+                logger.info("Intercepted identity question. Returning custom Invicto response.")
+                final_reply_text = "Soy una inteligencia artificial exclusiva desarrollada por Invicto para ayudarte en tus estudios."
+                generated_assets = []
+                sources_data = []
             
-            if arena_id:
-                try:
-                    logger.info(f"Attempting to fetch context for Arena: {arena_id}")
-                    arena_context = arena_service.get_arena_context(user_id, arena_id)
-                    
-                    if arena_context:
-                        arena_title = arena_context.get('Title', 'Custom Arena')
-                        arena_instructions = arena_context.get('SystemInstructions', '')
-                        
-                        arena_vector_store = arena_context.get('VectorStoreId')
-                        if arena_vector_store:
-                            if not selected_vector_stores:
-                                selected_vector_stores = []
-                            selected_vector_stores.append(arena_vector_store)
-                            logger.info(f"Attached Arena Vector Store: {arena_vector_store}")
-
-                        if arena_instructions and str(arena_instructions).strip():
-                            logger.info(f"Using Exclusive Arena Context: {arena_title}")
-                            
-                            # 1. Technical Baseline
-                            base_tech_prompt = (
-                                "You are an advanced AI Assistant. \n"
-                                "OUTPUT RULES:\n"
-                                "- Use Markdown for formatting.\n"
-                                "- Use LaTeX for math equations (e.g. $E=mc^2$).\n"
-                                "- Be helpful, clear, and accurate.\n"
-                            )
-                            
-                            if runtime_signals:
-                                context_str = "\n".join(runtime_signals)
-                                base_tech_prompt += f"\nCONTEXT:\n{context_str}\n"
-
-                            # Cleaner Injection
-                            injection = (
-                                f"\n\n## Identity: {arena_title}\n"
-                                f"{arena_instructions}"
-                            )
-                            
-                            system_prompt = base_tech_prompt + injection
-                        else:
-                            logger.warning(f"Arena {arena_id} found, but SystemInstructions is empty.")
-                    else:
-                        logger.warning(f"Arena {arena_id} context not found in DB.")
-                            
-                except Exception as e:
-                    logger.error(f"Failed to load arena context: {e}")
-
-            # FALLBACK
-            if not system_prompt:
-                system_prompt = build_system_instructions(
-                    extras=runtime_signals,
-                    exam_context=exam_context,
-                    requires_visuals=requires_visuals,
-                    web_search_active=is_web_search_active 
+            # NORMAL CHAT ROUTE
+            else:
+                runtime_signals = build_runtime_context(
+                    page=page,
+                    user_id=user_id,
+                    name=name,
+                    email=email,
+                    requires_visuals=requires_visuals 
                 )
 
-            # 3. Call AI
-            response_tuple = send_message_to_assistant(
-                conversation_input=conversation_input,
-                user_id=user_id,
-                page=page,
-                name=(name or None),
-                email=_normalize_email_for_storage(email),
-                mode=mode, # 🔹 Correctly uses whatever mode is now active
-                system_instruction=system_prompt, 
-                vector_store_ids=selected_vector_stores,
-                requires_visuals=requires_visuals,
-                web_search_config=web_search_config,
-                pdf_urls=clean_pdfs
-            )
-            
-            final_reply_text = response_tuple[0]
-            generated_assets = response_tuple[1]
-            sources_data = response_tuple[2] if len(response_tuple) > 2 else []
+                # Check for Arena FIRST.
+                system_prompt = ""
+                
+                if arena_id:
+                    try:
+                        logger.info(f"Attempting to fetch context for Arena: {arena_id}")
+                        arena_context = arena_service.get_arena_context(user_id, arena_id)
+                        
+                        if arena_context:
+                            arena_title = arena_context.get('Title', 'Custom Arena')
+                            arena_instructions = arena_context.get('SystemInstructions', '')
+                            
+                            arena_vector_store = arena_context.get('VectorStoreId')
+                            if arena_vector_store:
+                                if not selected_vector_stores:
+                                    selected_vector_stores = []
+                                selected_vector_stores.append(arena_vector_store)
+                                logger.info(f"Attached Arena Vector Store: {arena_vector_store}")
+
+                            if arena_instructions and str(arena_instructions).strip():
+                                logger.info(f"Using Exclusive Arena Context: {arena_title}")
+                                
+                                # 1. Technical Baseline
+                                base_tech_prompt = (
+                                    "You are an advanced AI Assistant. \n"
+                                    "OUTPUT RULES:\n"
+                                    "- Use Markdown for formatting.\n"
+                                    "- Use LaTeX for math equations (e.g. $E=mc^2$).\n"
+                                    "- Be helpful, clear, and accurate.\n"
+                                )
+                                
+                                if runtime_signals:
+                                    context_str = "\n".join(runtime_signals)
+                                    base_tech_prompt += f"\nCONTEXT:\n{context_str}\n"
+
+                                # Cleaner Injection
+                                injection = (
+                                    f"\n\n## Identity: {arena_title}\n"
+                                    f"{arena_instructions}"
+                                )
+                                
+                                system_prompt = base_tech_prompt + injection
+                            else:
+                                logger.warning(f"Arena {arena_id} found, but SystemInstructions is empty.")
+                        else:
+                            logger.warning(f"Arena {arena_id} context not found in DB.")
+                                
+                    except Exception as e:
+                        logger.error(f"Failed to load arena context: {e}")
+
+                # FALLBACK
+                if not system_prompt:
+                    system_prompt = build_system_instructions(
+                        extras=runtime_signals,
+                        exam_context=exam_context,
+                        requires_visuals=requires_visuals,
+                        web_search_active=is_web_search_active 
+                    )
+
+                # 3. Call AI
+                response_tuple = send_message_to_assistant(
+                    conversation_input=conversation_input,
+                    user_id=user_id,
+                    page=page,
+                    name=(name or None),
+                    email=_normalize_email_for_storage(email),
+                    mode=mode, # 🔹 Correctly uses whatever mode is now active
+                    system_instruction=system_prompt, 
+                    vector_store_ids=selected_vector_stores,
+                    requires_visuals=requires_visuals,
+                    web_search_config=web_search_config,
+                    pdf_urls=clean_pdfs
+                )
+                
+                final_reply_text = response_tuple[0]
+                generated_assets = response_tuple[1]
+                sources_data = response_tuple[2] if len(response_tuple) > 2 else []
 
         except Exception as e:
             raise RuntimeError(f"OpenAI Chat API failed: {e}")

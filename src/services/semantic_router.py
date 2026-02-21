@@ -17,7 +17,7 @@ class SemanticRouter:
         self.valid_categories = [
             "biologia", "quimica", "fisica", "matematicas", 
             "sociales", "lectura_critica", "analisis_imagen", "ingles",
-            "general"
+            "general", "identity_protection"  # 🟢 SECURITY: Added identity_protection
         ]
 
     def determine_category(self, text: str) -> dict:

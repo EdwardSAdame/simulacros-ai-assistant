@@ -91,6 +91,7 @@ def lambda_handler(event, context):
             # --- 2. Send Visual Feedback (The "Thinking" Phase) ---
             intent = "chat" 
             requires_visuals = False # Default
+            category_key = "general" # 🟢 SECURITY: Default category initialized here
             
             if connection_id:
                 try:
@@ -155,6 +156,7 @@ def lambda_handler(event, context):
                 media_items=media_items, 
                 mode=ai_mode,
                 intent=intent,
+                category=category_key, # 🟢 SECURITY: We now pass the category to chat_service!
                 requires_visuals=requires_visuals, 
                 stream_manager=stream_manager,
                 arena_id=arena_id  
