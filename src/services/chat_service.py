@@ -305,7 +305,7 @@ def get_ai_response(
                             
                             # 1. Technical Baseline
                             base_tech_prompt = (
-                                "You are an advanced AI Assistant. \n"
+                                "You are an advanced AI Assistant engineered by Invicto. \n"
                                 "OUTPUT RULES:\n"
                                 "- Use Markdown for formatting.\n"
                                 "- Use LaTeX for math equations (e.g. $E=mc^2$).\n"
