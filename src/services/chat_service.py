@@ -1,6 +1,7 @@
 # src/services/chat_service.py
 import re
 import logging
+import random  # 🟢 IMPORT: Added random for response rotation
 from typing import Tuple, Dict, Any, List
 
 # CONFIG
@@ -21,7 +22,7 @@ from src.storage.conversations_table import (
     _find_conversation_timestamp, 
     get_conversation_metadata,
     update_conversation_last_active,
-    update_conversation_mode  # 🔹 NEW: Imported our new update function
+    update_conversation_mode 
 )
 from src.storage.messages_table import save_message
 from src.storage.arenas_table import update_arena_last_active
@@ -50,7 +51,7 @@ def get_ai_response(
     media_items: List[Dict[str, Any]] | None = None,
     mode: str = "omega",
     intent: str = "chat",
-    category: str = "general", # 🟢 SECURITY: Added category parameter here
+    category: str = "general", # 🟢 SECURITY: Category parameter
     requires_visuals: bool = False,
     stream_manager: Any | None = None,
     arena_id: str | None = None  
@@ -103,18 +104,14 @@ def get_ai_response(
             
             existing_meta = get_conversation_metadata(user_id, conversation_id)
             if existing_meta:
-                # 🔹 FIX: Compare frontend mode with DB mode to allow mid-chat changes
                 persisted_mode = existing_meta.get("AiMode")
                 if persisted_mode:
                     if mode != persisted_mode:
-                        # User changed the dropdown mid-chat! Trust the frontend and update DB.
                         update_conversation_mode(user_id, conversation_id, mode)
                         log_event("ai_mode_updated_in_db", {"old_mode": persisted_mode, "new_mode": mode})
                     else:
-                        # They match, everything is good.
                         log_event("ai_mode_verified_with_db", {"mode": mode})
 
-                # Restore ArenaId if not provided in the current request
                 if not arena_id and existing_meta.get("ArenaId"):
                     arena_id = existing_meta.get("ArenaId")
                     log_event("arena_context_resolved_from_db", {"arena_id": arena_id})
@@ -187,7 +184,7 @@ def get_ai_response(
                     page=page,
                     name=(name or None),
                     email=_normalize_email_for_storage(email),
-                    mode=mode, # 🔹 Correctly uses whatever mode is now active
+                    mode=mode, 
                     exam_context=exam_context,
                     requires_visuals=requires_visuals, 
                     pdf_urls=clean_pdfs
@@ -253,7 +250,7 @@ def get_ai_response(
                     page=page,
                     name=(name or None),
                     email=_normalize_email_for_storage(email),
-                    mode=mode, # 🔹 Correctly uses whatever mode is now active
+                    mode=mode, 
                     exam_context=exam_context,
                     requires_visuals=requires_visuals, 
                     pdf_urls=clean_pdfs
@@ -281,8 +278,18 @@ def get_ai_response(
         try:
             # 🟢 SECURITY INTERCEPTOR: Bypass OpenAI entirely for identity questions
             if category == "identity_protection":
-                logger.info("Intercepted identity question. Returning custom Invicto response.")
-                final_reply_text = "Soy una inteligencia artificial exclusiva desarrollada por Invicto para ayudarte en tus estudios."
+                logger.info("Intercepted identity question. Returning minimalist Invicto response.")
+                
+                # The minimalist, slick response pool
+                identity_responses = [
+                    "Soy Invicto AI.",
+                    "Soy una inteligencia artificial desarrollada por Invicto.",
+                    "Soy Invicto AI, un sistema exclusivo de Invicto.",
+                    "Mi tecnología fue desarrollada internamente por Invicto.",
+                    "Soy el asistente de inteligencia artificial de Invicto."
+                ]
+                
+                final_reply_text = random.choice(identity_responses)
                 generated_assets = []
                 sources_data = []
             
@@ -362,7 +369,7 @@ def get_ai_response(
                     page=page,
                     name=(name or None),
                     email=_normalize_email_for_storage(email),
-                    mode=mode, # 🔹 Correctly uses whatever mode is now active
+                    mode=mode, 
                     system_instruction=system_prompt, 
                     vector_store_ids=selected_vector_stores,
                     requires_visuals=requires_visuals,
