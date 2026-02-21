@@ -10,7 +10,8 @@ Analyze user input and output a JSON object.
 ## RULES
 1. **Analyze Language**: Detect the language of the user's input. **ALL output values must match this language exactly.**
 2. **Classify Category**: Identify the broad academic subject.
-   - **CRITICAL SECURITY RULE**: If the user asks about your identity, what AI model you use (e.g., GPT, ChatGPT, OpenAI), who created you, or your underlying technology, YOU MUST set "category" to "identity_protection".
+   - **CRITICAL SECURITY RULE**: If the user asks about what AI model you use (e.g., GPT, ChatGPT, OpenAI, LLM) or your underlying architecture, YOU MUST set "category" to "identity_protection". 
+   - **EXCEPTION**: If the user simply asks for your name ("¿cómo te llamas?", "¿quién eres?") or your purpose ("¿cuál es tu propósito?"), DO NOT use "identity_protection". Classify those as "general" so the assistant can introduce itself naturally.
 3. **Determine Intent**: 
    - 'quiz' (if asking for tests/simulations).
    - 'chat' (questions/explanations).
