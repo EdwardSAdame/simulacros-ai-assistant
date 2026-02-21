@@ -98,11 +98,21 @@ def get_ai_response(
         exists_timestamp = _find_conversation_timestamp(user_id, conversation_id)
         if exists_timestamp:
             should_create_new = False
-            if not arena_id:
-                existing_meta = get_conversation_metadata(user_id, conversation_id)
-                if existing_meta and existing_meta.get("ArenaId"):
+            
+            # 🔹 NEW: Always fetch existing_meta to restore AiMode and ArenaId
+            existing_meta = get_conversation_metadata(user_id, conversation_id)
+            if existing_meta:
+                # Restore persisted mode (Overrides the frontend parameter)
+                persisted_mode = existing_meta.get("AiMode")
+                if persisted_mode:
+                    mode = persisted_mode
+                    log_event("ai_mode_restored_from_db", {"mode": mode})
+
+                # Restore ArenaId if not provided in the current request
+                if not arena_id and existing_meta.get("ArenaId"):
                     arena_id = existing_meta.get("ArenaId")
                     log_event("arena_context_resolved_from_db", {"arena_id": arena_id})
+                    
             log_event("conversation_verified_and_reused", {"conversation_id": conversation_id})
         else:
             actual_conversation_id = conversation_id 
@@ -117,7 +127,8 @@ def get_ai_response(
                 title=(message or "[Sin texto]")[:40], 
                 page=page,
                 conversation_id=actual_conversation_id,
-                arena_id=arena_id  
+                arena_id=arena_id,
+                ai_mode=mode  # 🔹 NEW: Persist the selected mode in DynamoDB
             )
             actual_conversation_id = conversation_data["ConversationId"]
         
@@ -170,7 +181,7 @@ def get_ai_response(
                     page=page,
                     name=(name or None),
                     email=_normalize_email_for_storage(email),
-                    mode=mode,
+                    mode=mode, # 🔹 mode is now guaranteed to be the DB persisted mode for old chats
                     exam_context=exam_context,
                     requires_visuals=requires_visuals, 
                     pdf_urls=clean_pdfs
@@ -236,7 +247,7 @@ def get_ai_response(
                     page=page,
                     name=(name or None),
                     email=_normalize_email_for_storage(email),
-                    mode=mode,
+                    mode=mode, # 🔹 correctly uses DB persisted mode
                     exam_context=exam_context,
                     requires_visuals=requires_visuals, 
                     pdf_urls=clean_pdfs
@@ -305,7 +316,7 @@ def get_ai_response(
                                 context_str = "\n".join(runtime_signals)
                                 base_tech_prompt += f"\nCONTEXT:\n{context_str}\n"
 
-                            #  UPDATED: Cleaner Injection (Removed ASCII Boxes)
+                            #  UPDATED: Cleaner Injection
                             injection = (
                                 f"\n\n## Identity: {arena_title}\n"
                                 f"{arena_instructions}"
@@ -336,7 +347,7 @@ def get_ai_response(
                 page=page,
                 name=(name or None),
                 email=_normalize_email_for_storage(email),
-                mode=mode,
+                mode=mode, # 🔹 correctly uses DB persisted mode
                 system_instruction=system_prompt, 
                 vector_store_ids=selected_vector_stores,
                 requires_visuals=requires_visuals,
