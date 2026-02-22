@@ -47,8 +47,10 @@ def lambda_handler(event, context):
         # Extract Context
         arena_id = meta.get("arenaId") or body.get("arenaId")
         
-        # 🟢 NEW: Extract the hidden flag for system context injections
-        is_hidden = body.get("is_hidden") or meta.get("is_hidden", False)
+        #  BULLETPROOF FIX: Detect hidden context via magic string in case Velo drops the flag
+        is_hidden_flag = body.get("is_hidden") or meta.get("is_hidden", False)
+        is_hidden_magic = isinstance(message, str) and message.strip().startswith("[CONTEXTO INTERNO:")
+        is_hidden = is_hidden_flag or is_hidden_magic
         
         # Extract Identity
         user_id = body.get("userId") or meta.get("debugClient", {}).get("clientUserId")
@@ -99,7 +101,7 @@ def lambda_handler(event, context):
             "mode": ai_mode,
             "arena_id": arena_id,
             
-            # 🟢 NEW: Pass hidden flag to the worker
+            #  Pass the guaranteed hidden flag to the worker
             "is_hidden": is_hidden
         }
 
@@ -116,7 +118,7 @@ def lambda_handler(event, context):
             "has_media_items": bool(media_items),
             "media_count": len(media_items),
             "arena_id": arena_id,
-            "is_hidden": is_hidden # 🟢 Log the hidden status
+            "is_hidden": is_hidden 
         })
 
         # Return success
