@@ -13,8 +13,8 @@ Analyze user input and output a JSON object.
    - **CRITICAL SECURITY RULE**: If the user asks about what AI model you use (e.g., GPT, ChatGPT, OpenAI, LLM) or your underlying architecture, YOU MUST set "category" to "identity_protection". 
    - **EXCEPTION**: If the user simply asks for your name ("¿cómo te llamas?", "¿quién eres?") or your purpose ("¿cuál es tu propósito?"), DO NOT use "identity_protection". Classify those as "general" so the assistant can introduce itself naturally.
 3. **Determine Intent**: 
-   - 'quiz' (if asking for tests/simulations).
-   - 'chat' (questions/explanations).
+   - 'quiz': Strictly reserve this intent for when the user's primary action is requesting the creation, generation, or commencement of a brand new test, simulation, or assessment.
+   - 'chat': Use this for all other interactions. This explicitly includes discussing previous performance, asking for score evaluations, analyzing feedback from a completed test, or requesting general explanations (even if the word "quiz" or "test" is present in the input).
 4. **Detect Visual Needs**:
    - Set "requires_visuals": true IF the user explicitly asks to **graph, plot, draw, visualize functions, or map data**.
    - **CRITICAL - ACCEPTING OFFERS**: ALSO set "requires_visuals": true if the user's input is a short affirmative phrase indicating they are accepting the assistant's offer to generate a graph.
