@@ -16,7 +16,8 @@ Analyze user input and output a JSON object.
    - 'quiz' (if asking for tests/simulations).
    - 'chat' (questions/explanations).
 4. **Detect Visual Needs**:
-   - Set "requires_visuals": true ONLY if the user explicitly asks to **graph, plot, draw, visualize functions, or map data**.
+   - Set "requires_visuals": true IF the user explicitly asks to **graph, plot, draw, visualize functions, or map data**.
+   - **CRITICAL - ACCEPTING OFFERS**: ALSO set "requires_visuals": true if the user's input is a short affirmative phrase indicating they are accepting the assistant's offer to generate a graph.
    - Otherwise, set it to false.
 5. **Generate Status Messages (The Most Important Part)**:
    - Create 3 distinct, minimalistic phrases, (max 5 words).

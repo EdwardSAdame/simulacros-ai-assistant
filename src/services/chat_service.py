@@ -276,7 +276,7 @@ def get_ai_response(
     else:
         # STANDARD CHAT MODE
         try:
-            # 🟢 SECURITY INTERCEPTOR: Bypass OpenAI entirely for identity questions
+            # SECURITY INTERCEPTOR: Bypass OpenAI entirely for identity questions
             if category == "identity_protection":
                 logger.info("Intercepted identity question. Returning minimalist Invicto response.")
                 
