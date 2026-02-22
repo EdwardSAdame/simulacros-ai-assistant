@@ -1,7 +1,7 @@
 # src/services/chat_service.py
 import re
 import logging
-import random  # 🟢 IMPORT: Added random for response rotation
+import random  # IMPORT: Added random for response rotation
 from typing import Tuple, Dict, Any, List
 
 # CONFIG
@@ -51,10 +51,11 @@ def get_ai_response(
     media_items: List[Dict[str, Any]] | None = None,
     mode: str = "omega",
     intent: str = "chat",
-    category: str = "general", # 🟢 SECURITY: Category parameter
+    category: str = "general", # SECURITY: Category parameter
     requires_visuals: bool = False,
     stream_manager: Any | None = None,
-    arena_id: str | None = None  
+    arena_id: str | None = None,
+    is_hidden: bool = False  # 🟢 NEW: Accept hidden flag
 ) -> Tuple[str, str, str, Dict | None]: 
     
     # Lazy Imports
@@ -77,21 +78,6 @@ def get_ai_response(
 
     clean_images = [m["url"] for m in media_items if "image" in m.get("type", "").lower() or not ".pdf" in m["url"].lower()]
     clean_pdfs   = [m["url"] for m in media_items if "pdf" in m.get("type", "").lower() or ".pdf" in m["url"].lower()]
-
-    # 2. Intelligence Layer
-    exam_context = determine_exam_context(page, message)
-    selected_vector_stores = get_stores_for_page(page)
-    web_search_config = get_search_filters(exam_context)
-    is_web_search_active = (web_search_config is not None)
-
-    log_event("context_resolution", {
-        "user_id": user_id,
-        "input_url": page,
-        "derived_exam": exam_context, 
-        "web_search_active": is_web_search_active,
-        "trigger_message": message[:50] if message else "None",
-        "media_count": len(media_items)
-    })
 
     # 2. Conversation Management
     actual_conversation_id = conversation_id
@@ -143,7 +129,40 @@ def get_ai_response(
     except Exception as e:
         raise RuntimeError(f"Failed to save/reuse conversation: {e}")
 
-    # 3. Build History & Inputs
+    # 🟢 NEW: Fast-Track Hidden Messages (Save to DB and HALT)
+    if is_hidden:
+        logger.info("👻 Processing Hidden Context Injection. Saving to DB and aborting AI trigger.")
+        try:
+            # We save it as the "user" role so the AI sees it as user context in the history
+            save_message(
+                actual_conversation_id, 
+                role="user", 
+                message_text=message if message else "[Hidden Context]",
+                metadata={"is_hidden": True, "type": "system_injection"} 
+            )
+            return "Context saved silently.", actual_conversation_id, "", None
+        except Exception as e:
+            logger.error(f"Failed to save hidden context: {e}")
+            raise RuntimeError(f"Failed to save hidden context: {e}")
+
+    # --- STANDARD FLOW CONTINUES BELOW ---
+
+    # 3. Intelligence Layer
+    exam_context = determine_exam_context(page, message)
+    selected_vector_stores = get_stores_for_page(page)
+    web_search_config = get_search_filters(exam_context)
+    is_web_search_active = (web_search_config is not None)
+
+    log_event("context_resolution", {
+        "user_id": user_id,
+        "input_url": page,
+        "derived_exam": exam_context, 
+        "web_search_active": is_web_search_active,
+        "trigger_message": message[:50] if message else "None",
+        "media_count": len(media_items)
+    })
+
+    # 4. Build History & Inputs
     conversation_input = build_history_list(actual_conversation_id)
     
     current_user_content = []

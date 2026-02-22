@@ -47,6 +47,9 @@ def lambda_handler(event, context):
         # Extract Context
         arena_id = meta.get("arenaId") or body.get("arenaId")
         
+        # 🟢 NEW: Extract the hidden flag for system context injections
+        is_hidden = body.get("is_hidden") or meta.get("is_hidden", False)
+        
         # Extract Identity
         user_id = body.get("userId") or meta.get("debugClient", {}).get("clientUserId")
         name = body.get("name") or meta.get("name") or meta.get("debugClient", {}).get("clientName")
@@ -94,7 +97,10 @@ def lambda_handler(event, context):
             
             "client_row_id": client_row_id,
             "mode": ai_mode,
-            "arena_id": arena_id 
+            "arena_id": arena_id,
+            
+            # 🟢 NEW: Pass hidden flag to the worker
+            "is_hidden": is_hidden
         }
 
         # Send the message to the SQS queue
@@ -109,7 +115,8 @@ def lambda_handler(event, context):
             "mode": ai_mode,
             "has_media_items": bool(media_items),
             "media_count": len(media_items),
-            "arena_id": arena_id 
+            "arena_id": arena_id,
+            "is_hidden": is_hidden # 🟢 Log the hidden status
         })
 
         # Return success

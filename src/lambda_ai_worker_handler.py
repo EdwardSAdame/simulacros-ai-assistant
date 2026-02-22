@@ -64,11 +64,14 @@ def lambda_handler(event, context):
             image_urls = payload.get("image_urls", [])
             pdf_urls = payload.get("pdf_urls", [])
             
-            # 🟢 NEW: Extract structured media items sent by chat_handler
+            # Extract structured media items sent by chat_handler
             media_items = payload.get("media_items", [])
 
-            # NEW: Extract Arena ID from SQS
+            # Extract Arena ID from SQS
             arena_id = payload.get("arena_id")
+
+            # 🟢 NEW: Extract the hidden flag from SQS
+            is_hidden = payload.get("is_hidden", False)
 
             user_id = payload.get("user_id")
             name = payload.get("name")
@@ -91,9 +94,10 @@ def lambda_handler(event, context):
             # --- 2. Send Visual Feedback (The "Thinking" Phase) ---
             intent = "chat" 
             requires_visuals = False # Default
-            category_key = "general" # 🟢 SECURITY: Default category initialized here
+            category_key = "general" # Default category initialized here
             
-            if connection_id:
+            # 🟢 SKIP visual feedback if this is a hidden background update
+            if connection_id and not is_hidden:
                 try:
                     # ROUTER CALL: Get category, creative phrases, AND intent
                     routing_result = semantic_router.determine_category(message)
@@ -134,7 +138,7 @@ def lambda_handler(event, context):
                         "phrases_count": len(loading_phrases),
                         "source": source_type,
                         "mode": ai_mode,
-                        "arena_id": arena_id # Log this
+                        "arena_id": arena_id 
                     })
 
                 except Exception as e:
@@ -152,18 +156,19 @@ def lambda_handler(event, context):
                 conversation_id=conv_id_in,
                 image_urls=image_urls,
                 pdf_urls=pdf_urls,
-                # 🟢 NEW: Pass structured media items to the brain
                 media_items=media_items, 
                 mode=ai_mode,
                 intent=intent,
-                category=category_key, # 🟢 SECURITY: We now pass the category to chat_service!
+                category=category_key, 
                 requires_visuals=requires_visuals, 
                 stream_manager=stream_manager,
-                arena_id=arena_id  
+                arena_id=arena_id,
+                is_hidden=is_hidden # 🟢 Pass hidden flag to chat_service
             )
 
             # --- 4. Send Final Reply ---
-            if connection_id:
+            # 🟢 SKIP sending final reply to WebSocket if this is a hidden background update
+            if connection_id and not is_hidden:
                 try:
                     # A. Send Standard Text Reply (The Chat Bubble + Inline Metadata)
                     response_payload = json.dumps({
@@ -218,7 +223,7 @@ def lambda_handler(event, context):
                     log_event("ws_send_failed_gone", {"user_id": user_id, "connection_id": connection_id}, level="warning")
                 except Exception as e:
                     log_event("ws_send_failed_exception", {"user_id": user_id}, level="error", error=e)
-            else:
+            elif not connection_id:
                 log_event("ws_connection_not_found", {"user_id": user_id}, level="warning")
 
         except Exception as e:
