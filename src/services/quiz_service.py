@@ -23,10 +23,11 @@ class QuizService:
             f"   - **FORBIDDEN**: Do NOT use ASCII control codes.\n"
             f"   - **CHECK**: Verify the text is human-readable before outputting.\n"
             
-            f"2. **MATH SYNTAX (STRICT LATEX)**: You must format ALL mathematical expressions using LaTeX.\n"
-            f"   - **Inline**: Use `\\(` and `\\)` for variables (`\\(x\\)`), formulas, and **SCIENTIFIC NOTATION** (e.g., `\\( 6.3 \\times 10^6 \\)`). \n"
-            f"   - **Multiplication**: NEVER use the letter 'x' for multiplication. Always use `\\times`.\n"
-            f"   - **Block**: Use `\\[` and `\\]` for complex, standalone equations.\n"
+            # 🟢 UPDATED: Generalized JSON-Safe LaTeX Rule (No hardcoded examples)
+            f"2. **MATH SYNTAX (JSON-ESCAPED LATEX)**: You must format ALL mathematical expressions using LaTeX. However, because your output is being serialized into strict JSON, you must escape your backslashes.\n"
+            f"   - **The Universal Rule**: EVERY single backslash used in ANY LaTeX command, symbol, or environment MUST be double-escaped so it survives the JSON parser.\n"
+            f"   - **Wrappers**: Use double-escaped parentheses for inline math, and double-escaped brackets for block math.\n"
+            f"   - **Multiplication**: NEVER use the letter 'x' for multiplication. Always use the proper LaTeX multiplication symbol (double-escaped).\n\n"
             
             f"3. **LANGUAGE MIRRORING**: Analyze the language used in the user's request topic ('{topic}').\n"
             f"   - If Spanish -> Output 100% Spanish (Colombia).\n"

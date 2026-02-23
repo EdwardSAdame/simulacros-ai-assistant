@@ -3,8 +3,8 @@ from pydantic import BaseModel, Field
 from typing import List, Optional
 
 class QuizOption(BaseModel):
-    # CRITICAL UPDATE: Aggressive formatting rules to prevent plain text math
-    text: str = Field(..., description="The answer text. STRICT FORMATTING: Any math, numbers, or variables MUST be wrapped in '\\(' and '\\)'. Example: '\\( x=2 \\)' NOT 'x=2'. Never output raw LaTeX without wrappers.")
+    #  CRITICAL UPDATE: Generalized JSON-safe formatting rules
+    text: str = Field(..., description="The answer text. STRICT FORMATTING: Any math, numbers, or variables MUST be wrapped in JSON-escaped LaTeX. You MUST double-escape every backslash (e.g., use '\\\\(' and '\\\\)'). NEVER output unescaped backslashes.")
     feedback: str = Field(..., description="Short feedback explaining why this option is right/wrong.")
 
 class QuizQuestion(BaseModel):
@@ -20,8 +20,8 @@ class QuizQuestion(BaseModel):
         "3. THE TRAPS: Identify 3 failure paths based on these specifics."
     ))
 
-    # CRITICAL UPDATE: Merged "Consistency" rule with "Strict Formatting" rule
-    question_text: str = Field(..., description="The question stem. STRICT FORMATTING: Wrap ALL math expressions, variables, and formulas in '\\(' and '\\)' (inline) or '\\[' and '\\]' (block). Example: 'Solve \\( 2x+5=0 \\)' NOT 'Solve 2x+5=0'. MUST match 'THE SETUP' numbers exactly.")
+    #  CRITICAL UPDATE: Generalized JSON-safe formatting rules
+    question_text: str = Field(..., description="The question stem. STRICT FORMATTING: Wrap ALL math expressions in JSON-escaped LaTeX. You MUST double-escape every backslash for both the wrappers (e.g., '\\\\(' or '\\\\[') and ALL internal math commands to survive JSON parsing. MUST match 'THE SETUP' numbers exactly.")
     
     # EXISTING: Field for the Graph/Image URL
     image_url: Optional[str] = Field(None, description="URL of the generated image/graph. If you used the python tool to generate a graph, this will be populated.")
@@ -42,7 +42,7 @@ class QuizResponse(BaseModel):
     
     questions: List[QuizQuestion]
 
-    # 🟢 NEW: Ghost Prompt Payloads (The "Next Steps")
+    #  NEW: Ghost Prompt Payloads (The "Next Steps")
     easier_payload: str = Field(..., description="A specific user command to generate an EASIER version of this quiz. E.g., 'Hazme un quiz más fácil sobre [Topic]'.")
     harder_payload: str = Field(..., description="A specific user command to generate a HARDER/ADVANCED version of this quiz. E.g., 'Hazme un examen avanzado sobre [Topic]'.")
     retry_payload: str = Field(..., description="A specific user command to generate a NEW quiz on the SAME TOPIC and SAME DIFFICULTY. E.g., 'Dame otro quiz sobre [Topic]'.")
