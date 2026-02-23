@@ -117,8 +117,11 @@ def handle_generated_files(client, response_obj, folder: str = "chat_assets") ->
             try:
                 container_files = cf_client.list(container_id)
                 
-                # 🟢 FIX: Convert to list and sort chronologically (oldest first = graph 1)
+                # 🟢 FIX: Convert to list and explicitly REVERSE it (from LIFO to FIFO)
                 c_files_list = list(container_files)
+                c_files_list.reverse() # Reverses the OpenAI LIFO order so Graph 1 is at index 0
+                
+                # Optional: apply stable sort just in case timestamps are actually different
                 try:
                     c_files_list.sort(key=lambda x: getattr(x, "created_at", 0))
                 except Exception:
@@ -128,11 +131,9 @@ def handle_generated_files(client, response_obj, folder: str = "chat_assets") ->
                     fname = getattr(c_file, "filename", None) or getattr(c_file, "name", None)
                     fid = getattr(c_file, "id", None) or getattr(c_file, "file_id", None)
                     
-                    # 🟢 FIX: Provide a unique sequential name matching the AI's pattern
                     if not fname: 
                         fname = f"graph_{idx+1}.png"
                     
-                    # Double-check uniqueness to prevent dictionary overwrites
                     if fname in uploaded_urls_map:
                         fname = f"generated_{fid}.png"
 
