@@ -1,6 +1,7 @@
 # src/assistant/artifact_handler.py
 import logging
-from typing import List, Any
+import os
+from typing import List, Dict, Any
 from src.services.storage_service import storage_service
 from src.schemas.quiz_schemas import QuizResponse
 
@@ -17,8 +18,8 @@ def get_files_client(client):
         return getattr(client.containers, "files")
     return getattr(client, "container_files", None)
 
-def process_file(cf_client, container_id, file_id, filename, url_list, folder: str):
-    """Downloads content from OpenAI and uploads to AWS S3."""
+def process_file(cf_client, container_id, file_id, filename, url_dict: Dict[str, str], folder: str):
+    """Downloads content from OpenAI, uploads to AWS S3, and stores in dict by filename."""
     try:
         file_content = None
         if hasattr(cf_client, "content") and hasattr(cf_client.content, "retrieve"):
@@ -62,22 +63,26 @@ def process_file(cf_client, container_id, file_id, filename, url_list, folder: s
             ctype = "image/png"
             if not fname.endswith(".png"): 
                 filename = f"{filename}.png"
+                fname = filename.lower()
 
         # Upload using the existing storage service
         s3_url = storage_service.upload_image_from_bytes(file_content, ctype, folder=folder)
-        logger.info(f"✅ Asset uploaded to S3: {s3_url}")
-        url_list.append(s3_url)
+        logger.info(f"✅ Asset uploaded to S3: {s3_url} (Mapped to {fname})")
+        
+        # 🟢 FIX: Map the specific filename to its S3 URL
+        url_dict[fname] = s3_url
+        
     except Exception as e:
         logger.error(f"File transfer failed for {file_id}: {e}")
 
-def handle_generated_files(client, response_obj, folder: str = "chat_assets") -> List[str]:
-    """Scans the OpenAI response for generated files and uploads them."""
-    uploaded_urls = []
+def handle_generated_files(client, response_obj, folder: str = "chat_assets") -> Dict[str, str]:
+    """Scans the OpenAI response for generated files and uploads them. Returns a dict mapping filenames to URLs."""
+    uploaded_urls_map = {}
     container_id = None
     
     cf_client = get_files_client(client)
     if not cf_client: 
-        return []
+        return {}
 
     try:
         output_items = getattr(response_obj, "output", []) or []
@@ -105,10 +110,10 @@ def handle_generated_files(client, response_obj, folder: str = "chat_assets") ->
                                 file_id = getattr(ann, "file_id", None)
                                 fname = getattr(ann, "filename", "graph.png")
                                 if file_id: 
-                                    process_file(cf_client, container_id, file_id, fname, uploaded_urls, folder)
+                                    process_file(cf_client, container_id, file_id, fname, uploaded_urls_map, folder)
 
         # Fallback: List files in container if no direct citations found but container exists
-        if not uploaded_urls and container_id:
+        if not uploaded_urls_map and container_id:
             try:
                 container_files = cf_client.list(container_id)
                 for c_file in container_files:
@@ -117,22 +122,44 @@ def handle_generated_files(client, response_obj, folder: str = "chat_assets") ->
                     if not fname: 
                         fname = "generated_plot.png"
                     if fid: 
-                        process_file(cf_client, container_id, fid, fname, uploaded_urls, folder)
+                        process_file(cf_client, container_id, fid, fname, uploaded_urls_map, folder)
             except Exception: 
                 pass
     except Exception: 
         pass
     
-    return uploaded_urls
+    return uploaded_urls_map
 
-def assign_urls_to_quiz(quiz_data: QuizResponse, urls: List[str]):
-    """Maps generated image URLs to quiz questions."""
-    if not urls: 
+def assign_urls_to_quiz(quiz_data: QuizResponse, urls_map: Dict[str, str] | List[str]):
+    """Maps generated image URLs to quiz questions based on matching filenames."""
+    if not urls_map: 
         return
-    idx = 0
+        
+    # BACKWARD COMPATIBILITY: If a list is passed (from old code), convert to a generic dict
+    if isinstance(urls_map, list):
+        urls_map = {f"graph_{i+1}.png": url for i, url in enumerate(urls_map)}
+
+    # We need a list of available URLs as fallback if filename matching fails
+    fallback_urls = list(urls_map.values())
+    fallback_idx = 0
+
     for q in quiz_data.questions:
-        # Check if question needs an image (PENDING_UPLOAD) or has a local path
-        if q.image_url == "PENDING_UPLOAD" or (q.image_url and "/mnt/" in q.image_url) or (not q.image_url and idx < len(urls)):
-            if idx < len(urls):
-                q.image_url = urls[idx]
-                idx += 1
+        if not q.image_url:
+            continue
+            
+        # 🟢 FIX: Smart Matching Logic
+        if q.image_url == "PENDING_UPLOAD" or "/mnt/" in q.image_url:
+            
+            # 1. Try to extract the exact filename the AI hallucinated
+            target_filename = os.path.basename(q.image_url).lower()
+            
+            # 2. Try to match it directly in our dictionary
+            if target_filename in urls_map:
+                q.image_url = urls_map[target_filename]
+                logger.info(f"✅ Matched exactly: {target_filename} -> {q.image_url}")
+                
+            # 3. Fallback: If no exact match, grab the next available URL
+            elif fallback_idx < len(fallback_urls):
+                q.image_url = fallback_urls[fallback_idx]
+                logger.warning(f"⚠️ Exact match failed for {target_filename}. Using fallback URL.")
+                fallback_idx += 1
