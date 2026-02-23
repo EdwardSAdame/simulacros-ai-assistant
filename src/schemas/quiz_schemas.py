@@ -3,8 +3,8 @@ from pydantic import BaseModel, Field
 from typing import List, Optional
 
 class QuizOption(BaseModel):
-    # CRITICAL UPDATE: Enforce conceptual wrapper rules without hardcoded examples
-    text: str = Field(..., description="The answer text. STRICT FORMATTING: Any mathematical expression, number, equation, or coordinate MUST be strictly wrapped in double-escaped inline LaTeX delimiters. You must explicitly begin every math expression with the double-escaped opening delimiter and end it with the double-escaped closing delimiter. NEVER output raw LaTeX without these explicit wrapper delimiters.")
+    # 🟢 FIX: Added explicit examples for numbers and \infty, and forced \\( \\) delimiters
+    text: str = Field(..., description="The answer text. STRICT FORMATTING: EVERY single number, mathematical expression, equation, or symbol MUST be strictly wrapped in double-escaped inline LaTeX delimiters: \\\\( and \\\\). Example: instead of '0', output '\\\\( 0 \\\\)'. Instead of '-\\infty', output '\\\\( -\\\\infty \\\\)'. NEVER output plain text numbers or raw LaTeX for math options.")
     feedback: str = Field(..., description="Short feedback explaining why this option is right/wrong.")
 
 class QuizQuestion(BaseModel):
@@ -20,8 +20,8 @@ class QuizQuestion(BaseModel):
         "3. THE TRAPS: Identify 3 failure paths based on these specifics."
     ))
 
-    # CRITICAL UPDATE: Generalized JSON-safe formatting rules
-    question_text: str = Field(..., description="The question stem. STRICT FORMATTING: Wrap ALL math expressions in JSON-escaped LaTeX. You MUST double-escape every backslash for both the wrappers and ALL internal math commands to survive JSON parsing. MUST match 'THE SETUP' numbers exactly.")
+    #  FIX: Also updated the question_text to provide the literal delimiter examples
+    question_text: str = Field(..., description="The question stem. STRICT FORMATTING: Wrap ALL numbers, symbols, and math expressions in double-escaped LaTeX (\\\\( and \\\\)). You MUST double-escape every backslash. Example: '\\\\( -\\\\infty \\\\)' or '\\\\( 5 \\\\)'. MUST match 'THE SETUP' numbers exactly.")
     
     # EXISTING: Field for the Graph/Image URL
     image_url: Optional[str] = Field(None, description="URL of the generated image/graph. If you used the python tool to generate a graph, this will be populated.")
