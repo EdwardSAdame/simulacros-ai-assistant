@@ -23,10 +23,10 @@ class QuizService:
             f"   - **FORBIDDEN**: Do NOT use ASCII control codes.\n"
             f"   - **CHECK**: Verify the text is human-readable before outputting.\n"
             
-            # 🟢 UPDATED: Generalized JSON-Safe LaTeX Rule (No hardcoded examples)
+            #  CRITICAL UPDATE: Conceptual enforcement of wrappers without hardcoded examples
             f"2. **MATH SYNTAX (JSON-ESCAPED LATEX)**: You must format ALL mathematical expressions using LaTeX. However, because your output is being serialized into strict JSON, you must escape your backslashes.\n"
             f"   - **The Universal Rule**: EVERY single backslash used in ANY LaTeX command, symbol, or environment MUST be double-escaped so it survives the JSON parser.\n"
-            f"   - **Wrappers**: Use double-escaped parentheses for inline math, and double-escaped brackets for block math.\n"
+            f"   - **Wrappers (CRITICAL)**: You MUST wrap every math expression in double-escaped inline math delimiters (a double-escaped opening parenthesis and a double-escaped closing parenthesis). This is especially mandatory for the `options` array. NEVER output naked or raw LaTeX without explicitly including these opening and closing wrapper delimiters.\n"
             f"   - **Multiplication**: NEVER use the letter 'x' for multiplication. Always use the proper LaTeX multiplication symbol (double-escaped).\n\n"
             
             f"3. **LANGUAGE MIRRORING**: Analyze the language used in the user's request topic ('{topic}').\n"
