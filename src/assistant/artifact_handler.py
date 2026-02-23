@@ -69,7 +69,7 @@ def process_file(cf_client, container_id, file_id, filename, url_dict: Dict[str,
         s3_url = storage_service.upload_image_from_bytes(file_content, ctype, folder=folder)
         logger.info(f"✅ Asset uploaded to S3: {s3_url} (Mapped to {fname})")
         
-        # 🟢 FIX: Map the specific filename to its S3 URL
+        # Add to dictionary
         url_dict[fname] = s3_url
         
     except Exception as e:
@@ -116,11 +116,26 @@ def handle_generated_files(client, response_obj, folder: str = "chat_assets") ->
         if not uploaded_urls_map and container_id:
             try:
                 container_files = cf_client.list(container_id)
-                for c_file in container_files:
+                
+                # 🟢 FIX: Convert to list and sort chronologically (oldest first = graph 1)
+                c_files_list = list(container_files)
+                try:
+                    c_files_list.sort(key=lambda x: getattr(x, "created_at", 0))
+                except Exception:
+                    pass
+
+                for idx, c_file in enumerate(c_files_list):
                     fname = getattr(c_file, "filename", None) or getattr(c_file, "name", None)
                     fid = getattr(c_file, "id", None) or getattr(c_file, "file_id", None)
+                    
+                    # 🟢 FIX: Provide a unique sequential name matching the AI's pattern
                     if not fname: 
-                        fname = "generated_plot.png"
+                        fname = f"graph_{idx+1}.png"
+                    
+                    # Double-check uniqueness to prevent dictionary overwrites
+                    if fname in uploaded_urls_map:
+                        fname = f"generated_{fid}.png"
+
                     if fid: 
                         process_file(cf_client, container_id, fid, fname, uploaded_urls_map, folder)
             except Exception: 
@@ -135,11 +150,9 @@ def assign_urls_to_quiz(quiz_data: QuizResponse, urls_map: Dict[str, str] | List
     if not urls_map: 
         return
         
-    # BACKWARD COMPATIBILITY: If a list is passed (from old code), convert to a generic dict
     if isinstance(urls_map, list):
         urls_map = {f"graph_{i+1}.png": url for i, url in enumerate(urls_map)}
 
-    # We need a list of available URLs as fallback if filename matching fails
     fallback_urls = list(urls_map.values())
     fallback_idx = 0
 
@@ -147,18 +160,12 @@ def assign_urls_to_quiz(quiz_data: QuizResponse, urls_map: Dict[str, str] | List
         if not q.image_url:
             continue
             
-        # 🟢 FIX: Smart Matching Logic
         if q.image_url == "PENDING_UPLOAD" or "/mnt/" in q.image_url:
-            
-            # 1. Try to extract the exact filename the AI hallucinated
             target_filename = os.path.basename(q.image_url).lower()
             
-            # 2. Try to match it directly in our dictionary
             if target_filename in urls_map:
                 q.image_url = urls_map[target_filename]
                 logger.info(f"✅ Matched exactly: {target_filename} -> {q.image_url}")
-                
-            # 3. Fallback: If no exact match, grab the next available URL
             elif fallback_idx < len(fallback_urls):
                 q.image_url = fallback_urls[fallback_idx]
                 logger.warning(f"⚠️ Exact match failed for {target_filename}. Using fallback URL.")
