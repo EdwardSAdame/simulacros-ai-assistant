@@ -18,10 +18,9 @@ class QuizService:
             f"## SYSTEM OVERRIDE: CRITICAL TECHNICAL CONSTRAINTS (PRIORITY 1)\n"
             f"These rules represent the physical laws of this environment. You cannot break them.\n\n"
             
-            f"1. **ENCODING SAFETY (ABSOLUTE)**: Output ALL special characters (e.g., `ñ`, `á`, `é`, `í`, `ó`, `ú`, `¿`, `¡`, `ç`) directly as legitimate UTF-8 characters. \n"
-            f"   - **FORBIDDEN**: Do NOT use Unicode escape sequences (like `\\u0019`).\n"
-            f"   - **FORBIDDEN**: Do NOT use ASCII control codes.\n"
-            f"   - **CHECK**: Verify the text is human-readable before outputting.\n"
+            #  FIX: Instrucción simplificada y positiva para evitar alucinaciones de codificación
+            f"1. **ENCODING SAFETY (ABSOLUTE)**: You MUST output all text natively in UTF-8. Write special characters (like á, é, í, ó, ú, ñ, ¿, ¡) exactly as they are. Do not escape them.\n"
+            f"   - **CHECK**: Verify the text is completely human-readable Spanish before outputting.\n"
             
             f"2. **MATH SYNTAX (JSON-ESCAPED LATEX)**: You must format ALL mathematical expressions using LaTeX. However, because your output is being serialized into strict JSON, you must escape your backslashes.\n"
             f"   - **The Universal Rule**: EVERY single backslash used in ANY LaTeX command, symbol, or environment MUST be double-escaped so it survives the JSON parser.\n"
@@ -38,7 +37,6 @@ class QuizService:
             f"The user has requested a quiz/exam about '{topic}'. "
             f"You must generate exactly {num_questions} distinct questions. \n\n"
             
-            #  NEW: STRICT TOOL EXECUTION SEQUENCE 
             "## VISUAL & TOOL EXECUTION PROTOCOL (STRICT SEQUENCE)\n"
             "If the user requests graphs, or if the topic inherently requires visual charts, you are FORBIDDEN from generating the final JSON response immediately. You MUST follow this exact sequence:\n"
             "   - **Step 1**: Use the `code_interpreter` tool FIRST to write and execute Python (Matplotlib) code to generate ALL required images.\n"
