@@ -25,22 +25,28 @@ OPENAI_TOKEN_URL = "https://api.openai.com/v1/realtime/sessions"
 def handler(event, context):
     """
     Handles a 'request_token' action by generating an ephemeral OpenAI
-    Realtime session token with LIGHTNING FAST settings.
+    Realtime session token. Supports 'transcription' and 'language_tutor' modes.
     """
     connection_id = event.get('requestContext', {}).get('connectionId')
     if not connection_id:
         logger.error("No connectionId in event")
         return {'statusCode': 400}
 
-    logger.info(f"Received token request from {connection_id}")
-
     try:
-        # 1. Get OpenAI API Key
-        api_key = settings.OPENAI_API_KEY
+        # 1. Parse the incoming body to determine the mode
+        body_str = event.get('body', '{}')
+        try:
+            body_data = json.loads(body_str)
+        except json.JSONDecodeError:
+            body_data = {}
+            
+        # Default to "transcription" to protect existing functionality
+        mode = body_data.get('mode', 'transcription')
         
-        # Use the preview model for best performance
-        model_name = "gpt-4o-realtime-preview-2024-10-01" 
+        logger.info(f"Received token request from {connection_id} for mode: {mode}")
 
+        # 2. Get OpenAI API Key
+        api_key = settings.OPENAI_API_KEY
         if not api_key:
             raise ValueError("OPENAI_API_KEY not configured in backend")
 
@@ -49,41 +55,52 @@ def handler(event, context):
             "Content-Type": "application/json"
         }
         
-        # 2. Define the session payload
-        payload = {
-            "model": model_name,
-            "modalities": ["audio", "text"],
-            
-            # Instructions help mitigate fragmentation by forcing context awareness
-            "instructions": (
-                "You are a professional transcriber. "
-                "Transcribe the user's speech accurately and quickly. "
-                "If the audio is a fragment, do your best to punctuate it logically."
-            ),
-            
-            # --- LIGHTNING FAST CONFIGURATION ---
-            "turn_detection": {
-                "type": "server_vad",
-                
-                # 0.5 is more sensitive. It keeps the turn alive during soft speech/short pauses.
-                "threshold": 0.5,
-                
-                # 1000ms buffer ensures the FIRST word (e.g., "Roma") is never lost.
-                # This does NOT slow down the response; it just sends more past audio.
-                "prefix_padding_ms": 1000,
-                
-                # 500ms wait time. 
-                # This makes the AI respond INSTANTLY (0.5s) after you stop speaking.
-                # TRADE-OFF: You must speak fluidly. If you pause > 0.5s, it will cut you off.
-                "silence_duration_ms": 500   
-            },
-            "input_audio_format": "pcm16",
-            "input_audio_transcription": {
-                "model": "whisper-1"
+        # 3. Dynamically build the payload based on the mode
+        if mode == "language_tutor":
+            # --- SPEECH-TO-SPEECH (LANGUAGE TUTOR) ---
+            payload = {
+                "model": "gpt-4o-realtime-preview-2024-12-17",  # Newer model recommended for voice agents
+                "modalities": ["audio", "text"],
+                "voice": "alloy",  # The AI must have a voice to speak back
+                "instructions": (
+                    "You are a friendly, encouraging language tutor. "
+                    "Help the user practice speaking a foreign language. "
+                    "Respond conversationally, correct major mistakes gently, and keep your answers concise to encourage the user to speak more. "
+                    "If they ask you to speak in a specific language, seamlessly switch to that language."
+                ),
+                "turn_detection": {
+                    "type": "server_vad",
+                    "threshold": 0.5,
+                    "prefix_padding_ms": 1000,
+                    "silence_duration_ms": 800  # 800ms gives language learners time to think
+                },
+                "input_audio_format": "pcm16",
+                "output_audio_format": "pcm16"
             }
-        }
+        else:
+            # --- TRANSCRIPTION (LEGACY / DEFAULT) ---
+            # Kept exactly as your original code
+            payload = {
+                "model": "gpt-4o-realtime-preview-2024-10-01",
+                "modalities": ["audio", "text"],
+                "instructions": (
+                    "You are a professional transcriber. "
+                    "Transcribe the user's speech accurately and quickly. "
+                    "If the audio is a fragment, do your best to punctuate it logically."
+                ),
+                "turn_detection": {
+                    "type": "server_vad",
+                    "threshold": 0.5,
+                    "prefix_padding_ms": 1000,
+                    "silence_duration_ms": 500   
+                },
+                "input_audio_format": "pcm16",
+                "input_audio_transcription": {
+                    "model": "whisper-1"
+                }
+            }
 
-        # 3. Make the POST request to OpenAI
+        # 4. Make the POST request to OpenAI
         response = requests.post(OPENAI_TOKEN_URL, headers=headers, json=payload)
         
         if response.status_code != 200:
@@ -92,18 +109,21 @@ def handler(event, context):
         
         data = response.json()
         
-        # Extract client_secret
-        client_secret = data.get("client_secret", {}).get("value")
-        if not client_secret:
-            client_secret = data.get("client_secret")
+        # 5. Extract client_secret safely
+        client_secret_data = data.get("client_secret", {})
+        if isinstance(client_secret_data, dict):
+            client_secret = client_secret_data.get("value")
+        else:
+            client_secret = client_secret_data
 
         if not client_secret:
             raise ValueError("OpenAI did not return a client_secret")
 
-        # 4. Send the token back to the frontend
+        # 6. Send the token back to the frontend
         response_data = {
             "action": "session_token",
-            "token": client_secret
+            "token": client_secret,
+            "mode": mode  # Return the mode so frontend knows the setup
         }
         
         apigw_management_client.post_to_connection(
@@ -111,7 +131,7 @@ def handler(event, context):
             Data=json.dumps(response_data)
         )
         
-        return {'statusCode': 200, 'body': 'Token generated.'}
+        return {'statusCode': 200, 'body': f'Token generated for mode: {mode}.'}
 
     except Exception as e:
         logger.error(f"Internal error: {e}", exc_info=True)
