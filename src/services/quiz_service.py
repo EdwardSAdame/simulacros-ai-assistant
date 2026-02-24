@@ -18,14 +18,13 @@ class QuizService:
             f"## SYSTEM OVERRIDE: CRITICAL TECHNICAL CONSTRAINTS (PRIORITY 1)\n"
             f"These rules represent the physical laws of this environment. You cannot break them.\n\n"
             
-            #  FIX: Instrucción simplificada y positiva para evitar alucinaciones de codificación
             f"1. **ENCODING SAFETY (ABSOLUTE)**: You MUST output all text natively in UTF-8. Write special characters (like á, é, í, ó, ú, ñ, ¿, ¡) exactly as they are. Do not escape them.\n"
             f"   - **CHECK**: Verify the text is completely human-readable Spanish before outputting.\n"
             
-            f"2. **MATH SYNTAX (JSON-ESCAPED LATEX)**: You must format ALL mathematical expressions using LaTeX. However, because your output is being serialized into strict JSON, you must escape your backslashes.\n"
-            f"   - **The Universal Rule**: EVERY single backslash used in ANY LaTeX command, symbol, or environment MUST be double-escaped so it survives the JSON parser.\n"
-            f"   - **Wrappers (CRITICAL)**: You MUST wrap every math expression in double-escaped inline math delimiters (a double-escaped opening parenthesis and a double-escaped closing parenthesis). This is especially mandatory for the `options` array. NEVER output naked or raw LaTeX without explicitly including these opening and closing wrapper delimiters.\n"
-            f"   - **Multiplication**: NEVER use the letter 'x' for multiplication. Always use the proper LaTeX multiplication symbol (double-escaped).\n\n"
+            # 🟢 FIX: Stripped out the double-escape contradiction. Aligned perfectly with schemas and system prompts.
+            f"2. **MATH SYNTAX**: You must format ALL mathematical expressions using standard LaTeX.\n"
+            f"   - **Wrappers**: You MUST wrap every math expression in standard inline math delimiters: \\( and \\). NEVER output naked or raw LaTeX for math options.\n"
+            f"   - **Multiplication**: NEVER use the letter 'x' for multiplication. Always use the proper LaTeX multiplication symbol.\n\n"
             
             f"3. **LANGUAGE MIRRORING**: Analyze the language used in the user's request topic ('{topic}').\n"
             f"   - If Spanish -> Output 100% Spanish (Colombia).\n"
