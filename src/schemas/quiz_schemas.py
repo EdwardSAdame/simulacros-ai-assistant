@@ -3,8 +3,8 @@ from pydantic import BaseModel, Field
 from typing import List, Optional
 
 class QuizOption(BaseModel):
-    #  FIX: Added conditional instructions to differentiate between text and math
-    text: str = Field(..., description="The answer text. FORMATTING RULES: 1. If the answer is just words/text, write normally WITHOUT delimiters (e.g., 'La biomasa disminuye'). 2. If the answer is a number, equation, or symbol, wrap it in double-escaped LaTeX delimiters \\\\( and \\\\). Example: '\\\\( -\\\\infty \\\\)' or '\\\\( 0 \\\\)'. 3. If it's mixed, wrap ONLY the math: 'El valor es \\\\( 5 \\\\)'. DO NOT wrap plain text sentences in math delimiters.")
+    # FIX: Removed double-escape instruction. Now requests standard LaTeX.
+    text: str = Field(..., description="The answer text. FORMATTING RULES: 1. If the answer is just words/text, write normally WITHOUT delimiters (e.g., 'La biomasa disminuye'). 2. If the answer is a number, equation, or symbol, wrap it in standard LaTeX delimiters \\( and \\). Example: '\\( -\\infty \\)' or '\\( 0 \\)'. 3. Mixed: 'El valor es \\( 5 \\)'. DO NOT double-escape backslashes.")
     feedback: str = Field(..., description="Short feedback explaining why this option is right/wrong.")
 
 class QuizQuestion(BaseModel):
@@ -20,8 +20,8 @@ class QuizQuestion(BaseModel):
         "3. THE TRAPS: Identify 3 failure paths based on these specifics."
     ))
 
-    #  FIX: Aligned question_text with the new conditional formatting rules
-    question_text: str = Field(..., description="The question stem. FORMATTING: Write regular text normally. Wrap ONLY math expressions, numbers, and symbols in double-escaped LaTeX (\\\\( and \\\\)). Example: 'Si \\\\( x = 5 \\\\), ¿qué sucede?'. MUST match 'THE SETUP' numbers exactly.")
+    # FIX: Standard LaTeX delimiters
+    question_text: str = Field(..., description="The question stem. FORMATTING: Write regular text normally. Wrap ONLY math expressions, numbers, and symbols in standard LaTeX (\\( and \\)). Example: 'Si \\( x = 5 \\), que sucede?'. MUST match 'THE SETUP' numbers exactly.")
     
     # EXISTING: Field for the Graph/Image URL
     image_url: Optional[str] = Field(None, description="URL of the generated image/graph. If you used the python tool to generate a graph, this will be populated.")
@@ -38,6 +38,6 @@ class QuizResponse(BaseModel):
     question_count: int = Field(..., description="The total number of questions generated in this quiz.")
     questions: List[QuizQuestion]
 
-    easier_payload: str = Field(..., description="A specific user command to generate an EASIER version of this quiz. E.g., 'Hazme un quiz más fácil sobre [Topic]'.")
+    easier_payload: str = Field(..., description="A specific user command to generate an EASIER version of this quiz. E.g., 'Hazme un quiz mas facil sobre [Topic]'.")
     harder_payload: str = Field(..., description="A specific user command to generate a HARDER/ADVANCED version of this quiz. E.g., 'Hazme un examen avanzado sobre [Topic]'.")
     retry_payload: str = Field(..., description="A specific user command to generate a NEW quiz on the SAME TOPIC and SAME DIFFICULTY. E.g., 'Dame otro quiz sobre [Topic]'.")
