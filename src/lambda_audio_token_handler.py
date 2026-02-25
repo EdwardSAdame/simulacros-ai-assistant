@@ -4,48 +4,41 @@ import boto3
 import os
 import requests
 from src.config.settings import settings
+from src.config.audio_config import AUDIO_PROFILES  # 🟢 IMPORT OUR NEW CONFIG
 
 # Set up logging
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
-# Get API Gateway endpoint URL from environment variables
 APIGW_ENDPOINT_URL = os.environ.get('APIGW_AUDIO_ENDPOINT_URL')
-if not APIGW_ENDPOINT_URL:
+if APIGW_ENDPOINT_URL:
+    apigw_management_client = boto3.client('apigatewaymanagementapi', endpoint_url=APIGW_ENDPOINT_URL)
+else:
     logger.error("Missing APIGW_AUDIO_ENDPOINT_URL environment variable!")
-    
-apigw_management_client = boto3.client(
-    'apigatewaymanagementapi',
-    endpoint_url=APIGW_ENDPOINT_URL
-)
 
-# Standard Realtime Sessions endpoint
 OPENAI_TOKEN_URL = "https://api.openai.com/v1/realtime/sessions"
 
 def handler(event, context):
-    """
-    Handles a 'request_token' action by generating an ephemeral OpenAI
-    Realtime session token. Supports 'transcription' and 'language_tutor' modes.
-    """
     connection_id = event.get('requestContext', {}).get('connectionId')
     if not connection_id:
         logger.error("No connectionId in event")
         return {'statusCode': 400}
 
     try:
-        # 1. Parse the incoming body to determine the mode
+        # 1. Parse Mode
         body_str = event.get('body', '{}')
         try:
             body_data = json.loads(body_str)
         except json.JSONDecodeError:
             body_data = {}
             
-        # Default to "transcription" to protect existing functionality
         mode = body_data.get('mode', 'transcription')
+        
+        # 🟢 Fallback to transcription if an unknown mode is requested
+        profile = AUDIO_PROFILES.get(mode, AUDIO_PROFILES['transcription'])
         
         logger.info(f"Received token request from {connection_id} for mode: {mode}")
 
-        # 2. Get OpenAI API Key
         api_key = settings.OPENAI_API_KEY
         if not api_key:
             raise ValueError("OPENAI_API_KEY not configured in backend")
@@ -55,52 +48,32 @@ def handler(event, context):
             "Content-Type": "application/json"
         }
         
-        # 3. Dynamically build the payload based on the mode
-        if mode == "language_tutor":
-            # --- SPEECH-TO-SPEECH (LANGUAGE TUTOR) ---
-            payload = {
-                "model": "gpt-4o-realtime-preview-2024-12-17",  # Newer model recommended for voice agents
-                "modalities": ["audio", "text"],
-                "voice": "alloy",  # The AI must have a voice to speak back
-                "instructions": (
-                    "You are a friendly, encouraging language tutor. "
-                    "Help the user practice speaking a foreign language. "
-                    "Respond conversationally, correct major mistakes gently, and keep your answers concise to encourage the user to speak more. "
-                    "If they ask you to speak in a specific language, seamlessly switch to that language."
-                ),
-                "turn_detection": {
-                    "type": "server_vad",
-                    "threshold": 0.5,
-                    "prefix_padding_ms": 1000,
-                    "silence_duration_ms": 800  # 800ms gives language learners time to think
-                },
-                "input_audio_format": "pcm16",
-                "output_audio_format": "pcm16"
-            }
-        else:
-            # --- TRANSCRIPTION (LEGACY / DEFAULT) ---
-            # Kept exactly as your original code
-            payload = {
-                "model": "gpt-4o-realtime-preview-2024-10-01",
-                "modalities": ["audio", "text"],
-                "instructions": (
-                    "You are a professional transcriber. "
-                    "Transcribe the user's speech accurately and quickly. "
-                    "If the audio is a fragment, do your best to punctuate it logically."
-                ),
-                "turn_detection": {
-                    "type": "server_vad",
-                    "threshold": 0.5,
-                    "prefix_padding_ms": 1000,
-                    "silence_duration_ms": 500   
-                },
-                "input_audio_format": "pcm16",
-                "input_audio_transcription": {
-                    "model": "whisper-1"
-                }
+        # 2. Build Base Payload Dynamically from the Profile
+        payload = {
+            "model": profile["model"],
+            "modalities": ["audio", "text"],
+            "instructions": profile["instructions"],
+            "turn_detection": {
+                "type": "server_vad",
+                "threshold": 0.5,
+                "prefix_padding_ms": 1000,
+                "silence_duration_ms": profile["silence_duration_ms"]
+            },
+            "input_audio_format": "pcm16"
+        }
+
+        # 3. Add Voice/Speech Output properties if applicable
+        if profile.get("voice"):
+            payload["voice"] = profile["voice"]
+            payload["output_audio_format"] = "pcm16"
+            
+        # 4. Add Transcription model if this is strictly a transcriber
+        if profile.get("requires_transcription_model"):
+            payload["input_audio_transcription"] = {
+                "model": "whisper-1"
             }
 
-        # 4. Make the POST request to OpenAI
+        # 5. Request Token
         response = requests.post(OPENAI_TOKEN_URL, headers=headers, json=payload)
         
         if response.status_code != 200:
@@ -108,22 +81,17 @@ def handler(event, context):
             raise ValueError(f"OpenAI returned status {response.status_code}")
         
         data = response.json()
-        
-        # 5. Extract client_secret safely
         client_secret_data = data.get("client_secret", {})
-        if isinstance(client_secret_data, dict):
-            client_secret = client_secret_data.get("value")
-        else:
-            client_secret = client_secret_data
+        client_secret = client_secret_data.get("value") if isinstance(client_secret_data, dict) else client_secret_data
 
         if not client_secret:
             raise ValueError("OpenAI did not return a client_secret")
 
-        # 6. Send the token back to the frontend
+        # 6. Send Token to Frontend
         response_data = {
             "action": "session_token",
             "token": client_secret,
-            "mode": mode  # Return the mode so frontend knows the setup
+            "mode": mode
         }
         
         apigw_management_client.post_to_connection(

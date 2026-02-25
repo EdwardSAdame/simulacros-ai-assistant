@@ -40,6 +40,10 @@ class Settings:
         # --- OpenAI Models ---
         self.OPENAI_AUDIO_MODEL: str = os.getenv("OPENAI_AUDIO_MODEL", "gpt-4o-mini-transcribe")
         
+        # 🟢 NEW: --- Realtime Audio (WebRTC) ---
+        self.OPENAI_REALTIME_MODEL: str = os.getenv("OPENAI_REALTIME_MODEL", "gpt-4o-realtime-preview-2024-12-17")
+        self.OPENAI_REALTIME_VOICE: str = os.getenv("OPENAI_REALTIME_VOICE", "alloy")
+        
         # 🔹 Router Model Configuration 🔹
         self.OPENAI_ROUTER_MODEL: str = os.getenv("OPENAI_MODEL_ROUTER", "gpt-4o-mini")
         self.OPENAI_ROUTER_EFFORT: str = os.getenv("OPENAI_REASONING_EFFORT_ROUTER", "low")
