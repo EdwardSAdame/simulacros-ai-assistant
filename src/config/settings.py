@@ -40,11 +40,27 @@ class Settings:
         # --- OpenAI Models ---
         self.OPENAI_AUDIO_MODEL: str = os.getenv("OPENAI_AUDIO_MODEL", "gpt-4o-mini-transcribe")
         
-        # 🟢 NEW: --- Realtime Audio (WebRTC) ---
-        self.OPENAI_REALTIME_MODEL: str = os.getenv("OPENAI_REALTIME_MODEL", "gpt-4o-realtime-preview-2024-12-17")
-        self.OPENAI_REALTIME_VOICE: str = os.getenv("OPENAI_REALTIME_VOICE", "alloy")
+        # =======================================================
+        # OPENAI REALTIME: TRANSCRIPTION MODE (Speech-to-Text)
+        # =======================================================
+        self.OPENAI_REALTIME_TRANSCRIPTION_MODEL: str = os.getenv(
+            "OPENAI_REALTIME_TRANSCRIPTION_MODEL", 
+            "gpt-4o-realtime-preview-2024-10-01"
+        )
         
-        # 🔹 Router Model Configuration 🔹
+        # =======================================================
+        # OPENAI REALTIME: TUTOR MODE (Speech-to-Speech)
+        # =======================================================
+        self.OPENAI_REALTIME_MODEL: str = os.getenv(
+            "OPENAI_REALTIME_MODEL", 
+            "gpt-4o-realtime-preview-2024-12-17"
+        )
+        self.OPENAI_REALTIME_VOICE: str = os.getenv(
+            "OPENAI_REALTIME_VOICE", 
+            "marin"
+        )
+        
+        # Router Model Configuration 
         self.OPENAI_ROUTER_MODEL: str = os.getenv("OPENAI_MODEL_ROUTER", "gpt-4o-mini")
         self.OPENAI_ROUTER_EFFORT: str = os.getenv("OPENAI_REASONING_EFFORT_ROUTER", "low")
         
@@ -63,7 +79,7 @@ class Settings:
             logger.warning("OPENAI_TOP_P_ROUTER in .env is not a valid float. Defaulting to 1.0.")
             self.OPENAI_ROUTER_TOP_P: float = 1.0
 
-        # 🟢 NEW: Web Search Toggle
+        # Web Search Toggle
         # Default is True (Strict) for safety. Set to "false" in AWS to open the web.
         strict_mode = os.getenv("WEB_SEARCH_STRICT_MODE", "true").lower()
         self.WEB_SEARCH_STRICT_MODE: bool = strict_mode == "true"
@@ -75,6 +91,7 @@ class Settings:
 
     def get_vector_search_max_results(self) -> int:
         return self.VECTOR_SEARCH_MAX_RESULTS
+
 
 settings = Settings()
 

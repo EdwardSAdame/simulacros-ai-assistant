@@ -8,7 +8,7 @@ Each key represents a 'mode' requested by the frontend.
 
 AUDIO_PROFILES = {
     "transcription": {
-        "model": "gpt-4o-realtime-preview-2024-10-01",
+        "model": settings.OPENAI_REALTIME_TRANSCRIPTION_MODEL,
         "voice": None,
         "instructions": (
             "You are a professional transcriber. "
