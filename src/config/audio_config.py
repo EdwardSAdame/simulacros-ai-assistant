@@ -1,4 +1,3 @@
-# src/config/audio_config.py
 from src.config.settings import settings
 
 """
@@ -17,6 +16,7 @@ AUDIO_PROFILES = {
             "CRITICAL: Ensure the following terms and acronyms are spelled correctly if spoken: icfes, unal, preicfes, preunal."
         ),
         "silence_duration_ms": 500,
+        "vad_threshold": 0.5,
         "requires_transcription_model": True
     },
     
@@ -49,6 +49,7 @@ AUDIO_PROFILES = {
             "- Never sound like you are reading from a textbook. Sound alive, sharp, and ready for whatever they throw at you."
         ),
         "silence_duration_ms": 800,
+        "vad_threshold": 0.8,
         "requires_transcription_model": False
     }
 }
