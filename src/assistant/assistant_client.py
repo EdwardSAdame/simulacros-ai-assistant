@@ -74,8 +74,11 @@ def send_message_to_assistant(
             text = re.sub(r'\[.*?\]\(sandbox:/mnt/data/.*?\)', '', text).strip()
 
         # 6. Process Artifacts & Sources (Delegated)
-        generated_urls = handle_generated_files(client, resp, folder="chat_assets")
+        generated_urls_map = handle_generated_files(client, resp, folder="chat_assets")
         sources_list = extract_sources(resp)
+
+        # Extract only the S3 URLs (values) from the dictionary and convert to a list
+        generated_urls = list(generated_urls_map.values()) if isinstance(generated_urls_map, dict) else generated_urls_map
 
         return (text or "[No response]", generated_urls, sources_list)
     except Exception as e:
