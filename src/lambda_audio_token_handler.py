@@ -1,3 +1,5 @@
+# src/lambda_audio_token_handler.py
+
 import json
 import logging
 import boto3
@@ -54,7 +56,7 @@ def handler(event, context):
             "turn_detection": {
                 "type": "server_vad",
                 "threshold": profile.get("vad_threshold", 0.5),
-                "prefix_padding_ms": 1000,
+                "prefix_padding_ms": 300, # Fixed: Lowered from 1000 to 300 to prevent echo drag
                 "silence_duration_ms": profile["silence_duration_ms"]
             },
             "input_audio_format": "pcm16"
