@@ -52,6 +52,6 @@ AUDIO_PROFILES = {
         ),
         "silence_duration_ms": 1000, # Increased to 1 second to allow the user to pause and think
         "vad_threshold": 0.9,        # Increased to 0.9 to strictly ignore background noise
-        "requires_transcription_model": False
+        "requires_transcription_model": True
     }
 }
