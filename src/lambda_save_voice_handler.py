@@ -59,7 +59,8 @@ def handler(event, context):
                     email=None,
                     title="Voice Conversation", # Default title for new voice chats
                     page="/",
-                    conversation_id=conversation_id
+                    conversation_id=conversation_id,
+                    channel="voice" # 🔹 Pass the channel flag to the new conversation header
                 )
 
         return {'statusCode': 200, 'body': 'Voice message saved successfully'}

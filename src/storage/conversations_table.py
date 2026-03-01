@@ -56,7 +56,8 @@ def save_conversation(
     page: str,
     conversation_id: Optional[str] = None, # Allow passing an existing ID
     arena_id: Optional[str] = None,        # Link to an Arena
-    ai_mode: str = "omega"                 # 🔹 Persist the selected mode
+    ai_mode: str = "omega",                # 🔹 Persist the selected mode
+    channel: str = "text"                  # 🔹 NEW: Distinguish text vs voice chats
 ) -> Dict[str, Any]:
     """
     Creates a new conversation record in DynamoDB.
@@ -85,7 +86,8 @@ def save_conversation(
         "IsPinned": False, # Default to false
         "ArenaId": arena_id,
         "LastUpdated": timestamp, # Initialize LastUpdated same as creation
-        "AiMode": ai_mode         # 🔹 Save the mode
+        "AiMode": ai_mode,        # 🔹 Save the mode
+        "Channel": channel        # 🔹 NEW: Save the channel (text, voice)
     }
 
     # Clean up (removes empty email, empty arena_id, etc.)
@@ -93,7 +95,7 @@ def save_conversation(
 
     try:
         table.put_item(Item=safe_item)
-        print(f"Conversation saved: {conversation_id} (Arena: {arena_id}, Mode: {ai_mode})")
+        print(f"Conversation saved: {conversation_id} (Arena: {arena_id}, Mode: {ai_mode}, Channel: {channel})")
     except Exception as e:
         print(f"Error saving conversation: {e}")
         raise e
@@ -103,7 +105,8 @@ def save_conversation(
         "Timestamp": timestamp,
         "Title": title,
         "ArenaId": arena_id,
-        "AiMode": ai_mode
+        "AiMode": ai_mode,
+        "Channel": channel
     }
 
 def update_conversation_last_active(user_id: str, conversation_id: str):
@@ -144,8 +147,8 @@ def get_conversations_for_user(
         '#n': 'Name'
     }
     
-    # 🔹 Added AiMode to the projection expression
-    projection_expression = "ConversationId, Title, #ts, IsPinned, #n, Page, ArenaId, LastUpdated, AiMode"
+    # 🔹 Added Channel to the projection expression
+    projection_expression = "ConversationId, Title, #ts, IsPinned, #n, Page, ArenaId, LastUpdated, AiMode, Channel"
 
     try:
         response = table.query(
@@ -209,7 +212,7 @@ def update_conversation_pin(user_id: str, conversation_id: str, is_pinned: bool)
 
 def get_conversation_metadata(user_id: str, conversation_id: str) -> Optional[Dict[str, Any]]:
     """
-    Fetches basic metadata (Title, ArenaId, AiMode) for a conversation.
+    Fetches basic metadata (Title, ArenaId, AiMode, Channel) for a conversation.
     """
     timestamp = _find_conversation_timestamp(user_id, conversation_id)
     if not timestamp:
@@ -218,7 +221,7 @@ def get_conversation_metadata(user_id: str, conversation_id: str) -> Optional[Di
     try:
         response = table.get_item(
             Key={'UserId': user_id, 'Timestamp': timestamp},
-            ProjectionExpression="ConversationId, Title, ArenaId, AiMode"
+            ProjectionExpression="ConversationId, Title, ArenaId, AiMode, Channel"
         )
         return response.get('Item')
     except Exception as e:
