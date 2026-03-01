@@ -1,3 +1,5 @@
+# .github/workflows/deploy_lambda.yml
+
 name: Deploy Roma Chatbot Functions to AWS
 
 on:
@@ -53,8 +55,11 @@ jobs:
           # ManageConversationsHandler
           cp src/lambda_manage_conversations_handler.py package/
           
-          # ArenasHandler (NEW)
+          # ArenasHandler 
           cp src/lambda_arenas_handler.py package/
+
+          # Save Voice Messages Handler (NEW)
+          cp src/lambda_save_voice_handler.py package/
 
           # Zip the contents of the package directory
           cd package
@@ -162,6 +167,13 @@ jobs:
         run: |
           aws lambda update-function-code \
             --function-name ${{ vars.LAMBDA_ARENAS_HANDLER_NAME }} \
+            --zip-file fileb://deployment.zip \
+            --region ${{ vars.AWS_REGION }}
+
+      - name: Deploy SaveVoiceHandler
+        run: |
+          aws lambda update-function-code \
+            --function-name ${{ vars.LAMBDA_SAVE_VOICE_HANDLER_NAME }} \
             --zip-file fileb://deployment.zip \
             --region ${{ vars.AWS_REGION }}
 
