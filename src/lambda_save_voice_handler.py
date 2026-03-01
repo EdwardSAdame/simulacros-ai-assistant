@@ -3,7 +3,11 @@
 import json
 import logging
 from src.storage.messages_table import save_message
-from src.storage.conversations_table import update_conversation_last_active
+from src.storage.conversations_table import (
+    update_conversation_last_active,
+    get_conversation_metadata,
+    save_conversation
+)
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
@@ -19,7 +23,7 @@ def handler(event, context):
         role = body.get('role')
         text = body.get('text')
         channel = body.get('channel', 'voice')
-        user_id = body.get('userId') # Good practice to pass this for the update
+        user_id = body.get('userId') 
 
         # 3. Validate required fields
         if not conversation_id or not role or not text:
@@ -38,9 +42,25 @@ def handler(event, context):
             metadata=metadata
         )
 
-        # 5. Bump the conversation to the top of the history list
+        # 5. Handle the Conversation Header (History List)
         if user_id:
-            update_conversation_last_active(user_id=user_id, conversation_id=conversation_id)
+            # Check if the conversation already exists
+            existing_meta = get_conversation_metadata(user_id=user_id, conversation_id=conversation_id)
+            
+            if existing_meta:
+                # It exists! Just bump it to the top of the list
+                update_conversation_last_active(user_id=user_id, conversation_id=conversation_id)
+            else:
+                # It doesn't exist! Create a new header row so it shows up in the UI
+                logger.info(f"Creating new conversation header for orphaned voice chat: {conversation_id}")
+                save_conversation(
+                    user_id=user_id,
+                    name="User", # Fallback name, you can adjust if you pass name in payload
+                    email=None,
+                    title="Voice Conversation", # Default title for new voice chats
+                    page="/",
+                    conversation_id=conversation_id
+                )
 
         return {'statusCode': 200, 'body': 'Voice message saved successfully'}
 
