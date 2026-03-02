@@ -24,6 +24,13 @@ def handler(event, context):
         text = body.get('text')
         channel = body.get('channel', 'voice')
         user_id = body.get('userId') 
+        
+        # 🟢 Extract the new frontend profile fields
+        user_name = body.get('name', 'Guest')
+        user_email = body.get('email', None)
+        user_page = body.get('page', '/')
+        ai_mode = body.get('mode', 'omega')
+        arena_id = body.get('arenaId', None)
 
         # 3. Validate required fields
         if not conversation_id or not role or not text:
@@ -51,16 +58,18 @@ def handler(event, context):
                 # It exists! Just bump it to the top of the list
                 update_conversation_last_active(user_id=user_id, conversation_id=conversation_id)
             else:
-                # It doesn't exist! Create a new header row so it shows up in the UI
+                # It doesn't exist! Create a new header row using the REAL user data
                 logger.info(f"Creating new conversation header for orphaned voice chat: {conversation_id}")
                 save_conversation(
                     user_id=user_id,
-                    name="User", # Fallback name, you can adjust if you pass name in payload
-                    email=None,
-                    title="Voice Conversation", # Default title for new voice chats
-                    page="/",
+                    name=user_name,       # 🟢 Real Name
+                    email=user_email,     # 🟢 Real Email
+                    title="Voice Conversation", 
+                    page=user_page,       # 🟢 Real URL
                     conversation_id=conversation_id,
-                    channel="voice" # 🔹 Pass the channel flag to the new conversation header
+                    arena_id=arena_id,    # 🟢 Real Arena ID (if any)
+                    ai_mode=ai_mode,      # 🟢 Real Mode (e.g. 'omega')
+                    channel="voice" 
                 )
 
         return {'statusCode': 200, 'body': 'Voice message saved successfully'}
