@@ -25,7 +25,7 @@ def handler(event, context):
         channel = body.get('channel', 'voice')
         user_id = body.get('userId') 
         
-        # 🟢 Extract the new frontend profile fields
+        # Extract the frontend profile fields
         user_name = body.get('name', 'Guest')
         user_email = body.get('email', None)
         user_page = body.get('page', '/')
@@ -58,16 +58,19 @@ def handler(event, context):
                 # It exists! Just bump it to the top of the list
                 update_conversation_last_active(user_id=user_id, conversation_id=conversation_id)
             else:
-                # 🟢 THE FIX: Only allow the 'user' payload to create the header.
-                # This guarantees that even if Lambda A and Lambda B run at the exact same millisecond,
-                # only one of them will ever create the database row.
+                # Only allow the 'user' payload to create the header to prevent race duplicates
                 if role == 'user':
-                    logger.info(f"Creating new conversation header for orphaned voice chat: {conversation_id}")
+                    
+                    # 🟢 THE FIX: Dynamically generate the title from the first spoken sentence
+                    dynamic_title = text[:40] + ("..." if len(text) > 40 else "")
+                    
+                    logger.info(f"Creating new conversation header: {conversation_id} with title: {dynamic_title}")
+                    
                     save_conversation(
                         user_id=user_id,
                         name=user_name,       
                         email=user_email,     
-                        title="Voice Conversation", 
+                        title=dynamic_title,  # 🟢 Use the dynamic title here!
                         page=user_page,       
                         conversation_id=conversation_id,
                         arena_id=arena_id,    
