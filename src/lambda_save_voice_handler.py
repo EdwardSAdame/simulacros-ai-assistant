@@ -58,19 +58,24 @@ def handler(event, context):
                 # It exists! Just bump it to the top of the list
                 update_conversation_last_active(user_id=user_id, conversation_id=conversation_id)
             else:
-                # It doesn't exist! Create a new header row using the REAL user data
-                logger.info(f"Creating new conversation header for orphaned voice chat: {conversation_id}")
-                save_conversation(
-                    user_id=user_id,
-                    name=user_name,       # 🟢 Real Name
-                    email=user_email,     # 🟢 Real Email
-                    title="Voice Conversation", 
-                    page=user_page,       # 🟢 Real URL
-                    conversation_id=conversation_id,
-                    arena_id=arena_id,    # 🟢 Real Arena ID (if any)
-                    ai_mode=ai_mode,      # 🟢 Real Mode (e.g. 'omega')
-                    channel="voice" 
-                )
+                # 🟢 THE FIX: Only allow the 'user' payload to create the header.
+                # This guarantees that even if Lambda A and Lambda B run at the exact same millisecond,
+                # only one of them will ever create the database row.
+                if role == 'user':
+                    logger.info(f"Creating new conversation header for orphaned voice chat: {conversation_id}")
+                    save_conversation(
+                        user_id=user_id,
+                        name=user_name,       
+                        email=user_email,     
+                        title="Voice Conversation", 
+                        page=user_page,       
+                        conversation_id=conversation_id,
+                        arena_id=arena_id,    
+                        ai_mode=ai_mode,      
+                        channel="voice" 
+                    )
+                else:
+                    logger.info(f"Skipping header creation for 'assistant' message to prevent race duplicate: {conversation_id}")
 
         return {'statusCode': 200, 'body': 'Voice message saved successfully'}
 
