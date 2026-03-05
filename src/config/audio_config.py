@@ -50,8 +50,8 @@ AUDIO_PROFILES = {
             "- Speak casually. Use contractions and natural conversational phrasing.\n"
             "- Never sound like you are reading from a textbook. Sound alive, sharp, and ready for whatever they throw at you."
         ),
-        "silence_duration_ms": 1000, # Increased to 1 second to allow the user to pause and think
-        "vad_threshold": 0.9,        # Increased to 0.9 to strictly ignore background noise
+        "silence_duration_ms": 500, 
+        "vad_threshold": 0.8,        
         "requires_transcription_model": True
     }
 }
