@@ -1,7 +1,6 @@
 # src/services/chat_service.py
-import re
 import logging
-import random  # IMPORT: Added random for response rotation
+import random
 from typing import Tuple, Dict, Any, List
 
 # CONFIG
@@ -51,11 +50,12 @@ def get_ai_response(
     media_items: List[Dict[str, Any]] | None = None,
     mode: str = "omega",
     intent: str = "chat",
-    category: str = "general", # SECURITY: Category parameter
+    category: str = "general",
     requires_visuals: bool = False,
     stream_manager: Any | None = None,
     arena_id: str | None = None,
-    is_hidden: bool = False  # 🟢 NEW: Accept hidden flag
+    is_hidden: bool = False,
+    num_questions: int = 5  # NEW: We now accept the parsed integer here
 ) -> Tuple[str, str, str, Dict | None]: 
     
     # Lazy Imports
@@ -129,11 +129,9 @@ def get_ai_response(
     except Exception as e:
         raise RuntimeError(f"Failed to save/reuse conversation: {e}")
 
-    # 🟢 NEW: Fast-Track Hidden Messages (Save to DB and HALT)
     if is_hidden:
-        logger.info("👻 Processing Hidden Context Injection. Saving to DB and aborting AI trigger.")
+        logger.info("Processing Hidden Context Injection. Saving to DB and aborting AI trigger.")
         try:
-            # We save it as the "user" role so the AI sees it as user context in the history
             save_message(
                 actual_conversation_id, 
                 role="user", 
@@ -185,13 +183,11 @@ def get_ai_response(
     
     if intent == "quiz":
         topic_hint = message if message else "General Knowledge"
-        num_questions = 5
-        if message:
-            match = re.search(r'\b(\d+)\b', message)
-            if match:
-                parsed_num = int(match.group(1))
-                if 1 <= parsed_num <= 10: 
-                    num_questions = parsed_num
+        
+        # FIX: Removed regex logic entirely.
+        # Ensure the integer passed down is within valid bounds.
+        if not isinstance(num_questions, int) or not (1 <= num_questions <= 10):
+            num_questions = 5
 
         conversation_input.append(QuizService.get_system_instruction(topic=topic_hint, num_questions=num_questions))
 
@@ -211,7 +207,7 @@ def get_ai_response(
                 
                 seen_indices = set()
                 accumulated_questions = []
-                final_reply_text = "Aquí tienes tu simulacro."
+                final_reply_text = "Aqui tienes tu simulacro."
                 ai_generated_title = "Simulacro Generado" 
                 
                 ghost_easier = None
@@ -295,16 +291,14 @@ def get_ai_response(
     else:
         # STANDARD CHAT MODE
         try:
-            # SECURITY INTERCEPTOR: Bypass OpenAI entirely for identity questions
             if category == "identity_protection":
                 logger.info("Intercepted identity question. Returning minimalist Invicto response.")
                 
-                # The minimalist, slick response pool
                 identity_responses = [
                     "Soy Invicto AI.",
                     "Soy una inteligencia artificial desarrollada por Invicto.",
                     "Soy Invicto AI, un sistema exclusivo de Invicto.",
-                    "Mi tecnología fue desarrollada internamente por Invicto.",
+                    "Mi tecnologia fue desarrollada internamente por Invicto.",
                     "Soy el asistente de inteligencia artificial de Invicto."
                 ]
                 
@@ -312,7 +306,6 @@ def get_ai_response(
                 generated_assets = []
                 sources_data = []
             
-            # NORMAL CHAT ROUTE
             else:
                 runtime_signals = build_runtime_context(
                     page=page,
@@ -322,7 +315,6 @@ def get_ai_response(
                     requires_visuals=requires_visuals 
                 )
 
-                # Check for Arena FIRST.
                 system_prompt = ""
                 
                 if arena_id:
@@ -344,7 +336,6 @@ def get_ai_response(
                             if arena_instructions and str(arena_instructions).strip():
                                 logger.info(f"Using Exclusive Arena Context: {arena_title}")
                                 
-                                # 1. Technical Baseline
                                 base_tech_prompt = (
                                     "You are an advanced AI Assistant. \n"
                                     "OUTPUT RULES:\n"
@@ -357,7 +348,6 @@ def get_ai_response(
                                     context_str = "\n".join(runtime_signals)
                                     base_tech_prompt += f"\nCONTEXT:\n{context_str}\n"
 
-                                # Cleaner Injection
                                 injection = (
                                     f"\n\n## Identity: {arena_title}\n"
                                     f"{arena_instructions}"
@@ -372,7 +362,6 @@ def get_ai_response(
                     except Exception as e:
                         logger.error(f"Failed to load arena context: {e}")
 
-                # FALLBACK
                 if not system_prompt:
                     system_prompt = build_system_instructions(
                         extras=runtime_signals,
@@ -381,7 +370,6 @@ def get_ai_response(
                         web_search_active=is_web_search_active 
                     )
 
-                # 3. Call AI
                 response_tuple = send_message_to_assistant(
                     conversation_input=conversation_input,
                     user_id=user_id,
@@ -406,7 +394,6 @@ def get_ai_response(
     # Step 7: Persist
     assistant_timestamp = ""
     try:
-        # Save user message WITH 'sentImages'
         save_message(
             actual_conversation_id, 
             role="user", 
@@ -414,7 +401,6 @@ def get_ai_response(
             metadata={"sentImages": media_items} 
         )
         
-        # Save Assistant Response
         meta_payload = quiz_data
         if not meta_payload: meta_payload = {}  
         

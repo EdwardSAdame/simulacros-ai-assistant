@@ -26,6 +26,7 @@ class SemanticRouter:
                 "category": "general", 
                 "intent": "chat",
                 "requires_visuals": False,
+                "num_questions": 5, # NEW: Default fallback
                 "loading_phrases": ["Procesando...", "Esperando datos..."], 
                 "source": "fallback"
             }
@@ -36,6 +37,7 @@ class SemanticRouter:
                 "category": result.get("category", "general"),
                 "intent": result.get("intent", "chat"),
                 "requires_visuals": result.get("requires_visuals", False),
+                "num_questions": result.get("num_questions", 5), # NEW: Pass the extracted number
                 "loading_phrases": result.get("loading_phrases", ["Analizando...", "Pensando..."]),
                 "source": "ai"
             }
@@ -45,6 +47,7 @@ class SemanticRouter:
                 "category": "general", 
                 "intent": "chat",
                 "requires_visuals": False,
+                "num_questions": 5, # NEW: Error fallback
                 "loading_phrases": ["Analizando solicitud...", "Procesando información..."],
                 "source": "error_fallback"
             }
@@ -101,6 +104,11 @@ class SemanticRouter:
             requires_visuals = data.get("requires_visuals", False)
             if not isinstance(requires_visuals, bool):
                 requires_visuals = False
+
+            # NEW: Extract and Sanitize num_questions
+            num_questions = data.get("num_questions", 5)
+            if not isinstance(num_questions, int) or not (1 <= num_questions <= 10):
+                num_questions = 5
                 
             # Robust Extraction for phrases
             phrases = data.get("loading_phrases")
@@ -115,11 +123,12 @@ class SemanticRouter:
             if not isinstance(phrases, list) or not phrases:
                 phrases = ["Procesando...", "Analizando..."]
 
-            logger.info(f"Router: AI classified as '{category}' (Intent: {intent}, Visuals: {requires_visuals})")
+            logger.info(f"Router: AI classified as '{category}' (Intent: {intent}, Visuals: {requires_visuals}, Questions: {num_questions})")
             return {
                 "category": category, 
                 "intent": intent, 
                 "requires_visuals": requires_visuals, 
+                "num_questions": num_questions, # NEW: Add to return dict
                 "loading_phrases": phrases
             }
             

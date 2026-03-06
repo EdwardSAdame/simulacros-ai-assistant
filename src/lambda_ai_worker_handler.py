@@ -70,7 +70,7 @@ def lambda_handler(event, context):
             # Extract Arena ID from SQS
             arena_id = payload.get("arena_id")
 
-            # 🟢 NEW: Extract the hidden flag from SQS
+            # Extract the hidden flag from SQS
             is_hidden = payload.get("is_hidden", False)
 
             user_id = payload.get("user_id")
@@ -95,8 +95,9 @@ def lambda_handler(event, context):
             intent = "chat" 
             requires_visuals = False # Default
             category_key = "general" # Default category initialized here
+            num_questions = 5 # NEW: Default question limit
             
-            # 🟢 SKIP visual feedback if this is a hidden background update
+            # SKIP visual feedback if this is a hidden background update
             if connection_id and not is_hidden:
                 try:
                     # ROUTER CALL: Get category, creative phrases, AND intent
@@ -107,6 +108,7 @@ def lambda_handler(event, context):
                     source_type = routing_result.get("source", "unknown")
                     intent = routing_result.get("intent", "chat") 
                     requires_visuals = routing_result.get("requires_visuals", False) 
+                    num_questions = routing_result.get("num_questions", 5) # NEW: Extract from router result
                     
                     # DETERMINE CLIENT ACTION
                     client_action = None
@@ -134,6 +136,7 @@ def lambda_handler(event, context):
                         "category": category_key,
                         "intent": intent,
                         "requires_visuals": requires_visuals,
+                        "num_questions": num_questions, # Log the extracted number
                         "client_action": client_action,
                         "phrases_count": len(loading_phrases),
                         "source": source_type,
@@ -163,11 +166,12 @@ def lambda_handler(event, context):
                 requires_visuals=requires_visuals, 
                 stream_manager=stream_manager,
                 arena_id=arena_id,
-                is_hidden=is_hidden # 🟢 Pass hidden flag to chat_service
+                is_hidden=is_hidden, 
+                num_questions=num_questions # NEW: Pass down to chat_service
             )
 
             # --- 4. Send Final Reply ---
-            # 🟢 SKIP sending final reply to WebSocket if this is a hidden background update
+            # SKIP sending final reply to WebSocket if this is a hidden background update
             if connection_id and not is_hidden:
                 try:
                     # A. Send Standard Text Reply (The Chat Bubble + Inline Metadata)
