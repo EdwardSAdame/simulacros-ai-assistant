@@ -55,7 +55,7 @@ def get_ai_response(
     stream_manager: Any | None = None,
     arena_id: str | None = None,
     is_hidden: bool = False,
-    num_questions: int = 5  # NEW: We now accept the parsed integer here
+    num_questions: int = 5
 ) -> Tuple[str, str, str, Dict | None]: 
     
     # Lazy Imports
@@ -184,10 +184,11 @@ def get_ai_response(
     if intent == "quiz":
         topic_hint = message if message else "General Knowledge"
         
-        # FIX: Removed regex logic entirely.
-        # Ensure the integer passed down is within valid bounds.
-        if not isinstance(num_questions, int) or not (1 <= num_questions <= 10):
+        # FIX: Ensure bounds and apply truncation failsafe
+        if not isinstance(num_questions, int) or num_questions < 1:
             num_questions = 5
+        elif num_questions > 30:
+            num_questions = 30 # Safe Truncation
 
         conversation_input.append(QuizService.get_system_instruction(topic=topic_hint, num_questions=num_questions))
 

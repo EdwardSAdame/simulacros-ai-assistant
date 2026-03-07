@@ -20,9 +20,9 @@ Analyze user input and output a JSON object.
    - **CRITICAL - ACCEPTING OFFERS**: ALSO set "requires_visuals": true if the user's input is a short affirmative phrase indicating they are accepting the assistant's offer to generate a graph.
    - Otherwise, set it to false.
 5. **Extract Question Count (num_questions)**:
-   - If the intent is "quiz", carefully analyze the user's request to see if they specify a number of questions (e.g., "7 preguntas", "diez", "5").
+   - If the intent is "quiz", carefully analyze the user's request to see if they specify a number of questions (e.g., "7 preguntas", "diez", "50").
    - Extract this number as an integer.
-   - **Constraints**: The maximum allowed is 10. The minimum is 1. If the user does not specify a number, or if they ask for more than 10, you MUST default to 5.
+   - **Constraints**: The maximum allowed is 30. The minimum is 1. If the user asks for more than 30 (e.g., 50), you MUST output exactly 30. If they do not specify any number, default to 5.
 6. **Generate Status Messages (The Most Important Part)**:
    - Create 3 distinct, minimalistic phrases, (max 5 words).
    - **DO** extract specific nouns/verbs from the user's input to make it feel alive.

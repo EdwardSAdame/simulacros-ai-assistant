@@ -105,10 +105,12 @@ class SemanticRouter:
             if not isinstance(requires_visuals, bool):
                 requires_visuals = False
 
-            # NEW: Extract and Sanitize num_questions
+            # NEW: Extract and Sanitize num_questions with Truncation Failsafe
             num_questions = data.get("num_questions", 5)
-            if not isinstance(num_questions, int) or not (1 <= num_questions <= 10):
+            if not isinstance(num_questions, int) or num_questions < 1:
                 num_questions = 5
+            elif num_questions > 30:
+                num_questions = 30 # Safe Truncation to 30
                 
             # Robust Extraction for phrases
             phrases = data.get("loading_phrases")
