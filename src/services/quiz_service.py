@@ -21,7 +21,7 @@ class QuizService:
             f"1. **ENCODING SAFETY (ABSOLUTE)**: You MUST output all text natively in UTF-8. Write special characters (like á, é, í, ó, ú, ñ, ¿, ¡) exactly as they are. Do not escape them.\n"
             f"   - **CHECK**: Verify the text is completely human-readable Spanish before outputting.\n"
             
-            # 🟢 FIX: Stripped out the double-escape contradiction. Aligned perfectly with schemas and system prompts.
+            # FIX: Stripped out the double-escape contradiction. Aligned perfectly with schemas and system prompts.
             f"2. **MATH SYNTAX**: You must format ALL mathematical expressions using standard LaTeX.\n"
             f"   - **Wrappers**: You MUST wrap every math expression in standard inline math delimiters: \\( and \\). NEVER output naked or raw LaTeX for math options.\n"
             f"   - **Multiplication**: NEVER use the letter 'x' for multiplication. Always use the proper LaTeX multiplication symbol.\n\n"
@@ -63,7 +63,8 @@ class QuizService:
             "7. **DIFFICULTY WEIGHTING**: Assign a `difficulty` integer to each question based on its cognitive load: 1 (Basic/Recall), 2 (Intermediate/Application), or 3 (Advanced/Analysis).\n"
             "8. **VOICE**: You are Roma. Be cold, precise, and efficient in your 'intro_message'.\n"
             "9. **FEEDBACK**: Provide specific, educational feedback for every option (Right or Wrong).\n"
-            "10. **CONTENT**: Questions must be challenging, intriguing, and non-trivial. Avoid generic questions.\n\n"
+            "10. **CONTENT**: Questions must be challenging, intriguing, and non-trivial. Avoid generic questions.\n"
+            "11. **CONTEXT TEXT (CRITICAL)**: If the topic requires reading comprehension, analysis of a historical document, or a case study (e.g., 'Lectura Critica', 'Ingles', 'Biologia'), you MUST generate and provide the full, unabridged reading passage inside the `context_text` field. DO NOT just summarize the text in the explanation. If the question is standalone (e.g., a direct math equation), leave `context_text` as null.\n\n"
             
             "## SMART FOLLOW-UP PROTOCOL (NEXT STEPS)\n"
             "Generate 3 'Ghost Prompts' (payloads) hidden in the buttons:\n"

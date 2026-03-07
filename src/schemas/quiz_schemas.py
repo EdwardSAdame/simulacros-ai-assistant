@@ -20,6 +20,9 @@ class QuizQuestion(BaseModel):
         "3. THE TRAPS: Identify 3 failure paths based on these specifics."
     ))
 
+    # NEW: Context Text for Reading Comprehension
+    context_text: Optional[str] = Field(None, description="The reading passage, historical context, or case study required to answer the question. USE ONLY IF the topic requires reading comprehension (e.g., 'Lectura Crítica', 'Inglés', 'Ciencias'). If the question is standalone (e.g., direct Math equation), leave this as null.")
+
     # FIX: Standard LaTeX delimiters
     question_text: str = Field(..., description="The question stem. FORMATTING: Write regular text normally. Wrap ONLY math expressions, numbers, and symbols in standard LaTeX (\\( and \\)). Example: 'Si \\( x = 5 \\), que sucede?'. MUST match 'THE SETUP' numbers exactly.")
     
