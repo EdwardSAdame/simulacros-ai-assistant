@@ -28,6 +28,10 @@ from src.storage.arenas_table import update_arena_last_active
 
 logger = logging.getLogger(__name__)
 
+# --- TESTING TOGGLE ---
+# Set to False to force all quiz/simulacro requests to act as standard chat
+QUIZ_FEATURE_ENABLED = False
+
 def _normalize_email_for_storage(val):
     if val is None: return None
     if isinstance(val, str) and val.strip() == "": return None
@@ -181,7 +185,8 @@ def get_ai_response(
     generated_assets = [] 
     sources_data = [] 
     
-    if intent == "quiz":
+    # Toggle applied here
+    if intent == "quiz" and QUIZ_FEATURE_ENABLED:
         topic_hint = message if message else "General Knowledge"
         
         # FIX: Ensure bounds and apply truncation failsafe
