@@ -44,7 +44,8 @@ class QuizService:
             "   - **ANTI-HALLUCINATION**: NEVER invent or guess an `image_url`. If you did not explicitly execute the code to create the image, you fail the mission.\n\n"
 
             "## LOGICAL EXECUTION PROTOCOL (PRIORITY 2 - THE THINKING ENGINE)\n"
-            "4. **ORDER OF OPERATIONS**: The schema requires you to provide the `explanation` FIRST. Use this field to fully derive the answer step-by-step. ONLY THEN generate the `options` and `correct_option_index` based on that solution.\n"
+            "4. **ORDER OF OPERATIONS & ANTI-ECHO**: The schema requires you to provide the `explanation` FIRST. Use this field to fully derive the answer step-by-step. ONLY THEN generate the `options` and `correct_option_index` based on that solution.\n"
+            "   - **CRITICAL ANTI-ECHO RULE**: DO NOT draft, echo, or repeat the question text, the options (A, B, C, D), or the correct answer index inside the `explanation` field. Only write the Setup, Solution, and Traps.\n"
             "5. **PREMISE LOCKING & CONSISTENCY**: \n"
             "   - **Variable Locking**: In the `explanation` field, you MUST explicitly define the 'Core Constraints' (Step 1: THE SETUP). For Math, these are Numbers. For History/Lit, these are Dates, Names, or Contexts.\n"
             "   - **Synchronization**: The `question_text` MUST use those EXACT constraints. You are FORBIDDEN from changing the values/facts between the explanation and the question text.\n"
@@ -64,10 +65,9 @@ class QuizService:
             "9. **FEEDBACK**: Provide specific, educational feedback for every option (Right or Wrong).\n"
             "10. **CONTENT**: Questions must be challenging, intriguing, and non-trivial. Avoid generic questions.\n"
             
-            "11. **CONTEXT TEXT AND SOURCES (CRITICAL)**: If the topic requires reading comprehension (e.g., 'Lectura Critica', 'Ingles', 'Biologia'), you MUST use the `web_search` tool to find a REAL article or essay.\n"
-            "    - **NO SUMMARIES**: You are FORBIDDEN from summarizing the text. The `context_text` field MUST contain the FULL reading passage.\n"
-            "    - **TOKEN SAVING**: You must put the full reading passage ONLY in the FIRST question that uses it. For questions 2, 3, 4, and 5 that use the same passage, you MUST leave `context_text` as null to save tokens.\n"
-            "    - **CITATIONS**: You MUST place the exact URL from your web search into the `source_url` field of the FIRST question. Leave it null for the rest.\n\n"
+            "11. **SHARED CONTEXT TEXT AND SOURCES (CRITICAL)**: If the topic requires reading comprehension (e.g., 'Lectura Critica', 'Ingles', 'Biologia'), you MUST use the `web_search` tool to find a REAL article or essay.\n"
+            "    - **ROOT-LEVEL PLACEMENT**: Put the full reading passage in the `shared_context_text` field and the exact URL in the `shared_source_url` field at the ROOT of the JSON. Because these are at the root level, you only provide them ONCE for the entire quiz.\n"
+            "    - **NO SUMMARIES**: You are FORBIDDEN from summarizing the text. The `shared_context_text` MUST contain the FULL, unabridged reading passage.\n\n"
             
             "## SMART FOLLOW-UP PROTOCOL (NEXT STEPS)\n"
             "Generate 3 'Ghost Prompts' (payloads) hidden in the buttons:\n"

@@ -11,20 +11,15 @@ class QuizQuestion(BaseModel):
     question_title: str = Field(..., description="Title with number, e.g., '# 1. Topic'")
     
     # -------------------------------------------------------------------------
-    # LOGIC ENGINE: Preserved 'THE SETUP' for deep thinking
+    # LOGIC ENGINE: Preserved 'THE SETUP' + Anti-Echo Constraint
     # -------------------------------------------------------------------------
     explanation: str = Field(..., description=(
         "Detailed reasoning plan. YOU MUST FOLLOW THIS STRUCTURE:\n"
         "1. THE SETUP: Define the EXACT numbers/facts you will use.\n"
         "2. THE SOLUTION: Solve the problem step-by-step using ONLY the setup.\n"
-        "3. THE TRAPS: Identify 3 failure paths based on these specifics."
+        "3. THE TRAPS: Identify 3 failure paths based on these specifics.\n"
+        "CRITICAL RULE: DO NOT draft, echo, or repeat the question text, the options (A, B, C, D), or the correct answer index inside this field. Only write the Setup, Solution, and Traps."
     ))
-
-    # UPDATED: Token saving logic (No duplication)
-    source_url: Optional[str] = Field(None, description="The exact URL of the web search. Put this ONLY in the first question. Leave null for subsequent questions to save tokens.")
-
-    # UPDATED: Token saving logic (No duplication)
-    context_text: Optional[str] = Field(None, description="The full reading passage. Put this ONLY in the first question. For subsequent questions using the same text, you MUST leave this as null to save tokens.")
 
     # FIX: Standard LaTeX delimiters
     question_text: str = Field(..., description="The question stem. FORMATTING: Write regular text normally. Wrap ONLY math expressions, numbers, and symbols in standard LaTeX (\\( and \\)). Example: 'Si \\( x = 5 \\), que sucede?'. MUST match 'THE SETUP' numbers exactly.")
@@ -41,6 +36,13 @@ class QuizQuestion(BaseModel):
 class QuizResponse(BaseModel):
     title: str = Field(..., description="A professional, short, engaging title for this quiz based on the specific topic (Max 6 words).")
     intro_message: str = Field(..., description="A single, concise sentence introducing the quiz (Voice: Roma).")
+    
+    # -------------------------------------------------------------------------
+    # NEW: ROOT-LEVEL CONTEXT (Saves thousands of tokens by preventing duplication)
+    # -------------------------------------------------------------------------
+    shared_source_url: Optional[str] = Field(None, description="The exact URL of the web search. Use this if the entire quiz is based on a single reading passage or article. If no web search was used, leave null.")
+    shared_context_text: Optional[str] = Field(None, description="The full reading passage, historical context, or case study that all questions are based on. MUST be the unabridged text (do not summarize). Put it here ONCE. If the quiz does not require a shared reading passage, leave this as null.")
+
     question_count: int = Field(..., description="The total number of questions generated in this quiz.")
     questions: List[QuizQuestion]
 
