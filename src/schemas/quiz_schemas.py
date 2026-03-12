@@ -3,7 +3,6 @@ from pydantic import BaseModel, Field
 from typing import List, Optional
 
 class QuizOption(BaseModel):
-    # FIX: Removed double-escape instruction. Now requests standard LaTeX.
     text: str = Field(..., description="The answer text. FORMATTING RULES: 1. If the answer is just words/text, write normally WITHOUT delimiters (e.g., 'La biomasa disminuye'). 2. If the answer is a number, equation, or symbol, wrap it in standard LaTeX delimiters \\( and \\). Example: '\\( -\\infty \\)' or '\\( 0 \\)'. 3. Mixed: 'El valor es \\( 5 \\)'. DO NOT double-escape backslashes.")
     feedback: str = Field(..., description="Short feedback explaining why this option is right/wrong.")
 
@@ -21,13 +20,16 @@ class QuizQuestion(BaseModel):
         "CRITICAL RULE: DO NOT draft, echo, or repeat the question text, the options (A, B, C, D), or the correct answer index inside this field. Only write the Setup, Solution, and Traps."
     ))
 
-    # FIX: Standard LaTeX delimiters
+    # REVERTED TO MATCH WIX UI: Kept token saving rule
+    source_url: Optional[str] = Field(None, description="The exact URL of the web search. Put this ONLY in the FIRST question. Leave null for all subsequent questions to save tokens.")
+
+    # REVERTED TO MATCH WIX UI: Kept token saving rule
+    context_text: Optional[str] = Field(None, description="The full reading passage. Put this ONLY in the FIRST question. For subsequent questions, you MUST leave this as null to save tokens.")
+
     question_text: str = Field(..., description="The question stem. FORMATTING: Write regular text normally. Wrap ONLY math expressions, numbers, and symbols in standard LaTeX (\\( and \\)). Example: 'Si \\( x = 5 \\), que sucede?'. MUST match 'THE SETUP' numbers exactly.")
     
-    # EXISTING: Field for the Graph/Image URL
     image_url: Optional[str] = Field(None, description="URL of the generated image/graph. If you used the python tool to generate a graph, this will be populated.")
 
-    # NEW: Weighted Scoring Logic
     difficulty: int = Field(1, ge=1, le=3, description="Difficulty weight: 1 (Basic/Easy), 2 (Application/Medium), 3 (Analysis/Hard).")
 
     options: List[QuizOption] = Field(..., min_items=4, max_items=4, description="Exactly 4 options.")
@@ -36,13 +38,6 @@ class QuizQuestion(BaseModel):
 class QuizResponse(BaseModel):
     title: str = Field(..., description="A professional, short, engaging title for this quiz based on the specific topic (Max 6 words).")
     intro_message: str = Field(..., description="A single, concise sentence introducing the quiz (Voice: Roma).")
-    
-    # -------------------------------------------------------------------------
-    # NEW: ROOT-LEVEL CONTEXT (Saves thousands of tokens by preventing duplication)
-    # -------------------------------------------------------------------------
-    shared_source_url: Optional[str] = Field(None, description="The exact URL of the web search. Use this if the entire quiz is based on a single reading passage or article. If no web search was used, leave null.")
-    shared_context_text: Optional[str] = Field(None, description="The full reading passage, historical context, or case study that all questions are based on. MUST be the unabridged text (do not summarize). Put it here ONCE. If the quiz does not require a shared reading passage, leave this as null.")
-
     question_count: int = Field(..., description="The total number of questions generated in this quiz.")
     questions: List[QuizQuestion]
 

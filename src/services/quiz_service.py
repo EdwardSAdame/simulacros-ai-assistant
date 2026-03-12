@@ -65,9 +65,9 @@ class QuizService:
             "9. **FEEDBACK**: Provide specific, educational feedback for every option (Right or Wrong).\n"
             "10. **CONTENT**: Questions must be challenging, intriguing, and non-trivial. Avoid generic questions.\n"
             
-            "11. **SHARED CONTEXT TEXT AND SOURCES (CRITICAL)**: If the topic requires reading comprehension (e.g., 'Lectura Critica', 'Ingles', 'Biologia'), you MUST use the `web_search` tool to find a REAL article or essay.\n"
-            "    - **ROOT-LEVEL PLACEMENT**: Put the full reading passage in the `shared_context_text` field and the exact URL in the `shared_source_url` field at the ROOT of the JSON. Because these are at the root level, you only provide them ONCE for the entire quiz.\n"
-            "    - **NO SUMMARIES**: You are FORBIDDEN from summarizing the text. The `shared_context_text` MUST contain the FULL, unabridged reading passage.\n\n"
+            "11. **CONTEXT TEXT AND SOURCES (CRITICAL)**: If the topic requires reading comprehension (e.g., 'Lectura Critica', 'Ingles', 'Biologia'), you MUST use the `web_search` tool to find a REAL article or essay.\n"
+            "    - **NO SUMMARIES**: You are FORBIDDEN from summarizing the text. The `context_text` field MUST contain the FULL reading passage.\n"
+            "    - **TOKEN SAVING**: You must put the full reading passage in `context_text` and the URL in `source_url` ONLY in the FIRST question. For questions 2, 3, 4, and 5, you MUST leave both of them as null to save tokens.\n\n"
             
             "## SMART FOLLOW-UP PROTOCOL (NEXT STEPS)\n"
             "Generate 3 'Ghost Prompts' (payloads) hidden in the buttons:\n"
