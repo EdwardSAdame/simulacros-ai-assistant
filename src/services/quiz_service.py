@@ -65,9 +65,10 @@ class QuizService:
             "9. **FEEDBACK**: Provide specific, educational feedback for every option (Right or Wrong).\n"
             "10. **CONTENT**: Questions must be challenging, intriguing, and non-trivial. Avoid generic questions.\n"
             
-            "11. **CONTEXT TEXT AND SOURCES (CRITICAL)**: If the topic requires reading comprehension (e.g., 'Lectura Critica', 'Ingles', 'Biologia'), you MUST use the `web_search` tool to find a REAL article or essay.\n"
-            "    - **NO SUMMARIES**: You are FORBIDDEN from summarizing the text. The `context_text` field MUST contain the FULL reading passage.\n"
-            "    - **TOKEN SAVING**: You must put the full reading passage in `context_text` and the URL in `source_url` ONLY in the FIRST question. For questions 2, 3, 4, and 5, you MUST leave both of them as null to save tokens.\n\n"
+            "11. **WEB SEARCH RESTRICTION (STRICT)**: You are FORBIDDEN from using the `web_search` tool for general academic topics.\n"
+            "    - **EXCEPTION**: Use `web_search` ONLY if the user uses words like 'noticia', 'noticias', 'actualidad', 'busca en la web', or 'noticia real'.\n"
+            "    - **QUIZ WITHOUT WEB**: If no web search is performed, you MUST leave `context_text` and `source_url` as null for ALL questions.\n"
+            "    - **QUIZ WITH WEB**: If a search is performed, put the FULL passage in `context_text` and the URL in `source_url` ONLY in the FIRST question. Leave subsequent ones as null.\n\n"
             
             "## SMART FOLLOW-UP PROTOCOL (NEXT STEPS)\n"
             "Generate 3 'Ghost Prompts' (payloads) hidden in the buttons:\n"
