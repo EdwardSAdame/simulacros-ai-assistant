@@ -97,7 +97,10 @@ def generate_structured_quiz(
     mode: str = "omega",
     exam_context: str = "ICFES",
     requires_visuals: bool = False,
-    pdf_urls: List[str] | None = None 
+    pdf_urls: List[str] | None = None,
+    vector_store_ids: List[str] | None = None,
+    web_search_config: Dict[str, Any] | None = None,
+    user_location: Dict[str, str] | None = None
 ) -> QuizResponse:
     
     client = get_openai_client()
@@ -113,12 +116,12 @@ def generate_structured_quiz(
     if pdf_urls:
         _inject_pdf_inputs(api_input, pdf_urls)
 
-    req = _build_request_payload(cfg, api_input, tools=None)
+    # Dynamic Tool Configuration using helper
+    tools = _configure_tools(vector_store_ids, requires_visuals, pdf_urls, web_search_config, user_location)
+
+    req = _build_request_payload(cfg, api_input, tools=tools)
     req["text_format"] = QuizResponse
     
-    if requires_visuals or (pdf_urls and len(pdf_urls) > 0):
-        req["tools"] = [{"type": "code_interpreter", "container": {"type": "auto"}}]
-
     try:
         resp = client.responses.parse(**req)
         quiz = resp.output_parsed
@@ -148,7 +151,10 @@ def stream_structured_quiz(
     mode: str = "omega",
     exam_context: str = "ICFES",
     requires_visuals: bool = False,
-    pdf_urls: List[str] | None = None 
+    pdf_urls: List[str] | None = None,
+    vector_store_ids: List[str] | None = None,
+    web_search_config: Dict[str, Any] | None = None,
+    user_location: Dict[str, str] | None = None
 ) -> Generator[Dict[str, Any], None, None]:
     
     client = get_openai_client()
@@ -164,12 +170,12 @@ def stream_structured_quiz(
     if pdf_urls:
         _inject_pdf_inputs(api_input, pdf_urls)
 
-    req = _build_request_payload(cfg, api_input, tools=None)
+    # Dynamic Tool Configuration using helper
+    tools = _configure_tools(vector_store_ids, requires_visuals, pdf_urls, web_search_config, user_location)
+
+    req = _build_request_payload(cfg, api_input, tools=tools)
     req["text_format"] = QuizResponse
     
-    if requires_visuals or (pdf_urls and len(pdf_urls) > 0):
-        req["tools"] = [{"type": "code_interpreter", "container": {"type": "auto"}}]
-
     streamed_questions = []
 
     try:

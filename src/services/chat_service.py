@@ -208,7 +208,9 @@ def get_ai_response(
                     mode=mode, 
                     exam_context=exam_context,
                     requires_visuals=requires_visuals, 
-                    pdf_urls=clean_pdfs
+                    pdf_urls=clean_pdfs,
+                    vector_store_ids=selected_vector_stores, # 🟢 ADDED: Pass vector stores to quiz
+                    web_search_config=web_search_config      # 🟢 ADDED: Pass web search config to quiz
                 )
                 
                 seen_indices = set()
@@ -274,7 +276,9 @@ def get_ai_response(
                     mode=mode, 
                     exam_context=exam_context,
                     requires_visuals=requires_visuals, 
-                    pdf_urls=clean_pdfs
+                    pdf_urls=clean_pdfs,
+                    vector_store_ids=selected_vector_stores, # 🟢 ADDED: Pass vector stores
+                    web_search_config=web_search_config      # 🟢 ADDED: Pass web search config
                 )
                 
                 quiz_data = {
