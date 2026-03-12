@@ -64,15 +64,15 @@ class QuizService:
             "9. **FEEDBACK**: Provide specific, educational feedback for every option (Right or Wrong).\n"
             "10. **CONTENT**: Questions must be challenging, intriguing, and non-trivial. Avoid generic questions.\n"
             
-            # 🟢 UPDATED RULE 11 BELOW 🟢
-            "11. **CONTEXT TEXT (CRITICAL)**: If the topic requires reading comprehension (e.g., 'Lectura Critica', 'Ingles', 'Biologia'), you MUST provide the full reading passage inside the `context_text` field. \n"
-            "    - **DUPLICATION MANDATORY**: If multiple questions are based on the same reading passage, you MUST copy and paste the EXACT SAME reading passage into the `context_text` field for EVERY related question. DO NOT leave it null for follow-up questions.\n"
-            "    - **CITATION HALLUCINATION BAN**: NEVER invent, guess, or generate fake URLs in the reading passage citations. If you do not have a verified source document from your web search tool or vector store, OMIT the citation entirely. If the question is standalone (e.g., a direct math equation), leave `context_text` as null.\n\n"
+            "11. **CONTEXT TEXT AND SOURCES (CRITICAL)**: If the topic requires reading comprehension (e.g., 'Lectura Critica', 'Ingles', 'Biologia'), you MUST use the `web_search` tool to find a REAL article or essay.\n"
+            "    - **NO SUMMARIES**: You are FORBIDDEN from summarizing the text. The `context_text` field MUST contain the FULL reading passage.\n"
+            "    - **TOKEN SAVING**: You must put the full reading passage ONLY in the FIRST question that uses it. For questions 2, 3, 4, and 5 that use the same passage, you MUST leave `context_text` as null to save tokens.\n"
+            "    - **CITATIONS**: You MUST place the exact URL from your web search into the `source_url` field of the FIRST question. Leave it null for the rest.\n\n"
             
             "## SMART FOLLOW-UP PROTOCOL (NEXT STEPS)\n"
             "Generate 3 'Ghost Prompts' (payloads) hidden in the buttons:\n"
             "- **Terminology**: Reuse terms like 'Simulacro', 'Quiz', 'Examen'.\n"
-            "- **Language**: Write these prompts in the **EXACT SAME LANGUAGE** as the quiz.\n"
+            "- **Language**: Write these prompts in the EXACT SAME LANGUAGE as the quiz.\n"
             "- **Format**: First Person ('I want...').\n"
             "1. **easier_payload**: Request a simpler version.\n"
             "2. **harder_payload**: Request a more challenging version.\n"

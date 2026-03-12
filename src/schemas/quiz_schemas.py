@@ -20,11 +20,11 @@ class QuizQuestion(BaseModel):
         "3. THE TRAPS: Identify 3 failure paths based on these specifics."
     ))
 
-    # ADDED: Field to capture the web search citation
-    source_url: Optional[str] = Field(None, description="The exact URL of the website from the web search where you found the reading passage. If no web search was used, leave null.")
+    # UPDATED: Token saving logic (No duplication)
+    source_url: Optional[str] = Field(None, description="The exact URL of the web search. Put this ONLY in the first question. Leave null for subsequent questions to save tokens.")
 
-    # UPDATED: Enforce full text and duplication to prevent lazy AI
-    context_text: Optional[str] = Field(None, description="The full reading passage, historical context, or case study. MUST be the unabridged text (do not summarize). If multiple questions use the same text, you MUST duplicate the full text here for each question. If the question is standalone (e.g., direct Math equation), leave this as null.")
+    # UPDATED: Token saving logic (No duplication)
+    context_text: Optional[str] = Field(None, description="The full reading passage. Put this ONLY in the first question. For subsequent questions using the same text, you MUST leave this as null to save tokens.")
 
     # FIX: Standard LaTeX delimiters
     question_text: str = Field(..., description="The question stem. FORMATTING: Write regular text normally. Wrap ONLY math expressions, numbers, and symbols in standard LaTeX (\\( and \\)). Example: 'Si \\( x = 5 \\), que sucede?'. MUST match 'THE SETUP' numbers exactly.")
