@@ -30,7 +30,7 @@ logger = logging.getLogger(__name__)
 
 # --- TESTING TOGGLE ---
 # Set to False to force all quiz/simulacro requests to act as standard chat
-QUIZ_FEATURE_ENABLED = False
+QUIZ_FEATURE_ENABLED = True
 
 def _normalize_email_for_storage(val):
     if val is None: return None
