@@ -106,9 +106,13 @@ def lambda_handler(event, context):
                     category_key = routing_result.get("category", "general")
                     loading_phrases = routing_result.get("loading_phrases", []) 
                     source_type = routing_result.get("source", "unknown")
-                    intent = routing_result.get("intent", "chat") 
+                    
+                    # 🟢 CRITICAL FIX: Normalize the intent string (lowercase & trim)
+                    raw_intent = routing_result.get("intent", "chat")
+                    intent = str(raw_intent).strip().lower()
+                    
                     requires_visuals = routing_result.get("requires_visuals", False) 
-                    num_questions = routing_result.get("num_questions", 5) # NEW: Extract from router result
+                    num_questions = routing_result.get("num_questions", 5)
                     
                     # DETERMINE CLIENT ACTION
                     client_action = None
@@ -136,7 +140,7 @@ def lambda_handler(event, context):
                         "category": category_key,
                         "intent": intent,
                         "requires_visuals": requires_visuals,
-                        "num_questions": num_questions, # Log the extracted number
+                        "num_questions": num_questions,
                         "client_action": client_action,
                         "phrases_count": len(loading_phrases),
                         "source": source_type,
@@ -167,7 +171,7 @@ def lambda_handler(event, context):
                 stream_manager=stream_manager,
                 arena_id=arena_id,
                 is_hidden=is_hidden, 
-                num_questions=num_questions # NEW: Pass down to chat_service
+                num_questions=num_questions
             )
 
             # --- 4. Send Final Reply ---

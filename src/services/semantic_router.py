@@ -8,7 +8,7 @@ logger = logging.getLogger(__name__)
 
 class SemanticRouter:
     """
-    Determines the intent/category of a user message and generates dynamic
+    Determises the intent/category of a user message and generates dynamic
     visual feedback phrases.
     """
     
@@ -96,9 +96,10 @@ class SemanticRouter:
             category = data.get("category", "general").lower()
             if category not in self.valid_categories: category = "general"
 
-            # Sanitize Intent
-            intent = data.get("intent", "chat").lower()
-            if intent not in ["quiz", "chat"]: intent = "chat"
+            # 🟢 CRITICAL FIX: Allow 'creative_image' intent to pass through
+            intent = data.get("intent", "chat").lower().strip()
+            if intent not in ["quiz", "chat", "creative_image"]: 
+                intent = "chat"
 
             # Extract Visual Intent
             requires_visuals = data.get("requires_visuals", False)
