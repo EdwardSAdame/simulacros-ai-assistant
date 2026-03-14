@@ -77,3 +77,24 @@ class StreamManager:
             "error": error_message
         }
         self._send(payload)
+
+    # ------------------------------------------------------------------
+    # NEW: CREATIVE IMAGE STREAMING METHODS
+    # ------------------------------------------------------------------
+    def send_partial_image(self, index: int, b64_data: str):
+        """Streams a partial, incomplete image chunk during generation."""
+        payload = {
+            "action": "partial_image_stream",
+            "index": index,
+            "image_b64": b64_data
+        }
+        self._send(payload)
+
+    def send_final_image(self, b64_data: str, revised_prompt: str = ""):
+        """Streams the completed, high-resolution final image."""
+        payload = {
+            "action": "final_image_stream",
+            "image_b64": b64_data,
+            "revised_prompt": revised_prompt
+        }
+        self._send(payload)
