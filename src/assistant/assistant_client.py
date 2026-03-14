@@ -7,6 +7,7 @@ from typing import List, Dict, Any, Tuple, Generator
 from src.config.settings import get_openai_client, get_vector_search_max_results
 from src.config.model_config import get_model_config
 from src.schemas.quiz_schemas import QuizResponse
+from src.config.creative_image_instructions import get_creative_image_system_prompt
 
 # NEW REFACTORED MODULES
 from src.services.signal_service import build_runtime_signals
@@ -83,6 +84,54 @@ def send_message_to_assistant(
         return (text or "[No response]", generated_urls, sources_list)
     except Exception as e:
         logger.error(f"Chat failed: {e}")
+        raise e
+
+# ------------------------------------------------------------------
+# CHAT STREAMING (WITH IMAGE GENERATION)
+# ------------------------------------------------------------------
+def stream_chat_response(
+    conversation_input: List[Dict[str, Any]], 
+    user_id: str | None = None, 
+    page: str | None = None, 
+    name: str | None = None, 
+    email: str | None = None, 
+    mode: str = "omega",
+    system_instruction: str | None = None,
+    enable_image_generation: bool = True
+) -> Generator[Any, None, None]:
+    
+    client = get_openai_client()
+    cfg = get_model_config(mode)
+    
+    base_system_text = system_instruction or build_runtime_signals(
+        user_id, page, name, email, requires_visuals=False
+    )
+    
+    if enable_image_generation:
+        brand_instruction = get_creative_image_system_prompt()
+        system_text = f"{base_system_text}\n\n{brand_instruction}"
+    else:
+        system_text = base_system_text
+        
+    api_input = [{"role": "system", "content": [{"type": "input_text", "text": system_text}]}]
+    api_input.extend(conversation_input)
+
+    tools = []
+    if enable_image_generation:
+        tools.append({
+            "type": "image_generation",
+            "partial_images": 3
+        })
+
+    req = _build_request_payload(cfg, api_input, tools)
+    req["stream"] = True
+
+    try:
+        stream = client.responses.create(**req)
+        for event in stream:
+            yield event
+    except Exception as e:
+        logger.error(f"Stream chat failed: {e}")
         raise e
 
 # ------------------------------------------------------------------

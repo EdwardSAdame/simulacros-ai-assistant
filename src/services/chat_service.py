@@ -67,6 +67,7 @@ def get_ai_response(
     from src.assistant.image_handler import format_image_urls_for_openai
     from src.services.quiz_service import QuizService
     from src.config.system_instructions import build_system_instructions
+    from src.services.creative_image_service import CreativeImageService
 
     page = _normalize_page(page)
 
@@ -178,14 +179,13 @@ def get_ai_response(
         conversation_input.append({"role": "user", "content": current_user_content})
 
     # ------------------------------------------------------------------
-    # BRANCH: QUIZ vs CHAT
+    # BRANCH: QUIZ vs CREATIVE_IMAGE vs CHAT
     # ------------------------------------------------------------------
     quiz_data = None
     final_reply_text = ""
     generated_assets = [] 
     sources_data = [] 
     
-    # Toggle applied here
     if intent == "quiz" and QUIZ_FEATURE_ENABLED:
         topic_hint = message if message else "General Knowledge"
         
@@ -209,8 +209,8 @@ def get_ai_response(
                     exam_context=exam_context,
                     requires_visuals=requires_visuals, 
                     pdf_urls=clean_pdfs,
-                    vector_store_ids=selected_vector_stores, # 🟢 ADDED: Pass vector stores to quiz
-                    web_search_config=web_search_config      # 🟢 ADDED: Pass web search config to quiz
+                    vector_store_ids=selected_vector_stores,
+                    web_search_config=web_search_config      
                 )
                 
                 seen_indices = set()
@@ -277,8 +277,8 @@ def get_ai_response(
                     exam_context=exam_context,
                     requires_visuals=requires_visuals, 
                     pdf_urls=clean_pdfs,
-                    vector_store_ids=selected_vector_stores, # 🟢 ADDED: Pass vector stores
-                    web_search_config=web_search_config      # 🟢 ADDED: Pass web search config
+                    vector_store_ids=selected_vector_stores,
+                    web_search_config=web_search_config
                 )
                 
                 quiz_data = {
@@ -296,6 +296,33 @@ def get_ai_response(
             logger.error(f"Quiz Generation Error: {e}")
             log_event("quiz_generation_failed", {"error": str(e)}, level="error")
             final_reply_text = "**Error**: No pudimos generar el simulacro."
+            quiz_data = None
+
+    elif intent == "creative_image":
+        logger.info(f"Routing to Creative Image Service for user {user_id}")
+        try:
+            final_reply_text, final_images_b64 = CreativeImageService.generate_image(
+                conversation_input=conversation_input,
+                user_id=user_id,
+                page=page,
+                name=name,
+                email=email,
+                mode=mode,
+                stream_manager=stream_manager
+            )
+            
+            # Store metadata about the generation. We avoid storing raw base64 
+            # to prevent DynamoDB 400KB limit exceptions. The frontend already 
+            # received the images via WebSockets.
+            quiz_data = {
+                "type": "creative_image_generation",
+                "images_count": len(final_images_b64),
+                "delivery": "websocket_stream"
+            }
+            
+        except Exception as e:
+            logger.error(f"Creative Image Generation Error: {e}")
+            final_reply_text = "**Error**: We could not generate the image."
             quiz_data = None
 
     else:

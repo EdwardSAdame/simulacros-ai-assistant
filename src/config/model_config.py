@@ -19,6 +19,9 @@ class ModelConfig:
     router_temperature: Optional[float]
     router_top_p: Optional[float]
     router_reasoning_effort: Optional[str]
+    
+    # 🟢 3. IMAGE GENERATION MODE
+    image_model: str
 
 def _parse_float_or_none(value: str | None, default: float) -> Optional[float]:
     if value is None: return default
@@ -35,7 +38,7 @@ def _parse_effort(value: str | None) -> Optional[str]:
 def get_model_config(mode: str = "omega") -> ModelConfig:
     """
     Universal Config Loader.
-    Loads params for Active Mode (Alpha/Omega) and Router.
+    Loads params for Active Mode (Alpha/Omega), Router, and Image Generation.
     """
     mode_key = mode.lower() if mode else "omega"
     
@@ -61,6 +64,9 @@ def get_model_config(mode: str = "omega") -> ModelConfig:
     router_temp = _parse_float_or_none(os.getenv("OPENAI_TEMP_ROUTER"), 0.1)
     router_top_p = _parse_float_or_none(os.getenv("OPENAI_TOP_P_ROUTER"), 1.0)
     router_effort = _parse_effort(os.getenv("OPENAI_REASONING_EFFORT_ROUTER"))
+    
+    # --- LOAD IMAGE CONFIG ---
+    image_model = os.getenv("OPENAI_MODEL_IMAGE", "gpt-image-1-mini")
 
     return ModelConfig(
         model=model,
@@ -71,5 +77,7 @@ def get_model_config(mode: str = "omega") -> ModelConfig:
         router_model=router_model,
         router_temperature=router_temp,
         router_top_p=router_top_p,
-        router_reasoning_effort=router_effort
+        router_reasoning_effort=router_effort,
+        
+        image_model=image_model
     )
