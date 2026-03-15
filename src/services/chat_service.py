@@ -454,7 +454,8 @@ def get_ai_response(
         safe_reply_text = final_reply_text.strip() if final_reply_text else ""
         if not safe_reply_text:
             if generated_assets:
-                safe_reply_text = "Aquí tienes tu imagen generada."
+                # Use a zero-width space. DynamoDB accepts it, but the UI renders nothing!
+                safe_reply_text = "\u200b"
             else:
                 safe_reply_text = "[Generación completada sin texto]"
 
