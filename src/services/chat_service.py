@@ -301,7 +301,8 @@ def get_ai_response(
     elif intent == "creative_image":
         logger.info(f"Routing to Creative Image Service for user {user_id}")
         try:
-            final_reply_text, final_images_b64 = CreativeImageService.generate_image(
+            # 🟢 NOTE: 'final_images_urls' now contains the lightweight S3 URLs!
+            final_reply_text, final_images_urls = CreativeImageService.generate_image(
                 conversation_input=conversation_input,
                 user_id=user_id,
                 page=page,
@@ -311,14 +312,14 @@ def get_ai_response(
                 stream_manager=stream_manager
             )
             
-            # Store metadata about the generation. We avoid storing raw base64 
-            # to prevent DynamoDB 400KB limit exceptions. The frontend already 
-            # received the images via WebSockets.
-            quiz_data = {
-                "type": "creative_image_generation",
-                "images_count": len(final_images_b64),
-                "delivery": "websocket_stream"
-            }
+            # 🟢 FIX: Pass the S3 URLs to 'generated_assets' and force 'requires_visuals' to True.
+            # This triggers the standard persistence block at the bottom of chat_service.py 
+            # to format them as a standard {"type": "rich_chat", "assets": [...]} and save to DynamoDB!
+            generated_assets = final_images_urls
+            requires_visuals = True 
+            
+            # We no longer use the dummy "websocket_stream" metadata payload
+            quiz_data = None
             
         except Exception as e:
             logger.error(f"Creative Image Generation Error: {e}")
