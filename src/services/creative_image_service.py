@@ -109,7 +109,8 @@ class CreativeImageService:
                     return "**Error**: We could not generate the image.", []
 
             if not final_text.strip() and final_image_urls:
-                final_text = "Here is your generated image."
+                # 🟢 RETURN EMPTY STRING INSTEAD OF HARDCODED ENGLISH FALLBACK
+                final_text = ""
 
             return final_text, final_image_urls
             
