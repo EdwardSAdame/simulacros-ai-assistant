@@ -450,10 +450,18 @@ def get_ai_response(
             meta_payload["sources"] = sources_data
         if not meta_payload: meta_payload = None
 
+        # 🟢 FIX: Guarantee the text is never empty so DynamoDB doesn't crash!
+        safe_reply_text = final_reply_text.strip() if final_reply_text else ""
+        if not safe_reply_text:
+            if generated_assets:
+                safe_reply_text = "Aquí tienes tu imagen generada."
+            else:
+                safe_reply_text = "[Generación completada sin texto]"
+
         saved_item = save_message(
             actual_conversation_id, 
             role="assistant", 
-            message_text=final_reply_text,
+            message_text=safe_reply_text, 
             metadata=meta_payload
         )
         if saved_item and isinstance(saved_item, dict):
@@ -462,4 +470,4 @@ def get_ai_response(
     except Exception as e:
         raise RuntimeError(f" Failed to save messages: {e}")
 
-    return final_reply_text, actual_conversation_id, assistant_timestamp, meta_payload
+    return safe_reply_text, actual_conversation_id, assistant_timestamp, meta_payload
