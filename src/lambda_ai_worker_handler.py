@@ -179,6 +179,7 @@ def lambda_handler(event, context):
             if connection_id and not is_hidden:
                 try:
                     # A. Send Standard Text Reply (The Chat Bubble + Inline Metadata)
+                    # 🟢 FIX: Added default=str to prevent crash from DynamoDB Decimal timestamp
                     response_payload = json.dumps({
                         "action": "ai_reply",
                         "ai_reply": ai_reply,
@@ -186,7 +187,7 @@ def lambda_handler(event, context):
                         "client_row_id": client_row_id,
                         "timestamp": assistant_timestamp,
                         "metadata": meta_payload 
-                    })
+                    }, default=str)
                     
                     api_gateway_client.post_to_connection(
                         ConnectionId=connection_id,
@@ -204,11 +205,12 @@ def lambda_handler(event, context):
                             action_type = "quiz_data_update"
 
                         if action_type:
+                            # 🟢 FIX: Added default=str here as well just in case!
                             data_payload = json.dumps({
                                 "action": action_type,
                                 "data": meta_payload,
                                 "conversation_id": conversation_id
-                            })
+                            }, default=str)
                             
                             api_gateway_client.post_to_connection(
                                 ConnectionId=connection_id,
