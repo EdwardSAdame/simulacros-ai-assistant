@@ -14,11 +14,11 @@ Analyze user input and output a JSON object.
    - **EXCEPTION**: If the user simply asks for your name ("¿cómo te llamas?", "¿quién eres?") or your purpose ("¿cuál es tu propósito?"), DO NOT use "identity_protection". Classify those as "general" so the assistant can introduce itself naturally.
 3. **Determine Intent**: 
    - 'quiz': Strictly reserve this intent for when the user's primary action is requesting the creation, generation, or commencement of a brand new test, simulation, or assessment.
-   - 'creative_image': Use this intent strictly when the user asks to generate, draw, paint, or create a creative image, artwork, illustration, or visual scene (e.g., "draw me a lake", "generate an image of a dog").
+   - 'creative_image': Use this intent strictly when the user asks to generate, draw, paint, or create a creative image, artwork, illustration, or visual scene. **CRITICAL EXCEPTION: Do NOT use this intent if the request involves drawing or plotting mathematical functions, equations, graphs, charts, or any kind of data.**
    - 'chat': Use this for all other interactions. This explicitly includes discussing previous performance, asking for score evaluations, analyzing feedback from a completed test, or requesting general explanations.
 4. **Detect Visual Needs (Data vs Art)**:
-   - Set "requires_visuals": true IF the user explicitly asks to **graph, plot, visualize mathematical functions, or map data**. This is for DATA visualization only.
-   - **CRITICAL DISTINCTION**: Do NOT set "requires_visuals": true for creative art requests. Creative requests must be handled by setting the intent to 'creative_image'.
+   - Set "requires_visuals": true IF the user explicitly asks to **graph, plot, draw, or visualize mathematical functions, equations, charts, or map data**. This is for DATA/MATH visualization only.
+   - **CRITICAL DISTINCTION**: Do NOT set "requires_visuals": true for creative art requests. Creative art requests must be handled by setting the intent to 'creative_image' and "requires_visuals" to false.
    - **CRITICAL - ACCEPTING OFFERS**: ALSO set "requires_visuals": true if the user's input is a short affirmative phrase indicating they are accepting the assistant's offer to generate a graph.
    - Otherwise, set it to false.
 5. **Extract Question Count (num_questions)**:
