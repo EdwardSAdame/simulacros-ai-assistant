@@ -312,6 +312,9 @@ def get_ai_response(
                 stream_manager=stream_manager
             )
             
+            # 🔍 DEBUG LOG 1: Check what came out of the Image Parser
+            logger.info(f"🔥 [DEBUG] Text returned from CreativeImageService: '{final_reply_text}'")
+            
             generated_assets = final_images_urls
             requires_visuals = True 
             quiz_data = None
@@ -446,14 +449,13 @@ def get_ai_response(
         if not meta_payload: meta_payload = None
 
         # 🟢 THE FIX
-        # Priority 1: Use the captured AI dynamic text (final_reply_text)
-        # Priority 2: Use an invisible space (\u200b) as a failsafe so DynamoDB doesn't crash 
-        #             and the UI knows to stop loading (it "types" nothing visible).
         safe_reply_text = final_reply_text.strip() if final_reply_text else "\u200b"
 
-        # Special safety case if AI text is genuinely empty AND no image was made
         if safe_reply_text == "\u200b" and not generated_assets:
              safe_reply_text = "[Generación completada sin texto]"
+
+        # 🔍 DEBUG LOG 2: Check what is finally making it to DynamoDB (and the WebSocket)
+        logger.info(f"🔥 [DEBUG] Final Text saved to DB and sent via WS: '{safe_reply_text}'")
 
         saved_item = save_message(
             actual_conversation_id, 
