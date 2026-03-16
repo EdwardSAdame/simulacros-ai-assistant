@@ -5,7 +5,7 @@ from typing import Any, Dict, List, Tuple
 
 from src.assistant.assistant_client import stream_chat_response
 from src.utils.image_stream_parser import ImageStreamParser
-from src.services.storage_service import storage_service  # 🟢 Import your S3 logic
+from src.services.storage_service import storage_service
 
 logger = logging.getLogger(__name__)
 
@@ -59,7 +59,6 @@ class CreativeImageService:
                 
                 elif evt_type == "partial_image":
                     b64_data = event.get("b64_data", "")
-                    # 🟢 FIX: Decode Base64 to bytes and upload to S3
                     try:
                         image_bytes = base64.b64decode(b64_data)
                         s3_url = storage_service.upload_image_from_bytes(
@@ -71,7 +70,7 @@ class CreativeImageService:
                         if stream_manager:
                             stream_manager.send_partial_image(
                                 index=event.get("index", 0),
-                                b64_data=s3_url  # Now sending the URL, not the massive string!
+                                b64_data=s3_url  
                             )
                     except Exception as upload_err:
                         logger.warning(f"Partial image S3 upload failed: {upload_err}")
@@ -80,7 +79,6 @@ class CreativeImageService:
                     b64_data = event.get("b64_data", "")
                     revised_prompt = event.get("revised_prompt", "")
                     
-                    # 🟢 FIX: Decode Final Base64 to bytes and upload to S3
                     try:
                         image_bytes = base64.b64decode(b64_data)
                         final_s3_url = storage_service.upload_image_from_bytes(
@@ -92,7 +90,7 @@ class CreativeImageService:
                         
                         if stream_manager:
                             stream_manager.send_final_image(
-                                b64_data=final_s3_url, # Sending the URL
+                                b64_data=final_s3_url, 
                                 revised_prompt=revised_prompt
                             )
                     except Exception as upload_err:
@@ -108,8 +106,8 @@ class CreativeImageService:
                         stream_manager.send_error(error_msg)
                     return "**Error**: We could not generate the image.", []
 
+            # Clean safety net fallback (leaves text empty if AI fails to generate a description)
             if not final_text.strip() and final_image_urls:
-                # 🟢 RETURN EMPTY STRING INSTEAD OF HARDCODED ENGLISH FALLBACK
                 final_text = ""
 
             return final_text, final_image_urls

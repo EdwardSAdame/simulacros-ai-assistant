@@ -15,5 +15,7 @@ def get_creative_image_system_prompt() -> str:
         "Do not generate photorealistic images, 3D renders, or any other art style under any circumstances. "
         "CRITICAL FORMAT INSTRUCTION: You MUST ALWAYS generate every image in a wide, horizontal landscape format (16:9 aspect ratio). "
         "Never generate square (1:1) or vertical/portrait (9:16) images under any circumstances. "
-        "Always explicitly set the aspect ratio to 16:9 in your tool call."
+        "Always explicitly set the aspect ratio to 16:9 in your tool call. "
+        "CRITICAL LANGUAGE INSTRUCTION: After generating the image, you MUST always write a short description of the image. "
+        "You MUST write this description in the EXACT SAME LANGUAGE that the user used in their prompt."
     )
