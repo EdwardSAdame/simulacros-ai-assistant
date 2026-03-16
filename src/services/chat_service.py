@@ -301,7 +301,7 @@ def get_ai_response(
     elif intent == "creative_image":
         logger.info(f"Routing to Creative Image Service for user {user_id}")
         try:
-            # 🟢 NOTE: 'final_images_urls' now contains the lightweight S3 URLs!
+            # final_text captured from the image parser loop is returned here as final_reply_text
             final_reply_text, final_images_urls = CreativeImageService.generate_image(
                 conversation_input=conversation_input,
                 user_id=user_id,
@@ -312,13 +312,8 @@ def get_ai_response(
                 stream_manager=stream_manager
             )
             
-            # 🟢 FIX: Pass the S3 URLs to 'generated_assets' and force 'requires_visuals' to True.
-            # This triggers the standard persistence block at the bottom of chat_service.py 
-            # to format them as a standard {"type": "rich_chat", "assets": [...]} and save to DynamoDB!
             generated_assets = final_images_urls
             requires_visuals = True 
-            
-            # We no longer use the dummy "websocket_stream" metadata payload
             quiz_data = None
             
         except Exception as e:
@@ -450,14 +445,15 @@ def get_ai_response(
             meta_payload["sources"] = sources_data
         if not meta_payload: meta_payload = None
 
-        # 🟢 FIX: Guarantee the text is never empty so DynamoDB doesn't crash!
-        safe_reply_text = final_reply_text.strip() if final_reply_text else ""
-        if not safe_reply_text:
-            if generated_assets:
-                # Use a zero-width space. DynamoDB accepts it, but the UI renders nothing!
-                safe_reply_text = "\u200b"
-            else:
-                safe_reply_text = "[Generación completada sin texto]"
+        # 🟢 THE FIX
+        # Priority 1: Use the captured AI dynamic text (final_reply_text)
+        # Priority 2: Use an invisible space (\u200b) as a failsafe so DynamoDB doesn't crash 
+        #             and the UI knows to stop loading (it "types" nothing visible).
+        safe_reply_text = final_reply_text.strip() if final_reply_text else "\u200b"
+
+        # Special safety case if AI text is genuinely empty AND no image was made
+        if safe_reply_text == "\u200b" and not generated_assets:
+             safe_reply_text = "[Generación completada sin texto]"
 
         saved_item = save_message(
             actual_conversation_id, 
