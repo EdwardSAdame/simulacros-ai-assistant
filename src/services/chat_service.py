@@ -301,7 +301,6 @@ def get_ai_response(
     elif intent == "creative_image":
         logger.info(f"Routing to Creative Image Service for user {user_id}")
         try:
-            # final_text captured from the image parser loop is returned here as final_reply_text
             final_reply_text, final_images_urls = CreativeImageService.generate_image(
                 conversation_input=conversation_input,
                 user_id=user_id,
@@ -311,9 +310,6 @@ def get_ai_response(
                 mode=mode,
                 stream_manager=stream_manager
             )
-            
-            # 🔍 DEBUG LOG 1: Check what came out of the Image Parser
-            logger.info(f"🔥 [DEBUG] Text returned from CreativeImageService: '{final_reply_text}'")
             
             generated_assets = final_images_urls
             requires_visuals = True 
@@ -448,14 +444,10 @@ def get_ai_response(
             meta_payload["sources"] = sources_data
         if not meta_payload: meta_payload = None
 
-        # 🟢 THE FIX
         safe_reply_text = final_reply_text.strip() if final_reply_text else "\u200b"
 
         if safe_reply_text == "\u200b" and not generated_assets:
              safe_reply_text = "[Generación completada sin texto]"
-
-        # 🔍 DEBUG LOG 2: Check what is finally making it to DynamoDB (and the WebSocket)
-        logger.info(f"🔥 [DEBUG] Final Text saved to DB and sent via WS: '{safe_reply_text}'")
 
         saved_item = save_message(
             actual_conversation_id, 
