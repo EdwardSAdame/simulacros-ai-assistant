@@ -7,6 +7,10 @@ from src.assistant.assistant_client import stream_chat_response
 from src.utils.image_stream_parser import ImageStreamParser
 from src.services.storage_service import storage_service
 
+# NEW IMPORTS: Bring in the prompt builders
+from src.services.context_builder import build_runtime_context
+from src.config.system_instructions import build_system_instructions
+
 logger = logging.getLogger(__name__)
 
 class CreativeImageService:
@@ -38,7 +42,22 @@ class CreativeImageService:
         final_image_urls = []
 
         try:
-            # 1. Trigger the stream using the updated assistant client
+            # 1. Build Runtime Signals
+            runtime_signals = build_runtime_context(
+                page=page,
+                user_id=user_id,
+                name=name,
+                email=email,
+                requires_visuals=False
+            )
+            
+            # 2. Build System Prompt with the Creative Image Doctrine active
+            system_prompt = build_system_instructions(
+                extras=runtime_signals,
+                requires_creative_image=True # This safely injects the Monet rules!
+            )
+
+            # 3. Trigger the stream using the updated assistant client
             raw_stream = stream_chat_response(
                 conversation_input=conversation_input,
                 user_id=user_id,
@@ -46,10 +65,11 @@ class CreativeImageService:
                 name=name,
                 email=email,
                 mode=mode,
-                enable_image_generation=True 
+                enable_image_generation=True,
+                system_instruction=system_prompt # Passing the correctly built prompt
             )
             
-            # 2. Parse the stream and dispatch events to the frontend
+            # 4. Parse the stream and dispatch events to the frontend
             for event in ImageStreamParser.parse(raw_stream):
                 evt_type = event.get("type")
                 

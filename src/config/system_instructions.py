@@ -6,6 +6,7 @@ from typing import Iterable, Optional
 # NEW IMPORTS: Bring in the dynamic modules
 from src.config.visual_instructions import build_visual_instructions
 from src.config.search_instructions import build_search_instructions
+from src.config.creative_image_instructions import get_creative_image_system_prompt
 
 # Base paths to find the JSON blueprints
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -80,19 +81,16 @@ def load_exam_rules(exam_context: str) -> str:
             name = comp.get("name", "Subject")
             framework_text += f"\n### DOMAIN: {name.upper()}\n"
             
-            # 1. Summary
             summary = comp.get("summary") or comp.get("focus") or comp.get("description")
             if summary:
                 framework_text += f"**Overview**: {summary}\n"
 
-            # 2. Competencies
             competencies = comp.get("competencies") or comp.get("skills")
             if competencies:
                 framework_text += "**Required Skills/Competencies**:\n"
                 for skill in competencies:
                     framework_text += f"- {skill}\n"
             
-            # 3. Topics
             topics = comp.get("areas") or comp.get("domains")
             if not topics and isinstance(comp.get("components"), list) and isinstance(comp["components"][0], str):
                  topics = comp["components"]
@@ -102,13 +100,11 @@ def load_exam_rules(exam_context: str) -> str:
                 for area in topics:
                     framework_text += f"- {area}\n"
 
-            # 4. Text Types
             if "text_types" in comp and isinstance(comp["text_types"], dict):
                 framework_text += "**Text Types**:\n"
                 for type_key, sublist in comp["text_types"].items():
                     framework_text += f"- {type_key.capitalize()}: {', '.join(sublist)}\n"
             
-            # 5. Structure (English)
             if "parts" in comp and isinstance(comp["parts"], list):
                 framework_text += "**Exam Structure (English)**:\n"
                 for part in comp["parts"]:
@@ -116,7 +112,6 @@ def load_exam_rules(exam_context: str) -> str:
                     p_desc = part.get("description", "")
                     framework_text += f"- Part {p_num}: {p_desc}\n"
 
-            # 6. Strategy
             strat = comp.get("ai_strategy")
             if strat:
                 framework_text += f"**Instructional Strategy**: {strat}\n"
@@ -132,9 +127,11 @@ def load_exam_rules(exam_context: str) -> str:
 def build_system_instructions(
     extras: Optional[Iterable[str]] = None, 
     exam_context: str = "ICFES",
-    requires_visuals: bool = False, # ADDED PARAMETER
-    web_search_active: bool = False # ADDED PARAMETER
+    requires_visuals: bool = False, # Analytical Graphing
+    web_search_active: bool = False,
+    requires_creative_image: bool = False # Monet Image Generation
 ) -> str:
+    
     blocks = [BASE_SYSTEM_INSTRUCTIONS]
     
     # 1. Inject Academic Framework
@@ -147,11 +144,17 @@ def build_system_instructions(
     # 2. Inject Search Protocols (CONDITIONAL)
     if web_search_active:
         blocks.append(build_search_instructions())
-    
-    # 3. Inject Visual Doctrine (CONDITIONAL)
+        
+    # 3. Inject Graphing Visual Doctrine (CONDITIONAL)
     if requires_visuals:
         blocks.append(build_visual_instructions())
+
+    # 4. Inject Creative Image Doctrine (CONDITIONAL)
+    if requires_creative_image:
+        creative_header = "## 7. CREATIVE IMAGE GENERATION (STRICT)\n"
+        blocks.append(creative_header + get_creative_image_system_prompt())
     
+    # 5. Inject Runtime Signals (Extras)
     if extras:
         addenda = [e for e in extras if e]
         if addenda:
