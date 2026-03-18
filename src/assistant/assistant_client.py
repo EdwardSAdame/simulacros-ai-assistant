@@ -7,7 +7,6 @@ from typing import List, Dict, Any, Tuple, Generator
 from src.config.settings import get_openai_client, get_vector_search_max_results
 from src.config.model_config import get_model_config
 from src.schemas.quiz_schemas import QuizResponse
-from src.config.creative_image_instructions import get_creative_image_system_prompt
 
 # NEW REFACTORED MODULES
 from src.services.signal_service import build_runtime_signals
@@ -103,15 +102,10 @@ def stream_chat_response(
     client = get_openai_client()
     cfg = get_model_config(mode)
     
-    base_system_text = system_instruction or build_runtime_signals(
+    # Trust the injected system_instruction entirely. No hardcoded appends!
+    system_text = system_instruction or build_runtime_signals(
         user_id, page, name, email, requires_visuals=False
     )
-    
-    if enable_image_generation:
-        brand_instruction = get_creative_image_system_prompt()
-        system_text = f"{base_system_text}\n\n{brand_instruction}"
-    else:
-        system_text = base_system_text
         
     api_input = [{"role": "system", "content": [{"type": "input_text", "text": system_text}]}]
     api_input.extend(conversation_input)
