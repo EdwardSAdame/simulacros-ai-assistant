@@ -26,7 +26,7 @@ class SemanticRouter:
                 "category": "general", 
                 "intent": "chat",
                 "requires_visuals": False,
-                "num_questions": 5, # NEW: Default fallback
+                "num_questions": 0, # FIX: Default fallback set to 0
                 "loading_phrases": ["Procesando...", "Esperando datos..."], 
                 "source": "fallback"
             }
@@ -37,7 +37,7 @@ class SemanticRouter:
                 "category": result.get("category", "general"),
                 "intent": result.get("intent", "chat"),
                 "requires_visuals": result.get("requires_visuals", False),
-                "num_questions": result.get("num_questions", 5), # NEW: Pass the extracted number
+                "num_questions": result.get("num_questions", 0), # FIX: Default to 0
                 "loading_phrases": result.get("loading_phrases", ["Analizando...", "Pensando..."]),
                 "source": "ai"
             }
@@ -47,7 +47,7 @@ class SemanticRouter:
                 "category": "general", 
                 "intent": "chat",
                 "requires_visuals": False,
-                "num_questions": 5, # NEW: Error fallback
+                "num_questions": 0, # FIX: Error fallback set to 0
                 "loading_phrases": ["Analizando solicitud...", "Procesando información..."],
                 "source": "error_fallback"
             }
@@ -103,12 +103,15 @@ class SemanticRouter:
             if not isinstance(requires_visuals, bool):
                 requires_visuals = False
 
-            # NEW: Extract and Sanitize num_questions with Truncation Failsafe
-            num_questions = data.get("num_questions", 5)
-            if not isinstance(num_questions, int) or num_questions < 1:
-                num_questions = 5
-            elif num_questions > 30:
-                num_questions = 30 # Safe Truncation to 30
+            # 🟢 NEW FIX: Clean Python logic to zero out num_questions for non-quizzes
+            if intent != "quiz":
+                num_questions = 0
+            else:
+                num_questions = data.get("num_questions", 5)
+                if not isinstance(num_questions, int) or num_questions < 1:
+                    num_questions = 5
+                elif num_questions > 30:
+                    num_questions = 30 # Safe Truncation to 30
                 
             # Robust Extraction for phrases
             phrases = data.get("loading_phrases")

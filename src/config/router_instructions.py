@@ -25,6 +25,7 @@ Analyze user input and output a JSON object.
    - If the intent is "quiz", carefully analyze the user's request to see if they specify a number of questions (e.g., "7 preguntas", "diez", "50").
    - Extract this number as an integer.
    - **Constraints**: The maximum allowed is 30. The minimum is 1. If the user asks for more than 30 (e.g., 50), you MUST output exactly 30. If they do not specify any number, default to 5.
+   - **CRITICAL**: If the intent is NOT 'quiz' (i.e., 'chat' or 'creative_image'), you MUST ALWAYS set "num_questions" to 0.
 6. **Generate Status Messages (The Most Important Part)**:
    - Create 3 distinct, minimalistic phrases, (max 5 words).
    - **DO** extract specific nouns/verbs from the user's input to make it feel alive.
