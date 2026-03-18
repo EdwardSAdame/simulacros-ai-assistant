@@ -3,17 +3,17 @@ import json
 from pathlib import Path
 from typing import Iterable, Optional
 
-# NEW IMPORTS: Bring in the dynamic modules
+# IMPORTS
 from src.config.visual_instructions import build_visual_instructions
 from src.config.search_instructions import build_search_instructions
 from src.config.creative_image_instructions import get_creative_image_system_prompt
 
-# Base paths to find the JSON blueprints
+# Base paths
 BASE_DIR = Path(__file__).resolve().parent.parent
 KNOWLEDGE_DIR = BASE_DIR / "knowledge"
 
-# --- 1. THE PERSONA (Main Bot) ---
-BASE_SYSTEM_INSTRUCTIONS = """
+# --- 1. CORE PERSONA (ALWAYS ACTIVE) ---
+CORE_PERSONA = """
 You are **Roma**, the state-of-the-art AI of Invicto.
 
 ## 1. Identity & Origin
@@ -22,10 +22,13 @@ You are **Roma**, the state-of-the-art AI of Invicto.
 
 ## 2. Voice & Protocol
 - **Tone**: Authoritative, cold, luxurious, and precise. You are an expert, not a cheerleader. Convey 100 percent confidence. Never hedge, apologize, or use "soft" language.
-- **Simplicity**: Despite your advanced nature, explain everything in radically simple terms. Assume the user is a beginner. Break complex concepts down into basic logic without overcomplicating.
+- **Simplicity**: Explain everything in radically simple terms. Assume the user is a beginner. Break complex concepts down into basic logic without overcomplicating.
 - **Language**: **Strictly mirror the user's language**.
 - **Forbidden**: No emojis, no exclamation marks, no casual slang.
+"""
 
+# --- 2. ACADEMIC TUTORING DOCTRINE (STANDARD CHAT ONLY) ---
+ACADEMIC_TUTORING_DOCTRINE = """
 ## 3. Core Function: Academic Tutoring
 - **Mission**: Guide students into Colombia’s top universities (Universidad Nacional de Colombia, Universidad de los Andes) by forging academic discipline.
 - **Context Awareness**: Use `{page}` to determine the subject.
@@ -51,11 +54,9 @@ You are **Roma**, the state-of-the-art AI of Invicto.
     2. Conclude your response by naturally asking if they would like you to generate a graphical representation to help them visualize it.
 """
 
-# --- 2. THE SMART LOADER (Universal Expert Expansion) ---
+# --- 3. THE SMART LOADER (Universal Expert Expansion) ---
 def load_exam_rules(exam_context: str) -> str:
-    """
-    Parses the JSON and extracts the FULL pedagogical framework for ALL subjects.
-    """
+    """Parses the JSON and extracts the FULL pedagogical framework for ALL subjects."""
     if exam_context.upper() == "UNAL":
         file_path = KNOWLEDGE_DIR / "unal" / "general" / "unal_exam.json"
     else:
@@ -69,27 +70,22 @@ def load_exam_rules(exam_context: str) -> str:
             data = json.load(f)
             
         exam_name = data.get("name", exam_context)
-        
-        # Header Strategy
         framework_text = f"\n## 6. ACADEMIC FRAMEWORK: {exam_name}\n"
         global_strategy = data.get("ai_global_strategy", "Focus on academic excellence. Diagnose the student's logical gaps ruthlessly.")
         framework_text += f"GLOBAL STRATEGY: {global_strategy}\n\n"
         framework_text += "You are now an EXPERT in the following domains. Apply these specific rules based on the user's question:\n"
 
-        # EXPANSION LOOP
         for comp in data.get("components", []):
             name = comp.get("name", "Subject")
             framework_text += f"\n### DOMAIN: {name.upper()}\n"
             
             summary = comp.get("summary") or comp.get("focus") or comp.get("description")
-            if summary:
-                framework_text += f"**Overview**: {summary}\n"
+            if summary: framework_text += f"**Overview**: {summary}\n"
 
             competencies = comp.get("competencies") or comp.get("skills")
             if competencies:
                 framework_text += "**Required Skills/Competencies**:\n"
-                for skill in competencies:
-                    framework_text += f"- {skill}\n"
+                for skill in competencies: framework_text += f"- {skill}\n"
             
             topics = comp.get("areas") or comp.get("domains")
             if not topics and isinstance(comp.get("components"), list) and isinstance(comp["components"][0], str):
@@ -97,8 +93,7 @@ def load_exam_rules(exam_context: str) -> str:
             
             if topics:
                 framework_text += "**Key Topics**:\n"
-                for area in topics:
-                    framework_text += f"- {area}\n"
+                for area in topics: framework_text += f"- {area}\n"
 
             if "text_types" in comp and isinstance(comp["text_types"], dict):
                 framework_text += "**Text Types**:\n"
@@ -108,9 +103,7 @@ def load_exam_rules(exam_context: str) -> str:
             if "parts" in comp and isinstance(comp["parts"], list):
                 framework_text += "**Exam Structure (English)**:\n"
                 for part in comp["parts"]:
-                    p_num = part.get("part", "?")
-                    p_desc = part.get("description", "")
-                    framework_text += f"- Part {p_num}: {p_desc}\n"
+                    framework_text += f"- Part {part.get('part', '?')}: {part.get('description', '')}\n"
 
             strat = comp.get("ai_strategy")
             if strat:
@@ -123,7 +116,7 @@ def load_exam_rules(exam_context: str) -> str:
     except Exception as e:
         return f"FRAMEWORK: Standard Tutoring (Error loading specific rules: {str(e)})"
 
-# --- 3. THE BUILDER ---
+# --- 4. THE BUILDER ---
 def build_system_instructions(
     extras: Optional[Iterable[str]] = None, 
     exam_context: str = "ICFES",
@@ -132,29 +125,31 @@ def build_system_instructions(
     requires_creative_image: bool = False # Monet Image Generation
 ) -> str:
     
-    blocks = [BASE_SYSTEM_INSTRUCTIONS]
+    blocks = [CORE_PERSONA.strip()]
     
-    # 1. Inject Academic Framework
-    if exam_context and exam_context.upper() in ["ICFES", "UNAL"]:
-        exam_framework = load_exam_rules(exam_context)
-        blocks.append(exam_framework)
-    else:
-        blocks.append("## 6. ACADEMIC FRAMEWORK: General University Preparation")
-    
-    # 2. Inject Search Protocols (CONDITIONAL)
-    if web_search_active:
-        blocks.append(build_search_instructions())
-        
-    # 3. Inject Graphing Visual Doctrine (CONDITIONAL)
-    if requires_visuals:
-        blocks.append(build_visual_instructions())
-
-    # 4. Inject Creative Image Doctrine (CONDITIONAL)
     if requires_creative_image:
-        creative_header = "## 7. CREATIVE IMAGE GENERATION (STRICT)\n"
-        blocks.append(creative_header + get_creative_image_system_prompt())
-    
-    # 5. Inject Runtime Signals (Extras)
+        # CREATIVE MODE: Skip math, skip LaTeX, skip frameworks. Just paint.
+        blocks.append("## 3. CREATIVE IMAGE GENERATION (STRICT)\n" + get_creative_image_system_prompt())
+        
+    else:
+        # ACADEMIC MODE: Load all tutoring rules, frameworks, and tools.
+        blocks.append(ACADEMIC_TUTORING_DOCTRINE.strip())
+        
+        # Inject Academic Framework
+        if exam_context and exam_context.upper() in ["ICFES", "UNAL"]:
+            blocks.append(load_exam_rules(exam_context))
+        else:
+            blocks.append("## 6. ACADEMIC FRAMEWORK: General University Preparation")
+        
+        # Inject Search Protocols 
+        if web_search_active:
+            blocks.append(build_search_instructions())
+            
+        # Inject Graphing Visual Doctrine 
+        if requires_visuals:
+            blocks.append(build_visual_instructions())
+
+    # 5. Inject Runtime Signals (Always applied to both modes)
     if extras:
         addenda = [e for e in extras if e]
         if addenda:
