@@ -55,13 +55,10 @@ class SemanticRouter:
     def _classify_with_llm(self, text: str) -> dict:
         router_model = settings.OPENAI_ROUTER_MODEL.lower()
         
-        system_prompt = (
-            f"{ROUTER_SYSTEM_INSTRUCTIONS}\n\n"
-            f"User Input to Classify: \"{text}\""
-        )
-
+        # 🟢 FIX: We no longer append the user text to the system prompt.
+        # We pass the pure instructions to the system, and the text to the user.
         messages = [
-            {"role": "system", "content": system_prompt},
+            {"role": "system", "content": ROUTER_SYSTEM_INSTRUCTIONS.strip()},
             {"role": "user", "content": text}
         ]
         
@@ -77,12 +74,12 @@ class SemanticRouter:
         }
 
         if is_reasoning_model:
-            # 🟢 Use Reasoning Effort
+            #  Use Reasoning Effort
             request_kwargs["max_completion_tokens"] = 100 
             if settings.OPENAI_ROUTER_EFFORT:
                 request_kwargs["reasoning_effort"] = settings.OPENAI_ROUTER_EFFORT
         else:
-            # 🟢 Use Temperature/Top_P
+            #  Use Temperature/Top_P
             request_kwargs["max_tokens"] = 100 
             request_kwargs["temperature"] = settings.OPENAI_ROUTER_TEMP
             request_kwargs["top_p"] = settings.OPENAI_ROUTER_TOP_P
@@ -96,7 +93,7 @@ class SemanticRouter:
             category = data.get("category", "general").lower()
             if category not in self.valid_categories: category = "general"
 
-            # 🟢 CRITICAL FIX: Allow 'creative_image' intent to pass through
+            #  CRITICAL FIX: Allow 'creative_image' intent to pass through
             intent = data.get("intent", "chat").lower().strip()
             if intent not in ["quiz", "chat", "creative_image"]: 
                 intent = "chat"
