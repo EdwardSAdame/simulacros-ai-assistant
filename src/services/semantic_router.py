@@ -8,7 +8,7 @@ logger = logging.getLogger(__name__)
 
 class SemanticRouter:
     """
-    Determises the intent/category of a user message and generates dynamic
+    Determines the intent/category of a user message and generates dynamic
     visual feedback phrases.
     """
     
@@ -17,7 +17,8 @@ class SemanticRouter:
         self.valid_categories = [
             "biologia", "quimica", "fisica", "matematicas", 
             "sociales", "lectura_critica", "analisis_imagen", "ingles",
-            "general", "identity_protection"  #  SECURITY: Added identity_protection
+            "general", "identity_protection", 
+            "admisiones"  # 🟢 NEW: Added admisiones category
         ]
 
     def determine_category(self, text: str) -> dict:
@@ -26,7 +27,7 @@ class SemanticRouter:
                 "category": "general", 
                 "intent": "chat",
                 "requires_visuals": False,
-                "num_questions": 0, # FIX: Default fallback set to 0
+                "num_questions": 0,
                 "loading_phrases": ["Procesando...", "Esperando datos..."], 
                 "source": "fallback"
             }
@@ -37,7 +38,7 @@ class SemanticRouter:
                 "category": result.get("category", "general"),
                 "intent": result.get("intent", "chat"),
                 "requires_visuals": result.get("requires_visuals", False),
-                "num_questions": result.get("num_questions", 0), # FIX: Default to 0
+                "num_questions": result.get("num_questions", 0),
                 "loading_phrases": result.get("loading_phrases", ["Analizando...", "Pensando..."]),
                 "source": "ai"
             }
@@ -47,7 +48,7 @@ class SemanticRouter:
                 "category": "general", 
                 "intent": "chat",
                 "requires_visuals": False,
-                "num_questions": 0, # FIX: Error fallback set to 0
+                "num_questions": 0,
                 "loading_phrases": ["Analizando solicitud...", "Procesando información..."],
                 "source": "error_fallback"
             }
@@ -55,7 +56,6 @@ class SemanticRouter:
     def _classify_with_llm(self, text: str) -> dict:
         router_model = settings.OPENAI_ROUTER_MODEL.lower()
         
-        # 🟢 FIX: We no longer append the user text to the system prompt.
         # We pass the pure instructions to the system, and the text to the user.
         messages = [
             {"role": "system", "content": ROUTER_SYSTEM_INSTRUCTIONS.strip()},
@@ -74,12 +74,10 @@ class SemanticRouter:
         }
 
         if is_reasoning_model:
-            #  Use Reasoning Effort
             request_kwargs["max_completion_tokens"] = 100 
             if settings.OPENAI_ROUTER_EFFORT:
                 request_kwargs["reasoning_effort"] = settings.OPENAI_ROUTER_EFFORT
         else:
-            #  Use Temperature/Top_P
             request_kwargs["max_tokens"] = 100 
             request_kwargs["temperature"] = settings.OPENAI_ROUTER_TEMP
             request_kwargs["top_p"] = settings.OPENAI_ROUTER_TOP_P
@@ -93,9 +91,9 @@ class SemanticRouter:
             category = data.get("category", "general").lower()
             if category not in self.valid_categories: category = "general"
 
-            #  CRITICAL FIX: Allow 'creative_image' intent to pass through
+            # 🟢 CRITICAL FIX: Allow 'admission_stats' intent to pass through
             intent = data.get("intent", "chat").lower().strip()
-            if intent not in ["quiz", "chat", "creative_image"]: 
+            if intent not in ["quiz", "chat", "creative_image", "admission_stats"]: 
                 intent = "chat"
 
             # Extract Visual Intent
@@ -103,7 +101,7 @@ class SemanticRouter:
             if not isinstance(requires_visuals, bool):
                 requires_visuals = False
 
-            # 🟢 NEW FIX: Clean Python logic to zero out num_questions for non-quizzes
+            # Clean Python logic to zero out num_questions for non-quizzes
             if intent != "quiz":
                 num_questions = 0
             else:
@@ -131,7 +129,7 @@ class SemanticRouter:
                 "category": category, 
                 "intent": intent, 
                 "requires_visuals": requires_visuals, 
-                "num_questions": num_questions, # NEW: Add to return dict
+                "num_questions": num_questions,
                 "loading_phrases": phrases
             }
             

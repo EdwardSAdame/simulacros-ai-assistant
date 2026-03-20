@@ -62,8 +62,8 @@ def get_ai_response(
     num_questions: int = 5
 ) -> Tuple[str, str, str, Dict | None]: 
     
-    # Lazy Imports
-    from src.assistant.assistant_client import send_message_to_assistant, generate_structured_quiz, stream_structured_quiz
+    # Lazy Imports (AÑADIMOS stream_chat_response AQUI)
+    from src.assistant.assistant_client import send_message_to_assistant, generate_structured_quiz, stream_structured_quiz, stream_chat_response
     from src.assistant.image_handler import format_image_urls_for_openai
     from src.services.quiz_service import QuizService
     from src.config.system_instructions import build_system_instructions
@@ -153,7 +153,14 @@ def get_ai_response(
     # 3. Intelligence Layer
     exam_context = determine_exam_context(page, message)
     selected_vector_stores = get_stores_for_page(page)
-    web_search_config = get_search_filters(exam_context)
+    
+    # 🟢 CRITICAL FIX: Disable web search explicitly if looking for admission stats
+    if intent == "admission_stats":
+        web_search_config = None
+        logger.info("Intent is 'admission_stats'. Web search explicitly disabled.")
+    else:
+        web_search_config = get_search_filters(exam_context)
+        
     is_web_search_active = (web_search_config is not None)
 
     log_event("context_resolution", {
@@ -179,7 +186,7 @@ def get_ai_response(
         conversation_input.append({"role": "user", "content": current_user_content})
 
     # ------------------------------------------------------------------
-    # BRANCH: QUIZ vs CREATIVE_IMAGE vs CHAT
+    # BRANCH: QUIZ vs CREATIVE_IMAGE vs ADMISSION_STATS vs CHAT
     # ------------------------------------------------------------------
     quiz_data = None
     final_reply_text = ""
@@ -189,7 +196,6 @@ def get_ai_response(
     if intent == "quiz" and QUIZ_FEATURE_ENABLED:
         topic_hint = message if message else "General Knowledge"
         
-        # FIX: Ensure bounds and apply truncation failsafe
         if not isinstance(num_questions, int) or num_questions < 1:
             num_questions = 5
         elif num_questions > 30:
@@ -318,6 +324,35 @@ def get_ai_response(
         except Exception as e:
             logger.error(f"Creative Image Generation Error: {e}")
             final_reply_text = "**Error**: We could not generate the image."
+            quiz_data = None
+
+    # 🟢 NEW BRANCH: ADMISSION STATS
+    elif intent == "admission_stats":
+        logger.info(f"Routing to Admission Stats local tool for user {user_id}")
+        try:
+            # We call the stream function we built, which has the tool execution logic built-in.
+            # Even if the frontend isn't streaming text chunks, we accumulate it here and return it smoothly.
+            stream_gen = stream_chat_response(
+                conversation_input=conversation_input,
+                user_id=user_id,
+                page=page,
+                name=name,
+                email=email,
+                mode=mode,
+                enable_image_generation=False
+            )
+            
+            for event in stream_gen:
+                if getattr(event, "type", "") == "response.output_text.delta":
+                    final_reply_text += getattr(event, "delta", "")
+                    
+            quiz_data = None
+            generated_assets = []
+            sources_data = []
+            
+        except Exception as e:
+            logger.error(f"Admission Stats Generaton Error: {e}")
+            final_reply_text = "**Error**: Hubo un problema consultando la base de datos de admisiones."
             quiz_data = None
 
     else:
