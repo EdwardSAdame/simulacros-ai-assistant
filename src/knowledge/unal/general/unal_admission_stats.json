@@ -1,0 +1,1892 @@
+{
+    "Música lnst. - Trompeta": {
+        "2025-1": {
+            "cutoff_score": 489.5265,
+            "admitted_count": 1
+        },
+        "2025-2": {
+            "cutoff_score": 507.5473,
+            "admitted_count": 2
+        },
+        "2023-1": {
+            "cutoff_score": 539.7279,
+            "admitted_count": 2
+        },
+        "2023-2": {
+            "cutoff_score": 547.55344,
+            "admitted_count": 2
+        },
+        "2024-1": {
+            "cutoff_score": 549.5615,
+            "admitted_count": 1
+        },
+        "2026-1": {
+            "cutoff_score": 620.5821,
+            "admitted_count": 1
+        }
+    },
+    "Geografía": {
+        "2025-1": {
+            "cutoff_score": 510.9925,
+            "admitted_count": 26
+        },
+        "2026-1": {
+            "cutoff_score": 549.5255,
+            "admitted_count": 41
+        },
+        "2023-1": {
+            "cutoff_score": 549.7317,
+            "admitted_count": 24
+        },
+        "2025-2": {
+            "cutoff_score": 549.8298,
+            "admitted_count": 40
+        },
+        "2024-2": {
+            "cutoff_score": 552.06,
+            "admitted_count": 22
+        },
+        "2023-2": {
+            "cutoff_score": 565.1158,
+            "admitted_count": 24
+        },
+        "2024-1": {
+            "cutoff_score": 572.1892,
+            "admitted_count": 23
+        }
+    },
+    "Música lnst. - Contrabajo": {
+        "2025-1": {
+            "cutoff_score": 520.8226,
+            "admitted_count": 2
+        },
+        "2023-2": {
+            "cutoff_score": 534.40762,
+            "admitted_count": 2
+        },
+        "2025-2": {
+            "cutoff_score": 579.2425,
+            "admitted_count": 1
+        },
+        "2023-1": {
+            "cutoff_score": 584.9808,
+            "admitted_count": 2
+        },
+        "2024-2": {
+            "cutoff_score": 610.4399,
+            "admitted_count": 2
+        },
+        "2024-1": {
+            "cutoff_score": 640.0426,
+            "admitted_count": 1
+        }
+    },
+    "Ingeniería Agrícola": {
+        "2025-2": {
+            "cutoff_score": 522.4584,
+            "admitted_count": 81
+        },
+        "2023-2": {
+            "cutoff_score": 531.6813,
+            "admitted_count": 80
+        },
+        "2023-1": {
+            "cutoff_score": 531.9034,
+            "admitted_count": 81
+        },
+        "2024-2": {
+            "cutoff_score": 542.9798,
+            "admitted_count": 80
+        },
+        "2024-1": {
+            "cutoff_score": 548.7672,
+            "admitted_count": 78
+        },
+        "2026-1": {
+            "cutoff_score": 555.8371,
+            "admitted_count": 85
+        },
+        "2025-1": {
+            "cutoff_score": 556.3579,
+            "admitted_count": 80
+        }
+    },
+    "Música lnst. - Tuba": {
+        "2026-1": {
+            "cutoff_score": 524.0356,
+            "admitted_count": 1
+        },
+        "2025-1": {
+            "cutoff_score": 581.589,
+            "admitted_count": 2
+        },
+        "2025-2": {
+            "cutoff_score": 593.5269,
+            "admitted_count": 1
+        },
+        "2023-1": {
+            "cutoff_score": 594.5126,
+            "admitted_count": 1
+        }
+    },
+    "Filología e Idiomas: Alemán": {
+        "2024-2": {
+            "cutoff_score": 524.0395,
+            "admitted_count": 17
+        },
+        "2025-2": {
+            "cutoff_score": 580.4545,
+            "admitted_count": 16
+        },
+        "2023-2": {
+            "cutoff_score": 585.6156,
+            "admitted_count": 21
+        },
+        "2025-1": {
+            "cutoff_score": 592.1507,
+            "admitted_count": 19
+        },
+        "2026-1": {
+            "cutoff_score": 594.9209,
+            "admitted_count": 17
+        },
+        "2023-1": {
+            "cutoff_score": 607.5028,
+            "admitted_count": 20
+        },
+        "2024-1": {
+            "cutoff_score": 624.4002,
+            "admitted_count": 16
+        }
+    },
+    "Música lnst. - Piano": {
+        "2025-2": {
+            "cutoff_score": 526.3529,
+            "admitted_count": 5
+        },
+        "2023-2": {
+            "cutoff_score": 537.45319,
+            "admitted_count": 6
+        },
+        "2023-1": {
+            "cutoff_score": 538.7058,
+            "admitted_count": 3
+        },
+        "2024-2": {
+            "cutoff_score": 564.7788,
+            "admitted_count": 2
+        },
+        "2025-1": {
+            "cutoff_score": 578.716,
+            "admitted_count": 2
+        },
+        "2026-1": {
+            "cutoff_score": 596.816,
+            "admitted_count": 4
+        },
+        "2024-1": {
+            "cutoff_score": 636.5902,
+            "admitted_count": 1
+        }
+    },
+    "Música lnst. - Clarinete": {
+        "2025-1": {
+            "cutoff_score": 527.3204,
+            "admitted_count": 1
+        },
+        "2023-1": {
+            "cutoff_score": 545.5992,
+            "admitted_count": 1
+        },
+        "2023-2": {
+            "cutoff_score": 591.8277,
+            "admitted_count": 2
+        },
+        "2026-1": {
+            "cutoff_score": 609.2529,
+            "admitted_count": 2
+        },
+        "2024-2": {
+            "cutoff_score": 613.2767,
+            "admitted_count": 1
+        }
+    },
+    "Lingüística": {
+        "2025-2": {
+            "cutoff_score": 527.6492,
+            "admitted_count": 26
+        },
+        "2023-1": {
+            "cutoff_score": 528.1879,
+            "admitted_count": 36
+        },
+        "2026-1": {
+            "cutoff_score": 543.3094,
+            "admitted_count": 31
+        },
+        "2023-2": {
+            "cutoff_score": 554.8722,
+            "admitted_count": 32
+        },
+        "2025-1": {
+            "cutoff_score": 561.3846,
+            "admitted_count": 28
+        },
+        "2024-2": {
+            "cutoff_score": 564.5701,
+            "admitted_count": 31
+        },
+        "2024-1": {
+            "cutoff_score": 565.5004,
+            "admitted_count": 33
+        }
+    },
+    "Música - Jazz": {
+        "2024-1": {
+            "cutoff_score": 533.3604,
+            "admitted_count": 5
+        },
+        "2025-2": {
+            "cutoff_score": 542.952,
+            "admitted_count": 3
+        },
+        "2024-2": {
+            "cutoff_score": 546.5545,
+            "admitted_count": 2
+        },
+        "2023-2": {
+            "cutoff_score": 561.86036,
+            "admitted_count": 1
+        },
+        "2023-1": {
+            "cutoff_score": 577.8305,
+            "admitted_count": 3
+        },
+        "2026-1": {
+            "cutoff_score": 585.4177,
+            "admitted_count": 2
+        }
+    },
+    "Música lnst. - Canto": {
+        "2025-2": {
+            "cutoff_score": 534.1467,
+            "admitted_count": 2
+        },
+        "2023-2": {
+            "cutoff_score": 548.27693,
+            "admitted_count": 1
+        },
+        "2026-1": {
+            "cutoff_score": 550.0646,
+            "admitted_count": 2
+        },
+        "2024-2": {
+            "cutoff_score": 562.2811,
+            "admitted_count": 4
+        },
+        "2025-1": {
+            "cutoff_score": 578.0662,
+            "admitted_count": 2
+        },
+        "2024-1": {
+            "cutoff_score": 638.2886,
+            "admitted_count": 2
+        }
+    },
+    "Ingeniería Agronómica": {
+        "2023-2": {
+            "cutoff_score": 534.6452,
+            "admitted_count": 84
+        },
+        "2024-2": {
+            "cutoff_score": 537.888,
+            "admitted_count": 97
+        },
+        "2025-2": {
+            "cutoff_score": 541.0044,
+            "admitted_count": 88
+        },
+        "2026-1": {
+            "cutoff_score": 550.4907,
+            "admitted_count": 95
+        },
+        "2023-1": {
+            "cutoff_score": 553.3086,
+            "admitted_count": 82
+        },
+        "2024-1": {
+            "cutoff_score": 566.3584,
+            "admitted_count": 91
+        },
+        "2025-1": {
+            "cutoff_score": 567.8054,
+            "admitted_count": 85
+        }
+    },
+    "Música lnst. - Trombón": {
+        "2025-2": {
+            "cutoff_score": 535.8468,
+            "admitted_count": 1
+        },
+        "2023-1": {
+            "cutoff_score": 563.9689,
+            "admitted_count": 1
+        },
+        "2026-1": {
+            "cutoff_score": 590.963,
+            "admitted_count": 1
+        },
+        "2025-1": {
+            "cutoff_score": 600.9679,
+            "admitted_count": 2
+        },
+        "2024-1": {
+            "cutoff_score": 623.0412,
+            "admitted_count": 2
+        }
+    },
+    "Español Y Filología Clásica": {
+        "2025-2": {
+            "cutoff_score": 537.2931,
+            "admitted_count": 25
+        },
+        "2026-1": {
+            "cutoff_score": 545.7364,
+            "admitted_count": 32
+        },
+        "2023-1": {
+            "cutoff_score": 553.1982,
+            "admitted_count": 32
+        },
+        "2023-2": {
+            "cutoff_score": 557.6619,
+            "admitted_count": 31
+        },
+        "2024-2": {
+            "cutoff_score": 561.1313,
+            "admitted_count": 32
+        },
+        "2025-1": {
+            "cutoff_score": 567.0693,
+            "admitted_count": 26
+        },
+        "2024-1": {
+            "cutoff_score": 577.2431,
+            "admitted_count": 32
+        }
+    },
+    "Música lnst. - Fagot": {
+        "2024-2": {
+            "cutoff_score": 538.0787,
+            "admitted_count": 1
+        },
+        "2025-2": {
+            "cutoff_score": 567.305,
+            "admitted_count": 1
+        },
+        "2025-1": {
+            "cutoff_score": 575.2286,
+            "admitted_count": 2
+        }
+    },
+    "Trabajo Social": {
+        "2026-1": {
+            "cutoff_score": 538.3903,
+            "admitted_count": 40
+        },
+        "2025-2": {
+            "cutoff_score": 569.6937,
+            "admitted_count": 31
+        },
+        "2023-2": {
+            "cutoff_score": 570.8274,
+            "admitted_count": 33
+        },
+        "2025-1": {
+            "cutoff_score": 571.0049,
+            "admitted_count": 25
+        },
+        "2023-1": {
+            "cutoff_score": 586.3535,
+            "admitted_count": 30
+        },
+        "2024-2": {
+            "cutoff_score": 588.3341,
+            "admitted_count": 27
+        },
+        "2024-1": {
+            "cutoff_score": 590.4611,
+            "admitted_count": 26
+        }
+    },
+    "Sociología": {
+        "2025-2": {
+            "cutoff_score": 539.6492,
+            "admitted_count": 36
+        },
+        "2024-2": {
+            "cutoff_score": 571.3747,
+            "admitted_count": 37
+        },
+        "2026-1": {
+            "cutoff_score": 572.6158,
+            "admitted_count": 39
+        },
+        "2023-2": {
+            "cutoff_score": 574.3266,
+            "admitted_count": 37
+        },
+        "2025-1": {
+            "cutoff_score": 594.5557,
+            "admitted_count": 39
+        },
+        "2024-1": {
+            "cutoff_score": 602.6066,
+            "admitted_count": 36
+        },
+        "2023-1": {
+            "cutoff_score": 610.3281,
+            "admitted_count": 37
+        }
+    },
+    "Contaduría Pública": {
+        "2025-2": {
+            "cutoff_score": 546.7443,
+            "admitted_count": 85
+        },
+        "2023-2": {
+            "cutoff_score": 553.5392,
+            "admitted_count": 104
+        },
+        "2023-1": {
+            "cutoff_score": 571.4093,
+            "admitted_count": 103
+        },
+        "2024-2": {
+            "cutoff_score": 576.3446,
+            "admitted_count": 64
+        },
+        "2024-1": {
+            "cutoff_score": 578.9613,
+            "admitted_count": 93
+        },
+        "2025-1": {
+            "cutoff_score": 594.6553,
+            "admitted_count": 68
+        },
+        "2026-1": {
+            "cutoff_score": 594.9209,
+            "admitted_count": 68
+        }
+    },
+    "Música lnst. - Guitarra": {
+        "2024-2": {
+            "cutoff_score": 548.3788,
+            "admitted_count": 4
+        },
+        "2023-2": {
+            "cutoff_score": 566.02662,
+            "admitted_count": 1
+        },
+        "2026-1": {
+            "cutoff_score": 581.1214,
+            "admitted_count": 2
+        },
+        "2025-1": {
+            "cutoff_score": 594.7058,
+            "admitted_count": 2
+        },
+        "2025-2": {
+            "cutoff_score": 681.0262,
+            "admitted_count": 1
+        },
+        "2023-1": {
+            "cutoff_score": 689.4629,
+            "admitted_count": 1
+        }
+    },
+    "Zootecnia": {
+        "2023-2": {
+            "cutoff_score": 548.772,
+            "admitted_count": 50
+        },
+        "2025-2": {
+            "cutoff_score": 552.4241,
+            "admitted_count": 47
+        },
+        "2023-1": {
+            "cutoff_score": 559.8072,
+            "admitted_count": 48
+        },
+        "2024-1": {
+            "cutoff_score": 561.009,
+            "admitted_count": 50
+        },
+        "2024-2": {
+            "cutoff_score": 566.8878,
+            "admitted_count": 48
+        },
+        "2025-1": {
+            "cutoff_score": 569.2406,
+            "admitted_count": 47
+        },
+        "2026-1": {
+            "cutoff_score": 577.0729,
+            "admitted_count": 49
+        }
+    },
+    "Música lnst. - Flauta": {
+        "2024-2": {
+            "cutoff_score": 549.3701,
+            "admitted_count": 1
+        },
+        "2025-1": {
+            "cutoff_score": 561.9375,
+            "admitted_count": 1
+        },
+        "2025-2": {
+            "cutoff_score": 585.523,
+            "admitted_count": 2
+        },
+        "2023-1": {
+            "cutoff_score": 593.8444,
+            "admitted_count": 2
+        },
+        "2026-1": {
+            "cutoff_score": 613.0057,
+            "admitted_count": 4
+        }
+    },
+    "Música lnst. - Oboe": {
+        "2025-2": {
+            "cutoff_score": 549.9744,
+            "admitted_count": 1
+        },
+        "2024-1": {
+            "cutoff_score": 557.6768,
+            "admitted_count": 2
+        },
+        "2026-1": {
+            "cutoff_score": 563.8298,
+            "admitted_count": 1
+        },
+        "2025-1": {
+            "cutoff_score": 584.4391,
+            "admitted_count": 1
+        },
+        "2023-2": {
+            "cutoff_score": 592.55264,
+            "admitted_count": 1
+        }
+    },
+    "Estudios Literarios": {
+        "2025-1": {
+            "cutoff_score": 551.1061,
+            "admitted_count": 42
+        },
+        "2026-1": {
+            "cutoff_score": 574.9105,
+            "admitted_count": 41
+        },
+        "2024-1": {
+            "cutoff_score": 606.089,
+            "admitted_count": 40
+        },
+        "2023-1": {
+            "cutoff_score": 613.8628,
+            "admitted_count": 39
+        }
+    },
+    "Música - Composición": {
+        "2026-1": {
+            "cutoff_score": 551.2396,
+            "admitted_count": 1
+        },
+        "2025-2": {
+            "cutoff_score": 570.0696,
+            "admitted_count": 1
+        },
+        "2023-1": {
+            "cutoff_score": 592.8696,
+            "admitted_count": 2
+        },
+        "2024-2": {
+            "cutoff_score": 595.6582,
+            "admitted_count": 3
+        },
+        "2023-2": {
+            "cutoff_score": 618.26692,
+            "admitted_count": 1
+        },
+        "2024-1": {
+            "cutoff_score": 656.4658,
+            "admitted_count": 1
+        }
+    },
+    "Terapia Ocupacional": {
+        "2023-1": {
+            "cutoff_score": 556.7892,
+            "admitted_count": 44
+        },
+        "2026-1": {
+            "cutoff_score": 558.1058,
+            "admitted_count": 55
+        },
+        "2025-1": {
+            "cutoff_score": 566.2489,
+            "admitted_count": 47
+        },
+        "2024-1": {
+            "cutoff_score": 574.575,
+            "admitted_count": 45
+        }
+    },
+    "Música lnst. - Violonchelo": {
+        "2024-2": {
+            "cutoff_score": 556.9702,
+            "admitted_count": 1
+        },
+        "2025-2": {
+            "cutoff_score": 566.9166,
+            "admitted_count": 2
+        },
+        "2023-1": {
+            "cutoff_score": 574.5319,
+            "admitted_count": 2
+        },
+        "2026-1": {
+            "cutoff_score": 613.5494,
+            "admitted_count": 1
+        },
+        "2025-1": {
+            "cutoff_score": 624.1129,
+            "admitted_count": 2
+        },
+        "2023-2": {
+            "cutoff_score": 639.3351,
+            "admitted_count": 1
+        }
+    },
+    "Filosofía": {
+        "2025-2": {
+            "cutoff_score": 557.6481,
+            "admitted_count": 46
+        },
+        "2025-1": {
+            "cutoff_score": 560.8824,
+            "admitted_count": 46
+        },
+        "2023-2": {
+            "cutoff_score": 567.0175,
+            "admitted_count": 45
+        },
+        "2026-1": {
+            "cutoff_score": 568.4992,
+            "admitted_count": 43
+        },
+        "2024-2": {
+            "cutoff_score": 579.6948,
+            "admitted_count": 44
+        },
+        "2024-1": {
+            "cutoff_score": 594.4315,
+            "admitted_count": 45
+        },
+        "2023-1": {
+            "cutoff_score": 615.5421,
+            "admitted_count": 42
+        }
+    },
+    "Filología e Idiomas: Francés": {
+        "2024-2": {
+            "cutoff_score": 557.9893,
+            "admitted_count": 22
+        },
+        "2025-2": {
+            "cutoff_score": 560.9884,
+            "admitted_count": 19
+        },
+        "2023-2": {
+            "cutoff_score": 580.1999,
+            "admitted_count": 22
+        },
+        "2026-1": {
+            "cutoff_score": 585.2085,
+            "admitted_count": 19
+        },
+        "2023-1": {
+            "cutoff_score": 590.9333,
+            "admitted_count": 22
+        },
+        "2024-1": {
+            "cutoff_score": 608.6432,
+            "admitted_count": 17
+        },
+        "2025-1": {
+            "cutoff_score": 608.8239,
+            "admitted_count": 20
+        }
+    },
+    "Historia": {
+        "2026-1": {
+            "cutoff_score": 560.5393,
+            "admitted_count": 57
+        },
+        "2025-1": {
+            "cutoff_score": 570.7192,
+            "admitted_count": 56
+        },
+        "2024-1": {
+            "cutoff_score": 590.9689,
+            "admitted_count": 53
+        },
+        "2023-1": {
+            "cutoff_score": 598.8505,
+            "admitted_count": 51
+        }
+    },
+    "Administración de Empresas": {
+        "2025-2": {
+            "cutoff_score": 560.6548,
+            "admitted_count": 85
+        },
+        "2023-2": {
+            "cutoff_score": 561.4088,
+            "admitted_count": 107
+        },
+        "2023-1": {
+            "cutoff_score": 592.7347,
+            "admitted_count": 107
+        },
+        "2024-1": {
+            "cutoff_score": 592.906,
+            "admitted_count": 97
+        },
+        "2024-2": {
+            "cutoff_score": 599.4926,
+            "admitted_count": 63
+        },
+        "2026-1": {
+            "cutoff_score": 606.8803,
+            "admitted_count": 66
+        },
+        "2025-1": {
+            "cutoff_score": 618.6088,
+            "admitted_count": 68
+        }
+    },
+    "Antropología": {
+        "2025-2": {
+            "cutoff_score": 562.2235,
+            "admitted_count": 37
+        },
+        "2025-1": {
+            "cutoff_score": 570.4681,
+            "admitted_count": 31
+        },
+        "2026-1": {
+            "cutoff_score": 600.5037,
+            "admitted_count": 37
+        },
+        "2023-2": {
+            "cutoff_score": 620.8553,
+            "admitted_count": 30
+        },
+        "2024-2": {
+            "cutoff_score": 621.4773,
+            "admitted_count": 32
+        },
+        "2023-1": {
+            "cutoff_score": 633.5089,
+            "admitted_count": 32
+        },
+        "2024-1": {
+            "cutoff_score": 646.8264,
+            "admitted_count": 30
+        }
+    },
+    "Música lnst. - Violín": {
+        "2023-2": {
+            "cutoff_score": 564.21614,
+            "admitted_count": 5
+        },
+        "2026-1": {
+            "cutoff_score": 578.9165,
+            "admitted_count": 4
+        },
+        "2025-2": {
+            "cutoff_score": 580.013,
+            "admitted_count": 4
+        },
+        "2023-1": {
+            "cutoff_score": 589.2446,
+            "admitted_count": 4
+        },
+        "2025-1": {
+            "cutoff_score": 597.6363,
+            "admitted_count": 3
+        },
+        "2024-2": {
+            "cutoff_score": 600.5484,
+            "admitted_count": 3
+        },
+        "2024-1": {
+            "cutoff_score": 628.1822,
+            "admitted_count": 2
+        }
+    },
+    "Música lnst. - Viola": {
+        "2025-2": {
+            "cutoff_score": 564.414,
+            "admitted_count": 1
+        },
+        "2025-1": {
+            "cutoff_score": 594.4192,
+            "admitted_count": 2
+        },
+        "2023-2": {
+            "cutoff_score": 609.84435,
+            "admitted_count": 2
+        },
+        "2024-2": {
+            "cutoff_score": 616.5843,
+            "admitted_count": 1
+        }
+    },
+    "Fonoaudiología": {
+        "2026-1": {
+            "cutoff_score": 565.1157,
+            "admitted_count": 38
+        },
+        "2023-1": {
+            "cutoff_score": 570.0096,
+            "admitted_count": 32
+        },
+        "2024-1": {
+            "cutoff_score": 582.877,
+            "admitted_count": 43
+        },
+        "2025-1": {
+            "cutoff_score": 586.9681,
+            "admitted_count": 34
+        }
+    },
+    "Música lnst. - Percusión": {
+        "2025-1": {
+            "cutoff_score": 565.8873,
+            "admitted_count": 2
+        },
+        "2026-1": {
+            "cutoff_score": 574.6346,
+            "admitted_count": 4
+        },
+        "2024-2": {
+            "cutoff_score": 582.1843,
+            "admitted_count": 2
+        },
+        "2023-1": {
+            "cutoff_score": 598.2074,
+            "admitted_count": 2
+        },
+        "2024-1": {
+            "cutoff_score": 625.6331,
+            "admitted_count": 1
+        }
+    },
+    "Química": {
+        "2023-2": {
+            "cutoff_score": 571.7972,
+            "admitted_count": 63
+        },
+        "2025-2": {
+            "cutoff_score": 593.2585,
+            "admitted_count": 61
+        },
+        "2024-2": {
+            "cutoff_score": 598.6861,
+            "admitted_count": 63
+        },
+        "2026-1": {
+            "cutoff_score": 621.1951,
+            "admitted_count": 65
+        },
+        "2023-1": {
+            "cutoff_score": 623.0717,
+            "admitted_count": 54
+        },
+        "2024-1": {
+            "cutoff_score": 625.6872,
+            "admitted_count": 61
+        },
+        "2025-1": {
+            "cutoff_score": 626.6705,
+            "admitted_count": 65
+        }
+    },
+    "Ciencia Política": {
+        "2025-2": {
+            "cutoff_score": 572.5698,
+            "admitted_count": 80
+        },
+        "2024-2": {
+            "cutoff_score": 584.8908,
+            "admitted_count": 73
+        },
+        "2023-2": {
+            "cutoff_score": 585.2755,
+            "admitted_count": 78
+        },
+        "2025-1": {
+            "cutoff_score": 593.5015,
+            "admitted_count": 88
+        },
+        "2026-1": {
+            "cutoff_score": 605.7308,
+            "admitted_count": 85
+        },
+        "2024-1": {
+            "cutoff_score": 621.3053,
+            "admitted_count": 73
+        },
+        "2023-1": {
+            "cutoff_score": 623.8279,
+            "admitted_count": 75
+        }
+    },
+    "Ingeniería Química": {
+        "2023-2": {
+            "cutoff_score": 574.5617,
+            "admitted_count": 132
+        },
+        "2025-2": {
+            "cutoff_score": 592.958,
+            "admitted_count": 126
+        },
+        "2024-2": {
+            "cutoff_score": 603.9707,
+            "admitted_count": 120
+        },
+        "2025-1": {
+            "cutoff_score": 635.8925,
+            "admitted_count": 125
+        },
+        "2023-1": {
+            "cutoff_score": 637.0858,
+            "admitted_count": 122
+        },
+        "2026-1": {
+            "cutoff_score": 645.5304,
+            "admitted_count": 133
+        },
+        "2024-1": {
+            "cutoff_score": 657.7965,
+            "admitted_count": 115
+        }
+    },
+    "Artes Plásticas": {
+        "2025-2": {
+            "cutoff_score": 575.6452,
+            "admitted_count": 33
+        },
+        "2025-1": {
+            "cutoff_score": 577.65525,
+            "admitted_count": 32
+        },
+        "2023-2": {
+            "cutoff_score": 578.1418,
+            "admitted_count": 34
+        },
+        "2024-2": {
+            "cutoff_score": 584.8575,
+            "admitted_count": 35
+        },
+        "2026-1": {
+            "cutoff_score": 587.1113,
+            "admitted_count": 33
+        },
+        "2023-1": {
+            "cutoff_score": 589.4214,
+            "admitted_count": 32
+        },
+        "2024-1": {
+            "cutoff_score": 601.5434,
+            "admitted_count": 32
+        }
+    },
+    "Música - Pedagogía Instrumental": {
+        "2026-1": {
+            "cutoff_score": 576.3713,
+            "admitted_count": 1
+        }
+    },
+    "Filología e Idiomas: Inglés": {
+        "2025-2": {
+            "cutoff_score": 576.7121,
+            "admitted_count": 36
+        },
+        "2023-2": {
+            "cutoff_score": 594.7467,
+            "admitted_count": 40
+        },
+        "2026-1": {
+            "cutoff_score": 599.2371,
+            "admitted_count": 40
+        },
+        "2024-2": {
+            "cutoff_score": 606.7603,
+            "admitted_count": 31
+        },
+        "2025-1": {
+            "cutoff_score": 617.4463,
+            "admitted_count": 37
+        },
+        "2023-1": {
+            "cutoff_score": 627.4448,
+            "admitted_count": 41
+        },
+        "2024-1": {
+            "cutoff_score": 648.2163,
+            "admitted_count": 30
+        }
+    },
+    "Matemáticas": {
+        "2025-2": {
+            "cutoff_score": 577.8021,
+            "admitted_count": 39
+        },
+        "2023-2": {
+            "cutoff_score": 624.5791,
+            "admitted_count": 33
+        },
+        "2024-2": {
+            "cutoff_score": 641.8423,
+            "admitted_count": 34
+        },
+        "2026-1": {
+            "cutoff_score": 651.8115,
+            "admitted_count": 49
+        },
+        "2025-1": {
+            "cutoff_score": 666.4875,
+            "admitted_count": 32
+        },
+        "2023-1": {
+            "cutoff_score": 670.5723,
+            "admitted_count": 33
+        },
+        "2024-1": {
+            "cutoff_score": 698.1093,
+            "admitted_count": 31
+        }
+    },
+    "Cine Y Televisión": {
+        "2023-2": {
+            "cutoff_score": 578.8,
+            "admitted_count": 32
+        },
+        "2026-1": {
+            "cutoff_score": 595.5334,
+            "admitted_count": 28
+        },
+        "2025-2": {
+            "cutoff_score": 595.635,
+            "admitted_count": 29
+        },
+        "2025-1": {
+            "cutoff_score": 598.8821,
+            "admitted_count": 25
+        },
+        "2024-2": {
+            "cutoff_score": 605.1708,
+            "admitted_count": 27
+        },
+        "2024-1": {
+            "cutoff_score": 606.3732,
+            "admitted_count": 29
+        },
+        "2023-1": {
+            "cutoff_score": 612.5265,
+            "admitted_count": 31
+        }
+    },
+    "Ingeniería Civil": {
+        "2025-2": {
+            "cutoff_score": 579.2609,
+            "admitted_count": 113
+        },
+        "2023-2": {
+            "cutoff_score": 584.3687,
+            "admitted_count": 117
+        },
+        "2024-2": {
+            "cutoff_score": 603.933,
+            "admitted_count": 110
+        },
+        "2026-1": {
+            "cutoff_score": 626.8907,
+            "admitted_count": 113
+        },
+        "2023-1": {
+            "cutoff_score": 627.2663,
+            "admitted_count": 112
+        },
+        "2025-1": {
+            "cutoff_score": 631.6668,
+            "admitted_count": 111
+        },
+        "2024-1": {
+            "cutoff_score": 642.7684,
+            "admitted_count": 108
+        }
+    },
+    "Ingeniería Eléctrica": {
+        "2025-2": {
+            "cutoff_score": 580.929,
+            "admitted_count": 55
+        },
+        "2023-2": {
+            "cutoff_score": 599.2324,
+            "admitted_count": 51
+        },
+        "2024-2": {
+            "cutoff_score": 607.9369,
+            "admitted_count": 52
+        },
+        "2023-1": {
+            "cutoff_score": 619.4595,
+            "admitted_count": 55
+        },
+        "2024-1": {
+            "cutoff_score": 625.1028,
+            "admitted_count": 52
+        },
+        "2026-1": {
+            "cutoff_score": 632.6991,
+            "admitted_count": 55
+        },
+        "2025-1": {
+            "cutoff_score": 638.9449,
+            "admitted_count": 52
+        }
+    },
+    "Fisioterapia": {
+        "2025-2": {
+            "cutoff_score": 581.4906,
+            "admitted_count": 50
+        },
+        "2023-2": {
+            "cutoff_score": 593.1136,
+            "admitted_count": 43
+        },
+        "2024-2": {
+            "cutoff_score": 607.3785,
+            "admitted_count": 40
+        }
+    },
+    "Música - Dirección": {
+        "2026-1": {
+            "cutoff_score": 583.6538,
+            "admitted_count": 1
+        },
+        "2023-1": {
+            "cutoff_score": 596.6112,
+            "admitted_count": 1
+        }
+    },
+    "Odontología": {
+        "2023-2": {
+            "cutoff_score": 588.0631,
+            "admitted_count": 51
+        },
+        "2025-2": {
+            "cutoff_score": 588.6023,
+            "admitted_count": 59
+        },
+        "2024-2": {
+            "cutoff_score": 606.0003,
+            "admitted_count": 55
+        },
+        "2023-1": {
+            "cutoff_score": 609.0857,
+            "admitted_count": 56
+        },
+        "2025-1": {
+            "cutoff_score": 613.0279,
+            "admitted_count": 51
+        },
+        "2026-1": {
+            "cutoff_score": 615.5039,
+            "admitted_count": 62
+        },
+        "2024-1": {
+            "cutoff_score": 628.9988,
+            "admitted_count": 53
+        }
+    },
+    "Música lnst. - Corno": {
+        "2024-1": {
+            "cutoff_score": 589.1526,
+            "admitted_count": 2
+        },
+        "2025-1": {
+            "cutoff_score": 597.6281,
+            "admitted_count": 1
+        },
+        "2023-1": {
+            "cutoff_score": 605.4507,
+            "admitted_count": 1
+        }
+    },
+    "Enfermería": {
+        "2024-2": {
+            "cutoff_score": 593.7538,
+            "admitted_count": 102
+        },
+        "2025-2": {
+            "cutoff_score": 600.2976,
+            "admitted_count": 85
+        },
+        "2023-2": {
+            "cutoff_score": 605.9894,
+            "admitted_count": 93
+        },
+        "2025-1": {
+            "cutoff_score": 608.6507,
+            "admitted_count": 88
+        },
+        "2026-1": {
+            "cutoff_score": 614.5843,
+            "admitted_count": 97
+        },
+        "2023-1": {
+            "cutoff_score": 615.8967,
+            "admitted_count": 84
+        },
+        "2024-1": {
+            "cutoff_score": 621.6292,
+            "admitted_count": 113
+        }
+    },
+    "Diseño Industrial": {
+        "2023-2": {
+            "cutoff_score": 599.6502,
+            "admitted_count": 46
+        },
+        "2023-1": {
+            "cutoff_score": 611.8148,
+            "admitted_count": 47
+        },
+        "2025-2": {
+            "cutoff_score": 611.8687,
+            "admitted_count": 48
+        },
+        "2026-1": {
+            "cutoff_score": 622.5919,
+            "admitted_count": 50
+        },
+        "2025-1": {
+            "cutoff_score": 623.6701,
+            "admitted_count": 50
+        },
+        "2024-2": {
+            "cutoff_score": 625.7072,
+            "admitted_count": 49
+        },
+        "2024-1": {
+            "cutoff_score": 630.3581,
+            "admitted_count": 47
+        }
+    },
+    "Música lnst. - Eufonio": {
+        "2025-2": {
+            "cutoff_score": 600.2648,
+            "admitted_count": 1
+        },
+        "2025-1": {
+            "cutoff_score": 620.2305,
+            "admitted_count": 1
+        }
+    },
+    "Nutrición Y Dietética": {
+        "2023-2": {
+            "cutoff_score": 601.1909,
+            "admitted_count": 33
+        },
+        "2025-2": {
+            "cutoff_score": 603.1158,
+            "admitted_count": 36
+        },
+        "2024-2": {
+            "cutoff_score": 605.1428,
+            "admitted_count": 39
+        },
+        "2026-1": {
+            "cutoff_score": 610.8516,
+            "admitted_count": 35
+        },
+        "2025-1": {
+            "cutoff_score": 614.7857,
+            "admitted_count": 30
+        },
+        "2023-1": {
+            "cutoff_score": 637.1352,
+            "admitted_count": 31
+        },
+        "2024-1": {
+            "cutoff_score": 641.6434,
+            "admitted_count": 36
+        }
+    },
+    "Geología": {
+        "2025-2": {
+            "cutoff_score": 601.3959,
+            "admitted_count": 32
+        },
+        "2023-2": {
+            "cutoff_score": 621.4346,
+            "admitted_count": 30
+        },
+        "2026-1": {
+            "cutoff_score": 630.0096,
+            "admitted_count": 32
+        },
+        "2025-1": {
+            "cutoff_score": 631.3984,
+            "admitted_count": 30
+        },
+        "2023-1": {
+            "cutoff_score": 644.39,
+            "admitted_count": 33
+        },
+        "2024-2": {
+            "cutoff_score": 645.0662,
+            "admitted_count": 30
+        },
+        "2024-1": {
+            "cutoff_score": 668.0706,
+            "admitted_count": 34
+        }
+    },
+    "Ingeniería Mecánica": {
+        "2023-2": {
+            "cutoff_score": 603.2942,
+            "admitted_count": 76
+        },
+        "2025-2": {
+            "cutoff_score": 623.2532,
+            "admitted_count": 77
+        },
+        "2024-2": {
+            "cutoff_score": 632.565,
+            "admitted_count": 73
+        },
+        "2024-1": {
+            "cutoff_score": 657.7746,
+            "admitted_count": 78
+        },
+        "2026-1": {
+            "cutoff_score": 657.8498,
+            "admitted_count": 97
+        },
+        "2025-1": {
+            "cutoff_score": 659.2312,
+            "admitted_count": 72
+        },
+        "2023-1": {
+            "cutoff_score": 662.2817,
+            "admitted_count": 76
+        }
+    },
+    "Estadística": {
+        "2023-2": {
+            "cutoff_score": 605.9286,
+            "admitted_count": 41
+        },
+        "2025-2": {
+            "cutoff_score": 616.4772,
+            "admitted_count": 33
+        },
+        "2024-2": {
+            "cutoff_score": 620.7971,
+            "admitted_count": 31
+        },
+        "2023-1": {
+            "cutoff_score": 635.9726,
+            "admitted_count": 42
+        },
+        "2024-1": {
+            "cutoff_score": 639.3649,
+            "admitted_count": 42
+        },
+        "2026-1": {
+            "cutoff_score": 644.9751,
+            "admitted_count": 33
+        },
+        "2025-1": {
+            "cutoff_score": 651.0591,
+            "admitted_count": 30
+        }
+    },
+    "Psicología": {
+        "2025-2": {
+            "cutoff_score": 609.38,
+            "admitted_count": 49
+        },
+        "2026-1": {
+            "cutoff_score": 651.0741,
+            "admitted_count": 51
+        },
+        "2025-1": {
+            "cutoff_score": 659.8698,
+            "admitted_count": 40
+        },
+        "2024-2": {
+            "cutoff_score": 667.5406,
+            "admitted_count": 42
+        },
+        "2023-2": {
+            "cutoff_score": 667.5665,
+            "admitted_count": 41
+        },
+        "2024-1": {
+            "cutoff_score": 681.3587,
+            "admitted_count": 42
+        },
+        "2023-1": {
+            "cutoff_score": 691.9658,
+            "admitted_count": 42
+        }
+    },
+    "Economía": {
+        "2023-2": {
+            "cutoff_score": 609.9211,
+            "admitted_count": 110
+        },
+        "2025-2": {
+            "cutoff_score": 616.4523,
+            "admitted_count": 89
+        },
+        "2024-2": {
+            "cutoff_score": 638.1642,
+            "admitted_count": 69
+        },
+        "2023-1": {
+            "cutoff_score": 652.4598,
+            "admitted_count": 107
+        },
+        "2024-1": {
+            "cutoff_score": 660.0444,
+            "admitted_count": 97
+        },
+        "2026-1": {
+            "cutoff_score": 663.9661,
+            "admitted_count": 64
+        },
+        "2025-1": {
+            "cutoff_score": 678.5346,
+            "admitted_count": 63
+        }
+    },
+    "Medicina Veterinaria": {
+        "2023-2": {
+            "cutoff_score": 612.8241,
+            "admitted_count": 47
+        },
+        "2024-2": {
+            "cutoff_score": 623.4782,
+            "admitted_count": 46
+        },
+        "2025-2": {
+            "cutoff_score": 629.1921,
+            "admitted_count": 41
+        },
+        "2023-1": {
+            "cutoff_score": 635.0496,
+            "admitted_count": 45
+        },
+        "2025-1": {
+            "cutoff_score": 638.6266,
+            "admitted_count": 41
+        },
+        "2024-1": {
+            "cutoff_score": 638.7695,
+            "admitted_count": 45
+        },
+        "2026-1": {
+            "cutoff_score": 644.7691,
+            "admitted_count": 42
+        }
+    },
+    "Derecho": {
+        "2025-2": {
+            "cutoff_score": 614.7034,
+            "admitted_count": 87
+        },
+        "2024-2": {
+            "cutoff_score": 628.2996,
+            "admitted_count": 74
+        },
+        "2023-2": {
+            "cutoff_score": 628.8759,
+            "admitted_count": 74
+        },
+        "2025-1": {
+            "cutoff_score": 645.9739,
+            "admitted_count": 86
+        },
+        "2026-1": {
+            "cutoff_score": 655.3837,
+            "admitted_count": 86
+        },
+        "2023-1": {
+            "cutoff_score": 665.6684,
+            "admitted_count": 80
+        },
+        "2024-1": {
+            "cutoff_score": 672.2599,
+            "admitted_count": 72
+        }
+    },
+    "Arquitectura": {
+        "2025-2": {
+            "cutoff_score": 616.9082,
+            "admitted_count": 74
+        },
+        "2023-2": {
+            "cutoff_score": 640.6309,
+            "admitted_count": 79
+        },
+        "2024-2": {
+            "cutoff_score": 646.3469,
+            "admitted_count": 72
+        },
+        "2026-1": {
+            "cutoff_score": 646.7341,
+            "admitted_count": 76
+        },
+        "2025-1": {
+            "cutoff_score": 651.2344,
+            "admitted_count": 73
+        },
+        "2023-1": {
+            "cutoff_score": 669.2994,
+            "admitted_count": 79
+        },
+        "2024-1": {
+            "cutoff_score": 674.8471,
+            "admitted_count": 76
+        }
+    },
+    "Ingeniería Industrial": {
+        "2023-2": {
+            "cutoff_score": 619.0857,
+            "admitted_count": 43
+        },
+        "2025-2": {
+            "cutoff_score": 628.1498,
+            "admitted_count": 46
+        },
+        "2024-2": {
+            "cutoff_score": 639.5534,
+            "admitted_count": 42
+        },
+        "2025-1": {
+            "cutoff_score": 642.8675,
+            "admitted_count": 47
+        },
+        "2026-1": {
+            "cutoff_score": 664.4823,
+            "admitted_count": 45
+        },
+        "2023-1": {
+            "cutoff_score": 680.2697,
+            "admitted_count": 47
+        },
+        "2024-1": {
+            "cutoff_score": 686.3972,
+            "admitted_count": 42
+        }
+    },
+    "Biología": {
+        "2025-2": {
+            "cutoff_score": 628.9331,
+            "admitted_count": 42
+        },
+        "2024-2": {
+            "cutoff_score": 629.3765,
+            "admitted_count": 43
+        },
+        "2023-2": {
+            "cutoff_score": 632.7677,
+            "admitted_count": 44
+        },
+        "2025-1": {
+            "cutoff_score": 652.7822,
+            "admitted_count": 41
+        },
+        "2026-1": {
+            "cutoff_score": 668.8809,
+            "admitted_count": 44
+        },
+        "2024-1": {
+            "cutoff_score": 672.2271,
+            "admitted_count": 40
+        },
+        "2023-1": {
+            "cutoff_score": 696.2426,
+            "admitted_count": 44
+        }
+    },
+    "Ingeniería Electrónica": {
+        "2025-2": {
+            "cutoff_score": 629.5506,
+            "admitted_count": 57
+        },
+        "2024-2": {
+            "cutoff_score": 644.8978,
+            "admitted_count": 56
+        },
+        "2023-2": {
+            "cutoff_score": 649.1092,
+            "admitted_count": 57
+        },
+        "2023-1": {
+            "cutoff_score": 655.6939,
+            "admitted_count": 60
+        },
+        "2026-1": {
+            "cutoff_score": 671.1149,
+            "admitted_count": 59
+        },
+        "2025-1": {
+            "cutoff_score": 671.2349,
+            "admitted_count": 58
+        },
+        "2024-1": {
+            "cutoff_score": 674.5581,
+            "admitted_count": 56
+        }
+    },
+    "Diseño Gráfico": {
+        "2025-2": {
+            "cutoff_score": 631.0114,
+            "admitted_count": 29
+        },
+        "2026-1": {
+            "cutoff_score": 635.5317,
+            "admitted_count": 30
+        },
+        "2023-2": {
+            "cutoff_score": 667.6904,
+            "admitted_count": 33
+        },
+        "2025-1": {
+            "cutoff_score": 673.2634,
+            "admitted_count": 30
+        },
+        "2024-2": {
+            "cutoff_score": 675.1783,
+            "admitted_count": 21
+        },
+        "2024-1": {
+            "cutoff_score": 692.1581,
+            "admitted_count": 28
+        },
+        "2023-1": {
+            "cutoff_score": 697.5743,
+            "admitted_count": 30
+        }
+    },
+    "Música lnst. - Arpa": {
+        "2023-1": {
+            "cutoff_score": 636.767,
+            "admitted_count": 1
+        }
+    },
+    "Farmacia": {
+        "2023-2": {
+            "cutoff_score": 638.4415,
+            "admitted_count": 54
+        },
+        "2024-2": {
+            "cutoff_score": 653.0607,
+            "admitted_count": 56
+        },
+        "2025-2": {
+            "cutoff_score": 663.2877,
+            "admitted_count": 51
+        },
+        "2025-1": {
+            "cutoff_score": 664.3899,
+            "admitted_count": 56
+        },
+        "2023-1": {
+            "cutoff_score": 669.4191,
+            "admitted_count": 48
+        },
+        "2024-1": {
+            "cutoff_score": 679.9907,
+            "admitted_count": 56
+        },
+        "2026-1": {
+            "cutoff_score": 680.04,
+            "admitted_count": 53
+        }
+    },
+    "Física": {
+        "2025-2": {
+            "cutoff_score": 645.5436,
+            "admitted_count": 61
+        },
+        "2024-2": {
+            "cutoff_score": 652.7682,
+            "admitted_count": 65
+        },
+        "2023-2": {
+            "cutoff_score": 653.4228,
+            "admitted_count": 64
+        },
+        "2026-1": {
+            "cutoff_score": 679.7862,
+            "admitted_count": 65
+        },
+        "2025-1": {
+            "cutoff_score": 684.4921,
+            "admitted_count": 62
+        },
+        "2023-1": {
+            "cutoff_score": 706.4403,
+            "admitted_count": 65
+        },
+        "2024-1": {
+            "cutoff_score": 726.1847,
+            "admitted_count": 65
+        }
+    },
+    "Ciencias de la Computación": {
+        "2024-2": {
+            "cutoff_score": 665.8633,
+            "admitted_count": 31
+        },
+        "2025-2": {
+            "cutoff_score": 678.9575,
+            "admitted_count": 37
+        },
+        "2023-2": {
+            "cutoff_score": 691.3934,
+            "admitted_count": 32
+        },
+        "2025-1": {
+            "cutoff_score": 717.3451,
+            "admitted_count": 31
+        },
+        "2026-1": {
+            "cutoff_score": 743.5349,
+            "admitted_count": 40
+        },
+        "2023-1": {
+            "cutoff_score": 746.3337,
+            "admitted_count": 32
+        },
+        "2024-1": {
+            "cutoff_score": 760.8593,
+            "admitted_count": 30
+        }
+    },
+    "Ingeniería de Sistemas y Computación": {
+        "2025-2": {
+            "cutoff_score": 667.9708,
+            "admitted_count": 103
+        },
+        "2024-2": {
+            "cutoff_score": 681.9674,
+            "admitted_count": 110
+        },
+        "2023-2": {
+            "cutoff_score": 693.5828,
+            "admitted_count": 97
+        },
+        "2026-1": {
+            "cutoff_score": 695.1161,
+            "admitted_count": 137
+        },
+        "2025-1": {
+            "cutoff_score": 697.9095,
+            "admitted_count": 103
+        },
+        "2024-1": {
+            "cutoff_score": 728.2006,
+            "admitted_count": 130
+        },
+        "2023-1": {
+            "cutoff_score": 743.1537,
+            "admitted_count": 99
+        }
+    },
+    "Música lnst. - Saxofón": {
+        "2024-2": {
+            "cutoff_score": 671.7047,
+            "admitted_count": 1
+        }
+    },
+    "Ingeniería Mecatrónica": {
+        "2025-2": {
+            "cutoff_score": 679.8278,
+            "admitted_count": 44
+        },
+        "2023-2": {
+            "cutoff_score": 689.9325,
+            "admitted_count": 42
+        },
+        "2024-2": {
+            "cutoff_score": 692.1843,
+            "admitted_count": 44
+        },
+        "2025-1": {
+            "cutoff_score": 741.6514,
+            "admitted_count": 41
+        },
+        "2023-1": {
+            "cutoff_score": 744.3797,
+            "admitted_count": 41
+        },
+        "2026-1": {
+            "cutoff_score": 753.0955,
+            "admitted_count": 55
+        },
+        "2024-1": {
+            "cutoff_score": 763.0655,
+            "admitted_count": 42
+        }
+    },
+    "Medicina": {
+        "2025-2": {
+            "cutoff_score": 718.3371,
+            "admitted_count": 112
+        },
+        "2024-2": {
+            "cutoff_score": 722.0061,
+            "admitted_count": 107
+        },
+        "2025-1": {
+            "cutoff_score": 729.0826,
+            "admitted_count": 106
+        },
+        "2023-2": {
+            "cutoff_score": 735.5039,
+            "admitted_count": 104
+        },
+        "2023-1": {
+            "cutoff_score": 759.2488,
+            "admitted_count": 106
+        },
+        "2024-1": {
+            "cutoff_score": 763.685,
+            "admitted_count": 106
+        },
+        "2026-1": {
+            "cutoff_score": 766.8117,
+            "admitted_count": 105
+        }
+    }
+}

@@ -1,6 +1,7 @@
 # src/assistant/assistant_client.py
 import logging
 import re
+import json
 from typing import List, Dict, Any, Tuple, Generator
 
 # CONFIG & CLIENT
@@ -14,6 +15,10 @@ from src.assistant.artifact_handler import handle_generated_files, assign_urls_t
 from src.utils.response_parser import extract_sources
 from src.utils.stream_parser import StreamParser
 from src.utils.quiz_utils import QuizUtils
+
+# IMPORT OUR NEW FUNCTION CALLING ASSETS
+from src.config.tools_config import get_custom_tools
+from src.services.admission_service import query_admission_data
 
 logger = logging.getLogger(__name__)
 
@@ -38,27 +43,23 @@ def send_message_to_assistant(
     client = get_openai_client()
     cfg = get_model_config(mode)
     
-    # 1. Build System Signal
     system_text = system_instruction or build_runtime_signals(
         user_id, page, name, email, exam_context="ICFES", requires_visuals=requires_visuals
     )
     api_input = [{"role": "system", "content": [{"type": "input_text", "text": system_text}]}]
     api_input.extend(conversation_input)
 
-    # 2. Inject PDFs
     if pdf_urls:
         _inject_pdf_inputs(api_input, pdf_urls)
 
-    # 3. Configure Tools
+    # Note: For non-streaming, you could also append custom tools here if needed
     tools = _configure_tools(vector_store_ids, requires_visuals, pdf_urls, web_search_config, user_location)
 
-    # 4. Build Request
     req = _build_request_payload(cfg, api_input, tools)
 
     try:
         resp = client.responses.create(**req)
         
-        # 5. Process Text
         text = getattr(resp, "output_text", None)
         if not text:
             chunks = []
@@ -73,11 +74,9 @@ def send_message_to_assistant(
         if text: 
             text = re.sub(r'\[.*?\]\(sandbox:/mnt/data/.*?\)', '', text).strip()
 
-        # 6. Process Artifacts & Sources (Delegated)
         generated_urls_map = handle_generated_files(client, resp, folder="chat_assets")
         sources_list = extract_sources(resp)
 
-        # Extract only the S3 URLs (values) from the dictionary and convert to a list
         generated_urls = list(generated_urls_map.values()) if isinstance(generated_urls_map, dict) else generated_urls_map
 
         return (text or "[No response]", generated_urls, sources_list)
@@ -86,7 +85,7 @@ def send_message_to_assistant(
         raise e
 
 # ------------------------------------------------------------------
-# CHAT STREAMING (WITH IMAGE GENERATION)
+# CHAT STREAMING (WITH DYNAMIC TOOL CALLING INTERCEPTION)
 # ------------------------------------------------------------------
 def stream_chat_response(
     conversation_input: List[Dict[str, Any]], 
@@ -102,7 +101,6 @@ def stream_chat_response(
     client = get_openai_client()
     cfg = get_model_config(mode)
     
-    # Trust the injected system_instruction entirely. No hardcoded appends!
     system_text = system_instruction or build_runtime_signals(
         user_id, page, name, email, requires_visuals=False
     )
@@ -110,7 +108,9 @@ def stream_chat_response(
     api_input = [{"role": "system", "content": [{"type": "input_text", "text": system_text}]}]
     api_input.extend(conversation_input)
 
-    tools = []
+    # Attach our custom data retrieval tools
+    tools = get_custom_tools()
+    
     if enable_image_generation:
         tools.append({
             "type": "image_generation",
@@ -120,10 +120,93 @@ def stream_chat_response(
     req = _build_request_payload(cfg, api_input, tools)
     req["stream"] = True
 
+    tool_name = None
+    tool_call_id = ""
+    tool_args_buffer = ""
+
     try:
         stream = client.responses.create(**req)
+        
         for event in stream:
-            yield event
+            event_type = getattr(event, "type", "")
+            
+            # 1. Standard text delta (Yield directly to frontend)
+            if event_type == "response.output_text.delta":
+                yield event
+                
+            # 2. Start of a Function Call
+            elif event_type == "response.output_item.added":
+                item = getattr(event, "item", None)
+                if item and getattr(item, "type", "") == "function_call":
+                    tool_name = getattr(item, "name", "")
+                    tool_call_id = getattr(item, "call_id", "") or getattr(item, "id", "")
+                    
+            # 3. Accumulating Function Call Arguments
+            elif event_type == "response.function_call_arguments.delta":
+                tool_args_buffer += getattr(event, "delta", "")
+                
+            # 4. Function Call Completed -> Execute and Re-stream
+            elif event_type == "response.function_call_arguments.done":
+                item = getattr(event, "item", None)
+                if item:
+                    tool_call_id = getattr(item, "call_id", "") or getattr(item, "id", "") or tool_call_id
+                
+                if tool_name == "query_admission_data":
+                    logger.info("Executing tool: query_admission_data")
+                    try:
+                        args = json.loads(tool_args_buffer)
+                        
+                        # Execute deterministic Python query dynamically based on AI arguments
+                        tool_result = query_admission_data(
+                            career=args.get("career"),
+                            min_score=args.get("min_score"),
+                            max_score=args.get("max_score"),
+                            semester=args.get("semester"),
+                            sort_by=args.get("sort_by"),
+                            sort_order=args.get("sort_order"),
+                            limit=args.get("limit")
+                        )
+                        
+                        # Append the interaction to context so AI knows the result
+                        api_input.append({
+                            "type": "function_call",
+                            "call_id": tool_call_id,
+                            "name": tool_name,
+                            "arguments": tool_args_buffer
+                        })
+                        api_input.append({
+                            "type": "function_call_output",
+                            "call_id": tool_call_id,
+                            "output": tool_result
+                        })
+                        
+                        # Trigger the secondary stream to get the final answer
+                        req2 = _build_request_payload(cfg, api_input, tools)
+                        req2["stream"] = True
+                        stream2 = client.responses.create(**req2)
+                        
+                        for event2 in stream2:
+                            if getattr(event2, "type", "") == "response.output_text.delta":
+                                yield event2
+                                
+                    except Exception as e:
+                        logger.error(f"Error executing tool {tool_name}: {e}")
+                        # Silently fail for the AI by returning an error message output
+                        api_input.append({
+                            "type": "function_call_output",
+                            "call_id": tool_call_id,
+                            "output": json.dumps({"error": "Failed to retrieve data due to query execution error."})
+                        })
+                
+                # Reset buffers for safety
+                tool_name = None
+                tool_call_id = ""
+                tool_args_buffer = ""
+            
+            else:
+                # Yield any other events (e.g., image generation streams)
+                yield event
+
     except Exception as e:
         logger.error(f"Stream chat failed: {e}")
         raise e
@@ -159,7 +242,6 @@ def generate_structured_quiz(
     if pdf_urls:
         _inject_pdf_inputs(api_input, pdf_urls)
 
-    # Dynamic Tool Configuration using helper
     tools = _configure_tools(vector_store_ids, requires_visuals, pdf_urls, web_search_config, user_location)
 
     req = _build_request_payload(cfg, api_input, tools=tools)
@@ -169,7 +251,6 @@ def generate_structured_quiz(
         resp = client.responses.parse(**req)
         quiz = resp.output_parsed
         
-        # Artifact Handling
         generated_urls = handle_generated_files(client, resp, folder="quiz_assets")
         assign_urls_to_quiz(quiz, generated_urls)
         
@@ -213,7 +294,6 @@ def stream_structured_quiz(
     if pdf_urls:
         _inject_pdf_inputs(api_input, pdf_urls)
 
-    # Dynamic Tool Configuration using helper
     tools = _configure_tools(vector_store_ids, requires_visuals, pdf_urls, web_search_config, user_location)
 
     req = _build_request_payload(cfg, api_input, tools=tools)
@@ -235,14 +315,12 @@ def stream_structured_quiz(
                 elif event["type"] == "done":
                     final_parsed = event["full_response"]
                     
-                    # Handle Artifacts on Stream Completion
                     generated_urls = []
                     if hasattr(stream, 'get_final_response'):
                         final_raw = stream.get_final_response()
                         generated_urls = handle_generated_files(client, final_raw, folder="quiz_assets")
                     
                     if final_parsed and hasattr(final_parsed, 'questions') and streamed_questions:
-                        # Sync streamed questions with final object
                         if len(final_parsed.questions) == len(streamed_questions):
                             final_parsed.questions = streamed_questions 
                         else:
@@ -265,7 +343,6 @@ def stream_structured_quiz(
 # INTERNAL HELPERS
 # ------------------------------------------------------------------
 def _inject_pdf_inputs(api_input, pdf_urls):
-    """Mutates api_input to attach PDF files."""
     target_message = None
     if api_input and api_input[-1].get("role") == "user":
         target_message = api_input[-1]
