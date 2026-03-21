@@ -24,10 +24,11 @@ def normalize_text(text: str) -> str:
     text = text.lower().strip()
     return ''.join(c for c in unicodedata.normalize('NFD', text) if unicodedata.category(c) != 'Mn')
 
-def _calculate_wma_target(career_data: dict, season: str) -> float | None:
+def _calculate_wma_target(career_data: dict, season: str) -> dict | None:
     """
     Calculates a Weighted Moving Average + 1.5% Safety Buffer 
     for a specific semester season ('-1' or '-2').
+    Returns a detailed dictionary with the breakdown of the math so the AI can show its work.
     """
     scores = []
     # Extract scores matching the requested season (e.g., all "-2" semesters)
@@ -42,19 +43,40 @@ def _calculate_wma_target(career_data: dict, season: str) -> float | None:
     scores.sort(key=lambda x: x[0], reverse=True)
     
     # Take up to the 3 most recent scores
-    recent_scores = [s[1] for s in scores[:3]]
+    recent_scores = scores[:3]
+    
+    wma = 0
+    breakdown = []
     
     # Apply weights based on available data points
     if len(recent_scores) == 3:
-        wma = (recent_scores[0] * 0.5) + (recent_scores[1] * 0.3) + (recent_scores[2] * 0.2)
+        wma = (recent_scores[0][1] * 0.5) + (recent_scores[1][1] * 0.3) + (recent_scores[2][1] * 0.2)
+        breakdown = [
+            {"semester": recent_scores[0][0], "score": recent_scores[0][1], "weight": "0.5 (50%)"},
+            {"semester": recent_scores[1][0], "score": recent_scores[1][1], "weight": "0.3 (30%)"},
+            {"semester": recent_scores[2][0], "score": recent_scores[2][1], "weight": "0.2 (20%)"}
+        ]
     elif len(recent_scores) == 2:
-        wma = (recent_scores[0] * 0.7) + (recent_scores[1] * 0.3)
+        wma = (recent_scores[0][1] * 0.7) + (recent_scores[1][1] * 0.3)
+        breakdown = [
+            {"semester": recent_scores[0][0], "score": recent_scores[0][1], "weight": "0.7 (70%)"},
+            {"semester": recent_scores[1][0], "score": recent_scores[1][1], "weight": "0.3 (30%)"}
+        ]
     else:
-        wma = recent_scores[0]
+        wma = recent_scores[0][1]
+        breakdown = [
+            {"semester": recent_scores[0][0], "score": recent_scores[0][1], "weight": "1.0 (100%)"}
+        ]
         
     # Add 1.5% safety buffer and round
     safe_target = wma * 1.015
-    return round(safe_target, 2)
+    
+    return {
+        "final_safe_target": round(safe_target, 2),
+        "base_wma": round(wma, 2),
+        "safety_buffer_multiplier": "1.015 (+1.5%)",
+        "calculation_breakdown": breakdown
+    }
 
 def query_admission_data(
     career: Optional[str] = None,
@@ -76,7 +98,7 @@ def query_admission_data(
         
         target_career = None
         
-        # 1. Resolve Specific Career (with bulletproof fuzzy matching)
+        # 1. Resolve Specific Career
         if career:
             career_norm = normalize_text(career)
             key_map = {normalize_text(k): k for k in data.keys()}
@@ -91,21 +113,22 @@ def query_admission_data(
                 else:
                     return json.dumps({"error": f"Could not find any career matching: '{career}'"})
 
-        # 2. Mathematical Forecasting (Only if a specific career is targeted)
+        # 2. Mathematical Forecasting (with explicit breakdown for AI to show)
         insights = None
         if target_career and target_career in data:
             c_data = data[target_career]
             insights = {
                 "trend_analysis": {
-                    "recommended_safe_target_for_semesters_ending_in_1": _calculate_wma_target(c_data, "-1"),
-                    "recommended_safe_target_for_semesters_ending_in_2": _calculate_wma_target(c_data, "-2"),
+                    "forecast_for_semesters_ending_in_1": _calculate_wma_target(c_data, "-1"),
+                    "forecast_for_semesters_ending_in_2": _calculate_wma_target(c_data, "-2"),
                     "counselor_directive": (
-                        "CRITICAL: You MUST explicitly show the student how the target score was calculated. "
-                        "1. Identify if they are applying for a -1 or -2 semester based on your system context. "
-                        "2. Explain that second semesters (-2) historically have different cutoff trends than first semesters (-1). "
-                        "3. Explain that you used a Weighted Moving Average (WMA) of the last three equivalent semesters, assigning 50% weight to the newest, 30% to the previous, and 20% to the oldest. "
-                        "4. Explain that you added a 1.5% 'safety buffer' to ensure they aim high enough. "
-                        "5. Provide the final recommended target score clearly."
+                        "CRITICAL: You MUST explicitly show the student the exact mathematical calculation to gain their trust. "
+                        "1. ANNOUNCE THE GOAL PROMINENTLY: Start or end your response with a highly visible block highlighting the 'final_safe_target'. "
+                        "2. SHOW THE DATA: List the specific semesters and scores used from the 'calculation_breakdown'. "
+                        "3. SHOW THE EQUATION: Write out the exact Weighted Moving Average math equation using the real numbers from the data. "
+                        "   (Example: WMA = (Score1 * 0.5) + (Score2 * 0.3) + (Score3 * 0.2) = base_wma) "
+                        "4. SHOW THE BUFFER: Explain the 1.5% safety buffer by showing the final step (Example: base_wma * 1.015 = final_safe_target). "
+                        "Do not just describe it with words. Use Markdown or LaTeX to make the math look professional."
                     )
                 }
             }
@@ -162,7 +185,7 @@ def query_admission_data(
             },
             "total_matches": len(results),
             "results": results,
-            "insights": insights  # The AI will read this directive and formulate the step-by-step advice!
+            "insights": insights  
         })
 
     except Exception as e:
