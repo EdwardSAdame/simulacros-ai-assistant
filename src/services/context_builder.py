@@ -32,9 +32,14 @@ def build_runtime_context(
         else:
             signals.append("Context: The user is on the home page.")
 
-        # 4. Meaningful Target Signal (Goal-Oriented)
+        # 4. Meaningful Target Signal (Strict Goal-Oriented Directive)
         if target_semester:
-            signals.append(f"Goal: The user is likely preparing now to pass the admission exam and begin their university studies in semester {target_semester}.")
+            season = target_semester.split("-")[-1] # Extracts '1' or '2'
+            signals.append(
+                f"TARGET SEMESTER: The user is EXPLICITLY applying for admission for semester {target_semester}. "
+                f"You MUST prioritize data, trends, and calculations for historical semesters ending in '-{season}' "
+                f"due to seasonality differences in admission scores. If database insights provide a 'recommended_safe_target_for_semesters_ending_in_{season}', you must use that specific calculation."
+            )
 
         # 5. Smart Identity Logic (AI-Driven Name Parsing)
         if name and name.strip():

@@ -99,7 +99,14 @@ def query_admission_data(
                 "trend_analysis": {
                     "recommended_safe_target_for_semesters_ending_in_1": _calculate_wma_target(c_data, "-1"),
                     "recommended_safe_target_for_semesters_ending_in_2": _calculate_wma_target(c_data, "-2"),
-                    "counselor_note": "Advise the user to aim for the 'recommended_safe_target' corresponding to their target semester. This is calculated using a Weighted Moving Average of recent historical data plus a safety margin to account for fluctuations."
+                    "counselor_directive": (
+                        "CRITICAL: You MUST explicitly show the student how the target score was calculated. "
+                        "1. Identify if they are applying for a -1 or -2 semester based on your system context. "
+                        "2. Explain that second semesters (-2) historically have different cutoff trends than first semesters (-1). "
+                        "3. Explain that you used a Weighted Moving Average (WMA) of the last three equivalent semesters, assigning 50% weight to the newest, 30% to the previous, and 20% to the oldest. "
+                        "4. Explain that you added a 1.5% 'safety buffer' to ensure they aim high enough. "
+                        "5. Provide the final recommended target score clearly."
+                    )
                 }
             }
 
@@ -155,7 +162,7 @@ def query_admission_data(
             },
             "total_matches": len(results),
             "results": results,
-            "insights": insights  # The AI will read this object and formulate advice!
+            "insights": insights  # The AI will read this directive and formulate the step-by-step advice!
         })
 
     except Exception as e:
