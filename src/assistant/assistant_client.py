@@ -52,9 +52,7 @@ def send_message_to_assistant(
     if pdf_urls:
         _inject_pdf_inputs(api_input, pdf_urls)
 
-    # Note: For non-streaming, you could also append custom tools here if needed
     tools = _configure_tools(vector_store_ids, requires_visuals, pdf_urls, web_search_config, user_location)
-
     req = _build_request_payload(cfg, api_input, tools)
 
     try:
@@ -85,7 +83,7 @@ def send_message_to_assistant(
         raise e
 
 # ------------------------------------------------------------------
-# CHAT STREAMING (WITH DYNAMIC TOOL CALLING INTERCEPTION)
+# CHAT STREAMING (WITH PARALLEL TOOL CALLING INTERCEPTION)
 # ------------------------------------------------------------------
 def stream_chat_response(
     conversation_input: List[Dict[str, Any]], 
@@ -108,7 +106,6 @@ def stream_chat_response(
     api_input = [{"role": "system", "content": [{"type": "input_text", "text": system_text}]}]
     api_input.extend(conversation_input)
 
-    # Attach our custom data retrieval tools
     tools = get_custom_tools()
     
     if enable_image_generation:
@@ -123,6 +120,9 @@ def stream_chat_response(
     tool_name = None
     tool_call_id = ""
     tool_args_buffer = ""
+    
+    # 🟢 LISTA PARA ACUMULAR LLAMADAS EN PARALELO
+    pending_tool_calls = []
 
     try:
         stream = client.responses.create(**req)
@@ -130,14 +130,14 @@ def stream_chat_response(
         for event in stream:
             event_type = getattr(event, "type", "")
             
-            # 1. Standard text delta (Yield directly to frontend)
+            # 1. Standard text delta
             if event_type == "response.output_text.delta":
                 yield event
                 
             # 2. Start of a Function Call
             elif event_type == "response.output_item.added":
                 item = getattr(event, "item", None)
-                if item and getattr(item, "type", "") == "function_call":
+                if item and getattr(event, "type", "") == "function_call":
                     tool_name = getattr(item, "name", "")
                     tool_call_id = getattr(item, "call_id", "") or getattr(item, "id", "")
                     
@@ -145,67 +145,71 @@ def stream_chat_response(
             elif event_type == "response.function_call_arguments.delta":
                 tool_args_buffer += getattr(event, "delta", "")
                 
-            # 4. Function Call Completed -> Execute and Re-stream
+            # 4. Function Call Completed -> GUARDAR, NO EJECUTAR TODAVÍA
             elif event_type == "response.function_call_arguments.done":
                 item = getattr(event, "item", None)
                 if item:
                     tool_call_id = getattr(item, "call_id", "") or getattr(item, "id", "") or tool_call_id
                 
                 if tool_name == "query_admission_data":
-                    logger.info("Executing tool: query_admission_data")
-                    try:
-                        args = json.loads(tool_args_buffer)
-                        
-                        # Execute deterministic Python query dynamically based on AI arguments
-                        tool_result = query_admission_data(
-                            career=args.get("career"),
-                            min_score=args.get("min_score"),
-                            max_score=args.get("max_score"),
-                            semester=args.get("semester"),
-                            sort_by=args.get("sort_by"),
-                            sort_order=args.get("sort_order"),
-                            limit=args.get("limit")
-                        )
-                        
-                        # Append the interaction to context so AI knows the result
-                        api_input.append({
-                            "type": "function_call",
-                            "call_id": tool_call_id,
-                            "name": tool_name,
-                            "arguments": tool_args_buffer
-                        })
-                        api_input.append({
-                            "type": "function_call_output",
-                            "call_id": tool_call_id,
-                            "output": tool_result
-                        })
-                        
-                        # Trigger the secondary stream to get the final answer
-                        req2 = _build_request_payload(cfg, api_input, tools)
-                        req2["stream"] = True
-                        stream2 = client.responses.create(**req2)
-                        
-                        for event2 in stream2:
-                            if getattr(event2, "type", "") == "response.output_text.delta":
-                                yield event2
-                                
-                    except Exception as e:
-                        logger.error(f"Error executing tool {tool_name}: {e}")
-                        # Silently fail for the AI by returning an error message output
-                        api_input.append({
-                            "type": "function_call_output",
-                            "call_id": tool_call_id,
-                            "output": json.dumps({"error": "Failed to retrieve data due to query execution error."})
-                        })
+                    pending_tool_calls.append({
+                        "name": tool_name,
+                        "id": tool_call_id,
+                        "args": tool_args_buffer
+                    })
                 
-                # Reset buffers for safety
+                # Resetear buffers para la siguiente posible llamada paralela
                 tool_name = None
                 tool_call_id = ""
                 tool_args_buffer = ""
             
             else:
-                # Yield any other events (e.g., image generation streams)
                 yield event
+
+        # 5. UNA VEZ QUE EL STREAM TERMINA, EJECUTAMOS TODAS LAS HERRAMIENTAS
+        if pending_tool_calls:
+            logger.info(f"Executing {len(pending_tool_calls)} parallel tool calls.")
+            
+            for tc in pending_tool_calls:
+                try:
+                    args = json.loads(tc["args"])
+                    tool_result = query_admission_data(
+                        career=args.get("career"),
+                        min_score=args.get("min_score"),
+                        max_score=args.get("max_score"),
+                        semester=args.get("semester"),
+                        sort_by=args.get("sort_by"),
+                        sort_order=args.get("sort_order"),
+                        limit=args.get("limit")
+                    )
+                    
+                    api_input.append({
+                        "type": "function_call",
+                        "call_id": tc["id"],
+                        "name": tc["name"],
+                        "arguments": tc["args"]
+                    })
+                    api_input.append({
+                        "type": "function_call_output",
+                        "call_id": tc["id"],
+                        "output": tool_result
+                    })
+                except Exception as e:
+                    logger.error(f"Error executing tool {tc['name']}: {e}")
+                    api_input.append({
+                        "type": "function_call_output",
+                        "call_id": tc["id"],
+                        "output": json.dumps({"error": "Query execution failed."})
+                    })
+            
+            # 6. DISPARAMOS EL SEGUNDO STREAM UNA SOLA VEZ CON TODOS LOS DATOS
+            req2 = _build_request_payload(cfg, api_input, tools)
+            req2["stream"] = True
+            stream2 = client.responses.create(**req2)
+            
+            for event2 in stream2:
+                if getattr(event2, "type", "") == "response.output_text.delta":
+                    yield event2
 
     except Exception as e:
         logger.error(f"Stream chat failed: {e}")
