@@ -52,7 +52,9 @@ def send_message_to_assistant(
     if pdf_urls:
         _inject_pdf_inputs(api_input, pdf_urls)
 
+    # Note: For non-streaming, you could also append custom tools here if needed
     tools = _configure_tools(vector_store_ids, requires_visuals, pdf_urls, web_search_config, user_location)
+
     req = _build_request_payload(cfg, api_input, tools)
 
     try:
@@ -106,6 +108,7 @@ def stream_chat_response(
     api_input = [{"role": "system", "content": [{"type": "input_text", "text": system_text}]}]
     api_input.extend(conversation_input)
 
+    # Attach our custom data retrieval tools
     tools = get_custom_tools()
     
     if enable_image_generation:
@@ -130,14 +133,15 @@ def stream_chat_response(
         for event in stream:
             event_type = getattr(event, "type", "")
             
-            # 1. Standard text delta
+            # 1. Standard text delta (Yield directly to frontend)
             if event_type == "response.output_text.delta":
                 yield event
                 
             # 2. Start of a Function Call
             elif event_type == "response.output_item.added":
                 item = getattr(event, "item", None)
-                if item and getattr(event, "type", "") == "function_call":
+                # 🟢 CORRECCIÓN: Usar getattr(item, "type", "") en lugar de event
+                if item and getattr(item, "type", "") == "function_call":
                     tool_name = getattr(item, "name", "")
                     tool_call_id = getattr(item, "call_id", "") or getattr(item, "id", "")
                     
@@ -145,7 +149,7 @@ def stream_chat_response(
             elif event_type == "response.function_call_arguments.delta":
                 tool_args_buffer += getattr(event, "delta", "")
                 
-            # 4. Function Call Completed -> GUARDAR, NO EJECUTAR TODAVÍA
+            # 4. Function Call Completed -> GUARDAR EN LA LISTA, NO EJECUTAR TODAVÍA
             elif event_type == "response.function_call_arguments.done":
                 item = getattr(event, "item", None)
                 if item:
@@ -164,9 +168,10 @@ def stream_chat_response(
                 tool_args_buffer = ""
             
             else:
+                # Yield any other events (e.g., image generation streams)
                 yield event
 
-        # 5. UNA VEZ QUE EL STREAM TERMINA, EJECUTAMOS TODAS LAS HERRAMIENTAS
+        # 5. UNA VEZ QUE EL STREAM TERMINA, EJECUTAMOS TODAS LAS HERRAMIENTAS ACUMULADAS
         if pending_tool_calls:
             logger.info(f"Executing {len(pending_tool_calls)} parallel tool calls.")
             
@@ -183,6 +188,7 @@ def stream_chat_response(
                         limit=args.get("limit")
                     )
                     
+                    # Añadimos la llamada y su resultado al contexto
                     api_input.append({
                         "type": "function_call",
                         "call_id": tc["id"],
