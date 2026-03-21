@@ -1,25 +1,27 @@
+# src/config/tools_config.py
+
 ADMISSION_QUERY_TOOL = {
     "type": "function",
     "name": "query_admission_data",
-    "description": "Queries historical university admission data. Use this to find specific career scores, filter by score ranges (e.g., less than 600), sort (e.g., highest scores), or limit results (e.g., top 5).",
+    "description": "Queries historical university admission data to forecast future trends. CRITICAL: This database ONLY contains PAST historical data. To predict a future semester, you must retrieve the past history by leaving the semester field null.",
     "parameters": {
         "type": "object",
         "properties": {
             "career": {
                 "type": ["string", "null"],
-                "description": "The specific name of the career to look up (e.g., medicina, ingenieria de sistemas). Set to null if the user is asking general questions like 'top 5 careers'."
+                "description": "The specific name of the career to look up. Set to null if the user is asking general questions."
             },
             "min_score": {
                 "type": ["number", "null"],
-                "description": "Minimum cutoff score. Use if the user asks for careers needing more than X points."
+                "description": "Minimum cutoff score. CRITICAL: NEVER invent or guess this value based on your calculations. ONLY use this if the user EXPLICITLY types a numerical value requesting a specific lower bound."
             },
             "max_score": {
                 "type": ["number", "null"],
-                "description": "Maximum cutoff score. Use if the user asks for careers needing less than X points."
+                "description": "Maximum cutoff score. CRITICAL: NEVER invent or guess this value based on your calculations. ONLY use this if the user EXPLICITLY types a numerical value requesting a specific upper bound."
             },
             "semester": {
                 "type": ["string", "null"],
-                "description": "Specific semester to filter by (e.g., '2022-1', '2023-2'). Set to null to search across all available semesters."
+                "description": "Specific historical semester to filter by. CRITICAL: NEVER pass a future or current semester because the database only holds past records. If the user asks about the future or a target semester that has not happened yet, you MUST set this to null to fetch the historical data."
             },
             "sort_by": {
                 "type": ["string", "null"],
@@ -27,11 +29,11 @@ ADMISSION_QUERY_TOOL = {
             },
             "sort_order": {
                 "type": ["string", "null"],
-                "description": "Order to sort the results. Valid values are exactly: 'asc' (lowest first) or 'desc' (highest first). Set to null if no sorting is requested."
+                "description": "Order to sort the results. Valid values are exactly: 'asc' or 'desc'. Set to null if no sorting is requested."
             },
             "limit": {
                 "type": ["integer", "null"],
-                "description": "Maximum number of careers to return. Use for 'top 5' or 'give me 3 options' queries. Set to null if no limit is specified."
+                "description": "Maximum number of careers to return. Set to null if no limit is specified."
             }
         },
         "required": [
