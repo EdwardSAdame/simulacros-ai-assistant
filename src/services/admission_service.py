@@ -2,6 +2,7 @@ import json
 import os
 import difflib
 import logging
+import unicodedata
 from typing import Optional
 
 logger = logging.getLogger(__name__)
@@ -16,6 +17,45 @@ JSON_PATH = os.path.join(
     "unal_admission_stats.json"
 )
 
+def normalize_text(text: str) -> str:
+    """Removes accents and converts to lowercase for robust matching."""
+    if not text:
+        return ""
+    text = text.lower().strip()
+    return ''.join(c for c in unicodedata.normalize('NFD', text) if unicodedata.category(c) != 'Mn')
+
+def _calculate_wma_target(career_data: dict, season: str) -> float | None:
+    """
+    Calculates a Weighted Moving Average + 1.5% Safety Buffer 
+    for a specific semester season ('-1' or '-2').
+    """
+    scores = []
+    # Extract scores matching the requested season (e.g., all "-2" semesters)
+    for sem, stats in career_data.items():
+        if sem.endswith(season) and stats.get("cutoff_score") is not None:
+            scores.append((sem, stats["cutoff_score"]))
+            
+    if not scores:
+        return None
+        
+    # Sort chronologically descending to get the newest semesters first
+    scores.sort(key=lambda x: x[0], reverse=True)
+    
+    # Take up to the 3 most recent scores
+    recent_scores = [s[1] for s in scores[:3]]
+    
+    # Apply weights based on available data points
+    if len(recent_scores) == 3:
+        wma = (recent_scores[0] * 0.5) + (recent_scores[1] * 0.3) + (recent_scores[2] * 0.2)
+    elif len(recent_scores) == 2:
+        wma = (recent_scores[0] * 0.7) + (recent_scores[1] * 0.3)
+    else:
+        wma = recent_scores[0]
+        
+    # Add 1.5% safety buffer and round
+    safe_target = wma * 1.015
+    return round(safe_target, 2)
+
 def query_admission_data(
     career: Optional[str] = None,
     min_score: Optional[float] = None,
@@ -27,7 +67,8 @@ def query_admission_data(
 ) -> str:
     """
     Dynamically queries admission stats based on multiple optional filters.
-    Returns a JSON string containing the filtered, sorted, and limited results.
+    Includes automated mathematical forecasting for specific careers.
+    Returns a JSON string containing the results.
     """
     try:
         with open(JSON_PATH, 'r', encoding='utf-8') as f:
@@ -35,35 +76,45 @@ def query_admission_data(
         
         target_career = None
         
-        # 1. Resolve Specific Career (with fuzzy matching)
+        # 1. Resolve Specific Career (with bulletproof fuzzy matching)
         if career:
-            career_clean = career.lower().strip()
-            if career_clean in data:
-                target_career = career_clean
+            career_norm = normalize_text(career)
+            key_map = {normalize_text(k): k for k in data.keys()}
+            
+            if career_norm in key_map:
+                target_career = key_map[career_norm]
             else:
-                matches = difflib.get_close_matches(career_clean, list(data.keys()), n=1, cutoff=0.6)
+                matches = difflib.get_close_matches(career_norm, list(key_map.keys()), n=1, cutoff=0.5)
                 if matches:
-                    target_career = matches[0]
+                    target_career = key_map[matches[0]]
                     logger.info(f"Fuzzy matched '{career}' to '{target_career}'")
                 else:
                     return json.dumps({"error": f"Could not find any career matching: '{career}'"})
 
-        # 2. Filter and Flatten Data
+        # 2. Mathematical Forecasting (Only if a specific career is targeted)
+        insights = None
+        if target_career and target_career in data:
+            c_data = data[target_career]
+            insights = {
+                "trend_analysis": {
+                    "recommended_safe_target_for_semesters_ending_in_1": _calculate_wma_target(c_data, "-1"),
+                    "recommended_safe_target_for_semesters_ending_in_2": _calculate_wma_target(c_data, "-2"),
+                    "counselor_note": "Advise the user to aim for the 'recommended_safe_target' corresponding to their target semester. This is calculated using a Weighted Moving Average of recent historical data plus a safety margin to account for fluctuations."
+                }
+            }
+
+        # 3. Filter and Flatten Data
         results = []
         for c_name, c_data in data.items():
-            # Skip if we are looking for a specific career and this isn't it
             if target_career and c_name != target_career:
                 continue
                 
             for sem, stats in c_data.items():
-                # Filter by semester
                 if semester and sem != semester:
                     continue
                 
                 score = stats.get("cutoff_score")
                 
-                # Filter by min/max score
-                # Note: We skip entries where the score is null (None) if a score filter is applied
                 if min_score is not None:
                     if score is None or score < min_score:
                         continue
@@ -72,7 +123,6 @@ def query_admission_data(
                     if score is None or score > max_score:
                         continue
                 
-                # If it passes all filters, add to results
                 results.append({
                     "career": c_name,
                     "semester": sem,
@@ -80,18 +130,15 @@ def query_admission_data(
                     "admitted_count": stats.get("admitted_count")
                 })
 
-        # 3. Sort Results
+        # 4. Sort Results
         if sort_by in ["cutoff_score", "admitted_count"]:
-            # Default to descending (highest first) unless 'asc' is explicitly requested
             reverse_sort = False if sort_order == "asc" else True
-            
-            # Sort safely, putting None/null values at the bottom
             results.sort(
                 key=lambda x: x[sort_by] if x[sort_by] is not None else -999, 
                 reverse=reverse_sort
             )
 
-        # 4. Limit Results
+        # 5. Limit Results
         if limit and limit > 0:
             results = results[:limit]
 
@@ -107,7 +154,8 @@ def query_admission_data(
                 "limit": limit
             },
             "total_matches": len(results),
-            "results": results
+            "results": results,
+            "insights": insights  # The AI will read this object and formulate advice!
         })
 
     except Exception as e:
