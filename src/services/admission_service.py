@@ -31,7 +31,6 @@ def _calculate_wma_target(career_data: dict, season: str) -> dict | None:
     Returns a detailed dictionary with the breakdown of the math so the AI can show its work.
     """
     scores = []
-    # Extract scores matching the requested season (e.g., all "-2" semesters)
     for sem, stats in career_data.items():
         if sem.endswith(season) and stats.get("cutoff_score") is not None:
             scores.append((sem, stats["cutoff_score"]))
@@ -39,16 +38,12 @@ def _calculate_wma_target(career_data: dict, season: str) -> dict | None:
     if not scores:
         return None
         
-    # Sort chronologically descending to get the newest semesters first
     scores.sort(key=lambda x: x[0], reverse=True)
-    
-    # Take up to the 3 most recent scores
     recent_scores = scores[:3]
     
     wma = 0
     breakdown = []
     
-    # Apply weights based on available data points
     if len(recent_scores) == 3:
         wma = (recent_scores[0][1] * 0.5) + (recent_scores[1][1] * 0.3) + (recent_scores[2][1] * 0.2)
         breakdown = [
@@ -68,7 +63,6 @@ def _calculate_wma_target(career_data: dict, season: str) -> dict | None:
             {"semester": recent_scores[0][0], "score": recent_scores[0][1], "weight": "1.0 (100%)"}
         ]
         
-    # Add 1.5% safety buffer and round
     safe_target = wma * 1.015
     
     return {
@@ -98,7 +92,6 @@ def query_admission_data(
         
         target_career = None
         
-        # 1. Resolve Specific Career
         if career:
             career_norm = normalize_text(career)
             key_map = {normalize_text(k): k for k in data.keys()}
@@ -113,7 +106,6 @@ def query_admission_data(
                 else:
                     return json.dumps({"error": f"Could not find any career matching: '{career}'"})
 
-        # 2. Mathematical Forecasting (with explicit breakdown for AI to show)
         insights = None
         if target_career and target_career in data:
             c_data = data[target_career]
@@ -126,14 +118,12 @@ def query_admission_data(
                         "1. ANNOUNCE THE GOAL PROMINENTLY: Start or end your response with a highly visible block highlighting the 'final_safe_target'. "
                         "2. SHOW THE DATA: List the specific semesters and scores used from the 'calculation_breakdown'. "
                         "3. SHOW THE EQUATION: Write out the exact Weighted Moving Average math equation using the real numbers from the data. "
-                        "   (Example: WMA = (Score1 * 0.5) + (Score2 * 0.3) + (Score3 * 0.2) = base_wma) "
-                        "4. SHOW THE BUFFER: Explain the 1.5% safety buffer by showing the final step (Example: base_wma * 1.015 = final_safe_target). "
-                        "Do not just describe it with words. Use Markdown or LaTeX to make the math look professional."
+                        "4. SHOW THE BUFFER: Explain the 1.5% safety buffer by showing the final step (base_wma * 1.015 = final_safe_target). "
+                        "5. EXCLUSIVE FOCUS RULE: Answer ONLY for the career newly requested in the current turn. DO NOT repeat or re-summarize the mathematical breakdown for careers discussed in previous messages unless the user explicitly asks you to compare them."
                     )
                 }
             }
 
-        # 3. Filter and Flatten Data
         results = []
         for c_name, c_data in data.items():
             if target_career and c_name != target_career:
@@ -160,7 +150,6 @@ def query_admission_data(
                     "admitted_count": stats.get("admitted_count")
                 })
 
-        # 4. Sort Results
         if sort_by in ["cutoff_score", "admitted_count"]:
             reverse_sort = False if sort_order == "asc" else True
             results.sort(
@@ -168,7 +157,6 @@ def query_admission_data(
                 reverse=reverse_sort
             )
 
-        # 5. Limit Results
         if limit and limit > 0:
             results = results[:limit]
 
