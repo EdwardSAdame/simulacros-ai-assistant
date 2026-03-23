@@ -17,8 +17,6 @@ if APIGW_ENDPOINT_URL:
 else:
     logger.error("Missing APIGW_AUDIO_ENDPOINT_URL environment variable")
 
-OPENAI_TOKEN_URL = "https://api.openai.com/v1/realtime/sessions"
-
 def handler(event, context):
     request_context = event.get('requestContext', {})
     connection_id = request_context.get('connectionId')
@@ -36,7 +34,8 @@ def handler(event, context):
             
         mode = body_data.get('mode', 'transcription')
         
-        profile = AUDIO_PROFILES.get(mode, AUDIO_PROFILES['transcription'])
+        # Safely get the profile or an empty dict fallback
+        profile = AUDIO_PROFILES.get(mode, AUDIO_PROFILES.get('transcription', {}))
         
         logger.info(f"Received token request from {connection_id} for mode: {mode}")
 
@@ -49,29 +48,51 @@ def handler(event, context):
             "Content-Type": "application/json"
         }
         
-        payload = {
-            "model": profile["model"],
-            "modalities": ["audio", "text"],
-            "instructions": profile["instructions"],
-            "turn_detection": {
-                "type": "server_vad",
-                "threshold": profile.get("vad_threshold", 0.5),
-                "prefix_padding_ms": 300, # Fixed: Lowered from 1000 to 300 to prevent echo drag
-                "silence_duration_ms": profile["silence_duration_ms"]
-            },
-            "input_audio_format": "pcm16"
-        }
-
-        if profile.get("voice"):
-            payload["voice"] = profile["voice"]
-            payload["output_audio_format"] = "pcm16"
+        # --- CRITICAL FIX: Route dynamically based on the requested feature ---
+        if mode == 'language_tutor':
+            # --- SPEECH TO SPEECH (Conversational WebRTC API) ---
+            target_url = "https://api.openai.com/v1/realtime/sessions"
             
-        if profile.get("requires_transcription_model"):
-            payload["input_audio_transcription"] = {
-                "model": "whisper-1"
+            payload = {
+                "model": profile.get("model", "gpt-4o-realtime-preview-2024-12-17"),
+                "modalities": ["audio", "text"],
+                "instructions": profile.get("instructions", "You are a helpful assistant."),
+                "turn_detection": {
+                    "type": "server_vad",
+                    "threshold": profile.get("vad_threshold", 0.5),
+                    "prefix_padding_ms": 300,
+                    "silence_duration_ms": profile.get("silence_duration_ms", 500)
+                },
+                "input_audio_format": "pcm16"
             }
 
-        response = requests.post(OPENAI_TOKEN_URL, headers=headers, json=payload)
+            if profile.get("voice"):
+                payload["voice"] = profile["voice"]
+                payload["output_audio_format"] = "pcm16"
+                
+            if profile.get("requires_transcription_model"):
+                payload["input_audio_transcription"] = {
+                    "model": "whisper-1"
+                }
+                
+        else:
+            # --- SPEECH TO TEXT (Transcription WebSocket API) ---
+            target_url = "https://api.openai.com/v1/realtime/transcription_sessions"
+            
+            # The transcription endpoint requires a much stricter, simpler payload
+            payload = {
+                "model": "gpt-4o-transcribe", 
+                "turn_detection": {
+                    "type": "server_vad",
+                    "threshold": profile.get("vad_threshold", 0.5),
+                    "prefix_padding_ms": 300,
+                    "silence_duration_ms": profile.get("silence_duration_ms", 500)
+                }
+            }
+
+        logger.info(f"Targeting OpenAI URL: {target_url}")
+        
+        response = requests.post(target_url, headers=headers, json=payload)
         
         if response.status_code != 200:
             logger.error(f"OpenAI Error: {response.text}")
