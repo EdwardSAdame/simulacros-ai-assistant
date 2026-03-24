@@ -48,7 +48,6 @@ def handler(event, context):
             "Content-Type": "application/json"
         }
         
-        # --- CRITICAL FIX: Route dynamically based on the requested feature ---
         if mode == 'language_tutor':
             # --- SPEECH TO SPEECH (Conversational WebRTC API) ---
             target_url = "https://api.openai.com/v1/realtime/sessions"
@@ -61,6 +60,7 @@ def handler(event, context):
                     "type": "server_vad",
                     "threshold": float(profile.get("vad_threshold", 0.5)),
                     "prefix_padding_ms": 300,
+                    # 500ms is fine for conversation back-and-forth
                     "silence_duration_ms": int(profile.get("silence_duration_ms", 500))
                 },
                 "input_audio_format": "pcm16"
@@ -79,7 +79,6 @@ def handler(event, context):
             # --- SPEECH TO TEXT (Transcription WebSocket API) ---
             target_url = "https://api.openai.com/v1/realtime/transcription_sessions"
             
-            # PERFECTED PAYLOAD: Nested EXACTLY as the OpenAI Docs request
             payload = {
                 "input_audio_format": "pcm16",
                 "input_audio_transcription": {
@@ -89,7 +88,8 @@ def handler(event, context):
                     "type": "server_vad",
                     "threshold": float(profile.get("vad_threshold", 0.5)),
                     "prefix_padding_ms": 300,
-                    "silence_duration_ms": int(profile.get("silence_duration_ms", 500))
+                    # INCREASED TO 2000 (2 seconds) to prevent fast phrase truncation!
+                    "silence_duration_ms": 2000
                 }
             }
 
@@ -97,7 +97,6 @@ def handler(event, context):
         
         response = requests.post(target_url, headers=headers, json=payload)
         
-        # --- NEW: SEND NATIVE OPENAI ERRORS TO FRONTEND IF IT FAILS ---
         if response.status_code != 200:
             error_details = f"OpenAI API Error ({response.status_code}): {response.text}"
             logger.error(error_details)
