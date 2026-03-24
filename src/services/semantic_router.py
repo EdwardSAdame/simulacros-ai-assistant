@@ -8,7 +8,6 @@ from src.services.token_usage_service import TokenUsageService
 
 logger = logging.getLogger(__name__)
 
-# 🟢 NEW: Strict Pydantic Schema for 100% Reliable Routing
 class RouterResponse(BaseModel):
     category: str = Field(description="The academic category or subject of the query (e.g., biologia, matematicas, admisiones, general).")
     intent: Literal["chat", "quiz", "creative_image", "admission_stats"] = Field(description="The primary intent of the user.")
@@ -31,7 +30,8 @@ class SemanticRouter:
             "admisiones"
         ]
 
-    def determine_category(self, text: str) -> dict:
+    # 🟢 FULLY UPDATED: Accepts user_id and session_id
+    def determine_category(self, text: str, user_id: str = "system_router", session_id: str = "intent_resolution") -> dict:
         if not text:
             return {
                 "category": "general", 
@@ -43,7 +43,7 @@ class SemanticRouter:
             }
             
         try:
-            result = self._classify_with_llm(text)
+            result = self._classify_with_llm(text, user_id, session_id)
             return {
                 "category": result.get("category", "general"),
                 "intent": result.get("intent", "chat"),
@@ -63,10 +63,10 @@ class SemanticRouter:
                 "source": "error_fallback"
             }
 
-    def _classify_with_llm(self, text: str) -> dict:
+    # 🟢 FULLY UPDATED: Passes user_id and session_id to token tracking
+    def _classify_with_llm(self, text: str, user_id: str, session_id: str) -> dict:
         router_model = settings.OPENAI_ROUTER_MODEL.lower()
         
-        # 🟢 CHANGED: payload shape from 'messages' to 'input'
         api_input = [
             {"role": "system", "content": ROUTER_SYSTEM_INSTRUCTIONS.strip()},
             {"role": "user", "content": text}
@@ -80,10 +80,9 @@ class SemanticRouter:
         request_kwargs = {
             "model": router_model,
             "input": api_input,
-            "text_format": RouterResponse, # 🟢 CHANGED: response_format to text_format using Pydantic
+            "text_format": RouterResponse, 
         }
 
-        # Handle Responses API parameters
         if is_reasoning_model:
             if settings.OPENAI_ROUTER_EFFORT:
                 request_kwargs["reasoning"] = {"effort": settings.OPENAI_ROUTER_EFFORT}
@@ -92,10 +91,8 @@ class SemanticRouter:
             request_kwargs["top_p"] = settings.OPENAI_ROUTER_TOP_P
 
         try:
-            # 🟢 CHANGED: completions.create to responses.parse
             response = self.client.responses.parse(**request_kwargs)
             
-            # Extract Structured Output securely
             parsed_data = None
             if hasattr(response, 'output_parsed') and response.output_parsed:
                 parsed_data = response.output_parsed
@@ -110,7 +107,6 @@ class SemanticRouter:
             if not parsed_data:
                 raise ValueError("Failed to parse structured output from Responses API.")
 
-            # 🟢 NEW: Capture and log Router Token Usage
             usage = getattr(response, "usage", None)
             if usage:
                 try:
@@ -129,10 +125,11 @@ class SemanticRouter:
                         in_details = getattr(usage, "input_tokens_details", None)
                         cached_val = getattr(in_details, "cached_tokens", 0) if in_details else 0
 
+                    # 🟢 FULLY UPDATED: Dynamic IDs and "router" model name
                     TokenUsageService().log_token_usage(
-                        user_id="system_router",
-                        session_id="intent_resolution",
-                        model=router_model,
+                        user_id=user_id,
+                        session_id=session_id,
+                        model="router",
                         input_tokens=input_val,
                         output_tokens=output_val,
                         total_tokens=total_val,
@@ -142,10 +139,8 @@ class SemanticRouter:
                 except Exception as e:
                     logger.error(f"Failed to log router tokens: {e}")
 
-            # Convert Pydantic object to dictionary
             data = parsed_data.model_dump() if hasattr(parsed_data, "model_dump") else parsed_data.dict()
             
-            # Final Sanitize (Guarantees backward compatibility)
             category = data.get("category", "general").lower()
             if category not in self.valid_categories: category = "general"
 

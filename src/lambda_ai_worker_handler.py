@@ -100,14 +100,18 @@ def lambda_handler(event, context):
             # SKIP visual feedback if this is a hidden background update
             if connection_id and not is_hidden:
                 try:
-                    # ROUTER CALL: Get category, creative phrases, AND intent
-                    routing_result = semantic_router.determine_category(message)
+                    # 🟢 CRITICAL FIX: Pass user_id and conv_id_in to track Router Costs properly!
+                    routing_result = semantic_router.determine_category(
+                        text=message, 
+                        user_id=user_id, 
+                        session_id=conv_id_in
+                    )
                     
                     category_key = routing_result.get("category", "general")
                     loading_phrases = routing_result.get("loading_phrases", []) 
                     source_type = routing_result.get("source", "unknown")
                     
-                    # 🟢 CRITICAL FIX: Normalize the intent string (lowercase & trim)
+                    # Normalize the intent string (lowercase & trim)
                     raw_intent = routing_result.get("intent", "chat")
                     intent = str(raw_intent).strip().lower()
                     
@@ -179,7 +183,6 @@ def lambda_handler(event, context):
             if connection_id and not is_hidden:
                 try:
                     # A. Send Standard Text Reply (The Chat Bubble + Inline Metadata)
-                    # 🟢 FIX: Added default=str to prevent crash from DynamoDB Decimal timestamp
                     response_payload = json.dumps({
                         "action": "ai_reply",
                         "ai_reply": ai_reply,
@@ -205,7 +208,6 @@ def lambda_handler(event, context):
                             action_type = "quiz_data_update"
 
                         if action_type:
-                            # 🟢 FIX: Added default=str here as well just in case!
                             data_payload = json.dumps({
                                 "action": action_type,
                                 "data": meta_payload,
