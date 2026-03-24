@@ -13,8 +13,8 @@ class TokenUsageService:
         user_id: str,
         session_id: str,
         model: str,
-        prompt_tokens: int,
-        completion_tokens: int,
+        input_tokens: int,
+        output_tokens: int,
         total_tokens: int,
         reasoning_tokens: Optional[int] = 0,
         cached_tokens: Optional[int] = 0
@@ -32,8 +32,8 @@ class TokenUsageService:
 
         timestamp = datetime.now(timezone.utc).isoformat()
 
-        prompt_tokens = max(0, prompt_tokens)
-        completion_tokens = max(0, completion_tokens)
+        input_tokens = max(0, input_tokens)
+        output_tokens = max(0, output_tokens)
         total_tokens = max(0, total_tokens)
         reasoning_tokens = max(0, reasoning_tokens or 0)
         cached_tokens = max(0, cached_tokens or 0)
@@ -48,8 +48,8 @@ class TokenUsageService:
             timestamp=timestamp,
             session_id=session_id,
             model=model,
-            prompt_tokens=prompt_tokens,
-            completion_tokens=completion_tokens,
+            input_tokens=input_tokens,
+            output_tokens=output_tokens,
             total_tokens=total_tokens,
             reasoning_tokens=reasoning_tokens,
             cached_tokens=cached_tokens

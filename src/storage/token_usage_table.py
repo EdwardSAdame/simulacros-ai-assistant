@@ -17,14 +17,14 @@ class TokenUsageTable:
         timestamp: str, 
         session_id: str, 
         model: str, 
-        prompt_tokens: int, 
-        completion_tokens: int, 
+        input_tokens: int, 
+        output_tokens: int, 
         total_tokens: int,
         reasoning_tokens: Optional[int] = 0,
         cached_tokens: Optional[int] = 0
     ) -> bool:
         """
-        Saves a single token usage record to DynamoDB.
+        Saves a single token usage record to DynamoDB using modern input/output nomenclature.
         """
         try:
             item = {
@@ -32,8 +32,8 @@ class TokenUsageTable:
                 'timestamp': timestamp,
                 'sessionId': session_id,
                 'model': model,
-                'promptTokens': prompt_tokens,
-                'completionTokens': completion_tokens,
+                'inputTokens': input_tokens,
+                'outputTokens': output_tokens,
                 'totalTokens': total_tokens,
                 'reasoningTokens': reasoning_tokens,
                 'cachedTokens': cached_tokens

@@ -74,12 +74,16 @@ def get_ai_response(
     def _log_usage(usage_data: dict, current_user: str, session: str, active_mode: str):
         if not usage_data or not current_user: return
         try:
+            # Safely map to the new input/output naming convention
+            input_val = usage_data.get("input_tokens", usage_data.get("prompt_tokens", 0))
+            output_val = usage_data.get("output_tokens", usage_data.get("completion_tokens", 0))
+
             TokenUsageService().log_token_usage(
                 user_id=current_user,
                 session_id=session,
                 model=active_mode,
-                prompt_tokens=usage_data.get("prompt_tokens", 0),
-                completion_tokens=usage_data.get("completion_tokens", 0),
+                input_tokens=input_val,
+                output_tokens=output_val,
                 total_tokens=usage_data.get("total_tokens", 0),
                 reasoning_tokens=usage_data.get("reasoning_tokens", 0),
                 cached_tokens=usage_data.get("cached_tokens", 0)
