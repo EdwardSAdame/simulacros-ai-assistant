@@ -120,7 +120,6 @@ def stream_chat_response(
 
     req = _build_request_payload(cfg, api_input, tools)
     req["stream"] = True
-    req["stream_options"] = {"include_usage": True}
 
     tool_name = None
     tool_call_id = ""
@@ -206,7 +205,6 @@ def stream_chat_response(
             
             req2 = _build_request_payload(cfg, api_input, tools)
             req2["stream"] = True
-            req2["stream_options"] = {"include_usage": True}
             stream2 = client.responses.create(**req2)
             
             for event2 in stream2:
@@ -309,7 +307,6 @@ def stream_structured_quiz(
 
     req = _build_request_payload(cfg, api_input, tools=tools)
     req["text_format"] = QuizResponse
-    req["stream_options"] = {"include_usage": True}
     
     streamed_questions = []
 
