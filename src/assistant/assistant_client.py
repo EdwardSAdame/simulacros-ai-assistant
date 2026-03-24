@@ -2,7 +2,7 @@
 import logging
 import re
 import json
-from typing import List, Dict, Any, Tuple, Generator
+from typing import List, Dict, Any, Tuple, Generator, Optional
 
 # CONFIG & CLIENT
 from src.config.settings import get_openai_client, get_vector_search_max_results
@@ -38,7 +38,7 @@ def send_message_to_assistant(
     web_search_config: Dict[str, Any] | None = None,
     user_location: Dict[str, str] | None = None,
     pdf_urls: List[str] | None = None
-) -> Tuple[str, List[str], List[Dict[str, str]]]:
+) -> Tuple[str, List[str], List[Dict[str, str]], Dict[str, int]]:
     
     client = get_openai_client()
     cfg = get_model_config(mode)
@@ -52,7 +52,6 @@ def send_message_to_assistant(
     if pdf_urls:
         _inject_pdf_inputs(api_input, pdf_urls)
 
-    # Note: For non-streaming, you could also append custom tools here if needed
     tools = _configure_tools(vector_store_ids, requires_visuals, pdf_urls, web_search_config, user_location)
 
     req = _build_request_payload(cfg, api_input, tools)
@@ -79,7 +78,10 @@ def send_message_to_assistant(
 
         generated_urls = list(generated_urls_map.values()) if isinstance(generated_urls_map, dict) else generated_urls_map
 
-        return (text or "[No response]", generated_urls, sources_list)
+        # Extract usage data
+        usage_data = _extract_usage_metrics(getattr(resp, "usage", None))
+
+        return (text or "[No response]", generated_urls, sources_list, usage_data)
     except Exception as e:
         logger.error(f"Chat failed: {e}")
         raise e
@@ -108,7 +110,6 @@ def stream_chat_response(
     api_input = [{"role": "system", "content": [{"type": "input_text", "text": system_text}]}]
     api_input.extend(conversation_input)
 
-    # Attach our custom data retrieval tools
     tools = get_custom_tools()
     
     if enable_image_generation:
@@ -119,37 +120,36 @@ def stream_chat_response(
 
     req = _build_request_payload(cfg, api_input, tools)
     req["stream"] = True
+    req["stream_options"] = {"include_usage": True}
 
     tool_name = None
     tool_call_id = ""
     tool_args_buffer = ""
     
-    # 🟢 LISTA PARA ACUMULAR LLAMADAS EN PARALELO
     pending_tool_calls = []
 
     try:
         stream = client.responses.create(**req)
         
         for event in stream:
+            # Check for usage object in the stream chunk
+            if hasattr(event, "usage") and event.usage is not None:
+                yield {"type": "usage_metrics", "data": _extract_usage_metrics(event.usage)}
+
             event_type = getattr(event, "type", "")
             
-            # 1. Standard text delta (Yield directly to frontend)
             if event_type == "response.output_text.delta":
                 yield event
                 
-            # 2. Start of a Function Call
             elif event_type == "response.output_item.added":
                 item = getattr(event, "item", None)
-                # 🟢 CORRECCIÓN: Usar getattr(item, "type", "") en lugar de event
                 if item and getattr(item, "type", "") == "function_call":
                     tool_name = getattr(item, "name", "")
                     tool_call_id = getattr(item, "call_id", "") or getattr(item, "id", "")
                     
-            # 3. Accumulating Function Call Arguments
             elif event_type == "response.function_call_arguments.delta":
                 tool_args_buffer += getattr(event, "delta", "")
                 
-            # 4. Function Call Completed -> GUARDAR EN LA LISTA, NO EJECUTAR TODAVÍA
             elif event_type == "response.function_call_arguments.done":
                 item = getattr(event, "item", None)
                 if item:
@@ -162,16 +162,13 @@ def stream_chat_response(
                         "args": tool_args_buffer
                     })
                 
-                # Resetear buffers para la siguiente posible llamada paralela
                 tool_name = None
                 tool_call_id = ""
                 tool_args_buffer = ""
             
             else:
-                # Yield any other events (e.g., image generation streams)
                 yield event
 
-        # 5. UNA VEZ QUE EL STREAM TERMINA, EJECUTAMOS TODAS LAS HERRAMIENTAS ACUMULADAS
         if pending_tool_calls:
             logger.info(f"Executing {len(pending_tool_calls)} parallel tool calls.")
             
@@ -188,7 +185,6 @@ def stream_chat_response(
                         limit=args.get("limit")
                     )
                     
-                    # Añadimos la llamada y su resultado al contexto
                     api_input.append({
                         "type": "function_call",
                         "call_id": tc["id"],
@@ -208,12 +204,15 @@ def stream_chat_response(
                         "output": json.dumps({"error": "Query execution failed."})
                     })
             
-            # 6. DISPARAMOS EL SEGUNDO STREAM UNA SOLA VEZ CON TODOS LOS DATOS
             req2 = _build_request_payload(cfg, api_input, tools)
             req2["stream"] = True
+            req2["stream_options"] = {"include_usage": True}
             stream2 = client.responses.create(**req2)
             
             for event2 in stream2:
+                if hasattr(event2, "usage") and event2.usage is not None:
+                    yield {"type": "usage_metrics", "data": _extract_usage_metrics(event2.usage)}
+
                 if getattr(event2, "type", "") == "response.output_text.delta":
                     yield event2
 
@@ -237,7 +236,7 @@ def generate_structured_quiz(
     vector_store_ids: List[str] | None = None,
     web_search_config: Dict[str, Any] | None = None,
     user_location: Dict[str, str] | None = None
-) -> QuizResponse:
+) -> Tuple[QuizResponse, Dict[str, int]]:
     
     client = get_openai_client()
     cfg = get_model_config(mode)
@@ -268,7 +267,9 @@ def generate_structured_quiz(
             for q in quiz.questions:
                 QuizUtils.shuffle_options(q)
 
-        return quiz
+        usage_data = _extract_usage_metrics(getattr(resp, "usage", None))
+
+        return (quiz, usage_data)
     except Exception as e:
         logger.error(f"Quiz generation failed: {e}")
         raise e
@@ -308,6 +309,7 @@ def stream_structured_quiz(
 
     req = _build_request_payload(cfg, api_input, tools=tools)
     req["text_format"] = QuizResponse
+    req["stream_options"] = {"include_usage": True}
     
     streamed_questions = []
 
@@ -329,6 +331,11 @@ def stream_structured_quiz(
                     if hasattr(stream, 'get_final_response'):
                         final_raw = stream.get_final_response()
                         generated_urls = handle_generated_files(client, final_raw, folder="quiz_assets")
+                        
+                        # Extract usage from the final stream payload
+                        usage_data = _extract_usage_metrics(getattr(final_raw, "usage", None))
+                        if usage_data:
+                            yield {"type": "usage_metrics", "data": usage_data}
                     
                     if final_parsed and hasattr(final_parsed, 'questions') and streamed_questions:
                         if len(final_parsed.questions) == len(streamed_questions):
@@ -352,6 +359,29 @@ def stream_structured_quiz(
 # ------------------------------------------------------------------
 # INTERNAL HELPERS
 # ------------------------------------------------------------------
+def _extract_usage_metrics(usage_obj: Any) -> Dict[str, int]:
+    """Extracts tokens including reasoning and cached prompts from an OpenAI usage object."""
+    if not usage_obj:
+        return {}
+    
+    prompt_tokens = getattr(usage_obj, "prompt_tokens", 0)
+    completion_tokens = getattr(usage_obj, "completion_tokens", 0)
+    total_tokens = getattr(usage_obj, "total_tokens", 0)
+    
+    completion_details = getattr(usage_obj, "completion_tokens_details", None)
+    reasoning_tokens = getattr(completion_details, "reasoning_tokens", 0) if completion_details else 0
+    
+    prompt_details = getattr(usage_obj, "prompt_tokens_details", None)
+    cached_tokens = getattr(prompt_details, "cached_tokens", 0) if prompt_details else 0
+
+    return {
+        "prompt_tokens": prompt_tokens,
+        "completion_tokens": completion_tokens,
+        "total_tokens": total_tokens,
+        "reasoning_tokens": reasoning_tokens,
+        "cached_tokens": cached_tokens
+    }
+
 def _inject_pdf_inputs(api_input, pdf_urls):
     target_message = None
     if api_input and api_input[-1].get("role") == "user":

@@ -62,12 +62,30 @@ def get_ai_response(
     num_questions: int = 5
 ) -> Tuple[str, str, str, Dict | None]: 
     
-    # Lazy Imports (AÑADIMOS stream_chat_response AQUI)
+    # Lazy Imports 
     from src.assistant.assistant_client import send_message_to_assistant, generate_structured_quiz, stream_structured_quiz, stream_chat_response
     from src.assistant.image_handler import format_image_urls_for_openai
     from src.services.quiz_service import QuizService
     from src.config.system_instructions import build_system_instructions
     from src.services.creative_image_service import CreativeImageService
+    from src.services.token_usage_service import TokenUsageService
+
+    # Internal helper to fire-and-forget token logging
+    def _log_usage(usage_data: dict, current_user: str, session: str, active_mode: str):
+        if not usage_data or not current_user: return
+        try:
+            TokenUsageService().log_token_usage(
+                user_id=current_user,
+                session_id=session,
+                model=active_mode,
+                prompt_tokens=usage_data.get("prompt_tokens", 0),
+                completion_tokens=usage_data.get("completion_tokens", 0),
+                total_tokens=usage_data.get("total_tokens", 0),
+                reasoning_tokens=usage_data.get("reasoning_tokens", 0),
+                cached_tokens=usage_data.get("cached_tokens", 0)
+            )
+        except Exception as e:
+            logger.error(f"Failed to log token usage: {e}")
 
     page = _normalize_page(page)
 
@@ -240,6 +258,8 @@ def get_ai_response(
                         if idx not in seen_indices:
                             accumulated_questions.append(q_dict)
                             seen_indices.add(idx)
+                    elif evt_type == "usage_metrics":
+                        _log_usage(event.get("data"), user_id, actual_conversation_id, mode)
                     elif evt_type == "done":
                         final_obj = event.get("full_response")
                         parsed_response = None
@@ -273,7 +293,7 @@ def get_ai_response(
 
             else:
                 # Batch Mode
-                quiz_model = generate_structured_quiz(
+                quiz_model, usage_data = generate_structured_quiz(
                     conversation_input=conversation_input,
                     user_id=user_id,
                     page=page,
@@ -287,6 +307,8 @@ def get_ai_response(
                     web_search_config=web_search_config
                 )
                 
+                _log_usage(usage_data, user_id, actual_conversation_id, mode)
+
                 quiz_data = {
                     "quiz_mode": "batch", 
                     "topic": quiz_model.title,
@@ -330,8 +352,6 @@ def get_ai_response(
     elif intent == "admission_stats":
         logger.info(f"Routing to Admission Stats local tool for user {user_id}")
         try:
-            # We call the stream function we built, which has the tool execution logic built-in.
-            # Even if the frontend isn't streaming text chunks, we accumulate it here and return it smoothly.
             stream_gen = stream_chat_response(
                 conversation_input=conversation_input,
                 user_id=user_id,
@@ -343,7 +363,9 @@ def get_ai_response(
             )
             
             for event in stream_gen:
-                if getattr(event, "type", "") == "response.output_text.delta":
+                if isinstance(event, dict) and event.get("type") == "usage_metrics":
+                    _log_usage(event.get("data"), user_id, actual_conversation_id, mode)
+                elif getattr(event, "type", "") == "response.output_text.delta":
                     final_reply_text += getattr(event, "delta", "")
                     
             quiz_data = None
@@ -454,6 +476,10 @@ def get_ai_response(
                 final_reply_text = response_tuple[0]
                 generated_assets = response_tuple[1]
                 sources_data = response_tuple[2] if len(response_tuple) > 2 else []
+                
+                # New Extract Token Usage
+                usage_data = response_tuple[3] if len(response_tuple) > 3 else {}
+                _log_usage(usage_data, user_id, actual_conversation_id, mode)
 
         except Exception as e:
             raise RuntimeError(f"OpenAI Chat API failed: {e}")
