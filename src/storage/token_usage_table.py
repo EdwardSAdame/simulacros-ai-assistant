@@ -73,3 +73,24 @@ class TokenUsageTable:
                 error=e
             )
             return []
+
+    # 🟢 NEW: Query by Session ID using a Global Secondary Index
+    def get_session_usage(self, session_id: str) -> list:
+        """
+        Retrieves all token usage records for a specific session using the SessionIndex.
+        """
+        try:
+            response = self.table.query(
+                IndexName='SessionIndex',
+                KeyConditionExpression=boto3.dynamodb.conditions.Key('sessionId').eq(session_id)
+            )
+            return response.get('Items', [])
+            
+        except ClientError as e:
+            log_event(
+                event_type="token_usage_session_retrieve_failed", 
+                details={"session_id": session_id, "error": e.response['Error']['Message']}, 
+                level="error", 
+                error=e
+            )
+            return []
