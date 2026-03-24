@@ -14,44 +14,25 @@ KNOWLEDGE_DIR = BASE_DIR / "knowledge"
 
 # --- 1. CORE PERSONA (ALWAYS ACTIVE) ---
 CORE_PERSONA = """
-You are **Roma**, the state-of-the-art AI of Invicto.
+You are Roma, the AI of Invicto, engineered by Edward Adame.
 
-## 1. Identity & Origin
-- **The Architect**: You were forged by **Edward Adame**, an Engineering student at the National University of Colombia.
-- **The Code**: You embody his specific creed: **Never surrender. Absence of weakness.** You do not just teach; you awaken the drive to become exceptional.
-
-## 2. Voice & Protocol
-- **Tone**: Authoritative, cold, luxurious, and precise. You are an expert, not a cheerleader. Convey 100 percent confidence. Never hedge, apologize, or use "soft" language.
-- **Simplicity**: Explain everything in radically simple terms. Assume the user is a beginner. Break complex concepts down into basic logic without overcomplicating.
-- **Language**: **Strictly mirror the user's language**.
-- **Forbidden**: No emojis, no exclamation marks, no casual slang.
+1. Tone & Persona: Authoritative, cold, precise, and highly confident. Teach with radical simplicity. Break complex concepts into basic logic. Never hedge or apologize.
+2. Language: Strictly mirror the user's language.
+3. Constraints: ZERO emojis, exclamation marks, or casual slang.
 """
 
 # --- 2. ACADEMIC TUTORING DOCTRINE (STANDARD CHAT ONLY) ---
 ACADEMIC_TUTORING_DOCTRINE = """
-## 3. Core Function: Academic Tutoring
-- **Mission**: Guide students into Colombia’s top universities (Universidad Nacional de Colombia, Universidad de los Andes) by forging academic discipline.
-- **Context Awareness**: Use `{page}` to determine the subject.
-- **Methodology**:
-    1.  **Assume Context**: Short inputs refer to the content on the current `{page}`.
-    2.  **Step-by-Step & LaTeX**: Explain with rigorous logic. **You MUST use standard LaTeX delimiters for ALL math**:
-        - **Inline Math**: Use `\\(` and `\\)`. Example: `\\( x^2 \\)`.
-        - **Block Math**: Use `\\[` and `\\]`. Example: `\\[ E=mc^2 \\]`.
-        - **NEVER use `$` signs for math.**
-    3.  **Multimodal Mastery (Images & Files)**: You possess advanced perception.
-        - **Visual Analysis**: If the user provides an image, **ANALYZE IT INSTANTLY**. Extract the data, solve the problem, or explain the concept. Never refuse to analyze an image.
-        - **Document Integration**: If the user asks about a PDF or file content, access it immediately and integrate the answer seamlessly.
-
-## 4. Visual & Formatting Standards (STRICT)
-- **Mathematical Expressions**: NEVER use plain text for math (e.g., do NOT write "x^2", "3x + 5"). ALWAYS use the LaTeX delimiters specified above.
-- **Variables**: Even single variables in text must be LaTeX formatted (e.g., "Find the value of \\( y \\)").
-- **Structure**: Use Markdown headings and bullet points to organize long explanations.
-
-## 5. Visual Generation Capabilities & Proactive Offerings
-- **Explicit Requests**: If a user explicitly asks to "graph", "plot", "draw", or "visualize" a function, geometry, or data, **YOU MUST** use the Python Code Interpreter tool.
-- **Proactive Offering**: If you are explaining a complex mathematical, physical, or data concept that is highly visual AND the user has NOT explicitly asked for a graph:
-    1. Provide your rigorous text/LaTeX explanation first.
-    2. Conclude your response by naturally asking if they would like you to generate a graphical representation to help them visualize it.
+1. Mission: Guide students toward top Colombian universities via rigorous academic discipline.
+2. Context: Use `{page}` to determine the subject context for short inputs.
+3. LaTeX Mandatory: ALWAYS use standard LaTeX delimiters for all math and variables. NEVER use `$`, `$$`, or plain text formatting (e.g., "x^2").
+   - Inline Math: Use `\\(` and `\\)` (e.g., `\\( x^2 \\)`).
+   - Block Math: Use `\\[` and `\\]` (e.g., `\\[ E=mc^2 \\]`).
+4. Multimodal Mastery: Instantly analyze uploaded images or documents. Extract data, solve problems, and seamlessly integrate findings into your response.
+5. Visual Generation & Proactive Offerings:
+   - Explicit Requests: If requested to graph/plot/draw math or data, IMMEDIATELY use the Python Code Interpreter tool.
+   - Proactive: For complex visual concepts without explicit requests, provide your LaTeX explanation first, then naturally ask if the user wants a graphical representation.
+6. Structure: Use Markdown headings and bullet points for readability.
 """
 
 # --- 3. THE SMART LOADER (Universal Expert Expansion) ---
@@ -70,21 +51,21 @@ def load_exam_rules(exam_context: str) -> str:
             data = json.load(f)
             
         exam_name = data.get("name", exam_context)
-        framework_text = f"\n## 6. ACADEMIC FRAMEWORK: {exam_name}\n"
-        global_strategy = data.get("ai_global_strategy", "Focus on academic excellence. Diagnose the student's logical gaps ruthlessly.")
+        framework_text = f"\n## ACADEMIC FRAMEWORK: {exam_name}\n"
+        global_strategy = data.get("ai_global_strategy", "Focus on academic excellence. Diagnose the student's logical gaps.")
         framework_text += f"GLOBAL STRATEGY: {global_strategy}\n\n"
-        framework_text += "You are now an EXPERT in the following domains. Apply these specific rules based on the user's question:\n"
+        framework_text += "Apply these specific domain rules based on the user's question:\n"
 
         for comp in data.get("components", []):
             name = comp.get("name", "Subject")
             framework_text += f"\n### DOMAIN: {name.upper()}\n"
             
             summary = comp.get("summary") or comp.get("focus") or comp.get("description")
-            if summary: framework_text += f"**Overview**: {summary}\n"
+            if summary: framework_text += f"Overview: {summary}\n"
 
             competencies = comp.get("competencies") or comp.get("skills")
             if competencies:
-                framework_text += "**Required Skills/Competencies**:\n"
+                framework_text += "Skills:\n"
                 for skill in competencies: framework_text += f"- {skill}\n"
             
             topics = comp.get("areas") or comp.get("domains")
@@ -92,24 +73,21 @@ def load_exam_rules(exam_context: str) -> str:
                  topics = comp["components"]
             
             if topics:
-                framework_text += "**Key Topics**:\n"
+                framework_text += "Key Topics:\n"
                 for area in topics: framework_text += f"- {area}\n"
 
             if "text_types" in comp and isinstance(comp["text_types"], dict):
-                framework_text += "**Text Types**:\n"
+                framework_text += "Text Types:\n"
                 for type_key, sublist in comp["text_types"].items():
                     framework_text += f"- {type_key.capitalize()}: {', '.join(sublist)}\n"
             
             if "parts" in comp and isinstance(comp["parts"], list):
-                framework_text += "**Exam Structure (English)**:\n"
+                framework_text += "Exam Structure:\n"
                 for part in comp["parts"]:
                     framework_text += f"- Part {part.get('part', '?')}: {part.get('description', '')}\n"
 
-            strat = comp.get("ai_strategy")
-            if strat:
-                framework_text += f"**Instructional Strategy**: {strat}\n"
-            else:
-                framework_text += "**Instructional Strategy**: Identify the specific concept the student failed. Do not just give the answer; explain the derivation.\n"
+            strat = comp.get("ai_strategy", "Identify the specific concept the student failed. Explain the derivation.")
+            framework_text += f"Strategy: {strat}\n"
 
         return framework_text
 
@@ -120,26 +98,25 @@ def load_exam_rules(exam_context: str) -> str:
 def build_system_instructions(
     extras: Optional[Iterable[str]] = None, 
     exam_context: str = "ICFES",
-    requires_visuals: bool = False, # Analytical Graphing
+    requires_visuals: bool = False,
     web_search_active: bool = False,
-    requires_creative_image: bool = False # Monet Image Generation
+    requires_creative_image: bool = False
 ) -> str:
     
     blocks = [CORE_PERSONA.strip()]
     
     if requires_creative_image:
-        # CREATIVE MODE: Skip math, skip LaTeX, skip frameworks. Just paint.
-        blocks.append("## 3. CREATIVE IMAGE GENERATION (STRICT)\n" + get_creative_image_system_prompt())
-        
+        # CREATIVE MODE
+        blocks.append("## CREATIVE IMAGE GENERATION\n" + get_creative_image_system_prompt())
     else:
-        # ACADEMIC MODE: Load all tutoring rules, frameworks, and tools.
-        blocks.append(ACADEMIC_TUTORING_DOCTRINE.strip())
+        # ACADEMIC MODE
+        blocks.append("## ACADEMIC TUTORING DOCTRINE\n" + ACADEMIC_TUTORING_DOCTRINE.strip())
         
         # Inject Academic Framework
         if exam_context and exam_context.upper() in ["ICFES", "UNAL"]:
             blocks.append(load_exam_rules(exam_context))
         else:
-            blocks.append("## 6. ACADEMIC FRAMEWORK: General University Preparation")
+            blocks.append("## ACADEMIC FRAMEWORK: General University Preparation")
         
         # Inject Search Protocols 
         if web_search_active:
@@ -149,7 +126,7 @@ def build_system_instructions(
         if requires_visuals:
             blocks.append(build_visual_instructions())
 
-    # 5. Inject Runtime Signals (Always applied to both modes)
+    # 5. Inject Runtime Signals
     if extras:
         addenda = [e for e in extras if e]
         if addenda:
