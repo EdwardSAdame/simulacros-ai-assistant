@@ -1,9 +1,8 @@
+# src/services/token_usage_service.py
 from datetime import datetime, timezone
 from typing import Optional
 from src.storage.token_usage_table import TokenUsageTable
-from src.utils.logging_utils import get_logger
-
-logger = get_logger(__name__)
+from src.utils.logging_utils import log_event
 
 class TokenUsageService:
     def __init__(self):
@@ -24,7 +23,11 @@ class TokenUsageService:
         Validates and processes token usage data before persisting it to the database.
         """
         if not user_id or not model:
-            logger.warning("Missing required fields (user_id or model) for token logging.")
+            log_event(
+                event_type="token_logging_missing_fields", 
+                details={"user_id": user_id, "model": model}, 
+                level="warning"
+            )
             return False
 
         timestamp = datetime.now(timezone.utc).isoformat()
@@ -35,7 +38,10 @@ class TokenUsageService:
         reasoning_tokens = max(0, reasoning_tokens or 0)
         cached_tokens = max(0, cached_tokens or 0)
 
-        logger.info(f"Processing token usage for user: {user_id}, model: {model}, total: {total_tokens}")
+        log_event(
+            event_type="processing_token_usage", 
+            details={"user_id": user_id, "model": model, "total_tokens": total_tokens}
+        )
 
         return self.storage.record_usage(
             user_id=user_id,
@@ -54,7 +60,11 @@ class TokenUsageService:
         Retrieves the raw token usage history for a specific user.
         """
         if not user_id:
-            logger.warning("Attempted to retrieve usage history without a user_id.")
+            log_event(
+                event_type="token_history_missing_user", 
+                details={}, 
+                level="warning"
+            )
             return []
             
         return self.storage.get_user_usage(user_id)

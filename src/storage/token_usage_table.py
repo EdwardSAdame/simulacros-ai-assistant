@@ -1,10 +1,9 @@
+# src/storage/token_usage_table.py
 import os
 import boto3
 from typing import Dict, Any, Optional
 from botocore.exceptions import ClientError
-from src.utils.logging_utils import get_logger
-
-logger = get_logger(__name__)
+from src.utils.logging_utils import log_event
 
 class TokenUsageTable:
     def __init__(self):
@@ -41,11 +40,19 @@ class TokenUsageTable:
             }
             
             self.table.put_item(Item=item)
-            logger.info(f"Successfully recorded token usage for user {user_id} and model {model}.")
+            log_event(
+                event_type="token_usage_recorded", 
+                details={"user_id": user_id, "model": model, "total_tokens": total_tokens}
+            )
             return True
             
         except ClientError as e:
-            logger.error(f"Failed to record token usage: {e.response['Error']['Message']}")
+            log_event(
+                event_type="token_usage_record_failed", 
+                details={"error": e.response['Error']['Message']}, 
+                level="error", 
+                error=e
+            )
             return False
 
     def get_user_usage(self, user_id: str) -> list:
@@ -59,5 +66,10 @@ class TokenUsageTable:
             return response.get('Items', [])
             
         except ClientError as e:
-            logger.error(f"Failed to retrieve token usage for user {user_id}: {e.response['Error']['Message']}")
+            log_event(
+                event_type="token_usage_retrieve_failed", 
+                details={"user_id": user_id, "error": e.response['Error']['Message']}, 
+                level="error", 
+                error=e
+            )
             return []
