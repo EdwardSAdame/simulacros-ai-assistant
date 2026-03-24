@@ -360,26 +360,64 @@ def stream_structured_quiz(
 # INTERNAL HELPERS
 # ------------------------------------------------------------------
 def _extract_usage_metrics(usage_obj: Any) -> Dict[str, int]:
-    """Extracts tokens including reasoning and cached prompts from an OpenAI usage object."""
+    """Extracts tokens handling Pydantic objects, standard dictionaries, and alternate key names."""
     if not usage_obj:
         return {}
-    
-    prompt_tokens = getattr(usage_obj, "prompt_tokens", 0)
-    completion_tokens = getattr(usage_obj, "completion_tokens", 0)
-    total_tokens = getattr(usage_obj, "total_tokens", 0)
-    
-    completion_details = getattr(usage_obj, "completion_tokens_details", None)
-    reasoning_tokens = getattr(completion_details, "reasoning_tokens", 0) if completion_details else 0
-    
-    prompt_details = getattr(usage_obj, "prompt_tokens_details", None)
-    cached_tokens = getattr(prompt_details, "cached_tokens", 0) if prompt_details else 0
+
+    # 1. If the usage object is a Dictionary
+    if isinstance(usage_obj, dict):
+        prompt_tokens = (
+            usage_obj.get("prompt_tokens") or 
+            usage_obj.get("promptTokens") or 
+            usage_obj.get("input_tokens") or 
+            usage_obj.get("prompt_token_count") or 0
+        )
+        completion_tokens = (
+            usage_obj.get("completion_tokens") or 
+            usage_obj.get("completionTokens") or 
+            usage_obj.get("output_tokens") or 
+            usage_obj.get("candidates_token_count") or 0
+        )
+        total_tokens = (
+            usage_obj.get("total_tokens") or 
+            usage_obj.get("totalTokens") or 0
+        )
+        
+        completion_details = usage_obj.get("completion_tokens_details", {})
+        reasoning_tokens = completion_details.get("reasoning_tokens", 0) if isinstance(completion_details, dict) else 0
+        
+        prompt_details = usage_obj.get("prompt_tokens_details", {})
+        cached_tokens = prompt_details.get("cached_tokens", 0) if isinstance(prompt_details, dict) else 0
+        
+    # 2. If the usage object is a Class/Object
+    else:
+        prompt_tokens = (
+            getattr(usage_obj, "prompt_tokens", None) or 
+            getattr(usage_obj, "promptTokens", None) or 
+            getattr(usage_obj, "input_tokens", None) or 0
+        )
+        completion_tokens = (
+            getattr(usage_obj, "completion_tokens", None) or 
+            getattr(usage_obj, "completionTokens", None) or 
+            getattr(usage_obj, "output_tokens", None) or 0
+        )
+        total_tokens = (
+            getattr(usage_obj, "total_tokens", None) or 
+            getattr(usage_obj, "totalTokens", None) or 0
+        )
+        
+        completion_details = getattr(usage_obj, "completion_tokens_details", None)
+        reasoning_tokens = getattr(completion_details, "reasoning_tokens", 0) if completion_details else 0
+        
+        prompt_details = getattr(usage_obj, "prompt_tokens_details", None)
+        cached_tokens = getattr(prompt_details, "cached_tokens", 0) if prompt_details else 0
 
     return {
-        "prompt_tokens": prompt_tokens,
-        "completion_tokens": completion_tokens,
-        "total_tokens": total_tokens,
-        "reasoning_tokens": reasoning_tokens,
-        "cached_tokens": cached_tokens
+        "prompt_tokens": int(prompt_tokens),
+        "completion_tokens": int(completion_tokens),
+        "total_tokens": int(total_tokens),
+        "reasoning_tokens": int(reasoning_tokens),
+        "cached_tokens": int(cached_tokens)
     }
 
 def _inject_pdf_inputs(api_input, pdf_urls):
