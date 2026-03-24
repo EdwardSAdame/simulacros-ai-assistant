@@ -59,9 +59,9 @@ def handler(event, context):
                 "instructions": profile.get("instructions", "You are a helpful assistant."),
                 "turn_detection": {
                     "type": "server_vad",
-                    "threshold": profile.get("vad_threshold", 0.5),
+                    "threshold": float(profile.get("vad_threshold", 0.5)),
                     "prefix_padding_ms": 300,
-                    "silence_duration_ms": profile.get("silence_duration_ms", 500)
+                    "silence_duration_ms": int(profile.get("silence_duration_ms", 500))
                 },
                 "input_audio_format": "pcm16"
             }
@@ -79,14 +79,17 @@ def handler(event, context):
             # --- SPEECH TO TEXT (Transcription WebSocket API) ---
             target_url = "https://api.openai.com/v1/realtime/transcription_sessions"
             
-            # The transcription endpoint requires a much stricter, simpler payload
+            # PERFECTED PAYLOAD: Nested EXACTLY as the OpenAI Docs request
             payload = {
-                "model": "gpt-4o-transcribe", 
+                "input_audio_format": "pcm16",
+                "input_audio_transcription": {
+                    "model": "gpt-4o-transcribe"
+                },
                 "turn_detection": {
                     "type": "server_vad",
-                    "threshold": profile.get("vad_threshold", 0.5),
+                    "threshold": float(profile.get("vad_threshold", 0.5)),
                     "prefix_padding_ms": 300,
-                    "silence_duration_ms": profile.get("silence_duration_ms", 500)
+                    "silence_duration_ms": int(profile.get("silence_duration_ms", 500))
                 }
             }
 
@@ -94,9 +97,15 @@ def handler(event, context):
         
         response = requests.post(target_url, headers=headers, json=payload)
         
+        # --- NEW: SEND NATIVE OPENAI ERRORS TO FRONTEND IF IT FAILS ---
         if response.status_code != 200:
-            logger.error(f"OpenAI Error: {response.text}")
-            raise ValueError(f"OpenAI returned status {response.status_code}")
+            error_details = f"OpenAI API Error ({response.status_code}): {response.text}"
+            logger.error(error_details)
+            apigw_management_client.post_to_connection(
+                ConnectionId=connection_id,
+                Data=json.dumps({"action": "error", "message": error_details})
+            )
+            return {'statusCode': 400, 'body': 'OpenAI rejected request'}
         
         data = response.json()
         client_secret_data = data.get("client_secret", {})
@@ -124,7 +133,7 @@ def handler(event, context):
             if APIGW_ENDPOINT_URL:
                 apigw_management_client.post_to_connection(
                     ConnectionId=connection_id,
-                    Data=json.dumps({"action": "error", "message": "Failed to generate AI token"})
+                    Data=json.dumps({"action": "error", "message": f"Backend Exception: {str(error)}"})
                 )
         except Exception as publish_error:
             logger.error(f"Failed to send error to client: {publish_error}")
