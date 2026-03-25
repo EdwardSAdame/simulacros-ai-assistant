@@ -60,7 +60,6 @@ def handler(event, context):
                     "type": "server_vad",
                     "threshold": float(profile.get("vad_threshold", 0.5)),
                     "prefix_padding_ms": 300,
-                    # 500ms is fine for conversation back-and-forth
                     "silence_duration_ms": int(profile.get("silence_duration_ms", 500))
                 },
                 "input_audio_format": "pcm16"
@@ -82,14 +81,15 @@ def handler(event, context):
             payload = {
                 "input_audio_format": "pcm16",
                 "input_audio_transcription": {
-                    "model": "gpt-4o-transcribe"
+                    # Pulled dynamically from audio_config.py
+                    "model": profile.get("model", "gpt-4o-transcribe")
                 },
                 "turn_detection": {
                     "type": "server_vad",
                     "threshold": float(profile.get("vad_threshold", 0.5)),
                     "prefix_padding_ms": 300,
-                    # INCREASED TO 2000 (2 seconds) to prevent fast phrase truncation!
-                    "silence_duration_ms": 2000
+                    # Pulled dynamically, falling back to 2000 to prevent phrase truncation
+                    "silence_duration_ms": int(profile.get("silence_duration_ms", 2000))
                 }
             }
 
