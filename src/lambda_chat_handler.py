@@ -6,6 +6,7 @@ import os
 import uuid
 
 from src.utils.logging_utils import log_event, set_invocation_context
+from src.services.token_usage_service import TokenUsageService  # 🟢 NEW: Import Token Service
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
@@ -33,6 +34,25 @@ def lambda_handler(event, context):
 
         # 2. Extract Meta Wrapper
         meta = body.get("meta", {})
+        action = body.get("action") or meta.get("action")
+
+        # 🟢 NEW: INTERCEPT TELEMETRY BEFORE IT REACHES SQS
+        if action == "log_audio_telemetry":
+            duration_seconds = body.get("audioDurationSeconds") or meta.get("audioDurationSeconds", 0)
+            user_id = body.get("userId") or meta.get("debugClient", {}).get("clientUserId", "anonymous")
+            conversation_id = body.get("conversationId") or meta.get("conversationId", "unknown")
+            
+            # Save the SECONDS directly into input_tokens
+            svc = TokenUsageService()
+            svc.log_token_usage(
+                user_id=user_id,
+                session_id=conversation_id,
+                model="speech-to-text",
+                input_tokens=int(duration_seconds), 
+                output_tokens=0,
+                total_tokens=int(duration_seconds)
+            )
+            return response(200, {"status": "telemetry_logged"})
 
         # 3. Extract Data
         message = body.get("message") or body.get("text") or meta.get("text")
