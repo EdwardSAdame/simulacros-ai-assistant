@@ -17,8 +17,8 @@ AUDIO_PROFILES = {
             "If the audio is a fragment, do your best to punctuate it logically. "
             "CRITICAL: Ensure the following terms and acronyms are spelled correctly if spoken: icfes, unal, preicfes, preunal."
         ),
-        # Updated to 2000 to prevent fast phrase truncation during dictation
-        "silence_duration_ms": 2000,
+        # Updated to 5000 (5 seconds) to act as a generous auto-cutoff safety net
+        "silence_duration_ms": 5000,
         "vad_threshold": 0.5,
         "requires_transcription_model": True
     },
