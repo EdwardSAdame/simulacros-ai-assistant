@@ -13,6 +13,9 @@ from src.streaming.stream_manager import StreamManager
 # IMPORT: The Hybrid Semantic Router
 from src.services.semantic_router import semantic_router
 
+# 🟢 NEW: Import Token Usage Service
+from src.services.token_usage_service import TokenUsageService
+
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
@@ -30,13 +33,6 @@ def get_api_gateway_management_client(endpoint_url):
     )
 
 def lambda_handler(event, context):
-    """
-    Triggered by SQS. 
-    1. Determines status/category + Creative Loading Phrases + INTENT.
-    2. Sends Visual Feedback (Action: status_update) containing CLIENT ACTIONS.
-    3. Generates Response (Text + Optional Meta Payload).
-    4. Sends Final Answer (Text Bubble + Rich Data Event).
-    """
     set_invocation_context(context)
 
     if not WEBSOCKET_API_ENDPOINT:
@@ -49,7 +45,6 @@ def lambda_handler(event, context):
     log_event("ai_worker_invocation", {"record_count": len(records)})
 
     for record in records:
-        # Initialize variables outside try block for safe error handling
         user_id = None
         connection_id = None
         conv_id_in = None
@@ -61,46 +56,52 @@ def lambda_handler(event, context):
 
             # --- Extract data from the payload ---
             message = payload.get("message")
+            user_id = payload.get("user_id")
+            conv_id_in = payload.get("conversation_id")
+            
+            # 🟢 NEW: Extract Audio Telemetry
+            audio_duration = payload.get("audioDurationSeconds")
+
+            # 🟢 NEW: INTERCEPT TELEMETRY (Save to DB and skip AI)
+            if audio_duration is not None and int(audio_duration) > 0:
+                logger.info(f"Intercepted Audio Telemetry: {audio_duration} seconds for user {user_id}")
+                svc = TokenUsageService()
+                svc.log_token_usage(
+                    user_id=user_id or "anonymous",
+                    session_id=conv_id_in or "unknown",
+                    model="speech-to-text",
+                    input_tokens=int(audio_duration), 
+                    output_tokens=0,
+                    total_tokens=int(audio_duration)
+                )
+                continue # Skip the rest of the worker loop!
+
             image_urls = payload.get("image_urls", [])
             pdf_urls = payload.get("pdf_urls", [])
-            
-            # Extract structured media items sent by chat_handler
             media_items = payload.get("media_items", [])
-
-            # Extract Arena ID from SQS
             arena_id = payload.get("arena_id")
-
-            # Extract the hidden flag from SQS
             is_hidden = payload.get("is_hidden", False)
-
-            user_id = payload.get("user_id")
             name = payload.get("name")
             email = payload.get("email")
             page = payload.get("page")
-            conv_id_in = payload.get("conversation_id")
             client_row_id = payload.get("client_row_id")
-            
-            # Extract the AI mode (sent by chat_handler)
             ai_mode = payload.get("mode", "omega")
 
             # --- 1. Get Connection ID ---
             connection_id = ws_connections_table.get_connection_id(user_id)
 
-            # Initialize Stream Manager (if connected)
             stream_manager = None
             if connection_id:
                 stream_manager = StreamManager(connection_id, api_gateway_client)
 
-            # --- 2. Send Visual Feedback (The "Thinking" Phase) ---
+            # --- 2. Send Visual Feedback ---
             intent = "chat" 
-            requires_visuals = False # Default
-            category_key = "general" # Default category initialized here
-            num_questions = 5 # NEW: Default question limit
+            requires_visuals = False 
+            category_key = "general" 
+            num_questions = 5 
             
-            # SKIP visual feedback if this is a hidden background update
             if connection_id and not is_hidden:
                 try:
-                    # 🟢 CRITICAL FIX: Pass user_id and conv_id_in to track Router Costs properly!
                     routing_result = semantic_router.determine_category(
                         text=message, 
                         user_id=user_id, 
@@ -111,14 +112,12 @@ def lambda_handler(event, context):
                     loading_phrases = routing_result.get("loading_phrases", []) 
                     source_type = routing_result.get("source", "unknown")
                     
-                    # Normalize the intent string (lowercase & trim)
                     raw_intent = routing_result.get("intent", "chat")
                     intent = str(raw_intent).strip().lower()
                     
                     requires_visuals = routing_result.get("requires_visuals", False) 
                     num_questions = routing_result.get("num_questions", 5)
                     
-                    # DETERMINE CLIENT ACTION
                     client_action = None
                     if intent == "quiz":
                         client_action = "OPEN_QUIZ_PANEL"
@@ -153,11 +152,9 @@ def lambda_handler(event, context):
                     })
 
                 except Exception as e:
-                    # Don't fail the whole process if just the status update fails
                     log_event("ws_status_send_failed", {"user_id": user_id}, level="warning", error=e)
 
-            # --- 3. Get the AI response (Heavy Processing) ---
-            
+            # --- 3. Get the AI response ---
             ai_reply, conversation_id, assistant_timestamp, meta_payload = get_ai_response(
                 message=message,
                 user_id=user_id,
@@ -179,10 +176,8 @@ def lambda_handler(event, context):
             )
 
             # --- 4. Send Final Reply ---
-            # SKIP sending final reply to WebSocket if this is a hidden background update
             if connection_id and not is_hidden:
                 try:
-                    # A. Send Standard Text Reply (The Chat Bubble + Inline Metadata)
                     response_payload = json.dumps({
                         "action": "ai_reply",
                         "ai_reply": ai_reply,
@@ -197,14 +192,11 @@ def lambda_handler(event, context):
                         Data=response_payload
                     )
 
-                    # B. Send Structured Data Update (ONLY if it's Quiz or Rich Chat)
                     if meta_payload:
                         action_type = None
-
                         if meta_payload.get("type") == "rich_chat":
                             action_type = "rich_content_update"
                         elif meta_payload.get("quiz_mode") or meta_payload.get("questions"):
-                            # Only trigger quiz update if actual quiz data is present
                             action_type = "quiz_data_update"
 
                         if action_type:
@@ -239,15 +231,11 @@ def lambda_handler(event, context):
                 log_event("ws_connection_not_found", {"user_id": user_id}, level="warning")
 
         except Exception as e:
-            # SOFT LANDING: Quota / Billing Error Handling (429)
             error_str = str(e).lower()
             if "429" in error_str or "quota" in error_str or "insufficient" in error_str:
                 log_event("ai_quota_exceeded_handled", {"user_id": user_id, "error": str(e)}, level="warning")
-                
-                # The Iconic Fallback Phrase
                 fallback_msg = "**Señal nula. Vacío de sistema. Intenta luego.**"
                 
-                # Send the "Soft Landing" message to the user
                 if connection_id:
                     try:
                         err_payload = json.dumps({
@@ -265,10 +253,8 @@ def lambda_handler(event, context):
                     except Exception as inner_e:
                         log_event("failed_to_send_error_fallback", {"error": str(inner_e)}, level="error")
                 
-                # IMPORTANT: Do NOT raise 'e'. Return normally to mark the SQS message as processed.
                 continue 
             
-            # --- For all other errors, behave normally (Log & Crash/Retry) ---
             log_event("ai_worker_failed", { "record_id": record.get("messageId") }, level="error", error=e)
             raise e
 

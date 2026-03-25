@@ -6,12 +6,10 @@ import os
 import uuid
 
 from src.utils.logging_utils import log_event, set_invocation_context
-from src.services.token_usage_service import TokenUsageService  # 🟢 NEW: Import Token Service
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
-# --- Initialize SQS client ---
 sqs = boto3.client('sqs')
 QUEUE_URL = os.environ.get('SQS_QUEUE_URL') 
 
@@ -26,53 +24,27 @@ def lambda_handler(event, context):
     try:
         log_event("lambda_invocation", {"source": "RomaChatHandler", "has_body": "body" in (event or {})})
         
-        # 1. Parse Body
         body_str = event.get("body", "{}")
         if not body_str:
             body_str = "{}"
         body = json.loads(body_str)
 
-        # 2. Extract Meta Wrapper
         meta = body.get("meta", {})
-        action = body.get("action") or meta.get("action")
+        
+        # 🟢 NEW: Extract telemetry duration safely
+        audio_duration = body.get("audioDurationSeconds") or meta.get("audioDurationSeconds")
 
-        # 🟢 NEW: INTERCEPT TELEMETRY BEFORE IT REACHES SQS
-        if action == "log_audio_telemetry":
-            duration_seconds = body.get("audioDurationSeconds") or meta.get("audioDurationSeconds", 0)
-            user_id = body.get("userId") or meta.get("debugClient", {}).get("clientUserId", "anonymous")
-            conversation_id = body.get("conversationId") or meta.get("conversationId", "unknown")
-            
-            # Save the SECONDS directly into input_tokens
-            svc = TokenUsageService()
-            svc.log_token_usage(
-                user_id=user_id,
-                session_id=conversation_id,
-                model="speech-to-text",
-                input_tokens=int(duration_seconds), 
-                output_tokens=0,
-                total_tokens=int(duration_seconds)
-            )
-            return response(200, {"status": "telemetry_logged"})
-
-        # 3. Extract Data
         message = body.get("message") or body.get("text") or meta.get("text")
-        
-        # Extract Structured Media (Check meta first, then body)
         media_items = meta.get("media") or body.get("media", [])
-        
-        # Legacy: Extract simple URL lists
         image_urls = meta.get("imageUrls") or body.get("imageUrls", [])
         pdf_urls = meta.get("pdfUrls") or body.get("pdfUrls", [])
         
-        # Extract Context
         arena_id = meta.get("arenaId") or body.get("arenaId")
         
-        #  BULLETPROOF FIX: Detect hidden context via magic string in case Velo drops the flag
         is_hidden_flag = body.get("is_hidden") or meta.get("is_hidden", False)
         is_hidden_magic = isinstance(message, str) and message.strip().startswith("[CONTEXTO INTERNO:")
         is_hidden = is_hidden_flag or is_hidden_magic
         
-        # Extract Identity
         user_id = body.get("userId") or meta.get("debugClient", {}).get("clientUserId")
         name = body.get("name") or meta.get("name") or meta.get("debugClient", {}).get("clientName")
         email = body.get("email") or meta.get("debugClient", {}).get("clientEmail")
@@ -81,14 +53,11 @@ def lambda_handler(event, context):
         conversation_id_in = body.get("conversationId") or meta.get("conversationId")
         client_row_id = body.get("clientRowId") or meta.get("clientRowId")
         
-        # Extract Mode
         ai_mode = body.get("mode") or meta.get("mode", "omega")
 
-        # Idempotency: Generate conversation ID if missing
         if not conversation_id_in:
             conversation_id_in = str(uuid.uuid4())
 
-        # ---- Normalize / sanitize ----
         user_id = user_id or "anonymous"
         name = name if isinstance(name, str) else (name or "")
         email = _none_if_empty(email)
@@ -98,8 +67,8 @@ def lambda_handler(event, context):
         if not isinstance(pdf_urls, list): pdf_urls = []
         if not isinstance(media_items, list): media_items = []
 
-        # ---- Input Validation ----
-        if not message and not image_urls and not pdf_urls and not media_items:
+        # 🟢 Allow request if it has message OR media OR telemetry
+        if not message and not image_urls and not pdf_urls and not media_items and not audio_duration:
             log_event("input_validation_failed", {"reason": "Missing message or media"}, level="warning")
             return response(400, {"error": "Missing message or media"})
 
@@ -111,21 +80,18 @@ def lambda_handler(event, context):
             "email": email,
             "page": page,
             "conversation_id": conversation_id_in, 
-            
-            # Pass all media types to Worker
             "image_urls": image_urls,
             "pdf_urls": pdf_urls,
             "media_items": media_items, 
-            
             "client_row_id": client_row_id,
             "mode": ai_mode,
             "arena_id": arena_id,
+            "is_hidden": is_hidden,
             
-            #  Pass the guaranteed hidden flag to the worker
-            "is_hidden": is_hidden
+            # 🟢 NEW: Send telemetry to worker via SQS
+            "audioDurationSeconds": audio_duration
         }
 
-        # Send the message to the SQS queue
         sqs.send_message(
             QueueUrl=QUEUE_URL,
             MessageBody=json.dumps(payload)
@@ -136,12 +102,11 @@ def lambda_handler(event, context):
             "conversation_id": conversation_id_in,
             "mode": ai_mode,
             "has_media_items": bool(media_items),
-            "media_count": len(media_items),
             "arena_id": arena_id,
-            "is_hidden": is_hidden 
+            "is_hidden": is_hidden,
+            "has_telemetry": bool(audio_duration)
         })
 
-        # Return success
         return response(202, {"status": "accepted", "message": "Request is being processed."})
 
     except Exception as e:
