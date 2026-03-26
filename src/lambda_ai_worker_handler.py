@@ -59,12 +59,14 @@ def lambda_handler(event, context):
             user_id = payload.get("user_id")
             conv_id_in = payload.get("conversation_id")
             
-            # 🟢 NEW: Extract Audio Telemetry
+            # 🟢 Extract Telemetry Data
             audio_duration = payload.get("audioDurationSeconds")
+            sts_input_tokens = payload.get("stsInputTokens")
+            sts_output_tokens = payload.get("stsOutputTokens")
 
-            # 🟢 NEW: INTERCEPT TELEMETRY (Save to DB and skip AI)
+            # 🟢 INTERCEPT SPEECH-TO-TEXT (Time-based)
             if audio_duration is not None and int(audio_duration) > 0:
-                logger.info(f"Intercepted Audio Telemetry: {audio_duration} seconds for user {user_id}")
+                logger.info(f"Intercepted STT Telemetry: {audio_duration} seconds for user {user_id}")
                 svc = TokenUsageService()
                 svc.log_token_usage(
                     user_id=user_id or "anonymous",
@@ -73,6 +75,20 @@ def lambda_handler(event, context):
                     input_tokens=int(audio_duration), 
                     output_tokens=0,
                     total_tokens=int(audio_duration)
+                )
+                continue # Skip the rest of the worker loop!
+
+            # 🟢 NEW: INTERCEPT SPEECH-TO-SPEECH (Token-based)
+            if sts_input_tokens is not None and int(sts_input_tokens) > 0:
+                logger.info(f"Intercepted STS Telemetry: {sts_input_tokens} In, {sts_output_tokens} Out for user {user_id}")
+                svc = TokenUsageService()
+                svc.log_token_usage(
+                    user_id=user_id or "anonymous", 
+                    session_id=conv_id_in or "unknown",
+                    model="speech-to-speech", 
+                    input_tokens=int(sts_input_tokens), 
+                    output_tokens=int(sts_output_tokens or 0), 
+                    total_tokens=int(sts_input_tokens) + int(sts_output_tokens or 0)
                 )
                 continue # Skip the rest of the worker loop!
 

@@ -31,8 +31,10 @@ def lambda_handler(event, context):
 
         meta = body.get("meta", {})
         
-        # 🟢 NEW: Extract telemetry duration safely
+        # 🟢 Extract telemetry duration safely
         audio_duration = body.get("audioDurationSeconds") or meta.get("audioDurationSeconds")
+        sts_input_tokens = body.get("stsInputTokens") or meta.get("stsInputTokens")
+        sts_output_tokens = body.get("stsOutputTokens") or meta.get("stsOutputTokens")
 
         message = body.get("message") or body.get("text") or meta.get("text")
         media_items = meta.get("media") or body.get("media", [])
@@ -68,7 +70,7 @@ def lambda_handler(event, context):
         if not isinstance(media_items, list): media_items = []
 
         # 🟢 Allow request if it has message OR media OR telemetry
-        if not message and not image_urls and not pdf_urls and not media_items and not audio_duration:
+        if not message and not image_urls and not pdf_urls and not media_items and not audio_duration and sts_input_tokens is None:
             log_event("input_validation_failed", {"reason": "Missing message or media"}, level="warning")
             return response(400, {"error": "Missing message or media"})
 
@@ -88,8 +90,10 @@ def lambda_handler(event, context):
             "arena_id": arena_id,
             "is_hidden": is_hidden,
             
-            # 🟢 NEW: Send telemetry to worker via SQS
-            "audioDurationSeconds": audio_duration
+            # 🟢 Send telemetry to worker via SQS
+            "audioDurationSeconds": audio_duration,
+            "stsInputTokens": sts_input_tokens,
+            "stsOutputTokens": sts_output_tokens
         }
 
         sqs.send_message(
@@ -104,7 +108,8 @@ def lambda_handler(event, context):
             "has_media_items": bool(media_items),
             "arena_id": arena_id,
             "is_hidden": is_hidden,
-            "has_telemetry": bool(audio_duration)
+            "has_stt_telemetry": bool(audio_duration),
+            "has_sts_telemetry": sts_input_tokens is not None
         })
 
         return response(202, {"status": "accepted", "message": "Request is being processed."})
