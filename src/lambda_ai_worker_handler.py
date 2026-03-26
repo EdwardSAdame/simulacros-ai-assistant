@@ -61,8 +61,12 @@ def lambda_handler(event, context):
             
             # 🟢 Extract Telemetry Data
             audio_duration = payload.get("audioDurationSeconds")
-            sts_input_tokens = payload.get("stsInputTokens")
-            sts_output_tokens = payload.get("stsOutputTokens")
+            
+            # 🟢 Extract Split STS Data
+            sts_in_text = payload.get("stsInputText")
+            sts_in_audio = payload.get("stsInputAudio")
+            sts_out_text = payload.get("stsOutputText", 0)
+            sts_out_audio = payload.get("stsOutputAudio", 0)
 
             # 🟢 INTERCEPT SPEECH-TO-TEXT (Time-based)
             if audio_duration is not None and int(audio_duration) > 0:
@@ -78,18 +82,31 @@ def lambda_handler(event, context):
                 )
                 continue # Skip the rest of the worker loop!
 
-            # 🟢 NEW: INTERCEPT SPEECH-TO-SPEECH (Token-based)
-            if sts_input_tokens is not None and int(sts_input_tokens) > 0:
-                logger.info(f"Intercepted STS Telemetry: {sts_input_tokens} In, {sts_output_tokens} Out for user {user_id}")
+            # 🟢 INTERCEPT SPEECH-TO-SPEECH (Split Text vs Audio)
+            if sts_in_text is not None or sts_in_audio is not None:
                 svc = TokenUsageService()
-                svc.log_token_usage(
-                    user_id=user_id or "anonymous", 
-                    session_id=conv_id_in or "unknown",
-                    model="speech-to-speech", 
-                    input_tokens=int(sts_input_tokens), 
-                    output_tokens=int(sts_output_tokens or 0), 
-                    total_tokens=int(sts_input_tokens) + int(sts_output_tokens or 0)
-                )
+                session_str = conv_id_in or "unknown"
+                uid_str = user_id or "anonymous"
+                
+                # 1. Log the Text Context
+                if int(sts_in_text or 0) > 0 or int(sts_out_text or 0) > 0:
+                    svc.log_token_usage(
+                        user_id=uid_str, session_id=session_str,
+                        model="sts-text", input_tokens=int(sts_in_text or 0), 
+                        output_tokens=int(sts_out_text or 0), 
+                        total_tokens=int(sts_in_text or 0) + int(sts_out_text or 0)
+                    )
+                
+                # 2. Log the Audio Context
+                if int(sts_in_audio or 0) > 0 or int(sts_out_audio or 0) > 0:
+                    svc.log_token_usage(
+                        user_id=uid_str, session_id=session_str,
+                        model="sts-audio", input_tokens=int(sts_in_audio or 0), 
+                        output_tokens=int(sts_out_audio or 0), 
+                        total_tokens=int(sts_in_audio or 0) + int(sts_out_audio or 0)
+                    )
+                
+                logger.info(f"Intercepted Split STS Telemetry for {uid_str}. Text({sts_in_text}/{sts_out_text}), Audio({sts_in_audio}/{sts_out_audio})")
                 continue # Skip the rest of the worker loop!
 
             image_urls = payload.get("image_urls", [])
