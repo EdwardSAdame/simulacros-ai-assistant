@@ -31,12 +31,12 @@ def lambda_handler(event, context):
 
         meta = body.get("meta", {})
         
-        # 🟢 Extract telemetry duration and split tokens safely
-        audio_duration = body.get("audioDurationSeconds") or meta.get("audioDurationSeconds")
-        sts_in_text = body.get("stsInputText") or meta.get("stsInputText")
-        sts_in_audio = body.get("stsInputAudio") or meta.get("stsInputAudio")
-        sts_out_text = body.get("stsOutputText") or meta.get("stsOutputText")
-        sts_out_audio = body.get("stsOutputAudio") or meta.get("stsOutputAudio")
+        # 🟢 THE FIX: Safely extract numbers, respecting '0' as a valid value!
+        audio_duration = body.get("audioDurationSeconds") if body.get("audioDurationSeconds") is not None else meta.get("audioDurationSeconds")
+        sts_in_text = body.get("stsInputText") if body.get("stsInputText") is not None else meta.get("stsInputText")
+        sts_in_audio = body.get("stsInputAudio") if body.get("stsInputAudio") is not None else meta.get("stsInputAudio")
+        sts_out_text = body.get("stsOutputText") if body.get("stsOutputText") is not None else meta.get("stsOutputText")
+        sts_out_audio = body.get("stsOutputAudio") if body.get("stsOutputAudio") is not None else meta.get("stsOutputAudio")
 
         message = body.get("message") or body.get("text") or meta.get("text")
         media_items = meta.get("media") or body.get("media", [])
@@ -71,12 +71,10 @@ def lambda_handler(event, context):
         if not isinstance(pdf_urls, list): pdf_urls = []
         if not isinstance(media_items, list): media_items = []
 
-        # 🟢 Allow request if it has message OR media OR telemetry
-        if not message and not image_urls and not pdf_urls and not media_items and not audio_duration and sts_in_text is None and sts_in_audio is None:
+        if not message and not image_urls and not pdf_urls and not media_items and audio_duration is None and sts_in_text is None and sts_in_audio is None:
             log_event("input_validation_failed", {"reason": "Missing message or media"}, level="warning")
             return response(400, {"error": "Missing message or media"})
 
-        # --- Construct Payload for SQS ---
         payload = {
             "message": message,
             "user_id": user_id,
@@ -92,7 +90,6 @@ def lambda_handler(event, context):
             "arena_id": arena_id,
             "is_hidden": is_hidden,
             
-            # 🟢 Send split telemetry to worker via SQS
             "audioDurationSeconds": audio_duration,
             "stsInputText": sts_in_text,
             "stsInputAudio": sts_in_audio,
@@ -112,7 +109,7 @@ def lambda_handler(event, context):
             "has_media_items": bool(media_items),
             "arena_id": arena_id,
             "is_hidden": is_hidden,
-            "has_stt_telemetry": bool(audio_duration),
+            "has_stt_telemetry": audio_duration is not None,
             "has_sts_telemetry": sts_in_text is not None or sts_in_audio is not None
         })
 

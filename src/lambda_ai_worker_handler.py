@@ -13,20 +13,16 @@ from src.streaming.stream_manager import StreamManager
 # IMPORT: The Hybrid Semantic Router
 from src.services.semantic_router import semantic_router
 
-# 🟢 NEW: Import Token Usage Service
+# Import Token Usage Service
 from src.services.token_usage_service import TokenUsageService
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
-# --- Instantiate the DynamoDB table manager ---
 ws_connections_table = WsConnectionsTable()
-
-# --- Get the WebSocket API endpoint from environment variables ---
 WEBSOCKET_API_ENDPOINT = os.environ.get('WEBSOCKET_API_ENDPOINT')
 
 def get_api_gateway_management_client(endpoint_url):
-    """Creates a client for the API Gateway Management API."""
     return boto3.client(
         'apigatewaymanagementapi',
         endpoint_url=endpoint_url
@@ -54,60 +50,53 @@ def lambda_handler(event, context):
             body_raw = record.get("body", "{}")
             payload = json.loads(body_raw)
 
-            # --- Extract data from the payload ---
-            message = payload.get("message")
+            message = payload.get("message", "")
             user_id = payload.get("user_id")
             conv_id_in = payload.get("conversation_id")
             
-            # 🟢 Extract Telemetry Data
             audio_duration = payload.get("audioDurationSeconds")
-            
-            # 🟢 Extract Split STS Data
             sts_in_text = payload.get("stsInputText")
             sts_in_audio = payload.get("stsInputAudio")
             sts_out_text = payload.get("stsOutputText", 0)
             sts_out_audio = payload.get("stsOutputAudio", 0)
 
-            # 🟢 INTERCEPT SPEECH-TO-TEXT (Time-based)
-            if audio_duration is not None and int(audio_duration) > 0:
-                logger.info(f"Intercepted STT Telemetry: {audio_duration} seconds for user {user_id}")
-                svc = TokenUsageService()
-                svc.log_token_usage(
-                    user_id=user_id or "anonymous",
-                    session_id=conv_id_in or "unknown",
-                    model="speech-to-text",
-                    input_tokens=int(audio_duration), 
-                    output_tokens=0,
-                    total_tokens=int(audio_duration)
-                )
-                continue # Skip the rest of the worker loop!
-
-            # 🟢 INTERCEPT SPEECH-TO-SPEECH (Split Text vs Audio)
-            if sts_in_text is not None or sts_in_audio is not None:
-                svc = TokenUsageService()
-                session_str = conv_id_in or "unknown"
-                uid_str = user_id or "anonymous"
+            # 🟢 THE BULLETPROOF FAILSAFE: Intercept exactly by message text!
+            if message in ["[AUDIO_TELEMETRY]", "[STS_TELEMETRY]"]:
+                logger.info(f"Intercepting Telemetry Ghost Message: {message} for user {user_id}")
                 
-                # 1. Log the Text Context
-                if int(sts_in_text or 0) > 0 or int(sts_out_text or 0) > 0:
+                if message == "[AUDIO_TELEMETRY]" and audio_duration is not None and int(audio_duration) > 0:
+                    svc = TokenUsageService()
                     svc.log_token_usage(
-                        user_id=uid_str, session_id=session_str,
-                        model="sts-text", input_tokens=int(sts_in_text or 0), 
-                        output_tokens=int(sts_out_text or 0), 
-                        total_tokens=int(sts_in_text or 0) + int(sts_out_text or 0)
+                        user_id=user_id or "anonymous", session_id=conv_id_in or "unknown",
+                        model="speech-to-text", input_tokens=int(audio_duration), 
+                        output_tokens=0, total_tokens=int(audio_duration)
                     )
                 
-                # 2. Log the Audio Context
-                if int(sts_in_audio or 0) > 0 or int(sts_out_audio or 0) > 0:
-                    svc.log_token_usage(
-                        user_id=uid_str, session_id=session_str,
-                        model="sts-audio", input_tokens=int(sts_in_audio or 0), 
-                        output_tokens=int(sts_out_audio or 0), 
-                        total_tokens=int(sts_in_audio or 0) + int(sts_out_audio or 0)
-                    )
+                elif message == "[STS_TELEMETRY]":
+                    svc = TokenUsageService()
+                    session_str = conv_id_in or "unknown"
+                    uid_str = user_id or "anonymous"
+                    
+                    # Log the Text Context
+                    if (sts_in_text is not None and int(sts_in_text) > 0) or (sts_out_text is not None and int(sts_out_text) > 0):
+                        svc.log_token_usage(
+                            user_id=uid_str, session_id=session_str,
+                            model="sts-text", input_tokens=int(sts_in_text or 0), 
+                            output_tokens=int(sts_out_text or 0), 
+                            total_tokens=int(sts_in_text or 0) + int(sts_out_text or 0)
+                        )
+                    
+                    # Log the Audio Context
+                    if (sts_in_audio is not None and int(sts_in_audio) > 0) or (sts_out_audio is not None and int(sts_out_audio) > 0):
+                        svc.log_token_usage(
+                            user_id=uid_str, session_id=session_str,
+                            model="sts-audio", input_tokens=int(sts_in_audio or 0), 
+                            output_tokens=int(sts_out_audio or 0), 
+                            total_tokens=int(sts_in_audio or 0) + int(sts_out_audio or 0)
+                        )
                 
-                logger.info(f"Intercepted Split STS Telemetry for {uid_str}. Text({sts_in_text}/{sts_out_text}), Audio({sts_in_audio}/{sts_out_audio})")
-                continue # Skip the rest of the worker loop!
+                # 🔥 CRITICAL: Skip the rest of the loop! Do NOT hit OpenAI!
+                continue 
 
             image_urls = payload.get("image_urls", [])
             pdf_urls = payload.get("pdf_urls", [])
@@ -120,14 +109,12 @@ def lambda_handler(event, context):
             client_row_id = payload.get("client_row_id")
             ai_mode = payload.get("mode", "omega")
 
-            # --- 1. Get Connection ID ---
             connection_id = ws_connections_table.get_connection_id(user_id)
 
             stream_manager = None
             if connection_id:
                 stream_manager = StreamManager(connection_id, api_gateway_client)
 
-            # --- 2. Send Visual Feedback ---
             intent = "chat" 
             requires_visuals = False 
             category_key = "general" 
@@ -187,7 +174,6 @@ def lambda_handler(event, context):
                 except Exception as e:
                     log_event("ws_status_send_failed", {"user_id": user_id}, level="warning", error=e)
 
-            # --- 3. Get the AI response ---
             ai_reply, conversation_id, assistant_timestamp, meta_payload = get_ai_response(
                 message=message,
                 user_id=user_id,
@@ -208,7 +194,6 @@ def lambda_handler(event, context):
                 num_questions=num_questions
             )
 
-            # --- 4. Send Final Reply ---
             if connection_id and not is_hidden:
                 try:
                     response_payload = json.dumps({
