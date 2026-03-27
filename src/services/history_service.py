@@ -11,13 +11,15 @@ def decimal_default(obj):
         return int(obj) if obj % 1 == 0 else float(obj)
     raise TypeError
 
-def build_history_list(conversation_id: str, max_user: int = 3, max_assistant: int = 3) -> List[Dict[str, Any]]:
+# 🔹 FIX: Increased memory limits from 3 to 10 to support long educational interactions
+def build_history_list(conversation_id: str, max_user: int = 10, max_assistant: int = 10) -> List[Dict[str, Any]]:
     """
     Retrieves recent messages from the database and formats them for the OpenAI API.
     Handles hidden context injection for assistant messages with metadata to prevent History Desync.
     """
     try:
-        msgs = get_recent_messages(conversation_id=conversation_id, limit=20, ascending=True)
+        # 🔹 FIX: Increased DB fetch limit to 40 to guarantee we retrieve the full requested window
+        msgs = get_recent_messages(conversation_id=conversation_id, limit=40, ascending=True)
         if not msgs: 
             return []
 
@@ -37,7 +39,7 @@ def build_history_list(conversation_id: str, max_user: int = 3, max_assistant: i
             if role == "assistant" and metadata:
                 try:
                     metadata_str = json.dumps(metadata, default=decimal_default)
-                    # 🟢 GENERALIZED ANTI-DESYNC FIX
+                    # GENERALIZED ANTI-DESYNC FIX
                     # Explicitly instruct the AI that the widget is already rendered.
                     hidden_context = (
                         f"\n\n[SYSTEM LOG: I successfully generated and delivered a rich interactive UI widget "
