@@ -14,7 +14,7 @@ def decimal_default(obj):
 def build_history_list(conversation_id: str, max_user: int = 3, max_assistant: int = 3) -> List[Dict[str, Any]]:
     """
     Retrieves recent messages from the database and formats them for the OpenAI API.
-    Handles hidden context injection for assistant messages with metadata.
+    Handles hidden context injection for assistant messages with metadata to prevent History Desync.
     """
     try:
         msgs = get_recent_messages(conversation_id=conversation_id, limit=20, ascending=True)
@@ -37,14 +37,18 @@ def build_history_list(conversation_id: str, max_user: int = 3, max_assistant: i
             if role == "assistant" and metadata:
                 try:
                     metadata_str = json.dumps(metadata, default=decimal_default)
+                    # 🟢 GENERALIZED ANTI-DESYNC FIX
+                    # Explicitly instruct the AI that the widget is already rendered.
                     hidden_context = (
-                        f"\n\n[SYSTEM CONTEXT: User cannot see this. "
-                        f"I previously generated this interactive content: {metadata_str}. "
-                        f"I must use this data to answer follow-up questions.]"
+                        f"\n\n[SYSTEM LOG: I successfully generated and delivered a rich interactive UI widget "
+                        f"(type: {metadata.get('type', 'rich_payload')}) to the user with this payload: {metadata_str}. "
+                        f"This payload is ALREADY VISIBLE on the user's screen. "
+                        f"I MUST NOT re-generate, repeat, or output this data in my text responses. "
+                        f"I will only use it as hidden memory context to concisely answer their next specific question.]"
                     )
                     text_content += hidden_context
-                except Exception:
-                    pass
+                except Exception as e:
+                    log_event("history_metadata_parse_failed", {"error": str(e)}, level="warning")
 
             msg_type = "input_text" if role == "user" else "output_text"
             content = [{"type": msg_type, "text": text_content}] 
