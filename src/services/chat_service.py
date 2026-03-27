@@ -21,7 +21,8 @@ from src.storage.conversations_table import (
     _find_conversation_timestamp, 
     get_conversation_metadata,
     update_conversation_last_active,
-    update_conversation_mode 
+    update_conversation_mode,
+    update_conversation_exam_context # 🔹 IMPORT THE NEW LOCK SETTER
 )
 from src.storage.messages_table import save_message
 from src.storage.arenas_table import update_arena_last_active
@@ -106,9 +107,10 @@ def get_ai_response(
     clean_images = [m["url"] for m in media_items if "image" in m.get("type", "").lower() or not ".pdf" in m["url"].lower()]
     clean_pdfs   = [m["url"] for m in media_items if "pdf" in m.get("type", "").lower() or ".pdf" in m["url"].lower()]
 
-    # 2. Conversation Management
+    # 2. Conversation Management & State Locking
     actual_conversation_id = conversation_id
     should_create_new = True
+    persisted_exam_context = None
 
     if conversation_id and user_id:
         exists_timestamp = _find_conversation_timestamp(user_id, conversation_id)
@@ -117,7 +119,10 @@ def get_ai_response(
             
             existing_meta = get_conversation_metadata(user_id, conversation_id)
             if existing_meta:
+                # 🔹 FETCH THE LOCK
+                persisted_exam_context = existing_meta.get("ExamContext")
                 persisted_mode = existing_meta.get("AiMode")
+                
                 if persisted_mode:
                     if mode != persisted_mode:
                         update_conversation_mode(user_id, conversation_id, mode)
@@ -133,6 +138,10 @@ def get_ai_response(
         else:
             actual_conversation_id = conversation_id 
 
+    # 🔹 INTELLIGENCE LAYER (Moved up to orchestrate the lock)
+    # Determine context based on explicit messages, the previous lock, or the page URL
+    exam_context = determine_exam_context(page, message, current_locked_context=persisted_exam_context)
+
     try:
         if should_create_new:
             sanitized_email = _normalize_email_for_storage(email)
@@ -144,9 +153,15 @@ def get_ai_response(
                 page=page,
                 conversation_id=actual_conversation_id,
                 arena_id=arena_id,
-                ai_mode=mode  
+                ai_mode=mode,
+                exam_context=exam_context # 🔹 SAVE INITIAL LOCK
             )
             actual_conversation_id = conversation_data["ConversationId"]
+        else:
+            # 🔹 UPDATE THE LOCK IF USER EXPLICITLY CHANGED IT
+            if persisted_exam_context and exam_context != persisted_exam_context:
+                update_conversation_exam_context(user_id, actual_conversation_id, exam_context)
+                log_event("exam_context_updated_in_db", {"old": persisted_exam_context, "new": exam_context})
         
         if user_id and actual_conversation_id:
             update_conversation_last_active(user_id, actual_conversation_id)
@@ -172,8 +187,7 @@ def get_ai_response(
 
     # --- STANDARD FLOW CONTINUES BELOW ---
 
-    # 3. Intelligence Layer
-    exam_context = determine_exam_context(page, message)
+    # 3. Intelligence Layer Follow-up
     selected_vector_stores = get_stores_for_page(page)
     
     # 🟢 CRITICAL FIX: Disable web search explicitly if looking for admission stats
@@ -458,7 +472,7 @@ def get_ai_response(
                 if not system_prompt:
                     system_prompt = build_system_instructions(
                         extras=runtime_signals,
-                        exam_context=exam_context,
+                        exam_context=exam_context, # 🔹 THE PROMPT BUILDER NOW RECEIVES THE LOCKED EXAM
                         requires_visuals=requires_visuals,
                         web_search_active=is_web_search_active 
                     )
