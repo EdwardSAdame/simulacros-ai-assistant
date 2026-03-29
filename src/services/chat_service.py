@@ -22,7 +22,7 @@ from src.storage.conversations_table import (
     get_conversation_metadata,
     update_conversation_last_active,
     update_conversation_mode,
-    update_conversation_exam_context # 🔹 IMPORT THE NEW LOCK SETTER
+    update_conversation_exam_context
 )
 from src.storage.messages_table import save_message
 from src.storage.arenas_table import update_arena_last_active
@@ -75,7 +75,6 @@ def get_ai_response(
     def _log_usage(usage_data: dict, current_user: str, session: str, active_mode: str):
         if not usage_data or not current_user: return
         try:
-            # Safely map to the new input/output naming convention
             input_val = usage_data.get("input_tokens", usage_data.get("prompt_tokens", 0))
             output_val = usage_data.get("output_tokens", usage_data.get("completion_tokens", 0))
 
@@ -119,7 +118,6 @@ def get_ai_response(
             
             existing_meta = get_conversation_metadata(user_id, conversation_id)
             if existing_meta:
-                # 🔹 FETCH THE LOCK
                 persisted_exam_context = existing_meta.get("ExamContext")
                 persisted_mode = existing_meta.get("AiMode")
                 
@@ -138,8 +136,6 @@ def get_ai_response(
         else:
             actual_conversation_id = conversation_id 
 
-    # 🔹 INTELLIGENCE LAYER (Moved up to orchestrate the lock)
-    # Determine context based on explicit messages, the previous lock, or the page URL
     exam_context = determine_exam_context(page, message, current_locked_context=persisted_exam_context)
 
     try:
@@ -154,11 +150,10 @@ def get_ai_response(
                 conversation_id=actual_conversation_id,
                 arena_id=arena_id,
                 ai_mode=mode,
-                exam_context=exam_context # 🔹 SAVE INITIAL LOCK
+                exam_context=exam_context
             )
             actual_conversation_id = conversation_data["ConversationId"]
         else:
-            # 🔹 UPDATE THE LOCK IF USER EXPLICITLY CHANGED IT
             if persisted_exam_context and exam_context != persisted_exam_context:
                 update_conversation_exam_context(user_id, actual_conversation_id, exam_context)
                 log_event("exam_context_updated_in_db", {"old": persisted_exam_context, "new": exam_context})
@@ -185,12 +180,9 @@ def get_ai_response(
             logger.error(f"Failed to save hidden context: {e}")
             raise RuntimeError(f"Failed to save hidden context: {e}")
 
-    # --- STANDARD FLOW CONTINUES BELOW ---
-
     # 3. Intelligence Layer Follow-up
     selected_vector_stores = get_stores_for_page(page)
     
-    # 🟢 CRITICAL FIX: Disable web search explicitly if looking for admission stats
     if intent == "admission_stats":
         web_search_config = None
         logger.info("Intent is 'admission_stats'. Web search explicitly disabled.")
@@ -230,12 +222,12 @@ def get_ai_response(
     sources_data = [] 
     
     if intent == "quiz" and QUIZ_FEATURE_ENABLED:
-        topic_hint = message if message else "General Knowledge"
+        topic_hint = category if category else "General Knowledge"
         
         if not isinstance(num_questions, int) or num_questions < 1:
             num_questions = 5
         elif num_questions > 30:
-            num_questions = 30 # Safe Truncation
+            num_questions = 30
 
         conversation_input.append(QuizService.get_system_instruction(topic=topic_hint, num_questions=num_questions))
 
@@ -310,7 +302,6 @@ def get_ai_response(
                 }
 
             else:
-                # Batch Mode
                 quiz_model, usage_data = generate_structured_quiz(
                     conversation_input=conversation_input,
                     user_id=user_id,
@@ -366,7 +357,6 @@ def get_ai_response(
             final_reply_text = "**Error**: We could not generate the image."
             quiz_data = None
 
-    # 🟢 NEW BRANCH: ADMISSION STATS
     elif intent == "admission_stats":
         logger.info(f"Routing to Admission Stats local tool for user {user_id}")
         try:
@@ -396,7 +386,6 @@ def get_ai_response(
             quiz_data = None
 
     else:
-        # STANDARD CHAT MODE
         try:
             if category == "identity_protection":
                 logger.info("Intercepted identity question. Returning minimalist Invicto response.")
@@ -447,7 +436,7 @@ def get_ai_response(
                                     "You are an advanced AI Assistant. \n"
                                     "OUTPUT RULES:\n"
                                     "- Use Markdown for formatting.\n"
-                                    "- Use LaTeX for math equations (e.g. $E=mc^2$).\n"
+                                    "- Use LaTeX for math equations.\n"
                                     "- Be helpful, clear, and accurate.\n"
                                 )
                                 
@@ -472,7 +461,7 @@ def get_ai_response(
                 if not system_prompt:
                     system_prompt = build_system_instructions(
                         extras=runtime_signals,
-                        exam_context=exam_context, # 🔹 THE PROMPT BUILDER NOW RECEIVES THE LOCKED EXAM
+                        exam_context=exam_context, 
                         requires_visuals=requires_visuals,
                         web_search_active=is_web_search_active 
                     )
@@ -495,14 +484,12 @@ def get_ai_response(
                 generated_assets = response_tuple[1]
                 sources_data = response_tuple[2] if len(response_tuple) > 2 else []
                 
-                # New Extract Token Usage
                 usage_data = response_tuple[3] if len(response_tuple) > 3 else {}
                 _log_usage(usage_data, user_id, actual_conversation_id, mode)
 
         except Exception as e:
             raise RuntimeError(f"OpenAI Chat API failed: {e}")
 
-    # Step 7: Persist
     assistant_timestamp = ""
     try:
         save_message(
