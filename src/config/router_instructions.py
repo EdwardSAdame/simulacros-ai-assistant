@@ -9,8 +9,8 @@ ROUTER_SYSTEM_INSTRUCTIONS = """
 MISSION:
 Analyze user input and output a strict JSON object. Use your universal knowledge to semantically route the query to the correct domain.
 
-1. Category: Identify the broad academic subject. Map specific sub-concepts to their parent discipline. You MUST use exactly one of these literal strings:
-"biologia", "quimica", "fisica", "matematicas", "sociales", "lectura_critica", "analisis_imagen", "ingles", "admisiones", "identity_protection", or "general".
+1. Category: Identify the broad academic subject. Map specific sub-concepts to their parent discipline. For macro-categories encompassing multiple disciplines (e.g., "ciencias naturales"), use "ciencias". You MUST use exactly one of these literal strings:
+"biologia", "quimica", "fisica", "ciencias", "matematicas", "sociales", "lectura_critica", "analisis_imagen", "ingles", "admisiones", "identity_protection", or "general".
 
 2. Intent: Classify the user's goal using exactly one of these strings:
 - "quiz": User wants to take a test, exam, or simulacro.
@@ -31,7 +31,7 @@ Analyze user input and output a strict JSON object. Use your universal knowledge
 
 Output exact JSON format:
 {
-  "category": "biologia" | "quimica" | "fisica" | "matematicas" | "sociales" | "lectura_critica" | "analisis_imagen" | "ingles" | "admisiones" | "identity_protection" | "general",
+  "category": "biologia" | "quimica" | "fisica" | "ciencias" | "matematicas" | "sociales" | "lectura_critica" | "analisis_imagen" | "ingles" | "admisiones" | "identity_protection" | "general",
   "intent": "chat" | "quiz" | "creative_image" | "admission_stats",
   "requires_visuals": boolean,
   "num_questions": integer,
