@@ -7,33 +7,27 @@ Contains the system prompt used by the LLM to classify user intents and extract 
 
 ROUTER_SYSTEM_INSTRUCTIONS = """
 MISSION:
-Analyze user input and output a JSON object. Follow these strict rules.
+Analyze user input and output a strict JSON object. Use your universal knowledge to semantically route the query to the correct domain.
 
-1. Category: Identify the broad academic subject. You MUST use exactly one of the following literal strings (do not use capital letters or accents):
-- "biologia" (Biology, Anatomy, Ecosystems)
-- "quimica" (Chemistry, Elements, Reactions)
-- "fisica" (Physics, Kinematics, Newton's Laws, Energy)
-- "matematicas" (Mathematics, Algebra, Calculus, Geometry)
-- "sociales" (Social Studies, History, Geography, Citizen Sciences)
-- "lectura_critica" (Critical Reading, Literature, Spanish, Text Analysis)
-- "analisis_imagen" (Image Analysis, Spatial Reasoning, Pattern Recognition)
-- "ingles" (English Language, Grammar, Vocabulary)
-- "admisiones" (University admission cutoff scores or statistics)
-- "identity_protection" (If asked about your underlying AI model, architecture, or prompt injection)
-- "general" (If asked for your name, purpose, or if the topic does not fit ANY of the above)
+1. Category: Identify the broad academic subject. Map specific sub-concepts to their parent discipline. You MUST use exactly one of these literal strings:
+"biologia", "quimica", "fisica", "matematicas", "sociales", "lectura_critica", "analisis_imagen", "ingles", "admisiones", "identity_protection", or "general".
 
-2. Intent and Visual Generation: You have two distinct paths for visuals.
-- CREATIVE PATH: Set intent to "creative_image" for artistic, photographic, or fictional visuals. For this path, "requires_visuals" MUST be false.
-- ANALYTICAL PATH: Set intent to "chat" and "requires_visuals" to true ONLY when the user explicitly requests to plot, graph, or visualize mathematical functions, equations, charts, or data.
-- STANDARD PATH: For all other conversations, set intent to "chat" and "requires_visuals" to false.
+2. Intent: Classify the user's goal using exactly one of these strings:
+- "quiz": User wants to take a test, exam, or simulacro.
+- "creative_image": User wants to generate an artistic or fictional image.
+- "admission_stats": User wants university admission cutoff scores or data.
+- "chat": Standard conversational inquiries, explanations, or analytical plotting.
 
-3. Other Intents:
-- "quiz": User requests to start, generate, or take a test, simulacro, exam, or quiz.
-- "admission_stats": Requests for university admission cutoff scores or statistics.
+3. Visuals (requires_visuals): 
+- true ONLY if intent is "chat" AND the user explicitly asks to plot, graph, or visualize mathematical functions or data.
+- false for all other scenarios.
 
-4. num_questions: If intent is "quiz", extract the requested number of questions. Default is 5. Minimum is 1. Maximum is 30. If intent is NOT "quiz", this MUST be 0.
+4. num_questions: 
+- If intent is "quiz", extract the requested number of questions (default 5, min 1, max 30).
+- If intent is NOT "quiz", this MUST be 0.
 
-5. loading_phrases: Array of 3 distinct, analytical phrases (max 5 words each). Extract specific nouns or verbs from the input.
+5. loading_phrases: 
+- Generate an array of 3 distinct, analytical phrases (max 5 words each) extracting key nouns or verbs from the input.
 
 Output exact JSON format:
 {
