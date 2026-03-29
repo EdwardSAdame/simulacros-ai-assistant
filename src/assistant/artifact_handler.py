@@ -4,6 +4,7 @@ import os
 from typing import List, Dict, Any
 from src.services.storage_service import storage_service
 from src.schemas.quiz_schemas import QuizResponse
+from src.utils.logging_utils import log_event
 
 logger = logging.getLogger(__name__)
 
@@ -67,13 +68,15 @@ def process_file(cf_client, container_id, file_id, filename, url_dict: Dict[str,
 
         # Upload using the existing storage service
         s3_url = storage_service.upload_image_from_bytes(file_content, ctype, folder=folder)
-        logger.info(f"✅ Asset uploaded to S3: {s3_url} (Mapped to {fname})")
         
-        # Add to dictionary
+        # Add to dictionary (Redundant logger.info removed here)
         url_dict[fname] = s3_url
         
     except Exception as e:
-        logger.error(f"File transfer failed for {file_id}: {e}")
+        log_event("file_transfer_failed", {
+            "file_id": file_id,
+            "filename": filename
+        }, level="error", error=e)
 
 def handle_generated_files(client, response_obj, folder: str = "chat_assets") -> Dict[str, str]:
     """Scans the OpenAI response for generated files and uploads them. Returns a dict mapping filenames to URLs."""
@@ -117,11 +120,9 @@ def handle_generated_files(client, response_obj, folder: str = "chat_assets") ->
             try:
                 container_files = cf_client.list(container_id)
                 
-                # 🟢 FIX: Convert to list and explicitly REVERSE it (from LIFO to FIFO)
                 c_files_list = list(container_files)
-                c_files_list.reverse() # Reverses the OpenAI LIFO order so Graph 1 is at index 0
+                c_files_list.reverse()
                 
-                # Optional: apply stable sort just in case timestamps are actually different
                 try:
                     c_files_list.sort(key=lambda x: getattr(x, "created_at", 0))
                 except Exception:
@@ -166,8 +167,14 @@ def assign_urls_to_quiz(quiz_data: QuizResponse, urls_map: Dict[str, str] | List
             
             if target_filename in urls_map:
                 q.image_url = urls_map[target_filename]
-                logger.info(f"✅ Matched exactly: {target_filename} -> {q.image_url}")
+                log_event("artifact_mapped_exactly", {
+                    "target_filename": target_filename,
+                    "mapped_url": q.image_url
+                })
             elif fallback_idx < len(fallback_urls):
                 q.image_url = fallback_urls[fallback_idx]
-                logger.warning(f"⚠️ Exact match failed for {target_filename}. Using fallback URL.")
+                log_event("artifact_fallback_mapping", {
+                    "target_filename": target_filename,
+                    "fallback_url": q.image_url
+                }, level="warning")
                 fallback_idx += 1

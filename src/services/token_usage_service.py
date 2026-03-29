@@ -38,11 +38,6 @@ class TokenUsageService:
         reasoning_tokens = max(0, reasoning_tokens or 0)
         cached_tokens = max(0, cached_tokens or 0)
 
-        log_event(
-            event_type="processing_token_usage", 
-            details={"user_id": user_id, "model": model, "total_tokens": total_tokens}
-        )
-
         return self.storage.record_usage(
             user_id=user_id,
             timestamp=timestamp,
