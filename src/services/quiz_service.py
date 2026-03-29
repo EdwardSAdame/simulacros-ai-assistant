@@ -3,6 +3,8 @@ from typing import Dict, Any
 import math
 import random
 
+from src.utils.logging_utils import log_event
+
 class QuizService:
     """
     Encapsulates logic for Quiz Prompts. 
@@ -31,6 +33,8 @@ class QuizService:
         is_visual_subject = any(subj in topic_lower for subj in visual_subjects)
 
         visual_instruction = ""
+        max_visuals = 0
+        target_visuals = 0
         
         if is_visual_subject:
             # Calculate max allowed visuals (40% of total questions, rounded down)
@@ -60,6 +64,15 @@ class QuizService:
                 "## VISUAL & TOOL EXECUTION PROTOCOL (NON-VISUAL SUBJECT)\n"
                 "This topic does not require visual charts. You are FORBIDDEN from generating any images or graphs. You MUST leave `image_url` as null for all questions.\n\n"
             )
+
+        # STRUCTURED LOGGING: Record the decision for CloudWatch Insights
+        log_event("dynamic_visual_quota_calculated", {
+            "subject_topic": topic_lower,
+            "is_visual_subject": is_visual_subject,
+            "num_questions_requested": num_questions,
+            "max_allowed_visuals": max_visuals,
+            "target_visuals_enforced": target_visuals
+        })
 
         # ---------------------------------------------------------------------
         # ASSEMBLE SYSTEM PROMPT

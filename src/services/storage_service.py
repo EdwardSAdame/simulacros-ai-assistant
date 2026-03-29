@@ -1,8 +1,12 @@
+# src/services/storage_service.py
 import boto3
 import logging
 import uuid
 from botocore.exceptions import ClientError
 from src.config.settings import settings
+
+# IMPORT CUSTOM LOGGING
+from src.utils.logging_utils import log_event
 
 logger = logging.getLogger(__name__)
 
@@ -36,7 +40,6 @@ class StorageService:
             file_extension = ".pdf"
             
         # 2. Generate a unique filename using the provided folder
-        # 🟢 FIX: Dynamic folder selection (chat_assets vs quiz_assets)
         file_name = f"{folder}/{uuid.uuid4()}{file_extension}"
         
         try:
@@ -57,11 +60,25 @@ class StorageService:
                 # Standard S3 URL
                 url = f"https://{self.bucket_name}.s3.{settings.AWS_REGION}.amazonaws.com/{file_name}"
                 
-            logger.info(f"StorageService: Successfully uploaded image to {url}")
+            # STRUCTURED LOGGING: Record the successful upload for CloudWatch Insights
+            log_event("s3_asset_uploaded", {
+                "url": url,
+                "folder": folder,
+                "file_name": file_name,
+                "content_type": content_type,
+                "bucket": self.bucket_name
+            })
+            
             return url
 
         except ClientError as e:
-            logger.error(f"StorageService: S3 Upload failed: {e}")
+            # STRUCTURED LOGGING: Record the failure
+            log_event("s3_upload_failed", {
+                "folder": folder,
+                "file_name": file_name,
+                "content_type": content_type,
+                "bucket": self.bucket_name
+            }, level="error", error=e)
             raise e
 
 # Create a singleton instance to be imported elsewhere
