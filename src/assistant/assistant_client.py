@@ -131,7 +131,6 @@ def stream_chat_response(
         stream = client.responses.create(**req)
         
         for event in stream:
-            # Check for usage object in the stream chunk
             if hasattr(event, "usage") and event.usage is not None:
                 yield {"type": "usage_metrics", "data": _extract_usage_metrics(event.usage)}
 
@@ -249,7 +248,9 @@ def generate_structured_quiz(
     if pdf_urls:
         _inject_pdf_inputs(api_input, pdf_urls)
 
-    tools = _configure_tools(vector_store_ids, requires_visuals, pdf_urls, web_search_config, user_location)
+    # Force the code interpreter tool to be available for all quizzes. 
+    # The prompt in quiz_service.py acts as the strict gatekeeper.
+    tools = _configure_tools(vector_store_ids, True, pdf_urls, web_search_config, user_location)
 
     req = _build_request_payload(cfg, api_input, tools=tools)
     req["text_format"] = QuizResponse
@@ -303,7 +304,9 @@ def stream_structured_quiz(
     if pdf_urls:
         _inject_pdf_inputs(api_input, pdf_urls)
 
-    tools = _configure_tools(vector_store_ids, requires_visuals, pdf_urls, web_search_config, user_location)
+    # Force the code interpreter tool to be available for all quizzes. 
+    # The prompt in quiz_service.py acts as the strict gatekeeper.
+    tools = _configure_tools(vector_store_ids, True, pdf_urls, web_search_config, user_location)
 
     req = _build_request_payload(cfg, api_input, tools=tools)
     req["text_format"] = QuizResponse
@@ -329,7 +332,6 @@ def stream_structured_quiz(
                         final_raw = stream.get_final_response()
                         generated_urls = handle_generated_files(client, final_raw, folder="quiz_assets")
                         
-                        # Extract usage from the final stream payload
                         usage_data = _extract_usage_metrics(getattr(final_raw, "usage", None))
                         if usage_data:
                             yield {"type": "usage_metrics", "data": usage_data}
@@ -357,11 +359,9 @@ def stream_structured_quiz(
 # INTERNAL HELPERS
 # ------------------------------------------------------------------
 def _extract_usage_metrics(usage_obj: Any) -> Dict[str, int]:
-    """Extracts tokens handling Pydantic objects, standard dictionaries, and alternate key names."""
     if not usage_obj:
         return {}
 
-    # 1. If the usage object is a Dictionary
     if isinstance(usage_obj, dict):
         input_tokens = (
             usage_obj.get("input_tokens") or 
@@ -386,7 +386,6 @@ def _extract_usage_metrics(usage_obj: Any) -> Dict[str, int]:
         prompt_details = usage_obj.get("input_tokens_details", usage_obj.get("prompt_tokens_details", {}))
         cached_tokens = prompt_details.get("cached_tokens", 0) if isinstance(prompt_details, dict) else 0
         
-    # 2. If the usage object is a Class/Object
     else:
         input_tokens = (
             getattr(usage_obj, "input_tokens", None) or 

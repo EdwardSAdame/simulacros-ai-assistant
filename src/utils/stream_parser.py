@@ -11,7 +11,7 @@ class StreamParser:
     """
     Handles the low-level parsing of the text stream from OpenAI.
     Extracts the 'intro_message' and individual 'QuizQuestion' JSON objects
-    from the incomplete string buffer.
+    from the incomplete string buffer. Includes proactive refusal detection.
     """
 
     @staticmethod
@@ -20,6 +20,7 @@ class StreamParser:
         Consumes the OpenAI stream and yields structured events:
         - {"type": "intro", "text": "..."}
         - {"type": "question", "index": int, "data": QuizQuestion}
+        - {"type": "refusal", "reason": str}
         - {"type": "done", "full_response": QuizResponse}
         - {"type": "error", "error": str}
         """
@@ -27,26 +28,45 @@ class StreamParser:
         intro_yielded = False
         question_count = 0
         last_checkpoint = None
+        has_refused = False
 
         try:
             # 1. Iterate over the stream events
             for event in stream:
-                if event.type == "response.output_text.delta":
-                    buffer += event.delta
+                event_type = getattr(event, "type", "")
+
+                # A. Detect Streaming Refusals
+                if event_type == "response.content_part.added":
+                    part = getattr(event, "part", None)
+                    if part and getattr(part, "type", "") == "refusal":
+                        has_refused = True
+                        yield {"type": "refusal", "reason": getattr(part, "refusal", "Model refused the request for safety reasons.")}
+                        continue
+
+                elif event_type == "response.refusal.delta":
+                    has_refused = True
+                    yield {"type": "refusal", "reason": getattr(event, "delta", "Model refused.")}
+                    continue
+
+                # B. Normal Text Stream Processing
+                elif event_type == "response.output_text.delta":
+                    buffer += getattr(event, "delta", "")
                     
-                    # A. Detect Intro Message
+                    # Detect Intro Message
                     if not intro_yielded and '"questions"' in buffer:
                         match = re.search(r'"intro_message"\s*:\s*"(.*?)"', buffer, re.DOTALL)
                         if match:
                             yield {"type": "intro", "text": match.group(1).replace('\\"', '"')}
                             intro_yielded = True
                     
-                    # B. Detect Questions Array
+                    # Detect Questions Array
                     q_marker = buffer.find('"questions"')
                     if q_marker != -1:
                         arr_start = buffer.find('[', q_marker)
                         if arr_start != -1:
-                            if last_checkpoint is None: last_checkpoint = arr_start
+                            if last_checkpoint is None: 
+                                last_checkpoint = arr_start
+                            
                             cursor = last_checkpoint
                             depth = 0
                             in_str = False
@@ -57,9 +77,11 @@ class StreamParser:
                             while cursor < len(buffer):
                                 char = buffer[cursor]
                                 if not in_str:
-                                    if char == '"': in_str = True
+                                    if char == '"': 
+                                        in_str = True
                                     elif char == '{':
-                                        if depth == 0: obj_start = cursor
+                                        if depth == 0: 
+                                            obj_start = cursor
                                         depth += 1
                                     elif char == '}':
                                         depth -= 1
@@ -74,25 +96,47 @@ class StreamParser:
                                                     def __init__(self, d): self.d = d
                                                     def dict(self): return self.d
                                                 
-                                                try: q_obj = QuizQuestion(**data)
-                                                except: q_obj = Wrapper(data)
+                                                try: 
+                                                    q_obj = QuizQuestion(**data)
+                                                except: 
+                                                    q_obj = Wrapper(data)
                                                 
                                                 yield {"type": "question", "index": question_count, "data": q_obj}
                                                 question_count += 1
                                                 last_checkpoint = cursor + 1
-                                            except Exception: pass
-                                    elif char == '\\': escape = True
+                                            except Exception: 
+                                                pass
+                                elif char == '\\': 
+                                    escape = True
                                 else:
-                                    if escape: escape = False
-                                    elif char == '\\': escape = True
-                                    elif char == '"': in_str = False
+                                    if escape: 
+                                        escape = False
+                                    elif char == '\\': 
+                                        escape = True
+                                    elif char == '"': 
+                                        in_str = False
                                 cursor += 1
 
             # 2. Retrieve Final Response (Standard OpenAI SDK method)
-            final = stream.get_final_response()
-            parsed = getattr(final, 'output_parsed', None) or getattr(final, 'parsed', None) or final
-            
-            yield {"type": "done", "full_response": parsed}
+            if hasattr(stream, 'get_final_response'):
+                final = stream.get_final_response()
+                
+                # Double-check for refusals in the final payload
+                refusal_msg = None
+                for output in getattr(final, "output", []):
+                    if getattr(output, "type", "") == "message":
+                        for item in getattr(output, "content", []):
+                            if getattr(item, "type", "") == "refusal":
+                                refusal_msg = getattr(item, "refusal", "Model refused the request.")
+                
+                if refusal_msg and not has_refused:
+                    yield {"type": "refusal", "reason": refusal_msg}
+                    return
+
+                parsed = getattr(final, 'output_parsed', None) or getattr(final, 'parsed', None) or final
+                yield {"type": "done", "full_response": parsed}
+            else:
+                yield {"type": "error", "error": "Stream did not contain a final response method."}
 
         except Exception as e:
             logger.error(f"StreamParser parsing failed: {e}")

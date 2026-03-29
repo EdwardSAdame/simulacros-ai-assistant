@@ -1,6 +1,6 @@
 # src/schemas/quiz_schemas.py
 from pydantic import BaseModel, Field
-from typing import List, Optional
+from typing import List, Optional, Literal
 
 class QuizOption(BaseModel):
     text: str = Field(..., description="The answer text. FORMATTING RULES: 1. If the answer is just words/text, write normally WITHOUT delimiters (e.g., 'La biomasa disminuye'). 2. If the answer is a number, equation, or symbol, wrap it in standard LaTeX delimiters \\( and \\). Example: '\\( -\\infty \\)' or '\\( 0 \\)'. 3. Mixed: 'El valor es \\( 5 \\)'. DO NOT double-escape backslashes.")
@@ -30,10 +30,10 @@ class QuizQuestion(BaseModel):
     
     image_url: Optional[str] = Field(None, description="URL of the generated image/graph. If you used the python tool to generate a graph, this will be populated.")
 
-    difficulty: int = Field(1, ge=1, le=3, description="Difficulty weight: 1 (Basic/Easy), 2 (Application/Medium), 3 (Analysis/Hard).")
+    difficulty: Literal[1, 2, 3] = Field(1, description="Difficulty weight: 1 (Basic/Easy), 2 (Application/Medium), 3 (Analysis/Hard).")
 
-    options: List[QuizOption] = Field(..., min_items=4, max_items=4, description="Exactly 4 options.")
-    correct_option_index: int = Field(..., ge=0, le=3, description="Index of the correct option (0-3).")
+    options: List[QuizOption] = Field(..., description="Exactly 4 options.")
+    correct_option_index: Literal[0, 1, 2, 3] = Field(..., description="Index of the correct option (0-3).")
 
 class QuizResponse(BaseModel):
     title: str = Field(..., description="A professional, short, engaging title for this quiz based on the specific topic (Max 6 words).")
