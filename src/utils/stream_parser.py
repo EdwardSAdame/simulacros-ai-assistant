@@ -20,6 +20,7 @@ class StreamParser:
         Consumes the OpenAI stream and yields structured events:
         - {"type": "intro", "text": "..."}
         - {"type": "question", "index": int, "data": QuizQuestion}
+        - {"type": "image_request", "index": int, "prompt": str}  <-- NEW DECOUPLED ARCHITECTURE
         - {"type": "partial_image", "index": int, "b64_data": str}
         - {"type": "refusal", "reason": str}
         - {"type": "done", "full_response": QuizResponse}
@@ -30,6 +31,9 @@ class StreamParser:
         question_count = 0
         last_checkpoint = None
         has_refused = False
+        
+        # Track which questions we have already requested images for
+        yielded_image_prompts = set()
 
         try:
             # 1. Iterate over the stream events
@@ -49,7 +53,7 @@ class StreamParser:
                     yield {"type": "refusal", "reason": getattr(event, "delta", "Model refused.")}
                     continue
 
-                # B. Detect Partial Images (Streaming Image Generation)
+                # B. Detect Partial Images (Standard Tool Calling - Kept for Math/Code Interpreter Fallback)
                 elif event_type == "response.image_generation_call.partial_image":
                     idx = getattr(event, "partial_image_index", 0)
                     b64 = getattr(event, "partial_image_b64", "")
@@ -65,6 +69,29 @@ class StreamParser:
                 elif event_type == "response.output_text.delta":
                     buffer += getattr(event, "delta", "")
                     
+                    # -------------------------------------------------------------------------
+                    # NEW: ASYNC IMAGE INTERCEPTOR (Decoupled Architecture)
+                    # Detects when the AI finishes writing the "image_prompt" string.
+                    # -------------------------------------------------------------------------
+                    prompt_matches = re.finditer(r'"image_prompt"\s*:\s*"((?:[^"\\]|\\.)*)"', buffer)
+                    for match in prompt_matches:
+                        # Calculate actual question index by counting how many "question_title" keys came before this
+                        q_titles_before = buffer.count('"question_title"', 0, match.start())
+                        actual_q_index = max(0, q_titles_before - 1)
+                        
+                        if actual_q_index not in yielded_image_prompts:
+                            prompt_text = match.group(1).replace('\\"', '"').replace('\\n', '\n').replace('\\/', '/')
+                            
+                            # Only trigger if the AI actually wrote a prompt (ignored if null or empty)
+                            if prompt_text and prompt_text.lower() not in ["null", "", "none"]:
+                                yield {
+                                    "type": "image_request", 
+                                    "index": actual_q_index, 
+                                    "prompt": prompt_text
+                                }
+                            yielded_image_prompts.add(actual_q_index)
+                    # -------------------------------------------------------------------------
+
                     # Detect Intro Message
                     if not intro_yielded and '"questions"' in buffer:
                         match = re.search(r'"intro_message"\s*:\s*"(.*?)"', buffer, re.DOTALL)

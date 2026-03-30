@@ -28,7 +28,12 @@ class QuizQuestion(BaseModel):
 
     question_text: str = Field(..., description="The question stem. FORMATTING: Write regular text normally. Wrap ONLY math expressions, numbers, and symbols in standard LaTeX (\\( and \\)). Example: 'Si \\( x = 5 \\), que sucede?'. MUST match 'THE SETUP' numbers exactly.")
     
-    image_url: Optional[str] = Field(None, description="URL of the generated image/graph. If you used the python tool to generate a graph, this will be populated.")
+    # -------------------------------------------------------------------------
+    # NEW: DECOUPLED IMAGE ARCHITECTURE
+    # -------------------------------------------------------------------------
+    image_prompt: Optional[str] = Field(None, description="If an illustration is needed for this question, provide a highly detailed text prompt describing the image you want generated (e.g., 'A Claude Monet style painting of...'). Leave null if no image is needed.")
+    
+    image_url: Optional[str] = Field(None, description="URL of the generated image/graph. If you wrote an image_prompt, LEAVE THIS NULL. The backend will populate it automatically. If you used the python code_interpreter, put the local file path here.")
 
     difficulty: Literal[1, 2, 3] = Field(1, description="Difficulty weight: 1 (Basic/Easy), 2 (Application/Medium), 3 (Analysis/Hard).")
 

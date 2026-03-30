@@ -1,7 +1,8 @@
 # src/services/chat_service.py
 import logging
 import random
-import base64 # NEW IMPORT
+import base64 
+import threading # NEW IMPORT FOR ASYNC DECOUPLED ARCHITECTURE
 from typing import Tuple, Dict, Any, List
 
 # CONFIG
@@ -15,7 +16,7 @@ from src.services.context_builder import build_runtime_context
 from src.services.arena_service import arena_service
 from src.services.context_resolution import determine_exam_context
 from src.services.history_service import build_history_list
-from src.services.storage_service import storage_service # NEW IMPORT
+from src.services.storage_service import storage_service 
 
 # STORAGE
 from src.storage.conversations_table import (
@@ -233,10 +234,61 @@ def get_ai_response(
                 ghost_harder = None
                 ghost_retry = None
 
+                # ------------------------------------------------------------------
+                # NEW: ASYNC IMAGE GENERATOR ENGINE
+                # ------------------------------------------------------------------
+                image_threads = []
+                image_urls_map = {}
+
+                def _bg_image_generator(img_prompt: str, q_index: int):
+                    try:
+                        from src.config.settings import get_openai_client
+                        bg_client = get_openai_client()
+                        bg_req = {
+                            "model": "gpt-4o", # Model capable of tool calling
+                            "input": [{"role": "user", "content": f"Generate this image: {img_prompt}"}],
+                            "tools": [{"type": "image_generation", "partial_images": 3}],
+                            "stream": True
+                        }
+                        bg_stream = bg_client.responses.create(**bg_req)
+                        final_url = None
+                        
+                        for bg_event in bg_stream:
+                            if getattr(bg_event, "type", "") == "response.image_generation_call.partial_image":
+                                bg_b64 = getattr(bg_event, "partial_image_b64", "")
+                                if bg_b64:
+                                    try:
+                                        img_bytes = base64.b64decode(bg_b64)
+                                        s3_url = storage_service.upload_image_from_bytes(
+                                            img_bytes, "image/png", folder="quiz_assets"
+                                        )
+                                        # Send the chunk directly to the frontend!
+                                        stream_manager.send_partial_image(index=q_index, b64_data=s3_url)
+                                        final_url = s3_url
+                                    except Exception as upload_err:
+                                        logger.warning(f"BG image upload failed: {upload_err}")
+                        
+                        if final_url:
+                            image_urls_map[q_index] = final_url
+                    except Exception as e:
+                        logger.error(f"BG image generation failed: {e}")
+
+                # ------------------------------------------------------------------
+
                 for event in stream_gen:
                     evt_type = event.get("type")
                     if evt_type == "intro":
                         final_reply_text = event.get("text", "")
+                    
+                    # CATCH THE INTERCEPTOR: Fire off the background thread!
+                    elif evt_type == "image_request":
+                        q_idx = event.get("index", 0)
+                        prompt_str = event.get("prompt", "")
+                        logger.info(f"Triggering async image generation for question {q_idx}")
+                        t = threading.Thread(target=_bg_image_generator, args=(prompt_str, q_idx))
+                        t.start()
+                        image_threads.append(t)
+                        
                     elif evt_type == "question":
                         q_data = event.get("data")
                         q_dict = q_data.dict()
@@ -245,28 +297,23 @@ def get_ai_response(
                         if idx not in seen_indices:
                             accumulated_questions.append(q_dict)
                             seen_indices.add(idx)
-                    # ------------------------------------------------------------------
-                    # NEW: CATCH AND STREAM PARTIAL IMAGES FOR QUIZ
-                    # ------------------------------------------------------------------
+                            
                     elif evt_type == "partial_image":
+                        # Kept for Math/Code Interpreter fallback safety
                         b64_data = event.get("b64_data", "")
                         if b64_data:
                             try:
                                 image_bytes = base64.b64decode(b64_data)
                                 s3_url = storage_service.upload_image_from_bytes(
-                                    image_bytes, 
-                                    "image/png", 
-                                    folder="quiz_assets"
+                                    image_bytes, "image/png", folder="quiz_assets"
                                 )
-                                stream_manager.send_partial_image(
-                                    index=event.get("index", 0),
-                                    b64_data=s3_url
-                                )
+                                stream_manager.send_partial_image(index=event.get("index", 0), b64_data=s3_url)
                             except Exception as upload_err:
                                 logger.warning(f"Partial image S3 upload failed during quiz: {upload_err}")
-                    # ------------------------------------------------------------------
+                                
                     elif evt_type == "usage_metrics":
                         _log_usage(event.get("data"), user_id, actual_conversation_id, mode)
+                        
                     elif evt_type == "done":
                         final_obj = event.get("full_response")
                         parsed_response = None
@@ -287,6 +334,17 @@ def get_ai_response(
                     elif evt_type == "error":
                         error_msg = event.get("error", "Unknown stream error")
                         stream_manager.send_error(error_msg)
+
+                # ------------------------------------------------------------------
+                # SYNC THE THREADS: Ensure all images finish before saving to Database
+                # ------------------------------------------------------------------
+                for t in image_threads:
+                    t.join()
+                    
+                # Bind the finished background image URLs to the accumulated questions payload
+                for i, q in enumerate(accumulated_questions):
+                    if i in image_urls_map:
+                        q["image_url"] = image_urls_map[i]
 
                 quiz_data = {
                     "quiz_mode": "batch", 

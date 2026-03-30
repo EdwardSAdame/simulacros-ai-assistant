@@ -62,22 +62,21 @@ class QuizService:
                 "  - **Cognitive Diversity**: DO NOT repeatedly ask to 'evaluate the function at point X'. Test intersections, slopes, limits, or domain/range.\n\n"
             )
             
-        # --- BRANCH B: CREATIVE VISUALS (DALL-E / GPT IMAGE) ---
+        # --- BRANCH B: CREATIVE VISUALS (DECOUPLED ASYNC ARCHITECTURE) ---
         elif is_creative_subject and target_visuals > 0:
             visual_instruction = (
-                f"## VISUAL & TOOL EXECUTION PROTOCOL (CREATIVE ILLUSTRATIONS - MANDATORY)\n"
-                f"You MUST generate EXACTLY {target_visuals} contextual illustration(s) for this quiz.\n"
-                "You are FORBIDDEN from generating the final JSON response immediately. Follow this sequence:\n"
-                "  - **Step 1**: Use the `image_generation` tool FIRST to create images relevant to the question.\n"
-                "  - **Step 2 (Style Doctrine)**: ALL images MUST strictly follow the Impressionist style of Claude Monet. Apply visible brushstrokes and accurate depiction of light. DO NOT generate photorealistic images, vector art, or 3D renders.\n"
-                "  - **Step 3**: Because the image tool returns data directly, you MUST act as if the files were saved sequentially as `creative_image_1.png`, `creative_image_2.png`, etc.\n"
-                "  - **Step 4**: Place these EXACT dummy filenames (e.g., `creative_image_1.png`) into the `image_url` fields of EXACTLY {target_visuals} distinct questions so the system can map them.\n\n"
+                f"## VISUAL GENERATION PROTOCOL (CREATIVE ILLUSTRATIONS - MANDATORY)\n"
+                f"You MUST include EXACTLY {target_visuals} contextual illustration(s) in this quiz.\n"
+                "CRITICAL: You are FORBIDDEN from using any external tools to generate these images. DO NOT call the image_generation tool.\n"
+                "Instead, you must describe the image you want the backend to generate by using the `image_prompt` field in the JSON schema.\n"
+                "  - **Style Doctrine**: ALL `image_prompt` descriptions MUST strictly enforce the Impressionist style of Claude Monet. Explicitly include phrases like 'in the style of Claude Monet, visible brushstrokes, impressionist lighting' in your description.\n"
+                "  - **Execution**: Write the descriptive prompt in the `image_prompt` field for the selected questions. Leave `image_url` as null. The backend will intercept your text prompt and paint the image asynchronously while you stream the rest of the questions.\n\n"
             )
             
         else:
             visual_instruction = (
                 "## VISUAL & TOOL EXECUTION PROTOCOL (VISUALS DISABLED)\n"
-                "For this specific quiz, you are FORBIDDEN from generating any images, graphs, or illustrations. You MUST leave `image_url` as null for all questions.\n\n"
+                "For this specific quiz, you are FORBIDDEN from generating any images, graphs, or illustrations. You MUST leave `image_url` and `image_prompt` as null for all questions.\n\n"
             )
 
         # STRUCTURED LOGGING: Record the decision for CloudWatch Insights
