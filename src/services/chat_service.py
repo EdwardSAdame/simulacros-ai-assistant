@@ -249,13 +249,22 @@ def get_ai_response(
                 def _bg_image_generator(img_prompt: str, q_index: int):
                     try:
                         from src.config.settings import get_openai_client
+                        from src.config.model_config import get_model_config # NEW IMPORT
+                        
                         bg_client = get_openai_client()
+                        active_config = get_model_config(mode) # Load settings for Alpha/Omega
+                        
                         bg_req = {
-                            "model": "gpt-4o", # Model capable of tool calling
+                            "model": active_config.model, # Uses gpt-4o or gpt-4o-mini based on user mode
                             "input": [{"role": "user", "content": f"Generate this image: {img_prompt}"}],
-                            "tools": [{"type": "image_generation", "partial_images": 3}],
+                            "tools": [{
+                                "type": "image_generation", 
+                                "model": active_config.image_model, # Explicitly sets gpt-image-1-mini
+                                "partial_images": 3
+                            }],
                             "stream": True
                         }
+                        
                         bg_stream = bg_client.responses.create(**bg_req)
                         final_url = None
                         
