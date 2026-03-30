@@ -3,6 +3,7 @@ import logging
 import random
 import base64 
 import threading # NEW IMPORT FOR ASYNC DECOUPLED ARCHITECTURE
+import math # NEW IMPORT FOR DYNAMIC QUOTA CALCULATION
 from typing import Tuple, Dict, Any, List
 
 # CONFIG
@@ -235,10 +236,15 @@ def get_ai_response(
                 ghost_retry = None
 
                 # ------------------------------------------------------------------
-                # NEW: ASYNC IMAGE GENERATOR ENGINE
+                # NEW: ASYNC IMAGE GENERATOR ENGINE WITH QUOTA CIRCUIT BREAKER
                 # ------------------------------------------------------------------
                 image_threads = []
                 image_urls_map = {}
+                
+                # Calculate the maximum allowed images physically in the backend
+                max_allowed_images = math.floor(num_questions * 0.4) if requires_creative_images else 0
+                images_triggered_count = 0
+                allowed_image_indices = set() # Track which questions got approved for images
 
                 def _bg_image_generator(img_prompt: str, q_index: int):
                     try:
@@ -283,17 +289,31 @@ def get_ai_response(
                     # CATCH THE INTERCEPTOR: Fire off the background thread!
                     elif evt_type == "image_request":
                         q_idx = event.get("index", 0)
-                        prompt_str = event.get("prompt", "")
-                        logger.info(f"Triggering async image generation for question {q_idx}")
-                        t = threading.Thread(target=_bg_image_generator, args=(prompt_str, q_idx))
-                        t.start()
-                        image_threads.append(t)
+                        
+                        # CIRCUIT BREAKER LOGIC
+                        if images_triggered_count < max_allowed_images:
+                            prompt_str = event.get("prompt", "")
+                            logger.info(f"Triggering async image generation for question {q_idx}")
+                            t = threading.Thread(target=_bg_image_generator, args=(prompt_str, q_idx))
+                            t.start()
+                            image_threads.append(t)
+                            images_triggered_count += 1
+                            allowed_image_indices.add(q_idx)
+                        else:
+                            logger.info(f"Visual quota ({max_allowed_images}) exceeded. Ignoring image_prompt for question {q_idx}.")
                         
                     elif evt_type == "question":
                         q_data = event.get("data")
                         q_dict = q_data.dict()
                         idx = event.get("index", 0)
+                        
+                        # THE SHIELD: Strip image_prompt if it wasn't approved by the quota!
+                        if idx not in allowed_image_indices:
+                            q_dict["image_prompt"] = None
+                            q_dict["image_url"] = None
+
                         stream_manager.send_quiz_item(question_data=q_dict, index=idx)
+                        
                         if idx not in seen_indices:
                             accumulated_questions.append(q_dict)
                             seen_indices.add(idx)
@@ -324,6 +344,13 @@ def get_ai_response(
                         if parsed_response:
                             final_reply_text = parsed_response.intro_message
                             accumulated_questions = [q.dict() for q in parsed_response.questions]
+                            
+                            # Final Shield: Strip unapproved prompts from the finalized output
+                            for i, q_dict in enumerate(accumulated_questions):
+                                if i not in allowed_image_indices:
+                                    q_dict["image_prompt"] = None
+                                    q_dict["image_url"] = None
+                            
                             if hasattr(parsed_response, 'title') and parsed_response.title:
                                 ai_generated_title = parsed_response.title
                             
