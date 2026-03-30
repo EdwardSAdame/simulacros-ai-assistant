@@ -30,7 +30,6 @@ from src.storage.arenas_table import update_arena_last_active
 logger = logging.getLogger(__name__)
 
 # --- TESTING TOGGLE ---
-# Set to False to force all quiz/simulacro requests to act as standard chat
 QUIZ_FEATURE_ENABLED = True
 
 def _normalize_email_for_storage(val):
@@ -71,7 +70,6 @@ def get_ai_response(
     from src.services.creative_image_service import CreativeImageService
     from src.services.token_usage_service import TokenUsageService
 
-    # Internal helper to fire-and-forget token logging
     def _log_usage(usage_data: dict, current_user: str, session: str, active_mode: str):
         if not usage_data or not current_user: return
         try:
@@ -93,7 +91,6 @@ def get_ai_response(
 
     page = _normalize_page(page)
 
-    # 1. Normalize Media
     if not media_items:
         media_items = []
         if image_urls:
@@ -106,7 +103,6 @@ def get_ai_response(
     clean_images = [m["url"] for m in media_items if "image" in m.get("type", "").lower() or not ".pdf" in m["url"].lower()]
     clean_pdfs   = [m["url"] for m in media_items if "pdf" in m.get("type", "").lower() or ".pdf" in m["url"].lower()]
 
-    # 2. Conversation Management & State Locking
     actual_conversation_id = conversation_id
     should_create_new = True
     persisted_exam_context = None
@@ -115,24 +111,17 @@ def get_ai_response(
         exists_timestamp = _find_conversation_timestamp(user_id, conversation_id)
         if exists_timestamp:
             should_create_new = False
-            
             existing_meta = get_conversation_metadata(user_id, conversation_id)
             if existing_meta:
                 persisted_exam_context = existing_meta.get("ExamContext")
                 persisted_mode = existing_meta.get("AiMode")
-                
                 if persisted_mode:
                     if mode != persisted_mode:
                         update_conversation_mode(user_id, conversation_id, mode)
                         log_event("ai_mode_updated_in_db", {"old_mode": persisted_mode, "new_mode": mode})
-                    else:
-                        log_event("ai_mode_verified_with_db", {"mode": mode})
 
                 if not arena_id and existing_meta.get("ArenaId"):
                     arena_id = existing_meta.get("ArenaId")
-                    log_event("arena_context_resolved_from_db", {"arena_id": arena_id})
-                    
-            log_event("conversation_verified_and_reused", {"conversation_id": conversation_id})
         else:
             actual_conversation_id = conversation_id 
 
@@ -156,7 +145,6 @@ def get_ai_response(
         else:
             if persisted_exam_context and exam_context != persisted_exam_context:
                 update_conversation_exam_context(user_id, actual_conversation_id, exam_context)
-                log_event("exam_context_updated_in_db", {"old": persisted_exam_context, "new": exam_context})
         
         if user_id and actual_conversation_id:
             update_conversation_last_active(user_id, actual_conversation_id)
@@ -167,7 +155,6 @@ def get_ai_response(
         raise RuntimeError(f"Failed to save/reuse conversation: {e}")
 
     if is_hidden:
-        logger.info("Processing Hidden Context Injection. Saving to DB and aborting AI trigger.")
         try:
             save_message(
                 actual_conversation_id, 
@@ -177,30 +164,17 @@ def get_ai_response(
             )
             return "Context saved silently.", actual_conversation_id, "", None
         except Exception as e:
-            logger.error(f"Failed to save hidden context: {e}")
             raise RuntimeError(f"Failed to save hidden context: {e}")
 
-    # 3. Intelligence Layer Follow-up
     selected_vector_stores = get_stores_for_page(page)
     
     if intent == "admission_stats":
         web_search_config = None
-        logger.info("Intent is 'admission_stats'. Web search explicitly disabled.")
     else:
         web_search_config = get_search_filters(exam_context)
         
     is_web_search_active = (web_search_config is not None)
 
-    log_event("context_resolution", {
-        "user_id": user_id,
-        "input_url": page,
-        "derived_exam": exam_context, 
-        "web_search_active": is_web_search_active,
-        "trigger_message": message[:50] if message else "None",
-        "media_count": len(media_items)
-    })
-
-    # 4. Build History & Inputs
     conversation_input = build_history_list(actual_conversation_id)
     
     current_user_content = []
@@ -213,9 +187,6 @@ def get_ai_response(
     if current_user_content:
         conversation_input.append({"role": "user", "content": current_user_content})
 
-    # ------------------------------------------------------------------
-    # BRANCH: QUIZ vs CREATIVE_IMAGE vs ADMISSION_STATS vs CHAT
-    # ------------------------------------------------------------------
     quiz_data = None
     final_reply_text = ""
     generated_assets = [] 
@@ -228,6 +199,13 @@ def get_ai_response(
             num_questions = 5
         elif num_questions > 30:
             num_questions = 30
+
+        # ------------------------------------------------------------------
+        # NEW: IDENTIFY CREATIVE CATEGORIES FOR HUMANITIES
+        # ------------------------------------------------------------------
+        creative_categories = ["sociales", "lectura_critica", "ingles", "ciencias_sociales"]
+        requires_creative_images = category in creative_categories
+        # ------------------------------------------------------------------
 
         conversation_input.append(QuizService.get_system_instruction(topic=topic_hint, num_questions=num_questions))
 
@@ -242,6 +220,7 @@ def get_ai_response(
                     mode=mode, 
                     exam_context=exam_context,
                     requires_visuals=requires_visuals, 
+                    requires_creative_images=requires_creative_images, # PASSED HERE
                     pdf_urls=clean_pdfs,
                     vector_store_ids=selected_vector_stores,
                     web_search_config=web_search_config      
@@ -311,6 +290,7 @@ def get_ai_response(
                     mode=mode, 
                     exam_context=exam_context,
                     requires_visuals=requires_visuals, 
+                    requires_creative_images=requires_creative_images, # PASSED HERE
                     pdf_urls=clean_pdfs,
                     vector_store_ids=selected_vector_stores,
                     web_search_config=web_search_config
@@ -415,7 +395,6 @@ def get_ai_response(
                 
                 if arena_id:
                     try:
-                        logger.info(f"Attempting to fetch context for Arena: {arena_id}")
                         arena_context = arena_service.get_arena_context(user_id, arena_id)
                         
                         if arena_context:
@@ -427,11 +406,8 @@ def get_ai_response(
                                 if not selected_vector_stores:
                                     selected_vector_stores = []
                                 selected_vector_stores.append(arena_vector_store)
-                                logger.info(f"Attached Arena Vector Store: {arena_vector_store}")
 
                             if arena_instructions and str(arena_instructions).strip():
-                                logger.info(f"Using Exclusive Arena Context: {arena_title}")
-                                
                                 base_tech_prompt = (
                                     "You are an advanced AI Assistant. \n"
                                     "OUTPUT RULES:\n"
@@ -450,10 +426,6 @@ def get_ai_response(
                                 )
                                 
                                 system_prompt = base_tech_prompt + injection
-                            else:
-                                logger.warning(f"Arena {arena_id} found, but SystemInstructions is empty.")
-                        else:
-                            logger.warning(f"Arena {arena_id} context not found in DB.")
                                 
                     except Exception as e:
                         logger.error(f"Failed to load arena context: {e}")

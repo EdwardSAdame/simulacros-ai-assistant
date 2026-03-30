@@ -1,6 +1,7 @@
 # src/assistant/artifact_handler.py
 import logging
 import os
+import base64
 from typing import List, Dict, Any
 from src.services.storage_service import storage_service
 from src.schemas.quiz_schemas import QuizResponse
@@ -69,7 +70,7 @@ def process_file(cf_client, container_id, file_id, filename, url_dict: Dict[str,
         # Upload using the existing storage service
         s3_url = storage_service.upload_image_from_bytes(file_content, ctype, folder=folder)
         
-        # Add to dictionary (Redundant logger.info removed here)
+        # Add to dictionary 
         url_dict[fname] = s3_url
         
     except Exception as e:
@@ -84,16 +85,37 @@ def handle_generated_files(client, response_obj, folder: str = "chat_assets") ->
     container_id = None
     
     cf_client = get_files_client(client)
-    if not cf_client: 
-        return {}
 
     try:
         output_items = getattr(response_obj, "output", []) or []
         for item in output_items:
             item_type = getattr(item, "type", "")
             
-            # Detect Container ID
-            if item_type == "code_interpreter_call":
+            # ---------------------------------------------------------
+            # NEW: Catch Creative Image Generations
+            # ---------------------------------------------------------
+            if item_type == "image_generation_call":
+                b64_data = getattr(item, "result", None)
+                if b64_data:
+                    try:
+                        image_bytes = base64.b64decode(b64_data)
+                        idx = len(uploaded_urls_map) + 1
+                        fname = f"creative_image_{idx}.png"
+                        
+                        s3_url = storage_service.upload_image_from_bytes(
+                            image_bytes, 
+                            "image/png", 
+                            folder=folder
+                        )
+                        uploaded_urls_map[fname] = s3_url
+                        log_event("creative_image_processed", {"filename": fname})
+                    except Exception as e:
+                        logger.error(f"Failed to process creative image artifact: {e}")
+                        
+            # ---------------------------------------------------------
+            # EXISTING: Detect Container ID for Code Interpreter
+            # ---------------------------------------------------------
+            elif item_type == "code_interpreter_call":
                 cid = getattr(item, "container_id", None)
                 if not cid and hasattr(item, "code_interpreter"):
                     cid = getattr(item.code_interpreter, "container_id", None)
@@ -103,7 +125,7 @@ def handle_generated_files(client, response_obj, folder: str = "chat_assets") ->
                     container_id = cid
 
             # Detect Files in Messages
-            if item_type == "message":
+            elif item_type == "message" and cf_client:
                 content_list = getattr(item, "content", []) or []
                 if isinstance(content_list, list):
                     for part in content_list:
@@ -116,7 +138,8 @@ def handle_generated_files(client, response_obj, folder: str = "chat_assets") ->
                                     process_file(cf_client, container_id, file_id, fname, uploaded_urls_map, folder)
 
         # Fallback: List files in container if no direct citations found but container exists
-        if not uploaded_urls_map and container_id:
+        has_code_citations = any(fname for fname in uploaded_urls_map.keys() if not fname.startswith("creative_image_"))
+        if not has_code_citations and container_id and cf_client:
             try:
                 container_files = cf_client.list(container_id)
                 
@@ -142,7 +165,8 @@ def handle_generated_files(client, response_obj, folder: str = "chat_assets") ->
                         process_file(cf_client, container_id, fid, fname, uploaded_urls_map, folder)
             except Exception: 
                 pass
-    except Exception: 
+    except Exception as e: 
+        logger.error(f"Error in handle_generated_files: {e}")
         pass
     
     return uploaded_urls_map
@@ -162,7 +186,7 @@ def assign_urls_to_quiz(quiz_data: QuizResponse, urls_map: Dict[str, str] | List
         if not q.image_url:
             continue
             
-        if q.image_url == "PENDING_UPLOAD" or "/mnt/" in q.image_url:
+        if q.image_url == "PENDING_UPLOAD" or "/mnt/" in q.image_url or "creative_image_" in q.image_url:
             target_filename = os.path.basename(q.image_url).lower()
             
             if target_filename in urls_map:

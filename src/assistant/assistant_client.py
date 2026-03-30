@@ -52,7 +52,7 @@ def send_message_to_assistant(
     if pdf_urls:
         _inject_pdf_inputs(api_input, pdf_urls)
 
-    tools = _configure_tools(vector_store_ids, requires_visuals, pdf_urls, web_search_config, user_location)
+    tools = _configure_tools(vector_store_ids, requires_visuals, False, pdf_urls, web_search_config, user_location)
 
     req = _build_request_payload(cfg, api_input, tools)
 
@@ -229,6 +229,7 @@ def generate_structured_quiz(
     mode: str = "omega",
     exam_context: str = "ICFES",
     requires_visuals: bool = False,
+    requires_creative_images: bool = False, # NEW FLAG ADDED
     pdf_urls: List[str] | None = None,
     vector_store_ids: List[str] | None = None,
     web_search_config: Dict[str, Any] | None = None,
@@ -248,9 +249,8 @@ def generate_structured_quiz(
     if pdf_urls:
         _inject_pdf_inputs(api_input, pdf_urls)
 
-    # Force the code interpreter tool to be available for all quizzes. 
-    # The prompt in quiz_service.py acts as the strict gatekeeper.
-    tools = _configure_tools(vector_store_ids, True, pdf_urls, web_search_config, user_location)
+    # Configure tools passing BOTH flags
+    tools = _configure_tools(vector_store_ids, True, requires_creative_images, pdf_urls, web_search_config, user_location)
 
     req = _build_request_payload(cfg, api_input, tools=tools)
     req["text_format"] = QuizResponse
@@ -285,6 +285,7 @@ def stream_structured_quiz(
     mode: str = "omega",
     exam_context: str = "ICFES",
     requires_visuals: bool = False,
+    requires_creative_images: bool = False, # NEW FLAG ADDED
     pdf_urls: List[str] | None = None,
     vector_store_ids: List[str] | None = None,
     web_search_config: Dict[str, Any] | None = None,
@@ -304,9 +305,8 @@ def stream_structured_quiz(
     if pdf_urls:
         _inject_pdf_inputs(api_input, pdf_urls)
 
-    # Force the code interpreter tool to be available for all quizzes. 
-    # The prompt in quiz_service.py acts as the strict gatekeeper.
-    tools = _configure_tools(vector_store_ids, True, pdf_urls, web_search_config, user_location)
+    # Configure tools passing BOTH flags
+    tools = _configure_tools(vector_store_ids, True, requires_creative_images, pdf_urls, web_search_config, user_location)
 
     req = _build_request_payload(cfg, api_input, tools=tools)
     req["text_format"] = QuizResponse
@@ -437,13 +437,21 @@ def _inject_pdf_inputs(api_input, pdf_urls):
                 "file_url": url
             })
 
-def _configure_tools(vector_store_ids, requires_visuals, pdf_urls, web_search_config, user_location):
+# ------------------------------------------------------------------
+# NEW PARAMETER: requires_creative_images
+# ------------------------------------------------------------------
+def _configure_tools(vector_store_ids, requires_visuals, requires_creative_images, pdf_urls, web_search_config, user_location):
     tools = []
     if vector_store_ids:
         tools.append({"type": "file_search", "vector_store_ids": vector_store_ids, "max_num_results": get_vector_search_max_results()})
     
+    # 1. Matplotlib Data Generation
     if requires_visuals or (pdf_urls and len(pdf_urls) > 0):
         tools.append({"type": "code_interpreter", "container": {"type": "auto"}})
+        
+    # 2. NEW: Creative Image Generation for Humanities Quizzes
+    if requires_creative_images:
+        tools.append({"type": "image_generation"})
         
     if web_search_config:
         web_tool = {"type": "web_search"}
