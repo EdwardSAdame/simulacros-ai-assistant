@@ -229,7 +229,7 @@ def generate_structured_quiz(
     mode: str = "omega",
     exam_context: str = "ICFES",
     requires_visuals: bool = False,
-    requires_creative_images: bool = False, # NEW FLAG ADDED
+    requires_creative_images: bool = False,
     pdf_urls: List[str] | None = None,
     vector_store_ids: List[str] | None = None,
     web_search_config: Dict[str, Any] | None = None,
@@ -249,7 +249,6 @@ def generate_structured_quiz(
     if pdf_urls:
         _inject_pdf_inputs(api_input, pdf_urls)
 
-    # Configure tools passing BOTH flags
     tools = _configure_tools(vector_store_ids, True, requires_creative_images, pdf_urls, web_search_config, user_location)
 
     req = _build_request_payload(cfg, api_input, tools=tools)
@@ -285,7 +284,7 @@ def stream_structured_quiz(
     mode: str = "omega",
     exam_context: str = "ICFES",
     requires_visuals: bool = False,
-    requires_creative_images: bool = False, # NEW FLAG ADDED
+    requires_creative_images: bool = False,
     pdf_urls: List[str] | None = None,
     vector_store_ids: List[str] | None = None,
     web_search_config: Dict[str, Any] | None = None,
@@ -305,7 +304,6 @@ def stream_structured_quiz(
     if pdf_urls:
         _inject_pdf_inputs(api_input, pdf_urls)
 
-    # Configure tools passing BOTH flags
     tools = _configure_tools(vector_store_ids, True, requires_creative_images, pdf_urls, web_search_config, user_location)
 
     req = _build_request_payload(cfg, api_input, tools=tools)
@@ -449,9 +447,12 @@ def _configure_tools(vector_store_ids, requires_visuals, requires_creative_image
     if requires_visuals or (pdf_urls and len(pdf_urls) > 0):
         tools.append({"type": "code_interpreter", "container": {"type": "auto"}})
         
-    # 2. NEW: Creative Image Generation for Humanities Quizzes
+    # 2. NEW: Creative Image Generation for Humanities Quizzes (WITH STREAMING)
     if requires_creative_images:
-        tools.append({"type": "image_generation"})
+        tools.append({
+            "type": "image_generation",
+            "partial_images": 3
+        })
         
     if web_search_config:
         web_tool = {"type": "web_search"}

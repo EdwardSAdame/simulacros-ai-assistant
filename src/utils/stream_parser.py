@@ -10,8 +10,8 @@ logger = logging.getLogger(__name__)
 class StreamParser:
     """
     Handles the low-level parsing of the text stream from OpenAI.
-    Extracts the 'intro_message' and individual 'QuizQuestion' JSON objects
-    from the incomplete string buffer. Includes proactive refusal detection.
+    Extracts the 'intro_message', individual 'QuizQuestion' JSON objects,
+    and progressive image chunks from the stream.
     """
 
     @staticmethod
@@ -20,6 +20,7 @@ class StreamParser:
         Consumes the OpenAI stream and yields structured events:
         - {"type": "intro", "text": "..."}
         - {"type": "question", "index": int, "data": QuizQuestion}
+        - {"type": "partial_image", "index": int, "b64_data": str}
         - {"type": "refusal", "reason": str}
         - {"type": "done", "full_response": QuizResponse}
         - {"type": "error", "error": str}
@@ -48,7 +49,19 @@ class StreamParser:
                     yield {"type": "refusal", "reason": getattr(event, "delta", "Model refused.")}
                     continue
 
-                # B. Normal Text Stream Processing
+                # B. Detect Partial Images (Streaming Image Generation)
+                elif event_type == "response.image_generation_call.partial_image":
+                    idx = getattr(event, "partial_image_index", 0)
+                    b64 = getattr(event, "partial_image_b64", "")
+                    if b64:
+                        yield {
+                            "type": "partial_image", 
+                            "index": idx, 
+                            "b64_data": b64
+                        }
+                    continue
+
+                # C. Normal Text Stream Processing
                 elif event_type == "response.output_text.delta":
                     buffer += getattr(event, "delta", "")
                     

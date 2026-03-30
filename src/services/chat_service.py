@@ -1,6 +1,7 @@
 # src/services/chat_service.py
 import logging
 import random
+import base64 # NEW IMPORT
 from typing import Tuple, Dict, Any, List
 
 # CONFIG
@@ -14,6 +15,7 @@ from src.services.context_builder import build_runtime_context
 from src.services.arena_service import arena_service
 from src.services.context_resolution import determine_exam_context
 from src.services.history_service import build_history_list
+from src.services.storage_service import storage_service # NEW IMPORT
 
 # STORAGE
 from src.storage.conversations_table import (
@@ -200,12 +202,8 @@ def get_ai_response(
         elif num_questions > 30:
             num_questions = 30
 
-        # ------------------------------------------------------------------
-        # NEW: IDENTIFY CREATIVE CATEGORIES FOR HUMANITIES
-        # ------------------------------------------------------------------
         creative_categories = ["sociales", "lectura_critica", "ingles", "ciencias_sociales"]
         requires_creative_images = category in creative_categories
-        # ------------------------------------------------------------------
 
         conversation_input.append(QuizService.get_system_instruction(topic=topic_hint, num_questions=num_questions))
 
@@ -220,7 +218,7 @@ def get_ai_response(
                     mode=mode, 
                     exam_context=exam_context,
                     requires_visuals=requires_visuals, 
-                    requires_creative_images=requires_creative_images, # PASSED HERE
+                    requires_creative_images=requires_creative_images,
                     pdf_urls=clean_pdfs,
                     vector_store_ids=selected_vector_stores,
                     web_search_config=web_search_config      
@@ -247,6 +245,26 @@ def get_ai_response(
                         if idx not in seen_indices:
                             accumulated_questions.append(q_dict)
                             seen_indices.add(idx)
+                    # ------------------------------------------------------------------
+                    # NEW: CATCH AND STREAM PARTIAL IMAGES FOR QUIZ
+                    # ------------------------------------------------------------------
+                    elif evt_type == "partial_image":
+                        b64_data = event.get("b64_data", "")
+                        if b64_data:
+                            try:
+                                image_bytes = base64.b64decode(b64_data)
+                                s3_url = storage_service.upload_image_from_bytes(
+                                    image_bytes, 
+                                    "image/png", 
+                                    folder="quiz_assets"
+                                )
+                                stream_manager.send_partial_image(
+                                    index=event.get("index", 0),
+                                    b64_data=s3_url
+                                )
+                            except Exception as upload_err:
+                                logger.warning(f"Partial image S3 upload failed during quiz: {upload_err}")
+                    # ------------------------------------------------------------------
                     elif evt_type == "usage_metrics":
                         _log_usage(event.get("data"), user_id, actual_conversation_id, mode)
                     elif evt_type == "done":
@@ -290,7 +308,7 @@ def get_ai_response(
                     mode=mode, 
                     exam_context=exam_context,
                     requires_visuals=requires_visuals, 
-                    requires_creative_images=requires_creative_images, # PASSED HERE
+                    requires_creative_images=requires_creative_images,
                     pdf_urls=clean_pdfs,
                     vector_store_ids=selected_vector_stores,
                     web_search_config=web_search_config
