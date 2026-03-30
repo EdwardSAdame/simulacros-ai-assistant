@@ -29,6 +29,11 @@ class SemanticRouter:
             "general", "identity_protection", 
             "admisiones"
         ]
+        
+        # NEW: Define categories that strictly require visual formatting
+        self.visual_categories = [
+            "matematicas", "fisica", "quimica", "biologia", "analisis_imagen"
+        ]
 
     # 🟢 FULLY UPDATED: Accepts user_id and session_id
     def determine_category(self, text: str, user_id: str = "system_router", session_id: str = "intent_resolution") -> dict:
@@ -125,7 +130,6 @@ class SemanticRouter:
                         in_details = getattr(usage, "input_tokens_details", None)
                         cached_val = getattr(in_details, "cached_tokens", 0) if in_details else 0
 
-                    # 🟢 FULLY UPDATED: Dynamic IDs and "router" model name
                     TokenUsageService().log_token_usage(
                         user_id=user_id,
                         session_id=session_id,
@@ -149,6 +153,14 @@ class SemanticRouter:
                 intent = "chat"
 
             requires_visuals = data.get("requires_visuals", False)
+
+            # -------------------------------------------------------------
+            # FIX: OVERRIDE REQUIRES_VISUALS FOR VISUAL QUIZZES
+            # -------------------------------------------------------------
+            if intent == "quiz" and category in self.visual_categories:
+                requires_visuals = True
+                logger.info(f"Router Override: Enforcing requires_visuals=True for {category} quiz to apply visual doctrine styling.")
+            # -------------------------------------------------------------
 
             if intent != "quiz":
                 num_questions = 0
