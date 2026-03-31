@@ -14,8 +14,7 @@ class QuizService:
     @staticmethod
     def get_system_instruction(topic: str = "general", num_questions: int = 5) -> Dict[str, Any]:
         """
-        Returns the system instruction with RESTORED 'THINKING LOGIC' (Step-by-Step),
-        while maintaining Technical Safety (UTF-8) and Subject Generalization.
+        Returns the system instruction with optimized token usage.
         Dynamically calculates visual quotas based on the subject and question count.
         """
         
@@ -51,12 +50,10 @@ class QuizService:
             visual_instruction = (
                 f"## VISUAL GENERATION PROTOCOL (DATA GRAPHS - MANDATORY)\n"
                 f"You MUST generate EXACTLY {target_visuals} graph(s) for this quiz.\n"
-                "CRITICAL: You are FORBIDDEN from using any external tools directly to generate these. DO NOT call the code_interpreter tool.\n"
-                "Instead, you must write MINIMALIST text instructions in the `plot_prompt` field for the backend to execute.\n"
-                "  - **MINIMALIST DOCTRINE (TOKEN SAVING)**: Your `plot_prompt` MUST ONLY contain pure mathematical instructions: the function, the x/y limits, and specific points to mark. \n"
-                "  - **FORBIDDEN STYLING**: Do NOT write any instructions about colors, grids, line widths, ticks, spines, backgrounds, or legends. The backend already has a strict styling doctrine it applies automatically.\n"
-                "  - **Example of GOOD prompt**: 'Plot f(x) = 2x-1 from x=-3 to 4. Mark points (-2, -5) and (3, 5). Draw a secant line between them. Limits: x in [-3,4], y in [-6,7].'\n"
-                "  - **Cognitive Diversity**: DO NOT repeatedly ask to 'evaluate the function at point X'. Test intersections, slopes, limits, or domain/range.\n\n"
+                "CRITICAL: Do NOT call the code_interpreter tool.\n"
+                "Instead, write MINIMALIST instructions in the `plot_prompt` field.\n"
+                "  - **MINIMALIST DOCTRINE**: Your `plot_prompt` MUST ONLY contain pure mathematical instructions (function, limits, points).\n"
+                "  - **STYLING FORBIDDEN**: Do NOT include any visual styling instructions (colors, grids, legends). The backend handles styling.\n\n"
             )
             
         # --- BRANCH B: CREATIVE VISUALS (DECOUPLED ASYNC ARCHITECTURE) ---
@@ -64,16 +61,15 @@ class QuizService:
             visual_instruction = (
                 f"## VISUAL GENERATION PROTOCOL (CREATIVE ILLUSTRATIONS - MANDATORY)\n"
                 f"You MUST include EXACTLY {target_visuals} contextual illustration(s) in this quiz.\n"
-                "CRITICAL: You are FORBIDDEN from using any external tools to generate these images. DO NOT call the image_generation tool.\n"
-                "Instead, you must describe the image you want the backend to generate by using the `image_prompt` field in the JSON schema.\n"
-                "  - **Style Doctrine**: ALL `image_prompt` descriptions MUST strictly enforce the Impressionist style of Claude Monet. Explicitly include phrases like 'in the style of Claude Monet, visible brushstrokes, impressionist lighting' in your description.\n"
-                "  - **Execution**: Write the descriptive prompt in the `image_prompt` field for the selected questions. Leave `image_url` as null. The backend will intercept your text prompt and paint the image asynchronously while you stream the rest of the questions.\n\n"
+                "CRITICAL: Do NOT call the image_generation tool.\n"
+                "Instead, describe the image using the `image_prompt` field.\n"
+                "  - **Style Doctrine**: ALL `image_prompt` descriptions MUST explicitly include 'in the style of Claude Monet, impressionist'.\n\n"
             )
             
         else:
             visual_instruction = (
                 "## VISUAL & TOOL EXECUTION PROTOCOL (VISUALS DISABLED)\n"
-                "For this specific quiz, you are FORBIDDEN from generating any images, graphs, or illustrations. You MUST leave `image_url` and `image_prompt` as null for all questions.\n\n"
+                "You are FORBIDDEN from generating any images or graphs. You MUST leave `image_url` and `image_prompt` as null.\n\n"
             )
 
         # STRUCTURED LOGGING: Record the decision for CloudWatch Insights
@@ -90,63 +86,36 @@ class QuizService:
         # ASSEMBLE SYSTEM PROMPT
         # ---------------------------------------------------------------------
         instruction_text = (
-            f"## SYSTEM OVERRIDE: CRITICAL TECHNICAL CONSTRAINTS (PRIORITY 1)\n"
-            f"These rules represent the physical laws of this environment. You cannot break them.\n\n"
-            
-            f"1. **ENCODING SAFETY (ABSOLUTE)**: You MUST output all text natively in UTF-8. Write special characters (like á, é, í, ó, ú, ñ, ¿, ¡) exactly as they are. Do not escape them.\n"
-            f"   - **CHECK**: Verify the text is completely human-readable Spanish before outputting.\n"
-            
-            f"2. **MATH SYNTAX**: You must format ALL mathematical expressions using standard LaTeX.\n"
-            f"   - **Wrappers**: You MUST wrap every math expression in standard inline math delimiters: \\( and \\). NEVER output naked or raw LaTeX for math options.\n"
-            f"   - **Multiplication**: NEVER use the letter 'x' for multiplication. Always use the proper LaTeX multiplication symbol.\n\n"
-            
-            f"3. **LANGUAGE MIRRORING**: Analyze the language used in the user's request topic ('{topic}').\n"
-            f"   - If Spanish -> Output 100% Spanish (Colombia).\n"
-            f"   - If English -> Output 100% English.\n"
-            f"   - If French -> Output 100% French.\n"
-            f"   - **Rule**: The output language must match the user's input language exactly. Override the English descriptions in the schema.\n\n"
-
             f"## IMMEDIATE RUNTIME MISSION\n"
-            f"The user has requested a quiz/exam about '{topic}'. "
-            f"You must generate exactly {num_questions} distinct questions. \n\n"
+            f"The user requested a quiz/exam about '{topic}'. "
+            f"Generate exactly {num_questions} distinct questions.\n"
+            f"Language: The output language MUST exactly match the language of the user's request.\n\n"
             
             f"{visual_instruction}"
 
-            "## LOGICAL EXECUTION PROTOCOL (PRIORITY 2 - THE THINKING ENGINE)\n"
-            "4. **ORDER OF OPERATIONS & ANTI-ECHO**: The schema requires you to provide the `explanation` FIRST. Use this field to fully derive the answer step-by-step. ONLY THEN generate the `options` and `correct_option_index` based on that solution.\n"
-            "   - **CRITICAL ANTI-ECHO RULE**: DO NOT draft, echo, or repeat the question text, the options (A, B, C, D), or the correct answer index inside the `explanation` field. Only write the Setup, Solution, and Traps.\n"
-            "5. **PREMISE LOCKING & CONSISTENCY**: \n"
-            "   - **Variable Locking**: In the `explanation` field, you MUST explicitly define the 'Core Constraints' (Step 1: THE SETUP). For Math, these are Numbers. For History/Lit, these are Dates, Names, or Contexts.\n"
-            "   - **Synchronization**: The `question_text` MUST use those EXACT constraints. You are FORBIDDEN from changing the values/facts between the explanation and the question text.\n"
-            "   - **Validation**: If the explanation says '0.5 Liters' (or 'Year 1810'), the question text cannot say '1 Liter' (or 'Year 1819'). Check this before outputting.\n\n"
+            "## SYSTEM OVERRIDE: CRITICAL CONSTRAINTS\n"
+            "1. **MATH SYNTAX**: Format ALL mathematical expressions using standard LaTeX wrapped in \\( and \\).\n"
+            "2. **ORDER OF OPERATIONS**: Provide the `explanation` FIRST to derive the answer step-by-step. THEN generate the `options` and `correct_option_index`.\n"
+            "3. **ANTI-ECHO RULE**: DO NOT echo or repeat the question text or the options inside the `explanation` field. Only write the Setup, Solution, and Traps.\n"
+            "4. **PREMISE LOCKING**: Explicitly define 'Core Constraints' (Numbers/Dates) in the `explanation`. The `question_text` MUST use those EXACT constraints.\n\n"
 
-            "## DISTRACTOR GENERATION PROTOCOL (PRIORITY 3 - STEP-BY-STEP LOGIC)\n"
-            "You are forbidden from generating random wrong options. You must use 'Plausible Distractor' logic:\n"
-            "- **Step A (In 'explanation')**: Identify the 'Correct Path' to the solution/conclusion using the Core Constraints from THE SETUP.\n"
-            "- **Step B (In 'explanation')**: Identify 3 distinct 'Failure Paths' (Common Misconceptions, Calculation Errors, or Logical Fallacies) that a student might fall into.\n"
-            "- **Step C (In 'options')**: The wrong options MUST be the result of these specific Failure Paths.\n"
-            "- **Step D (In 'feedback')**: For each wrong option, explicitly explain *why* the student might have chosen it (e.g., 'You forgot to divide by 2' or 'You confused the actor with the observer').\n\n"
+            "## DISTRACTOR GENERATION PROTOCOL\n"
+            "- Identify 3 distinct 'Failure Paths' (Misconceptions, Calculation Errors) in the `explanation`.\n"
+            "- The wrong `options` MUST be the result of these specific Failure Paths.\n"
+            "- In `feedback`, explicitly explain *why* the student might have chosen that wrong option.\n\n"
             
-            "## CONTENT & PEDAGOGY RULES (PRIORITY 4)\n"
-            "6. **FRAMEWORK COMPLIANCE**: Generate questions based on the 'ACADEMIC FRAMEWORK' present in your system context (Test specific Required Skills).\n"
-            "7. **DIFFICULTY WEIGHTING**: Assign a `difficulty` integer to each question based on its cognitive load: 1 (Basic/Recall), 2 (Intermediate/Application), or 3 (Advanced/Analysis).\n"
-            "8. **VOICE**: You are Roma. Be cold, precise, and efficient in your 'intro_message'.\n"
-            "9. **FEEDBACK**: Provide specific, educational feedback for every option (Right or Wrong).\n"
-            "10. **CONTENT**: Questions must be challenging, intriguing, and non-trivial. Avoid generic questions.\n"
+            "## CONTENT & PEDAGOGY RULES\n"
+            "- Generate questions based on the 'ACADEMIC FRAMEWORK'.\n"
+            "- Assign a `difficulty` integer (1-3).\n"
+            "- Be cold, precise, and efficient in your 'intro_message' as Roma.\n"
+            "- Questions must be challenging and non-trivial.\n\n"
             
-            "11. **WEB SEARCH RESTRICTION (STRICT)**: You are FORBIDDEN from using the `web_search` tool for general academic topics.\n"
-            "    - **EXCEPTION**: Use `web_search` ONLY if the user uses words like 'noticia', 'noticias', 'actualidad', 'busca en la web', or 'noticia real'.\n"
-            "    - **QUIZ WITHOUT WEB**: If no web search is performed, you MUST leave `context_text` and `source_url` as null for ALL questions.\n"
-            "    - **QUIZ WITH WEB**: If a search is performed, put the FULL passage in `context_text` and the URL in `source_url` ONLY in the FIRST question. Leave subsequent ones as null.\n\n"
+            "## WEB SEARCH RESTRICTION\n"
+            "- FORBIDDEN from using `web_search` unless the user uses words like 'noticia' or 'actualidad'.\n"
+            "- If no search is performed, leave `context_text` and `source_url` as null.\n\n"
             
-            "## SMART FOLLOW-UP PROTOCOL (NEXT STEPS)\n"
-            "Generate 3 'Ghost Prompts' (payloads) hidden in the buttons:\n"
-            "- **Terminology**: Reuse terms like 'Simulacro', 'Quiz', 'Examen'.\n"
-            "- **Language**: Write these prompts in the EXACT SAME LANGUAGE as the quiz.\n"
-            "- **Format**: First Person ('I want...').\n"
-            "1. **easier_payload**: Request a simpler version.\n"
-            "2. **harder_payload**: Request a more challenging version.\n"
-            "3. **retry_payload**: Request to practice the same topic again.\n"
+            "## SMART FOLLOW-UP PROTOCOL\n"
+            "Generate 3 'Ghost Prompts' (easier_payload, harder_payload, retry_payload) in the EXACT SAME LANGUAGE as the quiz, using First Person format ('I want...').\n"
         )
 
         return {
