@@ -33,7 +33,7 @@ class QuizQuestion(BaseModel):
     # -------------------------------------------------------------------------
     image_prompt: Optional[str] = Field(None, description="If an illustration is needed for this question, provide a highly detailed text prompt describing the image you want generated (e.g., 'A Claude Monet style painting of...'). Leave null if no image is needed.")
     
-    plot_prompt: Optional[str] = Field(None, description="If an analytical graph, data plot, or mathematical visualization is needed, provide explicit instructions here. The backend will use a Python Code Interpreter to generate the graph asynchronously. Leave null if no graph is needed.")
+    plot_prompt: Optional[str] = Field(None, description="If an analytical graph, data plot, or mathematical visualization is needed, provide explicit instructions here. The backend will use a Python Code Interpreter to generate the graph asynchronously. Leave null if no graph is needed. CRITICAL RULE: DO NOT use the python tool to write code, draw, or save the plot yourself! You MUST only write the text instructions here and leave image_url as null.")
     
     image_url: Optional[str] = Field(None, description="URL of the generated image/graph. If you wrote an image_prompt or plot_prompt, LEAVE THIS NULL. The backend will populate it automatically.")
 

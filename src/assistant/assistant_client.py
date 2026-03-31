@@ -249,7 +249,8 @@ def generate_structured_quiz(
     if pdf_urls:
         _inject_pdf_inputs(api_input, pdf_urls)
 
-    tools = _configure_tools(vector_store_ids, True, requires_creative_images, pdf_urls, web_search_config, user_location)
+    # NUEVO: Forzamos False, False para evitar que use tools síncronamente y dependa del decoupled architecture
+    tools = _configure_tools(vector_store_ids, False, False, pdf_urls, web_search_config, user_location)
 
     req = _build_request_payload(cfg, api_input, tools=tools)
     req["text_format"] = QuizResponse
@@ -304,7 +305,8 @@ def stream_structured_quiz(
     if pdf_urls:
         _inject_pdf_inputs(api_input, pdf_urls)
 
-    tools = _configure_tools(vector_store_ids, True, requires_creative_images, pdf_urls, web_search_config, user_location)
+    # NUEVO: Forzamos False, False para evitar que use tools síncronamente y dependa del decoupled architecture
+    tools = _configure_tools(vector_store_ids, False, False, pdf_urls, web_search_config, user_location)
 
     req = _build_request_payload(cfg, api_input, tools=tools)
     req["text_format"] = QuizResponse
