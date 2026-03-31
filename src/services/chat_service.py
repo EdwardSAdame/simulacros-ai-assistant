@@ -2,8 +2,8 @@
 import logging
 import random
 import base64 
-import threading # NEW IMPORT FOR ASYNC DECOUPLED ARCHITECTURE
-import math # NEW IMPORT FOR DYNAMIC QUOTA CALCULATION
+import threading # ASYNC DECOUPLED ARCHITECTURE
+import math # DYNAMIC QUOTA CALCULATION
 from typing import Tuple, Dict, Any, List
 
 # CONFIG
@@ -236,30 +236,30 @@ def get_ai_response(
                 ghost_retry = None
 
                 # ------------------------------------------------------------------
-                # NEW: ASYNC IMAGE GENERATOR ENGINE WITH QUOTA CIRCUIT BREAKER
+                # ASYNC GENERATOR ENGINES WITH QUOTA CIRCUIT BREAKER
                 # ------------------------------------------------------------------
                 image_threads = []
                 image_urls_map = {}
                 
-                # Calculate the maximum allowed images physically in the backend
-                max_allowed_images = math.floor(num_questions * 0.4) if requires_creative_images else 0
-                images_triggered_count = 0
-                allowed_image_indices = set() # Track which questions got approved for images
+                # Allow plots even if not creative (e.g. math plots). 
+                max_allowed_visuals = math.floor(num_questions * 0.4) if requires_creative_images else 2
+                visuals_triggered_count = 0
+                allowed_visual_indices = set() 
 
                 def _bg_image_generator(img_prompt: str, q_index: int):
                     try:
                         from src.config.settings import get_openai_client
-                        from src.config.model_config import get_model_config # NEW IMPORT
+                        from src.config.model_config import get_model_config 
                         
                         bg_client = get_openai_client()
-                        active_config = get_model_config(mode) # Load settings for Alpha/Omega
+                        active_config = get_model_config(mode) 
                         
                         bg_req = {
-                            "model": active_config.model, # Uses gpt-4o or gpt-4o-mini based on user mode
+                            "model": active_config.model, 
                             "input": [{"role": "user", "content": f"Generate this image: {img_prompt}"}],
                             "tools": [{
                                 "type": "image_generation", 
-                                "model": active_config.image_model, # Explicitly sets gpt-image-1-mini
+                                "model": active_config.image_model,
                                 "partial_images": 3
                             }],
                             "stream": True
@@ -277,7 +277,6 @@ def get_ai_response(
                                         s3_url = storage_service.upload_image_from_bytes(
                                             img_bytes, "image/png", folder="quiz_assets"
                                         )
-                                        # Send the chunk directly to the frontend!
                                         stream_manager.send_partial_image(index=q_index, b64_data=s3_url)
                                         final_url = s3_url
                                     except Exception as upload_err:
@@ -288,6 +287,63 @@ def get_ai_response(
                     except Exception as e:
                         logger.error(f"BG image generation failed: {e}")
 
+                def _bg_plot_generator(plot_prompt: str, q_index: int):
+                    try:
+                        from src.config.settings import get_openai_client
+                        from src.config.model_config import get_model_config
+                        
+                        bg_client = get_openai_client()
+                        active_config = get_model_config(mode) 
+                        
+                        instructions = (
+                            "You are a Data Scientist. Write and run python code to generate the requested plot or visualization. "
+                            "DO NOT use plt.show(). You must save the final plot as a .png file in your current directory. "
+                            "Once the file is saved, reference it so it gets attached as a citation."
+                        )
+                        
+                        bg_req = {
+                            "model": active_config.model,
+                            "input": [{"role": "user", "content": f"Generate a plot for this request and save it as a PNG file: {plot_prompt}"}],
+                            "tools": [{"type": "code_interpreter"}], 
+                            "instructions": instructions
+                        }
+                        
+                        logger.info(f"Starting Code Interpreter for plot on question {q_index}")
+                        response = bg_client.responses.create(**bg_req)
+                        
+                        file_id = None
+                        container_id = None
+                        for output in response.output:
+                            if getattr(output, "type", "") == "message":
+                                for item in getattr(output, "content", []):
+                                    annotations = getattr(item, "annotations", [])
+                                    for ann in annotations:
+                                        if getattr(ann, "type", "") == "container_file_citation":
+                                            file_id = getattr(ann, "file_id", None)
+                                            container_id = getattr(ann, "container_id", None)
+                                            break
+                        
+                        if file_id and container_id:
+                            try:
+                                img_response = bg_client.containers.files.content(container_id=container_id, file_id=file_id)
+                                img_bytes = img_response.read()
+                            except Exception:
+                                res = bg_client._get(f"/containers/{container_id}/files/{file_id}/content")
+                                img_bytes = res.content
+                                
+                            s3_url = storage_service.upload_image_from_bytes(
+                                img_bytes, "image/png", folder="quiz_assets"
+                            )
+                            
+                            stream_manager.send_partial_image(index=q_index, b64_data=s3_url)
+                            image_urls_map[q_index] = s3_url
+                            logger.info(f"Plot successfully generated and uploaded for question {q_index}")
+                        else:
+                            logger.warning(f"Code interpreter ran but no file citation was returned for question {q_index}")
+                            
+                    except Exception as e:
+                        logger.error(f"BG plot generation failed: {e}")
+
                 # ------------------------------------------------------------------
 
                 for event in stream_gen:
@@ -295,30 +351,43 @@ def get_ai_response(
                     if evt_type == "intro":
                         final_reply_text = event.get("text", "")
                     
-                    # CATCH THE INTERCEPTOR: Fire off the background thread!
+                    # CREATIVE IMAGE INTERCEPTOR
                     elif evt_type == "image_request":
                         q_idx = event.get("index", 0)
-                        
-                        # CIRCUIT BREAKER LOGIC
-                        if images_triggered_count < max_allowed_images:
+                        if visuals_triggered_count < max_allowed_visuals:
                             prompt_str = event.get("prompt", "")
                             logger.info(f"Triggering async image generation for question {q_idx}")
                             t = threading.Thread(target=_bg_image_generator, args=(prompt_str, q_idx))
                             t.start()
                             image_threads.append(t)
-                            images_triggered_count += 1
-                            allowed_image_indices.add(q_idx)
+                            visuals_triggered_count += 1
+                            allowed_visual_indices.add(q_idx)
                         else:
-                            logger.info(f"Visual quota ({max_allowed_images}) exceeded. Ignoring image_prompt for question {q_idx}.")
-                        
+                            logger.info(f"Visual quota ({max_allowed_visuals}) exceeded. Ignoring image_prompt for question {q_idx}.")
+
+                    # ANALYTICAL PLOT INTERCEPTOR (CODE INTERPRETER)
+                    elif evt_type == "plot_request":
+                        q_idx = event.get("index", 0)
+                        if visuals_triggered_count < max_allowed_visuals:
+                            prompt_str = event.get("prompt", "")
+                            logger.info(f"Triggering async plot generation for question {q_idx}")
+                            t = threading.Thread(target=_bg_plot_generator, args=(prompt_str, q_idx))
+                            t.start()
+                            image_threads.append(t)
+                            visuals_triggered_count += 1
+                            allowed_visual_indices.add(q_idx)
+                        else:
+                            logger.info(f"Visual quota ({max_allowed_visuals}) exceeded. Ignoring plot_prompt for question {q_idx}.")
+
                     elif evt_type == "question":
                         q_data = event.get("data")
                         q_dict = q_data.dict()
                         idx = event.get("index", 0)
                         
-                        # THE SHIELD: Strip image_prompt if it wasn't approved by the quota!
-                        if idx not in allowed_image_indices:
+                        # THE SHIELD: Strip prompts if they weren't approved by the quota!
+                        if idx not in allowed_visual_indices:
                             q_dict["image_prompt"] = None
+                            q_dict["plot_prompt"] = None
                             q_dict["image_url"] = None
 
                         stream_manager.send_quiz_item(question_data=q_dict, index=idx)
@@ -328,7 +397,7 @@ def get_ai_response(
                             seen_indices.add(idx)
                             
                     elif evt_type == "partial_image":
-                        # Kept for Math/Code Interpreter fallback safety
+                        # Kept for standard tools fallback
                         b64_data = event.get("b64_data", "")
                         if b64_data:
                             try:
@@ -356,8 +425,9 @@ def get_ai_response(
                             
                             # Final Shield: Strip unapproved prompts from the finalized output
                             for i, q_dict in enumerate(accumulated_questions):
-                                if i not in allowed_image_indices:
+                                if i not in allowed_visual_indices:
                                     q_dict["image_prompt"] = None
+                                    q_dict["plot_prompt"] = None
                                     q_dict["image_url"] = None
                             
                             if hasattr(parsed_response, 'title') and parsed_response.title:
@@ -372,12 +442,12 @@ def get_ai_response(
                         stream_manager.send_error(error_msg)
 
                 # ------------------------------------------------------------------
-                # SYNC THE THREADS: Ensure all images finish before saving to Database
+                # SYNC THE THREADS: Ensure all visual generation finishes
                 # ------------------------------------------------------------------
                 for t in image_threads:
                     t.join()
                     
-                # Bind the finished background image URLs to the accumulated questions payload
+                # Bind the finished background image URLs to the accumulated questions
                 for i, q in enumerate(accumulated_questions):
                     if i in image_urls_map:
                         q["image_url"] = image_urls_map[i]

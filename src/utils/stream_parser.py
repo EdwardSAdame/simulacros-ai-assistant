@@ -11,7 +11,7 @@ class StreamParser:
     """
     Handles the low-level parsing of the text stream from OpenAI.
     Extracts the 'intro_message', individual 'QuizQuestion' JSON objects,
-    and progressive image chunks from the stream.
+    and progressive image/plot chunks from the stream.
     """
 
     @staticmethod
@@ -20,7 +20,8 @@ class StreamParser:
         Consumes the OpenAI stream and yields structured events:
         - {"type": "intro", "text": "..."}
         - {"type": "question", "index": int, "data": QuizQuestion}
-        - {"type": "image_request", "index": int, "prompt": str}  <-- NEW DECOUPLED ARCHITECTURE
+        - {"type": "image_request", "index": int, "prompt": str}  <-- CREATIVE IMAGES
+        - {"type": "plot_request", "index": int, "prompt": str}   <-- CODE INTERPRETER PLOTS
         - {"type": "partial_image", "index": int, "b64_data": str}
         - {"type": "refusal", "reason": str}
         - {"type": "done", "full_response": QuizResponse}
@@ -32,8 +33,9 @@ class StreamParser:
         last_checkpoint = None
         has_refused = False
         
-        # Track which questions we have already requested images for
+        # Track which questions we have already requested visuals for
         yielded_image_prompts = set()
+        yielded_plot_prompts = set()
 
         try:
             # 1. Iterate over the stream events
@@ -53,7 +55,7 @@ class StreamParser:
                     yield {"type": "refusal", "reason": getattr(event, "delta", "Model refused.")}
                     continue
 
-                # B. Detect Partial Images (Standard Tool Calling - Kept for Math/Code Interpreter Fallback)
+                # B. Detect Partial Images (Standard Tool Calling - Kept for fallback safety)
                 elif event_type == "response.image_generation_call.partial_image":
                     idx = getattr(event, "partial_image_index", 0)
                     b64 = getattr(event, "partial_image_b64", "")
@@ -70,8 +72,7 @@ class StreamParser:
                     buffer += getattr(event, "delta", "")
                     
                     # -------------------------------------------------------------------------
-                    # NEW: ASYNC IMAGE INTERCEPTOR (Decoupled Architecture)
-                    # Detects when the AI finishes writing the "image_prompt" string.
+                    # NEW: ASYNC INTERCEPTOR FOR CREATIVE IMAGES
                     # -------------------------------------------------------------------------
                     prompt_matches = re.finditer(r'"image_prompt"\s*:\s*"((?:[^"\\]|\\.)*)"', buffer)
                     for match in prompt_matches:
@@ -90,6 +91,25 @@ class StreamParser:
                                     "prompt": prompt_text
                                 }
                             yielded_image_prompts.add(actual_q_index)
+
+                    # -------------------------------------------------------------------------
+                    # NEW: ASYNC INTERCEPTOR FOR CODE INTERPRETER PLOTS
+                    # -------------------------------------------------------------------------
+                    plot_matches = re.finditer(r'"plot_prompt"\s*:\s*"((?:[^"\\]|\\.)*)"', buffer)
+                    for match in plot_matches:
+                        q_titles_before = buffer.count('"question_title"', 0, match.start())
+                        actual_q_index = max(0, q_titles_before - 1)
+                        
+                        if actual_q_index not in yielded_plot_prompts:
+                            prompt_text = match.group(1).replace('\\"', '"').replace('\\n', '\n').replace('\\/', '/')
+                            
+                            if prompt_text and prompt_text.lower() not in ["null", "", "none"]:
+                                yield {
+                                    "type": "plot_request", 
+                                    "index": actual_q_index, 
+                                    "prompt": prompt_text
+                                }
+                            yielded_plot_prompts.add(actual_q_index)
                     # -------------------------------------------------------------------------
 
                     # Detect Intro Message
