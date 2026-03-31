@@ -262,33 +262,25 @@ def get_ai_response(
                         logger.error(f"BG image generation failed: {e}")
 
                 # ------------------------------------------------------------------
-                # REFACTORED: Background Plot Generator with STRICT Visual Doctrine
+                # REFACTORED: Background Plot Generator with DYNAMIC Visual Doctrine
                 # ------------------------------------------------------------------
                 def _bg_plot_generator(plot_prompt: str, q_index: int):
                     try:
                         from src.config.settings import get_openai_client
                         from src.config.model_config import get_model_config
                         from src.services.ai_assets_service import AiAssetsService
+                        from src.config.visual_instructions import build_visual_instructions
                         
                         bg_client = get_openai_client()
                         active_config = get_model_config(mode) 
                         
-                        # INSTRUCCIÓN CRÍTICA: Inyectamos la Doctrina Visual directamente al hilo de fondo
-                        instructions = (
-                            "You are Roma, the expert data designer for Invicto. Write and run Python code to generate the requested plot.\n"
+                        # INSTRUCCIÓN CRÍTICA: Inyectamos la Doctrina Visual dinámicamente
+                        base_instruction = (
+                            "Write and run Python code to generate the requested plot.\n"
                             "You MUST use Matplotlib. Save the figure as a .png file in your container environment (e.g., /mnt/data/plot.png). Do NOT use plt.show().\n\n"
-                            "## VISUAL GENERATION DOCTRINE (STRICT)\n"
-                            "A. THE COLOR DOCTRINE (Scenario-Based)\n"
-                            "- SCENARIO 1 (Single Curve): Use ONE main color: #61bb45 (Green), #00adef (Blue), or #ffcb04 (Yellow).\n"
-                            "- SCENARIO 2 (Dual Graphs): Pair A (#ffcb04 vs #00adef) or Pair B (#61bb45 vs #00adef).\n"
-                            "- SCENARIO 3 (Multi-Line): Cycle (#ffcb04, #00adef, #61bb45, #044892) OR 'Focus & Fade' (one primary, others light grey #7b8c96).\n\n"
-                            "B. MATPLOTLIB EXECUTION CODE (Strict)\n"
-                            "1. GLOBAL: Font size 12 (`plt.rcParams['font.size'] = 12`). White background (`fig.patch.set_facecolor('white')`, `ax.set_facecolor('white')`). Grid behind data (`ax.set_axisbelow(True)`).\n"
-                            "2. GRID: Visible but subtle: `ax.grid(True, which='major', axis='both', linestyle='--', linewidth=0.7, color='gray', alpha=0.2)`\n"
-                            "3. SPINES: Hide Top, Right, and Left. Show ONLY Bottom. `ax.spines['top'].set_visible(False)`, `ax.spines['right'].set_visible(False)`, `ax.spines['left'].set_visible(False)`, `ax.spines['bottom'].set_visible(True)`, `ax.spines['bottom'].set_linewidth(1.5)`\n"
-                            "4. TICKS: `ax.tick_params(axis='both', direction='in', length=6, width=1, color='black', labelsize=10)`\n"
-                            "5. LABELS: Legend `frameon=False`, `loc='upper right'`. NO `ax.set_ylabel`. Place Y-label as floating text: `ax.text(0, 1.02, 'LABEL_NAME', transform=ax.transAxes, ha='left', fontsize=12, color='black')`.\n"
                         )
+                        
+                        instructions = base_instruction + build_visual_instructions()
                         
                         bg_req = {
                             "model": active_config.model,

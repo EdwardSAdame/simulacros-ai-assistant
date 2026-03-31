@@ -239,8 +239,10 @@ def generate_structured_quiz(
     client = get_openai_client()
     cfg = get_model_config(mode)
     
+    # FIX: Force requires_visuals=False here to save tokens on the main Quiz JSON generation prompt.
+    # The actual visual doctrine is handled by the async background threads in chat_service.py
     system_text = build_runtime_signals(
-        user_id, page, name, email, exam_context=exam_context, requires_visuals=requires_visuals
+        user_id, page, name, email, exam_context=exam_context, requires_visuals=False
     )
     
     api_input = [{"role": "system", "content": [{"type": "input_text", "text": system_text}]}]
@@ -295,8 +297,9 @@ def stream_structured_quiz(
     client = get_openai_client()
     cfg = get_model_config(mode)
     
+    # FIX: Force requires_visuals=False here to save tokens on the main Quiz JSON generation prompt.
     system_text = build_runtime_signals(
-        user_id, page, name, email, exam_context=exam_context, requires_visuals=requires_visuals
+        user_id, page, name, email, exam_context=exam_context, requires_visuals=False
     )
     
     api_input = [{"role": "system", "content": [{"type": "input_text", "text": system_text}]}]
