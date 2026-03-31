@@ -49,16 +49,12 @@ class QuizService:
         # --- BRANCH A: DATA VISUALS (MATPLOTLIB) ---
         if is_visual_subject and target_visuals > 0:
             visual_instruction = (
-                f"## VISUAL & TOOL EXECUTION PROTOCOL (DATA GRAPHS - MANDATORY)\n"
+                f"## VISUAL GENERATION PROTOCOL (DATA GRAPHS - MANDATORY)\n"
                 f"You MUST generate EXACTLY {target_visuals} graph(s) for this quiz.\n"
-                "You are FORBIDDEN from generating the final JSON response immediately. Follow this sequence:\n"
-                "  - **Step 1**: Use the `code_interpreter` tool FIRST to write Python (Matplotlib) code.\n"
-                "  - **Step 2 (Adaptive Grid Protocol)**: You MUST make the graphs readable for students:\n"
-                "      * Zoom & Frame: Use `ax.set_xlim()` and `ax.set_ylim()` to frame the area of interest tightly (20% margin).\n"
-                "      * Dynamic Ticks: NEVER use auto-ticks for small numbers. Use `np.arange(min, max, 1)` to force integer steps (1, 2, 3), or exact $\\pi/4$ multiples for trig functions.\n"
-                "      * Point Highlighting: The specific coordinates asked in the question MUST be explicitly marked on the axis.\n"
-                "  - **Step 3**: Save the generated graphs to your environment (e.g., `/mnt/data/graph_1.png`).\n"
-                "  - **Step 4**: Place the EXACT file paths into the `image_url` fields of EXACTLY {target_visuals} distinct questions.\n"
+                "CRITICAL: You are FORBIDDEN from using any external tools directly to generate these. DO NOT call the code_interpreter tool.\n"
+                "Instead, you must describe the exact Python Matplotlib code or plotting instructions you want the backend to execute by using the `plot_prompt` field in the JSON schema.\n"
+                "  - **Execution**: Write the descriptive instructions (e.g., 'Plot f(x) = sin(x) from -pi to pi, mark x=0') in the `plot_prompt` field for the selected questions. Leave `image_url` as null. The backend will generate the graph asynchronously while you stream the rest of the questions.\n"
+                "  - **Adaptive Grid Protocol**: Specify in your prompt that the graph must be tightly framed, using integer steps or pi multiples for ticks.\n"
                 "  - **Cognitive Diversity**: DO NOT repeatedly ask to 'evaluate the function at point X'. Test intersections, slopes, limits, or domain/range.\n\n"
             )
             

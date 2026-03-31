@@ -262,75 +262,44 @@ def get_ai_response(
                         logger.error(f"BG image generation failed: {e}")
 
                 # ------------------------------------------------------------------
-                # A PRUEBA DE FALLOS: Extracción de File ID con plt.show()
+                # REFACTORED: Background Plot Generator using Code Interpreter and AiAssetsService
                 # ------------------------------------------------------------------
                 def _bg_plot_generator(plot_prompt: str, q_index: int):
                     try:
                         from src.config.settings import get_openai_client
                         from src.config.model_config import get_model_config
+                        from src.services.ai_assets_service import AiAssetsService
                         
                         bg_client = get_openai_client()
                         active_config = get_model_config(mode) 
                         
-                        # INSTRUCCIÓN CRÍTICA: Obligamos a la IA a usar plt.show()
+                        # INSTRUCCIÓN CRÍTICA: Obligamos a la IA a guardar el archivo, no a usar plt.show()
                         instructions = (
                             "You are a Data Scientist. Write and run python code to generate the requested plot. "
-                            "You MUST use plt.show() to display the plot directly so it is attached as an image file. "
-                            "Do NOT save it locally."
+                            "You MUST use Matplotlib. Save the figure as a .png file in your container environment (e.g., /mnt/data/plot.png). "
+                            "Make sure the graph is tightly framed and easy to read. Do not use plt.show(), just save the file."
                         )
                         
                         bg_req = {
                             "model": active_config.model,
                             "input": [{"role": "user", "content": f"Generate a plot for this request: {plot_prompt}"}],
-                            "tools": [{"type": "code_interpreter"}], 
+                            "tools": [{"type": "code_interpreter", "container": {"type": "auto", "memory_limit": "4g"}}], 
                             "instructions": instructions
                         }
                         
                         logger.info(f"Starting Code Interpreter for plot on question {q_index}")
                         response = bg_client.responses.create(**bg_req)
                         
-                        file_id = None
+                        # DELEGATING TO OUR ROBUST ASSET EXTRACTOR
+                        uploaded_map = AiAssetsService.handle_generated_files(bg_client, response, folder="quiz_assets")
                         
-                        # BÚSQUEDA EXHAUSTIVA DEL FILE ID
-                        for output in getattr(response, "output", []):
-                            if getattr(output, "type", "") == "message":
-                                for item in getattr(output, "content", []):
-                                    
-                                    # 1. Buscamos si usó plt.show() (debería venir como image_file)
-                                    if getattr(item, "type", "") == "image_file":
-                                        img_obj = getattr(item, "image_file", None)
-                                        if img_obj: 
-                                            file_id = getattr(img_obj, "file_id", file_id)
-                                            
-                                    # 2. Por si acaso, buscamos si ignoró la orden y lo guardó, dejando una anotación
-                                    annotations = getattr(item, "annotations", [])
-                                    for ann in annotations:
-                                        if getattr(ann, "type", "") in ["container_file_citation", "file_path"]:
-                                            file_id = getattr(ann, "file_id", file_id)
-                        
-                        # SI ENCONTRAMOS LA IMAGEN, LA DESCARGAMOS Y LA ENVIAMOS A WIX
-                        if file_id:
-                            img_bytes = None
-                            try:
-                                # Standard OpenAI Files API
-                                img_response = bg_client.files.content(file_id)
-                                img_bytes = img_response.read()
-                            except Exception:
-                                # Fallback genérico
-                                res = bg_client._get(f"/files/{file_id}/content")
-                                img_bytes = res.content
-                                    
-                            if img_bytes:
-                                s3_url = storage_service.upload_image_from_bytes(
-                                    img_bytes, "image/png", folder="quiz_assets"
-                                )
-                                stream_manager.send_partial_image(index=q_index, b64_data=s3_url)
-                                image_urls_map[q_index] = s3_url
-                                logger.info(f"Plot successfully extracted and uploaded for question {q_index}")
-                            else:
-                                logger.warning(f"Failed to read bytes for file_id {file_id}")
+                        if uploaded_map:
+                            s3_url = list(uploaded_map.values())[0]
+                            stream_manager.send_partial_image(index=q_index, b64_data=s3_url)
+                            image_urls_map[q_index] = s3_url
+                            logger.info(f"Plot successfully extracted and uploaded for question {q_index}")
                         else:
-                            logger.warning(f"Code interpreter ran but no file_id was found in output for question {q_index}")
+                            logger.warning(f"Code interpreter ran but no file was extracted for question {q_index}")
                             
                     except Exception as e:
                         logger.error(f"BG plot generation failed: {e}")
