@@ -87,8 +87,7 @@ class QuizService:
         instruction_text = (
             f"## IMMEDIATE RUNTIME MISSION\n"
             f"The user requested a quiz/exam about '{topic}'. "
-            f"Generate exactly {num_questions} distinct questions.\n"
-            f"Language: The output language MUST exactly match the language of the user's request.\n\n"
+            f"Generate exactly {num_questions} distinct questions.\n\n"
             
             f"{visual_instruction}"
 
