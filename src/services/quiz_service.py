@@ -52,9 +52,10 @@ class QuizService:
                 f"## VISUAL GENERATION PROTOCOL (DATA GRAPHS - MANDATORY)\n"
                 f"You MUST generate EXACTLY {target_visuals} graph(s) for this quiz.\n"
                 "CRITICAL: You are FORBIDDEN from using any external tools directly to generate these. DO NOT call the code_interpreter tool.\n"
-                "Instead, you must describe the exact Python Matplotlib code or plotting instructions you want the backend to execute by using the `plot_prompt` field in the JSON schema.\n"
-                "  - **Execution**: Write the descriptive instructions (e.g., 'Plot f(x) = sin(x) from -pi to pi, mark x=0') in the `plot_prompt` field for the selected questions. Leave `image_url` as null. The backend will generate the graph asynchronously while you stream the rest of the questions.\n"
-                "  - **Adaptive Grid Protocol**: Specify in your prompt that the graph must be tightly framed, using integer steps or pi multiples for ticks.\n"
+                "Instead, you must write MINIMALIST text instructions in the `plot_prompt` field for the backend to execute.\n"
+                "  - **MINIMALIST DOCTRINE (TOKEN SAVING)**: Your `plot_prompt` MUST ONLY contain pure mathematical instructions: the function, the x/y limits, and specific points to mark. \n"
+                "  - **FORBIDDEN STYLING**: Do NOT write any instructions about colors, grids, line widths, ticks, spines, backgrounds, or legends. The backend already has a strict styling doctrine it applies automatically.\n"
+                "  - **Example of GOOD prompt**: 'Plot f(x) = 2x-1 from x=-3 to 4. Mark points (-2, -5) and (3, 5). Draw a secant line between them. Limits: x in [-3,4], y in [-6,7].'\n"
                 "  - **Cognitive Diversity**: DO NOT repeatedly ask to 'evaluate the function at point X'. Test intersections, slopes, limits, or domain/range.\n\n"
             )
             
