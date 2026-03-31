@@ -68,8 +68,9 @@ GENERAL_FRAMEWORK = """
 ## ACADEMIC FRAMEWORK: General University Preparation
 GLOBAL STRATEGY: Build strong foundational knowledge across core academic subjects.
 
-Apply these specific domain rules based on the user's question:
-Strategy: Identify the core concept, provide a clear explanation using standard logic, and offer practice examples. Use LaTeX for all mathematical expressions.
+CRITICAL MISSION (EXAM DISCOVERY): 
+The user has not yet specified which admission exam they are preparing for (e.g., ICFES Saber 11 or Universidad Nacional UNAL).
+Strategy: Answer their immediate question clearly, but naturally ask them which specific exam or university they are targeting so you can tailor your future explanations, difficulty, and practice questions to that specific test.
 """
 
 def get_exam_framework(exam_context: str) -> str:
