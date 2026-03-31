@@ -52,8 +52,7 @@ class QuizService:
                 f"You MUST generate EXACTLY {target_visuals} graph(s) for this quiz.\n"
                 "CRITICAL: Do NOT call the code_interpreter tool.\n"
                 "Instead, write MINIMALIST instructions in the `plot_prompt` field.\n"
-                "  - **MINIMALIST DOCTRINE**: Your `plot_prompt` MUST ONLY contain pure mathematical instructions (function, limits, points).\n"
-                "  - **STYLING FORBIDDEN**: Do NOT include any visual styling instructions (colors, grids, legends). The backend handles styling.\n\n"
+                "  - **MINIMALIST DOCTRINE**: Your `plot_prompt` MUST ONLY contain pure mathematical instructions (function, limits, points).\n\n"
             )
             
         # --- BRANCH B: CREATIVE VISUALS (DECOUPLED ASYNC ARCHITECTURE) ---
@@ -93,11 +92,10 @@ class QuizService:
             
             f"{visual_instruction}"
 
-            "## SYSTEM OVERRIDE: CRITICAL CONSTRAINTS\n"
-            "1. **MATH SYNTAX**: Format ALL mathematical expressions using standard LaTeX wrapped in \\( and \\).\n"
-            "2. **ORDER OF OPERATIONS**: Provide the `explanation` FIRST to derive the answer step-by-step. THEN generate the `options` and `correct_option_index`.\n"
-            "3. **ANTI-ECHO RULE**: DO NOT echo or repeat the question text or the options inside the `explanation` field. Only write the Setup, Solution, and Traps.\n"
-            "4. **PREMISE LOCKING**: Explicitly define 'Core Constraints' (Numbers/Dates) in the `explanation`. The `question_text` MUST use those EXACT constraints.\n\n"
+            "## CRITICAL CONSTRAINTS\n"
+            "1. **ORDER OF OPERATIONS**: Provide the `explanation` FIRST to derive the answer step-by-step. THEN generate the `options` and `correct_option_index`.\n"
+            "2. **ANTI-ECHO RULE**: DO NOT echo or repeat the question text or the options inside the `explanation` field. Only write the Setup, Solution, and Traps.\n"
+            "3. **PREMISE LOCKING**: Explicitly define 'Core Constraints' (Numbers/Dates) in the `explanation`. The `question_text` MUST use those EXACT constraints.\n\n"
 
             "## DISTRACTOR GENERATION PROTOCOL\n"
             "- Identify 3 distinct 'Failure Paths' (Misconceptions, Calculation Errors) in the `explanation`.\n"
