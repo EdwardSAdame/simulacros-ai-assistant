@@ -261,9 +261,6 @@ def get_ai_response(
                     except Exception as e:
                         logger.error(f"BG image generation failed: {e}")
 
-                # ------------------------------------------------------------------
-                # REFACTORED: Background Plot Generator with DYNAMIC Visual Doctrine
-                # ------------------------------------------------------------------
                 def _bg_plot_generator(plot_prompt: str, q_index: int):
                     try:
                         from src.config.settings import get_openai_client
@@ -274,7 +271,6 @@ def get_ai_response(
                         bg_client = get_openai_client()
                         active_config = get_model_config(mode) 
                         
-                        # INSTRUCCIÓN CRÍTICA: Inyectamos la Doctrina Visual dinámicamente
                         base_instruction = (
                             "Write and run Python code to generate the requested plot.\n"
                             "You MUST use Matplotlib. Save the figure as a .png file in your container environment (e.g., /mnt/data/plot.png). Do NOT use plt.show().\n\n"
@@ -292,7 +288,6 @@ def get_ai_response(
                         logger.info(f"Starting Code Interpreter for plot on question {q_index}")
                         response = bg_client.responses.create(**bg_req)
                         
-                        # DELEGATING TO OUR ROBUST ASSET EXTRACTOR
                         uploaded_map = AiAssetsService.handle_generated_files(bg_client, response, folder="quiz_assets")
                         
                         if uploaded_map:
@@ -305,8 +300,6 @@ def get_ai_response(
                             
                     except Exception as e:
                         logger.error(f"BG plot generation failed: {e}")
-
-                # ------------------------------------------------------------------
 
                 for event in stream_gen:
                     evt_type = event.get("type")
@@ -528,7 +521,11 @@ def get_ai_response(
 
                 if not system_prompt:
                     system_prompt = build_system_instructions(
-                        extras=runtime_signals, exam_context=exam_context, requires_visuals=requires_visuals, web_search_active=is_web_search_active 
+                        extras=runtime_signals, 
+                        exam_context=exam_context, 
+                        requires_visuals=requires_visuals, 
+                        web_search_active=is_web_search_active, 
+                        intent=intent  # <-- FIX: Pushing intent down to the builder!
                     )
 
                 response_tuple = send_message_to_assistant(

@@ -8,7 +8,8 @@ def build_runtime_signals(
     name: str | None, 
     email: str | None, 
     exam_context: str = "ICFES",
-    requires_visuals: bool = False
+    requires_visuals: bool = False,
+    intent: str = "chat"  # <-- FIX: Accept the new intent parameter
 ) -> str:
     """Generates the dynamic system context for the AI."""
     
@@ -20,10 +21,16 @@ def build_runtime_signals(
         email=email
     )
 
+    # FIX: Block the Admission "Target Semester" logic from contaminating quizzes.
+    # The quiz generator doesn't need to know about seasonality and cut-off scores.
+    if intent == "quiz" and signals:
+        signals = [s for s in signals if "TARGET SEMESTER" not in s]
+
     # 2. Delegate everything else to the smart builder.
-    # We pass requires_visuals directly so system_instructions.py handles it cleanly.
+    # We pass requires_visuals and intent directly so system_instructions.py handles it cleanly.
     return build_system_instructions(
         extras=signals, 
         exam_context=exam_context,
-        requires_visuals=requires_visuals
+        requires_visuals=requires_visuals,
+        intent=intent  # <-- FIX: Pushing the intent down to the builder!
     )

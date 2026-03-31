@@ -44,7 +44,7 @@ def send_message_to_assistant(
     cfg = get_model_config(mode)
     
     system_text = system_instruction or build_runtime_signals(
-        user_id, page, name, email, exam_context="ICFES", requires_visuals=requires_visuals
+        user_id, page, name, email, exam_context="ICFES", requires_visuals=requires_visuals, intent="chat"
     )
     api_input = [{"role": "system", "content": [{"type": "input_text", "text": system_text}]}]
     api_input.extend(conversation_input)
@@ -104,7 +104,7 @@ def stream_chat_response(
     cfg = get_model_config(mode)
     
     system_text = system_instruction or build_runtime_signals(
-        user_id, page, name, email, requires_visuals=False
+        user_id, page, name, email, requires_visuals=False, intent="chat"
     )
         
     api_input = [{"role": "system", "content": [{"type": "input_text", "text": system_text}]}]
@@ -239,10 +239,9 @@ def generate_structured_quiz(
     client = get_openai_client()
     cfg = get_model_config(mode)
     
-    # FIX: Force requires_visuals=False here to save tokens on the main Quiz JSON generation prompt.
-    # The actual visual doctrine is handled by the async background threads in chat_service.py
+    # FIX: Push intent="quiz" so the builder knows to strip out Chat Doctrine
     system_text = build_runtime_signals(
-        user_id, page, name, email, exam_context=exam_context, requires_visuals=False
+        user_id, page, name, email, exam_context=exam_context, requires_visuals=False, intent="quiz"
     )
     
     api_input = [{"role": "system", "content": [{"type": "input_text", "text": system_text}]}]
@@ -297,9 +296,9 @@ def stream_structured_quiz(
     client = get_openai_client()
     cfg = get_model_config(mode)
     
-    # FIX: Force requires_visuals=False here to save tokens on the main Quiz JSON generation prompt.
+    # FIX: Push intent="quiz" so the builder knows to strip out Chat Doctrine
     system_text = build_runtime_signals(
-        user_id, page, name, email, exam_context=exam_context, requires_visuals=False
+        user_id, page, name, email, exam_context=exam_context, requires_visuals=False, intent="quiz"
     )
     
     api_input = [{"role": "system", "content": [{"type": "input_text", "text": system_text}]}]
