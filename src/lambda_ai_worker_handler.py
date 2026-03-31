@@ -16,6 +16,10 @@ from src.services.semantic_router import semantic_router
 # Import Token Usage Service
 from src.services.token_usage_service import TokenUsageService
 
+# 🟢 NEW IMPORTS: We need to resolve the exam context before routing!
+from src.services.context_resolution import determine_exam_context
+from src.storage.conversations_table import get_conversation_metadata
+
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
@@ -122,10 +126,24 @@ def lambda_handler(event, context):
             
             if connection_id and not is_hidden:
                 try:
+                    # 🟢 NEW: Resolve exam context BEFORE routing
+                    persisted_exam_context = None
+                    if conv_id_in and user_id:
+                        try:
+                            existing_meta = get_conversation_metadata(user_id, conv_id_in)
+                            if existing_meta:
+                                persisted_exam_context = existing_meta.get("ExamContext")
+                        except Exception as meta_e:
+                            logger.warning(f"Could not fetch conversation metadata: {meta_e}")
+
+                    current_exam_context = determine_exam_context(page, message, current_locked_context=persisted_exam_context)
+
+                    # 🟢 PASS exam_context into the router
                     routing_result = semantic_router.determine_category(
                         text=message, 
                         user_id=user_id, 
-                        session_id=conv_id_in
+                        session_id=conv_id_in,
+                        exam_context=current_exam_context  # <-- THE MAGIC LINK
                     )
                     
                     category_key = routing_result.get("category", "general")
@@ -168,7 +186,8 @@ def lambda_handler(event, context):
                         "phrases_count": len(loading_phrases),
                         "source": source_type,
                         "mode": ai_mode,
-                        "arena_id": arena_id 
+                        "arena_id": arena_id,
+                        "exam_context": current_exam_context # Logging it for good measure
                     })
 
                 except Exception as e:

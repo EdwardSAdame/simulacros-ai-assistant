@@ -3,13 +3,13 @@ import logging
 from typing import List, Literal
 from pydantic import BaseModel, Field
 from src.config.settings import settings, get_openai_client
-from src.config.router_instructions import ROUTER_SYSTEM_INSTRUCTIONS 
+from src.config.router_instructions import build_router_instructions 
 from src.services.token_usage_service import TokenUsageService
 
 logger = logging.getLogger(__name__)
 
 class RouterResponse(BaseModel):
-    category: str = Field(description="The academic category or subject of the query (e.g., biologia, matematicas, admisiones, general).")
+    category: str = Field(description="The academic category or subject of the query.")
     intent: Literal["chat", "quiz", "creative_image", "admission_stats"] = Field(description="The primary intent of the user.")
     requires_visuals: bool = Field(description="True if the user is asking for graphs, charts, or visual analysis.")
     num_questions: int = Field(description="The number of questions requested if the intent is 'quiz'. 0 otherwise.")
@@ -17,26 +17,27 @@ class RouterResponse(BaseModel):
 
 class SemanticRouter:
     """
-    Determines the intent/category of a user message and generates dynamic
-    visual feedback phrases using the new Responses API and Structured Outputs.
+    Determines the intent/category of a user message dynamically based on Exam Context.
     """
     
     def __init__(self):
         self.client = get_openai_client()
+        
+        # Unified validation list containing all possible dynamic categories
         self.valid_categories = [
-            "biologia", "quimica", "fisica", "matematicas", 
-            "sociales", "lectura_critica", "analisis_imagen", "ingles",
-            "general", "identity_protection", 
-            "admisiones"
+            "matematicas", "ciencias_naturales", "analisis_textual", 
+            "ciencias_sociales", "analisis_imagen", "lectura_critica", 
+            "sociales_ciudadanas", "ingles", "admisiones", 
+            "identity_protection", "general"
         ]
         
-        # NEW: Define categories that strictly require visual formatting
+        # Categories that enforce Matplotlib/Code Interpreter Data Visuals
         self.visual_categories = [
-            "matematicas", "fisica", "quimica", "biologia", "analisis_imagen"
+            "matematicas", "ciencias_naturales", "analisis_imagen"
         ]
 
-    # 🟢 FULLY UPDATED: Accepts user_id and session_id
-    def determine_category(self, text: str, user_id: str = "system_router", session_id: str = "intent_resolution") -> dict:
+    # 🟢 ACCEPT exam_context HERE
+    def determine_category(self, text: str, user_id: str = "system_router", session_id: str = "intent_resolution", exam_context: str = "GENERAL") -> dict:
         if not text:
             return {
                 "category": "general", 
@@ -48,7 +49,7 @@ class SemanticRouter:
             }
             
         try:
-            result = self._classify_with_llm(text, user_id, session_id)
+            result = self._classify_with_llm(text, user_id, session_id, exam_context)
             return {
                 "category": result.get("category", "general"),
                 "intent": result.get("intent", "chat"),
@@ -68,12 +69,15 @@ class SemanticRouter:
                 "source": "error_fallback"
             }
 
-    # 🟢 FULLY UPDATED: Passes user_id and session_id to token tracking
-    def _classify_with_llm(self, text: str, user_id: str, session_id: str) -> dict:
+    # 🟢 PASS exam_context TO BUILDER
+    def _classify_with_llm(self, text: str, user_id: str, session_id: str, exam_context: str) -> dict:
         router_model = settings.OPENAI_ROUTER_MODEL.lower()
         
+        # Build instructions dynamically based on context
+        system_instruction = build_router_instructions(exam_context)
+        
         api_input = [
-            {"role": "system", "content": ROUTER_SYSTEM_INSTRUCTIONS.strip()},
+            {"role": "system", "content": system_instruction.strip()},
             {"role": "user", "content": text}
         ]
         
@@ -112,6 +116,7 @@ class SemanticRouter:
             if not parsed_data:
                 raise ValueError("Failed to parse structured output from Responses API.")
 
+            # (Token Tracking Logic Remains Unchanged)
             usage = getattr(response, "usage", None)
             if usage:
                 try:
@@ -131,14 +136,9 @@ class SemanticRouter:
                         cached_val = getattr(in_details, "cached_tokens", 0) if in_details else 0
 
                     TokenUsageService().log_token_usage(
-                        user_id=user_id,
-                        session_id=session_id,
-                        model="router",
-                        input_tokens=input_val,
-                        output_tokens=output_val,
-                        total_tokens=total_val,
-                        reasoning_tokens=reasoning_val,
-                        cached_tokens=cached_val
+                        user_id=user_id, session_id=session_id, model="router",
+                        input_tokens=input_val, output_tokens=output_val, total_tokens=total_val,
+                        reasoning_tokens=reasoning_val, cached_tokens=cached_val
                     )
                 except Exception as e:
                     logger.error(f"Failed to log router tokens: {e}")
@@ -154,13 +154,9 @@ class SemanticRouter:
 
             requires_visuals = data.get("requires_visuals", False)
 
-            # -------------------------------------------------------------
-            # FIX: OVERRIDE REQUIRES_VISUALS FOR VISUAL QUIZZES
-            # -------------------------------------------------------------
             if intent == "quiz" and category in self.visual_categories:
                 requires_visuals = True
                 logger.info(f"Router Override: Enforcing requires_visuals=True for {category} quiz to apply visual doctrine styling.")
-            # -------------------------------------------------------------
 
             if intent != "quiz":
                 num_questions = 0
@@ -173,7 +169,7 @@ class SemanticRouter:
             if not phrases:
                 phrases = ["Procesando...", "Analizando..."]
 
-            logger.info(f"Router: AI classified as '{category}' (Intent: {intent}, Visuals: {requires_visuals}, Questions: {num_questions})")
+            logger.info(f"Router: AI classified as '{category}' in context '{exam_context}'")
             return {
                 "category": category, 
                 "intent": intent, 
