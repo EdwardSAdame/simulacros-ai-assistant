@@ -170,12 +170,7 @@ def get_ai_response(
             raise RuntimeError(f"Failed to save hidden context: {e}")
 
     selected_vector_stores = get_stores_for_page(page)
-    
-    if intent == "admission_stats":
-        web_search_config = None
-    else:
-        web_search_config = get_search_filters(exam_context)
-        
+    web_search_config = None if intent == "admission_stats" else get_search_filters(exam_context)
     is_web_search_active = (web_search_config is not None)
 
     conversation_input = build_history_list(actual_conversation_id)
@@ -183,10 +178,8 @@ def get_ai_response(
     current_user_content = []
     if message:
         current_user_content.append({"type": "input_text", "text": message})
-    
     if clean_images:
         current_user_content.extend(format_image_urls_for_openai(clean_images))
-
     if current_user_content:
         conversation_input.append({"role": "user", "content": current_user_content})
 
@@ -212,17 +205,10 @@ def get_ai_response(
             if stream_manager:
                 stream_gen = stream_structured_quiz(
                     conversation_input=conversation_input,
-                    user_id=user_id,
-                    page=page,
-                    name=(name or None),
-                    email=_normalize_email_for_storage(email),
-                    mode=mode, 
-                    exam_context=exam_context,
-                    requires_visuals=requires_visuals, 
-                    requires_creative_images=requires_creative_images,
-                    pdf_urls=clean_pdfs,
-                    vector_store_ids=selected_vector_stores,
-                    web_search_config=web_search_config      
+                    user_id=user_id, page=page, name=(name or None), email=_normalize_email_for_storage(email),
+                    mode=mode, exam_context=exam_context, requires_visuals=requires_visuals, 
+                    requires_creative_images=requires_creative_images, pdf_urls=clean_pdfs,
+                    vector_store_ids=selected_vector_stores, web_search_config=web_search_config      
                 )
                 
                 seen_indices = set()
@@ -252,11 +238,7 @@ def get_ai_response(
                         bg_req = {
                             "model": active_config.model, 
                             "input": [{"role": "user", "content": f"Generate this image: {img_prompt}"}],
-                            "tools": [{
-                                "type": "image_generation", 
-                                "model": active_config.image_model,
-                                "partial_images": 3
-                            }],
+                            "tools": [{"type": "image_generation", "model": active_config.image_model, "partial_images": 3}],
                             "stream": True
                         }
                         
@@ -269,21 +251,18 @@ def get_ai_response(
                                 if bg_b64:
                                     try:
                                         img_bytes = base64.b64decode(bg_b64)
-                                        s3_url = storage_service.upload_image_from_bytes(
-                                            img_bytes, "image/png", folder="quiz_assets"
-                                        )
+                                        s3_url = storage_service.upload_image_from_bytes(img_bytes, "image/png", folder="quiz_assets")
                                         stream_manager.send_partial_image(index=q_index, b64_data=s3_url)
                                         final_url = s3_url
                                     except Exception as upload_err:
                                         logger.warning(f"BG image upload failed: {upload_err}")
                         
-                        if final_url:
-                            image_urls_map[q_index] = final_url
+                        if final_url: image_urls_map[q_index] = final_url
                     except Exception as e:
                         logger.error(f"BG image generation failed: {e}")
 
                 # ------------------------------------------------------------------
-                # THE BULLETPROOF EXPLICIT CONTAINER EXTRACTOR
+                # A PRUEBA DE FALLOS: Extracción de File ID con plt.show()
                 # ------------------------------------------------------------------
                 def _bg_plot_generator(plot_prompt: str, q_index: int):
                     try:
@@ -293,59 +272,65 @@ def get_ai_response(
                         bg_client = get_openai_client()
                         active_config = get_model_config(mode) 
                         
-                        # 1. Creación explícita del contenedor (Sabemos su ID desde el principio)
-                        logger.info(f"Creating explicit container for question {q_index}")
-                        container = bg_client.containers.create(
-                            name=f"plot-q{q_index}-{actual_conversation_id}",
-                            memory_limit="4g"
-                        )
-                        container_id = container.id
-                        
+                        # INSTRUCCIÓN CRÍTICA: Obligamos a la IA a usar plt.show()
                         instructions = (
                             "You are a Data Scientist. Write and run python code to generate the requested plot. "
-                            "DO NOT use plt.show(). You MUST save the final plot as a '.png' file in your current directory."
+                            "You MUST use plt.show() to display the plot directly so it is attached as an image file. "
+                            "Do NOT save it locally."
                         )
                         
                         bg_req = {
                             "model": active_config.model,
-                            "input": [{"role": "user", "content": f"Generate a plot for this request and save it as a PNG file: {plot_prompt}"}],
-                            "tools": [{"type": "code_interpreter", "container": container_id}], # Usar el container_id explícito
+                            "input": [{"role": "user", "content": f"Generate a plot for this request: {plot_prompt}"}],
+                            "tools": [{"type": "code_interpreter"}], 
                             "instructions": instructions
                         }
                         
-                        logger.info(f"Starting Code Interpreter for plot on question {q_index} inside container {container_id}")
-                        bg_client.responses.create(**bg_req)
+                        logger.info(f"Starting Code Interpreter for plot on question {q_index}")
+                        response = bg_client.responses.create(**bg_req)
                         
-                        # 2. Ignoramos las citas de la IA y buscamos el archivo nosotros mismos
-                        files_page = bg_client.containers.files.list(container_id=container_id)
-                        files_iterable = getattr(files_page, "data", files_page) 
+                        file_id = None
                         
-                        png_file_id = None
-                        for f in files_iterable:
-                            fname = getattr(f, "filename", "") or ""
-                            if fname.endswith(".png"):
-                                png_file_id = getattr(f, "id", None)
-                                break
+                        # BÚSQUEDA EXHAUSTIVA DEL FILE ID
+                        for output in getattr(response, "output", []):
+                            if getattr(output, "type", "") == "message":
+                                for item in getattr(output, "content", []):
+                                    
+                                    # 1. Buscamos si usó plt.show() (debería venir como image_file)
+                                    if getattr(item, "type", "") == "image_file":
+                                        img_obj = getattr(item, "image_file", None)
+                                        if img_obj: 
+                                            file_id = getattr(img_obj, "file_id", file_id)
+                                            
+                                    # 2. Por si acaso, buscamos si ignoró la orden y lo guardó, dejando una anotación
+                                    annotations = getattr(item, "annotations", [])
+                                    for ann in annotations:
+                                        if getattr(ann, "type", "") in ["container_file_citation", "file_path"]:
+                                            file_id = getattr(ann, "file_id", file_id)
                         
-                        # 3. Si encontramos el .png, lo subimos a AWS
-                        if png_file_id:
+                        # SI ENCONTRAMOS LA IMAGEN, LA DESCARGAMOS Y LA ENVIAMOS A WIX
+                        if file_id:
+                            img_bytes = None
                             try:
-                                img_response = bg_client.containers.files.content(container_id=container_id, file_id=png_file_id)
+                                # Standard OpenAI Files API
+                                img_response = bg_client.files.content(file_id)
                                 img_bytes = img_response.read()
                             except Exception:
-                                res = bg_client._get(f"/containers/{container_id}/files/{png_file_id}/content")
+                                # Fallback genérico
+                                res = bg_client._get(f"/files/{file_id}/content")
                                 img_bytes = res.content
-                                
-                            s3_url = storage_service.upload_image_from_bytes(
-                                img_bytes, "image/png", folder="quiz_assets"
-                            )
-                            
-                            # Enviarlo al Frontend (Esto reemplazará la ruta falsa /mnt/data/... generada por la IA)
-                            stream_manager.send_partial_image(index=q_index, b64_data=s3_url)
-                            image_urls_map[q_index] = s3_url
-                            logger.info(f"Plot successfully extracted from explicit container and uploaded for question {q_index}")
+                                    
+                            if img_bytes:
+                                s3_url = storage_service.upload_image_from_bytes(
+                                    img_bytes, "image/png", folder="quiz_assets"
+                                )
+                                stream_manager.send_partial_image(index=q_index, b64_data=s3_url)
+                                image_urls_map[q_index] = s3_url
+                                logger.info(f"Plot successfully extracted and uploaded for question {q_index}")
+                            else:
+                                logger.warning(f"Failed to read bytes for file_id {file_id}")
                         else:
-                            logger.warning(f"Code interpreter finished in {container_id} but no .png file was found.")
+                            logger.warning(f"Code interpreter ran but no file_id was found in output for question {q_index}")
                             
                     except Exception as e:
                         logger.error(f"BG plot generation failed: {e}")
@@ -371,6 +356,7 @@ def get_ai_response(
                         q_idx = event.get("index", 0)
                         if visuals_triggered_count < max_allowed_visuals:
                             prompt_str = event.get("prompt", "")
+                            logger.info(f"Triggering async plot generation for question {q_idx}")
                             t = threading.Thread(target=_bg_plot_generator, args=(prompt_str, q_idx))
                             t.start()
                             image_threads.append(t)
@@ -456,17 +442,10 @@ def get_ai_response(
             else:
                 quiz_model, usage_data = generate_structured_quiz(
                     conversation_input=conversation_input,
-                    user_id=user_id,
-                    page=page,
-                    name=(name or None),
-                    email=_normalize_email_for_storage(email),
-                    mode=mode, 
-                    exam_context=exam_context,
-                    requires_visuals=requires_visuals, 
-                    requires_creative_images=requires_creative_images,
-                    pdf_urls=clean_pdfs,
-                    vector_store_ids=selected_vector_stores,
-                    web_search_config=web_search_config
+                    user_id=user_id, page=page, name=(name or None), email=_normalize_email_for_storage(email),
+                    mode=mode, exam_context=exam_context, requires_visuals=requires_visuals, 
+                    requires_creative_images=requires_creative_images, pdf_urls=clean_pdfs,
+                    vector_store_ids=selected_vector_stores, web_search_config=web_search_config
                 )
                 
                 _log_usage(usage_data, user_id, actual_conversation_id, mode)
@@ -492,19 +471,11 @@ def get_ai_response(
         logger.info(f"Routing to Creative Image Service for user {user_id}")
         try:
             final_reply_text, final_images_urls = CreativeImageService.generate_image(
-                conversation_input=conversation_input,
-                user_id=user_id,
-                page=page,
-                name=name,
-                email=email,
-                mode=mode,
-                stream_manager=stream_manager
+                conversation_input=conversation_input, user_id=user_id, page=page, name=name, email=email, mode=mode, stream_manager=stream_manager
             )
-            
             generated_assets = final_images_urls
             requires_visuals = True 
             quiz_data = None
-            
         except Exception as e:
             logger.error(f"Creative Image Generation Error: {e}")
             final_reply_text = "**Error**: We could not generate the image."
@@ -514,15 +485,8 @@ def get_ai_response(
         logger.info(f"Routing to Admission Stats local tool for user {user_id}")
         try:
             stream_gen = stream_chat_response(
-                conversation_input=conversation_input,
-                user_id=user_id,
-                page=page,
-                name=name,
-                email=email,
-                mode=mode,
-                enable_image_generation=False
+                conversation_input=conversation_input, user_id=user_id, page=page, name=name, email=email, mode=mode, enable_image_generation=False
             )
-            
             for event in stream_gen:
                 if isinstance(event, dict) and event.get("type") == "usage_metrics":
                     _log_usage(event.get("data"), user_id, actual_conversation_id, mode)
@@ -542,7 +506,6 @@ def get_ai_response(
         try:
             if category == "identity_protection":
                 logger.info("Intercepted identity question. Returning minimalist Invicto response.")
-                
                 identity_responses = [
                     "Soy Invicto AI.",
                     "Soy una inteligencia artificial desarrollada por Invicto.",
@@ -550,26 +513,18 @@ def get_ai_response(
                     "Mi tecnologia fue desarrollada internamente por Invicto.",
                     "Soy el asistente de inteligencia artificial de Invicto."
                 ]
-                
                 final_reply_text = random.choice(identity_responses)
                 generated_assets = []
                 sources_data = []
-            
             else:
                 runtime_signals = build_runtime_context(
-                    page=page,
-                    user_id=user_id,
-                    name=name,
-                    email=email,
-                    requires_visuals=requires_visuals 
+                    page=page, user_id=user_id, name=name, email=email, requires_visuals=requires_visuals 
                 )
 
                 system_prompt = ""
-                
                 if arena_id:
                     try:
                         arena_context = arena_service.get_arena_context(user_id, arena_id)
-                        
                         if arena_context:
                             arena_title = arena_context.get('Title', 'Custom Arena')
                             arena_instructions = arena_context.get('SystemInstructions', '')
@@ -588,7 +543,6 @@ def get_ai_response(
                                     "- Use LaTeX for math equations.\n"
                                     "- Be helpful, clear, and accurate.\n"
                                 )
-                                
                                 if runtime_signals:
                                     context_str = "\n".join(runtime_signals)
                                     base_tech_prompt += f"\nCONTEXT:\n{context_str}\n"
@@ -597,32 +551,19 @@ def get_ai_response(
                                     f"\n\n## Identity: {arena_title}\n"
                                     f"{arena_instructions}"
                                 )
-                                
                                 system_prompt = base_tech_prompt + injection
-                                
                     except Exception as e:
                         logger.error(f"Failed to load arena context: {e}")
 
                 if not system_prompt:
                     system_prompt = build_system_instructions(
-                        extras=runtime_signals,
-                        exam_context=exam_context, 
-                        requires_visuals=requires_visuals,
-                        web_search_active=is_web_search_active 
+                        extras=runtime_signals, exam_context=exam_context, requires_visuals=requires_visuals, web_search_active=is_web_search_active 
                     )
 
                 response_tuple = send_message_to_assistant(
-                    conversation_input=conversation_input,
-                    user_id=user_id,
-                    page=page,
-                    name=(name or None),
-                    email=_normalize_email_for_storage(email),
-                    mode=mode, 
-                    system_instruction=system_prompt, 
-                    vector_store_ids=selected_vector_stores,
-                    requires_visuals=requires_visuals,
-                    web_search_config=web_search_config,
-                    pdf_urls=clean_pdfs
+                    conversation_input=conversation_input, user_id=user_id, page=page, name=(name or None), email=_normalize_email_for_storage(email),
+                    mode=mode, system_instruction=system_prompt, vector_store_ids=selected_vector_stores, requires_visuals=requires_visuals,
+                    web_search_config=web_search_config, pdf_urls=clean_pdfs
                 )
                 
                 final_reply_text = response_tuple[0]
@@ -638,10 +579,7 @@ def get_ai_response(
     assistant_timestamp = ""
     try:
         save_message(
-            actual_conversation_id, 
-            role="user", 
-            message_text=message if message else "[Archivo adjunto]",
-            metadata={"sentImages": media_items} 
+            actual_conversation_id, role="user", message_text=message if message else "[Archivo adjunto]", metadata={"sentImages": media_items} 
         )
         
         meta_payload = quiz_data
@@ -661,10 +599,7 @@ def get_ai_response(
              safe_reply_text = "[Generación completada sin texto]"
 
         saved_item = save_message(
-            actual_conversation_id, 
-            role="assistant", 
-            message_text=safe_reply_text, 
-            metadata=meta_payload
+            actual_conversation_id, role="assistant", message_text=safe_reply_text, metadata=meta_payload
         )
         if saved_item and isinstance(saved_item, dict):
             assistant_timestamp = saved_item.get("Timestamp", "")
