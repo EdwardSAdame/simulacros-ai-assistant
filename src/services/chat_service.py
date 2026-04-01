@@ -243,14 +243,19 @@ def get_ai_response(
                     try:
                         from src.config.settings import get_openai_client
                         from src.config.model_config import get_model_config 
+                        from src.config.creative_image_instructions import get_creative_image_system_prompt
                         
                         bg_client = get_openai_client()
                         active_config = get_model_config(mode) 
+                        
+                        base_instruction = "You are an expert AI illustrator for Invicto. Use the image_generation tool to create the requested image.\n\n"
+                        instructions = base_instruction + get_creative_image_system_prompt()
                         
                         bg_req = {
                             "model": active_config.model, 
                             "input": [{"role": "user", "content": f"Generate this image: {img_prompt}"}],
                             "tools": [{"type": "image_generation", "model": active_config.image_model, "partial_images": 3}],
+                            "instructions": instructions,
                             "stream": True
                         }
                         
