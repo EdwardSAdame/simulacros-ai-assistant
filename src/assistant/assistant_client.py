@@ -43,7 +43,6 @@ def send_message_to_assistant(
     client = get_openai_client()
     cfg = get_model_config(mode)
     
-    # FIX: Changed hardcoded "ICFES" fallback to "GENERAL"
     system_text = system_instruction or build_runtime_signals(
         user_id, page, name, email, exam_context="GENERAL", requires_visuals=requires_visuals, intent="chat"
     )
@@ -228,20 +227,21 @@ def generate_structured_quiz(
     name: str | None = None, 
     email: str | None = None, 
     mode: str = "omega",
-    exam_context: str = "GENERAL",  # FIX: Default to GENERAL instead of ICFES
+    exam_context: str = "GENERAL",  
     requires_visuals: bool = False,
     requires_creative_images: bool = False,
     pdf_urls: List[str] | None = None,
     vector_store_ids: List[str] | None = None,
     web_search_config: Dict[str, Any] | None = None,
-    user_location: Dict[str, str] | None = None
+    user_location: Dict[str, str] | None = None,
+    category: str = "general" # <-- FIX 2: Added category here
 ) -> Tuple[QuizResponse, Dict[str, int]]:
     
     client = get_openai_client()
     cfg = get_model_config(mode)
     
     system_text = build_runtime_signals(
-        user_id, page, name, email, exam_context=exam_context, requires_visuals=requires_visuals, intent="quiz"
+        user_id, page, name, email, exam_context=exam_context, requires_visuals=requires_visuals, intent="quiz", category=category
     )
     
     api_input = [{"role": "system", "content": [{"type": "input_text", "text": system_text}]}]
@@ -283,20 +283,21 @@ def stream_structured_quiz(
     name: str | None = None, 
     email: str | None = None, 
     mode: str = "omega",
-    exam_context: str = "GENERAL",  # FIX: Default to GENERAL instead of ICFES
+    exam_context: str = "GENERAL", 
     requires_visuals: bool = False,
     requires_creative_images: bool = False,
     pdf_urls: List[str] | None = None,
     vector_store_ids: List[str] | None = None,
     web_search_config: Dict[str, Any] | None = None,
-    user_location: Dict[str, str] | None = None
+    user_location: Dict[str, str] | None = None,
+    category: str = "general" # <-- FIX 2: Added category here
 ) -> Generator[Dict[str, Any], None, None]:
     
     client = get_openai_client()
     cfg = get_model_config(mode)
     
     system_text = build_runtime_signals(
-        user_id, page, name, email, exam_context=exam_context, requires_visuals=requires_visuals, intent="quiz"
+        user_id, page, name, email, exam_context=exam_context, requires_visuals=requires_visuals, intent="quiz", category=category
     )
     
     api_input = [{"role": "system", "content": [{"type": "input_text", "text": system_text}]}]
@@ -441,11 +442,9 @@ def _configure_tools(vector_store_ids, requires_visuals, requires_creative_image
     if vector_store_ids:
         tools.append({"type": "file_search", "vector_store_ids": vector_store_ids, "max_num_results": get_vector_search_max_results()})
     
-    # 1. Matplotlib Data Generation
     if requires_visuals or (pdf_urls and len(pdf_urls) > 0):
         tools.append({"type": "code_interpreter", "container": {"type": "auto"}})
         
-    # 2. Creative Image Generation
     if requires_creative_images:
         tools.append({
             "type": "image_generation",

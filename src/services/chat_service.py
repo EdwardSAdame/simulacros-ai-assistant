@@ -196,13 +196,11 @@ def get_ai_response(
         elif num_questions > 30:
             num_questions = 30
 
-        # 🟢 FIX: Synced with the new Semantic Router taxonomy!
         creative_categories = [
             "ciencias_sociales", "sociales_ciudadanas", "sociales", 
             "lectura_critica", "analisis_textual", "ingles"
         ]
         
-        # If it's a creative subject OR a general mock exam, allow creative images
         requires_creative_images = category in creative_categories or category == "general"
 
         conversation_input.append(QuizService.get_system_instruction(topic=topic_hint, num_questions=num_questions))
@@ -214,7 +212,8 @@ def get_ai_response(
                     user_id=user_id, page=page, name=(name or None), email=_normalize_email_for_storage(email),
                     mode=mode, exam_context=exam_context, requires_visuals=requires_visuals, 
                     requires_creative_images=requires_creative_images, pdf_urls=clean_pdfs,
-                    vector_store_ids=selected_vector_stores, web_search_config=web_search_config      
+                    vector_store_ids=selected_vector_stores, web_search_config=web_search_config,
+                    category=category  # <-- FIX 1: PASS CATEGORY DOWN
                 )
                 
                 seen_indices = set()
@@ -229,7 +228,6 @@ def get_ai_response(
                 image_threads = []
                 image_urls_map = {}
                 
-                # 🟢 FIX: Synced Visual Max Guardrail logic for general exams
                 visual_subjects = ["matematicas", "ciencias_naturales", "analisis_imagen", "general"]
                 if category in visual_subjects or requires_creative_images:
                     max_allowed_visuals = math.floor(num_questions * 0.4)
@@ -426,7 +424,8 @@ def get_ai_response(
                     user_id=user_id, page=page, name=(name or None), email=_normalize_email_for_storage(email),
                     mode=mode, exam_context=exam_context, requires_visuals=requires_visuals, 
                     requires_creative_images=requires_creative_images, pdf_urls=clean_pdfs,
-                    vector_store_ids=selected_vector_stores, web_search_config=web_search_config
+                    vector_store_ids=selected_vector_stores, web_search_config=web_search_config,
+                    category=category  # <-- FIX 1: PASS CATEGORY DOWN
                 )
                 
                 _log_usage(usage_data, user_id, actual_conversation_id, mode)
@@ -465,7 +464,6 @@ def get_ai_response(
     elif intent == "admission_stats":
         logger.info(f"Routing to Admission Stats local tool for user {user_id}")
         try:
-            # FIX: We now build the system prompt and pass it so it carries the exact context (UNAL/ICFES/GENERAL)
             runtime_signals = build_runtime_context(
                 page=page, user_id=user_id, name=name, email=email, requires_visuals=False 
             )
@@ -486,7 +484,7 @@ def get_ai_response(
                 email=email, 
                 mode=mode, 
                 enable_image_generation=False,
-                system_instruction=system_prompt  # <-- THE MISSING PIECE!
+                system_instruction=system_prompt
             )
             for event in stream_gen:
                 if isinstance(event, dict) and event.get("type") == "usage_metrics":
@@ -563,7 +561,7 @@ def get_ai_response(
                         requires_visuals=requires_visuals, 
                         web_search_active=is_web_search_active, 
                         intent=intent,
-                        category=category  # Passed the category down to the builder
+                        category=category  
                     )
 
                 response_tuple = send_message_to_assistant(

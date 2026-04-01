@@ -38,7 +38,7 @@ def build_system_instructions(
     web_search_active: bool = False,
     requires_creative_image: bool = False,
     intent: str = "chat",
-    category: str = "general"  # <-- NEW: Track category to filter the framework
+    category: str = "general" 
 ) -> str:
     
     blocks = [CORE_PERSONA.strip()]
@@ -61,7 +61,9 @@ def build_system_instructions(
             blocks.append(build_search_instructions())
             
         # Inject Graphing Visual Doctrine 
-        if requires_visuals:
+        # FIX 4: Never inject Matplotlib code instructions into the quiz LLM, 
+        # because quiz plots are handled by the _bg_plot_generator thread!
+        if requires_visuals and intent != "quiz":
             blocks.append(build_visual_instructions())
 
     # 4. Inject Runtime Signals
