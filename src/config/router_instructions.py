@@ -29,7 +29,8 @@ Analyze user input and output a strict JSON object. Use your universal knowledge
 {categories}.
 
 CRITICAL CATEGORY RULES:
-- "general": You MUST use this category if the user asks for a general mock exam, simulacro, or test WITHOUT specifying a specific subject (e.g., "dame un simulacro icfes", "hazme un examen unal").
+- SUBJECT PRIORITY: If the user mentions ANY specific subject or topic (e.g., "ciencias", "biologia", "matematicas", "lectura"), you MUST route to that specific category, even if they use words like "simulacro" or "examen".
+- "general": You MUST use this category ONLY if the user asks for a broad, multi-subject exam WITHOUT specifying any subject at all (e.g., "dame un simulacro completo", "quiero practicar para el icfes").
 - "admisiones": You MUST use this EXCLUSIVELY if the user asks for historical cutoff scores, admission statistics, or university data (e.g., "puntaje de corte para medicina"). NEVER use this category for a quiz.
 
 2. Intent: Classify the user's goal using exactly one of these strings:
