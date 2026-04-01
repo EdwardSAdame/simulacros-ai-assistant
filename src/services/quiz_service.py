@@ -21,14 +21,17 @@ class QuizService:
         # ---------------------------------------------------------------------
         # DYNAMIC VISUAL QUOTA LOGIC (The 40% Rule)
         # ---------------------------------------------------------------------
+        # ADDED: "matematicas", "ciencias_naturales" to exactly match the router
         visual_subjects = [
-            "matematica", "matemática", "fisica", "física", 
+            "matematicas", "matematica", "matemática", "fisica", "física", 
             "quimica", "química", "biologia", "biología", 
-            "ciencia", "analisis_imagen", "análisis"
+            "ciencias_naturales", "ciencia", "analisis_imagen", "análisis"
         ]
         
+        # ADDED: "analisis_textual", "sociales_ciudadanas" to exactly match the router
         creative_subjects = [
-            "sociales", "lectura_critica", "ingles", "ciencias_sociales"
+            "ciencias_sociales", "sociales_ciudadanas", "sociales", 
+            "lectura_critica", "analisis_textual", "ingles"
         ]
         
         topic_lower = topic.lower()
