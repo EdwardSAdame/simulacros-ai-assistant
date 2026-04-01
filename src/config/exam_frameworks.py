@@ -1,7 +1,7 @@
 # src/config/exam_frameworks.py
 
 ICFES_GLOBAL = """## ACADEMIC FRAMEWORK: ICFES Saber 11
-GLOBAL STRATEGY: Focus on competency-based evaluation and psychometric awareness. The exam uses Item Response Theory (IRT), evaluating difficulty, discrimination, and pseudo-guessing. The AI must train the user to avoid erratic guessing patterns. Note the asymmetric scoring model (Math, Reading, Sciences, Social = 3x weight; English = 1x weight).
+GLOBAL STRATEGY: Focus on competency-based evaluation and psychometric awareness.
 DISTRACTOR LOGIC: The AI must craft and explain distractors that are factually true statements in the real world (e.g., a valid legal principle or a true biological fact) but are contextually irrelevant to the specific prompt. Always enforce the "most specific response" rule."""
 
 ICFES_DOMAINS = {
@@ -9,7 +9,7 @@ ICFES_DOMAINS = {
 - Overview: Evaluates generic (daily life citizen math) and non-generic (STEM-focused) competencies. Highly focused on data literacy and real-world application.
 - Focus: Interpretation of abstract data, strategic problem-solving planning, and logical justification.
 - Topics: Statistics & Probability (charts, variance, combinations/permutations, percentiles), Geometry (spatial modeling, transformations, Pythagorean applications), Algebra & Calculus (linear/quadratic/exponential functions, rates of change).
-- Strategy: Present scenarios involving tables, charts, or economic data. Provide rigorous derivations using LaTeX: \\( \\) for inline and \\[ \\] for blocks.""",
+- Strategy: Present scenarios involving tables, charts, or economic data.""",
 
     "lectura_critica": """### DOMAIN: CRITICAL READING
 - Overview: Hermeneutic comprehension evaluating both continuous texts (essays, novels, philosophy) and discontinuous texts (infographics, comics, data tables).
@@ -38,26 +38,26 @@ ICFES_DOMAINS = {
 
 
 UNAL_GLOBAL = """## ACADEMIC FRAMEWORK: Universidad Nacional de Colombia (UNAL) Admission Exam
-GLOBAL STRATEGY: Focus on deep analytical rigor, advanced problem-solving, and psychometric awareness. The real exam evaluates users using the Rasch Model (Item Response Theory); therefore, the AI must train the user to avoid erratic guessing patterns and to manage their time efficiently (the real exam averages 1.75 minutes per question). Every interaction must demonstrate "Reconocimiento" (Recognition) and "Uso Significativo" (Meaningful Use) of academic codes."""
+GLOBAL STRATEGY: Focus on deep analytical rigor, advanced problem-solving, and psychometric awareness."""
 
 UNAL_DOMAINS = {
     "analisis_textual": """### DOMAIN: TEXTUAL ANALYSIS
 - Overview: Deep hermeneutic comprehension of referential texts (Science, Humanities) and poetic-literary texts.
 - Focus: Penalize superficial reading. Heavily emphasize Inferential and Critical-Intertextual levels.
-- Topics: Deducing hidden premises, differentiating strict semantic definitions (e.g., recycle vs. reuse), judging authorial ideological bias, distinguishing facts from opinions, and applying mathematical propositional logic to natural language statements (e.g., negating an implication).
+- Topics: Deducing hidden premises, differentiating strict semantic definitions, judging authorial ideological bias, distinguishing facts from opinions, and applying mathematical propositional logic to natural language statements.
 - Strategy: Analyze syntax, semantics, and authorial intent. Deconstruct arguments logically to find underlying meanings.""",
 
     "matematicas": """### DOMAIN: MATHEMATICS
 - Overview: Mathematical modeling and translating natural language into formal algebraic/geometric structures. Rote memorization of formulas is insufficient.
 - Focus: Numerical, Spatial, Metric, Random, and Variational thinking.
 - Topics: Number hierarchies, system of equations (geometric interpretation), quadratic discriminants, geometric optimization (areas/volumes), analytic geometry (conics, slopes), function transformations, parity (even/odd), trigonometric identities, combinatorics (permutations vs. combinations), and expected value.
-- Strategy: Stimulate reflection through the interpretation of schemes. Provide rigorous derivations using LaTeX: \\( \\) for inline and \\[ \\] for blocks.""",
+- Strategy: Stimulate reflection through the interpretation of schemes.""",
 
     "ciencias_naturales": """### DOMAIN: NATURAL SCIENCES
 - Overview: Interdisciplinary phenomenology combining macroscopic principles, atomic reactivity, and cellular metabolism within single experimental scenarios.
 - Components: 
     - Physics: Galilean relativity, free-body diagrams, mechanical energy conservation, fluid dynamics (Archimedes, Bernoulli).
-    - Chemistry: Periodic trends (electronegativity, radius), Lewis structures (octet rule), strict stoichiometry (limiting reactants, balancing).
+    - Chemistry: Periodic trends, Lewis structures, strict stoichiometry.
     - Biology: Cellular organelles, central dogma (transcription/translation), mitosis vs. meiosis, Mendelian genetics (Punnett squares), trophic network thermodynamics.
 - Strategy: Prioritize the analysis of concepts and processes represented in schemas. Focus on synthesis, deduction, and the application of fundamental laws.""",
 
@@ -70,7 +70,7 @@ UNAL_DOMAINS = {
 - Strategy: Analyze social phenomena through contextualized problems. Evaluate the ability to use social science codes to solve complex situational queries.""",
 
     "analisis_imagen": """### DOMAIN: IMAGE ANALYSIS
-- Overview: Pure abstract logical reasoning, fluid intelligence, and visuospatial cognition. This is the highest statistical differentiator in the exam.
+- Overview: Pure abstract logical reasoning, fluid intelligence, and visuospatial cognition.
 - Focus: Mental rotation, deductive transformation, and comparative visual analytics.
 - Topics: Orthogonal views and 3D isometry, unfolding flat templates with symbols into 3D solids, differentiating specular reflections (mirror effect) from planar rotations, dynamic origami (predicting unfolded cuts), and spatial logic sequences.
 - Strategy: Explain visual transformations step-by-step (rotations, reflections). Explicitly describe the pattern recognition logic."""
