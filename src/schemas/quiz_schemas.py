@@ -20,11 +20,17 @@ class QuizQuestion(BaseModel):
         "CRITICAL RULE: DO NOT draft, echo, or repeat the question text, the options (A, B, C, D), or the correct answer index inside this field. Only write the Setup, Solution, and Traps."
     ))
 
-    # REVERTED TO MATCH WIX UI: Kept token saving rule
-    source_url: Optional[str] = Field(None, description="The exact URL of the web search. Put this ONLY in the FIRST question. Leave null for all subsequent questions to save tokens.")
+    # 🟢 FIX: Conditional URL logic (Anti-Hallucination)
+    source_url: Optional[str] = Field(
+        None, 
+        description="The exact URL of the web search. CRITICAL: If you did not perform a web search, you MUST leave this as null. Do NOT hallucinate or invent URLs."
+    )
 
-    # REVERTED TO MATCH WIX UI: Kept token saving rule
-    context_text: Optional[str] = Field(None, description="The full reading passage. Put this ONLY in the FIRST question. For subsequent questions, you MUST leave this as null to save tokens.")
+    # 🟢 FIX: Conditional Context logic (Multi-Subject friendly)
+    context_text: Optional[str] = Field(
+        None, 
+        description="The full reading passage. Leave this as null UNLESS this specific question requires reading comprehension (e.g., Lectura Crítica). To save tokens, only output the passage once per text."
+    )
 
     question_text: str = Field(..., description="The question stem. FORMATTING: Write regular text normally. Wrap ONLY math expressions, numbers, and symbols in standard LaTeX (\\( and \\)). Example: 'Si \\( x = 5 \\), que sucede?'. MUST match 'THE SETUP' numbers exactly.")
     

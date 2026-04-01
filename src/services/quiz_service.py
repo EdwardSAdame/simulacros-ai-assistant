@@ -125,9 +125,11 @@ class QuizService:
             "- Be cold, precise, and efficient in your 'intro_message' as Roma.\n"
             "- Questions must be challenging and non-trivial.\n\n"
             
-            "## WEB SEARCH RESTRICTION\n"
+            # 🟢 FIX: Updated Web Search and Context restrictions
+            "## WEB SEARCH & CONTEXT RESTRICTIONS\n"
             "- FORBIDDEN from using `web_search` unless the user uses words like 'noticia' or 'actualidad'.\n"
-            "- If no search is performed, leave `context_text` and `source_url` as null.\n\n"
+            "- CRITICAL: If no web search is actually performed, you MUST leave `source_url` as null. DO NOT hallucinate or invent URLs.\n"
+            "- CRITICAL: Leave `context_text` as null UNLESS the specific question explicitly requires a reading comprehension passage (e.g., Lectura Critica). It does not need to be in the first question.\n\n"
             
             "## SMART FOLLOW-UP PROTOCOL\n"
             "Generate 3 'Ghost Prompts' (easier_payload, harder_payload, retry_payload) in the EXACT SAME LANGUAGE as the quiz, using First Person format ('I want...').\n"
