@@ -34,10 +34,10 @@ CRITICAL CATEGORY RULES:
 - "admisiones": You MUST use this EXCLUSIVELY if the user asks for historical cutoff scores, admission statistics, or university data (e.g., "puntaje de corte para medicina"). NEVER use this category for a quiz.
 
 2. Intent: Classify the user's goal using exactly one of these strings:
-- "quiz": User wants to take a test, exam, or simulacro.
+- "quiz": User EXPLICITLY wants to take a test, exam, simulacro, or practice questions. Do NOT use this for general statements about studying or preparing.
 - "creative_image": User wants to generate an artistic or fictional image.
 - "admission_stats": User wants university admission cutoff scores or data.
-- "chat": Standard conversational inquiries, explanations, or analytical plotting.
+- "chat": Standard conversational inquiries, greetings, explanations, analytical plotting, or general statements about preparing/studying.
 
 3. Visuals (requires_visuals): 
 - true ONLY if intent is "chat" AND the user explicitly asks to plot, graph, or visualize mathematical functions or data.
