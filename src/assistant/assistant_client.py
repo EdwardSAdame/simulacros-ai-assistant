@@ -239,9 +239,9 @@ def generate_structured_quiz(
     client = get_openai_client()
     cfg = get_model_config(mode)
     
-    # FIX: Push intent="quiz" so the builder knows to strip out Chat Doctrine
+    # FIX: Pass the dynamic requires_visuals variable instead of hardcoding False
     system_text = build_runtime_signals(
-        user_id, page, name, email, exam_context=exam_context, requires_visuals=False, intent="quiz"
+        user_id, page, name, email, exam_context=exam_context, requires_visuals=requires_visuals, intent="quiz"
     )
     
     api_input = [{"role": "system", "content": [{"type": "input_text", "text": system_text}]}]
@@ -250,7 +250,6 @@ def generate_structured_quiz(
     if pdf_urls:
         _inject_pdf_inputs(api_input, pdf_urls)
 
-    # NUEVO: Forzamos False, False para evitar que use tools síncronamente y dependa del decoupled architecture
     tools = _configure_tools(vector_store_ids, False, False, pdf_urls, web_search_config, user_location)
 
     req = _build_request_payload(cfg, api_input, tools=tools)
@@ -296,9 +295,9 @@ def stream_structured_quiz(
     client = get_openai_client()
     cfg = get_model_config(mode)
     
-    # FIX: Push intent="quiz" so the builder knows to strip out Chat Doctrine
+    # FIX: Pass the dynamic requires_visuals variable instead of hardcoding False
     system_text = build_runtime_signals(
-        user_id, page, name, email, exam_context=exam_context, requires_visuals=False, intent="quiz"
+        user_id, page, name, email, exam_context=exam_context, requires_visuals=requires_visuals, intent="quiz"
     )
     
     api_input = [{"role": "system", "content": [{"type": "input_text", "text": system_text}]}]
@@ -307,7 +306,6 @@ def stream_structured_quiz(
     if pdf_urls:
         _inject_pdf_inputs(api_input, pdf_urls)
 
-    # NUEVO: Forzamos False, False para evitar que use tools síncronamente y dependa del decoupled architecture
     tools = _configure_tools(vector_store_ids, False, False, pdf_urls, web_search_config, user_location)
 
     req = _build_request_payload(cfg, api_input, tools=tools)
