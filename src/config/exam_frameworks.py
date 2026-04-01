@@ -2,65 +2,76 @@
 
 ICFES_FRAMEWORK = """
 ## ACADEMIC FRAMEWORK: ICFES Saber 11
-GLOBAL STRATEGY: Focus on competency-based evaluation.
+GLOBAL STRATEGY: Focus on competency-based evaluation and psychometric awareness. The exam uses Item Response Theory (IRT), evaluating difficulty, discrimination, and pseudo-guessing. The AI must train the user to avoid erratic guessing patterns. Note the asymmetric scoring model (Math, Reading, Sciences, Social = 3x weight; English = 1x weight).
+DISTRACTOR LOGIC: The AI must craft and explain distractors that are factually true statements in the real world (e.g., a valid legal principle or a true biological fact) but are contextually irrelevant to the specific prompt. Always enforce the "most specific response" rule.
 
-### DOMAIN: MATHEMATICS
-- Competencies: 1. Interpretation & Representation, 2. Formulation & Execution, 3. Argumentation.
-- Components: Algebra & Calculus, Geometry, Statistics.
-- Rule: Differentiate between Generic (daily life math) and Non-Generic (school-specific math) tools.
-- Strategy: Use LaTeX for models. Provide step-by-step logic.
-
-### DOMAIN: NATURAL SCIENCES
-- Competencies: 1. Use of scientific knowledge, 2. Explanation of phenomena, 3. Inquiry.
-- Components: 
-    - Biological: Homeostasis, heredity, ecology, evolution.
-    - Physical: Kinematics, dynamics, energy, waves, electromagnetism.
-    - Chemical: Atoms, bonds, stoichiometry, solubility, gases.
-    - CTS: Interdisciplinary topics (Science, Technology, Society).
-- Strategy: Connect theory to observable phenomena and energy conservation.
+### DOMAIN: MATHEMATICS (QUANTITATIVE REASONING)
+- Overview: Evaluates generic (daily life citizen math) and non-generic (STEM-focused) competencies. Highly focused on data literacy and real-world application.
+- Focus: Interpretation of abstract data, strategic problem-solving planning, and logical justification.
+- Topics: Statistics & Probability (charts, variance, combinations/permutations, percentiles), Geometry (spatial modeling, transformations, Pythagorean applications), Algebra & Calculus (linear/quadratic/exponential functions, rates of change).
+- Strategy: Present scenarios involving tables, charts, or economic data. Provide rigorous derivations using LaTeX: \\( \\) for inline and \\[ \\] for blocks.
 
 ### DOMAIN: CRITICAL READING
-- Competencies: 1. Local content identification, 2. Global articulation of parts, 3. Critical reflection.
-- Text Types: 
-    - Continuous: Literary (novels), Informative (essays), Philosophical.
-    - Discontinuous: Infographics, comics, tables, graphs.
-- Strategy: Identify the main thesis and debunk distractors based on textual evidence.
+- Overview: Hermeneutic comprehension evaluating both continuous texts (essays, novels, philosophy) and discontinuous texts (infographics, comics, data tables).
+- Focus: Literal, Inferential, and Critical-Intertextual levels.
+- Topics: Extracting local semantic elements, uncovering text macrostructures, deducing implicit premises, identifying formal/informal fallacies, and unmasking ideological biases.
+- Strategy: Describe visual texts (infographics/comics) clearly if simulating discontinuous texts. Force the user to differentiate between the author's main thesis and secondary supporting data.
 
 ### DOMAIN: SOCIAL AND CITIZEN SCIENCES
-- Competencies: 1. Social Thinking, 2. Interpretation & Analysis of perspectives, 3. Systemic/Reflective thinking.
-- Focus: Colombian Constitution, political system, and multi-perspective analysis of social problems.
-- Strategy: Maintain objectivity and analyze historical/geographical contexts.
+- Overview: Integration of history, geography, economics, and constitutional citizenship. Evaluates the ability to map social problems systemically.
+- Focus: Social thinking, perspective analysis, and systemic/reflective thinking.
+- Topics: Colombian Constitution of 1991 (mechanisms of citizen participation, branches of power, state of rights), 20th/21st-century Colombian history (violence, peace agreements, socioeconomic shifts), and global economic impacts.
+- Strategy: When analyzing perspectives, force the user to suspend their own moral/ethical judgment. The correct answer must strictly reflect the logical internal interest of the actor described in the prompt, regardless of ethical alignment.
 
-### DOMAIN: ENGLISH (CEFR Aligned)
-- Structure: 7 Parts (1. Descriptions/Vocabulary, 2. Notices/Signs, 3. Conversations, 4. Grammar/Cloze, 5. Basic Reading, 6. Complex Reading, 7. Advanced Grammar/Lexical Cloze).
-- Strategy: Explain the specific part being practiced and provide contextual vocabulary.
+### DOMAIN: NATURAL SCIENCES
+- Overview: Applied phenomenological problem-solving combining Biology, Chemistry, Physics, and CTS (Science, Technology, and Society).
+- Focus: Iconographic analysis and experimental design. The core data to solve the problem should often be embedded in described graphs, circuits, or diagrams rather than just the introductory text.
+- Topics: Biology (cellular transport, central dogma/protein synthesis, mitosis vs meiosis, Mendelian genetics, ecology), Chemistry (periodic trends, bonding, stoichiometry, conservation of mass), Physics (kinematics, Newton's laws, thermodynamics, mechanical energy conservation).
+- Strategy: Present experimental setups. Ask the user to validate hypotheses, identify controlled/dependent variables, or extrapolate conclusions from empirical data sets.
+
+### DOMAIN: ENGLISH
+- Overview: Evaluates communicative, pragmatic, lexical, and grammatical competence aligned with the CEFR (levels A- to B1+).
+- Focus: 7 distinct parts of progressive difficulty measuring specific cognitive-linguistic skills.
+- Topics: Part 1 (Lexical matching), Part 2 (Pragmatic signs and physical locations), Part 3 (Conversational coherence), Part 4 (Basic grammar cloze), Part 5 (Literal reading comprehension), Part 6 (Inferential reading comprehension), Part 7 (Advanced lexico-grammatical cloze).
+- Strategy: Clearly identify which of the 7 parts is being simulated. Provide culturally relevant contexts and test specific structural rules (e.g., modals, perfect tenses, conditionals).
 """
 
 UNAL_FRAMEWORK = """
 ## ACADEMIC FRAMEWORK: Universidad Nacional de Colombia (UNAL) Admission Exam
-GLOBAL STRATEGY: Focus on deep analytical rigor and advanced problem-solving. Every interaction must demonstrate "Reconocimiento" (Recognition) and "Uso Significativo" (Meaningful Use) of academic codes.
+GLOBAL STRATEGY: Focus on deep analytical rigor, advanced problem-solving, and psychometric awareness. Every interaction must demonstrate "Reconocimiento" (Recognition) and "Uso Significativo" (Meaningful Use) of academic codes.
 
 ### DOMAIN: TEXTUAL ANALYSIS
-- Overview: Comprehension of referential texts (Science, Humanities, Arts) and poetic-literary texts.
-- Focus: Evaluation levels: Literal, Inferential, and Critical-Intertextual (emphasize the last two).
+- Overview: Deep hermeneutic comprehension of referential texts (Science, Humanities) and poetic-literary texts.
+- Focus: Penalize superficial reading. Heavily emphasize Inferential and Critical-Intertextual levels.
+- Topics: Deducing hidden premises, differentiating strict semantic definitions, judging authorial ideological bias, distinguishing facts from opinions, and applying mathematical propositional logic to natural language statements.
 - Strategy: Analyze syntax, semantics, and authorial intent. Deconstruct arguments logically to find underlying meanings.
 
 ### DOMAIN: MATHEMATICS
-- Overview: Application of concepts through contextualized problems, graphs, and tables.
-- Focus: 1. Numerical, 2. Spatial & Metric, 3. Random/Statistical, 4. Variational thinking.
+- Overview: Mathematical modeling and translating natural language into formal algebraic/geometric structures. Rote memorization of formulas is insufficient.
+- Focus: Numerical, Spatial, Metric, Random, and Variational thinking.
+- Topics: Number hierarchies, system of equations (geometric interpretation), quadratic discriminants, geometric optimization (areas/volumes), analytic geometry (conics, slopes), function transformations, parity (even/odd), trigonometric identities, combinatorics (permutations vs. combinations), and expected value.
 - Strategy: Stimulate reflection through the interpretation of schemes. Provide rigorous derivations using LaTeX: \\( \\) for inline and \\[ \\] for blocks.
 
 ### DOMAIN: NATURAL SCIENCES
-- Components: Physics, Chemistry, Biology.
+- Overview: Interdisciplinary phenomenology combining macroscopic principles, atomic reactivity, and cellular metabolism within single experimental scenarios.
+- Components: 
+    - Physics: Galilean relativity, free-body diagrams, mechanical energy conservation, fluid dynamics (Archimedes, Bernoulli).
+    - Chemistry: Periodic trends, Lewis structures, strict stoichiometry.
+    - Biology: Cellular organelles, central dogma, mitosis vs. meiosis, Mendelian genetics (Punnett squares), trophic network thermodynamics.
 - Strategy: Prioritize the analysis of concepts and processes represented in schemas. Focus on synthesis, deduction, and the application of fundamental laws.
 
 ### DOMAIN: SOCIAL SCIENCES
-- Components: Geography, History, Philosophy.
+- Overview: Structural analysis of historical causalities, geographical systems, and philosophical arguments.
+- Components: 
+    - History: Epistemic ruptures (Renaissance, Revolutions), Colombian constitutional evolution (1886 to 1991).
+    - Geography: Astronomical dynamics, Colombian orography and thermal floors, global demographics.
+    - Philosophy & Logic: Classical to Contemporary thought (Plato, Descartes, Kant, Marx, Nietzsche, Freud), formal propositional logic, syllogisms, and informal fallacies.
 - Strategy: Analyze social phenomena through contextualized problems. Evaluate the ability to use social science codes to solve complex situational queries.
 
 ### DOMAIN: IMAGE ANALYSIS
-- Overview: Visual problems focused on form constancy, movements, and transformations.
-- Focus: Logical causality and semantic association between image and word.
+- Overview: Pure abstract logical reasoning, fluid intelligence, and visuospatial cognition. This is the highest statistical differentiator in the exam.
+- Focus: Mental rotation, deductive transformation, and comparative visual analytics.
+- Topics: Orthogonal views and 3D isometry, unfolding flat templates with symbols into 3D solids, differentiating specular reflections (mirror effect) from planar rotations, dynamic origami (predicting unfolded cuts), and spatial logic sequences.
 - Strategy: Explain visual transformations step-by-step (rotations, reflections). Explicitly describe the pattern recognition logic.
 """
 
