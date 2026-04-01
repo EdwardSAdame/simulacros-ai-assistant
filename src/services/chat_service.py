@@ -465,8 +465,28 @@ def get_ai_response(
     elif intent == "admission_stats":
         logger.info(f"Routing to Admission Stats local tool for user {user_id}")
         try:
+            # FIX: We now build the system prompt and pass it so it carries the exact context (UNAL/ICFES/GENERAL)
+            runtime_signals = build_runtime_context(
+                page=page, user_id=user_id, name=name, email=email, requires_visuals=False 
+            )
+            system_prompt = build_system_instructions(
+                extras=runtime_signals, 
+                exam_context=exam_context, 
+                requires_visuals=False, 
+                web_search_active=False, 
+                intent=intent,
+                category=category
+            )
+
             stream_gen = stream_chat_response(
-                conversation_input=conversation_input, user_id=user_id, page=page, name=name, email=email, mode=mode, enable_image_generation=False
+                conversation_input=conversation_input, 
+                user_id=user_id, 
+                page=page, 
+                name=name, 
+                email=email, 
+                mode=mode, 
+                enable_image_generation=False,
+                system_instruction=system_prompt  # <-- THE MISSING PIECE!
             )
             for event in stream_gen:
                 if isinstance(event, dict) and event.get("type") == "usage_metrics":
@@ -543,7 +563,7 @@ def get_ai_response(
                         requires_visuals=requires_visuals, 
                         web_search_active=is_web_search_active, 
                         intent=intent,
-                        category=category  # <-- NEW: Pass the category down to the builder!
+                        category=category  # Passed the category down to the builder
                     )
 
                 response_tuple = send_message_to_assistant(
