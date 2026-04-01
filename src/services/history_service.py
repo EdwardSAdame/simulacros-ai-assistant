@@ -11,14 +11,14 @@ def decimal_default(obj):
         return int(obj) if obj % 1 == 0 else float(obj)
     raise TypeError
 
-# 🔹 FIX: Increased memory limits from 3 to 10 to support long educational interactions
 def build_history_list(conversation_id: str, max_user: int = 10, max_assistant: int = 10) -> List[Dict[str, Any]]:
     """
     Retrieves recent messages from the database and formats them for the OpenAI API.
     Handles hidden context injection for assistant messages with metadata to prevent History Desync.
+    Applies SMART PRUNING to prevent token bloat from large JSON payloads.
     """
     try:
-        # 🔹 FIX: Increased DB fetch limit to 40 to guarantee we retrieve the full requested window
+        # Fetch enough messages to ensure we get the required user/assistant counts
         msgs = get_recent_messages(conversation_id=conversation_id, limit=40, ascending=True)
         if not msgs: 
             return []
@@ -29,17 +29,37 @@ def build_history_list(conversation_id: str, max_user: int = 10, max_assistant: 
         # Merge and sort by timestamp to maintain conversation flow
         merged = sorted(user_msgs + asst_msgs, key=lambda m: m["Timestamp"])
 
+        # 🟢 SMART PRUNING STEP 1: Find the most recent quiz generated in this window
+        latest_quiz_idx = -1
+        for i in range(len(merged) - 1, -1, -1):
+            meta = merged[i].get("Metadata") or merged[i].get("Meta")
+            if meta and meta.get("quiz_mode"):
+                latest_quiz_idx = i
+                break
+
         history_list = []
-        for m in merged:
+        for i, m in enumerate(merged):
             role = m.get("Role", "user")
             text_content = m.get("MessageText", "")
             
             # Inject metadata context if available (Assistant only)
             metadata = m.get("Metadata") or m.get("Meta")
             if role == "assistant" and metadata:
+                
+                # 🟢 SMART PRUNING STEP 2: Compress Quiz Metadata
+                if metadata.get("quiz_mode"):
+                    if i != latest_quiz_idx:
+                        # If this is an OLD quiz, strip it entirely to save massive tokens
+                        metadata = {"note": "Previous quiz omitted from context to save memory."}
+                    else:
+                        # If this is the LATEST quiz, keep questions but strip massive UI payloads
+                        metadata = dict(metadata) # Make a copy to avoid mutating the cached dict
+                        metadata.pop("easier_payload", None)
+                        metadata.pop("harder_payload", None)
+                        metadata.pop("retry_payload", None)
+
                 try:
                     metadata_str = json.dumps(metadata, default=decimal_default)
-                    # GENERALIZED ANTI-DESYNC FIX
                     # Explicitly instruct the AI that the widget is already rendered.
                     hidden_context = (
                         f"\n\n[SYSTEM LOG: I successfully generated and delivered a rich interactive UI widget "
