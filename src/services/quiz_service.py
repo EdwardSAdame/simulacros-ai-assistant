@@ -52,10 +52,10 @@ class QuizService:
             visual_instruction = (
                 f"## VISUAL GENERATION PROTOCOL (HYBRID MULTI-SUBJECT - MANDATORY)\n"
                 f"You MUST generate EXACTLY {target_visuals} visual(s) across this quiz.\n"
-                "Analyze the question and decide which visual engine to use:\n"
-                "  - **DATA**: For charts, graphs, or geometry -> Use `plot_prompt`. Leave `image_prompt` null.\n"
-                "  - **CREATIVE**: For thematic illustrations -> Use `image_prompt`. Leave `plot_prompt` null.\n"
-                "CRITICAL: Never use both in the same question. Do NOT call the image or code tools directly.\n\n"
+                "Analyze the question and select exactly ONE visual engine per question:\n"
+                "  - **DATA**: For charts, graphs, or geometry -> Write a description in `plot_prompt`. Keep `image_prompt` null.\n"
+                "  - **CREATIVE**: For thematic illustrations -> Write a description in `image_prompt`. Keep `plot_prompt` null.\n"
+                "CRITICAL: Rely entirely on the background system to execute the chosen visual engine.\n\n"
             )
 
         # --- BRANCH A: DATA VISUALS (MATPLOTLIB) ---
@@ -63,10 +63,10 @@ class QuizService:
             visual_instruction = (
                 f"## VISUAL GENERATION PROTOCOL (DATA GRAPHS - MANDATORY)\n"
                 f"You MUST generate EXACTLY {target_visuals} graph(s) for this quiz.\n"
-                "CRITICAL: You are NOT writing the Python code. Another system handles the Matplotlib styling.\n"
-                "  - **NO CODE DOCTRINE**: DO NOT write ANY Python code in the `plot_prompt`.\n"
-                "  - **NATURAL LANGUAGE ONLY**: Your `plot_prompt` MUST ONLY contain pure mathematical descriptions in plain English/Spanish. Focus on making the math complex and interesting.\n"
-                "  - **CONSTRAINT**: You MUST leave `image_prompt` as null.\n\n"
+                "CRITICAL: The background system handles all Python code, Matplotlib styling, colors, and layouts automatically.\n"
+                "  - **NATURAL LANGUAGE ONLY**: Write the `plot_prompt` strictly as a plain English/Spanish mathematical description.\n"
+                "  - **MATH FOCUSED**: Restrict the `plot_prompt` entirely to mathematical parameters, functions, domains, points, and axis labels. Focus your intelligence on making the math complex and interesting.\n"
+                "  - **FIELD ROUTING**: Keep `image_prompt` as null.\n\n"
             )
             
         # --- BRANCH B: CREATIVE VISUALS (DECOUPLED ASYNC ARCHITECTURE) ---
@@ -74,15 +74,14 @@ class QuizService:
             visual_instruction = (
                 f"## VISUAL GENERATION PROTOCOL (CREATIVE ILLUSTRATIONS - MANDATORY)\n"
                 f"You MUST include EXACTLY {target_visuals} contextual illustration(s) in this quiz.\n"
-                "CRITICAL: Do NOT call the image_generation tool.\n"
-                "Instead, describe the image using the `image_prompt` field.\n"
-                "  - **CONSTRAINT**: You MUST leave `plot_prompt` as null.\n\n"
+                "CRITICAL: Delegate image creation to the background renderer by describing the image exclusively in the `image_prompt` field.\n"
+                "  - **FIELD ROUTING**: Keep `plot_prompt` as null.\n\n"
             )
             
         else:
             visual_instruction = (
-                "## VISUAL & TOOL EXECUTION PROTOCOL (VISUALS DISABLED)\n"
-                "You are FORBIDDEN from generating any images or graphs. You MUST leave `image_url`, `image_prompt`, and `plot_prompt` as null.\n\n"
+                "## VISUAL & TOOL EXECUTION PROTOCOL (TEXT ONLY)\n"
+                "Produce a strictly text-based quiz. Keep `image_url`, `image_prompt`, and `plot_prompt` as null.\n\n"
             )
 
         # STRUCTURED LOGGING: Record the decision for CloudWatch Insights
@@ -108,7 +107,7 @@ class QuizService:
 
             "## CRITICAL CONSTRAINTS\n"
             "1. **ORDER OF OPERATIONS**: Provide the `explanation` FIRST to derive the answer step-by-step. THEN generate the `options` and `correct_option_index`.\n"
-            "2. **ANTI-ECHO RULE**: DO NOT repeat the question text or options inside the `explanation`.\n"
+            "2. **DISTINCT EXPLANATION**: Write the `explanation` focusing strictly on the Setup, Solution, and Traps, maintaining unique text that differs from the question and options.\n"
             "3. **PREMISE LOCKING**: Explicitly define 'Core Constraints' in the `explanation`. The `question_text` MUST use those EXACT constraints.\n\n"
 
             "## DISTRACTOR GENERATION PROTOCOL\n"
@@ -123,9 +122,9 @@ class QuizService:
             "- Questions must be challenging and non-trivial.\n\n"
             
             "## WEB SEARCH & CONTEXT RESTRICTIONS\n"
-            "- FORBIDDEN from using `web_search` unless explicitly requested.\n"
-            "- CRITICAL: Leave `source_url` as null if no search is performed.\n"
-            "- CRITICAL: Leave `context_text` as null UNLESS the question explicitly requires a reading comprehension passage.\n\n"
+            "- **WEB SEARCH**: Trigger `web_search` exclusively when the user explicitly requests news or current events.\n"
+            "- **SOURCES**: Populate `source_url` exclusively when a verified search link is obtained; otherwise, keep it null.\n"
+            "- **CONTEXT**: Reserve `context_text` exclusively for reading comprehension passages. Otherwise, keep it null.\n\n"
             
             "## SMART FOLLOW-UP PROTOCOL\n"
             "Generate 3 'Ghost Prompts' (easier_payload, harder_payload, retry_payload) in the EXACT SAME LANGUAGE as the quiz, using First Person format.\n"
