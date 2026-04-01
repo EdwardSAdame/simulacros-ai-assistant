@@ -34,9 +34,7 @@ class QuizService:
         
         topic_lower = topic.lower()
         
-        # 🟢 NEW: Dedicated check for the general multi-subject exam
         is_general_subject = "general" in topic_lower
-        
         is_visual_subject = any(subj in topic_lower for subj in visual_subjects)
         is_creative_subject = any(subj in topic_lower for subj in creative_subjects)
 
@@ -54,10 +52,10 @@ class QuizService:
             visual_instruction = (
                 f"## VISUAL GENERATION PROTOCOL (HYBRID MULTI-SUBJECT - MANDATORY)\n"
                 f"You MUST generate EXACTLY {target_visuals} visual(s) across this quiz.\n"
-                "Because this is a multi-subject exam, YOU ARE THE ORCHESTRATOR. You must analyze the question and decide which visual engine to use based on this Decision Matrix:\n"
-                "  - **DECISION A (Data)**: Does the question require reading a chart, graph, geometry, or statistics? -> You MUST use `plot_prompt`. Leave `image_prompt` null.\n"
-                "  - **DECISION B (Creative)**: Does the question require a thematic illustration for History, Reading, or Biology? -> You MUST use `image_prompt` (Monet style). Leave `plot_prompt` null.\n"
-                "CRITICAL: Never mix them. Never use both in the same question. Do NOT call the image or code tools directly.\n\n"
+                "Analyze the question and decide which visual engine to use:\n"
+                "  - **DATA**: For charts, graphs, or geometry -> Use `plot_prompt`. Leave `image_prompt` null.\n"
+                "  - **CREATIVE**: For thematic illustrations -> Use `image_prompt`. Leave `plot_prompt` null.\n"
+                "CRITICAL: Never use both in the same question. Do NOT call the image or code tools directly.\n\n"
             )
 
         # --- BRANCH A: DATA VISUALS (MATPLOTLIB) ---
@@ -65,10 +63,10 @@ class QuizService:
             visual_instruction = (
                 f"## VISUAL GENERATION PROTOCOL (DATA GRAPHS - MANDATORY)\n"
                 f"You MUST generate EXACTLY {target_visuals} graph(s) for this quiz.\n"
-                "CRITICAL: Do NOT call the code_interpreter tool.\n"
-                "Instead, write MINIMALIST instructions in the `plot_prompt` field.\n"
-                "  - **MINIMALIST DOCTRINE**: Your `plot_prompt` MUST ONLY contain pure mathematical instructions (function, limits, points, statistics).\n"
-                "  - **CONSTRAINT**: You MUST leave `image_prompt` as null. Do not use creative image generation.\n\n"
+                "CRITICAL: You are NOT writing the Python code. Another system handles the Matplotlib styling.\n"
+                "  - **NO CODE DOCTRINE**: DO NOT write ANY Python code in the `plot_prompt`.\n"
+                "  - **NATURAL LANGUAGE ONLY**: Your `plot_prompt` MUST ONLY contain pure mathematical descriptions in plain English/Spanish. Focus on making the math complex and interesting.\n"
+                "  - **CONSTRAINT**: You MUST leave `image_prompt` as null.\n\n"
             )
             
         # --- BRANCH B: CREATIVE VISUALS (DECOUPLED ASYNC ARCHITECTURE) ---
@@ -78,8 +76,7 @@ class QuizService:
                 f"You MUST include EXACTLY {target_visuals} contextual illustration(s) in this quiz.\n"
                 "CRITICAL: Do NOT call the image_generation tool.\n"
                 "Instead, describe the image using the `image_prompt` field.\n"
-                "  - **Style Doctrine**: ALL `image_prompt` descriptions MUST explicitly include 'in the style of Claude Monet, impressionist'.\n"
-                "  - **CONSTRAINT**: You MUST leave `plot_prompt` as null. Do not use data graphs.\n\n"
+                "  - **CONSTRAINT**: You MUST leave `plot_prompt` as null.\n\n"
             )
             
         else:
@@ -111,13 +108,13 @@ class QuizService:
 
             "## CRITICAL CONSTRAINTS\n"
             "1. **ORDER OF OPERATIONS**: Provide the `explanation` FIRST to derive the answer step-by-step. THEN generate the `options` and `correct_option_index`.\n"
-            "2. **ANTI-ECHO RULE**: DO NOT echo or repeat the question text or the options inside the `explanation` field. Only write the Setup, Solution, and Traps.\n"
-            "3. **PREMISE LOCKING**: Explicitly define 'Core Constraints' (Numbers/Dates) in the `explanation`. The `question_text` MUST use those EXACT constraints.\n\n"
+            "2. **ANTI-ECHO RULE**: DO NOT repeat the question text or options inside the `explanation`.\n"
+            "3. **PREMISE LOCKING**: Explicitly define 'Core Constraints' in the `explanation`. The `question_text` MUST use those EXACT constraints.\n\n"
 
             "## DISTRACTOR GENERATION PROTOCOL\n"
-            "- Identify 3 distinct 'Failure Paths' (Misconceptions, Calculation Errors) in the `explanation`.\n"
+            "- Identify 3 distinct 'Failure Paths' in the `explanation`.\n"
             "- The wrong `options` MUST be the result of these specific Failure Paths.\n"
-            "- In `feedback`, explicitly explain *why* the student might have chosen that wrong option.\n\n"
+            "- In `feedback`, explicitly explain why the student might have chosen that wrong option.\n\n"
             
             "## CONTENT & PEDAGOGY RULES\n"
             "- Generate questions based on the 'ACADEMIC FRAMEWORK'.\n"
@@ -125,14 +122,13 @@ class QuizService:
             "- Be cold, precise, and efficient in your 'intro_message' as Roma.\n"
             "- Questions must be challenging and non-trivial.\n\n"
             
-            # 🟢 FIX: Updated Web Search and Context restrictions
             "## WEB SEARCH & CONTEXT RESTRICTIONS\n"
-            "- FORBIDDEN from using `web_search` unless the user uses words like 'noticia' or 'actualidad'.\n"
-            "- CRITICAL: If no web search is actually performed, you MUST leave `source_url` as null. DO NOT hallucinate or invent URLs.\n"
-            "- CRITICAL: Leave `context_text` as null UNLESS the specific question explicitly requires a reading comprehension passage (e.g., Lectura Critica). It does not need to be in the first question.\n\n"
+            "- FORBIDDEN from using `web_search` unless explicitly requested.\n"
+            "- CRITICAL: Leave `source_url` as null if no search is performed.\n"
+            "- CRITICAL: Leave `context_text` as null UNLESS the question explicitly requires a reading comprehension passage.\n\n"
             
             "## SMART FOLLOW-UP PROTOCOL\n"
-            "Generate 3 'Ghost Prompts' (easier_payload, harder_payload, retry_payload) in the EXACT SAME LANGUAGE as the quiz, using First Person format ('I want...').\n"
+            "Generate 3 'Ghost Prompts' (easier_payload, harder_payload, retry_payload) in the EXACT SAME LANGUAGE as the quiz, using First Person format.\n"
         )
 
         return {
