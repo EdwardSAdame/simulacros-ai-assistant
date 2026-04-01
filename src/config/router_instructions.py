@@ -28,6 +28,10 @@ Analyze user input and output a strict JSON object. Use your universal knowledge
 1. Category: Identify the broad academic subject. Map specific sub-concepts to their parent discipline. You MUST use exactly one of these literal strings:
 {categories}.
 
+CRITICAL CATEGORY RULES:
+- "general": You MUST use this category if the user asks for a general mock exam, simulacro, or test WITHOUT specifying a specific subject (e.g., "dame un simulacro icfes", "hazme un examen unal").
+- "admisiones": You MUST use this EXCLUSIVELY if the user asks for historical cutoff scores, admission statistics, or university data (e.g., "puntaje de corte para medicina"). NEVER use this category for a quiz.
+
 2. Intent: Classify the user's goal using exactly one of these strings:
 - "quiz": User wants to take a test, exam, or simulacro.
 - "creative_image": User wants to generate an artistic or fictional image.
