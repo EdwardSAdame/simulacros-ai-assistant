@@ -37,7 +37,8 @@ def build_system_instructions(
     requires_visuals: bool = False,
     web_search_active: bool = False,
     requires_creative_image: bool = False,
-    intent: str = "chat"  # <-- NEW: Track the intent to filter context
+    intent: str = "chat",
+    category: str = "general"  # <-- NEW: Track category to filter the framework
 ) -> str:
     
     blocks = [CORE_PERSONA.strip()]
@@ -48,12 +49,12 @@ def build_system_instructions(
     else:
         # ACADEMIC MODE
         
-        # FIX: Only inject the Chat-Specific Tutoring Doctrine if it's NOT a quiz
+        # Only inject the Chat-Specific Tutoring Doctrine if it's NOT a quiz
         if intent != "quiz":
             blocks.append("## ACADEMIC TUTORING DOCTRINE\n" + ACADEMIC_TUTORING_DOCTRINE.strip())
         
-        # Inject Academic Framework (Dynamically loaded from memory, zero file I/O latency)
-        blocks.append(get_exam_framework(exam_context))
+        # Inject Academic Framework (Dynamically filtered by category!)
+        blocks.append(get_exam_framework(exam_context, category))
         
         # Inject Search Protocols 
         if web_search_active:

@@ -542,7 +542,8 @@ def get_ai_response(
                         exam_context=exam_context, 
                         requires_visuals=requires_visuals, 
                         web_search_active=is_web_search_active, 
-                        intent=intent  # <-- FIX: Pushing intent down to the builder!
+                        intent=intent,
+                        category=category  # <-- NEW: Pass the category down to the builder!
                     )
 
                 response_tuple = send_message_to_assistant(
