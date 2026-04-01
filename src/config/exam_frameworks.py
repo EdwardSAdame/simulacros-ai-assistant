@@ -83,19 +83,30 @@ CRITICAL MISSION (EXAM DISCOVERY):
 The user has not yet specified which admission exam they are preparing for (e.g., ICFES Saber 11 or Universidad Nacional UNAL).
 Strategy: Answer their immediate question clearly, but naturally ask them which specific exam or university they are targeting so you can tailor your future explanations, difficulty, and practice questions to that specific test."""
 
-def get_exam_framework(exam_context: str, category: str = "general") -> str:
+def get_exam_framework(exam_context: str, category: str = "general", intent: str = "chat") -> str:
     """
-    Returns the appropriate pedagogical framework based on the provided exam context and category.
-    If category is 'general', returns the full exam framework.
-    If category is specific, returns ONLY the relevant domain to save tokens and enforce focus.
+    Returns the appropriate pedagogical framework based on exam context, category, and intent.
+    - If intent is 'chat', returns ONLY the Global Strategy (saves tokens).
+    - If intent is 'quiz' and category is 'general', returns Global Strategy + ALL domains.
+    - If intent is 'quiz' and category is specific, returns Global Strategy + SPECIFIC domain.
     """
     if exam_context == "UNAL":
+        # If the user is just chatting, save tokens and only inject the core global rules
+        if intent != "quiz":
+            return UNAL_GLOBAL
+            
+        # If they want a quiz, determine if it's general or subject-specific
         if category == "general" or category not in UNAL_DOMAINS:
             return UNAL_GLOBAL + "\n\n" + "\n\n".join(UNAL_DOMAINS.values())
         else:
             return UNAL_GLOBAL + "\n\n" + UNAL_DOMAINS[category]
             
     elif exam_context == "ICFES":
+        # If the user is just chatting, save tokens and only inject the core global rules
+        if intent != "quiz":
+            return ICFES_GLOBAL
+            
+        # If they want a quiz, determine if it's general or subject-specific
         if category == "general" or category not in ICFES_DOMAINS:
             return ICFES_GLOBAL + "\n\n" + "\n\n".join(ICFES_DOMAINS.values())
         else:

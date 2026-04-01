@@ -53,8 +53,8 @@ def build_system_instructions(
         if intent != "quiz":
             blocks.append("## ACADEMIC TUTORING DOCTRINE\n" + ACADEMIC_TUTORING_DOCTRINE.strip())
         
-        # Inject Academic Framework (Dynamically filtered by category!)
-        blocks.append(get_exam_framework(exam_context, category))
+        # Inject Academic Framework (Dynamically filtered by category AND intent!)
+        blocks.append(get_exam_framework(exam_context, category, intent))
         
         # Inject Search Protocols 
         if web_search_active:
