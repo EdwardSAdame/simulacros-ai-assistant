@@ -50,23 +50,24 @@ UNAL_DOMAINS = {
     "matematicas": """### DOMAIN: MATHEMATICS
 - Overview: Mathematical modeling and translating natural language into formal algebraic/geometric structures. Rote memorization of formulas is insufficient.
 - Focus: Numerical, Spatial, Metric, Random, and Variational thinking.
-- Topics: Number hierarchies, system of equations (geometric interpretation), quadratic discriminants, geometric optimization (areas/volumes), analytic geometry (conics, slopes), function transformations, parity (even/odd), trigonometric identities, combinatorics (permutations vs. combinations), and expected value.
+- Topics: numerical sets, arithmetic 1, arithmetic 2, arithmetic 3, sequences, algebra 1, algebra 2, functions, graphing functions, geometry 1, geometry 2, trigonometry 1, trigonometry 2, statistics and probability, analytic geometry, calculus.
 - Strategy: Stimulate reflection through the interpretation of schemes.""",
 
     "ciencias_naturales": """### DOMAIN: NATURAL SCIENCES
 - Overview: Interdisciplinary phenomenology combining macroscopic principles, atomic reactivity, and cellular metabolism within single experimental scenarios.
 - Components: 
-    - Physics: Galilean relativity, free-body diagrams, mechanical energy conservation, fluid dynamics (Archimedes, Bernoulli).
-    - Chemistry: Periodic trends, Lewis structures, strict stoichiometry.
-    - Biology: Cellular organelles, central dogma (transcription/translation), mitosis vs. meiosis, Mendelian genetics (Punnett squares), trophic network thermodynamics.
-- Strategy: Prioritize the analysis of concepts and processes represented in schemas. Focus on synthesis, deduction, and the application of fundamental laws.""",
+    - Physics: Galilean relativity, free-body diagrams, mechanical energy conservation, fluid dynamics (Archimedes, Bernoulli), measurements, kinematics, dynamics, work, energy, momentum, gravitation, electricity and magnetism, fluid mechanics, thermodynamics, oscillatory motion and waves, optics.
+    - Chemistry: matter, atomic chemistry, inorganic chemistry, stoichiometry, solutions, organic chemistry, gases, electrochemistry and chemical kinetics.
+    - Biology: biomolecules, substance transport, protein synthesis, cell cycle, cell division, Mendelian genetics, population genetics, metabolism, metabolic pathways for energy production, photosynthesis, circulation and respiration, reproduction, ecology, evolution.
+    - Strategy: Prioritize the analysis of concepts and processes represented in schemas. Focus on synthesis, deduction, and the application of fundamental laws.""",
 
     "ciencias_sociales": """### DOMAIN: SOCIAL SCIENCES
 - Overview: Structural analysis of historical causalities, geographical systems, and philosophical arguments.
 - Components: 
-    - History: Epistemic ruptures (Renaissance, Revolutions), Colombian constitutional evolution (1886 to 1991).
-    - Geography: Astronomical dynamics, Colombian orography and thermal floors, global demographics.
+    - History: Epistemic ruptures, Colombian constitutional evolution (1886 to 1991), world history 1, world history 2, history of the Americas, Colombian history 1, Colombian history 2.
+    - Geography: Astronomical dynamics, Colombian orography and thermal floors, global demographics, geography 1, geography 2.
     - Philosophy & Logic: Classical to Contemporary thought (Plato, Descartes, Kant, Marx, Nietzsche, Freud), formal propositional logic, syllogisms, and informal fallacies.
+    - Economics: General economy.
 - Strategy: Analyze social phenomena through contextualized problems. Evaluate the ability to use social science codes to solve complex situational queries.""",
 
     "analisis_imagen": """### DOMAIN: IMAGE ANALYSIS
