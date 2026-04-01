@@ -196,8 +196,14 @@ def get_ai_response(
         elif num_questions > 30:
             num_questions = 30
 
-        creative_categories = ["sociales", "lectura_critica", "ingles", "ciencias_sociales"]
-        requires_creative_images = category in creative_categories
+        # 🟢 FIX: Synced with the new Semantic Router taxonomy!
+        creative_categories = [
+            "ciencias_sociales", "sociales_ciudadanas", "sociales", 
+            "lectura_critica", "analisis_textual", "ingles"
+        ]
+        
+        # If it's a creative subject OR a general mock exam, allow creative images
+        requires_creative_images = category in creative_categories or category == "general"
 
         conversation_input.append(QuizService.get_system_instruction(topic=topic_hint, num_questions=num_questions))
 
@@ -223,7 +229,13 @@ def get_ai_response(
                 image_threads = []
                 image_urls_map = {}
                 
-                max_allowed_visuals = math.floor(num_questions * 0.4) if requires_creative_images else 2
+                # 🟢 FIX: Synced Visual Max Guardrail logic for general exams
+                visual_subjects = ["matematicas", "ciencias_naturales", "analisis_imagen", "general"]
+                if category in visual_subjects or requires_creative_images:
+                    max_allowed_visuals = math.floor(num_questions * 0.4)
+                else:
+                    max_allowed_visuals = 2
+
                 visuals_triggered_count = 0
                 allowed_visual_indices = set() 
 

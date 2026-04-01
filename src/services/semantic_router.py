@@ -31,12 +31,12 @@ class SemanticRouter:
             "identity_protection", "general"
         ]
         
-        # Categories that enforce Matplotlib/Code Interpreter Data Visuals
+        # 🟢 THE FINAL FIX: Added "general" so multi-subject exams trigger the Hybrid Visual Protocol!
         self.visual_categories = [
-            "matematicas", "ciencias_naturales", "analisis_imagen"
+            "matematicas", "ciencias_naturales", "analisis_imagen", "general"
         ]
 
-    # 🟢 ACCEPT exam_context HERE
+    # 🟢 PASS exam_context TO THE ROUTER
     def determine_category(self, text: str, user_id: str = "system_router", session_id: str = "intent_resolution", exam_context: str = "GENERAL") -> dict:
         if not text:
             return {
@@ -69,7 +69,7 @@ class SemanticRouter:
                 "source": "error_fallback"
             }
 
-    # 🟢 PASS exam_context TO BUILDER
+    # 🟢 PASS exam_context TO INSTRUCTION BUILDER
     def _classify_with_llm(self, text: str, user_id: str, session_id: str, exam_context: str) -> dict:
         router_model = settings.OPENAI_ROUTER_MODEL.lower()
         
@@ -116,7 +116,7 @@ class SemanticRouter:
             if not parsed_data:
                 raise ValueError("Failed to parse structured output from Responses API.")
 
-            # (Token Tracking Logic Remains Unchanged)
+            # (Token Tracking Logic)
             usage = getattr(response, "usage", None)
             if usage:
                 try:
@@ -154,6 +154,7 @@ class SemanticRouter:
 
             requires_visuals = data.get("requires_visuals", False)
 
+            # 🟢 Override requires_visuals if category is in visual_categories (including "general")
             if intent == "quiz" and category in self.visual_categories:
                 requires_visuals = True
                 logger.info(f"Router Override: Enforcing requires_visuals=True for {category} quiz to apply visual doctrine styling.")

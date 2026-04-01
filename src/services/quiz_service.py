@@ -21,20 +21,22 @@ class QuizService:
         # ---------------------------------------------------------------------
         # DYNAMIC VISUAL QUOTA LOGIC (The 40% Rule)
         # ---------------------------------------------------------------------
-        # ADDED: "matematicas", "ciencias_naturales" to exactly match the router
         visual_subjects = [
             "matematicas", "matematica", "matemática", "fisica", "física", 
             "quimica", "química", "biologia", "biología", 
             "ciencias_naturales", "ciencia", "analisis_imagen", "análisis"
         ]
         
-        # ADDED: "analisis_textual", "sociales_ciudadanas" to exactly match the router
         creative_subjects = [
             "ciencias_sociales", "sociales_ciudadanas", "sociales", 
             "lectura_critica", "analisis_textual", "ingles"
         ]
         
         topic_lower = topic.lower()
+        
+        # 🟢 NEW: Dedicated check for the general multi-subject exam
+        is_general_subject = "general" in topic_lower
+        
         is_visual_subject = any(subj in topic_lower for subj in visual_subjects)
         is_creative_subject = any(subj in topic_lower for subj in creative_subjects)
 
@@ -42,14 +44,24 @@ class QuizService:
         max_visuals = 0
         target_visuals = 0
         
-        if is_visual_subject or is_creative_subject:
-            # Calculate max allowed visuals (40% of total questions, rounded down)
+        # Calculate max allowed visuals (40% of total questions, rounded down)
+        if is_general_subject or is_visual_subject or is_creative_subject:
             max_visuals = math.floor(num_questions * 0.4)
-            # Randomly select a target number between 0 and max_visuals
             target_visuals = random.randint(0, max_visuals) if max_visuals > 0 else 0
 
+        # --- BRANCH C: HYBRID VISUALS (MULTI-SUBJECT / GENERAL) ---
+        if is_general_subject and target_visuals > 0:
+            visual_instruction = (
+                f"## VISUAL GENERATION PROTOCOL (HYBRID MULTI-SUBJECT - MANDATORY)\n"
+                f"You MUST generate EXACTLY {target_visuals} visual(s) across this quiz.\n"
+                "Because this is a general/multi-subject exam, choose the appropriate visual engine per question:\n"
+                "  - **For Math, Science, or Image Analysis**: Use `plot_prompt` ONLY (pure mathematical instructions for Matplotlib). Leave `image_prompt` null.\n"
+                "  - **For Humanities, Reading, or Social Sciences**: Use `image_prompt` ONLY (explicitly include 'in the style of Claude Monet, impressionist'). Leave `plot_prompt` null.\n"
+                "CRITICAL: Never use both in the same question. Do NOT call the image or code tools directly.\n\n"
+            )
+
         # --- BRANCH A: DATA VISUALS (MATPLOTLIB) ---
-        if is_visual_subject and target_visuals > 0:
+        elif is_visual_subject and target_visuals > 0:
             visual_instruction = (
                 f"## VISUAL GENERATION PROTOCOL (DATA GRAPHS - MANDATORY)\n"
                 f"You MUST generate EXACTLY {target_visuals} graph(s) for this quiz.\n"
@@ -71,12 +83,13 @@ class QuizService:
         else:
             visual_instruction = (
                 "## VISUAL & TOOL EXECUTION PROTOCOL (VISUALS DISABLED)\n"
-                "You are FORBIDDEN from generating any images or graphs. You MUST leave `image_url` and `image_prompt` as null.\n\n"
+                "You are FORBIDDEN from generating any images or graphs. You MUST leave `image_url`, `image_prompt`, and `plot_prompt` as null.\n\n"
             )
 
         # STRUCTURED LOGGING: Record the decision for CloudWatch Insights
         log_event("dynamic_visual_quota_calculated", {
             "subject_topic": topic_lower,
+            "is_general_subject": is_general_subject,
             "is_visual_subject": is_visual_subject,
             "is_creative_subject": is_creative_subject,
             "num_questions_requested": num_questions,
