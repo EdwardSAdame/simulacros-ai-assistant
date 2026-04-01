@@ -54,10 +54,10 @@ class QuizService:
             visual_instruction = (
                 f"## VISUAL GENERATION PROTOCOL (HYBRID MULTI-SUBJECT - MANDATORY)\n"
                 f"You MUST generate EXACTLY {target_visuals} visual(s) across this quiz.\n"
-                "Because this is a general/multi-subject exam, choose the appropriate visual engine per question:\n"
-                "  - **For Math, Science, or Image Analysis**: Use `plot_prompt` ONLY (pure mathematical instructions for Matplotlib). Leave `image_prompt` null.\n"
-                "  - **For Humanities, Reading, or Social Sciences**: Use `image_prompt` ONLY (explicitly include 'in the style of Claude Monet, impressionist'). Leave `plot_prompt` null.\n"
-                "CRITICAL: Never use both in the same question. Do NOT call the image or code tools directly.\n\n"
+                "Because this is a multi-subject exam, YOU ARE THE ORCHESTRATOR. You must analyze the question and decide which visual engine to use based on this Decision Matrix:\n"
+                "  - **DECISION A (Data)**: Does the question require reading a chart, graph, geometry, or statistics? -> You MUST use `plot_prompt`. Leave `image_prompt` null.\n"
+                "  - **DECISION B (Creative)**: Does the question require a thematic illustration for History, Reading, or Biology? -> You MUST use `image_prompt` (Monet style). Leave `plot_prompt` null.\n"
+                "CRITICAL: Never mix them. Never use both in the same question. Do NOT call the image or code tools directly.\n\n"
             )
 
         # --- BRANCH A: DATA VISUALS (MATPLOTLIB) ---
@@ -67,7 +67,8 @@ class QuizService:
                 f"You MUST generate EXACTLY {target_visuals} graph(s) for this quiz.\n"
                 "CRITICAL: Do NOT call the code_interpreter tool.\n"
                 "Instead, write MINIMALIST instructions in the `plot_prompt` field.\n"
-                "  - **MINIMALIST DOCTRINE**: Your `plot_prompt` MUST ONLY contain pure mathematical instructions (function, limits, points).\n\n"
+                "  - **MINIMALIST DOCTRINE**: Your `plot_prompt` MUST ONLY contain pure mathematical instructions (function, limits, points, statistics).\n"
+                "  - **CONSTRAINT**: You MUST leave `image_prompt` as null. Do not use creative image generation.\n\n"
             )
             
         # --- BRANCH B: CREATIVE VISUALS (DECOUPLED ASYNC ARCHITECTURE) ---
@@ -77,7 +78,8 @@ class QuizService:
                 f"You MUST include EXACTLY {target_visuals} contextual illustration(s) in this quiz.\n"
                 "CRITICAL: Do NOT call the image_generation tool.\n"
                 "Instead, describe the image using the `image_prompt` field.\n"
-                "  - **Style Doctrine**: ALL `image_prompt` descriptions MUST explicitly include 'in the style of Claude Monet, impressionist'.\n\n"
+                "  - **Style Doctrine**: ALL `image_prompt` descriptions MUST explicitly include 'in the style of Claude Monet, impressionist'.\n"
+                "  - **CONSTRAINT**: You MUST leave `plot_prompt` as null. Do not use data graphs.\n\n"
             )
             
         else:

@@ -29,11 +29,27 @@ class QuizQuestion(BaseModel):
     question_text: str = Field(..., description="The question stem. FORMATTING: Write regular text normally. Wrap ONLY math expressions, numbers, and symbols in standard LaTeX (\\( and \\)). Example: 'Si \\( x = 5 \\), que sucede?'. MUST match 'THE SETUP' numbers exactly.")
     
     # -------------------------------------------------------------------------
-    # NEW: DECOUPLED IMAGE & PLOT ARCHITECTURE
+    # NEW: DECOUPLED IMAGE & PLOT ARCHITECTURE (STRICT AI ROUTING)
     # -------------------------------------------------------------------------
-    image_prompt: Optional[str] = Field(None, description="If an illustration is needed for this question, provide a highly detailed text prompt describing the image you want generated (e.g., 'A Claude Monet style painting of...'). Leave null if no image is needed.")
+    image_prompt: Optional[str] = Field(
+        None, 
+        description=(
+            "CREATIVE VISUALS ONLY. Use this exclusively for historical scenes, literary contexts, "
+            "or biological illustrations (e.g., 'A Claude Monet style painting of...'). "
+            "CRITICAL EXCLUSION: NEVER put charts, graphs, bar charts, geometry, statistics, or math in this field. "
+            "DALL-E cannot draw data. If you need data representation, leave this null and use plot_prompt."
+        )
+    )
     
-    plot_prompt: Optional[str] = Field(None, description="If an analytical graph, data plot, or mathematical visualization is needed, provide explicit instructions here. The backend will use a Python Code Interpreter to generate the graph asynchronously. Leave null if no graph is needed. CRITICAL RULE: DO NOT use the python tool to write code, draw, or save the plot yourself! You MUST only write the text instructions here and leave image_url as null.")
+    plot_prompt: Optional[str] = Field(
+        None, 
+        description=(
+            "DATA VISUALS ONLY. Use this exclusively for math, statistics, physics, geometry, charts, and graphs. "
+            "Provide pure mathematical instructions for Matplotlib. "
+            "CRITICAL EXCLUSION: NEVER use this for artistic or thematic illustrations. "
+            "If you need art, leave this null and use image_prompt. DO NOT write python code here, just the math instructions."
+        )
+    )
     
     image_url: Optional[str] = Field(None, description="URL of the generated image/graph. If you wrote an image_prompt or plot_prompt, LEAVE THIS NULL. The backend will populate it automatically.")
 
