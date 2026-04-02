@@ -83,6 +83,15 @@ When writing the Python code, you MUST apply the following "Clean Style" paramet
             fontsize=12, 
             color='black')
     ```
+
+#### 6. SAVING AND CLOSING (CRITICAL)
+* **Prevent Duplicates**: You MUST save the figure explicitly at 200 dpi and then immediately close the figure to prevent Jupyter from generating a duplicate low-resolution output.
+    ```python
+    out='/mnt/data/plot.png'
+    fig.tight_layout()
+    fig.savefig(out, dpi=200)
+    plt.close(fig) # THIS IS MANDATORY
+    ```
 """
 
 def build_visual_instructions() -> str:
