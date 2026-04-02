@@ -98,13 +98,14 @@ class QuizService:
                 "Produce a strictly text-based quiz. Keep `image_url`, `image_prompt`, and `plot_prompt` strictly as literal JSON null.\n\n"
             )
 
+        # FIX: Restored max_visuals variable in the logging dictionary
         log_event("dynamic_visual_quota_calculated", {
             "subject_topic": topic_lower,
             "is_general_subject": is_general_subject,
             "is_visual_subject": is_visual_subject,
             "is_creative_subject": is_creative_subject,
             "num_questions_requested": num_questions,
-            "max_allowed_visuals": max_allowed_visuals,
+            "max_allowed_visuals": max_visuals, 
             "target_visuals_enforced": target_visuals
         })
 
