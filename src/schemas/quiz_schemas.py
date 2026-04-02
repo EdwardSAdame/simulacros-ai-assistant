@@ -32,28 +32,35 @@ class QuizQuestion(BaseModel):
     )
 
     # -------------------------------------------------------------------------
-    # 2. LOGIC ENGINE: Preserved 'THE SETUP' + Anti-Echo Constraint
+    # 2. CONTEXT-FIRST ANCHORING (Foundational Texts)
     # -------------------------------------------------------------------------
-    explanation: str = Field(..., description=(
-        "Detailed reasoning plan. YOU MUST FOLLOW THIS STRUCTURE:\n"
-        "1. THE SETUP: Define the EXACT numbers/facts you will use. If you wrote a plot_prompt, state 'Data derived from graph'.\n"
-        "2. THE SOLUTION: Solve the problem step-by-step using ONLY the setup. You must write out every single arithmetic operation explicitly.\n"
-        "3. THE TRAPS: Identify 3 failure paths based on these specifics.\n"
-        "CRITICAL RULE: DO NOT draft, echo, or repeat the question text or options here."
-    ))
+    context_text: Optional[str] = Field(
+        None, 
+        description=(
+            "The full reading passage or foundational data. "
+            "CRITICAL RULE: If this question requires a text to read, WRITE THE ACTUAL TEXT HERE. "
+            "Do NOT hide the reading passage in the explanation. Leave null ONLY if no context_text is needed."
+        )
+    )
 
     source_url: Optional[str] = Field(
         None, 
         description="The exact URL of the web search. CRITICAL: If you did not perform a web search, you MUST leave this as null. Do NOT hallucinate or invent URLs."
     )
 
-    context_text: Optional[str] = Field(
-        None, 
-        description="The full reading passage or foundational data. Leave this as null UNLESS this specific question requires reading comprehension, a shared mathematical scenario, or a foundational text. To save tokens, only output the passage once per text."
-    )
+    # -------------------------------------------------------------------------
+    # 3. LOGIC ENGINE: Preserved 'THE SETUP' + Anti-Echo Constraint
+    # -------------------------------------------------------------------------
+    explanation: str = Field(..., description=(
+        "Detailed reasoning plan. YOU MUST FOLLOW THIS STRUCTURE:\n"
+        "1. THE SETUP: Define the EXACT numbers/facts you will use. If you wrote a plot_prompt or context_text, state 'Data derived from graph/context'. DO NOT draft the reading passage here.\n"
+        "2. THE SOLUTION: Solve the problem step-by-step using ONLY the setup. You must write out every single arithmetic operation explicitly.\n"
+        "3. THE TRAPS: Identify 3 failure paths based on these specifics.\n"
+        "CRITICAL RULE: DO NOT draft, echo, or repeat the question text or options here."
+    ))
 
     # -------------------------------------------------------------------------
-    # 3. STUDENT FACING TEXT
+    # 4. STUDENT FACING TEXT
     # -------------------------------------------------------------------------
     question_text: str = Field(..., description="The student-facing question stem. FORMATTING: Wrap ONLY math expressions, numbers, and symbols in standard LaTeX (\\( and \\)). CRITICAL VISUAL RULE: If this question has a plot_prompt or image_prompt, this text MUST refer to it (e.g., 'De acuerdo con la gráfica...') and MUST NOT reveal the exact numbers needed to solve the problem. CRITICAL ANTI-LEAK: NEVER include internal meta-labels like 'Core Constraints'.")
     
