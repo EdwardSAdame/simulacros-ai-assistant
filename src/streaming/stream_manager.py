@@ -29,9 +29,11 @@ class StreamManager:
             return False
 
         try:
+            # FIX: ensure_ascii=False forces Python to send pure UTF-8 Spanish characters 
+            # instead of \uXXXX escape sequences. This prevents frontend regex corruption!
             self.client.post_to_connection(
                 ConnectionId=self.connection_id,
-                Data=json.dumps(payload)
+                Data=json.dumps(payload, ensure_ascii=False)
             )
             self.packet_count += 1
             return True
