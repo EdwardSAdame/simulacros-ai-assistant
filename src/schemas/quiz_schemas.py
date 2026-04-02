@@ -20,13 +20,11 @@ class QuizQuestion(BaseModel):
         "CRITICAL RULE: DO NOT draft, echo, or repeat the question text, the options (A, B, C, D), or the correct answer index inside this field. Only write the Setup, Solution, and Traps."
     ))
 
-    # 🟢 FIX: Conditional URL logic (Anti-Hallucination)
     source_url: Optional[str] = Field(
         None, 
         description="The exact URL of the web search. CRITICAL: If you did not perform a web search, you MUST leave this as null. Do NOT hallucinate or invent URLs."
     )
 
-    # 🟢 FIX: Conditional Context logic (Multi-Subject friendly)
     context_text: Optional[str] = Field(
         None, 
         description="The full reading passage. Leave this as null UNLESS this specific question requires reading comprehension (e.g., Lectura Crítica). To save tokens, only output the passage once per text."
@@ -41,9 +39,10 @@ class QuizQuestion(BaseModel):
         None, 
         description=(
             "CREATIVE VISUALS ONLY. Use this exclusively for historical scenes, literary contexts, "
-            "or biological illustrations (e.g., 'A Claude Monet style painting of...'). "
-            "CRITICAL EXCLUSION: NEVER put charts, graphs, bar charts, geometry, statistics, or math in this field. "
-            "DALL-E cannot draw data. If you need data representation, leave this null and use plot_prompt."
+            "or biological illustrations. "
+            "CRITICAL EXCLUSION: NEVER put charts, graphs, or math in this field. "
+            "STRICT NULL RULE: If this specific question does NOT require a creative visual, "
+            "you MUST return a literal JSON null. Do not write 'none', 'null', or empty strings."
         )
     )
     
@@ -52,8 +51,9 @@ class QuizQuestion(BaseModel):
         description=(
             "DATA VISUALS ONLY. Use this exclusively for math, statistics, physics, geometry, charts, and graphs. "
             "Provide pure mathematical instructions for Matplotlib. "
-            "CRITICAL EXCLUSION: NEVER use this for artistic or thematic illustrations. "
-            "If you need art, leave this null and use image_prompt. DO NOT write python code here, just the math instructions."
+            "CRITICAL EXCLUSION: NEVER use this for artistic illustrations. DO NOT write python code here. "
+            "STRICT NULL RULE: If this specific question does NOT require a data visual, "
+            "you MUST return a literal JSON null. Do not write 'none', 'Plot none', 'null', or empty strings."
         )
     )
     
