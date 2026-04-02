@@ -25,7 +25,8 @@ class QuizQuestion(BaseModel):
     image_prompt: Optional[str] = Field(
         None, 
         description=(
-            "CREATIVE VISUALS ONLY. Use this exclusively for historical scenes, literary contexts, or biological illustrations. "
+            "CREATIVE VISUALS ONLY. Use this exclusively for historical scenes, literary contexts, or nature. "
+            "CRITICAL VISUAL METAPHOR RULE: NEVER request specific text, words, labels, sentences, or letters to be written inside the image. Text-to-image models fail at text. Instead, you MUST translate concepts into purely VISUAL METAPHORS. "
             "CRITICAL EXCLUSION: NEVER put charts, graphs, or math in this field. "
             "STRICT NULL RULE: If this question does NOT require a creative visual, you MUST return a literal JSON null."
         )
