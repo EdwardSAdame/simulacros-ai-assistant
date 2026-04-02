@@ -56,6 +56,7 @@ class QuizService:
                 f"You MUST generate EXACTLY {target_visuals} visual(s) across this quiz.\n"
                 f"ARRAY ENFORCEMENT: Out of the {num_questions} questions, exactly {target_visuals} MUST have EITHER a `plot_prompt` OR an `image_prompt`. "
                 f"The remaining {null_count} questions MUST have BOTH fields set to a literal JSON null.\n"
+                "CRITICAL VISUAL DEPENDENCY: For questions with a visual, the visual MUST contain the critical data. Do not repeat the data in the text.\n"
                 "Analyze the question and select exactly ONE visual engine per visual question:\n"
                 "  - **DATA**: For charts, graphs, or geometry -> Write a description in `plot_prompt`. Keep `image_prompt` null.\n"
                 "  - **CREATIVE**: For thematic illustrations -> Write a description in `image_prompt`. Keep `plot_prompt` null.\n"
@@ -69,6 +70,7 @@ class QuizService:
                 f"You MUST generate EXACTLY {target_visuals} graph(s) for this quiz.\n"
                 f"ARRAY ENFORCEMENT: Out of the {num_questions} questions, exactly {target_visuals} MUST contain a mathematical description in `plot_prompt`. "
                 f"The remaining {null_count} questions MUST have `plot_prompt` set to a literal JSON null. Do not write 'none' or empty strings.\n"
+                "CRITICAL VISUAL DEPENDENCY: If a question has a graph, the text MUST refer to it (e.g., 'Según la gráfica...') and the student MUST need to look at the graph to find the data. Do NOT give them the numbers in the text.\n"
                 "CRITICAL: The background system handles all Python code, Matplotlib styling, colors, and layouts automatically.\n"
                 "  - **NATURAL LANGUAGE ONLY**: Write the `plot_prompt` strictly as a plain English/Spanish mathematical description.\n"
                 "  - **MATH FOCUSED**: Restrict the `plot_prompt` entirely to mathematical parameters, functions, domains, points, and axis labels. Focus your intelligence on making the math complex and interesting.\n"
@@ -82,6 +84,7 @@ class QuizService:
                 f"You MUST include EXACTLY {target_visuals} contextual illustration(s) in this quiz.\n"
                 f"ARRAY ENFORCEMENT: Out of the {num_questions} questions, exactly {target_visuals} MUST contain a visual description in `image_prompt`. "
                 f"The remaining {null_count} questions MUST have `image_prompt` set to a literal JSON null. Do not write 'none' or empty strings.\n"
+                "CRITICAL VISUAL DEPENDENCY: The student must need to look at the image to understand the full context of the question.\n"
                 "CRITICAL: Delegate image creation to the background renderer by describing the image exclusively in the `image_prompt` field.\n"
                 "  - **FIELD ROUTING**: Keep `plot_prompt` always null.\n\n"
             )
@@ -114,7 +117,7 @@ class QuizService:
             f"{visual_instruction}"
 
             "## CRITICAL CONSTRAINTS\n"
-            "1. **ORDER OF OPERATIONS**: Provide the `explanation` FIRST to derive the answer step-by-step. THEN generate the `options` and `correct_option_index`.\n"
+            "1. **ORDER OF OPERATIONS**: FIRST, design the visuals (`plot_prompt` / `image_prompt`). SECOND, write the `explanation` based on those visuals. THIRD, write the `question_text` and `options`.\n"
             "2. **DISTINCT EXPLANATION**: Write the `explanation` focusing strictly on the Setup, Solution, and Traps.\n"
             "3. **PREMISE MATCHING**: The mathematical variables, numbers, and scenarios in `question_text` MUST logically match your Setup.\n"
             "4. **ANTI-LEAK DOCTRINE**: `question_text`, `options`, and `feedback` are strictly student-facing. NEVER leak internal meta-labels (e.g., 'Core Constraints', 'The Setup', 'Failure Paths', 'Traps') into these fields.\n\n"

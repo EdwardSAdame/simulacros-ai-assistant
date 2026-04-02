@@ -10,14 +10,36 @@ class QuizQuestion(BaseModel):
     question_title: str = Field(..., description="Title with number, e.g., '# 1. Topic'")
     
     # -------------------------------------------------------------------------
-    # LOGIC ENGINE: Preserved 'THE SETUP' + Anti-Echo Constraint
+    # 1. VISUAL-FIRST ANCHORING: Decide the visual BEFORE the logic
+    # -------------------------------------------------------------------------
+    plot_prompt: Optional[str] = Field(
+        None, 
+        description=(
+            "DATA VISUALS ONLY. Use this exclusively for math, statistics, physics, geometry, charts, and graphs. "
+            "Provide pure mathematical instructions for Matplotlib. "
+            "CRITICAL VISUAL DEPENDENCY: If you use this field, the graph MUST contain the critical data needed to solve the problem. Do NOT put the solving data in the question_text. "
+            "STRICT NULL RULE: If this question does NOT require a data visual, you MUST return a literal JSON null."
+        )
+    )
+
+    image_prompt: Optional[str] = Field(
+        None, 
+        description=(
+            "CREATIVE VISUALS ONLY. Use this exclusively for historical scenes, literary contexts, or biological illustrations. "
+            "CRITICAL EXCLUSION: NEVER put charts, graphs, or math in this field. "
+            "STRICT NULL RULE: If this question does NOT require a creative visual, you MUST return a literal JSON null."
+        )
+    )
+
+    # -------------------------------------------------------------------------
+    # 2. LOGIC ENGINE: Preserved 'THE SETUP' + Anti-Echo Constraint
     # -------------------------------------------------------------------------
     explanation: str = Field(..., description=(
         "Detailed reasoning plan. YOU MUST FOLLOW THIS STRUCTURE:\n"
-        "1. THE SETUP: Define the EXACT numbers/facts you will use.\n"
+        "1. THE SETUP: Define the EXACT numbers/facts you will use. If you wrote a plot_prompt, state 'Data derived from graph'.\n"
         "2. THE SOLUTION: Solve the problem step-by-step using ONLY the setup.\n"
         "3. THE TRAPS: Identify 3 failure paths based on these specifics.\n"
-        "CRITICAL RULE: DO NOT draft, echo, or repeat the question text, the options (A, B, C, D), or the correct answer index inside this field. Only write the Setup, Solution, and Traps."
+        "CRITICAL RULE: DO NOT draft, echo, or repeat the question text or options here."
     ))
 
     source_url: Optional[str] = Field(
@@ -30,32 +52,10 @@ class QuizQuestion(BaseModel):
         description="The full reading passage or foundational data. Leave this as null UNLESS this specific question requires reading comprehension, a shared mathematical scenario, or a foundational text. To save tokens, only output the passage once per text."
     )
 
-    question_text: str = Field(..., description="The student-facing question stem. FORMATTING: Write regular text normally. Wrap ONLY math expressions, numbers, and symbols in standard LaTeX (\\( and \\)). MUST logically match 'THE SETUP' numbers exactly. CRITICAL ANTI-LEAK: NEVER include internal meta-labels like 'Core Constraints', 'The Setup', 'Failure Paths', or 'Traps' in this field.")
-    
     # -------------------------------------------------------------------------
-    # DECOUPLED IMAGE & PLOT ARCHITECTURE (STRICT AI ROUTING)
+    # 3. STUDENT FACING TEXT
     # -------------------------------------------------------------------------
-    image_prompt: Optional[str] = Field(
-        None, 
-        description=(
-            "CREATIVE VISUALS ONLY. Use this exclusively for historical scenes, literary contexts, "
-            "or biological illustrations. "
-            "CRITICAL EXCLUSION: NEVER put charts, graphs, or math in this field. "
-            "STRICT NULL RULE: If this specific question does NOT require a creative visual, "
-            "you MUST return a literal JSON null. Do not write 'none', 'null', or empty strings."
-        )
-    )
-    
-    plot_prompt: Optional[str] = Field(
-        None, 
-        description=(
-            "DATA VISUALS ONLY. Use this exclusively for math, statistics, physics, geometry, charts, and graphs. "
-            "Provide pure mathematical instructions for Matplotlib. "
-            "CRITICAL EXCLUSION: NEVER use this for artistic illustrations. DO NOT write python code here. "
-            "STRICT NULL RULE: If this specific question does NOT require a data visual, "
-            "you MUST return a literal JSON null. Do not write 'none', 'Plot none', 'null', or empty strings."
-        )
-    )
+    question_text: str = Field(..., description="The student-facing question stem. FORMATTING: Wrap ONLY math expressions, numbers, and symbols in standard LaTeX (\\( and \\)). CRITICAL VISUAL RULE: If this question has a plot_prompt or image_prompt, this text MUST refer to it (e.g., 'De acuerdo con la gráfica...') and MUST NOT reveal the exact numbers needed to solve the problem. CRITICAL ANTI-LEAK: NEVER include internal meta-labels like 'Core Constraints'.")
     
     image_url: Optional[str] = Field(None, description="URL of the generated image/graph. If you wrote an image_prompt or plot_prompt, LEAVE THIS NULL. The backend will populate it automatically.")
 
