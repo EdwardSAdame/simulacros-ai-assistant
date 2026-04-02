@@ -1,13 +1,28 @@
 # src/services/quiz_service.py
-from typing import Dict, Any
+from typing import Dict, Any, List, Tuple
 import math
 import random
+import re
+import base64
+import threading
+import logging
 
 from src.utils.logging_utils import log_event
+from src.services.storage_service import storage_service
+from src.assistant.assistant_client import generate_structured_quiz, stream_structured_quiz
+from src.config.page_vectorstores import get_stores_for_page
+from src.config.web_search_config import get_search_filters
+
+logger = logging.getLogger(__name__)
+
+def _normalize_email_for_storage(val):
+    if val is None: return None
+    if isinstance(val, str) and val.strip() == "": return None
+    return val
 
 class QuizService:
     """
-    Encapsulates logic for Quiz Prompts. 
+    Encapsulates logic for Quiz Prompts and Orchestrates Quiz Execution. 
     Parsing is handled by the Assistant Client via Structured Outputs.
     """
 
@@ -17,12 +32,6 @@ class QuizService:
         Returns the system instruction with optimized token usage.
         Dynamically calculates visual quotas based on the subject and question count.
         """
-        
-        # ---------------------------------------------------------------------
-        # DYNAMIC VISUAL QUOTA LOGIC (The 40% Rule)
-        # ---------------------------------------------------------------------
-        # FIX: Eliminamos palabras genéricas como "ciencia" y "análisis" para evitar 
-        # que hagan match cruzado con "ciencias_sociales" o "analisis_textual".
         visual_subjects = [
             "matematicas", "matematica", "matemática", "fisica", "física", 
             "quimica", "química", "biologia", "biología", 
@@ -35,7 +44,6 @@ class QuizService:
         ]
         
         topic_lower = topic.lower()
-        
         is_general_subject = "general" in topic_lower
         is_visual_subject = any(subj in topic_lower for subj in visual_subjects)
         is_creative_subject = any(subj in topic_lower for subj in creative_subjects)
@@ -44,14 +52,12 @@ class QuizService:
         max_visuals = 0
         target_visuals = 0
         
-        # Calculate max allowed visuals (40% of total questions, rounded down)
         if is_general_subject or is_visual_subject or is_creative_subject:
             max_visuals = math.floor(num_questions * 0.4)
             target_visuals = random.randint(0, max_visuals) if max_visuals > 0 else 0
 
         null_count = num_questions - target_visuals
 
-        # --- BRANCH C: HYBRID VISUALS (MULTI-SUBJECT / GENERAL) ---
         if is_general_subject and target_visuals > 0:
             visual_instruction = (
                 f"## VISUAL GENERATION PROTOCOL (HYBRID MULTI-SUBJECT - MANDATORY)\n"
@@ -64,8 +70,6 @@ class QuizService:
                 "  - **CREATIVE**: For thematic illustrations -> Write a description in `image_prompt`. Keep `plot_prompt` null.\n"
                 "CRITICAL: Rely entirely on the background system to execute the chosen visual engine.\n\n"
             )
-
-        # --- BRANCH A: DATA VISUALS (MATPLOTLIB) ---
         elif is_visual_subject and target_visuals > 0:
             visual_instruction = (
                 f"## VISUAL GENERATION PROTOCOL (DATA GRAPHS - MANDATORY)\n"
@@ -78,8 +82,6 @@ class QuizService:
                 "  - **MATH FOCUSED**: Restrict the `plot_prompt` entirely to mathematical parameters, functions, domains, points, and axis labels. Focus your intelligence on making the math complex and interesting.\n"
                 "  - **FIELD ROUTING**: Keep `image_prompt` always null.\n\n"
             )
-            
-        # --- BRANCH B: CREATIVE VISUALS (DECOUPLED ASYNC ARCHITECTURE) ---
         elif is_creative_subject and target_visuals > 0:
             visual_instruction = (
                 f"## VISUAL GENERATION PROTOCOL (CREATIVE ILLUSTRATIONS - MANDATORY)\n"
@@ -90,14 +92,12 @@ class QuizService:
                 "CRITICAL: Delegate image creation to the background renderer by describing the image exclusively in the `image_prompt` field.\n"
                 "  - **FIELD ROUTING**: Keep `plot_prompt` always null.\n\n"
             )
-            
         else:
             visual_instruction = (
                 "## VISUAL & TOOL EXECUTION PROTOCOL (TEXT ONLY)\n"
                 "Produce a strictly text-based quiz. Keep `image_url`, `image_prompt`, and `plot_prompt` strictly as literal JSON null.\n\n"
             )
 
-        # STRUCTURED LOGGING: Record the decision for CloudWatch Insights
         log_event("dynamic_visual_quota_calculated", {
             "subject_topic": topic_lower,
             "is_general_subject": is_general_subject,
@@ -108,37 +108,28 @@ class QuizService:
             "target_visuals_enforced": target_visuals
         })
 
-        # ---------------------------------------------------------------------
-        # ASSEMBLE SYSTEM PROMPT
-        # ---------------------------------------------------------------------
         instruction_text = (
             f"## IMMEDIATE RUNTIME MISSION\n"
             f"The user requested a quiz/exam about '{topic}'. "
             f"Generate exactly {num_questions} distinct questions.\n\n"
-            
             f"{visual_instruction}"
-
             "## CRITICAL CONSTRAINTS\n"
             "1. **ORDER OF OPERATIONS**: FIRST, design visuals (`plot_prompt` / `image_prompt`). SECOND, write the `context_text` if a reading passage is required. THIRD, write the `explanation` based on those anchors. FOURTH, write the `question_text` and `options`.\n"
             "2. **DISTINCT EXPLANATION**: Write the `explanation` focusing strictly on the Setup, Solution, and Traps.\n"
             "3. **EXPLICIT ARITHMETIC**: Do NOT use mental math. In your `explanation`, you MUST write out every single arithmetic operation explicitly line-by-line.\n"
             "4. **PREMISE MATCHING**: The mathematical variables, numbers, and scenarios in `question_text` MUST logically match your Setup.\n"
             "5. **ANTI-LEAK DOCTRINE**: `question_text`, `options`, and `feedback` are strictly student-facing. NEVER leak internal meta-labels (e.g., 'Core Constraints', 'The Setup', 'Failure Paths', 'Traps') into these fields.\n\n"
-
             "## DISTRACTOR GENERATION PROTOCOL\n"
             "- Identify 3 distinct 'Failure Paths' in the `explanation`.\n"
             "- The wrong `options` MUST be the logical result of these specific Failure Paths.\n"
             "- In `feedback`, explicitly explain why the student might have chosen that wrong option without using the word 'Failure Path'.\n\n"
-            
             "## CONTENT & PEDAGOGY RULES\n"
             "- Generate questions strictly applying the 'ACADEMIC FRAMEWORK'.\n"
             "- Assign a `difficulty` integer (1-3) based on cognitive load.\n"
             "- Questions must be challenging, non-trivial, and require multi-step reasoning.\n\n"
-            
             "## SCHEMA & FIELD RESTRICTIONS\n"
             "- **SOURCES**: Keep `source_url` as null unless you actively hold a verified URL in your context for this specific question.\n"
             "- **CONTEXT**: Use `context_text` ONLY if the question requires a large foundational text, reading passage, or shared scenario. Otherwise, keep it null.\n\n"
-            
             "## SMART FOLLOW-UP PROTOCOL\n"
             "Generate 3 'Ghost Prompts' (easier_payload, harder_payload, retry_payload) in the EXACT SAME LANGUAGE as the quiz, using First Person format.\n"
         )
@@ -147,3 +138,273 @@ class QuizService:
             "role": "system", 
             "content": [{"type": "input_text", "text": instruction_text}]
         }
+
+    # 🟢 THE MISSING EXECUTION LOGIC MOVED FROM OLD CHAT_SERVICE:
+    @classmethod
+    def execute_quiz_generation(
+        cls,
+        message: str | None,
+        conversation_input: List[Dict[str, Any]],
+        user_id: str | None,
+        name: str | None,
+        email: str | None,
+        page: str | None,
+        mode: str,
+        exam_context: str,
+        stream_manager: Any | None = None,
+        category: str = "general",
+        clean_pdfs: List[str] | None = None
+    ) -> Tuple[str, Dict | None]:
+        
+        topic_hint = category if category else "General Knowledge"
+        num_questions = 5
+        
+        if message:
+            match = re.search(r'\b(\d+)\b', message)
+            if match:
+                parsed_num = int(match.group(1))
+                if 1 <= parsed_num <= 30: 
+                    num_questions = parsed_num
+
+        creative_categories = [
+            "ciencias_sociales", "sociales_ciudadanas", "sociales", 
+            "lectura_critica", "analisis_textual", "ingles"
+        ]
+        requires_creative_images = category in creative_categories or category == "general"
+
+        conversation_input.append(cls.get_system_instruction(topic=topic_hint, num_questions=num_questions))
+
+        selected_vector_stores = get_stores_for_page(page)
+        web_search_config = get_search_filters(exam_context)
+
+        quiz_data = None
+        final_reply_text = "Aquí tienes tu simulacro."
+
+        try:
+            if stream_manager:
+                stream_gen = stream_structured_quiz(
+                    conversation_input=conversation_input,
+                    user_id=user_id, page=page, name=(name or None), email=_normalize_email_for_storage(email),
+                    mode=mode, exam_context=exam_context, requires_visuals=False, 
+                    requires_creative_images=requires_creative_images, pdf_urls=clean_pdfs,
+                    vector_store_ids=selected_vector_stores, web_search_config=web_search_config,
+                    category=category
+                )
+                
+                seen_indices = set()
+                accumulated_questions = []
+                ai_generated_title = "Simulacro Generado" 
+                
+                ghost_easier, ghost_harder, ghost_retry = None, None, None
+
+                image_threads = []
+                image_urls_map = {}
+                
+                visual_subjects = ["matematicas", "ciencias_naturales", "analisis_imagen", "general"]
+                if category in visual_subjects or requires_creative_images:
+                    max_allowed_visuals = math.floor(num_questions * 0.4)
+                else:
+                    max_allowed_visuals = 2
+
+                visuals_triggered_count = 0
+                allowed_visual_indices = set() 
+
+                def _bg_image_generator(img_prompt: str, q_index: int):
+                    try:
+                        from src.config.settings import get_openai_client
+                        from src.config.model_config import get_model_config 
+                        from src.config.creative_image_instructions import get_creative_image_system_prompt
+                        
+                        bg_client = get_openai_client()
+                        active_config = get_model_config(mode) 
+                        
+                        base_instruction = "You are an expert AI illustrator for Invicto. Use the image_generation tool to create the requested image.\n\n"
+                        instructions = base_instruction + get_creative_image_system_prompt()
+                        
+                        bg_req = {
+                            "model": active_config.model, 
+                            "input": [{"role": "user", "content": f"Generate this image: {img_prompt}"}],
+                            "tools": [{"type": "image_generation", "model": active_config.image_model, "partial_images": 3}],
+                            "instructions": instructions,
+                            "stream": True
+                        }
+                        
+                        bg_stream = bg_client.responses.create(**bg_req)
+                        final_url = None
+                        
+                        for bg_event in bg_stream:
+                            if getattr(bg_event, "type", "") == "response.image_generation_call.partial_image":
+                                bg_b64 = getattr(bg_event, "partial_image_b64", "")
+                                if bg_b64:
+                                    try:
+                                        img_bytes = base64.b64decode(bg_b64)
+                                        s3_url = storage_service.upload_image_from_bytes(img_bytes, "image/png", folder="quiz_assets")
+                                        stream_manager.send_partial_image(index=q_index, b64_data=s3_url)
+                                        final_url = s3_url
+                                    except Exception as upload_err:
+                                        logger.warning(f"BG image upload failed: {upload_err}")
+                        
+                        if final_url: image_urls_map[q_index] = final_url
+                    except Exception as e:
+                        logger.error(f"BG image generation failed: {e}")
+
+                def _bg_plot_generator(plot_prompt: str, q_index: int):
+                    try:
+                        from src.config.settings import get_openai_client
+                        from src.config.model_config import get_model_config
+                        from src.services.ai_assets_service import AiAssetsService
+                        from src.config.visual_instructions import build_visual_instructions
+                        
+                        bg_client = get_openai_client()
+                        active_config = get_model_config(mode) 
+                        
+                        base_instruction = (
+                            "Write and run Python code to generate the requested plot.\n"
+                            "You MUST use Matplotlib. Save the figure as a .png file in your container environment (e.g., /mnt/data/plot.png). Do NOT use plt.show().\n\n"
+                        )
+                        
+                        instructions = base_instruction + build_visual_instructions()
+                        
+                        bg_req = {
+                            "model": active_config.model,
+                            "input": [{"role": "user", "content": f"Generate a plot for this mathematical request: {plot_prompt}"}],
+                            "tools": [{"type": "code_interpreter", "container": {"type": "auto", "memory_limit": "4g"}}], 
+                            "instructions": instructions
+                        }
+                        
+                        response = bg_client.responses.create(**bg_req)
+                        uploaded_map = AiAssetsService.handle_generated_files(bg_client, response, folder="quiz_assets")
+                        
+                        if uploaded_map:
+                            s3_url = list(uploaded_map.values())[0]
+                            stream_manager.send_partial_image(index=q_index, b64_data=s3_url)
+                            image_urls_map[q_index] = s3_url
+                    except Exception as e:
+                        logger.error(f"BG plot generation failed: {e}")
+
+                for event in stream_gen:
+                    evt_type = event.get("type")
+                    if evt_type == "intro":
+                        final_reply_text = event.get("text", "")
+                    
+                    elif evt_type == "image_request":
+                        q_idx = event.get("index", 0)
+                        if visuals_triggered_count < max_allowed_visuals:
+                            prompt_str = event.get("prompt", "")
+                            t = threading.Thread(target=_bg_image_generator, args=(prompt_str, q_idx))
+                            t.start()
+                            image_threads.append(t)
+                            visuals_triggered_count += 1
+                            allowed_visual_indices.add(q_idx)
+
+                    elif evt_type == "plot_request":
+                        q_idx = event.get("index", 0)
+                        if visuals_triggered_count < max_allowed_visuals:
+                            prompt_str = event.get("prompt", "")
+                            t = threading.Thread(target=_bg_plot_generator, args=(prompt_str, q_idx))
+                            t.start()
+                            image_threads.append(t)
+                            visuals_triggered_count += 1
+                            allowed_visual_indices.add(q_idx)
+
+                    elif evt_type == "question":
+                        q_data = event.get("data")
+                        q_dict = q_data.dict() if hasattr(q_data, 'dict') else q_data
+                        idx = event.get("index", 0)
+                        
+                        if idx not in allowed_visual_indices:
+                            q_dict["image_prompt"] = None
+                            q_dict["plot_prompt"] = None
+                            q_dict["image_url"] = None
+
+                        stream_manager.send_quiz_item(question_data=q_dict, index=idx)
+                        
+                        if idx not in seen_indices:
+                            accumulated_questions.append(q_dict)
+                            seen_indices.add(idx)
+                            
+                    elif evt_type == "partial_image":
+                        b64_data = event.get("b64_data", "")
+                        if b64_data:
+                            try:
+                                image_bytes = base64.b64decode(b64_data)
+                                s3_url = storage_service.upload_image_from_bytes(
+                                    image_bytes, "image/png", folder="quiz_assets"
+                                )
+                                stream_manager.send_partial_image(index=event.get("index", 0), b64_data=s3_url)
+                            except Exception as upload_err:
+                                logger.warning(f"Partial image S3 upload failed during quiz: {upload_err}")
+
+                    elif evt_type == "done":
+                        final_obj = event.get("full_response")
+                        parsed_response = None
+                        if hasattr(final_obj, 'questions'): parsed_response = final_obj
+                        elif hasattr(final_obj, 'parsed') and hasattr(final_obj.parsed, 'questions'): parsed_response = final_obj.parsed
+                        elif hasattr(final_obj, 'output_parsed') and hasattr(final_obj.output_parsed, 'questions'): parsed_response = final_obj.output_parsed
+                        
+                        if parsed_response:
+                            final_reply_text = getattr(parsed_response, 'intro_message', final_reply_text)
+                            accumulated_questions = [q.dict() if hasattr(q, 'dict') else q for q in parsed_response.questions]
+                            
+                            for i, q_dict in enumerate(accumulated_questions):
+                                if i not in allowed_visual_indices:
+                                    q_dict["image_prompt"] = None
+                                    q_dict["plot_prompt"] = None
+                                    q_dict["image_url"] = None
+                            
+                            if hasattr(parsed_response, 'title') and parsed_response.title:
+                                ai_generated_title = parsed_response.title
+                            
+                            if hasattr(parsed_response, 'easier_payload'): ghost_easier = parsed_response.easier_payload
+                            if hasattr(parsed_response, 'harder_payload'): ghost_harder = parsed_response.harder_payload
+                            if hasattr(parsed_response, 'retry_payload'): ghost_retry = parsed_response.retry_payload
+
+                    elif evt_type == "error":
+                        error_msg = event.get("error", "Unknown stream error")
+                        stream_manager.send_error(error_msg)
+
+                for t in image_threads:
+                    t.join()
+                    
+                for i, q in enumerate(accumulated_questions):
+                    if i in image_urls_map:
+                        q["image_url"] = image_urls_map[i]
+
+                quiz_data = {
+                    "quiz_mode": "batch", 
+                    "topic": ai_generated_title,
+                    "questions": accumulated_questions,
+                    "question_count": len(accumulated_questions),
+                    "easier_payload": ghost_easier,
+                    "harder_payload": ghost_harder,
+                    "retry_payload": ghost_retry
+                }
+
+            else:
+                quiz_model, usage_data = generate_structured_quiz(
+                    conversation_input=conversation_input,
+                    user_id=user_id, page=page, name=(name or None), email=_normalize_email_for_storage(email),
+                    mode=mode, exam_context=exam_context, requires_visuals=False, 
+                    requires_creative_images=requires_creative_images, pdf_urls=clean_pdfs,
+                    vector_store_ids=selected_vector_stores, web_search_config=web_search_config,
+                    category=category
+                )
+
+                quiz_data = {
+                    "quiz_mode": "batch", 
+                    "topic": getattr(quiz_model, 'title', 'Simulacro Generado'),
+                    "questions": [q.dict() if hasattr(q, 'dict') else q for q in quiz_model.questions],
+                    "question_count": len(quiz_model.questions),
+                    "easier_payload": getattr(quiz_model, 'easier_payload', None),
+                    "harder_payload": getattr(quiz_model, 'harder_payload', None),
+                    "retry_payload": getattr(quiz_model, 'retry_payload', None)
+                }
+                final_reply_text = getattr(quiz_model, 'intro_message', "Aquí tienes tu simulacro.")
+
+        except Exception as e:
+            logger.error(f"Quiz Generation Error: {e}")
+            log_event("quiz_generation_failed", {"error": str(e)}, level="error")
+            final_reply_text = "**Error**: No pudimos generar el simulacro."
+            quiz_data = None
+
+        return final_reply_text, quiz_data

@@ -100,15 +100,14 @@ class OrchestratorService:
         
         try:
             if intent == "quiz":
-                # Routed to Quiz Logic
+                # 🟢 THE FIX: Passed category and clean_pdfs correctly here
                 final_reply_text, meta_payload = QuizService.execute_quiz_generation(
                     message=message, conversation_input=conversation_input, user_id=user_id,
                     name=name, email=email, page=page, mode=mode, exam_context=exam_context, 
-                    stream_manager=stream_manager
+                    stream_manager=stream_manager, category=category, clean_pdfs=clean_pdfs
                 )
                 
             elif intent == "creative_image":
-                # Routed to Creative Image Service
                 final_reply_text, final_images_urls = CreativeImageService.generate_image(
                     conversation_input=conversation_input, user_id=user_id, page=page, 
                     name=name, email=email, mode=mode, stream_manager=stream_manager
@@ -119,7 +118,6 @@ class OrchestratorService:
                 }
                 
             elif intent == "admission_stats":
-                # Routed to Admission Stats
                 final_reply_text, meta_payload = AdmissionChatService.execute_admission_chat(
                     conversation_input=conversation_input, user_id=user_id, page=page, 
                     name=name, email=email, mode=mode, exam_context=exam_context, 
@@ -127,7 +125,6 @@ class OrchestratorService:
                 )
                 
             else:
-                # Default: Standard Chat & Arenas
                 final_reply_text, meta_payload = ChatService.execute_standard_chat(
                     conversation_input=conversation_input, user_id=user_id, page=page, 
                     name=name, email=email, message=message, mode=mode, exam_context=exam_context, 
