@@ -37,7 +37,7 @@ class QuizQuestion(BaseModel):
     explanation: str = Field(..., description=(
         "Detailed reasoning plan. YOU MUST FOLLOW THIS STRUCTURE:\n"
         "1. THE SETUP: Define the EXACT numbers/facts you will use. If you wrote a plot_prompt, state 'Data derived from graph'.\n"
-        "2. THE SOLUTION: Solve the problem step-by-step using ONLY the setup.\n"
+        "2. THE SOLUTION: Solve the problem step-by-step using ONLY the setup. You must write out every single arithmetic operation explicitly.\n"
         "3. THE TRAPS: Identify 3 failure paths based on these specifics.\n"
         "CRITICAL RULE: DO NOT draft, echo, or repeat the question text or options here."
     ))
