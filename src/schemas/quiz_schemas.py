@@ -3,8 +3,8 @@ from pydantic import BaseModel, Field
 from typing import List, Optional, Literal
 
 class QuizOption(BaseModel):
-    text: str = Field(..., description="The answer text. FORMATTING RULES: 1. If the answer is just words/text, write normally WITHOUT delimiters (e.g., 'La biomasa disminuye'). 2. If the answer is a number, equation, or symbol, wrap it in standard LaTeX delimiters \\( and \\). Example: '\\( -\\infty \\)' or '\\( 0 \\)'. 3. Mixed: 'El valor es \\( 5 \\)'. DO NOT double-escape backslashes.")
-    feedback: str = Field(..., description="Short feedback explaining why this option is right/wrong.")
+    text: str = Field(..., description="The answer text. FORMATTING RULES: 1. If the answer is just words/text, write normally WITHOUT delimiters. 2. If the answer is a number, equation, or symbol, wrap it in standard LaTeX delimiters \\( and \\). 3. Mixed: 'El valor es \\( 5 \\)'. CRITICAL: Do NOT include meta-words like 'Failure Path'.")
+    feedback: str = Field(..., description="Short feedback explaining why this option is right/wrong to the student. Speak directly to the student. Do NOT use meta-words like 'Failure Path' or 'Trap'.")
 
 class QuizQuestion(BaseModel):
     question_title: str = Field(..., description="Title with number, e.g., '# 1. Topic'")
@@ -25,13 +25,12 @@ class QuizQuestion(BaseModel):
         description="The exact URL of the web search. CRITICAL: If you did not perform a web search, you MUST leave this as null. Do NOT hallucinate or invent URLs."
     )
 
-    # 🟢 FIX: Broadened Context logic for Math/Science
     context_text: Optional[str] = Field(
         None, 
         description="The full reading passage or foundational data. Leave this as null UNLESS this specific question requires reading comprehension, a shared mathematical scenario, or a foundational text. To save tokens, only output the passage once per text."
     )
 
-    question_text: str = Field(..., description="The question stem. FORMATTING: Write regular text normally. Wrap ONLY math expressions, numbers, and symbols in standard LaTeX (\\( and \\)). Example: 'Si \\( x = 5 \\), que sucede?'. MUST match 'THE SETUP' numbers exactly.")
+    question_text: str = Field(..., description="The student-facing question stem. FORMATTING: Write regular text normally. Wrap ONLY math expressions, numbers, and symbols in standard LaTeX (\\( and \\)). MUST logically match 'THE SETUP' numbers exactly. CRITICAL ANTI-LEAK: NEVER include internal meta-labels like 'Core Constraints', 'The Setup', 'Failure Paths', or 'Traps' in this field.")
     
     # -------------------------------------------------------------------------
     # DECOUPLED IMAGE & PLOT ARCHITECTURE (STRICT AI ROUTING)

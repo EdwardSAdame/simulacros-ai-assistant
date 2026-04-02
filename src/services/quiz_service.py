@@ -115,18 +115,19 @@ class QuizService:
 
             "## CRITICAL CONSTRAINTS\n"
             "1. **ORDER OF OPERATIONS**: Provide the `explanation` FIRST to derive the answer step-by-step. THEN generate the `options` and `correct_option_index`.\n"
-            "2. **DISTINCT EXPLANATION**: Write the `explanation` focusing strictly on the Setup, Solution, and Traps, maintaining unique text that differs from the question and options.\n"
-            "3. **PREMISE LOCKING**: Explicitly define 'Core Constraints' in the `explanation`. The `question_text` MUST use those EXACT constraints.\n\n"
+            "2. **DISTINCT EXPLANATION**: Write the `explanation` focusing strictly on the Setup, Solution, and Traps.\n"
+            "3. **PREMISE MATCHING**: The mathematical variables, numbers, and scenarios in `question_text` MUST logically match your Setup.\n"
+            "4. **ANTI-LEAK DOCTRINE**: `question_text`, `options`, and `feedback` are strictly student-facing. NEVER leak internal meta-labels (e.g., 'Core Constraints', 'The Setup', 'Failure Paths', 'Traps') into these fields.\n\n"
 
             "## DISTRACTOR GENERATION PROTOCOL\n"
             "- Identify 3 distinct 'Failure Paths' in the `explanation`.\n"
-            "- The wrong `options` MUST be the result of these specific Failure Paths.\n"
-            "- In `feedback`, explicitly explain why the student might have chosen that wrong option.\n\n"
+            "- The wrong `options` MUST be the logical result of these specific Failure Paths.\n"
+            "- In `feedback`, explicitly explain why the student might have chosen that wrong option without using the word 'Failure Path'.\n\n"
             
             "## CONTENT & PEDAGOGY RULES\n"
             "- Generate questions strictly applying the 'ACADEMIC FRAMEWORK'.\n"
             "- Assign a `difficulty` integer (1-3) based on cognitive load.\n"
-            "- Questions must be non-trivial, and require multi-step reasoning.\n\n"
+            "- Questions must be challenging, non-trivial, and require multi-step reasoning.\n\n"
             
             "## FIELD ROUTING RESTRICTIONS\n"
             "- **SOURCES**: Keep `source_url` as null unless you actively hold a verified URL in your context for this specific question.\n"
