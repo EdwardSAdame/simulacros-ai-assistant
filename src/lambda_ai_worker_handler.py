@@ -3,20 +3,15 @@ import json
 import logging
 import boto3
 import os
-from src.services.chat_service import get_ai_response
+
+# 🟢 NEW IMPORT: The Central Orchestrator replaces chat_service
+from src.services.orchestrator_service import OrchestratorService
+
 from src.storage.ws_connections_table import WsConnectionsTable
 from src.utils.logging_utils import log_event, set_invocation_context
-
-# IMPORT: The Stream Manager
 from src.streaming.stream_manager import StreamManager
-
-# IMPORT: The Hybrid Semantic Router
 from src.services.semantic_router import semantic_router
-
-# Import Token Usage Service
 from src.services.token_usage_service import TokenUsageService
-
-# 🟢 NEW IMPORTS: We need to resolve the exam context before routing!
 from src.services.context_resolution import determine_exam_context
 from src.storage.conversations_table import get_conversation_metadata
 
@@ -81,7 +76,6 @@ def lambda_handler(event, context):
                     session_str = conv_id_in or "unknown"
                     uid_str = user_id or "anonymous"
                     
-                    # Log the Text Context
                     if (sts_in_text is not None and int(sts_in_text) > 0) or (sts_out_text is not None and int(sts_out_text) > 0):
                         svc.log_token_usage(
                             user_id=uid_str, session_id=session_str,
@@ -90,7 +84,6 @@ def lambda_handler(event, context):
                             total_tokens=int(sts_in_text or 0) + int(sts_out_text or 0)
                         )
                     
-                    # Log the Audio Context
                     if (sts_in_audio is not None and int(sts_in_audio) > 0) or (sts_out_audio is not None and int(sts_out_audio) > 0):
                         svc.log_token_usage(
                             user_id=uid_str, session_id=session_str,
@@ -126,7 +119,6 @@ def lambda_handler(event, context):
             
             if connection_id and not is_hidden:
                 try:
-                    # 🟢 NEW: Resolve exam context BEFORE routing
                     persisted_exam_context = None
                     if conv_id_in and user_id:
                         try:
@@ -138,12 +130,11 @@ def lambda_handler(event, context):
 
                     current_exam_context = determine_exam_context(page, message, current_locked_context=persisted_exam_context)
 
-                    # 🟢 PASS exam_context into the router
                     routing_result = semantic_router.determine_category(
                         text=message, 
                         user_id=user_id, 
                         session_id=conv_id_in,
-                        exam_context=current_exam_context  # <-- THE MAGIC LINK
+                        exam_context=current_exam_context 
                     )
                     
                     category_key = routing_result.get("category", "general")
@@ -187,13 +178,14 @@ def lambda_handler(event, context):
                         "source": source_type,
                         "mode": ai_mode,
                         "arena_id": arena_id,
-                        "exam_context": current_exam_context # Logging it for good measure
+                        "exam_context": current_exam_context 
                     })
 
                 except Exception as e:
                     log_event("ws_status_send_failed", {"user_id": user_id}, level="warning", error=e)
 
-            ai_reply, conversation_id, assistant_timestamp, meta_payload = get_ai_response(
+            # 🟢 --- NEW: Call OrchestratorService instead of chat_service ---
+            ai_reply, conversation_id, assistant_timestamp, meta_payload = OrchestratorService.process_ai_request(
                 message=message,
                 user_id=user_id,
                 name=name,
