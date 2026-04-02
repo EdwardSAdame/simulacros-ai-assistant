@@ -25,15 +25,16 @@ class QuizQuestion(BaseModel):
         description="The exact URL of the web search. CRITICAL: If you did not perform a web search, you MUST leave this as null. Do NOT hallucinate or invent URLs."
     )
 
+    # 🟢 FIX: Broadened Context logic for Math/Science
     context_text: Optional[str] = Field(
         None, 
-        description="The full reading passage. Leave this as null UNLESS this specific question requires reading comprehension (e.g., Lectura Crítica). To save tokens, only output the passage once per text."
+        description="The full reading passage or foundational data. Leave this as null UNLESS this specific question requires reading comprehension, a shared mathematical scenario, or a foundational text. To save tokens, only output the passage once per text."
     )
 
     question_text: str = Field(..., description="The question stem. FORMATTING: Write regular text normally. Wrap ONLY math expressions, numbers, and symbols in standard LaTeX (\\( and \\)). Example: 'Si \\( x = 5 \\), que sucede?'. MUST match 'THE SETUP' numbers exactly.")
     
     # -------------------------------------------------------------------------
-    # NEW: DECOUPLED IMAGE & PLOT ARCHITECTURE (STRICT AI ROUTING)
+    # DECOUPLED IMAGE & PLOT ARCHITECTURE (STRICT AI ROUTING)
     # -------------------------------------------------------------------------
     image_prompt: Optional[str] = Field(
         None, 

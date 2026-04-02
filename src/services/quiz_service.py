@@ -124,15 +124,13 @@ class QuizService:
             "- In `feedback`, explicitly explain why the student might have chosen that wrong option.\n\n"
             
             "## CONTENT & PEDAGOGY RULES\n"
-            "- Generate questions based on the 'ACADEMIC FRAMEWORK'.\n"
-            "- Assign a `difficulty` integer (1-3).\n"
-            "- Be cold, precise, and efficient in your 'intro_message' as Roma.\n"
-            "- Questions must be challenging and non-trivial.\n\n"
+            "- Generate questions strictly applying the 'ACADEMIC FRAMEWORK'.\n"
+            "- Assign a `difficulty` integer (1-3) based on cognitive load.\n"
+            "- Questions must be non-trivial, and require multi-step reasoning.\n\n"
             
-            "## WEB SEARCH & CONTEXT RESTRICTIONS\n"
-            "- **WEB SEARCH**: Trigger `web_search` exclusively when the user explicitly requests news or current events.\n"
-            "- **SOURCES**: Populate `source_url` exclusively when a verified search link is obtained; otherwise, keep it null.\n"
-            "- **CONTEXT**: Reserve `context_text` exclusively for reading comprehension passages. Otherwise, keep it null.\n\n"
+            "## FIELD ROUTING RESTRICTIONS\n"
+            "- **SOURCES**: Keep `source_url` as null unless you actively hold a verified URL in your context for this specific question.\n"
+            "- **CONTEXT**: Use `context_text` ONLY if the question requires a large foundational text, reading passage, or shared scenario. Otherwise, keep it null.\n\n"
             
             "## SMART FOLLOW-UP PROTOCOL\n"
             "Generate 3 'Ghost Prompts' (easier_payload, harder_payload, retry_payload) in the EXACT SAME LANGUAGE as the quiz, using First Person format.\n"
