@@ -15,20 +15,19 @@ class QuizQuestion(BaseModel):
     plot_prompt: Optional[str] = Field(
         None, 
         description=(
-            "DATA VISUALS ONLY. Use this exclusively for math, statistics, physics, geometry, charts, and graphs. "
-            "Provide pure mathematical instructions for Matplotlib. "
-            "CRITICAL VISUAL DEPENDENCY: If you use this field, the graph MUST contain the critical data needed to solve the problem. Do NOT put the solving data in the question_text. "
-            "STRICT NULL RULE: If this question does NOT require a data visual, you MUST return a literal JSON null."
+            "Mathematical instructions for Matplotlib. "
+            "The generated graph must contain the critical data needed to solve the problem. "
+            "Leave null if no data visual is required."
         )
     )
 
     image_prompt: Optional[str] = Field(
         None, 
         description=(
-            "CREATIVE VISUALS ONLY. Use this exclusively for historical scenes, literary contexts, or nature. "
-            "CRITICAL VISUAL METAPHOR RULE: NEVER request specific text, words, labels, sentences, or letters to be written inside the image. Text-to-image models fail at text. Instead, you MUST translate concepts into purely VISUAL METAPHORS. "
-            "CRITICAL EXCLUSION: NEVER put charts, graphs, or math in this field. "
-            "STRICT NULL RULE: If this question does NOT require a creative visual, you MUST return a literal JSON null."
+            "Instructions for a creative, decorative illustration. "
+            "Translate concepts into purely visual, text-free metaphors. "
+            "Describe the aesthetic scene and physical objects. "
+            "Leave null if no creative visual is required."
         )
     )
 
@@ -38,9 +37,9 @@ class QuizQuestion(BaseModel):
     context_text: Optional[str] = Field(
         None, 
         description=(
-            "The full reading passage or foundational data. "
-            "CRITICAL RULE: If this question requires a text to read, WRITE THE ACTUAL TEXT HERE. "
-            "Do NOT hide the reading passage in the explanation. Leave null ONLY if no context_text is needed."
+            "The foundational reading passage or shared scenario. "
+            "Provide the raw text directly without any introductory labels or prefixes. "
+            "Leave null if no reading passage is required."
         )
     )
 
@@ -53,17 +52,22 @@ class QuizQuestion(BaseModel):
     # 3. LOGIC ENGINE: Preserved 'THE SETUP' + Anti-Echo Constraint
     # -------------------------------------------------------------------------
     explanation: str = Field(..., description=(
-        "Detailed reasoning plan. YOU MUST FOLLOW THIS STRUCTURE:\n"
-        "1. THE SETUP: Define the EXACT numbers/facts you will use. If you wrote a plot_prompt or context_text, state 'Data derived from graph/context'. DO NOT draft the reading passage here.\n"
-        "2. THE SOLUTION: Solve the problem step-by-step using ONLY the setup. You must write out every single arithmetic operation explicitly.\n"
-        "3. THE TRAPS: Identify 3 failure paths based on these specifics.\n"
-        "CRITICAL RULE: DO NOT draft, echo, or repeat the question text or options here."
+        "Internal reasoning plan structured as follows:\n"
+        "1. THE SETUP: Define the exact facts or numbers to be used. If a visual or context exists, state 'Data derived from graph/context'.\n"
+        "2. THE SOLUTION: A step-by-step derivation using only the setup. Explicitly state every logical or arithmetic step.\n"
+        "3. THE TRAPS: Identify 3 distinct failure paths based on the setup.\n"
+        "This field is for logic only; omit the final question text or options."
     ))
 
     # -------------------------------------------------------------------------
     # 4. STUDENT FACING TEXT
     # -------------------------------------------------------------------------
-    question_text: str = Field(..., description="The student-facing question stem. FORMATTING: Wrap ONLY math expressions, numbers, and symbols in standard LaTeX (\\( and \\)). CRITICAL VISUAL RULE: If this question has a plot_prompt or image_prompt, this text MUST refer to it (e.g., 'De acuerdo con la gráfica...') and MUST NOT reveal the exact numbers needed to solve the problem. CRITICAL ANTI-LEAK: NEVER include internal meta-labels like 'Core Constraints'.")
+    question_text: str = Field(..., description=(
+        "The student-facing question stem. "
+        "Wrap math expressions, numbers, and symbols in standard LaTeX \\( and \\). "
+        "If a plot_prompt is present, the text must refer to the graph and omit the "
+        "specific data points required for the solution."
+    ))
     
     image_url: Optional[str] = Field(None, description="URL of the generated image/graph. If you wrote an image_prompt or plot_prompt, LEAVE THIS NULL. The backend will populate it automatically.")
 
