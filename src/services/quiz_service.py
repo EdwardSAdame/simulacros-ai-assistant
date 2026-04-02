@@ -88,7 +88,7 @@ class QuizService:
                 f"You MUST include EXACTLY {target_visuals} contextual illustration(s) in this quiz.\n"
                 f"ARRAY ENFORCEMENT: Out of the {num_questions} questions, exactly {target_visuals} MUST contain a visual description in `image_prompt`. "
                 f"The remaining {null_count} questions MUST have `image_prompt` set to a literal JSON null. Do not write 'none' or empty strings.\n"
-                "CRITICAL VISUAL DEPENDENCY: The student must need to look at the image to understand the full context of the question.\n"
+                "CRITICAL DECORATIVE RULE: The image MUST be purely decorative and metaphorical. It MUST NOT contain any text, sentences, or data required to solve the question. The student should be able to answer the question solely by reading the `context_text` or `question_text`.\n"
                 "CRITICAL: Delegate image creation to the background renderer by describing the image exclusively in the `image_prompt` field.\n"
                 "  - **FIELD ROUTING**: Keep `plot_prompt` always null.\n\n"
             )
@@ -104,7 +104,7 @@ class QuizService:
             "is_visual_subject": is_visual_subject,
             "is_creative_subject": is_creative_subject,
             "num_questions_requested": num_questions,
-            "max_allowed_visuals": max_visuals,
+            "max_allowed_visuals": max_allowed_visuals,
             "target_visuals_enforced": target_visuals
         })
 
