@@ -21,10 +21,12 @@ class QuizService:
         # ---------------------------------------------------------------------
         # DYNAMIC VISUAL QUOTA LOGIC (The 40% Rule)
         # ---------------------------------------------------------------------
+        # FIX: Eliminamos palabras genéricas como "ciencia" y "análisis" para evitar 
+        # que hagan match cruzado con "ciencias_sociales" o "analisis_textual".
         visual_subjects = [
             "matematicas", "matematica", "matemática", "fisica", "física", 
             "quimica", "química", "biologia", "biología", 
-            "ciencias_naturales", "ciencia", "analisis_imagen", "análisis"
+            "ciencias_naturales", "analisis_imagen"
         ]
         
         creative_subjects = [
@@ -117,10 +119,11 @@ class QuizService:
             f"{visual_instruction}"
 
             "## CRITICAL CONSTRAINTS\n"
-            "1. **ORDER OF OPERATIONS**: FIRST, design the visuals (`plot_prompt` / `image_prompt`). SECOND, write the `explanation` based on those visuals. THIRD, write the `question_text` and `options`.\n"
+            "1. **ORDER OF OPERATIONS**: FIRST, design visuals (`plot_prompt` / `image_prompt`). SECOND, write the `context_text` if a reading passage is required. THIRD, write the `explanation` based on those anchors. FOURTH, write the `question_text` and `options`.\n"
             "2. **DISTINCT EXPLANATION**: Write the `explanation` focusing strictly on the Setup, Solution, and Traps.\n"
-            "3. **PREMISE MATCHING**: The mathematical variables, numbers, and scenarios in `question_text` MUST logically match your Setup.\n"
-            "4. **ANTI-LEAK DOCTRINE**: `question_text`, `options`, and `feedback` are strictly student-facing. NEVER leak internal meta-labels (e.g., 'Core Constraints', 'The Setup', 'Failure Paths', 'Traps') into these fields.\n\n"
+            "3. **EXPLICIT ARITHMETIC**: Do NOT use mental math. In your `explanation`, you MUST write out every single arithmetic operation explicitly line-by-line.\n"
+            "4. **PREMISE MATCHING**: The mathematical variables, numbers, and scenarios in `question_text` MUST logically match your Setup.\n"
+            "5. **ANTI-LEAK DOCTRINE**: `question_text`, `options`, and `feedback` are strictly student-facing. NEVER leak internal meta-labels (e.g., 'Core Constraints', 'The Setup', 'Failure Paths', 'Traps') into these fields.\n\n"
 
             "## DISTRACTOR GENERATION PROTOCOL\n"
             "- Identify 3 distinct 'Failure Paths' in the `explanation`.\n"
@@ -132,7 +135,7 @@ class QuizService:
             "- Assign a `difficulty` integer (1-3) based on cognitive load.\n"
             "- Questions must be challenging, non-trivial, and require multi-step reasoning.\n\n"
             
-            "## FIELD ROUTING RESTRICTIONS\n"
+            "## SCHEMA & FIELD RESTRICTIONS\n"
             "- **SOURCES**: Keep `source_url` as null unless you actively hold a verified URL in your context for this specific question.\n"
             "- **CONTEXT**: Use `context_text` ONLY if the question requires a large foundational text, reading passage, or shared scenario. Otherwise, keep it null.\n\n"
             
