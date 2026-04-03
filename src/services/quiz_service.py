@@ -12,8 +12,6 @@ from src.services.storage_service import storage_service
 from src.assistant.assistant_client import generate_structured_quiz, stream_structured_quiz
 from src.config.page_vectorstores import get_stores_for_page
 from src.config.web_search_config import get_search_filters
-
-# 🟢 THE FIX: Import the TokenUsageService
 from src.services.token_usage_service import TokenUsageService
 
 logger = logging.getLogger(__name__)
@@ -29,7 +27,6 @@ class QuizService:
     Parsing is handled by the Assistant Client via Structured Outputs.
     """
 
-    # 🟢 THE FIX: Added a helper method to handle saving the tokens
     @staticmethod
     def _log_usage(usage_data: dict, current_user: str | None, session: str, active_mode: str):
         if not usage_data or not current_user: return
@@ -158,7 +155,7 @@ class QuizService:
         stream_manager: Any | None = None,
         category: str = "general",
         clean_pdfs: List[str] | None = None,
-        actual_conversation_id: str | None = None # 🟢 THE FIX: Added to signature
+        actual_conversation_id: str | None = None
     ) -> Tuple[str, Dict | None]:
         
         topic_hint = category if category else "General Knowledge"
@@ -196,7 +193,6 @@ class QuizService:
             max_visuals = math.floor(num_questions * 0.4)
             target_visuals = random.randint(0, max_visuals) if max_visuals > 0 else 0
             if target_visuals > 0:
-                # IMPORTANT FIX: sorted() added so the AI receives the list chronologically
                 target_indices = sorted(random.sample(range(num_questions), target_visuals))
 
         log_event("dynamic_visual_quota_calculated", {
@@ -290,13 +286,14 @@ class QuizService:
 
                 def _bg_plot_generator(plot_prompt: str, q_index: int):
                     try:
-                        from src.config.settings import get_openai_client
+                        from src.config.settings import get_openai_client, get_code_interpreter_memory
                         from src.config.model_config import get_model_config
                         from src.services.ai_assets_service import AiAssetsService
                         from src.config.visual_instructions import build_visual_instructions
                         
                         bg_client = get_openai_client()
-                        active_config = get_model_config(mode) 
+                        active_config = get_model_config(mode)
+                        memory_limit = get_code_interpreter_memory()
                         
                         base_instruction = (
                             "Write and run Python code to generate the requested plot.\n"
@@ -305,10 +302,17 @@ class QuizService:
                         
                         instructions = base_instruction + build_visual_instructions()
                         
+                        # NEW LOG: Track background quiz container requests
+                        log_event("container_requested", {
+                            "context": "quiz_background_plot",
+                            "question_index": q_index,
+                            "memory_limit": memory_limit
+                        })
+                        
                         bg_req = {
                             "model": active_config.model,
                             "input": [{"role": "user", "content": f"Generate a plot for this mathematical request: {plot_prompt}"}],
-                            "tools": [{"type": "code_interpreter", "container": {"type": "auto", "memory_limit": "4g"}}], 
+                            "tools": [{"type": "code_interpreter", "container": {"type": "auto", "memory_limit": memory_limit}}], 
                             "instructions": instructions
                         }
                         
@@ -372,7 +376,6 @@ class QuizService:
                             except Exception as upload_err:
                                 logger.warning(f"Partial image S3 upload failed during quiz: {upload_err}")
 
-                    # 🟢 THE FIX: Handle the usage metrics from the stream
                     elif evt_type == "usage_metrics":
                         usage_data = event.get("data")
                         if actual_conversation_id:
@@ -433,7 +436,6 @@ class QuizService:
                     category=category
                 )
 
-                # 🟢 THE FIX: Log usage for standard (non-streaming) execution
                 if usage_data and actual_conversation_id:
                     cls._log_usage(usage_data, user_id, actual_conversation_id, mode)
 
@@ -447,7 +449,6 @@ class QuizService:
                     "retry_payload": getattr(quiz_model, 'retry_payload', None)
                 }
                 
-                # Strict backend strip for non-streaming standard execution as well
                 for i, q_dict in enumerate(quiz_data["questions"]):
                     if i not in target_indices:
                         q_dict["image_prompt"] = None

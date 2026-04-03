@@ -4,8 +4,8 @@ import re
 import json
 from typing import List, Dict, Any, Tuple, Generator, Optional
 
-# CONFIG & CLIENT
-from src.config.settings import get_openai_client, get_vector_search_max_results
+# CONFIG & CLIENT 
+from src.config.settings import get_openai_client, get_vector_search_max_results, get_code_interpreter_memory
 from src.config.model_config import get_model_config
 from src.schemas.quiz_schemas import QuizResponse
 
@@ -15,6 +15,7 @@ from src.assistant.artifact_handler import handle_generated_files, assign_urls_t
 from src.utils.response_parser import extract_sources
 from src.utils.stream_parser import StreamParser
 from src.utils.quiz_utils import QuizUtils
+from src.utils.logging_utils import log_event
 
 # IMPORT OUR NEW FUNCTION CALLING ASSETS
 from src.config.tools_config import get_custom_tools
@@ -234,7 +235,7 @@ def generate_structured_quiz(
     vector_store_ids: List[str] | None = None,
     web_search_config: Dict[str, Any] | None = None,
     user_location: Dict[str, str] | None = None,
-    category: str = "general" # <-- FIX 2: Added category here
+    category: str = "general"
 ) -> Tuple[QuizResponse, Dict[str, int]]:
     
     client = get_openai_client()
@@ -290,7 +291,7 @@ def stream_structured_quiz(
     vector_store_ids: List[str] | None = None,
     web_search_config: Dict[str, Any] | None = None,
     user_location: Dict[str, str] | None = None,
-    category: str = "general" # <-- FIX 2: Added category here
+    category: str = "general"
 ) -> Generator[Dict[str, Any], None, None]:
     
     client = get_openai_client()
@@ -443,7 +444,17 @@ def _configure_tools(vector_store_ids, requires_visuals, requires_creative_image
         tools.append({"type": "file_search", "vector_store_ids": vector_store_ids, "max_num_results": get_vector_search_max_results()})
     
     if requires_visuals or (pdf_urls and len(pdf_urls) > 0):
-        tools.append({"type": "code_interpreter", "container": {"type": "auto"}})
+        # Apply the dynamic memory setting
+        memory_limit = get_code_interpreter_memory()
+        tools.append({
+            "type": "code_interpreter", 
+            "container": {
+                "type": "auto", 
+                "memory_limit": memory_limit
+            }
+        })
+        # Track standard chat container requests
+        log_event("container_requested", {"context": "standard_chat", "memory_limit": memory_limit})
         
     if requires_creative_images:
         tools.append({

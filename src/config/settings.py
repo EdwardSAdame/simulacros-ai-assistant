@@ -74,6 +74,9 @@ class Settings:
         strict_mode = os.getenv("WEB_SEARCH_STRICT_MODE", "true").lower()
         self.WEB_SEARCH_STRICT_MODE: bool = strict_mode == "true"
 
+        # 🟢 THE FIX: Container Memory Limit Configuration
+        self.CODE_INTERPRETER_MEMORY: str = os.getenv("CODE_INTERPRETER_MEMORY", "4g")
+
     def get_openai_client(self) -> openai.Client:
         if not self.OPENAI_API_KEY:
             raise ValueError("Cannot create OpenAI client: OPENAI_API_KEY is not set.")
@@ -81,6 +84,10 @@ class Settings:
 
     def get_vector_search_max_results(self) -> int:
         return self.VECTOR_SEARCH_MAX_RESULTS
+        
+    # 🟢 THE FIX: Getter for container memory
+    def get_code_interpreter_memory(self) -> str:
+        return self.CODE_INTERPRETER_MEMORY
 
 settings = Settings()
 
@@ -89,3 +96,7 @@ def get_openai_client() -> openai.Client:
 
 def get_vector_search_max_results() -> int:
     return settings.get_vector_search_max_results()
+
+# 🟢 THE FIX: Exported getter function
+def get_code_interpreter_memory() -> str:
+    return settings.get_code_interpreter_memory()
