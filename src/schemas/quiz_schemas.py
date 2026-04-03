@@ -77,7 +77,7 @@ class QuizQuestion(BaseModel):
     correct_option_index: Literal[0, 1, 2, 3] = Field(..., description="Index of the correct option (0-3).")
 
 class QuizResponse(BaseModel):
-    title: str = Field(..., description="An engaging short title for the quiz.")
+    title: str = Field(..., description="An engaging short title for the quiz. (max. 6 words)")
     intro_message: str = Field(..., description="A single sentence introduction to the quiz in the Roma persona.")
     question_count: int = Field(..., description="The total number of questions generated in this quiz.")
     questions: List[QuizQuestion]

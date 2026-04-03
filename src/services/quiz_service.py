@@ -27,43 +27,34 @@ class QuizService:
     """
 
     @staticmethod
-    def get_system_instruction(topic: str = "general", num_questions: int = 5) -> Dict[str, Any]:
+    def get_system_instruction(
+        topic: str = "general", 
+        num_questions: int = 5,
+        target_indices: List[int] = None,
+        is_general_subject: bool = False,
+        is_visual_subject: bool = False,
+        is_creative_subject: bool = False
+    ) -> Dict[str, Any]:
         """
-        Returns the system instruction with optimized token usage.
-        Dynamically calculates visual quotas based on the subject and question count.
+        Returns the system instruction with optimized token usage and strict, 
+        deterministic visual index assignments.
         """
-        visual_subjects = [
-            "matematicas", "matematica", "matemática", "fisica", "física", 
-            "quimica", "química", "biologia", "biología", 
-            "ciencias_naturales", "analisis_imagen"
-        ]
-        
-        creative_subjects = [
-            "ciencias_sociales", "sociales_ciudadanas", "sociales", 
-            "lectura_critica", "analisis_textual", "ingles"
-        ]
-        
-        topic_lower = topic.lower()
-        is_general_subject = "general" in topic_lower
-        is_visual_subject = any(subj in topic_lower for subj in visual_subjects)
-        is_creative_subject = any(subj in topic_lower for subj in creative_subjects)
+        target_indices = target_indices or []
+        target_visuals = len(target_indices)
+        null_count = num_questions - target_visuals
+
+        # LLMs understand 1-indexed question numbers much better than 0-indexed arrays
+        human_indices = [i + 1 for i in target_indices]
+        human_indices_str = ", ".join([f"#{i}" for i in human_indices])
 
         visual_instruction = ""
-        max_visuals = 0
-        target_visuals = 0
-        
-        if is_general_subject or is_visual_subject or is_creative_subject:
-            max_visuals = math.floor(num_questions * 0.4)
-            target_visuals = random.randint(0, max_visuals) if max_visuals > 0 else 0
-
-        null_count = num_questions - target_visuals
 
         if is_general_subject and target_visuals > 0:
             visual_instruction = (
                 f"## VISUAL GENERATION PROTOCOL (HYBRID MULTI-SUBJECT - MANDATORY)\n"
                 f"You MUST generate EXACTLY {target_visuals} visual(s) across this quiz.\n"
-                f"ARRAY ENFORCEMENT: Out of the {num_questions} questions, exactly {target_visuals} MUST have EITHER a `plot_prompt` OR an `image_prompt`. "
-                f"The remaining {null_count} questions MUST have BOTH fields set to a literal JSON null.\n"
+                f"DETERMINISTIC ENFORCEMENT: You MUST generate a visual (`plot_prompt` or `image_prompt`) ONLY for the following specific question numbers: {human_indices_str}.\n"
+                f"For the remaining {null_count} questions, BOTH fields MUST be set to a literal JSON null. Do not violate this assignment.\n"
                 "CRITICAL VISUAL DEPENDENCY: For questions with a visual, the visual MUST contain the critical data. Do not repeat the data in the text.\n"
                 "Analyze the question and select exactly ONE visual engine per visual question:\n"
                 "  - **DATA**: For charts, graphs, or geometry -> Write a description in `plot_prompt`. Keep `image_prompt` null.\n"
@@ -74,9 +65,9 @@ class QuizService:
             visual_instruction = (
                 f"## VISUAL GENERATION PROTOCOL (DATA GRAPHS - MANDATORY)\n"
                 f"You MUST generate EXACTLY {target_visuals} graph(s) for this quiz.\n"
-                f"ARRAY ENFORCEMENT: Out of the {num_questions} questions, exactly {target_visuals} MUST contain a mathematical description in `plot_prompt`. "
-                f"The remaining {null_count} questions MUST have `plot_prompt` set to a literal JSON null. Do not write 'none' or empty strings.\n"
-                "CRITICAL VISUAL DEPENDENCY: If a question has a graph, the text MUST refer to it (e.g., 'Según la gráfica...') and the student MUST need to look at the graph to find the data. Do NOT give them the numbers in the text.\n"
+                f"DETERMINISTIC ENFORCEMENT: You MUST write a mathematical description in `plot_prompt` ONLY for the following specific question numbers: {human_indices_str}.\n"
+                f"For the remaining {null_count} questions, `plot_prompt` MUST be set to a literal JSON null. Do not write 'none' or empty strings.\n"
+                "CRITICAL VISUAL DEPENDENCY: If a question has a graph, the text MUST refer to it (e.g., 'Segun la grafica...') and the student MUST need to look at the graph to find the data. Do NOT give them the numbers in the text.\n"
                 "CRITICAL: The background system handles all Python code, Matplotlib styling, colors, and layouts automatically.\n"
                 "  - **NATURAL LANGUAGE ONLY**: Write the `plot_prompt` strictly as a plain English/Spanish mathematical description.\n"
                 "  - **MATH FOCUSED**: Restrict the `plot_prompt` entirely to mathematical parameters, functions, domains, points, and axis labels. Focus your intelligence on making the math complex and interesting.\n"
@@ -86,8 +77,8 @@ class QuizService:
             visual_instruction = (
                 f"## VISUAL GENERATION PROTOCOL (CREATIVE ILLUSTRATIONS - MANDATORY)\n"
                 f"You MUST include EXACTLY {target_visuals} contextual illustration(s) in this quiz.\n"
-                f"ARRAY ENFORCEMENT: Out of the {num_questions} questions, exactly {target_visuals} MUST contain a visual description in `image_prompt`. "
-                f"The remaining {null_count} questions MUST have `image_prompt` set to a literal JSON null. Do not write 'none' or empty strings.\n"
+                f"DETERMINISTIC ENFORCEMENT: You MUST write a visual description in `image_prompt` ONLY for the following specific question numbers: {human_indices_str}.\n"
+                f"For the remaining {null_count} questions, `image_prompt` MUST be set to a literal JSON null. Do not write 'none' or empty strings.\n"
                 "CRITICAL DECORATIVE RULE: The image MUST be purely decorative and metaphorical. It MUST NOT contain any text, sentences, or data required to solve the question. The student should be able to answer the question solely by reading the `context_text` or `question_text`.\n"
                 "CRITICAL: Delegate image creation to the background renderer by describing the image exclusively in the `image_prompt` field.\n"
                 "  - **FIELD ROUTING**: Keep `plot_prompt` always null.\n\n"
@@ -97,17 +88,6 @@ class QuizService:
                 "## VISUAL & TOOL EXECUTION PROTOCOL (TEXT ONLY)\n"
                 "Produce a strictly text-based quiz. Keep `image_url`, `image_prompt`, and `plot_prompt` strictly as literal JSON null.\n\n"
             )
-
-        # FIX: Restored max_visuals variable in the logging dictionary
-        log_event("dynamic_visual_quota_calculated", {
-            "subject_topic": topic_lower,
-            "is_general_subject": is_general_subject,
-            "is_visual_subject": is_visual_subject,
-            "is_creative_subject": is_creative_subject,
-            "num_questions_requested": num_questions,
-            "max_allowed_visuals": max_visuals, 
-            "target_visuals_enforced": target_visuals
-        })
 
         instruction_text = (
             f"## IMMEDIATE RUNTIME MISSION\n"
@@ -140,7 +120,6 @@ class QuizService:
             "content": [{"type": "input_text", "text": instruction_text}]
         }
 
-    # 🟢 THE MISSING EXECUTION LOGIC MOVED FROM OLD CHAT_SERVICE:
     @classmethod
     def execute_quiz_generation(
         cls,
@@ -167,19 +146,59 @@ class QuizService:
                 if 1 <= parsed_num <= 30: 
                     num_questions = parsed_num
 
+        # Pre-calculate deterministic visual quotas and indices BEFORE calling the AI
+        visual_subjects_list = [
+            "matematicas", "matematica", "matemática", "fisica", "física", 
+            "quimica", "química", "biologia", "biología", 
+            "ciencias_naturales", "analisis_imagen"
+        ]
         creative_categories = [
             "ciencias_sociales", "sociales_ciudadanas", "sociales", 
             "lectura_critica", "analisis_textual", "ingles"
         ]
-        requires_creative_images = category in creative_categories or category == "general"
 
-        conversation_input.append(cls.get_system_instruction(topic=topic_hint, num_questions=num_questions))
+        topic_lower = topic_hint.lower()
+        is_general_subject = "general" in topic_lower
+        is_visual_subject = any(subj in topic_lower for subj in visual_subjects_list)
+        is_creative_subject = any(subj in topic_lower for subj in creative_categories)
+        requires_creative_images = is_creative_subject or is_general_subject
+
+        max_visuals = 0
+        target_visuals = 0
+        target_indices = []
+
+        if is_general_subject or is_visual_subject or is_creative_subject:
+            max_visuals = math.floor(num_questions * 0.4)
+            target_visuals = random.randint(0, max_visuals) if max_visuals > 0 else 0
+            if target_visuals > 0:
+                target_indices = random.sample(range(num_questions), target_visuals)
+
+        log_event("dynamic_visual_quota_calculated", {
+            "subject_topic": topic_lower,
+            "is_general_subject": is_general_subject,
+            "is_visual_subject": is_visual_subject,
+            "is_creative_subject": is_creative_subject,
+            "num_questions_requested": num_questions,
+            "max_allowed_visuals": max_visuals, 
+            "target_visuals_enforced": target_visuals,
+            "target_indices_assigned": target_indices
+        })
+
+        system_instruction = cls.get_system_instruction(
+            topic=topic_hint, 
+            num_questions=num_questions, 
+            target_indices=target_indices,
+            is_general_subject=is_general_subject,
+            is_visual_subject=is_visual_subject,
+            is_creative_subject=is_creative_subject
+        )
+        conversation_input.append(system_instruction)
 
         selected_vector_stores = get_stores_for_page(page)
         web_search_config = get_search_filters(exam_context)
 
         quiz_data = None
-        final_reply_text = "Aquí tienes tu simulacro."
+        final_reply_text = "Aqui tienes tu simulacro."
 
         try:
             if stream_manager:
@@ -201,14 +220,8 @@ class QuizService:
                 image_threads = []
                 image_urls_map = {}
                 
-                visual_subjects = ["matematicas", "ciencias_naturales", "analisis_imagen", "general"]
-                if category in visual_subjects or requires_creative_images:
-                    max_allowed_visuals = math.floor(num_questions * 0.4)
-                else:
-                    max_allowed_visuals = 2
-
-                visuals_triggered_count = 0
-                allowed_visual_indices = set() 
+                # Strict backend enforcement based on pre-calculated indices
+                allowed_visual_indices = set(target_indices)
 
                 def _bg_image_generator(img_prompt: str, q_index: int):
                     try:
@@ -290,29 +303,26 @@ class QuizService:
                     
                     elif evt_type == "image_request":
                         q_idx = event.get("index", 0)
-                        if visuals_triggered_count < max_allowed_visuals:
+                        if q_idx in allowed_visual_indices:
                             prompt_str = event.get("prompt", "")
                             t = threading.Thread(target=_bg_image_generator, args=(prompt_str, q_idx))
                             t.start()
                             image_threads.append(t)
-                            visuals_triggered_count += 1
-                            allowed_visual_indices.add(q_idx)
 
                     elif evt_type == "plot_request":
                         q_idx = event.get("index", 0)
-                        if visuals_triggered_count < max_allowed_visuals:
+                        if q_idx in allowed_visual_indices:
                             prompt_str = event.get("prompt", "")
                             t = threading.Thread(target=_bg_plot_generator, args=(prompt_str, q_idx))
                             t.start()
                             image_threads.append(t)
-                            visuals_triggered_count += 1
-                            allowed_visual_indices.add(q_idx)
 
                     elif evt_type == "question":
                         q_data = event.get("data")
                         q_dict = q_data.dict() if hasattr(q_data, 'dict') else q_data
                         idx = event.get("index", 0)
                         
+                        # Strict Override: Even if LLM hallucinated a prompt, strip it if not assigned
                         if idx not in allowed_visual_indices:
                             q_dict["image_prompt"] = None
                             q_dict["plot_prompt"] = None
@@ -400,7 +410,15 @@ class QuizService:
                     "harder_payload": getattr(quiz_model, 'harder_payload', None),
                     "retry_payload": getattr(quiz_model, 'retry_payload', None)
                 }
-                final_reply_text = getattr(quiz_model, 'intro_message', "Aquí tienes tu simulacro.")
+                
+                # Strict backend strip for non-streaming standard execution as well
+                for i, q_dict in enumerate(quiz_data["questions"]):
+                    if i not in target_indices:
+                        q_dict["image_prompt"] = None
+                        q_dict["plot_prompt"] = None
+                        q_dict["image_url"] = None
+
+                final_reply_text = getattr(quiz_model, 'intro_message', "Aqui tienes tu simulacro.")
 
         except Exception as e:
             logger.error(f"Quiz Generation Error: {e}")
