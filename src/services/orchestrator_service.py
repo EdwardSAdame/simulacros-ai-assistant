@@ -6,11 +6,11 @@ from src.utils.logging_utils import log_event
 from src.assistant.image_handler import format_image_urls_for_openai
 from src.services.context_resolution import determine_exam_context
 
-# 🟢 State Management
+# State Management
 from src.services.conversation_service import ConversationService
 from src.services.history_service import build_history_list
 
-# 🟢 Domain Services
+# Domain Services
 from src.services.chat_service import ChatService
 from src.services.quiz_service import QuizService
 from src.services.creative_image_service import CreativeImageService
@@ -67,7 +67,6 @@ class OrchestratorService:
         # 3. Resolve Context and Database State
         raw_exam_context = determine_exam_context(page, message) 
 
-        # 🟢 THE FIX: Capture the locked context returned by the ratchet system
         actual_conversation_id, locked_exam_context = ConversationService.resolve_and_update_conversation(
             user_id=user_id,
             conversation_id=conversation_id,
@@ -101,21 +100,31 @@ class OrchestratorService:
         
         try:
             if intent == "quiz":
-                # Pass locked_exam_context down!
                 final_reply_text, meta_payload = QuizService.execute_quiz_generation(
-                    message=message, conversation_input=conversation_input, user_id=user_id,
-                    name=name, email=email, page=page, mode=mode, exam_context=locked_exam_context, 
-                    stream_manager=stream_manager, category=category, clean_pdfs=clean_pdfs
+                    message=message, 
+                    conversation_input=conversation_input, 
+                    user_id=user_id,
+                    name=name, 
+                    email=email, 
+                    page=page, 
+                    mode=mode, 
+                    exam_context=locked_exam_context, 
+                    stream_manager=stream_manager, 
+                    category=category, 
+                    clean_pdfs=clean_pdfs,
+                    actual_conversation_id=actual_conversation_id
                 )
                 
             elif intent == "creative_image":
-                final_reply_text, final_images_urls = CreativeImageService.generate_image(
+                final_reply_text, final_images_urls, token_usage = CreativeImageService.generate_image(
                     conversation_input=conversation_input, user_id=user_id, page=page, 
                     name=name, email=email, mode=mode, stream_manager=stream_manager
                 )
+                
                 meta_payload = {
                     "type": "rich_chat",
-                    "assets": [{"type": "image", "url": url, "alt": "Generated Visualization"} for url in final_images_urls]
+                    "assets": [{"type": "image", "url": url, "alt": "Generated Visualization"} for url in final_images_urls],
+                    "token_usage": token_usage 
                 }
                 
             elif intent == "admission_stats":

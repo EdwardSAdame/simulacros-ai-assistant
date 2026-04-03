@@ -13,6 +13,9 @@ from src.assistant.assistant_client import generate_structured_quiz, stream_stru
 from src.config.page_vectorstores import get_stores_for_page
 from src.config.web_search_config import get_search_filters
 
+# 🟢 THE FIX: Import the TokenUsageService
+from src.services.token_usage_service import TokenUsageService
+
 logger = logging.getLogger(__name__)
 
 def _normalize_email_for_storage(val):
@@ -25,6 +28,27 @@ class QuizService:
     Encapsulates logic for Quiz Prompts and Orchestrates Quiz Execution. 
     Parsing is handled by the Assistant Client via Structured Outputs.
     """
+
+    # 🟢 THE FIX: Added a helper method to handle saving the tokens
+    @staticmethod
+    def _log_usage(usage_data: dict, current_user: str | None, session: str, active_mode: str):
+        if not usage_data or not current_user: return
+        try:
+            input_val = usage_data.get("input_tokens", usage_data.get("prompt_tokens", 0))
+            output_val = usage_data.get("output_tokens", usage_data.get("completion_tokens", 0))
+
+            TokenUsageService().log_token_usage(
+                user_id=current_user,
+                session_id=session,
+                model=active_mode,
+                input_tokens=input_val,
+                output_tokens=output_val,
+                total_tokens=usage_data.get("total_tokens", 0),
+                reasoning_tokens=usage_data.get("reasoning_tokens", 0),
+                cached_tokens=usage_data.get("cached_tokens", 0)
+            )
+        except Exception as e:
+            logger.error(f"Failed to log token usage in quiz service: {e}")
 
     @staticmethod
     def get_system_instruction(
@@ -133,7 +157,8 @@ class QuizService:
         exam_context: str,
         stream_manager: Any | None = None,
         category: str = "general",
-        clean_pdfs: List[str] | None = None
+        clean_pdfs: List[str] | None = None,
+        actual_conversation_id: str | None = None # 🟢 THE FIX: Added to signature
     ) -> Tuple[str, Dict | None]:
         
         topic_hint = category if category else "General Knowledge"
@@ -347,6 +372,12 @@ class QuizService:
                             except Exception as upload_err:
                                 logger.warning(f"Partial image S3 upload failed during quiz: {upload_err}")
 
+                    # 🟢 THE FIX: Handle the usage metrics from the stream
+                    elif evt_type == "usage_metrics":
+                        usage_data = event.get("data")
+                        if actual_conversation_id:
+                            cls._log_usage(usage_data, user_id, actual_conversation_id, mode)
+
                     elif evt_type == "done":
                         final_obj = event.get("full_response")
                         parsed_response = None
@@ -401,6 +432,10 @@ class QuizService:
                     vector_store_ids=selected_vector_stores, web_search_config=web_search_config,
                     category=category
                 )
+
+                # 🟢 THE FIX: Log usage for standard (non-streaming) execution
+                if usage_data and actual_conversation_id:
+                    cls._log_usage(usage_data, user_id, actual_conversation_id, mode)
 
                 quiz_data = {
                     "quiz_mode": "batch", 
