@@ -46,18 +46,20 @@ class ConversationService:
         mode: str,
         exam_context: str,
         arena_id: str | None = None
-    ) -> Tuple[str, str | None]:
+    ) -> Tuple[str, str]:
         """
         Checks if a conversation exists. 
-        If it does, updates the AI mode, context, and 'last active' timestamps.
-        If it doesn't, creates a new one.
-        Returns a tuple of (actual_conversation_id, persisted_exam_context).
+        Enforces Sticky Exam Context (Ratchet Logic) so the AI never downgrades to 'general'.
+        Returns a tuple of (actual_conversation_id, final_locked_exam_context).
         """
         page = cls.normalize_page(page)
         sanitized_email = cls.normalize_email(email)
 
         actual_conversation_id = conversation_id
         should_create_new = True
+        
+        # 🟢 STICKY RATCHET LOGIC
+        final_exam_context = str(exam_context).upper()
         persisted_exam_context = None
 
         if conversation_id and user_id:
@@ -66,7 +68,7 @@ class ConversationService:
                 should_create_new = False
                 existing_meta = get_conversation_metadata(user_id, conversation_id)
                 if existing_meta:
-                    persisted_exam_context = existing_meta.get("ExamContext")
+                    persisted_exam_context = str(existing_meta.get("ExamContext", "")).upper()
                     persisted_mode = existing_meta.get("AiMode")
                     
                     # Update mode if changed
@@ -77,6 +79,11 @@ class ConversationService:
                     # Maintain arena consistency
                     if not arena_id and existing_meta.get("ArenaId"):
                         arena_id = existing_meta.get("ArenaId")
+
+                    # 🟢 THE LOCK: Reject downgrade from specific exam to GENERAL
+                    specific_exams = ["UNAL", "ICFES"]
+                    if persisted_exam_context in specific_exams and final_exam_context not in specific_exams:
+                        final_exam_context = persisted_exam_context
 
         try:
             if should_create_new:
@@ -89,12 +96,13 @@ class ConversationService:
                     conversation_id=actual_conversation_id,
                     arena_id=arena_id,
                     ai_mode=mode,
-                    exam_context=exam_context
+                    exam_context=final_exam_context  # Save the locked one
                 )
                 actual_conversation_id = conversation_data["ConversationId"]
             else:
-                if persisted_exam_context and exam_context != persisted_exam_context:
-                    update_conversation_exam_context(user_id, actual_conversation_id, exam_context)
+                # Update DB only if we explicitly upgraded (General->UNAL) or swapped (UNAL->ICFES)
+                if persisted_exam_context and final_exam_context != persisted_exam_context:
+                    update_conversation_exam_context(user_id, actual_conversation_id, final_exam_context)
             
             # Update Activity Timestamps
             if user_id and actual_conversation_id:
@@ -106,7 +114,8 @@ class ConversationService:
             logger.error(f"Failed to save/reuse conversation: {e}")
             raise RuntimeError(f"Failed to save/reuse conversation: {e}")
 
-        return actual_conversation_id, persisted_exam_context
+        # Return the locked context to the Orchestrator
+        return actual_conversation_id, final_exam_context
 
     @classmethod
     def save_hidden_context(cls, conversation_id: str, message: str | None) -> Tuple[str, str, str, None]:

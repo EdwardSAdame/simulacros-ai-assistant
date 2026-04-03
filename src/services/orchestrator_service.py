@@ -65,9 +65,10 @@ class OrchestratorService:
             return ConversationService.save_hidden_context(conversation_id or "temp", message)
 
         # 3. Resolve Context and Database State
-        exam_context = determine_exam_context(page, message) 
+        raw_exam_context = determine_exam_context(page, message) 
 
-        actual_conversation_id, persisted_exam_context = ConversationService.resolve_and_update_conversation(
+        # 🟢 THE FIX: Capture the locked context returned by the ratchet system
+        actual_conversation_id, locked_exam_context = ConversationService.resolve_and_update_conversation(
             user_id=user_id,
             conversation_id=conversation_id,
             name=name,
@@ -75,7 +76,7 @@ class OrchestratorService:
             page=page,
             message=message,
             mode=mode,
-            exam_context=exam_context,
+            exam_context=raw_exam_context,
             arena_id=arena_id
         )
 
@@ -93,17 +94,17 @@ class OrchestratorService:
             conversation_input.append({"role": "user", "content": current_user_content})
 
         # 6. Route to Specific Domain Service
-        log_event("orchestrator_routing", {"intent": intent, "category": category, "conversation_id": actual_conversation_id})
+        log_event("orchestrator_routing", {"intent": intent, "category": category, "conversation_id": actual_conversation_id, "locked_exam_context": locked_exam_context})
         
         final_reply_text = ""
         meta_payload = None
         
         try:
             if intent == "quiz":
-                # 🟢 THE FIX: Passed category and clean_pdfs correctly here
+                # Pass locked_exam_context down!
                 final_reply_text, meta_payload = QuizService.execute_quiz_generation(
                     message=message, conversation_input=conversation_input, user_id=user_id,
-                    name=name, email=email, page=page, mode=mode, exam_context=exam_context, 
+                    name=name, email=email, page=page, mode=mode, exam_context=locked_exam_context, 
                     stream_manager=stream_manager, category=category, clean_pdfs=clean_pdfs
                 )
                 
@@ -120,14 +121,14 @@ class OrchestratorService:
             elif intent == "admission_stats":
                 final_reply_text, meta_payload = AdmissionChatService.execute_admission_chat(
                     conversation_input=conversation_input, user_id=user_id, page=page, 
-                    name=name, email=email, mode=mode, exam_context=exam_context, 
+                    name=name, email=email, mode=mode, exam_context=locked_exam_context, 
                     category=category, actual_conversation_id=actual_conversation_id
                 )
                 
             else:
                 final_reply_text, meta_payload = ChatService.execute_standard_chat(
                     conversation_input=conversation_input, user_id=user_id, page=page, 
-                    name=name, email=email, message=message, mode=mode, exam_context=exam_context, 
+                    name=name, email=email, message=message, mode=mode, exam_context=locked_exam_context, 
                     category=category, requires_visuals=requires_visuals, arena_id=arena_id, 
                     clean_pdfs=clean_pdfs, actual_conversation_id=actual_conversation_id
                 )
