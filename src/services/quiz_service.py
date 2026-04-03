@@ -171,7 +171,8 @@ class QuizService:
             max_visuals = math.floor(num_questions * 0.4)
             target_visuals = random.randint(0, max_visuals) if max_visuals > 0 else 0
             if target_visuals > 0:
-                target_indices = random.sample(range(num_questions), target_visuals)
+                # IMPORTANT FIX: sorted() added so the AI receives the list chronologically
+                target_indices = sorted(random.sample(range(num_questions), target_visuals))
 
         log_event("dynamic_visual_quota_calculated", {
             "subject_topic": topic_lower,
