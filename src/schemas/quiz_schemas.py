@@ -77,11 +77,11 @@ class QuizQuestion(BaseModel):
     correct_option_index: Literal[0, 1, 2, 3] = Field(..., description="Index of the correct option (0-3).")
 
 class QuizResponse(BaseModel):
-    title: str = Field(..., description="A professional, short, engaging title for this quiz based on the specific topic (Max 6 words).")
-    intro_message: str = Field(..., description="A single, concise sentence introducing the quiz (Voice: Roma).")
+    title: str = Field(..., description="An engaging short title for the quiz.")
+    intro_message: str = Field(..., description="A single sentence introduction to the quiz in the Roma persona.")
     question_count: int = Field(..., description="The total number of questions generated in this quiz.")
     questions: List[QuizQuestion]
 
-    easier_payload: str = Field(..., description="A specific user command to generate an EASIER version of this quiz. E.g., 'Hazme un quiz mas facil sobre [Topic]'.")
-    harder_payload: str = Field(..., description="A specific user command to generate a HARDER/ADVANCED version of this quiz. E.g., 'Hazme un examen avanzado sobre [Topic]'.")
-    retry_payload: str = Field(..., description="A specific user command to generate a NEW quiz on the SAME TOPIC and SAME DIFFICULTY. E.g., 'Dame otro quiz sobre [Topic]'.")
+easier_payload: str = Field(..., description="A user command to request an easier version of this quiz.")
+harder_payload: str = Field(..., description="A user command to request a more advanced version of this quiz.")
+retry_payload: str = Field(..., description="A user command to request a new quiz on the same topics and difficulty.")
