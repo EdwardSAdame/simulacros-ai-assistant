@@ -6,7 +6,6 @@ import re
 import base64
 import threading
 import queue
-import uuid
 import logging
 
 from src.utils.logging_utils import log_event
@@ -246,7 +245,6 @@ class QuizService:
                 
                 # Plot execution logic
                 plot_queue = queue.Queue()
-                shared_plot_thread_id = f"plot_session_{actual_conversation_id}" if actual_conversation_id else f"plot_session_{uuid.uuid4().hex}"
                 image_urls_map = {}
                 
                 # Strict backend enforcement based on pre-calculated indices
@@ -291,7 +289,7 @@ class QuizService:
                     except Exception as e:
                         logger.error(f"BG image generation failed: {e}")
 
-                # THE FIX: Single Plot Worker consuming from the queue
+                # The Single Plot Worker consuming from the queue WITHOUT thread_id
                 def _plot_worker():
                     from src.config.settings import get_openai_client, get_code_interpreter_memory
                     from src.config.model_config import get_model_config
@@ -318,16 +316,14 @@ class QuizService:
                             log_event("container_requested", {
                                 "context": "quiz_background_plot",
                                 "question_index": q_index,
-                                "memory_limit": memory_limit,
-                                "thread_id": shared_plot_thread_id
+                                "memory_limit": memory_limit
                             })
                             
                             bg_req = {
                                 "model": active_config.model,
                                 "input": [{"role": "user", "content": f"Generate a plot for this mathematical request: {plot_prompt}"}],
                                 "tools": [{"type": "code_interpreter", "container": {"type": "auto", "memory_limit": memory_limit}}], 
-                                "instructions": instructions,
-                                "thread_id": shared_plot_thread_id # Force session sharing
+                                "instructions": instructions
                             }
                             
                             response = bg_client.responses.create(**bg_req)

@@ -38,8 +38,7 @@ def send_message_to_assistant(
     requires_visuals: bool = False,
     web_search_config: Dict[str, Any] | None = None,
     user_location: Dict[str, str] | None = None,
-    pdf_urls: List[str] | None = None,
-    thread_id: str | None = None  # Added thread_id support
+    pdf_urls: List[str] | None = None
 ) -> Tuple[str, List[str], List[Dict[str, str]], Dict[str, int]]:
     
     client = get_openai_client()
@@ -56,7 +55,7 @@ def send_message_to_assistant(
 
     tools = _configure_tools(vector_store_ids, requires_visuals, False, pdf_urls, web_search_config, user_location)
 
-    req = _build_request_payload(cfg, api_input, tools, thread_id)
+    req = _build_request_payload(cfg, api_input, tools)
 
     try:
         resp = client.responses.create(**req)
@@ -99,8 +98,7 @@ def stream_chat_response(
     email: str | None = None, 
     mode: str = "omega",
     system_instruction: str | None = None,
-    enable_image_generation: bool = True,
-    thread_id: str | None = None # Added thread_id support
+    enable_image_generation: bool = True
 ) -> Generator[Any, None, None]:
     
     client = get_openai_client()
@@ -121,7 +119,7 @@ def stream_chat_response(
             "partial_images": 3
         })
 
-    req = _build_request_payload(cfg, api_input, tools, thread_id)
+    req = _build_request_payload(cfg, api_input, tools)
     req["stream"] = True
 
     tool_name = None
@@ -205,7 +203,7 @@ def stream_chat_response(
                         "output": json.dumps({"error": "Query execution failed."})
                     })
             
-            req2 = _build_request_payload(cfg, api_input, tools, thread_id)
+            req2 = _build_request_payload(cfg, api_input, tools)
             req2["stream"] = True
             stream2 = client.responses.create(**req2)
             
@@ -237,8 +235,7 @@ def generate_structured_quiz(
     vector_store_ids: List[str] | None = None,
     web_search_config: Dict[str, Any] | None = None,
     user_location: Dict[str, str] | None = None,
-    category: str = "general",
-    thread_id: str | None = None # Added thread_id support
+    category: str = "general"
 ) -> Tuple[QuizResponse, Dict[str, int]]:
     
     client = get_openai_client()
@@ -256,7 +253,7 @@ def generate_structured_quiz(
 
     tools = _configure_tools(vector_store_ids, False, False, pdf_urls, web_search_config, user_location)
 
-    req = _build_request_payload(cfg, api_input, tools=tools, thread_id=thread_id)
+    req = _build_request_payload(cfg, api_input, tools=tools)
     req["text_format"] = QuizResponse
     
     try:
@@ -294,8 +291,7 @@ def stream_structured_quiz(
     vector_store_ids: List[str] | None = None,
     web_search_config: Dict[str, Any] | None = None,
     user_location: Dict[str, str] | None = None,
-    category: str = "general",
-    thread_id: str | None = None # Added thread_id support
+    category: str = "general"
 ) -> Generator[Dict[str, Any], None, None]:
     
     client = get_openai_client()
@@ -313,7 +309,7 @@ def stream_structured_quiz(
 
     tools = _configure_tools(vector_store_ids, False, False, pdf_urls, web_search_config, user_location)
 
-    req = _build_request_payload(cfg, api_input, tools=tools, thread_id=thread_id)
+    req = _build_request_payload(cfg, api_input, tools=tools)
     req["text_format"] = QuizResponse
     
     streamed_questions = []
@@ -474,7 +470,7 @@ def _configure_tools(vector_store_ids, requires_visuals, requires_creative_image
         tools.append(web_tool)
     return tools
 
-def _build_request_payload(cfg, api_input, tools, thread_id: str | None = None):
+def _build_request_payload(cfg, api_input, tools):
     req = {"model": cfg.model, "input": api_input}
     is_reasoning = (cfg.model.startswith("o") and not cfg.model.startswith("gpt")) or "reasoning" in cfg.model
     
@@ -485,7 +481,5 @@ def _build_request_payload(cfg, api_input, tools, thread_id: str | None = None):
         req["top_p"] = cfg.top_p
     
     if tools: req["tools"] = tools
-    # Inject thread_id if provided
-    if thread_id: req["thread_id"] = thread_id
     
     return {k: v for k, v in req.items() if v is not None}
