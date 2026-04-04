@@ -74,8 +74,12 @@ class Settings:
         strict_mode = os.getenv("WEB_SEARCH_STRICT_MODE", "true").lower()
         self.WEB_SEARCH_STRICT_MODE: bool = strict_mode == "true"
 
-        # 🟢 THE FIX: Container Memory Limit Configuration
+        # Container Memory Limit Configuration
         self.CODE_INTERPRETER_MEMORY: str = os.getenv("CODE_INTERPRETER_MEMORY", "4g")
+
+        # Image Generation Configuration
+        self.IMAGE_GENERATION_SIZE: str = os.getenv("IMAGE_GENERATION_SIZE", "1024x1024")
+        self.IMAGE_GENERATION_QUALITY: str = os.getenv("IMAGE_GENERATION_QUALITY", "auto")
 
     def get_openai_client(self) -> openai.Client:
         if not self.OPENAI_API_KEY:
@@ -85,9 +89,14 @@ class Settings:
     def get_vector_search_max_results(self) -> int:
         return self.VECTOR_SEARCH_MAX_RESULTS
         
-    # 🟢 THE FIX: Getter for container memory
     def get_code_interpreter_memory(self) -> str:
         return self.CODE_INTERPRETER_MEMORY
+
+    def get_image_generation_size(self) -> str:
+        return self.IMAGE_GENERATION_SIZE
+
+    def get_image_generation_quality(self) -> str:
+        return self.IMAGE_GENERATION_QUALITY
 
 settings = Settings()
 
@@ -97,6 +106,11 @@ def get_openai_client() -> openai.Client:
 def get_vector_search_max_results() -> int:
     return settings.get_vector_search_max_results()
 
-# 🟢 THE FIX: Exported getter function
 def get_code_interpreter_memory() -> str:
     return settings.get_code_interpreter_memory()
+
+def get_image_generation_size() -> str:
+    return settings.get_image_generation_size()
+
+def get_image_generation_quality() -> str:
+    return settings.get_image_generation_quality()

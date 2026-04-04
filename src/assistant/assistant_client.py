@@ -5,7 +5,13 @@ import json
 from typing import List, Dict, Any, Tuple, Generator, Optional
 
 # CONFIG & CLIENT 
-from src.config.settings import get_openai_client, get_vector_search_max_results, get_code_interpreter_memory
+from src.config.settings import (
+    get_openai_client, 
+    get_vector_search_max_results, 
+    get_code_interpreter_memory,
+    get_image_generation_size,
+    get_image_generation_quality
+)
 from src.config.model_config import get_model_config
 from src.schemas.quiz_schemas import QuizResponse
 
@@ -116,7 +122,9 @@ def stream_chat_response(
     if enable_image_generation:
         tools.append({
             "type": "image_generation",
-            "partial_images": 3
+            "partial_images": 3,
+            "size": get_image_generation_size(),
+            "quality": get_image_generation_quality()
         })
 
     req = _build_request_payload(cfg, api_input, tools)
@@ -459,7 +467,9 @@ def _configure_tools(vector_store_ids, requires_visuals, requires_creative_image
     if requires_creative_images:
         tools.append({
             "type": "image_generation",
-            "partial_images": 3
+            "partial_images": 3,
+            "size": get_image_generation_size(),
+            "quality": get_image_generation_quality()
         })
         
     if web_search_config:
