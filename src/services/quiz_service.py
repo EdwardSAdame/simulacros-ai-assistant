@@ -5,6 +5,8 @@ import random
 import re
 import base64
 import threading
+import queue
+import uuid
 import logging
 
 from src.utils.logging_utils import log_event
@@ -239,7 +241,12 @@ class QuizService:
                 
                 ghost_easier, ghost_harder, ghost_retry = None, None, None
 
+                # Keep image generation (DALL-E) fully parallel as it is stateless and doesn't incur container fees
                 image_threads = []
+                
+                # Plot execution logic
+                plot_queue = queue.Queue()
+                shared_plot_thread_id = f"plot_session_{actual_conversation_id}" if actual_conversation_id else f"plot_session_{uuid.uuid4().hex}"
                 image_urls_map = {}
                 
                 # Strict backend enforcement based on pre-calculated indices
@@ -284,47 +291,60 @@ class QuizService:
                     except Exception as e:
                         logger.error(f"BG image generation failed: {e}")
 
-                def _bg_plot_generator(plot_prompt: str, q_index: int):
-                    try:
-                        from src.config.settings import get_openai_client, get_code_interpreter_memory
-                        from src.config.model_config import get_model_config
-                        from src.services.ai_assets_service import AiAssetsService
-                        from src.config.visual_instructions import build_visual_instructions
-                        
-                        bg_client = get_openai_client()
-                        active_config = get_model_config(mode)
-                        memory_limit = get_code_interpreter_memory()
-                        
-                        base_instruction = (
-                            "Write and run Python code to generate the requested plot.\n"
-                            "You MUST use Matplotlib. Save the figure as a .png file in your container environment (e.g., /mnt/data/plot.png). Do NOT use plt.show().\n\n"
-                        )
-                        
-                        instructions = base_instruction + build_visual_instructions()
-                        
-                        # NEW LOG: Track background quiz container requests
-                        log_event("container_requested", {
-                            "context": "quiz_background_plot",
-                            "question_index": q_index,
-                            "memory_limit": memory_limit
-                        })
-                        
-                        bg_req = {
-                            "model": active_config.model,
-                            "input": [{"role": "user", "content": f"Generate a plot for this mathematical request: {plot_prompt}"}],
-                            "tools": [{"type": "code_interpreter", "container": {"type": "auto", "memory_limit": memory_limit}}], 
-                            "instructions": instructions
-                        }
-                        
-                        response = bg_client.responses.create(**bg_req)
-                        uploaded_map = AiAssetsService.handle_generated_files(bg_client, response, folder="quiz_assets")
-                        
-                        if uploaded_map:
-                            s3_url = list(uploaded_map.values())[0]
-                            stream_manager.send_partial_image(index=q_index, b64_data=s3_url)
-                            image_urls_map[q_index] = s3_url
-                    except Exception as e:
-                        logger.error(f"BG plot generation failed: {e}")
+                # THE FIX: Single Plot Worker consuming from the queue
+                def _plot_worker():
+                    from src.config.settings import get_openai_client, get_code_interpreter_memory
+                    from src.config.model_config import get_model_config
+                    from src.services.ai_assets_service import AiAssetsService
+                    from src.config.visual_instructions import build_visual_instructions
+                    
+                    bg_client = get_openai_client()
+                    active_config = get_model_config(mode)
+                    memory_limit = get_code_interpreter_memory()
+                    
+                    base_instruction = (
+                        "Write and run Python code to generate the requested plot.\n"
+                        "You MUST use Matplotlib. Save the figure as a .png file in your container environment (e.g., /mnt/data/plot.png). Do NOT use plt.show().\n\n"
+                    )
+                    instructions = base_instruction + build_visual_instructions()
+
+                    while True:
+                        item = plot_queue.get()
+                        if item is None: # Sentinel value to shutdown thread
+                            break
+                            
+                        plot_prompt, q_index = item
+                        try:
+                            log_event("container_requested", {
+                                "context": "quiz_background_plot",
+                                "question_index": q_index,
+                                "memory_limit": memory_limit,
+                                "thread_id": shared_plot_thread_id
+                            })
+                            
+                            bg_req = {
+                                "model": active_config.model,
+                                "input": [{"role": "user", "content": f"Generate a plot for this mathematical request: {plot_prompt}"}],
+                                "tools": [{"type": "code_interpreter", "container": {"type": "auto", "memory_limit": memory_limit}}], 
+                                "instructions": instructions,
+                                "thread_id": shared_plot_thread_id # Force session sharing
+                            }
+                            
+                            response = bg_client.responses.create(**bg_req)
+                            uploaded_map = AiAssetsService.handle_generated_files(bg_client, response, folder="quiz_assets")
+                            
+                            if uploaded_map:
+                                s3_url = list(uploaded_map.values())[0]
+                                stream_manager.send_partial_image(index=q_index, b64_data=s3_url)
+                                image_urls_map[q_index] = s3_url
+                        except Exception as e:
+                            logger.error(f"BG plot generation failed for index {q_index}: {e}")
+                        finally:
+                            plot_queue.task_done()
+
+                # Start the single plot worker thread immediately
+                plot_worker_thread = threading.Thread(target=_plot_worker)
+                plot_worker_thread.start()
 
                 for event in stream_gen:
                     evt_type = event.get("type")
@@ -343,9 +363,8 @@ class QuizService:
                         q_idx = event.get("index", 0)
                         if q_idx in allowed_visual_indices:
                             prompt_str = event.get("prompt", "")
-                            t = threading.Thread(target=_bg_plot_generator, args=(prompt_str, q_idx))
-                            t.start()
-                            image_threads.append(t)
+                            # Drop the request into the queue; the active worker grabs it
+                            plot_queue.put((prompt_str, q_idx))
 
                     elif evt_type == "question":
                         q_data = event.get("data")
@@ -409,8 +428,12 @@ class QuizService:
                         error_msg = event.get("error", "Unknown stream error")
                         stream_manager.send_error(error_msg)
 
+                # Graceful shutdown: Wait for image threads and the queue to finish
                 for t in image_threads:
                     t.join()
+                    
+                plot_queue.put(None) # Send shutdown signal to plot worker
+                plot_worker_thread.join()
                     
                 for i, q in enumerate(accumulated_questions):
                     if i in image_urls_map:
