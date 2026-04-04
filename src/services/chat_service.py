@@ -4,7 +4,7 @@ import random
 from typing import Tuple, Dict, Any, List
 
 # CONFIG
-from src.config.settings import get_vector_search_max_results
+from src.config.settings import get_vector_search_max_results, get_code_interpreter_memory
 from src.config.page_vectorstores import get_stores_for_page
 from src.config.web_search_config import get_search_filters 
 from src.utils.logging_utils import log_event
@@ -15,6 +15,7 @@ from src.services.arena_service import arena_service
 from src.config.system_instructions import build_system_instructions
 from src.assistant.assistant_client import send_message_to_assistant
 from src.services.token_usage_service import TokenUsageService
+from src.services.container_usage_service import ContainerUsageService
 
 logger = logging.getLogger(__name__)
 
@@ -43,6 +44,21 @@ class ChatService:
             )
         except Exception as e:
             logger.error(f"Failed to log token usage: {e}")
+
+    @staticmethod
+    def _log_container(user_id: str | None, session_id: str, container_id: str | None):
+        if not user_id or not container_id: 
+            return
+        try:
+            memory_limit = get_code_interpreter_memory()
+            ContainerUsageService().log_container_usage(
+                user_id=user_id,
+                session_id=session_id,
+                container_id=container_id,
+                memory_limit=memory_limit
+            )
+        except Exception as e:
+            logger.error(f"Failed to log container usage: {e}")
 
     @classmethod
     def execute_standard_chat(
@@ -146,8 +162,10 @@ class ChatService:
             generated_assets = response_tuple[1]
             sources_data = response_tuple[2] if len(response_tuple) > 2 else []
             usage_data = response_tuple[3] if len(response_tuple) > 3 else {}
+            container_id = response_tuple[4] if len(response_tuple) > 4 else None
             
             cls._log_usage(usage_data, user_id, actual_conversation_id, mode)
+            cls._log_container(user_id, actual_conversation_id, container_id)
 
         except Exception as e:
             logger.error(f"OpenAI Chat API failed: {e}")

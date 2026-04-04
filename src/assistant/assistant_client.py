@@ -45,7 +45,7 @@ def send_message_to_assistant(
     web_search_config: Dict[str, Any] | None = None,
     user_location: Dict[str, str] | None = None,
     pdf_urls: List[str] | None = None
-) -> Tuple[str, List[str], List[Dict[str, str]], Dict[str, int]]:
+) -> Tuple[str, List[str], List[Dict[str, str]], Dict[str, int], Optional[str]]:
     
     client = get_openai_client()
     cfg = get_model_config(mode)
@@ -66,10 +66,12 @@ def send_message_to_assistant(
     try:
         resp = client.responses.create(**req)
         
+        # 1. Extract Text
         text = getattr(resp, "output_text", None)
+        output_list = getattr(resp, "output", []) or []
+        
         if not text:
             chunks = []
-            output_list = getattr(resp, "output", []) or []
             for item in output_list:
                 content_list = getattr(item, "content", []) or []
                 for c in content_list:
@@ -80,15 +82,31 @@ def send_message_to_assistant(
         if text: 
             text = re.sub(r'\[.*?\]\(sandbox:/mnt/data/.*?\)', '', text).strip()
 
+        # 2. Extract Container ID for FinOps Tracking
+        container_id = None
+        for item in output_list:
+            if getattr(item, "type", "") == "code_interpreter_call":
+                cid = getattr(item, "container_id", None)
+                if not cid and hasattr(item, "code_interpreter"):
+                    cid = getattr(item.code_interpreter, "container_id", None)
+                if not cid and hasattr(item, "code_interpreter_call"):
+                    cid = getattr(item.code_interpreter_call, "container_id", None)
+                if cid: 
+                    container_id = cid
+                    break
+
+        # 3. Handle Files and Sources
         generated_urls_map = handle_generated_files(client, resp, folder="chat_assets")
         sources_list = extract_sources(resp)
 
         generated_urls = list(generated_urls_map.values()) if isinstance(generated_urls_map, dict) else generated_urls_map
 
-        # Extract usage data
+        # 4. Extract usage data
         usage_data = _extract_usage_metrics(getattr(resp, "usage", None))
 
-        return (text or "[No response]", generated_urls, sources_list, usage_data)
+        # Return updated tuple including container_id
+        return (text or "[No response]", generated_urls, sources_list, usage_data, container_id)
+        
     except Exception as e:
         logger.error(f"Chat failed: {e}")
         raise e
