@@ -91,9 +91,6 @@ def handle_generated_files(client, response_obj, folder: str = "chat_assets") ->
         for item in output_items:
             item_type = getattr(item, "type", "")
             
-            # ---------------------------------------------------------
-            # NEW: Catch Creative Image Generations
-            # ---------------------------------------------------------
             if item_type == "image_generation_call":
                 b64_data = getattr(item, "result", None)
                 if b64_data:
@@ -112,9 +109,6 @@ def handle_generated_files(client, response_obj, folder: str = "chat_assets") ->
                     except Exception as e:
                         logger.error(f"Failed to process creative image artifact: {e}")
                         
-            # ---------------------------------------------------------
-            # EXISTING: Detect Container ID for Code Interpreter
-            # ---------------------------------------------------------
             elif item_type == "code_interpreter_call":
                 cid = getattr(item, "container_id", None)
                 if not cid and hasattr(item, "code_interpreter"):
@@ -123,8 +117,23 @@ def handle_generated_files(client, response_obj, folder: str = "chat_assets") ->
                     cid = getattr(item.code_interpreter_call, "container_id", None)
                 if cid: 
                     container_id = cid
+                    
+                # Extract explicit file IDs from plt.show()
+                outputs = getattr(item, "outputs", [])
+                if not outputs and hasattr(item, "code_interpreter"):
+                    outputs = getattr(item.code_interpreter, "outputs", [])
+                if not outputs and hasattr(item, "code_interpreter_call"):
+                    outputs = getattr(item.code_interpreter_call, "outputs", [])
+                    
+                for out in outputs:
+                    if getattr(out, "type", "") == "image":
+                        image_obj = getattr(out, "image", None)
+                        if image_obj:
+                            f_id = getattr(image_obj, "file_id", None)
+                            if f_id:
+                                fname = f"plot_output_{f_id}.png"
+                                process_file(cf_client, container_id, f_id, fname, uploaded_urls_map, folder)
 
-            # Detect Files in Messages
             elif item_type == "message" and cf_client:
                 content_list = getattr(item, "content", []) or []
                 if isinstance(content_list, list):
@@ -137,9 +146,9 @@ def handle_generated_files(client, response_obj, folder: str = "chat_assets") ->
                                 if file_id: 
                                     process_file(cf_client, container_id, file_id, fname, uploaded_urls_map, folder)
 
-        # Fallback: List files in container if no direct citations found but container exists
-        has_code_citations = any(fname for fname in uploaded_urls_map.keys() if not fname.startswith("creative_image_"))
-        if not has_code_citations and container_id and cf_client:
+        # Fallback ONLY if no files were explicitly extracted
+        has_extracted_files = any(fname for fname in uploaded_urls_map.keys() if not fname.startswith("creative_image_"))
+        if not has_extracted_files and container_id and cf_client:
             try:
                 container_files = cf_client.list(container_id)
                 
@@ -186,7 +195,7 @@ def assign_urls_to_quiz(quiz_data: QuizResponse, urls_map: Dict[str, str] | List
         if not q.image_url:
             continue
             
-        if q.image_url == "PENDING_UPLOAD" or "/mnt/" in q.image_url or "creative_image_" in q.image_url:
+        if q.image_url == "PENDING_UPLOAD" or "/mnt/" in q.image_url or "creative_image_" in q.image_url or "plot_output_" in q.image_url:
             target_filename = os.path.basename(q.image_url).lower()
             
             if target_filename in urls_map:
