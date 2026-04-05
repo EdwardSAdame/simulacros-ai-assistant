@@ -142,6 +142,16 @@ class ChatService:
                 category=category  
             )
 
+        # Look up explicit container ID to prevent duplicate billing
+        active_container_id = None
+        if requires_visuals or (clean_pdfs and len(clean_pdfs) > 0):
+            try:
+                active_container_id = ContainerUsageService().get_active_container_for_session(actual_conversation_id)
+                if active_container_id:
+                    logger.info(f"Reusing existing container ID: {active_container_id} for session {actual_conversation_id}")
+            except Exception as e:
+                logger.error(f"Failed to fetch active container: {e}")
+
         # 5. Call AI
         try:
             response_tuple = send_message_to_assistant(
@@ -155,7 +165,8 @@ class ChatService:
                 vector_store_ids=selected_vector_stores, 
                 requires_visuals=requires_visuals,
                 web_search_config=web_search_config, 
-                pdf_urls=clean_pdfs
+                pdf_urls=clean_pdfs,
+                active_container_id=active_container_id  # <--- NEW ARGUMENT ADDED HERE
             )
             
             final_reply_text = response_tuple[0]

@@ -44,7 +44,8 @@ def send_message_to_assistant(
     requires_visuals: bool = False,
     web_search_config: Dict[str, Any] | None = None,
     user_location: Dict[str, str] | None = None,
-    pdf_urls: List[str] | None = None
+    pdf_urls: List[str] | None = None,
+    active_container_id: str | None = None
 ) -> Tuple[str, List[str], List[Dict[str, str]], Dict[str, int], Optional[str]]:
     
     client = get_openai_client()
@@ -59,7 +60,15 @@ def send_message_to_assistant(
     if pdf_urls:
         _inject_pdf_inputs(api_input, pdf_urls)
 
-    tools = _configure_tools(vector_store_ids, requires_visuals, False, pdf_urls, web_search_config, user_location)
+    tools = _configure_tools(
+        vector_store_ids, 
+        requires_visuals, 
+        False, 
+        pdf_urls, 
+        web_search_config, 
+        user_location,
+        active_container_id
+    )
 
     req = _build_request_payload(cfg, api_input, tools)
 
@@ -464,23 +473,31 @@ def _inject_pdf_inputs(api_input, pdf_urls):
                 "file_url": url
             })
 
-def _configure_tools(vector_store_ids, requires_visuals, requires_creative_images, pdf_urls, web_search_config, user_location):
+def _configure_tools(vector_store_ids, requires_visuals, requires_creative_images, pdf_urls, web_search_config, user_location, active_container_id=None):
     tools = []
     if vector_store_ids:
         tools.append({"type": "file_search", "vector_store_ids": vector_store_ids, "max_num_results": get_vector_search_max_results()})
     
     if requires_visuals or (pdf_urls and len(pdf_urls) > 0):
-        # Apply the dynamic memory setting
         memory_limit = get_code_interpreter_memory()
+        
+        # Explicitly set the container ID if we have it to prevent duplicate billing
+        if active_container_id:
+            container_config = {"id": active_container_id}
+        else:
+            container_config = {"type": "auto", "memory_limit": memory_limit}
+
         tools.append({
             "type": "code_interpreter", 
-            "container": {
-                "type": "auto", 
-                "memory_limit": memory_limit
-            }
+            "container": container_config
         })
+        
         # Track standard chat container requests
-        log_event("container_requested", {"context": "standard_chat", "memory_limit": memory_limit})
+        log_event("container_requested", {
+            "context": "standard_chat", 
+            "memory_limit": memory_limit,
+            "explicit_id": active_container_id
+        })
         
     if requires_creative_images:
         tools.append({

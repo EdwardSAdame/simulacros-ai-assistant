@@ -6,11 +6,39 @@ from src.utils.logging_utils import log_event
 class ContainerUsageService:
     """
     Business logic layer for container usage tracking.
-    Ensures we only record once per unique container session.
+    Ensures we only record once per unique container session and allows container reuse.
     """
 
     def __init__(self):
         self.storage = ContainerUsageTable()
+
+    def get_active_container_for_session(self, session_id: str) -> str | None:
+        """
+        Retrieves the most recently used container ID for a given session.
+        This allows the orchestrator to explicitly pass the ID to OpenAI and prevent duplicate billing.
+        """
+        if not session_id:
+            return None
+            
+        existing_containers = self.storage.get_session_containers(session_id)
+        if not existing_containers:
+            return None
+            
+        try:
+            # Sort by Timestamp descending so the newest container is first
+            sorted_containers = sorted(
+                existing_containers, 
+                key=lambda x: x.get("Timestamp", ""), 
+                reverse=True
+            )
+            return sorted_containers[0].get("ContainerId")
+        except Exception as e:
+            log_event(
+                event_type="container_sort_failed",
+                details={"session_id": session_id, "error": str(e)},
+                level="error"
+            )
+            return None
 
     def log_container_usage(
         self,
