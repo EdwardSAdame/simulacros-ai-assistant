@@ -1,7 +1,6 @@
 # src/storage/container_usage_table.py
 import os
 import boto3
-from decimal import Decimal
 from botocore.exceptions import ClientError
 from src.utils.logging_utils import log_event
 
@@ -17,8 +16,7 @@ class ContainerUsageTable:
         timestamp: str, 
         session_id: str, 
         container_id: str, 
-        memory_limit: str, 
-        estimated_cost: float
+        memory_limit: str
     ) -> bool:
         """
         Saves a single container usage record to DynamoDB.
@@ -30,9 +28,7 @@ class ContainerUsageTable:
                 'Timestamp': timestamp,
                 'SessionId': session_id,
                 'ContainerId': container_id,
-                'MemoryLimit': memory_limit,
-                # DynamoDB requires floats to be cast to Decimal
-                'EstimatedCost': Decimal(str(estimated_cost)) 
+                'MemoryLimit': memory_limit
             }
             
             self.table.put_item(Item=item)
@@ -40,8 +36,7 @@ class ContainerUsageTable:
                 event_type="container_usage_recorded", 
                 details={
                     "UserId": user_id, 
-                    "ContainerId": container_id, 
-                    "EstimatedCost": estimated_cost
+                    "ContainerId": container_id
                 }
             )
             return True
