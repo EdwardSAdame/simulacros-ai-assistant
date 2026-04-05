@@ -49,7 +49,7 @@ class ContainerUsageService:
                         "container_id": container_id
                     }
                 )
-                return False # Do not save, it is a free reuse
+                return False
 
         # 3. If it is a new container, persist it
         timestamp = datetime.now(timezone.utc).isoformat()
