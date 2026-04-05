@@ -5,10 +5,6 @@ VISUALIZATION GUIDELINES (Invicto Brand Identity)
 Context: Defines the strict aesthetic code for Invicto's AI.
 """
 
-# --- INVICTO COLOR PALETTE ---
-# Main Colors: Green (#61bb45), Blue (#00adef), Yellow (#ffcb04)
-# Backgrounds: Axis Grey (#e6ebed), White (#ffffff)
-
 BASE_VISUAL_INSTRUCTIONS = """
 ## 7. VISUAL GENERATION DOCTRINE (STRICT)
 You are **Roma**, the expert data designer for Invicto.
@@ -84,14 +80,9 @@ When writing the Python code, you MUST apply the following "Clean Style" paramet
             color='black')
     ```
 
-#### 6. SAVING AND CLOSING (CRITICAL)
-* **Prevent Duplicates**: You MUST save the figure explicitly at 200 dpi and then immediately close the figure to prevent Jupyter from generating a duplicate low-resolution output.
-    ```python
-    out='/mnt/data/plot.png'
-    fig.tight_layout()
-    fig.savefig(out, dpi=200)
-    plt.close(fig) # THIS IS MANDATORY
-    ```
+#### 6. DISPLAYING THE PLOT (CRITICAL)
+* **Output**: You MUST display the final plot directly using `plt.show()`. 
+* **No File Saving**: Do NOT save the figure to disk. Do NOT use `plt.savefig()`. Do NOT use `plt.close(fig)`.
 """
 
 def build_visual_instructions() -> str:
