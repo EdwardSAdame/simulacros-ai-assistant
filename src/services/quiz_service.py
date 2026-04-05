@@ -66,7 +66,6 @@ class QuizService:
         target_visuals = len(target_indices)
         null_count = num_questions - target_visuals
 
-        # LLMs understand 1-indexed question numbers much better than 0-indexed arrays
         human_indices = [i + 1 for i in target_indices]
         human_indices_str = ", ".join([f"#{i}" for i in human_indices])
 
@@ -207,7 +206,6 @@ class QuizService:
             "target_indices_assigned": target_indices
         })
 
-        # Fetch Active Container to prevent duplicate billing
         active_container_id = None
         if actual_conversation_id:
             try:
@@ -303,15 +301,19 @@ class QuizService:
                     active_config = get_model_config(mode)
                     memory_limit = get_code_interpreter_memory()
                     
-                    # ADDED CRITICAL MEMORY FLUSH INSTRUCTION
+                    # FIXED: Enforce plt.show() to bypass the filesystem entirely
+                    # and ensure aggressive clearing at the top of the script
                     base_instruction = (
                         "Write and run Python code to generate the requested plot.\n"
-                        "CRITICAL KERNEL STATE: This is a shared, persistent Python environment. You MUST start your code with `import matplotlib.pyplot as plt`, followed by `plt.close('all')` and `plt.clf()` to completely clear previous plots from memory before drawing anything new.\n"
-                        "You MUST use Matplotlib. Save the figure as a .png file in your container environment (e.g., /mnt/data/plot.png). Do NOT use plt.show().\n\n"
+                        "CRITICAL KERNEL STATE: This is a shared, persistent Python environment. You MUST begin your script EXACTLY with these lines to clear the memory:\n"
+                        "import matplotlib.pyplot as plt\n"
+                        "plt.clf()\n"
+                        "plt.cla()\n"
+                        "plt.close('all')\n"
+                        "You MUST use Matplotlib. After building your plot, you MUST display it using `plt.show()`. Do NOT save it to disk. Do NOT use plt.savefig().\n\n"
                     )
                     instructions = base_instruction + build_visual_instructions()
 
-                    # Track current container inside the worker
                     current_container_id = active_container_id
 
                     while True:
@@ -321,13 +323,11 @@ class QuizService:
                             
                         plot_prompt, q_index = item
                         try:
-                            # ADDED SAFETY CHECK FOR EMPTY PROMPTS
                             if not plot_prompt or not str(plot_prompt).strip() or str(plot_prompt).lower() == "none":
                                 logger.warning(f"plot_prompt is empty for index {q_index}. Skipping background plot.")
                                 plot_queue.task_done()
                                 continue
 
-                            # Apply FinOps logic to background plots
                             if current_container_id:
                                 container_config = current_container_id
                             else:
@@ -349,7 +349,6 @@ class QuizService:
                             
                             response = bg_client.responses.create(**bg_req)
 
-                            # Extract container ID if this was a brand new one
                             if not current_container_id:
                                 output_list = getattr(response, "output", []) or []
                                 for out_item in output_list:
