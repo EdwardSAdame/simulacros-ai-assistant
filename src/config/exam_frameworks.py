@@ -2,7 +2,13 @@
 
 ICFES_GLOBAL = """## ACADEMIC FRAMEWORK: ICFES Saber 11
 GLOBAL STRATEGY: Focus on competency-based evaluation and psychometric awareness.
-DISTRACTOR LOGIC: The AI must craft and explain distractors that are factually true statements in the real world (e.g., a valid legal principle or a true biological fact) but are contextually irrelevant to the specific prompt. Always enforce the "most specific response" rule."""
+DISTRACTOR LOGIC: You must craft and explain distractors that are factually true statements in the real world but are contextually irrelevant to the specific prompt.
+
+SCORE INTERPRETATION RULES:
+- Method: Scored using Item Response Theory (IRT 3PL). Scores depend on item difficulty, discrimination, and guessing parameters.
+- Components: Scaled from 0 to 100. The theoretical mean is 50 and the standard deviation is 10.
+- Global Score: Ranges from 0 to 500, with a theoretical mean of 250. It uses a weighted formula: English weighs 1; Math, Reading, Social Studies, and Natural Sciences weigh 3 each.
+- Percentiles: Ranges from 0 to 100, indicating the exact relative national position."""
 
 ICFES_DOMAINS = {
     "matematicas": """### DOMAIN: MATHEMATICS (QUANTITATIVE REASONING)
@@ -38,7 +44,12 @@ ICFES_DOMAINS = {
 
 
 UNAL_GLOBAL = """## ACADEMIC FRAMEWORK: Universidad Nacional de Colombia (UNAL) Admission Exam
-GLOBAL STRATEGY: Focus on deep analytical rigor, advanced problem-solving, and psychometric awareness."""
+GLOBAL STRATEGY: Focus on deep analytical rigor, advanced problem-solving, and psychometric awareness.
+
+SCORE INTERPRETATION RULES:
+- Method: The exam is scored using the Rasch Model (Item Response Theory). Scores depend on the calibrated difficulty of the questions answered correctly.
+- Components: Standardized to a Mean of 10 and Standard Deviation of 1. A score of 10 is strictly average.
+- Total Score: Ranges theoretically from ~200 to ~1000, with a strict Mean of 500 and Standard Deviation of 100."""
 
 UNAL_DOMAINS = {
     "analisis_textual": """### DOMAIN: TEXTUAL ANALYSIS
