@@ -7,7 +7,7 @@ logger = logging.getLogger(__name__)
 class ImageStreamParser:
     """
     Parses the raw stream from OpenAI's Responses API when generating images.
-    Extracts partial images, the final image, and any conversational text.
+    Extracts partial images, the final image, conversational text, and token usage.
     """
 
     @staticmethod
@@ -17,6 +17,12 @@ class ImageStreamParser:
         """
         try:
             for event in stream:
+                # 🟢 THE FIX: Safely handle custom dictionaries (like usage_metrics) BEFORE getattr
+                if isinstance(event, dict):
+                    if event.get("type") == "usage_metrics":
+                        yield event
+                    continue
+
                 # The OpenAI Python SDK usually returns objects, so we use getattr.
                 event_type = getattr(event, "type", "")
 

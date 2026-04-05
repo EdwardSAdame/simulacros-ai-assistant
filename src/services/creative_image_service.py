@@ -28,18 +28,19 @@ class CreativeImageService:
         email: str | None,
         mode: str,
         stream_manager: Any
-    ) -> Tuple[str, List[str]]:
+    ) -> Tuple[str, List[str], Dict[str, Any]]: # 🟢 FIX: Updated Type Hint
         """
         Triggers the image generation stream and dispatches partial/final 
         images via WebSockets.
         
         Returns:
-            Tuple containing the final text response and a list of final S3 image URLs.
+            Tuple containing the final text response, a list of final S3 image URLs, and token usage.
         """
         logger.info(f"Starting creative image stream for user {user_id}")
         
         final_text = ""
         final_image_urls = []
+        final_usage = {} # 🟢 FIX: Variable to hold the tokens for the orchestrator
 
         try:
             # 1. Build Runtime Signals
@@ -119,28 +120,29 @@ class CreativeImageService:
                 elif evt_type == "text":
                     final_text += event.get("text", "")
                     
-                # 🟢 NEW: Intercept Usage Metrics and send to frontend
+                # 🟢 FIX: Intercept Usage Metrics and send to frontend
                 elif evt_type == "usage_metrics":
-                    usage_data = event.get("data", {})
-                    logger.info(f"Image generation usage metrics captured: {usage_data}")
-                    if stream_manager and usage_data:
-                        stream_manager.send_usage_metrics(usage_data)
+                    final_usage = event.get("data", {}) # Store to return it to orchestrator
+                    logger.info(f"Image generation usage metrics captured: {final_usage}")
+                    if stream_manager and final_usage:
+                        stream_manager.send_usage_metrics(final_usage)
                     
                 elif evt_type == "error":
                     error_msg = event.get("error", "Unknown error generating image.")
                     logger.error(f"Image generation stream error: {error_msg}")
                     if stream_manager:
                         stream_manager.send_error(error_msg)
-                    return "**Error**: We could not generate the image.", []
+                    return "**Error**: We could not generate the image.", [], {}
 
             # Clean safety net fallback (leaves text empty if AI fails to generate a description)
             if not final_text.strip() and final_image_urls:
                 final_text = ""
 
-            return final_text, final_image_urls
+            # 🟢 FIX: Return exactly 3 items to match what orchestrator_service.py expects
+            return final_text, final_image_urls, final_usage
             
         except Exception as e:
             logger.error(f"Failed to execute creative image service: {e}")
             if stream_manager:
                 stream_manager.send_error("Failed to connect to the image engine.")
-            return "**Error**: Image generation failed due to a server error.", []
+            return "**Error**: Image generation failed due to a server error.", [], {}
