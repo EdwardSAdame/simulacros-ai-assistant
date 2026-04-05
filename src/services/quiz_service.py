@@ -303,8 +303,10 @@ class QuizService:
                     active_config = get_model_config(mode)
                     memory_limit = get_code_interpreter_memory()
                     
+                    # ADDED CRITICAL MEMORY FLUSH INSTRUCTION
                     base_instruction = (
                         "Write and run Python code to generate the requested plot.\n"
+                        "CRITICAL KERNEL STATE: This is a shared, persistent Python environment. You MUST start your code with `import matplotlib.pyplot as plt`, followed by `plt.close('all')` and `plt.clf()` to completely clear previous plots from memory before drawing anything new.\n"
                         "You MUST use Matplotlib. Save the figure as a .png file in your container environment (e.g., /mnt/data/plot.png). Do NOT use plt.show().\n\n"
                     )
                     instructions = base_instruction + build_visual_instructions()
@@ -319,6 +321,12 @@ class QuizService:
                             
                         plot_prompt, q_index = item
                         try:
+                            # ADDED SAFETY CHECK FOR EMPTY PROMPTS
+                            if not plot_prompt or not str(plot_prompt).strip() or str(plot_prompt).lower() == "none":
+                                logger.warning(f"plot_prompt is empty for index {q_index}. Skipping background plot.")
+                                plot_queue.task_done()
+                                continue
+
                             # Apply FinOps logic to background plots
                             if current_container_id:
                                 container_config = current_container_id
