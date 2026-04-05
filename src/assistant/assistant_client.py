@@ -481,9 +481,9 @@ def _configure_tools(vector_store_ids, requires_visuals, requires_creative_image
     if requires_visuals or (pdf_urls and len(pdf_urls) > 0):
         memory_limit = get_code_interpreter_memory()
         
-        # Explicitly set the container ID if we have it to prevent duplicate billing
+        # FIX: Pass the raw string ID directly, do NOT wrap in a dictionary.
         if active_container_id:
-            container_config = {"id": active_container_id}
+            container_config = active_container_id
         else:
             container_config = {"type": "auto", "memory_limit": memory_limit}
 
