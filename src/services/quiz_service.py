@@ -14,6 +14,7 @@ from src.assistant.assistant_client import generate_structured_quiz, stream_stru
 from src.config.page_vectorstores import get_stores_for_page
 from src.config.web_search_config import get_search_filters
 from src.services.token_usage_service import TokenUsageService
+from src.services.container_usage_service import ContainerUsageService
 
 logger = logging.getLogger(__name__)
 
@@ -169,7 +170,6 @@ class QuizService:
                 if 1 <= parsed_num <= 30: 
                     num_questions = parsed_num
 
-        # Pre-calculate deterministic visual quotas and indices BEFORE calling the AI
         visual_subjects_list = [
             "matematicas", "matematica", "matemática", "fisica", "física", 
             "quimica", "química", "biologia", "biología", 
@@ -207,6 +207,16 @@ class QuizService:
             "target_indices_assigned": target_indices
         })
 
+        # Fetch Active Container to prevent duplicate billing
+        active_container_id = None
+        if actual_conversation_id:
+            try:
+                active_container_id = ContainerUsageService().get_active_container_for_session(actual_conversation_id)
+                if active_container_id:
+                    logger.info(f"Quiz execution reusing existing container: {active_container_id}")
+            except Exception as e:
+                logger.error(f"Failed to fetch active container for quiz: {e}")
+
         system_instruction = cls.get_system_instruction(
             topic=topic_hint, 
             num_questions=num_questions, 
@@ -239,15 +249,9 @@ class QuizService:
                 ai_generated_title = "Simulacro Generado" 
                 
                 ghost_easier, ghost_harder, ghost_retry = None, None, None
-
-                # Keep image generation (DALL-E) fully parallel as it is stateless and doesn't incur container fees
                 image_threads = []
-                
-                # Plot execution logic
                 plot_queue = queue.Queue()
                 image_urls_map = {}
-                
-                # Strict backend enforcement based on pre-calculated indices
                 allowed_visual_indices = set(target_indices)
 
                 def _bg_image_generator(img_prompt: str, q_index: int):
@@ -289,7 +293,6 @@ class QuizService:
                     except Exception as e:
                         logger.error(f"BG image generation failed: {e}")
 
-                # The Single Plot Worker consuming from the queue WITHOUT thread_id
                 def _plot_worker():
                     from src.config.settings import get_openai_client, get_code_interpreter_memory
                     from src.config.model_config import get_model_config
@@ -306,27 +309,62 @@ class QuizService:
                     )
                     instructions = base_instruction + build_visual_instructions()
 
+                    # Track current container inside the worker
+                    current_container_id = active_container_id
+
                     while True:
                         item = plot_queue.get()
-                        if item is None: # Sentinel value to shutdown thread
+                        if item is None:
                             break
                             
                         plot_prompt, q_index = item
                         try:
+                            # Apply FinOps logic to background plots
+                            if current_container_id:
+                                container_config = current_container_id
+                            else:
+                                container_config = {"type": "auto", "memory_limit": memory_limit}
+
                             log_event("container_requested", {
                                 "context": "quiz_background_plot",
                                 "question_index": q_index,
-                                "memory_limit": memory_limit
+                                "memory_limit": memory_limit,
+                                "explicit_id": current_container_id
                             })
                             
                             bg_req = {
                                 "model": active_config.model,
                                 "input": [{"role": "user", "content": f"Generate a plot for this mathematical request: {plot_prompt}"}],
-                                "tools": [{"type": "code_interpreter", "container": {"type": "auto", "memory_limit": memory_limit}}], 
+                                "tools": [{"type": "code_interpreter", "container": container_config}], 
                                 "instructions": instructions
                             }
                             
                             response = bg_client.responses.create(**bg_req)
+
+                            # Extract container ID if this was a brand new one
+                            if not current_container_id:
+                                output_list = getattr(response, "output", []) or []
+                                for out_item in output_list:
+                                    if getattr(out_item, "type", "") == "code_interpreter_call":
+                                        cid = getattr(out_item, "container_id", None)
+                                        if not cid and hasattr(out_item, "code_interpreter"):
+                                            cid = getattr(out_item.code_interpreter, "container_id", None)
+                                        if not cid and hasattr(out_item, "code_interpreter_call"):
+                                            cid = getattr(out_item.code_interpreter_call, "container_id", None)
+                                        if cid: 
+                                            current_container_id = cid
+                                            if actual_conversation_id and user_id:
+                                                try:
+                                                    ContainerUsageService().log_container_usage(
+                                                        user_id=user_id,
+                                                        session_id=actual_conversation_id,
+                                                        container_id=cid,
+                                                        memory_limit=memory_limit
+                                                    )
+                                                except Exception as e:
+                                                    logger.error(f"Failed to save background container: {e}")
+                                            break
+
                             uploaded_map = AiAssetsService.handle_generated_files(bg_client, response, folder="quiz_assets")
                             
                             if uploaded_map:
@@ -338,7 +376,6 @@ class QuizService:
                         finally:
                             plot_queue.task_done()
 
-                # Start the single plot worker thread immediately
                 plot_worker_thread = threading.Thread(target=_plot_worker)
                 plot_worker_thread.start()
 
@@ -359,7 +396,6 @@ class QuizService:
                         q_idx = event.get("index", 0)
                         if q_idx in allowed_visual_indices:
                             prompt_str = event.get("prompt", "")
-                            # Drop the request into the queue; the active worker grabs it
                             plot_queue.put((prompt_str, q_idx))
 
                     elif evt_type == "question":
@@ -367,7 +403,6 @@ class QuizService:
                         q_dict = q_data.dict() if hasattr(q_data, 'dict') else q_data
                         idx = event.get("index", 0)
                         
-                        # Strict Override: Even if LLM hallucinated a prompt, strip it if not assigned
                         if idx not in allowed_visual_indices:
                             q_dict["image_prompt"] = None
                             q_dict["plot_prompt"] = None
@@ -424,11 +459,10 @@ class QuizService:
                         error_msg = event.get("error", "Unknown stream error")
                         stream_manager.send_error(error_msg)
 
-                # Graceful shutdown: Wait for image threads and the queue to finish
                 for t in image_threads:
                     t.join()
                     
-                plot_queue.put(None) # Send shutdown signal to plot worker
+                plot_queue.put(None)
                 plot_worker_thread.join()
                     
                 for i, q in enumerate(accumulated_questions):
