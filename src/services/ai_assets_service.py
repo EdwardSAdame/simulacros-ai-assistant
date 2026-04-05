@@ -38,12 +38,14 @@ class AiAssetsService:
                           (getattr(item.code_interpreter_call, "container_id", None) if hasattr(item, "code_interpreter_call") else None)
                     if cid: container_id = cid
                     
-                    # Extract the exact file_id generated in THIS turn (bypasses old files)
-                    outputs = getattr(item, "outputs", [])
+                    # FIX: Add 'or []' to prevent NoneType iteration errors
+                    outputs = getattr(item, "outputs", []) or []
                     if not outputs and hasattr(item, "code_interpreter"):
-                        outputs = getattr(item.code_interpreter, "outputs", [])
+                        outputs = getattr(item.code_interpreter, "outputs", []) or []
                     if not outputs and hasattr(item, "code_interpreter_call"):
-                        outputs = getattr(item.code_interpreter_call, "outputs", [])
+                        outputs = getattr(item.code_interpreter_call, "outputs", []) or []
+                        
+                    outputs = outputs or [] # Final safety net
                         
                     for out in outputs:
                         if getattr(out, "type", "") == "image":
