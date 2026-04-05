@@ -100,3 +100,16 @@ class StreamManager:
             "revised_prompt": revised_prompt
         }
         self._send(payload)
+
+    # ------------------------------------------------------------------
+    # NEW: METRICS METHDOS
+    # ------------------------------------------------------------------
+    def send_usage_metrics(self, usage_data: Dict[str, Any]):
+        """
+        Streams the exact token usage metrics to the frontend for visibility.
+        """
+        payload = {
+            "action": "usage_metrics_stream",
+            "usage": usage_data
+        }
+        self._send(payload)

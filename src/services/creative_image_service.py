@@ -119,6 +119,13 @@ class CreativeImageService:
                 elif evt_type == "text":
                     final_text += event.get("text", "")
                     
+                # 🟢 NEW: Intercept Usage Metrics and send to frontend
+                elif evt_type == "usage_metrics":
+                    usage_data = event.get("data", {})
+                    logger.info(f"Image generation usage metrics captured: {usage_data}")
+                    if stream_manager and usage_data:
+                        stream_manager.send_usage_metrics(usage_data)
+                    
                 elif evt_type == "error":
                     error_msg = event.get("error", "Unknown error generating image.")
                     logger.error(f"Image generation stream error: {error_msg}")
