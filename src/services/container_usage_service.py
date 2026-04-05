@@ -14,8 +14,8 @@ class ContainerUsageService:
 
     def get_active_container_for_session(self, session_id: str) -> str | None:
         """
-        Retrieves the most recently used container ID for a given session.
-        This allows the orchestrator to explicitly pass the ID to OpenAI and prevent duplicate billing.
+        Retrieves the most recently used container ID for a given session,
+        ensuring it has not expired (OpenAI containers expire after ~20 mins).
         """
         if not session_id:
             return None
@@ -31,7 +31,24 @@ class ContainerUsageService:
                 key=lambda x: x.get("Timestamp", ""), 
                 reverse=True
             )
-            return sorted_containers[0].get("ContainerId")
+            latest_record = sorted_containers[0]
+            
+            # Check if the container is still alive (less than 15 minutes old to be safe)
+            timestamp_str = latest_record.get("Timestamp")
+            if timestamp_str:
+                # Handle ISO format strings safely
+                created_time = datetime.fromisoformat(timestamp_str.replace('Z', '+00:00'))
+                current_time = datetime.now(timezone.utc)
+                age_in_seconds = (current_time - created_time).total_seconds()
+                
+                if age_in_seconds < (15 * 60):  # 15 minutes
+                    return latest_record.get("ContainerId")
+                else:
+                    log_event("container_expired", {"session_id": session_id, "age_seconds": age_in_seconds})
+                    return None
+            
+            return latest_record.get("ContainerId")
+            
         except Exception as e:
             log_event(
                 event_type="container_sort_failed",
