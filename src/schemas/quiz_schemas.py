@@ -25,8 +25,8 @@ class QuizQuestion(BaseModel):
         None, 
         description=(
             "Instructions for a creative, decorative illustration. "
-            "Translate concepts into purely visual, text-free metaphors. "
-            "Describe the aesthetic scene and physical objects. "
+            "CRITICAL: You MUST use natural, realistic metaphors suitable for classic Impressionist art (e.g., landscapes, nature, gardens, or 19th-century everyday physical scenes) to represent abstract concepts. "
+            "Translate the core concept into an implicit, real-world physical scene. "
             "Leave null if no creative visual is required."
         )
     )
@@ -82,6 +82,6 @@ class QuizResponse(BaseModel):
     question_count: int = Field(..., description="The total number of questions generated in this quiz.")
     questions: List[QuizQuestion]
 
-easier_payload: str = Field(..., description="A user command to request an easier version of this quiz.")
-harder_payload: str = Field(..., description="A user command to request a more advanced version of this quiz.")
-retry_payload: str = Field(..., description="A user command to request a new quiz on the same topics and difficulty.")
+    easier_payload: str = Field(..., description="A user command to request an easier version of this quiz.")
+    harder_payload: str = Field(..., description="A user command to request a more advanced version of this quiz.")
+    retry_payload: str = Field(..., description="A user command to request a new quiz on the same topics and difficulty.")

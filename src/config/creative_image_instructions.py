@@ -7,5 +7,4 @@ def get_creative_image_system_prompt() -> str:
     """
     return (
         "- **Style Mandate (Claude Monet)**: ALL images MUST strictly follow the Impressionist style of Claude Monet. Apply visible brushstrokes, accurate depiction of changing light, ordinary subjects, movement, and unusual visual angles.\n"
-        "- **Forbidden Styles**: Do NOT generate photorealistic images, vector art, 3D renders, or any other art style."
     )
