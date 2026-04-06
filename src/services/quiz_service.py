@@ -285,6 +285,8 @@ class QuizService:
                         )
                         from src.config.model_config import get_model_config 
                         from src.config.creative_image_instructions import get_creative_image_system_prompt
+                        # 🟢 NEW: Import Image Usage Service for tracking
+                        from src.services.image_usage_service import ImageUsageService
                         
                         bg_client = get_openai_client()
                         active_config = get_model_config(mode) 
@@ -300,7 +302,7 @@ class QuizService:
                                 "model": active_config.image_model, 
                                 "partial_images": get_image_generation_partials(),
                                 "size": get_image_generation_size(),          
-                                "quality": active_config.image_quality # 🟢 DYNAMIC TIER
+                                "quality": active_config.image_quality 
                             }],
                             "instructions": instructions,
                             "stream": True
@@ -329,7 +331,28 @@ class QuizService:
                                     except Exception as upload_err:
                                         logger.warning(f"BG image upload failed: {upload_err}")
                         
-                        if final_url: image_urls_map[q_index] = final_url
+                        if final_url: 
+                            image_urls_map[q_index] = final_url
+                            
+                            # 🟢 NEW: Log successful background quiz image to DynamoDB
+                            if user_id:
+                                try:
+                                    active_session = actual_conversation_id if actual_conversation_id else f"quiz_bg_{user_id[-6:]}"
+                                    image_tracker = ImageUsageService()
+                                    image_tracker.log_image_usage(
+                                        user_id=user_id,
+                                        session_id=active_session,
+                                        context="quiz_background_image",
+                                        tier=mode,
+                                        engine=active_config.image_model,
+                                        size=get_image_generation_size(),
+                                        quality=active_config.image_quality,
+                                        partials=get_image_generation_partials(),
+                                        image_count=1
+                                    )
+                                except Exception as tracker_err:
+                                    logger.error(f"Failed to log background quiz image usage: {tracker_err}")
+
                     except Exception as e:
                         logger.error(f"BG image generation failed: {e}")
 

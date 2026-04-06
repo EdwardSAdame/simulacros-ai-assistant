@@ -11,6 +11,11 @@ from src.services.storage_service import storage_service
 from src.services.context_builder import build_runtime_context
 from src.config.system_instructions import build_system_instructions
 
+# 🟢 NEW: Bring in the Image Tracker and Configuration getters
+from src.services.image_usage_service import ImageUsageService
+from src.config.model_config import get_model_config
+from src.config.settings import get_image_generation_size, get_image_generation_partials
+
 logger = logging.getLogger(__name__)
 
 class CreativeImageService:
@@ -27,8 +32,9 @@ class CreativeImageService:
         name: str | None,
         email: str | None,
         mode: str,
-        stream_manager: Any
-    ) -> Tuple[str, List[str], Dict[str, Any]]: # 🟢 FIX: Updated Type Hint
+        stream_manager: Any,
+        session_id: str | None = None  # 🟢 NEW: Added to track exactly which chat generated this
+    ) -> Tuple[str, List[str], Dict[str, Any]]: 
         """
         Triggers the image generation stream and dispatches partial/final 
         images via WebSockets.
@@ -40,7 +46,7 @@ class CreativeImageService:
         
         final_text = ""
         final_image_urls = []
-        final_usage = {} # 🟢 FIX: Variable to hold the tokens for the orchestrator
+        final_usage = {} 
 
         try:
             # 1. Build Runtime Signals
@@ -55,7 +61,7 @@ class CreativeImageService:
             # 2. Build System Prompt with the Creative Image Doctrine active
             system_prompt = build_system_instructions(
                 extras=runtime_signals,
-                requires_creative_image=True # This safely injects the Monet rules!
+                requires_creative_image=True 
             )
 
             # 3. Trigger the stream using the updated assistant client
@@ -67,7 +73,7 @@ class CreativeImageService:
                 email=email,
                 mode=mode,
                 enable_image_generation=True,
-                system_instruction=system_prompt # Passing the correctly built prompt
+                system_instruction=system_prompt 
             )
             
             # 4. Parse the stream and dispatch events to the frontend
@@ -120,9 +126,8 @@ class CreativeImageService:
                 elif evt_type == "text":
                     final_text += event.get("text", "")
                     
-                # 🟢 FIX: Intercept Usage Metrics and send to frontend
                 elif evt_type == "usage_metrics":
-                    final_usage = event.get("data", {}) # Store to return it to orchestrator
+                    final_usage = event.get("data", {}) 
                     logger.info(f"Image generation usage metrics captured: {final_usage}")
                     if stream_manager and final_usage:
                         stream_manager.send_usage_metrics(final_usage)
@@ -134,11 +139,35 @@ class CreativeImageService:
                         stream_manager.send_error(error_msg)
                     return "**Error**: We could not generate the image.", [], {}
 
-            # Clean safety net fallback (leaves text empty if AI fails to generate a description)
+            # Clean safety net fallback
             if not final_text.strip() and final_image_urls:
                 final_text = ""
 
-            # 🟢 FIX: Return exactly 3 items to match what orchestrator_service.py expects
+            # 🟢 NEW: Log the deterministic Image Token Cost if images were generated
+            if final_image_urls and user_id:
+                try:
+                    cfg = get_model_config(mode)
+                    size = get_image_generation_size()
+                    partials = get_image_generation_partials()
+                    
+                    # Generate a fallback session ID if none was passed
+                    active_session = session_id if session_id else f"creative_chat_{user_id[-6:]}"
+                    
+                    image_tracker = ImageUsageService()
+                    image_tracker.log_image_usage(
+                        user_id=user_id,
+                        session_id=active_session,
+                        context="creative_chat",
+                        tier=mode,
+                        engine=cfg.image_model,
+                        size=size,
+                        quality=cfg.image_quality,
+                        partials=partials,
+                        image_count=len(final_image_urls)
+                    )
+                except Exception as tracker_err:
+                    logger.error(f"Failed to log image usage tokens to DynamoDB: {tracker_err}")
+
             return final_text, final_image_urls, final_usage
             
         except Exception as e:

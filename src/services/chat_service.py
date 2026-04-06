@@ -166,7 +166,8 @@ class ChatService:
                 requires_visuals=requires_visuals,
                 web_search_config=web_search_config, 
                 pdf_urls=clean_pdfs,
-                active_container_id=active_container_id  # <--- NEW ARGUMENT ADDED HERE
+                active_container_id=active_container_id,
+                session_id=actual_conversation_id  # 🟢 NEW: Pass the chat ID to the client
             )
             
             final_reply_text = response_tuple[0]

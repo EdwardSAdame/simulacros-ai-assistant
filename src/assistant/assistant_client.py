@@ -23,6 +23,9 @@ from src.utils.stream_parser import StreamParser
 from src.utils.quiz_utils import QuizUtils
 from src.utils.logging_utils import log_event
 
+# 🟢 NEW: Import Image Usage Service for tracking standard chat images
+from src.services.image_usage_service import ImageUsageService
+
 # IMPORT OUR NEW FUNCTION CALLING ASSETS
 from src.config.tools_config import get_custom_tools
 from src.services.admission_service import query_admission_data
@@ -45,7 +48,8 @@ def send_message_to_assistant(
     web_search_config: Dict[str, Any] | None = None,
     user_location: Dict[str, str] | None = None,
     pdf_urls: List[str] | None = None,
-    active_container_id: str | None = None
+    active_container_id: str | None = None,
+    session_id: str | None = None # 🟢 NEW: Added to track the chat ID
 ) -> Tuple[str, List[str], List[Dict[str, str]], Dict[str, int], Optional[str]]:
     
     client = get_openai_client()
@@ -103,9 +107,33 @@ def send_message_to_assistant(
                     container_id = cid
                     break
 
+        # 🟢 Extract the files from the response
         generated_urls_map = handle_generated_files(client, resp, folder="chat_assets")
-        sources_list = extract_sources(resp)
+        
+        # 🟢 NEW: Track if the AI generated a DALL-E image during the conversation
+        if isinstance(generated_urls_map, dict) and user_id:
+            # Check how many files start with "creative_image_" (differentiating them from charts/graphs)
+            creative_image_count = sum(1 for fname in generated_urls_map.keys() if fname.startswith("creative_image_"))
+            
+            if creative_image_count > 0:
+                try:
+                    active_session = session_id if session_id else f"chat_{user_id[-6:]}"
+                    image_tracker = ImageUsageService()
+                    image_tracker.log_image_usage(
+                        user_id=user_id,
+                        session_id=active_session,
+                        context="standard_chat",
+                        tier=mode,
+                        engine=cfg.image_model,
+                        size=get_image_generation_size(),
+                        quality=cfg.image_quality,
+                        partials=get_image_generation_partials(),
+                        image_count=creative_image_count
+                    )
+                except Exception as track_err:
+                    logger.error(f"Failed to log standard chat image usage: {track_err}")
 
+        sources_list = extract_sources(resp)
         generated_urls = list(generated_urls_map.values()) if isinstance(generated_urls_map, dict) else generated_urls_map
         usage_data = _extract_usage_metrics(getattr(resp, "usage", None))
 
