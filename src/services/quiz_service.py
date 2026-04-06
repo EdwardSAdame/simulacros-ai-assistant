@@ -50,6 +50,30 @@ class QuizService:
             logger.error(f"Failed to log token usage in quiz service: {e}")
 
     @staticmethod
+    def _extract_usage_from_obj(usage_obj: Any) -> Dict[str, int]:
+        """Helper to extract usage dict from OpenAI objects"""
+        if not usage_obj:
+            return {}
+        if isinstance(usage_obj, dict):
+            return {
+                "input_tokens": usage_obj.get("input_tokens", usage_obj.get("prompt_tokens", 0)),
+                "output_tokens": usage_obj.get("output_tokens", usage_obj.get("completion_tokens", 0)),
+                "total_tokens": usage_obj.get("total_tokens", 0),
+                "reasoning_tokens": usage_obj.get("output_tokens_details", {}).get("reasoning_tokens", 0) if isinstance(usage_obj.get("output_tokens_details"), dict) else 0,
+                "cached_tokens": usage_obj.get("input_tokens_details", {}).get("cached_tokens", 0) if isinstance(usage_obj.get("input_tokens_details"), dict) else 0
+            }
+        else:
+            comp_details = getattr(usage_obj, "output_tokens_details", getattr(usage_obj, "completion_tokens_details", None))
+            prompt_details = getattr(usage_obj, "input_tokens_details", getattr(usage_obj, "prompt_tokens_details", None))
+            return {
+                "input_tokens": getattr(usage_obj, "input_tokens", getattr(usage_obj, "prompt_tokens", 0)),
+                "output_tokens": getattr(usage_obj, "output_tokens", getattr(usage_obj, "completion_tokens", 0)),
+                "total_tokens": getattr(usage_obj, "total_tokens", 0),
+                "reasoning_tokens": getattr(comp_details, "reasoning_tokens", 0) if comp_details else 0,
+                "cached_tokens": getattr(prompt_details, "cached_tokens", 0) if prompt_details else 0
+            }
+
+    @staticmethod
     def get_system_instruction(
         topic: str = "general", 
         num_questions: int = 5,
@@ -276,6 +300,15 @@ class QuizService:
                         final_url = None
                         
                         for bg_event in bg_stream:
+                            # 🟢 NEW: Capture usage metrics for background image requests
+                            if getattr(bg_event, "type", "") == "response.completed":
+                                resp_obj = getattr(bg_event, "response", bg_event)
+                                usage_obj = getattr(resp_obj, "usage", None)
+                                if usage_obj and actual_conversation_id:
+                                    bg_usage = cls._extract_usage_from_obj(usage_obj)
+                                    cls._log_usage(bg_usage, user_id, actual_conversation_id, active_config.model)
+                                    logger.info(f"Background Image Gen Tokens Tracked for Q{q_index}: {bg_usage}")
+
                             if getattr(bg_event, "type", "") == "response.image_generation_call.partial_image":
                                 bg_b64 = getattr(bg_event, "partial_image_b64", "")
                                 if bg_b64:
@@ -301,8 +334,6 @@ class QuizService:
                     active_config = get_model_config(mode)
                     memory_limit = get_code_interpreter_memory()
                     
-                    # FIXED: Enforce plt.show() to bypass the filesystem entirely
-                    # and ensure aggressive clearing at the top of the script
                     base_instruction = (
                         "Write and run Python code to generate the requested plot.\n"
                         "CRITICAL KERNEL STATE: This is a shared, persistent Python environment. You MUST begin your script EXACTLY with these lines to clear the memory:\n"
@@ -348,6 +379,13 @@ class QuizService:
                             }
                             
                             response = bg_client.responses.create(**bg_req)
+                            
+                            # 🟢 NEW: Capture usage metrics for background plot requests
+                            bg_usage_obj = getattr(response, "usage", None)
+                            if bg_usage_obj and actual_conversation_id:
+                                bg_plot_usage = cls._extract_usage_from_obj(bg_usage_obj)
+                                cls._log_usage(bg_plot_usage, user_id, actual_conversation_id, active_config.model)
+                                logger.info(f"Background Plot Gen Tokens Tracked for Q{q_index}: {bg_plot_usage}")
 
                             if not current_container_id:
                                 output_list = getattr(response, "output", []) or []
