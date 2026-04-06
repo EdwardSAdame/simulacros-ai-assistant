@@ -157,13 +157,14 @@ class CreativeImageService:
                     image_tracker.log_image_usage(
                         user_id=user_id,
                         session_id=active_session,
-                        source="chat",             # 🟢 UPDATED: Changed 'context' to 'source' to match new Metadata schema
+                        source="chat",
                         tier=mode,
                         engine=cfg.image_model,
                         size=size,
                         quality=cfg.image_quality,
                         partials=partials,
-                        image_count=len(final_image_urls)
+                        image_count=len(final_image_urls),
+                        image_urls=final_image_urls  # 🟢 NEW: Pass the final image URLs to the tracker
                     )
                 except Exception as tracker_err:
                     logger.error(f"Failed to log image usage tokens to DynamoDB: {tracker_err}")

@@ -41,13 +41,14 @@ class ImageUsageService:
         self,
         user_id: str,
         session_id: str,
-        source: str,         # 🟢 UPDATED: e.g., 'chat' or 'quiz'
+        source: str,         
         tier: str,
         engine: str,
         size: str,
         quality: str,
         partials: int,
-        image_count: int = 1
+        image_count: int = 1,
+        image_urls: list = None  # 🟢 NEW: Parameter to accept the final S3 URLs
     ) -> dict:
         """
         Calculates the total cost and passes the cleanly structured transaction receipt to the storage layer.
@@ -77,7 +78,8 @@ class ImageUsageService:
                 "Size": size,
                 "Quality": quality,
                 "Partials": partials,
-                "ImageCount": image_count
+                "ImageCount": image_count,
+                "ImageUrls": image_urls or []  # 🟢 NEW: Saves the array of URLs, defaulting to empty list
             }
         }
 

@@ -112,8 +112,9 @@ def send_message_to_assistant(
         
         # 🟢 NEW: Track if the AI generated a DALL-E image during the conversation
         if isinstance(generated_urls_map, dict) and user_id:
-            # Check how many files start with "creative_image_" (differentiating them from charts/graphs)
-            creative_image_count = sum(1 for fname in generated_urls_map.keys() if fname.startswith("creative_image_"))
+            # Safely extract ONLY the creative image URLs (ignoring python-generated graphs)
+            creative_image_urls = [url for fname, url in generated_urls_map.items() if fname.startswith("creative_image_")]
+            creative_image_count = len(creative_image_urls)
             
             if creative_image_count > 0:
                 try:
@@ -122,13 +123,14 @@ def send_message_to_assistant(
                     image_tracker.log_image_usage(
                         user_id=user_id,
                         session_id=active_session,
-                        source="chat",  # 🟢 FIX: Updated to match the new ImageUsageService parameter
+                        source="chat",  
                         tier=mode,
                         engine=cfg.image_model,
                         size=get_image_generation_size(),
                         quality=cfg.image_quality,
                         partials=get_image_generation_partials(),
-                        image_count=creative_image_count
+                        image_count=creative_image_count,
+                        image_urls=creative_image_urls # 🟢 NEW: Pass the filtered list of S3 URLs
                     )
                 except Exception as track_err:
                     logger.error(f"Failed to log standard chat image usage: {track_err}")

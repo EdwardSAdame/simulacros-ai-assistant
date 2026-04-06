@@ -342,13 +342,14 @@ class QuizService:
                                     image_tracker.log_image_usage(
                                         user_id=user_id,
                                         session_id=active_session,
-                                        source="quiz",  # 🟢 FIX: Updated from context="quiz_background_image"
+                                        source="quiz",  
                                         tier=mode,
                                         engine=active_config.image_model,
                                         size=get_image_generation_size(),
                                         quality=active_config.image_quality,
                                         partials=get_image_generation_partials(),
-                                        image_count=1
+                                        image_count=1,
+                                        image_urls=[final_url]  # 🟢 NEW: Pass the final S3 URL mapped inside a list
                                     )
                                 except Exception as tracker_err:
                                     logger.error(f"Failed to log background quiz image usage: {tracker_err}")
