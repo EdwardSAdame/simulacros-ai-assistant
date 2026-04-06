@@ -9,6 +9,7 @@ from src.services.context_resolution import determine_exam_context
 # State Management
 from src.services.conversation_service import ConversationService
 from src.services.history_service import build_history_list
+from src.services.token_usage_service import TokenUsageService # 🟢 NEW: Import the tracking service
 
 # Domain Services
 from src.services.chat_service import ChatService
@@ -121,6 +122,21 @@ class OrchestratorService:
                     name=name, email=email, mode=mode, stream_manager=stream_manager
                 )
                 
+                # 🟢 NEW: Save the text model's tokens to the TokenUsageTable
+                if token_usage:
+                    try:
+                        TokenUsageService().log_token_usage(
+                            user_id=user_id or "anonymous",
+                            session_id=actual_conversation_id,
+                            model=mode, # This logs it identically to standard text chat!
+                            input_tokens=token_usage.get("input_tokens", 0),
+                            output_tokens=token_usage.get("output_tokens", 0),
+                            total_tokens=token_usage.get("total_tokens", 0)
+                        )
+                        logger.info(f"Image generation text tokens successfully logged for user {user_id}")
+                    except Exception as token_err:
+                        logger.error(f"Failed to log text tokens for image generation: {token_err}")
+
                 meta_payload = {
                     "type": "rich_chat",
                     "assets": [{"type": "image", "url": url, "alt": "Generated Visualization"} for url in final_images_urls],
