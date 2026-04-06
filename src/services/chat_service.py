@@ -46,14 +46,14 @@ class ChatService:
             logger.error(f"Failed to log token usage: {e}")
 
     @staticmethod
-    def _log_container(user_id: str | None, session_id: str, container_id: str | None):
+    def _log_container(user_id: str | None, conversation_id: str, container_id: str | None):
         if not user_id or not container_id: 
             return
         try:
             memory_limit = get_code_interpreter_memory()
             ContainerUsageService().log_container_usage(
                 user_id=user_id,
-                session_id=session_id,
+                conversation_id=conversation_id, # 🟢 FIX: Updated keyword argument!
                 container_id=container_id,
                 memory_limit=memory_limit
             )
@@ -167,7 +167,7 @@ class ChatService:
                 web_search_config=web_search_config, 
                 pdf_urls=clean_pdfs,
                 active_container_id=active_container_id,
-                conversation_id=actual_conversation_id  # 🟢 FIX: Changed parameter name from session_id to conversation_id
+                conversation_id=actual_conversation_id  
             )
             
             final_reply_text = response_tuple[0]

@@ -285,7 +285,6 @@ class QuizService:
                         )
                         from src.config.model_config import get_model_config 
                         from src.config.creative_image_instructions import get_creative_image_system_prompt
-                        # 🟢 NEW: Import Image Usage Service for tracking
                         from src.services.image_usage_service import ImageUsageService
                         
                         bg_client = get_openai_client()
@@ -334,14 +333,13 @@ class QuizService:
                         if final_url: 
                             image_urls_map[q_index] = final_url
                             
-                            # 🟢 NEW: Log successful background quiz image to DynamoDB
                             if user_id:
                                 try:
                                     active_session = actual_conversation_id if actual_conversation_id else f"quiz_bg_{user_id[-6:]}"
                                     image_tracker = ImageUsageService()
                                     image_tracker.log_image_usage(
                                         user_id=user_id,
-                                        conversation_id=active_session,  # 🟢 FIX: Renamed parameter to match UserConversation table!
+                                        conversation_id=active_session,
                                         source="quiz",  
                                         tier=mode,
                                         engine=active_config.image_model,
@@ -434,7 +432,7 @@ class QuizService:
                                                 try:
                                                     ContainerUsageService().log_container_usage(
                                                         user_id=user_id,
-                                                        session_id=actual_conversation_id,
+                                                        conversation_id=actual_conversation_id, # 🟢 FIX: Updated keyword argument!
                                                         container_id=cid,
                                                         memory_limit=memory_limit
                                                     )
