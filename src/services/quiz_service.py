@@ -278,7 +278,8 @@ class QuizService:
 
                 def _bg_image_generator(img_prompt: str, q_index: int):
                     try:
-                        from src.config.settings import get_openai_client
+                        # 🟢 FIX: Import size and quality settings
+                        from src.config.settings import get_openai_client, get_image_generation_size, get_image_generation_quality
                         from src.config.model_config import get_model_config 
                         from src.config.creative_image_instructions import get_creative_image_system_prompt
                         
@@ -291,7 +292,13 @@ class QuizService:
                         bg_req = {
                             "model": active_config.model, 
                             "input": [{"role": "user", "content": f"Generate this image: {img_prompt}"}],
-                            "tools": [{"type": "image_generation", "model": active_config.image_model, "partial_images": 3}],
+                            "tools": [{
+                                "type": "image_generation", 
+                                "model": active_config.image_model, 
+                                "partial_images": 3,
+                                "size": get_image_generation_size(),          # 🟢 Injected Size
+                                "quality": get_image_generation_quality()     # 🟢 Injected Quality
+                            }],
                             "instructions": instructions,
                             "stream": True
                         }
@@ -305,7 +312,6 @@ class QuizService:
                                 usage_obj = getattr(resp_obj, "usage", None)
                                 if usage_obj and actual_conversation_id:
                                     bg_usage = cls._extract_usage_from_obj(usage_obj)
-                                    # 🟢 FIX: Passed 'mode' instead of 'active_config.model'
                                     cls._log_usage(bg_usage, user_id, actual_conversation_id, mode)
                                     logger.info(f"Background Image Gen Tokens Tracked for Q{q_index}: {bg_usage}")
 
@@ -383,7 +389,6 @@ class QuizService:
                             bg_usage_obj = getattr(response, "usage", None)
                             if bg_usage_obj and actual_conversation_id:
                                 bg_plot_usage = cls._extract_usage_from_obj(bg_usage_obj)
-                                # 🟢 FIX: Passed 'mode' instead of 'active_config.model'
                                 cls._log_usage(bg_plot_usage, user_id, actual_conversation_id, mode)
                                 logger.info(f"Background Plot Gen Tokens Tracked for Q{q_index}: {bg_plot_usage}")
 
