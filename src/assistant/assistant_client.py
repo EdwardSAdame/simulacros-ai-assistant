@@ -10,8 +10,7 @@ from src.config.settings import (
     get_vector_search_max_results, 
     get_code_interpreter_memory,
     get_image_generation_size,
-    get_image_generation_quality,
-    get_image_generation_partials # 🟢 NEW: Import the partials getter
+    get_image_generation_partials 
 )
 from src.config.model_config import get_model_config
 from src.schemas.quiz_schemas import QuizResponse
@@ -68,6 +67,7 @@ def send_message_to_assistant(
         pdf_urls, 
         web_search_config, 
         user_location,
+        cfg, 
         active_container_id
     )
 
@@ -144,9 +144,10 @@ def stream_chat_response(
     if enable_image_generation:
         tools.append({
             "type": "image_generation",
-            "partial_images": get_image_generation_partials(), # 🟢 DYNAMIC
+            "model": cfg.image_model,          # 🟢 Injected dynamic model
+            "partial_images": get_image_generation_partials(), 
             "size": get_image_generation_size(),
-            "quality": get_image_generation_quality()
+            "quality": cfg.image_quality       # 🟢 Injected dynamic quality
         })
 
     req = _build_request_payload(cfg, api_input, tools)
@@ -289,7 +290,7 @@ def generate_structured_quiz(
     if pdf_urls:
         _inject_pdf_inputs(api_input, pdf_urls)
 
-    tools = _configure_tools(vector_store_ids, False, False, pdf_urls, web_search_config, user_location)
+    tools = _configure_tools(vector_store_ids, False, False, pdf_urls, web_search_config, user_location, cfg)
 
     req = _build_request_payload(cfg, api_input, tools=tools)
     req["text_format"] = QuizResponse
@@ -345,7 +346,7 @@ def stream_structured_quiz(
     if pdf_urls:
         _inject_pdf_inputs(api_input, pdf_urls)
 
-    tools = _configure_tools(vector_store_ids, False, False, pdf_urls, web_search_config, user_location)
+    tools = _configure_tools(vector_store_ids, False, False, pdf_urls, web_search_config, user_location, cfg)
 
     req = _build_request_payload(cfg, api_input, tools=tools)
     req["text_format"] = QuizResponse
@@ -476,7 +477,7 @@ def _inject_pdf_inputs(api_input, pdf_urls):
                 "file_url": url
             })
 
-def _configure_tools(vector_store_ids, requires_visuals, requires_creative_images, pdf_urls, web_search_config, user_location, active_container_id=None):
+def _configure_tools(vector_store_ids, requires_visuals, requires_creative_images, pdf_urls, web_search_config, user_location, cfg, active_container_id=None):
     tools = []
     if vector_store_ids:
         tools.append({"type": "file_search", "vector_store_ids": vector_store_ids, "max_num_results": get_vector_search_max_results()})
@@ -503,9 +504,10 @@ def _configure_tools(vector_store_ids, requires_visuals, requires_creative_image
     if requires_creative_images:
         tools.append({
             "type": "image_generation",
-            "partial_images": get_image_generation_partials(), # 🟢 DYNAMIC
+            "model": cfg.image_model,          # 🟢 Injected dynamic model
+            "partial_images": get_image_generation_partials(),
             "size": get_image_generation_size(),
-            "quality": get_image_generation_quality()
+            "quality": cfg.image_quality       # 🟢 Injected dynamic quality
         })
         
     if web_search_config:

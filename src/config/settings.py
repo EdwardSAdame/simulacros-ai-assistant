@@ -77,11 +77,10 @@ class Settings:
         # Container Memory Limit Configuration
         self.CODE_INTERPRETER_MEMORY: str = os.getenv("CODE_INTERPRETER_MEMORY", "4g")
 
-        # Image Generation Configuration
-        self.IMAGE_GENERATION_SIZE: str = os.getenv("IMAGE_GENERATION_SIZE", "1024x1024")
-        self.IMAGE_GENERATION_QUALITY: str = os.getenv("IMAGE_GENERATION_QUALITY", "auto")
+        # Global Image Generation Configuration
+        self.IMAGE_GENERATION_SIZE: str = os.getenv("IMAGE_GENERATION_SIZE", "1536x1024")
         
-        # 🟢 NEW: Dynamic Partial Images count
+        # Dynamic Partial Images count
         try:
             self.IMAGE_GENERATION_PARTIALS: int = int(os.getenv("IMAGE_GENERATION_PARTIALS", "3"))
         except ValueError:
@@ -102,10 +101,6 @@ class Settings:
     def get_image_generation_size(self) -> str:
         return self.IMAGE_GENERATION_SIZE
 
-    def get_image_generation_quality(self) -> str:
-        return self.IMAGE_GENERATION_QUALITY
-
-    # 🟢 NEW: Getter for partials
     def get_image_generation_partials(self) -> int:
         return self.IMAGE_GENERATION_PARTIALS
 
@@ -123,9 +118,5 @@ def get_code_interpreter_memory() -> str:
 def get_image_generation_size() -> str:
     return settings.get_image_generation_size()
 
-def get_image_generation_quality() -> str:
-    return settings.get_image_generation_quality()
-
-# 🟢 NEW: Exposed global function
 def get_image_generation_partials() -> int:
     return settings.get_image_generation_partials()

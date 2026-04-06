@@ -22,6 +22,7 @@ class ModelConfig:
     
     # 🟢 3. IMAGE GENERATION MODE
     image_model: str
+    image_quality: str # 🟢 NEW: Bundled quality parameter
 
 def _parse_float_or_none(value: str | None, default: float) -> Optional[float]:
     if value is None: return default
@@ -47,11 +48,17 @@ def get_model_config(mode: str = "omega") -> ModelConfig:
         suffix = "ALPHA"
         fallback_model = "gpt-4o"
         fallback_temp = 0.4
+        # 🟢 Premium Image Settings
+        fallback_image_model = "gpt-image-1.5"
+        fallback_image_quality = "high"
     else:
         # Defaults to 'omega'
         suffix = "OMEGA"
         fallback_model = "gpt-4o-mini"
         fallback_temp = 0.3
+        # 🟢 Standard Image Settings
+        fallback_image_model = "gpt-image-1-mini"
+        fallback_image_quality = "medium"
 
     model = os.getenv(f"OPENAI_MODEL_{suffix}", fallback_model)
     temperature = _parse_float_or_none(os.getenv(f"OPENAI_TEMP_{suffix}"), fallback_temp)
@@ -66,7 +73,9 @@ def get_model_config(mode: str = "omega") -> ModelConfig:
     router_effort = _parse_effort(os.getenv("OPENAI_REASONING_EFFORT_ROUTER"))
     
     # --- LOAD IMAGE CONFIG ---
-    image_model = os.getenv("OPENAI_MODEL_IMAGE", "gpt-image-1-mini")
+    # 🟢 Pulls from .env using the mode suffix, or uses our built-in fallbacks
+    image_model = os.getenv(f"OPENAI_MODEL_IMAGE_{suffix}", fallback_image_model)
+    image_quality = os.getenv(f"IMAGE_GENERATION_QUALITY_{suffix}", fallback_image_quality)
 
     return ModelConfig(
         model=model,
@@ -79,5 +88,6 @@ def get_model_config(mode: str = "omega") -> ModelConfig:
         router_top_p=router_top_p,
         router_reasoning_effort=router_effort,
         
-        image_model=image_model
+        image_model=image_model,
+        image_quality=image_quality
     )
