@@ -14,7 +14,7 @@ class ContainerUsageTable:
         self, 
         user_id: str, 
         timestamp: str, 
-        session_id: str, 
+        conversation_id: str,  # 🟢 FIX: Changed to conversation_id
         container_id: str, 
         memory_limit: str
     ) -> bool:
@@ -26,7 +26,7 @@ class ContainerUsageTable:
             item = {
                 'UserId': user_id,
                 'Timestamp': timestamp,
-                'SessionId': session_id,
+                'ConversationId': conversation_id, # 🟢 FIX: Matches the new standard
                 'ContainerId': container_id,
                 'MemoryLimit': memory_limit
             }
@@ -50,22 +50,22 @@ class ContainerUsageTable:
             )
             return False
 
-    def get_session_containers(self, session_id: str) -> list:
+    def get_conversation_containers(self, conversation_id: str) -> list:
         """
-        Retrieves all container records for a specific session using the SessionIndex.
-        Useful for checking if we have already billed for a container in this session.
+        Retrieves all container records for a specific conversation using the ConversationIndex.
+        Useful for checking if we have already billed for a container in this conversation.
         """
         try:
             response = self.table.query(
-                IndexName='SessionIndex',
-                KeyConditionExpression=boto3.dynamodb.conditions.Key('SessionId').eq(session_id)
+                IndexName='ConversationIndex', # 🟢 FIX: Updated Index Name
+                KeyConditionExpression=boto3.dynamodb.conditions.Key('ConversationId').eq(conversation_id)
             )
             return response.get('Items', [])
             
         except ClientError as e:
             log_event(
-                event_type="container_usage_session_retrieve_failed", 
-                details={"SessionId": session_id, "error": e.response['Error']['Message']}, 
+                event_type="container_usage_retrieve_failed", 
+                details={"ConversationId": conversation_id, "error": e.response['Error']['Message']}, 
                 level="error", 
                 error=e
             )

@@ -12,15 +12,15 @@ class ContainerUsageService:
     def __init__(self):
         self.storage = ContainerUsageTable()
 
-    def get_active_container_for_session(self, session_id: str) -> str | None:
+    def get_active_container_for_session(self, conversation_id: str) -> str | None: # 🟢 FIX: Param renamed
         """
-        Retrieves the most recently used container ID for a given session,
+        Retrieves the most recently used container ID for a given conversation,
         ensuring it has not expired (OpenAI containers expire after ~20 mins).
         """
-        if not session_id:
+        if not conversation_id:
             return None
             
-        existing_containers = self.storage.get_session_containers(session_id)
+        existing_containers = self.storage.get_conversation_containers(conversation_id)
         if not existing_containers:
             return None
             
@@ -44,7 +44,7 @@ class ContainerUsageService:
                 if age_in_seconds < (15 * 60):  # 15 minutes
                     return latest_record.get("ContainerId")
                 else:
-                    log_event("container_expired", {"session_id": session_id, "age_seconds": age_in_seconds})
+                    log_event("container_expired", {"conversation_id": conversation_id, "age_seconds": age_in_seconds})
                     return None
             
             return latest_record.get("ContainerId")
@@ -52,7 +52,7 @@ class ContainerUsageService:
         except Exception as e:
             log_event(
                 event_type="container_sort_failed",
-                details={"session_id": session_id, "error": str(e)},
+                details={"conversation_id": conversation_id, "error": str(e)},
                 level="error"
             )
             return None
@@ -60,7 +60,7 @@ class ContainerUsageService:
     def log_container_usage(
         self,
         user_id: str,
-        session_id: str,
+        conversation_id: str, # 🟢 FIX: Param renamed
         container_id: str,
         memory_limit: str = "1g"
     ) -> bool:
@@ -68,20 +68,22 @@ class ContainerUsageService:
         Validates and processes container usage. 
         Prevents duplicate records by checking if the container was already recorded.
         """
-        if not user_id or not session_id or not container_id:
+        # Note: We still support the 'session_id' kwarg via definition if needed, 
+        # but renamed standard usage to conversation_id. 
+        if not user_id or not conversation_id or not container_id:
             log_event(
                 event_type="container_logging_missing_fields", 
                 details={
                     "user_id": user_id, 
-                    "session_id": session_id, 
+                    "conversation_id": conversation_id, 
                     "container_id": container_id
                 }, 
                 level="warning"
             )
             return False
 
-        # 1. Query the Global Secondary Index to get all containers for this session
-        existing_containers = self.storage.get_session_containers(session_id)
+        # 1. Query the Global Secondary Index to get all containers for this conversation
+        existing_containers = self.storage.get_conversation_containers(conversation_id)
         
         # 2. Check if this specific container has already been recorded
         for record in existing_containers:
@@ -90,7 +92,7 @@ class ContainerUsageService:
                     event_type="container_already_recorded",
                     details={
                         "user_id": user_id, 
-                        "session_id": session_id, 
+                        "conversation_id": conversation_id, 
                         "container_id": container_id
                     }
                 )
@@ -102,7 +104,7 @@ class ContainerUsageService:
         return self.storage.record_container_usage(
             user_id=user_id,
             timestamp=timestamp,
-            session_id=session_id,
+            conversation_id=conversation_id,
             container_id=container_id,
             memory_limit=memory_limit
         )
