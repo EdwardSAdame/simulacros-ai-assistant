@@ -278,8 +278,13 @@ class QuizService:
 
                 def _bg_image_generator(img_prompt: str, q_index: int):
                     try:
-                        # 🟢 FIX: Import size and quality settings
-                        from src.config.settings import get_openai_client, get_image_generation_size, get_image_generation_quality
+                        # 🟢 FIX: Import dynamic partials getter
+                        from src.config.settings import (
+                            get_openai_client, 
+                            get_image_generation_size, 
+                            get_image_generation_quality,
+                            get_image_generation_partials
+                        )
                         from src.config.model_config import get_model_config 
                         from src.config.creative_image_instructions import get_creative_image_system_prompt
                         
@@ -295,9 +300,9 @@ class QuizService:
                             "tools": [{
                                 "type": "image_generation", 
                                 "model": active_config.image_model, 
-                                "partial_images": 3,
-                                "size": get_image_generation_size(),          # 🟢 Injected Size
-                                "quality": get_image_generation_quality()     # 🟢 Injected Quality
+                                "partial_images": get_image_generation_partials(), # 🟢 DYNAMIC
+                                "size": get_image_generation_size(),          
+                                "quality": get_image_generation_quality()     
                             }],
                             "instructions": instructions,
                             "stream": True

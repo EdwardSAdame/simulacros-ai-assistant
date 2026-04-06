@@ -80,6 +80,13 @@ class Settings:
         # Image Generation Configuration
         self.IMAGE_GENERATION_SIZE: str = os.getenv("IMAGE_GENERATION_SIZE", "1024x1024")
         self.IMAGE_GENERATION_QUALITY: str = os.getenv("IMAGE_GENERATION_QUALITY", "auto")
+        
+        # 🟢 NEW: Dynamic Partial Images count
+        try:
+            self.IMAGE_GENERATION_PARTIALS: int = int(os.getenv("IMAGE_GENERATION_PARTIALS", "3"))
+        except ValueError:
+            logger.warning("IMAGE_GENERATION_PARTIALS in .env is not a valid int. Defaulting to 3.")
+            self.IMAGE_GENERATION_PARTIALS: int = 3
 
     def get_openai_client(self) -> openai.Client:
         if not self.OPENAI_API_KEY:
@@ -98,6 +105,10 @@ class Settings:
     def get_image_generation_quality(self) -> str:
         return self.IMAGE_GENERATION_QUALITY
 
+    # 🟢 NEW: Getter for partials
+    def get_image_generation_partials(self) -> int:
+        return self.IMAGE_GENERATION_PARTIALS
+
 settings = Settings()
 
 def get_openai_client() -> openai.Client:
@@ -114,3 +125,7 @@ def get_image_generation_size() -> str:
 
 def get_image_generation_quality() -> str:
     return settings.get_image_generation_quality()
+
+# 🟢 NEW: Exposed global function
+def get_image_generation_partials() -> int:
+    return settings.get_image_generation_partials()

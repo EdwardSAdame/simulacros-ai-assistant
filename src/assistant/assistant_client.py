@@ -10,7 +10,8 @@ from src.config.settings import (
     get_vector_search_max_results, 
     get_code_interpreter_memory,
     get_image_generation_size,
-    get_image_generation_quality
+    get_image_generation_quality,
+    get_image_generation_partials # 🟢 NEW: Import the partials getter
 )
 from src.config.model_config import get_model_config
 from src.schemas.quiz_schemas import QuizResponse
@@ -143,7 +144,7 @@ def stream_chat_response(
     if enable_image_generation:
         tools.append({
             "type": "image_generation",
-            "partial_images": 3,
+            "partial_images": get_image_generation_partials(), # 🟢 DYNAMIC
             "size": get_image_generation_size(),
             "quality": get_image_generation_quality()
         })
@@ -163,9 +164,7 @@ def stream_chat_response(
         for event in stream:
             event_type = getattr(event, "type", "")
             
-            # 🟢 THE FIX 1: Catch 'response.completed' (The true end of an SSE stream)
             if event_type == "response.completed":
-                # Safely get the nested response object, or fallback to the event itself
                 resp_obj = getattr(event, "response", event)
                 usage_obj = getattr(resp_obj, "usage", None)
                 if usage_obj is not None:
@@ -244,7 +243,6 @@ def stream_chat_response(
             for event2 in stream2:
                 event_type2 = getattr(event2, "type", "")
                 
-                # 🟢 THE FIX 2: Catch 'response.completed' in the tool follow-up stream
                 if event_type2 == "response.completed":
                     resp_obj2 = getattr(event2, "response", event2)
                     usage_obj2 = getattr(resp_obj2, "usage", None)
@@ -505,7 +503,7 @@ def _configure_tools(vector_store_ids, requires_visuals, requires_creative_image
     if requires_creative_images:
         tools.append({
             "type": "image_generation",
-            "partial_images": 3,
+            "partial_images": get_image_generation_partials(), # 🟢 DYNAMIC
             "size": get_image_generation_size(),
             "quality": get_image_generation_quality()
         })
