@@ -300,13 +300,13 @@ class QuizService:
                         final_url = None
                         
                         for bg_event in bg_stream:
-                            # 🟢 NEW: Capture usage metrics for background image requests
                             if getattr(bg_event, "type", "") == "response.completed":
                                 resp_obj = getattr(bg_event, "response", bg_event)
                                 usage_obj = getattr(resp_obj, "usage", None)
                                 if usage_obj and actual_conversation_id:
                                     bg_usage = cls._extract_usage_from_obj(usage_obj)
-                                    cls._log_usage(bg_usage, user_id, actual_conversation_id, active_config.model)
+                                    # 🟢 FIX: Passed 'mode' instead of 'active_config.model'
+                                    cls._log_usage(bg_usage, user_id, actual_conversation_id, mode)
                                     logger.info(f"Background Image Gen Tokens Tracked for Q{q_index}: {bg_usage}")
 
                             if getattr(bg_event, "type", "") == "response.image_generation_call.partial_image":
@@ -380,11 +380,11 @@ class QuizService:
                             
                             response = bg_client.responses.create(**bg_req)
                             
-                            # 🟢 NEW: Capture usage metrics for background plot requests
                             bg_usage_obj = getattr(response, "usage", None)
                             if bg_usage_obj and actual_conversation_id:
                                 bg_plot_usage = cls._extract_usage_from_obj(bg_usage_obj)
-                                cls._log_usage(bg_plot_usage, user_id, actual_conversation_id, active_config.model)
+                                # 🟢 FIX: Passed 'mode' instead of 'active_config.model'
+                                cls._log_usage(bg_plot_usage, user_id, actual_conversation_id, mode)
                                 logger.info(f"Background Plot Gen Tokens Tracked for Q{q_index}: {bg_plot_usage}")
 
                             if not current_container_id:
