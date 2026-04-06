@@ -130,7 +130,7 @@ def send_message_to_assistant(
                         quality=cfg.image_quality,
                         partials=get_image_generation_partials(),
                         image_count=creative_image_count,
-                        image_urls=creative_image_urls # 🟢 NEW: Pass the filtered list of S3 URLs
+                        image_url=creative_image_urls[0] if creative_image_urls else None # 🟢 FIX: Passes a single string
                     )
                 except Exception as track_err:
                     logger.error(f"Failed to log standard chat image usage: {track_err}")

@@ -165,7 +165,7 @@ class CreativeImageService:
                         quality=cfg.image_quality,
                         partials=partials,
                         image_count=len(final_image_urls),
-                        image_urls=final_image_urls  
+                        image_url=final_image_urls[-1] if final_image_urls else None  # 🟢 FIX: Extract single string
                     )
                 except Exception as tracker_err:
                     logger.error(f"Failed to log image usage tokens to DynamoDB: {tracker_err}")

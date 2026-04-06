@@ -349,7 +349,7 @@ class QuizService:
                                         quality=active_config.image_quality,
                                         partials=get_image_generation_partials(),
                                         image_count=1,
-                                        image_urls=[final_url]  # 🟢 NEW: Pass the final S3 URL mapped inside a list
+                                        image_url=final_url  # 🟢 FIX: Passes a single string
                                     )
                                 except Exception as tracker_err:
                                     logger.error(f"Failed to log background quiz image usage: {tracker_err}")

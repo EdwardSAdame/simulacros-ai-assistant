@@ -48,7 +48,7 @@ class ImageUsageService:
         quality: str,
         partials: int,
         image_count: int = 1,
-        image_urls: list = None  # 🟢 NEW: Parameter to accept the final S3 URLs
+        image_url: str = None  # 🟢 FIX: Changed to a single string parameter
     ) -> dict:
         """
         Calculates the total cost and passes the cleanly structured transaction receipt to the storage layer.
@@ -61,26 +61,31 @@ class ImageUsageService:
         cost_per_image = self.calculate_tokens(size, quality, partials)
         total_tokens = cost_per_image * image_count
 
-        # 2. Prepare Database Item (Clean Metadata Structure)
+        # 2. Prepare Database Item
         timestamp = datetime.now(timezone.utc).isoformat()
         usage_id = str(uuid.uuid4())
+
+        metadata = {
+            "Source": source,       
+            "SessionId": session_id,
+            "Tier": tier,            
+            "Engine": engine,        
+            "Size": size,
+            "Quality": quality,
+            "Partials": partials,
+            "ImageCount": image_count
+        }
+        
+        # 🟢 FIX: Only attach the ImageUrl field if a URL actually exists
+        if image_url:
+            metadata["ImageUrl"] = image_url
 
         item = {
             "UsageId": usage_id,
             "UserId": user_id,
             "Timestamp": timestamp,
             "TotalTokens": total_tokens,
-            "Metadata": {
-                "Source": source,       
-                "SessionId": session_id,
-                "Tier": tier,            
-                "Engine": engine,        
-                "Size": size,
-                "Quality": quality,
-                "Partials": partials,
-                "ImageCount": image_count,
-                "ImageUrls": image_urls or []  # 🟢 NEW: Saves the array of URLs, defaulting to empty list
-            }
+            "Metadata": metadata
         }
 
         # 3. Save to DynamoDB via the Storage Layer
