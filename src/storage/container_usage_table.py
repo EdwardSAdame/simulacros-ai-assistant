@@ -14,9 +14,10 @@ class ContainerUsageTable:
         self, 
         user_id: str, 
         timestamp: str, 
-        conversation_id: str,  # 🟢 FIX: Changed to conversation_id
+        conversation_id: str,  
         container_id: str, 
-        memory_limit: str
+        memory_limit: str,
+        metadata: dict = None # 🟢 NEW: Added metadata parameter
     ) -> bool:
         """
         Saves a single container usage record to DynamoDB.
@@ -26,17 +27,22 @@ class ContainerUsageTable:
             item = {
                 'UserId': user_id,
                 'Timestamp': timestamp,
-                'ConversationId': conversation_id, # 🟢 FIX: Matches the new standard
+                'ConversationId': conversation_id, 
                 'ContainerId': container_id,
                 'MemoryLimit': memory_limit
             }
+            
+            # 🟢 NEW: Safely append Metadata if it was provided
+            if metadata:
+                item['Metadata'] = metadata
             
             self.table.put_item(Item=item)
             log_event(
                 event_type="container_usage_recorded", 
                 details={
                     "UserId": user_id, 
-                    "ContainerId": container_id
+                    "ContainerId": container_id,
+                    "MemoryLimit": memory_limit
                 }
             )
             return True
@@ -57,7 +63,7 @@ class ContainerUsageTable:
         """
         try:
             response = self.table.query(
-                IndexName='ConversationIndex', # 🟢 FIX: Updated Index Name
+                IndexName='ConversationIndex', 
                 KeyConditionExpression=boto3.dynamodb.conditions.Key('ConversationId').eq(conversation_id)
             )
             return response.get('Items', [])

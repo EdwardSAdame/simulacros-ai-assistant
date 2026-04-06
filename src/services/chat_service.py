@@ -53,8 +53,9 @@ class ChatService:
             memory_limit = get_code_interpreter_memory()
             ContainerUsageService().log_container_usage(
                 user_id=user_id,
-                conversation_id=conversation_id, # 🟢 FIX: Updated keyword argument!
+                conversation_id=conversation_id,
                 container_id=container_id,
+                source="chat", # 🟢 FIX: Added the source tracking parameter
                 memory_limit=memory_limit
             )
         except Exception as e:

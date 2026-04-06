@@ -12,7 +12,7 @@ class ContainerUsageService:
     def __init__(self):
         self.storage = ContainerUsageTable()
 
-    def get_active_container_for_session(self, conversation_id: str) -> str | None: # 🟢 FIX: Param renamed
+    def get_active_container_for_session(self, conversation_id: str) -> str | None:
         """
         Retrieves the most recently used container ID for a given conversation,
         ensuring it has not expired (OpenAI containers expire after ~20 mins).
@@ -60,16 +60,15 @@ class ContainerUsageService:
     def log_container_usage(
         self,
         user_id: str,
-        conversation_id: str, # 🟢 FIX: Param renamed
+        conversation_id: str,
         container_id: str,
+        source: str, # 🟢 NEW: Require the source to track analytics!
         memory_limit: str = "1g"
     ) -> bool:
         """
         Validates and processes container usage. 
         Prevents duplicate records by checking if the container was already recorded.
         """
-        # Note: We still support the 'session_id' kwarg via definition if needed, 
-        # but renamed standard usage to conversation_id. 
         if not user_id or not conversation_id or not container_id:
             log_event(
                 event_type="container_logging_missing_fields", 
@@ -100,11 +99,17 @@ class ContainerUsageService:
 
         # 3. If it is a new container, persist it
         timestamp = datetime.now(timezone.utc).isoformat()
+        
+        # 🟢 NEW: Package the source into the Metadata dict
+        metadata = {
+            "Source": source
+        }
 
         return self.storage.record_container_usage(
             user_id=user_id,
             timestamp=timestamp,
             conversation_id=conversation_id,
             container_id=container_id,
-            memory_limit=memory_limit
+            memory_limit=memory_limit,
+            metadata=metadata
         )

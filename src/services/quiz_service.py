@@ -432,8 +432,9 @@ class QuizService:
                                                 try:
                                                     ContainerUsageService().log_container_usage(
                                                         user_id=user_id,
-                                                        conversation_id=actual_conversation_id, # 🟢 FIX: Updated keyword argument!
+                                                        conversation_id=actual_conversation_id, # 🟢 FIX: Ensure parameter names match!
                                                         container_id=cid,
+                                                        source="quiz", # 🟢 FIX: Include the required source!
                                                         memory_limit=memory_limit
                                                     )
                                                 except Exception as e:
