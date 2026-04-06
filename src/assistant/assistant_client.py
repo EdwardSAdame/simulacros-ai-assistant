@@ -75,7 +75,6 @@ def send_message_to_assistant(
     try:
         resp = client.responses.create(**req)
         
-        # 1. Extract Text
         text = getattr(resp, "output_text", None)
         output_list = getattr(resp, "output", []) or []
         
@@ -91,7 +90,6 @@ def send_message_to_assistant(
         if text: 
             text = re.sub(r'\[.*?\]\(sandbox:/mnt/data/.*?\)', '', text).strip()
 
-        # 2. Extract Container ID for FinOps Tracking
         container_id = None
         for item in output_list:
             if getattr(item, "type", "") == "code_interpreter_call":
@@ -104,16 +102,12 @@ def send_message_to_assistant(
                     container_id = cid
                     break
 
-        # 3. Handle Files and Sources
         generated_urls_map = handle_generated_files(client, resp, folder="chat_assets")
         sources_list = extract_sources(resp)
 
         generated_urls = list(generated_urls_map.values()) if isinstance(generated_urls_map, dict) else generated_urls_map
-
-        # 4. Extract usage data
         usage_data = _extract_usage_metrics(getattr(resp, "usage", None))
 
-        # Return updated tuple including container_id
         return (text or "[No response]", generated_urls, sources_list, usage_data, container_id)
         
     except Exception as e:
@@ -169,11 +163,13 @@ def stream_chat_response(
         for event in stream:
             event_type = getattr(event, "type", "")
             
-            # 🟢 FIX 1: Extract usage from the 'response.done' event
-            if event_type == "response.done":
-                resp_obj = getattr(event, "response", None)
-                if resp_obj and hasattr(resp_obj, "usage") and resp_obj.usage is not None:
-                    yield {"type": "usage_metrics", "data": _extract_usage_metrics(resp_obj.usage)}
+            # 🟢 THE FIX 1: Catch 'response.completed' (The true end of an SSE stream)
+            if event_type == "response.completed":
+                # Safely get the nested response object, or fallback to the event itself
+                resp_obj = getattr(event, "response", event)
+                usage_obj = getattr(resp_obj, "usage", None)
+                if usage_obj is not None:
+                    yield {"type": "usage_metrics", "data": _extract_usage_metrics(usage_obj)}
 
             if event_type == "response.output_text.delta":
                 yield event
@@ -248,11 +244,12 @@ def stream_chat_response(
             for event2 in stream2:
                 event_type2 = getattr(event2, "type", "")
                 
-                # 🟢 FIX 2: Extract usage from the follow-up stream 'response.done' event
-                if event_type2 == "response.done":
-                    resp_obj2 = getattr(event2, "response", None)
-                    if resp_obj2 and hasattr(resp_obj2, "usage") and resp_obj2.usage is not None:
-                        yield {"type": "usage_metrics", "data": _extract_usage_metrics(resp_obj2.usage)}
+                # 🟢 THE FIX 2: Catch 'response.completed' in the tool follow-up stream
+                if event_type2 == "response.completed":
+                    resp_obj2 = getattr(event2, "response", event2)
+                    usage_obj2 = getattr(resp_obj2, "usage", None)
+                    if usage_obj2 is not None:
+                        yield {"type": "usage_metrics", "data": _extract_usage_metrics(usage_obj2)}
 
                 if event_type2 == "response.output_text.delta":
                     yield event2
