@@ -167,11 +167,14 @@ def stream_chat_response(
         stream = client.responses.create(**req)
         
         for event in stream:
-            if hasattr(event, "usage") and event.usage is not None:
-                yield {"type": "usage_metrics", "data": _extract_usage_metrics(event.usage)}
-
             event_type = getattr(event, "type", "")
             
+            # 🟢 FIX 1: Extract usage from the 'response.done' event
+            if event_type == "response.done":
+                resp_obj = getattr(event, "response", None)
+                if resp_obj and hasattr(resp_obj, "usage") and resp_obj.usage is not None:
+                    yield {"type": "usage_metrics", "data": _extract_usage_metrics(resp_obj.usage)}
+
             if event_type == "response.output_text.delta":
                 yield event
                 
@@ -243,10 +246,15 @@ def stream_chat_response(
             stream2 = client.responses.create(**req2)
             
             for event2 in stream2:
-                if hasattr(event2, "usage") and event2.usage is not None:
-                    yield {"type": "usage_metrics", "data": _extract_usage_metrics(event2.usage)}
+                event_type2 = getattr(event2, "type", "")
+                
+                # 🟢 FIX 2: Extract usage from the follow-up stream 'response.done' event
+                if event_type2 == "response.done":
+                    resp_obj2 = getattr(event2, "response", None)
+                    if resp_obj2 and hasattr(resp_obj2, "usage") and resp_obj2.usage is not None:
+                        yield {"type": "usage_metrics", "data": _extract_usage_metrics(resp_obj2.usage)}
 
-                if getattr(event2, "type", "") == "response.output_text.delta":
+                if event_type2 == "response.output_text.delta":
                     yield event2
 
     except Exception as e:
@@ -481,7 +489,6 @@ def _configure_tools(vector_store_ids, requires_visuals, requires_creative_image
     if requires_visuals or (pdf_urls and len(pdf_urls) > 0):
         memory_limit = get_code_interpreter_memory()
         
-        # FIX: Pass the raw string ID directly, do NOT wrap in a dictionary.
         if active_container_id:
             container_config = active_container_id
         else:
@@ -492,7 +499,6 @@ def _configure_tools(vector_store_ids, requires_visuals, requires_creative_image
             "container": container_config
         })
         
-        # Track standard chat container requests
         log_event("container_requested", {
             "context": "standard_chat", 
             "memory_limit": memory_limit,
