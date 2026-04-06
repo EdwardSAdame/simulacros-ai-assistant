@@ -33,20 +33,15 @@ class CreativeImageService:
         email: str | None,
         mode: str,
         stream_manager: Any,
-        session_id: str | None = None  # 🟢 NEW: Added to track exactly which chat generated this
+        session_id: str | None = None  
     ) -> Tuple[str, List[str], Dict[str, Any]]: 
-        """
-        Triggers the image generation stream and dispatches partial/final 
-        images via WebSockets.
         
-        Returns:
-            Tuple containing the final text response, a list of final S3 image URLs, and token usage.
-        """
         logger.info(f"Starting creative image stream for user {user_id}")
         
         final_text = ""
         final_image_urls = []
         final_usage = {} 
+        last_uploaded_url = None  # 🟢 NEW: Safety net to catch the final URL
 
         try:
             # 1. Build Runtime Signals
@@ -93,6 +88,7 @@ class CreativeImageService:
                             "image/png", 
                             folder="chat_assets"
                         )
+                        last_uploaded_url = s3_url  # 🟢 TRACK IT: Save the latest upload
                         
                         if stream_manager:
                             stream_manager.send_partial_image(
@@ -114,6 +110,7 @@ class CreativeImageService:
                             folder="chat_assets"
                         )
                         final_image_urls.append(final_s3_url)
+                        last_uploaded_url = final_s3_url  # 🟢 TRACK IT: Save the latest upload
                         
                         if stream_manager:
                             stream_manager.send_final_image(
@@ -138,6 +135,10 @@ class CreativeImageService:
                     if stream_manager:
                         stream_manager.send_error(error_msg)
                     return "**Error**: We could not generate the image.", [], {}
+
+            # 🟢 NEW: If the parser missed the final event, use our safety net!
+            if not final_image_urls and last_uploaded_url:
+                final_image_urls.append(last_uploaded_url)
 
             # Clean safety net fallback
             if not final_text.strip() and final_image_urls:
@@ -164,7 +165,7 @@ class CreativeImageService:
                         quality=cfg.image_quality,
                         partials=partials,
                         image_count=len(final_image_urls),
-                        image_urls=final_image_urls  # 🟢 NEW: Pass the final image URLs to the tracker
+                        image_urls=final_image_urls  
                     )
                 except Exception as tracker_err:
                     logger.error(f"Failed to log image usage tokens to DynamoDB: {tracker_err}")
