@@ -122,7 +122,7 @@ def send_message_to_assistant(
                     image_tracker.log_image_usage(
                         user_id=user_id,
                         session_id=active_session,
-                        context="standard_chat",
+                        source="chat",  # 🟢 FIX: Updated to match the new ImageUsageService parameter
                         tier=mode,
                         engine=cfg.image_model,
                         size=get_image_generation_size(),
@@ -524,7 +524,7 @@ def _configure_tools(vector_store_ids, requires_visuals, requires_creative_image
         })
         
         log_event("container_requested", {
-            "context": "standard_chat", 
+            "context": "chat", 
             "memory_limit": memory_limit,
             "explicit_id": active_container_id
         })

@@ -41,7 +41,7 @@ class ImageUsageService:
         self,
         user_id: str,
         session_id: str,
-        context: str,
+        source: str,         # 🟢 UPDATED: e.g., 'chat' or 'quiz'
         tier: str,
         engine: str,
         size: str,
@@ -50,8 +50,7 @@ class ImageUsageService:
         image_count: int = 1
     ) -> dict:
         """
-        Calculates the total cost and passes the transaction receipt to the storage layer.
-        Returns the token math as a dictionary so the calling function can see it.
+        Calculates the total cost and passes the cleanly structured transaction receipt to the storage layer.
         """
         if not user_id or not session_id:
             logger.warning("Missing user_id or session_id. Skipping Image Usage logging.")
@@ -61,7 +60,7 @@ class ImageUsageService:
         cost_per_image = self.calculate_tokens(size, quality, partials)
         total_tokens = cost_per_image * image_count
 
-        # 2. Prepare Database Item
+        # 2. Prepare Database Item (Clean Metadata Structure)
         timestamp = datetime.now(timezone.utc).isoformat()
         usage_id = str(uuid.uuid4())
 
@@ -69,24 +68,24 @@ class ImageUsageService:
             "UsageId": usage_id,
             "UserId": user_id,
             "Timestamp": timestamp,
-            "SessionId": session_id,
-            "Context": context,      # e.g., 'quiz_background', 'creative_chat'
-            "Tier": tier,            # e.g., 'alpha', 'omega'
-            "Engine": engine,        # e.g., 'gpt-image-1.5'
-            "Config": {
+            "TotalTokens": total_tokens,
+            "Metadata": {
+                "Source": source,       
+                "SessionId": session_id,
+                "Tier": tier,            
+                "Engine": engine,        
                 "Size": size,
                 "Quality": quality,
                 "Partials": partials,
                 "ImageCount": image_count
-            },
-            "TotalTokens": total_tokens
+            }
         }
 
         # 3. Save to DynamoDB via the Storage Layer
         success = image_usage_table.put_item(item)
         
         if success:
-            logger.info(f"🪙 Image Usage Logged: {total_tokens} tokens for User {user_id} in {context}")
+            logger.info(f"🪙 Image Usage Logged: {total_tokens} tokens for User {user_id} via {source}")
             return {"total_tokens": total_tokens, "cost_per_image": cost_per_image}
         else:
             logger.error(f"Failed to pass image usage to the storage layer for User {user_id}")

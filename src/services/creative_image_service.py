@@ -151,13 +151,13 @@ class CreativeImageService:
                     partials = get_image_generation_partials()
                     
                     # Generate a fallback session ID if none was passed
-                    active_session = session_id if session_id else f"creative_chat_{user_id[-6:]}"
+                    active_session = session_id if session_id else f"chat_{user_id[-6:]}"
                     
                     image_tracker = ImageUsageService()
                     image_tracker.log_image_usage(
                         user_id=user_id,
                         session_id=active_session,
-                        context="creative_chat",
+                        source="chat",             # 🟢 UPDATED: Changed 'context' to 'source' to match new Metadata schema
                         tier=mode,
                         engine=cfg.image_model,
                         size=size,

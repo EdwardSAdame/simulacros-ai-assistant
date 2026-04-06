@@ -342,7 +342,7 @@ class QuizService:
                                     image_tracker.log_image_usage(
                                         user_id=user_id,
                                         session_id=active_session,
-                                        context="quiz_background_image",
+                                        source="quiz",  # 🟢 FIX: Updated from context="quiz_background_image"
                                         tier=mode,
                                         engine=active_config.image_model,
                                         size=get_image_generation_size(),
