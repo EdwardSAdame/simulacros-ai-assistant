@@ -33,7 +33,7 @@ class CreativeImageService:
         email: str | None,
         mode: str,
         stream_manager: Any,
-        session_id: str | None = None  
+        conversation_id: str | None = None  # 🟢 FIX: Renamed from session_id to properly catch the UUID
     ) -> Tuple[str, List[str], Dict[str, Any]]: 
         
         logger.info(f"Starting creative image stream for user {user_id}")
@@ -152,12 +152,12 @@ class CreativeImageService:
                     partials = get_image_generation_partials()
                     
                     # Generate a fallback session ID if none was passed
-                    active_session = session_id if session_id else f"chat_{user_id[-6:]}"
+                    active_session = conversation_id if conversation_id else f"chat_{user_id[-6:]}"
                     
                     image_tracker = ImageUsageService()
                     image_tracker.log_image_usage(
                         user_id=user_id,
-                        session_id=active_session,
+                        conversation_id=active_session,  # 🟢 FIX: Uses the newly renamed parameter
                         source="chat",
                         tier=mode,
                         engine=cfg.image_model,

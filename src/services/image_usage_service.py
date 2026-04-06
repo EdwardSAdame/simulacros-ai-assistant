@@ -2,19 +2,12 @@
 import uuid
 import logging
 from datetime import datetime, timezone
-
-# Import the new storage layer
 from src.storage.image_usage_table import image_usage_table
 
 logger = logging.getLogger(__name__)
 
 class ImageUsageService:
-    """
-    Handles tracking and logging the deterministic token cost of 
-    OpenAI Image Generations (DALL-E 3 / Nano Banana 2 models).
-    """
     def __init__(self):
-        # Deterministic Pricing Grid (Base Tokens)
         self.PRICING_GRID = {
             "1024x1024": {"low": 272, "medium": 1056, "high": 4160},
             "1536x1024": {"low": 400, "medium": 1568, "high": 6208},
@@ -22,25 +15,16 @@ class ImageUsageService:
         }
 
     def calculate_tokens(self, size: str, quality: str, partials: int) -> int:
-        """
-        Calculates the exact token cost based on OpenAI's pricing formula.
-        Formula: Base Tokens (Resolution + Quality) + (Partial Images * 100)
-        """
         quality_lower = quality.lower()
         size_lower = size.lower()
-
-        # Fallback to standard landscape/medium (1568) if values are missing
         base_tokens = self.PRICING_GRID.get(size_lower, {}).get(quality_lower, 1568)
-        
-        # Each partial image chunks costs 100 tokens
         partials_cost = partials * 100
-
         return base_tokens + partials_cost
 
     def log_image_usage(
         self,
         user_id: str,
-        session_id: str,
+        conversation_id: str,  # 🟢 FIX: Renamed to match your UserConversation table
         source: str,         
         tier: str,
         engine: str,
@@ -48,26 +32,22 @@ class ImageUsageService:
         quality: str,
         partials: int,
         image_count: int = 1,
-        image_url: str = None  # 🟢 FIX: Changed to a single string parameter
+        image_url: str = None  
     ) -> dict:
-        """
-        Calculates the total cost and passes the cleanly structured transaction receipt to the storage layer.
-        """
-        if not user_id or not session_id:
-            logger.warning("Missing user_id or session_id. Skipping Image Usage logging.")
+        
+        if not user_id or not conversation_id:
+            logger.warning("Missing user_id or conversation_id. Skipping Image Usage logging.")
             return {}
 
-        # 1. Calculate Cost
         cost_per_image = self.calculate_tokens(size, quality, partials)
         total_tokens = cost_per_image * image_count
 
-        # 2. Prepare Database Item
         timestamp = datetime.now(timezone.utc).isoformat()
         usage_id = str(uuid.uuid4())
 
         metadata = {
             "Source": source,       
-            "SessionId": session_id,
+            "ConversationId": conversation_id,  # 🟢 FIX: Cleaned up the key name!
             "Tier": tier,            
             "Engine": engine,        
             "Size": size,
@@ -76,7 +56,6 @@ class ImageUsageService:
             "ImageCount": image_count
         }
         
-        # 🟢 FIX: Only attach the ImageUrl field if a URL actually exists
         if image_url:
             metadata["ImageUrl"] = image_url
 
@@ -88,7 +67,6 @@ class ImageUsageService:
             "Metadata": metadata
         }
 
-        # 3. Save to DynamoDB via the Storage Layer
         success = image_usage_table.put_item(item)
         
         if success:

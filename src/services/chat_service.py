@@ -167,7 +167,7 @@ class ChatService:
                 web_search_config=web_search_config, 
                 pdf_urls=clean_pdfs,
                 active_container_id=active_container_id,
-                session_id=actual_conversation_id  # 🟢 NEW: Pass the chat ID to the client
+                conversation_id=actual_conversation_id  # 🟢 FIX: Changed parameter name from session_id to conversation_id
             )
             
             final_reply_text = response_tuple[0]

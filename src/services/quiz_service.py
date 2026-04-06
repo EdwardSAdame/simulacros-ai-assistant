@@ -341,7 +341,7 @@ class QuizService:
                                     image_tracker = ImageUsageService()
                                     image_tracker.log_image_usage(
                                         user_id=user_id,
-                                        session_id=active_session,
+                                        conversation_id=active_session,  # 🟢 FIX: Renamed parameter to match UserConversation table!
                                         source="quiz",  
                                         tier=mode,
                                         engine=active_config.image_model,
@@ -349,7 +349,7 @@ class QuizService:
                                         quality=active_config.image_quality,
                                         partials=get_image_generation_partials(),
                                         image_count=1,
-                                        image_url=final_url  # 🟢 FIX: Passes a single string
+                                        image_url=final_url  
                                     )
                                 except Exception as tracker_err:
                                     logger.error(f"Failed to log background quiz image usage: {tracker_err}")

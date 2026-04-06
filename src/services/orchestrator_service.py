@@ -118,8 +118,14 @@ class OrchestratorService:
                 
             elif intent == "creative_image":
                 final_reply_text, final_images_urls, token_usage = CreativeImageService.generate_image(
-                    conversation_input=conversation_input, user_id=user_id, page=page, 
-                    name=name, email=email, mode=mode, stream_manager=stream_manager
+                    conversation_input=conversation_input, 
+                    user_id=user_id, 
+                    page=page, 
+                    name=name, 
+                    email=email, 
+                    mode=mode, 
+                    stream_manager=stream_manager,
+                    conversation_id=actual_conversation_id # 🟢 FIX: Passed the actual ConversationId to the Image Service
                 )
                 
                 # 🟢 NEW: Save the text model's tokens to the TokenUsageTable

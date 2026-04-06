@@ -49,7 +49,7 @@ def send_message_to_assistant(
     user_location: Dict[str, str] | None = None,
     pdf_urls: List[str] | None = None,
     active_container_id: str | None = None,
-    session_id: str | None = None # 🟢 NEW: Added to track the chat ID
+    conversation_id: str | None = None # 🟢 FIX: Renamed from session_id to match UserConversation table
 ) -> Tuple[str, List[str], List[Dict[str, str]], Dict[str, int], Optional[str]]:
     
     client = get_openai_client()
@@ -118,11 +118,11 @@ def send_message_to_assistant(
             
             if creative_image_count > 0:
                 try:
-                    active_session = session_id if session_id else f"chat_{user_id[-6:]}"
+                    active_conversation = conversation_id if conversation_id else f"chat_{user_id[-6:]}"
                     image_tracker = ImageUsageService()
                     image_tracker.log_image_usage(
                         user_id=user_id,
-                        session_id=active_session,
+                        conversation_id=active_conversation,  # 🟢 FIX: Uses the newly renamed parameter
                         source="chat",  
                         tier=mode,
                         engine=cfg.image_model,
