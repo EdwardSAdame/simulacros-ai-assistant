@@ -13,36 +13,35 @@ class TokenUsageTable:
 
     def record_usage(
         self, 
+        usage_id: str,           # 🟢 NEW: Unique ID for the record (Partition Key)
         user_id: str, 
         timestamp: str, 
-        session_id: str, 
-        model: str, 
-        input_tokens: int, 
-        output_tokens: int, 
-        total_tokens: int,
-        reasoning_tokens: Optional[int] = 0,
-        cached_tokens: Optional[int] = 0
+        conversation_id: str,    # 🟢 FIX: Renamed to strictly use conversation_id
+        total_tokens: int,       # 🟢 FIX: Main billing metric kept at the top level
+        metadata: dict           # 🟢 NEW: Encapsulates tier, engine, input/output tokens, etc.
     ) -> bool:
         """
-        Saves a single token usage record to DynamoDB using modern input/output nomenclature.
+        Saves a single token usage record to DynamoDB using PascalCase 
+        and a strictly normalized FinOps schema.
         """
         try:
             item = {
-                'userId': user_id,
-                'timestamp': timestamp,
-                'sessionId': session_id,
-                'model': model,
-                'inputTokens': input_tokens,
-                'outputTokens': output_tokens,
-                'totalTokens': total_tokens,
-                'reasoningTokens': reasoning_tokens,
-                'cachedTokens': cached_tokens
+                'UsageId': usage_id,
+                'UserId': user_id,
+                'Timestamp': timestamp,
+                'ConversationId': conversation_id,
+                'TotalTokens': total_tokens,
+                'Metadata': metadata
             }
             
             self.table.put_item(Item=item)
             log_event(
                 event_type="token_usage_recorded", 
-                details={"user_id": user_id, "model": model, "total_tokens": total_tokens}
+                details={
+                    "UsageId": usage_id, 
+                    "ConversationId": conversation_id, 
+                    "TotalTokens": total_tokens
+                }
             )
             return True
             
@@ -57,39 +56,39 @@ class TokenUsageTable:
 
     def get_user_usage(self, user_id: str) -> list:
         """
-        Retrieves all token usage records for a specific user.
+        Retrieves all token usage records for a specific user using the UserIndex.
         """
         try:
             response = self.table.query(
-                KeyConditionExpression=boto3.dynamodb.conditions.Key('userId').eq(user_id)
+                IndexName='UserIndex', # 🟢 NEW: Added index since UsageId is now the PK
+                KeyConditionExpression=boto3.dynamodb.conditions.Key('UserId').eq(user_id)
             )
             return response.get('Items', [])
             
         except ClientError as e:
             log_event(
                 event_type="token_usage_retrieve_failed", 
-                details={"user_id": user_id, "error": e.response['Error']['Message']}, 
+                details={"UserId": user_id, "error": e.response['Error']['Message']}, 
                 level="error", 
                 error=e
             )
             return []
 
-    # 🟢 NEW: Query by Session ID using a Global Secondary Index
-    def get_session_usage(self, session_id: str) -> list:
+    def get_conversation_usage(self, conversation_id: str) -> list: # 🟢 FIX: Renamed function
         """
-        Retrieves all token usage records for a specific session using the SessionIndex.
+        Retrieves all token usage records for a specific conversation using the ConversationIndex.
         """
         try:
             response = self.table.query(
-                IndexName='SessionIndex',
-                KeyConditionExpression=boto3.dynamodb.conditions.Key('sessionId').eq(session_id)
+                IndexName='ConversationIndex', # 🟢 FIX: Updated index name
+                KeyConditionExpression=boto3.dynamodb.conditions.Key('ConversationId').eq(conversation_id)
             )
             return response.get('Items', [])
             
         except ClientError as e:
             log_event(
-                event_type="token_usage_session_retrieve_failed", 
-                details={"session_id": session_id, "error": e.response['Error']['Message']}, 
+                event_type="token_usage_conversation_retrieve_failed", 
+                details={"ConversationId": conversation_id, "error": e.response['Error']['Message']}, 
                 level="error", 
                 error=e
             )

@@ -30,7 +30,7 @@ class QuizService:
     """
 
     @staticmethod
-    def _log_usage(usage_data: dict, current_user: str | None, session: str, active_mode: str):
+    def _log_usage(usage_data: dict, current_user: str | None, conversation_id: str, active_mode: str): # 🟢 FIX: Renamed session to conversation_id
         if not usage_data or not current_user: return
         try:
             input_val = usage_data.get("input_tokens", usage_data.get("prompt_tokens", 0))
@@ -38,7 +38,8 @@ class QuizService:
 
             TokenUsageService().log_token_usage(
                 user_id=current_user,
-                session_id=session,
+                conversation_id=conversation_id, # 🟢 FIX: Pass conversation_id
+                source="quiz",                   # 🟢 NEW: Pass source for Analytics
                 model=active_mode,
                 input_tokens=input_val,
                 output_tokens=output_val,

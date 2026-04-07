@@ -9,7 +9,7 @@ from src.services.context_resolution import determine_exam_context
 # State Management
 from src.services.conversation_service import ConversationService
 from src.services.history_service import build_history_list
-from src.services.token_usage_service import TokenUsageService # 🟢 NEW: Import the tracking service
+from src.services.token_usage_service import TokenUsageService
 
 # Domain Services
 from src.services.chat_service import ChatService
@@ -125,7 +125,7 @@ class OrchestratorService:
                     email=email, 
                     mode=mode, 
                     stream_manager=stream_manager,
-                    conversation_id=actual_conversation_id # 🟢 FIX: Passed the actual ConversationId to the Image Service
+                    conversation_id=actual_conversation_id 
                 )
                 
                 # 🟢 NEW: Save the text model's tokens to the TokenUsageTable
@@ -133,8 +133,9 @@ class OrchestratorService:
                     try:
                         TokenUsageService().log_token_usage(
                             user_id=user_id or "anonymous",
-                            session_id=actual_conversation_id,
-                            model=mode, # This logs it identically to standard text chat!
+                            conversation_id=actual_conversation_id, # 🟢 FIX: Updated keyword argument
+                            source="creative_image",                # 🟢 FIX: Passed source parameter
+                            model=mode,
                             input_tokens=token_usage.get("input_tokens", 0),
                             output_tokens=token_usage.get("output_tokens", 0),
                             total_tokens=token_usage.get("total_tokens", 0)
