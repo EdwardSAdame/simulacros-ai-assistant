@@ -5,6 +5,7 @@ from typing import Dict, Any, Tuple, List
 from src.utils.logging_utils import log_event
 from src.assistant.image_handler import format_image_urls_for_openai
 from src.services.context_resolution import determine_exam_context
+from src.config.model_config import get_model_config # 🟢 NEW: Import model config for true engine name
 
 # State Management
 from src.services.conversation_service import ConversationService
@@ -131,11 +132,16 @@ class OrchestratorService:
                 # 🟢 NEW: Save the text model's tokens to the TokenUsageTable
                 if token_usage:
                     try:
+                        # 🟢 EXTRACT ACTUAL ENGINE
+                        active_config = get_model_config(mode)
+                        engine_name = active_config.model
+
                         TokenUsageService().log_token_usage(
                             user_id=user_id or "anonymous",
-                            conversation_id=actual_conversation_id, # 🟢 FIX: Updated keyword argument
-                            source="creative_image",                # 🟢 FIX: Passed source parameter
-                            model=mode,
+                            conversation_id=actual_conversation_id, 
+                            source="creative_image",                
+                            tier=mode,           # 🟢 FIX: Pass abstract tier
+                            engine=engine_name,  # 🟢 FIX: Pass explicit engine
                             input_tokens=token_usage.get("input_tokens", 0),
                             output_tokens=token_usage.get("output_tokens", 0),
                             total_tokens=token_usage.get("total_tokens", 0)

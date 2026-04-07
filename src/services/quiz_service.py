@@ -13,6 +13,7 @@ from src.services.storage_service import storage_service
 from src.assistant.assistant_client import generate_structured_quiz, stream_structured_quiz
 from src.config.page_vectorstores import get_stores_for_page
 from src.config.web_search_config import get_search_filters
+from src.config.model_config import get_model_config # 🟢 NEW: Import model config for true engine name
 from src.services.token_usage_service import TokenUsageService
 from src.services.container_usage_service import ContainerUsageService
 
@@ -30,17 +31,22 @@ class QuizService:
     """
 
     @staticmethod
-    def _log_usage(usage_data: dict, current_user: str | None, conversation_id: str, active_mode: str): # 🟢 FIX: Renamed session to conversation_id
+    def _log_usage(usage_data: dict, current_user: str | None, conversation_id: str, active_mode: str):
         if not usage_data or not current_user: return
         try:
+            # 🟢 NEW: Extract the actual underlying engine based on the tier
+            active_config = get_model_config(active_mode)
+            engine_name = active_config.model
+
             input_val = usage_data.get("input_tokens", usage_data.get("prompt_tokens", 0))
             output_val = usage_data.get("output_tokens", usage_data.get("completion_tokens", 0))
 
             TokenUsageService().log_token_usage(
                 user_id=current_user,
-                conversation_id=conversation_id, # 🟢 FIX: Pass conversation_id
-                source="quiz",                   # 🟢 NEW: Pass source for Analytics
-                model=active_mode,
+                conversation_id=conversation_id, 
+                source="quiz",                   
+                tier=active_mode,   # 🟢 FIX: Pass the abstract tier (omega/alpha)
+                engine=engine_name, # 🟢 FIX: Pass the exact underlying engine (gpt-4o, etc.)
                 input_tokens=input_val,
                 output_tokens=output_val,
                 total_tokens=usage_data.get("total_tokens", 0),
@@ -433,9 +439,9 @@ class QuizService:
                                                 try:
                                                     ContainerUsageService().log_container_usage(
                                                         user_id=user_id,
-                                                        conversation_id=actual_conversation_id, # 🟢 FIX: Ensure parameter names match!
+                                                        conversation_id=actual_conversation_id, 
                                                         container_id=cid,
-                                                        source="quiz", # 🟢 FIX: Include the required source!
+                                                        source="quiz", 
                                                         memory_limit=memory_limit
                                                     )
                                                 except Exception as e:

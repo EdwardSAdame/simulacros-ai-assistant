@@ -31,12 +31,10 @@ class SemanticRouter:
             "identity_protection", "general"
         ]
         
-        # 🟢 THE FINAL FIX: Added "general" so multi-subject exams trigger the Hybrid Visual Protocol!
         self.visual_categories = [
             "matematicas", "ciencias_naturales", "analisis_imagen", "general"
         ]
 
-    # 🟢 FIX: Renamed session_id to conversation_id for absolute consistency
     def determine_category(self, text: str, user_id: str = "system_router", conversation_id: str = "intent_resolution", exam_context: str = "GENERAL") -> dict:
         if not text:
             return {
@@ -69,7 +67,6 @@ class SemanticRouter:
                 "source": "error_fallback"
             }
 
-    # 🟢 FIX: Renamed session_id to conversation_id
     def _classify_with_llm(self, text: str, user_id: str, conversation_id: str, exam_context: str) -> dict:
         router_model = settings.OPENAI_ROUTER_MODEL.lower()
         
@@ -137,9 +134,10 @@ class SemanticRouter:
 
                     TokenUsageService().log_token_usage(
                         user_id=user_id, 
-                        conversation_id=conversation_id, # 🟢 FIX: Passed the Conversation ID properly
-                        source="router",                 # 🟢 FIX: Logged the source as 'router'!
-                        model="router",
+                        conversation_id=conversation_id, 
+                        source="router",                 
+                        tier="router",        # 🟢 FIX: Set tier explicitly to "router"
+                        engine=router_model,  # 🟢 FIX: Log the actual model used (e.g. gpt-4o-mini)
                         input_tokens=input_val, 
                         output_tokens=output_val, 
                         total_tokens=total_val,
@@ -160,7 +158,6 @@ class SemanticRouter:
 
             requires_visuals = data.get("requires_visuals", False)
 
-            # 🟢 Override requires_visuals if category is in visual_categories (including "general")
             if intent == "quiz" and category in self.visual_categories:
                 requires_visuals = True
                 logger.info(f"Router Override: Enforcing requires_visuals=True for {category} quiz to apply visual doctrine styling.")

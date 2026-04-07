@@ -12,9 +12,10 @@ class TokenUsageService:
     def log_token_usage(
         self,
         user_id: str,
-        conversation_id: str, # 🟢 FIX: Renamed to strictly use conversation_id
-        source: str,          # 🟢 NEW: Source parameter (e.g., 'chat', 'quiz', 'image_generation')
-        model: str,
+        conversation_id: str,
+        source: str,          
+        tier: str,       # 🟢 FIX: Renamed 'model' to 'tier' (e.g., 'omega', 'alpha')
+        engine: str,     # 🟢 NEW: Added 'engine' for the exact LLM (e.g., 'gpt-4o')
         input_tokens: int,
         output_tokens: int,
         total_tokens: int,
@@ -25,16 +26,16 @@ class TokenUsageService:
         Validates and processes token usage data before persisting it to the database
         using the normalized FinOps schema.
         """
-        if not user_id or not model:
+        if not user_id or not tier or not engine:
             log_event(
                 event_type="token_logging_missing_fields", 
-                details={"user_id": user_id, "model": model}, 
+                details={"user_id": user_id, "tier": tier, "engine": engine}, 
                 level="warning"
             )
             return False
 
         timestamp = datetime.now(timezone.utc).isoformat()
-        usage_id = str(uuid.uuid4()) # 🟢 NEW: Generate unique ID for DynamoDB partition key
+        usage_id = str(uuid.uuid4())
 
         input_tokens = max(0, input_tokens)
         output_tokens = max(0, output_tokens)
@@ -42,10 +43,11 @@ class TokenUsageService:
         reasoning_tokens = max(0, reasoning_tokens or 0)
         cached_tokens = max(0, cached_tokens or 0)
 
-        # 🟢 NEW: Wrap details into a clean Metadata payload
+        # 🟢 FIX: Map Tier and Engine exactly like ImageUsage
         metadata = {
             "Source": source,
-            "Model": model,
+            "Tier": tier,
+            "Engine": engine,
             "InputTokens": input_tokens,
             "OutputTokens": output_tokens,
             "ReasoningTokens": reasoning_tokens,

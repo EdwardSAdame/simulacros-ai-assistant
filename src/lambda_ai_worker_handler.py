@@ -67,9 +67,10 @@ def lambda_handler(event, context):
                     svc = TokenUsageService()
                     svc.log_token_usage(
                         user_id=user_id or "anonymous", 
-                        conversation_id=conv_id_in or "unknown", # 🟢 FIX: Updated to conversation_id
-                        source="telemetry",                      # 🟢 FIX: Added missing source
-                        model="speech-to-text", 
+                        conversation_id=conv_id_in or "unknown", 
+                        source="telemetry",                      
+                        tier="telemetry",         # 🟢 FIX: Passed tier
+                        engine="speech-to-text",  # 🟢 FIX: Passed explicit engine
                         input_tokens=int(audio_duration), 
                         output_tokens=0, 
                         total_tokens=int(audio_duration)
@@ -83,9 +84,10 @@ def lambda_handler(event, context):
                     if (sts_in_text is not None and int(sts_in_text) > 0) or (sts_out_text is not None and int(sts_out_text) > 0):
                         svc.log_token_usage(
                             user_id=uid_str, 
-                            conversation_id=session_str,         # 🟢 FIX: Updated to conversation_id
-                            source="telemetry",                  # 🟢 FIX: Added missing source
-                            model="sts-text", 
+                            conversation_id=session_str,         
+                            source="telemetry",                  
+                            tier="telemetry",         # 🟢 FIX: Passed tier
+                            engine="sts-text",        # 🟢 FIX: Passed explicit engine
                             input_tokens=int(sts_in_text or 0), 
                             output_tokens=int(sts_out_text or 0), 
                             total_tokens=int(sts_in_text or 0) + int(sts_out_text or 0)
@@ -94,9 +96,10 @@ def lambda_handler(event, context):
                     if (sts_in_audio is not None and int(sts_in_audio) > 0) or (sts_out_audio is not None and int(sts_out_audio) > 0):
                         svc.log_token_usage(
                             user_id=uid_str, 
-                            conversation_id=session_str,         # 🟢 FIX: Updated to conversation_id
-                            source="telemetry",                  # 🟢 FIX: Added missing source
-                            model="sts-audio", 
+                            conversation_id=session_str,         
+                            source="telemetry",                  
+                            tier="telemetry",         # 🟢 FIX: Passed tier
+                            engine="sts-audio",       # 🟢 FIX: Passed explicit engine
                             input_tokens=int(sts_in_audio or 0), 
                             output_tokens=int(sts_out_audio or 0), 
                             total_tokens=int(sts_in_audio or 0) + int(sts_out_audio or 0)
@@ -143,7 +146,7 @@ def lambda_handler(event, context):
                     routing_result = semantic_router.determine_category(
                         text=message, 
                         user_id=user_id, 
-                        conversation_id=conv_id_in, # 🟢 FIX: Renamed from session_id to conversation_id
+                        conversation_id=conv_id_in, 
                         exam_context=current_exam_context 
                     )
                     
