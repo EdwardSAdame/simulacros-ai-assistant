@@ -4,9 +4,7 @@ import logging
 import boto3
 import os
 
-# 🟢 NEW IMPORT: The Central Orchestrator replaces chat_service
 from src.services.orchestrator_service import OrchestratorService
-
 from src.storage.ws_connections_table import WsConnectionsTable
 from src.utils.logging_utils import log_event, set_invocation_context
 from src.streaming.stream_manager import StreamManager
@@ -14,6 +12,10 @@ from src.services.semantic_router import semantic_router
 from src.services.token_usage_service import TokenUsageService
 from src.services.context_resolution import determine_exam_context
 from src.storage.conversations_table import get_conversation_metadata
+
+# 🟢 NEW IMPORTS: For Audio FinOps
+from src.services.audio_usage_service import AudioUsageService
+from src.config.model_config import get_model_config
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
@@ -53,6 +55,9 @@ def lambda_handler(event, context):
             user_id = payload.get("user_id")
             conv_id_in = payload.get("conversation_id")
             
+            # 🟢 MOVED UP: We need to know the user's tier early for accurate FinOps logging
+            ai_mode = payload.get("mode", "omega")
+            
             audio_duration = payload.get("audioDurationSeconds")
             sts_in_text = payload.get("stsInputText")
             sts_in_audio = payload.get("stsInputAudio")
@@ -64,16 +69,17 @@ def lambda_handler(event, context):
                 logger.info(f"Intercepting Telemetry Ghost Message: {message} for user {user_id}")
                 
                 if message == "[AUDIO_TELEMETRY]" and audio_duration is not None and int(audio_duration) > 0:
-                    svc = TokenUsageService()
-                    svc.log_token_usage(
+                    # 🟢 NEW: Route to AudioUsageService instead of TokenUsageService
+                    cfg = get_model_config(ai_mode)
+                    audio_svc = AudioUsageService()
+                    audio_svc.log_audio_usage(
                         user_id=user_id or "anonymous", 
                         conversation_id=conv_id_in or "unknown", 
                         source="telemetry",                      
-                        tier="telemetry",         # 🟢 FIX: Passed tier
-                        engine="speech-to-text",  # 🟢 FIX: Passed explicit engine
-                        input_tokens=int(audio_duration), 
-                        output_tokens=0, 
-                        total_tokens=int(audio_duration)
+                        tier=ai_mode,                            
+                        engine=cfg.audio_transcription_model,    
+                        duration_seconds=int(audio_duration),
+                        audio_type="speech-to-text"
                     )
                 
                 elif message == "[STS_TELEMETRY]":
@@ -86,8 +92,8 @@ def lambda_handler(event, context):
                             user_id=uid_str, 
                             conversation_id=session_str,         
                             source="telemetry",                  
-                            tier="telemetry",         # 🟢 FIX: Passed tier
-                            engine="sts-text",        # 🟢 FIX: Passed explicit engine
+                            tier=ai_mode,             # 🟢 FIX: Uses actual ai_mode instead of "telemetry"
+                            engine="sts-text",        
                             input_tokens=int(sts_in_text or 0), 
                             output_tokens=int(sts_out_text or 0), 
                             total_tokens=int(sts_in_text or 0) + int(sts_out_text or 0)
@@ -98,8 +104,8 @@ def lambda_handler(event, context):
                             user_id=uid_str, 
                             conversation_id=session_str,         
                             source="telemetry",                  
-                            tier="telemetry",         # 🟢 FIX: Passed tier
-                            engine="sts-audio",       # 🟢 FIX: Passed explicit engine
+                            tier=ai_mode,             # 🟢 FIX: Uses actual ai_mode instead of "telemetry"
+                            engine="sts-audio",       
                             input_tokens=int(sts_in_audio or 0), 
                             output_tokens=int(sts_out_audio or 0), 
                             total_tokens=int(sts_in_audio or 0) + int(sts_out_audio or 0)
@@ -117,7 +123,6 @@ def lambda_handler(event, context):
             email = payload.get("email")
             page = payload.get("page")
             client_row_id = payload.get("client_row_id")
-            ai_mode = payload.get("mode", "omega")
 
             connection_id = ws_connections_table.get_connection_id(user_id)
 
@@ -197,7 +202,6 @@ def lambda_handler(event, context):
                 except Exception as e:
                     log_event("ws_status_send_failed", {"user_id": user_id}, level="warning", error=e)
 
-            # 🟢 --- NEW: Call OrchestratorService instead of chat_service ---
             ai_reply, conversation_id, assistant_timestamp, meta_payload = OrchestratorService.process_ai_request(
                 message=message,
                 user_id=user_id,

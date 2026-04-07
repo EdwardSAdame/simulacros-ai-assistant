@@ -31,6 +31,9 @@ class Settings:
         self.CONVERSATIONS_TABLE_NAME: str = os.getenv("CONVERSATIONS_TABLE_NAME", "Conversations")
         self.FEEDBACK_TABLE_NAME: str = os.getenv("FEEDBACK_TABLE_NAME", "Feedback")
         self.WS_AUDIO_TABLE_NAME: str = os.getenv("WS_AUDIO_TABLE_NAME", "WsAudio")
+        
+        # 🟢 NEW: Add mapping for the Audio Usage FinOps Table
+        self.AUDIO_USAGE_TABLE_NAME: str = os.getenv("AUDIO_USAGE_TABLE_NAME", "AudioUsage")
 
         # AWS S3 Configuration
         self.S3_BUCKET_NAME: str = os.getenv("S3_BUCKET_NAME", "invicto-quiz-assets")
