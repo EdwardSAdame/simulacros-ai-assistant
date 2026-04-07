@@ -36,8 +36,8 @@ class SemanticRouter:
             "matematicas", "ciencias_naturales", "analisis_imagen", "general"
         ]
 
-    # 🟢 PASS exam_context TO THE ROUTER
-    def determine_category(self, text: str, user_id: str = "system_router", session_id: str = "intent_resolution", exam_context: str = "GENERAL") -> dict:
+    # 🟢 FIX: Renamed session_id to conversation_id for absolute consistency
+    def determine_category(self, text: str, user_id: str = "system_router", conversation_id: str = "intent_resolution", exam_context: str = "GENERAL") -> dict:
         if not text:
             return {
                 "category": "general", 
@@ -49,7 +49,7 @@ class SemanticRouter:
             }
             
         try:
-            result = self._classify_with_llm(text, user_id, session_id, exam_context)
+            result = self._classify_with_llm(text, user_id, conversation_id, exam_context)
             return {
                 "category": result.get("category", "general"),
                 "intent": result.get("intent", "chat"),
@@ -69,8 +69,8 @@ class SemanticRouter:
                 "source": "error_fallback"
             }
 
-    # 🟢 PASS exam_context TO INSTRUCTION BUILDER
-    def _classify_with_llm(self, text: str, user_id: str, session_id: str, exam_context: str) -> dict:
+    # 🟢 FIX: Renamed session_id to conversation_id
+    def _classify_with_llm(self, text: str, user_id: str, conversation_id: str, exam_context: str) -> dict:
         router_model = settings.OPENAI_ROUTER_MODEL.lower()
         
         # Build instructions dynamically based on context
@@ -136,9 +136,15 @@ class SemanticRouter:
                         cached_val = getattr(in_details, "cached_tokens", 0) if in_details else 0
 
                     TokenUsageService().log_token_usage(
-                        user_id=user_id, session_id=session_id, model="router",
-                        input_tokens=input_val, output_tokens=output_val, total_tokens=total_val,
-                        reasoning_tokens=reasoning_val, cached_tokens=cached_val
+                        user_id=user_id, 
+                        conversation_id=conversation_id, # 🟢 FIX: Passed the Conversation ID properly
+                        source="router",                 # 🟢 FIX: Logged the source as 'router'!
+                        model="router",
+                        input_tokens=input_val, 
+                        output_tokens=output_val, 
+                        total_tokens=total_val,
+                        reasoning_tokens=reasoning_val, 
+                        cached_tokens=cached_val
                     )
                 except Exception as e:
                     logger.error(f"Failed to log router tokens: {e}")
