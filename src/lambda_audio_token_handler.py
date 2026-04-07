@@ -6,9 +6,10 @@ import boto3
 import os
 import requests
 from src.config.settings import settings
-
-# 🟢 NEW IMPORT: Import the dynamic function instead of the static dictionary
 from src.config.audio_config import get_audio_profile
+
+# 🟢 NEW: Import your centralized structured logging utility
+from src.utils.logging_utils import log_event, set_invocation_context
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
@@ -20,11 +21,14 @@ else:
     logger.error("Missing APIGW_AUDIO_ENDPOINT_URL environment variable")
 
 def handler(event, context):
+    # 🟢 Set context so all logs in this execution inherit the Request ID
+    set_invocation_context(context)
+
     request_context = event.get('requestContext', {})
     connection_id = request_context.get('connectionId')
     
     if not connection_id:
-        logger.error("No connectionId in event")
+        log_event("audio_token_failed", {"reason": "No connectionId in event"}, level="error")
         return {'statusCode': 400, 'body': 'connectionId not found'}
 
     try:
@@ -34,21 +38,20 @@ def handler(event, context):
         except json.JSONDecodeError:
             body_data = {}
             
-        # 🟢 FIX: Differentiate between the Audio Profile and the AI Tier.
-        # We fall back to checking 'mode' for the profile to preserve backwards compatibility with your frontend.
         profile_name = body_data.get('profile_name', body_data.get('mode', 'transcription'))
-        
-        # 🟢 NEW: Extract the AI Tier (alpha/omega). 
-        # (Make sure your Wix frontend includes 'ai_mode' or 'tier' in the WebSocket payload)
         ai_tier = body_data.get('ai_mode', body_data.get('tier', 'omega'))
         
-        # 🟢 NEW: Safely get the dynamic profile based on both the requested audio type and the user's tier
         profile = get_audio_profile(profile_name, ai_tier)
         if not profile:
-            logger.warning(f"Profile {profile_name} not found. Falling back to transcription/omega.")
+            log_event("audio_profile_not_found", {"requested_profile": profile_name, "fallback": "transcription/omega"}, level="warning")
             profile = get_audio_profile('transcription', 'omega')
         
-        logger.info(f"Received token request from {connection_id} for profile: {profile_name} at tier: {ai_tier}")
+        # 🟢 FIX: Structured Log instead of plain text string
+        log_event("audio_token_requested", {
+            "connection_id": connection_id,
+            "profile": profile_name,
+            "tier": ai_tier
+        })
 
         api_key = settings.OPENAI_API_KEY
         if not api_key:
@@ -60,7 +63,6 @@ def handler(event, context):
         }
         
         if profile_name == 'language_tutor':
-            # --- SPEECH TO SPEECH (Conversational WebRTC API) ---
             target_url = "https://api.openai.com/v1/realtime/sessions"
             
             payload = {
@@ -86,13 +88,11 @@ def handler(event, context):
                 }
                 
         else:
-            # --- SPEECH TO TEXT (Transcription WebSocket API) ---
             target_url = "https://api.openai.com/v1/realtime/transcription_sessions"
             
             payload = {
                 "input_audio_format": "pcm16",
                 "input_audio_transcription": {
-                    # 🟢 Pulled dynamically! This will be the Alpha or Omega model depending on ai_tier
                     "model": profile.get("model", "gpt-4o-mini-transcribe") 
                 },
                 "turn_detection": {
@@ -103,13 +103,20 @@ def handler(event, context):
                 }
             }
 
-        logger.info(f"Targeting OpenAI URL: {target_url} with model: {payload.get('input_audio_transcription', {}).get('model', payload.get('model'))}")
+        selected_model = payload.get('input_audio_transcription', {}).get('model', payload.get('model'))
+        
+        # 🟢 FIX: Structured Log instead of plain text string
+        log_event("openai_realtime_api_call", {
+            "target_url": target_url,
+            "model": selected_model
+        })
         
         response = requests.post(target_url, headers=headers, json=payload)
         
         if response.status_code != 200:
             error_details = f"OpenAI API Error ({response.status_code}): {response.text}"
-            logger.error(error_details)
+            log_event("openai_realtime_api_error", {"status_code": response.status_code, "error": response.text}, level="error")
+            
             apigw_management_client.post_to_connection(
                 ConnectionId=connection_id,
                 Data=json.dumps({"action": "error", "message": error_details})
@@ -126,7 +133,7 @@ def handler(event, context):
         response_data = {
             "action": "session_token",
             "token": client_secret,
-            "mode": profile_name # Keep returning the requested profile_name back to the client
+            "mode": profile_name 
         }
         
         apigw_management_client.post_to_connection(
@@ -134,10 +141,13 @@ def handler(event, context):
             Data=json.dumps(response_data)
         )
         
+        # 🟢 Log success
+        log_event("audio_token_generated", {"profile": profile_name, "tier": ai_tier})
+        
         return {'statusCode': 200, 'body': f'Token generated for profile: {profile_name}'}
 
     except Exception as error:
-        logger.error(f"Internal error: {error}", exc_info=True)
+        log_event("audio_token_exception", {"error": str(error)}, level="error")
         try:
             if APIGW_ENDPOINT_URL:
                 apigw_management_client.post_to_connection(
@@ -145,5 +155,5 @@ def handler(event, context):
                     Data=json.dumps({"action": "error", "message": f"Backend Exception: {str(error)}"})
                 )
         except Exception as publish_error:
-            logger.error(f"Failed to send error to client: {publish_error}")
+            log_event("failed_to_send_error_to_client", {"error": str(publish_error)}, level="error")
         return {'statusCode': 500, 'body': 'Internal server error'}
