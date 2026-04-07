@@ -6,7 +6,9 @@ import boto3
 import os
 import requests
 from src.config.settings import settings
-from src.config.audio_config import AUDIO_PROFILES
+
+# 🟢 NEW IMPORT: Import the dynamic function instead of the static dictionary
+from src.config.audio_config import get_audio_profile
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
@@ -32,12 +34,21 @@ def handler(event, context):
         except json.JSONDecodeError:
             body_data = {}
             
-        mode = body_data.get('mode', 'transcription')
+        # 🟢 FIX: Differentiate between the Audio Profile and the AI Tier.
+        # We fall back to checking 'mode' for the profile to preserve backwards compatibility with your frontend.
+        profile_name = body_data.get('profile_name', body_data.get('mode', 'transcription'))
         
-        # Safely get the profile or an empty dict fallback
-        profile = AUDIO_PROFILES.get(mode, AUDIO_PROFILES.get('transcription', {}))
+        # 🟢 NEW: Extract the AI Tier (alpha/omega). 
+        # (Make sure your Wix frontend includes 'ai_mode' or 'tier' in the WebSocket payload)
+        ai_tier = body_data.get('ai_mode', body_data.get('tier', 'omega'))
         
-        logger.info(f"Received token request from {connection_id} for mode: {mode}")
+        # 🟢 NEW: Safely get the dynamic profile based on both the requested audio type and the user's tier
+        profile = get_audio_profile(profile_name, ai_tier)
+        if not profile:
+            logger.warning(f"Profile {profile_name} not found. Falling back to transcription/omega.")
+            profile = get_audio_profile('transcription', 'omega')
+        
+        logger.info(f"Received token request from {connection_id} for profile: {profile_name} at tier: {ai_tier}")
 
         api_key = settings.OPENAI_API_KEY
         if not api_key:
@@ -48,7 +59,7 @@ def handler(event, context):
             "Content-Type": "application/json"
         }
         
-        if mode == 'language_tutor':
+        if profile_name == 'language_tutor':
             # --- SPEECH TO SPEECH (Conversational WebRTC API) ---
             target_url = "https://api.openai.com/v1/realtime/sessions"
             
@@ -81,19 +92,18 @@ def handler(event, context):
             payload = {
                 "input_audio_format": "pcm16",
                 "input_audio_transcription": {
-                    # Pulled dynamically from audio_config.py
-                    "model": profile.get("model", "gpt-4o-transcribe")
+                    # 🟢 Pulled dynamically! This will be the Alpha or Omega model depending on ai_tier
+                    "model": profile.get("model", "gpt-4o-mini-transcribe") 
                 },
                 "turn_detection": {
                     "type": "server_vad",
                     "threshold": float(profile.get("vad_threshold", 0.5)),
                     "prefix_padding_ms": 300,
-                    # Pulled dynamically, falling back to 2000 to prevent phrase truncation
                     "silence_duration_ms": int(profile.get("silence_duration_ms", 2000))
                 }
             }
 
-        logger.info(f"Targeting OpenAI URL: {target_url}")
+        logger.info(f"Targeting OpenAI URL: {target_url} with model: {payload.get('input_audio_transcription', {}).get('model', payload.get('model'))}")
         
         response = requests.post(target_url, headers=headers, json=payload)
         
@@ -116,7 +126,7 @@ def handler(event, context):
         response_data = {
             "action": "session_token",
             "token": client_secret,
-            "mode": mode
+            "mode": profile_name # Keep returning the requested profile_name back to the client
         }
         
         apigw_management_client.post_to_connection(
@@ -124,7 +134,7 @@ def handler(event, context):
             Data=json.dumps(response_data)
         )
         
-        return {'statusCode': 200, 'body': f'Token generated for mode: {mode}'}
+        return {'statusCode': 200, 'body': f'Token generated for profile: {profile_name}'}
 
     except Exception as error:
         logger.error(f"Internal error: {error}", exc_info=True)

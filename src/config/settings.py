@@ -40,10 +40,8 @@ class Settings:
         # --- OpenAI Models ---
         self.OPENAI_AUDIO_MODEL: str = os.getenv("OPENAI_AUDIO_MODEL")
         
-        # =======================================================
-        # OPENAI REALTIME: TRANSCRIPTION MODE (Speech-to-Text)
-        # =======================================================
-        self.OPENAI_REALTIME_TRANSCRIPTION_MODEL: str = os.getenv("OPENAI_REALTIME_TRANSCRIPTION_MODEL")
+        # 🟢 NOTE: OPENAI_REALTIME_TRANSCRIPTION_MODEL has been removed.
+        # It is now dynamically loaded via src.config.model_config.get_model_config(mode)
         
         # =======================================================
         # OPENAI REALTIME: TUTOR MODE (Speech-to-Speech)

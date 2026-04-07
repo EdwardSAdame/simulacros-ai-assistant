@@ -22,7 +22,10 @@ class ModelConfig:
     
     # 🟢 3. IMAGE GENERATION MODE
     image_model: str
-    image_quality: str # 🟢 NEW: Bundled quality parameter
+    image_quality: str 
+    
+    # 🟢 4. AUDIO TRANSCRIPTION MODE
+    audio_transcription_model: str # NEW: Dynamic audio model
 
 def _parse_float_or_none(value: str | None, default: float) -> Optional[float]:
     if value is None: return default
@@ -39,7 +42,7 @@ def _parse_effort(value: str | None) -> Optional[str]:
 def get_model_config(mode: str = "omega") -> ModelConfig:
     """
     Universal Config Loader.
-    Loads params for Active Mode (Alpha/Omega), Router, and Image Generation.
+    Loads params for Active Mode (Alpha/Omega), Router, Image Generation, and Audio.
     """
     mode_key = mode.lower() if mode else "omega"
     
@@ -51,6 +54,8 @@ def get_model_config(mode: str = "omega") -> ModelConfig:
         # 🟢 Premium Image Settings
         fallback_image_model = "gpt-image-1.5"
         fallback_image_quality = "high"
+        # 🟢 Premium Audio Settings
+        fallback_audio_model = "gpt-4o-transcribe" 
     else:
         # Defaults to 'omega'
         suffix = "OMEGA"
@@ -59,6 +64,8 @@ def get_model_config(mode: str = "omega") -> ModelConfig:
         # 🟢 Standard Image Settings
         fallback_image_model = "gpt-image-1-mini"
         fallback_image_quality = "medium"
+        # 🟢 Standard Audio Settings
+        fallback_audio_model = "gpt-4o-mini-transcribe"
 
     model = os.getenv(f"OPENAI_MODEL_{suffix}", fallback_model)
     temperature = _parse_float_or_none(os.getenv(f"OPENAI_TEMP_{suffix}"), fallback_temp)
@@ -73,9 +80,12 @@ def get_model_config(mode: str = "omega") -> ModelConfig:
     router_effort = _parse_effort(os.getenv("OPENAI_REASONING_EFFORT_ROUTER"))
     
     # --- LOAD IMAGE CONFIG ---
-    # 🟢 Pulls from .env using the mode suffix, or uses our built-in fallbacks
     image_model = os.getenv(f"OPENAI_MODEL_IMAGE_{suffix}", fallback_image_model)
     image_quality = os.getenv(f"IMAGE_GENERATION_QUALITY_{suffix}", fallback_image_quality)
+
+    # --- LOAD AUDIO TRANSCRIPTION CONFIG ---
+    # Pulls from .env using the mode suffix (e.g. OPENAI_REALTIME_TRANSCRIPTION_MODEL_ALPHA)
+    audio_transcription_model = os.getenv(f"OPENAI_REALTIME_TRANSCRIPTION_MODEL_{suffix}", fallback_audio_model)
 
     return ModelConfig(
         model=model,
@@ -89,5 +99,7 @@ def get_model_config(mode: str = "omega") -> ModelConfig:
         router_reasoning_effort=router_effort,
         
         image_model=image_model,
-        image_quality=image_quality
+        image_quality=image_quality,
+        
+        audio_transcription_model=audio_transcription_model
     )
