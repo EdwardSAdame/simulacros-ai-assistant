@@ -1,4 +1,5 @@
 # src/storage/ws_connections_table.py
+import os
 import boto3
 import logging
 from boto3.dynamodb.conditions import Attr
@@ -6,9 +7,14 @@ from boto3.dynamodb.conditions import Attr
 logger = logging.getLogger(__name__)
 
 class WsConnectionsTable:
-    def __init__(self, table_name: str):
+    # THE FIX: Make table_name optional (default to None)
+    def __init__(self, table_name: str = None):
         self.dynamodb = boto3.resource('dynamodb')
-        self.table = self.dynamodb.Table(table_name)
+        
+        # If the Lambda handler doesn't pass a name, use the environment variable or default to 'WsConnections'
+        actual_table_name = table_name or os.environ.get('TABLE_NAME') or os.environ.get('WS_CONNECTIONS_TABLE_NAME') or 'WsConnections'
+        
+        self.table = self.dynamodb.Table(actual_table_name)
 
     def save_connection(self, user_id: str, connection_id: str):
         """
