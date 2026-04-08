@@ -7,7 +7,6 @@ from boto3.dynamodb.conditions import Attr
 logger = logging.getLogger(__name__)
 
 class WsConnectionsTable:
-    # THE FIX: Make table_name optional (default to None)
     def __init__(self, table_name: str = None):
         self.dynamodb = boto3.resource('dynamodb')
         
@@ -16,7 +15,8 @@ class WsConnectionsTable:
         
         self.table = self.dynamodb.Table(actual_table_name)
 
-    def save_connection(self, user_id: str, connection_id: str):
+    # 🟢 THE FIX: Renamed from 'save_connection' to 'add_connection' to match your Lambda handler
+    def add_connection(self, user_id: str, connection_id: str):
         """
         Saves a new WebSocket connection ID for the user using a DynamoDB String Set.
         """
