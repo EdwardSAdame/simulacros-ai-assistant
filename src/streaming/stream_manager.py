@@ -1,7 +1,7 @@
 # src/streaming/stream_manager.py
 import json
 import logging
-from typing import Any, Dict, Optional
+from typing import Any, Dict, List, Union
 
 logger = logging.getLogger(__name__)
 
@@ -9,42 +9,55 @@ class StreamManager:
     """
     Manages real-time data streaming to the WebSocket client via API Gateway.
     Abstracts away the JSON serialization and error handling for connection issues.
+    Now supports broadcasting to multiple active connections (multi-window support).
     """
 
-    def __init__(self, connection_id: str, api_gateway_client: Any):
+    def __init__(self, connection_ids: Union[str, List[str]], api_gateway_client: Any):
         """
-        :param connection_id: The WebSocket connection ID of the user.
+        :param connection_ids: A single WebSocket connection ID, or a list of IDs for the user.
         :param api_gateway_client: Boto3 client for 'apigatewaymanagementapi'.
         """
-        self.connection_id = connection_id
+        # Ensure connection_ids is always a list for consistent iteration
+        if isinstance(connection_ids, str):
+            self.connection_ids = [connection_ids]
+        else:
+            self.connection_ids = connection_ids if connection_ids else []
+            
         self.client = api_gateway_client
         self.packet_count = 0
 
     def _send(self, payload: Dict[str, Any]) -> bool:
         """
-        Internal helper to send a dictionary as a JSON string to the client.
-        Returns True if successful, False if the connection is gone or failed.
+        Internal helper to send a dictionary as a JSON string to all active clients.
+        Returns True if at least one connection successfully received the payload.
         """
-        if not self.connection_id or not self.client:
+        if not self.connection_ids or not self.client:
             return False
 
-        try:
-            # FIX: ensure_ascii=False forces Python to send pure UTF-8 Spanish characters 
-            # instead of \uXXXX escape sequences. This prevents frontend regex corruption!
-            self.client.post_to_connection(
-                ConnectionId=self.connection_id,
-                Data=json.dumps(payload, ensure_ascii=False)
-            )
+        # FIX: ensure_ascii=False forces Python to send pure UTF-8 Spanish characters 
+        # instead of \uXXXX escape sequences. This prevents frontend regex corruption!
+        payload_str = json.dumps(payload, ensure_ascii=False)
+        success_count = 0
+
+        for connection_id in self.connection_ids:
+            try:
+                self.client.post_to_connection(
+                    ConnectionId=connection_id,
+                    Data=payload_str
+                )
+                success_count += 1
+            except Exception as e:
+                # Handle "GoneException" (User closed the tab/window)
+                if "GoneException" in str(e) or "410" in str(e):
+                    logger.warning(f"StreamManager: Connection {connection_id} is gone.")
+                else:
+                    logger.error(f"StreamManager: Failed to send data to {connection_id}: {e}")
+
+        if success_count > 0:
             self.packet_count += 1
             return True
-        except Exception as e:
-            # Handle "GoneException" (User closed the tab)
-            # We check string for robustness since specific Exception classes vary by boto3 setup
-            if "GoneException" in str(e) or "410" in str(e):
-                logger.warning(f"StreamManager: Connection {self.connection_id} is gone.")
-            else:
-                logger.error(f"StreamManager: Failed to send data: {e}")
-            return False
+            
+        return False
 
     def send_status(self, message: str, step: str = "processing"):
         """
@@ -81,7 +94,7 @@ class StreamManager:
         self._send(payload)
 
     # ------------------------------------------------------------------
-    # NEW: CREATIVE IMAGE STREAMING METHODS
+    # CREATIVE IMAGE STREAMING METHODS
     # ------------------------------------------------------------------
     def send_partial_image(self, index: int, b64_data: str):
         """Streams a partial, incomplete image chunk during generation."""
@@ -102,7 +115,7 @@ class StreamManager:
         self._send(payload)
 
     # ------------------------------------------------------------------
-    # NEW: METRICS METHDOS
+    # METRICS METHDOS
     # ------------------------------------------------------------------
     def send_usage_metrics(self, usage_data: Dict[str, Any]):
         """

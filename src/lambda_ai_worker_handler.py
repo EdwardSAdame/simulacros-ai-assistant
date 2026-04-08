@@ -13,7 +13,7 @@ from src.services.token_usage_service import TokenUsageService
 from src.services.context_resolution import determine_exam_context
 from src.storage.conversations_table import get_conversation_metadata
 
-# 🟢 NEW IMPORTS: For Audio FinOps
+# For Audio FinOps
 from src.services.audio_usage_service import AudioUsageService
 from src.config.model_config import get_model_config
 
@@ -43,7 +43,7 @@ def lambda_handler(event, context):
 
     for record in records:
         user_id = None
-        connection_id = None
+        connection_ids = []  # 🟢 MODIFIED: Changed to plural/list
         conv_id_in = None
         client_row_id = None
         
@@ -55,7 +55,6 @@ def lambda_handler(event, context):
             user_id = payload.get("user_id")
             conv_id_in = payload.get("conversation_id")
             
-            # 🟢 MOVED UP: We need to know the user's tier early for accurate FinOps logging
             ai_mode = payload.get("mode", "omega")
             
             audio_duration = payload.get("audioDurationSeconds")
@@ -64,12 +63,11 @@ def lambda_handler(event, context):
             sts_out_text = payload.get("stsOutputText", 0)
             sts_out_audio = payload.get("stsOutputAudio", 0)
 
-            # 🟢 THE BULLETPROOF FAILSAFE: Intercept exactly by message text!
+            # THE BULLETPROOF FAILSAFE: Intercept exactly by message text!
             if message in ["[AUDIO_TELEMETRY]", "[STS_TELEMETRY]"]:
                 logger.info(f"Intercepting Telemetry Ghost Message: {message} for user {user_id}")
                 
                 if message == "[AUDIO_TELEMETRY]" and audio_duration is not None and int(audio_duration) > 0:
-                    # 🟢 NEW: Route to AudioUsageService instead of TokenUsageService
                     cfg = get_model_config(ai_mode)
                     audio_svc = AudioUsageService()
                     audio_svc.log_audio_usage(
@@ -92,7 +90,7 @@ def lambda_handler(event, context):
                             user_id=uid_str, 
                             conversation_id=session_str,         
                             source="telemetry",                  
-                            tier=ai_mode,             # 🟢 FIX: Uses actual ai_mode instead of "telemetry"
+                            tier=ai_mode,             
                             engine="sts-text",        
                             input_tokens=int(sts_in_text or 0), 
                             output_tokens=int(sts_out_text or 0), 
@@ -104,14 +102,13 @@ def lambda_handler(event, context):
                             user_id=uid_str, 
                             conversation_id=session_str,         
                             source="telemetry",                  
-                            tier=ai_mode,             # 🟢 FIX: Uses actual ai_mode instead of "telemetry"
+                            tier=ai_mode,             
                             engine="sts-audio",       
                             input_tokens=int(sts_in_audio or 0), 
                             output_tokens=int(sts_out_audio or 0), 
                             total_tokens=int(sts_in_audio or 0) + int(sts_out_audio or 0)
                         )
                 
-                # 🔥 CRITICAL: Skip the rest of the loop! Do NOT hit OpenAI!
                 continue 
 
             image_urls = payload.get("image_urls", [])
@@ -124,18 +121,20 @@ def lambda_handler(event, context):
             page = payload.get("page")
             client_row_id = payload.get("client_row_id")
 
-            connection_id = ws_connections_table.get_connection_id(user_id)
+            # 🟢 MODIFIED: Fetch the LIST of connection IDs
+            connection_ids = ws_connections_table.get_connection_ids(user_id)
 
             stream_manager = None
-            if connection_id:
-                stream_manager = StreamManager(connection_id, api_gateway_client)
+            if connection_ids:
+                # 🟢 MODIFIED: Pass the list to StreamManager
+                stream_manager = StreamManager(connection_ids, api_gateway_client)
 
             intent = "chat" 
             requires_visuals = False 
             category_key = "general" 
             num_questions = 5 
             
-            if connection_id and not is_hidden:
+            if connection_ids and not is_hidden:
                 try:
                     persisted_exam_context = None
                     if conv_id_in and user_id:
@@ -180,10 +179,14 @@ def lambda_handler(event, context):
                         "intent": intent  
                     })
                     
-                    api_gateway_client.post_to_connection(
-                        ConnectionId=connection_id,
-                        Data=status_payload
-                    )
+                    # 🟢 MODIFIED: Loop through connections
+                    for conn_id in connection_ids:
+                        try:
+                            api_gateway_client.post_to_connection(ConnectionId=conn_id, Data=status_payload)
+                        except api_gateway_client.exceptions.GoneException:
+                            pass
+                        except Exception as inner_e:
+                            logger.warning(f"Failed to send status to {conn_id}: {inner_e}")
                     
                     log_event("visual_feedback_sent", {
                         "user_id": user_id, 
@@ -222,58 +225,61 @@ def lambda_handler(event, context):
                 num_questions=num_questions
             )
 
-            if connection_id and not is_hidden:
-                try:
-                    response_payload = json.dumps({
-                        "action": "ai_reply",
-                        "ai_reply": ai_reply,
-                        "conversation_id": conversation_id,
-                        "client_row_id": client_row_id,
-                        "timestamp": assistant_timestamp,
-                        "metadata": meta_payload 
-                    }, default=str)
-                    
-                    api_gateway_client.post_to_connection(
-                        ConnectionId=connection_id,
-                        Data=response_payload
-                    )
+            if connection_ids and not is_hidden:
+                # 🟢 MODIFIED: Loop through connections
+                for conn_id in connection_ids:
+                    try:
+                        response_payload = json.dumps({
+                            "action": "ai_reply",
+                            "ai_reply": ai_reply,
+                            "conversation_id": conversation_id,
+                            "client_row_id": client_row_id,
+                            "timestamp": assistant_timestamp,
+                            "metadata": meta_payload 
+                        }, default=str)
+                        
+                        api_gateway_client.post_to_connection(
+                            ConnectionId=conn_id,
+                            Data=response_payload
+                        )
 
-                    if meta_payload:
-                        action_type = None
-                        if meta_payload.get("type") == "rich_chat":
-                            action_type = "rich_content_update"
-                        elif meta_payload.get("quiz_mode") or meta_payload.get("questions"):
-                            action_type = "quiz_data_update"
+                        if meta_payload:
+                            action_type = None
+                            if meta_payload.get("type") == "rich_chat":
+                                action_type = "rich_content_update"
+                            elif meta_payload.get("quiz_mode") or meta_payload.get("questions"):
+                                action_type = "quiz_data_update"
 
-                        if action_type:
-                            data_payload = json.dumps({
-                                "action": action_type,
-                                "data": meta_payload,
-                                "conversation_id": conversation_id
-                            }, default=str)
-                            
-                            api_gateway_client.post_to_connection(
-                                ConnectionId=connection_id,
-                                Data=data_payload
-                            )
-                            log_event("rich_data_pushed_to_client", {
-                                "type": action_type, 
-                                "conversation_id": conversation_id
-                            })
+                            if action_type:
+                                data_payload = json.dumps({
+                                    "action": action_type,
+                                    "data": meta_payload,
+                                    "conversation_id": conversation_id
+                                }, default=str)
+                                
+                                api_gateway_client.post_to_connection(
+                                    ConnectionId=conn_id,
+                                    Data=data_payload
+                                )
+                                log_event("rich_data_pushed_to_client", {
+                                    "type": action_type, 
+                                    "conversation_id": conversation_id
+                                })
 
-                    log_event("ai_worker_response_sent", {
-                        "user_id": user_id, 
-                        "connection_id": connection_id,
-                        "client_row_id": client_row_id,
-                        "timestamp": assistant_timestamp,
-                        "has_meta_payload": bool(meta_payload)
-                    })
+                    except api_gateway_client.exceptions.GoneException:
+                        log_event("ws_send_failed_gone", {"user_id": user_id, "connection_id": conn_id}, level="warning")
+                    except Exception as e:
+                        log_event("ws_send_failed_exception", {"user_id": user_id, "connection_id": conn_id}, level="error", error=e)
 
-                except api_gateway_client.exceptions.GoneException:
-                    log_event("ws_send_failed_gone", {"user_id": user_id, "connection_id": connection_id}, level="warning")
-                except Exception as e:
-                    log_event("ws_send_failed_exception", {"user_id": user_id}, level="error", error=e)
-            elif not connection_id:
+                log_event("ai_worker_response_sent", {
+                    "user_id": user_id, 
+                    "connections_count": len(connection_ids),
+                    "client_row_id": client_row_id,
+                    "timestamp": assistant_timestamp,
+                    "has_meta_payload": bool(meta_payload)
+                })
+
+            elif not connection_ids:
                 log_event("ws_connection_not_found", {"user_id": user_id}, level="warning")
 
         except Exception as e:
@@ -282,22 +288,24 @@ def lambda_handler(event, context):
                 log_event("ai_quota_exceeded_handled", {"user_id": user_id, "error": str(e)}, level="warning")
                 fallback_msg = "**Señal nula. Vacío de sistema. Intenta luego.**"
                 
-                if connection_id:
-                    try:
-                        err_payload = json.dumps({
-                            "action": "ai_reply",
-                            "ai_reply": fallback_msg,
-                            "conversation_id": conv_id_in,
-                            "client_row_id": client_row_id,
-                            "timestamp": "", 
-                            "metadata": None
-                        })
-                        api_gateway_client.post_to_connection(
-                            ConnectionId=connection_id,
-                            Data=err_payload
-                        )
-                    except Exception as inner_e:
-                        log_event("failed_to_send_error_fallback", {"error": str(inner_e)}, level="error")
+                if connection_ids:
+                    # 🟢 MODIFIED: Loop through connections for errors
+                    for conn_id in connection_ids:
+                        try:
+                            err_payload = json.dumps({
+                                "action": "ai_reply",
+                                "ai_reply": fallback_msg,
+                                "conversation_id": conv_id_in,
+                                "client_row_id": client_row_id,
+                                "timestamp": "", 
+                                "metadata": None
+                            })
+                            api_gateway_client.post_to_connection(
+                                ConnectionId=conn_id,
+                                Data=err_payload
+                            )
+                        except Exception as inner_e:
+                            log_event("failed_to_send_error_fallback", {"error": str(inner_e)}, level="error")
                 
                 continue 
             

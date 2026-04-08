@@ -2,19 +2,15 @@
 import boto3
 import logging
 import os
+from boto3.dynamodb.conditions import Attr
 
 logger = logging.getLogger()
 
-# --- Best Practice: Initialize the client once ---
 dynamodb = boto3.resource('dynamodb')
-
-# --- Use a more descriptive name for the table from environment variables ---
-TABLE_NAME = os.environ.get('WEBSOCKET_CONNECTIONS_TABLE_NAME', 'WsConnections') 
-# Note: I've added a default table name 'WsConnections' for clarity.
-# You will need to create a DynamoDB table with this name and 'userId' as the primary key.
+TABLE_NAME = os.environ.get('WEBSOCKET_CONNECTIONS_TABLE_NAME', 'WsConnections')
 
 class WsConnectionsTable:
-    """Manages WebSocket connections in a DynamoDB table."""
+    """Manages WebSocket connections in a DynamoDB table, supporting multiple connections per user."""
 
     def __init__(self):
         """Initializes the table resource."""
@@ -22,57 +18,73 @@ class WsConnectionsTable:
 
     def add_connection(self, user_id: str, connection_id: str):
         """
-        Saves or updates a user's connection ID.
-        Uses userId as the primary key.
+        Saves or updates a user's connection ID using a DynamoDB String Set.
+        This allows one user to have multiple active browser windows (connections).
         """
         if not user_id or not connection_id:
             logger.warning("add_connection failed: userId or connection_id is empty.")
             raise ValueError("userId and connectionId cannot be empty")
 
-        logger.info(f"Storing connection for userId: {user_id}")
-        self.table.put_item(
-            Item={
-                'userId': user_id,
-                'connectionId': connection_id
-            }
-        )
+        logger.info(f"Storing connection {connection_id} for userId: {user_id}")
+        
+        try:
+            self.table.update_item(
+                Key={'userId': user_id},
+                UpdateExpression="ADD connectionIds :c",
+                ExpressionAttributeValues={":c": set([connection_id])}
+            )
+        except Exception as e:
+            logger.error(f"Failed to add connection {connection_id} for {user_id}: {str(e)}")
+            raise e
 
     def remove_connection_by_id(self, connection_id: str):
         """
-        Removes a connection using the connectionId.
-        This requires a scan, which is less efficient but necessary if only
-        the connectionId is available on disconnect.
+        Removes a connection using the connectionId from the String Set.
+        Uses a scan to find the user first, then removes the specific connection ID.
         """
         if not connection_id:
             logger.warning("remove_connection_by_id failed: connection_id is empty.")
             raise ValueError("connectionId cannot be empty")
             
-        # Scan the table to find the item with the matching connectionId
-        response = self.table.scan(
-            FilterExpression=boto3.dynamodb.conditions.Attr('connectionId').eq(connection_id)
-        )
-        
-        items = response.get('Items', [])
-        if items:
-            user_id = items[0]['userId']
-            logger.info(f"Removing connection for userId: {user_id} with connectionId: {connection_id}")
-            self.table.delete_item(Key={'userId': user_id})
-        else:
-            logger.warning(f"No connection found with connectionId: {connection_id} to remove.")
+        try:
+            response = self.table.scan(
+                FilterExpression=Attr('connectionIds').contains(connection_id)
+            )
+            
+            items = response.get('Items', [])
+            if not items:
+                logger.warning(f"No user found owning connectionId: {connection_id} to remove.")
+                return
 
-    def get_connection_id(self, user_id: str) -> str | None:
+            for item in items:
+                user_id = item['userId']
+                logger.info(f"Removing connection {connection_id} from userId: {user_id}")
+                
+                self.table.update_item(
+                    Key={'userId': user_id},
+                    UpdateExpression="DELETE connectionIds :c",
+                    ExpressionAttributeValues={":c": set([connection_id])}
+                )
+        except Exception as e:
+            logger.error(f"Error removing connection {connection_id}: {str(e)}")
+
+    def get_connection_ids(self, user_id: str) -> list:
         """
-        Retrieves a connection ID for a given user ID.
+        Retrieves all active connection IDs for a given user ID.
+        Returns an empty list if none are found.
         """
         if not user_id:
-            logger.warning("get_connection_id failed: userId is empty.")
-            return None
+            logger.warning("get_connection_ids failed: userId is empty.")
+            return []
 
-        logger.info(f"Fetching connection for userId: {user_id}")
+        logger.info(f"Fetching connections for userId: {user_id}")
         try:
             response = self.table.get_item(Key={'userId': user_id})
             item = response.get('Item')
-            return item['connectionId'] if item else None
+            
+            if item and 'connectionIds' in item:
+                return list(item['connectionIds'])
+            return []
         except Exception as e:
-            logger.error(f"Error getting connection for {user_id}: {e}")
-            return None
+            logger.error(f"Error getting connections for {user_id}: {str(e)}")
+            return []
