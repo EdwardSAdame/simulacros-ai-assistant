@@ -1,4 +1,45 @@
-def remove_connection_by_id(self, connection_id: str):
+# src/storage/ws_connections_table.py
+import boto3
+import logging
+from boto3.dynamodb.conditions import Attr
+
+logger = logging.getLogger(__name__)
+
+class WsConnectionsTable:
+    def __init__(self, table_name: str):
+        self.dynamodb = boto3.resource('dynamodb')
+        self.table = self.dynamodb.Table(table_name)
+
+    def save_connection(self, user_id: str, connection_id: str):
+        """
+        Saves a new WebSocket connection ID for the user using a DynamoDB String Set.
+        """
+        try:
+            self.table.update_item(
+                Key={'userId': user_id},
+                UpdateExpression="ADD connectionIds :c",
+                ExpressionAttributeValues={":c": set([connection_id])}
+            )
+            logger.info(f"Saved connection {connection_id} for user {user_id}")
+        except Exception as e:
+            logger.error(f"Failed to save connection: {e}")
+            raise
+
+    def get_connection_ids(self, user_id: str) -> list:
+        """
+        Retrieves all active WebSocket connection IDs for the user.
+        """
+        try:
+            response = self.table.get_item(Key={'userId': user_id})
+            item = response.get('Item', {})
+            # DynamoDB returns sets as Python sets. We convert back to a list for JSON serialization.
+            connections = item.get('connectionIds', set())
+            return list(connections)
+        except Exception as e:
+            logger.error(f"Failed to get connections for user {user_id}: {e}")
+            return []
+
+    def remove_connection_by_id(self, connection_id: str):
         """
         Removes a connection using the connectionId from the String Set.
         If it was the user's last connection, it deletes the entire user row to keep the database clean.
@@ -27,7 +68,7 @@ def remove_connection_by_id(self, connection_id: str):
                     Key={'userId': user_id},
                     UpdateExpression="DELETE connectionIds :c",
                     ExpressionAttributeValues={":c": set([connection_id])},
-                    ReturnValues="UPDATED_NEW" # Tells DynamoDB to return what the row looks like now
+                    ReturnValues="UPDATED_NEW" 
                 )
                 
                 # Step 3: Check if the set is empty/missing. If so, delete the zombie row entirely.
