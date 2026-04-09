@@ -24,7 +24,7 @@ When comparing two distinct variables, use these high-contrast pairs:
 
 #### SCENARIO 3: MULTI-LINE (Complex Data)
 When 3+ lines are present, use one of these two strategies:
-1.  **The "Full Spectrum"**: Cycle through the primary triad: `#ffcb04`, `#00adef`, `#61bb45`, `#044892`.
+1.  **The "Full Spectrum"**: Cycle through the primary triad: `#ffcb04`, `#00adef`, `#61bb45`.
 2.  **The "Focus & Fade"**: 
     * Use only one color from the primary triad.
     * Render all other lines in a "faded" version (light grey `#7b8c96`).
@@ -80,7 +80,11 @@ When writing the Python code, you MUST apply the following "Clean Style" paramet
             color='black')
     ```
 
-#### 6. DISPLAYING THE PLOT (CRITICAL)
+#### 6. SPECIFIC CHART TYPES (BARS & SCATTER)
+* **Bar Graphs**: You MUST remove the contour/border of the bars. Always pass `edgecolor='none'` when calling `ax.bar()` or `plt.bar()`.
+* **Scatter Plots**: You MUST remove the contour/border of the dots. Always pass `edgecolors='none'` when calling `ax.scatter()` or `plt.scatter()`.
+
+#### 7. DISPLAYING THE PLOT (CRITICAL)
 * **Output**: You MUST display the final plot directly using `plt.show()`. 
 * **No File Saving**: Do NOT save the figure to disk. Do NOT use `plt.savefig()`. Do NOT use `plt.close(fig)`.
 """
