@@ -3,7 +3,8 @@ import json
 import logging
 import os
 from decimal import Decimal
-from src.storage.messages_table import get_all_messages # Import the new function
+from src.storage.messages_table import get_all_messages
+from src.storage.conversations_table import get_conversation_metadata # 🟢 NEW: Import the ownership checker
 from src.utils.logging_utils import log_event, set_invocation_context
 
 logger = logging.getLogger()
@@ -28,34 +29,50 @@ def lambda_handler(event, context):
     """
     API Gateway handler to fetch all messages for a specific conversation.
     Expects conversationId as a path parameter (e.g., /messages/{conversationId}).
+    Now secured by validating the userId query parameter!
     """
     set_invocation_context(context)
     log_event("get_messages_invocation", {"source": "GetMessagesHandler"})
 
-    conversation_id = None # Initialize conversation_id
+    conversation_id = None
+    user_id = None
 
     try:
-        # --- Extract conversationId from path parameters ---
-        # Assumes API Gateway is configured for a path like /messages/{conversationId}
+        # --- Extract Parameters ---
         path_params = event.get('pathParameters', {})
         conversation_id = path_params.get('conversationId') if path_params else None
+
+        query_params = event.get('queryStringParameters') or {}
+        user_id = query_params.get('userId') # 🟢 NEW: Extract the user ID passed from the frontend
 
         if not conversation_id:
             log_event("get_messages_failed", {"reason": "Missing conversationId path parameter"}, level="warning")
             return _response(400, {"error": "conversationId path parameter is required"})
 
+        if not user_id:
+            log_event("get_messages_unauthorized", {"reason": "Missing userId query parameter"}, level="warning")
+            return _response(401, {"error": "userId is required for authentication"})
+
+        # --- 🟢 CRITICAL SECURITY FIX: Verify Ownership ---
+        # Look up the conversation in the UserConversations table to ensure this user actually owns it.
+        metadata = get_conversation_metadata(user_id, conversation_id)
+        
+        if not metadata:
+            # If the DB returns None, the user does not own it (or it doesn't exist). BLOCK THEM.
+            log_event("get_messages_forbidden", {
+                "reason": "User attempted to access a chat they do not own",
+                "attempted_user": user_id,
+                "target_conversation": conversation_id
+            }, level="error")
+            return _response(403, {"error": "Access Denied. You do not have permission to view this conversation."})
+
         # --- Fetch all messages from DynamoDB ---
-        # Using the function we added to messages_table.py
         messages = get_all_messages(conversation_id=conversation_id) # Returns oldest first
 
         # 🟢 NORMALIZATION STEP: Match WebSocket format (Metadata -> metadata)
-        # This fixes the reload mismatch issue.
         cleaned_messages = []
         for msg in messages:
-            # Create a shallow copy to modify safely
             clean_msg = msg.copy()
-            
-            # Rename 'Metadata' (DynamoDB) to 'metadata' (Frontend/WebSocket standard)
             if "Metadata" in clean_msg:
                 clean_msg["metadata"] = clean_msg.pop("Metadata")
             elif "Meta" in clean_msg:
@@ -65,6 +82,7 @@ def lambda_handler(event, context):
 
         log_event("get_messages_success", {
             "conversation_id": conversation_id,
+            "user_id": user_id,
             "message_count": len(cleaned_messages)
         })
 
@@ -80,6 +98,5 @@ def _response(status_code, body):
     return {
         "statusCode": status_code,
         "headers": CORS_HEADERS,
-        # 🟢 UPDATED: Use the decimal_default helper to safely serialize DynamoDB data
         "body": json.dumps(body, default=decimal_default)
     }
