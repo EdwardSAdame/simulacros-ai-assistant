@@ -8,26 +8,26 @@ logger = logging.getLogger(__name__)
 
 @dataclass(frozen=True)
 class ModelConfig:
-    # 🟢 1. ACTIVE MODE (Alpha or Omega)
+    # 1. ACTIVE MODE (Alpha or Omega)
     model: str
     temperature: Optional[float]
     top_p: Optional[float]
     reasoning_effort: Optional[str]
 
-    # 🟢 2. ROUTER MODE (Classification)
+    # 2. ROUTER MODE (Classification)
     router_model: str
     router_temperature: Optional[float]
     router_top_p: Optional[float]
     router_reasoning_effort: Optional[str]
     
-    # 🟢 3. IMAGE GENERATION MODE
+    # 3. IMAGE GENERATION MODE
     image_model: str
     image_quality: str 
     
-    # 🟢 4. AUDIO TRANSCRIPTION MODE
+    # 4. AUDIO TRANSCRIPTION MODE
     audio_transcription_model: str 
 
-    # 🟢 5. REALTIME AUDIO MODE (Speech-to-Speech)
+    # 5. REALTIME AUDIO MODE (Speech-to-Speech)
     realtime_model: str
     realtime_voice: str
 
@@ -60,7 +60,7 @@ def get_model_config(mode: str = "omega") -> ModelConfig:
         fallback_image_quality = "high"
         # Premium Audio Settings
         fallback_audio_model = "gpt-4o-transcribe" 
-        # 🟢 Premium Realtime Settings (Speech-to-Speech)
+        # Premium Realtime Settings (Speech-to-Speech)
         fallback_realtime_model = "gpt-4o-realtime-preview-2024-12-17"
         fallback_realtime_voice = "alloy"
     else:
@@ -73,7 +73,7 @@ def get_model_config(mode: str = "omega") -> ModelConfig:
         fallback_image_quality = "medium"
         # Standard Audio Settings
         fallback_audio_model = "gpt-4o-mini-transcribe"
-        # 🟢 Standard Realtime Settings (Speech-to-Speech)
+        # Standard Realtime Settings (Speech-to-Speech)
         fallback_realtime_model = "gpt-4o-mini-realtime-preview-2024-12-17"
         fallback_realtime_voice = "sage"
 
@@ -95,9 +95,10 @@ def get_model_config(mode: str = "omega") -> ModelConfig:
     # --- LOAD AUDIO TRANSCRIPTION CONFIG ---
     audio_transcription_model = os.getenv(f"OPENAI_REALTIME_TRANSCRIPTION_MODEL_{suffix}", fallback_audio_model)
 
-    # 🟢 --- LOAD REALTIME AUDIO CONFIG (Speech-to-Speech) ---
-    realtime_model = os.getenv(f"OPENAI_REALTIME_MODEL_{suffix}", fallback_realtime_model)
-    realtime_voice = os.getenv(f"OPENAI_REALTIME_VOICE_{suffix}", fallback_realtime_voice)
+    # --- LOAD REALTIME AUDIO CONFIG (Speech-to-Speech) ---
+    # FIX: Added _SPEECH_ to match the exact keys in the .env file
+    realtime_model = os.getenv(f"OPENAI_REALTIME_SPEECH_MODEL_{suffix}", fallback_realtime_model)
+    realtime_voice = os.getenv(f"OPENAI_REALTIME_SPEECH_VOICE_{suffix}", fallback_realtime_voice)
 
     return ModelConfig(
         model=model,
