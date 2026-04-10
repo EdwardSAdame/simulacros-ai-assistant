@@ -10,7 +10,7 @@ logger = logging.getLogger(__name__)
 
 # DynamoDB setup
 dynamodb = boto3.resource("dynamodb")
-table = dynamodb.Table("PurchasesTable") 
+table = dynamodb.Table("Purchases")  # Corrected: Removed "Table" suffix
 
 def store_purchase(purchase_data: Dict[str, Any]) -> Dict[str, Any]:
     """
@@ -41,12 +41,12 @@ def store_purchase(purchase_data: Dict[str, Any]) -> Dict[str, Any]:
         safe_item = {k: v for k, v in item.items() if v != ""}
 
         table.put_item(Item=safe_item)
-        logger.info(f"✅ Stored purchase for web user {user_id} | Plan: {item.get('PlanName')}")
+        logger.info(f"Stored purchase for web user {user_id} | Plan: {item.get('PlanName')}")
         
         return safe_item
 
     except Exception as e:
-        logger.error(f"❌ Failed to store web purchase for user {purchase_data.get('UserId', 'Unknown')}: {e}")
+        logger.error(f"Failed to store web purchase for user {purchase_data.get('UserId', 'Unknown')}: {e}")
         raise
 
 
@@ -70,12 +70,12 @@ def get_latest_active_subscription(user_id: str) -> Optional[Dict[str, Any]]:
         items = response.get("Items", [])
         if items:
             latest_purchase = items[0]
-            logger.info(f"🛒 Found latest purchase for {user_id}: {latest_purchase.get('PlanName')}")
+            logger.info(f"Found latest purchase for {user_id}: {latest_purchase.get('PlanName')}")
             return latest_purchase
         else:
-            logger.info(f"🟡 No purchases found for web user {user_id}")
+            logger.info(f"No purchases found for web user {user_id}")
             return None
 
     except Exception as e:
-        logger.error(f"❌ Error querying latest purchase for {user_id}: {e}")
+        logger.error(f"Error querying latest purchase for {user_id}: {e}")
         return None
