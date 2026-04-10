@@ -43,7 +43,7 @@ def lambda_handler(event, context):
 
     for record in records:
         user_id = None
-        connection_ids = []  # 🟢 MODIFIED: Changed to plural/list
+        connection_ids = []  
         conv_id_in = None
         client_row_id = None
         
@@ -85,13 +85,17 @@ def lambda_handler(event, context):
                     session_str = conv_id_in or "unknown"
                     uid_str = user_id or "anonymous"
                     
+                    # Dynamically fetch the realtime engine based on the tier
+                    cfg = get_model_config(ai_mode)
+                    realtime_engine = getattr(cfg, 'realtime_model', 'gpt-4o-realtime')
+                    
                     if (sts_in_text is not None and int(sts_in_text) > 0) or (sts_out_text is not None and int(sts_out_text) > 0):
                         svc.log_token_usage(
                             user_id=uid_str, 
                             conversation_id=session_str,         
-                            source="telemetry",                  
+                            source="telemetry-text",                  
                             tier=ai_mode,             
-                            engine="sts-text",        
+                            engine=realtime_engine,        
                             input_tokens=int(sts_in_text or 0), 
                             output_tokens=int(sts_out_text or 0), 
                             total_tokens=int(sts_in_text or 0) + int(sts_out_text or 0)
@@ -101,9 +105,9 @@ def lambda_handler(event, context):
                         svc.log_token_usage(
                             user_id=uid_str, 
                             conversation_id=session_str,         
-                            source="telemetry",                  
+                            source="telemetry-audio",                  
                             tier=ai_mode,             
-                            engine="sts-audio",       
+                            engine=realtime_engine,       
                             input_tokens=int(sts_in_audio or 0), 
                             output_tokens=int(sts_out_audio or 0), 
                             total_tokens=int(sts_in_audio or 0) + int(sts_out_audio or 0)
@@ -121,12 +125,11 @@ def lambda_handler(event, context):
             page = payload.get("page")
             client_row_id = payload.get("client_row_id")
 
-            # 🟢 MODIFIED: Fetch the LIST of connection IDs
+            # Fetch the LIST of connection IDs
             connection_ids = ws_connections_table.get_connection_ids(user_id)
 
             stream_manager = None
             if connection_ids:
-                # 🟢 MODIFIED: Pass the list to StreamManager
                 stream_manager = StreamManager(connection_ids, api_gateway_client)
 
             intent = "chat" 
@@ -179,7 +182,6 @@ def lambda_handler(event, context):
                         "intent": intent  
                     })
                     
-                    # 🟢 MODIFIED: Loop through connections
                     for conn_id in connection_ids:
                         try:
                             api_gateway_client.post_to_connection(ConnectionId=conn_id, Data=status_payload)
@@ -226,7 +228,6 @@ def lambda_handler(event, context):
             )
 
             if connection_ids and not is_hidden:
-                # 🟢 MODIFIED: Loop through connections
                 for conn_id in connection_ids:
                     try:
                         response_payload = json.dumps({
@@ -289,7 +290,6 @@ def lambda_handler(event, context):
                 fallback_msg = "**Señal nula. Vacío de sistema. Intenta luego.**"
                 
                 if connection_ids:
-                    # 🟢 MODIFIED: Loop through connections for errors
                     for conn_id in connection_ids:
                         try:
                             err_payload = json.dumps({
