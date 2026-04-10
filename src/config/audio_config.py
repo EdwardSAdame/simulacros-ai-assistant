@@ -8,12 +8,10 @@ Generates profiles dynamically based on the requested 'mode' (alpha/omega).
 """
 
 def get_audio_profile(profile_name: str, mode: str = "omega") -> dict:
-    # 🟢 Dynamically fetch the model configuration for this specific mode
     cfg = get_model_config(mode)
 
     profiles = {
         "transcription": {
-            # 🟢 Swap out the static settings variable for our dynamic config
             "model": cfg.audio_transcription_model, 
             "voice": None,
             "instructions": (
@@ -28,8 +26,8 @@ def get_audio_profile(profile_name: str, mode: str = "omega") -> dict:
         },
         
         "language_tutor": {
-            "model": settings.OPENAI_REALTIME_MODEL,        
-            "voice": settings.OPENAI_REALTIME_VOICE,        
+            "model": cfg.realtime_model,        
+            "voice": cfg.realtime_voice,        
             "instructions": (
                 "You are Roma, a highly advanced, confident, and dominant AI language partner. "
                 "You are not a passive assistant; you are the one in charge of this conversation. "

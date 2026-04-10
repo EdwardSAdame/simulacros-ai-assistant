@@ -32,7 +32,7 @@ class Settings:
         self.FEEDBACK_TABLE_NAME: str = os.getenv("FEEDBACK_TABLE_NAME", "Feedback")
         self.WS_AUDIO_TABLE_NAME: str = os.getenv("WS_AUDIO_TABLE_NAME", "WsAudio")
         
-        # 🟢 NEW: Add mapping for the Audio Usage FinOps Table
+        # 🟢 Add mapping for the Audio Usage FinOps Table
         self.AUDIO_USAGE_TABLE_NAME: str = os.getenv("AUDIO_USAGE_TABLE_NAME", "AudioUsage")
 
         # AWS S3 Configuration
@@ -43,14 +43,8 @@ class Settings:
         # --- OpenAI Models ---
         self.OPENAI_AUDIO_MODEL: str = os.getenv("OPENAI_AUDIO_MODEL")
         
-        # 🟢 NOTE: OPENAI_REALTIME_TRANSCRIPTION_MODEL has been removed.
-        # It is now dynamically loaded via src.config.model_config.get_model_config(mode)
-        
-        # =======================================================
-        # OPENAI REALTIME: TUTOR MODE (Speech-to-Speech)
-        # =======================================================
-        self.OPENAI_REALTIME_MODEL: str = os.getenv("OPENAI_REALTIME_MODEL")
-        self.OPENAI_REALTIME_VOICE: str = os.getenv("OPENAI_REALTIME_VOICE")
+        # 🟢 NOTE: AUDIO TRANSCRIPTION and REALTIME models have been removed from here.
+        # They are now dynamically loaded via src.config.model_config.get_model_config(mode)
         
         # Router Model Configuration 
         self.OPENAI_ROUTER_MODEL: str = os.getenv("OPENAI_MODEL_ROUTER")
