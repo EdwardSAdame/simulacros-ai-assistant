@@ -125,4 +125,4 @@ class StreamManager:
             "action": "usage_metrics_stream",
             "usage": usage_data
         }
-        self._send(payload)
+        self._send(payload) 
