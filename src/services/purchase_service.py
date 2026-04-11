@@ -15,7 +15,8 @@ def process_purchase_webhook(payload: Dict[str, Any]) -> Dict[str, Any]:
         logger.info("Received raw purchase payload for processing.")
 
         # Step 1: Unwrap the Wix data block safely
-        data = payload.get("data", {})
+        # FIX APPLIED HERE: If "data" is missing, use the whole payload
+        data = payload.get("data", payload) 
         contact = data.get("contact", {})
 
         # Step 2: Extract identity and contact fields
