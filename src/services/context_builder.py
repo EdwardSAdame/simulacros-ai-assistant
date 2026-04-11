@@ -3,6 +3,9 @@ import logging
 from typing import List, Optional
 from src.utils.time_utils import get_current_time_info, infer_target_semester
 
+# 🟢 NEW IMPORT: This connects to your DynamoDB table
+from src.storage.purchase_table import get_latest_active_subscription 
+
 logger = logging.getLogger(__name__)
 
 def build_runtime_context(
@@ -14,7 +17,8 @@ def build_runtime_context(
 ) -> List[str]:
     """
     Constructs the dynamic 'Runtime Signals' list injected into the System Prompt.
-    Handles logic for time, target semester, and natural language personalization.
+    Handles logic for time, target semester, natural language personalization,
+    and user subscription status.
     """
     try:
         # 1. Calculate Temporal Context
@@ -49,8 +53,6 @@ def build_runtime_context(
             if clean_name.lower() in ["guest", "visitor", "user", "anonymous", "undefined"]:
                 signals.append("User Identity: The user is anonymous. Do NOT refer to them as 'Guest'.")
             else:
-                # 🟢 LOGIC: Give the AI the full name but instruct it to be smart.
-                # It handles "EdwardAdame" -> "Edward", "123User" -> Ignore, etc.
                 signals.append(
                     f"User Identity: The user's name is '{clean_name}'. "
                     "Use it ONLY if it is a valid human name. If it is numbers, gibberish, or a handle, ignore it. "
@@ -58,6 +60,27 @@ def build_runtime_context(
                 )
         else:
             signals.append("User Identity: The user is anonymous. Do NOT refer to them as 'Guest'.")
+
+        # 🟢 6. SUBSCRIPTION AWARENESS HYDRATION
+        # This is where we extract the data from your DynamoDB table!
+        if user_id:
+            try:
+                subscription = get_latest_active_subscription(user_id)
+                if subscription:
+                    plan_name = subscription.get("PlanName", "Premium")
+                    end_date = subscription.get("EndDate", "Unknown")
+                    # Tell the AI exactly what plan they have and when it expires
+                    signals.append(
+                        f"Subscription Status: The user has an active premium subscription called '{plan_name}'. "
+                        f"If they ask, their subscription is valid until {end_date}."
+                    )
+                else:
+                    signals.append("Subscription Status: The user is on the Free Tier.")
+            except Exception as e:
+                logger.error(f"Failed to hydrate subscription context: {e}")
+                signals.append("Subscription Status: Unknown.")
+        else:
+            signals.append("Subscription Status: Anonymous User.")
 
         return signals
 
