@@ -1,7 +1,7 @@
 import logging
 from datetime import datetime
 from typing import Dict, Any
-from src.storage.purchase_table import store_purchase
+from src.storage.purchase_table import store_purchase, get_latest_active_subscription
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
@@ -15,7 +15,6 @@ def process_purchase_webhook(payload: Dict[str, Any]) -> Dict[str, Any]:
         logger.info("Received raw purchase payload for processing.")
 
         # Step 1: Unwrap the Wix data block safely
-        # FIX APPLIED HERE: If "data" is missing, use the whole payload
         data = payload.get("data", payload) 
         contact = data.get("contact", {})
 
@@ -70,3 +69,41 @@ def process_purchase_webhook(payload: Dict[str, Any]) -> Dict[str, Any]:
             "statusCode": 500, 
             "message": "Failed to process purchase webhook"
         }
+
+def is_user_paid(user_id: str) -> bool:
+    """
+    Evaluates if a user currently has an active, unexpired subscription.
+    """
+    if not user_id or user_id == "anonymous":
+        return False
+        
+    latest_purchase = get_latest_active_subscription(user_id)
+    
+    if not latest_purchase:
+        return False
+        
+    end_date_str = latest_purchase.get("EndDate")
+    
+    # If there's a purchase but no end date, we treat it as a lifetime active plan
+    # Adjust this logic if your Wix plans ALWAYS have an end date.
+    if not end_date_str:
+        return True 
+        
+    try:
+        # Clean the string to handle ISO formats cleanly
+        end_date_clean = end_date_str.replace("Z", "+00:00")
+        end_date = datetime.fromisoformat(end_date_clean)
+        
+        # Strip timezone info for a safe UTC comparison
+        end_date_utc = end_date.replace(tzinfo=None)
+        current_time_utc = datetime.utcnow()
+        
+        is_active = current_time_utc < end_date_utc
+        
+        logger.info(f"User {user_id} paid status: {is_active} (Expires: {end_date_utc})")
+        return is_active
+        
+    except ValueError as e:
+        logger.error(f"Failed to parse EndDate '{end_date_str}' for user {user_id}: {e}")
+        # Default to false if we cannot verify the expiration securely
+        return False

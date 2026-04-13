@@ -6,6 +6,8 @@ import os
 import uuid
 
 from src.utils.logging_utils import log_event, set_invocation_context
+# --- NEW: Import the purchase service ---
+from src.services.purchase_service import is_user_paid
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
@@ -31,7 +33,6 @@ def lambda_handler(event, context):
 
         meta = body.get("meta", {})
         
-        # 🟢 THE FIX: Safely extract numbers, respecting '0' as a valid value!
         audio_duration = body.get("audioDurationSeconds") if body.get("audioDurationSeconds") is not None else meta.get("audioDurationSeconds")
         sts_in_text = body.get("stsInputText") if body.get("stsInputText") is not None else meta.get("stsInputText")
         sts_in_audio = body.get("stsInputAudio") if body.get("stsInputAudio") is not None else meta.get("stsInputAudio")
@@ -70,6 +71,14 @@ def lambda_handler(event, context):
         if not isinstance(image_urls, list): image_urls = []
         if not isinstance(pdf_urls, list): pdf_urls = []
         if not isinstance(media_items, list): media_items = []
+
+        # --- NEW: Secure the AI Mode ---
+        # Prevent non-paid users from forcing alpha mode via API manipulation
+        if ai_mode == "alpha":
+            is_paid = is_user_paid(user_id)
+            if not is_paid:
+                log_event("unauthorized_mode_access", {"user_id": user_id, "requested_mode": "alpha"}, level="warning")
+                ai_mode = "omega" # Force fallback to omega
 
         if not message and not image_urls and not pdf_urls and not media_items and audio_duration is None and sts_in_text is None and sts_in_audio is None:
             log_event("input_validation_failed", {"reason": "Missing message or media"}, level="warning")
