@@ -1,5 +1,5 @@
 import logging
-from datetime import datetime
+from datetime import datetime, timedelta
 from typing import Dict, Any
 from src.storage.purchase_table import store_purchase, get_latest_active_subscription
 
@@ -8,8 +8,8 @@ logger.setLevel(logging.INFO)
 
 def process_purchase_webhook(payload: Dict[str, Any]) -> Dict[str, Any]:
     """
-    Extracts and normalizes purchase data from the Wix webhook payload.
-    Validates required fields and delegates storage to the database layer.
+    Extracts purchase data, generates precise timestamps, and mathematically
+    calculates expiration times down to the exact second.
     """
     try:
         logger.info("Received raw purchase payload for processing.")
@@ -18,37 +18,52 @@ def process_purchase_webhook(payload: Dict[str, Any]) -> Dict[str, Any]:
         data = payload.get("data", payload) 
         contact = data.get("contact", {})
 
-        # Step 2: Extract identity and contact fields
-        user_id = contact.get("contactId")
+        # Step 2: Extract identity (Prioritize Member ID over Contact ID)
+        user_id = data.get("memberId") or contact.get("memberId") or contact.get("contactId")
         email = contact.get("email") or data.get("site_email", "")
 
         # Step 3: Extract plan details
         plan_name = data.get("plan_title", "Unknown")
-        
         plan_price_data = data.get("plan_price", {})
         price = float(plan_price_data.get("value", "0.0"))
         currency = plan_price_data.get("currency", "COP")
-
         order_id = data.get("plan_order_id")
-        start_date = data.get("plan_start_date", "")
-        end_date = data.get("plan_valid_until", "")
         
-        timestamp = datetime.utcnow().isoformat()
+        # ========================================================
+        # 🟢 NEW EXACT TIMING LOGIC
+        # ========================================================
+        
+        # 1. Grab the exact current UTC time down to the microsecond
+        now_utc = datetime.utcnow()
+        exact_start_timestamp = now_utc.isoformat() + "Z"
+        
+        # 2. Determine the duration mathematically based on the plan name
+        plan_name_lower = plan_name.lower()
+        if "year" in plan_name_lower or "anual" in plan_name_lower or "año" in plan_name_lower:
+            days_to_add = 365
+        else:
+            days_to_add = 30 # Default to exactly 30 days for monthly plans
+            
+        # 3. Add the exact days to the current exact time
+        exact_end_utc = now_utc + timedelta(days=days_to_add)
+        calculated_end_date_str = exact_end_utc.isoformat() + "Z"
+        
+        # ========================================================
 
         # Step 4: Validate essential fields
         if not user_id or not order_id:
             logger.warning(f"Missing essential fields. UserId: {user_id}, OrderId: {order_id}")
-            raise ValueError("Missing required fields: contactId or plan_order_id")
+            raise ValueError("Missing required fields: UserId or plan_order_id")
 
-        # Step 5: Package the data to perfectly match our DynamoDB schema
+        # Step 5: Package the data with our new precise timing
         purchase_data = {
             "UserId": user_id,
-            "Timestamp": timestamp,
+            "Timestamp": exact_start_timestamp,
             "Email": email,
             "PlanName": plan_name,
             "OrderId": order_id,
-            "StartDate": start_date,
-            "EndDate": end_date,
+            "StartDate": exact_start_timestamp, # Discard Wix's sloppy start date
+            "EndDate": calculated_end_date_str, # Discard Wix's sloppy end date
             "Price": price,
             "Currency": currency,
             "Source": "wix_pricing_plans"
@@ -57,7 +72,7 @@ def process_purchase_webhook(payload: Dict[str, Any]) -> Dict[str, Any]:
         # Step 6: Hand off to the storage layer
         store_purchase(purchase_data)
         
-        logger.info(f"Purchase successfully processed and stored for user: {user_id}")
+        logger.info(f"Purchase successfully processed and stored for user: {user_id}. Precision Expiration: {calculated_end_date_str}")
         return {
             "statusCode": 200, 
             "message": f"Purchase recorded successfully for user {user_id}"
@@ -72,7 +87,8 @@ def process_purchase_webhook(payload: Dict[str, Any]) -> Dict[str, Any]:
 
 def is_user_paid(user_id: str) -> bool:
     """
-    Evaluates if a user currently has an active, unexpired subscription.
+    Evaluates if a user currently has an active subscription using
+    strict UTC time comparisons down to the microsecond.
     """
     if not user_id or user_id == "anonymous":
         return False
@@ -84,13 +100,12 @@ def is_user_paid(user_id: str) -> bool:
         
     end_date_str = latest_purchase.get("EndDate")
     
-    # If there's a purchase but no end date, we treat it as a lifetime active plan
-    # Adjust this logic if your Wix plans ALWAYS have an end date.
     if not end_date_str:
         return True 
         
     try:
-        # Clean the string to handle ISO formats cleanly
+        # Because we now generate perfect ISO strings in the webhook,
+        # we can revert to this clean, lightning-fast parser.
         end_date_clean = end_date_str.replace("Z", "+00:00")
         end_date = datetime.fromisoformat(end_date_clean)
         
@@ -105,5 +120,4 @@ def is_user_paid(user_id: str) -> bool:
         
     except ValueError as e:
         logger.error(f"Failed to parse EndDate '{end_date_str}' for user {user_id}: {e}")
-        # Default to false if we cannot verify the expiration securely
         return False
