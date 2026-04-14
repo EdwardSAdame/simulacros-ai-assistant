@@ -1,5 +1,6 @@
 # src/services/semantic_router.py
 import logging
+import random
 from typing import List, Literal
 from pydantic import BaseModel, Field
 from src.config.settings import settings, get_openai_client
@@ -12,7 +13,7 @@ class RouterResponse(BaseModel):
     category: str = Field(description="The academic category or subject of the query.")
     intent: Literal["chat", "quiz", "creative_image", "admission_stats"] = Field(description="The primary intent of the user.")
     requires_visuals: bool = Field(description="True if the user is asking for graphs, charts, or visual analysis.")
-    num_questions: int = Field(description="The number of questions requested if the intent is 'quiz'. 0 otherwise.")
+    num_questions: int = Field(description="The number of questions requested if the intent is 'quiz'. Return 0 if the user does not specify a number.")
     loading_phrases: List[str] = Field(description="2 to 3 engaging loading phrases in Spanish relevant to the query.")
 
 class SemanticRouter:
@@ -136,8 +137,8 @@ class SemanticRouter:
                         user_id=user_id, 
                         conversation_id=conversation_id, 
                         source="router",                 
-                        tier="router",        # 🟢 FIX: Set tier explicitly to "router"
-                        engine=router_model,  # 🟢 FIX: Log the actual model used (e.g. gpt-4o-mini)
+                        tier="router",        
+                        engine=router_model,  
                         input_tokens=input_val, 
                         output_tokens=output_val, 
                         total_tokens=total_val,
@@ -165,9 +166,11 @@ class SemanticRouter:
             if intent != "quiz":
                 num_questions = 0
             else:
-                num_questions = data.get("num_questions", 5)
-                if num_questions < 1: num_questions = 5
-                elif num_questions > 30: num_questions = 30
+                num_questions = data.get("num_questions", 0)
+                if num_questions < 1: 
+                    num_questions = random.randint(5, 7)
+                elif num_questions > 30: 
+                    num_questions = 30
                 
             phrases = data.get("loading_phrases", [])
             if not phrases:

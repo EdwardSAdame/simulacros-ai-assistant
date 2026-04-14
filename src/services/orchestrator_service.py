@@ -5,7 +5,7 @@ from typing import Dict, Any, Tuple, List
 from src.utils.logging_utils import log_event
 from src.assistant.image_handler import format_image_urls_for_openai
 from src.services.context_resolution import determine_exam_context
-from src.config.model_config import get_model_config # 🟢 NEW: Import model config for true engine name
+from src.config.model_config import get_model_config 
 
 # State Management
 from src.services.conversation_service import ConversationService
@@ -46,7 +46,7 @@ class OrchestratorService:
         stream_manager: Any | None = None,
         arena_id: str | None = None,
         is_hidden: bool = False,
-        num_questions: int = 5
+        num_questions: int = 0
     ) -> Tuple[str, str, str, Dict | None]:
         
         # 1. Normalize Media
@@ -114,7 +114,8 @@ class OrchestratorService:
                     stream_manager=stream_manager, 
                     category=category, 
                     clean_pdfs=clean_pdfs,
-                    actual_conversation_id=actual_conversation_id
+                    actual_conversation_id=actual_conversation_id,
+                    num_questions=num_questions
                 )
                 
             elif intent == "creative_image":
@@ -129,10 +130,8 @@ class OrchestratorService:
                     conversation_id=actual_conversation_id 
                 )
                 
-                # 🟢 NEW: Save the text model's tokens to the TokenUsageTable
                 if token_usage:
                     try:
-                        # 🟢 EXTRACT ACTUAL ENGINE
                         active_config = get_model_config(mode)
                         engine_name = active_config.model
 
@@ -140,8 +139,8 @@ class OrchestratorService:
                             user_id=user_id or "anonymous",
                             conversation_id=actual_conversation_id, 
                             source="creative_image",                
-                            tier=mode,           # 🟢 FIX: Pass abstract tier
-                            engine=engine_name,  # 🟢 FIX: Pass explicit engine
+                            tier=mode,           
+                            engine=engine_name,  
                             input_tokens=token_usage.get("input_tokens", 0),
                             output_tokens=token_usage.get("output_tokens", 0),
                             total_tokens=token_usage.get("total_tokens", 0)
