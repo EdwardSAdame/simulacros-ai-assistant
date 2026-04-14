@@ -9,7 +9,8 @@ from src.storage.conversations_table import (
     get_conversation_metadata,
     update_conversation_last_active,
     update_conversation_mode,
-    update_conversation_exam_context
+    update_conversation_exam_context,
+    get_latest_conversation_for_user # NEW: Added import for global user context retrieval
 )
 from src.storage.messages_table import save_message
 from src.storage.arenas_table import update_arena_last_active
@@ -58,7 +59,6 @@ class ConversationService:
         actual_conversation_id = conversation_id
         should_create_new = True
         
-        # 🟢 STICKY RATCHET LOGIC
         final_exam_context = str(exam_context).upper()
         persisted_exam_context = None
 
@@ -80,10 +80,22 @@ class ConversationService:
                     if not arena_id and existing_meta.get("ArenaId"):
                         arena_id = existing_meta.get("ArenaId")
 
-                    # 🟢 THE LOCK: Reject downgrade from specific exam to GENERAL
-                    specific_exams = ["UNAL", "ICFES"]
-                    if persisted_exam_context in specific_exams and final_exam_context not in specific_exams:
-                        final_exam_context = persisted_exam_context
+        # NEW: Global User-Level Context Inheritance
+        # If this is a brand new session, query the database for the user's most recent conversation state
+        if should_create_new and user_id and user_id != "anonymous":
+            try:
+                latest_meta = get_latest_conversation_for_user(user_id)
+                if latest_meta:
+                    persisted_exam_context = str(latest_meta.get("ExamContext", "")).upper()
+                    logger.info(f"Inheriting global exam context {persisted_exam_context} for new conversation.")
+            except Exception as e:
+                logger.warning(f"Could not retrieve latest user conversation for context inheritance: {e}")
+
+        # THE LOCK: Reject downgrade from specific exam to GENERAL
+        # This applies whether the persisted context came from an existing conversation or inherited from a previous one
+        specific_exams = ["UNAL", "ICFES"]
+        if persisted_exam_context in specific_exams and final_exam_context not in specific_exams:
+            final_exam_context = persisted_exam_context
 
         try:
             if should_create_new:
@@ -96,7 +108,7 @@ class ConversationService:
                     conversation_id=actual_conversation_id,
                     arena_id=arena_id,
                     ai_mode=mode,
-                    exam_context=final_exam_context  # Save the locked one
+                    exam_context=final_exam_context  # Save the resolved lock
                 )
                 actual_conversation_id = conversation_data["ConversationId"]
             else:
@@ -114,7 +126,6 @@ class ConversationService:
             logger.error(f"Failed to save/reuse conversation: {e}")
             raise RuntimeError(f"Failed to save/reuse conversation: {e}")
 
-        # Return the locked context to the Orchestrator
         return actual_conversation_id, final_exam_context
 
     @classmethod
@@ -151,9 +162,8 @@ class ConversationService:
         """Saves the AI's response to the database and returns the generated timestamp."""
         safe_reply_text = final_reply_text.strip() if final_reply_text else "\u200b"
 
-        # Edge case: If there is no text but there are generated assets, label it cleanly
         if safe_reply_text == "\u200b" and not (meta_payload and meta_payload.get("assets")):
-             safe_reply_text = "[Generación completada sin texto]"
+             safe_reply_text = "[Generacion completada sin texto]"
 
         assistant_timestamp = ""
         try:

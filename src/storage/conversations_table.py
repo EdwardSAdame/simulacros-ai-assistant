@@ -58,7 +58,7 @@ def save_conversation(
     arena_id: Optional[str] = None,        # Link to an Arena
     ai_mode: str = "omega",                # Persist the selected mode
     channel: str = "text",                 # Distinguish text vs voice chats
-    exam_context: str = "GENERAL"          # 🔹 NEW: Persist the locked exam intent
+    exam_context: str = "GENERAL"          # NEW: Persist the locked exam intent
 ) -> Dict[str, Any]:
     """
     Creates a new conversation record in DynamoDB.
@@ -73,7 +73,7 @@ def save_conversation(
         
     timestamp = datetime.utcnow().isoformat()
 
-    # CRITICAL: Ensure Name has a fallback if it's None or Empty
+    # CRITICAL: Ensure Name has a fallback if it is None or Empty
     safe_name = name.strip() if name and name.strip() else "Guest"
 
     item = {
@@ -89,7 +89,7 @@ def save_conversation(
         "LastUpdated": timestamp, # Initialize LastUpdated same as creation
         "AiMode": ai_mode,        # Save the mode
         "Channel": channel,       # Save the channel (text, voice)
-        "ExamContext": exam_context # 🔹 NEW: Save the exam lock state
+        "ExamContext": exam_context # NEW: Save the exam lock state
     }
 
     # Clean up (removes empty email, empty arena_id, etc.)
@@ -114,7 +114,7 @@ def save_conversation(
 
 def update_conversation_last_active(user_id: str, conversation_id: str):
     """
-    Updates the 'LastUpdated' field to the current time.
+    Updates the LastUpdated field to the current time.
     Call this whenever a new message is sent.
     """
     timestamp = _find_conversation_timestamp(user_id, conversation_id)
@@ -150,7 +150,7 @@ def get_conversations_for_user(
         '#n': 'Name'
     }
     
-    # 🔹 Added ExamContext to the projection expression
+    # Added ExamContext to the projection expression
     projection_expression = "ConversationId, Title, #ts, IsPinned, #n, Page, ArenaId, LastUpdated, AiMode, Channel, ExamContext"
 
     try:
@@ -163,7 +163,7 @@ def get_conversations_for_user(
         )
         items = response.get("Items", [])
 
-        # MANUAL SORT: Re-sort by 'LastUpdated' (fallback to 'Timestamp')
+        # MANUAL SORT: Re-sort by LastUpdated (fallback to Timestamp)
         def get_sort_key(x):
             return x.get('LastUpdated', x.get('Timestamp', ''))
 
@@ -176,6 +176,17 @@ def get_conversations_for_user(
     except Exception as e:
         print(f"Error fetching conversations for {user_id}: {e}")
         return []
+
+def get_latest_conversation_for_user(user_id: str) -> Optional[Dict[str, Any]]:
+    """
+    NEW: Fetches the most recent conversation for a user.
+    Used to inherit the global ExamContext when starting a new session.
+    """
+    # Fetch a small batch of recent conversations and return the top one (most recently active)
+    recent_conversations = get_conversations_for_user(user_id, limit=5, ascending=False)
+    if recent_conversations:
+        return recent_conversations[0]
+    return None
 
 # --- MANAGEMENT FUNCTIONS ---
 
@@ -267,7 +278,6 @@ def update_conversation_mode(user_id: str, conversation_id: str, new_mode: str):
         print(f"Error updating AiMode for {conversation_id}: {e}")
         return False
 
-# 🔹 NEW FUNCTION: Allows updating the ExamContext mid-conversation to lock it
 def update_conversation_exam_context(user_id: str, conversation_id: str, new_exam_context: str):
     """
     Updates the ExamContext (intent lock) for an existing conversation.
