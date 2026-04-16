@@ -191,7 +191,6 @@ class QuizService:
         
         topic_hint = category if category else "General Knowledge"
         
-        # Purely rely on the router's parsing; fallback if not provided
         if num_questions < 1:
             num_questions = random.randint(5, 7)
 
@@ -209,13 +208,21 @@ class QuizService:
         is_general_subject = "general" in topic_lower
         is_visual_subject = any(subj in topic_lower for subj in visual_subjects_list)
         is_creative_subject = any(subj in topic_lower for subj in creative_categories)
+        is_analisis_imagen = "analisis_imagen" in topic_lower
+        
         requires_creative_images = is_creative_subject or is_general_subject
 
         max_visuals = 0
         target_visuals = 0
         target_indices = []
 
-        if is_general_subject or is_visual_subject or is_creative_subject:
+        if is_analisis_imagen:
+            # Enforce 100 percent visuals for analisis_imagen
+            max_visuals = num_questions
+            target_visuals = num_questions
+            target_indices = list(range(num_questions))
+        elif is_general_subject or is_visual_subject or is_creative_subject:
+            # Apply standard 40 percent randomizer for other visual or creative subjects
             max_visuals = math.floor(num_questions * 0.4)
             target_visuals = random.randint(0, max_visuals) if max_visuals > 0 else 0
             if target_visuals > 0:
@@ -226,6 +233,7 @@ class QuizService:
             "is_general_subject": is_general_subject,
             "is_visual_subject": is_visual_subject,
             "is_creative_subject": is_creative_subject,
+            "is_analisis_imagen": is_analisis_imagen,
             "num_questions_requested": num_questions,
             "max_allowed_visuals": max_visuals, 
             "target_visuals_enforced": target_visuals,
