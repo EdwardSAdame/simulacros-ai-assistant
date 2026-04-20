@@ -170,6 +170,8 @@ def lambda_handler(event, context):
                     client_action = None
                     if intent == "quiz":
                         client_action = "OPEN_QUIZ_PANEL"
+                    elif intent == "mentalmap":
+                        client_action = "OPEN_MENTAL_MAP_PANEL"
 
                     status_payload = json.dumps({
                         "action": "status_update",

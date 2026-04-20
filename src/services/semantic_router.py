@@ -11,7 +11,7 @@ logger = logging.getLogger(__name__)
 
 class RouterResponse(BaseModel):
     category: str = Field(description="The academic category or subject of the query.")
-    intent: Literal["chat", "quiz", "creative_image", "admission_stats"] = Field(description="The primary intent of the user.")
+    intent: Literal["chat", "quiz", "creative_image", "admission_stats", "mentalMap"] = Field(description="The primary intent of the user. Use 'mentalMap' if the user asks for a mind map, conceptual map, or structural diagram of a topic.")
     requires_visuals: bool = Field(description="True if the user is asking for graphs, charts, or visual analysis.")
     num_questions: int = Field(description="The number of questions requested if the intent is 'quiz'. Return 0 if the user does not specify a number.")
     loading_phrases: List[str] = Field(description="2 to 3 engaging loading phrases in Spanish relevant to the query.")
@@ -153,8 +153,15 @@ class SemanticRouter:
             category = data.get("category", "general").lower()
             if category not in self.valid_categories: category = "general"
 
-            intent = data.get("intent", "chat").lower().strip()
-            if intent not in ["quiz", "chat", "creative_image", "admission_stats"]: 
+            raw_intent = data.get("intent", "chat").strip()
+            intent_lower = raw_intent.lower()
+            
+            # Safe parsing for mentalMap intent
+            if intent_lower in ["mentalmap", "mental_map"]:
+                intent = "mentalMap"
+            elif intent_lower in ["quiz", "chat", "creative_image", "admission_stats"]: 
+                intent = intent_lower
+            else:
                 intent = "chat"
 
             requires_visuals = data.get("requires_visuals", False)
@@ -176,7 +183,7 @@ class SemanticRouter:
             if not phrases:
                 phrases = ["Procesando...", "Analizando..."]
 
-            logger.info(f"Router: AI classified as '{category}' in context '{exam_context}'")
+            logger.info(f"Router: AI classified as '{category}' with intent '{intent}' in context '{exam_context}'")
             return {
                 "category": category, 
                 "intent": intent, 

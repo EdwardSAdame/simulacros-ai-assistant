@@ -1,5 +1,3 @@
-# src/config/router_instructions.py
-
 """
 Configuration module for semantic router instructions.
 Contains the dynamic system prompt used by the LLM to classify user intents based on the active exam context.
@@ -37,6 +35,7 @@ CRITICAL CATEGORY RULES:
 - "quiz": User EXPLICITLY wants to take a test, exam, simulacro, or practice questions. Do NOT use this for general statements about studying or preparing.
 - "creative_image": User wants to generate an artistic or fictional image.
 - "admission_stats": User wants university admission cutoff scores or data.
+- "mentalMap": User EXPLICITLY asks to create, draw, or generate a mind map, conceptual map, structural diagram, or visual hierarchy of a topic.
 - "chat": Standard conversational inquiries, greetings, explanations, analytical plotting, or general statements about preparing/studying.
 
 3. Visuals (requires_visuals): 
