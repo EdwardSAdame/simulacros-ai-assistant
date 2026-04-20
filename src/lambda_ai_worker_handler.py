@@ -3,7 +3,6 @@ import json
 import logging
 import boto3
 import os
-import uuid
 from datetime import datetime, timezone
 
 from src.services.orchestrator_service import OrchestratorService
@@ -14,9 +13,6 @@ from src.services.semantic_router import semantic_router
 from src.services.token_usage_service import TokenUsageService
 from src.services.context_resolution import determine_exam_context
 from src.storage.conversations_table import get_conversation_metadata
-
-# 🟢 NEW: Import the Mind Map Service
-from src.services.mindmap_service import mindmap_service
 
 # For Audio FinOps
 from src.services.audio_usage_service import AudioUsageService
@@ -90,7 +86,6 @@ def lambda_handler(event, context):
                     session_str = conv_id_in or "unknown"
                     uid_str = user_id or "anonymous"
                     
-                    # Dynamically fetch the realtime engine based on the tier
                     cfg = get_model_config(ai_mode)
                     realtime_engine = getattr(cfg, 'realtime_model', 'gpt-4o-realtime')
                     
@@ -130,7 +125,6 @@ def lambda_handler(event, context):
             page = payload.get("page")
             client_row_id = payload.get("client_row_id")
 
-            # Fetch the LIST of connection IDs
             connection_ids = ws_connections_table.get_connection_ids(user_id)
 
             stream_manager = None
@@ -175,7 +169,7 @@ def lambda_handler(event, context):
                     client_action = None
                     if intent == "quiz":
                         client_action = "OPEN_QUIZ_PANEL"
-                    elif intent == "mentalmap":
+                    elif intent == "mentalmap" or intent == "mind_map":
                         client_action = "OPEN_MENTAL_MAP_PANEL"
 
                     status_payload = json.dumps({
@@ -214,47 +208,26 @@ def lambda_handler(event, context):
                 except Exception as e:
                     log_event("ws_status_send_failed", {"user_id": user_id}, level="warning", error=e)
 
-            # 🟢 NEW: Intercept Mental Map to bypass standard Chat Orchestration
-            if intent == "mentalmap":
-                conversation_id = conv_id_in or f"conv_{uuid.uuid4().hex[:8]}"
-                assistant_timestamp = datetime.now(timezone.utc).isoformat()
-                
-                try:
-                    map_data = mindmap_service.generate_mindmap(
-                        topic=message,
-                        user_id=user_id,
-                        conversation_id=conversation_id,
-                        exam_context=current_exam_context,
-                        mode=ai_mode  # 🟢 FIX: Pass the dynamic ai_mode here!
-                    )
-                    # Assign a type so the frontend recognizes it as mindmap data
-                    map_data["type"] = "mindmap_data"
-                    meta_payload = map_data
-                    ai_reply = "He analizado el tema y estructurado sus conceptos clave. Puedes explorar el mapa mental en el panel interactivo."
-                except Exception as mm_err:
-                    logger.error(f"Mindmap generation failed: {mm_err}")
-                    ai_reply = f"No pude generar el mapa mental en este momento: {str(mm_err)}"
-                    meta_payload = None
-            else:
-                ai_reply, conversation_id, assistant_timestamp, meta_payload = OrchestratorService.process_ai_request(
-                    message=message,
-                    user_id=user_id,
-                    name=name,
-                    email=email,
-                    page=page,
-                    conversation_id=conv_id_in,
-                    image_urls=image_urls,
-                    pdf_urls=pdf_urls,
-                    media_items=media_items, 
-                    mode=ai_mode,
-                    intent=intent,
-                    category=category_key, 
-                    requires_visuals=requires_visuals, 
-                    stream_manager=stream_manager,
-                    arena_id=arena_id,
-                    is_hidden=is_hidden, 
-                    num_questions=num_questions
-                )
+            # 🟢 FIX: Everything naturally flows to the Orchestrator, which saves it to the database!
+            ai_reply, conversation_id, assistant_timestamp, meta_payload = OrchestratorService.process_ai_request(
+                message=message,
+                user_id=user_id,
+                name=name,
+                email=email,
+                page=page,
+                conversation_id=conv_id_in,
+                image_urls=image_urls,
+                pdf_urls=pdf_urls,
+                media_items=media_items, 
+                mode=ai_mode,
+                intent=intent,
+                category=category_key, 
+                requires_visuals=requires_visuals, 
+                stream_manager=stream_manager,
+                arena_id=arena_id,
+                is_hidden=is_hidden, 
+                num_questions=num_questions
+            )
 
             if connection_ids and not is_hidden:
                 for conn_id in connection_ids:
@@ -279,7 +252,6 @@ def lambda_handler(event, context):
                                 action_type = "rich_content_update"
                             elif meta_payload.get("quiz_mode") or meta_payload.get("questions"):
                                 action_type = "quiz_data_update"
-                            # 🟢 NEW: Route the exact Mind Map Data payload to the WebSocket
                             elif meta_payload.get("type") == "mindmap_data":
                                 action_type = "mindmap_data_update"
 

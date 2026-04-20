@@ -18,6 +18,9 @@ from src.services.quiz_service import QuizService
 from src.services.creative_image_service import CreativeImageService
 from src.services.admission_chat_service import AdmissionChatService
 
+# 🟢 NEW: Import Mind Map Service here
+from src.services.mindmap_service import mindmap_service
+
 logger = logging.getLogger(__name__)
 
 class OrchestratorService:
@@ -117,7 +120,20 @@ class OrchestratorService:
                     actual_conversation_id=actual_conversation_id,
                     num_questions=num_questions
                 )
-                
+            
+            # 🟢 FIX: Mind Map execution is now properly routed so it gets saved to DynamoDB!
+            elif intent == "mentalmap" or intent == "mind_map":
+                map_data = mindmap_service.generate_mindmap(
+                    topic=message,
+                    user_id=user_id,
+                    conversation_id=actual_conversation_id,
+                    exam_context=locked_exam_context,
+                    mode=mode 
+                )
+                map_data["type"] = "mindmap_data"
+                meta_payload = map_data
+                final_reply_text = "He analizado el tema y estructurado sus conceptos clave. Puedes explorar el mapa mental en el panel interactivo."
+
             elif intent == "creative_image":
                 final_reply_text, final_images_urls, token_usage = CreativeImageService.generate_image(
                     conversation_input=conversation_input, 
@@ -175,7 +191,7 @@ class OrchestratorService:
             final_reply_text = "**Error**: Ha ocurrido un error interno de sistema. Intenta de nuevo."
             log_event("orchestrator_failure", {"error": str(e)}, level="error")
 
-        # 7. Persist AI Response
+        # 7. Persist AI Response (THIS IS WHERE THE MIND MAP GETS SAVED!)
         assistant_timestamp = ConversationService.save_assistant_message(
             actual_conversation_id, final_reply_text, meta_payload
         )
