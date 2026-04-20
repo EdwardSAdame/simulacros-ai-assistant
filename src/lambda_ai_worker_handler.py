@@ -224,7 +224,8 @@ def lambda_handler(event, context):
                         topic=message,
                         user_id=user_id,
                         conversation_id=conversation_id,
-                        exam_context=current_exam_context
+                        exam_context=current_exam_context,
+                        mode=ai_mode  # 🟢 FIX: Pass the dynamic ai_mode here!
                     )
                     # Assign a type so the frontend recognizes it as mindmap data
                     map_data["type"] = "mindmap_data"

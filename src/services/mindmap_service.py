@@ -5,22 +5,30 @@ from src.schemas.mindmap_schemas import MindMapPayload
 from src.config.mindmap_instructions import build_mindmap_instructions
 from src.services.token_usage_service import TokenUsageService
 
+# 🟢 NEW: Import the dynamic model config
+from src.config.model_config import get_model_config
+
 logger = logging.getLogger(__name__)
 
 class MindMapService:
     def __init__(self):
         self.client = get_openai_client()
 
-    def generate_mindmap(self, topic: str, user_id: str, conversation_id: str, exam_context: str = "GENERAL") -> dict:
+    # 🟢 FIX: Added 'mode' parameter to accept alpha/omega
+    def generate_mindmap(self, topic: str, user_id: str, conversation_id: str, exam_context: str = "GENERAL", mode: str = "omega") -> dict:
         try:
+            # 🟢 FIX: Get the exact model engine for the active tier
+            cfg = get_model_config(mode)
+            target_model = cfg.model
+            
             # 1. Get the pedagogical instructions
             system_prompt = build_mindmap_instructions(exam_context)
             
-            logger.info(f"Generating mind map for topic: '{topic}' in context: '{exam_context}'")
+            logger.info(f"Generating mind map for topic: '{topic}' in context: '{exam_context}' using engine: {target_model}")
             
             # 2. Call OpenAI with Structured Outputs
             response = self.client.chat.completions.parse(
-                model=settings.OPENAI_CHAT_MODEL,
+                model=target_model, # 🟢 FIX: Using the dynamic model!
                 messages=[
                     {"role": "system", "content": system_prompt.strip()},
                     {"role": "user", "content": f"Create a highly structured academic mind map for the following topic: {topic}"}
@@ -49,8 +57,8 @@ class MindMapService:
                         user_id=user_id, 
                         conversation_id=conversation_id, 
                         source="mindmap_generator",                 
-                        tier="mindmap",        
-                        engine=settings.OPENAI_CHAT_MODEL,  
+                        tier=mode,         # 🟢 FIX: Log the actual tier
+                        engine=target_model, # 🟢 FIX: Log the actual model engine
                         input_tokens=getattr(usage, "prompt_tokens", 0), 
                         output_tokens=getattr(usage, "completion_tokens", 0), 
                         total_tokens=getattr(usage, "total_tokens", 0)
