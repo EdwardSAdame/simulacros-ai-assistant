@@ -23,6 +23,9 @@ class MindMapEdge(BaseModel):
     )
 
 class MindMapPayload(BaseModel):
+    title: str = Field(
+        description="A concise and highly accurate academic title for this specific mind map."
+    )
     nodes: List[MindMapNode] = Field(
         description="The list of concept boxes."
     )
