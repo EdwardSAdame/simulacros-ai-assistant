@@ -4,8 +4,6 @@ from src.config.settings import settings, get_openai_client
 from src.schemas.mindmap_schemas import MindMapPayload
 from src.config.mindmap_instructions import build_mindmap_instructions
 from src.services.token_usage_service import TokenUsageService
-
-# 🟢 NEW: Import the dynamic model config
 from src.config.model_config import get_model_config
 
 logger = logging.getLogger(__name__)
@@ -19,7 +17,6 @@ class MindMapService:
             cfg = get_model_config(mode)
             target_model = cfg.model
             
-            # 1. Get the pedagogical instructions
             system_prompt = build_mindmap_instructions(exam_context)
             
             logger.info(f"Generating mind map for topic: '{topic}' in context: '{exam_context}' using engine: {target_model}")
@@ -29,7 +26,6 @@ class MindMapService:
                 {"role": "user", "content": f"Create a highly structured academic mind map for the following topic: {topic}"}
             ]
 
-            # 2. Determine if it's a reasoning model to handle kwargs safely
             is_reasoning_model = (
                 target_model.startswith("o") and not target_model.startswith("gpt") 
                 or "reasoning" in target_model
@@ -38,7 +34,7 @@ class MindMapService:
             request_kwargs = {
                 "model": target_model,
                 "input": api_input,
-                "text_format": MindMapPayload, # Responses API uses text_format instead of response_format
+                "text_format": MindMapPayload,
             }
 
             if is_reasoning_model:
@@ -49,7 +45,6 @@ class MindMapService:
                 if cfg.top_p is not None:
                     request_kwargs["top_p"] = cfg.top_p
 
-            # 3. Call OpenAI Responses API with Structured Outputs
             response = self.client.responses.parse(**request_kwargs)
             
             parsed_data = None
@@ -66,7 +61,6 @@ class MindMapService:
             if not parsed_data:
                 raise ValueError("Failed to parse structured output from Responses API.")
             
-            # 4. Log Token Usage (Using Responses API structure)
             usage = getattr(response, "usage", None)
             if usage:
                 try:
@@ -92,7 +86,6 @@ class MindMapService:
                 except Exception as token_err:
                     logger.error(f"Failed to log mind map tokens: {token_err}")
 
-            # 5. Export dictionary using alias (CRITICAL: converts 'source' back to 'from')
             payload_dict = parsed_data.model_dump(by_alias=True) if hasattr(parsed_data, "model_dump") else parsed_data.dict(by_alias=True)
             
             return payload_dict
@@ -101,5 +94,4 @@ class MindMapService:
             logger.error(f"Error generating mind map: {e}")
             raise e
 
-# Singleton instance
 mindmap_service = MindMapService()
