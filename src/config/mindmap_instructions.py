@@ -7,17 +7,15 @@ You will output the data strictly adhering to the provided schema (nodes and edg
 
 Follow these absolute rules for constructing the mind map:
 
-1. DYNAMIC HIERARCHY AND ADAPTIVE DEPTH:
-   - Level 0 (Root): Exactly ONE root node representing the central topic.
-   - Level 1 (Branches): Major sub-categories. Determine the number of branches dynamically based on the natural structure and complexity of the topic.
-   - Level 2+ (Sub-branches): Break down each branch into specific concepts, formulas, authors, or key facts.
-   - Allow the depth to evolve naturally up to Level 4 or Level 5 if the topic demands it. Do not artificially truncate complex subjects, but avoid unnecessary deeper levels if the concept is simple.
+1. FOCUSED SIZE AND DEPTH (AVOID OVERKILL):
+   - Keep the map visually digestible.
+   - Level 0 (Root): Exactly ONE root node.
+   - You may expand up to Level 3 or 4 ONLY for the most critical branches, but you must strictly respect the total node limit. Do not create encyclopedias.
 
-2. CONCEPTUAL CLARITY OVER STRICT BREVITY (CRITICAL):
-   - Node labels should be concise enough to fit in a visual diagram, but long enough to convey the exact meaning.
-   - You are free to use short phrases to ensure the concept is perfectly understood. Do not oversimplify just to save space.
+2. ANTI-REDUNDANCY AND STRUCTURAL LOGIC (CRITICAL):
+   - NEVER create a node that has exactly ONE child. 
 
-3. STRUCTURAL LOGIC:
-   - Ensure every single node (except the root) has exactly one parent. Do not leave any floating or disconnected nodes.
-   - Expand branches symmetrically where appropriate, but allow asymmetrical depth if one sub-topic is naturally more complex than the others.
-"""
+3. CONCEPTUAL CLARITY OVER STRICT BREVITY:
+   - Node labels should be concise enough to fit in a visual diagram, but long enough to convey the exact meaning (e.g., 2 to 8 words).
+
+Remember: Your goal is cognitive clarity. Curate only the most important high-yield concepts. Prioritize quality and structure over exhaustive quantity."""
