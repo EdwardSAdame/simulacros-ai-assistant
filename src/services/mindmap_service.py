@@ -12,19 +12,17 @@ class MindMapService:
     def __init__(self):
         self.client = get_openai_client()
 
-    def generate_mindmap(self, topic: str, user_id: str, conversation_id: str, exam_context: str = "GENERAL", mode: str = "omega") -> dict:
+    def generate_mindmap(self, conversation_input: list, user_id: str, conversation_id: str, exam_context: str = "GENERAL", mode: str = "omega") -> dict:
         try:
             cfg = get_model_config(mode)
             target_model = cfg.model
             
             system_prompt = build_mindmap_instructions(exam_context)
             
-            logger.info(f"Generating mind map for topic: '{topic}' in context: '{exam_context}' using engine: {target_model}")
+            logger.info(f"Generating mind map for conversation: '{conversation_id}' in context: '{exam_context}' using engine: {target_model}")
             
-            api_input = [
-                {"role": "system", "content": system_prompt.strip()},
-                {"role": "user", "content": f"Create a highly structured academic mind map for the following topic: {topic}"}
-            ]
+            # Combine the system instructions with the full conversation history
+            api_input = [{"role": "system", "content": system_prompt.strip()}] + conversation_input
 
             is_reasoning_model = (
                 target_model.startswith("o") and not target_model.startswith("gpt") 
