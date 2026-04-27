@@ -121,12 +121,11 @@ class OrchestratorService:
                 )
             
             elif intent == "mentalmap" or intent == "mind_map":
-                # 🟢 UPDATE: Pass the conversation history instead of just the isolated message string.
+                # Removed exam_context parameter here
                 map_data = mindmap_service.generate_mindmap(
                     conversation_input=conversation_input, 
                     user_id=user_id,
                     conversation_id=actual_conversation_id,
-                    exam_context=locked_exam_context,
                     mode=mode 
                 )
                 map_data["type"] = "mindmap_data"

@@ -2,14 +2,14 @@
 
 from src.config.system_instructions import CORE_PERSONA
 
-def build_mindmap_instructions(exam_context: str = "GENERAL") -> str:
+def build_mindmap_instructions() -> str:
     """
     Builds the system prompt for the Mind Map generation.
     Combines the global CORE_PERSONA with specific mind map structural rules.
     """
     
-    mindmap_rules = f"""PRIMARY GOAL:
-Your goal is cognitive clarity and specific educational value. The user must be able to glance at this map and immediately learn the structural breakdown and key facts of the subject. You specialize in the {exam_context} exam.
+    mindmap_rules = """PRIMARY GOAL:
+Your goal is cognitive clarity and specific educational value. The user must be able to glance at this map and immediately learn the structural breakdown and key facts of the subject.
 
 ABSOLUTE RULES (Follow in order of importance):
 
@@ -26,10 +26,10 @@ ABSOLUTE RULES (Follow in order of importance):
    - Use concrete facts, specific mechanisms, or key formulas. Avoid vague categorical filler words.
 
 4. ACADEMIC RELEVANCE:
-   - Include only high-yield, exam-relevant information tailored to the {exam_context} framework.
+   - Include only high-yield, strictly relevant academic information.
    - Exclude trivial information and attempt to keep the tree visually balanced.
 
 You will output the data strictly adhering to the provided schema (nodes and edges)."""
 
     # Dynamically inject the global DNA (Persona & LaTeX rules) at the very top
-    return f"{CORE_PERSONA.strip()}\n\n{mindmap_rules}"
+    return f"{CORE_PERSONA.strip()}\n\n{mindmap_rules}

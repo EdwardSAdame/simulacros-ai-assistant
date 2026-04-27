@@ -12,14 +12,14 @@ class MindMapService:
     def __init__(self):
         self.client = get_openai_client()
 
-    def generate_mindmap(self, conversation_input: list, user_id: str, conversation_id: str, exam_context: str = "GENERAL", mode: str = "omega") -> dict:
+    def generate_mindmap(self, conversation_input: list, user_id: str, conversation_id: str, mode: str = "omega") -> dict:
         try:
             cfg = get_model_config(mode)
             target_model = cfg.model
             
-            system_prompt = build_mindmap_instructions(exam_context)
+            system_prompt = build_mindmap_instructions()
             
-            logger.info(f"Generating mind map for conversation: '{conversation_id}' in context: '{exam_context}' using engine: {target_model}")
+            logger.info(f"Generating mind map for conversation: '{conversation_id}' using engine: {target_model}")
             
             # Filter out any existing system prompts from the chat history
             filtered_conversation = [msg for msg in conversation_input if msg.get("role") != "system"]
