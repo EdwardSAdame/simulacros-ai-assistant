@@ -1,24 +1,16 @@
 # src/config/mindmap_instructions.py
 
 from src.config.system_instructions import CORE_PERSONA
-from src.config.exam_frameworks import get_mindmap_domain_framework
 
-def build_mindmap_instructions(exam_context: str = "GENERAL", category: str = "general") -> str:
+def build_mindmap_instructions(exam_context: str = "GENERAL") -> str:
     """
     Builds the system prompt for the Mind Map generation.
-    Combines the global CORE_PERSONA, specific syllabus topics, and structural rules.
+    Combines the global CORE_PERSONA with specific mind map structural rules.
     """
-    
-    # Surgically extract only the academic topics for this specific subject
-    domain_syllabus = get_mindmap_domain_framework(exam_context, category)
-    
-    syllabus_section = ""
-    if domain_syllabus:
-        syllabus_section = f"\nACADEMIC SYLLABUS & FOCUS:\nEnsure the mind map reflects the depth and specific topics outlined here:\n{domain_syllabus}\n"
     
     mindmap_rules = f"""PRIMARY GOAL:
 Your goal is cognitive clarity and specific educational value. The user must be able to glance at this map and immediately learn the structural breakdown and key facts of the subject. You specialize in the {exam_context} exam.
-{syllabus_section}
+
 ABSOLUTE RULES (Follow in order of importance):
 
 1. STRICT FORK RULE (ANTI-REDUNDANCY):

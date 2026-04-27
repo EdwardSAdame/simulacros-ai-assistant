@@ -125,15 +125,3 @@ def get_exam_framework(exam_context: str, category: str = "general", intent: str
             return ICFES_GLOBAL + "\n\n" + ICFES_DOMAINS[category]
             
     return GENERAL_FRAMEWORK.strip()
-
-def get_mindmap_domain_framework(exam_context: str, category: str) -> str:
-    """
-    Extracts purely the syllabus and domain focus for mind maps.
-    This safely ignores the global scoring rules and conversational distractors.
-    """
-    if exam_context == "UNAL" and category in UNAL_DOMAINS:
-        return UNAL_DOMAINS[category]
-    elif exam_context == "ICFES" and category in ICFES_DOMAINS:
-        return ICFES_DOMAINS[category]
-    
-    return ""
