@@ -7,7 +7,7 @@ class MindMapNode(BaseModel):
         description="A unique integer ID for the node. The root node should typically be ID 1."
     )
     label: str = Field(
-        description="The short text to display inside the box. Keep it concise (1-4 words max)."
+        description="The short text to display. Keep it concise."
     )
     level: int = Field(
         description="The hierarchy level. 0 for the central root topic, 1 for main branches, 2 for sub-branches, etc."
@@ -24,7 +24,7 @@ class MindMapEdge(BaseModel):
 
 class MindMapPayload(BaseModel):
     title: str = Field(
-        description="A concise and highly accurate academic title for this specific mind map."
+        description="The formal academic name of the core subject matter."
     )
     nodes: List[MindMapNode] = Field(
         description="The list of concept boxes."
