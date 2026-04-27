@@ -32,4 +32,4 @@ ABSOLUTE RULES (Follow in order of importance):
 You will output the data strictly adhering to the provided schema (nodes and edges)."""
 
     # Dynamically inject the global DNA (Persona & LaTeX rules) at the very top
-    return f"{CORE_PERSONA.strip()}\n\n{mindmap_rules}
+    return f"{CORE_PERSONA.strip()}\n\n{mindmap_rules}"
