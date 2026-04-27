@@ -21,8 +21,11 @@ class MindMapService:
             
             logger.info(f"Generating mind map for conversation: '{conversation_id}' in context: '{exam_context}' using engine: {target_model}")
             
-            # Combine the system instructions with the full conversation history
-            api_input = [{"role": "system", "content": system_prompt.strip()}] + conversation_input
+            # Filter out any existing system prompts from the chat history
+            filtered_conversation = [msg for msg in conversation_input if msg.get("role") != "system"]
+            
+            # Combine the dedicated mind map system instructions with the filtered history
+            api_input = [{"role": "system", "content": system_prompt.strip()}] + filtered_conversation
 
             is_reasoning_model = (
                 target_model.startswith("o") and not target_model.startswith("gpt") 
