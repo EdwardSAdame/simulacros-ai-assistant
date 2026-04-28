@@ -121,12 +121,13 @@ class OrchestratorService:
                 )
             
             elif intent == "mentalmap" or intent == "mind_map":
-                # Removed exam_context parameter here
-                map_data = mindmap_service.generate_mindmap(
+                # 🟢 UPDATE: Now uses the streaming method and passes the stream_manager
+                map_data = mindmap_service.stream_mindmap(
                     conversation_input=conversation_input, 
                     user_id=user_id,
                     conversation_id=actual_conversation_id,
-                    mode=mode 
+                    mode=mode,
+                    stream_manager=stream_manager
                 )
                 map_data["type"] = "mindmap_data"
                 meta_payload = map_data
@@ -153,7 +154,7 @@ class OrchestratorService:
                             user_id=user_id or "anonymous",
                             conversation_id=actual_conversation_id, 
                             source="creative_image",                
-                            tier=mode,           
+                            tier=mode,            
                             engine=engine_name,  
                             input_tokens=token_usage.get("input_tokens", 0),
                             output_tokens=token_usage.get("output_tokens", 0),

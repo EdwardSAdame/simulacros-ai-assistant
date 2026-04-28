@@ -6,6 +6,10 @@ from src.config.mindmap_instructions import build_mindmap_instructions
 from src.services.token_usage_service import TokenUsageService
 from src.config.model_config import get_model_config
 
+# 🟢 NEW IMPORTS
+from src.assistant.assistant_client import stream_structured_mindmap
+from src.streaming.stream_manager import StreamManager
+
 logger = logging.getLogger(__name__)
 
 class MindMapService:
@@ -13,6 +17,7 @@ class MindMapService:
         self.client = get_openai_client()
 
     def generate_mindmap(self, conversation_input: list, user_id: str, conversation_id: str, mode: str = "omega") -> dict:
+        """Original synchronous generation (kept for backward compatibility if needed)"""
         try:
             cfg = get_model_config(mode)
             target_model = cfg.model
@@ -93,6 +98,73 @@ class MindMapService:
             
         except Exception as e:
             logger.error(f"Error generating mind map: {e}")
+            raise e
+
+    # ------------------------------------------------------------------
+    # 🟢 MIND MAP STREAMING (NEW)
+    # ------------------------------------------------------------------
+    def stream_mindmap(self, conversation_input: list, user_id: str, conversation_id: str, mode: str, stream_manager: StreamManager) -> dict:
+        """
+        Orchestrates the streaming of the Mind Map.
+        Pushes nodes and edges directly to the WebSocket via the StreamManager.
+        """
+        cfg = get_model_config(mode)
+        target_model = cfg.model
+        logger.info(f"Streaming mind map for conversation: '{conversation_id}' using engine: {target_model}")
+
+        final_payload = None
+        
+        try:
+            stream_generator = stream_structured_mindmap(
+                conversation_input=conversation_input,
+                mode=mode
+            )
+
+            for event in stream_generator:
+                event_type = event.get("type")
+                
+                # 🟢 Push nodes to the frontend in real-time
+                if event_type == "node":
+                    stream_manager.send_mindmap_node(event.get("data"))
+                    
+                # 🟢 Push edges to the frontend in real-time
+                elif event_type == "edge":
+                    stream_manager.send_mindmap_edge(event.get("data"))
+                    
+                # Handle usage metrics tracking
+                elif event_type == "usage_metrics":
+                    usage = event.get("data", {})
+                    try:
+                        TokenUsageService().log_token_usage(
+                            user_id=user_id, 
+                            conversation_id=conversation_id, 
+                            source="mindmap_generator",                 
+                            tier=mode,         
+                            engine=target_model, 
+                            input_tokens=usage.get("input_tokens", 0), 
+                            output_tokens=usage.get("output_tokens", 0), 
+                            total_tokens=usage.get("total_tokens", 0)
+                        )
+                    except Exception as token_err:
+                        logger.error(f"Failed to log streaming mind map tokens: {token_err}")
+
+                elif event_type == "refusal":
+                    stream_manager.send_error(event.get("reason", "Request refused by model."))
+                    
+                elif event_type == "error":
+                    stream_manager.send_error(event.get("error", "An unknown error occurred."))
+                    
+                elif event_type == "done":
+                    final_parsed = event.get("full_response")
+                    if final_parsed:
+                        # Convert Pydantic object to dict for final return
+                        final_payload = final_parsed.model_dump(by_alias=True) if hasattr(final_parsed, "model_dump") else final_parsed.dict(by_alias=True)
+
+            return final_payload
+
+        except Exception as e:
+            logger.error(f"Error streaming mind map: {e}")
+            stream_manager.send_error(str(e))
             raise e
 
 mindmap_service = MindMapService()

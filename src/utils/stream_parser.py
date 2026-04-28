@@ -10,22 +10,13 @@ logger = logging.getLogger(__name__)
 class StreamParser:
     """
     Handles the low-level parsing of the text stream from OpenAI.
-    Extracts the 'intro_message', individual 'QuizQuestion' JSON objects,
-    and progressive image/plot chunks from the stream.
+    Extracts structured items progressively so the UI can stream them in real-time.
     """
 
     @staticmethod
     def parse_quiz_stream(stream) -> Generator[Dict[str, Any], None, None]:
         """
-        Consumes the OpenAI stream and yields structured events:
-        - {"type": "intro", "text": "..."}
-        - {"type": "question", "index": int, "data": QuizQuestion}
-        - {"type": "image_request", "index": int, "prompt": str}  <-- CREATIVE IMAGES
-        - {"type": "plot_request", "index": int, "prompt": str}   <-- CODE INTERPRETER PLOTS
-        - {"type": "partial_image", "index": int, "b64_data": str}
-        - {"type": "refusal", "reason": str}
-        - {"type": "done", "full_response": QuizResponse}
-        - {"type": "error", "error": str}
+        Consumes the OpenAI stream and yields structured events for Quizzes.
         """
         buffer = ""
         intro_yielded = False
@@ -72,7 +63,7 @@ class StreamParser:
                     buffer += getattr(event, "delta", "")
                     
                     # -------------------------------------------------------------------------
-                    # NEW: ASYNC INTERCEPTOR FOR CREATIVE IMAGES
+                    # ASYNC INTERCEPTOR FOR CREATIVE IMAGES
                     # -------------------------------------------------------------------------
                     prompt_matches = re.finditer(r'"image_prompt"\s*:\s*"((?:[^"\\]|\\.)*)"', buffer)
                     for match in prompt_matches:
@@ -93,7 +84,7 @@ class StreamParser:
                             yielded_image_prompts.add(actual_q_index)
 
                     # -------------------------------------------------------------------------
-                    # NEW: ASYNC INTERCEPTOR FOR CODE INTERPRETER PLOTS
+                    # ASYNC INTERCEPTOR FOR CODE INTERPRETER PLOTS
                     # -------------------------------------------------------------------------
                     plot_matches = re.finditer(r'"plot_prompt"\s*:\s*"((?:[^"\\]|\\.)*)"', buffer)
                     for match in plot_matches:
@@ -200,4 +191,116 @@ class StreamParser:
 
         except Exception as e:
             logger.error(f"StreamParser parsing failed: {e}")
+            yield {"type": "error", "error": str(e)}
+
+
+    # -------------------------------------------------------------------------
+    # 🟢 NEW: MIND MAP STREAM PARSER
+    # -------------------------------------------------------------------------
+    @staticmethod
+    def parse_mindmap_stream(stream) -> Generator[Dict[str, Any], None, None]:
+        """
+        Consumes the OpenAI stream and yields structured events for Mind Maps:
+        - {"type": "node", "data": dict}
+        - {"type": "edge", "data": dict}
+        - {"type": "done", "full_response": MindMapPayload}
+        """
+        buffer = ""
+        last_checkpoint = None
+        has_refused = False
+        
+        try:
+            for event in stream:
+                event_type = getattr(event, "type", "")
+
+                # A. Detect Streaming Refusals
+                if event_type == "response.content_part.added":
+                    part = getattr(event, "part", None)
+                    if part and getattr(part, "type", "") == "refusal":
+                        has_refused = True
+                        yield {"type": "refusal", "reason": getattr(part, "refusal", "Model refused.")}
+                        continue
+                elif event_type == "response.refusal.delta":
+                    has_refused = True
+                    yield {"type": "refusal", "reason": getattr(event, "delta", "Model refused.")}
+                    continue
+
+                # B. Normal Text Stream Processing
+                elif event_type == "response.output_text.delta":
+                    buffer += getattr(event, "delta", "")
+                    
+                    # Wait until we see the start of the nodes array to begin parsing objects
+                    if last_checkpoint is None:
+                        n_marker = buffer.find('"nodes"')
+                        if n_marker != -1:
+                            arr_start = buffer.find('[', n_marker)
+                            if arr_start != -1:
+                                last_checkpoint = arr_start
+                    
+                    if last_checkpoint is not None:
+                        cursor = last_checkpoint
+                        depth = 0
+                        in_str = False
+                        escape = False
+                        obj_start = -1
+                        
+                        # Stack-based parser to find balanced braces {}
+                        while cursor < len(buffer):
+                            char = buffer[cursor]
+                            if not in_str:
+                                if char == '"':
+                                    in_str = True
+                                elif char == '{':
+                                    if depth == 0:
+                                        obj_start = cursor
+                                    depth += 1
+                                elif char == '}':
+                                    depth -= 1
+                                    if depth == 0 and obj_start != -1:
+                                        try:
+                                            json_str = buffer[obj_start:cursor+1]
+                                            data = json.loads(json_str)
+                                            
+                                            # Duck-type the object to decide if it's a node or edge
+                                            if "level" in data and "label" in data:
+                                                yield {"type": "node", "data": data}
+                                            elif ("from" in data or "source" in data) and "to" in data:
+                                                yield {"type": "edge", "data": data}
+                                                
+                                            last_checkpoint = cursor + 1
+                                        except Exception:
+                                            pass
+                            elif char == '\\':
+                                escape = True
+                            else:
+                                if escape:
+                                    escape = False
+                                elif char == '\\':
+                                    escape = True
+                                elif char == '"':
+                                    in_str = False
+                            cursor += 1
+
+            # 2. Retrieve Final Response
+            if hasattr(stream, 'get_final_response'):
+                final = stream.get_final_response()
+                
+                refusal_msg = None
+                for output in getattr(final, "output", []):
+                    if getattr(output, "type", "") == "message":
+                        for item in getattr(output, "content", []):
+                            if getattr(item, "type", "") == "refusal":
+                                refusal_msg = getattr(item, "refusal", "Model refused.")
+                
+                if refusal_msg and not has_refused:
+                    yield {"type": "refusal", "reason": refusal_msg}
+                    return
+
+                parsed = getattr(final, 'output_parsed', None) or getattr(final, 'parsed', None) or final
+                yield {"type": "done", "full_response": parsed}
+            else:
+                yield {"type": "error", "error": "Stream did not contain a final response method."}
+
+        except Exception as e:
+            logger.error(f"MindMap StreamParser failed: {e}")
             yield {"type": "error", "error": str(e)}

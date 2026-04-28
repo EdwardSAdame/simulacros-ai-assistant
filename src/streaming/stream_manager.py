@@ -126,3 +126,26 @@ class StreamManager:
             "usage": usage_data
         }
         self._send(payload) 
+
+    # ------------------------------------------------------------------
+    # 🟢 NEW: MIND MAP STREAMING METHODS
+    # ------------------------------------------------------------------
+    def send_mindmap_node(self, node_data: Dict[str, Any]):
+        """
+        Streams a single completed mind map node to the frontend.
+        """
+        payload = {
+            "action": "mindmap_stream_node",
+            "node": node_data
+        }
+        self._send(payload)
+
+    def send_mindmap_edge(self, edge_data: Dict[str, Any]):
+        """
+        Streams a single completed mind map edge to the frontend.
+        """
+        payload = {
+            "action": "mindmap_stream_edge",
+            "edge": edge_data
+        }
+        self._send(payload)
