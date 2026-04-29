@@ -133,6 +133,20 @@ class OrchestratorService:
                 meta_payload = map_data
                 final_reply_text = "He analizado el tema y estructurado sus conceptos clave. Puedes explorar el mapa mental en el panel interactivo."
 
+            elif intent == "flashcards":
+                # 🟢 NEW: Placeholder for Flashcards logic
+                # Sends a basic payload so the frontend knows we are in flashcards mode
+                # We will replace this with a call to FlashcardsService in the next steps
+                if stream_manager:
+                    # Depending on stream_manager implementation, this might help signal the UI
+                    stream_manager.send_intent("flashcards")
+
+                final_reply_text = "Preparando tus flashcards. ¡Comencemos a repasar!"
+                meta_payload = {
+                    "type": "flashcards_data",
+                    "status": "initializing"
+                }
+
             elif intent == "creative_image":
                 final_reply_text, final_images_urls, token_usage = CreativeImageService.generate_image(
                     conversation_input=conversation_input, 

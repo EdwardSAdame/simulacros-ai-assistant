@@ -32,11 +32,12 @@ CRITICAL CATEGORY RULES:
 - "admisiones": You MUST use this EXCLUSIVELY if the user asks for historical cutoff scores, admission statistics, or university data (e.g., "puntaje de corte para medicina"). NEVER use this category for a quiz.
 
 2. Intent: Classify the user's goal using exactly one of these strings:
-- "quiz": User EXPLICITLY wants to take a test, exam, simulacro, or practice questions. Do NOT use this for general statements about studying or preparing.
+- "quiz": User EXPLICITLY wants to practice with a test, exam, simulacro, or practice questions.
+- "flashcards": User EXPLICITLY wants to learn facts, review, or memorize information quickly using flashcards, cards, or spaced repetition.
+- "mentalMap": User EXPLICITLY asks to visualize information through a mind map, conceptual map, or structural diagram.
 - "creative_image": User wants to generate an artistic or fictional image.
 - "admission_stats": User wants university admission cutoff scores or data.
-- "mentalMap": User EXPLICITLY asks to create, draw, or generate a mind map, conceptual map, structural diagram, or visual hierarchy of a topic.
-- "chat": Standard conversational inquiries, greetings, explanations, analytical plotting, or general statements about preparing/studying.
+- "chat": Standard conversational inquiries, explanations, analytical plotting, or general statements.
 
 3. Visuals (requires_visuals): 
 - true ONLY if intent is "chat" AND the user explicitly asks to plot, graph, or visualize mathematical functions or data.
@@ -44,7 +45,8 @@ CRITICAL CATEGORY RULES:
 
 4. num_questions: 
 - If intent is "quiz", extract the requested number of questions (default 5, min 1, max 30).
-- If intent is NOT "quiz", this MUST be 0.
+- If intent is "flashcards", extract the requested number of flashcards (default 10, min 1, max 30).
+- If intent is NOT "quiz" or "flashcards", this MUST be 0.
 
 5. loading_phrases: 
 - Generate an array of 3 distinct, analytical phrases (max 5 words each) extracting key nouns or verbs from the input.

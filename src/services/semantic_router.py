@@ -11,9 +11,9 @@ logger = logging.getLogger(__name__)
 
 class RouterResponse(BaseModel):
     category: str = Field(description="The academic category or subject of the query.")
-    intent: Literal["chat", "quiz", "creative_image", "admission_stats", "mentalMap"] = Field(description="The primary intent of the user. Use 'mentalMap' if the user asks for a mind map, conceptual map, or structural diagram of a topic.")
+    intent: Literal["chat", "quiz", "creative_image", "admission_stats", "mentalMap", "flashcards"] = Field(description="The primary intent of the user. Use 'mentalMap' if the user asks for a mind map, conceptual map, or structural diagram. Use 'flashcards' for studying, memorizing, or reviewing facts.")
     requires_visuals: bool = Field(description="True if the user is asking for graphs, charts, or visual analysis.")
-    num_questions: int = Field(description="The number of questions requested if the intent is 'quiz'. Return 0 if the user does not specify a number.")
+    num_questions: int = Field(description="The number of questions requested if the intent is 'quiz', or the number of cards if the intent is 'flashcards'. Return 0 if the user does not specify a number.")
     loading_phrases: List[str] = Field(description="2 to 3 engaging loading phrases in Spanish relevant to the query.")
 
 class SemanticRouter:
@@ -156,10 +156,10 @@ class SemanticRouter:
             raw_intent = data.get("intent", "chat").strip()
             intent_lower = raw_intent.lower()
             
-            # Safe parsing for mentalMap intent
+            # Safe parsing for mentalMap and flashcards intents
             if intent_lower in ["mentalmap", "mental_map"]:
                 intent = "mentalMap"
-            elif intent_lower in ["quiz", "chat", "creative_image", "admission_stats"]: 
+            elif intent_lower in ["quiz", "chat", "creative_image", "admission_stats", "flashcards"]: 
                 intent = intent_lower
             else:
                 intent = "chat"
@@ -170,14 +170,20 @@ class SemanticRouter:
                 requires_visuals = True
                 logger.info(f"Router Override: Enforcing requires_visuals=True for {category} quiz to apply visual doctrine styling.")
 
-            if intent != "quiz":
+            if intent not in ["quiz", "flashcards"]:
                 num_questions = 0
             else:
                 num_questions = data.get("num_questions", 0)
-                if num_questions < 1: 
-                    num_questions = random.randint(5, 7)
-                elif num_questions > 30: 
-                    num_questions = 30
+                if intent == "flashcards":
+                    if num_questions < 1:
+                        num_questions = 10
+                    elif num_questions > 30:
+                        num_questions = 30
+                else: # intent is quiz
+                    if num_questions < 1: 
+                        num_questions = random.randint(5, 7)
+                    elif num_questions > 30: 
+                        num_questions = 30
                 
             phrases = data.get("loading_phrases", [])
             if not phrases:

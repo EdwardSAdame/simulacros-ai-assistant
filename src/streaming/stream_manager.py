@@ -59,6 +59,19 @@ class StreamManager:
             
         return False
 
+    # ------------------------------------------------------------------
+    # 🟢 NEW: INTENT SIGNALING
+    # ------------------------------------------------------------------
+    def send_intent(self, intent: str):
+        """
+        Sends an early signal to the frontend to prepare the UI.
+        For example, passing "flashcards" sends {"action": "flashcardsMode"}
+        """
+        payload = {
+            "action": f"{intent}Mode"
+        }
+        self._send(payload)
+
     def send_status(self, message: str, step: str = "processing"):
         """
         Sends a transient status update (e.g., "Generating question 3...").
@@ -128,7 +141,7 @@ class StreamManager:
         self._send(payload) 
 
     # ------------------------------------------------------------------
-    # 🟢 NEW: MIND MAP STREAMING METHODS
+    # MIND MAP STREAMING METHODS
     # ------------------------------------------------------------------
     def send_mindmap_node(self, node_data: Dict[str, Any]):
         """
