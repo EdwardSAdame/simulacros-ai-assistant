@@ -64,7 +64,7 @@ def lambda_handler(event, context):
             sts_out_text = payload.get("stsOutputText", 0)
             sts_out_audio = payload.get("stsOutputAudio", 0)
 
-            # THE BULLETPROOF FAILSAFE: Intercept exactly by message text!
+            # THE BULLETPROOF FAILSAFE: Intercept exactly by message text
             if message in ["[AUDIO_TELEMETRY]", "[STS_TELEMETRY]"]:
                 logger.info(f"Intercepting Telemetry Ghost Message: {message} for user {user_id}")
                 
@@ -94,7 +94,7 @@ def lambda_handler(event, context):
                             user_id=uid_str, 
                             conversation_id=session_str,         
                             source="telemetry-text",                  
-                            tier=ai_mode,             
+                            tier=ai_mode,              
                             engine=realtime_engine,        
                             input_tokens=int(sts_in_text or 0), 
                             output_tokens=int(sts_out_text or 0), 
@@ -106,7 +106,7 @@ def lambda_handler(event, context):
                             user_id=uid_str, 
                             conversation_id=session_str,         
                             source="telemetry-audio",                  
-                            tier=ai_mode,             
+                            tier=ai_mode,              
                             engine=realtime_engine,        
                             input_tokens=int(sts_in_audio or 0), 
                             output_tokens=int(sts_out_audio or 0), 
@@ -127,7 +127,6 @@ def lambda_handler(event, context):
 
             connection_ids = ws_connections_table.get_connection_ids(user_id)
 
-            # 🟢 This is the critical StreamManager initialization
             stream_manager = None
             if connection_ids:
                 stream_manager = StreamManager(connection_ids, api_gateway_client)
@@ -170,9 +169,10 @@ def lambda_handler(event, context):
                     client_action = None
                     if intent == "quiz":
                         client_action = "OPEN_QUIZ_PANEL"
-                    # 🟢 Mental map intent properly sets up the UI trigger
                     elif intent == "mentalmap" or intent == "mind_map":
                         client_action = "OPEN_MENTAL_MAP_PANEL"
+                    elif intent in ["flashcard", "flashcards"]:
+                        client_action = "OPEN_FLASHCARDS_PANEL"
 
                     status_payload = json.dumps({
                         "action": "status_update",
@@ -210,7 +210,6 @@ def lambda_handler(event, context):
                 except Exception as e:
                     log_event("ws_status_send_failed", {"user_id": user_id}, level="warning", error=e)
 
-            # 🟢 Orchestrator takes over, receiving the stream_manager
             ai_reply, conversation_id, assistant_timestamp, meta_payload = OrchestratorService.process_ai_request(
                 message=message,
                 user_id=user_id,
@@ -254,9 +253,10 @@ def lambda_handler(event, context):
                                 action_type = "rich_content_update"
                             elif meta_payload.get("quiz_mode") or meta_payload.get("questions"):
                                 action_type = "quiz_data_update"
-                            # 🟢 Once streaming is done, it pushes the final state
                             elif meta_payload.get("type") == "mindmap_data":
                                 action_type = "mindmap_data_update"
+                            elif meta_payload.get("type") == "flashcards_data":
+                                action_type = "flashcards_data_update"
 
                             if action_type:
                                 data_payload = json.dumps({
