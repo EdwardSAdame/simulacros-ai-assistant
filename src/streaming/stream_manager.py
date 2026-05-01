@@ -9,7 +9,7 @@ class StreamManager:
     """
     Manages real-time data streaming to the WebSocket client via API Gateway.
     Abstracts away the JSON serialization and error handling for connection issues.
-    Now supports broadcasting to multiple active connections (multi-window support).
+    Supports broadcasting to multiple active connections (multi-window support).
     """
 
     def __init__(self, connection_ids: Union[str, List[str]], api_gateway_client: Any):
@@ -17,7 +17,6 @@ class StreamManager:
         :param connection_ids: A single WebSocket connection ID, or a list of IDs for the user.
         :param api_gateway_client: Boto3 client for 'apigatewaymanagementapi'.
         """
-        # Ensure connection_ids is always a list for consistent iteration
         if isinstance(connection_ids, str):
             self.connection_ids = [connection_ids]
         else:
@@ -34,8 +33,6 @@ class StreamManager:
         if not self.connection_ids or not self.client:
             return False
 
-        # FIX: ensure_ascii=False forces Python to send pure UTF-8 Spanish characters 
-        # instead of \uXXXX escape sequences. This prevents frontend regex corruption!
         payload_str = json.dumps(payload, ensure_ascii=False)
         success_count = 0
 
@@ -47,7 +44,6 @@ class StreamManager:
                 )
                 success_count += 1
             except Exception as e:
-                # Handle "GoneException" (User closed the tab/window)
                 if "GoneException" in str(e) or "410" in str(e):
                     logger.warning(f"StreamManager: Connection {connection_id} is gone.")
                 else:
@@ -60,7 +56,7 @@ class StreamManager:
         return False
 
     # ------------------------------------------------------------------
-    # 🟢 NEW: INTENT SIGNALING
+    # INTENT SIGNALING
     # ------------------------------------------------------------------
     def send_intent(self, intent: str):
         """
@@ -72,10 +68,12 @@ class StreamManager:
         }
         self._send(payload)
 
+    # ------------------------------------------------------------------
+    # STATUS SIGNALING
+    # ------------------------------------------------------------------
     def send_status(self, message: str, step: str = "processing"):
         """
-        Sends a transient status update (e.g., "Generating question 3...").
-        Frontend can use this to show a dynamic spinner/loader label.
+        Sends a transient status update.
         """
         payload = {
             "action": "stream_status",
@@ -84,10 +82,23 @@ class StreamManager:
         }
         self._send(payload)
 
+    def send_status_update(self, category: str, loading_phrases: List[str] = None):
+        """
+        Sends a rich status update to the frontend, allowing for rotating loading phrases.
+        """
+        payload = {
+            "action": "status_update",
+            "category": category,
+            "phrases": loading_phrases or []
+        }
+        self._send(payload)
+
+    # ------------------------------------------------------------------
+    # QUIZ STREAMING METHODS
+    # ------------------------------------------------------------------
     def send_quiz_item(self, question_data: Dict[str, Any], index: int):
         """
         Sends a single completed question to the frontend.
-        The Frontend should listen for 'quiz_stream_item' and append it to the UI.
         """
         payload = {
             "action": "quiz_stream_item",
@@ -128,7 +139,7 @@ class StreamManager:
         self._send(payload)
 
     # ------------------------------------------------------------------
-    # METRICS METHDOS
+    # METRICS METHODS
     # ------------------------------------------------------------------
     def send_usage_metrics(self, usage_data: Dict[str, Any]):
         """

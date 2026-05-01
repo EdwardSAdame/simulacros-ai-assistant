@@ -17,8 +17,8 @@ from src.services.chat_service import ChatService
 from src.services.quiz_service import QuizService
 from src.services.creative_image_service import CreativeImageService
 from src.services.admission_chat_service import AdmissionChatService
-
 from src.services.mindmap_service import mindmap_service
+from src.services.flashcard_service import FlashcardsService
 
 logger = logging.getLogger(__name__)
 
@@ -121,7 +121,6 @@ class OrchestratorService:
                 )
             
             elif intent == "mentalmap" or intent == "mind_map":
-                # 🟢 UPDATE: Now uses the streaming method and passes the stream_manager
                 map_data = mindmap_service.stream_mindmap(
                     conversation_input=conversation_input, 
                     user_id=user_id,
@@ -134,18 +133,18 @@ class OrchestratorService:
                 final_reply_text = "He analizado el tema y estructurado sus conceptos clave. Puedes explorar el mapa mental en el panel interactivo."
 
             elif intent == "flashcards":
-                # 🟢 NEW: Placeholder for Flashcards logic
-                # Sends a basic payload so the frontend knows we are in flashcards mode
-                # We will replace this with a call to FlashcardsService in the next steps
                 if stream_manager:
-                    # Depending on stream_manager implementation, this might help signal the UI
                     stream_manager.send_intent("flashcards")
 
-                final_reply_text = "Preparando tus flashcards. ¡Comencemos a repasar!"
-                meta_payload = {
-                    "type": "flashcards_data",
-                    "status": "initializing"
-                }
+                final_reply_text, meta_payload = FlashcardsService.execute_flashcards_generation(
+                    message=message,
+                    conversation_input=conversation_input,
+                    user_id=user_id,
+                    mode=mode,
+                    actual_conversation_id=actual_conversation_id,
+                    stream_manager=stream_manager,
+                    num_questions=num_questions
+                )
 
             elif intent == "creative_image":
                 final_reply_text, final_images_urls, token_usage = CreativeImageService.generate_image(
