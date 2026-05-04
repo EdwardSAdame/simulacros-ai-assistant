@@ -95,7 +95,6 @@ class FlashcardsService:
         flashcard_data = None
 
         try:
-            # 🟢 UPDATED: Requesting the correct Pydantic Schema
             response = client.responses.parse(
                 model=active_config.model,
                 input=conversation_input,
@@ -122,9 +121,16 @@ class FlashcardsService:
                 final_reply_text = "Lo siento, no puedo generar flashcards sobre este tema por políticas de seguridad."
                 return final_reply_text, None
 
-            # 🟢 UPDATED: Accessing the 'cards' and 'topic' attributes defined in the schema
             if parsed_deck and hasattr(parsed_deck, 'cards'):
-                cards_list = [card.dict() if hasattr(card, 'dict') else card for card in parsed_deck.cards]
+                cards_list = []
+                for card in parsed_deck.cards:
+                    card_dict = card.dict() if hasattr(card, 'dict') else card
+                    
+                    # Strip the reasoning field before sending to the frontend to minimize payload size
+                    if "reasoning" in card_dict:
+                        del card_dict["reasoning"]
+                        
+                    cards_list.append(card_dict)
                 
                 flashcard_data = {
                     "type": "flashcards_data",
