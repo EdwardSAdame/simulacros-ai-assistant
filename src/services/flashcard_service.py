@@ -14,6 +14,9 @@ from src.schemas.flashcard_schemas import FlashcardsPayload
 from src.config.flashcard_instructions import get_flashcard_system_prompt
 from src.config.creative_image_instructions import get_creative_image_system_prompt
 
+# 🟢 NEW: Import the StreamParser
+from src.utils.stream_parser import StreamParser
+
 logger = logging.getLogger(__name__)
 
 class FlashcardsService:
@@ -124,8 +127,16 @@ class FlashcardsService:
                         try:
                             img_bytes = base64.b64decode(bg_b64)
                             s3_url = storage_service.upload_image_from_bytes(img_bytes, "image/png", folder="flashcard_assets")
+                            
+                            # Route the image payload specifically to the Flashcards intent
                             if stream_manager:
-                                stream_manager.send_partial_image(index=0, b64_data=s3_url)
+                                stream_manager._send({
+                                    "action": "partial_image_stream",
+                                    "intent": "flashcards",
+                                    "index": 0,
+                                    "image_b64": s3_url
+                                })
+                                
                             final_url = s3_url
                         except Exception as upload_err:
                             logger.warning(f"Background image upload failed: {upload_err}")
@@ -134,7 +145,12 @@ class FlashcardsService:
                 result_container["image_url"] = final_url
                 
                 if stream_manager:
-                    stream_manager.send_final_image(b64_data=final_url, revised_prompt=img_prompt)
+                    stream_manager._send({
+                        "action": "final_image_stream",
+                        "intent": "flashcards",
+                        "image_b64": final_url,
+                        "revised_prompt": img_prompt
+                    })
                     
                 if user_id:
                     try:
@@ -222,26 +238,44 @@ class FlashcardsService:
         flashcard_data = None
 
         try:
-            response = client.responses.parse(
-                model=active_config.model,
-                input=conversation_input,
-                text_format=FlashcardsPayload,
-            )
+            # 🟢 CHANGED: Switch from blocking .parse() to .stream()
+            req = {
+                "model": active_config.model,
+                "input": conversation_input,
+                "text_format": FlashcardsPayload
+            }
 
+            cards_list = []
             parsed_deck = None
             refusal_message = None
 
-            for output in response.output:
-                if getattr(output, "type", "") != "message":
-                    continue
+            with client.responses.stream(**req) as stream:
+                parser_generator = StreamParser.parse_flashcard_stream(stream)
                 
-                for item in getattr(output, "content", []):
-                    if getattr(item, "type", "") == "refusal":
-                        refusal_message = getattr(item, "refusal", "Refused")
-                        continue
+                for event in parser_generator:
+                    event_type = event.get("type", "")
                     
-                    if hasattr(item, "parsed") and item.parsed:
-                        parsed_deck = item.parsed
+                    if event_type == "refusal":
+                        refusal_message = event.get("reason", "Refused")
+                        break
+                        
+                    elif event_type == "card":
+                        card_data = event.get("data", {})
+                        if isinstance(card_data, dict):
+                            # Strip reasoning before sending to frontend to save bandwidth
+                            if "reasoning" in card_data:
+                                del card_data["reasoning"]
+                                
+                            cards_list.append(card_data)
+                            
+                            if stream_manager:
+                                stream_manager.send_flashcard_item(card_data, event.get("index", 0))
+                                
+                    elif event_type == "done":
+                        parsed_deck = event.get("full_response")
+                        
+                    elif event_type == "usage_metrics" and actual_conversation_id:
+                        cls._log_usage(event.get("data"), user_id, actual_conversation_id, mode)
 
             if refusal_message:
                 logger.warning(f"Model refused flashcard generation: {refusal_message}")
@@ -252,27 +286,14 @@ class FlashcardsService:
                     
                 return final_reply_text, None
 
-            if parsed_deck and hasattr(parsed_deck, 'cards'):
-                cards_list = []
-                for card in parsed_deck.cards:
-                    card_dict = card.dict() if hasattr(card, 'dict') else card
-                    
-                    # Strip reasoning before sending to frontend
-                    if "reasoning" in card_dict:
-                        del card_dict["reasoning"]
-                        
-                    cards_list.append(card_dict)
-                
-                flashcard_data = {
-                    "type": "flashcards_data",
-                    "topic": getattr(parsed_deck, 'topic', 'Flashcards'),
-                    "cards": cards_list,
-                    "count": len(cards_list),
-                    "background_image": None 
-                }
-
-            if hasattr(response, 'usage') and actual_conversation_id:
-                cls._log_usage(response.usage, user_id, actual_conversation_id, mode)
+            # Build the final payload to return to the database
+            flashcard_data = {
+                "type": "flashcards_data",
+                "topic": getattr(parsed_deck, 'topic', 'Flashcards') if parsed_deck else topic_hint,
+                "cards": cards_list,
+                "count": len(cards_list),
+                "background_image": None 
+            }
 
         except Exception as e:
             logger.error(f"Flashcard Generation Error: {e}")

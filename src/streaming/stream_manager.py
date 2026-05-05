@@ -173,3 +173,17 @@ class StreamManager:
             "edge": edge_data
         }
         self._send(payload)
+
+    # ------------------------------------------------------------------
+    # FLASHCARD STREAMING METHODS (NEW)
+    # ------------------------------------------------------------------
+    def send_flashcard_item(self, card_data: Dict[str, Any], index: int):
+        """
+        Streams a single completed flashcard to the frontend.
+        """
+        payload = {
+            "action": "flashcard_stream_item",
+            "index": index,
+            "card": card_data
+        }
+        self._send(payload)
