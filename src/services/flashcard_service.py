@@ -1,21 +1,44 @@
 # src/services/flashcard_service.py
 import logging
+import threading
+import base64
 from typing import Dict, Any, List, Tuple
 
 from src.utils.logging_utils import log_event
-from src.config.settings import get_openai_client
+from src.config.settings import get_openai_client, get_image_generation_size, get_image_generation_partials
 from src.config.model_config import get_model_config
 from src.services.token_usage_service import TokenUsageService
+from src.services.image_usage_service import ImageUsageService
+from src.services.storage_service import storage_service
 from src.schemas.flashcard_schemas import FlashcardsPayload
 from src.config.flashcard_instructions import get_flashcard_system_prompt
+from src.config.creative_image_instructions import get_creative_image_system_prompt
 
 logger = logging.getLogger(__name__)
 
 class FlashcardsService:
     """
     Encapsulates logic for generating study flashcards.
-    Utilizes OpenAI's Responses API to guarantee schema adherence.
+    Utilizes OpenAI's Responses API to guarantee schema adherence and 
+    uses a background thread to generate an aesthetic topic image in parallel.
     """
+
+    @staticmethod
+    def _extract_usage_from_obj(usage_obj: Any) -> Dict[str, int]:
+        """Helper to safely extract token usage dictionaries from OpenAI response objects."""
+        if not usage_obj:
+            return {}
+        if isinstance(usage_obj, dict):
+            return {
+                "input_tokens": usage_obj.get("input_tokens", usage_obj.get("prompt_tokens", 0)),
+                "output_tokens": usage_obj.get("output_tokens", usage_obj.get("completion_tokens", 0)),
+                "total_tokens": usage_obj.get("total_tokens", 0)
+            }
+        return {
+            "input_tokens": getattr(usage_obj, "input_tokens", getattr(usage_obj, "prompt_tokens", 0)),
+            "output_tokens": getattr(usage_obj, "output_tokens", getattr(usage_obj, "completion_tokens", 0)),
+            "total_tokens": getattr(usage_obj, "total_tokens", 0)
+        }
 
     @staticmethod
     def _log_usage(usage_data: Any, current_user: str | None, conversation_id: str, active_mode: str):
@@ -42,6 +65,98 @@ class FlashcardsService:
             )
         except Exception as e:
             logger.error(f"Failed to log token usage in flashcard service: {e}")
+
+    @classmethod
+    def _bg_image_worker(
+        cls, 
+        topic: str, 
+        user_id: str | None, 
+        actual_conversation_id: str | None, 
+        mode: str, 
+        stream_manager: Any,
+        result_container: Dict[str, Any]
+    ):
+        """
+        Background worker that generates an educational illustration for the flashcard deck.
+        Streams partial updates directly to the frontend to improve perceived load times.
+        """
+        try:
+            bg_client = get_openai_client()
+            active_config = get_model_config(mode)
+            
+            base_instruction = "You are an expert AI illustrator. Use the image_generation tool to create the requested image.\n\n"
+            instructions = base_instruction + get_creative_image_system_prompt()
+            
+            img_prompt = (
+                f"Create an inspiring, abstract, and highly polished educational background illustration "
+                f"representing the academic topic: '{topic}'. It must be suitable as a backdrop for study "
+                f"flashcards. Do not include any text or words."
+            )
+
+            bg_req = {
+                "model": active_config.model,
+                "input": [{"role": "user", "content": img_prompt}],
+                "tools": [{
+                    "type": "image_generation",
+                    "model": active_config.image_model,
+                    "partial_images": get_image_generation_partials(),
+                    "size": get_image_generation_size(),
+                    "quality": active_config.image_quality
+                }],
+                "instructions": instructions,
+                "stream": True
+            }
+
+            bg_stream = bg_client.responses.create(**bg_req)
+            final_url = None
+
+            for bg_event in bg_stream:
+                if getattr(bg_event, "type", "") == "response.completed":
+                    resp_obj = getattr(bg_event, "response", bg_event)
+                    usage_obj = getattr(resp_obj, "usage", None)
+                    if usage_obj and actual_conversation_id:
+                        bg_usage = cls._extract_usage_from_obj(usage_obj)
+                        cls._log_usage(bg_usage, user_id, actual_conversation_id, mode)
+
+                if getattr(bg_event, "type", "") == "response.image_generation_call.partial_image":
+                    bg_b64 = getattr(bg_event, "partial_image_b64", "")
+                    if bg_b64:
+                        try:
+                            img_bytes = base64.b64decode(bg_b64)
+                            s3_url = storage_service.upload_image_from_bytes(img_bytes, "image/png", folder="flashcard_assets")
+                            if stream_manager:
+                                stream_manager.send_partial_image(index=0, b64_data=s3_url)
+                            final_url = s3_url
+                        except Exception as upload_err:
+                            logger.warning(f"Background image upload failed: {upload_err}")
+
+            if final_url:
+                result_container["image_url"] = final_url
+                
+                if stream_manager:
+                    stream_manager.send_final_image(b64_data=final_url, revised_prompt=img_prompt)
+                    
+                if user_id:
+                    try:
+                        active_session = actual_conversation_id if actual_conversation_id else f"fc_bg_{user_id[-6:]}"
+                        image_tracker = ImageUsageService()
+                        image_tracker.log_image_usage(
+                            user_id=user_id,
+                            conversation_id=active_session,
+                            source="flashcards",
+                            tier=mode,
+                            engine=active_config.image_model,
+                            size=get_image_generation_size(),
+                            quality=active_config.image_quality,
+                            partials=get_image_generation_partials(),
+                            image_count=1,
+                            image_url=final_url
+                        )
+                    except Exception as tracker_err:
+                        logger.error(f"Failed to log background flashcard image usage: {tracker_err}")
+
+        except Exception as e:
+            logger.error(f"Background flashcard image generation failed: {e}")
 
     @staticmethod
     def get_system_instruction(topic: str, num_questions: int) -> Dict[str, Any]:
@@ -85,8 +200,20 @@ class FlashcardsService:
         if stream_manager:
             stream_manager.send_status_update(
                 category="Preparando flashcards...",
-                loading_phrases=["Estructurando conceptos", "Sintetizando respuestas", "Diseñando cartas"]
+                loading_phrases=["Estructurando conceptos", "Diseñando entorno", "Sintetizando respuestas"]
             )
+
+        # Thread state container for retrieving data safely
+        image_result = {"image_url": None}
+        image_thread = None
+
+        # Launch parallel image generation
+        if stream_manager:
+            image_thread = threading.Thread(
+                target=cls._bg_image_worker,
+                args=(topic_hint, user_id, actual_conversation_id, mode, stream_manager, image_result)
+            )
+            image_thread.start()
 
         client = get_openai_client()
         active_config = get_model_config(mode)
@@ -119,6 +246,10 @@ class FlashcardsService:
             if refusal_message:
                 logger.warning(f"Model refused flashcard generation: {refusal_message}")
                 final_reply_text = "Lo siento, no puedo generar flashcards sobre este tema por políticas de seguridad."
+                
+                if image_thread:
+                    image_thread.join()
+                    
                 return final_reply_text, None
 
             if parsed_deck and hasattr(parsed_deck, 'cards'):
@@ -126,7 +257,7 @@ class FlashcardsService:
                 for card in parsed_deck.cards:
                     card_dict = card.dict() if hasattr(card, 'dict') else card
                     
-                    # Strip the reasoning field before sending to the frontend to minimize payload size
+                    # Strip reasoning before sending to frontend
                     if "reasoning" in card_dict:
                         del card_dict["reasoning"]
                         
@@ -136,7 +267,8 @@ class FlashcardsService:
                     "type": "flashcards_data",
                     "topic": getattr(parsed_deck, 'topic', 'Flashcards'),
                     "cards": cards_list,
-                    "count": len(cards_list)
+                    "count": len(cards_list),
+                    "background_image": None 
                 }
 
             if hasattr(response, 'usage') and actual_conversation_id:
@@ -147,5 +279,14 @@ class FlashcardsService:
             log_event("flashcard_generation_failed", {"error": str(e)}, level="error")
             final_reply_text = "**Error**: No pudimos generar las flashcards. Intenta de nuevo."
             flashcard_data = None
+
+        finally:
+            # Strictly wait for the background image upload to finish before concluding the Lambda function
+            if image_thread:
+                image_thread.join()
+                
+            # Attach the processed image URL to the metadata payload so it persists in the database
+            if flashcard_data and image_result.get("image_url"):
+                flashcard_data["background_image"] = image_result["image_url"]
 
         return final_reply_text, flashcard_data

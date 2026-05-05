@@ -5,7 +5,7 @@ when communicating with the OpenAI API.
 """
 
 from pydantic import BaseModel, Field
-from typing import List
+from typing import List, Optional
 
 class FlashcardItem(BaseModel):
     """
@@ -41,4 +41,8 @@ class FlashcardsPayload(BaseModel):
     cards: List[FlashcardItem] = Field(
         ..., 
         description="The list of flashcards generated for the user."
+    )
+    background_image: Optional[str] = Field(
+        None,
+        description="The S3 URL of the generated background illustration for this deck."
     )
