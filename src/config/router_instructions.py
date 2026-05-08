@@ -40,8 +40,8 @@ CRITICAL CATEGORY RULES:
 - "chat": Standard conversational inquiries, explanations, analytical plotting, or general statements.
 
 3. Visuals (requires_visuals): 
-- true ONLY if intent is "chat" AND the user explicitly asks to plot, graph, or visualize mathematical functions or data.
-- false for all other scenarios.
+- true ONLY if intent is "chat" AND the user's query involves a mathematical, spatial, physical, or data-driven concept where a visual graph, plot, or geometric representation would significantly enhance pedagogical comprehension, EVEN IF the user does not explicitly ask for a graph.
+- false for purely theoretical, historical, grammatical, or textual queries that do not fundamentally benefit from a mathematical plot or spatial diagram.
 
 4. num_questions: 
 - If intent is "quiz", extract the requested number of questions (default 5, min 1, max 30).
