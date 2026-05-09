@@ -1,7 +1,7 @@
 # src/services/semantic_router.py
 import logging
 import random
-from typing import List, Literal
+from typing import List, Literal, Optional
 from pydantic import BaseModel, Field
 from src.config.settings import settings, get_openai_client
 from src.config.router_instructions import build_router_instructions 
@@ -36,7 +36,7 @@ class SemanticRouter:
             "matematicas", "ciencias_naturales", "analisis_imagen", "general"
         ]
 
-    def determine_category(self, text: str, user_id: str = "system_router", conversation_id: str = "intent_resolution", exam_context: str = "GENERAL") -> dict:
+    def determine_category(self, text: str, user_id: str = "system_router", conversation_id: str = "intent_resolution", exam_context: str = "GENERAL", history: Optional[List[dict]] = None) -> dict:
         if not text:
             return {
                 "category": "general", 
@@ -48,7 +48,7 @@ class SemanticRouter:
             }
             
         try:
-            result = self._classify_with_llm(text, user_id, conversation_id, exam_context)
+            result = self._classify_with_llm(text, user_id, conversation_id, exam_context, history)
             return {
                 "category": result.get("category", "general"),
                 "intent": result.get("intent", "chat"),
@@ -68,16 +68,31 @@ class SemanticRouter:
                 "source": "error_fallback"
             }
 
-    def _classify_with_llm(self, text: str, user_id: str, conversation_id: str, exam_context: str) -> dict:
+    def _classify_with_llm(self, text: str, user_id: str, conversation_id: str, exam_context: str, history: Optional[List[dict]] = None) -> dict:
         router_model = settings.OPENAI_ROUTER_MODEL.lower()
         
         # Build instructions dynamically based on context
         system_instruction = build_router_instructions(exam_context)
         
         api_input = [
-            {"role": "system", "content": system_instruction.strip()},
-            {"role": "user", "content": text}
+            {"role": "system", "content": system_instruction.strip()}
         ]
+
+        # Inject brief conversation history for context resolution
+        if history:
+            # Only take the last 4 messages to avoid bloating token usage on the router
+            recent_history = history[-4:]
+            for msg in recent_history:
+                role = msg.get("role")
+                content = msg.get("content")
+                if role in ["user", "assistant"] and content:
+                    # Truncate assistant responses to save tokens, we only need the gist
+                    content_str = str(content)
+                    if role == "assistant" and len(content_str) > 300:
+                        content_str = content_str[:300] + "... [truncated]"
+                    api_input.append({"role": role, "content": content_str})
+
+        api_input.append({"role": "user", "content": text})
         
         is_reasoning_model = (
             router_model.startswith("o") and not router_model.startswith("gpt") 
