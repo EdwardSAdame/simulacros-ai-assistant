@@ -27,7 +27,7 @@ Analyze user input AND the conversation history to output a strict JSON object. 
 {categories}.
 
 CRITICAL CATEGORY RULES:
-- SUBJECT PRIORITY: If the user mentions ANY specific subject or topic (e.g., "ciencias", "biologia", "matematicas", "lectura"), you MUST route to that specific category, even if they use words like "simulacro" or "examen".
+- SUBJECT PRIORITY: If the user mentions ANY specific subject or topic, you MUST route to that specific category, even if they use words like "simulacro" or "examen".
 - "general": You MUST use this category ONLY if the user asks for a broad, multi-subject exam WITHOUT specifying any subject at all.
 - "admisiones": You MUST use this EXCLUSIVELY if the user asks for historical cutoff scores, admission statistics, or university data. NEVER use this category for a quiz.
 
@@ -40,8 +40,9 @@ CRITICAL CATEGORY RULES:
 - "chat": Standard conversational inquiries, explanations, analytical plotting, general statements, OR follow-up requests to explain or solve a specific question number.
 
 3. Visuals (requires_visuals): 
-- true ONLY if intent is "chat" AND the user's query involves a mathematical, spatial, physical, or data-driven concept where a visual graph, plot, or geometric representation would significantly enhance pedagogical comprehension.
-- false for purely theoretical, historical, grammatical, or textual queries that do not fundamentally benefit from a mathematical plot or spatial diagram.
+- Evaluate the fundamental pedagogical nature of the query.
+- Set to true ONLY if intent is "chat" AND the core concept fundamentally relies on continuous multi-variable relationships, spatial geometry, data distributions, or physical kinematics to be visualized effectively.
+- Set to false if the query can be comprehensively and accurately answered using solely text, formulas, or discrete step-by-step arithmetic.
 
 4. num_questions: 
 - If intent is "quiz", extract the requested QUANTITY of questions to generate (default 5, min 1, max 30).
