@@ -40,9 +40,8 @@ CRITICAL CATEGORY RULES:
 - "chat": Standard conversational inquiries, explanations, analytical plotting, general statements, OR follow-up requests to explain or solve a specific question number.
 
 3. Visuals (requires_visuals): 
-- Evaluate the fundamental pedagogical nature of the query.
-- Set to true ONLY if intent is "chat" AND the core concept fundamentally relies on continuous multi-variable relationships, spatial geometry, data distributions, or physical kinematics to be visualized effectively.
-- Set to false if the query can be comprehensively and accurately answered using solely text, formulas, or discrete step-by-step arithmetic.
+- ROLEPLAY AS AN EXPERT TUTOR: Think, "If I were explaining this concept to a student in a physical classroom, would I instinctively walk over and draw a graph, chart, or spatial diagram on the whiteboard to give them a visual example?"
+- Set to true if the query involves analyzing functions, statistical distributions, probabilities, data trends, or physical kinematics where a visual plot drastically improves human understanding.
 
 4. num_questions: 
 - If intent is "quiz", extract the requested QUANTITY of questions to generate (default 5, min 1, max 30).
