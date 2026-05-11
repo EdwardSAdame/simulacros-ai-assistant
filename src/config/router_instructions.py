@@ -27,7 +27,13 @@ Analyze user input AND the conversation history to output a strict JSON object. 
 
 === SYSTEM STATE ===
 CURRENT_ACTIVITY: "{current_activity}"
-STATE RULE: If the CURRENT_ACTIVITY is anything other than "chat" (e.g., "quiz", "flashcards"), you MUST heavily bias towards the "chat" intent for any brief, numeric, or navigational user inputs. Only route to a generation intent if the user explicitly demands the creation of a brand NEW asset.
+
+CRITICAL ALGORITHMIC OVERRIDE (AMNESIA PREVENTION):
+IF CURRENT_ACTIVITY is NOT "chat" (e.g., "quiz", "flashcards") AND the user's input is short (under 6 words) or contains a bare number (e.g., "la 5", "el 3", "pregunta 4", "siguiente"):
+THEN you MUST strictly output:
+- "intent": "chat"
+- "num_questions": 0
+UNDER NO CIRCUMSTANCES should you output "quiz" or "flashcards" for a short numeric input. You may ONLY route to a generation intent if the user uses explicit creation verbs (e.g., "crea un nuevo simulacro", "dame otro quiz", "generar").
 
 1. Category: Identify the broad academic subject. Map specific sub-concepts to their parent discipline. You MUST use exactly one of these literal strings:
 {categories}.
@@ -38,7 +44,7 @@ CRITICAL CATEGORY RULES:
 - "admisiones": You MUST use this EXCLUSIVELY if the user asks for historical cutoff scores, admission statistics, or university data. NEVER use this category for a quiz.
 
 2. Intent: Classify the user's goal using exactly one of these strings:
-- "quiz": User EXPLICITLY wants to GENERATE a NEW test, exam, simulacro, or practice session. 
+- "quiz": User EXPLICITLY wants to GENERATE a NEW test, exam, simulacro, or practice session. (Subject to the Critical Algorithmic Override above).
 - "flashcards": User EXPLICITLY wants to learn facts, review, or memorize information quickly using NEW flashcards, cards, or spaced repetition.
 - "mentalMap": User EXPLICITLY asks to visualize information through a NEW mind map, conceptual map, or structural diagram.
 - "creative_image": User wants to generate an artistic or fictional image.
@@ -50,9 +56,9 @@ CRITICAL CATEGORY RULES:
 - Set to true if the query involves analyzing functions, statistical distributions, probabilities, data trends, or physical kinematics where a visual plot drastically improves human understanding.
 
 4. num_questions: 
-- If intent is "quiz", extract the requested QUANTITY of questions to generate (default 5, min 1, max 30).
-- If intent is "flashcards", extract the requested number of flashcards (default 10, min 1, max 30).
-- If intent is NOT "quiz" or "flashcards", this MUST be 0. Do NOT extract numbers from conversational follow-ups.
+- If intent is "quiz", extract the requested QUANTITY of questions to generate (min 1, max 30).
+- If intent is "flashcards", extract the requested number of flashcards (min 1, max 30).
+- If intent is "chat", this MUST be 0. Do NOT extract a number if you are routing to "chat", even if a number is present in the text.
 
 5. loading_phrases: 
 - Generate an array of 3 distinct, analytical phrases (max 5 words each) extracting key nouns or verbs from the input.
