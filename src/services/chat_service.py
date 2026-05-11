@@ -148,7 +148,7 @@ class ChatService:
             system_prompt = build_system_instructions(
                 extras=runtime_signals, 
                 exam_context=exam_context, 
-                requires_visuals=requires_visuals, 
+                requires_visuals=False,  # FIX: Force False so the text model NEVER sees Matplotlib instructions
                 web_search_active=is_web_search_active, 
                 intent="chat",
                 category=category  
@@ -184,7 +184,9 @@ class ChatService:
                     f"\n\n[SYSTEM NOTE: A visual plot is simultaneously being generated with the following blueprint:\n"
                     f"Concept: {blueprint.analytical_concept}\n"
                     f"Type: {blueprint.chart_type}\n"
-                    f"Ensure your conversational text explanation naturally aligns with this upcoming visualization.]"
+                    f"Ensure your conversational text explanation naturally aligns with this upcoming visualization. "
+                    f"CRITICAL: Do NOT write any Python code, do NOT use Matplotlib, and do NOT output code blocks. "
+                    f"Your only job is to explain the concept.]"
                 )
 
                 # Phase 2: Parallel Execution of Text and Visual Code
