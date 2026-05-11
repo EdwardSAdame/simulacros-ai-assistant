@@ -139,6 +139,20 @@ class StreamManager:
         self._send(payload)
 
     # ------------------------------------------------------------------
+    # RICH ASSETS STREAMING METHODS (NEW)
+    # ------------------------------------------------------------------
+    def send_chat_assets(self, assets: List[Dict[str, Any]]):
+        """
+        Streams generated assets (like parallel plot images) to the frontend.
+        The frontend custom element will receive this and render it.
+        """
+        payload = {
+            "action": "chat_assets_stream",
+            "assets": assets
+        }
+        self._send(payload)
+
+    # ------------------------------------------------------------------
     # METRICS METHODS
     # ------------------------------------------------------------------
     def send_usage_metrics(self, usage_data: Dict[str, Any]):
@@ -175,7 +189,7 @@ class StreamManager:
         self._send(payload)
 
     # ------------------------------------------------------------------
-    # FLASHCARD STREAMING METHODS (NEW)
+    # FLASHCARD STREAMING METHODS
     # ------------------------------------------------------------------
     def send_flashcard_item(self, card_data: Dict[str, Any], index: int):
         """

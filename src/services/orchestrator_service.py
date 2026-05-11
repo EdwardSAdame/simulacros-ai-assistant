@@ -198,6 +198,12 @@ class OrchestratorService:
                     clean_pdfs=clean_pdfs, actual_conversation_id=actual_conversation_id
                 )
                 
+                # Broadcats the rich plot assets dynamically to the frontend if available
+                if meta_payload and meta_payload.get("type") == "rich_chat" and stream_manager:
+                    assets = meta_payload.get("assets", [])
+                    if assets:
+                        stream_manager.send_chat_assets(assets)
+                
         except Exception as e:
             logger.error(f"Domain Service Execution Failed: {e}")
             final_reply_text = "**Error**: Ha ocurrido un error interno de sistema. Intenta de nuevo."

@@ -1,20 +1,25 @@
 # src/services/chat_service.py
 import logging
 import random
+import concurrent.futures
 from typing import Tuple, Dict, Any, List
 
 # CONFIG
 from src.config.settings import get_vector_search_max_results, get_code_interpreter_memory
 from src.config.page_vectorstores import get_stores_for_page
 from src.config.web_search_config import get_search_filters 
-from src.config.model_config import get_model_config # 🟢 NEW: Import model config to get the exact engine
+from src.config.model_config import get_model_config
 from src.utils.logging_utils import log_event
 
 # SERVICES
 from src.services.context_builder import build_runtime_context
 from src.services.arena_service import arena_service
 from src.config.system_instructions import build_system_instructions
-from src.assistant.assistant_client import send_message_to_assistant
+from src.assistant.assistant_client import (
+    send_message_to_assistant,
+    generate_plot_blueprint,
+    execute_plot_generation
+)
 from src.services.token_usage_service import TokenUsageService
 from src.services.container_usage_service import ContainerUsageService
 
@@ -22,15 +27,14 @@ logger = logging.getLogger(__name__)
 
 class ChatService:
     """
-    Handles standard conversational AI interactions, including identity protection
-    and custom Arena context injection.
+    Handles standard conversational AI interactions, including identity protection,
+    custom Arena context injection, and high-performance parallel visualization generation.
     """
 
     @staticmethod
     def _log_usage(usage_data: dict, current_user: str | None, conversation_id: str, active_mode: str):
         if not usage_data or not current_user: return
         try:
-            # 🟢 NEW: Get the exact underlying engine (e.g. gpt-4o) from the tier (e.g. omega)
             active_config = get_model_config(active_mode)
             engine_name = active_config.model
 
@@ -41,8 +45,8 @@ class ChatService:
                 user_id=current_user,
                 conversation_id=conversation_id, 
                 source="chat",                   
-                tier=active_mode,   # 🟢 FIX: Pass the abstract tier (omega/alpha)
-                engine=engine_name, # 🟢 FIX: Pass the precise AWS/OpenAI engine 
+                tier=active_mode,   
+                engine=engine_name, 
                 input_tokens=input_val,
                 output_tokens=output_val,
                 total_tokens=usage_data.get("total_tokens", 0),
@@ -160,30 +164,99 @@ class ChatService:
             except Exception as e:
                 logger.error(f"Failed to fetch active container: {e}")
 
-        # 5. Call AI
+        # 5. Call AI (Parallel Execution for Visuals)
         try:
-            response_tuple = send_message_to_assistant(
-                conversation_input=conversation_input, 
-                user_id=user_id, 
-                page=page, 
-                name=(name or None), 
-                email=email,
-                mode=mode, 
-                system_instruction=system_prompt, 
-                vector_store_ids=selected_vector_stores, 
-                requires_visuals=requires_visuals,
-                web_search_config=web_search_config, 
-                pdf_urls=clean_pdfs,
-                active_container_id=active_container_id,
-                conversation_id=actual_conversation_id  
-            )
-            
-            final_reply_text = response_tuple[0]
-            generated_assets = response_tuple[1]
-            sources_data = response_tuple[2] if len(response_tuple) > 2 else []
-            usage_data = response_tuple[3] if len(response_tuple) > 3 else {}
-            container_id = response_tuple[4] if len(response_tuple) > 4 else None
-            
+            if requires_visuals:
+                # Phase 1: Micro-latency Blueprint Generation
+                blueprint_instruction = (
+                    "You are the analytical engine. Based on the user's request, "
+                    "generate a strict analytical blueprint for a mathematical or data plot. "
+                    "Focus only on the variables and math. Do not worry about styling."
+                )
+                blueprint, blueprint_usage = generate_plot_blueprint(
+                    conversation_input=conversation_input,
+                    mode=mode,
+                    system_instruction=blueprint_instruction
+                )
+
+                # Inject blueprint context into the text generation prompt
+                text_prompt = system_prompt + (
+                    f"\n\n[SYSTEM NOTE: A visual plot is simultaneously being generated with the following blueprint:\n"
+                    f"Concept: {blueprint.analytical_concept}\n"
+                    f"Type: {blueprint.chart_type}\n"
+                    f"Ensure your conversational text explanation naturally aligns with this upcoming visualization.]"
+                )
+
+                # Phase 2: Parallel Execution of Text and Visual Code
+                with concurrent.futures.ThreadPoolExecutor(max_workers=2) as executor:
+                    # Thread A: Conversational Text (requires_visuals=False avoids double container generation)
+                    future_text = executor.submit(
+                        send_message_to_assistant,
+                        conversation_input=conversation_input, 
+                        user_id=user_id, 
+                        page=page, 
+                        name=(name or None), 
+                        email=email,
+                        mode=mode, 
+                        system_instruction=text_prompt, 
+                        vector_store_ids=selected_vector_stores, 
+                        requires_visuals=False, 
+                        web_search_config=web_search_config, 
+                        user_location=None,
+                        pdf_urls=clean_pdfs,
+                        active_container_id=active_container_id,
+                        conversation_id=actual_conversation_id
+                    )
+
+                    # Thread B: Visual Code Execution
+                    future_plot = executor.submit(
+                        execute_plot_generation,
+                        blueprint=blueprint, 
+                        mode=mode, 
+                        active_container_id=active_container_id
+                    )
+
+                    response_tuple = future_text.result()
+                    plot_urls, container_id, plot_usage = future_plot.result()
+
+                    final_reply_text = response_tuple[0]
+                    generated_assets = plot_urls
+                    sources_data = response_tuple[2] if len(response_tuple) > 2 else []
+                    
+                    # Aggregate total token usage across all 3 API calls
+                    text_usage = response_tuple[3] if len(response_tuple) > 3 else {}
+                    usage_data = {}
+                    for key in ["input_tokens", "output_tokens", "total_tokens", "reasoning_tokens", "cached_tokens"]:
+                        usage_data[key] = (
+                            text_usage.get(key, 0) + 
+                            blueprint_usage.get(key, 0) + 
+                            plot_usage.get(key, 0)
+                        )
+
+            else:
+                # Standard linear chat execution (No visuals required)
+                response_tuple = send_message_to_assistant(
+                    conversation_input=conversation_input, 
+                    user_id=user_id, 
+                    page=page, 
+                    name=(name or None), 
+                    email=email,
+                    mode=mode, 
+                    system_instruction=system_prompt, 
+                    vector_store_ids=selected_vector_stores, 
+                    requires_visuals=requires_visuals,
+                    web_search_config=web_search_config, 
+                    pdf_urls=clean_pdfs,
+                    active_container_id=active_container_id,
+                    conversation_id=actual_conversation_id  
+                )
+                
+                final_reply_text = response_tuple[0]
+                generated_assets = response_tuple[1]
+                sources_data = response_tuple[2] if len(response_tuple) > 2 else []
+                usage_data = response_tuple[3] if len(response_tuple) > 3 else {}
+                container_id = response_tuple[4] if len(response_tuple) > 4 else None
+
             cls._log_usage(usage_data, user_id, actual_conversation_id, mode)
             cls._log_container(user_id, actual_conversation_id, container_id)
 

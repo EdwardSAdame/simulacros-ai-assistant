@@ -15,11 +15,15 @@ from src.config.settings import (
 from src.config.model_config import get_model_config
 from src.schemas.quiz_schemas import QuizResponse
 
-# 🟢 NEW IMPORTS FOR MIND MAP STREAMING
+# MIND MAP STREAMING IMPORTS
 from src.schemas.mindmap_schemas import MindMapPayload
 from src.config.mindmap_instructions import build_mindmap_instructions
 
-# NEW REFACTORED MODULES
+# VISUAL GENERATION IMPORTS (NEW)
+from src.schemas.plot_schemas import PlotGenerationBlueprint
+from src.config.visual_instructions import build_visual_instructions
+
+# REFACTORED MODULES
 from src.services.signal_service import build_runtime_signals
 from src.assistant.artifact_handler import handle_generated_files, assign_urls_to_quiz
 from src.utils.response_parser import extract_sources
@@ -27,7 +31,7 @@ from src.utils.stream_parser import StreamParser
 from src.utils.quiz_utils import QuizUtils
 from src.utils.logging_utils import log_event
 
-# 🟢 NEW: Import Image Usage Service for tracking standard chat images
+# IMPORT IMAGE USAGE SERVICE
 from src.services.image_usage_service import ImageUsageService
 
 # IMPORT OUR NEW FUNCTION CALLING ASSETS
@@ -35,6 +39,113 @@ from src.config.tools_config import get_custom_tools
 from src.services.admission_service import query_admission_data
 
 logger = logging.getLogger(__name__)
+
+
+# ------------------------------------------------------------------
+# STRUCTURED PLOT GENERATION (NEW)
+# ------------------------------------------------------------------
+def generate_plot_blueprint(
+    conversation_input: List[Dict[str, Any]],
+    mode: str,
+    system_instruction: str
+) -> Tuple[PlotGenerationBlueprint, Dict[str, int]]:
+    """
+    Generates a strict JSON blueprint detailing the analytical structure 
+    of the required plot, without executing code.
+    """
+    client = get_openai_client()
+    cfg = get_model_config(mode)
+
+    api_input = [{"role": "system", "content": [{"type": "input_text", "text": system_instruction}]}]
+    api_input.extend(conversation_input)
+
+    req = _build_request_payload(cfg, api_input, tools=None)
+    req["text_format"] = PlotGenerationBlueprint
+
+    try:
+        resp = client.responses.parse(**req)
+        
+        parsed_data = None
+        if hasattr(resp, 'output_parsed') and resp.output_parsed:
+            parsed_data = resp.output_parsed
+        else:
+            for out in getattr(resp, 'output', []):
+                if getattr(out, "type", "") == "message":
+                    for item in getattr(out, "content", []):
+                        if getattr(item, "parsed", None):
+                            parsed_data = item.parsed
+                            break
+
+        if not parsed_data:
+            raise ValueError("Failed to parse PlotGenerationBlueprint from Responses API.")
+
+        usage_data = _extract_usage_metrics(getattr(resp, "usage", None))
+        return parsed_data, usage_data
+    except Exception as e:
+        logger.error(f"Failed to generate plot blueprint: {e}")
+        raise e
+
+
+def execute_plot_generation(
+    blueprint: PlotGenerationBlueprint,
+    mode: str,
+    active_container_id: str | None
+) -> Tuple[List[str], str | None, Dict[str, int]]:
+    """
+    Executes the code interpreter using the analytical blueprint combined 
+    with the strict visual doctrine rules.
+    """
+    client = get_openai_client()
+    cfg = get_model_config(mode)
+
+    visual_rules = build_visual_instructions()
+
+    prompt = (
+        f"You are the visual engine. Execute the following analytical blueprint "
+        f"strictly using the Code Interpreter.\n\n"
+        f"--- ANALYTICAL BLUEPRINT ---\n"
+        f"Concept: {blueprint.analytical_concept}\n"
+        f"Chart Type: {blueprint.chart_type}\n"
+        f"Data Generation: {blueprint.data_generation_rules}\n"
+        f"Axes Labels: {blueprint.axis_labels}\n\n"
+        f"--- VISUAL DOCTRINE (STRICT) ---\n"
+        f"{visual_rules}\n\n"
+        f"Generate and display the plot. Do NOT provide conversational text."
+    )
+
+    api_input = [{"role": "user", "content": [{"type": "input_text", "text": prompt}]}]
+
+    memory_limit = get_code_interpreter_memory()
+    container_config = active_container_id if active_container_id else {"type": "auto", "memory_limit": memory_limit}
+    tools = [{"type": "code_interpreter", "container": container_config}]
+
+    req = _build_request_payload(cfg, api_input, tools=tools)
+
+    try:
+        resp = client.responses.create(**req)
+
+        container_id = None
+        output_list = getattr(resp, "output", []) or []
+        for item in output_list:
+            if getattr(item, "type", "") == "code_interpreter_call":
+                cid = getattr(item, "container_id", None)
+                if not cid and hasattr(item, "code_interpreter"):
+                    cid = getattr(item.code_interpreter, "container_id", None)
+                if not cid and hasattr(item, "code_interpreter_call"):
+                    cid = getattr(item.code_interpreter_call, "container_id", None)
+                if cid:
+                    container_id = cid
+                    break
+
+        generated_urls_map = handle_generated_files(client, resp, folder="chat_assets")
+        generated_urls = list(generated_urls_map.values()) if isinstance(generated_urls_map, dict) else generated_urls_map
+        usage_data = _extract_usage_metrics(getattr(resp, "usage", None))
+
+        return generated_urls, container_id, usage_data
+    except Exception as e:
+        logger.error(f"Failed to execute plot generation: {e}")
+        raise e
+
 
 # ------------------------------------------------------------------
 # STANDARD CHAT
@@ -53,7 +164,7 @@ def send_message_to_assistant(
     user_location: Dict[str, str] | None = None,
     pdf_urls: List[str] | None = None,
     active_container_id: str | None = None,
-    conversation_id: str | None = None # 🟢 FIX: Renamed from session_id to match UserConversation table
+    conversation_id: str | None = None 
 ) -> Tuple[str, List[str], List[Dict[str, str]], Dict[str, int], Optional[str]]:
     
     client = get_openai_client()
@@ -111,12 +222,9 @@ def send_message_to_assistant(
                     container_id = cid
                     break
 
-        # 🟢 Extract the files from the response
         generated_urls_map = handle_generated_files(client, resp, folder="chat_assets")
         
-        # 🟢 NEW: Track if the AI generated a DALL-E image during the conversation
         if isinstance(generated_urls_map, dict) and user_id:
-            # Safely extract ONLY the creative image URLs (ignoring python-generated graphs)
             creative_image_urls = [url for fname, url in generated_urls_map.items() if fname.startswith("creative_image_")]
             creative_image_count = len(creative_image_urls)
             
@@ -178,10 +286,10 @@ def stream_chat_response(
     if enable_image_generation:
         tools.append({
             "type": "image_generation",
-            "model": cfg.image_model,          # 🟢 Injected dynamic model
+            "model": cfg.image_model,
             "partial_images": get_image_generation_partials(), 
             "size": get_image_generation_size(),
-            "quality": cfg.image_quality       # 🟢 Injected dynamic quality
+            "quality": cfg.image_quality
         })
 
     req = _build_request_payload(cfg, api_input, tools)
@@ -430,7 +538,7 @@ def stream_structured_quiz(
         yield {"type": "error", "error": str(e)}
 
 # ------------------------------------------------------------------
-# 🟢 MIND MAP STREAMING (NEW)
+# MIND MAP STREAMING (NEW)
 # ------------------------------------------------------------------
 def stream_structured_mindmap(
     conversation_input: List[Dict[str, Any]], 
@@ -589,10 +697,10 @@ def _configure_tools(vector_store_ids, requires_visuals, requires_creative_image
     if requires_creative_images:
         tools.append({
             "type": "image_generation",
-            "model": cfg.image_model,          # 🟢 Injected dynamic model
+            "model": cfg.image_model,
             "partial_images": get_image_generation_partials(),
             "size": get_image_generation_size(),
-            "quality": cfg.image_quality       # 🟢 Injected dynamic quality
+            "quality": cfg.image_quality
         })
         
     if web_search_config:
