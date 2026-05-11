@@ -12,7 +12,8 @@ def decimal_default(obj):
     raise TypeError
 
 # 🔹 FIX: Increased memory limits from 3 to 10 to support long educational interactions
-def build_history_list(conversation_id: str, max_user: int = 10, max_assistant: int = 10) -> List[Dict[str, Any]]:
+# 🔹 FIX: Added include_system_logs flag to prevent router hallucinations
+def build_history_list(conversation_id: str, max_user: int = 10, max_assistant: int = 10, include_system_logs: bool = True) -> List[Dict[str, Any]]:
     """
     Retrieves recent messages from the database and formats them for the OpenAI API.
     Handles hidden context injection for assistant messages with metadata to prevent History Desync.
@@ -36,7 +37,9 @@ def build_history_list(conversation_id: str, max_user: int = 10, max_assistant: 
             
             # Inject metadata context if available (Assistant only)
             metadata = m.get("Metadata") or m.get("Meta")
-            if role == "assistant" and metadata:
+            
+            # ONLY inject the system log if include_system_logs is True
+            if role == "assistant" and metadata and include_system_logs:
                 try:
                     metadata_str = json.dumps(metadata, default=decimal_default)
                     # GENERALIZED ANTI-DESYNC FIX

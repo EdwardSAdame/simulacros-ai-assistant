@@ -79,7 +79,7 @@ def lambda_handler(event, context):
                         conversation_id=conv_id_in or "unknown", 
                         source="telemetry",                      
                         tier=ai_mode,                            
-                        engine=cfg.audio_transcription_model,    
+                        engine=cfg.audio_transcription_model,   
                         duration_seconds=int(audio_duration),
                         audio_type="speech-to-text"
                     )
@@ -146,8 +146,8 @@ def lambda_handler(event, context):
                     recent_history = [] 
                     if conv_id_in and user_id:
                         try:
-                            # Limit to recent messages to save router tokens and time
-                            recent_history = build_history_list(conv_id_in, max_user=2, max_assistant=2)
+                            # 🔹 FIX: Pass include_system_logs=False to hide widget JSON from the router
+                            recent_history = build_history_list(conv_id_in, max_user=2, max_assistant=2, include_system_logs=False)
                             existing_meta = get_conversation_metadata(user_id, conv_id_in)
                             if existing_meta:
                                 persisted_exam_context = existing_meta.get("ExamContext")
