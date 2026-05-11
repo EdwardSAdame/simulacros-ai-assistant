@@ -10,7 +10,8 @@ from src.storage.conversations_table import (
     update_conversation_last_active,
     update_conversation_mode,
     update_conversation_exam_context,
-    get_latest_conversation_for_user # NEW: Added import for global user context retrieval
+    update_conversation_activity, # NEW: Import the activity updater
+    get_latest_conversation_for_user 
 )
 from src.storage.messages_table import save_message
 from src.storage.arenas_table import update_arena_last_active
@@ -46,11 +47,13 @@ class ConversationService:
         message: str | None,
         mode: str,
         exam_context: str,
-        arena_id: str | None = None
+        arena_id: str | None = None,
+        intent: str = "chat" # NEW: Accept intent to manage sticky UI state
     ) -> Tuple[str, str]:
         """
         Checks if a conversation exists. 
         Enforces Sticky Exam Context (Ratchet Logic) so the AI never downgrades to 'general'.
+        Manages CurrentActivity state so the router knows if the user is in a Quiz/Flashcard panel.
         Returns a tuple of (actual_conversation_id, final_locked_exam_context).
         """
         page = cls.normalize_page(page)
@@ -61,6 +64,7 @@ class ConversationService:
         
         final_exam_context = str(exam_context).upper()
         persisted_exam_context = None
+        persisted_activity = "chat" # Default
 
         if conversation_id and user_id:
             exists_timestamp = _find_conversation_timestamp(user_id, conversation_id)
@@ -70,6 +74,7 @@ class ConversationService:
                 if existing_meta:
                     persisted_exam_context = str(existing_meta.get("ExamContext", "")).upper()
                     persisted_mode = existing_meta.get("AiMode")
+                    persisted_activity = existing_meta.get("CurrentActivity", "chat")
                     
                     # Update mode if changed
                     if persisted_mode and mode != persisted_mode:
@@ -80,7 +85,7 @@ class ConversationService:
                     if not arena_id and existing_meta.get("ArenaId"):
                         arena_id = existing_meta.get("ArenaId")
 
-        # NEW: Global User-Level Context Inheritance
+        # Global User-Level Context Inheritance
         # If this is a brand new session, query the database for the user's most recent conversation state
         if should_create_new and user_id and user_id != "anonymous":
             try:
@@ -97,6 +102,12 @@ class ConversationService:
         if persisted_exam_context in specific_exams and final_exam_context not in specific_exams:
             final_exam_context = persisted_exam_context
 
+        # STICKY STATE LOGIC
+        # If the intent is a major tool, lock it as the active state. 
+        # If it's just "chat", stick to the previous state so the router knows they are asking a follow-up.
+        major_intents = ["quiz", "flashcards", "mentalmap", "mind_map", "creative_image", "admission_stats"]
+        final_activity = intent if intent in major_intents else (persisted_activity if not should_create_new else "chat")
+
         try:
             if should_create_new:
                 conversation_data = save_conversation(
@@ -108,13 +119,18 @@ class ConversationService:
                     conversation_id=actual_conversation_id,
                     arena_id=arena_id,
                     ai_mode=mode,
-                    exam_context=final_exam_context  # Save the resolved lock
+                    exam_context=final_exam_context,
+                    current_activity=final_activity # Save the sticky state on creation
                 )
                 actual_conversation_id = conversation_data["ConversationId"]
             else:
                 # Update DB only if we explicitly upgraded (General->UNAL) or swapped (UNAL->ICFES)
                 if persisted_exam_context and final_exam_context != persisted_exam_context:
                     update_conversation_exam_context(user_id, actual_conversation_id, final_exam_context)
+                
+                # Update activity state if the user moved to a new panel tool
+                if final_activity != persisted_activity:
+                    update_conversation_activity(user_id, actual_conversation_id, final_activity)
             
             # Update Activity Timestamps
             if user_id and actual_conversation_id:

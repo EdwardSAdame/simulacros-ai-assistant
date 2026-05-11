@@ -36,7 +36,7 @@ class SemanticRouter:
             "matematicas", "ciencias_naturales", "analisis_imagen", "general"
         ]
 
-    def determine_category(self, text: str, user_id: str = "system_router", conversation_id: str = "intent_resolution", exam_context: str = "GENERAL", history: Optional[List[dict]] = None) -> dict:
+    def determine_category(self, text: str, user_id: str = "system_router", conversation_id: str = "intent_resolution", exam_context: str = "GENERAL", history: Optional[List[dict]] = None, current_activity: str = "chat") -> dict:
         if not text:
             return {
                 "category": "general", 
@@ -48,7 +48,8 @@ class SemanticRouter:
             }
             
         try:
-            result = self._classify_with_llm(text, user_id, conversation_id, exam_context, history)
+            # NEW: Pass current_activity to the LLM classifier
+            result = self._classify_with_llm(text, user_id, conversation_id, exam_context, history, current_activity)
             return {
                 "category": result.get("category", "general"),
                 "intent": result.get("intent", "chat"),
@@ -68,11 +69,11 @@ class SemanticRouter:
                 "source": "error_fallback"
             }
 
-    def _classify_with_llm(self, text: str, user_id: str, conversation_id: str, exam_context: str, history: Optional[List[dict]] = None) -> dict:
+    def _classify_with_llm(self, text: str, user_id: str, conversation_id: str, exam_context: str, history: Optional[List[dict]] = None, current_activity: str = "chat") -> dict:
         router_model = settings.OPENAI_ROUTER_MODEL.lower()
         
-        # Build instructions dynamically based on context
-        system_instruction = build_router_instructions(exam_context)
+        # Build instructions dynamically based on context AND sticky state
+        system_instruction = build_router_instructions(exam_context, current_activity)
         
         api_input = [
             {"role": "system", "content": system_instruction.strip()}
@@ -204,7 +205,7 @@ class SemanticRouter:
             if not phrases:
                 phrases = ["Procesando...", "Analizando..."]
 
-            logger.info(f"Router: AI classified as '{category}' with intent '{intent}' in context '{exam_context}'")
+            logger.info(f"Router: AI classified as '{category}' with intent '{intent}' in context '{exam_context}' and active state '{current_activity}'")
             return {
                 "category": category, 
                 "intent": intent, 

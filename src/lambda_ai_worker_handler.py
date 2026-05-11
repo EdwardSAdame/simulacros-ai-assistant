@@ -142,6 +142,7 @@ def lambda_handler(event, context):
             if connection_ids and not is_hidden:
                 try:
                     persisted_exam_context = None
+                    current_activity = "chat" # NEW: Default fallback activity
                     # --- NEW: Fetch recent conversation history to pass to the router ---
                     recent_history = [] 
                     if conv_id_in and user_id:
@@ -151,18 +152,20 @@ def lambda_handler(event, context):
                             existing_meta = get_conversation_metadata(user_id, conv_id_in)
                             if existing_meta:
                                 persisted_exam_context = existing_meta.get("ExamContext")
+                                current_activity = existing_meta.get("CurrentActivity", "chat") # NEW: Extract sticky state
                         except Exception as meta_e:
                             logger.warning(f"Could not fetch conversation metadata/history: {meta_e}")
 
                     current_exam_context = determine_exam_context(page, message, current_locked_context=persisted_exam_context)
 
-                    # --- UPDATED: Passing the history array into the router ---
+                    # --- UPDATED: Passing the history array and current_activity into the router ---
                     routing_result = semantic_router.determine_category(
                         text=message, 
                         user_id=user_id, 
                         conversation_id=conv_id_in, 
                         exam_context=current_exam_context,
-                        history=recent_history 
+                        history=recent_history,
+                        current_activity=current_activity # NEW: Pass state to router
                     )
                     
                     category_key = routing_result.get("category", "general")

@@ -58,7 +58,8 @@ def save_conversation(
     arena_id: Optional[str] = None,        # Link to an Arena
     ai_mode: str = "omega",                # Persist the selected mode
     channel: str = "text",                 # Distinguish text vs voice chats
-    exam_context: str = "GENERAL"          # NEW: Persist the locked exam intent
+    exam_context: str = "GENERAL",         # Persist the locked exam intent
+    current_activity: str = "chat"         # NEW: Persist the current visual activity
 ) -> Dict[str, Any]:
     """
     Creates a new conversation record in DynamoDB.
@@ -89,7 +90,8 @@ def save_conversation(
         "LastUpdated": timestamp, # Initialize LastUpdated same as creation
         "AiMode": ai_mode,        # Save the mode
         "Channel": channel,       # Save the channel (text, voice)
-        "ExamContext": exam_context # NEW: Save the exam lock state
+        "ExamContext": exam_context, # Save the exam lock state
+        "CurrentActivity": current_activity # Save the active UI state
     }
 
     # Clean up (removes empty email, empty arena_id, etc.)
@@ -97,7 +99,7 @@ def save_conversation(
 
     try:
         table.put_item(Item=safe_item)
-        print(f"Conversation saved: {conversation_id} (Arena: {arena_id}, Mode: {ai_mode}, Exam: {exam_context})")
+        print(f"Conversation saved: {conversation_id} (Arena: {arena_id}, Mode: {ai_mode}, Exam: {exam_context}, Activity: {current_activity})")
     except Exception as e:
         print(f"Error saving conversation: {e}")
         raise e
@@ -109,7 +111,8 @@ def save_conversation(
         "ArenaId": arena_id,
         "AiMode": ai_mode,
         "Channel": channel,
-        "ExamContext": exam_context
+        "ExamContext": exam_context,
+        "CurrentActivity": current_activity
     }
 
 def update_conversation_last_active(user_id: str, conversation_id: str):
@@ -150,8 +153,8 @@ def get_conversations_for_user(
         '#n': 'Name'
     }
     
-    # Added ExamContext to the projection expression
-    projection_expression = "ConversationId, Title, #ts, IsPinned, #n, Page, ArenaId, LastUpdated, AiMode, Channel, ExamContext"
+    # Added CurrentActivity to the projection expression
+    projection_expression = "ConversationId, Title, #ts, IsPinned, #n, Page, ArenaId, LastUpdated, AiMode, Channel, ExamContext, CurrentActivity"
 
     try:
         response = table.query(
@@ -179,7 +182,7 @@ def get_conversations_for_user(
 
 def get_latest_conversation_for_user(user_id: str) -> Optional[Dict[str, Any]]:
     """
-    NEW: Fetches the most recent conversation for a user.
+    Fetches the most recent conversation for a user.
     Used to inherit the global ExamContext when starting a new session.
     """
     # Fetch a small batch of recent conversations and return the top one (most recently active)
@@ -226,7 +229,7 @@ def update_conversation_pin(user_id: str, conversation_id: str, is_pinned: bool)
 
 def get_conversation_metadata(user_id: str, conversation_id: str) -> Optional[Dict[str, Any]]:
     """
-    Fetches basic metadata (Title, ArenaId, AiMode, Channel, ExamContext) for a conversation.
+    Fetches basic metadata (Title, ArenaId, AiMode, Channel, ExamContext, CurrentActivity) for a conversation.
     """
     timestamp = _find_conversation_timestamp(user_id, conversation_id)
     if not timestamp:
@@ -235,7 +238,7 @@ def get_conversation_metadata(user_id: str, conversation_id: str) -> Optional[Di
     try:
         response = table.get_item(
             Key={'UserId': user_id, 'Timestamp': timestamp},
-            ProjectionExpression="ConversationId, Title, ArenaId, AiMode, Channel, ExamContext"
+            ProjectionExpression="ConversationId, Title, ArenaId, AiMode, Channel, ExamContext, CurrentActivity"
         )
         return response.get('Item')
     except Exception as e:
@@ -297,4 +300,25 @@ def update_conversation_exam_context(user_id: str, conversation_id: str, new_exa
         return True
     except Exception as e:
         print(f"Error updating ExamContext for {conversation_id}: {e}")
+        return False
+
+def update_conversation_activity(user_id: str, conversation_id: str, current_activity: str):
+    """
+    NEW: Updates the CurrentActivity (sticky UI state) for an existing conversation.
+    """
+    timestamp = _find_conversation_timestamp(user_id, conversation_id)
+    if not timestamp:
+        print(f"Cannot update CurrentActivity: Conversation {conversation_id} not found.")
+        return False
+
+    try:
+        table.update_item(
+            Key={'UserId': user_id, 'Timestamp': timestamp},
+            UpdateExpression="set CurrentActivity = :a",
+            ExpressionAttributeValues={':a': current_activity}
+        )
+        print(f"Successfully updated conversation {conversation_id} to Activity: {current_activity}")
+        return True
+    except Exception as e:
+        print(f"Error updating CurrentActivity for {conversation_id}: {e}")
         return False

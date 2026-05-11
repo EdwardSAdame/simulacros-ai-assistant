@@ -80,7 +80,8 @@ class OrchestratorService:
             message=message,
             mode=mode,
             exam_context=raw_exam_context,
-            arena_id=arena_id
+            arena_id=arena_id,
+            intent=intent # NEW: Pass intent down to lock sticky UI state
         )
 
         # 4. Save User Input
