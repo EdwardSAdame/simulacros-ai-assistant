@@ -6,30 +6,28 @@ from src.config.search_instructions import build_search_instructions
 from src.config.creative_image_instructions import get_creative_image_system_prompt
 from src.config.exam_frameworks import get_exam_framework
 
-# --- 1. CORE PERSONA (ALWAYS ACTIVE - GLOBAL DNA) ---
+# --- 1. CORE PERSONA (GLOBAL DNA) ---
 CORE_PERSONA = """
-You are Roma, the AI for Invicto, engineered by Edward Adame, an engineering student at the National University of Colombia.
+You are Roma, a female AI of Invicto. Always use she/her pronouns. You were created by Edward Adame, an engineering student at the National University of Colombia.
 
-1. Tone & Persona: Authoritative, cold, precise, and highly confident. Teach with radical simplicity. Break complex concepts into basic logic. Never hedge or apologize.
+1. Tone & Pedagogy: Authoritative, precise, and highly confident. Teach with radical simplicity. Assume the user has zero prior knowledge. Explain topics as if teaching a 12-year-old, using everyday analogies to break down complex logic. Avoid dense jargon unless you define it immediately in simple terms. Never hedge or apologize.
 2. Language: Strictly mirror the user's language.
 3. Constraints: ZERO emojis, exclamation marks, or casual slang.
-4. LaTeX Mandatory (GLOBAL): ALWAYS use standard LaTeX delimiters for all math and variables.
-   - Inline Math: Use `\\(` and `\\)` (e.g., `\\( x^2 \\)`).
-   - Block Math: Use `\\[` and `\\]` (e.g., `\\[ E=mc^2 \\]`).
+4. LaTeX Mandatory: ALWAYS use standard LaTeX delimiters for all math and variables.
+   - Inline Math: Use \\( and \\)
+   - Block Math: Use \\[ and \\]
 """
 
-# --- 2. ACADEMIC TUTORING DOCTRINE (STANDARD CHAT ONLY) ---
+# --- 2. ACADEMIC DOCTRINES ---
 ACADEMIC_TUTORING_DOCTRINE = """
 1. Mission: Guide students toward top Colombian universities.
-2. Context: Use `{page}` to determine the subject context for short inputs.
-3. Multimodal Mastery: Instantly analyze uploaded images or documents. Extract data, solve problems, and seamlessly integrate findings into your response.
+2. Context: Use `{page}` to determine subject context for short inputs.
+3. Multimodal: Instantly analyze uploaded images/documents. Extract data, solve problems, and integrate findings into your response.
 4. Structure: Use Markdown headings and bullet points for readability.
 """
 
 PROACTIVE_VISUAL_DOCTRINE = """
-5. Proactive Visual Generation (THE VISUAL DOCTRINE):
-   - You are a tutor with access to a Python Code Interpreter.
-   - Whenever explaining a concept that inherently benefits from spatial or mathematical visualization, you MUST immediately call your python/code_interpreter tool to generate the plot.
+5. Proactive Visuals: You have access to a Python Code Interpreter. When explaining concepts benefiting from mathematical visualization, you MUST immediately call code_interpreter to generate a plot.
 """
 
 # --- 3. THE BUILDER ---
@@ -46,37 +44,29 @@ def build_system_instructions(
     blocks = [CORE_PERSONA.strip()]
     
     if requires_creative_image:
-        # CREATIVE MODE
         blocks.append("## CREATIVE IMAGE GENERATION\n" + get_creative_image_system_prompt())
-    else:
-        # ACADEMIC MODE
-        
-        # Only inject the Chat-Specific Tutoring Doctrine if it's NOT a quiz
-        if intent != "quiz":
-            doctrine_text = ACADEMIC_TUTORING_DOCTRINE.strip()
-            # Conditionally inject the code interpreter command ONLY if visuals are required
-            if requires_visuals:
-                doctrine_text += "\n" + PROACTIVE_VISUAL_DOCTRINE.strip()
-                
-            blocks.append("## ACADEMIC TUTORING DOCTRINE\n" + doctrine_text)
-        
-        # Inject Academic Framework (Dynamically filtered by category AND intent)
-        blocks.append(get_exam_framework(exam_context, category, intent))
-        
-        # Inject Search Protocols 
-        if web_search_active:
-            blocks.append(build_search_instructions())
-            
-        # Inject Graphing Visual Doctrine 
-        # Never inject Matplotlib code instructions into the quiz LLM, 
-        # because quiz plots are handled by the background thread.
-        if requires_visuals and intent != "quiz":
-            blocks.append(build_visual_instructions())
+        return "\n\n".join(blocks).strip()
 
-    # 4. Inject Runtime Signals
+    # Academic Mode Logic
+    if intent != "quiz":
+        doctrine_parts = [ACADEMIC_TUTORING_DOCTRINE.strip()]
+        if requires_visuals:
+            doctrine_parts.append(PROACTIVE_VISUAL_DOCTRINE.strip())
+        blocks.append("## ACADEMIC TUTORING DOCTRINE\n" + "\n\n".join(doctrine_parts))
+
+    # Contextual Frameworks
+    blocks.append(get_exam_framework(exam_context, category, intent))
+    
+    if web_search_active:
+        blocks.append(build_search_instructions())
+        
+    if requires_visuals and intent != "quiz":
+        blocks.append(build_visual_instructions())
+
+    # Runtime Signals
     if extras:
-        addenda = [e for e in extras if e]
-        if addenda:
-            blocks.append("## RUNTIME SIGNALS\n" + "\n".join(addenda))
+        valid_extras = [e for e in extras if e]
+        if valid_extras:
+            blocks.append("## RUNTIME SIGNALS\n" + "\n".join(valid_extras))
             
     return "\n\n".join(blocks).strip()
