@@ -148,7 +148,7 @@ class ChatService:
             system_prompt = build_system_instructions(
                 extras=runtime_signals, 
                 exam_context=exam_context, 
-                requires_visuals=False,  # FIX: Force False so the text model NEVER sees Matplotlib instructions
+                requires_visuals=False, 
                 web_search_active=is_web_search_active, 
                 intent="chat",
                 category=category  
@@ -171,27 +171,32 @@ class ChatService:
                 blueprint_instruction = (
                     "You are the analytical engine. Based on the user's request, "
                     "generate a strict analytical blueprint for a mathematical or data plot. "
-                    "Focus only on the variables and math. Do not worry about styling."
                 )
+                
                 blueprint, blueprint_usage = generate_plot_blueprint(
                     conversation_input=conversation_input,
                     mode=mode,
                     system_instruction=blueprint_instruction
                 )
 
-                # Inject blueprint context into the text generation prompt
-                text_prompt = system_prompt + (
-                    f"\n\n[SYSTEM NOTE: A visual plot is simultaneously being generated with the following blueprint:\n"
-                    f"Concept: {blueprint.analytical_concept}\n"
-                    f"Type: {blueprint.chart_type}\n"
-                    f"Ensure your conversational text explanation naturally aligns with this upcoming visualization. "
-                    f"CRITICAL: Do NOT write any Python code, do NOT use Matplotlib, and do NOT output code blocks. "
-                    f"Your only job is to explain the concept.]"
-                )
+                # Phase 1.5: Short-circuit validation
+                is_valid_plot = blueprint.chart_type and "none" not in blueprint.chart_type.lower()
 
-                # Phase 2: Parallel Execution of Text and Visual Code
+                if is_valid_plot:
+                    text_prompt = system_prompt + (
+                        f"\n\n[SYSTEM NOTE: A visual plot is simultaneously being generated with the following blueprint:\n"
+                        f"Concept: {blueprint.analytical_concept}\n"
+                        f"Type: {blueprint.chart_type}\n"
+                        f"Ensure your conversational text explanation naturally aligns with this upcoming visualization. "
+                        f"CRITICAL: Do NOT write any Python code, do NOT use Matplotlib, and do NOT output code blocks. "
+                        f"Your only job is to explain the concept.]"
+                    )
+                else:
+                    text_prompt = system_prompt
+
+                # Phase 2: Parallel Execution of Text and Conditionally Visual Code
                 with concurrent.futures.ThreadPoolExecutor(max_workers=2) as executor:
-                    # Thread A: Conversational Text (requires_visuals=False avoids double container generation)
+                    
                     future_text = executor.submit(
                         send_message_to_assistant,
                         conversation_input=conversation_input, 
@@ -210,22 +215,30 @@ class ChatService:
                         conversation_id=actual_conversation_id
                     )
 
-                    # Thread B: Visual Code Execution
-                    future_plot = executor.submit(
-                        execute_plot_generation,
-                        blueprint=blueprint, 
-                        mode=mode, 
-                        active_container_id=active_container_id
-                    )
+                    future_plot = None
+                    if is_valid_plot:
+                        future_plot = executor.submit(
+                            execute_plot_generation,
+                            blueprint=blueprint, 
+                            mode=mode, 
+                            active_container_id=active_container_id
+                        )
 
                     response_tuple = future_text.result()
-                    plot_urls, container_id, plot_usage = future_plot.result()
+                    
+                    plot_urls = []
+                    plot_usage = {}
+                    container_id = response_tuple[4] if len(response_tuple) > 4 else None
+
+                    if future_plot:
+                        plot_urls, plot_container_id, plot_usage = future_plot.result()
+                        if plot_container_id:
+                            container_id = plot_container_id
 
                     final_reply_text = response_tuple[0]
                     generated_assets = plot_urls
                     sources_data = response_tuple[2] if len(response_tuple) > 2 else []
                     
-                    # Aggregate total token usage across all 3 API calls
                     text_usage = response_tuple[3] if len(response_tuple) > 3 else {}
                     usage_data = {}
                     for key in ["input_tokens", "output_tokens", "total_tokens", "reasoning_tokens", "cached_tokens"]:
