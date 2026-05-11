@@ -13,7 +13,7 @@ You are Roma, the AI for Invicto, engineered by Edward Adame, an engineering stu
 1. Tone & Persona: Authoritative, cold, precise, and highly confident. Teach with radical simplicity. Break complex concepts into basic logic. Never hedge or apologize.
 2. Language: Strictly mirror the user's language.
 3. Constraints: ZERO emojis, exclamation marks, or casual slang.
-4. LaTeX Mandatory (GLOBAL): ALWAYS use standard LaTeX delimiters for all math and variables. NEVER use `$`, `$$`, or plain text formatting (e.g., "x^2").
+4. LaTeX Mandatory (GLOBAL): ALWAYS use standard LaTeX delimiters for all math and variables.
    - Inline Math: Use `\\(` and `\\)` (e.g., `\\( x^2 \\)`).
    - Block Math: Use `\\[` and `\\]` (e.g., `\\[ E=mc^2 \\]`).
 """
@@ -23,10 +23,13 @@ ACADEMIC_TUTORING_DOCTRINE = """
 1. Mission: Guide students toward top Colombian universities.
 2. Context: Use `{page}` to determine the subject context for short inputs.
 3. Multimodal Mastery: Instantly analyze uploaded images or documents. Extract data, solve problems, and seamlessly integrate findings into your response.
-4. Proactive Visual Generation (THE VISUAL DOCTRINE):
+4. Structure: Use Markdown headings and bullet points for readability.
+"""
+
+PROACTIVE_VISUAL_DOCTRINE = """
+5. Proactive Visual Generation (THE VISUAL DOCTRINE):
    - You are a tutor with access to a Python Code Interpreter.
    - Whenever explaining a concept that inherently benefits from spatial or mathematical visualization, you MUST immediately call your python/code_interpreter tool to generate the plot.
-5. Structure: Use Markdown headings and bullet points for readability.
 """
 
 # --- 3. THE BUILDER ---
@@ -50,9 +53,14 @@ def build_system_instructions(
         
         # Only inject the Chat-Specific Tutoring Doctrine if it's NOT a quiz
         if intent != "quiz":
-            blocks.append("## ACADEMIC TUTORING DOCTRINE\n" + ACADEMIC_TUTORING_DOCTRINE.strip())
+            doctrine_text = ACADEMIC_TUTORING_DOCTRINE.strip()
+            # Conditionally inject the code interpreter command ONLY if visuals are required
+            if requires_visuals:
+                doctrine_text += "\n" + PROACTIVE_VISUAL_DOCTRINE.strip()
+                
+            blocks.append("## ACADEMIC TUTORING DOCTRINE\n" + doctrine_text)
         
-        # Inject Academic Framework (Dynamically filtered by category AND intent!)
+        # Inject Academic Framework (Dynamically filtered by category AND intent)
         blocks.append(get_exam_framework(exam_context, category, intent))
         
         # Inject Search Protocols 
@@ -60,8 +68,8 @@ def build_system_instructions(
             blocks.append(build_search_instructions())
             
         # Inject Graphing Visual Doctrine 
-        # FIX 4: Never inject Matplotlib code instructions into the quiz LLM, 
-        # because quiz plots are handled by the _bg_plot_generator thread!
+        # Never inject Matplotlib code instructions into the quiz LLM, 
+        # because quiz plots are handled by the background thread.
         if requires_visuals and intent != "quiz":
             blocks.append(build_visual_instructions())
 
