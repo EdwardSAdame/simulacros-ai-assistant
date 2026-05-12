@@ -67,7 +67,10 @@ When writing the Python code, you MUST apply the following "Clean Style" paramet
     ax.tick_params(axis='both', direction='in', length=6, width=1, color='black', labelsize=10)
     ```
 
-#### 5. LABELS & LEGEND
+#### 5. MATH & LATEX RENDERING
+* **MathText Formatting**: Format all mathematical expressions, symbols, and variables within labels, titles, legends, or text annotations using Matplotlib's native MathText engine. Enclose these mathematical elements strictly within dollar signs `$` and use raw Python strings (prefixed with `r`) to ensure correct LaTeX rendering in the generated image.
+
+#### 6. LABELS & LEGEND
 * **Legend**: Use `frameon=False` and `loc='upper right'`.
 * **X-Label**: Standard placement (`ax.set_xlabel`).
 * **Y-Label (Custom)**: Do NOT use `ax.set_ylabel`. Place the label as floating text aligned with the Y-axis origin (x=0).
@@ -80,11 +83,11 @@ When writing the Python code, you MUST apply the following "Clean Style" paramet
             color='black')
     ```
 
-#### 6. SPECIFIC CHART TYPES (BARS & SCATTER)
+#### 7. SPECIFIC CHART TYPES (BARS & SCATTER)
 * **Bar Graphs**: You MUST remove the contour/border of the bars. Always pass `edgecolor='none'` when calling `ax.bar()` or `plt.bar()`.
 * **Scatter Plots**: You MUST remove the contour/border of the dots. Always pass `edgecolors='none'` when calling `ax.scatter()` or `plt.scatter()`.
 
-#### 7. DISPLAYING THE PLOT (CRITICAL)
+#### 8. DISPLAYING THE PLOT (CRITICAL)
 * **Output**: You MUST display the final plot directly using `plt.show()`. 
 * **No File Saving**: Do NOT save the figure to disk. Do NOT use `plt.savefig()`. Do NOT use `plt.close(fig)`.
 """
