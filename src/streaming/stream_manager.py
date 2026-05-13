@@ -89,7 +89,8 @@ class StreamManager:
         payload = {
             "action": "status_update",
             "category": category,
-            "phrases": loading_phrases or []
+            # 🟢 FIX: Matches what the frontend chat.handlers.js expects!
+            "loading_phrases": loading_phrases or []
         }
         self._send(payload)
 
