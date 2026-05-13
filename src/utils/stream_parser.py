@@ -110,63 +110,62 @@ class StreamParser:
                             yield {"type": "intro", "text": match.group(1).replace('\\"', '"')}
                             intro_yielded = True
                     
-                    # Detect Questions Array
-                    q_marker = buffer.find('"questions"')
-                    if q_marker != -1:
-                        arr_start = buffer.find('[', q_marker)
-                        if arr_start != -1:
-                            if last_checkpoint is None: 
-                                last_checkpoint = arr_start
+                    # Detect Questions Array Safely
+                    if last_checkpoint is None:
+                        match = re.search(r'"questions"\s*:\s*\[', buffer)
+                        if match:
+                            last_checkpoint = match.end() - 1
                             
-                            cursor = last_checkpoint
-                            depth = 0
-                            in_str = False
-                            escape = False
-                            obj_start = -1
-                            
-                            # Stack-based parser to find balanced braces {}
-                            while cursor < len(buffer):
-                                char = buffer[cursor]
-                                if not in_str:
-                                    if char == '"': 
-                                        in_str = True
-                                    elif char == '{':
-                                        if depth == 0: 
-                                            obj_start = cursor
-                                        depth += 1
-                                    elif char == '}':
-                                        depth -= 1
-                                        if depth == 0:
-                                            # Found a complete object
-                                            try:
-                                                json_str = buffer[obj_start:cursor+1]
-                                                data = json.loads(json_str)
-                                                
-                                                # Helper for partial validation/wrapping
-                                                class Wrapper:
-                                                    def __init__(self, d): self.d = d
-                                                    def dict(self): return self.d
-                                                
-                                                try: 
-                                                    q_obj = QuizQuestion(**data)
-                                                except: 
-                                                    q_obj = Wrapper(data)
-                                                
-                                                yield {"type": "question", "index": question_count, "data": q_obj}
-                                                question_count += 1
-                                                last_checkpoint = cursor + 1
-                                            except Exception: 
-                                                pass
+                    if last_checkpoint is not None:
+                        cursor = last_checkpoint
+                        depth = 0
+                        in_str = False
+                        escape = False
+                        obj_start = -1
+                        
+                        # Stack-based parser to find balanced braces {}
+                        while cursor < len(buffer):
+                            char = buffer[cursor]
+                            if not in_str:
+                                if char == '"': 
+                                    in_str = True
+                                elif char == '{':
+                                    if depth == 0: 
+                                        obj_start = cursor
+                                    depth += 1
+                                elif char == '}':
+                                    depth -= 1
+                                    if depth == 0:
+                                        # Found a complete object
+                                        try:
+                                            json_str = buffer[obj_start:cursor+1]
+                                            data = json.loads(json_str)
+                                            
+                                            # Helper for partial validation/wrapping
+                                            class Wrapper:
+                                                def __init__(self, d): self.d = d
+                                                def dict(self): return self.d
+                                            
+                                            try: 
+                                                q_obj = QuizQuestion(**data)
+                                            except: 
+                                                q_obj = Wrapper(data)
+                                            
+                                            yield {"type": "question", "index": question_count, "data": q_obj}
+                                            question_count += 1
+                                            last_checkpoint = cursor + 1
+                                        except Exception: 
+                                            pass
+                            elif char == '\\': 
+                                escape = True
+                            else:
+                                if escape: 
+                                    escape = False
                                 elif char == '\\': 
                                     escape = True
-                                else:
-                                    if escape: 
-                                        escape = False
-                                    elif char == '\\': 
-                                        escape = True
-                                    elif char == '"': 
-                                        in_str = False
-                                cursor += 1
+                                elif char == '"': 
+                                    in_str = False
+                            cursor += 1
 
             # 2. Retrieve Final Response (Standard OpenAI SDK method)
             if hasattr(stream, 'get_final_response'):
@@ -195,7 +194,7 @@ class StreamParser:
 
 
     # -------------------------------------------------------------------------
-    # 🟢 MIND MAP STREAM PARSER
+    # MIND MAP STREAM PARSER
     # -------------------------------------------------------------------------
     @staticmethod
     def parse_mindmap_stream(stream) -> Generator[Dict[str, Any], None, None]:
@@ -229,13 +228,11 @@ class StreamParser:
                 elif event_type == "response.output_text.delta":
                     buffer += getattr(event, "delta", "")
                     
-                    # Wait until we see the start of the nodes array to begin parsing objects
+                    # Wait until we see the start of the nodes array safely
                     if last_checkpoint is None:
-                        n_marker = buffer.find('"nodes"')
-                        if n_marker != -1:
-                            arr_start = buffer.find('[', n_marker)
-                            if arr_start != -1:
-                                last_checkpoint = arr_start
+                        match = re.search(r'"nodes"\s*:\s*\[', buffer)
+                        if match:
+                            last_checkpoint = match.end() - 1
                     
                     if last_checkpoint is not None:
                         cursor = last_checkpoint
@@ -261,7 +258,7 @@ class StreamParser:
                                             json_str = buffer[obj_start:cursor+1]
                                             data = json.loads(json_str)
                                             
-                                            # Duck-type the object to decide if it's a node or edge
+                                            # Duck-type the object to decide if it is a node or edge
                                             if "level" in data and "label" in data:
                                                 yield {"type": "node", "data": data}
                                             elif ("from" in data or "source" in data) and "to" in data:
@@ -306,7 +303,7 @@ class StreamParser:
             yield {"type": "error", "error": str(e)}
 
     # -------------------------------------------------------------------------
-    # 🟢 NEW: FLASHCARD STREAM PARSER
+    # FLASHCARD STREAM PARSER
     # -------------------------------------------------------------------------
     @staticmethod
     def parse_flashcard_stream(stream) -> Generator[Dict[str, Any], None, None]:
@@ -340,13 +337,11 @@ class StreamParser:
                 elif event_type == "response.output_text.delta":
                     buffer += getattr(event, "delta", "")
                     
-                    # Wait until we see the start of the cards array to begin parsing objects
+                    # Wait until we see the start of the cards array safely
                     if last_checkpoint is None:
-                        n_marker = buffer.find('"cards"')
-                        if n_marker != -1:
-                            arr_start = buffer.find('[', n_marker)
-                            if arr_start != -1:
-                                last_checkpoint = arr_start
+                        match = re.search(r'"cards"\s*:\s*\[', buffer)
+                        if match:
+                            last_checkpoint = match.end() - 1
                     
                     if last_checkpoint is not None:
                         cursor = last_checkpoint

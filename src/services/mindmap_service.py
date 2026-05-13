@@ -6,7 +6,7 @@ from src.config.mindmap_instructions import build_mindmap_instructions
 from src.services.token_usage_service import TokenUsageService
 from src.config.model_config import get_model_config
 
-# 🟢 NEW IMPORTS
+# NEW IMPORTS
 from src.assistant.assistant_client import stream_structured_mindmap
 from src.streaming.stream_manager import StreamManager
 
@@ -94,6 +94,9 @@ class MindMapService:
 
             payload_dict = parsed_data.model_dump(by_alias=True) if hasattr(parsed_data, "model_dump") else parsed_data.dict(by_alias=True)
             
+            # Remove the thought process before returning it to the frontend
+            payload_dict.pop("thought_process", None)
+            
             return payload_dict
             
         except Exception as e:
@@ -101,7 +104,7 @@ class MindMapService:
             raise e
 
     # ------------------------------------------------------------------
-    # 🟢 MIND MAP STREAMING (NEW)
+    # MIND MAP STREAMING
     # ------------------------------------------------------------------
     def stream_mindmap(self, conversation_input: list, user_id: str, conversation_id: str, mode: str, stream_manager: StreamManager) -> dict:
         """
@@ -123,11 +126,11 @@ class MindMapService:
             for event in stream_generator:
                 event_type = event.get("type")
                 
-                # 🟢 Push nodes to the frontend in real-time
+                # Push nodes to the frontend in real-time
                 if event_type == "node":
                     stream_manager.send_mindmap_node(event.get("data"))
                     
-                # 🟢 Push edges to the frontend in real-time
+                # Push edges to the frontend in real-time
                 elif event_type == "edge":
                     stream_manager.send_mindmap_edge(event.get("data"))
                     
@@ -159,6 +162,9 @@ class MindMapService:
                     if final_parsed:
                         # Convert Pydantic object to dict for final return
                         final_payload = final_parsed.model_dump(by_alias=True) if hasattr(final_parsed, "model_dump") else final_parsed.dict(by_alias=True)
+                        
+                        # Remove the thought process before returning it to the frontend
+                        final_payload.pop("thought_process", None)
 
             return final_payload
 
