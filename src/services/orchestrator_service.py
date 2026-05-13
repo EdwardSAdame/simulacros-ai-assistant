@@ -134,8 +134,13 @@ class OrchestratorService:
                 final_reply_text = "He analizado el tema y estructurado sus conceptos clave. Puedes explorar el mapa mental en el panel interactivo."
 
             elif intent == "flashcards":
-                if stream_manager:
-                    stream_manager.send_intent("flashcards")
+                # =========================================================
+                # FIX: We NO LONGER send_intent("flashcards") from here.
+                # We will trigger the transition in flashcard_service.py 
+                # exactly when the real flashcard data begins to stream.
+                # =========================================================
+                # if stream_manager:
+                #     stream_manager.send_intent("flashcards")
 
                 final_reply_text, meta_payload = FlashcardsService.execute_flashcards_generation(
                     message=message,

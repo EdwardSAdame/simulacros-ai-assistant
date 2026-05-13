@@ -183,8 +183,13 @@ def lambda_handler(event, context):
                         client_action = "OPEN_QUIZ_PANEL"
                     elif intent == "mentalmap" or intent == "mind_map":
                         client_action = "OPEN_MENTAL_MAP_PANEL"
-                    elif intent in ["flashcard", "flashcards"]:
-                        client_action = "OPEN_FLASHCARDS_PANEL"
+                    # =========================================================
+                    # FIX: We NO LONGER trigger OPEN_FLASHCARDS_PANEL instantly here.
+                    # This allows the frontend Chat UI to stay open and display the 
+                    # loading phrases typed out by the #aiRichRenderer.
+                    # =========================================================
+                    # elif intent in ["flashcard", "flashcards"]:
+                    #     client_action = "OPEN_FLASHCARDS_PANEL"
 
                     status_payload = json.dumps({
                         "action": "status_update",

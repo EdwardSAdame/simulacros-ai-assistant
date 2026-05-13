@@ -238,7 +238,6 @@ class FlashcardsService:
         flashcard_data = None
 
         try:
-            # 🟢 CHANGED: Switch from blocking .parse() to .stream()
             req = {
                 "model": active_config.model,
                 "input": conversation_input,
@@ -248,6 +247,9 @@ class FlashcardsService:
             cards_list = []
             parsed_deck = None
             refusal_message = None
+            
+            # 🟢 FIX: State flag to track when to flip the UI
+            has_sent_intent = False
 
             with client.responses.stream(**req) as stream:
                 parser_generator = StreamParser.parse_flashcard_stream(stream)
@@ -269,6 +271,11 @@ class FlashcardsService:
                             cards_list.append(card_data)
                             
                             if stream_manager:
+                                # 🟢 FIX: Trigger the UI transition EXACTLY when the first card is ready!
+                                if not has_sent_intent:
+                                    stream_manager.send_intent("flashcards")
+                                    has_sent_intent = True
+                                    
                                 stream_manager.send_flashcard_item(card_data, event.get("index", 0))
                                 
                     elif event_type == "done":
