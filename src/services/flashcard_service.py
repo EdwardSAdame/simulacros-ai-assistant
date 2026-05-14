@@ -14,7 +14,6 @@ from src.schemas.flashcard_schemas import FlashcardsPayload
 from src.config.flashcard_instructions import get_flashcard_system_prompt
 from src.config.creative_image_instructions import get_creative_image_system_prompt
 
-# 🟢 NEW: Import the StreamParser
 from src.utils.stream_parser import StreamParser
 
 logger = logging.getLogger(__name__)
@@ -72,7 +71,7 @@ class FlashcardsService:
     @classmethod
     def _bg_image_worker(
         cls, 
-        topic: str, 
+        image_prompt: str, 
         user_id: str | None, 
         actual_conversation_id: str | None, 
         mode: str, 
@@ -89,16 +88,10 @@ class FlashcardsService:
             
             base_instruction = "You are an expert AI illustrator. Use the image_generation tool to create the requested image.\n\n"
             instructions = base_instruction + get_creative_image_system_prompt()
-            
-            img_prompt = (
-                f"Create an inspiring, abstract, and highly polished educational background illustration "
-                f"representing the academic topic: '{topic}'. It must be suitable as a backdrop for study "
-                f"flashcards. Do not include any text or words."
-            )
 
             bg_req = {
                 "model": active_config.model,
-                "input": [{"role": "user", "content": img_prompt}],
+                "input": [{"role": "user", "content": image_prompt}],
                 "tools": [{
                     "type": "image_generation",
                     "model": active_config.image_model,
@@ -128,7 +121,6 @@ class FlashcardsService:
                             img_bytes = base64.b64decode(bg_b64)
                             s3_url = storage_service.upload_image_from_bytes(img_bytes, "image/png", folder="flashcard_assets")
                             
-                            # Route the image payload specifically to the Flashcards intent
                             if stream_manager:
                                 stream_manager._send({
                                     "action": "partial_image_stream",
@@ -149,7 +141,7 @@ class FlashcardsService:
                         "action": "final_image_stream",
                         "intent": "flashcards",
                         "image_b64": final_url,
-                        "revised_prompt": img_prompt
+                        "revised_prompt": image_prompt
                     })
                     
                 if user_id:
@@ -219,22 +211,13 @@ class FlashcardsService:
                 loading_phrases=["Estructurando conceptos", "Diseñando entorno", "Sintetizando respuestas"]
             )
 
-        # Thread state container for retrieving data safely
         image_result = {"image_url": None}
         image_thread = None
-
-        # Launch parallel image generation
-        if stream_manager:
-            image_thread = threading.Thread(
-                target=cls._bg_image_worker,
-                args=(topic_hint, user_id, actual_conversation_id, mode, stream_manager, image_result)
-            )
-            image_thread.start()
 
         client = get_openai_client()
         active_config = get_model_config(mode)
 
-        final_reply_text = "Aquí tienes tus flashcards listas para estudiar."
+        final_reply_text = "Aqui tienes tus flashcards listas para estudiar."
         flashcard_data = None
 
         try:
@@ -248,7 +231,6 @@ class FlashcardsService:
             parsed_deck = None
             refusal_message = None
             
-            # 🟢 FIX: State flag to track when to flip the UI
             has_sent_intent = False
 
             with client.responses.stream(**req) as stream:
@@ -261,17 +243,25 @@ class FlashcardsService:
                         refusal_message = event.get("reason", "Refused")
                         break
                         
+                    elif event_type == "image_request":
+                        # We intercepted the natively generated image prompt. Launch the thread now!
+                        prompt_text = event.get("prompt")
+                        if prompt_text and stream_manager:
+                            image_thread = threading.Thread(
+                                target=cls._bg_image_worker,
+                                args=(prompt_text, user_id, actual_conversation_id, mode, stream_manager, image_result)
+                            )
+                            image_thread.start()
+
                     elif event_type == "card":
                         card_data = event.get("data", {})
                         if isinstance(card_data, dict):
-                            # Strip reasoning before sending to frontend to save bandwidth
                             if "reasoning" in card_data:
                                 del card_data["reasoning"]
                                 
                             cards_list.append(card_data)
                             
                             if stream_manager:
-                                # 🟢 FIX: Trigger the UI transition EXACTLY when the first card is ready!
                                 if not has_sent_intent:
                                     stream_manager.send_intent("flashcards")
                                     has_sent_intent = True
@@ -286,14 +276,13 @@ class FlashcardsService:
 
             if refusal_message:
                 logger.warning(f"Model refused flashcard generation: {refusal_message}")
-                final_reply_text = "Lo siento, no puedo generar flashcards sobre este tema por políticas de seguridad."
+                final_reply_text = "Lo siento, no puedo generar flashcards sobre este tema por politicas de seguridad."
                 
                 if image_thread:
                     image_thread.join()
                     
                 return final_reply_text, None
 
-            # Build the final payload to return to the database
             flashcard_data = {
                 "type": "flashcards_data",
                 "topic": getattr(parsed_deck, 'topic', 'Flashcards') if parsed_deck else topic_hint,
@@ -305,15 +294,13 @@ class FlashcardsService:
         except Exception as e:
             logger.error(f"Flashcard Generation Error: {e}")
             log_event("flashcard_generation_failed", {"error": str(e)}, level="error")
-            final_reply_text = "**Error**: No pudimos generar las flashcards. Intenta de nuevo."
+            final_reply_text = "Error: No pudimos generar las flashcards. Intenta de nuevo."
             flashcard_data = None
 
         finally:
-            # Strictly wait for the background image upload to finish before concluding the Lambda function
             if image_thread:
                 image_thread.join()
                 
-            # Attach the processed image URL to the metadata payload so it persists in the database
             if flashcard_data and image_result.get("image_url"):
                 flashcard_data["background_image"] = image_result["image_url"]
 

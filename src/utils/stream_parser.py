@@ -309,6 +309,7 @@ class StreamParser:
     def parse_flashcard_stream(stream) -> Generator[Dict[str, Any], None, None]:
         """
         Consumes the OpenAI stream and yields structured events for Flashcards:
+        - {"type": "image_request", "prompt": str}   <-- NEW INTERCEPTOR
         - {"type": "card", "index": int, "data": dict}
         - {"type": "done", "full_response": FlashcardsPayload}
         """
@@ -316,6 +317,7 @@ class StreamParser:
         card_count = 0
         last_checkpoint = None
         has_refused = False
+        image_prompt_yielded = False
         
         try:
             for event in stream:
@@ -337,6 +339,21 @@ class StreamParser:
                 elif event_type == "response.output_text.delta":
                     buffer += getattr(event, "delta", "")
                     
+                    # -------------------------------------------------------------------------
+                    # ASYNC INTERCEPTOR FOR DECK BACKGROUND IMAGE
+                    # -------------------------------------------------------------------------
+                    if not image_prompt_yielded:
+                        match = re.search(r'"image_prompt"\s*:\s*"((?:[^"\\]|\\.)*)"', buffer)
+                        if match:
+                            prompt_text = match.group(1).replace('\\"', '"').replace('\\n', '\n').replace('\\/', '/')
+                            if prompt_text and prompt_text.lower() not in ["null", "", "none"]:
+                                yield {
+                                    "type": "image_request",
+                                    "prompt": prompt_text
+                                }
+                            image_prompt_yielded = True
+                    # -------------------------------------------------------------------------
+
                     # Wait until we see the start of the cards array safely
                     if last_checkpoint is None:
                         match = re.search(r'"cards"\s*:\s*\[', buffer)

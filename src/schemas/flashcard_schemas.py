@@ -1,3 +1,4 @@
+# src/schemas/flashcard_schemas.py
 """
 Defines the Pydantic schemas for flashcard generation.
 These models are utilized to enforce strict JSON output schemas 
@@ -30,6 +31,10 @@ class FlashcardsPayload(BaseModel):
     Represents the complete payload returned by the AI, 
     containing metadata and the list of flashcards.
     """
+    image_prompt: Optional[str] = Field(
+        None,
+        description="A highly descriptive, concrete, and real-world scene conceptualization representing the academic topic. Describe tangible objects, people, or environments interacting in a realistic setting. Do not include text, letters, or numbers in the scene."
+    )
     topic: str = Field(
         ..., 
         description="The specific academic topic these flashcards cover."
