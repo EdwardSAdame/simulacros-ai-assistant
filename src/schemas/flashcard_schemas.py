@@ -33,7 +33,7 @@ class FlashcardsPayload(BaseModel):
     """
     image_prompt: Optional[str] = Field(
         None,
-        description="A highly descriptive, concrete, and real-world scene conceptualization representing the academic topic. Describe tangible objects, people, or environments interacting in a realistic setting. Do not include text, letters, or numbers in the scene."
+        description="A highly descriptive conceptualization of an Impressionist painting representing the academic topic. Describe tangible objects, landscapes, or generic figures. Do not include text, formulas, letters, or numbers."
     )
     topic: str = Field(
         ..., 
