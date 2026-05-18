@@ -8,16 +8,16 @@ logger.setLevel(logging.INFO)
 
 def lambda_handler(event, context):
     """
-    AWS Lambda entry point for fetching mock exams.
-    Expects 'component' (and optionally 'examType') in the query string parameters or body.
+    AWS Lambda entry point for fetching mock exams and catalogs.
+    Expects an 'action' parameter ('get_catalog' or 'get_exam').
+    For 'get_exam', expects 'component' and 'examId'.
     """
     try:
         logger.info(f"Received event: {json.dumps(event)}")
         
-        # 1. Extract parameters safely
+        # 1. Extract parameters safely (Supports GET and POST)
         params = event.get('queryStringParameters') or {}
         
-        # Fallback to body if called via POST instead of GET
         if not params and event.get('body'):
             try:
                 body_parsed = json.loads(event.get('body', '{}'))
@@ -26,35 +26,50 @@ def lambda_handler(event, context):
             except json.JSONDecodeError:
                 pass
 
+        # 2. Extract routing variables
+        action = params.get('action')
         exam_type = params.get('examType', 'icfes')
-        component = params.get('component')
 
-        # 2. Validate input
-        if not component:
-            logger.warning("Missing required parameter: component")
-            return build_response(400, {'error': 'Missing required parameter: component'})
+        # 3. Route to the correct service method based on 'action'
+        if action == 'get_catalog':
+            logger.info(f"Routing request to fetch catalog for type: {exam_type}")
+            message, payload = MockExamService.get_catalog(exam_type=exam_type)
 
-        # 3. Call internal service
-        logger.info(f"Fetching exam for type: {exam_type}, component: {component}")
-        message, exam_payload = MockExamService.get_random_exam(
-            exam_type=exam_type, 
-            component=component
-        )
+        elif action == 'get_exam':
+            component = params.get('component')
+            exam_id = params.get('examId')
 
-        # 4. Handle Service Failure (e.g., folder not found, no json files)
-        if exam_payload is None:
-            logger.error(f"Exam not found: {message}")
+            # Validation specifically for fetching an exam
+            if not component or not exam_id:
+                logger.warning("Missing required parameters for get_exam: component or examId")
+                return build_response(400, {'error': 'Missing required parameters: component and examId are required.'})
+
+            logger.info(f"Routing request to fetch specific exam: {exam_type} -> {component} -> {exam_id}")
+            message, payload = MockExamService.get_specific_exam(
+                exam_type=exam_type, 
+                component=component,
+                exam_id=exam_id
+            )
+
+        else:
+            # Handle missing or invalid action parameter
+            logger.warning(f"Invalid or missing action parameter: {action}")
+            return build_response(400, {'error': "A valid 'action' parameter is required ('get_catalog' or 'get_exam')."})
+
+        # 4. Handle Service Failure (e.g., file not found)
+        if payload is None:
+            logger.error(f"Operation failed: {message}")
             return build_response(404, {'error': message})
 
         # 5. Return Success
         return build_response(200, {
             'message': message,
-            'data': exam_payload
+            'data': payload
         })
 
     except Exception as e:
         logger.error(f"Unexpected error in lambda_mock_exam_handler: {str(e)}", exc_info=True)
-        return build_response(500, {'error': 'Internal server error while fetching the exam.'})
+        return build_response(500, {'error': 'Internal server error while processing the request.'})
 
 
 def build_response(status_code: int, body: dict) -> dict:
