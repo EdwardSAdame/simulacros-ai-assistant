@@ -1,0 +1,1204 @@
+{
+  "examType": "ICFES",
+  "component": "matematicas",
+  "examVolume": "Saber 11 - Matemáticas 2.a sesión",
+  "totalSections": 26,
+  "sections": [
+    {
+      "sectionIndex": 1,
+      "sectionTitle": "",
+      "sectionText": "",
+      "hasSectionImage": true,
+      "sectionImageUrl": "",
+      "sectionImageAiDescription": "",
+      "questions": [
+        {
+          "questionId": "q_26",
+          "questionText": "El ingreso per cápita se calcula dividiendo el total de los ingresos mensuales de un hogar entre la cantidad de personas que conforman el hogar. La gráfica muestra la distribución del ingreso per cápita de los hogares de un municipio y las líneas de pobreza extrema y monetaria.",
+          "hasQuestionImage": true,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "No, porque el ingreso total en el hogar de Esteban es mayor que $161.099",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "Sí, porque el ingreso de Esteban es mayor que $354.031",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "Sí, porque el ingreso per cápita del hogar de Esteban es menor que $354.031",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "No, porque el ingreso per cápita del hogar de Esteban es mayor que $161.099",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        }
+      ]
+    },
+    {
+      "sectionIndex": 2,
+      "sectionTitle": "",
+      "sectionText": "",
+      "hasSectionImage": false,
+      "sectionImageUrl": "",
+      "sectionImageAiDescription": "",
+      "questions": [
+        {
+          "questionId": "q_27",
+          "questionText": "En un conocido juego virtual, una forma de progresar es caminar y que un dispositivo mida la distancia recorrida. Lo importante es que se haga pie y no en un medio motorizado de transporte.\n\nLa empresa administradora del juego, preocupada por la conducta irregular de algunos de sus participantes, suspendió la cuenta de uno de sus jugadores por reportar 300 kilómetros caminados en un día, dando como argumento: “Es conocido que a cualquier persona le toma, en trayectos medios a largos, más de 6 minutos caminar un kilómetro”.\n\n¿Cuál de los siguientes argumentos sustenta la decisión de la suspensión del jugador?",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "Lo dicho implica que 300 kilómetros en un día son posibles pero requieren caminar sin descanso y eso es increíble para una persona.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "Lo dicho implica que la velocidad máxima es menos de 10 kilómetros por hora y menos de 240 kilómetros al día; un recorrido mayor corresponde entonces a un medio motorizado.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "Lo dicho implica que el jugador debe reportar mayor distancia porque un kilómetro se cubre en apenas 6 minutos; un recorrido así, corresponde entonces a un medio motorizado.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "Lo dicho implica una falta de relación con los 300 kilómetros reportados por el jugador y es solo un mensaje automático del juego.",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        }
+      ]
+    },
+    {
+      "sectionIndex": 3,
+      "sectionTitle": "",
+      "sectionText": "",
+      "hasSectionImage": false,
+      "sectionImageUrl": "",
+      "sectionImageAiDescription": "",
+      "questions": [
+        {
+          "questionId": "q_28",
+          "questionText": "Camila quería ayudar en su casa a pintar las paredes de dos habitaciones. Ella contaba inicialmente con 2 colores diferentes de pintura. En la primera habitación deseaba que la fracción pintada de cada color fuese \\(1/3\\) y en la segunda \\(1/4\\). En este sentido, ¿qué debió hacer para cumplir con sus objetivos?",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "Incluir 2 colores más para pintar el primer cuarto y 1 color más para pintar el segundo.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "Incluir 3 colores más para pintar el primer cuarto y 4 colores más para pintar el segundo.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "Incluir 1 color más para pintar el primer cuarto y 2 colores más para pintar el segundo.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "Incluir 4 colores más para pintar el primer cuarto y 3 colores más para pintar el segundo.",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        }
+      ]
+    },
+    {
+      "sectionIndex": 4,
+      "sectionTitle": "",
+      "sectionText": "",
+      "hasSectionImage": true,
+      "sectionImageUrl": "",
+      "sectionImageAiDescription": "",
+      "questions": [
+        {
+          "questionId": "q_29",
+          "questionText": "Una ruta escolar se encarga de recoger 8 estudiantes para llevarlos al colegio diariamente antes del inicio de clases que es a las 7:10 a. m. Con el fin de ver el promedio de las horas de llegada de la ruta al colegio, se realizó un registro en una semana, como se muestra en la siguiente tabla.\n\nCon esto se calcula que en promedio a las 7:05 a. m. llega la ruta al colegio. Al respecto, ¿cuál de las siguientes afirmaciones sobre el promedio calculado es válida?",
+          "hasQuestionImage": true,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "Es incorrecto porque se deben sumar los minutos de llegada y dividir entre los 8 estudiantes.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "Es correcto porque corresponde a la hora de llegada del miércoles que es la mitad de la semana.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "Es incorrecto porque se deben sumar los minutos de llegada y dividir entre los 5 días de la semana.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "Es correcto porque corresponde a la mitad entre las 7:00 a. m. y las 7:10 a. m.",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        }
+      ]
+    },
+    {
+      "sectionIndex": 5,
+      "sectionTitle": "",
+      "sectionText": "",
+      "hasSectionImage": true,
+      "sectionImageUrl": "",
+      "sectionImageAiDescription": "",
+      "questions": [
+        {
+          "questionId": "q_30",
+          "questionText": "Una familia que se dedica al cultivo de mojarrras consulta a un experto, que sugiere que un aumento de la temperatura del agua produciría un aumento proporcional en la cantidad de peces. La familia midió la cantidad de peces obtenidos a diferentes temperaturas y obtuvo la siguiente gráfica.\n\nSegún estos resultados, ¿es verdadera la afirmación del experto?",
+          "hasQuestionImage": true,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "No, puesto que a medida que aumenta la cantidad de peces, la temperatura permanece constante.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "Sí, puesto que la gráfica muestra un aumento en la temperatura del agua.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "No, puesto que al variar la temperatura, no cambia la cantidad de peces.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "Sí, puesto que para todas las temperaturas mostradas hay una cantidad de peces mayor que cero.",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        }
+      ]
+    },
+    {
+      "sectionIndex": 6,
+      "sectionTitle": "",
+      "sectionText": "",
+      "hasSectionImage": true,
+      "sectionImageUrl": "",
+      "sectionImageAiDescription": "",
+      "questions": [
+        {
+          "questionId": "q_31",
+          "questionText": "La imagen muestra una afirmación que escribió el profesor de Historia.\n\n¿Cuál de las siguientes opciones ordena las ciudades desde la primera que se fundó hasta la última que se fundó?",
+          "hasQuestionImage": true,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "Arauca – Inírida – Puerto Carreño – Mitú.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "Puerto Carreño – Mitú – Arauca – Inírida.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "Arauca – Puerto Carreño – Mitú – Inírida.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "Puerto Carreño – Arauca – Mitú – Inírida.",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        }
+      ]
+    },
+    {
+      "sectionIndex": 7,
+      "sectionTitle": "",
+      "sectionText": "",
+      "hasSectionImage": false,
+      "sectionImageUrl": "",
+      "sectionImageAiDescription": "",
+      "questions": [
+        {
+          "questionId": "q_32",
+          "questionText": "Para confeccionar una camiseta, un sastre utiliza 2 metros de tela. El precio de cada metro de tela es de 6.000 pesos, y cada camiseta se puede vender a un precio de 20.000 pesos. Adicionalmente, si el sastre no incurre en ningún costo adicional, la ganancia que obtiene se puede calcular por medio de la expresión \\(y=8.000x\\).\n\nSi la ganancia fue 80.000 pesos, ¿cuál fue la cantidad de camisetas que confeccionó el sastre?",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "10",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "8",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "6",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "2",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        }
+      ]
+    },
+    {
+      "sectionIndex": 8,
+      "sectionTitle": "",
+      "sectionText": "",
+      "hasSectionImage": true,
+      "sectionImageUrl": "",
+      "sectionImageAiDescription": "",
+      "questions": [
+        {
+          "questionId": "q_33",
+          "questionText": "Una semana antes de la elección del alcalde de una ciudad, a la pregunta “¿Por cuál de los dos candidatos votará la próxima semana?”, dos firmas encuestadoras (Firma X y Firma Y), basadas en muestras de igual tamaño, reportan la intención de voto que se relaciona en la tabla.\n\nDe acuerdo con la información presentada, ¿cuál de las siguientes afirmaciones es verdadera?",
+          "hasQuestionImage": true,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "Según las dos firmas, solamente el candidato 2 tiene opciones de ganar.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "Según la firma X, ningún candidato obtendrá más del 50 % de los votos.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "Según la firma Y, ningún candidato obtendrá menos del 40 % de los votos.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "Según las dos firmas, solamente el candidato 1 tiene opciones de ganar.",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        }
+      ]
+    },
+    {
+      "sectionIndex": 9,
+      "sectionTitle": "",
+      "sectionText": "",
+      "hasSectionImage": false,
+      "sectionImageUrl": "",
+      "sectionImageAiDescription": "",
+      "questions": [
+        {
+          "questionId": "q_34",
+          "questionText": "Una persona está esperando en una entidad bancaria y tiene asignado el turno 100. Cuando están atendiendo al turno 52 decide estimar el tiempo de espera, teniendo en cuenta que hay 4 personas encargadas de la atención al público y que el tiempo promedio de atención por cliente es de 6 minutos. Para esto efectúa el siguiente procedimiento:\n\nPaso 1. Cuenta la cantidad de turnos que hay entre el turno que están atendiendo y el suyo.\nPaso 2. Divide la cantidad obtenida en el paso anterior entre el número de personas que atienden al público.\nPaso 3. Multiplica el resultado del paso 2 por el tiempo promedio de atención por cliente.\n\n¿Cuál es el tiempo estimado de espera de esta persona?",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "32 minutos.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "78 minutos.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "72 minutos.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "150 minutos.",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        }
+      ]
+    },
+    {
+      "sectionIndex": 10,
+      "sectionTitle": "",
+      "sectionText": "",
+      "hasSectionImage": false,
+      "sectionImageUrl": "",
+      "sectionImageAiDescription": "",
+      "questions": [
+        {
+          "questionId": "q_35",
+          "questionText": "En un examen de optometría aplicado a los empleados de una compañía, \\(6/20\\) obtuvieron una puntuación en su agudeza visual mayor o igual que 80 puntos (sobre 100), 160 obtuvieron una puntuación mayor o igual que 60 puntos y menor que 80 puntos, y \\(1/3\\) obtuvieron una puntuación mayor o igual que 40 puntos y menor que 60 puntos.\n\nCon el propósito de determinar la cantidad de empleados que obtuvieron una puntuación mayor o igual que 0 y menor que 20 puntos en el examen de optometría, ¿cuál de las siguientes opciones presenta los datos que hacen falta para determinar dicha cantidad?",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "El total de empleados a los que fue realizado el examen y la fracción que representa a los empleados que obtuvieron una puntuación mayor o igual que 60 puntos y menor que 80 puntos.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "El total de empleados a los que fue realizado el examen y el número de empleados que obtuvieron una puntuación mayor o igual que 80 puntos.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "El total de empleados a los que fue realizado el examen y la cantidad de empleados que obtuvieron una puntuación mayor o igual que 20 puntos y menor que 40 puntos.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "El total de empleados a los que fue realizado el examen y el número entero positivo de empleados que obtuvieron una puntuación mayor o igual que 40 puntos y menor que 60 puntos.",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        }
+      ]
+    },
+    {
+      "sectionIndex": 11,
+      "sectionTitle": "",
+      "sectionText": "",
+      "hasSectionImage": true,
+      "sectionImageUrl": "",
+      "sectionImageAiDescription": "",
+      "questions": [
+        {
+          "questionId": "q_36",
+          "questionText": "En la tabla se muestra la esperanza de vida de algunos países para 1960.\n\nSi se sabe que para el año 2016, estos países habían duplicado su esperanza de vida respecto a lo consignado en la tabla, ¿cuál de las siguientes gráficas representa correctamente la esperanza de vida de estos países para el año 2016?",
+          "hasQuestionImage": true,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "image",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "image",
+              "content": "",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "image",
+              "content": "",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "image",
+              "content": "",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "image",
+              "content": "",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        }
+      ]
+    },
+    {
+      "sectionIndex": 12,
+      "sectionTitle": "",
+      "sectionText": "",
+      "hasSectionImage": true,
+      "sectionImageUrl": "",
+      "sectionImageAiDescription": "",
+      "questions": [
+        {
+          "questionId": "q_37",
+          "questionText": "Se planea llenar una piscina con capacidad de \\(100\\,\\text{m}^3\\), que contiene inicialmente \\(20\\,\\text{m}^3\\) de agua, para lo cual se enciende una máquina que bombea agua a la piscina a una razón de \\(5\\,\\text{m}^3/\\text{min}\\).\n\n¿Cuál gráfica representa de forma correcta el volumen de agua de la piscina en función del tiempo?",
+          "hasQuestionImage": true,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "image",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "image",
+              "content": "",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "image",
+              "content": "",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "image",
+              "content": "",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "image",
+              "content": "",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        }
+      ]
+    },
+    {
+      "sectionIndex": 13,
+      "sectionTitle": "",
+      "sectionText": "",
+      "hasSectionImage": true,
+      "sectionImageUrl": "",
+      "sectionImageAiDescription": "",
+      "questions": [
+        {
+          "questionId": "q_38",
+          "questionText": "La tabla muestra los resultados obtenidos por tres atletas en una competencia que consistió en tres pruebas diferentes.\n\nPara escoger la ganadora de la competencia, se proponen dos opciones:\n\nOpción 1. La ganadora será quien haya ganado más pruebas.\nOpción 2. La ganadora será quien tenga el menor tiempo promedio en las tres pruebas.\n\n¿Cuál de las siguientes afirmaciones es correcta sobre la ganadora de la competencia?",
+          "hasQuestionImage": true,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "Con las dos opciones gana Mónica.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "Con la opción 1 gana Rosa y con la opción 2 gana Mónica.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "Con las dos opciones gana Verónica.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "Con la opción 1 gana Verónica y con la opción 2 gana Rosa.",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        }
+      ]
+    },
+    {
+      "sectionIndex": 14,
+      "sectionTitle": "",
+      "sectionText": "",
+      "hasSectionImage": true,
+      "sectionImageUrl": "",
+      "sectionImageAiDescription": "",
+      "questions": [
+        {
+          "questionId": "q_39",
+          "questionText": "Un ganadero utilizó 6 postes y alambre para cercar una parte de su finca. La imagen muestra un plano de la cerca.\n\nUn mes después, el ganadero decidió trasladar la cerca 100 metros al oriente y dijo que simplemente debía mover horizontalmente cada uno de los vértices de la figura 100 metros hacia la derecha y luego unir los puntos; sin embargo, una persona afirma que lo que dijo el ganadero es incorrecto, pues la figura resultante no representaría la traslación de la cerca. ¿Es verdadera la afirmación de la persona?",
+          "hasQuestionImage": true,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "Sí, puesto que la afirmación del ganadero no tiene en cuenta la traslación de 100 metros de los vértices en el eje y, por lo que no se mantiene la misma forma de la figura original.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "No, puesto que, como la traslación es en una sola dirección, basta con sumar 100 metros a las abscisas de los vértices y se mantiene la misma forma de la figura original.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "Sí, puesto que, si se aplica lo afirmado por el ganadero, la figura resultante sería de un área mayor que la original.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "No, puesto que la distancia a trasladar es más grande que el ancho de toda la estructura.",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        }
+      ]
+    },
+    {
+      "sectionIndex": 15,
+      "sectionTitle": "",
+      "sectionText": "",
+      "hasSectionImage": true,
+      "sectionImageUrl": "",
+      "sectionImageAiDescription": "",
+      "questions": [
+        {
+          "questionId": "q_40",
+          "questionText": "Una persona compra 3 paquetes de arroz, 2 de fríjol y 2 de lentejas. La siguiente tabla muestra el peso de cada uno de los paquetes.\n\n¿Cuál tabla muestra el peso total de los paquetes?",
+          "hasQuestionImage": true,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "image",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "image",
+              "content": "",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "image",
+              "content": "",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "image",
+              "content": "",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "image",
+              "content": "",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        }
+      ]
+    },
+    {
+      "sectionIndex": 16,
+      "sectionTitle": "",
+      "sectionText": "",
+      "hasSectionImage": false,
+      "sectionImageUrl": "",
+      "sectionImageAiDescription": "",
+      "questions": [
+        {
+          "questionId": "q_41",
+          "questionText": "Un estudiante va a hacer una cartelera para una tarea. Para comprar los materiales su mamá le dio \\($6.000\\), y con ese dinero el estudiante compró una cartulina que cuesta \\($1.000\\) y 4 marcadores que cuestan \\($900\\) cada uno. ¿Cuánto dinero le sobró de la compra de los materiales?",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "\\($1.900\\)",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "\\($4.100\\)",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "\\($4.600\\)",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "\\($1.400\\)",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        }
+      ]
+    },
+    {
+      "sectionIndex": 17,
+      "sectionTitle": "",
+      "sectionText": "",
+      "hasSectionImage": true,
+      "sectionImageUrl": "",
+      "sectionImageAiDescription": "",
+      "questions": [
+        {
+          "questionId": "q_42",
+          "questionText": "Un profesor preguntó a seis estudiantes cuánto dinero traían al colegio diariamente para comprar refrigerio. Los resultados aparecen en la lista: \\($2.000\\), \\($2.000\\), \\($3.000\\), \\($4.000\\), \\($4.000\\) y \\($4.000\\).\\n\\nUno de los estudiantes observó la lista y elaboró la siguiente tabla de frecuencias:\n\nRespecto a la tabla, ¿cuál de las siguientes afirmaciones es verdadera?",
+          "hasQuestionImage": true,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "La tabla es válida porque aparecen todos los montos de dinero que llevan los estudiantes.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "La tabla no es válida porque no muestra la cantidad de estudiantes a los que se les hizo la pregunta.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "La tabla es válida porque indica la cantidad de estudiantes que llevan cada monto de dinero.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "La tabla no es válida porque los números de la segunda columna están en orden incorrecto.",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        }
+      ]
+    },
+    {
+      "sectionIndex": 18,
+      "sectionTitle": "",
+      "sectionText": "",
+      "hasSectionImage": true,
+      "sectionImageUrl": "",
+      "sectionImageAiDescription": "",
+      "questions": [
+        {
+          "questionId": "q_43",
+          "questionText": "Olivia tiene una figura plana compuesta por una semicircunferencia y un cuadrado, como se muestra a continuación:\n\nOlivia necesita medir el segmento de recta S. Si se sabe que el radio de la semicircunferencia mide 5 cm y que el lado del cuadrado mide 4 cm, ¿cuánto mide el segmento de recta S?",
+          "hasQuestionImage": true,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "9 cm",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "6 cm",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "5,5 cm",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "4,5 cm",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        }
+      ]
+    },
+    {
+      "sectionIndex": 19,
+      "sectionTitle": "",
+      "sectionText": "",
+      "hasSectionImage": true,
+      "sectionImageUrl": "",
+      "sectionImageAiDescription": "",
+      "questions": [
+        {
+          "questionId": "q_44",
+          "questionText": "Una empresa de servicios de internet realizó una encuesta a 100 familias de estratos sociales bajo, medio y alto, preguntándoles por el nivel de satisfacción frente al servicio en sus hogares; a continuación se presentan sus percepciones.\n\nA partir de la tabla realizada, se ha diseñado el siguiente diagrama circular.\n\nLa directora de la empresa se percata de que los gráficos no presentan la misma información. En este sentido, ¿qué información es posible obtener de la tabla, pero NO del diagrama circular?",
+          "hasQuestionImage": true,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "El porcentaje de familias poco satisfechas con el servicio.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "El porcentaje de familias por estrato social que se entrevistaron.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "El porcentaje de familias conformes con el servicio.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "El porcentaje de familias satisfechas que fueron entrevistadas.",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        }
+      ]
+    },
+    {
+      "sectionIndex": 20,
+      "sectionTitle": "",
+      "sectionText": "",
+      "hasSectionImage": false,
+      "sectionImageUrl": "",
+      "sectionImageAiDescription": "",
+      "questions": [
+        {
+          "questionId": "q_45",
+          "questionText": "El oro blanco es una aleación metálica que se usa para elaborar joyas preciosas y está compuesto de un 90 % de oro puro y un 10 % de níquel. Al respecto, se requiere fabricar 60 anillos en oro blanco, cada uno con un peso de 5 gramos. Para determinar la cantidad de níquel que se necesita, se puede efectuar el siguiente procedimiento:\n\nPaso 1. Multiplicar el número de anillos por el peso de cada uno.\nPaso 2. Multiplicar el resultado anterior por el porcentaje de níquel en el oro blanco.\n\nSi se sigue el procedimiento, ¿cuántos gramos de níquel se necesitan para elaborar los 60 anillos?",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "300",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "270",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "50",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "30",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        }
+      ]
+    },
+    {
+      "sectionIndex": 21,
+      "sectionTitle": "",
+      "sectionText": "",
+      "hasSectionImage": false,
+      "sectionImageUrl": "",
+      "sectionImageAiDescription": "",
+      "questions": [
+        {
+          "questionId": "q_46",
+          "questionText": "Se realizó una encuesta a 50 estudiantes de un colegio para determinar cuál es el género musical más popular entre estos jóvenes. Los resultados obtenidos fueron:\n\n• Al 25 % de los estudiantes les gusta la salsa.\n• Al 60 % de los estudiantes les gusta el vallenato.\n• Al 10 % de los estudiantes le gusta el pop.\n• Al 5 % de los estudiantes le gusta el hip hop.\n\n¿Cuál de las siguientes gráficas representa correctamente la cantidad de estudiantes a quienes les gusta el vallenato?",
+          "hasQuestionImage": true,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "image",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "image",
+              "content": "",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "image",
+              "content": "",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "image",
+              "content": "",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "image",
+              "content": "",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        }
+      ]
+    },
+    {
+      "sectionIndex": 22,
+      "sectionTitle": "",
+      "sectionText": "",
+      "hasSectionImage": false,
+      "sectionImageUrl": "",
+      "sectionImageAiDescription": "",
+      "questions": [
+        {
+          "questionId": "q_47",
+          "questionText": "En un polígono regular la medida de todos sus lados es la misma. El perímetro del polígono regular es el producto entre el número de lados que tiene y la medida de uno de ellos. La apotema es la menor medida entre el centro del polígono y cualquiera de sus lados.\n\n¿Cuál de las siguientes opciones representa el polígono regular que tiene 5 cm de lado, 30 cm de perímetro y 4 cm de apotema?",
+          "hasQuestionImage": true,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "image",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "image",
+              "content": "",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "image",
+              "content": "",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "image",
+              "content": "",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "image",
+              "content": "",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        }
+      ]
+    },
+    {
+      "sectionIndex": 23,
+      "sectionTitle": "",
+      "sectionText": "",
+      "hasSectionImage": false,
+      "sectionImageUrl": "",
+      "sectionImageAiDescription": "",
+      "questions": [
+        {
+          "questionId": "q_48",
+          "questionText": "En una tienda se planea ordenar los productos por vitrinas. Hay tres vitrinas y tres tipos de productos: aseo, congelados y golosinas. Las golosinas y los productos de aseo no pueden quedar en vitrinas seguidas. Para esto, uno de los encargados los organiza de la siguiente manera:\n\nAseo – Congelados – Golosinas\n\nEl encargado afirma que esta era la única manera de hacerlo. ¿Es verdadera esta afirmación?",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "Sí, porque en la vitrina del medio solo pueden estar los congelados.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "No, porque aseo, congelados y golosinas se pueden permutar de seis formas.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "No, porque aseo y golosinas se pueden permutar entre sí, y siguen separados.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "Sí, porque hay una sola permutación entre dos tipos de productos, al dejar fijo uno de ellos.",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        }
+      ]
+    },
+    {
+      "sectionIndex": 24,
+      "sectionTitle": "",
+      "sectionText": "",
+      "hasSectionImage": false,
+      "sectionImageUrl": "",
+      "sectionImageAiDescription": "",
+      "questions": [
+        {
+          "questionId": "q_49",
+          "questionText": "La calculadora de un computador quedó mal configurada y, ahora, al pedirle que haga la multiplicación entre dos números, ejecuta el siguiente proceso:\n\n• Suma los dos números.\n• Eleva el resultado de la suma al cuadrado.\n• Al resultado del paso anterior le suma 1.\n\n¿Qué resultado obtendrá una persona que le pida a esta calculadora el producto entre \\(-1\\) y \\(5\\)?",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "17",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "26",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "-5",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "-15",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        }
+      ]
+    },
+    {
+      "sectionIndex": 25,
+      "sectionTitle": "",
+      "sectionText": "",
+      "hasSectionImage": true,
+      "sectionImageUrl": "",
+      "sectionImageAiDescription": "",
+      "questions": [
+        {
+          "questionId": "q_50",
+          "questionText": "En una versión del juego de armar parejas con cartas, se busca encontrar pares de cartas con figuras geométricas que tengan la misma área. A continuación, se muestra un juego con dos cartas visibles.\n\n¿Qué datos se deben calcular para determinar si las cartas destapadas forman una pareja?",
+          "hasQuestionImage": true,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "Solamente la altura del triángulo.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "Solamente un lado del rectángulo.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "La altura del triángulo y un lado del rectángulo.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "Se puede determinar sin calcular ningún dato adicional.",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        }
+      ]
+    },
+    {
+      "sectionIndex": 26,
+      "sectionTitle": "",
+      "sectionText": "",
+      "hasSectionImage": false,
+      "sectionImageUrl": "",
+      "sectionImageAiDescription": "",
+      "questions": [
+        {
+          "questionId": "q_26b",
+          "questionText": "",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        }
+      ]
+    }
+  ]
+}

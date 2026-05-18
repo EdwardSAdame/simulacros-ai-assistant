@@ -1,0 +1,2078 @@
+{
+  "examType": "ICFES",
+  "component": "ingles",
+  "examVolume": "2a sesion",
+  "totalSections": 9,
+  "sections": [
+    {
+      "sectionIndex": 1,
+      "sectionTitle": "House",
+      "sectionText": "Responda las preguntas 80 a 84 de acuerdo con el ejemplo. Lea las descripciones de la columna de la izquierda (80 - 84). ¿Cuál palabra de la columna de la derecha (A - G) concuerda con cada descripción? La opción H se usa para el ejemplo. Sobran dos palabras más. En las preguntas 80 - 84, marque la letra correcta A - G en su hoja de respuestas.",
+      "hasSectionImage": true,
+      "sectionImageUrl": "",
+      "sectionImageAiDescription": "",
+      "questions": [
+        {
+          "questionId": "q_80",
+          "questionText": "People put their books in this.",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "armchair",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "bed",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "blanket",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "bookcase",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        },
+        {
+          "questionId": "q_81",
+          "questionText": "You wash your body in this place.",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "armchair",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "bed",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "blanket",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "bookcase",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        },
+        {
+          "questionId": "q_82",
+          "questionText": "You usually sleep on it at night.",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "armchair",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "bed",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "blanket",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "bookcase",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        },
+        {
+          "questionId": "q_83",
+          "questionText": "You can sit on one of these in the living room.",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "armchair",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "bed",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "blanket",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "bookcase",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        },
+        {
+          "questionId": "q_84",
+          "questionText": "People like to use this when they are cold.",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "armchair",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "bed",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "blanket",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "bookcase",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        }
+      ]
+    },
+    {
+      "sectionIndex": 2,
+      "sectionTitle": "Professions",
+      "sectionText": "Responda las preguntas 85 a 89 de acuerdo con el ejemplo. Lea las descripciones de la columna de la izquierda (85 - 89). ¿Cuál palabra de la columna de la derecha (A - G) concuerda con cada descripción? La opción H se usa para el ejemplo. Sobran dos palabras más. En las preguntas 85 - 89, marque la letra correcta A - G en su hoja de respuestas.",
+      "hasSectionImage": true,
+      "sectionImageUrl": "",
+      "sectionImageAiDescription": "",
+      "questions": [
+        {
+          "questionId": "q_85",
+          "questionText": "You visit them when your teeth hurt.",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "chefs",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "dentists",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "drivers",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "farmers",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        },
+        {
+          "questionId": "q_86",
+          "questionText": "They make fantastic food in restaurants.",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "chefs",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "dentists",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "drivers",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "farmers",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        },
+        {
+          "questionId": "q_87",
+          "questionText": "They take people from one place to another on a bus.",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "chefs",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "dentists",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "drivers",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "farmers",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        },
+        {
+          "questionId": "q_88",
+          "questionText": "They help you get better when you're sick or had an accident.",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "chefs",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "dentists",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "drivers",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "farmers",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        },
+        {
+          "questionId": "q_89",
+          "questionText": "Some of these famous artists show their art in museums.",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "chefs",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "dentists",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "drivers",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "farmers",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        }
+      ]
+    },
+    {
+      "sectionIndex": 3,
+      "sectionTitle": "",
+      "sectionText": "",
+      "hasSectionImage": true,
+      "sectionImageUrl": "",
+      "sectionImageAiDescription": "",
+      "questions": [
+        {
+          "questionId": "q_90",
+          "questionText": "Find Lucy's stories here. 2x1 today!",
+          "hasQuestionImage": true,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "in a bookstore",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "in a classroom",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "in a cinema",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        },
+        {
+          "questionId": "q_91",
+          "questionText": "NO CAMERAS\nNO PHOTOS\nDo not take pictures of the tigers",
+          "hasQuestionImage": true,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "on the beach",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "in a pet shop",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "at the zoo",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        },
+        {
+          "questionId": "q_92",
+          "questionText": "TODAY\nPiano lessons with Mrs. Wilson\nRoom 11 - 2:00 p.m.",
+          "hasQuestionImage": true,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "at a school",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "in a mall",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "at a playground",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        },
+        {
+          "questionId": "q_93",
+          "questionText": "Happy birthday, Anna! We love you.",
+          "hasQuestionImage": true,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "on a cake",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "on a candy bag",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "on a box of cereal",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        },
+        {
+          "questionId": "q_94",
+          "questionText": "Big bedrooms with TVs (Breakfast at 8:30 a.m.)",
+          "hasQuestionImage": true,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "in a hotel",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "in a cafeteria",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "in a sports center",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        }
+      ]
+    },
+    {
+      "sectionIndex": 4,
+      "sectionTitle": "",
+      "sectionText": "",
+      "hasSectionImage": true,
+      "sectionImageUrl": "",
+      "sectionImageAiDescription": "",
+      "questions": [
+        {
+          "questionId": "q_95",
+          "questionText": "Why didn't you put your new coat on yesterday?",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "I liked jeans.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "Let's dress up.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "It was too warm.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        },
+        {
+          "questionId": "q_96",
+          "questionText": "This movie is about a really big family.",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "Is it good?",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "Is that a lot?",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "Is your mom OK?",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        },
+        {
+          "questionId": "q_97",
+          "questionText": "Why are they hiding?",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "Come here now!",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "I've got no idea.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "Is it near?",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        },
+        {
+          "questionId": "q_98",
+          "questionText": "Everyone bought tickets for the rock concert.",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "Is it on Saturday?",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "There was noise.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "It is fair!",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        },
+        {
+          "questionId": "q_99",
+          "questionText": "It seems I'll be the new boss of the business department.",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "Excuse me!",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "It's ready!",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "Congratulations!",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        }
+      ]
+    },
+    {
+      "sectionIndex": 5,
+      "sectionTitle": "Grandma Gatewood",
+      "sectionText": "This strange story began in April 1955. On a foggy morning, Emma Gatewood, an American school teacher, told her family, “I will go for a walk after breakfast.” She left her small Ohio town with the clothes she had on and less than US$200. No one could guess her plans: not one of her 11 children or her 23 grandchildren.\n\nAt the age of 67, Emma became the first woman who walked the Appalachian Trail, a 2,050-mile way through forests and mountains. She didn't have few money or good equipment, but during her long journey, people helped her everywhere she went.\n\nToday, even sixty years later, “Grandma” Gatewood’s story is still amazing. Her story shows how any person can become stronger than they were before.",
+      "hasSectionImage": true,
+      "sectionImageUrl": "",
+      "sectionImageAiDescription": "",
+      "questions": [
+        {
+          "questionId": "q_100",
+          "questionText": "This strange story (0) ______ in April 1955.",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "than",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "as",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "that",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        },
+        {
+          "questionId": "q_101",
+          "questionText": "No one (101) ______ guess her plans: not one of her 11 children or her 23 grandchildren.",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "could",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "must",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "shall",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        },
+        {
+          "questionId": "q_102",
+          "questionText": "At the age of 67, Emma became the first woman (102) ______ walked the Appalachian Trail.",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "where",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "who",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "which",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        },
+        {
+          "questionId": "q_103",
+          "questionText": "a 2,050-mile way (103) ______ forests and mountains.",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "under",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "until",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "through",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        },
+        {
+          "questionId": "q_104",
+          "questionText": "She didn't have (104) ______ money or good equipment.",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "few",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "enough",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "little",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        },
+        {
+          "questionId": "q_105",
+          "questionText": "people helped her (105) ______ she went.",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "everyone",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "everywhere",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "everything",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        },
+        {
+          "questionId": "q_106",
+          "questionText": "“Grandma” Gatewood’s story is (106) ______ amazing.",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "ever",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "still",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "already",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        },
+        {
+          "questionId": "q_107",
+          "questionText": "Her story shows how any person can (107) ______ stronger than they were before.",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "become",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "became",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "becoming",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        }
+      ]
+    },
+    {
+      "sectionIndex": 6,
+      "sectionTitle": "Golf",
+      "sectionText": "Golf is an outdoor sport played with a club and a ball on a field called a course. Players hit the ball with the club, usually very hard, across the course until it goes into a hole. When the player hits the ball, it is called a stroke.\n\nHistorians believe that early forms of golf were played in the Netherlands and then in Scotland, where the oldest golf organization was created. The first golf courses were fields of grass; sheep ate the grass to keep it short. In the United States, the first course was on a farm in Illinois, and it's still there today. British players like John Taylor were considered the best in the 1800s, but in the 1920s Americans became well-known. In the 1960s, amazing players like Arnold Palmer and Jack Nicklaus began to appear.\n\nWhile playing, golfers choose between different clubs depending on how far they want to hit the ball. The balls are small, hard, white, and made of a strong material. They were originally wooden, but then they were made of leather in the 1600s. The modern balls made since the 1900s have very advanced technology in their design, which has improved the game a lot.\n\nThere are different popular ways of playing, like match play or stroke play. However, in all cases, the golf player with the lowest number of strokes for all the holes wins.",
+      "hasSectionImage": true,
+      "sectionImageUrl": "",
+      "sectionImageAiDescription": "",
+      "questions": [
+        {
+          "questionId": "q_108",
+          "questionText": "When a player makes a stroke, he",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "gives instructions.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "takes a hole.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "hits the ball.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        },
+        {
+          "questionId": "q_109",
+          "questionText": "Where did people play golf for the first time?",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "the Netherlands",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "Scotland",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "the United States",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        },
+        {
+          "questionId": "q_110",
+          "questionText": "In the past, how was the grass in courses kept short?",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "People from Illinois did it.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "A company cut it.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "Animals ate it.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        },
+        {
+          "questionId": "q_111",
+          "questionText": "Which player was famous in the 1800s in England?",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "John Taylor",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "Jack Nicklaus",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "Arnold Palmer",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        },
+        {
+          "questionId": "q_112",
+          "questionText": "If golfers want the balls to go further, they need a special",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "leather.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "club.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "field.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        },
+        {
+          "questionId": "q_113",
+          "questionText": "New technology has made",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "the game better than before.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "players use leather balls.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "balls go much further.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        },
+        {
+          "questionId": "q_114",
+          "questionText": "The text says that a golf player wins a game by",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "making more holes.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "hitting the ball fewer times.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "playing in famous matches.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        }
+      ]
+    },
+    {
+      "sectionIndex": 7,
+      "sectionTitle": "",
+      "sectionText": "I do not like when someone makes a mistake about my age. When someone says I look younger than I am, I don’t think that person is accurate, because I’m a different person from who I was at 24, 25, even 26. I don’t consider I actually look physically younger than 30. However, that doesn’t explain why we don’t always look like being 30 or why I can’t get champagne in my local supermarket.\n\nThere are loads of videos on TikTok about why millennials (people born after the 80s) don’t appear to be getting old “normally”. Some have the hypothesis that it’s because cosmetic operations are cheaper and more available now. Others have said that it’s because millennials “have depression, so we’re indoors all day, and we don’t let our skin feel the sun.” Still others have wondered whether it’s due to camera phones, and the fact that we use them regularly, meaning we pay more attention to our looks. Or maybe we are getting old normally but we just don’t consider we are, so we don’t act like it. Before I continue, I must add: I’m sure that age is not a main issue, and that putting labels to a person as a result of an arbitrary age opinion is not fair to their identities.\n\nI know that most people don’t actually “feel” their age, because they just feel like themselves (same here). But that doesn’t mean I am not interested and curious about how I appear to others now that I’m in my 30s.",
+      "hasSectionImage": true,
+      "sectionImageUrl": "",
+      "sectionImageAiDescription": "",
+      "questions": [
+        {
+          "questionId": "q_115",
+          "questionText": "What is the writer mainly doing in the text?",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "arguing about what social networks say regarding youths",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "presenting facts about how to appear to be younger than you are",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "discussing her thoughts about looking younger than you actually are",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "mentioning how different she is nowadays than when she was in her youth",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        },
+        {
+          "questionId": "q_116",
+          "questionText": "What can a reader find out in the text?",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "that the writer does not care about her real age",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "how people behave in front of a camera to display their age",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "that the writer knows her age according to the people around her",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "how some people are not accurate when telling other people's age",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        },
+        {
+          "questionId": "q_117",
+          "questionText": "In paragraph 1, with the underlined sentence the writer means she",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "considers people usually are right about her real age.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "considers she is younger than some people say she actually is.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "doesn't agree with what people say regarding how young she appears to be.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "doesn't understand what some people say regarding how young she really is.",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        },
+        {
+          "questionId": "q_118",
+          "questionText": "What does the writer mean with the underlined sentence in paragraph 3?",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "She feels younger than 30 and agrees with people's opinion on this.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "She doesn't feel comfortable based on what people say about her age.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "She wishes to know how people identify her being a 30-year-old person.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "She isn't anxious about what people say regarding how young she actually is.",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        },
+        {
+          "questionId": "q_119",
+          "questionText": "What piece of advice would the writer give people according to the text?",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "Take photos of yourself frequently to present to people that you are younger than they say you are.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "Do not worry about looking younger than you actually are; people often realize your real age.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "Go to the nearest supermarket and ask for a bottle of wine; they will let you get it as you look like an old person.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "Do not pay attention to what people say about your age and how younger you look. The important thing is how you feel.",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        }
+      ]
+    },
+    {
+      "sectionIndex": 8,
+      "sectionTitle": "",
+      "sectionText": "Does something about living abroad seem extraordinary to you? I understand. That’s what inspired me to leave America for the first time and set out on my journey to start high school in France. However, I was shocked that there were several things I had absolutely no idea about until I landed in France and took part in daily activities there.\n\nBefore I arrived, I had only experienced foreign exchange students coming to America, never being one. All those students spoke other languages unknown to me. For me, as an English speaker, that was not the case. Once in France, most of my foreign partners spoke English. In some ways, it’s positive that people communicate with you in your own language because it’s convenient. The disadvantage is you never have that secret moment where you can say things, and no one can imagine what you’re saying.\n\nIt will feel shocking to install yourself in a new family’s house, but you can handle this. As you start getting along with them, you can start doing things the way you like them, and it gets cozy. However, there are some things you can’t do your usual way. It’s those little things that separate your life in your home country from your life abroad.\n\nIf you're thinking about doing this, my advice is “say yes more than you say no.” Of course, there will be times when it is acceptable to say no, but if you’re turning down a weekend of excitement with classmates or your family there, you're not taking advantage of your exchange. Part of the reason you are living this adventure is to experience things. Say yes and you will not be disappointed.",
+      "hasSectionImage": true,
+      "sectionImageUrl": "",
+      "sectionImageAiDescription": "",
+      "questions": [
+        {
+          "questionId": "q_120",
+          "questionText": "What’s the writer doing in the text?",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "convincing people of the benefits to study foreign languages in France",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "warning exchange students about the culture shock they may deal with",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "informing students about what he learned after being in an exchange program",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "encouraging French people to discover what being an international student is like",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        },
+        {
+          "questionId": "q_121",
+          "questionText": "What can the reader find out about the writer in paragraph 1?",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "He had a good time studying high school in his hometown.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "He ignored several issues about life in France before his arrival.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "He had traveled abroad before his departure to France.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "He had many unbelievable experiences during his stay in America.",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        },
+        {
+          "questionId": "q_122",
+          "questionText": "In paragraph 2, when talking about his own language, the author means that",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "speakers of other languages are quite rare.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "learning a foreign language is considered unnecessary.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "English is familiar to people from different nationalities.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "English is rarely spoken if compared to other languages.",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        },
+        {
+          "questionId": "q_123",
+          "questionText": "What makes life abroad different from life at home is",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "being surrounded by unkind strangers.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "the new and surprising accommodations.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "the habits you must change to get on with your new life.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "the time it takes to have a friendly relationship with the homeowners.",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        },
+        {
+          "questionId": "q_124",
+          "questionText": "The best title for this article could be",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "How to Handle your Life and Not Die in the Attempt.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "The Value of English Not All International Students Realize.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "The Truth Nobody Told you About French Exchange Students.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "What No One Told you About Going on a Foreign Exchange Program.",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        }
+      ]
+    },
+    {
+      "sectionIndex": 9,
+      "sectionTitle": "Jane King",
+      "sectionText": "My name’s Jane King, professional designer. For about seven years, various novelists have hired me to work as their publisher. We shortly sign contracts where my duties are checking grammar and illustrations. This has allowed me to mix my interests without the two things I love, language and art. Instead, I developed the letter-shape photographs to combine my passions. This technique consists of organizing patterns of letters that look like a particular character or object. It requires me to be absolutely patient, but the result is worth it.\n\nMy main aim was always to share my work in independent art exhibitions abroad. That’s why whenever I could, I presented my designs to experts. At first, it was difficult, but finally they got interested and decided to support me. Considering that I’m inspired by the things that surround me, I moved to the countryside because of the landscapes. Anything natural easily finds its way onto paper.",
+      "hasSectionImage": true,
+      "sectionImageUrl": "",
+      "sectionImageAiDescription": "",
+      "questions": [
+        {
+          "questionId": "q_125",
+          "questionText": "For about seven years, various novelists have (125) ______ me to work as their publisher.",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "approximately",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "shortly",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "suddenly",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "frequently",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        },
+        {
+          "questionId": "q_126",
+          "questionText": "This has allowed me to mix my interests (126) ______ the two things I love, language and art.",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "without",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "regarding",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "against",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "despite",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        },
+        {
+          "questionId": "q_127",
+          "questionText": "(127) ______, I developed the letter-shape photographs to combine my passions.",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "Therefore",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "Instead",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "Besides",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "Meanwhile",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        },
+        {
+          "questionId": "q_128",
+          "questionText": "This (128) ______ consists of organizing patterns of letters that look like a particular character or object.",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "kind",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "network",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "technique",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "performance",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        },
+        {
+          "questionId": "q_129",
+          "questionText": "It requires me to be absolutely patient, but the result is (129) ______ it.",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "valuable",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "worth",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "accurate",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "convenient",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        },
+        {
+          "questionId": "q_130",
+          "questionText": "My (130) ______ aim was always to share my work in independent art exhibitions abroad.",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "accurate",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "medium",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "certain",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "main",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        },
+        {
+          "questionId": "q_131",
+          "questionText": "That’s why (131) ______ I could, I presented my designs to experts.",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "whether",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "whenever",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "whatever",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "whoever",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        },
+        {
+          "questionId": "q_132",
+          "questionText": "At (132) ______, it was difficult, but finally they got interested and decided to support me.",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "first",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "once",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "present",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "all",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        },
+        {
+          "questionId": "q_133",
+          "questionText": "Considering that I’m inspired by the things that (133) ______ me, I moved to the countryside because of the landscapes.",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "cover",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "attach",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "surround",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "contain",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        },
+        {
+          "questionId": "q_134",
+          "questionText": "Anything natural easily finds its way (134) ______ paper.",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "upon",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "within",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "beyond",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "onto",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        }
+      ]
+    }
+  ]
+}

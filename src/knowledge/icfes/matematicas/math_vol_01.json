@@ -1,0 +1,1158 @@
+{
+  "examType": "ICFES",
+  "component": "matematicas",
+  "examVolume": "Saber 11 - Matemáticas 1.ª sesión",
+  "totalSections": 25,
+  "sections": [
+    {
+      "sectionIndex": 1,
+      "sectionTitle": "",
+      "sectionText": "",
+      "hasSectionImage": false,
+      "sectionImageUrl": "",
+      "sectionImageAiDescription": "",
+      "questions": [
+        {
+          "questionId": "q_01",
+          "questionText": "En la siguiente tabla se evidencian los resultados de una entrevista realizada a siete mujeres, madres de familia, en donde se les preguntó a qué edad tuvieron su primer hijo.\n\nA partir de la información suministrada, ¿cuál es el promedio de las edades?",
+          "hasQuestionImage": true,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "18",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "22",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "24",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "28",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        }
+      ]
+    },
+    {
+      "sectionIndex": 2,
+      "sectionTitle": "",
+      "sectionText": "",
+      "hasSectionImage": false,
+      "sectionImageUrl": "",
+      "sectionImageAiDescription": "",
+      "questions": [
+        {
+          "questionId": "q_02",
+          "questionText": "Una aerolínea ofrece vuelos nacionales manejando las siguientes tarifas y aclarando que, al precio relacionado, se debe agregar el impuesto del 12 % o 19 % según la temporada del año seleccionada para el viaje.\n\nUn usuario compra 5 tiquetes para viajar el día jueves y 2 tiquetes para viajar el día sábado, para lo que debe usar la fórmula:\n\n\\[\\text{Valor total a pagar} = (5 \\times 80{.}000 + 2 \\times 150{.}000)(1+y)\\]\n\nDonde \\(y\\) es el porcentaje del impuesto.\n\nSobre el valor total a pagar, ¿cuál de las siguientes afirmaciones es verdadera?",
+          "hasQuestionImage": true,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "Es posible calcular el valor total a pagar, ya que se aplica el impuesto del 12 % a los tiquetes comprados para el día jueves y el impuesto del 19 % a los tiquetes para el día sábado.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "No es posible calcular el valor total a pagar, ya que el impuesto del 12 % y 19 % dependen de la temporada del año, y esta se desconoce.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "Es posible calcular el valor total a pagar, ya que se ejecuta la multiplicación entre la cantidad de tiquetes comprados para cada día y el valor respectivo.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "No es posible calcular el valor total a pagar, ya que falta conocer la tarifa correspondiente para asignar el valor de los tiquetes para el día jueves y sábado.",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        }
+      ]
+    },
+    {
+      "sectionIndex": 3,
+      "sectionTitle": "",
+      "sectionText": "",
+      "hasSectionImage": true,
+      "sectionImageUrl": "",
+      "sectionImageAiDescription": "",
+      "questions": [
+        {
+          "questionId": "q_03",
+          "questionText": "Un laboratorio aplicó un tratamiento médico a 60 pacientes y registró en un diagrama los tres efectos secundarios que padecieron algunos de ellos.\n\nLuego, un médico del laboratorio registró la información en una tabla de la siguiente manera:\n\n¿Es válida la información que registró el médico en la tabla?",
+          "hasQuestionImage": true,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "No, porque en el diagrama se evidencia que el efecto secundario que más presentaron los pacientes fue el de náuseas.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "Sí, porque la cantidad de pacientes que presentó cada síntoma, según la tabla, coincide con la cantidad de pacientes que indica el diagrama.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "Sí, porque la cantidad de pacientes a los que se les aplicó el tratamiento, según el diagrama, coincide con la suma de las frecuencias que se presentan en la tabla.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "No, porque falta tener en cuenta la cantidad de pacientes que presentaron los tres efectos secundarios.",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        }
+      ]
+    },
+    {
+      "sectionIndex": 4,
+      "sectionTitle": "",
+      "sectionText": "",
+      "hasSectionImage": true,
+      "sectionImageUrl": "",
+      "sectionImageAiDescription": "",
+      "questions": [
+        {
+          "questionId": "q_04",
+          "questionText": "En una clase de Inglés hay 6 estudiantes, 4 son mujeres y 2 son hombres. Para una exposición, el profesor quiere conformar grupos de 3 estudiantes.\n\nEn la tabla, \\(X\\), \\(Y\\), \\(Z\\) y \\(W\\) representan la cantidad de formas que tiene el profesor para escoger cada grupo de 3 estudiantes.\n\nDe acuerdo con los datos de la tabla, ¿cuáles valores se deben conocer para determinar la cantidad total de formas que hay para escoger un grupo de 3 estudiantes en donde, al menos, uno de ellos sea hombre?",
+          "hasQuestionImage": true,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "Solamente Z.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "Solamente Z y W.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "Solamente X.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "Solamente Y y Z.",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        }
+      ]
+    },
+    {
+      "sectionIndex": 5,
+      "sectionTitle": "",
+      "sectionText": "",
+      "hasSectionImage": true,
+      "sectionImageUrl": "",
+      "sectionImageAiDescription": "",
+      "questions": [
+        {
+          "questionId": "q_05",
+          "questionText": "Un banco organizó un concurso para premiar a los usuarios que más utilizan las tarjetas de crédito. La tabla muestra el tipo de premio, la cantidad de premios que se entregó de cada tipo y el monto correspondiente a cada tipo de premio.\n\n¿Cuál de las siguientes tablas muestra el total de dinero entregado por el banco para cada tipo de premio?",
+          "hasQuestionImage": true,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "Oro: $10.000.000; Plata: $5.000.000; Bronce: $1.000.000",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "Oro: $50.000.000; Plata: $125.000.000; Bronce: $100.000.000",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "Oro: $1.000.000.000; Plata: $125.000.000; Bronce: $5.000.000",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "Oro: $50.000.000; Plata: $100.000.000; Bronce: $125.000.000",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        }
+      ]
+    },
+    {
+      "sectionIndex": 6,
+      "sectionTitle": "",
+      "sectionText": "",
+      "hasSectionImage": false,
+      "sectionImageUrl": "",
+      "sectionImageAiDescription": "",
+      "questions": [
+        {
+          "questionId": "q_06",
+          "questionText": "Los miembros de una familia deciden ahorrar dinero para comprar una bicicleta que cuesta $750.000. Ellos acuerdan ahorrar $50.000 el primer mes y duplicar el ahorro cada mes hasta completar el valor de la bicicleta. Para calcular la cantidad de meses que la familia debe ahorrar, se puede usar el siguiente procedimiento:\n\nPaso 1. Dividir $750.000 entre $50.000.\nPaso 2. Encontrar el valor de \\(x\\) tal que la suma de \\(2^0 + 2^1 + \\cdots + 2^x\\) sea igual al resultado del paso 1.\nPaso 3. Sumar 1 al valor de \\(x\\) encontrado en el paso 2.\n\n¿Cuántos meses debe ahorrar la familia para comprar la bicicleta?",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "16",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "8",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "4",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "2",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        }
+      ]
+    },
+    {
+      "sectionIndex": 7,
+      "sectionTitle": "",
+      "sectionText": "",
+      "hasSectionImage": false,
+      "sectionImageUrl": "",
+      "sectionImageAiDescription": "",
+      "questions": [
+        {
+          "questionId": "q_07",
+          "questionText": "Alberto tiene un salario mensual de $800.000 y quiere ahorrar, cada mes, el 2 % de su sueldo para comprar una trompeta. Para determinar cuánto dinero ahorrará cada mes, realizó los siguientes cálculos:\n\n\\[8 \\times 2 = 16\\]\n\nComo 800.000 tiene 5 ceros a la derecha, solo consideró 3, y formó el número 1.000.\nFinalmente, con los dos valores anteriores forma el número 16.000.\n\nEsto quiere decir que Alberto ahorrará $16.000 cada mes. Estefanía quiere comprar una guitarra y planea seguir la misma estrategia de Alberto, pero ella tiene un sueldo mensual de $900.000 y quiere ahorrar, cada mes, el 3 %.\n\nSi Estefanía ahorra durante 10 meses consecutivos, ¿cuánto dinero ahorrará en total?",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "$297.000",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "$270.000",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "$240.000",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "$180.000",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        }
+      ]
+    },
+    {
+      "sectionIndex": 8,
+      "sectionTitle": "",
+      "sectionText": "",
+      "hasSectionImage": true,
+      "sectionImageUrl": "",
+      "sectionImageAiDescription": "",
+      "questions": [
+        {
+          "questionId": "q_08",
+          "questionText": "El Departamento Administrativo Nacional de Estadística (DANE) realiza cada año mediciones de la pobreza en Colombia para determinar el índice de pobreza multidimensional (IPM). La tabla muestra la “incidencia de la pobreza por el IPM” para algunas regiones entre 2011 y 2015.\n\nLa gráfica muestra la “incidencia de la pobreza por el IPM” para algunas regiones entre 2011 y 2015.\n\n¿La información de los datos de la gráfica es la misma que la información presentada en la tabla?",
+          "hasQuestionImage": true,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "Sí, porque la información incluida en la gráfica es semejante a la información presentada en la tabla, para las regiones en mención.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "No, porque, en vez de graficar los datos de Antioquia, se graficaron los datos de la región Central.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "No, porque los datos de la gráfica de Antioquia para 2012 y 2013, y de Bogotá, D. C. para 2015, son diferentes a los datos presentados en la tabla.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "Sí, porque los datos de la gráfica de Antioquia para 2013 y de la región Central para 2012 corresponden a los datos presentados en la tabla.",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        }
+      ]
+    },
+    {
+      "sectionIndex": 9,
+      "sectionTitle": "",
+      "sectionText": "",
+      "hasSectionImage": true,
+      "sectionImageUrl": "",
+      "sectionImageAiDescription": "",
+      "questions": [
+        {
+          "questionId": "q_09",
+          "questionText": "Una máquina separa las 2.000 papas de un bulto de acuerdo con su peso \\(p\\), obteniendo los datos de la tabla.\n\n¿Cuál es la gráfica que representa la distribución de las papas del bulto de acuerdo con su peso?",
+          "hasQuestionImage": true,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "Gráfica de pastel con 700 (35 %), 500 (25 %) y 800 (40 %)",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "Gráfica de pastel con 33,3 % para cada intervalo",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "Gráfica de barras con valores 5, 5 y 5",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "Gráfica de barras con cantidades 800, 500 y 700",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        }
+      ]
+    },
+    {
+      "sectionIndex": 10,
+      "sectionTitle": "",
+      "sectionText": "",
+      "hasSectionImage": false,
+      "sectionImageUrl": "",
+      "sectionImageAiDescription": "",
+      "questions": [
+        {
+          "questionId": "q_10",
+          "questionText": "Un candidato a la gobernación de un departamento quiere estimar el porcentaje de la población que votará por él. Para ello, contrata una firma encuestadora que realizará 1.000 llamadas telefónicas, en las que se pregunta por la preferencia de las personas a la hora de votar en las elecciones para gobernador. Para realizar la encuesta, la firma escoge aleatoriamente un municipio del departamento y llama a 1.000 personas de este lugar.\n\n¿Por qué el resultado de la encuesta puede diferir mucho de la realidad?",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "Porque la única manera de obtener resultados precisos es encuestar a toda la población del departamento.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "Porque la encuesta solo representará la opinión de las personas del departamento, si el municipio escogido es el más grande.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "Porque de esta manera solo están tomándose en cuenta las opiniones de la población de un municipio del departamento.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "Porque la muestra es muy grande, lo cual permite que existan grandes diferencias entre las respuestas de las personas.",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        }
+      ]
+    },
+    {
+      "sectionIndex": 11,
+      "sectionTitle": "",
+      "sectionText": "",
+      "hasSectionImage": true,
+      "sectionImageUrl": "",
+      "sectionImageAiDescription": "",
+      "questions": [
+        {
+          "questionId": "q_11",
+          "questionText": "Una torta con forma rectangular, que tiene 60 cm de base por 20 cm de altura, fue repartida entre 8 personas por medio de los siguientes cortes rectos.\n\nConsiderando la información anterior, ¿cuál es el área del trozo de torta número 1?",
+          "hasQuestionImage": true,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "225 cm²",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "150 cm²",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "75 cm²",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "40 cm²",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        }
+      ]
+    },
+    {
+      "sectionIndex": 12,
+      "sectionTitle": "",
+      "sectionText": "",
+      "hasSectionImage": true,
+      "sectionImageUrl": "",
+      "sectionImageAiDescription": "",
+      "questions": [
+        {
+          "questionId": "q_12",
+          "questionText": "En la tabla se muestra el peso de tres pedidos de mercancía que una empresa necesita enviar a otro país:\n\nPara saber el costo total del envío se debe calcular primero el peso total de los tres pedidos. Para esto, un empleado de la empresa efectúa el siguiente cálculo:\n\n\\[500 + 200 + 1 = 701\\ \\text{ton}\\]\n\nEsta solución es",
+          "hasQuestionImage": true,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "incorrecta; el resultado debe estar dado en kg, ya que la mayoría de los valores están en esta unidad.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "correcta; se suman correctamente los tres valores y se utiliza una de las unidades de los pedidos.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "incorrecta; como los datos están en unidades diferentes, no pueden sumarse directamente.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "correcta; el resultado se calcula bien y la unidad utilizada corresponde a la unidad de mayor peso.",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        }
+      ]
+    },
+    {
+      "sectionIndex": 13,
+      "sectionTitle": "",
+      "sectionText": "",
+      "hasSectionImage": true,
+      "sectionImageUrl": "",
+      "sectionImageAiDescription": "",
+      "questions": [
+        {
+          "questionId": "q_13",
+          "questionText": "Un pintor tiene un lienzo rectangular que quiere dividir en tres regiones: la región 1, que es triangular; la región 2, con forma de un cuarto de círculo; y la región 3, que ocupa el resto del lienzo, como se muestra en la figura.\n\nPara calcular el área de la región 3, el pintor realizó el siguiente procedimiento:\n\nPaso 1. Calculó el área del lienzo, multiplicando \\(8\\ \\text{m} \\times 5\\ \\text{m}\\).\nPaso 2. Calculó el área de región 1, multiplicando \\(4\\ \\text{m} \\times 3\\ \\text{m}\\).\nPaso 3. Calculó el área de región 2, multiplicando \\(\\pi \\times 16\\ \\text{m}^2\\) y dividiendo el resultado entre 4.\nPaso 4. Al resultado del paso 1, le restó los resultados del paso 2 y del paso 3.\n\n¿En cuál paso hay un error y cómo se puede corregir?",
+          "hasQuestionImage": true,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "En el paso 2, porque se debe multiplicar 3 m × 4 m × 5 m.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "En el paso 3, porque se debe multiplicar 2\\(\\pi\\) × 4 m y luego dividir entre 4.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "En el paso 2, porque se debe multiplicar 4 m × 3 m y luego dividir entre 2.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "En el paso 3, porque se debe multiplicar \\(\\pi \\times 4\\ \\text{m}\\) y luego dividir entre 4.",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        }
+      ]
+    },
+    {
+      "sectionIndex": 14,
+      "sectionTitle": "",
+      "sectionText": "",
+      "hasSectionImage": true,
+      "sectionImageUrl": "",
+      "sectionImageAiDescription": "",
+      "questions": [
+        {
+          "questionId": "q_14",
+          "questionText": "En una encuesta sobre la intención de voto para la elección de presidente en un país, se registraron los resultados que se observan en tabla y en la gráfica.\n\nDe acuerdo con lo anterior, ¿cuál de las siguientes afirmaciones es falsa?",
+          "hasQuestionImage": true,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "Con la información de la tabla se obtienen los datos de la gráfica.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "Con la información de la gráfica se obtiene cuál es el candidato con mayor intención de voto.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "Con la información de la gráfica se obtienen los datos de la tabla.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "Con la información de la tabla se obtiene la proporción entre los votos por un candidato y el total.",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        }
+      ]
+    },
+    {
+      "sectionIndex": 15,
+      "sectionTitle": "",
+      "sectionText": "",
+      "hasSectionImage": true,
+      "sectionImageUrl": "",
+      "sectionImageAiDescription": "",
+      "questions": [
+        {
+          "questionId": "q_15",
+          "questionText": "Un estudiante está ahorrando para un paseo que tiene un costo de $800.000; él empezó su ahorro en enero con $100.000, que se sube al regaló, y al final de cada mes está ahorrando cierta cantidad de dinero. La tabla resume el progreso del ahorro del estudiante durante los primeros cuatro meses.\n\n¿Cuál es la tendencia del dinero ahorrado al finalizar cada mes?",
+          "hasQuestionImage": true,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "Disminuye $30.000 cada mes.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "Aumenta $30.000 cada mes.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "Aumenta $100.000 cada mes.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "Disminuye $100.000 cada mes.",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        }
+      ]
+    },
+    {
+      "sectionIndex": 16,
+      "sectionTitle": "",
+      "sectionText": "",
+      "hasSectionImage": true,
+      "sectionImageUrl": "",
+      "sectionImageAiDescription": "",
+      "questions": [
+        {
+          "questionId": "q_16",
+          "questionText": "La tabla muestra el registro que llevó un mecánico automotriz de las piezas que tuvieron que reemplazarse durante el mantenimiento de tres vehículos.\n\nDe acuerdo con esta información, ¿cuál es el promedio del número de piezas reemplazadas de los tres vehículos?",
+          "hasQuestionImage": true,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "21",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "7",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "10",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "6",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        }
+      ]
+    },
+    {
+      "sectionIndex": 17,
+      "sectionTitle": "",
+      "sectionText": "",
+      "hasSectionImage": true,
+      "sectionImageUrl": "",
+      "sectionImageAiDescription": "",
+      "questions": [
+        {
+          "questionId": "q_17",
+          "questionText": "La figura muestra la distribución de los tipos de transporte que utilizan 160 personas para llegar al trabajo. Algunas personas usan únicamente un medio de transporte, otras dos, y otras tres.\n\nSi se necesita saber la cantidad total de personas que se transportan en bicicleta, ¿cuáles son los datos que se deben sumar?",
+          "hasQuestionImage": true,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "5, 15, 20 y 25.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "5 y 20.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "25, 35 y 50.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "5, 20, 25 y 50.",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        }
+      ]
+    },
+    {
+      "sectionIndex": 18,
+      "sectionTitle": "",
+      "sectionText": "",
+      "hasSectionImage": false,
+      "sectionImageUrl": "",
+      "sectionImageAiDescription": "",
+      "questions": [
+        {
+          "questionId": "q_18",
+          "questionText": "El fundador de una empresa de procesadores identificó que el número de transistores de un procesador del tipo \\(X\\) se duplicó cada dos años. Si en el 2010 el procesador tipo \\(X\\) tenía 10.000 transistores, ¿cuántos transistores tenía el procesador tipo \\(X\\) en el 2016?",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "20.000 transistores.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "40.000 transistores.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "60.000 transistores.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "80.000 transistores.",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        }
+      ]
+    },
+    {
+      "sectionIndex": 19,
+      "sectionTitle": "",
+      "sectionText": "",
+      "hasSectionImage": true,
+      "sectionImageUrl": "",
+      "sectionImageAiDescription": "",
+      "questions": [
+        {
+          "questionId": "q_19",
+          "questionText": "Un jardín con forma cuadrada, de vértices \\(EFGH\\), tiene de lado \\(x+y\\). Otro cuadrado \\(PQRS\\) está inscrito en el cuadrado \\(EFGH\\), de tal manera que la distancia más cercana entre dos vértices consecutivos mide \\(x\\).\n\nPara encontrar una fórmula que corresponda al área de la región sombreada, el jardinero propuso los siguientes pasos:\n\nPaso 1. Escoger uno de los cuatro triángulos sombreados y multiplicar la medida de la altura por la medida de la base.\nPaso 2. Dividir entre 2 el resultado obtenido en el paso 1.\nPaso 3. Multiplicar por 4 el resultado del paso anterior.\nPaso 4. Sumar cuatro veces el resultado del paso 2.\n\nDe los pasos propuestos, ¿cuál es redundante para el cálculo del área de la región sombreada?",
+          "hasQuestionImage": true,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "El paso 4, porque, al sumar cuatro veces el resultado del paso 2, se obtiene el resultado del paso 3.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "El paso 3, porque, al multiplicar por 4 el resultado del paso 2, se obtiene el mismo resultado obtenido en el paso 1.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "El paso 2, porque, al dividir entre 2 el resultado del paso 1, se obtiene el mismo resultado del paso 3.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "El paso 1, porque, al multiplicar la altura de uno de los triángulos por la base, se obtiene el área total de la figura.",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        }
+      ]
+    },
+    {
+      "sectionIndex": 20,
+      "sectionTitle": "",
+      "sectionText": "",
+      "hasSectionImage": false,
+      "sectionImageUrl": "",
+      "sectionImageAiDescription": "",
+      "questions": [
+        {
+          "questionId": "q_20",
+          "questionText": "Al entrar a un túnel, un carro que lleva una velocidad de 10 m/s, acelera a 3 m/s² durante 15 segundos, que es lo que dura recorriéndolo. La longitud del túnel se puede calcular mediante la siguiente fórmula:\n\n\\[(10\\ \\text{m/s}) \\times (15\\ \\text{s}) + \\frac{1}{2}(10\\ \\text{m/s}^2)(15\\ \\text{s})^2\\]\n\nAl ver la fórmula, una persona afirma que esta es equivalente a:\n\n\\[15\\ \\text{s} \\times \\left(10\\ \\text{m/s} + \\frac{1}{2}(3\\ \\text{m/s}^2)\\right)\\]\n\n¿Es verdadera la afirmación de la persona?",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "Sí, porque lo que hizo fue factorizar el tiempo que tarda en recorrer el túnel.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "No, porque omitió que hay unos 15 segundos elevados al cuadrado.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "Sí, porque el exponente 2, al que está elevado el tiempo, se puede cancelar.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "No, porque también se tiene que factorizar el fraccionario \\(\\frac{1}{2}\\).",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        }
+      ]
+    },
+    {
+      "sectionIndex": 21,
+      "sectionTitle": "",
+      "sectionText": "",
+      "hasSectionImage": false,
+      "sectionImageUrl": "",
+      "sectionImageAiDescription": "",
+      "questions": [
+        {
+          "questionId": "q_21",
+          "questionText": "Arturo quiere calcular el tiempo que se necesita para descargar un archivo de internet que tiene un tamaño de 12,6 megabytes. Él sabe que en su computador la velocidad de descarga es de 300 kilobytes por segundo y que 1 megabyte equivale a 1.024 kilobytes. ¿Cuál de los siguientes procedimientos NO permite calcular el tiempo necesario para descargar el archivo?",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "Paso 1. Multiplicar 12,6 por 1.024\nPaso 2. Dividir el resultado del paso 1 entre 300",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "Paso 1. Multiplicar 1.024 por 300\nPaso 2. Dividir el resultado del paso 1 entre 12,6",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "Paso 1. Dividir 12,6 entre 300\nPaso 2. Multiplicar el resultado del paso 1 por 1.024",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "Paso 1. Dividir 1.024 entre 300\nPaso 2. Multiplicar el resultado del paso 1 por 12,6",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        }
+      ]
+    },
+    {
+      "sectionIndex": 22,
+      "sectionTitle": "",
+      "sectionText": "",
+      "hasSectionImage": true,
+      "sectionImageUrl": "",
+      "sectionImageAiDescription": "",
+      "questions": [
+        {
+          "questionId": "q_22",
+          "questionText": "Una persona construyó una rampa, como se muestra en la figura, pero se necesita un refuerzo para evitar que esta se parta. Para esto, a dos metros del muro, se va a construir una columna que fortalezca la estructura.\n\n¿Cuál de los siguientes procedimientos permite calcular la altura \\(h\\) que debe tener la columna?",
+          "hasQuestionImage": true,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "Paso 1. Dividir 2 m entre 4 m, obteniendo 0,5.\nPaso 2. Dividir 3 m entre el valor calculado en el paso 1.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "Paso 1. Dividir 4 m entre 2 m, obteniendo 0,5.\nPaso 2. Multiplicar 3 m por el valor calculado en el paso 1.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "Paso 1. Dividir 4 m entre 2 m, obteniendo 2.\nPaso 2. Dividir 3 m entre el valor calculado en el paso 1.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "Paso 1. Dividir 2 m entre 4 m, obteniendo 2.\nPaso 2. Multiplicar 3 m por el valor calculado en el paso 1.",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        }
+      ]
+    },
+    {
+      "sectionIndex": 23,
+      "sectionTitle": "",
+      "sectionText": "",
+      "hasSectionImage": true,
+      "sectionImageUrl": "",
+      "sectionImageAiDescription": "",
+      "questions": [
+        {
+          "questionId": "q_23",
+          "questionText": "En la gráfica se muestra la ubicación, en coordenadas polares, de cuatro aviones \\((V, W, X, Y)\\) respecto a la torre de control de un aeropuerto.\n\nSi las coordenadas polares de un punto son de la forma \\((r,\\theta)\\), donde \\(r\\) es la distancia al polo y \\(\\theta\\) es el ángulo respecto al eje polar, ¿cuál es el orden de los aviones, del que está más cerca al que está más lejos de la torre de control?",
+          "hasQuestionImage": true,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "W, V, Y, X.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "X, V, W, Y.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "V, Y, W, X.",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "X, Y, V, W.",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        }
+      ]
+    },
+    {
+      "sectionIndex": 24,
+      "sectionTitle": "",
+      "sectionText": "",
+      "hasSectionImage": false,
+      "sectionImageUrl": "",
+      "sectionImageAiDescription": "",
+      "questions": [
+        {
+          "questionId": "q_24",
+          "questionText": "Kevin trabaja en una farmacia que entrega los medicamentos a domicilio. Los días viernes, Kevin tiene la posibilidad de salir tres horas antes de su trabajo, pero la condición es que debe repartir los pedidos que hacen falta por entregar y que estén ubicados en la ruta que toma hacia su casa. Por ejemplo, el último viernes que salió tuvo que entregar un total de cuatro pedidos, así:\n\n- Para entregar el primer pedido, tuvo que avanzar 3 cuadras.\n- Para entregar el segundo pedido, tuvo que avanzar el doble de cuadras de las que había hecho para entregar el primer pedido.\n- Para llegar a la dirección del tercer pedido, tuvo que avanzar la mitad de cuadras que avanzó para entregar el pedido anterior.\n- Para el último pedido, tuvo que regresarse 10 cuadras y, así, acabar su ruta de entregas.\n- Después de terminar las entregas, solo tuvo que caminar una cuadra para llegar a su casa.\n\n¿Cuál de las siguientes operaciones permite obtener la distancia que hay desde la farmacia hasta la casa de Kevin?",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "3 + 3 + 3 - 10 + 1",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "3 + 6 + 6 + 10",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "3 + 6 + 3 - 10 + 1",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "6 + 3 + 10 - 1",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        }
+      ]
+    },
+    {
+      "sectionIndex": 25,
+      "sectionTitle": "",
+      "sectionText": "",
+      "hasSectionImage": true,
+      "sectionImageUrl": "",
+      "sectionImageAiDescription": "",
+      "questions": [
+        {
+          "questionId": "q_25",
+          "questionText": "La presión pleural se genera entre algunas paredes de los pulmones en el proceso de respiración del ser humano. Al respecto, se midió la presión pleural de cuatro pacientes para determinar el orden en que deben recibir un tratamiento pulmonar.\n\nPara determinar el orden en que los pacientes van a recibir el tratamiento médico, se les debe ordenar de menor a mayor según su presión pleural. ¿Cuál de las siguientes tablas indica el orden en que deben recibir el tratamiento los pacientes?",
+          "hasQuestionImage": true,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "content": "Primero: Ximena; Segundo: Mariana; Tercero: Santiago; Cuarto: Orlando",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "content": "Primero: Orlando; Segundo: Santiago; Tercero: Mariana; Cuarto: Ximena",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "content": "Primero: Mariana; Segundo: Santiago; Tercero: Orlando; Cuarto: Ximena",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "content": "Primero: Santiago; Segundo: Ximena; Tercero: Mariana; Cuarto: Orlando",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        }
+      ]
+    }
+  ]
+}

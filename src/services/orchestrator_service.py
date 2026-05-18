@@ -19,6 +19,7 @@ from src.services.creative_image_service import CreativeImageService
 from src.services.admission_chat_service import AdmissionChatService
 from src.services.mindmap_service import mindmap_service
 from src.services.flashcard_service import FlashcardsService
+from src.services.mock_exam_service import MockExamService
 
 logger = logging.getLogger(__name__)
 
@@ -134,14 +135,6 @@ class OrchestratorService:
                 final_reply_text = "He analizado el tema y estructurado sus conceptos clave. Puedes explorar el mapa mental en el panel interactivo."
 
             elif intent == "flashcards":
-                # =========================================================
-                # FIX: We NO LONGER send_intent("flashcards") from here.
-                # We will trigger the transition in flashcard_service.py 
-                # exactly when the real flashcard data begins to stream.
-                # =========================================================
-                # if stream_manager:
-                #     stream_manager.send_intent("flashcards")
-
                 final_reply_text, meta_payload = FlashcardsService.execute_flashcards_generation(
                     message=message,
                     conversation_input=conversation_input,
@@ -194,6 +187,13 @@ class OrchestratorService:
                     conversation_input=conversation_input, user_id=user_id, page=page, 
                     name=name, email=email, mode=mode, exam_context=locked_exam_context, 
                     category=category, actual_conversation_id=actual_conversation_id
+                )
+                
+            elif intent == "static_exam":
+                exam_type = "icfes" # Hardcoded for now based on your immediate need, scalable later
+                final_reply_text, meta_payload = MockExamService.get_random_exam(
+                    exam_type=exam_type,
+                    component=category
                 )
                 
             else:
