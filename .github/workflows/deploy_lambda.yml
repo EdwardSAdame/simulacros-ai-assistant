@@ -61,8 +61,11 @@ jobs:
           # Save Voice Messages Handler
           cp src/lambda_save_voice_handler.py package/
 
-          # Purchase Webhook Handler (NEW)
+          # Purchase Webhook Handler
           cp src/lambda_purchase_handler.py package/
+
+          # Mock Exam Handler (NEW)
+          cp src/lambda_mock_exam_handler.py package/
 
           # Zip the contents of the package directory
           cd package
@@ -184,6 +187,13 @@ jobs:
         run: |
           aws lambda update-function-code \
             --function-name ${{ vars.LAMBDA_PURCHASE_HANDLER_NAME }} \
+            --zip-file fileb://deployment.zip \
+            --region ${{ vars.AWS_REGION }}
+
+      - name: Deploy MockExamHandler
+        run: |
+          aws lambda update-function-code \
+            --function-name ${{ vars.LAMBDA_MOCK_EXAM_HANDLER_NAME }} \
             --zip-file fileb://deployment.zip \
             --region ${{ vars.AWS_REGION }}
 
