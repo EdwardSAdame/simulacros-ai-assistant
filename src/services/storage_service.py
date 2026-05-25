@@ -12,73 +12,116 @@ logger = logging.getLogger(__name__)
 
 class StorageService:
     """
-    Handles file uploads to AWS S3.
+    Handles private file uploads to AWS S3, routing between Dynamic AI Assets and Static Exam Assets.
     """
     def __init__(self):
-        # We allow the region to be configurable via settings
         self.s3_client = boto3.client('s3', region_name=settings.AWS_REGION)
-        self.bucket_name = settings.S3_BUCKET_NAME
 
+    # ---------------------------------------------------------
+    # 1. ACTIVE AI GENERATION (Chat, Quizzes, Flashcards)
+    # ---------------------------------------------------------
     def upload_image_from_bytes(self, file_content: bytes, content_type: str = "image/png", folder: str = "quiz_assets") -> str:
         """
-        Uploads raw image bytes to S3 and returns the public URL.
-        Generates a unique filename using UUID to prevent collisions.
-        
-        Args:
-            file_content (bytes): The raw binary data of the image.
-            content_type (str): The MIME type (default: image/png).
-            folder (str): The folder (prefix) inside the bucket. Default: 'quiz_assets'.
-            
-        Returns:
-            str: The public HTTPS URL of the uploaded image.
+        Uploads dynamic AI images to the AI_ASSETS_BUCKET.
+        NOTE: Retained original function name so existing AI services do not break.
         """
         # 1. Determine Extension
         file_extension = ".png"
-        if "jpeg" in content_type:
+        if "jpeg" in content_type or "jpg" in content_type:
             file_extension = ".jpg"
         elif "pdf" in content_type:
             file_extension = ".pdf"
             
-        # 2. Generate a unique filename using the provided folder
+        # 2. Generate a unique filename
         file_name = f"{folder}/{uuid.uuid4()}{file_extension}"
+        bucket = settings.AI_ASSETS_BUCKET
         
         try:
             # 3. Upload to S3
             self.s3_client.put_object(
-                Bucket=self.bucket_name,
+                Bucket=bucket,
                 Key=file_name,
                 Body=file_content,
                 ContentType=content_type
-                # ACL='public-read' # Uncomment if your bucket isn't using Policy-based public access
             )
             
-            # 4. Construct the Public URL
-            if hasattr(settings, 'S3_CUSTOM_DOMAIN') and settings.S3_CUSTOM_DOMAIN:
-                # If you use CloudFront later
-                url = f"https://{settings.S3_CUSTOM_DOMAIN}/{file_name}"
+            # 4. Construct URL (Use AI CDN if configured, else fallback to standard S3 URL)
+            if hasattr(settings, 'AI_ASSETS_CDN') and settings.AI_ASSETS_CDN:
+                url = f"https://{settings.AI_ASSETS_CDN}/{file_name}"
             else:
-                # Standard S3 URL
-                url = f"https://{self.bucket_name}.s3.{settings.AWS_REGION}.amazonaws.com/{file_name}"
+                url = f"https://{bucket}.s3.{settings.AWS_REGION}.amazonaws.com/{file_name}"
                 
-            # STRUCTURED LOGGING: Record the successful upload for CloudWatch Insights
-            log_event("s3_asset_uploaded", {
+            # STRUCTURED LOGGING
+            log_event("ai_asset_uploaded", {
                 "url": url,
                 "folder": folder,
                 "file_name": file_name,
                 "content_type": content_type,
-                "bucket": self.bucket_name
+                "bucket": bucket
             })
             
             return url
 
         except ClientError as e:
-            # STRUCTURED LOGGING: Record the failure
-            log_event("s3_upload_failed", {
+            log_event("ai_asset_upload_failed", {
                 "folder": folder,
                 "file_name": file_name,
                 "content_type": content_type,
-                "bucket": self.bucket_name
-            }, level="error", error=e)
+                "bucket": bucket
+            }, level="error", error=str(e))
+            raise e
+
+    # ---------------------------------------------------------
+    # 2. NEW MOCK EXAM CDN (Static Assets)
+    # ---------------------------------------------------------
+    def upload_exam_asset(self, file_content: bytes, content_type: str = "image/png", folder: str = "exam_assets") -> str:
+        """
+        Uploads static mock exam images directly to the secure CloudFront CDN bucket.
+        """
+        # 1. Determine Extension
+        file_extension = ".png"
+        if "jpeg" in content_type or "jpg" in content_type:
+            file_extension = ".jpg"
+        elif "pdf" in content_type:
+            file_extension = ".pdf"
+            
+        # 2. Generate a unique filename
+        file_name = f"{folder}/{uuid.uuid4()}{file_extension}"
+        bucket = settings.CDN_ASSETS_BUCKET
+        
+        try:
+            # 3. Upload to S3
+            self.s3_client.put_object(
+                Bucket=bucket,
+                Key=file_name,
+                Body=file_content,
+                ContentType=content_type
+            )
+            
+            # 4. Construct the ultra-fast CloudFront CDN URL
+            if hasattr(settings, 'CDN_CUSTOM_DOMAIN') and settings.CDN_CUSTOM_DOMAIN:
+                url = f"https://{settings.CDN_CUSTOM_DOMAIN}/{file_name}"
+            else:
+                url = f"https://{bucket}.s3.{settings.AWS_REGION}.amazonaws.com/{file_name}"
+                
+            # STRUCTURED LOGGING
+            log_event("exam_asset_uploaded", {
+                "url": url,
+                "folder": folder,
+                "file_name": file_name,
+                "content_type": content_type,
+                "bucket": bucket
+            })
+            
+            return url
+
+        except ClientError as e:
+            log_event("exam_asset_upload_failed", {
+                "folder": folder,
+                "file_name": file_name,
+                "content_type": content_type,
+                "bucket": bucket
+            }, level="error", error=str(e))
             raise e
 
 # Create a singleton instance to be imported elsewhere

@@ -17,14 +17,15 @@ def test_visual_quiz():
     
     # 2. Safety Checks
     if not os.getenv("OPENAI_API_KEY"):
-        print("❌ ERROR: OPENAI_API_KEY is missing in .env")
+        print("ERROR: OPENAI_API_KEY is missing in .env")
         return
     
-    bucket_name = os.getenv("S3_BUCKET_NAME")
+    # UPDATED: Check for the new dynamic AI bucket variable
+    bucket_name = os.getenv("AI_ASSETS_BUCKET")
     if not bucket_name:
-        print("⚠️ WARNING: S3_BUCKET_NAME is missing in .env. Uploads might fail.")
+        print("WARNING: AI_ASSETS_BUCKET is missing in .env. Uploads might fail.")
 
-    print("\n🚀 STARTING VISUAL QUIZ TEST")
+    print("\nSTARTING VISUAL QUIZ TEST")
     print("------------------------------------------------")
     print("Subject: Quadratic Functions (Graphing Request)")
     
@@ -38,13 +39,16 @@ def test_visual_quiz():
 
     try:
         # 4. Call the function (Simulating the Lambda Worker)
-        quiz_response = generate_structured_quiz(
+        raw_result = generate_structured_quiz(
             conversation_input=conversation,
             user_id="test_local_dev",
             mode="omega" # Ensure you use a smart model (gpt-4o)
         )
 
-        print("\n✅ GENERATION COMPLETE!")
+        # Handle the new tuple return type from the upgraded backend
+        quiz_response = raw_result[0] if isinstance(raw_result, tuple) else raw_result
+
+        print("\nGENERATION COMPLETE!")
         print(f"Intro: {quiz_response.intro_message}\n")
         
         # 5. Inspect the Questions for URLs
@@ -54,22 +58,21 @@ def test_visual_quiz():
             
             # THE MOMENT OF TRUTH
             if q.image_url:
-                print(f"    🖼️ IMAGE URL: {q.image_url}")
+                print(f"    IMAGE URL: {q.image_url}")
                 
-                # 🟢 UPDATED CHECK: Look for the new bucket OR the specific folder
-                # It checks if the URL contains the bucket name AND the 'quiz_assets' folder
+                # UPDATED CHECK: Validates against the renamed AI bucket
                 if (bucket_name in q.image_url or "invicto-ai-assets" in q.image_url) and "quiz_assets" in q.image_url:
-                      print("    🎉 SUCCESS: Valid S3 URL detected in 'quiz_assets' folder!")
+                      print("    SUCCESS: Valid S3 URL detected in 'quiz_assets' folder!")
                 elif q.image_url == "PENDING_UPLOAD":
-                      print("    ⚠️ PENDING: The AI tagged it, but the upload logic didn't replace it.")
+                      print("    PENDING: The AI tagged it, but the upload logic didn't replace it.")
                 else:
-                      print("    ⚠️ WARNING: URL generated but might be in the wrong bucket/folder.")
+                      print("    WARNING: URL generated but might be in the wrong bucket/folder.")
             else:
-                print("    ⚪ No image for this question.")
+                print("    No image for this question.")
             print("-" * 40)
 
     except Exception as e:
-        print(f"\n❌ TEST FAILED: {e}")
+        print(f"\nTEST FAILED: {e}")
         import traceback
         traceback.print_exc()
 

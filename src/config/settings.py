@@ -35,10 +35,18 @@ class Settings:
         # 🟢 Add mapping for the Audio Usage FinOps Table
         self.AUDIO_USAGE_TABLE_NAME: str = os.getenv("AUDIO_USAGE_TABLE_NAME", "AudioUsage")
 
-        # AWS S3 Configuration
-        self.S3_BUCKET_NAME: str = os.getenv("S3_BUCKET_NAME", "invicto-quiz-assets")
+        # ---------------------------------------------------------
+        # AWS S3 Configuration (Dynamic AI Assets - Active)
+        # ---------------------------------------------------------
+        self.AI_ASSETS_BUCKET: str = os.getenv("AI_ASSETS_BUCKET", "invicto-ai-assets")
+        self.AI_ASSETS_CDN: str = os.getenv("AI_ASSETS_CDN", "") 
         self.AWS_REGION: str = os.getenv("AWS_REGION", "us-east-1")
-        self.S3_CUSTOM_DOMAIN: str = os.getenv("S3_CUSTOM_DOMAIN", "") 
+
+        # ---------------------------------------------------------
+        # AWS S3 Configuration (Static Exam Assets - New CDN)
+        # ---------------------------------------------------------
+        self.CDN_ASSETS_BUCKET: str = os.getenv("CDN_ASSETS_BUCKET", "simulacros-ai-assets")
+        self.CDN_CUSTOM_DOMAIN: str = os.getenv("CDN_CUSTOM_DOMAIN", "cdn.invicto.com.co") 
 
         # --- OpenAI Models ---
         self.OPENAI_AUDIO_MODEL: str = os.getenv("OPENAI_AUDIO_MODEL")
