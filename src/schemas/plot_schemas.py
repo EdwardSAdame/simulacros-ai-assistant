@@ -5,7 +5,7 @@ class PlotGenerationBlueprint(BaseModel):
         description="The core mathematical, scientific, or data concept to be visualized."
     )
     chart_type: str = Field(
-        description="The appropriate chart type for the analytical data (e.g., line chart, scatter plot, bar chart)."
+        description="The appropriate chart type for the analytical data."
     )
     data_generation_rules: str = Field(
         description="Strict instructions on what data the code must generate. Example: 'Generate x linearly spaced from 0 to 2*pi, calculate y = sin(x)'."

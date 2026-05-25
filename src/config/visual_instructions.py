@@ -24,8 +24,8 @@ When comparing two distinct variables, use these high-contrast pairs:
 
 #### SCENARIO 3: MULTI-LINE (Complex Data)
 When 3+ lines are present, use one of these two strategies:
-1.  **The "Full Spectrum"**: Cycle through the primary triad: `#ffcb04`, `#00adef`, `#61bb45`.
-2.  **The "Focus & Fade"**: 
+1.  **The Full Spectrum**: Cycle through the primary triad: `#ffcb04`, `#00adef`, `#61bb45`.
+2.  **The Focus & Fade**: 
     * Use only one color from the primary triad.
     * Render all other lines in a "faded" version (light grey `#7b8c96`).
 
@@ -55,7 +55,7 @@ When writing the Python code, you MUST apply the following "Clean Style" paramet
     ```python
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
-    ax.spines['left'].set_visible(False)  # Important: Hide left border
+    ax.spines['left'].set_visible(False)
     ax.spines['bottom'].set_visible(True)
     ax.spines['bottom'].set_linewidth(1.5)
     ```
@@ -68,14 +68,13 @@ When writing the Python code, you MUST apply the following "Clean Style" paramet
     ```
 
 #### 5. MATH & LATEX RENDERING
-* **MathText Formatting**: Format all mathematical expressions, symbols, and variables within labels, titles, legends, or text annotations using Matplotlib's native MathText engine. Enclose these mathematical elements strictly within dollar signs `$` and use raw Python strings (prefixed with `r`) to ensure correct LaTeX rendering in the generated image.
+* **MathText Formatting**: Format all mathematical expressions, symbols, and variables within labels, titles, legends, or text annotations using Matplotlib's native MathText engine. Enclose these mathematical elements strictly within dollar signs `$` and use raw Python strings (prefixed with `r`).
 
 #### 6. LABELS & LEGEND
 * **Legend**: Use `frameon=False` and `loc='upper right'`.
 * **X-Label**: Standard placement (`ax.set_xlabel`).
 * **Y-Label (Custom)**: Do NOT use `ax.set_ylabel`. Place the label as floating text aligned with the Y-axis origin (x=0).
     ```python
-    # Y-Label Example: Place 'VALOR' or variable name at x=0
     ax.text(0, 1.02, 'LABEL_NAME', 
             transform=ax.transAxes, 
             ha='left', 
@@ -84,10 +83,35 @@ When writing the Python code, you MUST apply the following "Clean Style" paramet
     ```
 
 #### 7. SPECIFIC CHART TYPES (BARS & SCATTER)
-* **Bar Graphs**: You MUST remove the contour/border of the bars. Always pass `edgecolor='none'` when calling `ax.bar()` or `plt.bar()`.
-* **Scatter Plots**: You MUST remove the contour/border of the dots. Always pass `edgecolors='none'` when calling `ax.scatter()` or `plt.scatter()`.
+* **Bar Graphs**: You MUST remove the contour/border of the bars. Always pass `edgecolor='none'`.
+* **Scatter Plots**: You MUST remove the contour/border of the dots. Always pass `edgecolors='none'`.
 
-#### 8. DISPLAYING THE PLOT (CRITICAL)
+#### 8. SPECIFIC CHART TYPES (TABLES)
+When the blueprint dictates a visual table, you MUST construct it using Matplotlib's `table` module applying these strict rules:
+* **Axes Removal**: You MUST completely turn off axes (`ax.axis('tight')` and `ax.axis('off')`).
+* **Layout**: Place the table perfectly centered (`loc='center'`, `cellLoc='center'`).
+* **Styling Elements**:
+    * Disable auto font size and set font size to 12.
+    * Scale the rows for readability using `table.scale(1, 1.8)`.
+    * Set cell edge colors to a subtle grey (`#d1d5db`) with a linewidth of 0.5.
+    * The header row MUST have a background color of `#f0f2f5` and bold text.
+    ```python
+    ax.axis('tight')
+    ax.axis('off')
+    table = ax.table(cellText=data, colLabels=columns, loc='center', cellLoc='center')
+    table.auto_set_font_size(False)
+    table.set_fontsize(12)
+    table.scale(1, 1.8)
+    
+    for (row, col), cell in table.get_celld().items():
+        cell.set_edgecolor('#d1d5db')
+        cell.set_linewidth(0.5)
+        if row == 0:
+            cell.set_facecolor('#f0f2f5')
+            cell.get_text().set_weight('bold')
+    ```
+
+#### 9. DISPLAYING THE PLOT (CRITICAL)
 * **Output**: You MUST display the final plot directly using `plt.show()`. 
 * **No File Saving**: Do NOT save the figure to disk. Do NOT use `plt.savefig()`. Do NOT use `plt.close(fig)`.
 """
