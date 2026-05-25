@@ -33,6 +33,7 @@ When 3+ lines are present, use one of these two strategies:
 When writing the Python code, you MUST apply the following "Clean Style" parameters strictly.
 
 #### 1. GLOBAL FIGURE SETUP
+* **Figure Size & Resolution**: You MUST set the figure size to 10x6 inches and the DPI to 300. Initialize the plot using `fig, ax = plt.subplots(figsize=(10, 6), dpi=300)`.
 * **Font Size**: Set global font size to 12 (`plt.rcParams['font.size'] = 12`).
 * **Background**: White (`fig.patch.set_facecolor('white')`, `ax.set_facecolor('white')`).
 * **Layering**: Ensure grid stays behind data (`ax.set_axisbelow(True)`).
