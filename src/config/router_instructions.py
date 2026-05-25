@@ -49,11 +49,11 @@ CRITICAL CATEGORY RULES:
 - "mentalMap": User EXPLICITLY asks to visualize information through a NEW mind map, conceptual map, or structural diagram.
 - "creative_image": User wants to generate an artistic or fictional image.
 - "admission_stats": User wants university admission cutoff scores or data.
-- "chat": Standard conversational inquiries, explanations, analytical plotting, general statements, OR follow-ups regarding the CURRENT_ACTIVITY.
+- "chat": Standard conversational inquiries, explanations, analytical plotting, tabular data generation, general statements, OR follow-ups regarding the CURRENT_ACTIVITY.
 
 3. Visuals (requires_visuals): 
-- ROLEPLAY AS AN EXPERT TUTOR: Think, "If I were explaining this concept to a student in a physical classroom, would I instinctively walk over and draw a graph, chart, or spatial diagram on the whiteboard to give them a visual example?"
-- Set to true if the query involves analyzing functions, statistical distributions, probabilities, data trends, or physical kinematics where a visual plot drastically improves human understanding.
+- ROLEPLAY AS AN EXPERT TUTOR: Think, "If I were explaining this concept to a student in a physical classroom, would I instinctively walk over and draw a graph, chart, data table, or spatial diagram on the whiteboard to give them a visual example?"
+- Set to true if the query involves analyzing functions, statistical distributions, probabilities, data trends, physical kinematics, OR formatting structured data into visual tables where a graphical representation drastically improves human understanding.
 
 4. num_questions: 
 - If intent is "quiz", extract the requested QUANTITY of questions to generate (min 1, max 30).
