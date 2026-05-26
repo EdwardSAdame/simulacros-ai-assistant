@@ -45,8 +45,8 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "C",
+          "aiExplanation": "Para calcular el promedio, se debe calcular la suma de todas las edades proporcionadas y dividirla entre el número total de datos. La suma es \\(21 + 26 + 20 + 21 + 22 + 28 + 30 = 168\\). Al dividir esta suma entre el número total de madres, que es \\(7\\), el resultado es \\(\\frac{168}{7} = 24\\). Por lo tanto, la edad promedio es \\(24\\)."
         }
       ]
     },
@@ -62,8 +62,8 @@
           "questionId": "q_02",
           "questionText": "Una aerolínea ofrece vuelos nacionales manejando las siguientes tarifas y aclarando que, al precio relacionado, se debe agregar el impuesto del 12 % o 19 % según la temporada del año seleccionada para el viaje.\n\nUn usuario compra 5 tiquetes para viajar el día jueves y 2 tiquetes para viajar el día sábado, para lo que debe usar la fórmula:\n\n\\[\\text{Valor total a pagar} = (5 \\times 80{.}000 + 2 \\times 150{.}000)(1+y)\\]\n\nDonde \\(y\\) es el porcentaje del impuesto.\n\nSobre el valor total a pagar, ¿cuál de las siguientes afirmaciones es verdadera?",
           "hasQuestionImage": true,
-          "questionImageUrl": "",
-          "questionImageAiDescription": "",
+          "questionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session1/q2.png",
+          "questionImageAiDescription": "Tabla de costos de un trayecto nacional según el día de la semana. La tabla compara dos rangos de tarifa: de lunes a jueves y de viernes a domingo. El valor del trayecto nacional es de $80.000 de lunes, martes, miércoles o jueves, y de $150.000 de viernes, sábado o domingo. Los títulos de las columnas están distribuidos en varias líneas para mejorar la legibilidad.",
           "optionsType": "text",
           "options": [
             {
@@ -91,8 +91,8 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "B",
+          "aiExplanation": "La fórmula requiere la variable \\(y\\), que representa el porcentaje del impuesto. El problema especifica que el impuesto es del \\(12 \\%\\) o del \\(19 \\%\\) dependiendo de la temporada del año. Como no se menciona la temporada específica en la que se realiza el viaje, el valor de \\(y\\) es desconocido, lo que hace imposible calcular el valor total a pagar."
         }
       ]
     },
