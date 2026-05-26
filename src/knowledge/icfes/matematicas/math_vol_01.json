@@ -16,7 +16,7 @@
           "questionId": "q_01",
           "questionText": "En la siguiente tabla se evidencian los resultados de una entrevista realizada a siete mujeres, madres de familia, en donde se les preguntó a qué edad tuvieron su primer hijo.\n\nA partir de la información suministrada, ¿cuál es el promedio de las edades?",
           "hasQuestionImage": true,
-          "questionImageUrl": "",
+          "questionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session1/q1.png",
           "questionImageAiDescription": "Table with two columns: Madre and Edad (años). The ages listed are 21, 26, 20, 21, 22, 28, and 30.",
           "optionsType": "text",
           "options": [
