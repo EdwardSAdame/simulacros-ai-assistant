@@ -16,7 +16,7 @@
           "questionId": "q_01",
           "questionText": "En la siguiente tabla se evidencian los resultados de una entrevista realizada a siete mujeres, madres de familia, en donde se les preguntó a qué edad tuvieron su primer hijo.\n\nA partir de la información suministrada, ¿cuál es el promedio de las edades?",
           "hasQuestionImage": true,
-          "questionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session1/q1.png",
+          "questionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session1/q01.png",
           "questionImageAiDescription": "Table with two columns: Madre and Edad (años). The ages listed are 21, 26, 20, 21, 22, 28, and 30.",
           "optionsType": "text",
           "options": [
@@ -62,7 +62,7 @@
           "questionId": "q_02",
           "questionText": "Una aerolínea ofrece vuelos nacionales manejando las siguientes tarifas y aclarando que, al precio relacionado, se debe agregar el impuesto del 12 % o 19 % según la temporada del año seleccionada para el viaje.\n\nUn usuario compra 5 tiquetes para viajar el día jueves y 2 tiquetes para viajar el día sábado, para lo que debe usar la fórmula:\n\n\\[\\text{Valor total a pagar} = (5 \\times 80{.}000 + 2 \\times 150{.}000)(1+y)\\]\n\nDonde \\(y\\) es el porcentaje del impuesto.\n\nSobre el valor total a pagar, ¿cuál de las siguientes afirmaciones es verdadera?",
           "hasQuestionImage": true,
-          "questionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session1/q2.png",
+          "questionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session1/q02.png",
           "questionImageAiDescription": "Tabla de costos de un trayecto nacional según el día de la semana. La tabla compara dos rangos de tarifa: de lunes a jueves y de viernes a domingo. El valor del trayecto nacional es de $80.000 de lunes, martes, miércoles o jueves, y de $150.000 de viernes, sábado o domingo. Los títulos de las columnas están distribuidos en varias líneas para mejorar la legibilidad.",
           "optionsType": "text",
           "options": [
@@ -101,15 +101,15 @@
       "sectionTitle": "",
       "sectionText": "",
       "hasSectionImage": true,
-      "sectionImageUrl": "",
-      "sectionImageAiDescription": "",
+      "sectionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session1/q03_section.png",
+      "sectionImageAiDescription": "La imagen muestra un diagrama de Venn con tres conjuntos relacionados con síntomas: dolor de cabeza, mareo y náuseas. Cada círculo representa un síntoma, y las intersecciones muestran combinaciones de síntomas. Se observan los valores 10 en la parte exclusiva de dolor de cabeza, 5 en la parte exclusiva de mareo, 15 en la parte exclusiva de náuseas, 8 en la intersección entre dolor de cabeza y mareo, 6 en la intersección entre dolor de cabeza y náuseas, 1 en la intersección entre mareo y náuseas, y 15 fuera de los tres conjuntos. La imagen está titulada como un diagrama.",
       "questions": [
         {
           "questionId": "q_03",
           "questionText": "Un laboratorio aplicó un tratamiento médico a 60 pacientes y registró en un diagrama los tres efectos secundarios que padecieron algunos de ellos.\n\nLuego, un médico del laboratorio registró la información en una tabla de la siguiente manera:\n\n¿Es válida la información que registró el médico en la tabla?",
           "hasQuestionImage": true,
-          "questionImageUrl": "",
-          "questionImageAiDescription": "",
+          "questionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session1/q03.png",
+          "questionImageAiDescription": "La imagen muestra una tabla titulada 'Efectos secundarios después del tratamiento', con dos columnas: 'Efecto secundario' y 'Cantidad de pacientes'. Reporta tres efectos secundarios: dolor de cabeza con 24 pacientes, náuseas con 22 pacientes y mareo con 14 pacientes. Es una comparación categórica de frecuencias.",
           "optionsType": "text",
           "options": [
             {
