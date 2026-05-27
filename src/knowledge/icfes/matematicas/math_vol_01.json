@@ -154,8 +154,8 @@
           "questionId": "q_04",
           "questionText": "En una clase de Inglés hay 6 estudiantes, 4 son mujeres y 2 son hombres. Para una exposición, el profesor quiere conformar grupos de 3 estudiantes.\n\nEn la tabla, \\(X\\), \\(Y\\), \\(Z\\) y \\(W\\) representan la cantidad de formas que tiene el profesor para escoger cada grupo de 3 estudiantes.\n\nDe acuerdo con los datos de la tabla, ¿cuáles valores se deben conocer para determinar la cantidad total de formas que hay para escoger un grupo de 3 estudiantes en donde, al menos, uno de ellos sea hombre?",
           "hasQuestionImage": true,
-          "questionImageUrl": "",
-          "questionImageAiDescription": "",
+          "questionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session1/q04.png",
+          "questionImageAiDescription": "La imagen muestra una tabla con cuatro grupos y una fila de características. En la primera fila aparecen los encabezados Grupo 1, Grupo 2, Grupo 3 y Grupo 4. En la segunda fila se indica la composición de cada grupo: Grupo 1 corresponde a tres hombres, Grupo 2 a una mujer y dos hombres, Grupo 3 a dos mujeres y un hombre, y Grupo 4 a tres mujeres. En la tercera fila se presenta la cantidad de formas de escoger el grupo, representada por las variables X, Y, Z y W respectivamente. La tabla relaciona composición de grupos con el número de maneras de formarlos.",
           "optionsType": "text",
           "options": [
             {
@@ -200,33 +200,33 @@
           "questionId": "q_05",
           "questionText": "Un banco organizó un concurso para premiar a los usuarios que más utilizan las tarjetas de crédito. La tabla muestra el tipo de premio, la cantidad de premios que se entregó de cada tipo y el monto correspondiente a cada tipo de premio.\n\n¿Cuál de las siguientes tablas muestra el total de dinero entregado por el banco para cada tipo de premio?",
           "hasQuestionImage": true,
-          "questionImageUrl": "",
-          "questionImageAiDescription": "",
-          "optionsType": "text",
+          "questionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session1/q05.png",
+          "questionImageAiDescription": "La imagen muestra una tabla de premios con tres columnas: 'Tipo de premio', 'Cantidad de premios' y 'Monto de cada premio'. Presenta tres categorías: Oro con 5 premios de $10.000.000 cada uno, Plata con 25 premios de $5.000.000 cada uno y Bronce con 100 premios de $1.000.000 cada uno. Es una tabla comparativa de cantidades y valores monetarios.",
+          "optionsType": "image",
           "options": [
             {
               "optionId": "A",
-              "type": "text",
-              "content": "Oro: $10.000.000; Plata: $5.000.000; Bronce: $1.000.000",
-              "optionAiDescription": ""
+              "type": "image",
+              "content": "https://cdn.invicto.com.co/icfes/math/2025_2_session1/q05_a.png",
+              "optionAiDescription": "La imagen muestra una tabla con dos columnas: 'Tipo de premio' y 'Dinero entregado'. Incluye tres filas: Oro con $10.000.000, Plata con $5.000.000 y Bronce con $1.000.000. Es una lista ordenada de premios según su valor monetario."
             },
             {
               "optionId": "B",
-              "type": "text",
-              "content": "Oro: $50.000.000; Plata: $125.000.000; Bronce: $100.000.000",
-              "optionAiDescription": ""
+              "type": "image",
+              "content": "https://cdn.invicto.com.co/icfes/math/2025_2_session1/q05_b.png",
+              "optionAiDescription": "La imagen muestra una tabla con dos columnas: 'Tipo de premio' y 'Dinero entregado'. Presenta tres filas: Oro con $50.000.000, Plata con $125.000.000 y Bronce con $100.000.000. Es una comparación de premios según el monto total entregado."
             },
             {
               "optionId": "C",
-              "type": "text",
-              "content": "Oro: $1.000.000.000; Plata: $125.000.000; Bronce: $5.000.000",
-              "optionAiDescription": ""
+              "type": "image",
+              "content": "https://cdn.invicto.com.co/icfes/math/2025_2_session1/q05_c.png",
+              "optionAiDescription": "La imagen muestra una tabla con dos columnas: 'Tipo de premio' y 'Dinero entregado'. Presenta tres filas: Oro con $1.000.000.000, Plata con $125.000.000 y Bronce con $5.000.000. Es una comparación de premios según el monto total entregado."
             },
             {
               "optionId": "D",
-              "type": "text",
-              "content": "Oro: $50.000.000; Plata: $100.000.000; Bronce: $125.000.000",
-              "optionAiDescription": ""
+              "type": "image",
+              "content": "https://cdn.invicto.com.co/icfes/math/2025_2_session1/q05_d.png",
+              "optionAiDescription": "La imagen muestra una tabla con dos columnas: 'Tipo de premio' y 'Dinero entregado'. Presenta tres filas: Oro con $50.000.000, Plata con $100.000.000 y Bronce con $125.000.000. Es una comparación de premios según el monto entregado a cada tipo."
             }
           ],
           "correctOptionId": "",
