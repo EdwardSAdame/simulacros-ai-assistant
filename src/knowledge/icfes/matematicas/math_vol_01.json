@@ -16,7 +16,7 @@
           "questionId": "q_01",
           "questionText": "En la siguiente tabla se evidencian los resultados de una entrevista realizada a siete mujeres, madres de familia, en donde se les preguntó a qué edad tuvieron su primer hijo.",
           "hasQuestionImage": true,
-          "questionImageUrl": "",
+          "questionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session1/q01.png",
           "questionImageAiDescription": "Tabla de \\(2\\) columnas y \\(8\\) filas, incluyendo encabezado. Encabezados: columna \\(1\\): \"Madre\"; columna \\(2\\): \"Edad (años)\". Filas de datos: fila \\(1\\): madre \\(1\\), edad \\(21\\); fila \\(2\\): madre \\(2\\), edad \\(26\\); fila \\(3\\): madre \\(3\\), edad \\(20\\); fila \\(4\\): madre \\(4\\), edad \\(21\\); fila \\(5\\): madre \\(5\\), edad \\(22\\); fila \\(6\\): madre \\(6\\), edad \\(28\\); fila \\(7\\): madre \\(7\\), edad \\(30\\).",
           "optionsType": "text",
           "options": [
@@ -66,7 +66,7 @@
           "questionId": "q_02",
           "questionText": "Una aerolínea ofrece vuelos nacionales manejando las siguientes tarifas y aclarando que, al precio relacionado, se debe agregar el impuesto del \\(12\\,\\%\\) o \\(19\\,\\%\\) según la temporada del año seleccionada para el viaje.\n\nUn usuario compra \\(5\\) tiquetes para viajar el día jueves y \\(2\\) tiquetes para viajar el día sábado, para lo que debe usar la fórmula:\n\n\\[\n\\text{Valor total a pagar} = (5 \\times 80.000 + 2 \\times 150.000)(1+y)\n\\]\n\nDonde \\(y\\) es el porcentaje del impuesto.\n\nSobre el valor total a pagar, ¿cuál de las siguientes afirmaciones es verdadera?",
           "hasQuestionImage": true,
-          "questionImageUrl": "",
+          "questionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session1/q02.png",
           "questionImageAiDescription": "Tabla de tarifas con \\(2\\) columnas de precios y \\(1\\) fila de datos para un trayecto nacional. Encabezados de columnas de precio: columna \\(1\\): \"Costo de lunes, martes, miércoles o jueves\" con valor \\($80.000\\); columna \\(2\\): \"Costo de viernes, sábado o domingo\" con valor \\($150.000\\). A la izquierda aparece la etiqueta de fila: \"Trayecto nacional\".",
           "optionsType": "text",
           "options": [
@@ -108,15 +108,15 @@
       "sectionIndex": 3,
       "sectionTitle": "",
       "sectionText": "",
-      "hasSectionImage": false,
-      "sectionImageUrl": "",
+      "hasSectionImage": true,
+      "sectionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session1/q03_section.png",
       "sectionImageAiDescription": "",
       "questions": [
         {
           "questionId": "q_03",
           "questionText": "Un laboratorio aplicó un tratamiento médico a \\(60\\) pacientes y registró en un diagrama los tres efectos secundarios que padecieron algunos de ellos.\n\nLuego, un médico del laboratorio registró la información en una tabla de la siguiente manera:\n\n¿Es válida la información que registró el médico en la tabla?",
           "hasQuestionImage": true,
-          "questionImageUrl": "",
+          "questionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session1/q03.png",
           "questionImageAiDescription": "La imagen contiene dos elementos. Elemento \\(1\\): diagrama de Venn de \\(3\\) conjuntos dentro de un rectángulo. Conjunto izquierdo etiquetado \"Dolor de cabeza\"; conjunto derecho etiquetado \"Mareo\"; conjunto inferior etiquetado \"Náuseas\". Valores en las regiones: solo dolor de cabeza \\(10\\); intersección dolor de cabeza y mareo sin náuseas \\(8\\); solo mareo \\(5\\); intersección dolor de cabeza y náuseas sin mareo \\(6\\); intersección triple \\(1\\); solo náuseas \\(15\\); fuera de los tres conjuntos pero dentro del rectángulo \\(15\\). Elemento \\(2\\): tabla titulada \"Efectos secundarios después del tratamiento\" con \\(2\\) columnas: \"Efecto secundario\" y \"Cantidad de pacientes\". Filas: \"Dolor de cabeza\" \\(24\\); \"Náuseas\" \\(22\\); \"Mareo\" \\(14\\).",
           "optionsType": "text",
           "options": [
@@ -166,7 +166,7 @@
           "questionId": "q_04",
           "questionText": "En una clase de Inglés hay \\(6\\) estudiantes, \\(4\\) son mujeres y \\(2\\) son hombres. Para una exposición, el profesor quiere conformar grupos de \\(3\\) estudiantes.\n\nEn la tabla, \\(X\\), \\(Y\\), \\(Z\\), y \\(W\\) representan la cantidad de formas que tiene el profesor para escoger cada grupo de \\(3\\) estudiantes.\n\nDe acuerdo con los datos de la tabla, ¿cuáles valores se deben conocer para determinar la cantidad total de formas que hay para escoger un grupo de \\(3\\) estudiantes en donde, al menos, uno de ellos sea hombre?",
           "hasQuestionImage": true,
-          "questionImageUrl": "",
+          "questionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session1/q04.png",
           "questionImageAiDescription": "Tabla con \\(4\\) columnas de grupos. Encabezados superiores: \"Grupo \\(1\\)\", \"Grupo \\(2\\)\", \"Grupo \\(3\\)\", \"Grupo \\(4\\)\". Fila \"Característica\": grupo \\(1\\): \"Tres hombres\"; grupo \\(2\\): \"Una mujer y dos hombres\"; grupo \\(3\\): \"Dos mujeres y un hombre\"; grupo \\(4\\): \"Tres mujeres\". Fila \"Cantidad de formas de escoger el grupo\": grupo \\(1\\): \\(X\\); grupo \\(2\\): \\(Y\\); grupo \\(3\\): \\(Z\\); grupo \\(4\\): \\(W\\).",
           "optionsType": "text",
           "options": [
@@ -216,7 +216,7 @@
           "questionId": "q_05",
           "questionText": "Un banco organizó un concurso para premiar a los usuarios que más utilizan las tarjetas de crédito. La tabla muestra el tipo de premio, la cantidad de premios que se entregó de cada tipo y el monto correspondiente a cada tipo de premio.\n\n¿Cuál de las siguientes tablas muestra el total de dinero entregado por el banco para cada tipo de premio?",
           "hasQuestionImage": true,
-          "questionImageUrl": "",
+          "questionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session1/q05.png",
           "questionImageAiDescription": "La imagen del enunciado es una tabla con \\(3\\) columnas: \"Tipo de premio\", \"Cantidad de premios\", \"Monto de cada premio\". Filas: Oro, cantidad \\(5\\), monto \\($10.000.000\\); Plata, cantidad \\(25\\), monto \\($5.000.000\\); Bronce, cantidad \\(100\\), monto \\($1.000.000\\).",
           "optionsType": "image",
           "options": [
@@ -224,28 +224,28 @@
               "optionId": "A",
               "type": "image",
               "optionText": "",
-              "optionImageUrl": "",
+              "optionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session1/q05_a.png",
               "optionAiDescription": "Tabla con \\(2\\) columnas: \"Tipo de premio\" y \"Dinero entregado\". Filas: Oro \\($10.000.000\\); Plata \\($5.000.000\\); Bronce \\($1.000.000\\)."
             },
             {
               "optionId": "B",
               "type": "image",
               "optionText": "",
-              "optionImageUrl": "",
+              "optionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session1/q05_b.png",
               "optionAiDescription": "Tabla con \\(2\\) columnas: \"Tipo de premio\" y \"Dinero entregado\". Filas: Oro \\($50.000.000\\); Plata \\($125.000.000\\); Bronce \\($100.000.000\\)."
             },
             {
               "optionId": "C",
               "type": "image",
               "optionText": "",
-              "optionImageUrl": "",
+              "optionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session1/q05_c.png",
               "optionAiDescription": "Tabla con \\(2\\) columnas: \"Tipo de premio\" y \"Dinero entregado\". Filas: Oro \\($1.000.000.000\\); Plata \\($125.000.000\\); Bronce \\($5.000.000\\)."
             },
             {
               "optionId": "D",
               "type": "image",
               "optionText": "",
-              "optionImageUrl": "",
+              "optionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session1/q05_d.png",
               "optionAiDescription": "Tabla con \\(2\\) columnas: \"Tipo de premio\" y \"Dinero entregado\". Filas: Oro \\($50.000.000\\); Plata \\($100.000.000\\); Bronce \\($125.000.000\\)."
             }
           ],
