@@ -16,7 +16,7 @@
           "questionId": "q_01",
           "questionText": "En la siguiente tabla se evidencian los resultados de una entrevista realizada a siete mujeres, madres de familia, en donde se les preguntó a qué edad tuvieron su primer hijo.",
           "hasQuestionImage": true,
-          "questionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session1/q01.png",
+          "questionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session1/q_01.png",
           "questionImageAiDescription": "Tabla de \\(2\\) columnas y \\(8\\) filas, incluyendo encabezado. Encabezados: columna \\(1\\): \"Madre\"; columna \\(2\\): \"Edad (años)\". Filas de datos: fila \\(1\\): madre \\(1\\), edad \\(21\\); fila \\(2\\): madre \\(2\\), edad \\(26\\); fila \\(3\\): madre \\(3\\), edad \\(20\\); fila \\(4\\): madre \\(4\\), edad \\(21\\); fila \\(5\\): madre \\(5\\), edad \\(22\\); fila \\(6\\): madre \\(6\\), edad \\(28\\); fila \\(7\\): madre \\(7\\), edad \\(30\\).",
           "optionsType": "text",
           "options": [
@@ -66,8 +66,8 @@
           "questionId": "q_02",
           "questionText": "Una aerolínea ofrece vuelos nacionales manejando las siguientes tarifas y aclarando que, al precio relacionado, se debe agregar el impuesto del \\(12\\,\\%\\) o \\(19\\,\\%\\) según la temporada del año seleccionada para el viaje.\n\nUn usuario compra \\(5\\) tiquetes para viajar el día jueves y \\(2\\) tiquetes para viajar el día sábado, para lo que debe usar la fórmula:\n\n\\[\n\\text{Valor total a pagar} = (5 \\times 80.000 + 2 \\times 150.000)(1+y)\n\\]\n\nDonde \\(y\\) es el porcentaje del impuesto.\n\nSobre el valor total a pagar, ¿cuál de las siguientes afirmaciones es verdadera?",
           "hasQuestionImage": true,
-          "questionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session1/q02.png",
-          "questionImageAiDescription": "Tabla de tarifas con \\(2\\) columnas de precios y \\(1\\) fila de datos para un trayecto nacional. Encabezados de columnas de precio: columna \\(1\\): \"Costo de lunes, martes, miércoles o jueves\" con valor \\($80.000\\); columna \\(2\\): \"Costo de viernes, sábado o domingo\" con valor \\($150.000\\). A la izquierda aparece la etiqueta de fila: \"Trayecto nacional\".",
+          "questionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session1/q_02.png",
+          "questionImageAiDescription": "Tabla de tarifas de 2 columnas y 2 filas (incluyendo encabezado). Las dos columnas deben estar ampliamente separadas entre sí, incrementando el ancho de cada columna para dejar un espacio horizontal generoso en el centro que evite que los encabezados se toquen. Todo el texto y los valores están estrictamente alineados a la izquierda (left-aligned) y con suficiente padding vertical. Encabezado Columna 1: \\'Costo de lunes, martes,\\' (línea 1) y \\'miércoles o jueves\\' (línea 2); valor en la celda inferior: \\($80.000\\). Encabezado Columna 2: \\'Costo de viernes,\\' (línea 1) y \\'sábado o domingo\\' (línea 2); valor en la celda inferior: \\($150.000\\). A la izquierda de las celdas de precio se incluye la etiqueta de fila: \\'Trayecto nacional\\'.",
           "optionsType": "text",
           "options": [
             {
@@ -109,15 +109,15 @@
       "sectionTitle": "",
       "sectionText": "",
       "hasSectionImage": true,
-      "sectionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session1/q03_section.png",
-      "sectionImageAiDescription": "",
+      "sectionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session1/q_03_section.png",
+      "sectionImageAiDescription": "Diagrama de Venn de 3 conjuntos sin rectángulo delimitador ni borde exterior. Las etiquetas de los conjuntos flotan libremente de forma analítica junto a cada círculo, estrictamente sin líneas indicadoras, sin cajas y sin flechas que las conecten: \"Dolor de cabeza\" arriba a la izquierda, \"Mareo\" arriba a la derecha, \"Náuseas\" en la parte inferior. Los tres círculos están rellenos con colores pastel desvanecidos. Los valores exactos para las regiones son: Solo \"Dolor de cabeza\" \\(10\\); Solo \"Mareo\" \\(5\\); intersección \"Dolor de cabeza\" y \"Mareo\" excluyendo \"Náuseas\" \\(8\\); Solo \"Náuseas\" \\(15\\); intersección \"Dolor de cabeza\" y \"Náuseas\" excluyendo \"Mareo\" \\(6\\); intersección \"Mareo\" y \"Náuseas\" excluyendo \"Dolor de cabeza\" \\(1\\); la intersección central de los tres conjuntos está matemáticamente vacía (valor cero, estrictamente no dibujar ni mostrar ningún dato aquí). MUY IMPORTANTE: El valor del universo exterior es \\(15\\). Este número \\(15\\) debe colocarse flotando libremente en la parte inferior izquierda del diagrama. En la esquina inferior derecha aparece el texto \"Diagrama\". Todos los números mostrados están en formato LaTeX.",
       "questions": [
         {
           "questionId": "q_03",
           "questionText": "Un laboratorio aplicó un tratamiento médico a \\(60\\) pacientes y registró en un diagrama los tres efectos secundarios que padecieron algunos de ellos.\n\nLuego, un médico del laboratorio registró la información en una tabla de la siguiente manera:\n\n¿Es válida la información que registró el médico en la tabla?",
           "hasQuestionImage": true,
-          "questionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session1/q03.png",
-          "questionImageAiDescription": "La imagen contiene dos elementos. Elemento \\(1\\): diagrama de Venn de \\(3\\) conjuntos dentro de un rectángulo. Conjunto izquierdo etiquetado \"Dolor de cabeza\"; conjunto derecho etiquetado \"Mareo\"; conjunto inferior etiquetado \"Náuseas\". Valores en las regiones: solo dolor de cabeza \\(10\\); intersección dolor de cabeza y mareo sin náuseas \\(8\\); solo mareo \\(5\\); intersección dolor de cabeza y náuseas sin mareo \\(6\\); intersección triple \\(1\\); solo náuseas \\(15\\); fuera de los tres conjuntos pero dentro del rectángulo \\(15\\). Elemento \\(2\\): tabla titulada \"Efectos secundarios después del tratamiento\" con \\(2\\) columnas: \"Efecto secundario\" y \"Cantidad de pacientes\". Filas: \"Dolor de cabeza\" \\(24\\); \"Náuseas\" \\(22\\); \"Mareo\" \\(14\\).",
+          "questionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session1/q_03.png",
+          "questionImageAiDescription": "Tabla de 2 columnas y 4 filas (incluyendo encabezados de columna). Como título superior general se debe incluir el texto: \"Efectos secundarios después del tratamiento\". Columna 1: \"Efecto secundario\". Columna 2: \"Cantidad de pacientes\". Fila 1 de datos: \"Dolor de cabeza\", \\(24\\). Fila 2 de datos: \"Náuseas\", \\(22\\). Fila 3 de datos: \"Mareo\", \\(14\\). Todo el texto de la tabla debe estar estrictamente alineado a la izquierda (left-aligned).",
           "optionsType": "text",
           "options": [
             {
@@ -166,8 +166,8 @@
           "questionId": "q_04",
           "questionText": "En una clase de Inglés hay \\(6\\) estudiantes, \\(4\\) son mujeres y \\(2\\) son hombres. Para una exposición, el profesor quiere conformar grupos de \\(3\\) estudiantes.\n\nEn la tabla, \\(X\\), \\(Y\\), \\(Z\\), y \\(W\\) representan la cantidad de formas que tiene el profesor para escoger cada grupo de \\(3\\) estudiantes.\n\nDe acuerdo con los datos de la tabla, ¿cuáles valores se deben conocer para determinar la cantidad total de formas que hay para escoger un grupo de \\(3\\) estudiantes en donde, al menos, uno de ellos sea hombre?",
           "hasQuestionImage": true,
-          "questionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session1/q04.png",
-          "questionImageAiDescription": "Tabla con \\(4\\) columnas de grupos. Encabezados superiores: \"Grupo \\(1\\)\", \"Grupo \\(2\\)\", \"Grupo \\(3\\)\", \"Grupo \\(4\\)\". Fila \"Característica\": grupo \\(1\\): \"Tres hombres\"; grupo \\(2\\): \"Una mujer y dos hombres\"; grupo \\(3\\): \"Dos mujeres y un hombre\"; grupo \\(4\\): \"Tres mujeres\". Fila \"Cantidad de formas de escoger el grupo\": grupo \\(1\\): \\(X\\); grupo \\(2\\): \\(Y\\); grupo \\(3\\): \\(Z\\); grupo \\(4\\): \\(W\\).",
+          "questionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session1/q_04.png",
+          "questionImageAiDescription": "Tabla matemática de 5 columnas y 3 filas. Para evitar desbordamientos, la figura debe ser ancha y las celdas con texto largo deben incluir saltos de línea (text wrap). Fila 1 (Encabezados): [Celda vacía], \"Grupo 1\", \"Grupo 2\", \"Grupo 3\", \"Grupo 4\". Fila 2 (Datos): \"Característica\" (columna 1), \"Tres hombres\", \"Una mujer\\ny dos hombres\", \"Dos mujeres\\ny un hombre\", \"Tres mujeres\". Fila 3 (Datos): \"Cantidad de formas\\nde escoger\\nel grupo\", \\(X\\), \\(Y\\), \\(Z\\), \\(W\\). Todo el texto debe estar alineado al centro.",
           "optionsType": "text",
           "options": [
             {
@@ -216,7 +216,7 @@
           "questionId": "q_05",
           "questionText": "Un banco organizó un concurso para premiar a los usuarios que más utilizan las tarjetas de crédito. La tabla muestra el tipo de premio, la cantidad de premios que se entregó de cada tipo y el monto correspondiente a cada tipo de premio.\n\n¿Cuál de las siguientes tablas muestra el total de dinero entregado por el banco para cada tipo de premio?",
           "hasQuestionImage": true,
-          "questionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session1/q05.png",
+          "questionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session1/q_05.png",
           "questionImageAiDescription": "La imagen del enunciado es una tabla con \\(3\\) columnas: \"Tipo de premio\", \"Cantidad de premios\", \"Monto de cada premio\". Filas: Oro, cantidad \\(5\\), monto \\($10.000.000\\); Plata, cantidad \\(25\\), monto \\($5.000.000\\); Bronce, cantidad \\(100\\), monto \\($1.000.000\\).",
           "optionsType": "image",
           "options": [
@@ -224,28 +224,28 @@
               "optionId": "A",
               "type": "image",
               "optionText": "",
-              "optionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session1/q05_a.png",
+              "optionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session1/q_05_a.png",
               "optionAiDescription": "Tabla con \\(2\\) columnas: \"Tipo de premio\" y \"Dinero entregado\". Filas: Oro \\($10.000.000\\); Plata \\($5.000.000\\); Bronce \\($1.000.000\\)."
             },
             {
               "optionId": "B",
               "type": "image",
               "optionText": "",
-              "optionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session1/q05_b.png",
+              "optionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session1/q_05_b.png",
               "optionAiDescription": "Tabla con \\(2\\) columnas: \"Tipo de premio\" y \"Dinero entregado\". Filas: Oro \\($50.000.000\\); Plata \\($125.000.000\\); Bronce \\($100.000.000\\)."
             },
             {
               "optionId": "C",
               "type": "image",
               "optionText": "",
-              "optionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session1/q05_c.png",
+              "optionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session1/q_05_c.png",
               "optionAiDescription": "Tabla con \\(2\\) columnas: \"Tipo de premio\" y \"Dinero entregado\". Filas: Oro \\($1.000.000.000\\); Plata \\($125.000.000\\); Bronce \\($5.000.000\\)."
             },
             {
               "optionId": "D",
               "type": "image",
               "optionText": "",
-              "optionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session1/q05_d.png",
+              "optionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session1/q_05_d.png",
               "optionAiDescription": "Tabla con \\(2\\) columnas: \"Tipo de premio\" y \"Dinero entregado\". Filas: Oro \\($50.000.000\\); Plata \\($100.000.000\\); Bronce \\($125.000.000\\)."
             }
           ],
@@ -358,16 +358,16 @@
       "sectionIndex": 8,
       "sectionTitle": "",
       "sectionText": "",
-      "hasSectionImage": false,
-      "sectionImageUrl": "",
-      "sectionImageAiDescription": "",
+      "hasSectionImage": true,
+      "sectionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session1/q_08_section.png",
+      "sectionImageAiDescription": "Tabla de datos de 5 columnas y 6 filas (incluyendo encabezados de columna). Todo el texto de la tabla debe estar estrictamente alineado a la izquierda (left-aligned) para mantener consistencia visual. Columna 1: \"Año\". Columna 2: \"Pacífica\". Columna 3: \"Antioquia\". Columna 4: \"Bogotá, D. C.\". Columna 5: \"Central\". Fila 1 de datos: 2011, \\(41,4\\), \\(25,7\\), \\(11,9\\), \\(30,7\\). Fila 2 de datos: 2012, \\(36,3\\), \\(21,7\\), \\(11,1\\), \\(26,7\\). Fila 3 de datos: 2013, \\(37,6\\), \\(22,4\\), \\(8,7\\), \\(26,1\\). Fila 4 de datos: 2014, \\(34,6\\), \\(19,5\\), \\(5,4\\), \\(28,1\\). Fila 5 de datos: 2015, \\(33,8\\), \\(18,7\\), \\(4,7\\), \\(22,1\\).",
       "questions": [
         {
           "questionId": "q_08",
           "questionText": "El Departamento Administrativo Nacional de Estadística (DANE) realiza cada año mediciones de la pobreza en Colombia para determinar el índice de pobreza multidimensional (IPM). La tabla muestra la “incidencia de la pobreza por el IPM” para algunas regiones entre \\(2011\\) y \\(2015\\).\n\nLa gráfica muestra la “incidencia de la pobreza por el IPM” para algunas regiones entre \\(2011\\) y \\(2015\\).\n\n¿La información de los datos de la gráfica es la misma que la información presentada en la tabla?",
           "hasQuestionImage": true,
-          "questionImageUrl": "",
-          "questionImageAiDescription": "La imagen contiene dos representaciones. Elemento \\(1\\): tabla con columnas \"Año\", \"Pacífica\", \"Antioquia\", \"Bogotá, D. C.\", \"Central\". Filas: año \\(2011\\): Pacífica \\(41,4\\), Antioquia \\(25,7\\), Bogotá, D. C. \\(11,9\\), Central \\(30,7\\). Año \\(2012\\): Pacífica \\(36,3\\), Antioquia \\(21,7\\), Bogotá, D. C. \\(11,1\\), Central \\(26,7\\). Año \\(2013\\): Pacífica \\(37,6\\), Antioquia \\(22,4\\), Bogotá, D. C. \\(8,7\\), Central \\(26,1\\). Año \\(2014\\): Pacífica \\(34,6\\), Antioquia \\(19,5\\), Bogotá, D. C. \\(5,4\\), Central \\(28,1\\). Año \\(2015\\): Pacífica \\(33,8\\), Antioquia \\(18,7\\), Bogotá, D. C. \\(4,7\\), Central \\(22,1\\). Elemento \\(2\\): gráfica de líneas con eje horizontal de años \\(2011\\) a \\(2015\\) y eje vertical aproximadamente de \\(0\\) a \\(45\\). Cuatro series identificadas: Pacífica, Antioquia, Bogotá, D. C., Central. Valores rotulados en la gráfica: Pacífica \\(41,4\\), \\(36,3\\), \\(37,6\\), \\(34,6\\), \\(33,8\\); una serie con triángulos para Antioquia muestra \\(25,7\\), \\(20,5\\), \\(18,3\\), \\(19,5\\), \\(18,7\\); una serie baja para Bogotá, D. C. muestra \\(11,9\\), \\(11,1\\), \\(8,7\\), \\(5,4\\), \\(7,6\\); una serie con círculos para Central muestra \\(30,7\\), \\(26,7\\), \\(26,1\\), \\(28,1\\), \\(22,1\\).",
+          "questionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session1/q_08.png",
+          "questionImageAiDescription": "Gráfica de líneas. Eje X: años 2011 a 2015. Eje Y: 0 a 45. Cuatro series con marcadores y etiquetas de datos exactas. Serie 1 ('Pacífica', marcadores cuadrados): \\(41,4\\) en 2011, \\(36,3\\) en 2012, \\(37,6\\) en 2013, \\(34,6\\) en 2014, \\(33,8\\) en 2015. Serie 2 ('Central', marcadores circulares): \\(30,7\\) en 2011, \\(26,7\\) en 2012, \\(26,1\\) en 2013, \\(28,1\\) en 2014, \\(22,1\\) en 2015. Serie 3 ('Antioquia', marcadores triangulares): \\(25,7\\) en 2011, \\(20,5\\) en 2012, \\(18,3\\) en 2013, \\(19,5\\) en 2014, \\(18,7\\) en 2015. Serie 4 ('Bogotá, D. C.', línea inferior): \\(11,9\\) en 2011, \\(11,1\\) en 2012, \\(8,7\\) en 2013, \\(5,4\\) en 2014, \\(7,6\\) en 2015. Ubicar la leyenda en la parte superior.",
           "optionsType": "text",
           "options": [
             {
@@ -416,7 +416,7 @@
           "questionId": "q_09",
           "questionText": "Una máquina separa las \\(2.000\\) papas de un bulto de acuerdo con su peso \\(P\\), obteniendo los datos de la tabla.\n\n¿Cuál es la gráfica que representa la distribución de las papas del bulto de acuerdo con su peso?",
           "hasQuestionImage": true,
-          "questionImageUrl": "",
+          "questionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session1/q_09.png",
           "questionImageAiDescription": "Tabla con \\(2\\) columnas: \"Peso (gramos)\" y \"Cantidad de papas\". Filas: \\(15 \\leq P < 20\\) corresponde a \\(700\\); \\(20 \\leq P < 25\\) corresponde a \\(500\\); \\(25 \\leq P < 30\\) corresponde a \\(800\\).",
           "optionsType": "image",
           "options": [
@@ -424,29 +424,29 @@
               "optionId": "A",
               "type": "image",
               "optionText": "",
-              "optionImageUrl": "",
-              "optionAiDescription": "Gráfico circular titulado \"Distribución del peso en gramos\" con tres sectores y leyenda por textura. Sectores rotulados con cantidades y porcentajes: sector de \\(800\\) y \\(40\\,\\%\\) para el intervalo \\(25 \\leq p < 30\\); sector de \\(700\\) y \\(35\\,\\%\\) para \\(15 \\leq p < 20\\); sector de \\(500\\) y \\(25\\,\\%\\) para \\(20 \\leq p < 25\\)."
+              "optionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session1/q_09_a.png",
+              "optionAiDescription": "Gráfico circular titulado \"Distribución del peso en gramos\" con tres sectores, sin bordes externos y rellenos con colores pastel desvanecidos (faded colours). Leyenda identificada únicamente por color desvanecido, sin texturas. Sectores rotulados con cantidades y porcentajes: sector de \\(800\\) y \\(40\\,\\%\\) para el intervalo \\(25 \\leq p < 30\\); sector de \\(700\\) y \\(35\\,\\%\\) para \\(15 \\leq p < 20\\); sector de \\(500\\) y \\(25\\,\\%\\) para \\(20 \\leq p < 25\\)."
             },
             {
               "optionId": "B",
               "type": "image",
               "optionText": "",
-              "optionImageUrl": "",
-              "optionAiDescription": "Gráfico circular titulado \"Distribución del peso en gramos\" con tres sectores iguales, cada uno marcado con \\(33,3\\,\\%\\). Etiquetas visibles: \\(25\\text{–}30\\), \\(15\\text{–}20\\), \\(20\\text{–}25\\)."
+              "optionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session1/q_09_b.png",
+              "optionAiDescription": "Gráfico circular titulado \"Distribución del peso en gramos\" con tres sectores iguales, sin bordes externos y rellenos con colores pastel desvanecidos (faded colours). Leyenda identificada únicamente por color desvanecido, sin texturas. Cada uno marcado con \\(33,3\\,\\%\\). Etiquetas visibles: \\(25\\text{–}30\\), \\(15\\text{–}20\\), \\(20\\text{–}25\\)."
             },
             {
               "optionId": "C",
               "type": "image",
               "optionText": "",
-              "optionImageUrl": "",
-              "optionAiDescription": "Gráfica de barras con eje vertical \"Peso (gramos)\" y eje horizontal \"Intervalo\". Tres barras de igual altura aproximada \\(5\\) para intervalos \\(15\\text{–}20\\), \\(20\\text{–}25\\), \\(25\\text{–}30\\)."
+              "optionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session1/q_09_c.png",
+              "optionAiDescription": "Gráfica de barras con eje vertical \"Cantidad\" y eje horizontal \"Peso (gramos)\". Tres barras de igual altura aproximada \\(5\\) para intervalos \\(15\\text{–}20\\), \\(20\\text{–}25\\), \\(25\\text{–}30\\)."
             },
             {
               "optionId": "D",
               "type": "image",
               "optionText": "",
-              "optionImageUrl": "",
-              "optionAiDescription": "Gráfica de barras con eje vertical \"Cantidad de papas\" y eje horizontal \"Intervalo\". Barras para \\(15\\text{–}20\\) de altura aproximada \\(800\\), para \\(20\\text{–}25\\) de altura aproximada \\(500\\), para \\(25\\text{–}30\\) de altura aproximada \\(700\\)."
+              "optionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session1/q_09_d.png",
+              "optionAiDescription": "Gráfica de barras con eje vertical \"Intervalo\" y eje horizontal \"Cantidad de papas\". Barras para \\(15\\text{–}20\\) de valor aproximado \\(800\\), para \\(20\\text{–}25\\) de valor aproximado \\(500\\), para \\(25\\text{–}30\\) de valor aproximado \\(700\\)."
             }
           ],
           "correctOptionId": "A",
@@ -516,8 +516,8 @@
           "questionId": "q_11",
           "questionText": "Una torta con forma rectangular, que tiene \\(60\\) cm de base por \\(20\\) cm de altura, fue repartida entre \\(8\\) personas por medio de los siguientes cortes rectos:\n\nConsiderando la información anterior, ¿cuál es el área del trozo de torta número \\(1\\)?",
           "hasQuestionImage": true,
-          "questionImageUrl": "",
-          "questionImageAiDescription": "Rectángulo horizontal que representa una torta de base \\(60\\) cm y altura \\(20\\) cm. Está dividido por una línea horizontal media en dos franjas de \\(10\\) cm de altura cada una. La mitad derecha del rectángulo tiene ancho \\(30\\) cm indicado con flecha inferior. En la franja superior derecha, hay un subrectángulo central marcado con ancho \\(15\\) cm y altura \\(5\\) cm, delimitado por líneas punteadas o rectas internas. Las \\(8\\) piezas están numeradas: en la mitad izquierda, arriba pieza \\(2\\), abajo pieza \\(3\\), y junto al centro piezas \\(6\\) y \\(7\\); en la mitad derecha, arriba a la izquierda del extremo pieza \\(5\\), abajo pieza \\(8\\), y en el extremo derecho superior pieza \\(1\\), extremo derecho inferior pieza \\(4\\). La pieza \\(1\\) corresponde a la región rectangular en la esquina superior derecha, de altura \\(10\\) cm y ancho igual a la diferencia entre \\(30\\) cm y \\(15\\) cm, es decir \\(15\\) cm.",
+          "questionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session1/q_11.png",
+          "questionImageAiDescription": "Plano geométrico centrado en el origen (0,0). 1) Rectángulo exterior: límites x=[-30, 30], y=[-10, 10], relleno con color institucional de baja opacidad. 2) Ejes divisorios: línea horizontal continua en y=0; línea vertical punteada en x=0. 3) Rectángulo interior (líneas punteadas): x=[-15, 15], y=[-5, 5], con opacidad distinta. 4) Etiquetas numéricas (ESTRICTO: usar bbox con fondo sólido claro/blanco para cada número y evitar solapamiento con líneas): '1' en (24, 7); '2' en (-24, 7); '3' en (-24, -7); '4' en (24, -7); '5' en (12, 3.5); '6' en (-12, 3.5); '7' en (-12, -3.5); '8' en (12, -3.5). 5) Acotaciones (flechas con texto en LaTeX, usar bbox para que no toquen las líneas ni los números): flecha horizontal de x=0 a x=15 sobre y=0 con texto '\\(15\\text{ cm}\\)' desplazado ligeramente hacia arriba; flecha vertical de y=0 a y=5 en x=0 con texto '\\(5\\text{ cm}\\)' desplazado a la izquierda; flecha de x=0 a x=30 bajo y=-10 con texto '\\(30\\text{ cm}\\)'; flecha de y=0 a y=-10 a la derecha de x=30 con texto '\\(10\\text{ cm}\\)'.",
           "optionsType": "text",
           "options": [
             {
@@ -566,7 +566,7 @@
           "questionId": "q_12",
           "questionText": "En la tabla se muestra el peso de tres pedidos de mercancía que una empresa necesita enviar a otro país:\n\nPara saber el costo total del envío se debe calcular primero el peso total de los tres pedidos. Para esto, un empleado de la empresa efectúa el siguiente cálculo:\n\n\\[\n500 + 200 + 1 = 701\\text{ ton}\n\\]\n\nEsta solución es",
           "hasQuestionImage": true,
-          "questionImageUrl": "",
+          "questionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session1/q_12.png",
           "questionImageAiDescription": "Tabla titulada \"Peso de los pedidos\" con \\(2\\) columnas. Primera columna contiene \"Pedido \\(1\\)\", \"Pedido \\(2\\)\", \"Pedido \\(3\\)\". Segunda columna, encabezada \"Peso\", contiene respectivamente \\(500\\) kg, \\(200\\) kg y \\(1\\) ton.",
           "optionsType": "text",
           "options": [
@@ -616,8 +616,8 @@
           "questionId": "q_13",
           "questionText": "Un pintor tiene un lienzo rectangular que quiere dividir en tres regiones: la región \\(1\\), que es triangular; la región \\(2\\), con forma de un cuarto de círculo; y la región \\(3\\), que ocupa el resto del lienzo, como se muestra en la figura.\n\nPara calcular el área de la región \\(3\\), el pintor realizó el siguiente procedimiento:\n\nPaso \\(1\\). Calculó el área del lienzo, multiplicando \\(8\\text{ m} \\times 5\\text{ m}\\).\n\nPaso \\(2\\). Calculó el área de región \\(1\\), multiplicando \\(4\\text{ m} \\times 3\\text{ m}\\).\n\nPaso \\(3\\). Calculó el área de región \\(2\\), multiplicando \\(\\pi \\times 16\\text{ m}^{2}\\) y dividiendo el resultado entre \\(4\\).\n\nPaso \\(4\\). Al resultado del paso \\(1\\), le restó los resultados del paso \\(2\\) y del paso \\(3\\).\n\n¿En cuál paso hay un error y cómo se puede corregir?",
           "hasQuestionImage": true,
-          "questionImageUrl": "",
-          "questionImageAiDescription": "Rectángulo de base \\(8\\) m y altura \\(5\\) m. En la parte superior, el borde está dividido en dos segmentos de \\(4\\) m y \\(4\\) m, con un punto central superior. En el lado izquierdo, desde la esquina superior izquierda hacia abajo, hay una medida vertical de \\(3\\) m hasta un punto donde inicia una diagonal de longitud \\(5\\) m que llega al punto central superior. Esa diagonal y los bordes superior e izquierdo delimitan la región \\(1\\), un triángulo rectángulo con catetos \\(4\\) m y \\(3\\) m. Desde el punto central superior hacia la esquina inferior derecha aparece un arco de cuarto de círculo que delimita la región \\(2\\); el radio es \\(4\\) m, pues va desde el punto central superior hasta la vertical derecha a la misma distancia horizontal. La región \\(3\\) es el resto sombreado del rectángulo.",
+          "questionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session1/q_13.png",
+          "questionImageAiDescription": "Plano geométrico cartesiano, origen en (0,0). 1) Contorno: Rectángulo de (0,0) a (8,5). 2) Divisiones: Recta de (0,2) a (4,5); y un arco de (4,5) a (8,1) que es un cuarto de círculo con centro en (8,5) y radio 4. 3) Relleno estricto (Opacity/Fade): 'Región 1' y 'Región 2' SIN relleno (fondo limpio). 'Región 3' con relleno de color institucional de baja opacidad. IMPORTANTE PARA EL RELLENO: Para evitar que el color invada la Región 2, el polígono de la Región 3 debe generarse evaluando matemáticamente su límite superior: desde x=0 a x=4 usar la recta, y desde x=4 a x=8 usar la ecuación exacta del arco circular y = 5 - sqrt(16 - (x - 8)^2). El límite inferior es y=0. 4) Etiquetas: 'Región 1' en (1.5, 3.8); 'Región 2' en (6.5, 3.8); 'Región 3' en (4, 1.5). 5) Acotaciones (ESTRICTO: dibujar líneas de cota con flechas en ambos extremos y texto en LaTeX centrado sobre/junto a la línea): flecha horizontal indicando la medida de x=0 a x=4 ligeramente por encima del límite superior (y=5) con texto '\\(4\\text{ m}\\)'; flecha horizontal de x=4 a x=8 ligeramente por encima del límite superior con texto '\\(4\\text{ m}\\)'; flecha vertical de y=2 a y=5 ligeramente a la izquierda de x=0 con texto '\\(3\\text{ m}\\)'; flecha diagonal paralela y desplazada hacia arriba del segmento (0,2)-(4,5) con texto '\\(5\\text{ m}\\)'; flecha vertical de y=0 a y=5 a la derecha de x=8 con texto '\\(5\\text{ m}\\)'; flecha horizontal de x=0 a x=8 bajo el límite inferior (y=0) con texto '\\(8\\text{ m}\\)'.",
           "optionsType": "text",
           "options": [
             {
@@ -658,16 +658,16 @@
       "sectionIndex": 14,
       "sectionTitle": "",
       "sectionText": "",
-      "hasSectionImage": false,
-      "sectionImageUrl": "",
-      "sectionImageAiDescription": "",
+      "hasSectionImage": true,
+      "sectionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session1/q_14_section.png",
+      "sectionImageAiDescription": "Tabla analítica de 2 columnas y 6 filas (incluyendo encabezados). Todo el texto y los valores numéricos deben estar estrictamente alineados a la izquierda (left-aligned). Columna 1: \"Candidato\". Columna 2: \"Votos\". Fila 1 de datos: \"Candidato E\", \\(2.000\\). Fila 2 de datos: \"Candidato F\", \\(5.000\\). Fila 3 de datos: \"Candidato G\", \\(4.500\\). Fila 4 de datos: \"Candidato H\", \\(7.000\\). Fila 5 de datos: \"Candidato I\", \\(3.400\\).",
       "questions": [
         {
           "questionId": "q_14",
           "questionText": "En una encuesta sobre la intención de voto para la elección de presidente en un país, se registraron los resultados que se observan en tabla y en la gráfica.\n\nDe acuerdo con lo anterior, ¿cuál de las siguientes afirmaciones es falsa?",
           "hasQuestionImage": true,
-          "questionImageUrl": "",
-          "questionImageAiDescription": "La imagen contiene una tabla y un gráfico circular. Tabla con \\(2\\) columnas: \"Candidato\" y \"Votos\". Filas: candidato \\(E\\): \\(2.000\\); candidato \\(F\\): \\(5.000\\); candidato \\(G\\): \\(4.500\\); candidato \\(H\\): \\(7.000\\); candidato \\(I\\): \\(3.400\\). Debajo, gráfico circular con \\(5\\) sectores etiquetados Candidato \\(E\\), \\(F\\), \\(G\\), \\(H\\), \\(I\\). El sector mayor corresponde a \\(H\\); luego \\(F\\); luego \\(G\\); luego \\(I\\); el menor corresponde a \\(E\\).",
+          "questionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session1/q_14.png",
+          "questionImageAiDescription": "Gráfico circular (pie chart) analítico, sin marcos ni bordes externos. Contiene 5 sectores proporcionales rellenos con colores pastel desvanecidos (faded colours), estrictamente sin texturas. Los datos matemáticos para renderizar las proporciones exactas son: Candidato E \\(2.000\\), Candidato F \\(5.000\\), Candidato G \\(4.500\\), Candidato H \\(7.000\\), Candidato I \\(3.400\\). Cada sector debe estar etiquetado claramente indicando a qué candidato pertenece (ej. 'Candidato H').",
           "optionsType": "text",
           "options": [
             {
@@ -716,8 +716,8 @@
           "questionId": "q_15",
           "questionText": "Un estudiante está ahorrando para un paseo que tiene un costo de \\($800.000\\); él empezó su ahorro en enero con \\($100.000\\), que su abuela le regaló, y, al final de cada mes está ahorrando cierta cantidad de dinero. La tabla resume el progreso del ahorro del estudiante durante los primeros cuatro meses.\n\n¿Cuál es la tendencia del dinero ahorrado al finalizar cada mes?",
           "hasQuestionImage": true,
-          "questionImageUrl": "",
-          "questionImageAiDescription": "Tabla con \\(4\\) columnas: \"Mes\", \"Dinero ahorrado al inicio del mes\", \"Dinero ahorrado al finalizar el mes\", \"Dinero que hace falta para completar el ahorro\". Filas: Enero: inicio \\($100.000\\), final \\($130.000\\), falta \\($670.000\\). Febrero: inicio \\($130.000\\), final \\($160.000\\), falta \\($640.000\\). Marzo: inicio \\($160.000\\), final \\($190.000\\), falta \\($610.000\\). Abril: inicio \\($190.000\\), final \\($220.000\\), falta \\($580.000\\).",
+          "questionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session1/q_15.png",
+          "questionImageAiDescription": "Tabla matemática de 4 columnas y 5 filas (incluyendo la fila de encabezados). Para evitar desbordamientos y colisiones, la figura debe ser ancha y las celdas con texto largo deben incluir saltos de línea (text wrap). Fila 1 (Encabezados): \"Mes\", \"Dinero ahorrado\\nal inicio del mes\", \"Dinero ahorrado\\nal finalizar el mes\", \"Dinero que hace falta\\npara completar\\nel ahorro\". Fila 2: \"Enero\", \\(\\$100.000\\), \\(\\$130.000\\), \\(\\$670.000\\). Fila 3: \"Febrero\", \\(\\$130.000\\), \\(\\$160.000\\), \\(\\$640.000\\). Fila 4: \"Marzo\", \\(\\$160.000\\), \\(\\$190.000\\), \\(\\$610.000\\). Fila 5: \"Abril\", \\(\\$190.000\\), \\(\\$220.000\\), \\(\\$580.000\\). Todo el texto y los números deben estar alineados al centro.",
           "optionsType": "text",
           "options": [
             {
@@ -766,7 +766,7 @@
           "questionId": "q_16",
           "questionText": "La tabla muestra el registro que llevó un mecánico automotriz de las piezas que tuvieron que reemplazarse durante el mantenimiento de tres vehículos.\n\nDe acuerdo con esta información, ¿cuál es el promedio del número de piezas reemplazadas de los tres vehículos?",
           "hasQuestionImage": true,
-          "questionImageUrl": "",
+          "questionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session1/q_16.png",
           "questionImageAiDescription": "Tabla con \\(2\\) columnas: \"Vehículo\" y \"Número de piezas reemplazadas\". Filas: vehículo \\(1\\): \\(6\\); vehículo \\(2\\): \\(5\\); vehículo \\(3\\): \\(10\\).",
           "optionsType": "text",
           "options": [
@@ -816,7 +816,7 @@
           "questionId": "q_17",
           "questionText": "La figura muestra la distribución de los tipos de transporte que utilizan \\(160\\) personas para llegar al trabajo. Algunas personas usan únicamente un medio de transporte, otras dos, y otras tres.\n\nSi se necesita saber la cantidad total de personas que se transportan en bicicleta, ¿cuáles son los datos que se deben sumar?",
           "hasQuestionImage": true,
-          "questionImageUrl": "",
+          "questionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session1/q_17.png",
           "questionImageAiDescription": "Diagrama de Venn de \\(3\\) conjuntos con etiquetas: \"Carro privado\" a la izquierda, \"Bicicleta\" a la derecha, \"Transporte público\" abajo. Valores en las regiones: solo carro \\(35\\); solo bicicleta \\(50\\); solo transporte público \\(10\\); intersección carro-bicicleta sin transporte público \\(20\\); intersección carro-transporte público sin bicicleta \\(15\\); intersección bicicleta-transporte público sin carro \\(25\\); intersección triple \\(5\\).",
           "optionsType": "text",
           "options": [
@@ -916,8 +916,8 @@
           "questionId": "q_19",
           "questionText": "Un jardín con forma cuadrada, de vértices \\(EFGH\\), tiene lado \\(x+y\\). Otro cuadrado, de vértices \\(PQRS\\), está inscrito en el cuadrado \\(EFGH\\), de tal manera que la distancia más cercana entre dos vértices consecutivos mide \\(x\\).\n\nPara encontrar una fórmula que corresponda al área de la región sombreada, el jardinero propuso los siguientes pasos:\n\nPaso \\(1\\). Escoger uno de los cuatro triángulos sombreados y multiplicar la medida de la altura por la medida de la base.\n\nPaso \\(2\\). Dividir entre \\(2\\) el resultado obtenido en el paso \\(1\\).\n\nPaso \\(3\\). Multiplicar por \\(4\\) el resultado del paso anterior.\n\nPaso \\(4\\). Sumar cuatro veces el resultado del paso \\(2\\).\n\nDe los pasos propuestos, ¿cuál es redundante para el cálculo del área de la región sombreada?",
           "hasQuestionImage": true,
-          "questionImageUrl": "",
-          "questionImageAiDescription": "Diagrama de un cuadrado grande \\(EFGH\\) y un cuadrado inscrito \\(PQRS\\) rotado. El lado del cuadrado grande mide \\(x+y\\). Sobre el lado superior, desde \\(E\\) hasta \\(P\\) mide \\(x\\) y desde \\(P\\) hasta \\(F\\) mide \\(y\\). Sobre el lado derecho, desde \\(F\\) hasta \\(Q\\) mide \\(x\\) y desde \\(Q\\) hasta \\(G\\) mide \\(y\\). Sobre el lado inferior, desde \\(H\\) hasta \\(R\\) mide \\(y\\) y desde \\(R\\) hasta \\(G\\) mide \\(x\\). Sobre el lado izquierdo, desde \\(E\\) hasta \\(S\\) mide \\(y\\) y desde \\(S\\) hasta \\(H\\) mide \\(x\\). La región sombreada corresponde a los \\(4\\) triángulos de las esquinas entre el cuadrado grande y el cuadrado inscrito.",
+          "questionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session1/q_19.png",
+          "questionImageAiDescription": "Diagrama geométrico puro. ESTRICTO: Desactivar/Ocultar todos los ejes cartesianos (spines, ticks, labels) y el grid. Para renderizar proporciones perfectas, asuma internamente x=2 y y=5, creando un cuadrado exterior de lado 7 con vértice inferior izquierdo en H(0,0). 1) Vértices exteriores: H(0,0), G(7,0), F(7,7), E(0,7). 2) Vértices interiores: S(0,2), R(5,0), Q(7,5), P(2,7). Trazar los lados del cuadrado EFGH y los segmentos PQ, QR, RS y SP para formar el cuadrado inscrito. 3) Puntos: Dibujar pequeños círculos sólidos (marcadores) en los 8 vértices. 4) Relleno (Opacity/Fade): Sombrear ÚNICAMENTE los 4 triángulos de las esquinas (el área entre el cuadrado exterior y el interior) usando el color principal con baja opacidad. El cuadrado central PQRS debe quedar en blanco. 5) Letras de vértices (flotando ligeramente hacia afuera): 'E' en (0,7); 'F' en (7,7); 'G' en (7,0); 'H' en (0,0); 'P' arriba de (2,7); 'Q' a la derecha de (7,5); 'R' abajo de (5,0); 'S' a la izquierda de (0,2). 6) Acotaciones de segmentos (solo texto LaTeX flotando): '\\(x\\)' en el segmento superior EP; '\\(y\\)' en el segmento superior PF; '\\(x\\)' en el derecho superior FQ; '\\(y\\)' en el derecho inferior QG; '\\(y\\)' en el inferior izquierdo HR; '\\(x\\)' en el inferior derecho RG; '\\(y\\)' en el izquierdo superior ES; '\\(x\\)' en el izquierdo inferior SH. 7) Acotaciones totales: '\\(x + y\\)' flotando centrado arriba de todo el lado superior (y=7.8); '\\(x + y\\)' flotando centrado a la derecha de todo el lado derecho (x=7.8).",
           "optionsType": "text",
           "options": [
             {
@@ -1066,8 +1066,8 @@
           "questionId": "q_22",
           "questionText": "Una persona construyó una rampa, como se muestra en la figura, pero se necesita un refuerzo para evitar que esta se parta. Para esto, a dos metros del muro, se va a construir una columna que fortalezca la estructura.\n\n¿Cuál de los siguientes procedimientos permite calcular la altura \\(h\\) que debe tener la columna?",
           "hasQuestionImage": true,
-          "questionImageUrl": "",
-          "questionImageAiDescription": "Figura de una rampa formando un triángulo rectángulo con base horizontal de \\(4\\) m y altura vertical en el muro de \\(3\\) m. La hipotenusa baja desde la parte superior del muro hasta el extremo derecho de la base. A \\(2\\) m del muro se ubica una columna vertical de altura \\(h\\) que llega hasta la hipotenusa. La distancia desde el muro hasta la columna es \\(2\\) m, y la base total desde el muro hasta el extremo derecho es \\(4\\) m.",
+          "questionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session1/q_22.png",
+          "questionImageAiDescription": "1) Polígonos: Rectángulo definido por los vértices (-1, 0), (0, 0), (0, 3) y (-1, 3). Triángulo rectángulo definido por los vértices (0, 0), (4, 0) y (0, 3). 2) Segmentos: Segmento vertical en x=2, desde y=0 hasta y=1.5. 3) Cotas dimensionales: Cota vertical en x=-1.3 desde y=0 hasta y=3 con texto '\\(3\\text{ m}\\)'. Cota horizontal en y=-0.8 desde x=0 hasta x=4 con texto '\\(4\\text{ m}\\)'. Cota horizontal en y=-0.3 desde x=0 hasta x=2 con texto '\\(2\\text{ m}\\)'. 4) Etiquetas de texto independientes: '\\(h\\)' posicionado en la coordenada (2.1, 0.75).",
           "optionsType": "text",
           "options": [
             {
@@ -1116,8 +1116,8 @@
           "questionId": "q_23",
           "questionText": "En la gráfica se muestra la ubicación, en coordenadas polares, de cuatro aviones \\((V, W, X, Y)\\) respecto a la torre de control de un aeropuerto.\n\nSi las coordenadas polares de un punto son de la forma \\((r, \\theta)\\), donde \\(r\\) es la distancia al polo y \\(\\theta\\) es el ángulo respecto al eje polar, ¿cuál es el orden de los aviones, del que está más cerca al que está más lejos de la torre de control?",
           "hasQuestionImage": true,
-          "questionImageUrl": "",
-          "questionImageAiDescription": "Plano polar con polo etiquetado \"Torre de control (polo)\" y eje polar horizontal hacia la derecha. Cuatro puntos etiquetados: \\(V\\) con coordenadas \\((30\\text{ km}, 30^{\\circ})\\); \\(W\\) con coordenadas \\((20\\text{ km}, 90^{\\circ})\\); \\(X\\) con coordenadas \\((60\\text{ km}, 180^{\\circ})\\); \\(Y\\) con coordenadas \\((40\\text{ km}, 60^{\\circ})\\).",
+          "questionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session1/q_23.png",
+          "questionImageAiDescription": "Gráfico de coordenadas polares. 1) Cuadrícula (grid) polar: Círculos concéntricos con radios en 10, 20, 30, 40, 50 y 60. Líneas radiales en ángulos múltiplos de 30 grados. 2) Etiquetas del plano: El centro (origen) etiquetado inferiormente como 'Torre de control (polo)'. El rayo horizontal derecho (ángulo 0°) etiquetado como 'Eje polar'. 3) Puntos de datos (marcadores exactos): Punto en radio 30 y ángulo 30°, con texto '\\(V (30\\text{ km}, 30^{\\circ})\\)'; Punto en radio 40 y ángulo 60°, con texto '\\(Y (40\\text{ km}, 60^{\\circ})\\)'; Punto en radio 20 y ángulo 90°, con texto '\\(W (20\\text{ km}, 90^{\\circ})\\)'; Punto en radio 60 y ángulo 180°, con texto '\\(X (60\\text{ km}, 180^{\\circ})\\)'.",
           "optionsType": "text",
           "options": [
             {
@@ -1216,7 +1216,7 @@
           "questionId": "q_25",
           "questionText": "La presión pleural se genera entre algunas paredes de los pulmones en el proceso de respiración del ser humano. Al respecto, se midió la presión pleural de cuatro pacientes para determinar el orden en que deben recibir un tratamiento pulmonar.\n\nPara determinar el orden en que los pacientes van a recibir el tratamiento médico, se les debe ordenar de menor a mayor según su presión pleural. ¿Cuál de las siguientes tablas indica el orden en que deben recibir el tratamiento los pacientes?",
           "hasQuestionImage": true,
-          "questionImageUrl": "",
+          "questionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session1/q_25.png",
           "questionImageAiDescription": "La imagen del enunciado contiene una tabla principal con \\(2\\) columnas: \"Paciente\" y \"Presión pleural (cmH\\(_2\\)O)\". Filas: Santiago \\(-7,6\\); Ximena \\(-7,09\\); Mariana \\(-7,62\\); Orlando \\(-7,53\\).",
           "optionsType": "image",
           "options": [
@@ -1224,28 +1224,28 @@
               "optionId": "A",
               "type": "image",
               "optionText": "",
-              "optionImageUrl": "",
+              "optionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session1/q_25_a.png",
               "optionAiDescription": "Tabla de \\(2\\) columnas: \"Orden en que se va a recibir el tratamiento\" y \"Paciente\". Filas: Primero \\rightarrow Ximena; Segundo \\rightarrow Mariana; Tercero \\rightarrow Santiago; Cuarto \\rightarrow Orlando."
             },
             {
               "optionId": "B",
               "type": "image",
               "optionText": "",
-              "optionImageUrl": "",
+              "optionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session1/q_25_b.png",
               "optionAiDescription": "Tabla de \\(2\\) columnas: \"Orden en que se va a recibir el tratamiento\" y \"Paciente\". Filas: Primero \\rightarrow Orlando; Segundo \\rightarrow Santiago; Tercero \\rightarrow Mariana; Cuarto \\rightarrow Ximena."
             },
             {
               "optionId": "C",
               "type": "image",
               "optionText": "",
-              "optionImageUrl": "",
+              "optionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session1/q_25_c.png",
               "optionAiDescription": "Tabla de \\(2\\) columnas: \"Orden en que se va a recibir el tratamiento\" y \"Paciente\". Filas: Primero \\rightarrow Mariana; Segundo \\rightarrow Santiago; Tercero \\rightarrow Orlando; Cuarto \\rightarrow Ximena."
             },
             {
               "optionId": "D",
               "type": "image",
               "optionText": "",
-              "optionImageUrl": "",
+              "optionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session1/q_25_d.png",
               "optionAiDescription": "Tabla de \\(2\\) columnas: \"Orden en que se va a recibir el tratamiento\" y \"Paciente\". Filas: Primero \\rightarrow Santiago; Segundo \\rightarrow Ximena; Tercero \\rightarrow Mariana; Cuarto \\rightarrow Orlando."
             }
           ],
