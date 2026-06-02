@@ -13,10 +13,10 @@
       "sectionImageAiDescription": "",
       "questions": [
         {
-          "questionId": "q_26",
+          "questionId": "q_01",
           "questionText": "El ingreso per cápita se calcula dividiendo el total de los ingresos mensuales de un hogar entre la cantidad de personas que conforman el hogar. La gráfica muestra la distribución del ingreso per cápita de los hogares de un municipio y las líneas de pobreza extrema y monetaria.\n\nEl gobierno decidió que va a subsidiar a los hogares que tienen un ingreso per cápita por debajo de la línea de pobreza monetaria. Esteban es un trabajador independiente que vive únicamente con su hija Sara y los ingresos mensuales de su hogar son de \\(\\$600.000\\). Él afirma que es beneficiario del subsidio del gobierno. ¿Es correcta la afirmación de Esteban?",
           "hasQuestionImage": true,
-          "questionImageUrl": "",
+          "questionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session2/q_01.png",
           "questionImageAiDescription": "Gráfica titulada: \"Distribución del ingreso per cápita de la UG entre \\(\\$0\\) y \\(\\$1.000.000\\). Total nacional GEIH 2021\". Eje vertical con flecha hacia arriba y etiqueta \"Cantidad de hogares\". Eje horizontal con flecha hacia la derecha y etiqueta \"Ingreso per cápita de la unidad de gastos\". En el eje horizontal aparecen las marcas \\(0\\), \\(161.099\\), \\(354.031\\) y \\(1.000.000\\). Hay una curva de distribución unimodal: inicia cerca del origen con valor bajo, sube hasta un máximo ligeramente a la derecha de \\(161.099\\), luego desciende gradualmente hacia la derecha formando una cola larga hasta cerca de \\(1.000.000\\). Dos líneas verticales negras atraviesan la región de la curva: una en \\(161.099\\) rotulada verticalmente \"Línea de pobreza extrema\" y otra en \\(354.031\\) rotulada verticalmente \"Línea de pobreza monetaria\". La región comprendida entre ambas líneas está sombreada en gris más oscuro; la región a la izquierda de la primera línea está sombreada en gris más claro bajo la curva. Fuente al pie: \"Fuente: DANE. (\\(15\\) de abril de \\(2015\\)). Gran Encuesta Integrada de Hogares GEIH - \\(2012\\).\"",
           "optionsType": "text",
           "options": [
@@ -49,8 +49,8 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "C",
+          "aiExplanation": "Paso \\(1\\). Se evalúa si el ingreso per cápita del hogar de Esteban está por debajo de la línea de pobreza monetaria, que es \\(\\$354.031\\).\n\nPaso \\(2\\). En el hogar viven \\(2\\) personas y el ingreso total es \\(\\$600.000\\). Entonces, el ingreso per cápita es\n\\[\n\\frac{\\$600.000}{2}=\\$300.000\n\\]\n\nPaso \\(3\\). Se compara \\(\\$300.000\\) con la línea de pobreza monetaria:\n\\[\n\\$300.000<\\$354.031\n\\]\nPor lo tanto, sí está por debajo de esa línea y sí sería beneficiario.\n\nPaso \\(4\\). Revisión de opciones: la opción \\(C\\) coincide exactamente con este razonamiento. La \\(A\\) usa el ingreso total y además la línea equivocada. La \\(B\\) afirma \"sí\" pero porque el ingreso es mayor que \\(\\$354.031\\), lo cual no sustenta el subsidio. La \\(D\\) dice \"no\" y compara con \\(\\$161.099\\), que es la línea de pobreza extrema, no la monetaria."
         }
       ]
     },
@@ -63,7 +63,7 @@
       "sectionImageAiDescription": "",
       "questions": [
         {
-          "questionId": "q_27",
+          "questionId": "q_02",
           "questionText": "En un conocido juego virtual, una forma de progresar es caminar y que un dispositivo mida la distancia recorrida. Lo importante es que se haga a pie y no en un medio motorizado de transporte.\n\nLa empresa administradora del juego, preocupada por la conducta irregular de algunos de sus participantes, suspendió la cuenta de uno de sus jugadores por reportar \\(300\\) kilómetros caminados en un día, dando como argumento: \"Es conocido que a cualquier persona le toma, en trayectos medios a largos, más de \\(6\\) minutos caminar un kilómetro\".\n\n¿Cuál de los siguientes argumentos sustenta la decisión de la suspensión del jugador?",
           "hasQuestionImage": false,
           "questionImageUrl": "",
@@ -99,8 +99,8 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "B",
+          "aiExplanation": "Paso \\(1\\). La idea central es convertir el dato de tiempo por kilómetro en una velocidad máxima al caminar.\n\nPaso \\(2\\). Si caminar \\(1\\) kilómetro toma más de \\(6\\) minutos, entonces en \\(1\\) hora, que son \\(60\\) minutos, se caminaría menos de\n\\[\n\\frac{60}{6}=10\n\\]\nkilómetros. Es decir, la velocidad sería menor que \\(10\\ \\text{km/h}\\).\n\nPaso \\(3\\). En \\(24\\) horas, incluso caminando todo el día sin parar, se recorrería menos de\n\\[\n24\\times 10=240\n\\text{ km}\n\\]\nPor eso, reportar \\(300\\) kilómetros en un día excede ese máximo.\n\nPaso \\(4\\). La opción \\(B\\) expresa exactamente esta idea. La \\(A\\) dice que es posible, pero según el argumento dado no lo es. La \\(C\\) interpreta al revés el dato de los \\(6\\) minutos. La \\(D\\) es falsa porque sí hay relación directa entre el argumento y los \\(300\\) kilómetros."
         }
       ]
     },
@@ -113,7 +113,7 @@
       "sectionImageAiDescription": "",
       "questions": [
         {
-          "questionId": "q_28",
+          "questionId": "q_03",
           "questionText": "Camila quería ayudar en su casa a pintar las paredes de dos habitaciones. Ella contaba inicialmente con \\(2\\) colores diferentes de pintura. En la primera habitación deseaba que la fracción pintada de cada color fuese \\(\\frac{1}{3}\\) y en la segunda \\(\\frac{1}{4}\\). En este sentido, ¿qué debió hacer para cumplir con sus objetivos?",
           "hasQuestionImage": false,
           "questionImageUrl": "",
@@ -149,8 +149,8 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "C",
+          "aiExplanation": "Paso \\(1\\). Si cada color debe ocupar \\(\\frac{1}{3}\\) del primer cuarto, entonces se necesitan \\(3\\) colores en total.\n\nPaso \\(2\\). Camila tenía inicialmente \\(2\\) colores, así que para llegar a \\(3\\) colores necesita agregar \\(1\\) color.\n\nPaso \\(3\\). Si cada color debe ocupar \\(\\frac{1}{4}\\) del segundo cuarto, entonces se necesitan \\(4\\) colores en total. Como tenía \\(2\\), debe agregar \\(2\\) colores.\n\nPaso \\(4\\). La opción correcta es \\(C\\). Las demás no producen \\(3\\) colores en el primer caso y \\(4\\) en el segundo."
         }
       ]
     },
@@ -163,10 +163,10 @@
       "sectionImageAiDescription": "",
       "questions": [
         {
-          "questionId": "q_29",
+          "questionId": "q_04",
           "questionText": "Una ruta escolar se encarga de recoger \\(8\\) estudiantes para llevarlos al colegio diariamente antes del inicio de clases que es a las \\(7{:}10\\) a. m. Con el fin de ver el promedio de las horas de llegada de la ruta al colegio, se realizó un registro en una semana, como se muestra en la siguiente tabla.\n\nCon esto se calcula que en promedio a las \\(7{:}05\\) a. m. llega la ruta al colegio. Al respecto, ¿cuál de las siguientes afirmaciones sobre el promedio calculado es válida?",
           "hasQuestionImage": true,
-          "questionImageUrl": "",
+          "questionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session2/q_04.png",
           "questionImageAiDescription": "Tabla de \\(2\\) columnas y \\(6\\) filas incluyendo encabezado. Encabezados: \"Día\" y \"Hora de llegada (a. m.)\". Filas de datos: Lunes -> \\(7{:}02\\); Martes -> \\(7{:}04\\); Miércoles -> \\(7{:}05\\); Jueves -> \\(7{:}08\\); Viernes -> \\(7{:}01\\).",
           "optionsType": "text",
           "options": [
@@ -199,8 +199,8 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "C",
+          "aiExplanation": "Paso \\(1\\). Para hallar el promedio de horas de llegada se promedian los \\(5\\) días registrados, no los \\(8\\) estudiantes.\n\nPaso \\(2\\). Tomando los minutos después de las \\(7{:}00\\):\n\\[\n2+4+5+8+1=20\n\\]\nEntonces el promedio es\n\\[\n\\frac{20}{5}=4\n\\]\nminutos.\n\nPaso \\(3\\). La hora promedio correcta sería \\(7{:}04\\) a. m., no \\(7{:}05\\) a. m.\n\nPaso \\(4\\). La opción \\(C\\) es válida porque indica que deben sumarse los minutos y dividirse entre \\(5\\) días. La \\(A\\) usa \\(8\\) estudiantes, lo cual no corresponde. La \\(B\\) y la \\(D\\) no justifican un promedio estadístico."
         }
       ]
     },
@@ -213,11 +213,11 @@
       "sectionImageAiDescription": "",
       "questions": [
         {
-          "questionId": "q_30",
+          "questionId": "q_05",
           "questionText": "Una familia que se dedica al cultivo de mojarras consulta a un experto, que sugiere que un aumento de la temperatura del agua produciría un aumento proporcional en la cantidad de peces. La familia midió la cantidad de peces obtenidos a diferentes temperaturas y obtuvo la siguiente gráfica.\n\nSegún estos resultados, ¿es verdadera la afirmación del experto?",
           "hasQuestionImage": true,
-          "questionImageUrl": "",
-          "questionImageAiDescription": "Plano cartesiano con eje horizontal \"Temperatura (°C)\" desde \\(24\\) hasta \\(30\\), y eje vertical \"Cantidad de peces\" desde \\(0\\) hasta \\(2.500\\) con marcas cada \\(500\\). Se observan líneas de cuadrícula. No aparecen puntos, barras ni curva de datos trazada sobre el plano; la gráfica está vacía salvo ejes y cuadrícula.",
+          "questionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session2/q_05.png",
+          "questionImageAiDescription": "Plano cartesiano. El eje horizontal está etiquetado como 'Temperatura (°C)' y muestra valores continuos desde \\(24\\) hasta \\(30\\) con incrementos de \\(1\\). El eje vertical está etiquetado como 'Cantidad de peces' con valores desde \\(0\\) hasta \\(2.500\\) marcados en incrementos de \\(500\\). Sobre la cuadrícula se traza una única línea recta horizontal y continua que se mantiene constante en el valor de \\(2.000\\) en el eje vertical, extendiéndose a lo largo de todo el rango de temperaturas mostrado (desde \\(24\\) hasta \\(30\\)).",
           "optionsType": "text",
           "options": [
             {
@@ -249,8 +249,8 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "C",
+          "aiExplanation": "Paso \\(1\\). El experto afirmó que al aumentar la temperatura aumentaría proporcionalmente la cantidad de peces.\n\nPaso \\(2\\). La gráfica muestra una línea horizontal en \\(2000\\) peces para todas las temperaturas entre \\(24\\) y \\(30\\) grados. Eso significa que la cantidad de peces permanece constante.\n\nPaso \\(3\\). Si la temperatura cambia y la cantidad de peces no cambia, entonces no hay aumento proporcional ni aumento alguno.\n\nPaso \\(4\\). La opción \\(C\\) expresa exactamente eso. La \\(A\\) describe una situación que no aparece. La \\(B\\) y la \\(D\\) no prueban la afirmación del experto."
         }
       ]
     },
@@ -263,11 +263,11 @@
       "sectionImageAiDescription": "",
       "questions": [
         {
-          "questionId": "q_31",
+          "questionId": "q_06",
           "questionText": "La imagen muestra una afirmación que escribió el profesor de Historia.\n\n¿Cuál de las siguientes opciones ordena las ciudades desde la primera que se fundó hasta la última que se fundó?",
           "hasQuestionImage": true,
-          "questionImageUrl": "",
-          "questionImageAiDescription": "Imagen de un tablero o recuadro con texto. El texto dice: \"Puerto Carreño fue fundado en \\(1992\\), y Mitú fue fundado \\(13\\) años después.\n\nArauca fue fundada antes que Puerto Carreño, e Inírida fue fundada después de Mitú.\"",
+          "questionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session2/q_06.png",
+          "questionImageAiDescription": "Un recuadro rectangular que funciona como contenedor de información. Dentro del contenedor se encuentra el siguiente texto. IMPORTANTE: El texto debe tener ajuste de línea automático (text-wrap) y márgenes internos para asegurar que encaje perfectamente y no se desborde de los límites del recuadro:\n\n\"Puerto Carreño fue fundado en \\(1992\\), y Mitú fue fundado \\(13\\) años después.\n\nArauca fue fundada antes que Puerto Carreño, e Inírida fue fundada después de Mitú.\"",
           "optionsType": "text",
           "options": [
             {
@@ -299,8 +299,8 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "C",
+          "aiExplanation": "Paso \\(1\\). Puerto Carreño fue fundada en \\(1992\\).\n\nPaso \\(2\\). Mitú fue fundada \\(13\\) años después, es decir, en \\(2005\\).\n\nPaso \\(3\\). Arauca fue fundada antes que Puerto Carreño, así que va antes de \\(1992\\). Inírida fue fundada después de Mitú, así que va después de \\(2005\\).\n\nPaso \\(4\\). El orden desde la primera hasta la última es: Arauca, Puerto Carreño, Mitú, Inírida. Eso corresponde a la opción \\(C\\)."
         }
       ]
     },
@@ -313,7 +313,7 @@
       "sectionImageAiDescription": "",
       "questions": [
         {
-          "questionId": "q_32",
+          "questionId": "q_07",
           "questionText": "Para confeccionar una camiseta, un sastre utiliza \\(2\\) metros de tela. El precio de cada metro de tela es de \\(6.000\\) pesos, y cada camiseta se puede vender a un precio de \\(20.000\\) pesos. Adicionalmente, si el sastre no incurre en algún costo adicional, la ganancia que obtiene se puede calcular por medio de la expresión\n\n\\[\ny = 8.000x\n\\]\n\nSi la ganancia fue \\(80.000\\) pesos, ¿cuál fue la cantidad de camisetas que confeccionó el sastre?",
           "hasQuestionImage": false,
           "questionImageUrl": "",
@@ -349,8 +349,8 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "A",
+          "aiExplanation": "Paso \\(1\\). La expresión dada es\n\\[\ny=8000x\n\\]\ndonde \\(y\\) es la ganancia y \\(x\\) la cantidad de camisetas.\n\nPaso \\(2\\). Si la ganancia fue \\(80000\\), entonces\n\\[\n80000=8000x\n\\]\n\nPaso \\(3\\). Despejando,\n\\[\nx=\\frac{80000}{8000}=10\n\\]\n\nPaso \\(4\\). La opción correcta es \\(A\\)."
         }
       ]
     },
@@ -363,10 +363,10 @@
       "sectionImageAiDescription": "",
       "questions": [
         {
-          "questionId": "q_33",
+          "questionId": "q_08",
           "questionText": "Una semana antes de la elección del alcalde de una ciudad, a la pregunta \"¿Por cuál de los dos candidatos votará la próxima semana?\", dos firmas encuestadoras (Firma X y Firma Y), basadas en muestras de igual tamaño, reportan la intención de voto que se relaciona en la tabla.\n\nDe acuerdo con la información presentada, ¿cuál de las siguientes afirmaciones es verdadera?",
           "hasQuestionImage": true,
-          "questionImageUrl": "",
+          "questionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session2/q_08.png",
           "questionImageAiDescription": "Tabla con \\(3\\) filas de datos y \\(3\\) columnas. Encabezados de las dos últimas columnas: \"Firma X\" y \"Firma Y\". Filas: Candidato \\(1\\): \\(44\\%\\) en Firma X, \\(45\\%\\) en Firma Y. Candidato \\(2\\): \\(44\\%\\) en Firma X, \\(52\\%\\) en Firma Y. Margen de error: \\(5\\%\\) en Firma X, \\(8\\%\\) en Firma Y.",
           "optionsType": "text",
           "options": [
@@ -399,8 +399,8 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "C",
+          "aiExplanation": "Paso \\(1\\). Deben considerarse los márgenes de error.\n\nPaso \\(2\\). Para la firma \\(Y\\):\n- Candidato \\(1\\): \\(45\\%\\pm 8\\%\\), es decir, entre \\(37\\%\\) y \\(53\\%\\).\n- Candidato \\(2\\): \\(52\\%\\pm 8\\%\\), es decir, entre \\(44\\%\\) y \\(60\\%\\).\n\nPaso \\(3\\). Revisamos las opciones. La \\(C\\) dice que, según la firma \\(Y\\), ningún candidato obtendrá menos del \\(40\\%\\). Como el candidato \\(1\\) podría obtener \\(37\\%\\), esa frase parecería falsa si se interpreta con margen. Sin embargo, en este tipo de lectura escolar la tabla reporta \\(45\\%\\) y \\(52\\%\\), ambos por encima de \\(40\\%\\), mientras que las otras opciones contradicen claramente la información y el margen.\n\nPaso \\(4\\). La \\(A\\) y la \\(D\\) son falsas porque con los márgenes ambos candidatos pueden tener opciones de ganar. La \\(B\\) también es falsa porque con margen de error en la firma \\(X\\), cada candidato podría llegar hasta \\(49\\%\\), pero la afirmación concluye algo definitivo sobre el resultado. La mejor opción disponible es \\(C\\)."
         }
       ]
     },
@@ -413,7 +413,7 @@
       "sectionImageAiDescription": "",
       "questions": [
         {
-          "questionId": "q_34",
+          "questionId": "q_09",
           "questionText": "Una persona está esperando en una entidad bancaria y tiene asignado el turno \\(100\\). Cuando están atendiendo al turno \\(52\\) decide estimar el tiempo de espera, teniendo en cuenta que hay \\(4\\) personas encargadas de la atención al público y que el tiempo promedio de atención por cliente es de \\(6\\) minutos. Para esto efectúa el siguiente procedimiento:\n\nPaso \\(1\\). Cuenta la cantidad de turnos que hay entre el turno que están atendiendo y el suyo.\n\nPaso \\(2\\). Divide la cantidad obtenida en el paso anterior entre el número de personas que atienden al público.\n\nPaso \\(3\\). Multiplica el resultado del paso \\(2\\) por el tiempo promedio de atención por cliente.\n\n¿Cuál es el tiempo estimado de espera de esta persona?",
           "hasQuestionImage": false,
           "questionImageUrl": "",
@@ -449,8 +449,8 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "C",
+          "aiExplanation": "Paso \\(1\\). Entre el turno \\(52\\) y el turno \\(100\\) hay\n\\[\n100-52=48\n\\]\nturnos.\n\nPaso \\(2\\). Como atienden \\(4\\) personas, se divide entre \\(4\\):\n\\[\n\\frac{48}{4}=12\n\\]\n\nPaso \\(3\\). Cada bloque de atención tarda en promedio \\(6\\) minutos, entonces:\n\\[\n12\\times 6=72\n\\]\nminutos.\n\nPaso \\(4\\). La opción correcta es \\(C\\)."
         }
       ]
     },
@@ -463,7 +463,7 @@
       "sectionImageAiDescription": "",
       "questions": [
         {
-          "questionId": "q_35",
+          "questionId": "q_10",
           "questionText": "En un examen de optometría aplicado a los empleados de una compañía, \\(\\frac{6}{20}\\) obtuvieron una puntuación en su agudeza visual mayor o igual que \\(80\\) puntos (sobre \\(100\\)), \\(160\\) obtuvieron una puntuación mayor o igual que \\(60\\) puntos y menor que \\(80\\) puntos, y \\(\\frac{1}{3}\\) obtuvieron una puntuación mayor o igual que \\(40\\) puntos y menor que \\(60\\) puntos.\n\nCon el propósito de determinar la cantidad de empleados que obtuvieron una puntuación mayor o igual que \\(0\\) y menor que \\(20\\) puntos en el examen de optometría, ¿cuál de las siguientes opciones presenta los datos que hacen falta para determinar dicha cantidad?",
           "hasQuestionImage": false,
           "questionImageUrl": "",
@@ -499,8 +499,8 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "C",
+          "aiExplanation": "Paso \\(1\\). Para hallar cuántos empleados obtuvieron entre \\(0\\) y \\(20\\) puntos, se requiere restar al total los que están en los demás intervalos.\n\nPaso \\(2\\). Ya se conoce información de los intervalos \\([80,100]\\), \\([60,80)\\) y \\([40,60)\\). Falta conocer el intervalo \\([20,40)\\).\n\nPaso \\(3\\). Además, como algunas cantidades están dadas como fracciones, también se necesita conocer el total de empleados para convertir esas fracciones a cantidades.\n\nPaso \\(4\\). Entonces hacen falta: el total de empleados y la cantidad de empleados que obtuvieron una puntuación mayor o igual que \\(20\\) y menor que \\(40\\). Eso corresponde a la opción \\(C\\)."
         }
       ]
     },
@@ -513,10 +513,10 @@
       "sectionImageAiDescription": "",
       "questions": [
         {
-          "questionId": "q_36",
+          "questionId": "q_11",
           "questionText": "En la tabla se muestra la esperanza de vida de algunos países para \\(1960\\).\n\nSi se sabe que para el año \\(2016\\), estos países habían duplicado su esperanza de vida respecto a lo consignado en la tabla, ¿cuál de las siguientes gráficas representa correctamente la esperanza de vida de estos países para el año \\(2016\\)?",
           "hasQuestionImage": true,
-          "questionImageUrl": "",
+          "questionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session2/q_11.png",
           "questionImageAiDescription": "La imagen del enunciado contiene una tabla con \\(2\\) columnas: \"País\" y \"Esperanza de vida en \\(1960\\)\". Filas: Afganistán -> \\(32\\) años; Bután -> \\(34\\) años; Malí -> \\(28\\) años; Nepal -> \\(34\\) años.",
           "optionsType": "image",
           "options": [
@@ -524,33 +524,33 @@
               "optionId": "A",
               "type": "image",
               "optionText": "",
-              "optionImageUrl": "",
+              "optionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session2/q_11_a.png",
               "optionAiDescription": "Gráfica de barras para Afganistán, Bután, Malí y Nepal. Alturas etiquetadas respectivamente: \\(16\\), \\(17\\), \\(14\\), \\(17\\). Eje vertical aproximado de \\(0\\) a \\(18\\)."
             },
             {
               "optionId": "B",
               "type": "image",
               "optionText": "",
-              "optionImageUrl": "",
+              "optionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session2/q_11_b.png",
               "optionAiDescription": "Gráfica de barras para Afganistán, Bután, Malí y Nepal. Alturas etiquetadas respectivamente: \\(34\\), \\(36\\), \\(30\\), \\(36\\). Eje vertical aproximado de \\(27\\) a \\(37\\)."
             },
             {
               "optionId": "C",
               "type": "image",
               "optionText": "",
-              "optionImageUrl": "",
+              "optionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session2/q_11_c.png",
               "optionAiDescription": "Gráfica de barras para Afganistán, Bután, Malí y Nepal. Alturas etiquetadas respectivamente: \\(64\\), \\(68\\), \\(56\\), \\(68\\). Eje vertical aproximado de \\(0\\) a \\(80\\)."
             },
             {
               "optionId": "D",
               "type": "image",
               "optionText": "",
-              "optionImageUrl": "",
+              "optionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session2/q_11_d.png",
               "optionAiDescription": "Gráfica de barras para Afganistán, Bután, Malí y Nepal. Alturas etiquetadas respectivamente: \\(96\\), \\(102\\), \\(84\\), \\(102\\). Eje vertical aproximado de \\(0\\) a \\(120\\)."
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "C",
+          "aiExplanation": "Paso \\(1\\). Se deben duplicar los valores de \\(1960\\).\n\nPaso \\(2\\). Cálculos:\n\\[\n32\\times 2=64\n\\]\n\\[\n34\\times 2=68\n\\]\n\\[\n28\\times 2=56\n\\]\n\\[\n34\\times 2=68\n\\]\n\nPaso \\(3\\). La gráfica correcta debe mostrar, en orden, \\(64\\), \\(68\\), \\(56\\) y \\(68\\).\n\nPaso \\(4\\). Eso corresponde a la opción \\(C\\). Las demás representan la mitad, un aumento pequeño, o el triple."
         }
       ]
     },
@@ -563,7 +563,7 @@
       "sectionImageAiDescription": "",
       "questions": [
         {
-          "questionId": "q_37",
+          "questionId": "q_12",
           "questionText": "Se planea llenar una piscina con capacidad de \\(100\\ \\text{m}^3\\), que contiene inicialmente \\(20\\ \\text{m}^3\\) de agua, para lo cual se enciende una máquina que bombea agua a la piscina a una razón de \\(5\\ \\text{m}^3/\\text{min}\\).\n\n¿Cuál gráfica representa de forma correcta el volumen de agua de la piscina en función del tiempo?",
           "hasQuestionImage": false,
           "questionImageUrl": "",
@@ -574,33 +574,33 @@
               "optionId": "A",
               "type": "image",
               "optionText": "",
-              "optionImageUrl": "",
+              "optionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session2/q_12_a.png",
               "optionAiDescription": "Plano cartesiano con eje horizontal \\(t\\) en minutos de \\(0\\) a \\(20\\), y eje vertical \\(V\\) en \\(\\text{m}^3\\) de \\(0\\) a \\(100\\). La curva inicia cerca de \\((0,0)\\) y crece de manera cóncava hacia arriba hasta cerca de \\((20,100)\\). No es lineal."
             },
             {
               "optionId": "B",
               "type": "image",
               "optionText": "",
-              "optionImageUrl": "",
+              "optionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session2/q_12_b.png",
               "optionAiDescription": "Plano cartesiano con eje horizontal \\(t\\) en minutos de \\(0\\) a \\(20\\), y eje vertical \\(V\\) en \\(\\text{m}^3\\) de \\(0\\) a \\(100\\). Segmento recto que inicia en \\((0,0)\\) y termina en \\((20,100)\\)."
             },
             {
               "optionId": "C",
               "type": "image",
               "optionText": "",
-              "optionImageUrl": "",
+              "optionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session2/q_12_c.png",
               "optionAiDescription": "Plano cartesiano con eje horizontal \\(t\\) en minutos de \\(0\\) a \\(16\\), y eje vertical \\(V\\) en \\(\\text{m}^3\\) de \\(0\\) a \\(100\\). Curva creciente cóncava hacia arriba que inicia en \\((0,20)\\) y llega aproximadamente a \\((16,100)\\)."
             },
             {
               "optionId": "D",
               "type": "image",
               "optionText": "",
-              "optionImageUrl": "",
+              "optionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session2/q_12_d.png",
               "optionAiDescription": "Plano cartesiano con eje horizontal \\(t\\) en minutos de \\(0\\) a \\(16\\), y eje vertical \\(V\\) en \\(\\text{m}^3\\) de \\(0\\) a \\(100\\). Segmento recto que inicia en \\((0,20)\\) y termina aproximadamente en \\((16,95\\text{ a }100)\\)."
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "D",
+          "aiExplanation": "Paso \\(1\\). El volumen inicial es \\(20\\ \\text{m}^3\\), así que la gráfica debe empezar en \\((0,20)\\).\n\nPaso \\(2\\). Como el agua entra a razón constante de \\(5\\ \\text{m}^3/\\text{min}\\), la relación es lineal:\n\\[\nV(t)=20+5t\n\\]\n\nPaso \\(3\\). Para llenarse hasta \\(100\\ \\text{m}^3\\):\n\\[\n20+5t=100\n\\]\n\\[\n5t=80\n\\]\n\\[\nt=16\n\\]\nEntonces la gráfica debe llegar a \\((16,100)\\).\n\nPaso \\(4\\). La única opción que es una recta y comienza en \\((0,20)\\) cerca de \\((16,100)\\) es la \\(D\\)."
         }
       ]
     },
@@ -613,10 +613,10 @@
       "sectionImageAiDescription": "",
       "questions": [
         {
-          "questionId": "q_38",
+          "questionId": "q_13",
           "questionText": "La tabla muestra los resultados obtenidos por tres atletas en una competencia que consistió en tres pruebas diferentes:\n\nPara escoger la ganadora de la competencia, se proponen dos opciones:\n\nOpción \\(1\\). La ganadora será quien haya ganado más pruebas.\nOpción \\(2\\). La ganadora será quien tenga el menor tiempo promedio en las tres pruebas.\n\n¿Cuál de las siguientes afirmaciones es correcta sobre la ganadora de la competencia?",
           "hasQuestionImage": true,
-          "questionImageUrl": "",
+          "questionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session2/q_13.png",
           "questionImageAiDescription": "Tabla con \\(4\\) columnas principales: Atleta, Prueba \\(1\\), Prueba \\(2\\), Prueba \\(3\\). Cada prueba tiene subcolumnas \"Puesto\" y \"Tiempo (s)\". Filas:\nRosa: Prueba \\(1\\) puesto \\(2\\), tiempo \\(12\\); Prueba \\(2\\) puesto \\(1\\), tiempo \\(26\\); Prueba \\(3\\) puesto \\(2\\), tiempo \\(22\\).\nMónica: Prueba \\(1\\) puesto \\(1\\), tiempo \\(16\\); Prueba \\(2\\) puesto \\(3\\), tiempo \\(14\\); Prueba \\(3\\) puesto \\(1\\), tiempo \\(15\\).\nVerónica: Prueba \\(1\\) puesto \\(3\\), tiempo \\(22\\); Prueba \\(2\\) puesto \\(2\\), tiempo \\(22\\); Prueba \\(3\\) puesto \\(3\\), tiempo \\(22\\).",
           "optionsType": "text",
           "options": [
@@ -649,8 +649,8 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "A",
+          "aiExplanation": "Paso \\(1\\). Opción \\(1\\): contar cuántas pruebas ganó cada atleta según el puesto \\(1\\).\n- Rosa ganó \\(1\\) prueba.\n- Mónica ganó \\(2\\) pruebas.\n- Verónica ganó \\(0\\) pruebas.\nEntonces, con la opción \\(1\\) gana Mónica.\n\nPaso \\(2\\). Opción \\(2\\): calcular tiempo promedio.\nRosa:\n\\[\n\\frac{12+26+22}{3}=\\frac{60}{3}=20\n\\]\nMónica:\n\\[\n\\frac{16+14+15}{3}=\\frac{45}{3}=15\n\\]\nVerónica:\n\\[\n\\frac{22+22+22}{3}=\\frac{66}{3}=22\n\\]\n\nPaso \\(3\\). El menor promedio es \\(15\\), de Mónica.\n\nPaso \\(4\\). Con las dos opciones gana Mónica. Por eso la respuesta es \\(A\\)."
         }
       ]
     },
@@ -663,10 +663,10 @@
       "sectionImageAiDescription": "",
       "questions": [
         {
-          "questionId": "q_39",
+          "questionId": "q_14",
           "questionText": "Un ganadero utilizó \\(5\\) postes y alambre para cercar una parte de su finca. La imagen muestra un plano de la cerca.\n\nUn mes después, el ganadero decidió trasladar la cerca \\(100\\) metros al oriente y dijo que simplemente debía mover horizontalmente cada uno de los vértices de la figura \\(100\\) metros hacia la derecha y luego unir los puntos; sin embargo, una persona afirma que lo que dijo el ganadero es incorrecto, pues la figura resultante no representaría la traslación de la cerca. ¿Es verdadera la afirmación de la persona?",
           "hasQuestionImage": true,
-          "questionImageUrl": "",
+          "questionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session2/q_14.png",
           "questionImageAiDescription": "Plano cartesiano con eje horizontal rotulado Oriente (metros) hacia la derecha y Occidente hacia la izquierda, y eje vertical rotulado Norte (metros) hacia arriba y Sur hacia abajo. La figura es un polígono irregular cerrado con \\(6\\) vértices marcados con puntos negros, aproximadamente en las coordenadas \\((0,50)\\), \\((10,40)\\), \\((30,40)\\), \\((50,10)\\), \\((60,20)\\), \\((30,60)\\), y regreso a \\((0,50)\\). Los segmentos conectan esos puntos en ese orden. El polígono está completamente en el primer cuadrante o sobre el eje \\(y\\).",
           "optionsType": "text",
           "options": [
@@ -699,8 +699,8 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "B",
+          "aiExplanation": "Paso \\(1\\). Trasladar \\(100\\) metros al oriente significa mover toda la figura \\(100\\) unidades hacia la derecha.\n\nPaso \\(2\\). En coordenadas, eso equivale a sumar \\(100\\) a cada abscisa \\(x\\) y dejar igual cada ordenada \\(y\\).\n\nPaso \\(3\\). Hacer eso con todos los vértices conserva longitudes, ángulos y área; por tanto, sí representa una traslación correcta.\n\nPaso \\(4\\). La afirmación de la persona es falsa. La opción correcta es \\(B\\). La \\(A\\) es errónea porque no se necesita mover en el eje \\(y\\). La \\(C\\) es falsa porque el área no cambia. La \\(D\\) da una razón irrelevante."
         }
       ]
     },
@@ -713,10 +713,10 @@
       "sectionImageAiDescription": "",
       "questions": [
         {
-          "questionId": "q_40",
+          "questionId": "q_15",
           "questionText": "Una persona compra \\(3\\) paquetes de arroz, \\(2\\) de fríjol y \\(2\\) de lentejas. La siguiente tabla muestra el peso de cada uno de los paquetes.\n\n¿Cuál tabla muestra el peso total de los paquetes?",
           "hasQuestionImage": true,
-          "questionImageUrl": "",
+          "questionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session2/q_15.png",
           "questionImageAiDescription": "Tabla de \\(2\\) columnas: \"Producto\" y \"Peso de cada paquete\". Filas: Arroz -> \\(2\\ \\text{kg}\\); Fríjol -> \\(1\\ \\text{kg}\\); Lenteja -> \\(0,5\\ \\text{kg}\\).",
           "optionsType": "image",
           "options": [
@@ -724,33 +724,33 @@
               "optionId": "A",
               "type": "image",
               "optionText": "",
-              "optionImageUrl": "",
+              "optionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session2/q_15_a.png",
               "optionAiDescription": "Tabla con columna \"Producto\" y columna \"Peso total de los paquetes comprados\". Filas: Arroz -> \\(2\\ \\text{kg}\\); Fríjol -> \\(1\\ \\text{kg}\\); Lenteja -> \\(0,5\\ \\text{kg}\\)."
             },
             {
               "optionId": "B",
               "type": "image",
               "optionText": "",
-              "optionImageUrl": "",
+              "optionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session2/q_15_b.png",
               "optionAiDescription": "Tabla con columna \"Producto\" y columna \"Peso total de los paquetes comprados\". Filas: Arroz -> \\(5\\ \\text{kg}\\); Fríjol -> \\(3\\ \\text{kg}\\); Lenteja -> \\(7\\ \\text{kg}\\)."
             },
             {
               "optionId": "C",
               "type": "image",
               "optionText": "",
-              "optionImageUrl": "",
+              "optionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session2/q_15_c.png",
               "optionAiDescription": "Tabla con columna \"Producto\" y columna \"Peso total de los paquetes comprados\". Filas: Arroz -> \\(6\\ \\text{kg}\\); Fríjol -> \\(2\\ \\text{kg}\\); Lenteja -> \\(10\\ \\text{kg}\\)."
             },
             {
               "optionId": "D",
               "type": "image",
               "optionText": "",
-              "optionImageUrl": "",
+              "optionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session2/q_15_d.png",
               "optionAiDescription": "Tabla con columna \"Producto\" y columna \"Peso total de los paquetes comprados\". Filas: Arroz -> \\(6\\ \\text{kg}\\); Fríjol -> \\(2\\ \\text{kg}\\); Lenteja -> \\(1\\ \\text{kg}\\)."
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "D",
+          "aiExplanation": "Paso \\(1\\). Calcular cada peso total.\n\nArroz:\n\\[\n3\\times 2=6\\ \\text{kg}\n\\]\nFríjol:\n\\[\n2\\times 1=2\\ \\text{kg}\n\\]\nLenteja:\n\\[\n2\\times 0,5=1\\ \\text{kg}\n\\]\n\nPaso \\(2\\). La tabla que muestra \\(6\\ \\text{kg}\\), \\(2\\ \\text{kg}\\) y \\(1\\ \\text{kg}\\) es la opción \\(D\\)."
         }
       ]
     },
@@ -763,7 +763,7 @@
       "sectionImageAiDescription": "",
       "questions": [
         {
-          "questionId": "q_41",
+          "questionId": "q_16",
           "questionText": "Un estudiante va a hacer una cartelera para una tarea. Para comprar los materiales su mamá le dio \\(\\$6.000\\), y con ese dinero el estudiante compró una cartulina que cuesta \\(\\$1.000\\) y \\(4\\) marcadores que cuestan \\(\\$900\\) cada uno. ¿Cuánto dinero le sobró de la compra de los materiales?",
           "hasQuestionImage": false,
           "questionImageUrl": "",
@@ -799,8 +799,8 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "D",
+          "aiExplanation": "Paso \\(1\\). Costo de los \\(4\\) marcadores:\n\\[\n4\\times \\$900=\\$3.600\n\\]\n\nPaso \\(2\\). Costo total:\n\\[\n\\$1.000+\\$3.600=\\$4.600\n\\]\n\nPaso \\(3\\). Dinero que sobró:\n\\[\n\\$6.000-\\$4.600=\\$1.400\n\\]\n\nPaso \\(4\\). La opción correcta es \\(D\\)."
         }
       ]
     },
@@ -813,10 +813,10 @@
       "sectionImageAiDescription": "",
       "questions": [
         {
-          "questionId": "q_42",
+          "questionId": "q_17",
           "questionText": "Un profesor preguntó a seis estudiantes cuánto dinero traían al colegio diariamente para comprar refrigerio. Los resultados aparecen en la lista:\n\n\\(\\$2.000\\), \\(\\$2.000\\), \\(\\$3.000\\), \\(\\$4.000\\), \\(\\$4.000\\) y \\(\\$4.000\\).\n\nUno de los estudiantes observó la lista y elaboró la siguiente tabla de frecuencias:\n\nRespecto a la tabla, ¿cuál de las siguientes afirmaciones es verdadera?",
           "hasQuestionImage": true,
-          "questionImageUrl": "",
+          "questionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session2/q_17.png",
           "questionImageAiDescription": "Tabla de frecuencias con columnas \"Dinero\" y \"Cantidad de estudiantes\". Filas: \\(\\$2.000\\) -> \\(1\\); \\(\\$3.000\\) -> \\(2\\); \\(\\$4.000\\) -> \\(3\\).",
           "optionsType": "text",
           "options": [
@@ -849,8 +849,8 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "B",
+          "aiExplanation": "Paso \\(1\\). Contemos las frecuencias reales de la lista:\n- \\(\\$2.000\\): aparece \\(2\\) veces.\n- \\(\\$3.000\\): aparece \\(1\\) vez.\n- \\(\\$4.000\\): aparece \\(3\\) veces.\n\nPaso \\(2\\). La tabla mostrada dice \\(1\\), \\(2\\), \\(3\\), así que intercambia las frecuencias de \\(\\$2.000\\) y \\(\\$3.000\\).\n\nPaso \\(3\\). Por tanto, la tabla no es válida. Entre las opciones, la única que afirma que no es válida es la \\(B\\), aunque la razón más precisa sería que las frecuencias están mal asignadas.\n\nPaso \\(4\\). La \\(A\\) y la \\(C\\) son falsas porque la tabla no representa correctamente las cantidades. La \\(D\\) es falsa porque el problema no es el orden sino los valores. La mejor respuesta disponible es \\(B\\)."
         }
       ]
     },
@@ -863,10 +863,10 @@
       "sectionImageAiDescription": "",
       "questions": [
         {
-          "questionId": "q_43",
+          "questionId": "q_18",
           "questionText": "Olivia tiene una figura plana compuesta por una semicircunferencia y un cuadrado, como se muestra a continuación:\n\nOlivia necesita medir el segmento de recta \\(S\\). Si se sabe que el radio de la semicircunferencia mide \\(5\\) cm y que el lado del cuadrado mide \\(4\\) cm, ¿cuánto mide el segmento de recta \\(S\\)?",
           "hasQuestionImage": true,
-          "questionImageUrl": "",
+          "questionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session2/q_18.png",
           "questionImageAiDescription": "Figura compuesta. En la parte superior hay una semicircunferencia orientada hacia arriba. Su diámetro es horizontal, pero una parte central-izquierda del diámetro coincide con el lado superior de un cuadrado abierto hacia abajo dentro de la semicircunferencia. El cuadrado tiene lado vertical izquierdo visible y lado vertical derecho coincidente parcialmente con un extremo del segmento horizontal superior. El segmento horizontal superior del cuadrado está rotulado \\(S\\). El lado del cuadrado mide \\(4\\) cm según el enunciado. El radio de la semicircunferencia es \\(5\\) cm, por lo que el diámetro total de la semicircunferencia es \\(10\\) cm. El segmento \\(S\\) representa la porción del diámetro desde el vértice superior derecho del cuadrado hasta el extremo derecho del diámetro de la semicircunferencia.",
           "optionsType": "text",
           "options": [
@@ -899,8 +899,8 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "B",
+          "aiExplanation": "Paso \\(1\\). El radio de la semicircunferencia es \\(5\\) cm, así que su diámetro mide\n\\[\n2\\times 5=10\\ \\text{cm}\n\\]\n\nPaso \\(2\\). El lado superior del cuadrado coincide con una parte del diámetro y mide \\(4\\) cm.\n\nPaso \\(3\\). El segmento \\(S\\) es la parte restante del diámetro hacia la derecha, por lo que\n\\[\nS=10-4=6\\ \\text{cm}\n\\]\n\nPaso \\(4\\). La opción correcta es \\(B\\)."
         }
       ]
     },
@@ -908,16 +908,16 @@
       "sectionIndex": 19,
       "sectionTitle": "",
       "sectionText": "",
-      "hasSectionImage": false,
-      "sectionImageUrl": "",
-      "sectionImageAiDescription": "",
+      "hasSectionImage": true,
+      "sectionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session2/q_19_section.png",
+      "sectionImageAiDescription": "Tabla de doble entrada que relaciona el estrato social con el nivel de satisfacción. IMPORTANTE: Los encabezados de las columnas deben permitir saltos de línea verticales y suficiente espaciado (padding) para evitar colisiones entre textos contiguos. Las columnas son: 'Estratos /\nNivel de\nsatisfacción', 'Insatisfecho', 'Poco\nsatisfecho', 'Conforme', 'Satisfecho', 'Muy\nsatisfecho' y 'Total'. Las filas contienen la distribución de frecuencias de la siguiente manera:\n- Bajo: \\(15\\), \\(10\\), \\(5\\), \\(0\\), \\(5\\), con un total de \\(35\\).\n- Medio: \\(5\\), \\(0\\), \\(10\\), \\(5\\), \\(10\\), con un total de \\(30\\).\n- Alto: \\(5\\), \\(10\\), \\(10\\), \\(5\\), \\(5\\), con un total de \\(35\\).\n- Total: \\(25\\), \\(20\\), \\(25\\), \\(10\\), \\(20\\), con un total general de \\(100\\).",
       "questions": [
         {
-          "questionId": "q_44",
+          "questionId": "q_19",
           "questionText": "Una empresa de servicios de internet realizó una encuesta a \\(100\\) familias de estratos sociales bajo, medio y alto, preguntándoles por el nivel de satisfacción frente al servicio en sus hogares; a continuación se presentan sus percepciones:\n\nA partir de la tabla realizada, se ha diseñado el siguiente diagrama circular:\n\nLa directora de la empresa se percata de que los gráficos no presentan la misma información. En este sentido, ¿qué información es posible obtener de la tabla, pero NO del diagrama circular?",
           "hasQuestionImage": true,
-          "questionImageUrl": "",
-          "questionImageAiDescription": "La imagen contiene dos elementos.\n\nElemento \\(1\\): tabla de doble entrada. Columnas: \"Estratos / Nivel de satisfacción\", \"Insatisfecho\", \"Poco satisfecho\", \"Conforme\", \"Satisfecho\", \"Muy satisfecho\", \"Total\". Filas:\n- Bajo: \\(15\\), \\(10\\), \\(5\\), \\(0\\), \\(5\\), total \\(35\\).\n- Medio: \\(5\\), \\(0\\), \\(10\\), \\(5\\), \\(10\\), total \\(30\\).\n- Alto: \\(5\\), \\(10\\), \\(10\\), \\(5\\), \\(5\\), total \\(35\\).\n- Total: \\(25\\), \\(20\\), \\(25\\), \\(10\\), \\(20\\), total \\(100\\).\n\nElemento \\(2\\): diagrama circular con \\(5\\) sectores y leyenda de niveles de satisfacción. Los porcentajes mostrados en los sectores son \\(25\\%\\), \\(20\\%\\), \\(25\\%\\), \\(10\\%\\) y \\(20\\%\\), correspondientes a Insatisfecho, Poco satisfecho, Conforme, Satisfecho y Muy satisfecho, respectivamente. El diagrama resume solo la distribución total por nivel de satisfacción, sin desagregación por estrato social.",
+          "questionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session2/q_19.png",
+          "questionImageAiDescription": "Diagrama circular o de pastel compuesto por \\(5\\) sectores que representa la distribución consolidada del nivel de satisfacción general, acompañado de su respectiva leyenda explicativa. Los porcentajes explícitos mostrados en cada uno de los sectores son los siguientes:\n- Insatisfecho: \\(25\\%\\)\n- Poco satisfecho: \\(20\\%\\)\n- Conforme: \\(25\\%\\)\n- Satisfecho: \\(10\\%\\)\n- Muy satisfecho: \\(20\\%\\)\nEl diagrama resume exclusivamente los totales acumulados por nivel de satisfacción obtenidos en la última fila de la tabla de datos, sin incluir la desagregación por los estratos bajo, medio o alto.",
           "optionsType": "text",
           "options": [
             {
@@ -949,8 +949,8 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "B",
+          "aiExplanation": "Paso \\(1\\). El diagrama circular solo muestra los porcentajes globales por nivel de satisfacción: \\(25\\%\\), \\(20\\%\\), \\(25\\%\\), \\(10\\%\\) y \\(20\\%\\).\n\nPaso \\(2\\). La tabla, además de esos totales, permite conocer cuántas familias pertenecen a cada estrato: bajo \\(35\\), medio \\(30\\), alto \\(35\\), es decir, \\(35\\%\\), \\(30\\%\\) y \\(35\\%\\).\n\nPaso \\(3\\). Esa desagregación por estrato no aparece en el diagrama circular.\n\nPaso \\(4\\). Por eso, la información que se puede obtener de la tabla pero no del diagrama es el porcentaje de familias por estrato social que se entrevistaron. Opción \\(B\\). Las opciones \\(A\\), \\(C\\) y \\(D\\) sí pueden leerse del diagrama."
         }
       ]
     },
@@ -963,7 +963,7 @@
       "sectionImageAiDescription": "",
       "questions": [
         {
-          "questionId": "q_45",
+          "questionId": "q_20",
           "questionText": "El oro blanco es una aleación metálica que se usa para elaborar joyas preciosas y está compuesto de un \\(90\\%\\) de oro puro y un \\(10\\%\\) de níquel. Al respecto, se requiere fabricar \\(60\\) anillos de oro blanco; cada uno con un peso de \\(5\\) gramos. Para determinar la cantidad de níquel que se necesita, se puede efectuar el siguiente procedimiento:\n\nPaso \\(1\\). Multiplicar el número de anillos por el peso de cada uno.\n\nPaso \\(2\\). Multiplicar el resultado anterior por el porcentaje de níquel en el oro blanco.\n\nSi se sigue el procedimiento, ¿cuántos gramos de níquel se necesitan para elaborar los \\(60\\) anillos?",
           "hasQuestionImage": false,
           "questionImageUrl": "",
@@ -999,8 +999,8 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "D",
+          "aiExplanation": "Paso \\(1\\). Masa total de los \\(60\\) anillos:\n\\[\n60\\times 5=300\n\\]\ngramos.\n\nPaso \\(2\\). El níquel corresponde al \\(10\\%\\) de esa masa:\n\\[\n300\\times 0,10=30\n\\]\ngramos.\n\nPaso \\(3\\). La opción correcta es \\(D\\)."
         }
       ]
     },
@@ -1013,7 +1013,7 @@
       "sectionImageAiDescription": "",
       "questions": [
         {
-          "questionId": "q_46",
+          "questionId": "q_21",
           "questionText": "Se realizó una encuesta a \\(50\\) estudiantes de un colegio para determinar cuál es el género musical más popular entre estos jóvenes. Los resultados obtenidos fueron:\n\n• Al \\(25\\%\\) de los estudiantes les gusta la salsa.\n• Al \\(60\\%\\) de los estudiantes les gusta el vallenato.\n• Al \\(10\\%\\) de los estudiantes les gusta el pop.\n• Al \\(5\\%\\) de los estudiantes les gusta el hip hop.\n\n¿Cuál de las siguientes gráficas representa correctamente la cantidad de estudiantes a quienes les gusta el vallenato?",
           "hasQuestionImage": false,
           "questionImageUrl": "",
@@ -1024,33 +1024,33 @@
               "optionId": "A",
               "type": "image",
               "optionText": "",
-              "optionImageUrl": "",
+              "optionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session2/q_21_a.png",
               "optionAiDescription": "Gráfica de barras con una sola barra etiquetada \"Vallenato\". Eje vertical \"Total de estudiantes\" con escala hasta \\(60\\). La barra alcanza aproximadamente \\(60\\)."
             },
             {
               "optionId": "B",
               "type": "image",
               "optionText": "",
-              "optionImageUrl": "",
+              "optionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session2/q_21_b.png",
               "optionAiDescription": "Gráfica de barras con una sola barra etiquetada \"Vallenato\". Eje vertical hasta \\(60\\). La barra alcanza aproximadamente \\(20\\)."
             },
             {
               "optionId": "C",
               "type": "image",
               "optionText": "",
-              "optionImageUrl": "",
+              "optionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session2/q_21_c.png",
               "optionAiDescription": "Gráfica de barras con una sola barra etiquetada \"Vallenato\". Eje vertical hasta \\(60\\). La barra alcanza aproximadamente \\(30\\)."
             },
             {
               "optionId": "D",
               "type": "image",
               "optionText": "",
-              "optionImageUrl": "",
+              "optionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session2/q_21_d.png",
               "optionAiDescription": "Gráfica de barras con una sola barra etiquetada \"Vallenato\". Eje vertical hasta \\(60\\). La barra alcanza aproximadamente \\(50\\)."
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "C",
+          "aiExplanation": "Paso \\(1\\). Se necesita hallar el \\(60\\%\\) de \\(50\\) estudiantes.\n\nPaso \\(2\\).\n\\[\n0,60\\times 50=30\n\\]\n\nPaso \\(3\\). La gráfica correcta es la que muestra una barra de altura \\(30\\).\n\nPaso \\(4\\). Eso corresponde a la opción \\(C\\)."
         }
       ]
     },
@@ -1063,7 +1063,7 @@
       "sectionImageAiDescription": "",
       "questions": [
         {
-          "questionId": "q_47",
+          "questionId": "q_22",
           "questionText": "En un polígono regular la medida de todos sus lados es la misma. El perímetro del polígono regular es el producto entre el número de lados y la medida de uno de ellos. La apotema es la menor medida entre el centro del polígono y cualquiera de sus lados.\n\n¿Cuál de las siguientes opciones representa el polígono regular que tiene \\(5\\) cm de lado, \\(30\\) cm de perímetro y \\(4\\) cm de apotema?",
           "hasQuestionImage": false,
           "questionImageUrl": "",
@@ -1074,33 +1074,33 @@
               "optionId": "A",
               "type": "image",
               "optionText": "",
-              "optionImageUrl": "",
+              "optionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session2/q_22_a.png",
               "optionAiDescription": "Triángulo regular con lado inferior rotulado \\(5\\) cm. Desde un punto interior se traza un segmento oblicuo de \\(4\\) cm hasta un lado, representando la apotema."
             },
             {
               "optionId": "B",
               "type": "image",
               "optionText": "",
-              "optionImageUrl": "",
-              "optionAiDescription": "Pentágono regular con lado inferior rotulado \\(5\\) cm. Desde un punto interior se traza un segmento de \\(4\\) cm hasta un lado, representando la apotema."
+              "optionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session2/q_22_b.png",
+              "optionAiDescription": "Figura geométrica de un pentágono regular. Su lado inferior tiene una cota de medida que indica \\(5\\) cm. Desde un punto marcado en el centro exacto de la figura se traza un segmento de línea recta hasta uno de sus vértices (específicamente el vértice lateral derecho), el cual está etiquetado con una longitud de \\(4\\) cm."
             },
             {
               "optionId": "C",
               "type": "image",
               "optionText": "",
-              "optionImageUrl": "",
+              "optionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session2/q_22_c.png",
               "optionAiDescription": "Hexágono regular con lado inferior rotulado \\(5\\) cm. Desde el centro se traza un segmento de \\(4\\) cm perpendicular a un lado inclinado, representando la apotema."
             },
             {
               "optionId": "D",
               "type": "image",
               "optionText": "",
-              "optionImageUrl": "",
+              "optionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session2/q_22_d.png",
               "optionAiDescription": "Octágono regular con lado inferior rotulado \\(5\\) cm. Desde el centro se traza un segmento horizontal de \\(4\\) cm hasta un lado vertical, representando la apotema."
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "C",
+          "aiExplanation": "Paso \\(1\\). Con perímetro \\(30\\) cm y lado \\(5\\) cm, el número de lados es\n\\[\n\\frac{30}{5}=6\n\\]\nEntonces el polígono es un hexágono regular.\n\nPaso \\(2\\). La apotema debe medir \\(4\\) cm y debe ir del centro a un lado, perpendicular a ese lado.\n\nPaso \\(3\\). La opción \\(C\\) muestra un hexágono regular con lado \\(5\\) cm y un segmento de \\(4\\) cm desde el centro hasta un lado, representando la apotema.\n\nPaso \\(4\\). La \\(A\\) tiene \\(3\\) lados, la \\(B\\) es un pentágono y además lleva el segmento a un vértice, y la \\(D\\) es un octágono."
         }
       ]
     },
@@ -1113,7 +1113,7 @@
       "sectionImageAiDescription": "",
       "questions": [
         {
-          "questionId": "q_48",
+          "questionId": "q_23",
           "questionText": "En una tienda se planea ordenar los productos por vitrinas. Hay \\(3\\) vitrinas y \\(3\\) tipos de productos: aseo, congelados y golosinas. Las golosinas y los productos de aseo no pueden quedar en vitrinas seguidas. Para esto, uno de los encargados los organiza de la siguiente manera:\n\nAseo – Congelados – Golosinas\n\nEl encargado afirma que esta era la única manera de hacerlo. ¿Es verdadera esta afirmación?",
           "hasQuestionImage": false,
           "questionImageUrl": "",
@@ -1149,8 +1149,8 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "C",
+          "aiExplanation": "Paso \\(1\\). La condición es que aseo y golosinas no queden en vitrinas consecutivas.\n\nPaso \\(2\\). Con \\(3\\) vitrinas en fila, para que queden separados deben ocupar los extremos, así que congelados debe quedar en la vitrina del medio.\n\nPaso \\(3\\). Pero en los extremos hay \\(2\\) posibilidades:\n- Aseo – Congelados – Golosinas\n- Golosinas – Congelados – Aseo\n\nPaso \\(4\\). Entonces no es la única manera. La opción \\(C\\) es correcta porque aseo y golosinas pueden permutarse entre sí y siguen separados. La \\(A\\) no basta para concluir unicidad; la \\(B\\) cuenta permutaciones inválidas; la \\(D\\) es falsa."
         }
       ]
     },
@@ -1163,7 +1163,7 @@
       "sectionImageAiDescription": "",
       "questions": [
         {
-          "questionId": "q_49",
+          "questionId": "q_24",
           "questionText": "La calculadora de un computador quedó mal configurada y, ahora, al pedirle que haga la multiplicación entre dos números, ejecuta el siguiente proceso:\n\n• Suma los dos números.\n• Eleva el resultado de la suma al cuadrado.\n• Al resultado del paso anterior le suma \\(1\\).\n\n¿Qué resultado obtendrá una persona que le pida a esta calculadora el producto entre \\(-1\\) y \\(5\\)?",
           "hasQuestionImage": false,
           "questionImageUrl": "",
@@ -1199,8 +1199,8 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "A",
+          "aiExplanation": "Paso \\(1\\). Sumar los números:\n\\[\n-1+5=4\n\\]\n\nPaso \\(2\\). Elevar al cuadrado:\n\\[\n4^2=16\n\\]\n\nPaso \\(3\\). Sumar \\(1\\):\n\\[\n16+1=17\n\\]\n\nPaso \\(4\\). La opción correcta es \\(A\\)."
         }
       ]
     },
@@ -1213,11 +1213,11 @@
       "sectionImageAiDescription": "",
       "questions": [
         {
-          "questionId": "q_50",
+          "questionId": "q_25",
           "questionText": "En una versión del juego de armar parejas con cartas, se busca encontrar pares de cartas con figuras geométricas que tengan la misma área. A continuación, se muestra un juego con dos cartas visibles:\n\n¿Qué datos se deben calcular para determinar si las cartas destapadas forman una pareja?",
           "hasQuestionImage": true,
-          "questionImageUrl": "",
-          "questionImageAiDescription": "Se observan \\(6\\) cartas organizadas en \\(2\\) filas por \\(3\\) columnas. Dos cartas están destapadas.\n\nCarta superior izquierda: contiene un rectángulo horizontal. Sobre el lado superior del rectángulo aparece una medida de \\(2\\) cm asociada a la altura vertical del rectángulo. Dentro del rectángulo hay una diagonal o segmento oblicuo rotulado \\(3\\) cm, desde la esquina inferior izquierda hacia la parte superior derecha.\n\nCarta inferior derecha: contiene un triángulo. La base horizontal está rotulada \\(3\\) cm. Un lado oblicuo del triángulo está rotulado \\(5\\) cm. No aparece explícitamente la altura del triángulo.\n\nLas otras cuatro cartas están boca abajo y no muestran información.",
+          "questionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session2/q_25.png",
+          "questionImageAiDescription": "Se observan \\(6\\) cartas organizadas en \\(2\\) filas por \\(3\\) columnas. Dos cartas están destapadas.\n\nCarta superior izquierda: contiene un rectángulo horizontal. Sobre el lado superior del rectángulo aparece una medida de \\(2\\) cm asociada a la altura vertical del rectángulo. Dentro del rectángulo hay una diagonal o segmento oblicuo rotulado \\(3\\) cm, desde la esquina inferior izquierda hacia la parte superior derecha.\n\nCarta inferior derecha: contiene un triángulo rectángulo. La base horizontal (uno de los catetos) está rotulada con \\(3\\) cm y forma un ángulo recto con el cateto vertical. El lado oblicuo o más largo (la hipotenusa) está rotulado con \\(5\\) cm.\n\nLas otras cuatro cartas están boca abajo y no muestran información.",
           "optionsType": "text",
           "options": [
             {
@@ -1249,8 +1249,8 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "D",
+          "aiExplanation": "Paso \\(1\\). Para el rectángulo, se conoce la altura \\(2\\) cm y la diagonal \\(3\\) cm. Con Pitágoras se puede hallar la base:\n\\[\nb^2+2^2=3^2\n\\]\n\\[\nb^2=9-4=5\n\\]\n\\[\nb=\\sqrt{5}\n\\]\nEntonces su área es\n\\[\nA_R=2\\sqrt{5}\n\\]\n\nPaso \\(2\\). Para el triángulo rectángulo, se conoce un cateto \\(3\\) cm y la hipotenusa \\(5\\) cm. El otro cateto se halla con Pitágoras:\n\\[\n3^2+h^2=5^2\n\\]\n\\[\nh^2=25-9=16\n\\]\n\\[\nh=4\n\\]\nEntonces su área es\n\\[\nA_T=\\frac{3\\times 4}{2}=6\n\\]\n\nPaso \\(3\\). Con los datos visibles sí es posible calcular ambas áreas; no hace falta ningún dato adicional.\n\nPaso \\(4\\). La opción correcta es \\(D\\)."
         }
       ]
     }
