@@ -6,8 +6,8 @@
   "sections": [
     {
       "sectionIndex": 1,
-      "sectionTitle": "",
-      "sectionText": "RESPONDA LAS PREGUNTAS \\(1\\) A \\(3\\) DE ACUERDO CON LA SIGUIENTE INFORMACIÓN\n\nUn grupo de expertos quiere llevar a cabo un plan de recuperación de un ecosistema en el que una fuente de agua, y varias especies de peces y de plantas se han visto afectadas por un grave problema de contaminación, la cual es causada por la actividad humana de un barrio cercano que tiene sus tuberías de desagüe conectadas a la fuente de agua. Al respecto, los expertos afirman que el foco de la contaminación son sustancias como el aceite que se usa en casas, restaurantes y en la industria, y que esto no solo afecta la calidad del agua, sino que también ha causado la disminución de los individuos de especies acuáticas de animales y el desmejoramiento de especies vegetales.",
+      "sectionTitle": "RESPONDA LAS PREGUNTAS \\(1\\) A \\(3\\) DE ACUERDO CON LA SIGUIENTE INFORMACIÓN",
+      "sectionText": "Un grupo de expertos quiere llevar a cabo un plan de recuperación de un ecosistema en el que una fuente de agua, y varias especies de peces y de plantas se han visto afectadas por un grave problema de contaminación, la cual es causada por la actividad humana de un barrio cercano que tiene sus tuberías de desagüe conectadas a la fuente de agua. Al respecto, los expertos afirman que el foco de la contaminación son sustancias como el aceite que se usa en casas, restaurantes y en la industria, y que esto no solo afecta la calidad del agua, sino que también ha causado la disminución de los individuos de especies acuáticas de animales y el desmejoramiento de especies vegetales.",
       "hasSectionImage": true,
       "sectionImageUrl": "",
       "sectionImageAiDescription": "Diagrama de una planta completa con raíces dentro del suelo. En la parte superior izquierda aparece un sol rotulado \"Luz solar\" con flechas onduladas dirigidas hacia la planta. A la izquierda media aparece el texto \"Dióxido de carbono\" con flechas onduladas entrando a la planta. A la derecha media aparece el texto \"Oxígeno \\(O_2\\)\" con flechas onduladas saliendo de la planta. En la zona de raíces, dentro del suelo, aparece el texto \"Agua\" con flechas onduladas dirigidas hacia las raíces. Sobre hojas, tallo y suelo hay puntos o manchas negras que representan aceite contaminante adherido y acumulado.",
@@ -136,8 +136,8 @@
     },
     {
       "sectionIndex": 2,
-      "sectionTitle": "",
-      "sectionText": "RESPONDA LAS PREGUNTAS \\(4\\) A \\(6\\) DE ACUERDO CON LA SIGUIENTE INFORMACIÓN\n\nUn ingeniero investiga cómo se dará la transmisión de información para que su pueblo se conecte a internet. Él encuentra que esto ocurrirá a través de la integración de dos tecnologías:\n\n- Un cable de fibra óptica por el que se transporta la información desde internet hasta la antena principal del pueblo.\n- Un grupo de antenas que emiten y reciben la información por medio de ondas electromagnéticas (antenas de wifi).\n\nAmbas tecnologías se comunican con la antena principal en la cabecera del pueblo, que repite la señal a otras antenas ubicadas estratégicamente en las plazas y zonas comunes, como se muestra a continuación.\n\nA partir de su investigación, el ingeniero propone realizar una conexión por medio de ondas electromagnéticas, con todas las antenas conectadas entre sí y con frecuencias de onda, sin costo, como las ondas de radio. Su propuesta se llama \"Megazonas wifi\" y se muestra en el siguiente esquema:",
+      "sectionTitle": "RESPONDA LAS PREGUNTAS \\(4\\) A \\(6\\) DE ACUERDO CON LA SIGUIENTE INFORMACIÓN",
+      "sectionText": "Un ingeniero investiga cómo se dará la transmisión de información para que su pueblo se conecte a internet. Él encuentra que esto ocurrirá a través de la integración de dos tecnologías:\n\n- Un cable de fibra óptica por el que se transporta la información desde internet hasta la antena principal del pueblo.\n- Un grupo de antenas que emiten y reciben la información por medio de ondas electromagnéticas (antenas de wifi).\n\nAmbas tecnologías se comunican con la antena principal en la cabecera del pueblo, que repite la señal a otras antenas ubicadas estratégicamente en las plazas y zonas comunes, como se muestra a continuación.\n\nA partir de su investigación, el ingeniero propone realizar una conexión por medio de ondas electromagnéticas, con todas las antenas conectadas entre sí y con frecuencias de onda, sin costo, como las ondas de radio. Su propuesta se llama \"Megazonas wifi\" y se muestra en el siguiente esquema:",
       "hasSectionImage": true,
       "sectionImageUrl": "",
       "sectionImageAiDescription": "La sección contiene dos esquemas.\n\nEsquema superior titulado \"Esquema wifi zonas comunitarias\": representación de un pueblo circular con casas, árboles, personas y una plaza central con una fuente. Hay una \"Antena principal\" en la parte alta del pueblo, una \"Antena secundaria\" en la parte baja, y un tercer punto de acceso en el lado izquierdo. A la derecha aparece una nube etiquetada \"Internet\" conectada por una flecha vertical a un icono de antena. Entre la antena derecha y la antena principal hay una flecha horizontal doble rotulada \"Conexión por ondas\". Desde la antena principal del pueblo hacia la nube de Internet sale una flecha curva gruesa rotulada \"Conexión por fibra óptica\". Hay un recuadro de leyenda con un icono y el texto \"Punto de acceso\".\n\nEsquema inferior titulado \"Esquema Megazonas wifi\": varias antenas interconectadas por líneas punteadas formando una red mallada. A la izquierda hay una \"Escuela\" conectada a la red. En la parte central superior aparece \"Cabecera rural 3\". A la derecha superior está la nube \"Internet\" conectada verticalmente a una antena y por una flecha horizontal doble hacia la red; cerca de ahí aparece la etiqueta \"Red fija\". En la parte inferior izquierda está la \"Cabecera rural 1\" con su \"Antena principal\" y \"Antena secundaria\". En la parte inferior derecha está la \"Cabecera rural 2\" con su \"Antena principal\" y \"Antena secundaria\". Un recuadro indica: \"Las ondas de la señal pueden tener frecuencias entre los 928 MHz y los 5.850 MHz, para mayor cobertura\".",
@@ -773,7 +773,7 @@
       "sectionImageAiDescription": "",
       "questions": [
         {
-          "questionId": "q_108",
+          "questionId": "q_17",
           "questionText": "Una estudiante tiene la hipótesis de que al hacer reaccionar agua oxigenada con papa criolla, entre más grande sea el trozo de papa, mayor será el tiempo que dure reaccionando con el agua oxigenada. Si ella quiere representar gráficamente este fenómeno, ¿cuál de las siguientes gráficas debe elegir?",
           "hasQuestionImage": false,
           "questionImageUrl": "",
@@ -816,14 +816,14 @@
     },
     {
       "sectionIndex": 14,
-      "sectionTitle": "",
-      "sectionText": "RESPONDA LAS PREGUNTAS \\(109\\) A \\(111\\) DE ACUERDO CON LA SIGUIENTE INFORMACIÓN\n\nPara el reciclaje de los neumáticos usados, se está implementando un proceso llamado \"trituración criogénica\". Este proceso consiste en depositar trozos de neumáticos en un recipiente; posteriormente, se hacen pasar por un túnel de enfriamiento, donde el caucho se pone en contacto con nitrógeno líquido, que está a una temperatura aproximada de \\(-200\\ ^\\circ\\text{C}\\), para extraer energía del caucho y llevarlo a temperaturas menores a \\(-70\\ ^\\circ\\text{C}\\), a las que es muy frágil y susceptible de quebrarse con golpes. En último lugar, el caucho se pasa por un molino de martillos en el que se tritura y se pulveriza, como se muestra a continuación.",
+      "sectionTitle": "RESPONDA LAS PREGUNTAS \\(18\\) A \\(21\\) DE ACUERDO CON LA SIGUIENTE INFORMACIÓN\n\n",
+      "sectionText": "Para el reciclaje de los neumáticos usados, se está implementando un proceso llamado \"trituración criogénica\". Este proceso consiste en depositar trozos de neumáticos en un recipiente; posteriormente, se hacen pasar por un túnel de enfriamiento, donde el caucho se pone en contacto con nitrógeno líquido, que está a una temperatura aproximada de \\(-200\\ ^\\circ\\text{C}\\), para extraer energía del caucho y llevarlo a temperaturas menores a \\(-70\\ ^\\circ\\text{C}\\), a las que es muy frágil y susceptible de quebrarse con golpes. En último lugar, el caucho se pasa por un molino de martillos en el que se tritura y se pulveriza, como se muestra a continuación.",
       "hasSectionImage": true,
       "sectionImageUrl": "",
       "sectionImageAiDescription": "Diagrama de proceso industrial. A la izquierda hay un recipiente superior etiquetado \"Recipiente de neumáticos\" que alimenta trozos hacia un conducto. En el centro hay un \"Túnel de enfriamiento\" horizontal con tornillo o hélice interna y flechas de dirección del flujo. A la derecha hay un tanque cilíndrico vertical etiquetado \"Nitrógeno líquido\" conectado por tuberías al túnel y a un equipo inferior. En la parte inferior central hay un equipo etiquetado \"Molino\". A la salida del molino, en la parte inferior derecha, aparece un recipiente con producto etiquetado \"Caucho pulverizado\". Una tubería inferior retorna gas etiquetado \"Gas nitrógeno\". Flechas muestran circulación del nitrógeno y del material a través del sistema.",
       "questions": [
         {
-          "questionId": "q_17",
+          "questionId": "q_18",
           "questionText": "Se supone que si el túnel de enfriamiento deja de funcionar se puede continuar con el proceso de trituración. Sin embargo, se debe considerar que el caucho a temperatura ambiente requiere de otras condiciones para ser triturado. ¿Qué puede cambiarse en el proceso para continuar con la trituración?",
           "hasQuestionImage": false,
           "questionImageUrl": "",
@@ -863,7 +863,7 @@
           "aiExplanation": ""
         },
         {
-          "questionId": "q_18",
+          "questionId": "q_19",
           "questionText": "La trituración simple es otro proceso que muele los neumáticos utilizando únicamente molinos; sin embargo, si se desean granos del tamaño de la trituración criogénica, se debe pasar el caucho varias veces por los molinos.\n\nAl respecto, ¿qué beneficio presenta la trituración criogénica con relación a la trituración simple?",
           "hasQuestionImage": false,
           "questionImageUrl": "",
@@ -903,7 +903,7 @@
           "aiExplanation": ""
         },
         {
-          "questionId": "q_19",
+          "questionId": "q_20",
           "questionText": "¿Qué ocurre con la energía interna del caucho en el túnel de enfriamiento?",
           "hasQuestionImage": false,
           "questionImageUrl": "",
@@ -953,7 +953,7 @@
       "sectionImageAiDescription": "",
       "questions": [
         {
-          "questionId": "q_20",
+          "questionId": "q_21",
           "questionText": "La siguiente gráfica muestra cómo varía la temperatura y el volumen de un gas ideal a presión constante.\n\nUn estudiante tiene un gas ideal en un recipiente cerrado de paredes flexibles sobre el cual se aplica una presión externa constante de \\(1\\ \\text{atm}\\). ¿Qué pasará si hay un aumento en su temperatura?",
           "hasQuestionImage": true,
           "questionImageUrl": "",
@@ -991,9 +991,19 @@
           ],
           "correctOptionId": "",
           "aiExplanation": ""
-        },
+        }
+      ]
+    },
+    {
+      "sectionIndex": 16,
+      "sectionTitle": "",
+      "sectionText": "",
+      "hasSectionImage": false,
+      "sectionImageUrl": "",
+      "sectionImageAiDescription": "",
+      "questions": [
         {
-          "questionId": "q_21",
+          "questionId": "q_22",
           "questionText": "La metamorfosis en los insectos puede seguir uno de los dos modelos descritos a continuación:\n\n- Modelo \\(1\\) de crecimiento gradual: en el cual el insecto, en sus primeras etapas de vida, es muy similar a los adultos.\n- Modelo \\(2\\) con transformaciones bruscas: en el cual las larvas son diferentes a los adultos y existe una fase intermedia o pupal entre la larva y el adulto.\n\nA continuación, se muestran los dos modelos:\n\nAhora, observe el siguiente ciclo de vida:\n\n¿A qué modelo pertenece el tipo de metamorfosis que tienen las mariposas?",
           "hasQuestionImage": true,
           "questionImageUrl": "",
@@ -1031,9 +1041,19 @@
           ],
           "correctOptionId": "",
           "aiExplanation": ""
-        },
+        }
+      ]
+    },
+    {
+      "sectionIndex": 17,
+      "sectionTitle": "",
+      "sectionText": "",
+      "hasSectionImage": false,
+      "sectionImageUrl": "",
+      "sectionImageAiDescription": "",
+      "questions": [
         {
-          "questionId": "q_22",
+          "questionId": "q_23",
           "questionText": "El tetra cardenal \\((\\textit{Paracheirodon axelrodi})\\) es un pez común en los acuarios de las casas, muy llamativo por su cuerpo colorido y alargado. Estos peces requieren acuarios con condiciones de temperatura, pH y concentraciones de amoníaco y nitritos muy específicas, como se muestra en la tabla.\n\nMario tiene en su casa un acuario con varios peces, y al limpiarlo, no enjuagó bien el detergente y dejó residuos. Las condiciones del agua del acuario se afectaron y se llegó a una temperatura de \\(22{,}4\\ ^\\circ\\text{C}\\), un pH de \\(10{,}4\\) y concentraciones de \\(25{,}8\\ \\text{mg/L}\\) y \\(0{,}9\\ \\text{mg/L}\\) de amoníaco y nitritos, respectivamente. En consecuencia, ¿qué le sucederá a los peces en estas nuevas condiciones?",
           "hasQuestionImage": true,
           "questionImageUrl": "",
@@ -1071,9 +1091,19 @@
           ],
           "correctOptionId": "",
           "aiExplanation": ""
-        },
+        }
+      ]
+    },
+    {
+      "sectionIndex": 18,
+      "sectionTitle": "",
+      "sectionText": "",
+      "hasSectionImage": false,
+      "sectionImageUrl": "",
+      "sectionImageAiDescription": "",
+      "questions": [
         {
-          "questionId": "q_23",
+          "questionId": "q_24",
           "questionText": "Un jardinero utiliza un rociador y observa que a medida que aumenta la distancia, la intensidad de gotas de agua que llega a los cuerpos disminuye. Por ejemplo, a los \\(2\\ \\text{m}\\) de distancia la intensidad será de \\(\\frac{1}{4}\\ \\text{mm}\\), como se muestra en la imagen.\n\nTeniendo en cuenta la información anterior, ¿cómo debe ser la intensidad de gotas a los \\(5\\ \\text{m}\\) de distancia?",
           "hasQuestionImage": true,
           "questionImageUrl": "",
@@ -1111,9 +1141,19 @@
           ],
           "correctOptionId": "",
           "aiExplanation": ""
-        },
+        }
+      ]
+    },
+    {
+      "sectionIndex": 19,
+      "sectionTitle": "",
+      "sectionText": "",
+      "hasSectionImage": false,
+      "sectionImageUrl": "",
+      "sectionImageAiDescription": "",
+      "questions": [
         {
-          "questionId": "q_24",
+          "questionId": "q_25",
           "questionText": "En una práctica de laboratorio, el profesor afirma que el agua y el aceite no se mezclan y pregunta, ¿el alcohol y el aceite se mezclan? Para responder, solicita que mezclen las dos sustancias. Un estudiante escribe como hipótesis que estos dos líquidos se mezclan formando una solución homogénea; luego, vierte los dos líquidos en un recipiente, los agita y pasado unos minutos observa que se forman dos capas: en el fondo se encuentra el aceite y en la capa superior está el alcohol. Al analizar los resultados, ¿será válida la hipótesis del estudiante y qué conclusión se puede dar?",
           "hasQuestionImage": false,
           "questionImageUrl": "",
@@ -1151,9 +1191,19 @@
           ],
           "correctOptionId": "",
           "aiExplanation": ""
-        },
+        }
+      ]
+    },
+    {
+      "sectionIndex": 20,
+      "sectionTitle": "",
+      "sectionText": "",
+      "hasSectionImage": false,
+      "sectionImageUrl": "",
+      "sectionImageAiDescription": "",
+      "questions": [
         {
-          "questionId": "q_25",
+          "questionId": "q_26",
           "questionText": "Un estudiante realizó un experimento para analizar el crecimiento de un grupo de bacterias durante un período de \\(14\\) horas. Los datos que obtuvo le permitieron identificar cuatro etapas diferentes, que se presentaron en el siguiente orden:\n\nEtapa \\(1\\): las bacterias se adaptan al nuevo medio, comienzan a madurar y no pueden dividirse; no hay crecimiento.\n\nEtapa \\(2\\): se caracteriza por la duplicación de las bacterias; su crecimiento es exponencial.\n\nEtapa \\(3\\): los nutrientes empiezan a agotarse y se acumulan toxinas; el número de bacterias permanece constante.\n\nEtapa \\(4\\): los nutrientes se terminan y el nivel de toxinas es muy alto, por lo que las bacterias terminan muriendo progresivamente.\n\n¿Cuál de los siguientes formatos representa los datos obtenidos por el estudiante sobre el crecimiento del grupo bacteriano?",
           "hasQuestionImage": false,
           "questionImageUrl": "",
@@ -1191,9 +1241,19 @@
           ],
           "correctOptionId": "",
           "aiExplanation": ""
-        },
+        }
+      ]
+    },
+    {
+      "sectionIndex": 21,
+      "sectionTitle": "",
+      "sectionText": "",
+      "hasSectionImage": false,
+      "sectionImageUrl": "",
+      "sectionImageAiDescription": "",
+      "questions": [
         {
-          "questionId": "q_26",
+          "questionId": "q_27",
           "questionText": "En un laboratorio se usan los cromosomas de dos individuos de una especie de mosca para hacer el siguiente cruce:\n\nDe acuerdo con la información del cruce, el individuo resultante es homocigoto o heterocigoto para este gen?",
           "hasQuestionImage": true,
           "questionImageUrl": "",
@@ -1231,9 +1291,19 @@
           ],
           "correctOptionId": "",
           "aiExplanation": ""
-        },
+        }
+      ]
+    },
+    {
+      "sectionIndex": 22,
+      "sectionTitle": "",
+      "sectionText": "",
+      "hasSectionImage": false,
+      "sectionImageUrl": "",
+      "sectionImageAiDescription": "",
+      "questions": [
         {
-          "questionId": "q_27",
+          "questionId": "q_28",
           "questionText": "Para efectuar un procedimiento, un estudiante tiene las sustancias que se relacionan en la tabla.\n\nSi el estudiante debe usar una sustancia cuyo punto de ebullición sea menor que \\(130\\ ^\\circ\\text{C}\\), soluble en agua y que no conduzca la electricidad, ¿cuál sustancia debería elegir?",
           "hasQuestionImage": true,
           "questionImageUrl": "",
@@ -1271,9 +1341,19 @@
           ],
           "correctOptionId": "",
           "aiExplanation": ""
-        },
+        }
+      ]
+    },
+    {
+      "sectionIndex": 23,
+      "sectionTitle": "",
+      "sectionText": "",
+      "hasSectionImage": false,
+      "sectionImageUrl": "",
+      "sectionImageAiDescription": "",
+      "questions": [
         {
-          "questionId": "q_28",
+          "questionId": "q_29",
           "questionText": "Un investigador realizó un experimento en el que sometió un bloque de hierro a temperaturas muy altas. Él descubrió que la temperatura del hierro no cambia mientras cambia su fase. La siguiente tabla muestra los registros que hizo el investigador de temperatura, fase y cambios de fase del hierro durante su experimento.\n\n¿Cuál de las siguientes gráficas corresponde a los datos de temperatura en el tiempo registrados por el investigador?",
           "hasQuestionImage": true,
           "questionImageUrl": "",
