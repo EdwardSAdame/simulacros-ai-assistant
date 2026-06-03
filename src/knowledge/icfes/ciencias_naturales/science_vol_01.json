@@ -2,19 +2,19 @@
   "examType": "ICFES",
   "component": "ciencias_naturales",
   "examVolume": "Saber 11 - 1.ª sesión",
-  "totalSections": 16,
+  "totalSections": 14,
   "sections": [
     {
       "sectionIndex": 1,
       "sectionTitle": "",
-      "sectionText": "Un grupo de expertos quiere llevar a cabo un plan de recuperación de un ecosistema en el que una fuente de agua, y varias especies de peces y de plantas se han visto afectadas por un grave problema de contaminación, la cual es causada por la actividad humana de un barrio cercano que tiene sus tuberías de desagüe conectadas a la fuente de agua. Al respecto, los expertos afirman que el foco de la contaminación son sustancias como el aceite que se usa en casas, restaurantes y en la industria, y que esto no solo afecta la calidad del agua, sino que también ha causado la disminución de los individuos de especies acuáticas de animales y del mejoramiento de especies vegetales.",
-      "hasSectionImage": false,
+      "sectionText": "RESPONDA LAS PREGUNTAS \\(1\\) A \\(3\\) DE ACUERDO CON LA SIGUIENTE INFORMACIÓN\n\nUn grupo de expertos quiere llevar a cabo un plan de recuperación de un ecosistema en el que una fuente de agua, y varias especies de peces y de plantas se han visto afectadas por un grave problema de contaminación, la cual es causada por la actividad humana de un barrio cercano que tiene sus tuberías de desagüe conectadas a la fuente de agua. Al respecto, los expertos afirman que el foco de la contaminación son sustancias como el aceite que se usa en casas, restaurantes y en la industria, y que esto no solo afecta la calidad del agua, sino que también ha causado la disminución de los individuos de especies acuáticas de animales y el desmejoramiento de especies vegetales.",
+      "hasSectionImage": true,
       "sectionImageUrl": "",
-      "sectionImageAiDescription": "",
+      "sectionImageAiDescription": "Diagrama de una planta completa con raíces dentro del suelo. En la parte superior izquierda aparece un sol rotulado \"Luz solar\" con flechas onduladas dirigidas hacia la planta. A la izquierda media aparece el texto \"Dióxido de carbono\" con flechas onduladas entrando a la planta. A la derecha media aparece el texto \"Oxígeno \\(O_2\\)\" con flechas onduladas saliendo de la planta. En la zona de raíces, dentro del suelo, aparece el texto \"Agua\" con flechas onduladas dirigidas hacia las raíces. Sobre hojas, tallo y suelo hay puntos o manchas negras que representan aceite contaminante adherido y acumulado.",
       "questions": [
         {
-          "questionId": "q_92",
-          "questionText": "92. Los expertos saben que la causa de la contaminación de la fuente de agua se debe a una actividad en concreto que se desarrolla en el barrio.\n\nDe acuerdo con lo anterior, ¿cuál de las siguientes es la causa de la contaminación de la fuente de agua?",
+          "questionId": "q_01",
+          "questionText": "Los expertos saben que la causa de la contaminación de la fuente de agua se debe a una actividad en concreto que se desarrolla en el barrio.\n\nDe acuerdo con lo anterior, ¿cuál de las siguientes es la causa de la contaminación de la fuente de agua?",
           "hasQuestionImage": false,
           "questionImageUrl": "",
           "questionImageAiDescription": "",
@@ -23,25 +23,29 @@
             {
               "optionId": "A",
               "type": "text",
-              "content": "El consumo de comidas rápidas altas en grasas por parte de los habitantes del barrio.",
+              "optionText": "El consumo de comidas rápidas altas en grasas por parte de los habitantes del barrio.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "B",
               "type": "text",
-              "content": "El uso de una marca de aceite que se emplea en las cocinas de los restaurantes y las casas.",
+              "optionText": "El uso de una marca de aceite que se emplea en las cocinas de los restaurantes y las casas.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "C",
               "type": "text",
-              "content": "El vertimiento al desagüe de aceites residuales de los hogares, la industria y los restaurantes.",
+              "optionText": "El vertimiento al desagüe de aceites residuales de los hogares, la industria y los restaurantes.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "D",
               "type": "text",
-              "content": "El tipo de maquinaria obsoleta que utilizan las diferentes industrias que se ubican en el barrio.",
+              "optionText": "El tipo de maquinaria obsoleta que utilizan las diferentes industrias que se ubican en el barrio.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             }
           ],
@@ -49,35 +53,39 @@
           "aiExplanation": ""
         },
         {
-          "questionId": "q_93",
-          "questionText": "93. Un experto en botánica muestra la siguiente figura:\n\nDe acuerdo con la información anterior, ¿por qué el no realizar correctamente la fotosíntesis impide el crecimiento de las plantas?",
+          "questionId": "q_02",
+          "questionText": "Un experto en botánica muestra la siguiente figura:\n\nÉl explica que el aceite contaminante, representado en negro, se adhiere a los órganos de la planta como las hojas y el tallo, y, además, se acumula en el suelo, lo cual impide que se realice correctamente la fotosíntesis y la planta no crezca adecuadamente.\n\nDe acuerdo con la información anterior, ¿por qué el no realizar correctamente la fotosíntesis impide el crecimiento de las plantas?",
           "hasQuestionImage": true,
           "questionImageUrl": "",
-          "questionImageAiDescription": "",
+          "questionImageAiDescription": "A la derecha del dibujo aparece el título \"Ecuación de la fotosíntesis\" y la ecuación \\(6CO_2 + 6H_2O +\\) Energía solar \\(\\rightarrow C_6H_{12}O_6 + 6O_2\\). Debajo de cada término se leen las etiquetas: dióxido de carbono, agua, carbohidratos y oxígeno.",
           "optionsType": "text",
           "options": [
             {
               "optionId": "A",
               "type": "text",
-              "content": "Porque el tallo no hace la circulación de nutrientes a las partes altas de la planta.",
+              "optionText": "Porque el tallo no hace la circulación de nutrientes a las partes altas de la planta.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "B",
               "type": "text",
-              "content": "Porque las raíces no absorben la suficiente agua para el crecimiento de la planta.",
+              "optionText": "Porque las raíces no absorben la suficiente agua para el crecimiento de la planta.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "C",
               "type": "text",
-              "content": "Porque no se permite la entrada a la planta del oxígeno necesario para la fotosíntesis.",
+              "optionText": "Porque no se permite la entrada a la planta del oxígeno necesario para la fotosíntesis.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "D",
               "type": "text",
-              "content": "Porque no se producen los carbohidratos necesarios para el crecimiento de las plantas.",
+              "optionText": "Porque no se producen los carbohidratos necesarios para el crecimiento de las plantas.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             }
           ],
@@ -85,36 +93,40 @@
           "aiExplanation": ""
         },
         {
-          "questionId": "q_94",
-          "questionText": "94. Con el fin de evidenciar la variación en la biodiversidad animal de especies acuáticas, se revisaron los registros de la entidad ambiental competente, tomando en cuenta las variables de riqueza (número de especies) y el número total de individuos de todas las especies presentes, y se compararon en la siguiente tabla.\n\nDe acuerdo con la información anterior, ¿cuál de los siguientes gráficos representa adecuadamente los datos recolectados?",
+          "questionId": "q_03",
+          "questionText": "Con el fin de evidenciar la variación en la biodiversidad animal de especies acuáticas, se revisaron los registros de la entidad ambiental competente, tomando en cuenta las variables de riqueza (número de especies) y el número total de individuos de todas las especies presentes, y se compilaron en la siguiente tabla:\n\nDe acuerdo con la información anterior, ¿cuál de los siguientes gráficos representa adecuadamente los datos recolectados?",
           "hasQuestionImage": true,
           "questionImageUrl": "",
-          "questionImageAiDescription": "",
+          "questionImageAiDescription": "La imagen contiene una tabla y, debajo, cuatro gráficos de opciones rotulados A, B, C y D.\n\nTabla con \\(3\\) columnas y \\(5\\) filas de datos.\nColumnas: Año | Riqueza | Cantidad de individuos.\nFilas:\n- \\(2003\\) | \\(68\\) | \\(1.563\\)\n- \\(2008\\) | \\(62\\) | \\(1.621\\)\n- \\(2013\\) | \\(45\\) | \\(803\\)\n- \\(2018\\) | \\(22\\) | \\(456\\)\n- \\(2023\\) | \\(12\\) | \\(102\\)\n\nNo describir aquí los gráficos de las opciones, porque pertenecen a las opciones de respuesta.",
           "optionsType": "image",
           "options": [
             {
               "optionId": "A",
               "type": "image",
-              "content": "",
-              "optionAiDescription": ""
+              "optionText": "",
+              "optionImageUrl": "",
+              "optionAiDescription": "Gráfico de barras apiladas con eje vertical de \\(0\\) a \\(5.000\\) aproximadamente en intervalos de \\(500\\). En el eje horizontal hay dos categorías: \"Riqueza\" y \"Cantidad de individuos\". La leyenda usa \\(5\\) tonos para los años \\(2003\\), \\(2008\\), \\(2013\\), \\(2018\\), \\(2023\\). Sobre la categoría \"Riqueza\" aparece una barra apilada muy baja, suma aproximada \\(68+62+45+22+12=209\\). Sobre la categoría \"Cantidad de individuos\" aparece una barra apilada alta, suma aproximada \\(1.563+1.621+803+456+102=4.545\\). No representa cada año en el eje horizontal; agrupa por variable y apila por año."
             },
             {
               "optionId": "B",
               "type": "image",
-              "content": "",
-              "optionAiDescription": ""
+              "optionText": "",
+              "optionImageUrl": "",
+              "optionAiDescription": "Gráfico de barras agrupadas. Eje horizontal con posiciones numéricas \\(1\\), \\(2\\), \\(3\\), \\(4\\), \\(5\\) en lugar de años. Eje vertical de \\(0\\) a \\(2.500\\). En cada posición hay \\(3\\) barras según leyenda: \"Año\", \"Riqueza\", \"Cantidad de individuos\". La barra \"Año\" es casi constante alrededor de \\(2000\\) en las \\(5\\) posiciones; las barras de \"Riqueza\" son pequeñas alrededor de \\(68,62,45,22,12\\); las barras de \"Cantidad de individuos\" son alrededor de \\(1563,1621,803,456,102\\). Mezcla el año como variable cuantitativa graficada junto con las otras dos."
             },
             {
               "optionId": "C",
               "type": "image",
-              "content": "",
-              "optionAiDescription": ""
+              "optionText": "",
+              "optionImageUrl": "",
+              "optionAiDescription": "Gráfico de barras apiladas al \\(100\\%\\). Eje vertical expresado en porcentaje de \\(0\\%\\) a \\(100\\%\\). Eje horizontal con años \\(2003\\), \\(2008\\), \\(2013\\), \\(2018\\), \\(2023\\). Cada barra anual está compuesta por dos segmentos según leyenda: riqueza y cantidad de individuos. Todas las barras llegan al \\(100\\%\\), por lo que solo muestra proporciones internas y no los valores absolutos de la tabla."
             },
             {
               "optionId": "D",
               "type": "image",
-              "content": "",
-              "optionAiDescription": ""
+              "optionText": "",
+              "optionImageUrl": "",
+              "optionAiDescription": "Gráfico de líneas con eje horizontal de años desde aproximadamente \\(2000\\) hasta \\(2025\\). Eje vertical de \\(0\\) a \\(1.800\\). Dos series según leyenda: riqueza y cantidad de individuos. Serie de cantidad de individuos con puntos etiquetados \\(1.563\\) en \\(2003\\), \\(1.621\\) en \\(2008\\), \\(803\\) en \\(2013\\), \\(456\\) en \\(2018\\), \\(102\\) en \\(2023\\). Serie de riqueza cercana al eje inferior con puntos etiquetados \\(68\\), \\(62\\), \\(45\\), \\(22\\), \\(12\\) en esos mismos años. Representa los datos por año para ambas variables."
             }
           ],
           "correctOptionId": "",
@@ -125,14 +137,14 @@
     {
       "sectionIndex": 2,
       "sectionTitle": "",
-      "sectionText": "Un ingeniero investiga cómo se dará la transmisión de información para que su pueblo se conecte a internet. Él encuentra que esto ocurrirá a través de la integración de dos tecnologías:\n\n- Un cable de fibra óptica por el que se transporta la información desde internet hasta la antena principal del pueblo.\n- Un grupo de antenas que emiten y reciben la información por medio de ondas electromagnéticas (antenas de wifi).\n\nAmbas tecnologías se comunican con la antena principal en la cabecera del pueblo, que repite la señal a otras antenas ubicadas estratégicamente en las plazas y zonas comunes, como se muestra a continuación.\n\nA partir de su investigación, el ingeniero propone realizar una conexión por medio de ondas electromagnéticas, con todas las antenas conectadas entre sí y con frecuencias de onda, sin costo, como las ondas de radio. Su propuesta se llama “Megazonas wifi” y se muestra en el siguiente esquema.",
+      "sectionText": "RESPONDA LAS PREGUNTAS \\(4\\) A \\(6\\) DE ACUERDO CON LA SIGUIENTE INFORMACIÓN\n\nUn ingeniero investiga cómo se dará la transmisión de información para que su pueblo se conecte a internet. Él encuentra que esto ocurrirá a través de la integración de dos tecnologías:\n\n- Un cable de fibra óptica por el que se transporta la información desde internet hasta la antena principal del pueblo.\n- Un grupo de antenas que emiten y reciben la información por medio de ondas electromagnéticas (antenas de wifi).\n\nAmbas tecnologías se comunican con la antena principal en la cabecera del pueblo, que repite la señal a otras antenas ubicadas estratégicamente en las plazas y zonas comunes, como se muestra a continuación.\n\nA partir de su investigación, el ingeniero propone realizar una conexión por medio de ondas electromagnéticas, con todas las antenas conectadas entre sí y con frecuencias de onda, sin costo, como las ondas de radio. Su propuesta se llama \"Megazonas wifi\" y se muestra en el siguiente esquema:",
       "hasSectionImage": true,
       "sectionImageUrl": "",
-      "sectionImageAiDescription": "",
+      "sectionImageAiDescription": "La sección contiene dos esquemas.\n\nEsquema superior titulado \"Esquema wifi zonas comunitarias\": representación de un pueblo circular con casas, árboles, personas y una plaza central con una fuente. Hay una \"Antena principal\" en la parte alta del pueblo, una \"Antena secundaria\" en la parte baja, y un tercer punto de acceso en el lado izquierdo. A la derecha aparece una nube etiquetada \"Internet\" conectada por una flecha vertical a un icono de antena. Entre la antena derecha y la antena principal hay una flecha horizontal doble rotulada \"Conexión por ondas\". Desde la antena principal del pueblo hacia la nube de Internet sale una flecha curva gruesa rotulada \"Conexión por fibra óptica\". Hay un recuadro de leyenda con un icono y el texto \"Punto de acceso\".\n\nEsquema inferior titulado \"Esquema Megazonas wifi\": varias antenas interconectadas por líneas punteadas formando una red mallada. A la izquierda hay una \"Escuela\" conectada a la red. En la parte central superior aparece \"Cabecera rural 3\". A la derecha superior está la nube \"Internet\" conectada verticalmente a una antena y por una flecha horizontal doble hacia la red; cerca de ahí aparece la etiqueta \"Red fija\". En la parte inferior izquierda está la \"Cabecera rural 1\" con su \"Antena principal\" y \"Antena secundaria\". En la parte inferior derecha está la \"Cabecera rural 2\" con su \"Antena principal\" y \"Antena secundaria\". Un recuadro indica: \"Las ondas de la señal pueden tener frecuencias entre los 928 MHz y los 5.850 MHz, para mayor cobertura\".",
       "questions": [
         {
-          "questionId": "q_95",
-          "questionText": "95. De acuerdo con el esquema de wifi zonas comunitarias, ¿cuál de las siguientes razones puede argumentar la necesidad de conectar el cable de fibra óptica?",
+          "questionId": "q_04",
+          "questionText": "De acuerdo con el esquema de wifi zonas comunitarias, ¿cuál de las siguientes razones puede argumentar la necesidad de conectar el cable de fibra óptica?",
           "hasQuestionImage": false,
           "questionImageUrl": "",
           "questionImageAiDescription": "",
@@ -141,25 +153,109 @@
             {
               "optionId": "A",
               "type": "text",
-              "content": "El cable de fibra óptica es el que lleva la corriente a las antenas.",
+              "optionText": "El cable de fibra óptica es el que lleva la corriente a las antenas.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "B",
               "type": "text",
-              "content": "El cable de fibra óptica es la única forma de comunicarse con internet.",
+              "optionText": "El cable de fibra óptica es la única forma de comunicarse con internet.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "C",
               "type": "text",
-              "content": "El cable de fibra óptica es una segunda forma de conectarse con internet.",
+              "optionText": "El cable de fibra óptica es una segunda forma de conectarse con internet.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "D",
               "type": "text",
-              "content": "El cable de fibra óptica llega a cada antena y repite la señal de internet.",
+              "optionText": "El cable de fibra óptica llega a cada antena y repite la señal de internet.",
+              "optionImageUrl": "",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        },
+        {
+          "questionId": "q_05",
+          "questionText": "En el esquema Mega zonas wifi, el ingeniero sugiere utilizar dos grupos de ondas, en donde se observa que la frecuencia de las ondas del Grupo \\(2\\) es, aproximadamente, \\(5\\) veces mayor que la del Grupo \\(1\\). ¿Cómo serían las ondas de estas frecuencias?",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "image",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "image",
+              "optionText": "",
+              "optionImageUrl": "",
+              "optionAiDescription": "Opción con dos gráficos de onda seno rotulados, plot in the same graph \"Grupo \\(1\\)\" y \"Grupo \\(2\\)\", ambos con ejes amplitud-tiempo. En ambos paneles se observan casi el mismo número de oscilaciones en el mismo intervalo de tiempo, aproximadamente \\(9\\) a \\(10\\) ciclos cada uno. La frecuencia aparente de ambos grupos es muy similar."
+            },
+            {
+              "optionId": "B",
+              "type": "image",
+              "optionText": "",
+              "optionImageUrl": "",
+              "optionAiDescription": "Opción con dos gráficos de onda seno. En \"Grupo \\(1\\)\" hay alta frecuencia, aproximadamente \\(9\\) a \\(10\\) oscilaciones en el intervalo. En \"Grupo \\(2\\)\" hay baja frecuencia, aproximadamente \\(2\\) ciclos en el mismo intervalo. La frecuencia del Grupo \\(2\\) es menor que la del Grupo \\(1\\)."
+            },
+            {
+              "optionId": "C",
+              "type": "image",
+              "optionText": "",
+              "optionImageUrl": "",
+              "optionAiDescription": "Opción con dos gráficos de onda seno. Tanto \"Grupo \\(1\\)\" como \"Grupo \\(2\\)\" muestran baja frecuencia, alrededor de \\(2\\) ciclos en el intervalo temporal. Las frecuencias son parecidas entre sí y bajas."
+            },
+            {
+              "optionId": "D",
+              "type": "image",
+              "optionText": "",
+              "optionImageUrl": "",
+              "optionAiDescription": "Opción con dos gráficos de onda seno. \"Grupo \\(1\\)\" muestra baja frecuencia, cerca de \\(2\\) ciclos en el intervalo temporal. \"Grupo \\(2\\)\" muestra alta frecuencia, cerca de \\(10\\) ciclos en el mismo intervalo. La frecuencia del Grupo \\(2\\) es aproximadamente \\(5\\) veces la del Grupo \\(1\\)."
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        },
+        {
+          "questionId": "q_06",
+          "questionText": "En una encuesta aplicada a la población, se resaltó que dibujar en el esquema la conexión entre las antenas es una fortaleza en la comunicación de la propuesta de las Megazonas wifi.\n\n¿Por qué mostrar la conexión entre las antenas es una fortaleza en la comunicación?",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "optionText": "Porque se puede deducir que cada antena se comunica con una sola antena, y de esta manera, llevan la señal.",
+              "optionImageUrl": "",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "optionText": "Porque, de acuerdo con la conexión entre las antenas, se puede determinar qué frecuencias usa cada una de ellas.",
+              "optionImageUrl": "",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "optionText": "Porque se puede saber cuántas antenas se necesitan para llevar la señal de internet a la escuela.",
+              "optionImageUrl": "",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "optionText": "Porque ilustra cómo pueden conectarse varias poblaciones entre sí y con una señal muy estable.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             }
           ],
@@ -171,41 +267,45 @@
     {
       "sectionIndex": 3,
       "sectionTitle": "",
-      "sectionText": "96. En el esquema Mega zonas wifi, el ingeniero sugiere utilizar dos grupos de ondas, en donde se observa que la frecuencia de las ondas del Grupo 2 es, aproximadamente, 5 veces mayor que la del Grupo 1. ¿Cómo serían las ondas de estas frecuencias?",
-      "hasSectionImage": true,
+      "sectionText": "",
+      "hasSectionImage": false,
       "sectionImageUrl": "",
       "sectionImageAiDescription": "",
       "questions": [
         {
-          "questionId": "q_96",
-          "questionText": "96. En el esquema Mega zonas wifi, el ingeniero sugiere utilizar dos grupos de ondas, en donde se observa que la frecuencia de las ondas del Grupo 2 es, aproximadamente, 5 veces mayor que la del Grupo 1. ¿Cómo serían las ondas de estas frecuencias?",
-          "hasQuestionImage": true,
+          "questionId": "q_07",
+          "questionText": "Pedro dejó una fruta al aire libre para ver cuánto tardaba en descomponerse. Los días pasaban y seguía sin descomponerse totalmente, entonces planteó la hipótesis de que todos los cambios químicos necesitan de varios días para que ocurran. Al otro día, leyó en un libro de ciencias lo siguiente: \"Es fundamental controlar la velocidad de las reacciones químicas, ya que existen varios factores que la afectan, como la concentración de los reactivos, el tamaño de partícula, la temperatura y los catalizadores, entre otros\".\n\nTeniendo en cuenta la información anterior, ¿la hipótesis planteada por Pedro es compatible con el fenómeno observado y la información del libro?",
+          "hasQuestionImage": false,
           "questionImageUrl": "",
           "questionImageAiDescription": "",
-          "optionsType": "image",
+          "optionsType": "text",
           "options": [
             {
               "optionId": "A",
-              "type": "image",
-              "content": "",
+              "type": "text",
+              "optionText": "Es compatible, porque tuvo en cuenta las observaciones realizadas y consideró que algunas reacciones tardan bastante tiempo.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "B",
-              "type": "image",
-              "content": "",
+              "type": "text",
+              "optionText": "No es compatible, porque las frutas se descomponen en un día al aire libre, además no tuvo en cuenta la información del libro.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "C",
-              "type": "image",
-              "content": "",
+              "type": "text",
+              "optionText": "Es compatible, porque existen factores que aceleran las reacciones, de tal forma que su experimento pudo tardar varias semanas.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "D",
-              "type": "image",
-              "content": "",
+              "type": "text",
+              "optionText": "No es compatible, porque no se puede generalizar que todos los cambios tardan varios días, desconociendo la información del libro.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             }
           ],
@@ -217,42 +317,46 @@
     {
       "sectionIndex": 4,
       "sectionTitle": "",
-      "sectionText": "97. En una encuesta aplicada a la población, se resaltó que dibujar en el esquema la conexión entre las antenas es una fortaleza en la comunicación de la propuesta de las Megazonas wifi.\n\n¿Por qué mostrar la conexión entre las antenas es una fortaleza en la comunicación?",
-      "hasSectionImage": true,
+      "sectionText": "",
+      "hasSectionImage": false,
       "sectionImageUrl": "",
       "sectionImageAiDescription": "",
       "questions": [
         {
-          "questionId": "q_97",
-          "questionText": "97. En una encuesta aplicada a la población, se resaltó que dibujar en el esquema la conexión entre las antenas es una fortaleza en la comunicación de la propuesta de las Megazonas wifi.\n\n¿Por qué mostrar la conexión entre las antenas es una fortaleza en la comunicación?",
+          "questionId": "q_08",
+          "questionText": "Existe una población de monos que vive en un ecosistema boscoso. Este ecosistema, durante un largo período de tiempo, ha estado dividido por un gran río, dejando a la población de monos dividida en dos lugares diferentes. Algunos científicos han investigado este fenómeno y han resuelto que la población de monos, que en principio se creía pertenecían a una misma especie, sufrió un aislamiento reproductivo a causa de la división causada por el río, y posteriormente, se demostró que pertenecen a dos especies diferentes.\n\nDe acuerdo con la información anterior, ¿cuál de los siguientes modelos representa el fenómeno?",
           "hasQuestionImage": false,
           "questionImageUrl": "",
           "questionImageAiDescription": "",
-          "optionsType": "text",
+          "optionsType": "image",
           "options": [
             {
               "optionId": "A",
-              "type": "text",
-              "content": "Porque se puede deducir que cada antena se comunica con una sola antena, y de esta manera, llevan la señal.",
-              "optionAiDescription": ""
+              "type": "image",
+              "optionText": "",
+              "optionImageUrl": "",
+              "optionAiDescription": "Secuencia temporal de 4 etapas con una flecha rotulada \"Tiempo\". Etapa 1: un círculo único claro rotulado \"Población inicial de monos\". Etapa 2: un círculo dividido físicamente por una franja vertical blanca, formando dos mitades del mismo tono claro, rotulado \"Aparece el río\". Etapa 3: un círculo dividido físicamente por una franja vertical blanca, con el lado izquierdo claro y el derecho oscuro, rotulado \"Aislamiento reproductivo\". Etapa 4: dos círculos pequeños y separados, uno claro y otro oscuro, rotulados \"Dos especies de monos\"."
             },
             {
               "optionId": "B",
-              "type": "text",
-              "content": "Porque, de acuerdo con la conexión entre las antenas, se puede determinar qué frecuencias usa cada una de ellas.",
-              "optionAiDescription": ""
+              "type": "image",
+              "optionText": "",
+              "optionImageUrl": "",
+              "optionAiDescription": "Secuencia temporal de 4 etapas con una flecha rotulada \"Tiempo\". Etapa 1: un círculo único claro rotulado \"Población inicial de monos\". Etapa 2: un círculo con un degradado horizontal de claro a oscuro rotulado \"Aparece el río\". Etapa 3: un círculo dividido verticalmente mostrando un degradado, con el lado izquierdo claro y el derecho oscuro, rotulado \"Aislamiento reproductivo\". Etapa 4: dos círculos pequeños y separados, uno claro y otro oscuro, rotulados \"Dos especies de monos\"."
             },
             {
               "optionId": "C",
-              "type": "text",
-              "content": "Porque se puede saber cuántas antenas se necesitan para llevar la señal de internet a la escuela.",
-              "optionAiDescription": ""
+              "type": "image",
+              "optionText": "",
+              "optionImageUrl": "",
+              "optionAiDescription": "Secuencia temporal de 4 etapas con una flecha rotulada \"Tiempo\". Etapa 1: un círculo único claro rotulado \"Población inicial de monos\". Etapa 2: un círculo dividido físicamente por una franja vertical blanca, formando dos mitades del mismo tono claro, rotulado \"Aparece el río\". Etapa 3: un círculo unido mostrando un degradado, con el lado izquierdo claro y el derecho oscuro, rotulado \"Aislamiento reproductivo\". Etapa 4: dos círculos pequeños y separados, uno claro y otro oscuro, rotulados \"Dos especies de monos\"."
             },
             {
               "optionId": "D",
-              "type": "text",
-              "content": "Porque ilustra cómo pueden conectarse varias poblaciones entre sí y con una señal muy estable.",
-              "optionAiDescription": ""
+              "type": "image",
+              "optionText": "",
+              "optionImageUrl": "",
+              "optionAiDescription": "Secuencia temporal de 4 etapas con una flecha rotulada \"Tiempo\". Etapa 1: un círculo único claro rotulado \"Población inicial de monos\". Etapa 2: un círculo mostrando un degradado, con el lado izquierdo claro y el derecho oscuro, rotulado \"Aparece el río\". Etapa 3: un círculo claro con una zona oscura difusa en el centro, rotulado \"Aislamiento reproductivo\". Etapa 4: dos círculos concéntricos, uno exterior claro y otro interior oscuro, rotulados \"Dos especies de monos\"."
             }
           ],
           "correctOptionId": "",
@@ -269,108 +373,40 @@
       "sectionImageAiDescription": "",
       "questions": [
         {
-          "questionId": "q_98",
-          "questionText": "98. Pedro dejó una fruta al aire libre para ver cuánto tardaba en descomponerse. Los días pasaban y seguía sin descomponerse totalmente, entonces planteó la hipótesis de que todos los cambios químicos necesitan de varios días para que ocurran. Al otro día, leyó en un libro de ciencias lo siguiente: “Es fundamental controlar la velocidad de las reacciones químicas, ya que existen varios factores que la afectan, como la concentración de los reactivos, el tamaño de partícula, la temperatura y los catalizadores, entre otros”.\n\nTeniendo en cuenta la información anterior, ¿la hipótesis planteada por Pedro es compatible con el fenómeno observado y la información del libro?",
+          "questionId": "q_09",
+          "questionText": "En un laboratorio, un estudiante debe transportar los materiales para un experimento utilizando una mesa con ruedas. Para esto, el estudiante ejerce primero una fuerza a la mesa, que aumenta a medida que se desplaza hasta recorrer \\(4\\ \\text{m}\\); luego, ejerce una fuerza constante hasta finalizar el recorrido a los \\(6\\ \\text{m}\\). Teniendo en cuenta la información anterior, ¿cuál de las siguientes gráficas representa la fuerza como función de la posición en esta situación?",
           "hasQuestionImage": false,
           "questionImageUrl": "",
           "questionImageAiDescription": "",
-          "optionsType": "text",
-          "options": [
-            {
-              "optionId": "A",
-              "type": "text",
-              "content": "Es compatible, porque tuvo en cuenta las observaciones realizadas y consideró que algunas reacciones tardan bastante tiempo.",
-              "optionAiDescription": ""
-            },
-            {
-              "optionId": "B",
-              "type": "text",
-              "content": "No es compatible, porque las frutas se descomponen en un día al aire libre, además no tuvo en cuenta la información del libro.",
-              "optionAiDescription": ""
-            },
-            {
-              "optionId": "C",
-              "type": "text",
-              "content": "Es compatible, porque existen factores que aceleran las reacciones, de tal forma que su experimento pudo tardar varias semanas.",
-              "optionAiDescription": ""
-            },
-            {
-              "optionId": "D",
-              "type": "text",
-              "content": "No es compatible, porque no se puede generalizar que todos los cambios tardan varios días, desconociendo la información del libro.",
-              "optionAiDescription": ""
-            }
-          ],
-          "correctOptionId": "",
-          "aiExplanation": ""
-        },
-        {
-          "questionId": "q_99",
-          "questionText": "99. Existe una población de monos que vive en un ecosistema boscoso. Este ecosistema, durante un largo periodo de tiempo, ha estado dividido por un gran río, dejando la población de monos dividida en dos lugares diferentes. Algunos científicos han investigado este fenómeno y han resuelto que la población de monos, que en principio se creía pertenecían a una misma especie, sufrió un aislamiento reproductivo a causa de la división causada por el río y, posteriormente, se demostró que pertenecen a dos especies diferentes.\n\nDe acuerdo con la información anterior, ¿cuál de los siguientes modelos representa el fenómeno?",
-          "hasQuestionImage": true,
-          "questionImageUrl": "",
-          "questionImageAiDescription": "",
           "optionsType": "image",
           "options": [
             {
               "optionId": "A",
               "type": "image",
-              "content": "",
-              "optionAiDescription": ""
+              "optionText": "",
+              "optionImageUrl": "",
+              "optionAiDescription": "Gráfica fuerza vs. desplazamiento. Desde \\(0\\) hasta \\(4\\ \\text{m}\\) la fuerza es aproximadamente constante. De \\(4\\) a \\(6\\ \\text{m}\\) la fuerza aumenta linealmente."
             },
             {
               "optionId": "B",
               "type": "image",
-              "content": "",
-              "optionAiDescription": ""
+              "optionText": "",
+              "optionImageUrl": "",
+              "optionAiDescription": "Gráfica fuerza vs. desplazamiento. Desde \\(0\\) hasta \\(4\\ \\text{m}\\) la fuerza es aproximadamente constante. De \\(4\\) a \\(6\\ \\text{m}\\) la fuerza disminuye linealmente."
             },
             {
               "optionId": "C",
               "type": "image",
-              "content": "",
-              "optionAiDescription": ""
+              "optionText": "",
+              "optionImageUrl": "",
+              "optionAiDescription": "Gráfica fuerza vs. desplazamiento. Desde \\(0\\) hasta \\(4\\ \\text{m}\\) la fuerza aumenta linealmente. De \\(4\\) a \\(6\\ \\text{m}\\) la fuerza permanece constante en un valor alto."
             },
             {
               "optionId": "D",
               "type": "image",
-              "content": "",
-              "optionAiDescription": ""
-            }
-          ],
-          "correctOptionId": "",
-          "aiExplanation": ""
-        },
-        {
-          "questionId": "q_100",
-          "questionText": "100. En un laboratorio, un estudiante debe transportar los materiales para un experimento utilizando una mesa con ruedas. Para esto, el estudiante ejerce primero una fuerza a la mesa, que aumenta a medida que se desplaza hasta recorrer 4 m; luego, ejerce una fuerza constante hasta finalizar el recorrido a los 6 m. Teniendo en cuenta la información anterior, ¿cuál de las siguientes gráficas representa la fuerza como función de la posición en esta situación?",
-          "hasQuestionImage": true,
-          "questionImageUrl": "",
-          "questionImageAiDescription": "",
-          "optionsType": "image",
-          "options": [
-            {
-              "optionId": "A",
-              "type": "image",
-              "content": "",
-              "optionAiDescription": ""
-            },
-            {
-              "optionId": "B",
-              "type": "image",
-              "content": "",
-              "optionAiDescription": ""
-            },
-            {
-              "optionId": "C",
-              "type": "image",
-              "content": "",
-              "optionAiDescription": ""
-            },
-            {
-              "optionId": "D",
-              "type": "image",
-              "content": "",
-              "optionAiDescription": ""
+              "optionText": "",
+              "optionImageUrl": "",
+              "optionAiDescription": "Gráfica fuerza vs. desplazamiento. Desde \\(0\\) hasta \\(4\\) o \\(5\\ \\text{m}\\) la fuerza disminuye linealmente. Luego permanece constante hasta \\(6\\ \\text{m}\\)."
             }
           ],
           "correctOptionId": "",
@@ -387,35 +423,39 @@
       "sectionImageAiDescription": "",
       "questions": [
         {
-          "questionId": "q_101",
-          "questionText": "101. Una estudiante encuentra en un libro información sobre algunos minerales y sus características (ver tabla).\n\nDe acuerdo con la tabla, ¿cuáles minerales tienen las mismas características?",
+          "questionId": "q_10",
+          "questionText": "Una estudiante encuentra en un libro información sobre algunos minerales y sus características (ver tabla).\n\nDe acuerdo con la tabla, ¿cuáles minerales tienen las mismas características?",
           "hasQuestionImage": true,
           "questionImageUrl": "",
-          "questionImageAiDescription": "",
+          "questionImageAiDescription": "Tabla de \\(4\\) columnas con encabezados: Mineral | Color | Brillo | Transparencia. Filas:\n\\(1\\) | Azul | Metálico | Sí\n\\(2\\) | Rojo | No metálico | No\n\\(3\\) | Azul | No metálico | Sí\n\\(4\\) | Verde | Metálico | No\n\\(5\\) | Rojo | Metálico | No\n\\(6\\) | Azul | No metálico | Sí\n\\(7\\) | Rojo | No metálico | No\n\\(8\\) | Verde | Metálico | Sí",
           "optionsType": "text",
           "options": [
             {
               "optionId": "A",
               "type": "text",
-              "content": "Los minerales 3 y 6, y los minerales 4 y 8.",
+              "optionText": "Los minerales \\(3\\) y \\(6\\), y los minerales \\(4\\) y \\(8\\).",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "B",
               "type": "text",
-              "content": "Los minerales 3 y 6, y los minerales 2 y 7.",
+              "optionText": "Los minerales \\(3\\) y \\(6\\), y los minerales \\(2\\) y \\(7\\).",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "C",
               "type": "text",
-              "content": "Los minerales 2 y 5, y los minerales 4 y 8.",
+              "optionText": "Los minerales \\(2\\) y \\(5\\), y los minerales \\(4\\) y \\(8\\).",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "D",
               "type": "text",
-              "content": "Los minerales 2 y 7, y los minerales 1 y 6.",
+              "optionText": "Los minerales \\(2\\) y \\(7\\), y los minerales \\(1\\) y \\(6\\).",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             }
           ],
@@ -433,35 +473,39 @@
       "sectionImageAiDescription": "",
       "questions": [
         {
-          "questionId": "q_102",
-          "questionText": "102. El cuero cabelludo se compone de una parte fibrosa, formada de queratina (cabello o pelo), y una parte celular. En las células capilares sucede la división celular solamente mediante el proceso de mitosis. Estas células nuevas secretan las fibras de queratina, como se muestra en la figura.\n\n¿Qué papel específico cumple la mitosis en el pelo?",
+          "questionId": "q_11",
+          "questionText": "El cuero cabelludo se compone de una parte fibrosa, formada de queratina (cabello o pelo), y una parte celular. En las células capilares sucede la división celular solamente mediante el proceso de mitosis. Estas células nuevas secretan las fibras de queratina, como se muestra en la figura.\n\n¿Qué papel específico cumple la mitosis en el pelo?",
           "hasQuestionImage": true,
           "questionImageUrl": "",
-          "questionImageAiDescription": "",
+          "questionImageAiDescription": "Esquema del folículo piloso en corte. Se observan etiquetas: Cabello, Superficie de la piel, Sebo, Folículo, Glándula sebácea y Célula capilar. A la derecha hay un diagrama celular: una \"Célula madre\" \\(2n\\) entra en \"Mitosis\" y produce dos células hijas también marcadas \\(2n\\). Debajo se lee \"Producción de clones de la célula madre\" y una nota \"\\(n =\\) número de cromosomas\".",
           "optionsType": "text",
           "options": [
             {
               "optionId": "A",
               "type": "text",
-              "content": "Permite la variabilidad genética del pelo, mediante la recombinación.",
+              "optionText": "Permite la variabilidad genética del pelo, mediante la recombinación.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "B",
               "type": "text",
-              "content": "Produce células madre, a partir de una fibra de queratina.",
+              "optionText": "Produce células madre, a partir de una fibra de queratina.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "C",
               "type": "text",
-              "content": "Permite el crecimiento del pelo, al aumentar las células del folículo.",
+              "optionText": "Permite el crecimiento del pelo, al aumentar las células del folículo.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "D",
               "type": "text",
-              "content": "Produce células con diferente número de cromosomas.",
+              "optionText": "Produce células con diferente número de cromosomas.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             }
           ],
@@ -479,35 +523,39 @@
       "sectionImageAiDescription": "",
       "questions": [
         {
-          "questionId": "q_103",
-          "questionText": "103. La malaria aviar es una enfermedad causada por parásitos del género Plasmodium y es transmitida por la picadura de zancudos y a las diferentes especies de aves. A continuación, se muestra una parte del ciclo de vida de este parásito:\n\nSegún el anterior diagrama, ¿qué tipo de interacción tiene el parásito con el ave y con el zancudo?",
+          "questionId": "q_12",
+          "questionText": "La malaria aviar es una enfermedad causada por parásitos del género \\(\\textit{Plasmodium}\\) y es transmitida por la picadura de zancudos a las diferentes especies de aves. A continuación, se muestra una parte del ciclo de vida de este parásito:\n\nSegún el anterior diagrama, ¿qué tipo de interacción tiene el parásito con el ave y con el zancudo?",
           "hasQuestionImage": true,
           "questionImageUrl": "",
-          "questionImageAiDescription": "",
+          "questionImageAiDescription": "Diagrama cíclico del ciclo de vida del parásito. Elementos alrededor del ciclo: un zancudo, un ave, un órgano del ave (hígado) y una imagen de células sanguíneas. Textos alrededor de las flechas: \"Reproducción del parásito y desarrollo de los huevos\", \"Transmisión del parásito a otra ave\", \"Reinicio del ciclo\", \"El zancudo se alimenta de sangre infectada\", \"Infección del hígado y daño de los glóbulos rojos del ave\", \"Transmisión del parásito al ave\". En el centro se lee: \"El parásito se reproduce en el intestino del insecto sin afectar su funcionamiento\".",
           "optionsType": "text",
           "options": [
             {
               "optionId": "A",
               "type": "text",
-              "content": "El parásito interactúa con el ave y con el zancudo de manera negativa, al causar la enfermedad de la malaria que deriva en daños internos en los dos organismos.",
+              "optionText": "El parásito interactúa con el ave y con el zancudo de manera negativa, al causar la enfermedad de la malaria que deriva en daños internos en los dos organismos.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "B",
               "type": "text",
-              "content": "El parásito interactúa con el ave de manera negativa al causar la enfermedad, mientras que con el zancudo interactúa de manera neutral, dado que convive dentro de él sin causar ningún daño.",
+              "optionText": "El parásito interactúa con el ave de manera negativa al causarle la enfermedad, mientras que con el zancudo interactúa de manera neutral, dado que convive dentro de él sin causar ningún daño.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "C",
               "type": "text",
-              "content": "El parásito interactúa con el ave y con el zancudo de manera neutral, ya que convive con ellos para cumplir su ciclo de vida sin causar daño a ninguno de los dos.",
+              "optionText": "El parásito interactúa con el ave y con el zancudo de manera neutral, ya que convive con ellos para cumplir su ciclo de vida sin causar daño a ninguno de los dos.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "D",
               "type": "text",
-              "content": "El parásito interactúa con el ave de manera neutral, ya que el hígado es el único órgano afectado, mientras que con el zancudo interactúa de manera negativa, dado que se reproduce dentro de él.",
+              "optionText": "El parásito interactúa con el ave de manera neutral, ya que el hígado es el único órgano afectado, mientras que con el zancudo interactúa de manera negativa, dado que se reproduce dentro de él.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             }
           ],
@@ -525,35 +573,39 @@
       "sectionImageAiDescription": "",
       "questions": [
         {
-          "questionId": "q_104",
-          "questionText": "104. Dos átomos pertenecen al mismo elemento químico cuando tienen la misma cantidad de protones. De esta forma, si dos átomos tienen la misma cantidad de protones, pero distinta cantidad de neutrones, serán isótopos. En la siguiente tabla, se representa el número de protones y neutrones para algunos átomos.\n\nSegún la información suministrada, ¿cuál de las siguientes parejas de átomos son isótopos?",
+          "questionId": "q_13",
+          "questionText": "Dos átomos pertenecen al mismo elemento químico cuando tienen la misma cantidad de protones. De esta forma, si dos átomos tienen la misma cantidad de protones, pero distinta cantidad de neutrones, serán isótopos. En la siguiente tabla, se representa el número de protones y neutrones para algunos átomos.\n\nSegún la información suministrada, ¿cuál de las siguientes parejas de átomos son isótopos?",
           "hasQuestionImage": true,
           "questionImageUrl": "",
-          "questionImageAiDescription": "",
+          "questionImageAiDescription": "Tabla con \\(3\\) columnas: Átomo | Protones | Neutrones. Filas:\nÑ | \\(1\\) | \\(0\\)\nX | \\(2\\) | \\(1\\)\nY | \\(1\\) | \\(2\\)\nZ | \\(2\\) | \\(2\\)",
           "optionsType": "text",
           "options": [
             {
               "optionId": "A",
               "type": "text",
-              "content": "Ñ y X.",
+              "optionText": "Ñ y X.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "B",
               "type": "text",
-              "content": "Ñ y Y.",
+              "optionText": "Ñ y Y.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "C",
               "type": "text",
-              "content": "Y y X.",
+              "optionText": "Y y X.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "D",
               "type": "text",
-              "content": "Y y Z.",
+              "optionText": "Y y Z.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             }
           ],
@@ -571,35 +623,39 @@
       "sectionImageAiDescription": "",
       "questions": [
         {
-          "questionId": "q_105",
-          "questionText": "105. Las unidades de concentración de disoluciones indican la cantidad de soluto disuelto en una solución. Por ejemplo tenemos las siguientes unidades:\n\n- \\(%\\ p/p\\): es la cantidad en gramos del soluto presente en 100 gramos de la disolución.\n- \\(%\\ p/v\\): indica el número de gramos de soluto que hay en cada 100 mL de disolución.\n- Molaridad \\((M)\\): es el número de moles de soluto en 1 L de disolución.\n\nLas concentraciones de dos disoluciones del mismo soluto se reportaron en la siguiente tabla.\n\nDe acuerdo con la información anterior, si se tienen dos volúmenes iguales de las disoluciones, ¿cuál de las disoluciones tiene mayor masa de soluto?",
+          "questionId": "q_14",
+          "questionText": "Las unidades de concentración de disoluciones indican la cantidad de soluto disuelto en una solución. Por ejemplo, tenemos las siguientes unidades:\n\n- \\(%\\ p/p\\): es la cantidad en gramos del soluto presente en \\(100\\) gramos de la disolución.\n- \\(%\\ p/v\\): indica el número de gramos de soluto que hay en cada \\(100\\ \\text{mL}\\) de disolución.\n- Molaridad \\((M)\\): es el número de moles de soluto en \\(1\\ \\text{L}\\) de disolución.\n\nLas concentraciones de dos disoluciones del mismo soluto se reportaron en la siguiente tabla.\n\nDe acuerdo con la información anterior, si se tienen dos volúmenes iguales de las disoluciones, ¿cuál de las disoluciones tiene mayor masa de soluto?",
           "hasQuestionImage": true,
           "questionImageUrl": "",
-          "questionImageAiDescription": "",
+          "questionImageAiDescription": "Tabla con \\(4\\) columnas: Disolución | Porcentaje \\((\\%\\ p/p)\\) | Porcentaje \\((\\%\\ p/v)\\) | Molaridad \\((M)\\). Filas:\n\\(1\\) | \\(12\\) | \\(12\\) | \\(2{,}05\\)\n\\(2\\) | \\(24\\) | \\(24\\) | \\(4{,}10\\)",
           "optionsType": "text",
           "options": [
             {
               "optionId": "A",
               "type": "text",
-              "content": "La disolución 2, porque a mayor masa de soluto mayor es el valor de la molaridad.",
+              "optionText": "La disolución \\(2\\), porque a mayor masa de soluto mayor es el valor de la molaridad.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "B",
               "type": "text",
-              "content": "La disolución 1, porque los valores de \\(%\\ p/p\\) y \\(%\\ p/v\\) son mayores que el valor la molaridad.",
+              "optionText": "La disolución \\(1\\), porque los valores de \\(%\\ p/p\\) y \\(%\\ p/v\\) son mayores que el valor la molaridad.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "C",
               "type": "text",
-              "content": "La disolución 1, porque a mayor masa de soluto menor es el valor de la molaridad.",
+              "optionText": "La disolución \\(1\\), porque a mayor masa de soluto menor es el valor de la molaridad.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "D",
               "type": "text",
-              "content": "La disolución 2, porque los valores de \\(%\\ p/p\\) y \\(%\\ p/v\\) son menores que el valor la molaridad.",
+              "optionText": "La disolución \\(2\\), porque los valores de \\(%\\ p/p\\) y \\(%\\ p/v\\) son menores que el valor la molaridad.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             }
           ],
@@ -617,35 +673,39 @@
       "sectionImageAiDescription": "",
       "questions": [
         {
-          "questionId": "q_106",
-          "questionText": "106. Camila elabora un experimento donde acerca un imán a una jarra que tiene una esfera de hierro en su interior, y mide la velocidad que alcanza la esfera al acercar el imán usando diferentes líquidos, como se muestra en la figura.\n\nCamila concluye que los resultados de la tabla demuestran que las sustancias viscosas disminuyen la velocidad de la esfera.\n\nDe acuerdo con la información anterior, ¿qué se debería modificar para apoyar de manera correcta la conclusión de Camila?",
+          "questionId": "q_15",
+          "questionText": "Camila elabora un experimento donde acerca un imán a una jarra que tiene una esfera de hierro en su interior, y mide la velocidad que alcanza la esfera al acercar el imán usando diferentes líquidos, como se muestra en la figura.\n\nElla anota los resultados en la siguiente tabla.\n\nCamila concluye que los resultados de la tabla demuestran que las sustancias viscosas disminuyen la velocidad de la esfera.\n\nDe acuerdo con la información anterior, ¿qué se debería modificar para apoyar de manera correcta la conclusión de Camila?",
           "hasQuestionImage": true,
           "questionImageUrl": "",
-          "questionImageAiDescription": "",
+          "questionImageAiDescription": "Tabla con 2 columnas: Distancia del imán a la esfera (cm) y Velocidad de la esfera (m/s). Las 4 filas tienen la misma distancia 5 cm, y velocidades 3,0, 2,0, 1,0, 0,6. La tabla no identifica qué líquido corresponde a cada velocidad ni reporta viscosidades.",
           "optionsType": "text",
           "options": [
             {
               "optionId": "A",
               "type": "text",
-              "content": "Se deberían variar las distancias entre el imán y la jarra.",
+              "optionText": "Se deberían variar las distancias entre el imán y la jarra.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "B",
               "type": "text",
-              "content": "Se debería mantener siempre la misma velocidad de la esfera.",
+              "optionText": "Se debería mantener siempre la misma velocidad de la esfera.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "C",
               "type": "text",
-              "content": "Se deberían mostrar datos del líquido usado y su viscosidad.",
+              "optionText": "Se deberían mostrar datos del líquido usado y su viscosidad.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "D",
               "type": "text",
-              "content": "Se debería mantener constante la fuerza magnética.",
+              "optionText": "Se debería mantener constante la fuerza magnética.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             }
           ],
@@ -663,35 +723,39 @@
       "sectionImageAiDescription": "",
       "questions": [
         {
-          "questionId": "q_107",
-          "questionText": "107. Juan asiste al médico porque nota que está teniendo problemas de estreñimiento. El médico le enseña la siguiente tabla sobre algunos tipos de compuestos presentes en los alimentos y su función en el organismo.\n\nDe acuerdo con la información de la tabla, ¿qué tipo de alimentos debe consumir Juan para solucionar su problema de estreñimiento?",
+          "questionId": "q_16",
+          "questionText": "Juan asiste al médico porque nota que está teniendo problemas de estreñimiento. El médico le enseña la siguiente tabla sobre algunos tipos de compuestos presentes en los alimentos y su función en el organismo.\n\nDe acuerdo con la información de la tabla, ¿qué tipo de alimentos debe consumir Juan para solucionar su problema de estreñimiento?",
           "hasQuestionImage": true,
           "questionImageUrl": "",
-          "questionImageAiDescription": "",
+          "questionImageAiDescription": "Tabla con \\(2\\) columnas: Tipo de compuesto | Función en el organismo. Filas:\n- Vitaminas: \"Mantienen el buen funcionamiento del cuerpo; son esenciales para los huesos, el corazón, el cerebro, las enzimas y las hormonas.\"\n- Minerales: \"Son esenciales para el metabolismo, el desarrollo, el crecimiento y la regulación del funcionamiento de las células.\"\n- Fibra insoluble: \"Absorbe agua y favorece el paso de los alimentos por el tracto digestivo, y regulariza la función del intestino.\"\n- Fibra soluble: \"Reduce el colesterol y la absorción de azúcares en la sangre, retarda la digestión y produce sensación de saciedad.\"",
           "optionsType": "text",
           "options": [
             {
               "optionId": "A",
               "type": "text",
-              "content": "Alimentos ricos en vitaminas.",
+              "optionText": "Alimentos ricos en vitaminas.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "B",
               "type": "text",
-              "content": "Alimentos ricos en minerales.",
+              "optionText": "Alimentos ricos en minerales.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "C",
               "type": "text",
-              "content": "Alimentos ricos en fibra insoluble.",
+              "optionText": "Alimentos ricos en fibra insoluble.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "D",
               "type": "text",
-              "content": "Alimentos ricos en fibra soluble.",
+              "optionText": "Alimentos ricos en fibra soluble.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             }
           ],
@@ -700,7 +764,7 @@
         }
       ]
     },
-    {
+        {
       "sectionIndex": 13,
       "sectionTitle": "",
       "sectionText": "",
@@ -710,8 +774,8 @@
       "questions": [
         {
           "questionId": "q_108",
-          "questionText": "108. Una estudiante tiene la hipótesis de que al hacer reaccionar agua oxigenada con papa criolla, entre más grande sea el trozo de papa, mayor será el tiempo que dure reaccionando con el agua oxigenada. Si ella quiere representar gráficamente este fenómeno, ¿cuál de las siguientes gráficas debe elegir?",
-          "hasQuestionImage": true,
+          "questionText": "Una estudiante tiene la hipótesis de que al hacer reaccionar agua oxigenada con papa criolla, entre más grande sea el trozo de papa, mayor será el tiempo que dure reaccionando con el agua oxigenada. Si ella quiere representar gráficamente este fenómeno, ¿cuál de las siguientes gráficas debe elegir?",
+          "hasQuestionImage": false,
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "image",
@@ -719,44 +783,48 @@
             {
               "optionId": "A",
               "type": "image",
-              "content": "",
-              "optionAiDescription": ""
+              "optionText": "",
+              "optionImageUrl": "",
+              "optionAiDescription": "Gráfico de barras. Eje X: Tamaño de papa criolla (Grande, Mediana, Pequeña). Eje Y: Tiempo de reacción (s). Alturas aproximadas de las barras: Grande = 30, Mediana = 60, Pequeña = 30."
             },
             {
               "optionId": "B",
               "type": "image",
-              "content": "",
-              "optionAiDescription": ""
+              "optionText": "",
+              "optionImageUrl": "",
+              "optionAiDescription": "Gráfico circular titulado 'Tiempo de reacción (s)'. La porción 'Grande' ocupa casi la mitad del círculo, 'Mediana' algo más de un cuarto, y 'Pequeña' la porción restante más pequeña."
             },
             {
               "optionId": "C",
               "type": "image",
-              "content": "",
-              "optionAiDescription": ""
+              "optionText": "",
+              "optionImageUrl": "",
+              "optionAiDescription": "Gráfico de barras. Eje X: Tamaño de papa criolla (Grande, Mediana, Pequeña). Eje Y: Tiempo de reacción (s). Alturas aproximadas de las barras: Grande = 120, Mediana = 60, Pequeña = 30. Muestra una tendencia descendente clara."
             },
             {
               "optionId": "D",
               "type": "image",
-              "content": "",
-              "optionAiDescription": ""
+              "optionText": "",
+              "optionImageUrl": "",
+              "optionAiDescription": "Gráfico circular titulado 'Tiempo de reacción (s)'. La porción 'Pequeña' ocupa exactamente la mitad (semicírculo superior), mientras que 'Grande' y 'Mediana' se dividen la otra mitad inferior."
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "C",
+          "aiExplanation": "La hipótesis plantea una relación directamente proporcional: a mayor tamaño del trozo de papa, mayor debe ser el tiempo de reacción. La opción C es un gráfico de barras (ideal para comparar categorías vs. una variable continua) que representa exactamente esta tendencia: la barra de tamaño 'Grande' es la más alta, seguida por la 'Mediana' y finalmente la 'Pequeña'."
         }
       ]
     },
     {
       "sectionIndex": 14,
       "sectionTitle": "",
-      "sectionText": "Para el reciclaje de los neumáticos usados, se está implementando un proceso llamado “trituración criogénica”. Este proceso consiste en depositar trozos de neumáticos en un recipiente; posteriormente, se hacen pasar por un túnel de enfriamiento, donde el caucho se pone en contacto con nitrógeno líquido, que está a una temperatura aproximada de \\(-200\\ ^\\circ\\mathrm{C}\\), para extraer energía del caucho y llevarlo a temperaturas menores a \\(-70\\ ^\\circ\\mathrm{C}\\), a las que es muy frágil y susceptible de quebrarse con golpes. En último lugar, el caucho se pasa por un molino de martillos en el que se tritura y se pulveriza, como se muestra a continuación.",
+      "sectionText": "RESPONDA LAS PREGUNTAS \\(109\\) A \\(111\\) DE ACUERDO CON LA SIGUIENTE INFORMACIÓN\n\nPara el reciclaje de los neumáticos usados, se está implementando un proceso llamado \"trituración criogénica\". Este proceso consiste en depositar trozos de neumáticos en un recipiente; posteriormente, se hacen pasar por un túnel de enfriamiento, donde el caucho se pone en contacto con nitrógeno líquido, que está a una temperatura aproximada de \\(-200\\ ^\\circ\\text{C}\\), para extraer energía del caucho y llevarlo a temperaturas menores a \\(-70\\ ^\\circ\\text{C}\\), a las que es muy frágil y susceptible de quebrarse con golpes. En último lugar, el caucho se pasa por un molino de martillos en el que se tritura y se pulveriza, como se muestra a continuación.",
       "hasSectionImage": true,
       "sectionImageUrl": "",
-      "sectionImageAiDescription": "",
+      "sectionImageAiDescription": "Diagrama de proceso industrial. A la izquierda hay un recipiente superior etiquetado \"Recipiente de neumáticos\" que alimenta trozos hacia un conducto. En el centro hay un \"Túnel de enfriamiento\" horizontal con tornillo o hélice interna y flechas de dirección del flujo. A la derecha hay un tanque cilíndrico vertical etiquetado \"Nitrógeno líquido\" conectado por tuberías al túnel y a un equipo inferior. En la parte inferior central hay un equipo etiquetado \"Molino\". A la salida del molino, en la parte inferior derecha, aparece un recipiente con producto etiquetado \"Caucho pulverizado\". Una tubería inferior retorna gas etiquetado \"Gas nitrógeno\". Flechas muestran circulación del nitrógeno y del material a través del sistema.",
       "questions": [
         {
-          "questionId": "q_109",
-          "questionText": "109. Se supone que si el túnel de enfriamiento deja de funcionar se puede continuar con el proceso de trituración. Sin embargo, se debe considerar que el caucho a temperatura ambiente requiere de otras condiciones para ser triturado. ¿Qué puede cambiarse en el proceso para continuar con la trituración?",
+          "questionId": "q_17",
+          "questionText": "Se supone que si el túnel de enfriamiento deja de funcionar se puede continuar con el proceso de trituración. Sin embargo, se debe considerar que el caucho a temperatura ambiente requiere de otras condiciones para ser triturado. ¿Qué puede cambiarse en el proceso para continuar con la trituración?",
           "hasQuestionImage": false,
           "questionImageUrl": "",
           "questionImageAiDescription": "",
@@ -765,25 +833,109 @@
             {
               "optionId": "A",
               "type": "text",
-              "content": "Emplear recipientes de mayor volumen para contener el caucho.",
+              "optionText": "Emplear recipientes de mayor volumen para contener el caucho.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "B",
               "type": "text",
-              "content": "Utilizar agua a temperatura ambiente en lugar de nitrógeno.",
+              "optionText": "Utilizar agua a temperatura ambiente en lugar de nitrógeno.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "C",
               "type": "text",
-              "content": "Utilizar un molino con mayor fuerza de trituración.",
+              "optionText": "Utilizar un molino con mayor fuerza de trituración.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "D",
               "type": "text",
-              "content": "Emplear mayor cantidad de nitrógeno en estado líquido.",
+              "optionText": "Emplear mayor cantidad de nitrógeno en estado líquido.",
+              "optionImageUrl": "",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        },
+        {
+          "questionId": "q_18",
+          "questionText": "La trituración simple es otro proceso que muele los neumáticos utilizando únicamente molinos; sin embargo, si se desean granos del tamaño de la trituración criogénica, se debe pasar el caucho varias veces por los molinos.\n\nAl respecto, ¿qué beneficio presenta la trituración criogénica con relación a la trituración simple?",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "optionText": "Tritura con mayor rapidez a bajas temperaturas.",
+              "optionImageUrl": "",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "optionText": "Tritura sin generar gastos energéticos.",
+              "optionImageUrl": "",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "optionText": "Tritura con mayor fuerza que a temperatura ambiente.",
+              "optionImageUrl": "",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "optionText": "Tritura sin generar ningún impacto ambiental.",
+              "optionImageUrl": "",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        },
+        {
+          "questionId": "q_19",
+          "questionText": "¿Qué ocurre con la energía interna del caucho en el túnel de enfriamiento?",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "optionText": "Se convierte en química al contacto con el nitrógeno.",
+              "optionImageUrl": "",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "optionText": "Permanece sin cambios hasta que llega al molino.",
+              "optionImageUrl": "",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "optionText": "Se transfiere al nitrógeno en forma de calor.",
+              "optionImageUrl": "",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "optionText": "Se convierte en mecánica para mover el molino.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             }
           ],
@@ -801,8 +953,168 @@
       "sectionImageAiDescription": "",
       "questions": [
         {
-          "questionId": "q_110",
-          "questionText": "110. La trituración simple es otro proceso que muelle los neumáticos utilizando únicamente molinos; sin embargo, si se desean granos del tamaño de la trituración criogénica, se debe pasar el caucho varias veces por los molinos.\n\nAl respecto, ¿qué beneficio presenta la trituración criogénica con relación a la trituración simple?",
+          "questionId": "q_20",
+          "questionText": "La siguiente gráfica muestra cómo varía la temperatura y el volumen de un gas ideal a presión constante.\n\nUn estudiante tiene un gas ideal en un recipiente cerrado de paredes flexibles sobre el cual se aplica una presión externa constante de \\(1\\ \\text{atm}\\). ¿Qué pasará si hay un aumento en su temperatura?",
+          "hasQuestionImage": true,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "Gráfica titulada \"Con presión constante\". Eje vertical: Volumen. Eje horizontal: Temperatura. Se muestra una recta ascendente que pasa cerca del origen, indicando relación lineal directa entre temperatura y volumen a presión constante. Hay líneas punteadas horizontal y vertical que marcan un punto intermedio de la recta.",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "optionText": "Aumentará la presión del gas, ya que se eleva la presión externa.",
+              "optionImageUrl": "",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "optionText": "Disminuirá la presión del gas, ya que se eleva la cantidad de choques entre sus partículas.",
+              "optionImageUrl": "",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "optionText": "Aumentará el volumen del gas, ya que se eleva la cantidad de choques entre sus partículas.",
+              "optionImageUrl": "",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "optionText": "Disminuirá el volumen del gas, ya que se eleva la presión externa.",
+              "optionImageUrl": "",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        },
+        {
+          "questionId": "q_21",
+          "questionText": "La metamorfosis en los insectos puede seguir uno de los dos modelos descritos a continuación:\n\n- Modelo \\(1\\) de crecimiento gradual: en el cual el insecto, en sus primeras etapas de vida, es muy similar a los adultos.\n- Modelo \\(2\\) con transformaciones bruscas: en el cual las larvas son diferentes a los adultos y existe una fase intermedia o pupal entre la larva y el adulto.\n\nA continuación, se muestran los dos modelos:\n\nAhora, observe el siguiente ciclo de vida:\n\n¿A qué modelo pertenece el tipo de metamorfosis que tienen las mariposas?",
+          "hasQuestionImage": true,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "Cuadro comparativo con dos columnas tituladas \"Modelo 1\" y \"Modelo 2\". En el Modelo 1 aparece la secuencia: huevo, seguido de un insecto juvenil similar al adulto con la etiqueta \"Ausencia de alas\", y luego \"Presencia de alas\" hacia la etapa adulta, representada por un saltamontes. En el Modelo 2 aparece la secuencia: huevo, seguido de larva, luego pupa y finalmente la etapa adulta, representada por un mosquito.",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "optionText": "Al modelo \\(1\\), porque la mariposa mantiene su forma en todas las etapas del ciclo de vida.",
+              "optionImageUrl": "",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "optionText": "Al modelo \\(2\\), porque en el ciclo de vida de la mariposa existen transformaciones drásticas.",
+              "optionImageUrl": "",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "optionText": "Al modelo \\(1\\), porque las alas de la mariposa aparecen en estadios intermedios.",
+              "optionImageUrl": "",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "optionText": "Al modelo \\(2\\), porque el ciclo de vida de la mariposa inicia con la fase de huevo.",
+              "optionImageUrl": "",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        },
+        {
+          "questionId": "q_22",
+          "questionText": "El tetra cardenal \\((\\textit{Paracheirodon axelrodi})\\) es un pez común en los acuarios de las casas, muy llamativo por su cuerpo colorido y alargado. Estos peces requieren acuarios con condiciones de temperatura, pH y concentraciones de amoníaco y nitritos muy específicas, como se muestra en la tabla.\n\nMario tiene en su casa un acuario con varios peces, y al limpiarlo, no enjuagó bien el detergente y dejó residuos. Las condiciones del agua del acuario se afectaron y se llegó a una temperatura de \\(22{,}4\\ ^\\circ\\text{C}\\), un pH de \\(10{,}4\\) y concentraciones de \\(25{,}8\\ \\text{mg/L}\\) y \\(0{,}9\\ \\text{mg/L}\\) de amoníaco y nitritos, respectivamente. En consecuencia, ¿qué le sucederá a los peces en estas nuevas condiciones?",
+          "hasQuestionImage": true,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "Tabla titulada \"Tolerancia (niveles máximos y mínimos)\" con columnas: Temperatura mínima, Temperatura máxima, pH ácido, pH alcalino, Amoníaco máximo, Nitrito máximo. Valores: temperatura mínima \\(19{,}6\\ ^\\circ\\text{C}\\); temperatura máxima \\(33{,}7\\ ^\\circ\\text{C}\\); pH ácido \\(2{,}9\\); pH alcalino \\(8{,}8\\); amoníaco máximo \\(23{,}7\\ \\text{mg/L}\\); nitrito máximo \\(1{,}1\\ \\text{mg/L}\\).",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "optionText": "Los peces sobrevivirán, porque la temperatura y el nivel de nitritos no superan los rangos de tolerancia de esta especie.",
+              "optionImageUrl": "",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "optionText": "Los peces no sobrevivirán, porque los niveles de pH y nitritos superan los rangos de tolerancia de esta especie.",
+              "optionImageUrl": "",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "optionText": "Los peces sobrevivirán, porque la temperatura y el nivel de amoníaco no superan los rangos de tolerancia de esta especie.",
+              "optionImageUrl": "",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "optionText": "Los peces no sobrevivirán, porque los niveles de pH y amoníaco superan los rangos de tolerancia de esta especie.",
+              "optionImageUrl": "",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        },
+        {
+          "questionId": "q_23",
+          "questionText": "Un jardinero utiliza un rociador y observa que a medida que aumenta la distancia, la intensidad de gotas de agua que llega a los cuerpos disminuye. Por ejemplo, a los \\(2\\ \\text{m}\\) de distancia la intensidad será de \\(\\frac{1}{4}\\ \\text{mm}\\), como se muestra en la imagen.\n\nTeniendo en cuenta la información anterior, ¿cómo debe ser la intensidad de gotas a los \\(5\\ \\text{m}\\) de distancia?",
+          "hasQuestionImage": true,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "Diagrama de un rociador emitiendo un abanico. Se muestran arcos concéntricos a distancias de 1 m, 2 m, 3 m y 4 m. A 1 m, el área abarcada es 1 unidad completa sombreada. A 2 m, la misma porción del abanico se divide en 4 cuadrículas y solo 1 está sombreada. A 3 m, se divide en 9 cuadrículas con 1 sombreada. A 4 m, se divide en 16 cuadrículas con 1 sombreada. Esto ilustra visualmente cómo la concentración disminuye proporcionalmente al cuadrado de la distancia.",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "optionText": "Menor, porque la cantidad de gotas de agua siempre es igual al aumentar la distancia.",
+              "optionImageUrl": "",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "optionText": "Mayor, porque las gotas de agua al aumentar la distancia son cada vez más grandes.",
+              "optionImageUrl": "",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "optionText": "Menor, porque la intensidad es inversamente proporcional al cuadrado de la distancia.",
+              "optionImageUrl": "",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "optionText": "Mayor, porque la intensidad es directamente proporcional al cuadrado de la distancia.",
+              "optionImageUrl": "",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        },
+        {
+          "questionId": "q_24",
+          "questionText": "En una práctica de laboratorio, el profesor afirma que el agua y el aceite no se mezclan y pregunta, ¿el alcohol y el aceite se mezclan? Para responder, solicita que mezclen las dos sustancias. Un estudiante escribe como hipótesis que estos dos líquidos se mezclan formando una solución homogénea; luego, vierte los dos líquidos en un recipiente, los agita y pasado unos minutos observa que se forman dos capas: en el fondo se encuentra el aceite y en la capa superior está el alcohol. Al analizar los resultados, ¿será válida la hipótesis del estudiante y qué conclusión se puede dar?",
           "hasQuestionImage": false,
           "questionImageUrl": "",
           "questionImageAiDescription": "",
@@ -811,321 +1123,39 @@
             {
               "optionId": "A",
               "type": "text",
-              "content": "Tritura con mayor rapidez a bajas temperaturas.",
+              "optionText": "La hipótesis es válida y se concluye que los resultados obtenidos se dieron debido a que estas sustancias no se mezclaron.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "B",
               "type": "text",
-              "content": "Tritura sin generar gastos energéticos.",
+              "optionText": "La hipótesis es válida y se concluye que el alcohol tiene enlaces que impiden que se forme una mezcla heterogénea con el aceite.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "C",
               "type": "text",
-              "content": "Tritura con mayor fuerza que a temperatura ambiente.",
+              "optionText": "La hipótesis es falsa y se concluye que la mezcla obtenida luego de agitar las dos sustancias es de carácter homogéneo.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "D",
               "type": "text",
-              "content": "Tritura sin generar ningún impacto ambiental.",
+              "optionText": "La hipótesis es falsa y se concluye que el alcohol no se disuelve en el aceite por lo que se obtiene una mezcla heterogénea.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             }
           ],
           "correctOptionId": "",
           "aiExplanation": ""
-        }
-      ]
-    },
-    {
-      "sectionIndex": 16,
-      "sectionTitle": "",
-      "sectionText": "",
-      "hasSectionImage": false,
-      "sectionImageUrl": "",
-      "sectionImageAiDescription": "",
-      "questions": [
+        },
         {
-          "questionId": "q_111",
-          "questionText": "111. ¿Qué ocurre con la energía interna del caucho en el túnel de enfriamiento?",
+          "questionId": "q_25",
+          "questionText": "Un estudiante realizó un experimento para analizar el crecimiento de un grupo de bacterias durante un período de \\(14\\) horas. Los datos que obtuvo le permitieron identificar cuatro etapas diferentes, que se presentaron en el siguiente orden:\n\nEtapa \\(1\\): las bacterias se adaptan al nuevo medio, comienzan a madurar y no pueden dividirse; no hay crecimiento.\n\nEtapa \\(2\\): se caracteriza por la duplicación de las bacterias; su crecimiento es exponencial.\n\nEtapa \\(3\\): los nutrientes empiezan a agotarse y se acumulan toxinas; el número de bacterias permanece constante.\n\nEtapa \\(4\\): los nutrientes se terminan y el nivel de toxinas es muy alto, por lo que las bacterias terminan muriendo progresivamente.\n\n¿Cuál de los siguientes formatos representa los datos obtenidos por el estudiante sobre el crecimiento del grupo bacteriano?",
           "hasQuestionImage": false,
-          "questionImageUrl": "",
-          "questionImageAiDescription": "",
-          "optionsType": "text",
-          "options": [
-            {
-              "optionId": "A",
-              "type": "text",
-              "content": "Se convierte en química al contacto con el nitrógeno.",
-              "optionAiDescription": ""
-            },
-            {
-              "optionId": "B",
-              "type": "text",
-              "content": "Permanece sin cambios hasta que llega al molino.",
-              "optionAiDescription": ""
-            },
-            {
-              "optionId": "C",
-              "type": "text",
-              "content": "Se transfiere al nitrógeno en forma de calor.",
-              "optionAiDescription": ""
-            },
-            {
-              "optionId": "D",
-              "type": "text",
-              "content": "Se convierte en mecánica para mover el molino.",
-              "optionAiDescription": ""
-            }
-          ],
-          "correctOptionId": "",
-          "aiExplanation": ""
-        }
-      ]
-    },
-    {
-      "sectionIndex": 17,
-      "sectionTitle": "",
-      "sectionText": "",
-      "hasSectionImage": false,
-      "sectionImageUrl": "",
-      "sectionImageAiDescription": "",
-      "questions": [
-        {
-          "questionId": "q_112",
-          "questionText": "112. La siguiente gráfica muestra cómo varía la temperatura y el volumen de un gas ideal a presión constante.\n\nUn estudiante tiene un gas ideal en un recipiente cerrado de paredes flexibles sobre el cual se aplica una presión externa constante de 1 atm. ¿Qué pasará si hay un aumento en su temperatura?",
-          "hasQuestionImage": true,
-          "questionImageUrl": "",
-          "questionImageAiDescription": "",
-          "optionsType": "text",
-          "options": [
-            {
-              "optionId": "A",
-              "type": "text",
-              "content": "Aumentará la presión del gas, ya que se eleva la presión externa.",
-              "optionAiDescription": ""
-            },
-            {
-              "optionId": "B",
-              "type": "text",
-              "content": "Disminuirá la presión del gas, ya que se eleva la cantidad de choques entre sus partículas.",
-              "optionAiDescription": ""
-            },
-            {
-              "optionId": "C",
-              "type": "text",
-              "content": "Aumentará el volumen del gas, ya que se eleva la cantidad de choques entre sus partículas.",
-              "optionAiDescription": ""
-            },
-            {
-              "optionId": "D",
-              "type": "text",
-              "content": "Disminuirá el volumen del gas, ya que se eleva la presión externa.",
-              "optionAiDescription": ""
-            }
-          ],
-          "correctOptionId": "",
-          "aiExplanation": ""
-        }
-      ]
-    },
-    {
-      "sectionIndex": 18,
-      "sectionTitle": "",
-      "sectionText": "",
-      "hasSectionImage": false,
-      "sectionImageUrl": "",
-      "sectionImageAiDescription": "",
-      "questions": [
-        {
-          "questionId": "q_113",
-          "questionText": "113. La metamorfosis en los insectos puede seguir uno de los dos modelos descritos a continuación:\n\n- Modelo 1 de crecimiento gradual: en el cual el insecto, en sus primeras etapas de vida, es muy similar a los adultos.\n- Modelo 2 con transformaciones bruscas: en el cual las larvas son diferentes a los adultos y existe una fase intermedia o pupal entre la larva y el adulto.\n\nA continuación, se muestran los dos modelos:\n\nAhora, observe el siguiente ciclo de vida:\n\n¿A qué modelo pertenece el tipo de metamorfosis que tienen las mariposas?",
-          "hasQuestionImage": true,
-          "questionImageUrl": "",
-          "questionImageAiDescription": "",
-          "optionsType": "text",
-          "options": [
-            {
-              "optionId": "A",
-              "type": "text",
-              "content": "Al modelo 1, porque la mariposa mantiene su forma en todas las etapas del ciclo de vida.",
-              "optionAiDescription": ""
-            },
-            {
-              "optionId": "B",
-              "type": "text",
-              "content": "Al modelo 2, porque en el ciclo de vida de la mariposa existen transformaciones drásticas.",
-              "optionAiDescription": ""
-            },
-            {
-              "optionId": "C",
-              "type": "text",
-              "content": "Al modelo 1, porque las alas de la mariposa aparecen en estadios intermedios.",
-              "optionAiDescription": ""
-            },
-            {
-              "optionId": "D",
-              "type": "text",
-              "content": "Al modelo 2, porque el ciclo de vida de la mariposa inicia con la fase de huevo.",
-              "optionAiDescription": ""
-            }
-          ],
-          "correctOptionId": "",
-          "aiExplanation": ""
-        }
-      ]
-    },
-    {
-      "sectionIndex": 19,
-      "sectionTitle": "",
-      "sectionText": "",
-      "hasSectionImage": false,
-      "sectionImageUrl": "",
-      "sectionImageAiDescription": "",
-      "questions": [
-        {
-          "questionId": "q_114",
-          "questionText": "114. El tetra cardinal (Paracheirodon axelrodi) es un pez común en los acuarios de las casas, muy llamativo por su cuerpo colorido y alargado. Estos peces requieren acuarios con condiciones de temperatura, pH y concentraciones de amoníaco y nitritos muy específicas, como se muestra en la tabla.\n\nMario tiene en su casa un acuario con varios peces y, al limpiarlo, no enjuagó bien el detergente y dejó residuos. Las condiciones del agua del acuario se afectaron y se llegó a una temperatura de 22,4 \\(^\\circ\\mathrm{C}\\), un pH de 10,4 y concentraciones de 25,8 mg/L y 0,9 mg/L de amoníaco y nitritos, respectivamente. En consecuencia, ¿qué le sucederá a los peces en estas nuevas condiciones?",
-          "hasQuestionImage": true,
-          "questionImageUrl": "",
-          "questionImageAiDescription": "",
-          "optionsType": "text",
-          "options": [
-            {
-              "optionId": "A",
-              "type": "text",
-              "content": "Los peces sobrevivirán porque la temperatura y el nivel de nitritos no superan los rangos de tolerancia de esta especie.",
-              "optionAiDescription": ""
-            },
-            {
-              "optionId": "B",
-              "type": "text",
-              "content": "Los peces no sobrevivirán, porque los niveles de pH y nitritos superan los rangos de tolerancia de esta especie.",
-              "optionAiDescription": ""
-            },
-            {
-              "optionId": "C",
-              "type": "text",
-              "content": "Los peces sobrevivirán, porque la temperatura y el nivel de amoniaco no superan los rangos de tolerancia de esta especie.",
-              "optionAiDescription": ""
-            },
-            {
-              "optionId": "D",
-              "type": "text",
-              "content": "Los peces no sobrevivirán, porque los niveles de pH y amoniaco superan los rangos de tolerancia de esta especie.",
-              "optionAiDescription": ""
-            }
-          ],
-          "correctOptionId": "",
-          "aiExplanation": ""
-        }
-      ]
-    },
-    {
-      "sectionIndex": 20,
-      "sectionTitle": "",
-      "sectionText": "",
-      "hasSectionImage": false,
-      "sectionImageUrl": "",
-      "sectionImageAiDescription": "",
-      "questions": [
-        {
-          "questionId": "q_115",
-          "questionText": "115. Un jardinero utiliza un rociador y observa que a medida que aumenta la distancia, la intensidad de gotas de agua que llega a los cuerpos disminuye. Por ejemplo, a los 2 m de distancia la intensidad será de \\(\\tfrac{1}{4}\\) mm, como se muestra en la imagen.\n\nTeniendo en cuenta la información anterior, ¿cómo debe ser la intensidad de gotas a los 5 m de distancia?",
-          "hasQuestionImage": true,
-          "questionImageUrl": "",
-          "questionImageAiDescription": "",
-          "optionsType": "text",
-          "options": [
-            {
-              "optionId": "A",
-              "type": "text",
-              "content": "Menor, porque la cantidad de gotas de agua siempre es igual al aumentar la distancia.",
-              "optionAiDescription": ""
-            },
-            {
-              "optionId": "B",
-              "type": "text",
-              "content": "Mayor, porque las gotas de agua al aumentar la distancia son cada vez más grandes.",
-              "optionAiDescription": ""
-            },
-            {
-              "optionId": "C",
-              "type": "text",
-              "content": "Menor, porque la intensidad es inversamente proporcional al cuadrado de la distancia.",
-              "optionAiDescription": ""
-            },
-            {
-              "optionId": "D",
-              "type": "text",
-              "content": "Mayor, porque la intensidad es directamente proporcional al cuadrado de la distancia.",
-              "optionAiDescription": ""
-            }
-          ],
-          "correctOptionId": "",
-          "aiExplanation": ""
-        }
-      ]
-    },
-    {
-      "sectionIndex": 21,
-      "sectionTitle": "",
-      "sectionText": "",
-      "hasSectionImage": false,
-      "sectionImageUrl": "",
-      "sectionImageAiDescription": "",
-      "questions": [
-        {
-          "questionId": "q_116",
-          "questionText": "116. En una práctica de laboratorio, el profesor afirma que el agua y el aceite no se mezclan y pregunta, ¿el alcohol y el aceite se mezclan? Para responder la pregunta solicita que mezclen las dos sustancias. Un estudiante escribe como hipótesis que estas dos líquidos se mezclan formando una solución homogénea; luego, vierte los dos líquidos en un recipiente, lo agita y pasados unos minutos observa que se forman dos capas: en el fondo se encuentra el aceite y en la capa superior está el alcohol. Al analizar los resultados, ¿será válida la hipótesis del estudiante y qué conclusión se puede dar?",
-          "hasQuestionImage": false,
-          "questionImageUrl": "",
-          "questionImageAiDescription": "",
-          "optionsType": "text",
-          "options": [
-            {
-              "optionId": "A",
-              "type": "text",
-              "content": "La hipótesis es válida y se concluye que los resultados obtenidos se dieron debido a que estas sustancias no se mezclaron.",
-              "optionAiDescription": ""
-            },
-            {
-              "optionId": "B",
-              "type": "text",
-              "content": "La hipótesis es válida y se concluye que el alcohol tiene enlaces que impiden que se forme una mezcla heterogénea con el aceite.",
-              "optionAiDescription": ""
-            },
-            {
-              "optionId": "C",
-              "type": "text",
-              "content": "La hipótesis es falsa y se concluye que la mezcla obtenida luego de agitar las dos sustancias es de carácter homogéneo.",
-              "optionAiDescription": ""
-            },
-            {
-              "optionId": "D",
-              "type": "text",
-              "content": "La hipótesis es falsa y se concluye que el alcohol no se disuelve en el aceite por lo que se obtiene una mezcla heterogénea.",
-              "optionAiDescription": ""
-            }
-          ],
-          "correctOptionId": "",
-          "aiExplanation": ""
-        }
-      ]
-    },
-    {
-      "sectionIndex": 22,
-      "sectionTitle": "",
-      "sectionText": "",
-      "hasSectionImage": false,
-      "sectionImageUrl": "",
-      "sectionImageAiDescription": "",
-      "questions": [
-        {
-          "questionId": "q_117",
-          "questionText": "117. Un estudiante realizó un experimento para analizar el crecimiento de un grupo de bacterias durante un periodo de 14 horas. Los datos que obtuvo le permitieron identificar cuatro etapas diferentes, que se presentaron en el siguiente orden:\n\nEtapa 1: las bacterias se adaptan al nuevo medio, comienzan a madurar y no pueden dividirse; no hay crecimiento.\nEtapa 2: se caracteriza por la duplicación de las bacterias; su crecimiento es exponencial.\nEtapa 3: los nutrientes empiezan a agotarse y se acumulan toxinas; el número de bacterias permanece constante.\nEtapa 4: los nutrientes se terminan y el nivel de toxinas es muy alto, por lo que las bacterias terminan muriendo progresivamente.\n\n¿Cuál de los siguientes formatos representa los datos obtenidos por el estudiante sobre el crecimiento del grupo bacteriano?",
-          "hasQuestionImage": true,
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "image",
@@ -1133,164 +1163,150 @@
             {
               "optionId": "A",
               "type": "image",
-              "content": "",
-              "optionAiDescription": ""
+              "optionText": "",
+              "optionImageUrl": "",
+              "optionAiDescription": "Gráfico de líneas titulado \"Curva de crecimiento bacteriano\". Eje horizontal tiempo hasta \\(16\\ \\text{h}\\), eje vertical número de bacterias \\((\\log)\\). La curva inicia en \\(0\\), crece linealmente desde el comienzo hasta cerca de \\(5\\) en \\(5\\ \\text{h}\\), permanece constante entre aproximadamente \\(5\\) y \\(9\\ \\text{h}\\), y luego desciende linealmente hasta \\(0\\) en \\(14\\ \\text{h}\\). No presenta fase inicial de adaptación sin crecimiento."
             },
             {
               "optionId": "B",
               "type": "image",
-              "content": "",
-              "optionAiDescription": ""
+              "optionText": "",
+              "optionImageUrl": "",
+              "optionAiDescription": "Tabla dispuesta verticalmente con 3 columnas: Crecimiento bacteriano, Tiempo (h) y Número de bacterias (log). Contiene 14 filas con los siguientes valores correspondientes (Crecimiento, Tiempo, Número): (0, 1, 0), (1, 2, 1), (2, 3, 1), (3, 4, 1), (4, 5, 2), (5, 6, 3), (6, 7, 4), (7, 8, 5), (8, 9, 5), (9, 10, 4), (10, 11, 3), (11, 12, 2), (12, 13, 1), (13, 14, 0)."
             },
             {
               "optionId": "C",
               "type": "image",
-              "content": "",
-              "optionAiDescription": ""
+              "optionText": "",
+              "optionImageUrl": "",
+              "optionAiDescription": "Gráfico de líneas titulado \"Curva de crecimiento bacteriano\". Eje horizontal tiempo hasta \\(16\\ \\text{h}\\), eje vertical número de bacterias \\((\\log)\\). La curva empieza con un tramo horizontal alrededor de \\(1\\) desde \\(0\\) hasta cerca de \\(3\\ \\text{h}\\) (fase sin crecimiento), luego asciende hasta alrededor de \\(5\\) entre \\(3\\) y \\(7\\ \\text{h}\\), permanece constante cerca de \\(5\\) entre \\(7\\) y \\(9\\ \\text{h}\\), y finalmente desciende progresivamente hasta \\(0\\) en \\(14\\ \\text{h}\\)."
             },
             {
               "optionId": "D",
               "type": "image",
-              "content": "",
-              "optionAiDescription": ""
+              "optionText": "",
+              "optionImageUrl": "",
+              "optionAiDescription": "Tabla con dos columnas: \"Crecimiento bacteriano\" y \"Número de bacterias \\((\\log)\\)\". Filas para \\(0\\) a \\(14\\): \\(1,1,1,1,2,3,4,5,5,5,4,3,2,1,0\\). La primera columna no representa tiempo explícitamente y el formato no identifica el eje temporal como horas."
             }
           ],
           "correctOptionId": "",
           "aiExplanation": ""
-        }
-      ]
-    },
-    {
-      "sectionIndex": 23,
-      "sectionTitle": "",
-      "sectionText": "",
-      "hasSectionImage": false,
-      "sectionImageUrl": "",
-      "sectionImageAiDescription": "",
-      "questions": [
+        },
         {
-          "questionId": "q_118",
-          "questionText": "118. En un laboratorio se usan los cromosomas de dos individuos de una especie de mosca para hacer el siguiente cruce:\n\nDe acuerdo a la información del cruce, el individuo resultante es homocigoto o heterocigoto para este gen?",
+          "questionId": "q_26",
+          "questionText": "En un laboratorio se usan los cromosomas de dos individuos de una especie de mosca para hacer el siguiente cruce:\n\nDe acuerdo con la información del cruce, el individuo resultante es homocigoto o heterocigoto para este gen?",
           "hasQuestionImage": true,
           "questionImageUrl": "",
-          "questionImageAiDescription": "",
+          "questionImageAiDescription": "Esquema de cruce genético. A la izquierda, \"Mosca de ojos rojos\" asociada a un par de cromosomas con ambos alelos marcados \\(G\\) y \\(G\\). A la derecha, \"Mosca de ojos blancos\" asociada a un par de cromosomas con ambos alelos marcados \\(g\\) y \\(g\\). Flechas convergen hacia abajo a un individuo resultante con un par de cromosomas que porta alelos \\(G\\) y \\(g\\), acompañado del dibujo de una \"Mosca de ojos rojos\".",
           "optionsType": "text",
           "options": [
             {
               "optionId": "A",
               "type": "text",
-              "content": "Homocigoto, porque tiene dos alelos.",
+              "optionText": "Homocigoto, porque tiene dos alelos.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "B",
               "type": "text",
-              "content": "Heterocigoto, porque tiene un solo alelo.",
+              "optionText": "Heterocigoto, porque tiene un solo alelo.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "C",
               "type": "text",
-              "content": "Homocigoto, porque tiene el alelo G y el alelo g.",
+              "optionText": "Homocigoto, porque tiene el alelo \\(G\\) y el alelo \\(g\\).",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "D",
               "type": "text",
-              "content": "Heterocigoto, porque tiene el alelo G y el alelo g.",
+              "optionText": "Heterocigoto, porque tiene el alelo \\(G\\) y el alelo \\(g\\).",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             }
           ],
           "correctOptionId": "",
           "aiExplanation": ""
-        }
-      ]
-    },
-    {
-      "sectionIndex": 24,
-      "sectionTitle": "",
-      "sectionText": "",
-      "hasSectionImage": false,
-      "sectionImageUrl": "",
-      "sectionImageAiDescription": "",
-      "questions": [
+        },
         {
-          "questionId": "q_119",
-          "questionText": "119. Para efectuar un procedimiento, un estudiante tiene las sustancias que se relacionan en la tabla.\n\nSi el estudiante debe usar una sustancia cuyo punto de ebullición sea menor que 130 \\(^\\circ\\mathrm{C}\\), soluble en agua y que no conduzca la electricidad, ¿cuál sustancia debería elegir?",
+          "questionId": "q_27",
+          "questionText": "Para efectuar un procedimiento, un estudiante tiene las sustancias que se relacionan en la tabla.\n\nSi el estudiante debe usar una sustancia cuyo punto de ebullición sea menor que \\(130\\ ^\\circ\\text{C}\\), soluble en agua y que no conduzca la electricidad, ¿cuál sustancia debería elegir?",
           "hasQuestionImage": true,
           "questionImageUrl": "",
-          "questionImageAiDescription": "",
+          "questionImageAiDescription": "Tabla dispuesta verticalmente con 4 columnas y encabezados divididos en múltiples líneas: 'Sustancia', 'Punto de\nebullición\n(°C)', '¿Es soluble\nen agua?' y '¿Es\nconductora?'. Contiene 4 filas con los siguientes valores: (Sustancia 1, -196, Sí, Sí), (Sustancia 2, 59, Sí, Sí), (Sustancia 3, -188, No, No), (Sustancia 4, -34, Sí, No).",
           "optionsType": "text",
           "options": [
             {
               "optionId": "A",
               "type": "text",
-              "content": "La sustancia 1.",
+              "optionText": "La sustancia \\(1\\).",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "B",
               "type": "text",
-              "content": "La sustancia 2.",
+              "optionText": "La sustancia \\(2\\).",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "C",
               "type": "text",
-              "content": "La sustancia 3.",
+              "optionText": "La sustancia \\(3\\).",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "D",
               "type": "text",
-              "content": "La sustancia 4.",
+              "optionText": "La sustancia \\(4\\).",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             }
           ],
           "correctOptionId": "",
           "aiExplanation": ""
-        }
-      ]
-    },
-    {
-      "sectionIndex": 25,
-      "sectionTitle": "",
-      "sectionText": "",
-      "hasSectionImage": false,
-      "sectionImageUrl": "",
-      "sectionImageAiDescription": "",
-      "questions": [
+        },
         {
-          "questionId": "q_120",
-          "questionText": "120. Un investigador realizó un experimento en el que sometió un bloque de hierro a temperaturas muy altas. Él descubrió que la temperatura del hierro no cambia mientras cambia su fase. La siguiente tabla muestra los registros que hizo el investigador de temperatura, fase y cambios de fase del hierro durante su experimento.\n\n¿Cuál de las siguientes gráficas corresponde a los datos de temperatura en el tiempo registrados por el investigador?",
+          "questionId": "q_28",
+          "questionText": "Un investigador realizó un experimento en el que sometió un bloque de hierro a temperaturas muy altas. Él descubrió que la temperatura del hierro no cambia mientras cambia su fase. La siguiente tabla muestra los registros que hizo el investigador de temperatura, fase y cambios de fase del hierro durante su experimento.\n\n¿Cuál de las siguientes gráficas corresponde a los datos de temperatura en el tiempo registrados por el investigador?",
           "hasQuestionImage": true,
           "questionImageUrl": "",
-          "questionImageAiDescription": "",
+          "questionImageAiDescription": "Tabla con 2 columnas: Temperatura (°C) y Estado del hierro. Contiene 6 filas con los siguientes valores (Temperatura, Estado): (0, Sólido), (750, Sólido), (1.535, Cambio de sólido a líquido), (2.255, Líquido), (2.750, Cambio de líquido a gaseoso), (3.000, Gaseoso).",
           "optionsType": "image",
           "options": [
             {
               "optionId": "A",
               "type": "image",
-              "content": "",
-              "optionAiDescription": ""
+              "optionText": "",
+              "optionImageUrl": "",
+              "optionAiDescription": "Gráfica temperatura vs. tiempo con aumento continuo por tramos inclinados desde \\(0\\) hasta cerca de \\(3.000\\ ^\\circ\\text{C}\\), etiquetando regiones de sólido, líquido y gaseoso, sin mesetas en los cambios de fase."
             },
             {
               "optionId": "B",
               "type": "image",
-              "content": "",
-              "optionAiDescription": ""
+              "optionText": "",
+              "optionImageUrl": "",
+              "optionAiDescription": "Gráfica de Temperatura (°C) vs. Tiempo. Muestra una sola línea recta diagonal ascendente desde el origen en 0 hasta un punto final en 3.000 °C. A lo largo de esta recta se ubican las etiquetas 'Sólido' en la parte inferior, 'Líquido' en el medio y 'Gaseoso' en la parte superior. No presenta tramos horizontales que representen los cambios de fase."
             },
             {
               "optionId": "C",
               "type": "image",
-              "content": "",
-              "optionAiDescription": ""
+              "optionText": "",
+              "optionImageUrl": "",
+              "optionAiDescription": "Gráfica temperatura vs. tiempo con ascenso inicial desde \\(0\\) hasta alrededor de \\(1.500\\ ^\\circ\\text{C}\\), primera meseta horizontal cerca de \\(1.535\\ ^\\circ\\text{C}\\), nuevo ascenso hasta alrededor de \\(2.750\\ ^\\circ\\text{C}\\), segunda meseta horizontal cerca de \\(2.750\\ ^\\circ\\text{C}\\), y ascenso final hasta alrededor de \\(3.000\\ ^\\circ\\text{C}\\). Etiquetas de regiones: sólido, líquido y gaseoso."
             },
             {
               "optionId": "D",
               "type": "image",
-              "content": "",
-              "optionAiDescription": ""
+              "optionText": "",
+              "optionImageUrl": "",
+              "optionAiDescription": "Gráfica de Temperatura (°C) vs. Tiempo con múltiples escalones. Muestra tramos ascendentes intercalados con tramos horizontales (mesetas) en aproximadamente 750 °C, 1.500 °C, 2.250 °C y 2.750 °C. Se observan las etiquetas 'Sólido' bajo la primera meseta, 'Líquido' bajo la meseta de 2.250 °C, y 'Gaseoso' en el punto final superior de 3.000 °C."
             }
           ],
           "correctOptionId": "",
