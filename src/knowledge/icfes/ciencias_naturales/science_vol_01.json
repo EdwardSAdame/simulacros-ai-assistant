@@ -9,7 +9,7 @@
       "sectionTitle": "RESPONDA LAS PREGUNTAS \\(1\\) A \\(3\\) DE ACUERDO CON LA SIGUIENTE INFORMACIÓN",
       "sectionText": "Un grupo de expertos quiere llevar a cabo un plan de recuperación de un ecosistema en el que una fuente de agua, y varias especies de peces y de plantas se han visto afectadas por un grave problema de contaminación, la cual es causada por la actividad humana de un barrio cercano que tiene sus tuberías de desagüe conectadas a la fuente de agua. Al respecto, los expertos afirman que el foco de la contaminación son sustancias como el aceite que se usa en casas, restaurantes y en la industria, y que esto no solo afecta la calidad del agua, sino que también ha causado la disminución de los individuos de especies acuáticas de animales y el desmejoramiento de especies vegetales.",
       "hasSectionImage": true,
-      "sectionImageUrl": "",
+      "sectionImageUrl": "https://cdn.invicto.com.co/icfes/science/2025_2_session1/q_01_section.png",
       "sectionImageAiDescription": "Diagrama de una planta completa con raíces dentro del suelo. En la parte superior izquierda aparece un sol rotulado \"Luz solar\" con flechas onduladas dirigidas hacia la planta. A la izquierda media aparece el texto \"Dióxido de carbono\" con flechas onduladas entrando a la planta. A la derecha media aparece el texto \"Oxígeno \\(O_2\\)\" con flechas onduladas saliendo de la planta. En la zona de raíces, dentro del suelo, aparece el texto \"Agua\" con flechas onduladas dirigidas hacia las raíces. Sobre hojas, tallo y suelo hay puntos o manchas negras que representan aceite contaminante adherido y acumulado.",
       "questions": [
         {
@@ -56,7 +56,7 @@
           "questionId": "q_02",
           "questionText": "Un experto en botánica muestra la siguiente figura:\n\nÉl explica que el aceite contaminante, representado en negro, se adhiere a los órganos de la planta como las hojas y el tallo, y, además, se acumula en el suelo, lo cual impide que se realice correctamente la fotosíntesis y la planta no crezca adecuadamente.\n\nDe acuerdo con la información anterior, ¿por qué el no realizar correctamente la fotosíntesis impide el crecimiento de las plantas?",
           "hasQuestionImage": true,
-          "questionImageUrl": "",
+          "questionImageUrl": "https://cdn.invicto.com.co/icfes/science/2025_2_session1/q_02.png",
           "questionImageAiDescription": "A la derecha del dibujo aparece el título \"Ecuación de la fotosíntesis\" y la ecuación \\(6CO_2 + 6H_2O +\\) Energía solar \\(\\rightarrow C_6H_{12}O_6 + 6O_2\\). Debajo de cada término se leen las etiquetas: dióxido de carbono, agua, carbohidratos y oxígeno.",
           "optionsType": "text",
           "options": [
@@ -96,7 +96,7 @@
           "questionId": "q_03",
           "questionText": "Con el fin de evidenciar la variación en la biodiversidad animal de especies acuáticas, se revisaron los registros de la entidad ambiental competente, tomando en cuenta las variables de riqueza (número de especies) y el número total de individuos de todas las especies presentes, y se compilaron en la siguiente tabla:\n\nDe acuerdo con la información anterior, ¿cuál de los siguientes gráficos representa adecuadamente los datos recolectados?",
           "hasQuestionImage": true,
-          "questionImageUrl": "",
+          "questionImageUrl": "https://cdn.invicto.com.co/icfes/science/2025_2_session1/q_03.png",
           "questionImageAiDescription": "La imagen contiene una tabla y, debajo, cuatro gráficos de opciones rotulados A, B, C y D.\n\nTabla con \\(3\\) columnas y \\(5\\) filas de datos.\nColumnas: Año | Riqueza | Cantidad de individuos.\nFilas:\n- \\(2003\\) | \\(68\\) | \\(1.563\\)\n- \\(2008\\) | \\(62\\) | \\(1.621\\)\n- \\(2013\\) | \\(45\\) | \\(803\\)\n- \\(2018\\) | \\(22\\) | \\(456\\)\n- \\(2023\\) | \\(12\\) | \\(102\\)\n\nNo describir aquí los gráficos de las opciones, porque pertenecen a las opciones de respuesta.",
           "optionsType": "image",
           "options": [
@@ -104,28 +104,28 @@
               "optionId": "A",
               "type": "image",
               "optionText": "",
-              "optionImageUrl": "",
+              "optionImageUrl": "https://cdn.invicto.com.co/icfes/science/2025_2_session1/q_03_a.png",
               "optionAiDescription": "Gráfico de barras apiladas con eje vertical de \\(0\\) a \\(5.000\\) aproximadamente en intervalos de \\(500\\). En el eje horizontal hay dos categorías: \"Riqueza\" y \"Cantidad de individuos\". La leyenda usa \\(5\\) tonos para los años \\(2003\\), \\(2008\\), \\(2013\\), \\(2018\\), \\(2023\\). Sobre la categoría \"Riqueza\" aparece una barra apilada muy baja, suma aproximada \\(68+62+45+22+12=209\\). Sobre la categoría \"Cantidad de individuos\" aparece una barra apilada alta, suma aproximada \\(1.563+1.621+803+456+102=4.545\\). No representa cada año en el eje horizontal; agrupa por variable y apila por año."
             },
             {
               "optionId": "B",
               "type": "image",
               "optionText": "",
-              "optionImageUrl": "",
+              "optionImageUrl": "https://cdn.invicto.com.co/icfes/science/2025_2_session1/q_03_b.png",
               "optionAiDescription": "Gráfico de barras agrupadas. Eje horizontal con posiciones numéricas \\(1\\), \\(2\\), \\(3\\), \\(4\\), \\(5\\) en lugar de años. Eje vertical de \\(0\\) a \\(2.500\\). En cada posición hay \\(3\\) barras según leyenda: \"Año\", \"Riqueza\", \"Cantidad de individuos\". La barra \"Año\" es casi constante alrededor de \\(2000\\) en las \\(5\\) posiciones; las barras de \"Riqueza\" son pequeñas alrededor de \\(68,62,45,22,12\\); las barras de \"Cantidad de individuos\" son alrededor de \\(1563,1621,803,456,102\\). Mezcla el año como variable cuantitativa graficada junto con las otras dos."
             },
             {
               "optionId": "C",
               "type": "image",
               "optionText": "",
-              "optionImageUrl": "",
+              "optionImageUrl": "https://cdn.invicto.com.co/icfes/science/2025_2_session1/q_03_c.png",
               "optionAiDescription": "Gráfico de barras apiladas al \\(100\\%\\). Eje vertical expresado en porcentaje de \\(0\\%\\) a \\(100\\%\\). Eje horizontal con años \\(2003\\), \\(2008\\), \\(2013\\), \\(2018\\), \\(2023\\). Cada barra anual está compuesta por dos segmentos según leyenda: riqueza y cantidad de individuos. Todas las barras llegan al \\(100\\%\\), por lo que solo muestra proporciones internas y no los valores absolutos de la tabla."
             },
             {
               "optionId": "D",
               "type": "image",
               "optionText": "",
-              "optionImageUrl": "",
+              "optionImageUrl": "https://cdn.invicto.com.co/icfes/science/2025_2_session1/q_03_d.png",
               "optionAiDescription": "Gráfico de líneas con eje horizontal de años desde aproximadamente \\(2000\\) hasta \\(2025\\). Eje vertical de \\(0\\) a \\(1.800\\). Dos series según leyenda: riqueza y cantidad de individuos. Serie de cantidad de individuos con puntos etiquetados \\(1.563\\) en \\(2003\\), \\(1.621\\) en \\(2008\\), \\(803\\) en \\(2013\\), \\(456\\) en \\(2018\\), \\(102\\) en \\(2023\\). Serie de riqueza cercana al eje inferior con puntos etiquetados \\(68\\), \\(62\\), \\(45\\), \\(22\\), \\(12\\) en esos mismos años. Representa los datos por año para ambas variables."
             }
           ],
@@ -139,7 +139,7 @@
       "sectionTitle": "RESPONDA LAS PREGUNTAS \\(4\\) A \\(6\\) DE ACUERDO CON LA SIGUIENTE INFORMACIÓN",
       "sectionText": "Un ingeniero investiga cómo se dará la transmisión de información para que su pueblo se conecte a internet. Él encuentra que esto ocurrirá a través de la integración de dos tecnologías:\n\n- Un cable de fibra óptica por el que se transporta la información desde internet hasta la antena principal del pueblo.\n- Un grupo de antenas que emiten y reciben la información por medio de ondas electromagnéticas (antenas de wifi).\n\nAmbas tecnologías se comunican con la antena principal en la cabecera del pueblo, que repite la señal a otras antenas ubicadas estratégicamente en las plazas y zonas comunes, como se muestra a continuación.\n\nA partir de su investigación, el ingeniero propone realizar una conexión por medio de ondas electromagnéticas, con todas las antenas conectadas entre sí y con frecuencias de onda, sin costo, como las ondas de radio. Su propuesta se llama \"Megazonas wifi\" y se muestra en el siguiente esquema:",
       "hasSectionImage": true,
-      "sectionImageUrl": "",
+      "sectionImageUrl": "https://cdn.invicto.com.co/icfes/science/2025_2_session1/q_04_section.png",
       "sectionImageAiDescription": "La sección contiene dos esquemas.\n\nEsquema superior titulado \"Esquema wifi zonas comunitarias\": representación de un pueblo circular con casas, árboles, personas y una plaza central con una fuente. Hay una \"Antena principal\" en la parte alta del pueblo, una \"Antena secundaria\" en la parte baja, y un tercer punto de acceso en el lado izquierdo. A la derecha aparece una nube etiquetada \"Internet\" conectada por una flecha vertical a un icono de antena. Entre la antena derecha y la antena principal hay una flecha horizontal doble rotulada \"Conexión por ondas\". Desde la antena principal del pueblo hacia la nube de Internet sale una flecha curva gruesa rotulada \"Conexión por fibra óptica\". Hay un recuadro de leyenda con un icono y el texto \"Punto de acceso\".\n\nEsquema inferior titulado \"Esquema Megazonas wifi\": varias antenas interconectadas por líneas punteadas formando una red mallada. A la izquierda hay una \"Escuela\" conectada a la red. En la parte central superior aparece \"Cabecera rural 3\". A la derecha superior está la nube \"Internet\" conectada verticalmente a una antena y por una flecha horizontal doble hacia la red; cerca de ahí aparece la etiqueta \"Red fija\". En la parte inferior izquierda está la \"Cabecera rural 1\" con su \"Antena principal\" y \"Antena secundaria\". En la parte inferior derecha está la \"Cabecera rural 2\" con su \"Antena principal\" y \"Antena secundaria\". Un recuadro indica: \"Las ondas de la señal pueden tener frecuencias entre los 928 MHz y los 5.850 MHz, para mayor cobertura\".",
       "questions": [
         {
@@ -194,28 +194,28 @@
               "optionId": "A",
               "type": "image",
               "optionText": "",
-              "optionImageUrl": "",
+              "optionImageUrl": "https://cdn.invicto.com.co/icfes/science/2025_2_session1/q_05_a.png",
               "optionAiDescription": "Opción con dos gráficos de onda seno rotulados, plot in the same graph \"Grupo \\(1\\)\" y \"Grupo \\(2\\)\", ambos con ejes amplitud-tiempo. En ambos paneles se observan casi el mismo número de oscilaciones en el mismo intervalo de tiempo, aproximadamente \\(9\\) a \\(10\\) ciclos cada uno. La frecuencia aparente de ambos grupos es muy similar."
             },
             {
               "optionId": "B",
               "type": "image",
               "optionText": "",
-              "optionImageUrl": "",
+              "optionImageUrl": "https://cdn.invicto.com.co/icfes/science/2025_2_session1/q_05_b.png",
               "optionAiDescription": "Opción con dos gráficos de onda seno. En \"Grupo \\(1\\)\" hay alta frecuencia, aproximadamente \\(9\\) a \\(10\\) oscilaciones en el intervalo. En \"Grupo \\(2\\)\" hay baja frecuencia, aproximadamente \\(2\\) ciclos en el mismo intervalo. La frecuencia del Grupo \\(2\\) es menor que la del Grupo \\(1\\)."
             },
             {
               "optionId": "C",
               "type": "image",
               "optionText": "",
-              "optionImageUrl": "",
+              "optionImageUrl": "https://cdn.invicto.com.co/icfes/science/2025_2_session1/q_05_c.png",
               "optionAiDescription": "Opción con dos gráficos de onda seno. Tanto \"Grupo \\(1\\)\" como \"Grupo \\(2\\)\" muestran baja frecuencia, alrededor de \\(2\\) ciclos en el intervalo temporal. Las frecuencias son parecidas entre sí y bajas."
             },
             {
               "optionId": "D",
               "type": "image",
               "optionText": "",
-              "optionImageUrl": "",
+              "optionImageUrl": "https://cdn.invicto.com.co/icfes/science/2025_2_session1/q_05_d.png",
               "optionAiDescription": "Opción con dos gráficos de onda seno. \"Grupo \\(1\\)\" muestra baja frecuencia, cerca de \\(2\\) ciclos en el intervalo temporal. \"Grupo \\(2\\)\" muestra alta frecuencia, cerca de \\(10\\) ciclos en el mismo intervalo. La frecuencia del Grupo \\(2\\) es aproximadamente \\(5\\) veces la del Grupo \\(1\\)."
             }
           ],
@@ -334,28 +334,28 @@
               "optionId": "A",
               "type": "image",
               "optionText": "",
-              "optionImageUrl": "",
+              "optionImageUrl": "https://cdn.invicto.com.co/icfes/science/2025_2_session1/q_08_a.png",
               "optionAiDescription": "Secuencia temporal de 4 etapas con una flecha rotulada \"Tiempo\". Etapa 1: un círculo único claro rotulado \"Población inicial de monos\". Etapa 2: un círculo dividido físicamente por una franja vertical blanca, formando dos mitades del mismo tono claro, rotulado \"Aparece el río\". Etapa 3: un círculo dividido físicamente por una franja vertical blanca, con el lado izquierdo claro y el derecho oscuro, rotulado \"Aislamiento reproductivo\". Etapa 4: dos círculos pequeños y separados, uno claro y otro oscuro, rotulados \"Dos especies de monos\"."
             },
             {
               "optionId": "B",
               "type": "image",
               "optionText": "",
-              "optionImageUrl": "",
+              "optionImageUrl": "https://cdn.invicto.com.co/icfes/science/2025_2_session1/q_08_b.png",
               "optionAiDescription": "Secuencia temporal de 4 etapas con una flecha rotulada \"Tiempo\". Etapa 1: un círculo único claro rotulado \"Población inicial de monos\". Etapa 2: un círculo con un degradado horizontal de claro a oscuro rotulado \"Aparece el río\". Etapa 3: un círculo dividido verticalmente mostrando un degradado, con el lado izquierdo claro y el derecho oscuro, rotulado \"Aislamiento reproductivo\". Etapa 4: dos círculos pequeños y separados, uno claro y otro oscuro, rotulados \"Dos especies de monos\"."
             },
             {
               "optionId": "C",
               "type": "image",
               "optionText": "",
-              "optionImageUrl": "",
+              "optionImageUrl": "https://cdn.invicto.com.co/icfes/science/2025_2_session1/q_08_c.png",
               "optionAiDescription": "Secuencia temporal de 4 etapas con una flecha rotulada \"Tiempo\". Etapa 1: un círculo único claro rotulado \"Población inicial de monos\". Etapa 2: un círculo dividido físicamente por una franja vertical blanca, formando dos mitades del mismo tono claro, rotulado \"Aparece el río\". Etapa 3: un círculo unido mostrando un degradado, con el lado izquierdo claro y el derecho oscuro, rotulado \"Aislamiento reproductivo\". Etapa 4: dos círculos pequeños y separados, uno claro y otro oscuro, rotulados \"Dos especies de monos\"."
             },
             {
               "optionId": "D",
               "type": "image",
               "optionText": "",
-              "optionImageUrl": "",
+              "optionImageUrl": "https://cdn.invicto.com.co/icfes/science/2025_2_session1/q_08_d.png",
               "optionAiDescription": "Secuencia temporal de 4 etapas con una flecha rotulada \"Tiempo\". Etapa 1: un círculo único claro rotulado \"Población inicial de monos\". Etapa 2: un círculo mostrando un degradado, con el lado izquierdo claro y el derecho oscuro, rotulado \"Aparece el río\". Etapa 3: un círculo claro con una zona oscura difusa en el centro, rotulado \"Aislamiento reproductivo\". Etapa 4: dos círculos concéntricos, uno exterior claro y otro interior oscuro, rotulados \"Dos especies de monos\"."
             }
           ],
@@ -384,28 +384,28 @@
               "optionId": "A",
               "type": "image",
               "optionText": "",
-              "optionImageUrl": "",
+              "optionImageUrl": "https://cdn.invicto.com.co/icfes/science/2025_2_session1/q_09_a.png",
               "optionAiDescription": "Gráfica fuerza vs. desplazamiento. Desde \\(0\\) hasta \\(4\\ \\text{m}\\) la fuerza es aproximadamente constante. De \\(4\\) a \\(6\\ \\text{m}\\) la fuerza aumenta linealmente."
             },
             {
               "optionId": "B",
               "type": "image",
               "optionText": "",
-              "optionImageUrl": "",
+              "optionImageUrl": "https://cdn.invicto.com.co/icfes/science/2025_2_session1/q_09_b.png",
               "optionAiDescription": "Gráfica fuerza vs. desplazamiento. Desde \\(0\\) hasta \\(4\\ \\text{m}\\) la fuerza es aproximadamente constante. De \\(4\\) a \\(6\\ \\text{m}\\) la fuerza disminuye linealmente."
             },
             {
               "optionId": "C",
               "type": "image",
               "optionText": "",
-              "optionImageUrl": "",
+              "optionImageUrl": "https://cdn.invicto.com.co/icfes/science/2025_2_session1/q_09_c.png",
               "optionAiDescription": "Gráfica fuerza vs. desplazamiento. Desde \\(0\\) hasta \\(4\\ \\text{m}\\) la fuerza aumenta linealmente. De \\(4\\) a \\(6\\ \\text{m}\\) la fuerza permanece constante en un valor alto."
             },
             {
               "optionId": "D",
               "type": "image",
               "optionText": "",
-              "optionImageUrl": "",
+              "optionImageUrl": "https://cdn.invicto.com.co/icfes/science/2025_2_session1/q_09_d.png",
               "optionAiDescription": "Gráfica fuerza vs. desplazamiento. Desde \\(0\\) hasta \\(4\\) o \\(5\\ \\text{m}\\) la fuerza disminuye linealmente. Luego permanece constante hasta \\(6\\ \\text{m}\\)."
             }
           ],
@@ -426,7 +426,7 @@
           "questionId": "q_10",
           "questionText": "Una estudiante encuentra en un libro información sobre algunos minerales y sus características (ver tabla).\n\nDe acuerdo con la tabla, ¿cuáles minerales tienen las mismas características?",
           "hasQuestionImage": true,
-          "questionImageUrl": "",
+          "questionImageUrl": "https://cdn.invicto.com.co/icfes/science/2025_2_session1/q_10.png",
           "questionImageAiDescription": "Tabla de \\(4\\) columnas con encabezados: Mineral | Color | Brillo | Transparencia. Filas:\n\\(1\\) | Azul | Metálico | Sí\n\\(2\\) | Rojo | No metálico | No\n\\(3\\) | Azul | No metálico | Sí\n\\(4\\) | Verde | Metálico | No\n\\(5\\) | Rojo | Metálico | No\n\\(6\\) | Azul | No metálico | Sí\n\\(7\\) | Rojo | No metálico | No\n\\(8\\) | Verde | Metálico | Sí",
           "optionsType": "text",
           "options": [
@@ -476,7 +476,7 @@
           "questionId": "q_11",
           "questionText": "El cuero cabelludo se compone de una parte fibrosa, formada de queratina (cabello o pelo), y una parte celular. En las células capilares sucede la división celular solamente mediante el proceso de mitosis. Estas células nuevas secretan las fibras de queratina, como se muestra en la figura.\n\n¿Qué papel específico cumple la mitosis en el pelo?",
           "hasQuestionImage": true,
-          "questionImageUrl": "",
+          "questionImageUrl": "https://cdn.invicto.com.co/icfes/science/2025_2_session1/q_11.png",
           "questionImageAiDescription": "Esquema del folículo piloso en corte. Se observan etiquetas: Cabello, Superficie de la piel, Sebo, Folículo, Glándula sebácea y Célula capilar. A la derecha hay un diagrama celular: una \"Célula madre\" \\(2n\\) entra en \"Mitosis\" y produce dos células hijas también marcadas \\(2n\\). Debajo se lee \"Producción de clones de la célula madre\" y una nota \"\\(n =\\) número de cromosomas\".",
           "optionsType": "text",
           "options": [
@@ -526,7 +526,7 @@
           "questionId": "q_12",
           "questionText": "La malaria aviar es una enfermedad causada por parásitos del género \\(\\textit{Plasmodium}\\) y es transmitida por la picadura de zancudos a las diferentes especies de aves. A continuación, se muestra una parte del ciclo de vida de este parásito:\n\nSegún el anterior diagrama, ¿qué tipo de interacción tiene el parásito con el ave y con el zancudo?",
           "hasQuestionImage": true,
-          "questionImageUrl": "",
+          "questionImageUrl": "https://cdn.invicto.com.co/icfes/science/2025_2_session1/q_12.png",
           "questionImageAiDescription": "Diagrama cíclico del ciclo de vida del parásito. Elementos alrededor del ciclo: un zancudo, un ave, un órgano del ave (hígado) y una imagen de células sanguíneas. Textos alrededor de las flechas: \"Reproducción del parásito y desarrollo de los huevos\", \"Transmisión del parásito a otra ave\", \"Reinicio del ciclo\", \"El zancudo se alimenta de sangre infectada\", \"Infección del hígado y daño de los glóbulos rojos del ave\", \"Transmisión del parásito al ave\". En el centro se lee: \"El parásito se reproduce en el intestino del insecto sin afectar su funcionamiento\".",
           "optionsType": "text",
           "options": [
@@ -576,7 +576,7 @@
           "questionId": "q_13",
           "questionText": "Dos átomos pertenecen al mismo elemento químico cuando tienen la misma cantidad de protones. De esta forma, si dos átomos tienen la misma cantidad de protones, pero distinta cantidad de neutrones, serán isótopos. En la siguiente tabla, se representa el número de protones y neutrones para algunos átomos.\n\nSegún la información suministrada, ¿cuál de las siguientes parejas de átomos son isótopos?",
           "hasQuestionImage": true,
-          "questionImageUrl": "",
+          "questionImageUrl": "https://cdn.invicto.com.co/icfes/science/2025_2_session1/q_13.png",
           "questionImageAiDescription": "Tabla con \\(3\\) columnas: Átomo | Protones | Neutrones. Filas:\nÑ | \\(1\\) | \\(0\\)\nX | \\(2\\) | \\(1\\)\nY | \\(1\\) | \\(2\\)\nZ | \\(2\\) | \\(2\\)",
           "optionsType": "text",
           "options": [
@@ -626,7 +626,7 @@
           "questionId": "q_14",
           "questionText": "Las unidades de concentración de disoluciones indican la cantidad de soluto disuelto en una solución. Por ejemplo, tenemos las siguientes unidades:\n\n- \\(%\\ p/p\\): es la cantidad en gramos del soluto presente en \\(100\\) gramos de la disolución.\n- \\(%\\ p/v\\): indica el número de gramos de soluto que hay en cada \\(100\\ \\text{mL}\\) de disolución.\n- Molaridad \\((M)\\): es el número de moles de soluto en \\(1\\ \\text{L}\\) de disolución.\n\nLas concentraciones de dos disoluciones del mismo soluto se reportaron en la siguiente tabla.\n\nDe acuerdo con la información anterior, si se tienen dos volúmenes iguales de las disoluciones, ¿cuál de las disoluciones tiene mayor masa de soluto?",
           "hasQuestionImage": true,
-          "questionImageUrl": "",
+          "questionImageUrl": "https://cdn.invicto.com.co/icfes/science/2025_2_session1/q_14.png",
           "questionImageAiDescription": "Tabla con \\(4\\) columnas: Disolución | Porcentaje \\((\\%\\ p/p)\\) | Porcentaje \\((\\%\\ p/v)\\) | Molaridad \\((M)\\). Filas:\n\\(1\\) | \\(12\\) | \\(12\\) | \\(2{,}05\\)\n\\(2\\) | \\(24\\) | \\(24\\) | \\(4{,}10\\)",
           "optionsType": "text",
           "options": [
@@ -676,7 +676,7 @@
           "questionId": "q_15",
           "questionText": "Camila elabora un experimento donde acerca un imán a una jarra que tiene una esfera de hierro en su interior, y mide la velocidad que alcanza la esfera al acercar el imán usando diferentes líquidos, como se muestra en la figura.\n\nElla anota los resultados en la siguiente tabla.\n\nCamila concluye que los resultados de la tabla demuestran que las sustancias viscosas disminuyen la velocidad de la esfera.\n\nDe acuerdo con la información anterior, ¿qué se debería modificar para apoyar de manera correcta la conclusión de Camila?",
           "hasQuestionImage": true,
-          "questionImageUrl": "",
+          "questionImageUrl": "https://cdn.invicto.com.co/icfes/science/2025_2_session1/q_15.png",
           "questionImageAiDescription": "Tabla con 2 columnas: Distancia del imán a la esfera (cm) y Velocidad de la esfera (m/s). Las 4 filas tienen la misma distancia 5 cm, y velocidades 3,0, 2,0, 1,0, 0,6. La tabla no identifica qué líquido corresponde a cada velocidad ni reporta viscosidades.",
           "optionsType": "text",
           "options": [
@@ -726,7 +726,7 @@
           "questionId": "q_16",
           "questionText": "Juan asiste al médico porque nota que está teniendo problemas de estreñimiento. El médico le enseña la siguiente tabla sobre algunos tipos de compuestos presentes en los alimentos y su función en el organismo.\n\nDe acuerdo con la información de la tabla, ¿qué tipo de alimentos debe consumir Juan para solucionar su problema de estreñimiento?",
           "hasQuestionImage": true,
-          "questionImageUrl": "",
+          "questionImageUrl": "https://cdn.invicto.com.co/icfes/science/2025_2_session1/q_16.png",
           "questionImageAiDescription": "Tabla con \\(2\\) columnas: Tipo de compuesto | Función en el organismo. Filas:\n- Vitaminas: \"Mantienen el buen funcionamiento del cuerpo; son esenciales para los huesos, el corazón, el cerebro, las enzimas y las hormonas.\"\n- Minerales: \"Son esenciales para el metabolismo, el desarrollo, el crecimiento y la regulación del funcionamiento de las células.\"\n- Fibra insoluble: \"Absorbe agua y favorece el paso de los alimentos por el tracto digestivo, y regulariza la función del intestino.\"\n- Fibra soluble: \"Reduce el colesterol y la absorción de azúcares en la sangre, retarda la digestión y produce sensación de saciedad.\"",
           "optionsType": "text",
           "options": [
@@ -784,28 +784,28 @@
               "optionId": "A",
               "type": "image",
               "optionText": "",
-              "optionImageUrl": "",
+              "optionImageUrl": "https://cdn.invicto.com.co/icfes/science/2025_2_session1/q_17_a.png",
               "optionAiDescription": "Gráfico de barras. Eje X: Tamaño de papa criolla (Grande, Mediana, Pequeña). Eje Y: Tiempo de reacción (s). Alturas aproximadas de las barras: Grande = 30, Mediana = 60, Pequeña = 30."
             },
             {
               "optionId": "B",
               "type": "image",
               "optionText": "",
-              "optionImageUrl": "",
+              "optionImageUrl": "https://cdn.invicto.com.co/icfes/science/2025_2_session1/q_17_b.png",
               "optionAiDescription": "Gráfico circular titulado 'Tiempo de reacción (s)'. La porción 'Grande' ocupa casi la mitad del círculo, 'Mediana' algo más de un cuarto, y 'Pequeña' la porción restante más pequeña."
             },
             {
               "optionId": "C",
               "type": "image",
               "optionText": "",
-              "optionImageUrl": "",
+              "optionImageUrl": "https://cdn.invicto.com.co/icfes/science/2025_2_session1/q_17_c.png",
               "optionAiDescription": "Gráfico de barras. Eje X: Tamaño de papa criolla (Grande, Mediana, Pequeña). Eje Y: Tiempo de reacción (s). Alturas aproximadas de las barras: Grande = 120, Mediana = 60, Pequeña = 30. Muestra una tendencia descendente clara."
             },
             {
               "optionId": "D",
               "type": "image",
               "optionText": "",
-              "optionImageUrl": "",
+              "optionImageUrl": "https://cdn.invicto.com.co/icfes/science/2025_2_session1/q_17_d.png",
               "optionAiDescription": "Gráfico circular titulado 'Tiempo de reacción (s)'. La porción 'Pequeña' ocupa exactamente la mitad (semicírculo superior), mientras que 'Grande' y 'Mediana' se dividen la otra mitad inferior."
             }
           ],
@@ -956,7 +956,7 @@
           "questionId": "q_21",
           "questionText": "La siguiente gráfica muestra cómo varía la temperatura y el volumen de un gas ideal a presión constante.\n\nUn estudiante tiene un gas ideal en un recipiente cerrado de paredes flexibles sobre el cual se aplica una presión externa constante de \\(1\\ \\text{atm}\\). ¿Qué pasará si hay un aumento en su temperatura?",
           "hasQuestionImage": true,
-          "questionImageUrl": "",
+          "questionImageUrl": "https://cdn.invicto.com.co/icfes/science/2025_2_session1/q_21.png",
           "questionImageAiDescription": "Gráfica titulada \"Con presión constante\". Eje vertical: Volumen. Eje horizontal: Temperatura. Se muestra una recta ascendente que pasa cerca del origen, indicando relación lineal directa entre temperatura y volumen a presión constante. Hay líneas punteadas horizontal y vertical que marcan un punto intermedio de la recta.",
           "optionsType": "text",
           "options": [
@@ -1006,7 +1006,7 @@
           "questionId": "q_22",
           "questionText": "La metamorfosis en los insectos puede seguir uno de los dos modelos descritos a continuación:\n\n- Modelo \\(1\\) de crecimiento gradual: en el cual el insecto, en sus primeras etapas de vida, es muy similar a los adultos.\n- Modelo \\(2\\) con transformaciones bruscas: en el cual las larvas son diferentes a los adultos y existe una fase intermedia o pupal entre la larva y el adulto.\n\nA continuación, se muestran los dos modelos:\n\nAhora, observe el siguiente ciclo de vida:\n\n¿A qué modelo pertenece el tipo de metamorfosis que tienen las mariposas?",
           "hasQuestionImage": true,
-          "questionImageUrl": "",
+          "questionImageUrl": "https://cdn.invicto.com.co/icfes/science/2025_2_session1/q_22.png",
           "questionImageAiDescription": "Cuadro comparativo con dos columnas tituladas \"Modelo 1\" y \"Modelo 2\". En el Modelo 1 aparece la secuencia: huevo, seguido de un insecto juvenil similar al adulto con la etiqueta \"Ausencia de alas\", y luego \"Presencia de alas\" hacia la etapa adulta, representada por un saltamontes. En el Modelo 2 aparece la secuencia: huevo, seguido de larva, luego pupa y finalmente la etapa adulta, representada por un mosquito.",
           "optionsType": "text",
           "options": [
@@ -1056,7 +1056,7 @@
           "questionId": "q_23",
           "questionText": "El tetra cardenal \\((\\textit{Paracheirodon axelrodi})\\) es un pez común en los acuarios de las casas, muy llamativo por su cuerpo colorido y alargado. Estos peces requieren acuarios con condiciones de temperatura, pH y concentraciones de amoníaco y nitritos muy específicas, como se muestra en la tabla.\n\nMario tiene en su casa un acuario con varios peces, y al limpiarlo, no enjuagó bien el detergente y dejó residuos. Las condiciones del agua del acuario se afectaron y se llegó a una temperatura de \\(22{,}4\\ ^\\circ\\text{C}\\), un pH de \\(10{,}4\\) y concentraciones de \\(25{,}8\\ \\text{mg/L}\\) y \\(0{,}9\\ \\text{mg/L}\\) de amoníaco y nitritos, respectivamente. En consecuencia, ¿qué le sucederá a los peces en estas nuevas condiciones?",
           "hasQuestionImage": true,
-          "questionImageUrl": "",
+          "questionImageUrl": "https://cdn.invicto.com.co/icfes/science/2025_2_session1/q_23.png",
           "questionImageAiDescription": "Tabla titulada \"Tolerancia (niveles máximos y mínimos)\" con columnas: Temperatura mínima, Temperatura máxima, pH ácido, pH alcalino, Amoníaco máximo, Nitrito máximo. Valores: temperatura mínima \\(19{,}6\\ ^\\circ\\text{C}\\); temperatura máxima \\(33{,}7\\ ^\\circ\\text{C}\\); pH ácido \\(2{,}9\\); pH alcalino \\(8{,}8\\); amoníaco máximo \\(23{,}7\\ \\text{mg/L}\\); nitrito máximo \\(1{,}1\\ \\text{mg/L}\\).",
           "optionsType": "text",
           "options": [
@@ -1106,7 +1106,7 @@
           "questionId": "q_24",
           "questionText": "Un jardinero utiliza un rociador y observa que a medida que aumenta la distancia, la intensidad de gotas de agua que llega a los cuerpos disminuye. Por ejemplo, a los \\(2\\ \\text{m}\\) de distancia la intensidad será de \\(\\frac{1}{4}\\ \\text{mm}\\), como se muestra en la imagen.\n\nTeniendo en cuenta la información anterior, ¿cómo debe ser la intensidad de gotas a los \\(5\\ \\text{m}\\) de distancia?",
           "hasQuestionImage": true,
-          "questionImageUrl": "",
+          "questionImageUrl": "https://cdn.invicto.com.co/icfes/science/2025_2_session1/q_24.png",
           "questionImageAiDescription": "Diagrama de un rociador emitiendo un abanico. Se muestran arcos concéntricos a distancias de 1 m, 2 m, 3 m y 4 m. A 1 m, el área abarcada es 1 unidad completa sombreada. A 2 m, la misma porción del abanico se divide en 4 cuadrículas y solo 1 está sombreada. A 3 m, se divide en 9 cuadrículas con 1 sombreada. A 4 m, se divide en 16 cuadrículas con 1 sombreada. Esto ilustra visualmente cómo la concentración disminuye proporcionalmente al cuadrado de la distancia.",
           "optionsType": "text",
           "options": [
@@ -1214,28 +1214,28 @@
               "optionId": "A",
               "type": "image",
               "optionText": "",
-              "optionImageUrl": "",
+              "optionImageUrl": "https://cdn.invicto.com.co/icfes/science/2025_2_session1/q_26_a.png",
               "optionAiDescription": "Gráfico de líneas titulado \"Curva de crecimiento bacteriano\". Eje horizontal tiempo hasta \\(16\\ \\text{h}\\), eje vertical número de bacterias \\((\\log)\\). La curva inicia en \\(0\\), crece linealmente desde el comienzo hasta cerca de \\(5\\) en \\(5\\ \\text{h}\\), permanece constante entre aproximadamente \\(5\\) y \\(9\\ \\text{h}\\), y luego desciende linealmente hasta \\(0\\) en \\(14\\ \\text{h}\\). No presenta fase inicial de adaptación sin crecimiento."
             },
             {
               "optionId": "B",
               "type": "image",
               "optionText": "",
-              "optionImageUrl": "",
+              "optionImageUrl": "https://cdn.invicto.com.co/icfes/science/2025_2_session1/q_26_b.png",
               "optionAiDescription": "Tabla dispuesta verticalmente con 3 columnas: Crecimiento bacteriano, Tiempo (h) y Número de bacterias (log). Contiene 14 filas con los siguientes valores correspondientes (Crecimiento, Tiempo, Número): (0, 1, 0), (1, 2, 1), (2, 3, 1), (3, 4, 1), (4, 5, 2), (5, 6, 3), (6, 7, 4), (7, 8, 5), (8, 9, 5), (9, 10, 4), (10, 11, 3), (11, 12, 2), (12, 13, 1), (13, 14, 0)."
             },
             {
               "optionId": "C",
               "type": "image",
               "optionText": "",
-              "optionImageUrl": "",
+              "optionImageUrl": "https://cdn.invicto.com.co/icfes/science/2025_2_session1/q_26_c.png",
               "optionAiDescription": "Gráfico de líneas titulado \"Curva de crecimiento bacteriano\". Eje horizontal tiempo hasta \\(16\\ \\text{h}\\), eje vertical número de bacterias \\((\\log)\\). La curva empieza con un tramo horizontal alrededor de \\(1\\) desde \\(0\\) hasta cerca de \\(3\\ \\text{h}\\) (fase sin crecimiento), luego asciende hasta alrededor de \\(5\\) entre \\(3\\) y \\(7\\ \\text{h}\\), permanece constante cerca de \\(5\\) entre \\(7\\) y \\(9\\ \\text{h}\\), y finalmente desciende progresivamente hasta \\(0\\) en \\(14\\ \\text{h}\\)."
             },
             {
               "optionId": "D",
               "type": "image",
               "optionText": "",
-              "optionImageUrl": "",
+              "optionImageUrl": "https://cdn.invicto.com.co/icfes/science/2025_2_session1/q_26_d.png",
               "optionAiDescription": "Tabla con dos columnas: \"Crecimiento bacteriano\" y \"Número de bacterias \\((\\log)\\)\". Filas para \\(0\\) a \\(14\\): \\(1,1,1,1,2,3,4,5,5,5,4,3,2,1,0\\). La primera columna no representa tiempo explícitamente y el formato no identifica el eje temporal como horas."
             }
           ],
@@ -1256,7 +1256,7 @@
           "questionId": "q_27",
           "questionText": "En un laboratorio se usan los cromosomas de dos individuos de una especie de mosca para hacer el siguiente cruce:\n\nDe acuerdo con la información del cruce, el individuo resultante es homocigoto o heterocigoto para este gen?",
           "hasQuestionImage": true,
-          "questionImageUrl": "",
+          "questionImageUrl": "https://cdn.invicto.com.co/icfes/science/2025_2_session1/q_27.png",
           "questionImageAiDescription": "Esquema de cruce genético. A la izquierda, \"Mosca de ojos rojos\" asociada a un par de cromosomas con ambos alelos marcados \\(G\\) y \\(G\\). A la derecha, \"Mosca de ojos blancos\" asociada a un par de cromosomas con ambos alelos marcados \\(g\\) y \\(g\\). Flechas convergen hacia abajo a un individuo resultante con un par de cromosomas que porta alelos \\(G\\) y \\(g\\), acompañado del dibujo de una \"Mosca de ojos rojos\".",
           "optionsType": "text",
           "options": [
@@ -1306,7 +1306,7 @@
           "questionId": "q_28",
           "questionText": "Para efectuar un procedimiento, un estudiante tiene las sustancias que se relacionan en la tabla.\n\nSi el estudiante debe usar una sustancia cuyo punto de ebullición sea menor que \\(130\\ ^\\circ\\text{C}\\), soluble en agua y que no conduzca la electricidad, ¿cuál sustancia debería elegir?",
           "hasQuestionImage": true,
-          "questionImageUrl": "",
+          "questionImageUrl": "https://cdn.invicto.com.co/icfes/science/2025_2_session1/q_28.png",
           "questionImageAiDescription": "Tabla dispuesta verticalmente con 4 columnas y encabezados divididos en múltiples líneas: 'Sustancia', 'Punto de\nebullición\n(°C)', '¿Es soluble\nen agua?' y '¿Es\nconductora?'. Contiene 4 filas con los siguientes valores: (Sustancia 1, -196, Sí, Sí), (Sustancia 2, 59, Sí, Sí), (Sustancia 3, -188, No, No), (Sustancia 4, -34, Sí, No).",
           "optionsType": "text",
           "options": [
@@ -1356,7 +1356,7 @@
           "questionId": "q_29",
           "questionText": "Un investigador realizó un experimento en el que sometió un bloque de hierro a temperaturas muy altas. Él descubrió que la temperatura del hierro no cambia mientras cambia su fase. La siguiente tabla muestra los registros que hizo el investigador de temperatura, fase y cambios de fase del hierro durante su experimento.\n\n¿Cuál de las siguientes gráficas corresponde a los datos de temperatura en el tiempo registrados por el investigador?",
           "hasQuestionImage": true,
-          "questionImageUrl": "",
+          "questionImageUrl": "https://cdn.invicto.com.co/icfes/science/2025_2_session1/q_29.png",
           "questionImageAiDescription": "Tabla con 2 columnas: Temperatura (°C) y Estado del hierro. Contiene 6 filas con los siguientes valores (Temperatura, Estado): (0, Sólido), (750, Sólido), (1.535, Cambio de sólido a líquido), (2.255, Líquido), (2.750, Cambio de líquido a gaseoso), (3.000, Gaseoso).",
           "optionsType": "image",
           "options": [
@@ -1364,28 +1364,28 @@
               "optionId": "A",
               "type": "image",
               "optionText": "",
-              "optionImageUrl": "",
+              "optionImageUrl": "https://cdn.invicto.com.co/icfes/science/2025_2_session1/q_29_a.png",
               "optionAiDescription": "Gráfica temperatura vs. tiempo con aumento continuo por tramos inclinados desde \\(0\\) hasta cerca de \\(3.000\\ ^\\circ\\text{C}\\), etiquetando regiones de sólido, líquido y gaseoso, sin mesetas en los cambios de fase."
             },
             {
               "optionId": "B",
               "type": "image",
               "optionText": "",
-              "optionImageUrl": "",
+              "optionImageUrl": "https://cdn.invicto.com.co/icfes/science/2025_2_session1/q_29_b.png",
               "optionAiDescription": "Gráfica de Temperatura (°C) vs. Tiempo. Muestra una sola línea recta diagonal ascendente desde el origen en 0 hasta un punto final en 3.000 °C. A lo largo de esta recta se ubican las etiquetas 'Sólido' en la parte inferior, 'Líquido' en el medio y 'Gaseoso' en la parte superior. No presenta tramos horizontales que representen los cambios de fase."
             },
             {
               "optionId": "C",
               "type": "image",
               "optionText": "",
-              "optionImageUrl": "",
+              "optionImageUrl": "https://cdn.invicto.com.co/icfes/science/2025_2_session1/q_29_c.png",
               "optionAiDescription": "Gráfica temperatura vs. tiempo con ascenso inicial desde \\(0\\) hasta alrededor de \\(1.500\\ ^\\circ\\text{C}\\), primera meseta horizontal cerca de \\(1.535\\ ^\\circ\\text{C}\\), nuevo ascenso hasta alrededor de \\(2.750\\ ^\\circ\\text{C}\\), segunda meseta horizontal cerca de \\(2.750\\ ^\\circ\\text{C}\\), y ascenso final hasta alrededor de \\(3.000\\ ^\\circ\\text{C}\\). Etiquetas de regiones: sólido, líquido y gaseoso."
             },
             {
               "optionId": "D",
               "type": "image",
               "optionText": "",
-              "optionImageUrl": "",
+              "optionImageUrl": "https://cdn.invicto.com.co/icfes/science/2025_2_session1/q_29_d.png",
               "optionAiDescription": "Gráfica de Temperatura (°C) vs. Tiempo con múltiples escalones. Muestra tramos ascendentes intercalados con tramos horizontales (mesetas) en aproximadamente 750 °C, 1.500 °C, 2.250 °C y 2.750 °C. Se observan las etiquetas 'Sólido' bajo la primera meseta, 'Líquido' bajo la meseta de 2.250 °C, y 'Gaseoso' en el punto final superior de 3.000 °C."
             }
           ],
