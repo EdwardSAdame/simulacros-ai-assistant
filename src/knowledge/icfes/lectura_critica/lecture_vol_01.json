@@ -49,8 +49,8 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "D",
+          "aiExplanation": "El problema consiste en identificar una paráfrasis fiel del segundo párrafo. Ese párrafo da \\(2\\) razones complementarias: \\(1\\) desde el nacimiento, los seres vivos buscan por instinto el placer y rechazan el dolor; \\(2\\) los sentimientos de placer y dolor son criterios reales de decisión y conducta. La opción \\(D\\) recoge exactamente esas dos ideas. La \\(A\\) introduce erróneamente “evitar el dolor del nacimiento”, algo que el texto no dice. La \\(B\\) invierte el sentido, porque habla de buscar dolor y huir del placer. La \\(C\\) contradice el texto al decir que buscamos la buena vida sin pensar en dolor o placer. Por eso, la correcta es \\(D\\)."
         },
         {
           "questionId": "q_02",
@@ -89,8 +89,8 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "D",
+          "aiExplanation": "La pregunta evalúa la relación lógica entre \\(2\\) enunciados. El primero afirma de manera general que la filosofía epicúrea busca orientar hacia la buena vida. El segundo precisa en qué consiste esa buena vida para el epicureísmo: una vida placentera orientada a conseguir placer y evitar dolor. Así, el enunciado \\(2\\) desarrolla y especifica el contenido del \\(1\\). No lo rechaza ni lo refuta, por lo que \\(A\\) y \\(C\\) son incorrectas. Tampoco es una síntesis del primero, porque añade información nueva y más concreta; por eso \\(B\\) no sirve. La correcta es \\(D\\)."
         },
         {
           "questionId": "q_03",
@@ -129,8 +129,8 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "A",
+          "aiExplanation": "El fragmento funciona como argumento porque sostiene que placer y dolor son sentimientos reales e irrefutables, y por eso sirven como criterios para decidir cómo actuar. Esa realidad de los sentimientos apoya la tesis de que nuestras acciones se orientan a buscar placer y evitar dolor. La opción \\(A\\) expresa justamente esa idea. La \\(B\\) habla de “ejemplifica”, pero el fragmento no es un ejemplo sino una justificación. La \\(C\\) cambia el foco hacia bien y mal, algo que no es lo central del fragmento citado. La \\(D\\) mezcla la idea de instinto y de bien/mal, que pertenecen a otras partes del texto. Por ello, la correcta es \\(A\\)."
         },
         {
           "questionId": "q_04",
@@ -169,8 +169,8 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "A",
+          "aiExplanation": "El fragmento defiende que existe una tendencia natural a buscar placer y evitar dolor, y que esta guía la conducta. La opción \\(A\\) es la más cercana porque también afirma que el comportamiento humano se moldea por experiencias agradables y desagradables, es decir, por placer y dolor. La \\(B\\) solo habla de la capacidad de sentir, no de que esa tendencia funcione como criterio ético o guía de acción. La \\(C\\) se centra en la felicidad y la naturaleza, pero no en la oposición placer-dolor como motor de conducta. La \\(D\\) incluso se opone al epicureísmo, porque niega que el placer sea el asunto central. Por eso, la correcta es \\(A\\)."
         },
         {
           "questionId": "q_05",
@@ -209,8 +209,8 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "C",
+          "aiExplanation": "La pregunta es retórica. Su función no es pedir información, sino reforzar la idea de que la sensación de dolor es un hecho real e indudable. Por eso, la intención del autor es afirmar que no se puede dudar del dolor. La \\(A\\) y la \\(B\\) convierten la pregunta en advertencia u orden, cosa que no ocurre. La \\(D\\) dice lo contrario del sentido del fragmento. La correcta es \\(C\\)."
         }
       ]
     },
@@ -259,8 +259,8 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "A",
+          "aiExplanation": "El tercer párrafo contrapone \\(2\\) fines: el objetivo teórico de alcanzar la verdad y la finalidad práctica de imponer el propio argumento. Para que esa contraposición funcione, se supone que la búsqueda de la verdad no es, en sí misma, un fin práctico como el de triunfar en política o en juicios. La \\(A\\) expresa ese supuesto. La \\(B\\) introduce la actualidad, que no aparece en el párrafo. La \\(C\\) exagera al decir que engañaban; el texto dice que buscaban convencer independientemente de la verdad o moralidad, no necesariamente engañar siempre. La \\(D\\) contradice la oposición central del párrafo. Por eso, la correcta es \\(A\\)."
         },
         {
           "questionId": "q_07",
@@ -299,8 +299,8 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "B",
+          "aiExplanation": "La afirmación \\(1\\) expresa relativismo: la verdad depende del punto de vista, las costumbres y la fuerza del argumento. La afirmación \\(2\\) expresa una tesis mucho más radical, cercana al nihilismo: nada existe, o no puede conocerse ni comunicarse. La primera no justifica la segunda porque del hecho de que la verdad dependa de perspectivas no se sigue que nada exista. Eso es exactamente lo que dice la opción \\(B\\). La \\(A\\) afirma lo contrario. La \\(C\\) y la \\(D\\) interpretan mal la frase “el hombre es la medida de todas las cosas”. Por eso, la correcta es \\(B\\)."
         }
       ]
     },
@@ -349,8 +349,8 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "B",
+          "aiExplanation": "Aquí “deslumbrar” no se usa en sentido literal de causar mucho brillo, sino en sentido figurado: causar admiración o impacto en otros mediante el dinero. El reemplazo más adecuado es “impresionar”. “Encandilar” es cercano, pero conserva más el matiz literal o afectivo y resulta menos preciso en este contexto social. “Ilusionar” y “engañar” cambian el sentido. Por eso, la respuesta correcta es \\(B\\)."
         },
         {
           "questionId": "q_09",
@@ -389,8 +389,8 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "B",
+          "aiExplanation": "El fragmento aparece al inicio y abre la reflexión sobre qué significa “la buena vida humana”. Su función principal es introducir el tema del texto, que luego será desarrollado con preguntas, ejemplos y una conclusión. La tesis más precisa aparece después: la buena vida humana ocurre entre seres humanos. Por eso, \\(A\\) no es la mejor. Tampoco es conclusión ni síntesis. La correcta es \\(B\\)."
         },
         {
           "questionId": "q_10",
@@ -429,8 +429,8 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "C",
+          "aiExplanation": "El autor plantea el tema de la buena vida humana, formula varias preguntas retóricas como “¿estarías contento?” o “¿Cuánto tiempo podrías vivir así?”, y usa ejemplos sobre dinero, casa, ropa y soledad para conducir al lector a una conclusión: la buena vida humana es una vida entre seres humanos. Esa estrategia corresponde a la opción \\(C\\). La \\(A\\) habla de ironía para decir lo contrario, lo cual no describe el texto. La \\(B\\) menciona una conclusión contraria, inexistente. La \\(D\\) alude a autoridades, que no aparecen. Por eso, la correcta es \\(C\\)."
         }
       ]
     },
@@ -479,8 +479,8 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "B",
+          "aiExplanation": "La expresión “lo que” retoma la idea anterior —que casi todas las sociedades han tenido música— y presenta su consecuencia o inferencia: eso sugiere que la apreciación musical es innata. Por tanto, introduce una relación causal o consecutiva entre ambas ideas. No plantea oposición, ni mera aclaración, ni simple adición. La correcta es \\(B\\)."
         },
         {
           "questionId": "q_12",
@@ -519,8 +519,8 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "C",
+          "aiExplanation": "El texto organiza una secuencia histórica: primero había flautas de hueso y percusiones; después surgieron instrumentos de madera, cuerda y metal; más tarde, guitarras eléctricas y consolas. Como la trompeta es de metal, debió aparecer después de las percusiones y antes de la guitarra eléctrica. La opción correcta es \\(C\\). Las \\(A\\) y \\(B\\) contradicen el orden del texto, y la \\(D\\) también."
         },
         {
           "questionId": "q_13",
@@ -559,8 +559,8 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "D",
+          "aiExplanation": "El texto contrasta “sonidos agradables” con “disonantes”. Por contexto, “disonantes” se refiere a sonidos que resultan desagradables al oído. No significa cautivantes, intensos ni necesariamente agudos. La correcta es \\(D\\)."
         },
         {
           "questionId": "q_14",
@@ -599,8 +599,8 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "B",
+          "aiExplanation": "Ese fragmento abre el texto y sitúa el asunto del que se va a hablar: la antigua relación entre los humanos y la música. Por eso su función es introducir el tema. No presenta todavía una tesis definitiva, ni resume, ni concluye. La correcta es \\(B\\)."
         }
       ]
     },
@@ -649,8 +649,8 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "C",
+          "aiExplanation": "El autor compara la dedicación a la literatura con llevar una solitaria en el cuerpo: algo que se alimenta de uno y lo vuelve su sirviente. Esa es explícitamente una comparación o analogía. No es principalmente contraste, exageración ni cita de autoridad. La correcta es \\(C\\)."
         },
         {
           "questionId": "q_16",
@@ -689,8 +689,8 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "B",
+          "aiExplanation": "La pregunta pide el fragmento que describe el modo de actuar de la solitaria dentro del organismo. La opción \\(B\\) responde de forma directa: se instala, se consustancia con el organismo, se alimenta de él, crece y se fortalece a su costa. Las demás opciones muestran consecuencias o testimonios, no la acción misma del parásito. Por eso, la correcta es \\(B\\)."
         },
         {
           "questionId": "q_17",
@@ -729,8 +729,8 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "B",
+          "aiExplanation": "José María dice que ya no vive para sí mismo, sino para la solitaria, y que no es más que “un sirviente” de ese ser. Esa descripción caracteriza una situación de sometimiento o esclavitud. No habla de libertad, ni de soledad, ni de inteligencia. La correcta es \\(B\\)."
         }
       ]
     },
@@ -739,8 +739,8 @@
       "sectionTitle": "",
       "sectionText": "",
       "hasSectionImage": true,
-      "sectionImageUrl": "",
-      "sectionImageAiDescription": "Infografía titulada \"PETRICOR: EL OLOR DE LA LLUVIA\" en letras grandes. Formato vertical con \\(4\\) viñetas principales apiladas y fondo oscuro. Viñeta \\(1\\): una gota de lluvia cae sobre suelo horizontal y genera una burbuja irregular de aire; un recuadro de texto dice: \"CUANDO LAS GOTAS DE LLUVIA IMPACTAN CONTRA EL SUELO, SE FORMAN BURBUJAS DE AIRE.\" Viñeta \\(2\\): burbuja más aplanada sobre el suelo con varias partículas circulares oscuras y claras dentro; recuadro de texto: \"ESTAS BURBUJAS 'ATRAPAN' PARTÍCULAS DE LA TIERRA \\(ACEITES Y QUÍMICOS PRODUCIDOS POR BACTERIAS\\).\" Viñeta \\(3\\): burbuja baja y extendida; se observan pequeñas partículas saliendo hacia arriba como efervescencia; recuadro de texto: \"LAS BURBUJAS HACEN EFERVESCENCIA COMO CHAMPAÑA Y ESPARCEN LAS PARTÍCULAS EN EL AMBIENTE.\" Viñeta \\(4\\), en la parte inferior, funciona como conclusión: texto a la izquierda \"EL CONJUNTO DE PARTÍCULAS ES LO QUE PRODUCE ESE OLOR LLAMADO 'PETRICOR'\", seguido de una flecha horizontal hacia la derecha y el texto \"O COMO LO CONOCES TÚ: TIERRA MOJADA\". En la esquina inferior derecha aparece la ilustración de una persona de cabello largo oliendo una taza. Pie de fuente: \"FUENTE 'How the Smell of Rain Bubbles From the Ground' - THE NEW YORK TIMES\" y marca \"PICTOLINE.COM\".",
+      "sectionImageUrl": "https://cdn.invicto.com.co/icfes/lecture/q_06_section.png",
+      "sectionImageAiDescription": "Infografía vertical con fondo oscuro, diseñada con márgenes amplios y espacios delimitados para evitar la superposición de elementos. Título principal en la parte superior: \"PETRICOR: EL OLOR DE LA LLUVIA\". Consta de 4 viñetas apiladas verticalmente. En cada viñeta, el texto explicativo está escrito con una tipografía pequeña, distribuido en varios renglones (texto envuelto/wrapped) y contenido estrictamente dentro de recuadros definidos. Viñeta 1: gota cayendo sobre el suelo formando una burbuja de aire; texto ajustado en bloque: \"CUANDO LAS GOTAS DE LLUVIA IMPACTAN CONTRA EL SUELO, SE FORMAN BURBUJAS DE AIRE.\". Viñeta 2: burbuja aplanada con partículas en su interior; texto pequeño y envuelto: \"ESTAS BURBUJAS 'ATRAPAN' PARTÍCULAS DE LA TIERRA (ACEITES Y QUÍMICOS PRODUCIDOS POR BACTERIAS).\". Viñeta 3: burbuja extendida liberando efervescencia; texto ajustado: \"LAS BURBUJAS HACEN EFERVESCENCIA COMO CHAMPAÑA Y ESPARCEN LAS PARTÍCULAS EN EL AMBIENTE.\". Viñeta 4: conclusión en la base inferior con el texto dividido en dos bloques pequeños para no saturar el espacio; a la izquierda \"EL CONJUNTO DE PARTÍCULAS ES LO QUE PRODUCE ESE OLOR LLAMADO 'PETRICOR'\", seguido de una flecha hacia la derecha que apunta a \"O COMO LO CONOCES TÚ: TIERRA MOJADA\". En la esquina inferior derecha, ilustración de una persona de cabello largo oliendo una taza. Pie de página en letra muy pequeña: \"FUENTE 'How the Smell of Rain Bubbles From the Ground' - THE NEW YORK TIMES\" y marca \"PICTOLINE.COM\".",
       "questions": [
         {
           "questionId": "q_18",
@@ -779,8 +779,8 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "C",
+          "aiExplanation": "La comparación con la champaña describe el modo en que las burbujas liberan gas y dispersan partículas en el ambiente. La opción \\(C\\) conserva exactamente esa idea de salida del gas de forma semejante a la de la champaña. La \\(A\\) introduce alcohol, irrelevante. La \\(B\\) habla de hervir, que no es lo mismo que efervescer. La \\(D\\) menciona color, aspecto no tratado. Por eso, la correcta es \\(C\\)."
         },
         {
           "questionId": "q_19",
@@ -819,8 +819,8 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "D",
+          "aiExplanation": "La infografía presenta un proceso en \\(4\\) etapas y el último cuadro enuncia el resultado final: el conjunto de partículas produce el olor llamado petricor o tierra mojada. Por su posición y contenido, cumple la función de cierre del texto. Aunque también resume el resultado, su papel principal en la secuencia es cerrar el proceso explicado. Por eso, la mejor opción es \\(D\\)."
         },
         {
           "questionId": "q_20",
@@ -859,8 +859,8 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "C",
+          "aiExplanation": "En ese contexto, la palabra “o” introduce una reformulación equivalente: “petricor” es otra manera de decir “tierra mojada”. No expresa oposición, causa-efecto ni adición, sino denominación alternativa. La correcta es \\(C\\)."
         },
         {
           "questionId": "q_21",
@@ -899,8 +899,8 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "D",
+          "aiExplanation": "La infografía explica un proceso secuencial: impacto de la lluvia, formación de burbujas, captura de partículas, efervescencia y producción del olor. Esa organización corresponde a una estrategia de explicación por pasos o etapas. La \\(C\\) es insuficiente porque no solo define “petricor”, sino que describe cómo se produce. Las \\(A\\) y \\(B\\) no corresponden a la estructura observada. Por eso, la correcta es \\(D\\)."
         }
       ]
     },
@@ -949,8 +949,8 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "B",
+          "aiExplanation": "La tesis del texto es que la infancia representa la sinceridad y la ausencia de hipocresía en sentimientos como el amor y el desamor. La opción \\(B\\) recoge mejor esa defensa: el niño ama con claridad, de forma sincera y leal. La \\(D\\) es demasiado amplia, porque el texto no dice que los niños digan siempre la verdad sobre todo, sino que son sinceros en sus afectos. La \\(C\\) exagera el retrato de la adultez. La \\(A\\) no corresponde al texto. Por eso, la correcta es \\(B\\)."
         },
         {
           "questionId": "q_23",
@@ -989,8 +989,8 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "B",
+          "aiExplanation": "El autor plantea una tesis clara: la infancia es la única certeza de sinceridad. Luego la defiende enumerando ejemplos y descripciones: los niños aman y detestan sinceramente, confiesan su desamor con claridad, muestran ternura honesta hacia múltiples objetos y seres. Esa acumulación de evidencias corresponde a la opción \\(B\\). No hay estructura de tesis-antítesis-síntesis, ni refutación final, ni ausencia de argumentos. Por eso, la correcta es \\(B\\)."
         }
       ]
     },
@@ -999,7 +999,7 @@
       "sectionTitle": "",
       "sectionText": "",
       "hasSectionImage": true,
-      "sectionImageUrl": "",
+      "sectionImageUrl": "https://cdn.invicto.com.co/icfes/lecture/q_08_section.png",
       "sectionImageAiDescription": "Página con cómic de \\(6\\) viñetas en una cuadrícula de \\(2\\) columnas por \\(3\\) filas, en blanco y negro. Trata sobre una niña en recuperación de lectura del Corán con una maestra. Viñeta \\(1\\): exterior de un edificio escolar con varias personas; cartela superior: \"El director de la escuela y mi padre creían que mi nivel de Corán era muy deficiente.\" Viñeta \\(2\\): la niña sentada ante un libro abierto en un aula; texto manuscrito superior: \"El árabe del Corán no es el mismo que el que se hablaba en clase\". Viñeta \\(3\\): la maestra sentada junto a la niña en un pupitre; globo de la maestra: \"¡Venga, Riad!\"; caja de texto cerca del libro: \"Explícame de qué habla este versículo.\"; texto manuscrito de la narradora: \"Como todo el mundo quería matarme a la hora del recreo, me venía bien\". Viñeta \\(4\\): la maestra levanta un brazo; la niña llora; globo grande: \"BUAAA\"; globo pequeño: \"Yo... No sé...\"; cartela superior: \"Yo me preguntaba si iba en serio o disimulaba. Si apenas conseguía leer...\" Viñeta \\(5\\): la maestra inclinada hacia la niña, ambas frente al libro; globo de la maestra: \"Venga, no pasa nada, volvemos a empezar, escucha bien.\" Viñeta \\(6\\): primer plano de la maestra sonriendo y de la niña parcialmente visible; cartela superior: \"Olía a una fragancia jabonosa y, de fondo, a un sudor embriagador y reconfortante.\"; globo: \"Bismilâ arrahmân arrahîm.\"; anotación manuscrita con flecha: \"Escucharla era muy agradable\".",
       "questions": [
         {
@@ -1039,8 +1039,8 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "B",
+          "aiExplanation": "El cómic se refiere explícitamente al Corán y menciona que el texto está dividido en versículos. Esa organización corresponde a un texto religioso, como la Biblia o el propio Corán. No se trata de un diccionario, cuentos ni una novela. Por eso, la correcta es \\(B\\)."
         },
         {
           "questionId": "q_25",
@@ -1079,8 +1079,8 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "C",
+          "aiExplanation": "En la viñeta \\(6\\), el globo contiene las palabras pronunciadas por la maestra: “Bismilâ arrahmân arrahîm”. El texto en cursiva con flecha dice: “Escucharla era muy agradable”, que es una valoración de la niña sobre la voz de la mujer. Así, la cursiva expresa el gusto de la niña por la voz de la maestra. La correcta es \\(C\\)."
         },
         {
           "questionId": "q_26",
@@ -1119,8 +1119,8 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "D",
+          "aiExplanation": "Los textos superiores dicen, por ejemplo, “mi padre creían”, “yo me preguntaba”, “escucharla era muy agradable”. Es claro que se trata de una narración en primera persona hecha por la niña protagonista. No es la voz de la maestra, del director ni del padre. La correcta es \\(D\\)."
         }
       ]
     },
@@ -1169,8 +1169,8 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "D",
+          "aiExplanation": "El autor distingue entre predicciones más precisas, que suelen fallar, y otras muy generales, que pueden parecer acertadas. “El papa Francisco sufrirá una grave enfermedad” es una predicción particular y el texto la presenta como equivocada. “En el mundo habrá más refugiados” es general y el autor dice que allí sí acertó. Por eso, cumplen funciones opuestas dentro de la argumentación. La correcta es \\(D\\)."
         },
         {
           "questionId": "q_28",
@@ -1209,8 +1209,8 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "D",
+          "aiExplanation": "El experimento de Forer mostró que todos los estudiantes recibieron la misma descripción general y, aun así, la consideraron precisa para su personalidad. Eso evidencia que una formulación vaga y amplia puede parecer muy personal a personas diferentes. La opción \\(D\\) expresa exactamente ese punto. La \\(A\\) agrega el matiz de “cosas positivas”, que no es el centro del experimento. La \\(B\\) introduce un sesgo del profesor que el texto no desarrolla. La \\(C\\) contradice los resultados. Por eso, la correcta es \\(D\\)."
         }
       ]
     },
@@ -1259,8 +1259,8 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "B",
+          "aiExplanation": "El texto dice que los alemanes entraron en el cuartel de Foch, “un antiguo coche-cama francés”, y luego afirma que la tregua se firmó “en el mismo vagón”. Además, Foch era comandante aliado y el coche era francés, es decir, en territorio aliado. La correcta es \\(B\\). No se habla de zona neutral ni de estación, y tampoco de un batallón."
         },
         {
           "questionId": "q_30",
@@ -1299,8 +1299,8 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "B",
+          "aiExplanation": "El texto afirma que, al escuchar las condiciones, los alemanes quedaron aturdidos, “comprendiendo por primera vez la magnitud de su derrota”. Eso indica que estaban vencidos, pero no eran plenamente conscientes de la gravedad de su situación. La \\(A\\) es posible en parte, pero menos precisa. La \\(C\\) confunde el lapso temporal con indecisión. La \\(D\\) no se desprende del pasaje. La correcta es \\(B\\)."
         },
         {
           "questionId": "q_31",
@@ -1339,8 +1339,8 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "B",
+          "aiExplanation": "El texto lo presenta como “portavoz del grupo” de los \\(6\\) alemanes que iban a recibir las condiciones de tregua de Foch, comandante supremo aliado. Por tanto, era el representante alemán encargado de negociar. La opción que mejor recoge esto es \\(B\\). Las demás le atribuyen nacionalidad o cargo equivocados."
         },
         {
           "questionId": "q_32",
@@ -1379,8 +1379,8 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "C",
+          "aiExplanation": "El texto principal afirma que al final de la Primera Guerra se desataron fuerzas de rencor y orgullo que condujeron a la Segunda. El fragmento de Churchill complementa esa idea al mostrar que incluso Foch pensó que el Tratado de Versalles no era paz duradera, sino una tregua que anticipaba otro conflicto. Así, aporta más razones para sostener que el final de la Primera Guerra preparó la Segunda. La correcta es \\(C\\)."
         }
       ]
     },
@@ -1429,8 +1429,8 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "D",
+          "aiExplanation": "El primer enunciado presenta el argumento de quienes consideran natural la extinción. El segundo, mediante una pregunta retórica, desarrolla y refuerza ese mismo argumento: si es natural, no habría por qué preocuparse. No lo contradice ni lo pone en duda; lo apoya. Por eso, la correcta es \\(D\\)."
         },
         {
           "questionId": "q_34",
@@ -1469,8 +1469,8 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "D",
+          "aiExplanation": "La cita de Burns expresa una postura hostil a la preservación y sugiere que la naturaleza no merece ayuda; en ese sentido, quienes están contra la preservación podrían verla como un apoyo a su tesis. La \\(B\\) es incorrecta porque el autor no defiende que la extinción sea antinatural en general, sino que cuestiona la aceleración causada por los humanos. La \\(C\\) sería una lectura desde la postura del autor, pero la pregunta pide qué dirían quienes están en contra de la preservación. Por eso, la correcta es \\(D\\)."
         }
       ]
     },
@@ -1519,8 +1519,8 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "C",
+          "aiExplanation": "En este contexto, “inmune a la infección” significa que no puede ser afectado por virus o gusanos. El mejor sinónimo es “invulnerable”. “Inatacable” no es tan preciso en este contexto técnico, y “proclive” o “propenso” significan lo contrario. Por eso, la correcta es \\(C\\)."
         },
         {
           "questionId": "q_36",
@@ -1559,8 +1559,8 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "C",
+          "aiExplanation": "La comparación con los soldados enfatiza la obediencia incuestionable: los computadores ejecutan órdenes sin evaluarlas moral o prácticamente. La \\(C\\) expresa esa idea central. La \\(B\\) es una consecuencia cercana, pero no recoge tan bien el sentido de la comparación. La \\(A\\) es un efecto posterior y la \\(D\\) contradice el texto. Por eso, la correcta es \\(C\\)."
         },
         {
           "questionId": "q_37",
@@ -1599,8 +1599,8 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "C",
+          "aiExplanation": "El enunciado \\(2\\) formula una tesis general: la obediencia incuestionable hace útiles a los computadores, pero también vulnerables. El enunciado \\(1\\) aporta un caso concreto que ilustra y confirma esa tesis: un programa malicioso será obedecido y replicado. Por tanto, \\(1\\) funciona como evidencia a favor de \\(2\\). La correcta es \\(C\\)."
         },
         {
           "questionId": "q_38",
@@ -1639,8 +1639,8 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "B",
+          "aiExplanation": "El texto se centra en un rasgo principal de los computadores: la obediencia a las instrucciones. Luego expone sus implicaciones: esa obediencia los hace útiles, pero también vulnerables a virus y gusanos. La opción \\(B\\) resume exactamente esa pregunta central. La \\(C\\) solo contempla ventajas, no desventajas. La \\(A\\) contradice el texto, que dice que es difícil hacerlos invulnerables. La \\(D\\) también contradice el texto, pues los computadores no distinguen buenos y malos efectos. Por eso, la correcta es \\(B\\)."
         },
         {
           "questionId": "q_39",
@@ -1679,8 +1679,8 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "B",
+          "aiExplanation": "El texto da un ejemplo explícito de un programa que ordena “cópiame y envíame a todas las direcciones que puedas encontrar en el disco duro”, y afirma que el computador obedecerá esa instrucción. Por eso, si es infectado por un programa así, enviará el programa a todas las direcciones que encuentre. La \\(A\\) y la \\(C\\) no se deducen del texto. La \\(D\\) es una afirmación general, no la consecuencia concreta de esa infección. La correcta es \\(B\\)."
         }
       ]
     },
@@ -1729,8 +1729,8 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "B",
+          "aiExplanation": "El texto dice de forma explícita que “la pequeñez de las partes constituía un gran obstáculo para la rapidez de mi trabajo”, por lo cual decidió hacer un ser gigantesco. Es decir, crear uno pequeño le habría tomado más tiempo o dificultado más el proceso. La correcta es \\(B\\). Las demás opciones introducen motivos que el texto no menciona."
         },
         {
           "questionId": "q_41",
@@ -1769,8 +1769,8 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "B",
+          "aiExplanation": "Con esa frase, el narrador expresa retrospectivamente su estado emocional y moral durante la creación: estaba obsesionado hasta el punto de perder sensibilidad ante todo salvo su objetivo. No formula una pregunta, ni una promesa, ni una simple descripción técnica del proceso. Está manifestando una emoción y valoración sobre su propia actitud pasada. Por eso, la correcta es \\(B\\)."
         }
       ]
     }
