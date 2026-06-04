@@ -49,8 +49,8 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "C",
+          "aiExplanation": "Paso \\(1\\): el problema pide identificar la actividad humana específica que origina la contaminación.\n\nPaso \\(2\\): en el texto de la sección se dice que las tuberías de desagüe del barrio están conectadas a la fuente de agua y que el foco de contaminación son sustancias como el aceite usado en casas, restaurantes e industria.\n\nPaso \\(3\\): por tanto, la causa directa no es consumir grasas ni usar una marca particular de aceite, sino descargar esos aceites residuales al sistema de desagüe que termina en la fuente hídrica.\n\nPaso \\(4\\): la opción \\(C\\) coincide exactamente con esa actividad. La \\(A\\) habla de consumo, no de contaminación del agua. La \\(B\\) habla de una marca de aceite, lo cual es irrelevante. La \\(D\\) menciona maquinaria obsoleta, pero el texto no la identifica como foco contaminante."
         },
         {
           "questionId": "q_02",
@@ -89,8 +89,8 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "D",
+          "aiExplanation": "Paso \\(1\\): el concepto evaluado es la función de la fotosíntesis en el crecimiento vegetal.\n\nPaso \\(2\\): la imagen muestra la ecuación de la fotosíntesis: \\(6CO_2 + 6H_2O +\\) energía solar \\(\\rightarrow C_6H_{12}O_6 + 6O_2\\). El producto orgánico relevante es \\(C_6H_{12}O_6\\), es decir, carbohidratos.\n\nPaso \\(3\\): si la fotosíntesis se altera, la planta deja de fabricar suficientes carbohidratos, que son la fuente de materia y energía para formar nuevos tejidos y crecer.\n\nPaso \\(4\\): la opción \\(D\\) es correcta. La \\(A\\) se refiere al transporte por el tallo, pero la pregunta pregunta por fotosíntesis. La \\(B\\) menciona absorción de agua, que puede influir, pero no explica directamente por qué fallar la fotosíntesis impide crecer. La \\(C\\) es incorrecta porque el oxígeno no es un reactivo de la fotosíntesis; es un producto."
         },
         {
           "questionId": "q_03",
@@ -129,8 +129,8 @@
               "optionAiDescription": "Gráfico de líneas con eje horizontal de años desde aproximadamente \\(2000\\) hasta \\(2025\\). Eje vertical de \\(0\\) a \\(1.800\\). Dos series según leyenda: riqueza y cantidad de individuos. Serie de cantidad de individuos con puntos etiquetados \\(1.563\\) en \\(2003\\), \\(1.621\\) en \\(2008\\), \\(803\\) en \\(2013\\), \\(456\\) en \\(2018\\), \\(102\\) en \\(2023\\). Serie de riqueza cercana al eje inferior con puntos etiquetados \\(68\\), \\(62\\), \\(45\\), \\(22\\), \\(12\\) en esos mismos años. Representa los datos por año para ambas variables."
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "D",
+          "aiExplanation": "Paso \\(1\\): se debe escoger el gráfico que represente correctamente la variación temporal de dos variables: riqueza y cantidad de individuos, ambas medidas para los años \\(2003\\), \\(2008\\), \\(2013\\), \\(2018\\) y \\(2023\\).\n\nPaso \\(2\\): los datos son: riqueza \\((68,62,45,22,12)\\) y cantidad de individuos \\((1563,1621,803,456,102)\\). Por tanto, el eje horizontal debe ser el tiempo y deben aparecer dos series asociadas a esos años.\n\nPaso \\(3\\): el formato adecuado es uno que muestre cada año y el valor de ambas variables, permitiendo observar su descenso con el tiempo.\n\nPaso \\(4\\): la opción \\(D\\) es la correcta porque ubica los años en el eje horizontal y traza dos series con los valores exactos. La \\(A\\) suma años dentro de cada variable, perdiendo la evolución temporal. La \\(B\\) grafica el año como si fuera otra variable numérica. La \\(C\\) usa porcentajes al \\(100\\%\\), lo cual no representa los valores absolutos de la tabla."
         }
       ]
     },
@@ -179,8 +179,8 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "B",
+          "aiExplanation": "Paso \\(1\\): se pregunta por la necesidad del cable de fibra óptica en el esquema de zonas comunitarias.\n\nPaso \\(2\\): el texto de la sección indica que la información viaja desde internet hasta la antena principal por un cable de fibra óptica; luego, las antenas distribuyen la señal por ondas electromagnéticas.\n\nPaso \\(3\\): esto significa que la fibra óptica cumple la función de enlace con internet, mientras que las antenas solo redistribuyen localmente la señal.\n\nPaso \\(4\\): la opción \\(B\\) es la que mejor justifica su necesidad dentro del esquema: es el medio por el cual se establece la comunicación con internet. La \\(A\\) confunde transmisión de información con suministro eléctrico. La \\(C\\) dice que es una segunda forma, pero en el esquema no aparece otra vía directa a internet para la antena principal. La \\(D\\) es falsa porque la fibra no llega a cada antena; llega a la antena principal."
         },
         {
           "questionId": "q_05",
@@ -219,8 +219,8 @@
               "optionAiDescription": "Opción con dos gráficos de onda seno. \"Grupo \\(1\\)\" muestra baja frecuencia, cerca de \\(2\\) ciclos en el intervalo temporal. \"Grupo \\(2\\)\" muestra alta frecuencia, cerca de \\(10\\) ciclos en el mismo intervalo. La frecuencia del Grupo \\(2\\) es aproximadamente \\(5\\) veces la del Grupo \\(1\\)."
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "D",
+          "aiExplanation": "Paso \\(1\\): el concepto evaluado es frecuencia de onda.\n\nPaso \\(2\\): si la frecuencia del Grupo \\(2\\) es aproximadamente \\(5\\) veces la del Grupo \\(1\\), entonces en el mismo intervalo de tiempo el Grupo \\(2\\) debe mostrar unas \\(5\\) veces más oscilaciones.\n\nPaso \\(3\\): una representación correcta debe mostrar al Grupo \\(1\\) con pocas oscilaciones y al Grupo \\(2\\) con muchas más, aproximadamente en proporción \\(1:5\\).\n\nPaso \\(4\\): la opción \\(D\\) cumple esto, pues el Grupo \\(1\\) tiene cerca de \\(2\\) ciclos y el Grupo \\(2\\) cerca de \\(10\\). La \\(A\\) muestra frecuencias similares. La \\(B\\) invierte la relación. La \\(C\\) muestra ambas bajas y parecidas."
         },
         {
           "questionId": "q_06",
@@ -259,8 +259,8 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "D",
+          "aiExplanation": "Paso \\(1\\): se pregunta por la ventaja comunicativa de mostrar las conexiones entre antenas en el esquema.\n\nPaso \\(2\\): en la imagen de Megazonas wifi se observa una red mallada, donde varias antenas de distintas cabeceras rurales están interconectadas y enlazadas con internet.\n\nPaso \\(3\\): dibujar esas conexiones permite entender visualmente la cobertura y la forma en que varias poblaciones pueden enlazarse entre sí dentro de una red, lo que hace más clara la propuesta.\n\nPaso \\(4\\): la opción \\(D\\) es la mejor. La \\(A\\) es incorrecta porque no cada antena se comunica con una sola; la red es múltiple. La \\(B\\) no se puede deducir solo con las líneas de conexión, pues las frecuencias no están asignadas antena por antena. La \\(C\\) es demasiado específica y no representa la fortaleza general de comunicación del esquema."
         }
       ]
     },
@@ -309,8 +309,8 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "D",
+          "aiExplanation": "Paso \\(1\\): el problema evalúa si la hipótesis de Pedro es una generalización válida.\n\nPaso \\(2\\): Pedro observó un solo caso: la descomposición de una fruta. Luego afirmó que \\(\\textit{todos}\\) los cambios químicos necesitan varios días. Sin embargo, el libro señala que la velocidad de reacción depende de varios factores, así que no todas las reacciones duran lo mismo.\n\nPaso \\(3\\): una observación particular no permite concluir una regla universal, especialmente cuando existe información científica que indica variabilidad en la rapidez de las reacciones.\n\nPaso \\(4\\): la opción \\(D\\) es correcta. La \\(A\\) y la \\(C\\) aceptan una generalización incorrecta. La \\(B\\) introduce una afirmación no sustentada, pues no necesariamente toda fruta se descompone en \\(1\\) día."
         }
       ]
     },
@@ -359,8 +359,8 @@
               "optionAiDescription": "Secuencia temporal de 4 etapas con una flecha rotulada \"Tiempo\". Etapa 1: un círculo único claro rotulado \"Población inicial de monos\". Etapa 2: un círculo mostrando un degradado, con el lado izquierdo claro y el derecho oscuro, rotulado \"Aparece el río\". Etapa 3: un círculo claro con una zona oscura difusa en el centro, rotulado \"Aislamiento reproductivo\". Etapa 4: dos círculos concéntricos, uno exterior claro y otro interior oscuro, rotulados \"Dos especies de monos\"."
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "A",
+          "aiExplanation": "Paso \\(1\\): el fenómeno descrito es especiación por aislamiento geográfico y reproductivo.\n\nPaso \\(2\\): la secuencia correcta debe mostrar: una población inicial única, aparición de una barrera física \\((\\text{río})\\), separación de las poblaciones, diferenciación progresiva y finalmente dos especies distintas.\n\nPaso \\(3\\): la representación adecuada debe mantener la división física causada por el río y después evidenciar que cada lado evoluciona de forma diferente.\n\nPaso \\(4\\): la opción \\(A\\) cumple esa secuencia. La \\(B\\) no muestra claramente la barrera física cuando aparece el río. La \\(C\\) contradice el aislamiento porque en la etapa \\(3\\) las poblaciones aparecen unidas. La \\(D\\) no representa correctamente ni la barrera geográfica ni la formación de dos especies separadas."
         }
       ]
     },
@@ -409,8 +409,8 @@
               "optionAiDescription": "Gráfica fuerza vs. desplazamiento. Desde \\(0\\) hasta \\(4\\) o \\(5\\ \\text{m}\\) la fuerza disminuye linealmente. Luego permanece constante hasta \\(6\\ \\text{m}\\)."
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "C",
+          "aiExplanation": "Paso \\(1\\): se pide una gráfica de fuerza en función de la posición.\n\nPaso \\(2\\): el enunciado dice que desde \\(0\\) hasta \\(4\\ \\text{m}\\) la fuerza aumenta, y desde \\(4\\) hasta \\(6\\ \\text{m}\\) la fuerza se mantiene constante.\n\nPaso \\(3\\): por tanto, la gráfica debe tener un tramo ascendente primero y luego un tramo horizontal.\n\nPaso \\(4\\): la opción \\(C\\) coincide exactamente. La \\(A\\) y la \\(B\\) muestran fuerza constante al inicio, lo cual contradice el enunciado. La \\(D\\) muestra disminución inicial, también incorrecta."
         }
       ]
     },
@@ -459,8 +459,8 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "B",
+          "aiExplanation": "Paso \\(1\\): se deben comparar las tres características de cada mineral: color, brillo y transparencia.\n\nPaso \\(2\\): de la tabla, los minerales \\(3\\) y \\(6\\) son ambos azul, no metálico y sí transparentes. Los minerales \\(2\\) y \\(7\\) son ambos rojos, no metálicos y no transparentes.\n\nPaso \\(3\\): esos son los pares con características exactamente iguales.\n\nPaso \\(4\\): la opción \\(B\\) es correcta. La \\(A\\) falla porque \\(4\\) y \\(8\\) no coinciden en transparencia. La \\(C\\) falla porque \\(2\\) y \\(5\\) difieren en brillo, y \\(4\\) y \\(8\\) también difieren en transparencia. La \\(D\\) falla porque \\(1\\) y \\(6\\) no coinciden en brillo."
         }
       ]
     },
@@ -509,8 +509,8 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "C",
+          "aiExplanation": "Paso \\(1\\): el concepto clave es la función de la mitosis.\n\nPaso \\(2\\): la imagen muestra que una célula madre \\(2n\\) por mitosis produce dos células hijas \\(2n\\), es decir, clones con el mismo número de cromosomas.\n\nPaso \\(3\\): en el folículo piloso, este aumento del número de células permite producir más queratina y, por tanto, el crecimiento del pelo.\n\nPaso \\(4\\): la opción \\(C\\) es correcta. La \\(A\\) es falsa porque la recombinación ocurre en meiosis, no en mitosis. La \\(B\\) invierte la relación: la queratina no produce células madre. La \\(D\\) es falsa porque la mitosis conserva el número de cromosomas."
         }
       ]
     },
@@ -559,8 +559,8 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "B",
+          "aiExplanation": "Paso \\(1\\): se analiza la relación del parásito con dos organismos distintos.\n\nPaso \\(2\\): el diagrama indica que en el ave hay infección del hígado y daño de glóbulos rojos, así que el ave resulta perjudicada. También dice que el parásito se reproduce en el intestino del zancudo sin afectar su funcionamiento.\n\nPaso \\(3\\): entonces, con el ave la interacción es negativa para el ave \\((\\text{parasitismo})\\), mientras que con el zancudo, según el diagrama, no hay daño aparente.\n\nPaso \\(4\\): la opción \\(B\\) es la correcta. La \\(A\\) exagera al afirmar daño en ambos. La \\(C\\) dice que ninguno resulta afectado, lo cual contradice el daño en el ave. La \\(D\\) invierte las relaciones."
         }
       ]
     },
@@ -609,8 +609,8 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "B",
+          "aiExplanation": "Paso \\(1\\): los isótopos tienen igual número de protones y diferente número de neutrones.\n\nPaso \\(2\\): de la tabla, Ñ tiene \\(1\\) protón y \\(0\\) neutrones; Y tiene \\(1\\) protón y \\(2\\) neutrones. Comparten protones y difieren en neutrones.\n\nPaso \\(3\\): por tanto, Ñ y Y son isótopos del mismo elemento.\n\nPaso \\(4\\): la opción \\(B\\) es correcta. La \\(A\\) no sirve porque Ñ y X tienen diferente número de protones. La \\(C\\) y la \\(D\\) también combinan átomos con protones distintos."
         }
       ]
     },
@@ -659,8 +659,8 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "A",
+          "aiExplanation": "Paso \\(1\\): se comparan dos disoluciones del mismo soluto en volúmenes iguales.\n\nPaso \\(2\\): la disolución \\(2\\) tiene mayores valores en todas las medidas de concentración: \\(24\\%\\ p/p\\), \\(24\\%\\ p/v\\) y \\(4{,}10\\ M\\), frente a \\(12\\%\\), \\(12\\%\\) y \\(2{,}05\\ M\\) de la disolución \\(1\\).\n\nPaso \\(3\\): si el soluto es el mismo y el volumen comparado es igual, mayor concentración significa mayor cantidad de soluto presente en ese mismo volumen.\n\nPaso \\(4\\): la opción \\(A\\) es correcta. La \\(B\\) y la \\(C\\) escogen la disolución \\(1\\), contradiciendo la tabla. La \\(D\\) da una justificación incorrecta, porque no tiene sentido comparar directamente porcentajes con molaridad por ser unidades distintas."
         }
       ]
     },
@@ -709,8 +709,8 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "C",
+          "aiExplanation": "Paso \\(1\\): la conclusión de Camila relaciona una variable específica, la viscosidad del líquido, con la velocidad de la esfera.\n\nPaso \\(2\\): la tabla solo muestra una distancia fija de \\(5\\ \\text{cm}\\) y varias velocidades, pero no indica cuál líquido se usó en cada ensayo ni cuál es su viscosidad.\n\nPaso \\(3\\): sin esos datos no se puede sostener que la diferencia de velocidades se deba a la viscosidad. Hace falta identificar el líquido y reportar su viscosidad para comparar ambas variables.\n\nPaso \\(4\\): la opción \\(C\\) es correcta. La \\(A\\) cambia una variable distinta. La \\(B\\) elimina justamente la variable de respuesta. La \\(D\\) podría ser un control experimental útil, pero el enunciado ya compara a una misma distancia y el problema central es que falta el dato de viscosidad."
         }
       ]
     },
@@ -759,12 +759,12 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "C",
+          "aiExplanation": "Paso \\(1\\): se relaciona el problema de estreñimiento con la función de cada compuesto en la tabla.\n\nPaso \\(2\\): la tabla dice que la fibra insoluble absorbe agua, favorece el paso de los alimentos por el tracto digestivo y regulariza la función del intestino.\n\nPaso \\(3\\): esa es la función directamente asociada a aliviar el estreñimiento.\n\nPaso \\(4\\): la opción \\(C\\) es correcta. Las vitaminas y minerales cumplen otras funciones generales, y la fibra soluble se asocia más con colesterol, absorción de azúcares y saciedad."
         }
       ]
     },
-        {
+    {
       "sectionIndex": 13,
       "sectionTitle": "",
       "sectionText": "",
@@ -819,7 +819,7 @@
       "sectionTitle": "RESPONDA LAS PREGUNTAS \\(18\\) A \\(21\\) DE ACUERDO CON LA SIGUIENTE INFORMACIÓN\n\n",
       "sectionText": "Para el reciclaje de los neumáticos usados, se está implementando un proceso llamado \"trituración criogénica\". Este proceso consiste en depositar trozos de neumáticos en un recipiente; posteriormente, se hacen pasar por un túnel de enfriamiento, donde el caucho se pone en contacto con nitrógeno líquido, que está a una temperatura aproximada de \\(-200\\ ^\\circ\\text{C}\\), para extraer energía del caucho y llevarlo a temperaturas menores a \\(-70\\ ^\\circ\\text{C}\\), a las que es muy frágil y susceptible de quebrarse con golpes. En último lugar, el caucho se pasa por un molino de martillos en el que se tritura y se pulveriza, como se muestra a continuación.",
       "hasSectionImage": true,
-      "sectionImageUrl": "",
+      "sectionImageUrl": "https://cdn.invicto.com.co/icfes/science/2025_2_session1/q_14_section.png",
       "sectionImageAiDescription": "Diagrama de proceso industrial. A la izquierda hay un recipiente superior etiquetado \"Recipiente de neumáticos\" que alimenta trozos hacia un conducto. En el centro hay un \"Túnel de enfriamiento\" horizontal con tornillo o hélice interna y flechas de dirección del flujo. A la derecha hay un tanque cilíndrico vertical etiquetado \"Nitrógeno líquido\" conectado por tuberías al túnel y a un equipo inferior. En la parte inferior central hay un equipo etiquetado \"Molino\". A la salida del molino, en la parte inferior derecha, aparece un recipiente con producto etiquetado \"Caucho pulverizado\". Una tubería inferior retorna gas etiquetado \"Gas nitrógeno\". Flechas muestran circulación del nitrógeno y del material a través del sistema.",
       "questions": [
         {
@@ -859,8 +859,8 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "C",
+          "aiExplanation": "Paso \\(1\\): el túnel de enfriamiento vuelve frágil el caucho al bajar su temperatura por debajo de \\(-70\\ ^\\circ\\text{C}\\).\n\nPaso \\(2\\): si el túnel deja de funcionar, el caucho queda a temperatura ambiente y será menos frágil, por lo que será más difícil romperlo.\n\nPaso \\(3\\): para triturarlo en esas condiciones, se requiere aumentar la acción mecánica del proceso.\n\nPaso \\(4\\): la opción \\(C\\) es correcta porque un molino con mayor fuerza puede compensar la menor fragilidad del caucho. La \\(A\\) no cambia la capacidad de triturar. La \\(B\\) no enfría ni facilita la trituración. La \\(D\\) no sirve si el túnel de enfriamiento no está funcionando."
         },
         {
           "questionId": "q_19",
@@ -899,8 +899,8 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "A",
+          "aiExplanation": "Paso \\(1\\): la comparación es entre trituración simple y trituración criogénica.\n\nPaso \\(2\\): el texto dice que en la trituración simple, para obtener granos tan pequeños como los de la criogénica, hay que pasar varias veces el caucho por los molinos. En la criogénica, el caucho se vuelve frágil y se rompe más fácilmente.\n\nPaso \\(3\\): eso implica un proceso más eficiente y rápido para alcanzar el tamaño deseado cuando está a baja temperatura.\n\nPaso \\(4\\): la opción \\(A\\) es correcta. La \\(B\\) es falsa porque sí hay gasto energético. La \\(C\\) no es una propiedad intrínseca del proceso; la fuerza del molino no necesariamente cambia. La \\(D\\) es una afirmación absoluta sin sustento."
         },
         {
           "questionId": "q_20",
@@ -939,8 +939,8 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "C",
+          "aiExplanation": "Paso \\(1\\): el texto dice que el nitrógeno líquido extrae energía del caucho.\n\nPaso \\(2\\): cuando un cuerpo se enfría, disminuye su energía interna porque transfiere calor a un entorno más frío.\n\nPaso \\(3\\): en el túnel, esa energía sale del caucho y pasa al nitrógeno.\n\nPaso \\(4\\): la opción \\(C\\) es correcta. La \\(A\\) habla de conversión química sin sustento. La \\(B\\) contradice el enfriamiento. La \\(D\\) no corresponde al proceso descrito."
         }
       ]
     },
@@ -989,8 +989,8 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "C",
+          "aiExplanation": "Paso \\(1\\): la gráfica y el enunciado indican presión constante.\n\nPaso \\(2\\): a presión constante, un gas ideal cumple que el volumen aumenta cuando aumenta la temperatura \\((\\text{ley de Charles})\\).\n\nPaso \\(3\\): como el recipiente tiene paredes flexibles, al aumentar la energía cinética y los choques de las partículas, el gas se expande hasta mantener la presión constante.\n\nPaso \\(4\\): la opción \\(C\\) es correcta. La \\(A\\) y la \\(B\\) hablan de cambios de presión, pero esta se mantiene constante. La \\(D\\) contradice la relación directa entre temperatura y volumen."
         }
       ]
     },
@@ -1004,7 +1004,7 @@
       "questions": [
         {
           "questionId": "q_22",
-          "questionText": "La metamorfosis en los insectos puede seguir uno de los dos modelos descritos a continuación:\n\n- Modelo \\(1\\) de crecimiento gradual: en el cual el insecto, en sus primeras etapas de vida, es muy similar a los adultos.\n- Modelo \\(2\\) con transformaciones bruscas: en el cual las larvas son diferentes a los adultos y existe una fase intermedia o pupal entre la larva y el adulto.\n\nA continuación, se muestran los dos modelos:\n\nAhora, observe el siguiente ciclo de vida:\n\n¿A qué modelo pertenece el tipo de metamorfosis que tienen las mariposas?",
+          "questionText": "La metamorfosis en los insectos puede seguir uno de los dos modelos descritos a continuación:\n\n- Modelo \\(1\\) de crecimiento gradual: en el cual el insecto, en sus primeras etapas de vida, es muy similar a los adultos.\n- Modelo \\(2\\) con transformaciones bruscas: en el cual las larvas son diferentes a los adultos y existe una fase intermedia o pupal entre la larva y el adulto.\n\nA continuación, se muestran los dos modelos:\n\nAhora, imagine el siguiente ciclo de vida:\n\n¿A qué modelo pertenece el tipo de metamorfosis que tienen las mariposas?",
           "hasQuestionImage": true,
           "questionImageUrl": "https://cdn.invicto.com.co/icfes/science/2025_2_session1/q_22.png",
           "questionImageAiDescription": "Cuadro comparativo con dos columnas tituladas \"Modelo 1\" y \"Modelo 2\". En el Modelo 1 aparece la secuencia: huevo, seguido de un insecto juvenil similar al adulto con la etiqueta \"Ausencia de alas\", y luego \"Presencia de alas\" hacia la etapa adulta, representada por un saltamontes. En el Modelo 2 aparece la secuencia: huevo, seguido de larva, luego pupa y finalmente la etapa adulta, representada por un mosquito.",
@@ -1039,8 +1039,8 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "B",
+          "aiExplanation": "Paso \\(1\\): las mariposas presentan metamorfosis completa.\n\nPaso \\(2\\): ese ciclo incluye huevo, larva \\((\\text{oruga})\\), pupa \\((\\text{crisálida})\\) y adulto, con cambios marcados entre etapas.\n\nPaso \\(3\\): eso coincide con el modelo \\(2\\), descrito como de transformaciones bruscas y con fase pupal.\n\nPaso \\(4\\): la opción \\(B\\) es correcta. La \\(A\\) y la \\(C\\) describen crecimiento gradual, que no corresponde a mariposas. La \\(D\\) no es una razón válida, porque ambos modelos pueden iniciar con huevo."
         }
       ]
     },
@@ -1089,8 +1089,8 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "D",
+          "aiExplanation": "Paso \\(1\\): se comparan las nuevas condiciones del acuario con los límites de tolerancia.\n\nPaso \\(2\\): temperatura: \\(22{,}4\\ ^\\circ\\text{C}\\), dentro del rango \\(19{,}6\\) a \\(33{,}7\\ ^\\circ\\text{C}\\). pH: \\(10{,}4\\), supera el máximo alcalino de \\(8{,}8\\). Amoníaco: \\(25{,}8\\ \\text{mg/L}\\), supera el máximo de \\(23{,}7\\ \\text{mg/L}\\). Nitritos: \\(0{,}9\\ \\text{mg/L}\\), no supera el máximo de \\(1{,}1\\ \\text{mg/L}\\).\n\nPaso \\(3\\): por tanto, dos variables críticas quedan fuera de tolerancia: pH y amoníaco.\n\nPaso \\(4\\): la opción \\(D\\) es correcta. La \\(A\\) y la \\(C\\) concluyen supervivencia ignorando variables fuera de rango. La \\(B\\) falla porque los nitritos no superan el límite."
         }
       ]
     },
@@ -1139,8 +1139,8 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "C",
+          "aiExplanation": "Paso \\(1\\): la imagen muestra un patrón de \\(1\\), \\(\\frac{1}{4}\\), \\(\\frac{1}{9}\\), \\(\\frac{1}{16}\\) para distancias de \\(1\\), \\(2\\), \\(3\\) y \\(4\\ \\text{m}\\).\n\nPaso \\(2\\): esto corresponde a una relación inversa con el cuadrado de la distancia: \\(I \\propto \\frac{1}{d^2}\\).\n\nPaso \\(3\\): a \\(5\\ \\text{m}\\), la intensidad sería aún menor, específicamente del orden de \\(\\frac{1}{25}\\) respecto a la referencia de \\(1\\ \\text{m}\\).\n\nPaso \\(4\\): la opción \\(C\\) es correcta. La \\(A\\) da una razón incorrecta. La \\(B\\) y la \\(D\\) afirman que la intensidad aumenta, lo cual contradice el esquema."
         }
       ]
     },
@@ -1189,8 +1189,8 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "D",
+          "aiExplanation": "Paso \\(1\\): la hipótesis del estudiante afirma que alcohol y aceite forman una solución homogénea.\n\nPaso \\(2\\): el resultado experimental muestra dos capas separadas después de agitar, lo que indica que no se mezclan uniformemente.\n\nPaso \\(3\\): cuando dos líquidos forman capas, la mezcla es heterogénea y la hipótesis inicial queda refutada.\n\nPaso \\(4\\): la opción \\(D\\) es correcta. La \\(A\\) y la \\(B\\) dicen que la hipótesis es válida, lo cual contradice la observación. La \\(C\\) reconoce que es falsa, pero concluye erróneamente que la mezcla es homogénea."
         }
       ]
     },
@@ -1239,8 +1239,8 @@
               "optionAiDescription": "Tabla con dos columnas: \"Crecimiento bacteriano\" y \"Número de bacterias \\((\\log)\\)\". Filas para \\(0\\) a \\(14\\): \\(1,1,1,1,2,3,4,5,5,5,4,3,2,1,0\\). La primera columna no representa tiempo explícitamente y el formato no identifica el eje temporal como horas."
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "C",
+          "aiExplanation": "Paso \\(1\\): la curva bacteriana debe presentar cuatro fases en orden: latencia \\((\\text{sin crecimiento})\\), crecimiento exponencial, fase estacionaria y fase de muerte.\n\nPaso \\(2\\): por ello se espera: un tramo inicial horizontal, luego ascenso, después una meseta y finalmente descenso.\n\nPaso \\(3\\): entre las opciones, la \\(C\\) muestra exactamente esa secuencia a lo largo del tiempo.\n\nPaso \\(4\\): la opción \\(C\\) es correcta. La \\(A\\) no presenta fase inicial de adaptación. La \\(B\\) es una tabla y además no refleja claramente la secuencia descrita como formato más adecuado. La \\(D\\) no explicita el tiempo en horas, por lo que representa mal los datos del experimento."
         }
       ]
     },
@@ -1289,8 +1289,8 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "D",
+          "aiExplanation": "Paso \\(1\\): se debe identificar el genotipo del descendiente.\n\nPaso \\(2\\): según el esquema, el individuo resultante tiene los alelos \\(G\\) y \\(g\\).\n\nPaso \\(3\\): un individuo es heterocigoto cuando posee dos alelos distintos para un mismo gen.\n\nPaso \\(4\\): la opción \\(D\\) es correcta. La \\(A\\) es falsa porque tener dos alelos no implica homocigosis. La \\(B\\) es falsa porque el individuo no tiene un solo alelo. La \\(C\\) es incorrecta porque \\(Gg\\) no es homocigoto."
         }
       ]
     },
@@ -1339,8 +1339,8 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "D",
+          "aiExplanation": "Paso \\(1\\): los criterios son tres: punto de ebullición menor que \\(130\\ ^\\circ\\text{C}\\), soluble en agua y no conductora.\n\nPaso \\(2\\): la sustancia \\(4\\) tiene punto de ebullición de \\(-34\\ ^\\circ\\text{C}\\), sí es soluble en agua y no conduce electricidad.\n\nPaso \\(3\\): las demás fallan en al menos una condición: la \\(1\\) y la \\(2\\) conducen electricidad, y la \\(3\\) no es soluble en agua.\n\nPaso \\(4\\): por eso la opción \\(D\\) es la correcta."
         }
       ]
     },
@@ -1389,8 +1389,8 @@
               "optionAiDescription": "Gráfica de Temperatura (°C) vs. Tiempo con múltiples escalones. Muestra tramos ascendentes intercalados con tramos horizontales (mesetas) en aproximadamente 750 °C, 1.500 °C, 2.250 °C y 2.750 °C. Se observan las etiquetas 'Sólido' bajo la primera meseta, 'Líquido' bajo la meseta de 2.250 °C, y 'Gaseoso' en el punto final superior de 3.000 °C."
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "C",
+          "aiExplanation": "Paso \\(1\\): la tabla indica que la temperatura del hierro aumenta dentro de una fase, pero permanece constante durante cada cambio de fase.\n\nPaso \\(2\\): hay dos cambios de fase: a \\(1.535\\ ^\\circ\\text{C}\\) de sólido a líquido y a \\(2.750\\ ^\\circ\\text{C}\\) de líquido a gaseoso. Por eso la gráfica debe tener dos mesetas horizontales en esas temperaturas.\n\nPaso \\(3\\): entre esas mesetas debe haber tramos ascendentes correspondientes a sólido, luego líquido, y al final gaseoso.\n\nPaso \\(4\\): la opción \\(C\\) es correcta porque muestra exactamente dos mesetas en los puntos de cambio de fase. La \\(A\\) y la \\(B\\) no muestran mesetas. La \\(D\\) incluye demasiadas mesetas, incluso en temperaturas que no corresponden a cambios de fase según la tabla."
         }
       ]
     }
