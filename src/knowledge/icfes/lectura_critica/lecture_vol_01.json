@@ -1,19 +1,19 @@
 {
   "examType": "ICFES",
   "component": "lectura_critica",
-  "examVolume": "1a_sesion",
-  "totalSections": 15,
+  "examVolume": "1.a sesión",
+  "totalSections": 11,
   "sections": [
     {
       "sectionIndex": 1,
-      "sectionTitle": "",
-      "sectionText": "El placer y el dolor en el epicureísmo\n\nLa filosofía epicúrea tiene una finalidad ética*, pues pretende guiarnos para alcanzar la buena vida. Para el epicureísmo esta es la vida placentera, ya que considera que el fin último de todas nuestras acciones es conseguir placer y evitar dolor; por ello, el epicureísmo identifica el placer con el bien y el dolor con el mal.\n\nEpicuro da por lo menos dos razones complementarias por las cuales considera que el propósito de la buena vida debe ser el placer. Por un lado, menciona el hecho de que, sin necesidad de pensar y desde su nacimiento, todas las criaturas vivientes, por instinto, se contentan con el placer y son reacias al dolor. Por otro lado, Epicuro toma a los sentimientos de placer y dolor como criterios esenciales de decisión y conducta, en tanto que son eventos reales que no pueden ser refutados: no hay razón o evidencia alguna que pueda hacernos dudar de que estamos sintiendo dolor o placer; es un hecho real que los sentimos, pues, ¿cómo podría ser falsa la sensación de dolor ante un golpe?\n\nAsí, si lo que trae placer es lo que elegimos y lo que trae dolor es lo que evitamos, son nuestros sentimientos los que nos permiten deliberar qué debemos elegir y evitar, pues ellos no se equivocan. De esta manera, esa tendencia instintiva y natural hacia buscar el placer y evitar el dolor concuerda con lo que, para el epicureísmo, es el criterio ético más fundamental y verdadero.\n\n*La ética es el campo de la filosofía que estudia los principios para decidir correctamente.\n\nTomado y adaptado de: Cifuentes, F. (2021). Ataraxia & Aponía en el Epicureísmo. Saga, Revista de Estudiantes de Filosofía. Universidad Nacional de Colombia.",
+      "sectionTitle": "El placer y el dolor en el epicureísmo",
+      "sectionText": "La filosofía epicúrea tiene una finalidad ética*, pues pretende guiarnos para alcanzar la buena vida. Para el epicureísmo esta es la vida placentera, ya que considera que el fin último de todas nuestras acciones es conseguir placer y evitar dolor; por ello, el epicureísmo identifica el placer con el bien y el dolor con el mal.\n\nEpicuro da por lo menos dos razones complementarias por las cuales considera que el propósito de la buena vida debe ser el placer. Por un lado, menciona el hecho de que, sin necesidad de pensarlo y desde su nacimiento, todas las criaturas vivientes, por instinto, se contentan con el placer y son reacias al dolor. Por otro lado, Epicuro toma a los sentimientos de placer y dolor como criterios esenciales de decisión y conducta, en tanto que son eventos reales que no pueden ser refutados: no hay razón o evidencia alguna que pueda hacernos dudar de que estamos sintiendo dolor o placer; es un hecho real que lo sentimos, pues, ¿cómo podría ser falsa la sensación de dolor ante un golpe?\n\nAsí, si lo que trae placer es lo que elegimos y lo que trae dolor es lo que evitamos, son nuestros sentimientos los que nos permiten deliberar qué debemos elegir y evitar, pues ellos no se equivocan. De esta manera, esa tendencia instintiva y natural hacia buscar el placer y evitar el dolor concuerda con lo que, para el epicureísmo, es el criterio ético más fundamental y verdadero.\n\n*La ética es el campo de la filosofía que estudia los principios para decidir correctamente.\n\nTomado y adaptado de: Cifuentes, F. \\, \\(2021\\). Ataraxia & Aponía en el Epicureísmo. Saga, Revista de Estudiantes de Filosofía. Universidad Nacional de Colombia.",
       "hasSectionImage": false,
       "sectionImageUrl": "",
       "sectionImageAiDescription": "",
       "questions": [
         {
-          "questionId": "q_26",
+          "questionId": "q_01",
           "questionText": "¿Cuál de las siguientes opciones es una paráfrasis correcta del segundo párrafo del texto?",
           "hasQuestionImage": false,
           "questionImageUrl": "",
@@ -23,25 +23,29 @@
             {
               "optionId": "A",
               "type": "text",
-              "content": "Para Epicuro hay dos formas de concebir la vida: aquella que busca el placer y aquella que busca evitar el dolor del nacimiento.",
+              "optionText": "Para Epicuro hay dos formas de concebir la vida: aquella que busca el placer y aquella que busca evitar el dolor del nacimiento.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "B",
               "type": "text",
-              "content": "Para Epicuro hay dos formas en la que todo ser vivo concibe la buena vida: la primera es la búsqueda del dolor y la segunda es huir del placer.",
+              "optionText": "Para Epicuro hay dos formas en la que todo ser vivo concibe la buena vida: la primera es la búsqueda del dolor y la segunda es huir del placer.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "C",
               "type": "text",
-              "content": "Para Epicuro todos buscamos alcanzar una buena vida sin pensar en el dolor o en el placer. Desde que nacemos obramos guiados por el instinto.",
+              "optionText": "Para Epicuro todos buscamos alcanzar una buena vida sin pensar en el dolor o en el placer. Desde que nacemos obramos guiados por el instinto.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "D",
               "type": "text",
-              "content": "Para Epicuro son ciertas dos cosas: que todos buscamos el placer y rechazamos el dolor, y que los sentimientos son los que determinan nuestras decisiones.",
+              "optionText": "Para Epicuro son ciertas dos cosas: que todos buscamos el placer y rechazamos el dolor, y que los sentimientos son los que determinan nuestras decisiones.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             }
           ],
@@ -49,8 +53,8 @@
           "aiExplanation": ""
         },
         {
-          "questionId": "q_27",
-          "questionText": "Lea los siguientes dos enunciados tomados del texto:\n\n1. La filosofía epicúrea tiene una finalidad ética, pues pretende guiarnos para alcanzar la buena vida.\n2. Para el epicureísmo esta es la vida placentera, ya que considera que el fin último de todas nuestras acciones es conseguir placer y evitar dolor.\n\n¿Qué relación hay entre ambos enunciados?",
+          "questionId": "q_02",
+          "questionText": "Lea los siguientes dos enunciados tomados del texto:\n\n\\(1\\). La filosofía epicúrea tiene una finalidad ética, pues pretende guiarnos para alcanzar la buena vida.\n\\(2\\). Para el epicureísmo esta es la vida placentera, ya que considera que el fin último de todas nuestras acciones es conseguir placer y evitar dolor.\n\n¿Qué relación hay entre ambos enunciados?",
           "hasQuestionImage": false,
           "questionImageUrl": "",
           "questionImageAiDescription": "",
@@ -59,25 +63,29 @@
             {
               "optionId": "A",
               "type": "text",
-              "content": "El primer enunciado rechaza la idea expuesta en el segundo enunciado.",
+              "optionText": "El primer enunciado rechaza la idea expuesta en el segundo enunciado.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "B",
               "type": "text",
-              "content": "El segundo enunciado es una síntesis del primer enunciado.",
+              "optionText": "El segundo enunciado es una síntesis del primer enunciado.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "C",
               "type": "text",
-              "content": "El primer enunciado da una hipótesis y el segundo enunciado la refuta.",
+              "optionText": "El primer enunciado da una hipótesis y el segundo enunciado la refuta.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "D",
               "type": "text",
-              "content": "El segundo enunciado amplía lo dicho en el primer enunciado.",
+              "optionText": "El segundo enunciado amplía lo dicho en el primer enunciado.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             }
           ],
@@ -85,8 +93,8 @@
           "aiExplanation": ""
         },
         {
-          "questionId": "q_28",
-          "questionText": "Lea el siguiente fragmento tomado del texto:\n\n“Epicuro toma a los sentimientos de placer y dolor como criterios esenciales de decisión y conducta, en tanto que son eventos reales que no pueden ser refutados; no hay razón o evidencia alguna que pueda hacernos dudar de que estamos sintiendo dolor o placer; es un hecho real que lo sentimos”.\n\n¿Por qué el enunciado anterior puede ser considerado un argumento a favor de la tesis de que el fin último de todas las acciones humanas es conseguir placer y evitar dolor?",
+          "questionId": "q_03",
+          "questionText": "Lea el siguiente fragmento tomado del texto:\n\n\"Epicuro toma a los sentimientos de placer y dolor como criterios esenciales de decisión y conducta, en tanto que son eventos reales que no pueden ser refutados: no hay razón o evidencia alguna que pueda hacernos dudar de que estamos sintiendo dolor o placer; es un hecho real que lo sentimos\".\n\n¿Por qué el enunciado anterior puede ser considerado un argumento a favor de la tesis de que el fin último de todas las acciones humanas es conseguir placer y evitar dolor?",
           "hasQuestionImage": false,
           "questionImageUrl": "",
           "questionImageAiDescription": "",
@@ -95,25 +103,29 @@
             {
               "optionId": "A",
               "type": "text",
-              "content": "Porque justifica la idea de que el dolor y el placer son reales e inevitables al momento de elegir la forma en la que actuamos.",
+              "optionText": "Porque justifica la idea de que el dolor y el placer son reales e inevitables al momento de elegir la forma en la que actuamos.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "B",
               "type": "text",
-              "content": "Porque ejemplifica la teoría de que el placer y el dolor son criterios de decisión al ser sentimientos reales que tiene todo ser humano.",
+              "optionText": "Porque ejemplifica la teoría de que el placer y el dolor son criterios de decisión al ser sentimientos reales que tiene todo ser humano.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "C",
               "type": "text",
-              "content": "Porque explica que el fin último de todas las acciones humanas consiste en relacionar el placer con el bien y el dolor con el mal.",
+              "optionText": "Porque explica que el fin último de todas las acciones humanas consiste en relacionar el placer con el bien y el dolor con el mal.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "D",
               "type": "text",
-              "content": "Porque relaciona los sentimientos reales de dolor y de placer existentes instintivamente en el ser humano con los conceptos de bien y de mal.",
+              "optionText": "Porque relaciona los sentimientos reales de dolor y de placer existentes instintivamente en el ser humano con los conceptos de bien y de mal.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             }
           ],
@@ -121,8 +133,8 @@
           "aiExplanation": ""
         },
         {
-          "questionId": "q_29",
-          "questionText": "Considere el siguiente fragmento del texto:\n\n“Esa tendencia instintiva y natural hacia buscar el placer y evitar el dolor concuerda con lo que, para el epicureísmo, es el criterio ético más fundamental y verdadero”.\n\n¿Cuál de los siguientes enunciados presenta una perspectiva similar a la del fragmento?",
+          "questionId": "q_04",
+          "questionText": "Considere el siguiente fragmento del texto:\n\n\"Esa tendencia instintiva y natural hacia buscar el placer y evitar el dolor concuerda con lo que, para el epicureísmo, es el criterio ético más fundamental y verdadero\".\n\n¿Cuál de los siguientes enunciados presenta una perspectiva similar a la del fragmento?",
           "hasQuestionImage": false,
           "questionImageUrl": "",
           "questionImageAiDescription": "",
@@ -131,25 +143,29 @@
             {
               "optionId": "A",
               "type": "text",
-              "content": "“El comportamiento del ser humano puede ser moldeado de acuerdo con las experiencias agradables y desagradables que se desprenden de cada acción”. B. F. Skinner.",
+              "optionText": "\"El comportamiento del ser humano puede ser moldeado de acuerdo con las experiencias agradables y desagradables que se desprenden de cada acción\". B. F. Skinner.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "B",
               "type": "text",
-              "content": "“No hay ninguna diferencia fundamental entre el hombre y los animales en su capacidad de sentir placer y dolor, felicidad y miseria”. C. Darwin.",
+              "optionText": "\"No hay ninguna diferencia fundamental entre el hombre y los animales en su capacidad de sentir placer y dolor, felicidad y miseria\". C. Darwin.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "C",
               "type": "text",
-              "content": "“La felicidad es un fin cuya posibilidad descansa en condiciones que solo pueden ser esperadas de la naturaleza, es decir, los medios para la felicidad propia están en la naturaleza tanto externa como interna”. I. Kant.",
+              "optionText": "\"La felicidad es un fin cuya posibilidad descansa en condiciones que solo pueden ser esperadas de la naturaleza, es decir, los medios para la felicidad propia están en la naturaleza tanto externa como interna\". I. Kant.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "D",
               "type": "text",
-              "content": "“No se trata de concebir el placer como asunto único y verdadero de felicidad, sino de hallar la mejor manera para alcanzar la virtud que es universal y que no se supedita a la sensibilidad”. I. Kant.",
+              "optionText": "\"No se trata de concebir el placer como asunto único y verdadero de felicidad, sino de hallar la mejor manera para alcanzar la virtud que es universal y que no se supedita a la sensibilidad\". I. Kant.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             }
           ],
@@ -157,8 +173,8 @@
           "aiExplanation": ""
         },
         {
-          "questionId": "q_30",
-          "questionText": "Lea la siguiente pregunta tomada del texto:\n\n“¿Cómo podría ser falsa la sensación de dolor ante un golpe?”\n\n¿Cuál es la intención del autor con esa pregunta?",
+          "questionId": "q_05",
+          "questionText": "Lea la siguiente pregunta tomada del texto:\n\n\"¿cómo podría ser falsa la sensación de dolor ante un golpe?\"\n\n¿Cuál es la intención del autor con esa pregunta?",
           "hasQuestionImage": false,
           "questionImageUrl": "",
           "questionImageAiDescription": "",
@@ -167,25 +183,29 @@
             {
               "optionId": "A",
               "type": "text",
-              "content": "Advertir sobre el peligro de dolor ante una decisión.",
+              "optionText": "Advertir sobre el peligro de dolor ante una decisión.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "B",
               "type": "text",
-              "content": "Dar la orden de huir del dolor ante un golpe.",
+              "optionText": "Dar la orden de huir del dolor ante un golpe.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "C",
               "type": "text",
-              "content": "Afirmar la idea de que no se puede dudar del dolor.",
+              "optionText": "Afirmar la idea de que no se puede dudar del dolor.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "D",
               "type": "text",
-              "content": "Expresar que los dolores pueden inventarse.",
+              "optionText": "Expresar que los dolores pueden inventarse.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             }
           ],
@@ -197,13 +217,13 @@
     {
       "sectionIndex": 2,
       "sectionTitle": "",
-      "sectionText": "Auténticas bestias negras para Platón, los sofistas fueron unos filósofos y educadores que dominaron la escena intelectual de Atenas a finales del siglo IV a. C. De hecho, la palabra “sofista” no tenía entonces la connotación peyorativa que tiene hoy y que debemos, en buena medida, a la mala imagen que de ellos transmitió Platón. Sofista significaba simplemente “profesor”, y con el término se designaba a una serie de educadores que se ganaban la vida instruyendo jóvenes a cambio de una retribución.\n\nEran dos los elementos de la sofística que despertaban el recelo, por decir lo menos, entre una nutrida parte de la población griega. El primero de ellos residía en que, contrario a los sabios de antaño, los sofistas no reunían en torno a sí a un grupo de discípulos por el mero placer de difundir sus ideas, sino que cobraban y vivían de ello. Esto, que probablemente hoy no nos parezca grave, era visto con escándalo por los sectores más snobs y aristocráticos de la polis. En definitiva, y sin duda hayan cambiado las cosas, los que despreciaban el “vil metal” eran precisamente aquellos que lo tenían garantizado y no tenían necesidad de ganárselo.\n\nEn segundo lugar, y también como diferencia sustancial con los modelos del pasado, la educación impartida por los sofistas no tenía el objetivo teórico de alcanzar y descubrir la verdad, sino que su finalidad era eminentemente práctica: adquirir las técnicas necesarias para imponer el propio argumento. En efecto, en la democracia ateniense, regida con un sistema de participación directa de los ciudadanos en los asuntos de la polis, y con abundantes litigios y juicios, la capacidad de desenvolverse con habilidad en el arte de la palabra era imprescindible para el éxito en la política. En este contexto nacieron y se multiplicaron los sofistas, como maestros de la retórica y la oratoria cuya principal preocupación fue desarrollar y transmitir las técnicas necesarias para defender y convencer al público de un planteamiento, independientemente de que este fuera verdadero o no, moral o inmoral. Este énfasis práctico los condujo con frecuencia a posiciones escépticas o relativistas: no existía una verdad con mayúsculas, sino que todo dependía del punto de vista, de los usos y costumbres, de la fuerza de los argumentos. Para Protágoras “el hombre es la medida de todas las cosas”, y para Gorgias, nada existía; si existiera, sería incognoscible, y si existiera y fuera cognoscible, sería incomunicable.\n\nTomado y adaptado de: Dal Maschio, E. (2016). Platón: La verdad está en otra parte. Emse Publishing.",
+      "sectionText": "Auténticas bestias negras para Platón, los sofistas fueron unos filósofos y educadores que dominaron la escena intelectual de Atenas a finales del siglo \\(IV\\) a. C. De hecho, la palabra \"sofista\" no tenía entonces la connotación peyorativa que tiene hoy y que debemos, en buena medida, a la mala imagen que de ellos transmitió Platón. Sofista significaba simplemente \"profesor\", y con el término se designaba a una serie de educadores que se ganaban la vida instruyendo jóvenes a cambio de una retribución.\n\nEran dos los elementos de la sofística que despertaban el recelo, por decir lo menos, entre una nutrida parte de la población griega. El primero de ellos residía en que, contrario a los sabios de antaño, los sofistas no reunían en torno a sí a un grupo de discípulos por el mero placer de difundir sus ideas, sino que cobraban y vivían de ello. Esto, que probablemente hoy no nos parezca grave, era visto con escándalo por los sectores más esnobs y aristocráticos de la polis. En definitiva, y sin que hayan cambiado las cosas, los que despreciaban el \"vil metal\" eran precisamente aquellos que lo tenían garantizado y no tenían necesidad de ganárselo.\n\nEn segundo lugar, y también como diferencia sustancial con los modelos del pasado, la educación impartida por los sofistas no tenía el objetivo teórico de alcanzar y descubrir la verdad, sino que su finalidad era eminentemente práctica: adquirir las técnicas necesarias para imponer el propio argumento. En efecto, en la democracia ateniense, regida con un sistema de participación directa de los ciudadanos en los asuntos de la polis, y con abundantes litigios y juicios, la capacidad de desenvolverse con habilidad en el arte de la palabra era imprescindible para el éxito en la política. En este contexto nacieron y se multiplicaron los sofistas, como maestros de la retórica y la oratoria cuya principal preocupación fue desarrollar y transmitir las técnicas necesarias para defender y convencer al público de un planteamiento, independientemente de que este fuera verdadero o no, moral o inmoral. Este énfasis práctico los condujo con frecuencia a posiciones escépticas o relativistas: no existía una verdad con mayúsculas, sino que todo dependía del punto de vista, de los usos y costumbres, de la fuerza de los argumentos. Para Protágoras \"el hombre es la medida de todas las cosas\" y, para Gorgias, nada existía; si existiera, sería incognoscible, y si existiera y fuera cognoscible, sería incomunicable.\n\nTomado y adaptado de: Dal Maschio, E. \\, \\(2016\\). Platón. La verdad está en otra parte. Emse Publishing.",
       "hasSectionImage": false,
       "sectionImageUrl": "",
       "sectionImageAiDescription": "",
       "questions": [
         {
-          "questionId": "q_31",
+          "questionId": "q_06",
           "questionText": "¿Qué supuesto se encuentra presente en el tercer párrafo del texto?",
           "hasQuestionImage": false,
           "questionImageUrl": "",
@@ -213,25 +233,29 @@
             {
               "optionId": "A",
               "type": "text",
-              "content": "Que la búsqueda de la verdad no es un fin práctico.",
+              "optionText": "Que la búsqueda de la verdad no es un fin práctico.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "B",
               "type": "text",
-              "content": "Que la participación política en la actualidad no es alta.",
+              "optionText": "Que la participación política en la actualidad no es alta.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "C",
               "type": "text",
-              "content": "Que los sofistas engañaban a sus discípulos con técnicas retóricas.",
+              "optionText": "Que los sofistas engañaban a sus discípulos con técnicas retóricas.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "D",
               "type": "text",
-              "content": "Que la búsqueda teórica de la verdad puede ayudar a vencer en un juicio.",
+              "optionText": "Que la búsqueda teórica de la verdad puede ayudar a vencer en un juicio.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             }
           ],
@@ -239,8 +263,8 @@
           "aiExplanation": ""
         },
         {
-          "questionId": "q_32",
-          "questionText": "Considere las siguientes afirmaciones del texto:\n\n1) “no existía una verdad con mayúsculas, sino que todo dependía del punto de vista, de los usos y costumbres, de la fuerza de los argumentos”.\n2) “nada existía; si existiera sería incognoscible, y si existiera y fuera cognoscible, sería incomunicable”.\n\nLa afirmación 1 NO justifica la afirmación 2 por la siguiente razón:",
+          "questionId": "q_07",
+          "questionText": "Considere las siguientes afirmaciones del texto;\n\\(1\\) \"no existía una verdad con mayúsculas, sino que todo dependía del punto de vista, de los usos y costumbres, de la fuerza de los argumentos\"\n\\(2\\) \"nada existía; si existiera sería incognoscible, y si existiera y fuera cognoscible, sería incomunicable\".\n\nLa afirmación \\(1\\) NO justifica la afirmación \\(2\\) por la siguiente razón:",
           "hasQuestionImage": false,
           "questionImageUrl": "",
           "questionImageAiDescription": "",
@@ -249,25 +273,29 @@
             {
               "optionId": "A",
               "type": "text",
-              "content": "Que todo dependa del punto de vista y la cultura prueba que nada existe.",
+              "optionText": "Que todo dependa del punto de vista y la cultura prueba que nada existe.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "B",
               "type": "text",
-              "content": "Que todo dependa del punto de vista y la cultura no prueba que nada existe.",
+              "optionText": "Que todo dependa del punto de vista y la cultura no prueba que nada existe.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "C",
               "type": "text",
-              "content": "Que el hombre sea la medida de todas las cosas prueba que hay muchas verdades universales.",
+              "optionText": "Que el hombre sea la medida de todas las cosas prueba que hay muchas verdades universales.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "D",
               "type": "text",
-              "content": "Que el hombre sea la medida de todas las cosas muestra que no dependen del punto de vista de alguien.",
+              "optionText": "Que el hombre sea la medida de todas las cosas muestra que no dependen del punto de vista de alguien.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             }
           ],
@@ -278,15 +306,15 @@
     },
     {
       "sectionIndex": 3,
-      "sectionTitle": "",
-      "sectionText": "Ética para Amador (fragmento)\n\nQuieres darte la buena vida: estupendo. Pero también quieres que esa buena vida no sea la buena vida de una coliflor o de un escarabajo, con todo mi respeto para ambas especies, sino una buena vida humana. Es lo que te corresponde, creo yo. Y estoy seguro de que a ello no renunciarías por nada del mundo. Ser humano, ya lo hemos indicado antes, consiste principalmente en tener relaciones con los otros seres humanos. Si pudieras tener muchísimo dinero, una casa más lujosa que un palacio de las mil y una noches, las mejores ropas, los más exquisitos alimentos —en tu caso, muchísimas lentejas—, los más sofisticados aparatos, etc., pero todo ello a costa de no volver a ver ni a ser visto por ningún ser humano jamás, ¿estarías contento? ¿Cuánto tiempo podrías vivir así sin volverte loco? ¿No es la mayor de las locuras querer las cosas a costa de la relación con las personas? ¡Pero si precisamente la gracia de todas esas cosas radica en que te permiten —o parecen permitirte— relacionarte más favorablemente con los demás! Por medio del dinero se espera poder deslumbrar o comprar a los otros; las ropas son para gustarlos o para que nos envidien; y lo mismo la buena casa, los mejores vinos, etcétera. Muy pocas cosas conservan su gracia en la soledad; y si la soledad es completa y definitiva, todas las cosas resultan tristes inevitablemente. La buena vida humana es una buena vida entre seres humanos o de lo contrario puede que sea vida, pero no será ni buena ni humana.\n\nTomado y adaptado de: Savater, F. (1991). Ética para Amador. Ariel.",
+      "sectionTitle": "Ética para Amador (fragmento)",
+      "sectionText": "Quieres darte la buena vida: estupendo. Pero también quieres que esa buena vida no sea la buena vida de una coliflor o de un escarabajo, con todo mi respeto para ambas especies, sino una buena vida humana. Es lo que te corresponde, creo yo. Y estoy seguro de que a ello no renunciarías por nada del mundo. Ser humano, ya te lo hemos indicado antes, consiste principalmente en tener relaciones con los otros seres humanos. Si pudiera tener muchísimo dinero, una casa más lujosa que un palacio de las mil y una noches, las mejores ropas, los más exquisitos alimentos —en tu caso, muchísimas lentejas—, los más sofisticados aparatos, etc., pero todo ello a costa de no volver a ver ni a ser visto por ningún ser humano jamás, ¿estarías contento? ¿Cuánto tiempo podrías vivir así sin volverte loco? ¿No es la mayor de las locuras querer las cosas a costa de la relación con las personas? ¡Pero si precisamente la gracia de todas esas cosas radica en que te permiten —o parecen permitirte— relacionarte más favorablemente con los demás! Por medio del dinero se espera poder deslumbrar o comprar a los otros; las ropas para gustarles, y lo mismo la buena casa, los mejores vinos, etcétera. Muy pocas cosas conservan su gracia en la soledad; y si la soledad es completa y definitiva, todas las cosas resultan tristes inevitablemente. La buena vida humana es una buena vida entre seres humanos o de lo contrario puede que sea vida, pero no será ni buena ni humana.\n\nTomado y adaptado de: Savater, F. \\, \\(1991\\). Ética para Amador. Ariel.",
       "hasSectionImage": false,
       "sectionImageUrl": "",
       "sectionImageAiDescription": "",
       "questions": [
         {
-          "questionId": "q_33",
-          "questionText": "Entre las siguientes opciones, ¿cuál podría reemplazar, sin cambiar el sentido, la palabra “deslumbrar” que aparece en la frase: “Por medio del dinero se espera poder deslumbrar o comprar a los otros [...]”?",
+          "questionId": "q_08",
+          "questionText": "Entre las siguientes opciones, ¿cuál podría reemplazar, sin cambiar el sentido, la palabra \"deslumbrar\" que aparece en la frase: \"Por medio del dinero se espera poder deslumbrar o comprar a los otros [...]\"?",
           "hasQuestionImage": false,
           "questionImageUrl": "",
           "questionImageAiDescription": "",
@@ -295,25 +323,29 @@
             {
               "optionId": "A",
               "type": "text",
-              "content": "Encandilar.",
+              "optionText": "Encandilar.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "B",
               "type": "text",
-              "content": "Impresionar.",
+              "optionText": "Impresionar.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "C",
               "type": "text",
-              "content": "Ilusionar.",
+              "optionText": "Ilusionar.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "D",
               "type": "text",
-              "content": "Engañar.",
+              "optionText": "Engañar.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             }
           ],
@@ -321,8 +353,8 @@
           "aiExplanation": ""
         },
         {
-          "questionId": "q_34",
-          "questionText": "Lea el siguiente fragmento del texto:\n\n“Quieres darte la buena vida: estupendo. Pero también quieres que esa buena vida no sea la buena vida de una coliflor o de un escarabajo, con todo mi respeto para ambas especies, sino una buena vida humana”.\n\n¿Qué función cumple este fragmento dentro del texto?",
+          "questionId": "q_09",
+          "questionText": "Lea el siguiente fragmento del texto:\n\n\"Quieres darte la buena vida: estupendo. Pero también quieres que esa buena vida no sea la buena vida de una coliflor o de un escarabajo, con todo mi respeto para ambas especies, sino una buena vida humana\".\n\n¿Qué función cumple este fragmento dentro del texto?",
           "hasQuestionImage": false,
           "questionImageUrl": "",
           "questionImageAiDescription": "",
@@ -331,25 +363,29 @@
             {
               "optionId": "A",
               "type": "text",
-              "content": "Presenta la tesis general del texto.",
+              "optionText": "Presenta la tesis general del texto.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "B",
               "type": "text",
-              "content": "Introduce el tema que se trata en el texto.",
+              "optionText": "Introduce el tema que se trata en el texto.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "C",
               "type": "text",
-              "content": "Expone la conclusión general del texto.",
+              "optionText": "Expone la conclusión general del texto.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "D",
               "type": "text",
-              "content": "Sintetiza el contenido del texto.",
+              "optionText": "Sintetiza el contenido del texto.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             }
           ],
@@ -357,7 +393,7 @@
           "aiExplanation": ""
         },
         {
-          "questionId": "q_35",
+          "questionId": "q_10",
           "questionText": "¿Qué tipo de estrategia argumentativa utiliza el autor para convencer al lector de su posición?",
           "hasQuestionImage": false,
           "questionImageUrl": "",
@@ -367,25 +403,29 @@
             {
               "optionId": "A",
               "type": "text",
-              "content": "El autor introduce el tema y la tesis con ironía, para hacer entender lo contrario de lo que dice, con la intención de restarle credibilidad a dicha tesis.",
+              "optionText": "El autor introduce el tema y la tesis con ironía, para hacer entender lo contrario de lo que dice, con la intención de restarle credibilidad a dicha tesis.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "B",
               "type": "text",
-              "content": "El autor contextualiza el problema sobre la buena vida, presenta algunas opiniones suyas sobre el tema y concluye con la tesis contraria.",
+              "optionText": "El autor contextualiza el problema sobre la buena vida, presenta algunas opiniones suyas sobre el tema y concluye con la tesis contraria.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "C",
               "type": "text",
-              "content": "El autor introduce el tema y la tesis, a través de diversas preguntas retóricas, ofreciendo ejemplos que lo conducen a una conclusión.",
+              "optionText": "El autor introduce el tema y la tesis, a través de diversas preguntas retóricas, ofreciendo ejemplos que lo conducen a una conclusión.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "D",
               "type": "text",
-              "content": "El autor contextualiza el problema sobre la buena vida, presenta su tesis y la defiende con la ayuda de ejemplos dados por autoridades en el tema.",
+              "optionText": "El autor contextualiza el problema sobre la buena vida, presenta su tesis y la defiende con la ayuda de ejemplos dados por autoridades en el tema.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             }
           ],
@@ -396,15 +436,15 @@
     },
     {
       "sectionIndex": 4,
-      "sectionTitle": "",
-      "sectionText": "Nuestro cerebro, ¿hecho para la música? (fragmento)\n\nLa relación entre los humanos y lo que hoy reconocemos como música se remonta a más de 40.000 años atrás, desde los principios de nuestra civilización. Nuestros antepasados, en esos entonces, ya tocaban flautas de hueso y percusiones. Los instrumentos se fueron diversificando y multiplicando, pasando por la creación de instrumentos de madera, cuerda y metal, hasta llegar a las guitarras eléctricas y consolas de música electrónica de hoy en día. Casi todas las sociedades humanas conocidas han tenido música, lo que sugiere que nuestra apreciación por ella es innata; incluso los bebés de dos meses de nacidos se voltean cuando escuchan sonidos agradables y le dan la espalda a los disonantes. Dada su universalidad, entonces, ¿será que la música podría haber ayudado en la supervivencia humana de alguna forma? ¿Tendría alguna ventaja o beneficio? Algunos investigadores sugieren que puede haber ayudado en el cortejo. Otros dicen que promueve la cohesión de grupo, tal como lo hace hoy en día. Incluso, puede ser un simple accidente feliz, una dulzura auditiva, que casualmente terminó creando una rumba cerebral.\n\nTomado y adaptado de: Pardo, E. (20 de marzo de 2021). Nuestro cerebro, ¿hecho para la música? Shots de Ciencia, Recuperado de: https://www.shotsdeciencia.com/post/nuestro-cerebro-hecho-para-la-m%C3%BAsica",
+      "sectionTitle": "Nuestro cerebro, ¿hecho para la música? (fragmento)",
+      "sectionText": "La relación entre los humanos y lo que hoy reconocemos como música se remonta a más de \\(40.000\\) años atrás, desde los principios de nuestra civilización. Nuestros antepasados, en ese entonces, ya tocaban flautas de hueso y percusiones. Los instrumentos se fueron diversificando y multiplicando, pasando por la creación de instrumentos de madera, cuerda y metal, hasta llegar a las guitarras eléctricas y consolas de música electrónica de hoy en día. Casi todas las sociedades humanas conocidas han tenido música, lo que sugiere que nuestra apreciación por ella es innata; incluso bebés de dos meses de nacidos se voltean cuando escuchan sonidos agradables y le dan la espalda a los disonantes. Dada su universalidad, entonces, ¿será que la música podría haber ayudado en la supervivencia humana de alguna forma? ¿Tendría alguna ventaja o beneficio? Algunos investigadores sugieren que puede haber ayudado en el cortejo. Otros dicen que promueve la cohesión de grupo, tal como lo hace hoy en día. Incluso, puede ser un simple accidente feliz, una dulzura auditiva, que casualmente terminó creando una rumba cerebral.\n\nTomado y adaptado de: Pardo, E. \\(20\\) de marzo de \\(2021\\). Nuestro cerebro, ¿hecho para la música? Shots de Ciencia. Recuperado de: https://www.shotsdeciencia.com/post/nuestro-cerebro-hecho-para-la-m%C3%BAsica",
       "hasSectionImage": false,
       "sectionImageUrl": "",
       "sectionImageAiDescription": "",
       "questions": [
         {
-          "questionId": "q_36",
-          "questionText": "Considere el siguiente apartado del texto:\n\n“Casi todas las sociedades humanas conocidas han tenido música, lo que sugiere que nuestra apreciación por ella es innata”.\n\n¿Cuál es la función de la expresión “lo que”?",
+          "questionId": "q_11",
+          "questionText": "Considere el siguiente apartado del texto:\n\n\"Casi todas las sociedades humanas conocidas han tenido música, lo que sugiere que nuestra apreciación por ella es innata\".\n\n¿Cuál es la función de la expresión \"lo que\"?",
           "hasQuestionImage": false,
           "questionImageUrl": "",
           "questionImageAiDescription": "",
@@ -413,25 +453,29 @@
             {
               "optionId": "A",
               "type": "text",
-              "content": "Plantear dos opciones opuestas sobre una teoría.",
+              "optionText": "Plantear dos opciones opuestas sobre una teoría.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "B",
               "type": "text",
-              "content": "Introducir una relación de causalidad entre la primera y la segunda idea.",
+              "optionText": "Introducir una relación de causalidad entre la primera y la segunda idea.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "C",
               "type": "text",
-              "content": "Aclarar el sentido de la primera idea a partir de la segunda.",
+              "optionText": "Aclarar el sentido de la primera idea a partir de la segunda.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "D",
               "type": "text",
-              "content": "Añadir una idea similar a la que se presenta al principio de la oración.",
+              "optionText": "Añadir una idea similar a la que se presenta al principio de la oración.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             }
           ],
@@ -439,7 +483,7 @@
           "aiExplanation": ""
         },
         {
-          "questionId": "q_37",
+          "questionId": "q_12",
           "questionText": "La trompeta es un instrumento de metal. Teniendo en cuenta lo que dice el texto, la invención de la trompeta ocurrió:",
           "hasQuestionImage": false,
           "questionImageUrl": "",
@@ -449,25 +493,29 @@
             {
               "optionId": "A",
               "type": "text",
-              "content": "Antes de la invención de la flauta de hueso.",
+              "optionText": "Antes de la invención de la flauta de hueso.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "B",
               "type": "text",
-              "content": "Antes de la aparición de los instrumentos de percusión.",
+              "optionText": "Antes de la aparición de los instrumentos de percusión.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "C",
               "type": "text",
-              "content": "Después de la aparición de los instrumentos de percusión.",
+              "optionText": "Después de la aparición de los instrumentos de percusión.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "D",
               "type": "text",
-              "content": "Después de la aparición de la guitarra eléctrica.",
+              "optionText": "Después de la aparición de la guitarra eléctrica.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             }
           ],
@@ -475,8 +523,8 @@
           "aiExplanation": ""
         },
         {
-          "questionId": "q_38",
-          "questionText": "En el texto, la palabra “disonantes” hace referencia a:",
+          "questionId": "q_13",
+          "questionText": "En el texto, la palabra \"disonantes\" hace referencia a:",
           "hasQuestionImage": false,
           "questionImageUrl": "",
           "questionImageAiDescription": "",
@@ -485,25 +533,29 @@
             {
               "optionId": "A",
               "type": "text",
-              "content": "Sonidos cautivantes.",
+              "optionText": "Sonidos cautivantes.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "B",
               "type": "text",
-              "content": "Sonidos intensos.",
+              "optionText": "Sonidos intensos.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "C",
               "type": "text",
-              "content": "Sonidos agudos.",
+              "optionText": "Sonidos agudos.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "D",
               "type": "text",
-              "content": "Sonidos desagradables.",
+              "optionText": "Sonidos desagradables.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             }
           ],
@@ -511,8 +563,8 @@
           "aiExplanation": ""
         },
         {
-          "questionId": "q_39",
-          "questionText": "Considere el siguiente fragmento del texto:\n\n“La relación entre los humanos y lo que hoy reconocemos como música se remonta a más de 40.000 años atrás, desde los principios de nuestra civilización”.\n\n¿Qué función cumple el fragmento en el texto?",
+          "questionId": "q_14",
+          "questionText": "Considere el siguiente fragmento del texto:\n\n\"La relación entre los humanos y lo que hoy reconocemos como música se remonta a más de \\(40.000\\) años atrás, desde los principios de nuestra civilización\".\n\n¿Qué función cumple el fragmento en el texto?",
           "hasQuestionImage": false,
           "questionImageUrl": "",
           "questionImageAiDescription": "",
@@ -521,25 +573,29 @@
             {
               "optionId": "A",
               "type": "text",
-              "content": "Presentar la tesis central del texto.",
+              "optionText": "Presentar la tesis central del texto.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "B",
               "type": "text",
-              "content": "Introducir el tema que se trata en el texto.",
+              "optionText": "Introducir el tema que se trata en el texto.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "C",
               "type": "text",
-              "content": "Resumir el contenido del texto.",
+              "optionText": "Resumir el contenido del texto.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "D",
               "type": "text",
-              "content": "Plantear la conclusión central del texto.",
+              "optionText": "Plantear la conclusión central del texto.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             }
           ],
@@ -551,13 +607,13 @@
     {
       "sectionIndex": 5,
       "sectionTitle": "",
-      "sectionText": "Querido amigo,\n\nUsted ha decidido dedicarse a la literatura, ¿ahora qué?\n\nSu decisión de asumir su afición por la literatura como un destino deberá convertirse en servidumbre, en nada menos que esclavitud. Para explicarlo de una manera gráfica, le diré que acaba usted de hacer algo que, por lo visto, hacían en el siglo XIX algunas damas espantadas con el grosor de su cuerpo, que, a fin de recobrar una silueta de sílfide, se tragaban una solitaria. ¿Ha tenido usted ocasión de ver a alguien que lleva en sus entrañas ese horrendo parásito? Yo sí, y puedo asegurarle que aquellas damas eran unas heroínas, unas mártires de la belleza. A comienzos de los años sesenta, en París, yo tenía un magnífico amigo, José María, un muchacho español, pintor y cineasta, que padeció esa enfermedad. Una vez que la solitaria se instala en el organismo se consubstancia con él, se alimenta de él, crece y se fortaleza a expensas de él, y es dificilísimo expulsar de ese cuerpo del que se aprovecha, al que tiene colonizado. José María enflaquecía, a pesar de que debía comer y beber líquidos (leche, sobre todo) constantemente para aplacar la ansiedad del animal aposentado en sus entrañas, pues, si no, su malestar se volvía insoportable. Pero todo lo que comía y bebía no era para su gusto y placer, sino para los de la solitaria. Un día, cuando estábamos conversando en un pequeño bistró de Montparnasse, me sorprendió con esta confesión: “Nosotros hacemos tantas cosas juntos. Vamos al cine, a exposiciones, a recorrer librerías, y discutimos horas de horas sobre política, libros, amigos comunes. Y tú crees que yo estoy haciendo esas cosas como las haces tú, porque te divierte hacerlas. Pero te equivocas. Yo las hago para ella, la solitaria. Esa es la impresión que tengo: que todo en mi vida, ahora, no lo vivo para mí, sino para ese ser que llevo adentro, del que ya no soy más que un sirviente”.\n\nDesde entonces, me gusta comparar la situación del escritor con la de mi amigo José María cuando llevaba adentro la solitaria.\n\nTomado y adaptado de: Vargas Llosa, M. (2011). Parábola de la solitaria. En M. Vargas Llosa (Ed.). Cartas a un joven novelista (pp. 11-22). Madrid: Alfaguara.",
+      "sectionText": "Querido amigo,\n\nUsted ha decidido dedicarse a la literatura, ¿ahora qué?\n\nSu decisión de asumir su afición por la literatura como un destino deberá convertirse en servidumbre, en nada menos que esclavitud. Para explicarlo de una manera gráfica, le diré que acaba usted de hacer algo que, por lo visto, hacían en el siglo \\(XIX\\) algunas damas españadas con el grosor de su cuerpo, que, a fin de recobrar una silueta de sílfide, se tragaban una solitaria. ¿Ha tenido usted ocasión de ver a alguien que lleva en sus entrañas ese horrendo parásito? Yo sí, y puedo asegurarle que aquellas damas eran unas heroínas, unas mártires de la belleza. A comienzos de los años sesenta, en París, yo tenía un magnífico amigo, José María, un muchacho español, pintor y cineasta, que padeció esa enfermedad. Una vez que la solitaria se instala en el organismo se consubstancia con él, se alimenta de él, crece y se fortalece a expensas de él, y es dificilísimo expulsarla de ese cuerpo del que se aprovecha, al que tiene colonizado. José María enflaquecía, a pesar de que debía comer y beber líquidos \\(\\text{leche, sobre todo}\\) constantemente para aplacar la ansiedad del animal aposentado en sus entrañas, pues, si no, su malestar se volvía insoportable. Pero todo lo que comía y bebía no era para su gusto y placer, sino para los de la solitaria. Un día, que estábamos conversando en un pequeño bistrot de Montparnasse, me sorprendió con esta confesión: \"Nosotros hacemos tantas cosas juntos. Vamos al cine, a exposiciones, a recorrer librerías, y discutimos horas de horas sobre política, libros, amigos comunes. Y tú crees que yo estoy haciendo esas cosas como las haces tú, porque te divierte hacerlas. Pero te equivocas. Yo las hago para ella, la solitaria. Esa es la impresión que tengo: que todo en mi vida, ahora, no lo vivo para mí, sino para ese ser que llevo adentro, del que ya no soy más que un sirviente\".\n\nDesde entonces, me gusta comparar la situación del escritor con la de mi amigo José María cuando llevaba adentro la solitaria.\n\nTomado y adaptado de: Vargas Llosa, M. \\(2011\\). Parábola de la solitaria. En M. Vargas Llosa \\(Ed.\\). Cartas a un joven novelista \\(pp.\\ \\(11\\)-\\(22\\)\\). Madrid: Alfaguara.",
       "hasSectionImage": false,
       "sectionImageUrl": "",
       "sectionImageAiDescription": "",
       "questions": [
         {
-          "questionId": "q_40",
+          "questionId": "q_15",
           "questionText": "Según el autor, la afición por la literatura puede convertirse en esclavitud. ¿Qué estrategia retórica usa el autor para ilustrar esto?",
           "hasQuestionImage": false,
           "questionImageUrl": "",
@@ -567,25 +623,29 @@
             {
               "optionId": "A",
               "type": "text",
-              "content": "Contraste.",
+              "optionText": "Contraste.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "B",
               "type": "text",
-              "content": "Exageración.",
+              "optionText": "Exageración.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "C",
               "type": "text",
-              "content": "Comparación.",
+              "optionText": "Comparación.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "D",
               "type": "text",
-              "content": "Cita de autoridades.",
+              "optionText": "Cita de autoridades.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             }
           ],
@@ -593,8 +653,8 @@
           "aiExplanation": ""
         },
         {
-          "questionId": "q_41",
-          "questionText": "El fragmento del texto que responde la pregunta “¿cómo actúa la solitaria dentro del organismo?” es:",
+          "questionId": "q_16",
+          "questionText": "El fragmento del texto que responde la pregunta \"¿cómo actúa la solitaria dentro del organismo?\" es:",
           "hasQuestionImage": false,
           "questionImageUrl": "",
           "questionImageAiDescription": "",
@@ -603,25 +663,29 @@
             {
               "optionId": "A",
               "type": "text",
-              "content": "Pero todo lo que comía y bebía no era para su gusto y placer, sino para los de la solitaria.",
+              "optionText": "Pero todo lo que comía y bebía no era para su gusto y placer, sino para los de la solitaria.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "B",
               "type": "text",
-              "content": "Una vez que la solitaria se instala en el organismo se consubstancia con él, se alimenta de él, crece y se fortalece a expensas de él.",
+              "optionText": "Una vez que la solitaria se instala en el organismo se consubstancia con él, se alimenta de él, crece y se fortalece a expensas de él.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "C",
               "type": "text",
-              "content": "José María enflaquecía a pesar de que debía comer y beber líquidos (leche, sobre todo) constantemente para aplacar la ansiedad del animal aposentado en sus entrañas.",
+              "optionText": "José María enflaquecía a pesar de que debía comer y beber líquidos \\(\\text{leche, sobre todo}\\) constantemente para aplacar la ansiedad del animal aposentado en sus entrañas.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "D",
               "type": "text",
-              "content": "Nosotros hacemos tantas cosas juntos. Vamos al cine, a exposiciones, a recorrer librerías, y discutimos horas de horas sobre política, libros, amigos comunes. Y tú crees que yo estoy haciendo esas cosas como las haces tú, porque te divierte hacerlas. Pero te equivocas. Yo las hago para ella, la solitaria.",
+              "optionText": "\"Nosotros hacemos tantas cosas juntos. Y tú crees que yo estoy haciendo esas cosas como las haces tú, porque te divierte hacerlas. Pero te equivocas. Yo las hago para ella, la solitaria\".",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             }
           ],
@@ -629,8 +693,8 @@
           "aiExplanation": ""
         },
         {
-          "questionId": "q_42",
-          "questionText": "Considere el siguiente fragmento del texto:\n\n“Un día, que estábamos conversando en un pequeño bistró de Montparnasse, me sorprendió con esta confesión: ‘Nosotros hacemos tantas cosas juntos. Vamos al cine, a exposiciones, a recorrer librerías, y discutimos horas de horas sobre política, libros, amigos comunes. Y tú crees que yo estoy haciendo esas cosas como las haces tú, porque te divierte hacerlas. Pero te equivocas. Yo las hago para ella, la solitaria. Esa es la impresión que tengo: que todo en mi vida, ahora, no lo vivo para mí, sino para ese ser que llevo adentro, del que ya no soy más que un sirviente’”.\n\nEl anterior fragmento hace una caracterización de",
+          "questionId": "q_17",
+          "questionText": "Considere el siguiente fragmento del texto:\n\n\"Un día, que estábamos conversando en un pequeño bistrot de Montparnasse, me sorprendió con esta confesión: 'Nosotros hacemos tantas cosas juntos. Vamos al cine, a exposiciones, a recorrer librerías, y discutimos horas de horas sobre política, libros, amigos comunes. Y tú crees que yo estoy haciendo esas cosas como las haces tú, porque te divierte hacerlas. Pero te equivocas. Yo las hago para ella, la solitaria. Esa es la impresión que tengo: que todo en mi vida, ahora, no lo vivo para mí, sino para ese ser que llevo adentro, del que ya no soy más que un sirviente'.\"\n\nEl anterior fragmento hace una caracterización de",
           "hasQuestionImage": false,
           "questionImageUrl": "",
           "questionImageAiDescription": "",
@@ -639,25 +703,29 @@
             {
               "optionId": "A",
               "type": "text",
-              "content": "la libertad de José María.",
+              "optionText": "la libertad de José María.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "B",
               "type": "text",
-              "content": "la esclavitud de José María.",
+              "optionText": "la esclavitud de José María.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "C",
               "type": "text",
-              "content": "la soledad de José María.",
+              "optionText": "la soledad de José María.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "D",
               "type": "text",
-              "content": "la inteligencia de José María.",
+              "optionText": "la inteligencia de José María.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             }
           ],
@@ -669,14 +737,14 @@
     {
       "sectionIndex": 6,
       "sectionTitle": "",
-      "sectionText": "PETRICORE EL OLOR DE LA LLUVIA\n\nCuando las gotas de lluvia impactan contra el suelo, se forman burbujas de aire.\nEstas burbujas “atrapan” partículas de la tierra (aceites y químicos producidos por bacterias).\nLas burbujas hacen efervescencia como champaña y esparcen las partículas en el ambiente.\nEl conjunto de partículas es lo que produce ese olor llamado “petrícor” o como lo conoces tú: tierra mojada.\n\nFuente: “How the Smell of Rain Bubbles from the Ground” - THE NEW YORK TIMES\nPICTOLINE.COM",
+      "sectionText": "",
       "hasSectionImage": true,
       "sectionImageUrl": "",
-      "sectionImageAiDescription": "",
+      "sectionImageAiDescription": "Infografía titulada \"PETRICOR: EL OLOR DE LA LLUVIA\" en letras grandes. Formato vertical con \\(4\\) viñetas principales apiladas y fondo oscuro. Viñeta \\(1\\): una gota de lluvia cae sobre suelo horizontal y genera una burbuja irregular de aire; un recuadro de texto dice: \"CUANDO LAS GOTAS DE LLUVIA IMPACTAN CONTRA EL SUELO, SE FORMAN BURBUJAS DE AIRE.\" Viñeta \\(2\\): burbuja más aplanada sobre el suelo con varias partículas circulares oscuras y claras dentro; recuadro de texto: \"ESTAS BURBUJAS 'ATRAPAN' PARTÍCULAS DE LA TIERRA \\(ACEITES Y QUÍMICOS PRODUCIDOS POR BACTERIAS\\).\" Viñeta \\(3\\): burbuja baja y extendida; se observan pequeñas partículas saliendo hacia arriba como efervescencia; recuadro de texto: \"LAS BURBUJAS HACEN EFERVESCENCIA COMO CHAMPAÑA Y ESPARCEN LAS PARTÍCULAS EN EL AMBIENTE.\" Viñeta \\(4\\), en la parte inferior, funciona como conclusión: texto a la izquierda \"EL CONJUNTO DE PARTÍCULAS ES LO QUE PRODUCE ESE OLOR LLAMADO 'PETRICOR'\", seguido de una flecha horizontal hacia la derecha y el texto \"O COMO LO CONOCES TÚ: TIERRA MOJADA\". En la esquina inferior derecha aparece la ilustración de una persona de cabello largo oliendo una taza. Pie de fuente: \"FUENTE 'How the Smell of Rain Bubbles From the Ground' - THE NEW YORK TIMES\" y marca \"PICTOLINE.COM\".",
       "questions": [
         {
-          "questionId": "q_43",
-          "questionText": "Considere el siguiente fragmento del texto: “Las burbujas hacen efervescencia como champaña”. ¿Cuál de las siguientes opciones expresa el mismo significado que este fragmento?",
+          "questionId": "q_18",
+          "questionText": "Considere el siguiente fragmento del texto: \"Las burbujas hacen efervescencia como champaña\". ¿Cuál de las siguientes opciones expresa el mismo significado que este fragmento?",
           "hasQuestionImage": false,
           "questionImageUrl": "",
           "questionImageAiDescription": "",
@@ -685,25 +753,29 @@
             {
               "optionId": "A",
               "type": "text",
-              "content": "Las burbujas de agua están llenas de alcohol, al igual que las burbujas de champaña.",
+              "optionText": "Las burbujas de agua están llenas de alcohol, al igual que las burbujas de champaña.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "B",
               "type": "text",
-              "content": "El agua hierve de la misma manera que la champaña crea burbujas.",
+              "optionText": "El agua hierve de la misma manera que la champaña crea burbujas.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "C",
               "type": "text",
-              "content": "El gas sale de las burbujas de agua del mismo modo que de las burbujas de champaña.",
+              "optionText": "El gas sale de las burbujas de agua del mismo modo que de las burbujas de champaña.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "D",
               "type": "text",
-              "content": "Las burbujas que salen de la champaña son del mismo color que las del agua.",
+              "optionText": "Las burbujas que salen de la champaña son del mismo color que las del agua.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             }
           ],
@@ -711,7 +783,7 @@
           "aiExplanation": ""
         },
         {
-          "questionId": "q_44",
+          "questionId": "q_19",
           "questionText": "Teniendo en cuenta el proceso descrito en el texto, ¿qué función cumple el último cuadro?",
           "hasQuestionImage": false,
           "questionImageUrl": "",
@@ -721,25 +793,29 @@
             {
               "optionId": "A",
               "type": "text",
-              "content": "Sintetiza el contenido del texto.",
+              "optionText": "Sintetiza el contenido del texto.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "B",
               "type": "text",
-              "content": "Presenta los contenidos del texto.",
+              "optionText": "Presenta los contenidos del texto.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "C",
               "type": "text",
-              "content": "Anuncia la estructura del texto.",
+              "optionText": "Anuncia la estructura del texto.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "D",
               "type": "text",
-              "content": "Funciona como el cierre del texto.",
+              "optionText": "Funciona como el cierre del texto.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             }
           ],
@@ -747,8 +823,8 @@
           "aiExplanation": ""
         },
         {
-          "questionId": "q_45",
-          "questionText": "En el último recuadro se presentan dos enunciados: 1. “El conjunto de partículas es lo que produce ese olor llamado ‘petricor’.” 2. “O como lo conoces tú: tierra mojada”. ¿Qué relación establece la palabra “o” entre estas dos frases?",
+          "questionId": "q_20",
+          "questionText": "En el último recuadro se presentan dos enunciados:\n\\(1\\). \"El conjunto de partículas es lo que produce ese olor llamado petricor\";\n\\(2\\). \"o como lo conoces tú: tierra mojada\".\n\n¿Qué relación establece la palabra \"o\" entre estas dos frases?",
           "hasQuestionImage": false,
           "questionImageUrl": "",
           "questionImageAiDescription": "",
@@ -757,25 +833,29 @@
             {
               "optionId": "A",
               "type": "text",
-              "content": "Permite establecer una relación de oposición, pues el segundo enunciado se opone al primero.",
+              "optionText": "Permite establecer una relación de oposición, pues el segundo enunciado se opone al primero.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "B",
               "type": "text",
-              "content": "Permite establecer una relación de causa-efecto, pues el primer enunciado es la causa del segundo.",
+              "optionText": "Permite establecer una relación de causa-efecto, pues el primer enunciado es la causa del segundo.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "C",
               "type": "text",
-              "content": "Permite expresar una alternativa, pues el segundo enunciado presenta otra manera de denominar al primero.",
+              "optionText": "Permite expresar una alternativa, pues el segundo enunciado presenta otra manera de denominar al primero.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "D",
               "type": "text",
-              "content": "Permite expresar una adición, pues el segundo enunciado agrega nuevas ideas al tema presentado por el primero.",
+              "optionText": "Permite expresar una adición, pues el segundo enunciado agrega nuevas ideas al tema presentado por el primero.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             }
           ],
@@ -783,7 +863,7 @@
           "aiExplanation": ""
         },
         {
-          "questionId": "q_46",
+          "questionId": "q_21",
           "questionText": "A partir de la lectura de la infografía, ¿qué tipo de estrategia utiliza el autor del texto para lograr su propósito?",
           "hasQuestionImage": false,
           "questionImageUrl": "",
@@ -793,25 +873,29 @@
             {
               "optionId": "A",
               "type": "text",
-              "content": "Muestra las similitudes y las diferencias entre dos temas con el propósito de demostrar preferencia.",
+              "optionText": "Muestra las similitudes y las diferencias entre dos temas con el propósito de demostrar preferencia.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "B",
               "type": "text",
-              "content": "Utiliza detalles y lenguaje figurado con el fin de apoyar una impresión dominante con respecto al tema.",
+              "optionText": "Utiliza detalles y lenguaje figurado con el fin de apoyar una impresión dominante con respecto al tema.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "C",
               "type": "text",
-              "content": "Explica el significado de un término relevante para el texto y así deja claro cómo este se va a entender.",
+              "optionText": "Explica el significado de un término relevante para el texto y así deja claro cómo este se va a entender.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "D",
               "type": "text",
-              "content": "Señala y explica pasos o etapas según sus características.",
+              "optionText": "Señala y explica pasos o etapas según sus características.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             }
           ],
@@ -822,14 +906,14 @@
     },
     {
       "sectionIndex": 7,
-      "sectionTitle": "",
-      "sectionText": "La verdad en la infancia\n\nEn la vasta comedia de los sentimientos y de las pasiones humanas, la infancia representa la única certeza de sinceridad. Nos hacemos hombres adultos, nos hacemos viejos, maduramos principal y casi exclusivamente para mentir, para disimular, para fingir acerca del amor, de la amistad, del aprecio, entre otras cosas. Sobre ninguna de tales categorías morales conoce la infancia el recurso de la hipocresía. Los niños aman y detestan integral, honda y sinceramente con diáfana lealtad. Confiesan su desamor por una cosa o por una persona, con esplendorosa claridad, sin agregar vanas razones al mandato interior que los fuerza a declarar su pueril odio o abominación. Afirman, de la misma manera honesta, su prodigiosa ternura por una persona o un juguete, por un desaprovechado trozo de madera, por un inservible artefacto, resto de un naufragio de cosas domésticas, por un perro de ojos tristes y de estampa maltrecha, por un gato envejecido y cojo, por una piedrecilla minúscula, cuyos hostiles bordes se han ido suavizando al roce de las caricias entre las manos incansables. Los niños aman el viento y la lluvia, la tierra mojada, el agua que brota y que salta en los estanques públicos, el sol y el cielo, la yerba, los árboles, la luz, los colores, todo el universo real y todo el universo irreal de sus sueños.\n\nTomado y adaptado de Téllez, H. (1946). Bagatela sobre la infancia. En Hernando Téllez (Ed.). Luces en el bosque (pp. 141-142). Ediciones Librería Siglo XX.",
+      "sectionTitle": "La verdad en la infancia",
+      "sectionText": "En la vasta comedia de los sentimientos y de las pasiones humanas, la infancia representa la única certeza de sinceridad. Nos hacemos hombres adultos, nos hacemos viejos, maduramos principal y casi exclusivamente para mentir, para disimular, para fingir acerca del amor, de la amistad, del aprecio, entre otras cosas. Sobre ninguna de tales categorías morales conoce la infancia el recurso de la hipocresía. Los niños aman y detestan integral, honda y sinceramente con diáfana lealtad. Confiesan su desamor por una cosa o por una persona, con esplendorosa claridad, sin agregar vanas razones al mandato interior que los fuerza a declarar su pueril odio o abominación. Afirman, de la misma manera honesta, su prodigiosa ternura por una persona o un juguete, por un desaprovechado trozo de madera, por un inservible artefacto, resto de un naufragio de cosas domésticas, por un perro de ojos tristes y de estampa maltrecha, por un gato envejecido y cojo, por una piedrecilla minúscula, cuyos hostiles bordes se han ido suavizando al roce de las caricias entre las manos incansables. Los niños aman el viento y la lluvia, la tierra mojada, el agua que brota y que salta en los estanques públicos, el sol y el cielo, la yerba, los árboles, la luz, los colores, todo el universo real y todo el universo irreal de sus sueños.\n\nTomado y adaptado de Téllez, H. \\(1946\\). Bagatela sobre la infancia. En Hernando Téllez \\(Ed.\\). Luces en el bosque \\(pp.\\ \\(141\\)-\\(142\\)\\). Ediciones Librería Siglo \\(XX\\).",
       "hasSectionImage": false,
       "sectionImageUrl": "",
       "sectionImageAiDescription": "",
       "questions": [
         {
-          "questionId": "q_47",
+          "questionId": "q_22",
           "questionText": "¿Cuál de las siguientes opciones presenta la idea que defiende el texto?",
           "hasQuestionImage": false,
           "questionImageUrl": "",
@@ -839,25 +923,29 @@
             {
               "optionId": "A",
               "type": "text",
-              "content": "Cuando se es viejo siempre se ama con libertad.",
+              "optionText": "Cuando se es viejo siempre se ama con libertad.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "B",
               "type": "text",
-              "content": "Cuando se es niño siempre se ama con claridad.",
+              "optionText": "Cuando se es niño siempre se ama con claridad.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "C",
               "type": "text",
-              "content": "Cuando se es viejo siempre se miente.",
+              "optionText": "Cuando se es viejo siempre se miente.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "D",
               "type": "text",
-              "content": "Cuando se es niño siempre se dice la verdad.",
+              "optionText": "Cuando se es niño siempre se dice la verdad.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             }
           ],
@@ -865,7 +953,7 @@
           "aiExplanation": ""
         },
         {
-          "questionId": "q_48",
+          "questionId": "q_23",
           "questionText": "¿Cuál es la estrategia argumentativa usada por el autor?",
           "hasQuestionImage": false,
           "questionImageUrl": "",
@@ -875,25 +963,29 @@
             {
               "optionId": "A",
               "type": "text",
-              "content": "El autor presenta el tema, seguido de una tesis y de una antítesis, y concluye con una síntesis.",
+              "optionText": "El autor presenta el tema, seguido de una tesis y de una antítesis, y concluye con una síntesis.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "B",
               "type": "text",
-              "content": "El autor emprende la tarea de defender una tesis enumerando evidencias a favor de ella.",
+              "optionText": "El autor emprende la tarea de defender una tesis enumerando evidencias a favor de ella.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "C",
               "type": "text",
-              "content": "El autor presenta diferentes argumentos y concluye refutando esos argumentos.",
+              "optionText": "El autor presenta diferentes argumentos y concluye refutando esos argumentos.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "D",
               "type": "text",
-              "content": "El autor expone una tesis, pero no presenta argumentos para apoyarla.",
+              "optionText": "El autor expone una tesis, pero no presenta argumentos para apoyarla.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             }
           ],
@@ -905,13 +997,13 @@
     {
       "sectionIndex": 8,
       "sectionTitle": "",
-      "sectionText": "El director de la escuela y mi padre creían que mi nivel de Corán era muy deficiente.\n\nEl árabe del Corán no es el mismo que el que se hablaba en clase.\n\nAsí que me obligaron a pasarme todos los recreos haciendo recuperación con la maestra.\n\nYo me preguntaba si iba en serio o disimulaba. Si apenas conseguía leer...\n\nVenga, no pasa nada, volvemos a empezar, escucha bien.\n\nOía a una fragancia jabonosa y, de fondo, a un sudor embriagador y reconfortante.\n\nBismillāh arrahmān arrahīm.\n\nEscúchala era muy agradable.\n\nTomado y adaptado de: Sattouf, R. (2019). El árabe del futuro 4. Una juventud en Oriente Medio (1987-1992). España: Editorial Salamandra.",
+      "sectionText": "",
       "hasSectionImage": true,
       "sectionImageUrl": "",
-      "sectionImageAiDescription": "",
+      "sectionImageAiDescription": "Página con cómic de \\(6\\) viñetas en una cuadrícula de \\(2\\) columnas por \\(3\\) filas, en blanco y negro. Trata sobre una niña en recuperación de lectura del Corán con una maestra. Viñeta \\(1\\): exterior de un edificio escolar con varias personas; cartela superior: \"El director de la escuela y mi padre creían que mi nivel de Corán era muy deficiente.\" Viñeta \\(2\\): la niña sentada ante un libro abierto en un aula; texto manuscrito superior: \"El árabe del Corán no es el mismo que el que se hablaba en clase\". Viñeta \\(3\\): la maestra sentada junto a la niña en un pupitre; globo de la maestra: \"¡Venga, Riad!\"; caja de texto cerca del libro: \"Explícame de qué habla este versículo.\"; texto manuscrito de la narradora: \"Como todo el mundo quería matarme a la hora del recreo, me venía bien\". Viñeta \\(4\\): la maestra levanta un brazo; la niña llora; globo grande: \"BUAAA\"; globo pequeño: \"Yo... No sé...\"; cartela superior: \"Yo me preguntaba si iba en serio o disimulaba. Si apenas conseguía leer...\" Viñeta \\(5\\): la maestra inclinada hacia la niña, ambas frente al libro; globo de la maestra: \"Venga, no pasa nada, volvemos a empezar, escucha bien.\" Viñeta \\(6\\): primer plano de la maestra sonriendo y de la niña parcialmente visible; cartela superior: \"Olía a una fragancia jabonosa y, de fondo, a un sudor embriagador y reconfortante.\"; globo: \"Bismilâ arrahmân arrahîm.\"; anotación manuscrita con flecha: \"Escucharla era muy agradable\".",
       "questions": [
         {
-          "questionId": "q_49",
+          "questionId": "q_24",
           "questionText": "El texto en árabe al que se refieren en los recuadros está dividido en versículos. Uno podría deducir que se trata de:",
           "hasQuestionImage": false,
           "questionImageUrl": "",
@@ -921,25 +1013,29 @@
             {
               "optionId": "A",
               "type": "text",
-              "content": "Un diccionario de una lengua de Oriente Medio.",
+              "optionText": "Un diccionario de una lengua de Oriente Medio.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "B",
               "type": "text",
-              "content": "Un texto religioso como la Biblia.",
+              "optionText": "Un texto religioso como la Biblia.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "C",
               "type": "text",
-              "content": "Una colección de cuentos de los hermanos Grimm.",
+              "optionText": "Una colección de cuentos de los hermanos Grimm.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "D",
               "type": "text",
-              "content": "Una novela como María, de Jorge Isaacs.",
+              "optionText": "Una novela como María, de Jorge Isaacs.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             }
           ],
@@ -947,7 +1043,7 @@
           "aiExplanation": ""
         },
         {
-          "questionId": "q_50",
+          "questionId": "q_25",
           "questionText": "En el sexto recuadro del cómic, ¿cuál es la relación entre el texto en cursiva debajo de la flecha y el texto dentro del globo?",
           "hasQuestionImage": false,
           "questionImageUrl": "",
@@ -957,25 +1053,29 @@
             {
               "optionId": "A",
               "type": "text",
-              "content": "Mediante el texto en cursiva la mujer corrige la pronunciación de la niña, cuyas palabras aparecen en el globo.",
+              "optionText": "Mediante el texto en cursiva la mujer corrige la pronunciación de la niña, cuyas palabras aparecen en el globo.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "B",
               "type": "text",
-              "content": "Con el texto en el globo la niña busca hacer una pregunta, que la mujer responde con el texto en cursiva.",
+              "optionText": "Con el texto en el globo la niña busca hacer una pregunta, que la mujer responde con el texto en cursiva.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "C",
               "type": "text",
-              "content": "Mediante el texto en cursiva la niña expresa gusto por la voz de la mujer, cuyas palabras están en el globo.",
+              "optionText": "Mediante el texto en cursiva la niña expresa gusto por la voz de la mujer, cuyas palabras están en el globo.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "D",
               "type": "text",
-              "content": "Con el texto en el globo la mujer responde las observaciones de la niña, que aparecen en cursiva.",
+              "optionText": "Con el texto en el globo la mujer responde las observaciones de la niña, que aparecen en cursiva.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             }
           ],
@@ -983,8 +1083,8 @@
           "aiExplanation": ""
         },
         {
-          "questionId": "q_51",
-          "questionText": "Los rectángulos de texto que aparecen en la parte superior de los recuadros 1, 3, 4 y 6 corresponden a la voz de:",
+          "questionId": "q_26",
+          "questionText": "Los rectángulos de texto que aparecen en la parte superior de los recuadros \\(1\\), \\(3\\), \\(4\\) y \\(6\\) corresponden a la voz de:",
           "hasQuestionImage": false,
           "questionImageUrl": "",
           "questionImageAiDescription": "",
@@ -993,25 +1093,29 @@
             {
               "optionId": "A",
               "type": "text",
-              "content": "La maestra que aparece en el cómic, que cuenta todo en tercera persona.",
+              "optionText": "La maestra que aparece en el cómic, que cuenta todo en tercera persona.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "B",
               "type": "text",
-              "content": "El director de la escuela, que no aparece en los recuadros pero conoció la historia.",
+              "optionText": "El director de la escuela, que no aparece en los recuadros pero conoció la historia.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "C",
               "type": "text",
-              "content": "El padre de la niña del cómic, que recuerda los eventos en segunda persona.",
+              "optionText": "El padre de la niña del cómic, que recuerda los eventos en segunda persona.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "D",
               "type": "text",
-              "content": "La niña de la historia, que hace su relato en primera persona.",
+              "optionText": "La niña de la historia, que hace su relato en primera persona.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             }
           ],
@@ -1023,14 +1127,14 @@
     {
       "sectionIndex": 9,
       "sectionTitle": "",
-      "sectionText": "Me pregunto qué diría un comité de ética si un periódico indujera a sus lectores a cambiar comportamientos, a vender o comprar propiedades, a suspender relaciones amorosas o a cambiar de trabajo. Todo eso con el agravante de que la intromisión proviene de afirmaciones sin base científica o factual, producto de la pluma de alguien que ya había demostrado estar equivocado y se lucra de la ingenuidad de la gente. Pues eso es exactamente lo que pasa con los horóscopos que nos inundan por esta época, incluso en los medios de la mayor seriedad.\n\nHoróscopos y cartas astrales se basan en creencias y mitos de diversas culturas, en escritos antiguos que están equivocados y se contradicen en sus predicciones. Los signos del Zodíaco, por ejemplo, no son 12 sino 13, y hay quienes piensan que 14. Los astrólogos esconden ese hecho, lo que nos obligaría a reubicarnos en signos diferentes al nuestro tradicional, cambiando el análisis de personalidad y las predicciones de toda la vida. ¡Qué oso!\n\nEl nombre y carácter de los signos se derivan de lo que creían ver en las estrellas astrónomos de la Antigüedad. Podrían haber imaginado cosas distintas. Hoy, por ejemplo, no verían una balanza (pieza de museo) en los astros del signo Libra. Quizás verían un brasier, y eso nos dañaría a los del signo nuestra proverbial fama de equilibrados.\n\nEn los análisis de personalidad hacen afirmaciones generales que le cuadran a cualquiera. Aprovechan lo que en psicología se llama efecto Forer. Forer sometió a sus estudiantes a un test que supuestamente había elaborado para definir la personalidad. Posteriormente, le entregó a cada uno su resultado y les pidió que calificaran su precisión de 0 a 5. El test recibió una excelente calificación promedio de 4,2.\n\nEl asunto fue que Forer no leyó los exámenes y entregó a todos los estudiantes el mismo resultado. Este les decía al examinado que tenía gran necesidad de aprecio, pero que era crítico consigo mismo. Que trataba de compensar sus debilidades, y así muchas otras cosas, muy personales e íntimas. El texto les cuadró a todos. Así, la mayoría de astrólogos usan esa técnica, y la gente siente que acertaron.\n\nAlgunos se arriesgan a pronósticos más precisos, y en ellos casi siempre se equivocan, pero nos recuerdan solo sus aciertos. Este año habrá quienes se jactarán de haber predecido la muerte de Fidel Castro; no nos recordarán que llevan 10 años prediciéndola. Busquen en la web las predicciones de sus astrólogos preferidos para el 2016. Una conocida astróloga mexicana pronosticó la caída de Maduro y que Jeb Bush iba a ser presidente. Otro lamentó informarnos que el papa Francisco sufriría una grave enfermedad. Acertó, eso sí, al predecir que en el mundo habría más refugiados.\n\nA mí, el astrólogo colombiano de cabecera me predijo que iba a participar en eventos al aire libre y me recomendó utilizar mi capacidad creativa para labrarme un buen futuro. Comparto feliz estas buenas predicciones con otros 625 millones de terrícolas.\n\nTomado y adaptado de: Wasserman, M. (22 de diciembre de 2016). Otra vez ‘horoscopando’. El Tiempo. Recuperado de http://www.eltiempo.com/archivo/documento/CMS-16778742",
+      "sectionText": "Me pregunto qué diría un comité de ética si un periódico indujera a sus lectores a cambiar comportamientos, a vender o comprar propiedades, a suspender relaciones amorosas o a cambiar de trabajo. Todo eso con el agravante de que la intromisión proviene de afirmaciones sin base científica o factual, producto de la pluma de alguien que ya había demostrado estar equivocado y se lucra de la ingenuidad de la gente. Pues eso es exactamente lo que pasa con los horóscopos que nos inundan por esta época, incluso en los medios de la mayor seriedad.\n\nHoróscopos y cartas astrales se basan en creencias y mitos de diversas culturas, en escritos antiguos que están equivocados y se contradicen en sus predicciones. Los signos del Zodíaco, por ejemplo, no son \\(12\\) sino \\(13\\), y hay quienes piensan que \\(14\\). Los astrólogos esconden ese hecho, que nos obligaría a reubicarnos en signos diferentes al nuestro tradicional, cambiando el análisis de personalidad y las predicciones de toda la vida. ¡Qué oso!\n\nEl nombre y carácter de los signos se derivan de lo que creían ver en las estrellas astrónomos de la Antigüedad. Podrían haber imaginado cosas distintas. Hoy, por ejemplo, no verían una balanza \\(pieza de museo\\) en los astros del signo Libra. Quizás verían un brasier, y eso nos dañaría a los del signo nuestra proverbial fama de equilibrados.\n\nEn los análisis de personalidad hacen afirmaciones generales que le cuadran a cualquiera. Aprovechan lo que en psicología se llama efecto Forer. Forer sometió a sus estudiantes a un test que supuestamente había elaborado para definir la personalidad. Posteriormente, le entregó a cada uno su resultado y le pidió que calificara su precisión de \\(0\\) a \\(5\\). El test recibió una excelente calificación promedio de \\(4,2\\).\n\nEl asunto fue que Forer no leyó los exámenes y entregó a todos los estudiantes el mismo resultado. Este le decía al examinado que tenía gran necesidad de aprecio, pero que era crítico consigo mismo. Que trataba de compensar sus debilidades, y así muchas otras cosas, muy personales e íntimas. El texto les cuadró a todos. Así, la mayoría de astrólogos usan esta técnica, y la gente siente que acertaron.\n\nAlgunos se arriesgan a pronósticos más precisos, y en ellos casi siempre se equivocan, pero nos recuerdan solo sus aciertos. Este año habrá quienes se vanaglorien de haber predicho la muerte de Fidel Castro; no nos recordarán que llevan \\(10\\) años prediciéndola. Busquen en la web las predicciones de sus astrólogos preferidos para el \\(2016\\). Una conocida astróloga mexicana pronosticó la caída de Maduro y que Jeb Bush iba a ser presidente. Otro lamentó informarnos que el papa Francisco sufriría una grave enfermedad. Acertó, eso sí, al predecir que en el mundo habría más refugiados.\n\nA mí, el astrólogo colombiano de cabecera me predijo que iba a participar en eventos al aire libre y me recomendó utilizar mi capacidad creativa para labrarme un buen futuro. Comparto feliz estas buenas predicciones con otros \\(625\\) millones de terrícolas.\n\nTomado y adaptado de: Wasserman, M. \\(22\\) de diciembre de \\(2016\\). Otra vez 'horoscopeando'. El Tiempo. Recuperado de http://www.eltiempo.com/archivo/documento/CMS-16778742",
       "hasSectionImage": false,
       "sectionImageUrl": "",
       "sectionImageAiDescription": "",
       "questions": [
         {
-          "questionId": "q_52",
-          "questionText": "Considere las siguientes predicciones, presentadas en el penúltimo párrafo del texto:\n\n1) El papa Francisco sufrirá una grave enfermedad.\n2) En el mundo habrá más refugiados.\n\n¿Cuál es la relación entre estas dos afirmaciones?",
+          "questionId": "q_27",
+          "questionText": "Considere las siguientes predicciones, presentadas en el penúltimo párrafo del texto:\n\n\\(1\\) El papa Francisco sufrirá una grave enfermedad.\n\\(2\\) En el mundo habrá más refugiados.\n\n¿Cuál es la relación entre estas dos afirmaciones?",
           "hasQuestionImage": false,
           "questionImageUrl": "",
           "questionImageAiDescription": "",
@@ -1039,25 +1143,29 @@
             {
               "optionId": "A",
               "type": "text",
-              "content": "Son complementarias, puesto que ambas sirven para probar que las predicciones específicas de los astrólogos son ciertas.",
+              "optionText": "Son complementarias, puesto que ambas sirven para probar que las predicciones específicas de los astrólogos son ciertas.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "B",
               "type": "text",
-              "content": "Tienen la misma función, ya que ambas prueban que las predicciones generales de los astrólogos suelen resultar falsas.",
+              "optionText": "Tienen la misma función, ya que ambas prueban que las predicciones generales de los astrólogos suelen resultar falsas.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "C",
               "type": "text",
-              "content": "Son contradictorias, puesto que 1) dice lo contrario que 2), mostrando que los horóscopos son una práctica incoherente.",
+              "optionText": "Son contradictorias, puesto que \\(1\\) dice lo contrario que \\(2\\), mostrando que los horóscopos son una práctica incoherente.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "D",
               "type": "text",
-              "content": "Tienen funciones opuestas, ya que 1) prueba que las predicciones particulares fallan, y 2) que las generales aciertan.",
+              "optionText": "Tienen funciones opuestas, ya que \\(1\\) prueba que las predicciones particulares fallan, y \\(2\\) que las generales aciertan.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             }
           ],
@@ -1065,8 +1173,8 @@
           "aiExplanation": ""
         },
         {
-          "questionId": "q_53",
-          "questionText": "Considere los párrafos 4 y 5 del texto. En ellos, el autor busca mostrar que los análisis de personalidad a veces son engañosos. El experimento realizado por Forer logra apoyar bien esa idea, pues en este se evidencia que",
+          "questionId": "q_28",
+          "questionText": "Considere los párrafos \\(4\\) y \\(5\\) del texto. En ellos, el autor busca mostrar que los análisis de personalidad a veces son engañosos. El experimento realizado por Forer logra apoyar bien esa idea, pues en este se evidencia que",
           "hasQuestionImage": false,
           "questionImageUrl": "",
           "questionImageAiDescription": "",
@@ -1075,25 +1183,29 @@
             {
               "optionId": "A",
               "type": "text",
-              "content": "la mayoría de la gente es proclive a creer en los test de personalidad, sobre todo si estos afirman cosas positivas.",
+              "optionText": "la mayoría de la gente es proclive a creer en los test de personalidad, sobre todo si estos afirman cosas positivas.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "B",
               "type": "text",
-              "content": "los estudiantes están sesgados y predispuestos a considerar como verdadero lo que su profesor de psicología les dice.",
+              "optionText": "los estudiantes están sesgados y predispuestos a considerar como verdadero lo que su profesor de psicología les dice.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "C",
               "type": "text",
-              "content": "debido a las diferencias normales entre sus personalidades, los estudiantes no le otorgaron a la prueba una calificación más alta.",
+              "optionText": "debido a las diferencias normales entre sus personalidades, los estudiantes no le otorgaron a la prueba una calificación más alta.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "D",
               "type": "text",
-              "content": "a pesar de las diferentes personalidades de los estudiantes, todos ellos se sintieron identificados con una misma descripción general.",
+              "optionText": "a pesar de las diferentes personalidades de los estudiantes, todos ellos se sintieron identificados con una misma descripción general.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             }
           ],
@@ -1105,13 +1217,13 @@
     {
       "sectionIndex": 10,
       "sectionTitle": "",
-      "sectionText": "El tren se detuvo en el interior del bosque. La niebla envolvía los robles alrededor del claro. Eran las 7 a. m. del 8 de noviembre de 1918. Estaba finalizando la Primera Guerra Mundial. Estaba empezando la Segunda.\n\nDesde el último coche, cuya tapicería de raso verde era una reliquia de los tiempos en que había sido el vagón privado del emperador Napoleón III de Francia, los pasajeros pudieron ver otro coche en un apartadero. Ignoraban dónde estaban, pero sabían que aquella era la última parada de un viaje de pesadilla... un viaje, que esperaban, pondría fin a los combates.\n\nUn oficial del ejército francés apareció en la puerta para informar a los recién llegados, seis alemanes, que el mariscal Ferdinand Foch, supremo comandante de las fuerzas aliadas, les recibiría a las 9 a. m. Para Matthias Erzberger, portavoz del grupo, la perspectiva de esperar solo podía aumentar su incomodidad. Le dolía el pesado cuerpo, su sombrero estaba aplastado y, en algún lugar del camino había perdido las gafas.\n\nUnos minutos antes de las 9 a. m., los alemanes cruzaron un caminillo de tablillas que había sido colocado entre las vías y entraron en el cuartel de Foch, un antiguo coche-cama francés. Luego, de porte erguido a la edad de 67 años, apareció Foch, acompañado por el Primer Lord de la Marina de Inglaterra, almirante Rosslyn Wemyss.\n\nFoch se mostró glacialmente formal:\n\n—¿Qué trae a estos caballeros por aquí? ¿Qué quieren de mí?\n\nErzberger dijo que habían ido con el fin de recibir las propuestas aliadas para una tregua.\n\n—No tengo ninguna propuesta que hacer —dijo Foch.\n\nHubo un momento de consternación; uno de los alemanes preguntó cómo quería que se expresaran.\n\n—¿Desean una tregua? —respondió Foch—. Si es así, les puedo comunicar las condiciones bajo las cuales la pueden obtener.\n\nPidieron tregua.\n\nEl silencio fue absoluto mientras un decán leía las condiciones. Foch permaneció sentado como una estatua. El almirante jugaba con su monóculo. Mientras escuchaban, los alemanes quedaron aturdidos, comprendiendo por primera vez la magnitud de su derrota.\n\nTres días más tarde, el 11 de noviembre de 1918, a las 5:20 a. m., en el mismo vagón, Erzberger firmó la tregua y, al hacerlo, su propia sentencia de muerte. Tres años después sería abatido a tiros por compatriotas resentidos, un par de oficiales del ejército, nacionalistas y fanáticos.\n\nLa intransigencia de Foch y el fatídico destino de Erzberger son vívidos ejemplos de las fuerzas desatadas al final del primer gran conflicto, que condujeron –y hoy nos parece inevitable– al segundo. Estas fuerzas, compuestas de rencor y orgullo, tanto en los alemanes como en sus vencedores, iban a cobrar impulso aún después de que se acallaran las armas.\n\nTomado y adaptado de: Elson, R. (1995). La Segunda Guerra Mundial. El preludio de la guerra I. Barcelona: Ediciones Folio.",
+      "sectionText": "El tren se detuvo en el interior del bosque. La niebla envolvía los robles alrededor del claro. Eran las \\(7\\) a. m. del \\(8\\) de noviembre de \\(1918\\). Estaba finalizando la Primera Guerra Mundial. Estaba empezando la Segunda.\n\nDesde el último coche, cuya tapicería de raso verde era una reliquia de los tiempos en que había sido el vagón privado del emperador Napoleón \\(III\\) de Francia, los pasajeros pudieron ver otro coche en un apartadero. Ignoraban dónde estaban, pero sabían que aquella era la última parada de un viaje de pesadilla... un viaje, que esperaban, pondría fin a los combates.\n\nUn oficial del ejército francés apareció en la puerta para informar a los recién llegados, seis alemanes, que el mariscal Ferdinand Foch, supremo comandante de las fuerzas aliadas, les recibiría a las \\(9\\) a. m. Para Matthias Erzberger, portavoz del grupo, la perspectiva de esperar solo podía aumentar su incomodidad. Le dolía el pesado cuerpo, su sombrero estaba aplastado y, en algún lugar del camino había perdido las gafas.\n\nUnos minutos antes de las \\(9\\) a. m., los alemanes cruzaron un caminillo de tablillas que había sido colocado entre las vías y entraron en el cuartel de Foch, un antiguo coche-cama francés. Luego, de porte erguido a la edad de \\(67\\) años, apareció Foch, acompañado por el Primer Lord de la Marina de Inglaterra, almirante Rosslyn Wemyss.\n\nFoch se mostró glacialmente formal:\n—¿Qué trae a estos caballeros por aquí? ¿Qué quieren de mí?\n\nErzberger dijo que habían ido con el fin de recibir las propuestas aliadas para una tregua.\n\n—No tengo ninguna propuesta que hacer —dijo Foch.\n\nHubo un momento de consternación; uno de los alemanes preguntó cómo quería que se expresaran.\n\n—¿Desean una tregua? —respondió Foch—. Si es así, les puedo comunicar las condiciones bajo las cuales la pueden obtener.\n\nPidieron tregua.\n\nEl silencio fue absoluto mientras un edecán leía las condiciones. Foch permaneció sentado como una estatua. El almirante jugaba con su monóculo. Mientras escuchaban, los alemanes quedaron aturdidos, comprendiendo por primera vez la magnitud de su derrota.\n\nTres días más tarde, el \\(11\\) de noviembre de \\(1918\\), a las \\(5{:}20\\) a. m., en el mismo vagón, Erzberger firmó la tregua y, al hacerlo, su propia sentencia de muerte. Tres años después sería abatido a tiros por compatriotas resentidos, un par de exoficiales del ejército, nacionalistas y fanáticos.\n\nLa intransigencia de Foch y el fatídico destino de Erzberger son vívidos ejemplos de las fuerzas desatadas al final del primer gran conflicto, que condujeron —y hoy nos parece inevitable— al segundo. Estas fuerzas, compuestas de rencor y orgullo, tanto en los alemanes como en sus vencedores, iban a cobrar impulso aún después de que se acallaran las armas.\n\nTomado y adaptado de: Elson, R. \\(1995\\). La Segunda Guerra Mundial. El preludio de la guerra \\(I\\). Barcelona: Ediciones Folio.",
       "hasSectionImage": false,
       "sectionImageUrl": "",
       "sectionImageAiDescription": "",
       "questions": [
         {
-          "questionId": "q_54",
+          "questionId": "q_29",
           "questionText": "De acuerdo con el texto, la firma del armisticio se da en",
           "hasQuestionImage": false,
           "questionImageUrl": "",
@@ -1121,25 +1233,29 @@
             {
               "optionId": "A",
               "type": "text",
-              "content": "una zona neutral para aliados y alemanes.",
+              "optionText": "una zona neutral para aliados y alemanes.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "B",
               "type": "text",
-              "content": "un vagón de tren en territorio aliado.",
+              "optionText": "un vagón de tren en territorio aliado.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "C",
               "type": "text",
-              "content": "un batallón militar del ejército francés.",
+              "optionText": "un batallón militar del ejército francés.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "D",
               "type": "text",
-              "content": "una estación de tren en medio de un bosque.",
+              "optionText": "una estación de tren en medio de un bosque.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             }
           ],
@@ -1147,7 +1263,7 @@
           "aiExplanation": ""
         },
         {
-          "questionId": "q_55",
+          "questionId": "q_30",
           "questionText": "Es posible describir a los alemanes como",
           "hasQuestionImage": false,
           "questionImageUrl": "",
@@ -1157,25 +1273,29 @@
             {
               "optionId": "A",
               "type": "text",
-              "content": "desesperados, pues hicieron un largo viaje para poder hablar con Foch.",
+              "optionText": "desesperados, pues hicieron un largo viaje para poder hablar con Foch.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "B",
               "type": "text",
-              "content": "vencidos, pero ignorantes de su situación real.",
+              "optionText": "vencidos, pero ignorantes de su situación real.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "C",
               "type": "text",
-              "content": "indecisos, pues les tomó alrededor de tres días decidir firmar el armisticio.",
+              "optionText": "indecisos, pues les tomó alrededor de tres días decidir firmar el armisticio.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "D",
               "type": "text",
-              "content": "combativos, pero con voluntad de hacer la paz.",
+              "optionText": "combativos, pero con voluntad de hacer la paz.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             }
           ],
@@ -1183,7 +1303,7 @@
           "aiExplanation": ""
         },
         {
-          "questionId": "q_56",
+          "questionId": "q_31",
           "questionText": "De acuerdo con el texto, Matthias Erzberger era",
           "hasQuestionImage": false,
           "questionImageUrl": "",
@@ -1193,25 +1313,29 @@
             {
               "optionId": "A",
               "type": "text",
-              "content": "un político francés que sirvió como mediador en la negociación entre los alemanes y Foch.",
+              "optionText": "un político francés que sirvió como mediador en la negociación entre los alemanes y Foch.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "B",
               "type": "text",
-              "content": "un diplomático alemán encargado de negociar con el supremo comandante de las fuerzas aliadas.",
+              "optionText": "un diplomático alemán encargado de negociar con el supremo comandante de las fuerzas aliadas.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "C",
               "type": "text",
-              "content": "un oficial del ejército aliado que acompañó a los alemanes al momento de negociar con Foch.",
+              "optionText": "un oficial del ejército aliado que acompañó a los alemanes al momento de negociar con Foch.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "D",
               "type": "text",
-              "content": "un edecán encargado de comandar el grupo de negociación conformado por alemanes y aliados.",
+              "optionText": "un edecán encargado de comandar el grupo de negociación conformado por alemanes y aliados.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             }
           ],
@@ -1219,8 +1343,8 @@
           "aiExplanation": ""
         },
         {
-          "questionId": "q_57",
-          "questionText": "Considere el siguiente fragmento:\n\nLas cláusulas territoriales del Tratado de Versalles [el acuerdo de paz firmado en 1919 entre aliados y alemanes tras finalizar la Primera Guerra Mundial] dejaban a Alemania prácticamente intacta. Seguía siendo el más grande de los bloques raciales homogéneos de Europa.\n\nCuando el mariscal Foch se enteró de la firma del Tratado de Paz de Versalles, comentó con singular acierto: “Esto no es la paz. Es una tregua por veinte años”.\n\n¿Qué relación guarda el anterior fragmento con el texto principal?",
+          "questionId": "q_32",
+          "questionText": "Considere el siguiente fragmento:\n\nLas cláusulas territoriales del Tratado de Versalles [el acuerdo de paz firmado en \\(1919\\) entre aliados y alemanes tras finalizar la Primera Guerra Mundial] dejaban a Alemania prácticamente intacta. Seguía siendo el más grande de los bloques raciales homogéneos de Europa.\n\nCuando el mariscal Foch se enteró de la firma del Tratado de Paz de Versalles, comentó con singular acierto: \"Esto no es la paz. Es una tregua por veinte años\".\n\nTomado y adaptado de: Churchill, W. \\(1986\\). The Second World War. The Gathering Storm. Mariner Books.\n\n¿Qué relación guarda el anterior fragmento con el texto principal?",
           "hasQuestionImage": false,
           "questionImageUrl": "",
           "questionImageAiDescription": "",
@@ -1229,25 +1353,29 @@
             {
               "optionId": "A",
               "type": "text",
-              "content": "Lo complementa, pues muestra un aspecto desconocido del mariscal Foch que está en contra de aceptar el armisticio.",
+              "optionText": "Lo complementa, pues muestra un aspecto desconocido del mariscal Foch que está en contra de aceptar el armisticio.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "B",
               "type": "text",
-              "content": "Lo contradice, pues en el texto principal se advierte que Foch apoyaba las condiciones impuestas a los alemanes para la firma del armisticio.",
+              "optionText": "Lo contradice, pues en el texto principal se advierte que Foch apoyaba las condiciones impuestas a los alemanes para la firma del armisticio.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "C",
               "type": "text",
-              "content": "Lo complementa, pues da más razones para asegurar que el fin de la Primera Guerra Mundial fue el inicio de la Segunda.",
+              "optionText": "Lo complementa, pues da más razones para asegurar que el fin de la Primera Guerra Mundial fue el inicio de la Segunda.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "D",
               "type": "text",
-              "content": "Lo contradice, pues en el texto principal se advierte que el fin de la Primera Guerra Mundial solo tuvo consecuencias negativas para Alemania.",
+              "optionText": "Lo contradice, pues en el texto principal se advierte que el fin de la Primera Guerra Mundial solo tuvo consecuencias negativas para Alemania.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             }
           ],
@@ -1259,14 +1387,14 @@
     {
       "sectionIndex": 11,
       "sectionTitle": "",
-      "sectionText": "Existen argumentos en contra de la preservación de las especies, esgrimidos por quienes no consideran fatal que la humanidad colabore en la desaparición del escenario de otras especies. Quizás el más extendido es el de que la extinción es un proceso evolutivo perfectamente natural, que se ha venido produciendo durante millones de años con o sin la participación humana. ¿Por qué hay que preocuparse si en realidad se está ayudando a la naturaleza a seguir su curso?\n\nCuando en 1859, Charles Darwin expuso la teoría de la evolución, junto a las correspondientes pruebas a su favor, no proponía solo la selección natural como fuerza directriz del proceso evolutivo, sino que reconocía también la inevitabilidad de la extinción. Decía Darwin que “como las nuevas formas se producen lenta y constantemente, a menos que admitamos que el número de formas específicas puede seguir aumentando perpetua y casi indefinidamente, es inevitable que haya grupos que se extingan”.\n\nAntes de Darwin, la idea de la extinción ya había sido tratada por varios geólogos y naturalistas; sin embargo, a mediados del siglo XIX, el concepto resultaba escandaloso para la mayoría de personas. Se creía que todo ser vivo había sido creado por Dios, según una secuencia de complejidad creciente, y que las especies aparecieron en un único acto creador, así que la visión “creacionista” de las especies no contemplaba la extinción. No obstante, actualmente parece haberse cerrado el ciclo; no solo ya no escandaliza la idea de la extinción, sino que se toma el nombre de Darwin en vano cuando se pretende justificar el exterminio de las otras especies a manos del Homo sapiens.\n\nEs evidente que quienes recurren a este tipo de argumentos pasan por alto un dato importante, y es que la humanidad ya ha elevado la tasa de extinción de especies muy por encima de las tasas históricas de aparición de las mismas. Las especies desaparecen ahora mucho más deprisa de lo que aparecen, y la tasa de desaparición promete seguir aumentando vertiginosamente. El argumento que justifica el exterminio recuerda a aquel hombre que, al ver cómo el agua escapaba por unas grietas cada vez más anchas del muro de una gran presa, decía a las gentes que vivían río abajo: “No hay por qué preocuparse; después de todo, el agua siempre ha salido por el sobraddero”.\n\nTomado de: Ehrlich, P. R. y Ehrlich A. H. (1987). Extinción. Barcelona: Salvat Editores.",
+      "sectionText": "Existen argumentos en contra de la preservación de las especies, esgrimidos por quienes no consideran fatal que la humanidad colabore en la desaparición del escenario de otras especies. Quizás el más extendido es el de que la extinción es un proceso evolutivo perfectamente natural, que se ha venido produciendo durante millones de años con o sin la participación humana. ¿Por qué hay que preocuparse si en realidad se está ayudando a la naturaleza a seguir su curso?\n\nCuando en \\(1859\\), Charles Darwin expuso la teoría de la evolución, junto a las correspondientes pruebas a su favor, no proponía solo la selección natural como fuerza directriz del proceso evolutivo, sino que reconocía también la inevitabilidad de la extinción. Decía Darwin que \"como las nuevas formas se producen lenta y constantemente, a menos de que admitamos que el número de formas específicas puede seguir aumentando perpetua y casi indefinidamente, es inevitable que haya grupos que se extingan\".\n\nAntes de Darwin, la idea de la extinción ya había sido tratada por varios geólogos y naturalistas; sin embargo, a mediados del siglo \\(XIX\\), el concepto resultaba escandaloso para la mayoría de personas. Se creía que todo ser vivo había sido creado por Dios, según una secuencia de complejidad creciente, y que las especies aparecieron en un único acto creador, así que la visión \"creacionista\" de las especies no contemplaba la extinción. No obstante, actualmente parece haberse cerrado el ciclo; no solo ya no escandaliza la idea de la extinción, sino que se toma el nombre de Darwin en vano cuando se pretende justificar el exterminio de las otras especies a manos del Homo sapiens.\n\nEs evidente que quienes recurren a este tipo de argumentos pasan por alto un dato importante, y es que la humanidad ya ha elevado la tasa de extinción de especies muy por encima de las tasas históricas de aparición de las mismas. Las especies desaparecen ahora mucho más deprisa de lo que aparecen, y la tasa de desaparición promete seguir aumentando vertiginosamente. El argumento que justifica el exterminio recuerda a aquel hombre que, al ver cómo el agua escapaba por unas grietas cada vez más anchas del muro de una gran presa, decía a las gentes que vivían río abajo: \"No hay por qué preocuparse; después de todo, el agua siempre ha salido por el sobradero\".\n\nTomado de: Ehrlich, P. R. y Ehrlich A. H. \\(1987\\). Extinción. Barcelona: Salvat Editores.",
       "hasSectionImage": false,
       "sectionImageUrl": "",
       "sectionImageAiDescription": "",
       "questions": [
         {
-          "questionId": "q_58",
-          "questionText": "Considere el siguiente fragmento del texto:\n\n“Quizás el argumento contra la preservación de las especies] más extendido es el de que la extinción es un proceso evolutivo perfectamente natural, que se ha venido produciendo durante millones de años con o sin la participación humana. ¿Por qué hay que preocuparse si en realidad se está ayudando a la naturaleza a seguir su curso?”.\n\n¿Cuál es la relación entre los dos enunciados que componen este fragmento?",
+          "questionId": "q_33",
+          "questionText": "Considere el siguiente fragmento del texto:\n\n\"Quizás el [argumento contra la preservación de las especies] más extendido es el de que la extinción es un proceso evolutivo perfectamente natural, que se ha venido produciendo durante millones de años con o sin la participación humana. ¿Por qué hay que preocuparse si en realidad se está ayudando a la naturaleza a seguir su curso?\"\n\n¿Cuál es la relación entre los dos enunciados que componen este fragmento?",
           "hasQuestionImage": false,
           "questionImageUrl": "",
           "questionImageAiDescription": "",
@@ -1275,25 +1403,29 @@
             {
               "optionId": "A",
               "type": "text",
-              "content": "La pregunta pone en duda la tesis de la frase que la precede.",
+              "optionText": "La pregunta pone en duda la tesis de la frase que la precede.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "B",
               "type": "text",
-              "content": "Los enunciados se oponen entre sí.",
+              "optionText": "Los enunciados se oponen entre sí.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "C",
               "type": "text",
-              "content": "La pregunta busca aclarar una idea de la frase que la precede.",
+              "optionText": "La pregunta busca aclarar una idea de la frase que la precede.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "D",
               "type": "text",
-              "content": "Los enunciados apoyan una misma tesis.",
+              "optionText": "Los enunciados apoyan una misma tesis.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             }
           ],
@@ -1301,8 +1433,8 @@
           "aiExplanation": ""
         },
         {
-          "questionId": "q_59",
-          "questionText": "Considere el siguiente texto:\n\n“¡Ah, la madre naturaleza necesita favores! Debió pensarla cuando nos asoló con inundaciones, sequías y monos enfermos. ¡Ella inició la lucha por sobrevivir y ahora quiere renunciar porque está perdiendo? Pues yo digo, ¡mala noche!” (Montgomery Burns, Los Simpsons).\n\nQuienes están en contra de la preservación de las especies podrían argumentar que la idea del párrafo anterior",
+          "questionId": "q_34",
+          "questionText": "Considere el siguiente texto:\n\n\"¡Ah, la madre naturaleza necesita favores! Debió pensarlo cuando nos asoló con inundaciones, sequías y monos enfermos. ¿Ella inició la lucha por sobrevivir y ahora quiere renunciar porque está perdiendo? Pues yo digo, ¡mala noche!\" \\(Montgomery Burns, Los Simpsons\\).\n\nQuienes están en contra de la preservación de las especies podrían argumentar que la idea del párrafo anterior",
           "hasQuestionImage": false,
           "questionImageUrl": "",
           "questionImageAiDescription": "",
@@ -1311,71 +1443,29 @@
             {
               "optionId": "A",
               "type": "text",
-              "content": "contradice su tesis, porque favorece el rechazo del autor a quienes dudan de la extinción.",
+              "optionText": "contradice su tesis, porque favorece el rechazo del autor a quienes dudan de la extinción.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "B",
               "type": "text",
-              "content": "complementa su tesis, porque contradice la defensa del autor de que la extinción es antinatural.",
+              "optionText": "complementa su tesis, porque contradice la defensa del autor de que la extinción es antinatural.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "C",
               "type": "text",
-              "content": "debilita su tesis, porque caricaturiza el argumento de que la extinción es aceptable por tratarse de un proceso natural.",
+              "optionText": "debilita su tesis, porque caricaturiza el argumento de que la extinción es aceptable por tratarse de un proceso natural.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "D",
               "type": "text",
-              "content": "apoya su tesis, porque presenta una nueva manera de comprender la teoría de la inevitabilidad de la extinción.",
-              "optionAiDescription": ""
-            }
-          ],
-          "correctOptionId": "",
-          "aiExplanation": ""
-        }
-      ]
-    },
-    {
-      "sectionIndex": 12,
-      "sectionTitle": "",
-      "sectionText": "Los computadores hacen lo que se les manda. Servilmente obedecen cualquier instrucción dada en su propio lenguaje de programación. Así es como hacen cosas útiles como procesar textos y realizar operaciones en hojas de cálculo. Pero, como inevitable subproducto, son igualmente robóticos a la hora de obedecer instrucciones incorrectas. No tienen modo alguno de decir si una instrucción tendrá un buen efecto o uno malo.\n\nSimplemente, obedecen, como se supone que lo hacen los soldados. Es su incuestionable obediencia lo que hace que los computadores sean útiles, y exactamente eso mismo hace que sean inevitablemente vulnerables a la infección de virus y gusanos. Un programa maliciosamente diseñado que diga «cópIame y envíame a todas las direcciones que puedas encontrar en el disco duro» será simplemente obedecido y vuelto a obedecer por los demás computadores de la línea por la que se esté enviando, en una expansión exponencial. Es difícil, por no decir imposible, diseñar un computador que sea obedientemente útil, y al mismo tiempo, inmune a la infección.\n\nTomado y adaptado de: Dawkins, R. (2007). El espejismo de Dios, p. 190. Madrid: Espasa Calpe.",
-      "hasSectionImage": false,
-      "sectionImageUrl": "",
-      "sectionImageAiDescription": "",
-      "questions": [
-        {
-          "questionId": "q_60",
-          "questionText": "Considere la siguiente oración del texto:\n\n“Es difícil, por no decir imposible, diseñar un ordenador que sea obedientemente útil y, al mismo tiempo, inmune a la infección”.\n\nEn la oración anterior, la palabra “inmune” se podría reemplazar por",
-          "hasQuestionImage": false,
-          "questionImageUrl": "",
-          "questionImageAiDescription": "",
-          "optionsType": "text",
-          "options": [
-            {
-              "optionId": "A",
-              "type": "text",
-              "content": "inatacable.",
-              "optionAiDescription": ""
-            },
-            {
-              "optionId": "B",
-              "type": "text",
-              "content": "proclive.",
-              "optionAiDescription": ""
-            },
-            {
-              "optionId": "C",
-              "type": "text",
-              "content": "invulnerable.",
-              "optionAiDescription": ""
-            },
-            {
-              "optionId": "D",
-              "type": "text",
-              "content": "propenso.",
+              "optionText": "apoya su tesis, porque presenta una nueva manera de comprender la teoría de la inevitabilidad de la extinción.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             }
           ],
@@ -1383,8 +1473,8 @@
           "aiExplanation": ""
         },
         {
-          "questionId": "q_61",
-          "questionText": "Considere el siguiente enunciado del texto:\n\n“Simplemente, [los computadores] obedecen, como se supone que lo hacen los soldados”.\n\nLo que el autor quiere decir con este enunciado es que los computadores",
+          "questionId": "q_35",
+          "questionText": "Los computadores hacen lo que se les manda. Servilmente obedecen cualquier instrucción dada en su propio lenguaje de programación. Así es como hacen cosas útiles como procesar textos y realizar operaciones en hojas de cálculo. Pero, como inevitable subproducto, son igualmente robóticos a la hora de obedecer instrucciones incorrectas. No tienen modo alguno de decir si una instrucción tendrá un buen efecto o uno malo.\n\nSimplemente, obedecen, como se supone que lo hacen los soldados. Es su incuestionable obediencia lo que hace que los computadores sean útiles, y exactamente eso mismo hace que sean inevitablemente vulnerables a la infección de virus y gusanos. Un programa maliciosamente diseñado que diga «cópiame y envíame a todas las direcciones que puedas encontrar en el disco duro» será simplemente obedecido y vuelto a obedecer por los demás computadores de la línea por la que se está enviando, en una expansión exponencial. Es difícil, por no decir imposible, diseñar un computador que sea obedientemente útil y, al mismo tiempo, inmune a la infección.\n\nTomado y adaptado de: Dawkins, R. \\(2007\\). El espejismo de Dios, p. \\(190\\). Madrid: Espasa Calpe.\n\nConsidere la siguiente oración del texto:\n\n\"Es difícil, por no decir imposible, diseñar un ordenador que sea obedientemente útil y, al mismo tiempo, inmune a la infección\".\n\nEn la oración anterior, la palabra \"inmune\" se podría reemplazar por",
           "hasQuestionImage": false,
           "questionImageUrl": "",
           "questionImageAiDescription": "",
@@ -1393,25 +1483,29 @@
             {
               "optionId": "A",
               "type": "text",
-              "content": "siempre están expuestos a los virus.",
+              "optionText": "inatacable.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "B",
               "type": "text",
-              "content": "desconocen si una instrucción es correcta.",
+              "optionText": "proclive.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "C",
               "type": "text",
-              "content": "siguen las órdenes sin cuestionarlas.",
+              "optionText": "invulnerable.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "D",
               "type": "text",
-              "content": "son capaces de tomar decisiones.",
+              "optionText": "propenso.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             }
           ],
@@ -1419,8 +1513,8 @@
           "aiExplanation": ""
         },
         {
-          "questionId": "q_62",
-          "questionText": "Considere los siguientes enunciados del texto:\n\n1. Un programa maliciosamente diseñado que diga «cópIame y envíame a todas las direcciones que puedas encontrar en el disco duro» será simplemente obedecido y vuelto a obedecer por los demás computadores.\n2. Es su incuestionable obediencia lo que hace que los computadores sean útiles, y exactamente eso mismo hace que sean inevitablemente vulnerables a la infección de virus y gusanos.\n\nLa relación entre los enunciados 1 y 2 puede describirse de la siguiente manera:",
+          "questionId": "q_36",
+          "questionText": "Considere el siguiente enunciado del texto:\n\n\"Simplemente, [los computadores] obedecen, como se supone que lo hacen los soldados\".\n\nLo que el autor quiere decir con este enunciado es que los computadores",
           "hasQuestionImage": false,
           "questionImageUrl": "",
           "questionImageAiDescription": "",
@@ -1429,25 +1523,29 @@
             {
               "optionId": "A",
               "type": "text",
-              "content": "El enunciado 1 es una evidencia en contra del enunciado 2.",
+              "optionText": "siempre están expuestos a los virus.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "B",
               "type": "text",
-              "content": "El enunciado 2 es una evidencia a favor del enunciado 1.",
+              "optionText": "desconocen si una instrucción es correcta.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "C",
               "type": "text",
-              "content": "El enunciado 1 es una evidencia a favor del enunciado 2.",
+              "optionText": "siguen las órdenes sin cuestionarlas.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "D",
               "type": "text",
-              "content": "El enunciado 2 es una evidencia en contra del enunciado 1.",
+              "optionText": "son capaces de tomar decisiones.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             }
           ],
@@ -1455,7 +1553,47 @@
           "aiExplanation": ""
         },
         {
-          "questionId": "q_63",
+          "questionId": "q_37",
+          "questionText": "Considere los siguientes enunciados del texto:\n\n\\(1\\). Un programa maliciosamente diseñado que diga «cópiame y envíame a todas las direcciones que puedas encontrar en el disco duro» será simplemente obedecido y vuelto a obedecer por los demás computadores.\n\\(2\\). Es su incuestionable obediencia lo que hace que los computadores sean útiles, y exactamente eso mismo hace que sean inevitablemente vulnerables a la infección de virus y gusanos.\n\nLa relación entre los enunciados \\(1\\) y \\(2\\) puede describirse de la siguiente manera:",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "optionText": "El enunciado \\(1\\) es una evidencia en contra del enunciado \\(2\\).",
+              "optionImageUrl": "",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "optionText": "El enunciado \\(2\\) es una evidencia a favor del enunciado \\(1\\).",
+              "optionImageUrl": "",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "optionText": "El enunciado \\(1\\) es una evidencia a favor del enunciado \\(2\\).",
+              "optionImageUrl": "",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "optionText": "El enunciado \\(2\\) es una evidencia en contra del enunciado \\(1\\).",
+              "optionImageUrl": "",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        },
+        {
+          "questionId": "q_38",
           "questionText": "¿Cuál es la pregunta principal que busca responder el texto?",
           "hasQuestionImage": false,
           "questionImageUrl": "",
@@ -1465,25 +1603,29 @@
             {
               "optionId": "A",
               "type": "text",
-              "content": "¿Por qué los computadores pueden ser invulnerables a los virus?",
+              "optionText": "¿Por qué los computadores pueden ser invulnerables a los virus?",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "B",
               "type": "text",
-              "content": "¿Cuál es el principal rasgo de los computadores y qué implicaciones tiene dicho rasgo?",
+              "optionText": "¿Cuál es el principal rasgo de los computadores y qué implicaciones tiene dicho rasgo?",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "C",
               "type": "text",
-              "content": "¿Cuál es la principal característica de los computadores y qué ventajas posee dicho rasgo?",
+              "optionText": "¿Cuál es la principal característica de los computadores y qué ventajas posee dicho rasgo?",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "D",
               "type": "text",
-              "content": "¿Por qué los computadores, a pesar de ser vulnerables, tienen la utilidad de detectar buenos y malos efectos?",
+              "optionText": "¿Por qué los computadores, a pesar de ser vulnerables, tienen la utilidad de detectar buenos y malos efectos?",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             }
           ],
@@ -1491,7 +1633,7 @@
           "aiExplanation": ""
         },
         {
-          "questionId": "q_64",
+          "questionId": "q_39",
           "questionText": "De acuerdo con la información dada en el texto, si su computador es infectado por un programa con las características descritas por el autor,",
           "hasQuestionImage": false,
           "questionImageUrl": "",
@@ -1501,71 +1643,29 @@
             {
               "optionId": "A",
               "type": "text",
-              "content": "no podrá obedecer otro tipo de instrucciones dadas en el lenguaje de programación.",
+              "optionText": "no podrá obedecer otro tipo de instrucciones dadas en el lenguaje de programación.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "B",
               "type": "text",
-              "content": "enviará el programa a todas las direcciones que encuentre en el disco duro.",
+              "optionText": "enviará el programa a todas las direcciones que encuentre en el disco duro.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "C",
               "type": "text",
-              "content": "no podrá realizar acciones útiles como procesar textos o realizar hojas de cálculo.",
+              "optionText": "no podrá realizar acciones útiles como procesar textos o realizar hojas de cálculo.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "D",
               "type": "text",
-              "content": "será incapaz de ser útil y, al mismo tiempo, invulnerable a diferentes virus.",
-              "optionAiDescription": ""
-            }
-          ],
-          "correctOptionId": "",
-          "aiExplanation": ""
-        }
-      ]
-    },
-    {
-      "sectionIndex": 13,
-      "sectionTitle": "",
-      "sectionText": "Con estos sentimientos, empecé la creación de un ser humano. Como la pequeñez de las partes constituía un gran obstáculo para la rapidez de mi trabajo, decidí, en contra de mi primera intención, hacer un ser de estatura gigantesca; es decir, de unos ocho pies de alto, y de una anchura proporcionada. Y tras adoptar esta decisión, y pasar meses recogiendo y ordenando material, emprendí mi trabajo.\n\nNadie puede imaginar la diversidad de sentimientos que me empujaron a seguir, como un huracán, desde el primer entusiasmo de éxito. La vida y la muerte me parecían barreras ideales que no debía romper, derramando un torrente de luz sobre nuestro mundo en tinieblas. Una nueva especie me bendeciría como su origen y creador; muchas naturalezas excelentes y dichosas me deberían su ser. Ningún padre podría reclamar la gratitud de sus hijos con tanto derecho como yo merecería la de ellos. Siguiendo con estas reflexiones, pensé que si podía infundir animación en la materia inerte, en el curso del tiempo (pues ahora resultaba imposible), podría renovar la vida allí donde la muerte había sometido el cuerpo aparentemente a la corrupción.\n\nHoy me tiemblan las piernas y se me humedecen los ojos ante el recuerdo; pero entonces me empujaba un deseo irresistible y casi frenético; parecía haber perdido por completo el alma y la sensibilidad salvo para este objetivo.\n\nLa sala de disección y el matadero me proporcionaron muchos de mis materiales; con frecuencia, mi naturaleza abominaba mi empresa mientras, impulsado por una ansiedad perpetuamente en aumento, mi trabajo se acercaba a su fin.\n\nTomado de: Shelley, Mary. (2018). Frankenstein, p. 74. Madrid: Alianza Editorial.",
-      "hasSectionImage": false,
-      "sectionImageUrl": "",
-      "sectionImageAiDescription": "",
-      "questions": [
-        {
-          "questionId": "q_65",
-          "questionText": "El narrador decide crear un ser de estatura gigantesca porque",
-          "hasQuestionImage": false,
-          "questionImageUrl": "",
-          "questionImageAiDescription": "",
-          "optionsType": "text",
-          "options": [
-            {
-              "optionId": "A",
-              "type": "text",
-              "content": "su intención era que aquel nuevo ser infundiera terror en quienes lo vieran.",
-              "optionAiDescription": ""
-            },
-            {
-              "optionId": "B",
-              "type": "text",
-              "content": "hacer un ser pequeño le iba a tomar más tiempo que hacer uno gigante.",
-              "optionAiDescription": ""
-            },
-            {
-              "optionId": "C",
-              "type": "text",
-              "content": "en la sala de disección y en el matadero solo había materiales de gran tamaño.",
-              "optionAiDescription": ""
-            },
-            {
-              "optionId": "D",
-              "type": "text",
-              "content": "sentía un deseo irresistible por crear una criatura de esa dimensión.",
+              "optionText": "será incapaz de ser útil y, al mismo tiempo, invulnerable a diferentes virus.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             }
           ],
@@ -1573,8 +1673,8 @@
           "aiExplanation": ""
         },
         {
-          "questionId": "q_66",
-          "questionText": "La intención del narrador cuando dice “parecía haber perdido por completo el alma y la sensibilidad salvo para este objetivo”, es:",
+          "questionId": "q_40",
+          "questionText": "Con estos sentimientos, empecé la creación de un ser humano. Como la pequeñez de las partes constituía un gran obstáculo para la rapidez de mi trabajo, decidí, en contra de mi primera intención, hacer un ser de estatura gigantesca; es decir, de unos ocho pies de alto, y de una anchura proporcionada. Y tras adoptar esta decisión, y pasar meses recogiendo y ordenando material, emprendí mi trabajo.\n\nNadie puede imaginar la diversidad de sentimientos que me empujaron a seguir, como un huracán, desde el primer entusiasmo de éxito. La vida y la muerte me parecían barreras ideales que yo sería el primero en romper, derramando un torrente de luz sobre nuestro mundo en tinieblas. Una nueva especie me bendeciría como su origen y creador; muchas naturalezas excelentes y dichosas me deberían su ser. Ningún padre podría reclamar la gratitud de sus hijos con tanto derecho como yo merecería la de ellos. Siguiendo con estas reflexiones, pensé que si podía infundir animación en la materia inerte, en el curso del tiempo \\(pues ahora resultaba imposible\\), podría renovar la vida allí donde la muerte había sometido el cuerpo aparentemente a la corrupción.\n\nHoy me tiemblan las piernas y se me humedecen los ojos ante el recuerdo; pero entonces me empujaba un deseo irresistible y casi frenético; parecía haber perdido por completo el alma y la sensibilidad salvo para este objetivo.\n\nLa sala de disección y el matadero me proporcionaron muchos de mis materiales; con frecuencia, mi naturaleza abominaba mi empresa mientras, impulsado por una ansiedad perpetuamente en aumento, mi trabajo se acercaba a su fin.\n\nTomado de: Shelley, Mary. \\(2018\\). Frankenstein, p. \\(74\\). Madrid: Alianza Editorial.\n\nEl narrador decide crear un ser de estatura gigantesca porque",
           "hasQuestionImage": false,
           "questionImageUrl": "",
           "questionImageAiDescription": "",
@@ -1583,25 +1683,69 @@
             {
               "optionId": "A",
               "type": "text",
-              "content": "Hacer una afirmación acerca de la creación del nuevo ser y la manera en que lo hizo.",
+              "optionText": "su intención era que aquel nuevo ser infundiera terror en quienes lo vieran.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "B",
               "type": "text",
-              "content": "Manifestar una emoción con respecto a su actitud durante la creación del nuevo ser.",
+              "optionText": "hacer un ser pequeño le iba a tomar más tiempo que hacer uno gigante.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "C",
               "type": "text",
-              "content": "Dirigir una pregunta indirecta al lector sobre su opinión al respecto del nuevo ser.",
+              "optionText": "en la sala de disección y en el matadero solo había materiales de gran tamaño.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "D",
               "type": "text",
-              "content": "Comprometerse con el lector a no volver a actuar de la manera en que lo hizo.",
+              "optionText": "sentía un deseo irresistible por crear una criatura de esa dimensión.",
+              "optionImageUrl": "",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        },
+        {
+          "questionId": "q_41",
+          "questionText": "La intención del narrador cuando dice \"parecía haber perdido por completo el alma y la sensibilidad salvo para este objetivo\", es:",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "optionText": "Hacer una afirmación acerca de la creación del nuevo ser y la manera en que lo hizo.",
+              "optionImageUrl": "",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "optionText": "Manifestar una emoción con respecto a su actitud durante la creación del nuevo ser.",
+              "optionImageUrl": "",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "optionText": "Dirigir una pregunta indirecta al lector sobre su opinión al respecto del nuevo ser.",
+              "optionImageUrl": "",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "optionText": "Comprometerse con el lector a no volver a actuar de la manera en que lo hizo.",
+              "optionImageUrl": "",
               "optionAiDescription": ""
             }
           ],
