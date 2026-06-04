@@ -1471,10 +1471,20 @@
           ],
           "correctOptionId": "",
           "aiExplanation": ""
-        },
+        }
+      ]
+    },
+    {
+      "sectionIndex": 12,
+      "sectionTitle": "",
+      "sectionText": "Los computadores hacen lo que se les manda. Servilmente obedecen cualquier instrucción dada en su propio lenguaje de programación. Así es como hacen cosas útiles como procesar textos y realizar operaciones en hojas de cálculo. Pero, como inevitable subproducto, son igualmente robóticos a la hora de obedecer instrucciones incorrectas. No tienen modo alguno de decir si una instrucción tendrá un buen efecto o uno malo.\n\nSimplemente, obedecen, como se supone que lo hacen los soldados. Es su incuestionable obediencia lo que hace que los computadores sean útiles, y exactamente eso mismo hace que sean inevitablemente vulnerables a la infección de virus y gusanos. Un programa maliciosamente diseñado que diga «cópiame y envíame a todas las direcciones que puedas encontrar en el disco duro» será simplemente obedecido y vuelto a obedecer por los demás computadores de la línea por la que se está enviando, en una expansión exponencial. Es difícil, por no decir imposible, diseñar un computador que sea obedientemente útil y, al mismo tiempo, inmune a la infección.\n\nTomado y adaptado de: Dawkins, R. \\(2007\\). El espejismo de Dios, p. \\(190\\). Madrid: Espasa Calpe.",
+      "hasSectionImage": false,
+      "sectionImageUrl": "",
+      "sectionImageAiDescription": "",
+      "questions": [
         {
           "questionId": "q_35",
-          "questionText": "Los computadores hacen lo que se les manda. Servilmente obedecen cualquier instrucción dada en su propio lenguaje de programación. Así es como hacen cosas útiles como procesar textos y realizar operaciones en hojas de cálculo. Pero, como inevitable subproducto, son igualmente robóticos a la hora de obedecer instrucciones incorrectas. No tienen modo alguno de decir si una instrucción tendrá un buen efecto o uno malo.\n\nSimplemente, obedecen, como se supone que lo hacen los soldados. Es su incuestionable obediencia lo que hace que los computadores sean útiles, y exactamente eso mismo hace que sean inevitablemente vulnerables a la infección de virus y gusanos. Un programa maliciosamente diseñado que diga «cópiame y envíame a todas las direcciones que puedas encontrar en el disco duro» será simplemente obedecido y vuelto a obedecer por los demás computadores de la línea por la que se está enviando, en una expansión exponencial. Es difícil, por no decir imposible, diseñar un computador que sea obedientemente útil y, al mismo tiempo, inmune a la infección.\n\nTomado y adaptado de: Dawkins, R. \\(2007\\). El espejismo de Dios, p. \\(190\\). Madrid: Espasa Calpe.\n\nConsidere la siguiente oración del texto:\n\n\"Es difícil, por no decir imposible, diseñar un ordenador que sea obedientemente útil y, al mismo tiempo, inmune a la infección\".\n\nEn la oración anterior, la palabra \"inmune\" se podría reemplazar por",
+          "questionText": "Considere la siguiente oración del texto:\n\n\"Es difícil, por no decir imposible, diseñar un ordenador que sea obedientemente útil y, al mismo tiempo, inmune a la infección\".\n\nEn la oración anterior, la palabra \"inmune\" se podría reemplazar por",
           "hasQuestionImage": false,
           "questionImageUrl": "",
           "questionImageAiDescription": "",
@@ -1671,10 +1681,20 @@
           ],
           "correctOptionId": "",
           "aiExplanation": ""
-        },
+        }
+      ]
+    },
+    {
+      "sectionIndex": 13,
+      "sectionTitle": "",
+      "sectionText": "Con estos sentimientos, empecé la creación de un ser humano. Como la pequeñez de las partes constituía un gran obstáculo para la rapidez de mi trabajo, decidí, en contra de mi primera intención, hacer un ser de estatura gigantesca; es decir, de unos ocho pies de alto, y de una anchura proporcionada. Y tras adoptar esta decisión, y pasar meses recogiendo y ordenando material, emprendí mi trabajo.\n\nNadie puede imaginar la diversidad de sentimientos que me empujaron a seguir, como un huracán, desde el primer entusiasmo de éxito. La vida y la muerte me parecían barreras ideales que yo sería el primero en romper, derramando un torrente de luz sobre nuestro mundo en tinieblas. Una nueva especie me bendeciría como su origen y creador; muchas naturalezas excelentes y dichosas me deberían su ser. Ningún padre podría reclamar la gratitud de sus hijos con tanto derecho como yo merecería la de ellos. Siguiendo con estas reflexiones, pensé que si podía infundir animación en la materia inerte, en el curso del tiempo \\(pues ahora resultaba imposible\\), podría renovar la vida allí donde la muerte había sometido el cuerpo aparentemente a la corrupción.\n\nHoy me tiemblan las piernas y se me humedecen los ojos ante el recuerdo; pero entonces me empujaba un deseo irresistible y casi frenético; parecía haber perdido por completo el alma y la sensibilidad salvo para este objetivo.\n\nLa sala de disección y el matadero me proporcionaron muchos de mis materiales; con frecuencia, mi naturaleza abominaba mi empresa mientras, impulsado por una ansiedad perpetuamente en aumento, mi trabajo se acercaba a su fin.\n\nTomado de: Shelley, Mary. \\(2018\\). Frankenstein, p. \\(74\\). Madrid: Alianza Editorial.",
+      "hasSectionImage": false,
+      "sectionImageUrl": "",
+      "sectionImageAiDescription": "",
+      "questions": [
         {
           "questionId": "q_40",
-          "questionText": "Con estos sentimientos, empecé la creación de un ser humano. Como la pequeñez de las partes constituía un gran obstáculo para la rapidez de mi trabajo, decidí, en contra de mi primera intención, hacer un ser de estatura gigantesca; es decir, de unos ocho pies de alto, y de una anchura proporcionada. Y tras adoptar esta decisión, y pasar meses recogiendo y ordenando material, emprendí mi trabajo.\n\nNadie puede imaginar la diversidad de sentimientos que me empujaron a seguir, como un huracán, desde el primer entusiasmo de éxito. La vida y la muerte me parecían barreras ideales que yo sería el primero en romper, derramando un torrente de luz sobre nuestro mundo en tinieblas. Una nueva especie me bendeciría como su origen y creador; muchas naturalezas excelentes y dichosas me deberían su ser. Ningún padre podría reclamar la gratitud de sus hijos con tanto derecho como yo merecería la de ellos. Siguiendo con estas reflexiones, pensé que si podía infundir animación en la materia inerte, en el curso del tiempo \\(pues ahora resultaba imposible\\), podría renovar la vida allí donde la muerte había sometido el cuerpo aparentemente a la corrupción.\n\nHoy me tiemblan las piernas y se me humedecen los ojos ante el recuerdo; pero entonces me empujaba un deseo irresistible y casi frenético; parecía haber perdido por completo el alma y la sensibilidad salvo para este objetivo.\n\nLa sala de disección y el matadero me proporcionaron muchos de mis materiales; con frecuencia, mi naturaleza abominaba mi empresa mientras, impulsado por una ansiedad perpetuamente en aumento, mi trabajo se acercaba a su fin.\n\nTomado de: Shelley, Mary. \\(2018\\). Frankenstein, p. \\(74\\). Madrid: Alianza Editorial.\n\nEl narrador decide crear un ser de estatura gigantesca porque",
+          "questionText": "El narrador decide crear un ser de estatura gigantesca porque",
           "hasQuestionImage": false,
           "questionImageUrl": "",
           "questionImageAiDescription": "",
