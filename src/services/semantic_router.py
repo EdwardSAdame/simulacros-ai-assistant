@@ -25,10 +25,11 @@ class SemanticRouter:
         self.client = get_openai_client()
         
         # Unified validation list containing all possible dynamic categories
+        # FIXED: Changed "sociales_ciudadanas" to "sociales_y_ciudadanas"
         self.valid_categories = [
             "matematicas", "ciencias_naturales", "analisis_textual", 
             "ciencias_sociales", "analisis_imagen", "lectura_critica", 
-            "sociales_ciudadanas", "ingles", "admisiones", 
+            "sociales_y_ciudadanas", "ingles", "admisiones", 
             "identity_protection", "general"
         ]
         
