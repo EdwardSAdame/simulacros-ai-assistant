@@ -3,8 +3,8 @@
     {
       "examId": "math_vol_01.json",
       "componentId": "matematicas",
-      "componentTitle": "Matemáticas",
-      "componentDescription": "ICFES 2025-2, sesión 1",
+      "componentTitle": "Matemáticas - ICFES 2025-2",
+      "componentDescription": "Examen oficial de matemática del año 2025-2, sesión 1.",
       "componentImage": "https://cdn.invicto.com.co/icfes/general/2025_2_session1.png",
       "questionCount": 25,
       "timeLimitMinutes": 60
@@ -21,8 +21,8 @@
     {
       "examId": "science_vol_01.json",
       "componentId": "ciencias-naturales",
-      "componentTitle": "Simulacro Ciencias Naturales - Volumen 1",
-      "componentDescription": "Preguntas enfocadas en biología y entorno físico.",
+      "componentTitle": "Ciencia Natural - ICFES 2025-2",
+      "componentDescription": "Examen oficial de ciencia natural del año 2025-2, sesión 1.",
       "componentImage": "https://cdn.invicto.com.co/icfes/general/2025_2_session1.png",
       "questionCount": 58,
       "timeLimitMinutes": 120
@@ -39,8 +39,8 @@
     {
       "examId": "lecture_vol_01.json",
       "componentId": "lectura-critica",
-      "componentTitle": "Simulacro Lectura Crítica - Volumen 1",
-      "componentDescription": "Análisis de textos argumentativos, continuos y discontinuos.",
+      "componentTitle": "Lectura Crítica - ICFES 2025-2",
+      "componentDescription": "Examen oficial de lectura crítica del año 2025-2, sesión 1.",
       "componentImage": "https://cdn.invicto.com.co/icfes/general/2025_2_session1.png",
       "questionCount": 41,
       "timeLimitMinutes": 90
@@ -48,8 +48,8 @@
     {
       "examId": "social_vol_01.json",
       "componentId": "sociales-y-ciudadanas",
-      "componentTitle": "Simulacro Sociales y Ciudadanas - Vol 1",
-      "componentDescription": "Análisis de historia y competencias ciudadanas.",
+      "componentTitle": "Sociales y Ciudadanas - ICFES 2025-2",
+      "componentDescription": "Examen oficial de sociales y ciudadanas del año 2025-2, sesión 1.",
       "componentImage": "https://cdn.invicto.com.co/icfes/general/2025_2_session1.png",
       "questionCount": 50,
       "timeLimitMinutes": 90
