@@ -3,18 +3,18 @@
     {
       "examId": "math_vol_01.json",
       "componentId": "matematicas",
-      "componentTitle": "Simulacro Matemáticas - Volumen 1",
-      "componentDescription": "Evalúa tus habilidades de álgebra y cálculo básico.",
-      "componentImage": "wix:image://v1/imagen-math-1.jpg/...",
+      "componentTitle": "Matemáticas",
+      "componentDescription": "ICFES 2025-2, sesión 1",
+      "componentImage": "https://cdn.invicto.com.co/icfes/general/2025_2_session1.png",
       "questionCount": 25,
       "timeLimitMinutes": 60
     },
     {
       "examId": "math_vol_02.json",
       "componentId": "matematicas",
-      "componentTitle": "Simulacro Matemáticas - Volumen 2",
-      "componentDescription": "Pon a prueba tus conocimientos en geometría y estadística.",
-      "componentImage": "wix:image://v1/imagen-math-2.jpg/...",
+      "componentTitle": "Matemáticas",
+      "componentDescription": "ICFES 2025-2, sesión 2",
+      "componentImage": "https://cdn.invicto.com.co/icfes/general/2025_2_session2.png",
       "questionCount": 25,
       "timeLimitMinutes": 60
     },
@@ -23,16 +23,7 @@
       "componentId": "ciencias-naturales",
       "componentTitle": "Simulacro Ciencias Naturales - Volumen 1",
       "componentDescription": "Preguntas enfocadas en biología y entorno físico.",
-      "componentImage": "wix:image://v1/imagen-science-1.jpg/...",
-      "questionCount": 58,
-      "timeLimitMinutes": 120
-    },
-    {
-      "examId": "science_vol_02.json",
-      "componentId": "ciencias-naturales",
-      "componentTitle": "Simulacro Ciencias Naturales - Volumen 2",
-      "componentDescription": "Evalúa conceptos de química y física aplicada.",
-      "componentImage": "wix:image://v1/imagen-science-2.jpg/...",
+      "componentImage": "https://cdn.invicto.com.co/icfes/general/2025_2_session1.png",
       "questionCount": 58,
       "timeLimitMinutes": 120
     },
@@ -41,7 +32,7 @@
       "componentId": "ingles",
       "componentTitle": "Simulacro Inglés - Volumen 1",
       "componentDescription": "Prueba tu nivel de gramática, vocabulario y comprensión de lectura.",
-      "componentImage": "wix:image://v1/imagen-english-1.jpg/...",
+      "componentImage": "https://cdn.invicto.com.co/icfes/general/2025_2_session1.png",
       "questionCount": 45,
       "timeLimitMinutes": 60
     },
@@ -50,7 +41,7 @@
       "componentId": "lectura-critica",
       "componentTitle": "Simulacro Lectura Crítica - Volumen 1",
       "componentDescription": "Análisis de textos argumentativos, continuos y discontinuos.",
-      "componentImage": "wix:image://v1/imagen-lecture-1.jpg/...",
+      "componentImage": "https://cdn.invicto.com.co/icfes/general/2025_2_session1.png",
       "questionCount": 41,
       "timeLimitMinutes": 90
     },
@@ -59,16 +50,7 @@
       "componentId": "sociales-y-ciudadanas",
       "componentTitle": "Simulacro Sociales y Ciudadanas - Vol 1",
       "componentDescription": "Análisis de historia y competencias ciudadanas.",
-      "componentImage": "wix:image://v1/imagen-social-1.jpg/...",
-      "questionCount": 50,
-      "timeLimitMinutes": 90
-    },
-    {
-      "examId": "social_vol_02.json",
-      "componentId": "sociales-y-ciudadanas",
-      "componentTitle": "Simulacro Sociales y Ciudadanas - Vol 2",
-      "componentDescription": "Preguntas sobre constitución política y geografía.",
-      "componentImage": "wix:image://v1/imagen-social-2.jpg/...",
+      "componentImage": "https://cdn.invicto.com.co/icfes/general/2025_2_session1.png",
       "questionCount": 50,
       "timeLimitMinutes": 90
     }
