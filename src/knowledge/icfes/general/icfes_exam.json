@@ -5,7 +5,7 @@
       "componentId": "matematicas",
       "componentTitle": "Matemáticas - ICFES 2025-2",
       "componentDescription": "Examen oficial de matemática del año 2025-2, sesión 1.",
-      "componentImage": "https://cdn.invicto.com.co/icfes/general/2025_2_session1.png",
+      "componentImage": "https://cdn.invicto.com.co/icfes/general/math_vol_01.png",
       "questionCount": 25,
       "timeLimitMinutes": 60
     },
@@ -14,7 +14,7 @@
       "componentId": "matematicas",
       "componentTitle": "Matemáticas",
       "componentDescription": "ICFES 2025-2, sesión 2",
-      "componentImage": "https://cdn.invicto.com.co/icfes/general/2025_2_session2.png",
+      "componentImage": "https://cdn.invicto.com.co/icfes/general/math_vol_02.png",
       "questionCount": 25,
       "timeLimitMinutes": 60
     },
@@ -23,7 +23,7 @@
       "componentId": "ciencias-naturales",
       "componentTitle": "Ciencia Natural - ICFES 2025-2",
       "componentDescription": "Examen oficial de ciencia natural del año 2025-2, sesión 1.",
-      "componentImage": "https://cdn.invicto.com.co/icfes/general/2025_2_session1.png",
+      "componentImage": "https://cdn.invicto.com.co/icfes/general/science_vol_01.png",
       "questionCount": 58,
       "timeLimitMinutes": 120
     },
@@ -32,7 +32,7 @@
       "componentId": "ingles",
       "componentTitle": "Simulacro Inglés - Volumen 1",
       "componentDescription": "Prueba tu nivel de gramática, vocabulario y comprensión de lectura.",
-      "componentImage": "https://cdn.invicto.com.co/icfes/general/2025_2_session1.png",
+      "componentImage": "https://cdn.invicto.com.co/icfes/general/english_vol_01.png",
       "questionCount": 45,
       "timeLimitMinutes": 60
     },
@@ -41,7 +41,7 @@
       "componentId": "lectura-critica",
       "componentTitle": "Lectura Crítica - ICFES 2025-2",
       "componentDescription": "Examen oficial de lectura crítica del año 2025-2, sesión 1.",
-      "componentImage": "https://cdn.invicto.com.co/icfes/general/2025_2_session1.png",
+      "componentImage": "https://cdn.invicto.com.co/icfes/general/lecture_vol_01.png",
       "questionCount": 41,
       "timeLimitMinutes": 90
     },
@@ -50,7 +50,7 @@
       "componentId": "sociales-y-ciudadanas",
       "componentTitle": "Sociales y Ciudadanas - ICFES 2025-2",
       "componentDescription": "Examen oficial de sociales y ciudadanas del año 2025-2, sesión 1.",
-      "componentImage": "https://cdn.invicto.com.co/icfes/general/2025_2_session1.png",
+      "componentImage": "https://cdn.invicto.com.co/icfes/general/social_vol_01.png",
       "questionCount": 50,
       "timeLimitMinutes": 90
     }
