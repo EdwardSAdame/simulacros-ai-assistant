@@ -1,20 +1,20 @@
 {
   "examType": "ICFES",
   "component": "sociales_y_ciudadanas",
-  "examVolume": "1.ª sesión",
-  "totalSections": 24,
+  "examVolume": "1.a_sesion",
+  "totalSections": 25,
   "sections": [
     {
       "sectionIndex": 1,
       "sectionTitle": "",
-      "sectionText": "A continuación, se presentan dos textos escritos por Antonio Nariño sobre la polémica entre centralistas y federalistas durante la independencia de la Nueva Granada. El primero fue escrito en \u0018\\(1811\\)\u0019, cuando acababan de ocurrir los primeros gritos de independencia a lo largo de todo el reino. El segundo, mucho más tardío, se publicó en \u0018\\(1823\\)\u0019, cuando las últimas acciones militares contra los españoles se estaban librando en lo que entonces era ya Colombia.\n\n\u0018\\(1\\)\u0019. \"[...] el sistema de convertir nuestras provincias en estados soberanos para hacer la federación es una locura hija de la precipitación de nuestros juicios y de una ambición mal entendida. No es la extensión del terreno, no es la población, no son las riquezas ni las luces que forman la fuerza de un imperio por sí solas: la suma total de todas estas cosas forman su fuerza; y si nosotros en lugar de acumular nuestras luces, nuestras riquezas y nuestras fuerzas, las dividimos en otras tantas partes como tenemos de provincias, ¿cuál será el resultado?\".\n\nTomado y adaptado de: Nariño, A. (\u0018\\(1811\\)\u0019). La Bagatela N.° \u0018\\(5\\)\u0019. Imprenta Real de Don Bruno Espinosa de los Monteros.\n\n\u0018\\(2\\)\u0019. \"[...] el Gobierno federal es [...] el más adecuado para la libertad y el menos expuesto al abuso por el contrapeso que oponen las partes federadas. De aquí se deduce que, mientras tengamos sobre nosotros el Gobierno español, mientras este no reconozca nuestra independencia, lo que nos conviene es unidad de acción y el sistema centralista; pero que reconocida la independencia por la España, hallándonos sin peligros y con los elementos necesarios, la federación será la llama de la libertad\".\n\nTomado y adaptado de: Nariño, A. (\u0018\\(5\\) de marzo de \u0018\\(1823\\)\u0019). Los toros de Fucha. Imprenta Real de Don Bruno Espinosa de los Monteros.",
+      "sectionText": "A continuación, se presentan dos textos escritos por Antonio Nariño sobre la polémica entre centralistas y federalistas durante la independencia de la Nueva Granada. El primero fue escrito en 1811, cuando acababan de ocurrir los primeros gritos de independencia a lo largo de todo el reino. El segundo, mucho más tardío, se publicó en 1823, cuando las últimas acciones militares contra los españoles se estaban librando en lo que entonces era ya Colombia.\n\n\\(1\\). \"[...] el sistema de convertir nuestras provincias en estados soberanos para hacer la federación es una locura hija de la precipitación de nuestros juicios y de una ambición mal entendida. No es la extensión del terreno, no es la población, no son las riquezas ni las luces que forman la fuerza de un imperio por sí solas: la suma total de todas estas cosas forman su fuerza; y si nosotros en lugar de acumular nuestras luces, nuestras riquezas y nuestras fuerzas, las dividimos en otras tantas partes como tenemos de provincias, ¿cuál será el resultado?\".\n\nTomado y adaptado de: Nariño, A. \\((1811)\\). La Bagatela N.\\(^{\\circ}\\) \\(5\\): Imprenta Real de Don Bruno Espinosa de los Monteros.\n\n\\(2\\). \"[...] el Gobierno federal es [...] el más adecuado para la libertad y el menos expuesto al abuso por el contrapeso que oponen las partes federadas. De aquí se deduce que, mientras tengamos sobre nosotros el Gobierno español, mientras este no reconozca nuestra independencia, lo que nos conviene es unidad de acción y el sistema centralista; pero que reconocida la independencia por la España, hallándonos sin peligros y con los elementos necesarios, la federación será la llama de la libertad\".\n\nTomado y adaptado de: Nariño, A. \\((5\\ de\\ marzo\\ de\\ 1823)\\). Los toros de Fucha. Imprenta Real de Don Bruno Espinosa de los Monteros.\n\nEn el plazo de doce años, Antonio Nariño cambió su percepción sobre el sistema federalista: pasó de atacarlo en \\(1811\\) a defenderlo en \\(1823\\). ¿Qué razón explica el cambio de perspectiva del prócer de la independencia sobre este modelo político?",
       "hasSectionImage": false,
       "sectionImageUrl": "",
       "sectionImageAiDescription": "",
       "questions": [
         {
           "questionId": "q_01",
-          "questionText": "En el plazo de doce años, Antonio Nariño cambió su percepción sobre el sistema federalista: pasó de atacarlo en \u0018\\(1811\\)\u0019 a defenderlo en \u0018\\(1823\\)\u0019. ¿Qué razón explica el cambio de perspectiva del prócer de la independencia sobre este modelo político?",
+          "questionText": "En el plazo de doce años, Antonio Nariño cambió su percepción sobre el sistema federalista: pasó de atacarlo en \\(1811\\) a defenderlo en \\(1823\\). ¿Qué razón explica el cambio de perspectiva del prócer de la independencia sobre este modelo político?",
           "hasQuestionImage": false,
           "questionImageUrl": "",
           "questionImageAiDescription": "",
@@ -23,7 +23,7 @@
             {
               "optionId": "A",
               "type": "text",
-              "optionText": "Porque, para Nariño, el modelo centralista garantizaba la unión de fuerzas de todas las provincias en la guerra contra España, algo necesario en \u0018\\(1823\\)\u0019.",
+              "optionText": "Porque, para Nariño, el modelo centralista garantizaba la unión de fuerzas de todas las provincias en la guerra contra España, algo necesario en \\(1823\\).",
               "optionImageUrl": "",
               "optionAiDescription": ""
             },
@@ -44,7 +44,7 @@
             {
               "optionId": "D",
               "type": "text",
-              "optionText": "Porque, para Nariño, el modelo federalista era útil en países libres y, por tanto, lo rechaza en \u0018\\(1811\\)\u0019, pero lo defiende en \u0018\\(1823\\)\u0019 con la independencia consolidada.",
+              "optionText": "Porque, para Nariño, el modelo federalista era útil en países libres y, por tanto, lo rechaza en \\(1811\\), pero lo defiende en \\(1823\\) con la independencia consolidada.",
               "optionImageUrl": "",
               "optionAiDescription": ""
             }
@@ -207,14 +207,14 @@
     {
       "sectionIndex": 5,
       "sectionTitle": "",
-      "sectionText": "",
+      "sectionText": "Los siguientes son reportes periodísticos sobre dos discursos diferentes pronunciados acerca de los atentados terroristas ocurridos en Francia, en \\(2015\\). Léalos detenidamente:\n\nFragmento A. \"Aunque el presidente francés dijo que el Gobierno ha hecho grandes avances aprobando nuevas leyes y reforzando la seguridad, de acuerdo con el Gobierno, el nivel de alerta sigue siendo alto [...] Igualmente, explicó que en el último año [...] se dictaron medidas contra medio centenar de extranjeros a fin de impedir que puedan entrar en territorio francés por sospechas terroristas\".\n\nTomado y adaptado de: http://www.lanacion.com.ar/1800111franciafrancoishollandeanuncianuevobatallacontraamenazaterrorista\n\nFragmento B. \"[...] el presidente francés se dirige por segunda vez en \\(48\\) horas a la nación, para condenar los hechos, y llamar a la calma y la unidad sin fisuras. El miércoles calificó a las víctimas como héroes que habían muerto por defender los valores de la República y pidió que los franceses dejaran a un lado sus diferencias ('nada puede dividirnos')\".\n\nTomado y adaptado de: http://www.rtve.es/noticias/20150109/franciaconvulsionadadeclataquecharliehebdomarcharepublicana/1081424.shtml\n\nA partir de la información contenida en los dos discursos, es correcto afirmar que se pronunció primero",
       "hasSectionImage": false,
       "sectionImageUrl": "",
       "sectionImageAiDescription": "",
       "questions": [
         {
           "questionId": "q_05",
-          "questionText": "Los siguientes son reportes periodísticos sobre dos discursos diferentes pronunciados acerca de los atentados terroristas ocurridos en Francia, en \u0018\\(2015\\)\u0019. Léalos detenidamente:\n\nFragmento A. \"Aunque el presidente francés dijo que el Gobierno ha hecho grandes avances aprobando nuevas leyes y reforzando la seguridad, de acuerdo con el Gobierno, el nivel de alerta sigue siendo alto [...] Igualmente, explicó que en el último año [...] se dictaron medidas contra medio centenar de extranjeros a fin de impedir que puedan entrar en territorio francés por sospechas terroristas\".\n\nTomado y adaptado de: http://www.lanacion.com.ar/\u0018\\(1800111\\)\u0019/francia-francia-ordeno-la-deten-chanellebdo-amenaza-terrorista\n\nFragmento B. \"[...] el presidente francés se dirige por segunda vez en \u0018\\(48\\)\u0019 horas a la nación, para condenar los hechos, y llamar a la calma y la unidad sin fisuras. El miércoles calificó a las víctimas como héroes que habían muerto por defender los valores de la República y pidió que los franceses dejaran a un lado sus diferencias (\"nada puede dividirnos\")\".\n\nTomado y adaptado de: http://www.rtve.es/noticias/\u0018\\(20150109\\)\u0019/francia-convulsionada-delata-que-charlie-hebdo-marcha-republicana/\u0018\\(1081424\\)\u0019.shtml\n\nA partir de la información contenida en los dos discursos, es correcto afirmar que se pronunció primero",
+          "questionText": "A partir de la información contenida en los dos discursos, es correcto afirmar que se pronunció primero",
           "hasQuestionImage": false,
           "questionImageUrl": "",
           "questionImageAiDescription": "",
@@ -244,7 +244,7 @@
             {
               "optionId": "D",
               "type": "text",
-              "optionText": "el fragmento B, porque es una respuesta inmediata que hace un llamado a la calma y la unidad; el A habla sobre procesos a largo plazo, como la aprobación de leyes y políticas de seguridad.",
+              "optionText": "el fragmento B porque es una respuesta inmediata que hace un llamado a la calma y la unidad; el A habla sobre procesos a largo plazo, como la aprobación de leyes y políticas de seguridad.",
               "optionImageUrl": "",
               "optionAiDescription": ""
             }
@@ -264,7 +264,7 @@
       "questions": [
         {
           "questionId": "q_06",
-          "questionText": "La erradicación de cultivos ilícitos, como la coca, es una de las principales problemáticas que vive Colombia. Este flagelo ha generado un debate sobre la forma correcta de erradicar los cultivos: si se debe hacer de manera manual o a través de aspersión aérea, con químicos que eliminan las plantas. En esta problemática confluyen varios actores e intereses a la hora de buscar soluciones que satisfagan las necesidades del país, entre los cuales se encuentran los siguientes:\n\nPor un lado, está el Estado, que tiene como misión, bajo el mando de la fuerza pública, eliminar los cultivos para disminuir el número de hectáreas cultivadas y mejorar los índices nacionales de erradicación.\n\nPor otro lado, están los grupos armados organizados \u0018\\(GAO\\)\u0019 que promueven la siembra de cultivos para que estos sean usados, posteriormente, en el narcotráfico y financiar sus actividades delictivas.\n\nOtro actor importante son los campesinos que han sido obligados por los \u0018\\(GAO\\)\u0019 a cultivar coca, y a quienes no se contempla judicializar dentro de la política de erradicación manual.\n\nAdicionalmente, se encuentran las organizaciones, como las Naciones Unidas, que elaboran informes para mostrar el avance o retroceso de la siembra de cultivos ilícitos.\n\nFinalmente, existen algunos países, como Estados Unidos, que, a través de recursos internacionales, se encargan de financiar actividades que logren erradicar los cultivos que son usados para actividades ilegales.\n\nSi se lleva a cabo la estrategia de erradicación manual de cultivos ilícitos, ¿entre quiénes es probable que se dé un conflicto?",
+          "questionText": "La erradicación de cultivos ilícitos, como la coca, es una de las principales problemáticas que vive Colombia. Este flagelo ha generado un debate sobre la forma correcta de erradicar los cultivos: si se debe hacer de manera manual o a través de aspersión aérea, con químicos que eliminan las plantas. En esta problemática confluyen varios actores e intereses a la hora de buscar soluciones que satisfagan las necesidades del país, entre los cuales se encuentran los siguientes:\n\nPor un lado, está el Estado, que tiene como misión, bajo el mando de la fuerza pública, eliminar los cultivos para disminuir el número de hectáreas cultivadas y mejorar los índices nacionales de erradicación.\n\nPor otro lado, están los grupos armados organizados -GAO- que promueven la siembra de cultivos para que estos sean usados, posteriormente, en el narcotráfico y financiar sus actividades delictivas.\n\nOtro actor importante son los campesinos que han sido obligados por los GAO a cultivar coca, y a quienes no se contempla judicializar dentro de la política de erradicación manual.\n\nAdicionalmente, se encuentran las organizaciones, como las Naciones Unidas, que elaboran informes para mostrar el avance o retroceso de la siembra de cultivos ilícitos.\n\nFinalmente, existen algunos países, como Estados Unidos, que, a través de recursos internacionales, se encargan de financiar actividades que logren erradicar los cultivos que son usados para actividades ilegales.\n\nSi se lleva a cabo la estrategia de erradicación manual de cultivos ilícitos, ¿entre quiénes es probable que se dé un conflicto?",
           "hasQuestionImage": false,
           "questionImageUrl": "",
           "questionImageAiDescription": "",
@@ -273,7 +273,7 @@
             {
               "optionId": "A",
               "type": "text",
-              "optionText": "Los campesinos víctimas de los \u0018\\(GAO\\)\u0019 y las Naciones Unidas.",
+              "optionText": "Los campesinos víctimas de los GAO y las Naciones Unidas.",
               "optionImageUrl": "",
               "optionAiDescription": ""
             },
@@ -287,7 +287,7 @@
             {
               "optionId": "C",
               "type": "text",
-              "optionText": "La fuerza pública y los campesinos víctimas de los \u0018\\(GAO\\)\u0019.",
+              "optionText": "La fuerza pública y los campesinos víctimas de los GAO.",
               "optionImageUrl": "",
               "optionAiDescription": ""
             },
@@ -323,7 +323,7 @@
             {
               "optionId": "A",
               "type": "text",
-              "optionText": "es antiético que un gobernante o dirigente político busque beneficiarse electoralmente de un grupo de ciudadanos.",
+              "optionText": "es antitético que un gobernante o dirigente político busque beneficiarse electoralmente de un grupo de ciudadanos.",
               "optionImageUrl": "",
               "optionAiDescription": ""
             },
@@ -357,14 +357,14 @@
     {
       "sectionIndex": 8,
       "sectionTitle": "",
-      "sectionText": "",
+      "sectionText": "En \\(2011\\), la Corte Constitucional de Colombia estableció que las parejas conformadas por personas del mismo sexo sí constituyen una familia. Cinco años después, la misma entidad reconoció la validez del matrimonio igualitario para estas mismas parejas. Antes de eso, solo las parejas heterosexuales podían casarse legalmente, mientras que las homosexuales solo podían acceder a una figura contractual llamada \"unión solemne\", la cual otorgaba solo algunos de los derechos conferidos a los matrimonios. Con esto, la Corte Constitucional busca responder a los nuevos patrones en la conformación de las familias en el país y evitar que los derechos de cerca de cuatro millones de colombianos sigan siendo vulnerados.\n\nTomado y adaptado de: Rueda, M. \\((30\\ de\\ abril\\ de\\ 2005)\\) ¿Es fácil ser gay en Colombia? Revista Semana, e información tomada de Redacción Judicial \\((7\\ de\\ abril\\ de\\ 2016)\\). Corte Constitucional le da el \"sí\" al matrimonio igualitario. El Espectador. http://www.elespectador.com",
       "hasSectionImage": false,
       "sectionImageUrl": "",
       "sectionImageAiDescription": "",
       "questions": [
         {
           "questionId": "q_08",
-          "questionText": "En \u0018\\(2011\\)\u0019, la Corte Constitucional de Colombia estableció que las parejas conformadas por personas del mismo sexo sí constituyen una familia. Cinco años después, la misma entidad reconoció la validez del matrimonio igualitario para estas mismas parejas. Antes de eso, solo las parejas heterosexuales podían casarse legalmente, mientras que las homosexuales solo podían acceder a una figura contractual llamada \"unión solemne\", la cual otorgaba solo algunos de los derechos conferidos a los matrimonios. Con esto, la Corte Constitucional busca responder a los nuevos patrones en la conformación de las familias en el país y evitar que los derechos de cerca de cuatro millones de colombianos sigan siendo vulnerados.\n\nTomado y adaptado de: Rueda, M. (\u0018\\(30\\) de abril de \u0018\\(2005\\)\u0019) ¿Es fácil ser gay en Colombia? Revista Semana. y Redacción Judicial (\u0018\\(7\\) de abril de \u0018\\(2016\\)\u0019). Corte Constitucional le da el “sí” al matrimonio igualitario. El Espectador. http://www.elespectador.com\n\nCon base en la información anterior, ¿cuál de las siguientes afirmaciones es una de las razones por las cuales se modificó el concepto legal de matrimonio y familia en Colombia?",
+          "questionText": "Con base en la información anterior, ¿cuál de las siguientes afirmaciones es una de las razones por las cuales se modificó el concepto legal de matrimonio y familia en Colombia?",
           "hasQuestionImage": false,
           "questionImageUrl": "",
           "questionImageAiDescription": "",
@@ -407,14 +407,14 @@
     {
       "sectionIndex": 9,
       "sectionTitle": "",
-      "sectionText": "",
+      "sectionText": "En la introducción al Manifiesto Comunista, Karl Marx y Friedrich Engels escribieron:\n\n\"Un fantasma recorre Europa: el fantasma del comunismo. Todas las fuerzas de la vieja Europa se han unido en santa cruzada para acosar a ese fantasma [...] No hay un solo partido de oposición a quien los adversarios gobernantes no motejen de comunista [...] De este hecho, se desprenden dos consecuencias: la primera es que el comunismo se halla ya reconocido como una potencia por todas las potencias europeas. La segunda, que ya es hora de que los comunistas expresen a la luz del día y ante el mundo entero sus ideas, sus tendencias, sus aspiraciones, saliendo así al paso de esa leyenda del espectro comunista, con un manifiesto de su partido [...]\".\n\n¿Este texto fue escrito en el siglo \\(XX\\)?",
       "hasSectionImage": false,
       "sectionImageUrl": "",
       "sectionImageAiDescription": "",
       "questions": [
         {
           "questionId": "q_09",
-          "questionText": "En un municipio, un grupo de mineros artesanales ha aumentado sus ingresos al encontrar oro en un punto del río en el cual se puede extraer con la ayuda de mercurio. La comunidad del municipio aledaño se ha visto afectada por esta situación, porque el río se va contaminando con los desechos tóxicos que genera la actividad minera y es la única fuente de agua que tienen los habitantes para el consumo y la irrigación de cultivos. Ante esto, la alcaldesa del municipio considera necesario establecer una normatividad que regule este tipo de actividades.\n\n¿Cuál es la razón que mejor justifica por qué debería establecerse allí una normatividad que regule las actividades de extracción minera en el municipio?",
+          "questionText": "¿Este texto fue escrito en el siglo \\(XX\\)?",
           "hasQuestionImage": false,
           "questionImageUrl": "",
           "questionImageAiDescription": "",
@@ -423,28 +423,28 @@
             {
               "optionId": "A",
               "type": "text",
-              "optionText": "Para que los mineros busquen más lugares de extracción de oro sin tener problemas con las autoridades.",
+              "optionText": "No, ya que fue escrito en el siglo \\(XIX\\) como respuesta a las injusticias cometidas en América por las potencias imperialistas de la vieja Europa.",
               "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "B",
               "type": "text",
-              "optionText": "Para garantizar los derechos a la salud y a un ambiente sano de los pobladores y el derecho de los mineros al trabajo.",
+              "optionText": "Sí, porque el texto describe cómo el Partido Comunista empezó a obtener el poder en varias potencias europeas y a perseguir cualquier fuerza política opositora.",
               "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "C",
               "type": "text",
-              "optionText": "Para que se pueda subsidiar la compra de agua para los pobladores, por medio de las ganancias que genera la explotación minera.",
+              "optionText": "No, porque el comunismo solo tuvo relevancia después de la segunda mitad del siglo \\(XX\\), durante el enfrentamiento entre la Unión Soviética y los países capitalistas en la Guerra Fría.",
               "optionImageUrl": "",
               "optionAiDescription": ""
             },
             {
               "optionId": "D",
               "type": "text",
-              "optionText": "Para establecer periodos de alternancia en la extracción del oro, para que los mineros descansen y permitan que el agua no se contamine tanto.",
+              "optionText": "Sí, porque el contexto del escrito es la consolidación del comunismo en Europa como fuerza política y, por tanto, el rechazo del mismo por los regímenes gobernantes y sus aliados.",
               "optionImageUrl": "",
               "optionAiDescription": ""
             }
@@ -464,57 +464,7 @@
       "questions": [
         {
           "questionId": "q_10",
-          "questionText": "En la introducción al Manifiesto Comunista, Karl Marx y Friedrich Engels escribieron:\n\n\"Un fantasma recorre Europa: el fantasma del comunismo. Todas las fuerzas de la vieja Europa se han unido en santa cruzada para acosar a ese fantasma [...] No hay un solo partido de oposición a quien los adversarios gobernantes no motejen de comunista [...] De este hecho, se desprenden dos consecuencias: la primera es que el comunismo se halla ya reconocido como una potencia por todas las potencias europeas. La segunda, que ya es hora de que los comunistas expresen a la luz del día y ante el mundo entero sus ideas, sus tendencias, sus aspiraciones, saliendo así al paso de esa leyenda del espectro comunista, con un manifiesto de su partido [...]\".\n\n¿Este texto fue escrito en el siglo \u0018\\(XX\\)\u0019?",
-          "hasQuestionImage": false,
-          "questionImageUrl": "",
-          "questionImageAiDescription": "",
-          "optionsType": "text",
-          "options": [
-            {
-              "optionId": "A",
-              "type": "text",
-              "optionText": "No, ya que fue escrito en el siglo \u0018\\(XIX\\)\u0019 como respuesta a las injusticias cometidas en América por las potencias imperialistas de la vieja Europa.",
-              "optionImageUrl": "",
-              "optionAiDescription": ""
-            },
-            {
-              "optionId": "B",
-              "type": "text",
-              "optionText": "Sí, porque el texto describe cómo el Partido Comunista empezó a obtener el poder en varias potencias europeas y a perseguir cualquier fuerza política opositora.",
-              "optionImageUrl": "",
-              "optionAiDescription": ""
-            },
-            {
-              "optionId": "C",
-              "type": "text",
-              "optionText": "No, porque el comunismo solo tuvo relevancia después de la segunda mitad del siglo \u0018\\(XX\\)\u0019, durante el enfrentamiento entre la Unión Soviética y los países capitalistas en la Guerra Fría.",
-              "optionImageUrl": "",
-              "optionAiDescription": ""
-            },
-            {
-              "optionId": "D",
-              "type": "text",
-              "optionText": "Sí, porque el contexto del escrito es la consolidación del comunismo en Europa como fuerza política y, por tanto, el rechazo del mismo por los regímenes gobernantes y sus aliados.",
-              "optionImageUrl": "",
-              "optionAiDescription": ""
-            }
-          ],
-          "correctOptionId": "",
-          "aiExplanation": ""
-        }
-      ]
-    },
-    {
-      "sectionIndex": 11,
-      "sectionTitle": "",
-      "sectionText": "",
-      "hasSectionImage": false,
-      "sectionImageUrl": "",
-      "sectionImageAiDescription": "",
-      "questions": [
-        {
-          "questionId": "q_11",
-          "questionText": "En Colombia, se debe tener un Plan de Ordenamiento Territorial \u0018\\(POT\\)\u0019 en cada uno de los municipios, para organizar y planear el desarrollo físico del territorio. \"Un \u0018\\(POT\\)\u0019 se define como el conjunto de objetivos, directrices, políticas, estrategias, metas, programas, actuaciones y normas adoptadas para orientar y administrar el desarrollo físico del territorio y la utilización del suelo. Señala, pues, los derroteros de las diferentes acciones urbanísticas posibles que pueden emprenderse. Las ciudades deben crecer ordenadamente, de manera tal que los recursos con que se cuenta para el desarrollo de la comunidad, se empleen eficientemente y de manera sostenible en el tiempo. El \u0018\\(POT\\)\u0019 nos pone de presente que no todo está permitido y que lo que sí lo está, debe ser en función de la obtención del desarrollo más equitativo posible\".\n\nTomado y adaptado de: Fenak. (\u0018\\(2013\\)\u0019). ¿Qué es un Plan de Ordenamiento Territorial y para qué sirve? http://fenalcolbolivar.com/desarrollosectorial/quesunplandeordenamientoterritorialyparaquesirve/\u0018\\(1487\\)\u0019\n\n¿Cuál de los siguientes conceptos se aplica en la anterior definición de un \u0018\\(POT\\)\u0019?",
+          "questionText": "En Colombia, se debe tener un Plan de Ordenamiento Territorial \\((POT)\\) en cada uno de los municipios, para organizar y planear el desarrollo físico del territorio. \"Un POT se define como el conjunto de objetivos, directrices, políticas, estrategias, metas, programas, actuaciones y normas adoptadas para orientar y administrar el desarrollo físico del territorio y la utilización del suelo. Señala, pues, los derroteros de las diferentes acciones urbanísticas posibles que pueden emprenderse. Las ciudades deben crecer ordenadamente, de manera tal que los recursos con que se cuenta para el desarrollo de la comunidad, se empleen eficientemente y de manera sostenible en el tiempo. El POT nos pone de presente que no todo está permitido y que lo que sí lo está, debe ser en función de la obtención del desarrollo más equitativo posible\".\n\nTomado y adaptado de: Fenak. \\((2013)\\). ¿Qué es un Plan de Ordenamiento Territorial y para qué sirve? http://fenalcolbolivar.com/desarrollosectorial/quesunplandeordenamientoterritorialyparaquesirve/1487\n\n¿Cuál de los siguientes conceptos se aplica en la anterior definición de un POT?",
           "hasQuestionImage": false,
           "questionImageUrl": "",
           "questionImageAiDescription": "",
@@ -555,7 +505,7 @@
       ]
     },
     {
-      "sectionIndex": 12,
+      "sectionIndex": 11,
       "sectionTitle": "",
       "sectionText": "",
       "hasSectionImage": false,
@@ -563,8 +513,8 @@
       "sectionImageAiDescription": "",
       "questions": [
         {
-          "questionId": "q_12",
-          "questionText": "En España, se han instalado miles de generadores de energía eólica \u0018\\(aquellos\\) que producen energía a partir del viento\u0019 que, actualmente, ocupan grandes extensiones de tierra. A diferencia de los combustibles fósiles o de las centrales nucleares, los generadores de energía eólica son fuentes de energía limpia y amigable con el medio ambiente.\n\nEn este momento, se está analizando la posibilidad de instalar este tipo de generadores en una región desértica en el norte de Colombia, para satisfacer las necesidades energéticas de la población del lugar. Esta población produce la mayor parte de la energía que consume a partir de la quema de madera, lo que genera problemas de contaminación y deforestación.\n\n¿Cuál de las siguientes condiciones NO sería necesaria para implementar esta medida, de energía eólica, en dicha región del territorio colombiano?",
+          "questionId": "q_11",
+          "questionText": "En España, se han instalado miles de generadores de energía eólica \\((aquellos\\ que\\ producen\\ energía\\ a\\ partir\\ del\\ viento)\\) que, actualmente, ocupan grandes extensiones de tierra. A diferencia de los combustibles fósiles o de las centrales nucleares, los generadores de energía eólica son fuentes de energía limpia y amigable con el medio ambiente.\n\nEn este momento, se está analizando la posibilidad de instalar este tipo de generadores en una región desértica en el norte de Colombia, para satisfacer las necesidades energéticas de la población del lugar. Esta población produce la mayor parte de la energía que consume a partir de la quema de madera, lo que genera problemas de contaminación y deforestación.\n\n¿Cuál de las siguientes condiciones NO sería necesaria para implementar esta medida, de energía eólica, en dicha región del territorio colombiano?",
           "hasQuestionImage": false,
           "questionImageUrl": "",
           "questionImageAiDescription": "",
@@ -605,7 +555,7 @@
       ]
     },
     {
-      "sectionIndex": 13,
+      "sectionIndex": 12,
       "sectionTitle": "",
       "sectionText": "",
       "hasSectionImage": false,
@@ -613,7 +563,7 @@
       "sectionImageAiDescription": "",
       "questions": [
         {
-          "questionId": "q_13",
+          "questionId": "q_12",
           "questionText": "Un político de una ciudad del país se encuentra muy preocupado por el aumento en la inseguridad que se ha venido presentando en los últimos años. Recientemente, afirma el político, el número de robos y atracos a mano armada se ha intensificado y esta problemática se debería, en gran parte, a la llegada de personas de un país vecino, que migran por la crisis económica y social que viven al interior de su país. En palabras del político: \"Ya se han registrado muchos casos de personas atracadas por estos ciudadanos inmigrantes. Recomiendo a la población tener mucho cuidado al momento de relacionarse en la calle con cualquier persona que parezca tener un acento del país vecino. También, hago un llamado a la comunidad para que continúe denunciando los casos de atraco que cometen las personas de ese país\".\n\nAhora bien, en esta situación, las palabras pronunciadas por el político",
           "hasQuestionImage": false,
           "questionImageUrl": "",
@@ -655,7 +605,7 @@
       ]
     },
     {
-      "sectionIndex": 14,
+      "sectionIndex": 13,
       "sectionTitle": "",
       "sectionText": "",
       "hasSectionImage": false,
@@ -663,8 +613,8 @@
       "sectionImageAiDescription": "",
       "questions": [
         {
-          "questionId": "q_14",
-          "questionText": "Un líder político afirmó lo siguiente durante una entrevista:\n\n\"Volveremos a participar en las elecciones cuando:\n\u0018\\(1\\)\u0019. El calendario electoral vuelva a ser estable y no haya intervención por parte del presidente.\n\u0018\\(2\\)\u0019. Aumenten los controles por parte de entes independientes en los puestos de votación.\n\u0018\\(3\\)\u0019. Los ciudadanos no sufran represalias por expresar su preferencia electoral.\n\u0018\\(4\\)\u0019. Se les permita a los ciudadanos crear y pertenecer a partidos políticos diferentes al de Gobierno.\n\u0018\\(5\\)\u0019. Las decisiones tomadas en las urnas se respeten y los candidatos elegidos puedan posesionarse\".\n\n¿Cuál es el propósito de las medidas propuestas?",
+          "questionId": "q_13",
+          "questionText": "Un líder político afirmó lo siguiente durante una entrevista:\n\n\"Volveremos a participar en las elecciones cuando:\n\\(1\\). El calendario electoral vuelva a ser estable y no haya intervención por parte del presidente.\n\\(2\\). Aumenten los controles por parte de entes independientes en los puestos de votación.\n\\(3\\). Los ciudadanos no sufran represalias por expresar su preferencia electoral.\n\\(4\\). Se les permita a los ciudadanos crear y pertenecer a partidos políticos diferentes al de Gobierno.\n\\(5\\). Las decisiones tomadas en las urnas se respeten y los candidatos elegidos puedan posesionarse\".\n\n¿Cuál es el propósito de las medidas propuestas?",
           "hasQuestionImage": false,
           "questionImageUrl": "",
           "questionImageAiDescription": "",
@@ -705,15 +655,15 @@
       ]
     },
     {
-      "sectionIndex": 15,
-      "sectionTitle": "",
-      "sectionText": "RESPONDA LAS PREGUNTAS \u0018\\(81\\)\u0019 Y \u0018\\(82\\)\u0019 DE ACUERDO CON LA SIGUIENTE INFORMACIÓN\n\nRepresentantes de los gremios minero y petrolero han enviado un comunicado al Gobierno con la intención de obtener los permisos necesarios para intervenir la selva amazónica. Estos gremios argumentan que esta intervención les permitiría mejorar la competitividad de este sector del mercado y generar empleos para las comunidades de la región del Amazonas. Por otra parte, los líderes de algunos pueblos indígenas del Amazonas llevan varios meses pidiendo la ayuda del Gobierno para proteger los territorios de sus “hermanos aislados”, pueblos indígenas que han decidido voluntariamente aislarse en las selvas huyendo de la esclavitud, la violencia y las enfermedades que la civilización occidental ha traído consigo durante los últimos cinco siglos. La amenaza para estos pueblos aún sigue latente; por ejemplo, en el último año varias comunidades indígenas se han visto seriamente afectadas por cuenta de contagios de gripa y sarampión, producto de encuentros imprevistos con leñadores de grupos madereros ilegales en el Amazonas.\n\nPara tomar una decisión informada sobre este tema, el Gobierno ha pedido la colaboración, tanto de su Ministerio de Minas y Energía, como de los académicos estudiosos de la cultura y la cosmovisión de estos pueblos indígenas del Amazonas. Los académicos argumentan que, teniendo en cuenta la gran vulnerabilidad que estos pueblos antiguos presentan frente a las enfermedades más comunes de Occidente, es necesario crear estructuras legales que protejan los territorios en donde podrían habitar los pueblos indígenas en aislamiento voluntario, respetando su autodeterminación a no ser contactados y protegiendo el gran patrimonio cultural, espiritual y natural que ellos poseen. Por otra parte, desde el Ministerio de Minas y Energía se argumenta que la solución está en que se reúnan los gremios minero, petrolero y maderero con las comunidades indígenas del Amazonas, incluyendo a las comunidades indígenas en aislamiento voluntario, para así poder negociar qué partes de la selva amazónica pueden ser explotadas legalmente para beneficio del desarrollo económico del país.\n\nTomado y adaptado de: Calle, H. (\u0018\\(2\\) de noviembre de \u0018\\(2017\\)\u0019). Una política de buen vecino para los pueblos aislados colombianos. El Espectador. https://www.elespectador.com/noticias/medio-ambiente/una-politica-de-buen-vecino-para-los-pueblos-aislados-colombianos-articulo-\u0018\\(721038\\)\u0019",
+      "sectionIndex": 14,
+      "sectionTitle": "RESPONDA LAS PREGUNTAS \\(81\\) Y \\(82\\) DE ACUERDO CON LA SIGUIENTE INFORMACIÓN",
+      "sectionText": "Representantes de los gremios minero y petrolero han enviado un comunicado al Gobierno con la intención de obtener los permisos necesarios para intervenir la selva amazónica. Estos gremios argumentan que esta intervención les permitiría mejorar la competitividad de este sector del mercado y generar empleos para las comunidades de la región del Amazonas. Por otra parte, los líderes de algunos pueblos indígenas del Amazonas llevan varios meses pidiendo la ayuda del Gobierno para proteger los territorios de sus \"hermanos aislados\", pueblos indígenas que han decidido voluntariamente aislarse en las selvas huyendo de la esclavitud, la violencia y las enfermedades que la civilización occidental ha traído consigo durante los últimos cinco siglos. La amenaza para estos pueblos aún sigue latente; por ejemplo, en el último año varias comunidades indígenas se han visto seriamente afectadas por cuenta de contagios de gripa y sarampión, producto de encuentros imprevistos con leñadores de grupos madereros ilegales en el Amazonas.\n\nPara tomar una decisión informada sobre este tema, el Gobierno ha pedido la colaboración, tanto de su Ministerio de Minas y Energía, como de los académicos estudiosos de la cultura y la cosmovisión de estos pueblos indígenas del Amazonas. Los académicos argumentan que, teniendo en cuenta la gran vulnerabilidad que estos pueblos antiguos presentan frente a las enfermedades más comunes de Occidente, es necesario crear estructuras legales que protejan los territorios en donde podrían habitar los pueblos indígenas en aislamiento voluntario, respetando su autodeterminación a no ser contactados y protegiendo el gran patrimonio cultural, espiritual y natural que ellos poseen. Por otra parte, desde el Ministerio de Minas y Energía se argumenta que la solución está en que se reúnan los gremios minero, petrolero y maderero con las comunidades indígenas del Amazonas, incluyendo a las comunidades indígenas en aislamiento voluntario, para así poder negociar qué partes de la selva amazónica pueden ser explotadas legalmente para beneficio del desarrollo económico del país.\n\nTomado y adaptado de: Calle, H. \\((2\\ de\\ noviembre\\ de\\ 2017)\\). Una política de buen vecino para los pueblos aislados colombianos. El Espectador. https://www.elespectador.com/noticias/medio-ambiente/una-politica-de-buen-vecino-para-los-pueblos-aislados-colombianos-articulo-721038",
       "hasSectionImage": false,
       "sectionImageUrl": "",
       "sectionImageAiDescription": "",
       "questions": [
         {
-          "questionId": "q_15",
+          "questionId": "q_14",
           "questionText": "De acuerdo con los intereses involucrados en la situación descrita, ¿entre quiénes sería más probable que se genere un conflicto?",
           "hasQuestionImage": false,
           "questionImageUrl": "",
@@ -753,7 +703,7 @@
           "aiExplanation": ""
         },
         {
-          "questionId": "q_16",
+          "questionId": "q_15",
           "questionText": "En relación con la propuesta planteada por el Ministerio de Minas y Energía, ¿cuál de las siguientes opciones describe una posible reacción o respuesta que NO se tuvo en cuenta en dicha propuesta?",
           "hasQuestionImage": false,
           "questionImageUrl": "",
@@ -795,16 +745,16 @@
       ]
     },
     {
-      "sectionIndex": 16,
+      "sectionIndex": 15,
       "sectionTitle": "",
-      "sectionText": "",
+      "sectionText": "Un grupo de campesinos productores de papa se ha visto afectado por la entrada en vigencia de un tratado de libre comercio que ha permitido el ingreso al país de alimentos extranjeros que son más económicos, incluyendo la papa. La situación se ha complicado tanto para ellos, que sus ingresos se han reducido considerablemente y se ha puesto en riesgo su permanencia como agricultores. Esto afecta aspectos esenciales de su vida, dado que muchas de sus tradiciones y elementos culturales están relacionados con el cultivo de la tierra. Los campesinos mencionan que los políticos prometieron, en sus campañas, que los tratados no los afectarían, pues sus cultivos y productos serían protegidos.\n\nAnte esta situación, deciden rescatar una antigua tradición: los mercados campesinos, donde pueden vender sus productos sin intermediarios y a precios más bajos. Con esto se busca mejorar la calidad de vida de los productores, que más personas accedan a alimentos de alta calidad y que sus productos compitan en mejores condiciones frente a los productos extranjeros. Ahora bien, se busca ampliar este tipo de mercados a todo el país, pues la medida ha sido altamente beneficiosa para los cultivadores de papa, para los consumidores y para la tradición, pues se rescatan prácticas olvidadas.",
       "hasSectionImage": false,
       "sectionImageUrl": "",
       "sectionImageAiDescription": "",
       "questions": [
         {
-          "questionId": "q_17",
-          "questionText": "Un grupo de campesinos productores de papa se ha visto afectado por la entrada en vigencia de un tratado de libre comercio que ha permitido el ingreso al país de alimentos extranjeros que son más económicos, incluyendo la papa. La situación se ha complicado tanto para ellos, que sus ingresos se han reducido considerablemente y se ha puesto en riesgo su permanencia como agricultores. Esto afecta aspectos esenciales de su vida, dado que muchas de sus tradiciones y elementos culturales están relacionados con el cultivo de la tierra. Los campesinos mencionan que los políticos prometieron, en sus campañas, que los tratados no los afectarían, pues sus cultivos y productos serían protegidos.\n\nAnte esta situación, deciden rescatar una antigua tradición: los mercados campesinos, donde pueden vender sus productos sin intermediarios y a precios más bajos. Con esto se busca mejorar la calidad de vida de los productores, que más personas accedan a alimentos de alta calidad y que sus productos compitan en mejores condiciones frente a los productos extranjeros. Ahora bien, se busca ampliar este tipo de mercados a todo el país, pues la medida ha sido altamente beneficiosa para los cultivadores de papa, para los consumidores y para la tradición, pues se rescatan prácticas olvidadas.\n\n¿Cuáles de las siguientes dimensiones se privilegiaron en la solución propuesta por los campesinos?",
+          "questionId": "q_16",
+          "questionText": "¿Cuáles de las siguientes dimensiones se privilegiaron en la solución propuesta por los campesinos?",
           "hasQuestionImage": false,
           "questionImageUrl": "",
           "questionImageAiDescription": "",
@@ -845,7 +795,7 @@
       ]
     },
     {
-      "sectionIndex": 17,
+      "sectionIndex": 16,
       "sectionTitle": "",
       "sectionText": "",
       "hasSectionImage": false,
@@ -853,7 +803,7 @@
       "sectionImageAiDescription": "",
       "questions": [
         {
-          "questionId": "q_18",
+          "questionId": "q_17",
           "questionText": "Para llevar agua a varios municipios, el gobernador de un departamento propone la extensión del sistema de acueducto con presupuesto del Gobierno nacional. Después de varios estudios, un equipo de ingenieros entrega el diseño del proyecto.\n\nEste diseño contempla el trazado que tendrá el acueducto, el presupuesto general que se requiere para construirlo, el plan para proteger la flora y la fauna de la región, y la reubicación temporal de algunas familias que viven donde se llevarán a cabo las obras. Ahora bien, cuando el gobernador pretende dar inicio al proyecto, el Gobierno nacional le comunica que, si se considera el diseño entregado por los ingenieros, no habrá dinero suficiente para ejecutar la obra.\n\n¿Qué aspecto descrito anteriormente obstaculiza el desarrollo del acueducto?",
           "hasQuestionImage": false,
           "questionImageUrl": "",
@@ -895,7 +845,7 @@
       ]
     },
     {
-      "sectionIndex": 18,
+      "sectionIndex": 17,
       "sectionTitle": "",
       "sectionText": "",
       "hasSectionImage": false,
@@ -903,8 +853,8 @@
       "sectionImageAiDescription": "",
       "questions": [
         {
-          "questionId": "q_19",
-          "questionText": "Como resultado del acuerdo de paz firmado por un Gobierno y un grupo armado al margen de la ley, se establecieron zonas veredales transitorias de normalización \u0018\\(ZVTN\\)\u0019, las cuales consisten en locaciones rurales donde se concentran los militantes del grupo armado para iniciar su transición a la vida civil. En estas zonas, el ejército del país debe custodiar a los miembros del grupo armado, en lugar de combatirlo. De acuerdo con lo expuesto, ¿por qué es posible que se dé esta situación?",
+          "questionId": "q_18",
+          "questionText": "Como resultado del acuerdo de paz firmado por un Gobierno y un grupo armado al margen de la ley, se establecieron zonas veredales transitorias de normalización \\((ZVTN)\\), las cuales consisten en locaciones rurales donde se concentran los militantes del grupo armado para iniciar su transición a la vida civil. En estas zonas, el ejército del país debe custodiar a los miembros del grupo armado, en lugar de combatirlo. De acuerdo con lo expuesto, ¿por qué es posible que se dé esta situación?",
           "hasQuestionImage": false,
           "questionImageUrl": "",
           "questionImageAiDescription": "",
@@ -927,7 +877,7 @@
             {
               "optionId": "C",
               "type": "text",
-              "optionText": "Porque el grupo armado ahora controla las \u0018\\(ZVTN\\)\u0019 y tienen miembros del Ejército a su disposición.",
+              "optionText": "Porque el grupo armado ahora controla las ZVTN y tienen miembros del Ejército a su disposición.",
               "optionImageUrl": "",
               "optionAiDescription": ""
             },
@@ -945,16 +895,16 @@
       ]
     },
     {
-      "sectionIndex": 19,
+      "sectionIndex": 18,
       "sectionTitle": "",
-      "sectionText": "",
+      "sectionText": "En Estados Unidos existe un debate sobre el cambio climático, definido como variaciones del clima atribuidas directa o indirectamente a la actividad humana, que alteran la composición de la atmósfera mundial y que se suman a la variabilidad natural del clima observada durante períodos de tiempo comparables. Este debate ha llevado a que algunos Gobiernos se resistan a suscribir acuerdos internacionales que comprometan a los Estados a reducir la emisión de gases. El ejemplo más reciente fue el retiro de los Estados Unidos del Acuerdo de París. Esta situación ha generado que grupos ambientalistas protesten e insistan en que el desarrollo económico no puede seguir poniendo en peligro la existencia misma del planeta.\n\nAl respecto, el presidente de un país, escéptico del cambio climático, escribió en su red social de internet las siguientes dos frases:\n\n\\(1\\). \"Por el cambio climático que deberíamos estar preocupados es el provocado por las armas nucleares que están en las manos de líderes locos o incompetentes\".\n\n\\(2\\). \"Hace frío afuera. ¿Dónde demonios está el cambio climático?\".\n\nTomado y adaptado de: http://www.minambiente.gov.co/index.php/cambio-climatico y de http://www.elfinanciero.com.mx/\n\nA partir de la información anterior, ¿resultan confiables las afirmaciones del presidente en su red social acerca del cambio climático?",
       "hasSectionImage": false,
       "sectionImageUrl": "",
       "sectionImageAiDescription": "",
       "questions": [
         {
-          "questionId": "q_20",
-          "questionText": "En Estados Unidos existe un debate sobre el cambio climático, definido como variaciones del clima atribuidas directa o indirectamente a la actividad humana, que alteran la composición de la atmósfera mundial y que se suman a la variabilidad natural del clima observada durante periodos de tiempo comparables. Este debate ha llevado a que algunos Gobiernos se resistan a suscribir acuerdos internacionales que comprometan a los Estados a reducir la emisión de gases. El ejemplo más reciente fue el retiro de Estados Unidos de Acuerdo de París. Esta situación ha generado que grupos ambientalistas protesten e insistan en que el desarrollo económico no puede seguir poniendo en peligro la existencia misma del planeta.\n\nAl respecto, el presidente de un país, escéptico del cambio climático, escribió en su red social de internet las siguientes dos frases:\n\n\u0018\\(1\\)\u0019. “Por el cambio climático que deberíamos estar preocupados es el provocado por las armas nucleares que están en las manos de líderes locos o incompetentes”.\n\u0018\\(2\\)\u0019. “Hace frío afuera. ¿Dónde demonios está el cambio climático?”.\n\nTomado y adaptado de: http://www.minambiente.gov.co/index.php/cambio-climatico y de http://www.elfinanciero.com.mx/\n\nA partir de la información anterior, ¿resultan confiables las afirmaciones del presidente en su red social acerca del cambio climático?",
+          "questionId": "q_19",
+          "questionText": "A partir de la información anterior, ¿resultan confiables las afirmaciones del presidente en su red social acerca del cambio climático?",
           "hasQuestionImage": false,
           "questionImageUrl": "",
           "questionImageAiDescription": "",
@@ -995,16 +945,16 @@
       ]
     },
     {
-      "sectionIndex": 20,
+      "sectionIndex": 19,
       "sectionTitle": "",
-      "sectionText": "",
+      "sectionText": "La teoría de la dependencia argumenta que la pobreza que existe en los países del sur se debe a condiciones históricas que han estructurado el mercado global de tal manera que favorece a los países del norte y mantiene a los países del sur en un estado constante de pobreza. Es así como, desde sus inicios, los países del sur han servido como proveedores de materia prima para los países del norte y, a cambio, han sido receptores de aquellos productos terminados que ya han cumplido su ciclo en los mercados del norte. De esta manera, se crea un vínculo de dependencia, en el que las economías del sur dependen de la voluntad de compra de materias primas por parte de los países del norte.\n\nTomado y adaptado de: Subgerencia Cultural del Banco de la República. \\((2015)\\). Teoría de la dependencia. http://www.banrepcultural.org/blaavirtual/ayudadetareas/politica/teoria_de_la_dependencia",
       "hasSectionImage": false,
       "sectionImageUrl": "",
       "sectionImageAiDescription": "",
       "questions": [
         {
-          "questionId": "q_21",
-          "questionText": "La teoría de la dependencia argumenta que la pobreza que existe en los países del sur se debe a condiciones históricas que han estructurado el mercado global de tal manera que favorece a los países del norte y mantiene a los países del sur en un estado constante de pobreza. Es así como, desde sus inicios, los países del sur han servido como proveedores de materia prima para los países del norte y, a cambio, han sido receptores de aquellos productos terminados que ya han cumplido su ciclo en los mercados del norte. De esta manera, se crea un vínculo de dependencia, en el que las economías del sur dependen de la voluntad de compra de materias primas por parte de los países del norte.\n\nTomado y adaptado de: Subgerencia Cultural del Banco de la República. (\u0018\\(2015\\)\u0019). Teoría de la dependencia. http://www.banrepcultural.org/blaavirtual/ayudadetareas/politica/teoria_de_la_dependencia\n\n¿Cuál de las siguientes situaciones se ajusta al modelo teórico descrito?",
+          "questionId": "q_20",
+          "questionText": "¿Cuál de las siguientes situaciones se ajusta al modelo teórico descrito?",
           "hasQuestionImage": false,
           "questionImageUrl": "",
           "questionImageAiDescription": "",
@@ -1045,15 +995,15 @@
       ]
     },
     {
-      "sectionIndex": 21,
+      "sectionIndex": 20,
       "sectionTitle": "",
-      "sectionText": "La Organización de las Naciones Unidas \u0018\\(ONU\\)\u0019 define el “desarrollo sostenible” como\n\n\"[...] la satisfacción de las necesidades de la generación presente sin comprometer la capacidad de las generaciones futuras para satisfacer sus propias necesidades”. El desarrollo sostenible ha emergido como el principio rector para el desarrollo mundial a largo plazo. Consta de tres pilares: el desarrollo sostenible trata de lograr, de manera equilibrada, el desarrollo económico, el desarrollo social y la protección del medio ambiente. [A partir de lo anterior] la Conferencia de las Naciones Unidas sobre el Desarrollo Sostenible, o Cumbre de la Tierra de Río \u0018\\(20\\)\u0019, se centrará en dos temas: \u0018\\(1\\)\u0019 la economía verde en el contexto del desarrollo sostenible y la erradicación de la pobreza y \u0018\\(2\\)\u0019 el marco institucional para el desarrollo sostenible\".\n\nTomado y adaptado de: Asamblea General de las Naciones Unidas \u0018\\(s. f.\\)\u0019. Desarrollo Sostenible. http://www.un.org/es/ga/president/\u0018\\(65\\)\u0019/issues/sustdev.shtml",
+      "sectionText": "La Organización de las Naciones Unidas \\((ONU)\\) define el \"desarrollo sostenible\" como\n\n\"[...] la satisfacción de las necesidades de la generación presente sin comprometer la capacidad de las generaciones futuras para satisfacer sus propias necesidades\". El desarrollo sostenible ha emergido como el principio rector para el desarrollo mundial a largo plazo. Consta de tres pilares: el desarrollo sostenible trata de lograr, de manera equilibrada, el desarrollo económico, el desarrollo social y la protección del medio ambiente. [A partir de lo anterior] la Conferencia de las Naciones Unidas sobre el Desarrollo Sostenible, o Cumbre de la Tierra de Río \\(20\\), se centrará en dos temas: \\(1\\) la economía verde en el contexto del desarrollo sostenible y la erradicación de la pobreza y \\(2\\) el marco institucional para el desarrollo sostenible\".\n\nTomado y adaptado de: Asamblea General de las Naciones Unidas \\((s.f.)\\). Desarrollo Sostenible. http://www.un.org/es/ga/president/65/issues/sustdev.shtml\n\nDe acuerdo con la anterior definición, una política económica es sostenible cuando",
       "hasSectionImage": false,
       "sectionImageUrl": "",
       "sectionImageAiDescription": "",
       "questions": [
         {
-          "questionId": "q_22",
+          "questionId": "q_21",
           "questionText": "De acuerdo con la anterior definición, una política económica es sostenible cuando",
           "hasQuestionImage": false,
           "questionImageUrl": "",
@@ -1095,7 +1045,7 @@
       ]
     },
     {
-      "sectionIndex": 22,
+      "sectionIndex": 21,
       "sectionTitle": "",
       "sectionText": "",
       "hasSectionImage": false,
@@ -1103,8 +1053,8 @@
       "sectionImageAiDescription": "",
       "questions": [
         {
-          "questionId": "q_23",
-          "questionText": "Para Adam Smith, economista y filósofo escocés del siglo \u0018\\(XVIII\\)\u0019, la división del trabajo aumenta la productividad, pues cada persona se enfoca en producir aquello en lo que es mejor y, luego, lo intercambia de forma mercantil por los otros bienes y servicios que necesita. Si cada uno dependiera del autosuministro, tendría menos posibilidades de fabricar la misma cantidad de bienes que le es posible conseguir en el intercambio.\n\nSegún el concepto de división del trabajo, para Smith, el mercado",
+          "questionId": "q_22",
+          "questionText": "Para Adam Smith, economista y filósofo escocés del siglo \\(XVIII\\), la división del trabajo aumenta la productividad, pues cada persona se enfoca en producir aquello en lo que es mejor y, luego, lo intercambia de forma mercantil por los otros bienes y servicios que necesita. Si cada uno dependiera del autosuministro, tendría menos posibilidades de fabricar la misma cantidad de bienes que le es posible conseguir en el intercambio.\n\nSegún el concepto de división del trabajo, para Smith, el mercado",
           "hasQuestionImage": false,
           "questionImageUrl": "",
           "questionImageAiDescription": "",
@@ -1145,16 +1095,16 @@
       ]
     },
     {
-      "sectionIndex": 23,
+      "sectionIndex": 22,
       "sectionTitle": "",
-      "sectionText": "",
+      "sectionText": "El Gobierno está investigando el impacto que tiene el pez león en los ecosistemas marítimos colombianos y las formas de combatirlo. El pez león, especie originaria de Asia, se ha convertido en una amenaza o \"plaga\" para los ecosistemas marítimos y se ha extendido a las costas del Caribe colombiano. Según un artículo de prensa, este pez genera dos tipos de peligro: \"Por un lado, es una amenaza para el hombre, que puede sufrir accidentes al pisar o tocar sus nocivas púas venenosas, y, por otro, es una amenaza para las especies nativas, pues se alimenta de peces jóvenes que sirven de alimento para el hombre, como el pargo y el mero\".\n\nTomado y adaptado de: Agencia de Noticias de la Universidad Nacional. \\((15\\ de\\ diciembre\\ de\\ 2009)\\). Pez león ataca en el Caribe colombiano. Revista Semana. https://www.semana.com/-vida-moderna/ciencia/articulo/pez-leon-ataca-caribe-colombiano/111041-3/",
       "hasSectionImage": false,
       "sectionImageUrl": "",
       "sectionImageAiDescription": "",
       "questions": [
         {
-          "questionId": "q_24",
-          "questionText": "El Gobierno está investigando el impacto que tiene el pez león en los ecosistemas marítimos colombianos y las formas de combatirlo. El pez león, especie originaria de Asia, se ha convertido en una amenaza o “plaga” para los ecosistemas marítimos y se ha extendido a las costas del Caribe colombiano. Según un artículo de prensa, este pez genera dos tipos de peligro: \"Por un lado, es una amenaza para el hombre, que puede sufrir accidentes al pisar o tocar sus nocivas púas venenosas, y, por otro, es una amenaza para las especies nativas, pues se alimenta de peces juveniles que sirven de alimentación para el hombre, como el pargo y el mero\".\n\nTomado y adaptado de: Agencia de Noticias de la Universidad Nacional. (\u0018\\(15\\) de diciembre de \u0018\\(2009\\)\u0019). Pez león ataca en el Caribe colombiano. Revista Semana. https://www.semana.com/-vida-moderna/ciencia/articulo/pez-leon-ataca-caribe-colombiano/\u0018\\(110141\\)-\u0018\\(3\\)\u0019/\n\n¿Para cuál de los siguientes objetivos de investigación del Gobierno sería útil la anterior información?",
+          "questionId": "q_23",
+          "questionText": "¿Para cuál de los siguientes objetivos de investigación del Gobierno sería útil la anterior información?",
           "hasQuestionImage": false,
           "questionImageUrl": "",
           "questionImageAiDescription": "",
@@ -1195,16 +1145,16 @@
       ]
     },
     {
-      "sectionIndex": 24,
+      "sectionIndex": 23,
       "sectionTitle": "",
-      "sectionText": "",
+      "sectionText": "En Colombia, una importante firma encuestadora reveló que, desde hace cuatro años, la corrupción es percibida por la ciudadanía como uno de los problemas más graves que afecta al país. En la versión más reciente de la encuesta aplicada, se muestra que el \\(84\\ \\%\\) de los encuestados piensa que el problema está empeorando. Al respecto, un grupo de jóvenes decide promover el aumento de las penas para los delitos de corrupción y fortalecer a las entidades de control como la Procuraduría General de la Nación y la Contraloría General de la República.\n\nSin embargo, al buscar apoyo para promover su ley, los jóvenes se dan cuenta de que en todos los partidos políticos hay escándalos de corrupción, por lo que reciben poco apoyo para su iniciativa. Ante esta situación, los jóvenes deciden promover un referendo aprobatorio de iniciativa ciudadana.\n\nTomado y adaptado de: Ávila, R. \\((4\\ de\\ octubre\\ de\\ 2020)\\). La corrupción en Colombia: un mal más grave que el coronavirus. Portafolio. https://www.portafolio.co/economia/la-corrupcion-en-colombia-un-mal-mas-grave-que-el-coronavirus-545299",
       "hasSectionImage": false,
       "sectionImageUrl": "",
       "sectionImageAiDescription": "",
       "questions": [
         {
-          "questionId": "q_25",
-          "questionText": "En Colombia, una importante firma encuestadora reveló que, desde hace cuatro años, la corrupción es percibida por la ciudadanía como uno de los problemas más graves que afecta al país. En la versión más reciente de la encuesta aplicada, se muestra que el \u0018\\(84\\)\u0019 \\(\\%\\) de los encuestados piensa que el problema está empeorando. Al respecto, un grupo de jóvenes decide promover el aumento de las penas para los delitos de corrupción y fortalecer a las entidades de control como la Procuraduría General de la Nación y la Contraloría General de la República.\n\nSin embargo, al buscar apoyo para promover su ley, los jóvenes se dan cuenta de que en todos los partidos políticos hay escándalos de corrupción, por lo que reciben poco apoyo para su iniciativa. Ante esta situación, los jóvenes deciden promover un referendo aprobatorio de iniciativa ciudadana.\n\nTomado y adaptado de: Ávila, R. (\u0018\\(4\\) de octubre de \u0018\\(2020\\)\u0019). La corrupción en Colombia: un mal más grave que el coronavirus. Portafolio. https://www.portafolio.co/economia/la-corrupcion-en-colombia-un-mal-mas-grave-que-el-coronavirus-\u0018\\(545299\\)\u0019\n\nEn esta situación, y teniendo en cuenta la Constitución Política de Colombia, ¿pueden los jóvenes continuar con su propuesta de referendo?",
+          "questionId": "q_24",
+          "questionText": "En esta situación, y teniendo en cuenta la Constitución Política de Colombia, ¿pueden los jóvenes continuar con su propuesta de referendo?",
           "hasQuestionImage": false,
           "questionImageUrl": "",
           "questionImageAiDescription": "",
@@ -1235,6 +1185,106 @@
               "optionId": "D",
               "type": "text",
               "optionText": "Sí, pues en Colombia existen los referendos para que cada una de las decisiones públicas en el país sea consultada a la ciudadanía.",
+              "optionImageUrl": "",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        }
+      ]
+    },
+    {
+      "sectionIndex": 24,
+      "sectionTitle": "",
+      "sectionText": "",
+      "hasSectionImage": false,
+      "sectionImageUrl": "",
+      "sectionImageAiDescription": "",
+      "questions": [
+        {
+          "questionId": "q_25",
+          "questionText": "La Organización de las Naciones Unidas \\((ONU)\\) define el \"desarrollo sostenible\" como\n\n\"[...] la satisfacción de las necesidades de la generación presente sin comprometer la capacidad de las generaciones futuras para satisfacer sus propias necesidades\". El desarrollo sostenible ha emergido como el principio rector para el desarrollo mundial a largo plazo. Consta de tres pilares: el desarrollo sostenible trata de lograr, de manera equilibrada, el desarrollo económico, el desarrollo social y la protección del medio ambiente. [A partir de lo anterior] la Conferencia de las Naciones Unidas sobre el Desarrollo Sostenible, o Cumbre de la Tierra de Río \\(20\\), se centrará en dos temas: \\(1\\) la economía verde en el contexto del desarrollo sostenible y la erradicación de la pobreza y \\(2\\) el marco institucional para el desarrollo sostenible\".\n\nTomado y adaptado de: Asamblea General de las Naciones Unidas \\((s.f.)\\). Desarrollo Sostenible. http://www.un.org/es/ga/president/65/issues/sustdev.shtml\n\nDe acuerdo con la anterior definición, una política económica es sostenible cuando",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "optionText": "privilegia la industrialización para generar empleo por encima de la necesidad de disminuir los gases de efecto invernadero.",
+              "optionImageUrl": "",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "optionText": "le da la misma importancia a la generación de riqueza y a la explotación ilimitada de los recursos naturales.",
+              "optionImageUrl": "",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "optionText": "le da la misma importancia a la generación de riqueza para las personas y a la protección del medio ambiente.",
+              "optionImageUrl": "",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "optionText": "prohíbe totalmente aprovechar económicamente los bienes y servicios ecosistémicos de lagos, ríos y bosques para lograr su conservación.",
+              "optionImageUrl": "",
+              "optionAiDescription": ""
+            }
+          ],
+          "correctOptionId": "",
+          "aiExplanation": ""
+        }
+      ]
+    },
+    {
+      "sectionIndex": 25,
+      "sectionTitle": "",
+      "sectionText": "",
+      "hasSectionImage": false,
+      "sectionImageUrl": "",
+      "sectionImageAiDescription": "",
+      "questions": [
+        {
+          "questionId": "q_26",
+          "questionText": "La teoría de la dependencia argumenta que la pobreza que existe en los países del sur se debe a condiciones históricas que han estructurado el mercado global de tal manera que favorece a los países del norte y mantiene a los países del sur en un estado constante de pobreza. Es así como, desde sus inicios, los países del sur han servido como proveedores de materia prima para los países del norte y, a cambio, han sido receptores de aquellos productos terminados que ya han cumplido su ciclo en los mercados del norte. De esta manera, se crea un vínculo de dependencia, en el que las economías del sur dependen de la voluntad de compra de materias primas por parte de los países del norte.\n\nTomado y adaptado de: Subgerencia Cultural del Banco de la República. \\((2015)\\). Teoría de la dependencia. http://www.banrepcultural.org/blaavirtual/ayudadetareas/politica/teoria_de_la_dependencia\n\n¿Cuál de las siguientes situaciones se ajusta al modelo teórico descrito?",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "optionText": "Un país latinoamericano desarrolla tecnología industrial que le permite procesar materias primas para generar productos con valor añadido, que se venden dentro del mismo país.",
+              "optionImageUrl": "",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "optionText": "Una compañía multinacional adquiere, en un país pobre, materias primas a bajo costo, las procesa e incrementa su valor añadido para, luego, vender sus productos en el país pobre.",
+              "optionImageUrl": "",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "optionText": "Un país desarrollado de Europa genera riquezas gracias a sus adelantos tecnológicos y, luego, impulsa el avance de la industria de países en desarrollo, porque comparte con ellos esta nueva tecnología.",
+              "optionImageUrl": "",
+              "optionAiDescription": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "optionText": "Una organización internacional regula las relaciones comerciales entre países, para asegurarse de que los países que venden materias primas no cobren de más a los países que más las necesitan.",
               "optionImageUrl": "",
               "optionAiDescription": ""
             }
