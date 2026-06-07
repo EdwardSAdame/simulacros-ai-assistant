@@ -49,8 +49,13 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "D",
+          "aiExplanation": "El problema central es identificar por qué Nariño cambia entre \\(1811\\) y \\(1823\\).\n\nEn \\(1811\\), Nariño critica el federalismo porque considera que dividir las provincias debilita las fuerzas necesarias para enfrentar a España. En \\(1823\\), afirma explícitamente que mientras no se reconozca la independencia conviene la unidad de acción y el centralismo, pero una vez reconocida la independencia, la federación favorece la libertad.\n\nPor tanto, el cambio no se debe a que siempre prefiriera el centralismo, ni a una imitación del modelo español, sino a que distinguía entre dos contextos políticos: guerra de independencia y vida republicana ya libre.\n\nLa opción \\(D\\) coincide exactamente con esa idea: el federalismo es útil en países libres, por eso lo rechaza en \\(1811\\) y lo defiende en \\(1823\\). La \\(A\\) es incorrecta porque en \\(1823\\) ya no sostiene que lo necesario sea el centralismo permanente. La \\(B\\) menciona rasgos del federalismo, pero no explica el cambio temporal. La \\(C\\) no aparece sustentada en los textos.",
+          "irt_parameters": {
+            "discrimination_a": 1.0,
+            "difficulty_b": 0.0,
+            "guessing_c": 0.25
+          }
         }
       ]
     },
@@ -99,8 +104,13 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "B",
+          "aiExplanation": "El núcleo del caso es determinar qué dimensiones chocan en la situación.\n\nLa comunidad indígena actúa desde su autonomía y autoridad propia al imponer una sanción dentro de su territorio. Pedro rechaza esa sanción porque no pertenece a la comunidad. Además, la prohibición de cazar está vinculada con la cosmovisión indígena sobre el jaguar.\n\nAsí, el conflicto principal no es entre ambiente y ambiente, ni entre sanción económica y protección ecológica, sino entre la dimensión jurisdiccional, es decir, quién tiene autoridad para sancionar, y la dimensión cultural, ligada a la cosmovisión indígena que fundamenta la norma.\n\nLa opción \\(B\\) es correcta. La \\(A\\) falla porque Pedro no defiende el cuidado ambiental. La \\(C\\) plantea una falsa oposición dentro del mismo interés indígena. La \\(D\\) confunde la multa con un interés económico central, cuando el punto clave es la autoridad y la pertenencia comunitaria.",
+          "irt_parameters": {
+            "discrimination_a": 1.0,
+            "difficulty_b": 0.0,
+            "guessing_c": 0.25
+          }
         }
       ]
     },
@@ -149,8 +159,13 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "A",
+          "aiExplanation": "La pregunta busca el argumento que contradice la idea del periodista de que puede publicar cualquier acusación sin verificarla.\n\nLa libertad de prensa no ampara la difusión irresponsable de información falsa o no verificada. Está asociada al deber de informar de manera veraz e imparcial.\n\nLa opción \\(A\\) contradice directamente al periodista, porque establece ese límite: la protección existe cuando la información es veraz e imparcial. La \\(B\\) refuerza equivocadamente la postura del periodista al hablar de ausencia de restricciones. La \\(C\\) habla de la importancia de la libertad de prensa, pero no contradice el punto específico. La \\(D\\) introduce el tema de persecución, que no responde al problema planteado.",
+          "irt_parameters": {
+            "discrimination_a": 1.0,
+            "difficulty_b": 0.0,
+            "guessing_c": 0.25
+          }
         }
       ]
     },
@@ -199,8 +214,13 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "D",
+          "aiExplanation": "El concepto central es identificar las dimensiones mencionadas en la descripción.\n\nPor un lado, se habla de generación de ingresos, empleo y electricidad, lo cual corresponde a la dimensión económica. Por otro lado, se menciona el riesgo para la biodiversidad del río Omo y para animales y plantas nativas, lo cual corresponde a la dimensión ambiental.\n\nLa opción \\(D\\) es correcta. La \\(B\\) incluye lo social, pero el texto enfatiza más claramente economía y ambiente. La \\(A\\) y la \\(C\\) incluyen lo cultural, aspecto que no aparece en la descripción.",
+          "irt_parameters": {
+            "discrimination_a": 1.0,
+            "difficulty_b": 0.0,
+            "guessing_c": 0.25
+          }
         }
       ]
     },
@@ -249,8 +269,13 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "D",
+          "aiExplanation": "La tarea es inferir cuál discurso fue primero según su contenido.\n\nEl fragmento \\(B\\) describe una reacción inmediata: condena de los hechos, llamado a la calma y a la unidad, y una intervención presidencial dentro de \\(48\\) horas. En cambio, el fragmento \\(A\\) habla de medidas posteriores y de más largo plazo: nuevas leyes, refuerzo de seguridad y controles a extranjeros.\n\nPor eso, primero se pronunció el fragmento \\(B\\), y luego el \\(A\\).\n\nLa opción \\(D\\) es correcta. La \\(A\\) es incorrecta porque \\(A\\) no promueve caos. La \\(B\\) se equivoca al afirmar que en \\(A\\) ya se superó la crisis. La \\(C\\) invierte el orden y describe mal el sentido de ambos fragmentos.",
+          "irt_parameters": {
+            "discrimination_a": 1.0,
+            "difficulty_b": 0.0,
+            "guessing_c": 0.25
+          }
         }
       ]
     },
@@ -299,8 +324,13 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "D",
+          "aiExplanation": "El problema es identificar qué actores tienen intereses directamente opuestos si se hace erradicación manual.\n\nEl Estado, mediante la fuerza pública, busca eliminar los cultivos ilícitos. Los \\(GAO\\) promueven esos cultivos para financiar actividades delictivas. Por tanto, la erradicación manual enfrenta de manera directa a la fuerza pública con los \\(GAO\\).\n\nLa opción \\(D\\) es correcta. La \\(C\\) no es la mejor porque el texto aclara que los campesinos han sido obligados y no se contempla judicializarlos. La \\(A\\) y la \\(B\\) no muestran un conflicto central derivado de la erradicación manual.",
+          "irt_parameters": {
+            "discrimination_a": 1.0,
+            "difficulty_b": 0.0,
+            "guessing_c": 0.25
+          }
         }
       ]
     },
@@ -349,8 +379,13 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "C",
+          "aiExplanation": "El clientelismo implica intercambio de favores por apoyo político o votos. Eso justifica la existencia de entes de control para impedir el uso indebido del poder público.\n\nLa opción \\(C\\) recoge exactamente esa idea: evitar que los gobernantes utilicen su posición para obtener apoyo electoral mediante favores. La \\(A\\) es demasiado general, porque buscar apoyo electoral no es en sí mismo ilegítimo. La \\(B\\) habla de alianzas políticas, que no necesariamente son clientelistas. La \\(D\\) confunde clientelismo con medidas populares legítimas.",
+          "irt_parameters": {
+            "discrimination_a": 1.0,
+            "difficulty_b": 0.0,
+            "guessing_c": 0.25
+          }
         }
       ]
     },
@@ -399,8 +434,13 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "C",
+          "aiExplanation": "El texto señala dos razones: responder a nuevos patrones en la conformación de las familias y evitar la vulneración de derechos.\n\nEso implica que las normas deben adaptarse a transformaciones sociales para garantizar igualdad y convivencia en una sociedad cambiante.\n\nLa opción \\(C\\) es correcta. La \\(A\\) es falsa porque no se busca restringir derechos de familias católicas. La \\(B\\) también es incorrecta porque no se trata de privilegios, sino de igualdad de derechos. La \\(D\\) contradice el texto, que justamente muestra que los conceptos legales sí pueden modificarse.",
+          "irt_parameters": {
+            "discrimination_a": 1.0,
+            "difficulty_b": 0.0,
+            "guessing_c": 0.25
+          }
         }
       ]
     },
@@ -449,8 +489,13 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "A",
+          "aiExplanation": "La pregunta exige ubicar históricamente el texto. El Manifiesto Comunista fue publicado en \\(1848\\), es decir, en el siglo \\(XIX\\), no en el siglo \\(XX\\).\n\nEntre las opciones, la única que responde correctamente con \\(\"No\"\\) y ubica el texto en el siglo \\(XIX\\) es la \\(A\\), aunque su justificación sobre América no es el centro del texto. Sin embargo, sigue siendo la mejor respuesta frente a las demás, que afirman erróneamente que fue escrito en el siglo \\(XX\\) o dicen que el comunismo solo tuvo relevancia después.\n\nPor eso la opción correcta es \\(A\\).",
+          "irt_parameters": {
+            "discrimination_a": 1.0,
+            "difficulty_b": 0.0,
+            "guessing_c": 0.25
+          }
         }
       ]
     },
@@ -499,8 +544,13 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "A",
+          "aiExplanation": "El texto define el \\(POT\\) como una herramienta para orientar el uso del suelo y el desarrollo físico del territorio de forma eficiente, sostenible en el tiempo y buscando el desarrollo más equitativo posible.\n\nEsos elementos corresponden directamente a la idea de desarrollo equitativo y sustentable.\n\nLa opción \\(A\\) es correcta. La \\(B\\), la \\(C\\) y la \\(D\\) no recogen de manera completa la combinación de sostenibilidad y equidad que destaca la definición.",
+          "irt_parameters": {
+            "discrimination_a": 1.0,
+            "difficulty_b": 0.0,
+            "guessing_c": 0.25
+          }
         }
       ]
     },
@@ -549,8 +599,13 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "C",
+          "aiExplanation": "La pregunta pide identificar la condición que \\(NO\\) es necesaria para implementar la energía eólica.\n\nPara implementarla sí sería importante que la población adopte la nueva fuente energética, que el impacto paisajístico no genere rechazo grave y que la capacidad de producción sea suficiente.\n\nEn cambio, reforestar las selvas de donde antes se extrajo la madera puede ser deseable como medida ambiental complementaria, pero no es una condición necesaria para instalar los generadores eólicos en esa región.\n\nPor eso la opción \\(C\\) es correcta.",
+          "irt_parameters": {
+            "discrimination_a": 1.0,
+            "difficulty_b": 0.0,
+            "guessing_c": 0.25
+          }
         }
       ]
     },
@@ -599,8 +654,13 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "A",
+          "aiExplanation": "El problema central es evaluar el efecto de las palabras del político.\n\nÉl generaliza la relación entre inmigración y delincuencia, y recomienda desconfiar de cualquiera que tenga acento del país vecino. Eso fomenta estigmatización y sospecha sobre todos los inmigrantes, sin distinguir si han cometido delitos o no.\n\nLa opción \\(A\\) es correcta. La \\(B\\) podría ser una observación posible, pero no capta el efecto principal del discurso. La \\(C\\) no responde al problema central. La \\(D\\) no tiene relación con el caso.",
+          "irt_parameters": {
+            "discrimination_a": 1.0,
+            "difficulty_b": 0.0,
+            "guessing_c": 0.25
+          }
         }
       ]
     },
@@ -649,8 +709,13 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "D",
+          "aiExplanation": "Las medidas propuestas buscan elecciones libres, vigilancia independiente, ausencia de represalias, pluralismo político y respeto a los resultados.\n\nTodo eso fortalece la democracia representativa y permite el ejercicio real de la oposición.\n\nLa opción \\(D\\) es correcta. La \\(A\\) y la \\(C\\) hablan de limitar la democracia, contrario a lo expuesto. La \\(B\\) es incorrecta porque no se busca disminuir la oposición, sino garantizarla.",
+          "irt_parameters": {
+            "discrimination_a": 1.0,
+            "difficulty_b": 0.0,
+            "guessing_c": 0.25
+          }
         }
       ]
     },
@@ -699,8 +764,13 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "B",
+          "aiExplanation": "El núcleo del problema es el choque entre intereses extractivos y protección territorial.\n\nLos gremios minero y petrolero buscan permisos para intervenir la selva amazónica por razones de competitividad y empleo. Los pueblos indígenas buscan proteger sus territorios, su autodeterminación y su supervivencia cultural y física.\n\nPor eso, el conflicto más probable se da entre el gremio minero y los pueblos indígenas.\n\nLa opción \\(B\\) es correcta. La \\(A\\) es incorrecta porque los académicos defienden la protección indígena. La \\(C\\) no corresponde, pues el Ministerio favorece la negociación extractiva. La \\(D\\) no representa el conflicto central del texto.",
+          "irt_parameters": {
+            "discrimination_a": 1.0,
+            "difficulty_b": 0.0,
+            "guessing_c": 0.25
+          }
         },
         {
           "questionId": "q_15",
@@ -739,8 +809,13 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "C",
+          "aiExplanation": "La propuesta del Ministerio supone reunir a los gremios con las comunidades indígenas, incluso con pueblos en aislamiento voluntario, para negociar zonas de explotación.\n\nPero esa propuesta no considera una respuesta fundamental: que los pueblos aislados precisamente han decidido no tener contacto con la sociedad occidental y, por tanto, no aceptarían ninguna negociación.\n\nLa opción \\(C\\) es correcta. La \\(A\\) habla de extracción ilegal, mientras la propuesta trata de explotación legal. La \\(B\\) se refiere a los académicos, no a una reacción omitida de los pueblos aislados. La \\(D\\) se enfoca en madereros ilegales, que no son el punto central de la propuesta ministerial.",
+          "irt_parameters": {
+            "discrimination_a": 1.0,
+            "difficulty_b": 0.0,
+            "guessing_c": 0.25
+          }
         }
       ]
     },
@@ -789,8 +864,13 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "C",
+          "aiExplanation": "La solución de los mercados campesinos busca mejorar ingresos, competir mejor frente a productos extranjeros y vender sin intermediarios. Eso corresponde a la dimensión económica.\n\nAdemás, el texto dice que se rescata una antigua tradición y prácticas olvidadas, lo cual corresponde a la dimensión cultural.\n\nLa opción \\(C\\) es correcta. La \\(B\\) incluye lo cultural, pero deja por fuera el énfasis fuerte en ingresos y competencia. La \\(A\\) y la \\(D\\) no representan bien la solución planteada.",
+          "irt_parameters": {
+            "discrimination_a": 1.0,
+            "difficulty_b": 0.0,
+            "guessing_c": 0.25
+          }
         }
       ]
     },
@@ -839,8 +919,13 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "B",
+          "aiExplanation": "El obstáculo señalado expresamente es que no habrá dinero suficiente para ejecutar la obra si se mantiene ese diseño.\n\nPor tanto, el problema es económico: el costo del proyecto no se ajusta al presupuesto disponible.\n\nLa opción \\(B\\) es correcta. La \\(A\\) es incorrecta porque se habla de reubicación temporal, no permanente. La \\(C\\) es falsa porque sí existe un plan ambiental. La \\(D\\) también es falsa porque el trazado sí fue contemplado.",
+          "irt_parameters": {
+            "discrimination_a": 1.0,
+            "difficulty_b": 0.0,
+            "guessing_c": 0.25
+          }
         }
       ]
     },
@@ -889,8 +974,13 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "D",
+          "aiExplanation": "Tras un acuerdo de paz, cambian las funciones de las instituciones estatales en ese contexto específico. En lugar de combatir al grupo armado en proceso de desmovilización, el Ejército pasa a custodiar la transición y garantizar el cumplimiento del acuerdo.\n\nLa opción \\(D\\) es correcta porque expresa esa adecuación de la función militar al nuevo contexto sociopolítico. La \\(A\\), la \\(B\\) y la \\(C\\) atribuyen intenciones o situaciones que no aparecen en el texto.",
+          "irt_parameters": {
+            "discrimination_a": 1.0,
+            "difficulty_b": 0.0,
+            "guessing_c": 0.25
+          }
         }
       ]
     },
@@ -939,8 +1029,13 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "B",
+          "aiExplanation": "La pregunta pide evaluar la confiabilidad de las afirmaciones del presidente sobre cambio climático. Sus frases no se basan en la definición científica presentada: una se desvía hacia armas nucleares y la otra confunde clima con una percepción momentánea del tiempo atmosférico.\n\nLa opción que mejor contradice la confiabilidad es la \\(B\\), porque señala que puede existir un interés político y económico en minimizar el problema para evitar compromisos internacionales de reducción de emisiones.\n\nLa \\(A\\) y la \\(D\\) no justifican confiabilidad científica. La \\(C\\) es demasiado general, porque ser político no implica por sí solo incapacidad para opinar con fundamento.",
+          "irt_parameters": {
+            "discrimination_a": 1.0,
+            "difficulty_b": 0.0,
+            "guessing_c": 0.25
+          }
         }
       ]
     },
@@ -989,8 +1084,13 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "B",
+          "aiExplanation": "La teoría de la dependencia describe una relación en la que países pobres venden materias primas baratas y luego compran productos elaborados con mayor valor agregado, manteniéndose subordinados económicamente.\n\nLa opción \\(B\\) refleja exactamente ese esquema: se extraen materias primas a bajo costo en un país pobre, se procesan y luego se venden los productos terminados en ese mismo país.\n\nLa \\(A\\) rompe la dependencia porque hay industrialización interna. La \\(C\\) plantea cooperación tecnológica. La \\(D\\) describe regulación comercial, no dependencia estructural.",
+          "irt_parameters": {
+            "discrimination_a": 1.0,
+            "difficulty_b": 0.0,
+            "guessing_c": 0.25
+          }
         }
       ]
     },
@@ -1039,8 +1139,13 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "C",
+          "aiExplanation": "La definición de desarrollo sostenible exige equilibrio entre desarrollo económico, desarrollo social y protección del medio ambiente.\n\nLa opción \\(C\\) es la que expresa ese balance entre generación de riqueza y protección ambiental. La \\(A\\) subordina el ambiente al empleo. La \\(B\\) acepta explotación ilimitada, lo cual contradice la sostenibilidad. La \\(D\\) plantea una prohibición total, cuando la sostenibilidad no exige eliminar todo aprovechamiento económico, sino regularlo equilibradamente.",
+          "irt_parameters": {
+            "discrimination_a": 1.0,
+            "difficulty_b": 0.0,
+            "guessing_c": 0.25
+          }
         }
       ]
     },
@@ -1089,8 +1194,13 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "D",
+          "aiExplanation": "Según Smith, la división del trabajo permite especialización y mayor productividad, y el mercado posibilita el intercambio de esos bienes especializados.\n\nPor eso, para Smith, el mercado es un mecanismo eficiente para distribuir o repartir los bienes producidos mediante la especialización.\n\nLa opción \\(D\\) es correcta. Las demás opciones atribuyen al mercado efectos que no corresponden a la idea expuesta en el texto.",
+          "irt_parameters": {
+            "discrimination_a": 1.0,
+            "difficulty_b": 0.0,
+            "guessing_c": 0.25
+          }
         }
       ]
     },
@@ -1139,8 +1249,13 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "C",
+          "aiExplanation": "La información dada señala que el pez león amenaza a las especies nativas porque se alimenta de peces jóvenes como el pargo y el mero. Esto sirve para investigar causas de disminución de fauna en ciertas costas.\n\nLa opción \\(C\\) es correcta. La \\(A\\) introduce impacto económico sobre flora y fauna, pero el texto no aporta directamente esos datos. La \\(B\\) propone una política de caza, no un objetivo de investigación derivado del texto. La \\(D\\) requeriría información histórica que no está presente.",
+          "irt_parameters": {
+            "discrimination_a": 1.0,
+            "difficulty_b": 0.0,
+            "guessing_c": 0.25
+          }
         }
       ]
     },
@@ -1189,8 +1304,13 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "C",
+          "aiExplanation": "La Constitución colombiana contempla mecanismos de participación ciudadana, entre ellos el referendo, para que la ciudadanía impulse cambios normativos de manera directa cumpliendo ciertos requisitos.\n\nPor eso, los jóvenes sí pueden continuar con su propuesta.\n\nLa opción \\(C\\) es correcta. La \\(A\\) y la \\(B\\) desconocen la participación ciudadana. La \\(D\\) exagera el alcance del referendo, pues no todas las decisiones públicas deben consultarse por esa vía.",
+          "irt_parameters": {
+            "discrimination_a": 1.0,
+            "difficulty_b": 0.0,
+            "guessing_c": 0.25
+          }
         }
       ]
     },
@@ -1239,8 +1359,13 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "C",
+          "aiExplanation": "La sostenibilidad exige equilibrio entre economía, sociedad y ambiente. Una política económica sostenible no sacrifica completamente el ambiente por el crecimiento, ni elimina todo uso económico de la naturaleza.\n\nLa opción \\(C\\) es correcta porque equilibra generación de riqueza y protección del medio ambiente. La \\(A\\) prioriza empleo sobre ambiente. La \\(B\\) acepta explotación ilimitada. La \\(D\\) plantea una prohibición absoluta que no corresponde a la definición.",
+          "irt_parameters": {
+            "discrimination_a": 1.0,
+            "difficulty_b": 0.0,
+            "guessing_c": 0.25
+          }
         }
       ]
     },
@@ -1289,8 +1414,13 @@
               "optionAiDescription": ""
             }
           ],
-          "correctOptionId": "",
-          "aiExplanation": ""
+          "correctOptionId": "B",
+          "aiExplanation": "El modelo de dependencia supone extracción de materias primas baratas en países pobres y posterior venta de productos elaborados con mayor valor agregado, perpetuando la subordinación económica.\n\nLa opción \\(B\\) reproduce exactamente esa lógica. La \\(A\\) describe industrialización interna. La \\(C\\) plantea transferencia tecnológica favorable. La \\(D\\) habla de regulación comercial y no del vínculo dependiente descrito.",
+          "irt_parameters": {
+            "discrimination_a": 1.0,
+            "difficulty_b": 0.0,
+            "guessing_c": 0.25
+          }
         }
       ]
     }
