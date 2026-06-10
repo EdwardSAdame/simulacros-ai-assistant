@@ -1207,7 +1207,7 @@
     {
       "sectionIndex": 21,
       "sectionTitle": "",
-      "sectionText": "El yagé es una preparación de la medicina tradicional indígena del Putumayo colombiano. De acuerdo con los indígenas de la región, su acción es integral, física, mental y espiritual. La toma de esta bebida es cada vez más común fuera de las comunidades indígenas, dado que su popularidad ha generado que algunos conocedores de la planta organicen encuentros para beberla a cambio de un aporte económico. Sin embargo, el uso de esta bebida sagrada puede resultar letal cuando no se toman las precauciones adecuadas.\n\nRecientemente, como consecuencia de la muerte de algunas personas por el consumo de yagé, se han planteado algunas propuestas: \\(1\\) prohibir el consumo de la bebida porque contiene peligrosos psicoactivos y \\(2\\) permitir que únicamente los indígenas puedan consumir la bebida.\n\nTeniendo en cuenta la problemática planteada, desde el ámbito cultural, la implementación de la solución \\(1\\) sería",
+      "sectionText": "El yagé es una preparación de la medicina tradicional indígena del Putumayo colombiano. De acuerdo con los indígenas de la región, su acción es integral, física, mental y espiritual. La toma de esta bebida es cada vez más común fuera de las comunidades indígenas, dado que su popularidad ha generado que algunos conocedores de la planta organicen encuentros para beberla a cambio de un aporte económico. Sin embargo, el uso de esta bebida sagrada puede resultar letal cuando no se toman las precauciones adecuadas.\n\nRecientemente, como consecuencia de la muerte de algunas personas por el consumo de yagé, se han planteado algunas propuestas: \\(1\\) prohibir el consumo de la bebida porque contiene peligrosos psicoactivos y \\(2\\) permitir que únicamente los indígenas puedan consumir la bebida.",
       "sectionSource": "",
       "hasSectionImage": false,
       "sectionImageUrl": "",
@@ -1215,7 +1215,7 @@
       "questions": [
         {
           "questionId": "q_21",
-          "questionText": "",
+          "questionText": "Teniendo en cuenta la problemática planteada, desde el ámbito cultural, la implementación de la solución \\(1\\) sería",
           "hasQuestionImage": false,
           "questionImageUrl": "",
           "questionImageAiDescription": "",
@@ -1447,7 +1447,7 @@
     {
       "sectionIndex": 25,
       "sectionTitle": "",
-      "sectionText": "Debido a los problemas de corrupción presentes en un país, el presidente propone terminar con el Congreso o reducir el número de sus miembros. Al respecto, una parte de la población apoya la idea propuesta, ya que considera que muchos congresistas son corruptos y que, además, reciben un salario muy alto para los resultados que presentan al país. Por su parte, un sector de la oposición advierte que estas ideas son antidemocráticas, puesto que el Congreso es fundamental para garantizar una división equitativa del poder.\n\n¿Cuál de las siguientes opciones apoya el argumento de la oposición?",
+      "sectionText": "Debido a los problemas de corrupción presentes en un país, el presidente propone terminar con el Congreso o reducir el número de sus miembros. Al respecto, una parte de la población apoya la idea propuesta, ya que considera que muchos congresistas son corruptos y que, además, reciben un salario muy alto para los resultados que presentan al país. Por su parte, un sector de la oposición advierte que estas ideas son antidemocráticas, puesto que el Congreso es fundamental para garantizar una división equitativa del poder.",
       "sectionSource": "",
       "hasSectionImage": false,
       "sectionImageUrl": "",
@@ -1455,7 +1455,7 @@
       "questions": [
         {
           "questionId": "q_25",
-          "questionText": "",
+          "questionText": "¿Cuál de las siguientes opciones apoya el argumento de la oposición?",
           "hasQuestionImage": false,
           "questionImageUrl": "",
           "questionImageAiDescription": "",
