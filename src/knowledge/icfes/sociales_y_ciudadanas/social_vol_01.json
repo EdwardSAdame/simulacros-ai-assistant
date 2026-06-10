@@ -20,7 +20,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** explicar por qué Nariño pasa de criticar el federalismo en \\(1811\\) a defenderlo en \\(1823\\).\n- **Datos clave del texto:**\n  - En \\(1811\\), Nariño afirma que dividir las provincias en estados soberanos debilita las fuerzas necesarias para enfrentar la situación política y militar.\n  - En \\(1823\\), dice explícitamente que **mientras exista el peligro español conviene el centralismo**, pero **una vez reconocida la independencia**, la federación favorece la libertad.\n- **Método lógico:** comparar las condiciones históricas de ambos momentos.\n  - En \\(1811\\), la independencia no estaba consolidada; por eso defendía la **unidad de acción**.\n  - En \\(1823\\), con la independencia más avanzada, considera que el federalismo ya es conveniente para preservar la libertad.\n- **Conclusión:** el cambio no se debe a que Nariño alabara siempre el federalismo o el centralismo, sino a que veía cada sistema como adecuado según el contexto histórico. **Rechazó el federalismo en guerra y lo defendió para un país libre.**",
           "options": [
             {
               "optionId": "A",
@@ -28,7 +28,7 @@
               "optionText": "Porque, para Nariño, el modelo centralista garantizaba la unión de fuerzas de todas las provincias en la guerra contra España, algo necesario en 1823.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** La primera parte sí recoge una idea del texto: el centralismo servía para unir fuerzas contra España.\n- Pero falla al decir que eso era lo necesario en \\(1823\\). En ese segundo texto, Nariño sostiene que, con la independencia reconocida, **la federación** sería adecuada para la libertad."
             },
             {
               "optionId": "B",
@@ -36,7 +36,7 @@
               "optionText": "Porque, para Nariño, el modelo federalista velaba por las libertades individuales, pero imponía límites en el ejercicio del poder de cada provincia federada.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** El texto de \\(1823\\) sí relaciona federalismo con libertad y contrapesos al poder.\n- Sin embargo, eso **no explica el cambio temporal** entre \\(1811\\) y \\(1823\\). La razón del cambio está en el contexto de guerra e independencia, no en una supuesta limitación del poder de cada provincia como idea central."
             },
             {
               "optionId": "C",
@@ -44,7 +44,7 @@
               "optionText": "Porque, para Nariño, el modelo centralista era adecuado para la Nueva Granada, ya que se asemejaba al modelo de administración que tenía la Corona española.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Nariño no defiende el centralismo porque se parezca al modelo español.\n- Al contrario, lo justifica como una estrategia de **unidad de acción** mientras existía la amenaza de España. La semejanza con la administración colonial no aparece como argumento en los fragmentos."
             },
             {
               "optionId": "D",
@@ -52,10 +52,10 @@
               "optionText": "Porque, para Nariño, el modelo federalista era útil en países libres y, por tanto, lo rechaza en 1811, pero lo defiende en 1823 con la independencia consolidada.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** Resume con precisión la idea central de los dos textos.\n- Nariño considera que en medio de la guerra conviene el **centralismo** para mantener la unidad, pero una vez alcanzada o consolidada la independencia, el **federalismo** favorece la libertad."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "D",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -80,7 +80,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** identificar qué dimensiones chocan en el caso.\n- **Datos relevantes:**\n  - El cabildo indígena actúa desde su **cosmovisión** sobre el jaguar, lo cual remite a la dimensión **cultural**.\n  - Además, impone una **sanción** a Pedro, quien no pertenece a la comunidad, lo que introduce un problema de **jurisdicción** o alcance de la autoridad indígena.\n- **Análisis:**\n  - El conflicto principal no es entre protección ambiental y economía, sino entre la autoridad propia del cabildo y la pertenencia de Pedro a esa jurisdicción.\n  - La cosmovisión indígena fundamenta la norma y la sanción, por eso también está presente la dimensión cultural.\n- **Conclusión:** el conflicto es entre la **dimensión jurisdiccional** y la **dimensión cultural**.",
           "options": [
             {
               "optionId": "A",
@@ -88,7 +88,7 @@
               "optionText": "La cultural y la ambiental, porque la cosmovisión del cabildo indígena respecto al jaguar se opone al interés de Pedro en el cuidado del medio ambiente.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** La dimensión cultural sí aparece por la cosmovisión indígena.\n- Pero Pedro no está defendiendo el cuidado del medio ambiente; su interés es proteger su ganado. Además, el conflicto más claro gira sobre la **autoridad para sancionarlo**."
             },
             {
               "optionId": "B",
@@ -96,7 +96,7 @@
               "optionText": "La jurisdiccional y la cultural, porque al interés de la comunidad indígena de imponer una sanción se opone el hecho de que Pedro no pertenece a esa comunidad.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** La dimensión **cultural** aparece en la valoración espiritual del jaguar y la **jurisdiccional** en la discusión sobre si el cabildo puede sancionar a alguien externo a la comunidad.\n- Esa es justamente la tensión central del caso."
             },
             {
               "optionId": "C",
@@ -104,7 +104,7 @@
               "optionText": "La ambiental y la religiosa, porque el interés del cabildo indígena en la protección del jaguar se opone a su cosmovisión respecto al valor espiritual de este animal.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** La opción plantea una oposición falsa.\n- La protección ambiental del jaguar y su valor espiritual **no se oponen entre sí**; ambas razones sustentan la postura del cabildo. El conflicto real está con Pedro y con la sanción impuesta."
             },
             {
               "optionId": "D",
@@ -112,10 +112,10 @@
               "optionText": "La económica y la ambiental, porque el interés del cabildo indígena de imponer una sanción económica va en contra de la protección del jaguar en su territorio.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** La multa económica no va en contra de la protección del jaguar; es una consecuencia de esa protección.\n- Además, esta opción omite el elemento esencial del caso: la disputa sobre la **autoridad indígena** frente a una persona ajena a la comunidad."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "B",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -140,7 +140,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** encontrar el argumento que contradice la idea de que un periodista puede publicar cualquier cosa sin verificarla.\n- **Dato clave:** la libertad de prensa no es absoluta; está ligada a deberes como la **veracidad** y la **imparcialidad**.\n- **Análisis de fondo:**\n  - Si la información no ha sido verificada, no cumple con estándares periodísticos básicos.\n  - Por eso, la mejor contradicción es la que afirma que la libertad de prensa protege la difusión de información **veraz e imparcial**, no rumores o acusaciones infundadas.\n- **Conclusión:** la opción correcta es la que limita la libertad de prensa mediante el deber de informar responsablemente.",
           "options": [
             {
               "optionId": "A",
@@ -148,7 +148,7 @@
               "optionText": "La libertad de prensa en el país protege a los periodistas cuando divulgan información de manera veraz e imparcial.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** Contradice directamente al periodista, porque señala que la protección de la libertad de prensa está asociada a la difusión de información **veraz e imparcial**.\n- Si no verifica sus fuentes, no puede ampararse plenamente en ese derecho."
             },
             {
               "optionId": "B",
@@ -156,7 +156,7 @@
               "optionText": "La libertad de expresión es un derecho constitucional que respalda la actividad periodística en el país sin restricción alguna.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Esta opción más bien **respalda** al periodista, porque presenta la libertad de expresión como un derecho sin límites.\n- Eso contradice los principios de responsabilidad y veracidad propios del ejercicio periodístico."
             },
             {
               "optionId": "C",
@@ -164,7 +164,7 @@
               "optionText": "La libertad de prensa sobre hechos políticos es una de las bases que sostiene la libertad y la democracia de cualquier país.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Aunque la afirmación puede ser verdadera en general, no contradice el punto específico del periodista sobre publicar sin verificación.\n- Defiende la importancia de la prensa, pero no establece el límite de la **responsabilidad informativa**."
             },
             {
               "optionId": "D",
@@ -172,10 +172,10 @@
               "optionText": "Existe persecución a los periodistas cuando las noticias que publican ellos son cuestionadas por actores políticos.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Cuestionar una noticia no equivale automáticamente a persecución.\n- Además, esta opción no rebate la idea central del caso: que un periodista no puede justificar acusaciones no verificadas solo invocando la libertad de prensa."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "A",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -200,7 +200,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** identificar las dimensiones mencionadas en la descripción.\n- **Datos relevantes del texto:**\n  - Se habla de **ingresos**, **empleo** y **electricidad**, lo cual corresponde a la dimensión **económica**.\n  - También se menciona el riesgo para un río muy biodiverso y para especies nativas, lo cual corresponde a la dimensión **ambiental**.\n- **Conclusión:** las dos dimensiones explícitas son la **ambiental** y la **económica**.",
           "options": [
             {
               "optionId": "A",
@@ -208,7 +208,7 @@
               "optionText": "La social y la cultural.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** El texto no se centra en prácticas culturales ni en identidad cultural.\n- Aunque el empleo puede tener efectos sociales, las dimensiones más explícitas y centrales son la **económica** y la **ambiental**."
             },
             {
               "optionId": "B",
@@ -216,7 +216,7 @@
               "optionText": "La económica y la social.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** La dimensión económica sí aparece claramente.\n- Pero la segunda dimensión central no es la social sino la **ambiental**, por el impacto sobre el río Omo y su biodiversidad."
             },
             {
               "optionId": "C",
@@ -224,7 +224,7 @@
               "optionText": "La cultural y la ambiental.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** La dimensión ambiental sí está presente.\n- Sin embargo, el texto no desarrolla una dimensión cultural; sí desarrolla una **económica** mediante ingresos, empleo y energía."
             },
             {
               "optionId": "D",
@@ -232,10 +232,10 @@
               "optionText": "La ambiental y la económica.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** La construcción de la represa se presenta como fuente de **ingresos, empleo y electricidad** \\(dimensión económica\\), pero también como amenaza para la **biodiversidad del río Omo** \\(dimensión ambiental\\)."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "D",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -260,7 +260,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** establecer cuál discurso ocurrió primero.\n- **Datos relevantes:**\n  - El **fragmento B** habla de una reacción inmediata: *segunda vez en \\(48\\) horas*, condena de los hechos, llamado a la calma y a la unidad.\n  - El **fragmento A** menciona avances en leyes, seguridad y medidas adoptadas en el último año, lo que sugiere un momento posterior y de balance institucional.\n- **Razonamiento:**\n  - Tras un atentado, lo más inmediato suele ser condenar los hechos y llamar a la unidad.\n  - Tiempo después vienen las respuestas de largo plazo: leyes, controles y políticas de seguridad.\n- **Conclusión:** primero se pronunció el **fragmento B**.",
           "options": [
             {
               "optionId": "A",
@@ -268,7 +268,7 @@
               "optionText": "el fragmento A, porque promueve el caos y la confusión inmediata luego de los atentados; el B se refiere a un momento de calma y unidad que solo se logra después de un consenso nacional.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** El fragmento A no promueve caos; habla de leyes y medidas de seguridad ya adoptadas.\n- Además, el fragmento B sí corresponde a una reacción inmediata, no a un momento necesariamente posterior de consenso."
             },
             {
               "optionId": "B",
@@ -276,7 +276,7 @@
               "optionText": "el fragmento B, porque este garantiza el cubrimiento inmediato de la noticia de los atentados; el A se refiere a un momento en el que ya se ha superado la crisis que se desató a raíz de los atentados.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Acierta en que el fragmento B es más inmediato.\n- Pero falla al afirmar que en A la crisis ya se superó: allí se dice que el nivel de alerta **sigue siendo alto**, así que no puede hablarse de crisis superada."
             },
             {
               "optionId": "C",
@@ -284,7 +284,7 @@
               "optionText": "el fragmento A, porque es una respuesta que hace un llamado a la prevención en contra de los extranjeros; el B habla sobre procesos a largo plazo, como fortalecer la sociedad a futuro.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Invierte el orden temporal.\n- El B es el discurso inmediato de condena y unidad; el A recoge acciones más elaboradas y sostenidas en el tiempo, como leyes y medidas de seguridad."
             },
             {
               "optionId": "D",
@@ -292,10 +292,10 @@
               "optionText": "el fragmento B porque es una respuesta inmediata que hace un llamado a la calma y la unidad; el A habla sobre procesos a largo plazo, como la aprobación de leyes y políticas de seguridad.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** El fragmento B muestra la reacción inicial ante el atentado: condena, calma y unidad.\n- El fragmento A, en cambio, se ubica después, cuando ya se evalúan **leyes** y **políticas de seguridad**."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "D",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -320,7 +320,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** identificar entre qué actores es más probable un conflicto si se aplica la erradicación manual.\n- **Datos clave:**\n  - La fuerza pública debe eliminar cultivos.\n  - Los **GAO** promueven esos cultivos porque financian sus actividades ilegales.\n  - Los campesinos obligados a cultivar no serían judicializados en la erradicación manual.\n- **Razonamiento:**\n  - La erradicación manual afecta directamente el interés económico y criminal de los GAO.\n  - Por eso, quienes ejecutan la erradicación \\(fuerza pública\\) entrarían en choque con quienes desean mantener los cultivos \\(GAO\\).\n- **Conclusión:** el conflicto más probable se da entre la **fuerza pública** y los **GAO**.",
           "options": [
             {
               "optionId": "A",
@@ -328,7 +328,7 @@
               "optionText": "Los campesinos víctimas de los GAO y las Naciones Unidas.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Las Naciones Unidas aparecen como un actor que elabora informes, no como parte de una confrontación directa con los campesinos.\n- No hay en el texto intereses opuestos entre estos dos actores."
             },
             {
               "optionId": "B",
@@ -336,7 +336,7 @@
               "optionText": "Los Estados Unidos y las Naciones Unidas.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Ambos actores participan de manera indirecta: uno financia acciones y el otro produce informes.\n- El texto no sugiere un choque directo entre sus intereses frente a la erradicación manual."
             },
             {
               "optionId": "C",
@@ -344,7 +344,7 @@
               "optionText": "La fuerza pública y los campesinos víctimas de los GAO.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Aunque podría haber tensiones prácticas, el texto aclara que a esos campesinos **no se contempla judicializarlos** en la erradicación manual.\n- El conflicto principal es con quienes promueven y protegen el negocio ilícito: los GAO."
             },
             {
               "optionId": "D",
@@ -352,10 +352,10 @@
               "optionText": "La fuerza pública y los grupos armados organizados.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** La fuerza pública busca erradicar los cultivos, mientras que los **GAO** los promueven para financiar el narcotráfico.\n- Sus intereses son directamente opuestos, así que allí se ubica el conflicto más probable."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "D",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -380,7 +380,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** explicar por qué el clientelismo hace necesarios los entes de control.\n- **Dato clave de la definición:** el gobernante intercambia favores, bienes o tratos privilegiados a cambio de apoyo político.\n- **Razonamiento:**\n  - Esto implica un uso indebido del poder público para obtener beneficios electorales.\n  - Los entes de control existen precisamente para vigilar y sancionar ese abuso del cargo.\n- **Conclusión:** se justifica crear controles para evitar que los gobernantes usen su posición para conseguir votos mediante favores. ",
           "options": [
             {
               "optionId": "A",
@@ -388,7 +388,7 @@
               "optionText": "es antitético que un gobernante o dirigente político busque beneficiarse electoralmente de un grupo de ciudadanos.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Un gobernante sí puede buscar apoyo electoral legítimo.\n- El problema no es beneficiarse electoralmente en sí mismo, sino hacerlo mediante **favores indebidos** o trato privilegiado."
             },
             {
               "optionId": "B",
@@ -396,7 +396,7 @@
               "optionText": "es inconveniente que un gobernante haga alianzas políticas con otros dirigentes para mantenerse en el poder.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Hacer alianzas políticas no equivale necesariamente a clientelismo.\n- El clientelismo, según la definición, implica intercambio de favores con uso de recursos o privilegios, no cualquier alianza política."
             },
             {
               "optionId": "C",
@@ -404,7 +404,7 @@
               "optionText": "es necesario evitar que los gobernantes usen su posición privilegiada para ser elegidos con favores, a cambio de votos.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** Describe exactamente el riesgo del clientelismo: usar el poder para conseguir apoyo político mediante favores.\n- Por eso se justifican los **entes de control** sobre los gobernantes."
             },
             {
               "optionId": "D",
@@ -412,10 +412,10 @@
               "optionText": "es reprochable que los gobernantes adopten medidas populares para aumentar su aceptación entre los ciudadanos.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Adoptar medidas populares no es necesariamente clientelismo.\n- El problema aparece cuando hay **intercambio particularista de favores** a cambio de respaldo político, no cuando se aplican políticas públicas generales."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "C",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -440,7 +440,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** identificar la razón de la modificación legal del matrimonio y la familia.\n- **Dato clave del texto:** la Corte busca responder a **nuevos patrones en la conformación de las familias** y evitar vulneración de derechos.\n- **Razonamiento:**\n  - La sociedad cambia y el derecho se ajusta para reconocer esas transformaciones.\n  - No se trata de privilegiar a un grupo ni de restringir derechos de otros, sino de adaptar la norma para garantizar igualdad y convivencia.\n- **Conclusión:** la mejor razón es que las normas deben adaptarse a los cambios sociales. ",
           "options": [
             {
               "optionId": "A",
@@ -448,7 +448,7 @@
               "optionText": "Para restringir los derechos de las familias católicas, ya que, al considerar todos los matrimonios como iguales, se reduce la dimensión sagrada del matrimonio.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** El texto no habla de restringir derechos de familias católicas.\n- La decisión judicial busca ampliar derechos y reconocer nuevas formas de familia, no disminuir libertades religiosas."
             },
             {
               "optionId": "B",
@@ -456,7 +456,7 @@
               "optionText": "Para privilegiar los derechos de los homosexuales, ya que estas personas ahora recibirán un trato preferencial por su orientación sexual.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** No se trata de trato preferencial, sino de **igualdad de derechos**.\n- La Corte pretende evitar la vulneración de derechos, no crear privilegios."
             },
             {
               "optionId": "C",
@@ -464,7 +464,7 @@
               "optionText": "Para facilitar la convivencia en una sociedad cambiante, ya que las normas deben adaptarse a las transformaciones sociales.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** Coincide con lo que señala el texto: la Corte responde a **nuevos patrones** de conformación familiar y adapta la norma para proteger derechos en una sociedad cambiante."
             },
             {
               "optionId": "D",
@@ -472,10 +472,10 @@
               "optionText": "Para priorizar los valores de la sociedad, ya que estos son el centro de la vida en comunidad y no deberían modificarse.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** La opción contradice el texto, porque allí justamente se muestra que el derecho **sí se modifica** ante cambios sociales.\n- No se trata de inmovilizar valores, sino de ajustar la regulación a nuevas realidades familiares."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "C",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -500,7 +500,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** justificar por qué debe regularse la extracción minera con mercurio.\n- **Datos clave:**\n  - Los mineros aumentan ingresos \\(trabajo\\).\n  - La comunidad vecina sufre contaminación del río, única fuente de agua \\(salud y ambiente sano\\).\n- **Razonamiento:**\n  - La regulación debe equilibrar derechos en tensión: el derecho al trabajo de los mineros y los derechos colectivos e individuales de la población afectada.\n  - Una norma sirve para proteger la salud y el ambiente sin desconocer totalmente la actividad económica.\n- **Conclusión:** la mejor justificación es garantizar simultáneamente salud, ambiente sano y trabajo. ",
           "options": [
             {
               "optionId": "A",
@@ -508,7 +508,7 @@
               "optionText": "Para que los mineros busquen más lugares de extracción de oro sin tener problemas con las autoridades.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Regular no significa facilitar expansión sin límites.\n- La necesidad de la norma surge por el daño al río y a la comunidad, no por evitar problemas de autoridad a los mineros."
             },
             {
               "optionId": "B",
@@ -516,7 +516,7 @@
               "optionText": "Para garantizar los derechos a la salud y a un ambiente sano de los pobladores y el derecho de los mineros al trabajo.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** La regulación busca equilibrar el **derecho al trabajo** con los derechos de la comunidad a la **salud** y a un **ambiente sano**, afectados por la contaminación con mercurio."
             },
             {
               "optionId": "C",
@@ -524,7 +524,7 @@
               "optionText": "Para que se pueda subsidiar la compra de agua para los pobladores, por medio de las ganancias que genera la explotación minera.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** La respuesta no soluciona el problema de fondo: la contaminación de la única fuente de agua.\n- Además, la regulación no se justifica principalmente para crear subsidios, sino para **prevenir y controlar el daño ambiental**."
             },
             {
               "optionId": "D",
@@ -532,10 +532,10 @@
               "optionText": "Para establecer periodos de alternancia en la extracción del oro, para que los mineros descansen y permitan que el agua no se contamine tanto.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** La idea de alternancia y descanso no enfrenta adecuadamente el uso de mercurio ni protege de manera suficiente el agua.\n- La regulación necesaria es más amplia y apunta a derechos fundamentales y ambientales."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "B",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -560,7 +560,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** decidir si el texto pertenece al siglo \\(XX\\).\n- **Dato contextual:** el *Manifiesto Comunista* fue publicado en \\(1848\\), es decir, en el siglo \\(XIX\\).\n- **Análisis de opciones:**\n  - Las respuestas correctas deben decir **no**.\n  - Además, la justificación debe corresponder al contexto europeo de surgimiento del comunismo, no a la Guerra Fría ni a América imperialista.\n- **Conclusión:** no fue escrito en el siglo \\(XX\\), sino en el **siglo \\(XIX\\)**. La opción que acierta en el siglo y se aproxima mejor al contexto es la A, aunque su justificación histórica es imperfecta; entre las alternativas dadas, es la única que responde correctamente **no** sin caer en errores mayores de cronología sobre la relevancia del comunismo. ",
           "options": [
             {
               "optionId": "A",
@@ -568,7 +568,7 @@
               "optionText": "No, ya que fue escrito en el siglo XIX como respuesta a las injusticias cometidas en América por las potencias imperialistas de la vieja Europa.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta dentro de las opciones dadas.** Acerta en lo esencial: el texto fue escrito en el **siglo \\(XIX\\)**, no en el \\(XX\\).\n- Su justificación sobre *América* no es la más precisa para el contexto inmediato del fragmento, que se centra en **Europa**, pero es la única alternativa que ubica correctamente la obra en el siglo correspondiente."
             },
             {
               "optionId": "B",
@@ -576,7 +576,7 @@
               "optionText": "Sí, porque el texto describe cómo el Partido Comunista empezó a obtener el poder en varias potencias europeas y a perseguir cualquier fuerza política opositora.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** El fragmento no describe al comunismo ya gobernando Europa ni persiguiendo opositores.\n- Además, el *Manifiesto Comunista* es de \\(1848\\), por lo que no pertenece al siglo \\(XX\\)."
             },
             {
               "optionId": "C",
@@ -584,7 +584,7 @@
               "optionText": "No, porque el comunismo solo tuvo relevancia después de la segunda mitad del siglo XX, durante el enfrentamiento entre la Unión Soviética y los países capitalistas en la Guerra Fría.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Aunque responde *no*, la justificación es errada.\n- El comunismo ya tenía relevancia política en el **siglo \\(XIX\\)**, como muestra precisamente el texto de Marx y Engels, mucho antes de la Guerra Fría."
             },
             {
               "optionId": "D",
@@ -592,10 +592,10 @@
               "optionText": "Sí, porque el contexto del escrito es la consolidación del comunismo en Europa como fuerza política y, por tanto, el rechazo del mismo por los regímenes gobernantes y sus aliados.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Aunque describe parcialmente el ambiente de rechazo al comunismo, se equivoca al decir que el texto es del siglo \\(XX\\).\n- El *Manifiesto Comunista* fue publicado en \\(1848\\), es decir, en el **siglo \\(XIX\\)**."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "A",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -620,7 +620,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** identificar el concepto presente en la definición del POT.\n- **Datos clave del texto:**\n  - Uso eficiente de recursos.\n  - Crecimiento ordenado.\n  - Sostenibilidad en el tiempo.\n  - Búsqueda del desarrollo más equitativo posible.\n- **Conclusión:** el concepto aplicado es el de **desarrollo equitativo y sustentable**. ",
           "options": [
             {
               "optionId": "A",
@@ -628,7 +628,7 @@
               "optionText": "Desarrollo equitativo y sustentable.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** Resume exactamente lo que dice el texto: crecimiento ordenado, uso eficiente de recursos, sostenibilidad en el tiempo y búsqueda de un desarrollo **equitativo**."
             },
             {
               "optionId": "B",
@@ -636,7 +636,7 @@
               "optionText": "Capital político y social.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** El texto no se enfoca en redes de confianza, participación o capital político, sino en ordenar el uso del suelo y promover un desarrollo sostenible y equitativo."
             },
             {
               "optionId": "C",
@@ -644,7 +644,7 @@
               "optionText": "Participación política.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Aunque los POT pueden involucrar participación, ese no es el concepto central expresado en la definición citada.\n- La definición destaca ordenamiento, sostenibilidad y equidad."
             },
             {
               "optionId": "D",
@@ -652,10 +652,10 @@
               "optionText": "Crecimiento económico.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** El POT no se reduce al crecimiento económico.\n- El texto insiste en que el desarrollo debe ser **ordenado, sostenible y equitativo**, no solo económicamente expansivo."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "A",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -680,7 +680,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** hallar la condición que **no** es necesaria para implementar energía eólica.\n- **Datos relevantes:** se busca reemplazar una fuente contaminante \\(quema de madera\\) por una energía limpia que satisfaga necesidades locales.\n- **Evaluación:**\n  - Es necesario que la población acepte el cambio o al menos que pueda adoptarlo \\(A\\).\n  - También es necesario que la instalación no genere un rechazo social fuerte por el paisaje \\(B\\), y que la capacidad sea suficiente \\(D\\).\n  - En cambio, **reforestar las selvas de donde antes se extrajo madera** puede ser deseable ambientalmente, pero no es una condición indispensable para instalar los generadores eólicos.\n- **Conclusión:** la condición no necesaria es la **reforestación previa o paralela** de esas selvas. ",
           "options": [
             {
               "optionId": "A",
@@ -688,7 +688,7 @@
               "optionText": "Que sea posible convencer a la población de los efectos negativos de la quema de madera para que abandone dicha práctica.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Esta condición sí puede ser necesaria para facilitar la adopción de una nueva fuente energética.\n- Si la población no acepta abandonar la quema de madera, la medida perdería viabilidad social."
             },
             {
               "optionId": "B",
@@ -696,7 +696,7 @@
               "optionText": "Que la población no se vea incomodada por el impacto que tendría la instalación de los generadores en el paisaje.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** La aceptación social del proyecto es relevante para implementarlo.\n- Si la comunidad rechaza fuertemente el impacto visual o territorial, la medida puede fracasar."
             },
             {
               "optionId": "C",
@@ -704,7 +704,7 @@
               "optionText": "Que sea posible reforestar las selvas de donde se ha extraído la madera que la población ha utilizado tradicionalmente para generar energía.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** Reforestar sería una medida positiva, pero **no es una condición necesaria** para instalar generadores eólicos.\n- La implementación de la energía eólica depende más de su viabilidad técnica, suficiencia energética y aceptación social."
             },
             {
               "optionId": "D",
@@ -712,10 +712,10 @@
               "optionText": "Que la capacidad de producción de los generadores eólicos que se instalarían sea suficiente para satisfacer las necesidades energéticas de la población.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Esta condición sí es indispensable.\n- Si los generadores no producen suficiente energía, la medida no cumpliría su objetivo principal."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "C",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -740,7 +740,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** identificar el efecto de las palabras del político.\n- **Dato clave:** asocia inseguridad con inmigración y pide desconfiar de cualquiera que tenga acento del país vecino.\n- **Razonamiento:**\n  - Esto generaliza y estigmatiza a todo un grupo por la conducta de algunos individuos.\n  - Promueve prejuicio, sospecha y rechazo social contra inmigrantes, incluso inocentes.\n- **Conclusión:** sus palabras fomentan el rechazo y la discriminación hacia los inmigrantes. ",
           "options": [
             {
               "optionId": "A",
@@ -748,7 +748,7 @@
               "optionText": "promueven el rechazo hacia los inmigrantes del país vecino porque la gente va a tratarlos con sospecha, sean o no atracadores.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** El político invita a desconfiar de cualquier persona con determinado acento, lo que estigmatiza a todos los inmigrantes y promueve su rechazo, **sean o no responsables de delitos**."
             },
             {
               "optionId": "B",
@@ -756,7 +756,7 @@
               "optionText": "ignoran que el origen de la inseguridad puede deberse a las necesidades económicas que atraviesan los inmigrantes.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Aunque menciona un posible factor social, no es la crítica principal al discurso.\n- El problema central es que generaliza y estigmatiza a toda una población migrante."
             },
             {
               "optionId": "C",
@@ -764,7 +764,7 @@
               "optionText": "desconocen que la comunidad no está obligada a participar ni a denunciar los atracos que se cometen en la ciudad.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** La denuncia ciudadana sí puede ser un deber cívico relevante.\n- El aspecto cuestionable no es invitar a denunciar delitos, sino asociarlos indiscriminadamente con todos los inmigrantes."
             },
             {
               "optionId": "D",
@@ -772,10 +772,10 @@
               "optionText": "motivan a que las personas de un país que se encuentran en situaciones de pobreza, decidan irse a vivir a otro país.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** El discurso no motiva la migración; más bien alimenta hostilidad hacia quienes ya migraron.\n- La consecuencia señalada en el texto va en sentido contrario: rechazo social."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "A",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -800,7 +800,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** determinar para qué sirven las medidas propuestas.\n- **Datos del enunciado:** se pide estabilidad del calendario, controles independientes, ausencia de represalias, pluralismo de partidos y respeto por los resultados electorales.\n- **Razonamiento:**\n  - Todas estas condiciones apuntan a elecciones libres, competitivas y con garantías para la oposición.\n  - Eso fortalece la democracia representativa y reduce obstáculos al ejercicio electoral.\n- **Conclusión:** las medidas buscan **fortalecer la democracia representativa** y garantizar condiciones reales para la oposición. ",
           "options": [
             {
               "optionId": "A",
@@ -808,7 +808,7 @@
               "optionText": "Establecer límites a la democracia, modificando el calendario electoral y concentrando el poder en los partidos políticos existentes.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Las propuestas buscan lo contrario: estabilidad del calendario y pluralismo político.\n- No pretenden concentrar poder, sino abrir condiciones democráticas."
             },
             {
               "optionId": "B",
@@ -816,7 +816,7 @@
               "optionText": "Fortalecer la democracia, priorizando la gobernabilidad del partido político en el poder y creando un consenso nacional, al disminuir la oposición.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** La propuesta no busca disminuir la oposición, sino **garantizarla**.\n- Además, no prioriza al partido de Gobierno, sino que limita su intervención."
             },
             {
               "optionId": "C",
@@ -824,7 +824,7 @@
               "optionText": "Establecer límites a la democracia, controlando el número de partidos que pueden postular candidatos y debilitando la figura presidencial.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** El punto \\(4\\) pide justamente permitir la creación de partidos diferentes al de Gobierno.\n- No se trata de restringir el pluralismo, sino de ampliarlo."
             },
             {
               "optionId": "D",
@@ -832,10 +832,10 @@
               "optionText": "Fortalecer la democracia representativa, garantizando condiciones para ejercer la oposición y disminuyendo los límites al ejercicio electoral.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** Todas las medidas mencionadas apuntan a elecciones con garantías: controles independientes, libertad política, pluralismo y respeto a los resultados.\n- Eso fortalece la **democracia representativa** y la participación opositora."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "D",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -860,7 +860,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** identificar los actores con intereses más opuestos.\n- **Datos clave:**\n  - El gremio minero quiere intervenir la selva para competitividad y empleo.\n  - Los pueblos indígenas buscan proteger territorios, salud, autodeterminación y evitar contacto.\n- **Razonamiento:**\n  - Hay una tensión directa entre **explotación económica del territorio** y **protección territorial y cultural**.\n  - Académicos e indígenas comparten posiciones cercanas, no conflictivas.\n- **Conclusión:** el conflicto más probable es entre el **gremio minero** y los **pueblos indígenas**. ",
           "options": [
             {
               "optionId": "A",
@@ -868,7 +868,7 @@
               "optionText": "Entre los pueblos indígenas y los académicos.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Los académicos defienden proteger los territorios y respetar la autodeterminación indígena.\n- Sus intereses son afines, no opuestos."
             },
             {
               "optionId": "B",
@@ -876,7 +876,7 @@
               "optionText": "Entre el gremio minero y los pueblos indígenas.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** El gremio minero busca explotar la selva amazónica, mientras que los pueblos indígenas defienden su territorio, su salud y su derecho al aislamiento.\n- Son intereses claramente enfrentados."
             },
             {
               "optionId": "C",
@@ -884,7 +884,7 @@
               "optionText": "Entre el Ministerio de Minas y Energía y el gremio petrolero.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** El Ministerio de Minas y Energía propone una salida negociada que favorece la explotación legal; no se observa un choque directo con el gremio petrolero."
             },
             {
               "optionId": "D",
@@ -892,10 +892,10 @@
               "optionText": "Entre los grupos madereros ilegales y el gremio petrolero.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** El texto menciona a los madereros ilegales como una amenaza, pero no presenta un conflicto principal entre ellos y el gremio petrolero.\n- La tensión central es entre extracción y protección indígena."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "B",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -909,7 +909,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** hallar qué respuesta posible no fue considerada por la propuesta del Ministerio.\n- **Dato clave:** el Ministerio propone reunir también a los pueblos indígenas en aislamiento voluntario para negociar.\n- **Razonamiento:**\n  - Esa propuesta ignora precisamente que dichos pueblos han decidido **no establecer contacto** con la sociedad occidental.\n  - Su autodeterminación a no ser contactados es un punto central destacado por los académicos.\n- **Conclusión:** no se tuvo en cuenta la posibilidad de que estos pueblos **no acepten ningún tipo de relación o negociación**. ",
           "options": [
             {
               "optionId": "A",
@@ -917,7 +917,7 @@
               "optionText": "Que los gremios petroleros y mineros solo quieran beneficiarse de la extracción ilegal de la mayor cantidad de recursos del Amazonas.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Esta posibilidad no es la más directamente omitida por la propuesta.\n- Además, el Ministerio habla de explotación **legal**, por lo que la extracción ilegal no es el punto central del vacío de la propuesta."
             },
             {
               "optionId": "B",
@@ -925,7 +925,7 @@
               "optionText": "Que los académicos no tengan en cuenta los beneficios que conlleva el modelo extractivo legal que busca el desarrollo económico del país.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Esto no describe una reacción omitida por la propuesta ministerial, sino una crítica a la postura de los académicos.\n- No es el problema principal señalado en el texto."
             },
             {
               "optionId": "C",
@@ -933,7 +933,7 @@
               "optionText": "Que los pueblos indígenas aislados voluntariamente no acepten entablar ningún tipo de relación con la sociedad occidental.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** La propuesta del Ministerio supone que estos pueblos podrían sentarse a negociar.\n- Pero el texto enfatiza su **aislamiento voluntario** y su derecho a **no ser contactados**, reacción que claramente no fue considerada."
             },
             {
               "optionId": "D",
@@ -941,10 +941,10 @@
               "optionText": "Que los grupos madereros ilegales no tengan las vías para poder negociar la explotación legal de los bosques amazónicos.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Los grupos madereros ilegales no son el foco de la propuesta ministerial como sujetos legítimos de negociación.\n- El punto omitido central es la imposibilidad misma de contactar a los pueblos aislados."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "C",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -969,7 +969,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** identificar qué dimensiones prioriza la solución de los mercados campesinos.\n- **Datos clave:**\n  - Permiten vender sin intermediarios y competir mejor \\(dimensión **económica**\\).\n  - Rescatan una antigua tradición y prácticas olvidadas \\(dimensión **cultural**\\).\n- **Conclusión:** la solución privilegia las dimensiones **económica y cultural**. ",
           "options": [
             {
               "optionId": "A",
@@ -977,7 +977,7 @@
               "optionText": "Social y política.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Aunque hay efectos sociales, la propuesta no se centra en participación política ni en reformas institucionales.\n- El texto destaca más la mejora en ingresos y el rescate de tradiciones."
             },
             {
               "optionId": "B",
@@ -985,7 +985,7 @@
               "optionText": "Cultural y social.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** La dimensión cultural sí está presente, pero falta la **económica**, que es fundamental porque la solución mejora condiciones de venta y competencia."
             },
             {
               "optionId": "C",
@@ -993,7 +993,7 @@
               "optionText": "Económica y cultural.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** Los mercados campesinos mejoran la comercialización de los productos \\(dimensión económica\\) y rescatan una tradición campesina olvidada \\(dimensión cultural\\)."
             },
             {
               "optionId": "D",
@@ -1001,10 +1001,10 @@
               "optionText": "Política y comercial.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Aunque hay un componente comercial, la opción reemplaza indebidamente la dimensión cultural por una política que no es la central en la solución propuesta."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "C",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -1029,7 +1029,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** identificar qué aspecto obstaculiza la obra.\n- **Dato clave del enunciado:** el Gobierno comunica que **no habrá dinero suficiente** para ejecutar el diseño propuesto.\n- **Razonamiento:**\n  - El trazado sí está definido.\n  - Hay plan ambiental.\n  - La reubicación es temporal y prevista.\n  - El obstáculo explícito es la falta de ajuste entre costo del diseño y presupuesto disponible.\n- **Conclusión:** el obstáculo es el **aspecto económico**. ",
           "options": [
             {
               "optionId": "A",
@@ -1037,7 +1037,7 @@
               "optionText": "El aspecto social, pues las familias que viven en la zona de la obra no podrán ser reubicadas permanentemente.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** El texto habla de **reubicación temporal**, no de imposibilidad de reubicación permanente.\n- Además, el obstáculo explícito señalado es la falta de dinero."
             },
             {
               "optionId": "B",
@@ -1045,7 +1045,7 @@
               "optionText": "El aspecto económico, pues los requerimientos de diseño de la obra no se ajustan al presupuesto del Gobierno.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** El problema expresamente mencionado es que **no hay dinero suficiente** para ejecutar la obra conforme al diseño entregado, lo que corresponde al aspecto **económico**."
             },
             {
               "optionId": "C",
@@ -1053,7 +1053,7 @@
               "optionText": "El aspecto ambiental, pues el diseño no especifica qué sucederá con la flora y la fauna presente en la zona.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** El enunciado sí dice que el diseño contempla **un plan para proteger la flora y la fauna**.\n- Por tanto, ese no es el obstáculo."
             },
             {
               "optionId": "D",
@@ -1061,10 +1061,10 @@
               "optionText": "El aspecto logístico, pues los ingenieros no especifican el trazado definitivo del acueducto.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** El texto afirma que el diseño sí contempla **el trazado** del acueducto.\n- No hay un problema logístico principal señalado, sino presupuestal."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "B",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -1089,7 +1089,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** explicar por qué el Ejército pasa de combatir a custodiar en las ZVTN.\n- **Dato clave:** existe un **acuerdo de paz** y esas zonas sirven para la transición del grupo armado a la vida civil.\n- **Razonamiento:**\n  - Con el cambio del contexto político y jurídico, también cambia la función operativa de la Fuerza Pública en esas zonas.\n  - No significa subordinación del Ejército al grupo armado, sino adaptación institucional al proceso de paz.\n- **Conclusión:** esto es posible porque las Fuerzas Armadas adecuaron su función al nuevo contexto sociopolítico. ",
           "options": [
             {
               "optionId": "A",
@@ -1097,7 +1097,7 @@
               "optionText": "Porque el Gobierno nacional quiere que el grupo armado conviva con el Ejército, para que en el futuro haga parte de él.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** El objetivo no es incorporar automáticamente al grupo armado al Ejército.\n- La finalidad es facilitar la **transición a la vida civil** dentro del acuerdo de paz."
             },
             {
               "optionId": "B",
@@ -1105,7 +1105,7 @@
               "optionText": "Porque el Gobierno nacional ha dado un giro hacia el socialismo y ha decidido poner a su Ejército al servicio del grupo armado.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** La afirmación introduce una interpretación ideológica que no aparece en el texto.\n- La custodia se explica por el acuerdo de paz, no por un cambio al socialismo."
             },
             {
               "optionId": "C",
@@ -1113,7 +1113,7 @@
               "optionText": "Porque el grupo armado ahora controla las ZVTN y tienen miembros del Ejército a su disposición.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** El texto no dice que el grupo armado controle al Ejército.\n- Señala que el Ejército **custodia** a los miembros del grupo en el marco del proceso de normalización."
             },
             {
               "optionId": "D",
@@ -1121,10 +1121,10 @@
               "optionText": "Porque la función de las Fuerzas Armadas se adecuó al nuevo contexto sociopolítico del país.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** Tras el acuerdo de paz, la función del Ejército en esas zonas cambia: deja de combatir y pasa a **custodiar** para apoyar la transición a la vida civil.\n- Es una adecuación al nuevo contexto sociopolítico."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "D",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -1149,7 +1149,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** evaluar si las afirmaciones del presidente son confiables.\n- **Dato científico del texto:** el cambio climático se refiere a variaciones del clima observadas en periodos comparables y asociadas a la actividad humana; no se invalida porque un día haga frío.\n- **Razonamiento:**\n  - La frase \\(2\\) confunde **tiempo atmosférico puntual** con **clima de largo plazo**.\n  - La confiabilidad no depende del cargo ni del número de seguidores, sino de la validez del argumento y de posibles intereses involucrados.\n  - Entre las opciones, la mejor crítica disponible es que el presidente puede tener intereses políticos y económicos para minimizar el problema.\n- **Conclusión:** **no** resultan confiables. ",
           "options": [
             {
               "optionId": "A",
@@ -1157,7 +1157,7 @@
               "optionText": "Sí, porque, como presidente, tiene acceso a información precisa sobre los aspectos relevantes del planeta.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Tener un cargo alto no garantiza que lo dicho sea científicamente correcto.\n- En este caso, una de sus frases confunde un episodio de frío con el fenómeno climático global."
             },
             {
               "optionId": "B",
@@ -1165,7 +1165,7 @@
               "optionText": "No, porque, como presidente, tiene intereses en que el país que gobierna siga siendo competitivo en la economía mundial.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** Entre las opciones dadas, es la mejor razón para desconfiar: sus afirmaciones pueden estar influidas por **intereses políticos y económicos** contrarios a compromisos ambientales internacionales.\n- Además, sus frases no se apoyan en una comprensión rigurosa del cambio climático."
             },
             {
               "optionId": "C",
@@ -1173,7 +1173,7 @@
               "optionText": "No, porque, al ser un político, los temas de las ciencias naturales le son ajenos a sus conocimientos de la vida diaria.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Ser político no implica automáticamente desconocer temas científicos.\n- La objeción correcta no depende de su profesión, sino de la **falta de rigor** de sus afirmaciones y de los intereses en juego."
             },
             {
               "optionId": "D",
@@ -1181,10 +1181,10 @@
               "optionText": "Sí, porque, al ser difundido en una red social con tantos seguidores, lo expresado tiene un impacto a nivel de la economía internacional.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** El impacto o alcance de un mensaje no lo vuelve confiable.\n- La confiabilidad depende de su fundamento, y aquí las afirmaciones no siguen el concepto científico de cambio climático."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "B",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -1209,7 +1209,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** identificar la situación que se ajusta a la teoría de la dependencia.\n- **Datos clave del modelo:**\n  - Países pobres exportan materias primas baratas.\n  - Países ricos o actores vinculados a ellos procesan esas materias y venden productos con mayor valor agregado.\n  - Esto reproduce dependencia y desigualdad.\n- **Conclusión:** la opción que muestra compra barata de materias primas en un país pobre, procesamiento y venta posterior de productos elaborados al mismo país es la que mejor encaja. ",
           "options": [
             {
               "optionId": "A",
@@ -1217,7 +1217,7 @@
               "optionText": "Un país latinoamericano desarrolla tecnología industrial que le permite procesar materias primas para generar productos con valor añadido, que se venden dentro del mismo país.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Esta situación rompe parcialmente la dependencia, porque el país agrega valor internamente y no queda limitado al papel de proveedor de materias primas."
             },
             {
               "optionId": "B",
@@ -1225,7 +1225,7 @@
               "optionText": "Una compañía multinacional adquiere, en un país pobre, materias primas a bajo costo, las procesa e incrementa su valor añadido para, luego, vender sus productos en el país pobre.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** Describe exactamente la lógica de la dependencia: el país pobre vende **materias primas baratas** y luego compra productos **procesados y más costosos**, manteniendo la subordinación económica."
             },
             {
               "optionId": "C",
@@ -1233,7 +1233,7 @@
               "optionText": "Un país desarrollado de Europa genera riquezas gracias a sus adelantos tecnológicos y, luego, impulsa el avance de la industria de países en desarrollo, porque comparte con ellos esta nueva tecnología.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Esta opción describe cooperación tecnológica, no una relación de dependencia estructural basada en extracción de materias primas y subordinación comercial."
             },
             {
               "optionId": "D",
@@ -1241,10 +1241,10 @@
               "optionText": "Una organización internacional regula las relaciones comerciales entre países, para asegurarse de que los países que venden materias primas no cobren de más a los países que más las necesitan.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** La opción se centra en regulación de precios, pero no expresa la estructura desigual descrita por la teoría.\n- Incluso podría reforzar una relación asimétrica, pero no la representa tan directamente como la opción B."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "B",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -1269,7 +1269,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** identificar cuándo una política económica es sostenible según la ONU.\n- **Dato clave:** el desarrollo sostenible exige equilibrio entre **desarrollo económico**, **desarrollo social** y **protección del medio ambiente**.\n- **Razonamiento:**\n  - No puede privilegiarse totalmente la riqueza sacrificando el ambiente.\n  - Tampoco implica prohibir toda actividad económica.\n  - La mejor respuesta es la que plantea un equilibrio entre generación de riqueza y protección ambiental.\n- **Conclusión:** una política económica sostenible da igual importancia a la riqueza y al cuidado del ambiente. ",
           "options": [
             {
               "optionId": "A",
@@ -1277,7 +1277,7 @@
               "optionText": "privilegia la industrialización para generar empleo por encima de la necesidad de disminuir los gases de efecto invernadero.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Esta opción rompe el equilibrio del desarrollo sostenible, porque prioriza la industrialización **por encima** de la protección ambiental."
             },
             {
               "optionId": "B",
@@ -1285,7 +1285,7 @@
               "optionText": "le da la misma importancia a la generación de riqueza y a la explotación ilimitada de los recursos naturales.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** La explotación **ilimitada** de recursos es incompatible con la sostenibilidad y con la protección de las generaciones futuras."
             },
             {
               "optionId": "C",
@@ -1293,7 +1293,7 @@
               "optionText": "le da la misma importancia a la generación de riqueza para las personas y a la protección del medio ambiente.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** Resume el principio del desarrollo sostenible: equilibrar **crecimiento económico** y **protección ambiental**, pensando también en el bienestar humano presente y futuro."
             },
             {
               "optionId": "D",
@@ -1301,10 +1301,10 @@
               "optionText": "prohíbe totalmente aprovechar económicamente los bienes y servicios ecosistémicos de lagos, ríos y bosques para lograr su conservación.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** El desarrollo sostenible no exige prohibición total del uso económico de la naturaleza.\n- Exige un uso **responsable y equilibrado**, no una negación absoluta del aprovechamiento."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "C",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -1329,7 +1329,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** interpretar el papel del mercado en la división del trabajo según Adam Smith.\n- **Dato clave:** cada persona se especializa en lo que hace mejor y luego intercambia por otros bienes.\n- **Razonamiento:**\n  - Si hay especialización, el mercado sirve para distribuir e intercambiar eficientemente esos bienes producidos.\n  - El texto no critica al mercado como fuente principal de injusticia, fracaso o ignorancia.\n- **Conclusión:** para Smith, el mercado es una forma eficiente de repartir bienes producidos mediante especialización. ",
           "options": [
             {
               "optionId": "A",
@@ -1337,7 +1337,7 @@
               "optionText": "genera injusticias sociales al separar a las personas en clases sociales según sus ingresos.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Esa crítica no corresponde a la idea expuesta de Smith en el texto.\n- Aquí el mercado aparece como mecanismo de intercambio ligado a productividad, no como origen principal de clases sociales."
             },
             {
               "optionId": "B",
@@ -1345,7 +1345,7 @@
               "optionText": "lleva la economía al fracaso, pues no hay coordinación entre productores y consumidores.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Según Smith, el intercambio de mercado precisamente permite coordinar necesidades y producción, no llevar al fracaso económico."
             },
             {
               "optionId": "C",
@@ -1353,7 +1353,7 @@
               "optionText": "hace que las personas se vuelvan más ignorantes, pues no saben cómo producir ciertos bienes.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Aunque la especialización puede limitar conocimientos amplios, esa no es la idea central del fragmento.\n- El texto resalta la **productividad** y el intercambio eficiente."
             },
             {
               "optionId": "D",
@@ -1361,10 +1361,10 @@
               "optionText": "es una forma eficiente de repartir los bienes que se han producido mediante la especialización.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** Resume fielmente la teoría expuesta: la **división del trabajo** aumenta la productividad y el **mercado** permite intercambiar y distribuir eficientemente lo producido."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "D",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -1389,7 +1389,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** determinar para qué objetivo investigativo sirve la información dada.\n- **Datos clave:**\n  - El pez león amenaza a especies nativas porque se alimenta de peces jóvenes.\n  - Eso afecta la fauna local y también puede afectar a humanos.\n- **Razonamiento:**\n  - La información ayuda a identificar una **causa** de disminución de fauna marina en ciertas costas.\n  - No permite calcular cantidades previas exactas ni promover directamente una política económica de caza.\n- **Conclusión:** sirve para investigar factores de disminución de fauna en costas colombianas. ",
           "options": [
             {
               "optionId": "A",
@@ -1397,7 +1397,7 @@
               "optionText": "Establecer el impacto económico que provocan las plagas en la fauna y flora del Caribe colombiano.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** La información habla de amenazas ecológicas y riesgos para humanos, pero no aporta datos suficientes para medir **impacto económico**."
             },
             {
               "optionId": "B",
@@ -1405,7 +1405,7 @@
               "optionText": "Promover la caza del pez león para fortalecer la economía de las zonas pesqueras en el Caribe.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** El texto no ofrece elementos para diseñar una estrategia económica de caza ni para evaluar su conveniencia productiva.\n- Solo describe el riesgo ecológico y sanitario."
             },
             {
               "optionId": "C",
@@ -1413,7 +1413,7 @@
               "optionText": "Determinar los factores que han provocado una disminución de la fauna en algunas costas colombianas.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** La información indica que el pez león consume peces jóvenes de especies nativas, por lo que resulta útil para investigar **causas de disminución de fauna** en las costas colombianas."
             },
             {
               "optionId": "D",
@@ -1421,10 +1421,10 @@
               "optionText": "Establecer la cantidad de especies nativas existentes antes de la aparición del pez león.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Para eso se necesitarían registros históricos o censos biológicos previos.\n- El texto solo describe el tipo de amenaza actual del pez león."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "C",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -1449,7 +1449,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** establecer si los jóvenes pueden impulsar un referendo de iniciativa ciudadana.\n- **Dato constitucional relevante:** en Colombia existen mecanismos de participación ciudadana mediante los cuales los ciudadanos pueden intervenir directamente en asuntos normativos y políticos, entre ellos el **referendo**.\n- **Razonamiento:**\n  - La ciudadanía no depende exclusivamente del Congreso o del Gobierno para impulsar cambios normativos.\n  - Sin embargo, eso no significa que toda decisión pública deba consultarse siempre por referendo.\n- **Conclusión:** **sí** pueden continuar, porque el referendo es un mecanismo de participación para proponer cambios normativos de manera directa. ",
           "options": [
             {
               "optionId": "A",
@@ -1457,7 +1457,7 @@
               "optionText": "No, pues solo pueden proponer leyes de la República los integrantes del Congreso de la República y del Gobierno nacional.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** La Constitución colombiana reconoce mecanismos de participación ciudadana que permiten intervención directa de los ciudadanos en la producción normativa y decisiones públicas."
             },
             {
               "optionId": "B",
@@ -1465,7 +1465,7 @@
               "optionText": "No, pues solo pueden pronunciarse sobre temas políticos los expertos y los representantes elegidos popularmente.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Esta opción desconoce el principio democrático participativo.\n- Los ciudadanos sí pueden pronunciarse e impulsar mecanismos constitucionales como el referendo."
             },
             {
               "optionId": "C",
@@ -1473,7 +1473,7 @@
               "optionText": "Sí, pues en Colombia existen los referendos como mecanismos para que los ciudadanos propongan cambios normativos de manera directa.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** El **referendo** es un mecanismo de participación ciudadana reconocido en Colombia, por medio del cual los ciudadanos pueden impulsar directamente cambios normativos."
             },
             {
               "optionId": "D",
@@ -1481,10 +1481,10 @@
               "optionText": "Sí, pues en Colombia existen los referendos para que cada una de las decisiones públicas en el país sea consultada a la ciudadanía.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** El referendo no se usa para consultar **cada** decisión pública.\n- Es un mecanismo específico de participación, no una consulta obligatoria sobre toda actuación estatal."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "C",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
