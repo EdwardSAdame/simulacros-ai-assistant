@@ -20,7 +20,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** identificar qué actores tienen intereses opuestos sobre el uso de la cancha.\n- **Datos relevantes:**\n  - El torneo de microfútbol se juega los sábados entre \\(11{:}00\\ \\text{a. m.}\\) y \\(1{:}00\\ \\text{p. m.}\\).\n  - Las camionetas de los escoltas ocupan la cancha y por eso no se pueden realizar varias fechas.\n  - El bingo ocurre después, entre \\(7{:}00\\ \\text{p. m.}\\) y \\(9{:}00\\ \\text{p. m.}\\), así que no interfiere con el horario del torneo.\n- **Método lógico:** buscar el grupo que directamente impide el desarrollo del torneo en el mismo espacio y en un horario que afecta esa actividad.\n- **Conclusión:** el conflicto más probable es entre quienes quieren jugar microfútbol y quienes estacionan las camionetas en la cancha, es decir, **los escoltas** frente a **los habitantes del barrio que quieren participar del torneo**.",
           "options": [
             {
               "optionId": "A",
@@ -28,7 +28,7 @@
               "optionText": "Entre los dueños de las camionetas y los habitantes del barrio que organizan el bingo.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** El bingo se realiza entre \\(7{:}00\\ \\text{p. m.}\\) y \\(9{:}00\\ \\text{p. m.}\\), mientras que las camionetas se retiran, a veces, hasta las \\(6{:}00\\ \\text{p. m.}\\). No hay un choque directo de horarios entre estos dos grupos."
             },
             {
               "optionId": "B",
@@ -36,7 +36,7 @@
               "optionText": "Entre los habitantes del barrio que juegan microfútbol y los habitantes del barrio que organizan el bingo.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Aunque ambos usan la cancha, lo hacen en horarios distintos: el microfútbol al mediodía y el bingo en la noche. El problema descrito no surge entre ellos."
             },
             {
               "optionId": "C",
@@ -44,7 +44,7 @@
               "optionText": "Entre los escoltas y los habitantes del barrio contiguo que son dueños de las camionetas.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** El texto no muestra un conflicto entre escoltas y dueños de las camionetas; más bien, los escoltas las estacionan por encargo de esos habitantes."
             },
             {
               "optionId": "D",
@@ -52,10 +52,10 @@
               "optionText": "Entre los escoltas y los habitantes del barrio que quieren participar del torneo de microfútbol.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** Los escoltas ocupan la cancha con las camionetas justo en un período que impide realizar el torneo, por lo que sus intereses chocan directamente con los de quienes quieren jugar."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "D",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -80,7 +80,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** determinar qué derecho constitucional protege la actuación de la asociación barrial.\n- **Datos relevantes:**\n  - Hay rechazo hacia un lugar de reunión religiosa.\n  - Circulan acusaciones infundadas contra esa iglesia.\n  - La asociación promueve diálogo y conciliación para evitar discriminación y permitir conocer nuevas culturas.\n- **Método lógico:** identificar cuál derecho está siendo vulnerado por los panfletos y cuál está defendiendo la asociación.\n- **Conclusión:** la situación se relaciona directamente con el respeto a profesar una religión y reunirse para su práctica. Por eso la asociación actúa en defensa de la **libertad de culto**.",
           "options": [
             {
               "optionId": "A",
@@ -88,7 +88,7 @@
               "optionText": "Porque reconoce el derecho a la libre asociación, estipulado en la Constitución.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Aunque la iglesia se reúne como grupo, el conflicto descrito no gira principalmente sobre crear asociaciones, sino sobre poder practicar una religión sin ser estigmatizados."
             },
             {
               "optionId": "B",
@@ -96,7 +96,7 @@
               "optionText": "Porque reconoce el derecho a la libertad de culto, estipulado en la Constitución.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** La asociación barrial busca proteger a un grupo religioso frente a acusaciones y rechazo social, defendiendo su derecho constitucional a practicar libremente su religión."
             },
             {
               "optionId": "C",
@@ -104,7 +104,7 @@
               "optionText": "Porque reconoce el derecho a la libre participación, estipulado en la Constitución.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** La participación puede aparecer en el diálogo comunitario, pero no es el núcleo del conflicto jurídico planteado."
             },
             {
               "optionId": "D",
@@ -112,10 +112,10 @@
               "optionText": "Porque reconoce el derecho a la igualdad y a la libertad, estipulado en la Constitución.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Son principios amplios que pueden relacionarse con el caso, pero la pregunta apunta al derecho específico comprometido: la **libertad de culto**."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "B",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -140,7 +140,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** identificar un efecto no deseado de concentrar \\(90\\%\\) de los recursos educativos en un solo megacolegio.\n- **Datos relevantes:**\n  - Se invirtió casi todo el presupuesto de educación en una sola institución.\n  - El megacolegio quedó bien dotado y con infraestructura amplia.\n  - La pregunta pide un efecto indeseado de esa solución.\n- **Método lógico:** analizar qué consecuencia social puede surgir al privilegiar un solo colegio frente a las demás necesidades educativas del municipio.\n- **Conclusión:** el efecto más probable es el descontento de otros ciudadanos por la concentración de recursos en un único establecimiento, lo que puede generar protestas para exigir inversión en otros colegios.",
           "options": [
             {
               "optionId": "A",
@@ -148,7 +148,7 @@
               "optionText": "Que los profesores del megacolegio protesten por la falta de recursos para el desarrollo de su labor educativa.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** El texto muestra que el megacolegio sí recibió abundantes recursos: parqueadero, tecnología, libros, materiales y cancha múltiple."
             },
             {
               "optionId": "B",
@@ -156,7 +156,7 @@
               "optionText": "Que los vecinos del colegio se quejen por cuenta del impacto generado por el alto flujo vehicular en la puerta del colegio.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** La alcaldía precisamente ubicó la entrada y salida de vehículos en una calle poco transitada para mitigar ese problema."
             },
             {
               "optionId": "C",
@@ -164,7 +164,7 @@
               "optionText": "Que se generen protestas pacíficas por parte de ciudadanos del municipio que piden a la alcaldía invertir recursos en otros colegios del municipio.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** Si \\(90\\%\\) del presupuesto educativo se concentra en un solo megacolegio, es razonable que otros sectores del municipio reclamen inversión para sus propias instituciones."
             },
             {
               "optionId": "D",
@@ -172,10 +172,10 @@
               "optionText": "Que los padres de familia se quejen porque los estudiantes deben desplazarse a un lugar desconocido para practicar deportes en la cancha múltiple.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** La cancha queda en el parque contiguo a la institución, así que no se trata de un lugar lejano ni desconocido."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "C",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -200,7 +200,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** establecer cuál acción del presidente invade competencias ajenas.\n- **Datos relevantes:**\n  - Existe una investigación judicial por corrupción.\n  - Hubo detención preventiva ordenada para proteger la justicia.\n  - El presidente exigió públicamente la liberación del investigado.\n- **Método lógico:** distinguir entre la rama ejecutiva y la judicial. El presidente pertenece a la ejecutiva y no puede interferir en decisiones judiciales.\n- **Conclusión:** la extralimitación consiste en desconocer la **autonomía de la rama judicial**.",
           "options": [
             {
               "optionId": "A",
@@ -208,7 +208,7 @@
               "optionText": "El desconocimiento de la autonomía de la rama judicial.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** Al exigir la liberación de su copartidario, el presidente interfiere indebidamente en un proceso que corresponde a la rama judicial, desconociendo su independencia."
             },
             {
               "optionId": "B",
@@ -216,7 +216,7 @@
               "optionText": "El desconocimiento del partido político como primer investigador.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Los partidos no son la autoridad judicial competente para investigar delitos de corrupción."
             },
             {
               "optionId": "C",
@@ -224,7 +224,7 @@
               "optionText": "El conocimiento del pasado judicial de su copartidario.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Conocer antecedentes no constituye por sí mismo una extralimitación funcional; el problema es intervenir en la decisión judicial."
             },
             {
               "optionId": "D",
@@ -232,10 +232,10 @@
               "optionText": "El uso de los medios de comunicación para expresarse.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** El uso de medios no es el punto central; lo reprochable es el contenido de su exigencia frente a una autoridad judicial."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "A",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -260,7 +260,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** hallar el elemento común entre dos reclamos de propiedad sobre la misma tierra.\n- **Datos relevantes:**\n  - La comunidad indígena reclama restitución por despojo.\n  - La familia campesina alega haber comprado la tierra.\n  - Ambos grupos son poblaciones rurales vulnerables y consideran la tierra como base de su subsistencia.\n- **Método lógico:** identificar no las diferencias jurídicas, sino el interés común subyacente en ambos reclamos.\n- **Conclusión:** en ambos casos aparece el interés por el **acceso a recursos de subsistencia** ligados a la tierra en contextos rurales.",
           "options": [
             {
               "optionId": "A",
@@ -268,7 +268,7 @@
               "optionText": "El derecho al acceso a recursos de subsistencia por parte de habitantes rurales.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** Tanto la comunidad indígena como la familia campesina fundamentan sus reclamos en la importancia de la tierra como medio de vida, subsistencia y permanencia en el territorio."
             },
             {
               "optionId": "B",
@@ -276,7 +276,7 @@
               "optionText": "La vulneración indiscriminada de los derechos de las comunidades por parte de actores armados.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Ese elemento aplica claramente a la comunidad indígena despojada, pero no necesariamente a la familia campesina compradora."
             },
             {
               "optionId": "C",
@@ -284,7 +284,7 @@
               "optionText": "Las facilidades en el acceso a la justicia en procesos de restitución de tierras en Colombia.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** El texto no habla de facilidades de acceso a la justicia, sino de una disputa por la propiedad."
             },
             {
               "optionId": "D",
@@ -292,10 +292,10 @@
               "optionText": "Las consecuencias de la concentración de la tierra para las poblaciones vulnerables de nuestro país.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** La situación descrita se refiere a despojo y conflicto de propiedad, no específicamente a concentración de la tierra."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "A",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -320,7 +320,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** evaluar para quién fue deseable o indeseable la intervención de las autoridades.\n- **Datos relevantes:**\n  - La profesora fue despedida.\n  - Luego fue reintegrada por intervención de autoridades públicas.\n  - Las autoridades investigaron a la rectora por presunta intolerancia religiosa.\n- **Método lógico:** analizar quién resultó afectado negativamente por esa intervención.\n- **Conclusión:** la intervención fue **indeseable para la rectora**, porque cuestionó sus decisiones y abrió una investigación sobre su conducta directiva.",
           "options": [
             {
               "optionId": "A",
@@ -328,7 +328,7 @@
               "optionText": "deseable para las madres, porque lograron el despido de la profesora de Literatura.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Aunque inicialmente se produjo el despido, la intervención de las autoridades revirtió esa decisión y reintegró a la profesora."
             },
             {
               "optionId": "B",
@@ -336,7 +336,7 @@
               "optionText": "indeseable para la profesora, porque mostró la importancia de la posición religiosa de las madres.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** La intervención benefició a la profesora, pues recuperó su trabajo y se investigó la posible intolerancia en su contra."
             },
             {
               "optionId": "C",
@@ -344,7 +344,7 @@
               "optionText": "indeseable para la rectora, porque puso en entredicho sus actuaciones en ejercicio de su labor directiva.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** La rectora quedó cuestionada por haber despedido a la profesora y además fue objeto de investigación por presunta intolerancia religiosa."
             },
             {
               "optionId": "D",
@@ -352,10 +352,10 @@
               "optionText": "deseable para el Ministerio de Educación, porque le dio visibilidad a uno de los libros que recomienda a los colegios.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** El objetivo de la intervención no fue dar visibilidad al libro, sino resolver una situación de posible discriminación religiosa."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "C",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -380,7 +380,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** identificar por qué la afirmación corresponde a una postura ambientalista.\n- **Datos relevantes:**\n  - Señala afectaciones al agua, suelo, subsuelo, biodiversidad y paisaje.\n  - Destaca la especial riqueza biológica e hídrica de Colombia.\n- **Método lógico:** elegir la opción que se centre en la protección de fauna, flora y ecosistemas, no en otros aspectos secundarios.\n- **Conclusión:** se considera ambientalista porque **advierte el impacto del fracking sobre la biodiversidad** del país.",
           "options": [
             {
               "optionId": "A",
@@ -388,7 +388,7 @@
               "optionText": "estudia los posibles sismos que puede causar el fracking en un país con alto nivel de biodiversidad.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Los sismos se mencionan, pero como un efecto más. Lo que define la postura ambientalista es la preocupación por los ecosistemas y la biodiversidad."
             },
             {
               "optionId": "B",
@@ -396,7 +396,7 @@
               "optionText": "advierte sobre el impacto que puede tener este método en la fauna y flora del país con mayor diversidad biológica.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** La afirmación subraya los daños sobre agua, suelo, biodiversidad y paisaje, lo que refleja una defensa directa de la fauna, la flora y los ecosistemas."
             },
             {
               "optionId": "C",
@@ -404,7 +404,7 @@
               "optionText": "cree que es más importante la crisis económica del país que el cuidado y la conservación de la biodiversidad.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** La persona no prioriza la economía sobre el ambiente; precisamente pide precaución por los riesgos ecológicos."
             },
             {
               "optionId": "D",
@@ -412,10 +412,10 @@
               "optionText": "está a favor de la precaución, debido a que no es posible saber si un método tan inseguro podrá generar un beneficio económico real.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** La precaución aparece, pero el rasgo ambientalista no se define por dudar del beneficio económico, sino por proteger la biodiversidad."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "B",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -440,7 +440,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** comparar la propuesta del Gobierno con los intereses reales de los vecinos.\n- **Datos relevantes:**\n  - Los vecinos quieren reparar el parque y conservar espacios recreativos.\n  - La cancha de microfútbol es el espacio más usado del barrio.\n  - La nueva pista ocuparía justamente el lugar de esa cancha.\n- **Método lógico:** evaluar si la propuesta satisface o contradice el interés principal de uso comunitario del parque.\n- **Conclusión:** la propuesta **va en contra de los intereses recreativos de los vecinos**, porque elimina el escenario más utilizado por ellos.",
           "options": [
             {
               "optionId": "A",
@@ -448,7 +448,7 @@
               "optionText": "Se ajusta completamente a sus intereses, porque va a mejorar el parque principal del barrio como solicitaron.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** No se ajusta completamente, porque la mejora del parque implicaría perder la cancha de microfútbol, que es el espacio más usado."
             },
             {
               "optionId": "B",
@@ -456,7 +456,7 @@
               "optionText": "Beneficia a los vecinos del barrio y al municipio, porque mejora el parque y agrega una pista profesional.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Puede beneficiar al municipio en términos generales, pero no responde al interés principal de los vecinos si desaparece su cancha más utilizada."
             },
             {
               "optionId": "C",
@@ -464,7 +464,7 @@
               "optionText": "Va en contra de los intereses de recreación de los vecinos, porque va a quitar el escenario que más utilizan.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** La propuesta elimina la cancha de microfútbol, que es justamente el espacio recreativo central para niños, jóvenes y familias del barrio."
             },
             {
               "optionId": "D",
@@ -472,10 +472,10 @@
               "optionText": "Afecta parcialmente los intereses del municipio, porque debe pagar la pista y además la remodelación.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** La pregunta pide la relación con los intereses de los vecinos, no con los costos o intereses administrativos del municipio."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "C",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -500,7 +500,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** identificar el foco principal del texto.\n- **Datos relevantes:**\n  - Se menciona que el oso de anteojos es vulnerable.\n  - Se enumeran causas: pérdida de hábitat, tala, actividades productivas, cacería.\n  - Se insiste en que la intervención humana invade su hábitat.\n- **Método lógico:** distinguir entre una descripción de causas, de distribución, de políticas estatales o de peligros para humanos.\n- **Conclusión:** el énfasis está en **las razones por las que el oso de anteojos está en peligro de extinción**.",
           "options": [
             {
               "optionId": "A",
@@ -508,7 +508,7 @@
               "optionText": "En las razones por las que el oso de anteojos está en peligro de extinción.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** El texto se concentra en explicar las causas humanas de su vulnerabilidad: pérdida de hábitat, tala, actividades productivas y cacería."
             },
             {
               "optionId": "B",
@@ -516,7 +516,7 @@
               "optionText": "En los peligros que representa el oso de anteojos para los humanos.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Aunque se menciona que a veces afecta ganado o cultivos, eso aparece como una reacción de comunidades; no es el énfasis principal."
             },
             {
               "optionId": "C",
@@ -524,7 +524,7 @@
               "optionText": "En los esfuerzos del Estado por proteger al oso de anteojos.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Solo se menciona de manera general el deber constitucional del Estado, pero no se desarrollan medidas concretas de protección."
             },
             {
               "optionId": "D",
@@ -532,10 +532,10 @@
               "optionText": "En la distribución geográfica del oso de anteojos.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Se dice que habita en los páramos andinos, pero ese dato es secundario frente a las causas de su amenaza."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "A",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -560,7 +560,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** escoger una situación que justifique políticas de reconocimiento multicultural, protección de diversidad étnica y derechos diferenciados.\n- **Datos relevantes del fragmento:**\n  - Se habla de grupos étnicos y minorías sociales.\n  - Se defiende la igualdad, dignidad cultural y autonomía de pueblos indígenas.\n- **Método lógico:** buscar una situación de discriminación o persecución contra un grupo étnico o cultural minoritario.\n- **Conclusión:** la opción que mejor justifica esas políticas es la persecución y estigmatización del pueblo rom o gitano.",
           "options": [
             {
               "optionId": "A",
@@ -568,7 +568,7 @@
               "optionText": "En una ciudad intermedia de Colombia, los miembros del pueblo rom o gitano son constantemente perseguidos y desalojados violentamente por algunas personas que los consideran brujos, ladrones, supersticiosos y nocivos para la sociedad.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** Esta situación muestra discriminación contra una minoría étnica y cultural, justamente el tipo de problema que las políticas multiculturales buscan enfrentar."
             },
             {
               "optionId": "B",
@@ -576,7 +576,7 @@
               "optionText": "En la capital colombiana, \\(12\\) de cada \\(100\\) habitantes vive en condiciones de pobreza o pobreza extrema, con ingresos de \\(\\$200.000\\) mensuales o menos, siendo en su mayoría personas desplazadas por la violencia en otras regiones.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Es un problema social y económico grave, pero no se relaciona directamente con reconocimiento multicultural o derechos diferenciados de grupos étnicos."
             },
             {
               "optionId": "C",
@@ -584,7 +584,7 @@
               "optionText": "Entre \\(2015\\) y \\(2016\\), aumentaron en un \\(19 \\%\\) los suicidios en Medellín, y se ha reportado que la mayoría de los suicidios los cometen niños entre los \\(5\\) y los \\(16\\) años, en plena etapa escolar, pero también jóvenes entre los \\(18\\) y los \\(28\\) años, es decir, en plena edad productiva.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Se trata de un problema de salud pública, no de diversidad étnica, reconocimiento cultural o derechos diferenciados."
             },
             {
               "optionId": "D",
@@ -592,10 +592,10 @@
               "optionText": "El consumo de alcohol entre hombres y mujeres en \\(2014\\) presentó una amplia diferencia: se observó que el \\(54{,}73 \\%\\) de los hombres consume alcohol, mientras que solo el \\(38{,}89 \\%\\) de las mujeres lo hace.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Es una diferencia estadística de consumo y no justifica por sí misma políticas multiculturales dirigidas a minorías étnicas o culturales."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "A",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -620,7 +620,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** identificar la entidad competente para investigar el mal manejo de recursos públicos y procurar su recuperación.\n- **Datos relevantes:**\n  - Hay una obra inconclusa tras \\(10\\) años.\n  - Se deterioraron tuberías ya instaladas.\n  - Se pregunta por investigación sobre recursos públicos y recuperación de estos.\n- **Método lógico:** relacionar el caso con la función de control fiscal en Colombia.\n- **Conclusión:** la entidad competente es la **Contraloría General de la República**, encargada del control fiscal y de vigilar bienes y recursos del Estado.",
           "options": [
             {
               "optionId": "A",
@@ -628,7 +628,7 @@
               "optionText": "Al Concejo municipal, para que en ejercicio del control político expida un acuerdo mediante el cual sancione a los responsables.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** El Concejo ejerce control político local, pero no es la entidad principal para adelantar control fiscal ni recuperar recursos públicos."
             },
             {
               "optionId": "B",
@@ -636,7 +636,7 @@
               "optionText": "Al Ministerio de Ambiente, para que verifique las condiciones de insalubridad que genera la falta de alcantarillado.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Puede existir un problema ambiental o sanitario, pero la pregunta apunta al manejo inadecuado de recursos públicos."
             },
             {
               "optionId": "C",
@@ -644,7 +644,7 @@
               "optionText": "Al Congreso de la República, para que impulse un proyecto de ley que endurezca las penas por este tipo de actos.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** El Congreso legisla, pero no investiga ni recupera directamente recursos mal administrados en este caso concreto."
             },
             {
               "optionId": "D",
@@ -652,10 +652,10 @@
               "optionText": "A la Contraloría General de la República, para que ejerza el control fiscal y la vigilancia de los bienes del Estado.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** La Contraloría es la entidad encargada de investigar el manejo fiscal de los recursos públicos y promover su recuperación cuando hay detrimento patrimonial."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "D",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -680,7 +680,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** explicar el efecto laboral negativo de la globalización sobre países en desarrollo.\n- **Datos relevantes:**\n  - La ONU menciona disparidades del sistema comercial mundial.\n  - Los críticos hablan de explotación de personas en países en desarrollo.\n- **Método lógico:** relacionar esa explotación con la estructura económica global y el papel asignado a esos países en el mercado laboral.\n- **Conclusión:** la afectación laboral ocurre porque la división internacional del trabajo convierte a los países en desarrollo en proveedores de **mano de obra barata**.",
           "options": [
             {
               "optionId": "A",
@@ -688,7 +688,7 @@
               "optionText": "Porque la cultura de masas global ha determinado patrones de consumo en países en desarrollo.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Eso puede explicar cambios culturales o de consumo, pero no la afectación laboral central mencionada por la fuente."
             },
             {
               "optionId": "B",
@@ -696,7 +696,7 @@
               "optionText": "Porque se presentan dificultades para el intercambio de conocimientos productivos en países en desarrollo.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** La cita no destaca ese factor; el énfasis está en las desigualdades del sistema comercial y en la explotación laboral."
             },
             {
               "optionId": "C",
@@ -704,7 +704,7 @@
               "optionText": "Porque se generan problemáticas medioambientales, principalmente en los países en desarrollo.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Puede ser una consecuencia de la globalización, pero no responde específicamente a la pregunta por el impacto laboral."
             },
             {
               "optionId": "D",
@@ -712,10 +712,10 @@
               "optionText": "Porque la división internacional del trabajo ofrece una mano de obra barata en los países en desarrollo.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** Esa división económica hace que muchos países en desarrollo sean usados como fuente de trabajo barato, lo que favorece relaciones de explotación y desigualdad laboral."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "D",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -740,7 +740,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** identificar la medida que perjudicaría el desarrollo de los recién nacidos.\n- **Datos relevantes:**\n  - La licencia de maternidad actual es de \\(20\\) semanas.\n  - Se busca solucionar discriminación laboral contra mujeres.\n  - Debe elegirse la opción con efecto negativo sobre el cuidado del bebé.\n- **Método lógico:** analizar cuál propuesta reduce el tiempo de cuidado directo de la madre o de los padres durante las primeras semanas de vida.\n- **Conclusión:** reducir la licencia de maternidad de \\(20\\) a \\(8\\) semanas afectaría negativamente el desarrollo y cuidado inicial del recién nacido.",
           "options": [
             {
               "optionId": "A",
@@ -748,7 +748,7 @@
               "optionText": "Diseñar una estrategia para que el Gobierno ayude a las empresas privadas a pagarles a las mujeres el costo total de la licencia.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Esta medida busca disminuir el desincentivo a contratar mujeres sin recortar el tiempo de cuidado del recién nacido."
             },
             {
               "optionId": "B",
@@ -756,7 +756,7 @@
               "optionText": "Reducir impuestos a las empresas privadas por cada mujer en edad reproductiva que contraten.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Podría incentivar la contratación femenina y no afecta directamente el tiempo de atención del recién nacido."
             },
             {
               "optionId": "C",
@@ -764,7 +764,7 @@
               "optionText": "Crear una nueva ley que permita reducir la licencia de maternidad de \\(20\\) a \\(8\\) semanas.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** Disminuir drásticamente la licencia reduce el tiempo de recuperación, lactancia y cuidado inicial, afectando el desarrollo adecuado del recién nacido."
             },
             {
               "optionId": "D",
@@ -772,10 +772,10 @@
               "optionText": "Modificar la ley que establece la licencia de paternidad, aumentando la licencia remunerada a \\(20\\) semanas.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Esta medida podría equilibrar los costos de contratación entre hombres y mujeres y fortalecer el cuidado del bebé, no perjudicarlo."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "C",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -800,7 +800,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** valorar la confiabilidad de una fuente de información sobre salud.\n- **Datos relevantes:**\n  - La fuente es la Organización Mundial de la Salud.\n  - La OMS emite orientaciones públicas basadas en evidencia científica.\n  - Algunas opciones apelan a testimonios o afirmaciones políticas, que no equivalen a evidencia científica validada.\n- **Método lógico:** una fuente es más confiable cuando sus recomendaciones se sustentan en estudios y validación científica, no en testimonios aislados.\n- **Conclusión:** la fuente sí es confiable porque la **OMS basa sus recomendaciones en estudios científicos validados**.",
           "options": [
             {
               "optionId": "A",
@@ -808,7 +808,7 @@
               "optionText": "No, porque existen testimonios en redes sociales de personas que se han curado de COVID-19 al ingerir cloro.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Los testimonios en redes sociales no constituyen evidencia científica confiable y no invalidan las recomendaciones de una entidad especializada."
             },
             {
               "optionId": "B",
@@ -816,7 +816,7 @@
               "optionText": "Sí, porque la Organización Mundial de la Salud es infalible en sus análisis sobre las enfermedades en el mundo.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Una fuente científica puede ser confiable sin ser infalible. La confiabilidad depende del método y la evidencia, no de una supuesta perfección."
             },
             {
               "optionId": "C",
@@ -824,7 +824,7 @@
               "optionText": "No, porque algunos líderes políticos del mundo han afirmado públicamente que el dióxido de cloro sí es efectivo contra el COVID-19.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** La opinión de líderes políticos no reemplaza la evidencia científica especializada."
             },
             {
               "optionId": "D",
@@ -832,10 +832,10 @@
               "optionText": "Sí, porque la Organización Mundial de la Salud basa sus recomendaciones en estudios realizados y validados por comunidades científicas.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** Esa es precisamente la base de confiabilidad de una fuente científica en salud pública: recomendaciones sustentadas en investigación y validación especializada."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "D",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -860,7 +860,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** identificar un efecto no previsto de limitar el número de trabajadores africanos y pagarles menos.\n- **Datos relevantes:**\n  - El Gobierno propone un máximo de \\(10\\) empleados africanos por empresa.\n  - Además, plantea que ganen menos que los trabajadores franceses.\n- **Método lógico:** pensar qué consecuencia discriminatoria o laboral puede surgir de esa regulación y que no esté planteada como propósito explícito.\n- **Conclusión:** un efecto no esperado sería la exclusión sindical o debilitamiento de sus derechos laborales; entre las opciones, la que mejor recoge esa consecuencia es que **los trabajadores africanos no podrían unirse a los sindicatos franceses**.",
           "options": [
             {
               "optionId": "A",
@@ -868,7 +868,7 @@
               "optionText": "Que las empresas estarían obligadas a contratar a empleados africanos.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** La propuesta fija un límite máximo, no una obligación de contratar inmigrantes africanos."
             },
             {
               "optionId": "B",
@@ -876,7 +876,7 @@
               "optionText": "Que los trabajadores africanos no podrían unirse a los sindicatos franceses.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** Aunque la medida no lo dice expresamente, al establecer condiciones laborales discriminatorias e inferiores, puede producir exclusión y debilitamiento de sus derechos de asociación y defensa laboral."
             },
             {
               "optionId": "C",
@@ -884,7 +884,7 @@
               "optionText": "Que las empresas de otros sectores comenzarían a contratar inmigrantes.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** La medida no sugiere directamente que otros sectores empiecen a contratar más inmigrantes; más bien impone restricciones."
             },
             {
               "optionId": "D",
@@ -892,10 +892,10 @@
               "optionText": "Que el sector de la construcción tendría exceso de trabajadores.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** El contexto inicial señala falta de trabajadores en sectores como la construcción y la agricultura, no un posible exceso."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "B",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -920,7 +920,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** identificar qué propuesta choca con los intereses de los empresarios de productos altos en grasa y sodio.\n- **Datos relevantes:**\n  - Los empresarios temen que disminuya el consumo de sus productos.\n  - Consideran que medidas de advertencia o restricción afectan sus ventas.\n- **Método lógico:** buscar la opción que reduzca de forma directa la comercialización de esos productos.\n- **Conclusión:** la solución incompatible es **prohibir en los colegios la venta y distribución de productos empacados altos en grasa y sodio**.",
           "options": [
             {
               "optionId": "A",
@@ -928,7 +928,7 @@
               "optionText": "Realizar talleres y campañas educativas orientadas a promover el deporte y la actividad física.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Esta medida no afecta directamente la venta de los productos de los empresarios; se centra en hábitos saludables."
             },
             {
               "optionId": "B",
@@ -936,7 +936,7 @@
               "optionText": "Promover un programa de refrigerios balanceados en los colegios que incluya porciones de diferentes tipos de alimentos.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Aunque puede competir indirectamente con productos poco saludables, no los prohíbe de forma directa."
             },
             {
               "optionId": "C",
@@ -944,7 +944,7 @@
               "optionText": "Aprobar una ley que prohíba en los colegios la venta y distribución de productos empacados altos en grasa y sodio.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** Esta medida afecta directamente el mercado de esos productos en los colegios, por lo que es claramente incompatible con los intereses comerciales de los empresarios."
             },
             {
               "optionId": "D",
@@ -952,10 +952,10 @@
               "optionText": "Crear una comisión de padres que trabaje en temas de nutrición y prácticas saludables capacitando a los colegios y las familias.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Es una propuesta educativa y organizativa; no restringe de manera inmediata la comercialización de los productos."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "C",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -980,7 +980,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** aplicar la definición jurídica de refugiado a un caso concreto.\n- **Datos relevantes de la definición:**\n  - La persona debe estar **fuera de su país**.\n  - Debe tener fundados temores de persecución.\n  - No puede o no quiere acogerse a la protección de su país.\n- **Método lógico:** descartar opciones de desplazamiento interno, migración económica o prisión política dentro del mismo país.\n- **Conclusión:** la definición explica mejor el caso de una víctima de conflicto armado que busca asilo fuera de su país y es obligada a regresar, quedando desprotegida.",
           "options": [
             {
               "optionId": "A",
@@ -988,7 +988,7 @@
               "optionText": "la discriminación que sufren quienes se ven obligados a desplazarse desde zonas rurales hacia cascos urbanos de un país en razón de un conflicto armado interno.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Aquí se trata de desplazamiento interno dentro del mismo país, no de refugio internacional."
             },
             {
               "optionId": "B",
@@ -996,7 +996,7 @@
               "optionText": "la situación por la que atraviesan los presos políticos en las cárceles de un país que ha violado sistemáticamente su derecho a la libertad de expresión.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Aunque hay persecución política, estas personas siguen dentro de su país y no corresponde directamente a la definición de refugiado."
             },
             {
               "optionId": "C",
@@ -1004,7 +1004,7 @@
               "optionText": "la falta de garantías a la que se ve sometida una víctima de un conflicto armado interno a quien se le niega asilo en un país y es obligada a volver a su país de origen.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** Esta situación encaja con la definición: una persona fuera de su país, con temor fundado, que necesita protección internacional y sufre al ser obligada a regresar."
             },
             {
               "optionId": "D",
@@ -1012,10 +1012,10 @@
               "optionText": "la estigmatización y el rechazo que sufren los miembros de una comunidad étnica minoritaria que migran a otros países por motivos económicos.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** La migración por motivos económicos no corresponde, por sí sola, a la categoría jurídica de refugio."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "C",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -1040,7 +1040,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** prever qué actores tendrán intereses más claramente opuestos si se reabre el comercio dos días por semana.\n- **Datos relevantes:**\n  - Los comerciantes quieren reabrir para evitar pérdida de empleos.\n  - Los profesionales de la salud se oponen a cualquier reactivación por aumento de contagios.\n  - La alcaldía busca un punto intermedio.\n- **Método lógico:** identificar el par de actores con posturas directamente enfrentadas respecto a la reapertura.\n- **Conclusión:** el conflicto más probable sería entre **comerciantes** y **profesionales de la salud**.",
           "options": [
             {
               "optionId": "A",
@@ -1048,7 +1048,7 @@
               "optionText": "la alcaldía y los comerciantes, por el posible aumento en el número de empleos y de contagios dada la activación económica.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** La alcaldía también propone reactivar gradualmente la economía, así que no es el actor más enfrentado a los comerciantes."
             },
             {
               "optionId": "B",
@@ -1056,7 +1056,7 @@
               "optionText": "los vecinos y la alcaldía, por la falta de garantías para una reactivación económica segura.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Puede haber tensiones, pero el choque más directo del texto está entre reabrir para trabajar y no reabrir para evitar contagios."
             },
             {
               "optionId": "C",
@@ -1064,7 +1064,7 @@
               "optionText": "los vecinos y los profesionales de la salud, por la ausencia de medidas efectivas para cuidar la salud pública.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Ambos comparten preocupación por medidas de cuidado y control de aglomeraciones; no son los actores más opuestos."
             },
             {
               "optionId": "D",
@@ -1072,10 +1072,10 @@
               "optionText": "los comerciantes y los profesionales de la salud, por el posible aumento de contagios dada la activación económica en el sector.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** Los comerciantes priorizan la reapertura y los profesionales de la salud rechazan cualquier reactivación por el riesgo de contagios, lo que genera un conflicto directo."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "D",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -1100,7 +1100,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** relacionar el contenido del testimonio con uno de los objetivos de investigación.\n- **Datos relevantes del testimonio:**\n  - Los campesinos no logran vender yuca, maíz, plátano o ganado.\n  - La coca sí se compra rápido y genera ingresos.\n  - Se muestra una decisión económica basada en la supervivencia.\n- **Método lógico:** elegir el objetivo que trate sobre condiciones sociales e ingresos, no sobre violencia, resistencia o ambiente.\n- **Conclusión:** el testimonio sirve para el objetivo **\\(1\\)**, porque evidencia cómo las condiciones económicas e ingresos campesinos favorecieron el cultivo de coca.",
           "options": [
             {
               "optionId": "A",
@@ -1108,7 +1108,7 @@
               "optionText": "Para el \\(3\\), porque en el testimonio se evidencia cómo el cultivo de hoja de coca fue una forma de resistencia cultural ante la imposición de otros cultivos.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** El testimonio no habla de resistencia cultural, sino de necesidad económica y falta de mercado para otros productos."
             },
             {
               "optionId": "B",
@@ -1116,7 +1116,7 @@
               "optionText": "Para el \\(1\\), porque en el testimonio se evidencia cómo las condiciones económicas llevaron a los campesinos a elegir el cultivo de hoja de coca.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** El relato muestra claramente problemas de comercialización e ingresos, y cómo eso empuja a los campesinos hacia la economía de la coca."
             },
             {
               "optionId": "C",
@@ -1124,7 +1124,7 @@
               "optionText": "Para el \\(2\\), porque en el testimonio se evidencian los factores que generaron fenómenos de violencia dentro de las zonas de cultivo de coca.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** No se describen hechos de violencia ni causas de aumento de esta; el foco está en la economía campesina."
             },
             {
               "optionId": "D",
@@ -1132,10 +1132,10 @@
               "optionText": "Para el \\(4\\), porque en el testimonio se evidencian las afectaciones ambientales producto de la expansión de la economía del narcotráfico en el territorio.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** El testimonio no aborda daños ambientales, sino decisiones de subsistencia económica."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "B",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -1160,7 +1160,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** explicar por qué cambian las afirmaciones del gobernador entre campaña y ejercicio del cargo.\n- **Datos relevantes:**\n  - En campaña estaba en contra del fracking por riesgo a acuíferos, biodiversidad y ecosistemas: razones **ambientales**.\n  - Después de elegido aprueba pilotos y habla de reactivación y agenda energética: razones **económicas** y de gestión.\n- **Método lógico:** comparar el tipo de justificación antes y después.\n- **Conclusión:** primero se opone por razones ambientales; luego lo respalda con argumentos ligados a la reactivación económica.",
           "options": [
             {
               "optionId": "A",
@@ -1168,7 +1168,7 @@
               "optionText": "Tanto en campaña electoral como luego de su elección, el gobernador expresa razones de distinto tipo a favor del fracking.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** En campaña no estaba a favor del fracking; expresó oposición clara."
             },
             {
               "optionId": "B",
@@ -1176,7 +1176,7 @@
               "optionText": "En campaña electoral, el gobernador estaba en contra del fracking por razones ambientales; luego de su elección, sus razones a favor son económicas.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** Esa es la diferencia central: primero enfatiza riesgos ecológicos y después prioriza la reactivación y sostenibilidad asociadas a hidrocarburos."
             },
             {
               "optionId": "C",
@@ -1184,7 +1184,7 @@
               "optionText": "En campaña electoral, el gobernador estaba en contra del fracking por razones económicas; luego de su elección, sus razones a favor son ambientales.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Invierte el sentido del texto: en campaña las razones eran ambientales, no económicas."
             },
             {
               "optionId": "D",
@@ -1192,10 +1192,10 @@
               "optionText": "Tanto en campaña electoral como luego de su elección, el gobernador expresa razones de distinto tipo en contra del fracking.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Después de su elección ya no se manifiesta en contra, sino que aprueba pilotos de fracking."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "B",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -1220,7 +1220,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** valorar culturalmente la propuesta \\(1\\): prohibir el consumo del yagé.\n- **Datos relevantes:**\n  - El yagé es parte de la medicina tradicional indígena.\n  - Tiene significado físico, mental y espiritual para las comunidades.\n  - Prohibirlo afectaría una práctica cultural sagrada.\n- **Método lógico:** analizar la solución desde el derecho a la preservación de tradiciones culturales, no solo desde seguridad o economía.\n- **Conclusión:** desde el ámbito cultural, la medida sería **negativa**, porque vulnera el derecho de los pueblos indígenas a mantener sus tradiciones.",
           "options": [
             {
               "optionId": "A",
@@ -1228,7 +1228,7 @@
               "optionText": "negativa, porque los conocedores de la planta no podrían obtener ingresos por las ceremonias.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Ese argumento es económico, no cultural. La pregunta pide valorar la medida desde el ámbito cultural."
             },
             {
               "optionId": "B",
@@ -1236,7 +1236,7 @@
               "optionText": "positiva, porque no se presentarían más casos de muerte a causa del consumo de yagé.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Ese es un enfoque de salud o seguridad, no cultural; además la prohibición desconoce el valor tradicional del yagé."
             },
             {
               "optionId": "C",
@@ -1244,7 +1244,7 @@
               "optionText": "negativa, porque se estaría vulnerando el derecho de los indígenas a mantener sus tradiciones.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** Prohibir el yagé afectaría una práctica propia de la medicina y espiritualidad indígena, vulnerando su derecho a conservar sus tradiciones culturales."
             },
             {
               "optionId": "D",
@@ -1252,10 +1252,10 @@
               "optionText": "positiva, porque protege la tradición al permitir que solo los indígenas puedan beber yagé.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Esta opción mezcla la valoración de la solución \\(2\\), no de la solución \\(1\\), que consiste en prohibir totalmente el consumo."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "C",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -1280,7 +1280,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** encontrar una postura semejante a la de quienes consideran inadecuado emitir contenido discriminatorio.\n- **Datos relevantes:**\n  - Los medios sostienen que la serie fomenta violencia, machismo, gordofobia y discriminación.\n  - Por eso consideran inadecuado volver a emitirla.\n- **Método lógico:** buscar una opción que también rechace la emisión de contenidos ofensivos o discriminatorios, aun si son frecuentes.\n- **Conclusión:** la postura semejante es la que afirma que, aunque muchas series hagan burlas por rasgos físicos, **no deberían emitir ese tipo de contenido ofensivo**.",
           "options": [
             {
               "optionId": "A",
@@ -1288,7 +1288,7 @@
               "optionText": "Aunque en la serie los personajes se burlen de individuos con sobrepeso, los espectadores tienen criterio para no reproducir comportamientos ofensivos.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Esta postura minimiza el problema del contenido discriminatorio y defiende su emisión, lo contrario de la posición de los medios."
             },
             {
               "optionId": "B",
@@ -1296,7 +1296,7 @@
               "optionText": "Las series televisivas usualmente se burlan de personajes con cualquier tipo de característica física y eso no es una buena razón para dejar de emitirlas.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Justifica la continuidad de la emisión pese al contenido ofensivo, lo cual se opone a la postura planteada."
             },
             {
               "optionId": "C",
@@ -1304,7 +1304,7 @@
               "optionText": "Aunque muchas series actuales se burlen de personajes con ciertos rasgos físicos, no deberían emitir ese tipo de contenido ofensivo.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** Coincide con la idea de que los contenidos discriminatorios no deben difundirse, aunque sean comunes en ciertos productos audiovisuales."
             },
             {
               "optionId": "D",
@@ -1312,10 +1312,10 @@
               "optionText": "No es adecuado emitir series televisivas tan antiguas porque habría problemas con los programas de televisión actuales.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** El problema no es la antigüedad de la serie, sino el contenido discriminatorio que transmite."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "C",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -1340,7 +1340,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** interpretar la postura política del congresista.\n- **Datos relevantes:**\n  - Habla de defender el \"derecho a la vida\".\n  - Convoca a colectividades políticas, gremios y asociaciones de padres.\n  - El contexto es un debate sobre despenalización del aborto.\n- **Método lógico:** inferir si apoya o rechaza la despenalización y a qué sectores representa.\n- **Conclusión:** el congresista **representa sectores específicos de la sociedad que están en contra de la despenalización del aborto**.",
           "options": [
             {
               "optionId": "A",
@@ -1348,7 +1348,7 @@
               "optionText": "acompaña a sectores sociales que buscan legalizar el aborto solo en los casos de violación.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** La intervención usa un lenguaje de oposición al aborto, no de apoyo a su legalización parcial."
             },
             {
               "optionId": "B",
@@ -1356,7 +1356,7 @@
               "optionText": "expone posiciones políticas que no representan de ninguna manera a los ciudadanos.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Como congresista, justamente expresa una posición que sí representa a ciertos sectores ciudadanos, aunque no a todos."
             },
             {
               "optionId": "C",
@@ -1364,7 +1364,7 @@
               "optionText": "representa a sectores específicos de la sociedad que están en contra de la despenalización del aborto.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** El llamado a unirse para defender el \"derecho a la vida\" muestra una postura contraria a la despenalización y alineada con sectores sociales conservadores."
             },
             {
               "optionId": "D",
@@ -1372,10 +1372,10 @@
               "optionText": "muestra el descontento de las mujeres incitadas a abortar porque no cuentan con subsidios.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Esa idea no aparece en la intervención ni se deriva del llamado político citado."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "C",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -1400,7 +1400,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** identificar el propósito democrático de la propuesta.\n- **Datos relevantes:**\n  - Los ministerios explicarían públicamente sus políticas.\n  - Habría \\(15\\) días para comentarios de distintos sectores y ciudadanía.\n  - Luego las decisiones se justificarían públicamente.\n- **Método lógico:** distinguir entre participación consultiva, decisión directa de la ciudadanía, agilidad administrativa o reducción del debate.\n- **Conclusión:** el objetivo es **abrir la toma de decisiones al debate y a los aportes ciudadanos**, no transferirles la decisión final.",
           "options": [
             {
               "optionId": "A",
@@ -1408,7 +1408,7 @@
               "optionText": "Evitar la controversia y la polarización que se puede generar a partir del debate público.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** La propuesta no evita el debate; al contrario, lo promueve explícitamente."
             },
             {
               "optionId": "B",
@@ -1416,7 +1416,7 @@
               "optionText": "Agilizar los procesos de toma de decisiones sobre políticas que afectan a la ciudadanía.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Incorporar ruedas de prensa, plazos y comentarios probablemente hace el proceso más deliberativo, no más rápido."
             },
             {
               "optionId": "C",
@@ -1424,7 +1424,7 @@
               "optionText": "Permitir que los ciudadanos sean quienes tomen las decisiones sobre las políticas que los afectan.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Los ciudadanos opinan y aportan, pero la decisión final sigue en manos del ministerio."
             },
             {
               "optionId": "D",
@@ -1432,10 +1432,10 @@
               "optionText": "Promover una toma de decisiones más abierta a los aportes y al debate por parte de los ciudadanos.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** La propuesta busca más deliberación, transparencia y apertura a observaciones de la ciudadanía y otros sectores interesados."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "D",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -1460,7 +1460,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** escoger el argumento que respalde la idea de que el Congreso es esencial para la democracia y la división del poder.\n- **Datos relevantes:**\n  - La oposición afirma que eliminar o reducir drásticamente el Congreso es antidemocrático.\n  - El Congreso cumple funciones de representación y equilibrio frente al poder ejecutivo.\n- **Método lógico:** identificar la opción que defiende el papel representativo e institucional del Congreso.\n- **Conclusión:** la mejor opción es la que señala que el Congreso **representa indirectamente los múltiples intereses de los distintos grupos del país**.",
           "options": [
             {
               "optionId": "A",
@@ -1468,7 +1468,7 @@
               "optionText": "El Congreso no es la única fuente de corrupción e ineficiencia en las instituciones que conforman un Estado.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Aunque relativiza la culpa del Congreso, no explica por qué este es importante para la democracia y la división del poder."
             },
             {
               "optionId": "B",
@@ -1476,7 +1476,7 @@
               "optionText": "La reducción del Congreso permitiría que el Estado invierta los recursos de los salarios de los congresistas en obras sociales.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Este argumento apoya más bien la propuesta presidencial, no la posición de la oposición."
             },
             {
               "optionId": "C",
@@ -1484,7 +1484,7 @@
               "optionText": "El Congreso permite representar, de manera indirecta, los múltiples intereses de los diferentes grupos que conforman un país.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** Este argumento respalda la idea de que el Congreso es clave en una democracia porque canaliza la representación plural y equilibra el poder político."
             },
             {
               "optionId": "D",
@@ -1492,10 +1492,10 @@
               "optionText": "El presidente es la máxima autoridad de una nación, por lo que las decisiones que la afectan no requieren la aprobación del Congreso.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Esta afirmación contradice directamente la defensa de la división de poderes y del papel democrático del Congreso."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "C",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
