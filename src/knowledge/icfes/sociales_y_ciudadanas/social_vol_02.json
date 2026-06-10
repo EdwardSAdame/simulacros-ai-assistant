@@ -1,0 +1,1508 @@
+{
+  "examType": "ICFES",
+  "component": "sociales_y_ciudadanas",
+  "examVolume": "2025-2 Segunda Sesión",
+  "totalSections": 25,
+  "sections": [
+    {
+      "sectionIndex": 1,
+      "sectionTitle": "",
+      "sectionText": "",
+      "sectionSource": "",
+      "hasSectionImage": false,
+      "sectionImageUrl": "",
+      "sectionImageAiDescription": "",
+      "questions": [
+        {
+          "questionId": "q_01",
+          "questionText": "Los habitantes de un barrio pintaron una cancha de microfútbol en la calle, ya que suelen hacer encuentros futbolísticos, en el marco de un torneo local, los sábados desde las \\(11{:}00\\ \\text{a. m.}\\) hasta la \\(1{:}00\\ \\text{p. m.}\\). Sin embargo, no se han podido llevar a cabo varias fechas del torneo, ya que los habitantes del barrio contiguo mandan a estacionar las camionetas blindadas de sus escoltas en la cancha y las dejan ahí, a veces, hasta las \\(6{:}00\\ \\text{p. m.}\\). Más tarde, entre las \\(7{:}00\\ \\text{p. m.}\\) y las \\(9{:}00\\ \\text{p. m.}\\), otros de los habitantes del barrio organizan un bingo en la cancha, por lo que no es posible jugar fútbol a esa hora.\n\nEn esta situación, ¿entre quiénes es probable que se presente un conflicto?",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "aiExplanation": "",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "optionText": "Entre los dueños de las camionetas y los habitantes del barrio que organizan el bingo.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "optionText": "Entre los habitantes del barrio que juegan microfútbol y los habitantes del barrio que organizan el bingo.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "optionText": "Entre los escoltas y los habitantes del barrio contiguo que son dueños de las camionetas.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "optionText": "Entre los escoltas y los habitantes del barrio que quieren participar del torneo de microfútbol.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            }
+          ],
+          "correctOptionId": "",
+          "irt_parameters": {
+            "discrimination_a": 1.0,
+            "difficulty_b": 0.0,
+            "guessing_c": 0.25
+          }
+        }
+      ]
+    },
+    {
+      "sectionIndex": 2,
+      "sectionTitle": "",
+      "sectionText": "",
+      "sectionSource": "",
+      "hasSectionImage": false,
+      "sectionImageUrl": "",
+      "sectionImageAiDescription": "",
+      "questions": [
+        {
+          "questionId": "q_02",
+          "questionText": "En un barrio de una ciudad principal, se han elevado múltiples quejas por la construcción de un lugar de reunión para personas que profesan una religión cuyas prácticas se vinculan con la exaltación de la magia y de ritos de religiones antiguas. La inconformidad ha propiciado la aparición de distintos panfletos en los que se acusa a los integrantes de la iglesia de ser promotores de violencia contra otras religiones y hacia poblaciones vulnerables. Para detener estas acusaciones, que encuentran infundadas, los miembros de la asociación barrial buscan generar espacios de conciliación y de diálogo para evitar comentarios que afectan la unidad de la comunidad y que les impiden a los habitantes del sector conocer nuevas culturas y diversificar su pensamiento.\n\n¿Por qué se puede afirmar que la asociación barrial actúa en derecho?",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "aiExplanation": "",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "optionText": "Porque reconoce el derecho a la libre asociación, estipulado en la Constitución.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "optionText": "Porque reconoce el derecho a la libertad de culto, estipulado en la Constitución.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "optionText": "Porque reconoce el derecho a la libre participación, estipulado en la Constitución.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "optionText": "Porque reconoce el derecho a la igualdad y a la libertad, estipulado en la Constitución.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            }
+          ],
+          "correctOptionId": "",
+          "irt_parameters": {
+            "discrimination_a": 1.0,
+            "difficulty_b": 0.0,
+            "guessing_c": 0.25
+          }
+        }
+      ]
+    },
+    {
+      "sectionIndex": 3,
+      "sectionTitle": "",
+      "sectionText": "",
+      "sectionSource": "",
+      "hasSectionImage": false,
+      "sectionImageUrl": "",
+      "sectionImageAiDescription": "",
+      "questions": [
+        {
+          "questionId": "q_03",
+          "questionText": "La alcaldía de un municipio decidió invertir el \\(90 \\%\\) de los recursos destinados a educación en la construcción de un megacolegio, con el fin de resolver los problemas de falta de cupos en el centro del municipio. En la zona donde se construyó la nueva institución educativa hay un alto flujo de personas y de vehículos, por lo que, en su interior, se construyó un parqueadero amplio para los profesores y algunas rutas escolares; de igual manera, la puerta de ingreso y salida de vehículos fue ubicada sobre una calle poco transitada. Adicionalmente, la alcaldía invirtió en la compra de televisores, tableros digitales, computadores, libros y materiales didácticos para la institución y, con apoyo de algunas organizaciones privadas, construyó una cancha múltiple para uso del colegio en el parque contiguo a la institución educativa, donde los profesores de Educación Física les dan clases a sus estudiantes.\n\n¿Qué efecto indeseado podría traer la solución ejecutada por la alcaldía?",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "aiExplanation": "",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "optionText": "Que los profesores del megacolegio protesten por la falta de recursos para el desarrollo de su labor educativa.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "optionText": "Que los vecinos del colegio se quejen por cuenta del impacto generado por el alto flujo vehicular en la puerta del colegio.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "optionText": "Que se generen protestas pacíficas por parte de ciudadanos del municipio que piden a la alcaldía invertir recursos en otros colegios del municipio.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "optionText": "Que los padres de familia se quejen porque los estudiantes deben desplazarse a un lugar desconocido para practicar deportes en la cancha múltiple.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            }
+          ],
+          "correctOptionId": "",
+          "irt_parameters": {
+            "discrimination_a": 1.0,
+            "difficulty_b": 0.0,
+            "guessing_c": 0.25
+          }
+        }
+      ]
+    },
+    {
+      "sectionIndex": 4,
+      "sectionTitle": "",
+      "sectionText": "",
+      "sectionSource": "",
+      "hasSectionImage": false,
+      "sectionImageUrl": "",
+      "sectionImageAiDescription": "",
+      "questions": [
+        {
+          "questionId": "q_04",
+          "questionText": "En un país, se abrió una investigación judicial por corrupción a un político perteneciente al mismo partido del presidente de la República y, a esto, se le suma su detención preventiva, para que no se obstruya la administración de justicia. Al respecto, el primer mandatario anunció, en los medios de comunicación de su país, su apoyo incondicional a su copartidario y exigió a la autoridad judicial su liberación.\n\n¿Cuál de las siguientes situaciones demuestra una extralimitación de sus funciones por parte del presidente de la República frente al proceso en contra de su copartidario?",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "aiExplanation": "",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "optionText": "El desconocimiento de la autonomía de la rama judicial.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "optionText": "El desconocimiento del partido político como primer investigador.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "optionText": "El conocimiento del pasado judicial de su copartidario.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "optionText": "El uso de los medios de comunicación para expresarse.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            }
+          ],
+          "correctOptionId": "",
+          "irt_parameters": {
+            "discrimination_a": 1.0,
+            "difficulty_b": 0.0,
+            "guessing_c": 0.25
+          }
+        }
+      ]
+    },
+    {
+      "sectionIndex": 5,
+      "sectionTitle": "",
+      "sectionText": "",
+      "sectionSource": "",
+      "hasSectionImage": false,
+      "sectionImageUrl": "",
+      "sectionImageAiDescription": "",
+      "questions": [
+        {
+          "questionId": "q_05",
+          "questionText": "En el marco del conflicto colombiano, una comunidad indígena fue víctima de despojo de tierras por parte de un actor armado. Años después, el cabildo indígena que representa a la comunidad reclama la restitución de la porción de tierra perdida por el resguardo, la cual fue comprada por una familia campesina a un tercero. Al respecto, los indígenas manifiestan que la Constitución política respalda su derecho a la propiedad colectiva, mientras que la familia campesina expresa que el pago que hicieron por la tierra les da la propiedad sobre la misma.\n\nFrente a este conflicto, ¿qué aspecto en común está presente en los reclamos de la comunidad indígena y de la familia campesina?",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "aiExplanation": "",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "optionText": "El derecho al acceso a recursos de subsistencia por parte de habitantes rurales.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "optionText": "La vulneración indiscriminada de los derechos de las comunidades por parte de actores armados.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "optionText": "Las facilidades en el acceso a la justicia en procesos de restitución de tierras en Colombia.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "optionText": "Las consecuencias de la concentración de la tierra para las poblaciones vulnerables de nuestro país.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            }
+          ],
+          "correctOptionId": "",
+          "irt_parameters": {
+            "discrimination_a": 1.0,
+            "difficulty_b": 0.0,
+            "guessing_c": 0.25
+          }
+        }
+      ]
+    },
+    {
+      "sectionIndex": 6,
+      "sectionTitle": "",
+      "sectionText": "En una escuela municipal del estado de Río de Janeiro, la profesora de Literatura Brasileña, una mujer afrobrasileña, orgullosa de sus raíces culturales y religiosas, propuso trabajar con el libro \"Leyendas de Exú\". Esta obra trata acerca de una de las principales divinidades de la cultura afrobrasileña. Ahora bien, a pesar de ser una obra recomendada por el Ministerio de Educación de ese país, algunas madres evangélicas acusaron a la profesora de usar la clase para \"alabar al diablo\". La rectora, también evangélica, despidió a la profesora para evitar enfrentamientos con las madres. Finalmente, la profesora acudió a las autoridades públicas y fue reintegrada a su trabajo. En esta instancia, las autoridades públicas decidieron abrir una investigación a la rectora por presunta intolerancia religiosa.",
+      "sectionSource": "*Tomado y adaptado de: Redacción Educación. (27 de octubre de 2009). Livro sobre lendas da umbanda gera polêmica em escola no Rio. Terra. https://www.terra.com.br/noticias/educacao/livro-sobre-lendas-da-umbanda-gera-polemica-em-escola-no-rio,891937dabd9ea310VgnCLD200000bbcceb0aRCRD.html*",
+      "hasSectionImage": false,
+      "sectionImageUrl": "",
+      "sectionImageAiDescription": "",
+      "questions": [
+        {
+          "questionId": "q_06",
+          "questionText": "La intervención de las autoridades públicas para solucionar el conflicto que se dio en la escuela fue",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "aiExplanation": "",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "optionText": "deseable para las madres, porque lograron el despido de la profesora de Literatura.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "optionText": "indeseable para la profesora, porque mostró la importancia de la posición religiosa de las madres.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "optionText": "indeseable para la rectora, porque puso en entredicho sus actuaciones en ejercicio de su labor directiva.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "optionText": "deseable para el Ministerio de Educación, porque le dio visibilidad a uno de los libros que recomienda a los colegios.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            }
+          ],
+          "correctOptionId": "",
+          "irt_parameters": {
+            "discrimination_a": 1.0,
+            "difficulty_b": 0.0,
+            "guessing_c": 0.25
+          }
+        }
+      ]
+    },
+    {
+      "sectionIndex": 7,
+      "sectionTitle": "",
+      "sectionText": "El \\*fracking\\* es un método para extraer gas y petróleo fracturando las rocas del subsuelo; aunque este método podría fortalecer la economía colombiana, parece no ser completamente seguro. Al respecto, una persona afirmó que \"el \\*fracking\\* es una técnica cuestionada en el mundo porque afecta las aguas, el suelo y el subsuelo, así como la biodiversidad y el paisaje; también puede inducir a la generación de sismos. Su posible desarrollo en el país con mayor diversidad biológica por kilómetro cuadrado del planeta y con una amplia riqueza hídrica amerita consideraciones especiales\".",
+      "sectionSource": "*Tomado y adaptado de: Montenegro, A. (28 de agosto de 2017). Ambientalistas se oponen a luz verde al \"fracking\" en el país. El Tiempo. https://eltiempo.com*",
+      "hasSectionImage": false,
+      "sectionImageUrl": "",
+      "sectionImageAiDescription": "",
+      "questions": [
+        {
+          "questionId": "q_07",
+          "questionText": "Se podría decir que la persona que hizo la anterior afirmación es un ambientalista, o sea, un individuo comprometido con el cuidado y la conservación de la biodiversidad de un territorio, porque",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "aiExplanation": "",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "optionText": "estudia los posibles sismos que puede causar el fracking en un país con alto nivel de biodiversidad.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "optionText": "advierte sobre el impacto que puede tener este método en la fauna y flora del país con mayor diversidad biológica.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "optionText": "cree que es más importante la crisis económica del país que el cuidado y la conservación de la biodiversidad.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "optionText": "está a favor de la precaución, debido a que no es posible saber si un método tan inseguro podrá generar un beneficio económico real.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            }
+          ],
+          "correctOptionId": "",
+          "irt_parameters": {
+            "discrimination_a": 1.0,
+            "difficulty_b": 0.0,
+            "guessing_c": 0.25
+          }
+        }
+      ]
+    },
+    {
+      "sectionIndex": 8,
+      "sectionTitle": "",
+      "sectionText": "",
+      "sectionSource": "",
+      "hasSectionImage": false,
+      "sectionImageUrl": "",
+      "sectionImageAiDescription": "",
+      "questions": [
+        {
+          "questionId": "q_08",
+          "questionText": "Los vecinos de un barrio están solicitando la reparación y mantenimiento del parque principal, incluyendo los espacios deportivos y recreativos, como la cancha de microfútbol. Esta cancha se encuentra en un alto grado de deterioro, pues es el espacio más utilizado por niños, jóvenes y familias del sector, dado que, años atrás, la cancha de fútbol fue remodelada y reservada para encuentros deportivos especiales.\n\nEl Gobierno municipal se comprometería a remodelar el parque, siempre y cuando se incluya la construcción de la primera pista de patinaje profesional del municipio. Sin embargo, por las dimensiones de la pista, tendría que ocuparse el espacio donde queda la cancha de microfútbol del barrio.\n\n¿De qué manera se relaciona la propuesta de remodelación del Gobierno municipal con los intereses de los vecinos?",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "aiExplanation": "",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "optionText": "Se ajusta completamente a sus intereses, porque va a mejorar el parque principal del barrio como solicitaron.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "optionText": "Beneficia a los vecinos del barrio y al municipio, porque mejora el parque y agrega una pista profesional.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "optionText": "Va en contra de los intereses de recreación de los vecinos, porque va a quitar el escenario que más utilizan.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "optionText": "Afecta parcialmente los intereses del municipio, porque debe pagar la pista y además la remodelación.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            }
+          ],
+          "correctOptionId": "",
+          "irt_parameters": {
+            "discrimination_a": 1.0,
+            "difficulty_b": 0.0,
+            "guessing_c": 0.25
+          }
+        }
+      ]
+    },
+    {
+      "sectionIndex": 9,
+      "sectionTitle": "",
+      "sectionText": "En Colombia, la Constitución política establece que es deber del Estado proteger la diversidad e integridad del ambiente y conservar las áreas de especial importancia ecológica; sin embargo, hay muchas especies en peligro de extinción, una de las cuales es el oso de anteojos. Este oso habita en los páramos andinos y ayuda a dispersar semillas, generando, así, la renovación de estos ecosistemas, pero, a pesar de su importancia ecológica, es una especie vulnerable a causa de la pérdida de su hábitat. Esto es generado principalmente por la intervención del ser humano en las zonas en las que vive; al respecto, algunas de las actividades que ponen en peligro la existencia de esta especie son: la tala de los bosques, la implementación de actividades productivas en sus territorios y la cacería, que, en ocasiones, se da como respuesta al eventual sacrificio por parte de los osos del ganado o a daños causados a los cultivos de las comunidades aledañas a su hábitat. En estos casos es importante que las comunidades entiendan, de antemano, que somos los humanos quienes, en un principio, invadimos el hábitat del oso, no al contrario.",
+      "sectionSource": "*Tomado y adaptado de: Redacción Otras Ciudades (2018). ¿Por qué es tan importante el oso de anteojos para Colombia? [Infografía] El Tiempo. https://www.eltiempo.com/colombia/otras-ciudades/Infografia-sobre-el-oso-de-anteojos-262212*",
+      "hasSectionImage": false,
+      "sectionImageUrl": "",
+      "sectionImageAiDescription": "",
+      "questions": [
+        {
+          "questionId": "q_09",
+          "questionText": "En la descripción de la situación anterior, ¿en qué se está haciendo énfasis?",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "aiExplanation": "",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "optionText": "En las razones por las que el oso de anteojos está en peligro de extinción.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "optionText": "En los peligros que representa el oso de anteojos para los humanos.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "optionText": "En los esfuerzos del Estado por proteger al oso de anteojos.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "optionText": "En la distribución geográfica del oso de anteojos.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            }
+          ],
+          "correctOptionId": "",
+          "irt_parameters": {
+            "discrimination_a": 1.0,
+            "difficulty_b": 0.0,
+            "guessing_c": 0.25
+          }
+        }
+      ]
+    },
+    {
+      "sectionIndex": 10,
+      "sectionTitle": "",
+      "sectionText": "Lea con atención el siguiente fragmento:\n\n\"El reconocimiento de la diversidad, de los derechos diferenciados y de la igualdad como condición estructural de la vida en comunidad, es la legitimación de luchas históricas de grupos étnicos vernáculos y minorías sociales, que han sido sujetos paradigmáticos de las luchas por la participación económica, social y política en Colombia. La Constitución de 1991 hace un claro y normativo reconocimiento del multiculturalismo, del principio del reconocimiento y de la protección a la diversidad étnica y cultural de la nación colombiana (art. 7); en esa medida, se hace reconocimiento de la igualdad y la dignidad de todas las culturas que conviven en el país (art. 70), y del principio de la autonomía normativa y judicial consagrada en el artículo 246 de la Constitución, gracias al cual los pueblos indígenas podrán ejercer funciones jurisdiccionales dentro de su ámbito territorial, de conformidad con sus propias normas y procedimientos [...]\".",
+      "sectionSource": "*Tomado y adaptado de: Moreno Parra, H. (s. f.). Derechos diferenciados y Estado multicultural en Colombia. http://viva.org.co/cajavirtual/svc0287/pdfs/articulo783_287.pdf*",
+      "hasSectionImage": false,
+      "sectionImageUrl": "",
+      "sectionImageAiDescription": "",
+      "questions": [
+        {
+          "questionId": "q_10",
+          "questionText": "¿Cuál de las siguientes opciones describe una situación que justifica la adopción de las políticas mencionadas?",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "aiExplanation": "",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "optionText": "En una ciudad intermedia de Colombia, los miembros del pueblo rom o gitano son constantemente perseguidos y desalojados violentamente por algunas personas que los consideran brujos, ladrones, supersticiosos y nocivos para la sociedad.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "optionText": "En la capital colombiana, \\(12\\) de cada \\(100\\) habitantes vive en condiciones de pobreza o pobreza extrema, con ingresos de \\(\\$200.000\\) mensuales o menos, siendo en su mayoría personas desplazadas por la violencia en otras regiones.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "optionText": "Entre \\(2015\\) y \\(2016\\), aumentaron en un \\(19 \\%\\) los suicidios en Medellín, y se ha reportado que la mayoría de los suicidios los cometen niños entre los \\(5\\) y los \\(16\\) años, en plena etapa escolar, pero también jóvenes entre los \\(18\\) y los \\(28\\) años, es decir, en plena edad productiva.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "optionText": "El consumo de alcohol entre hombres y mujeres en \\(2014\\) presentó una amplia diferencia: se observó que el \\(54{,}73 \\%\\) de los hombres consume alcohol, mientras que solo el \\(38{,}89 \\%\\) de las mujeres lo hace.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            }
+          ],
+          "correctOptionId": "",
+          "irt_parameters": {
+            "discrimination_a": 1.0,
+            "difficulty_b": 0.0,
+            "guessing_c": 0.25
+          }
+        }
+      ]
+    },
+    {
+      "sectionIndex": 11,
+      "sectionTitle": "",
+      "sectionText": "",
+      "sectionSource": "",
+      "hasSectionImage": false,
+      "sectionImageUrl": "",
+      "sectionImageAiDescription": "",
+      "questions": [
+        {
+          "questionId": "q_11",
+          "questionText": "El alcalde de un municipio contrató la construcción de una red de alcantarillado con la que se buscaba beneficiar a cuatro barrios de escasos recursos; sin embargo, luego de diez años de haberse iniciado la construcción, las obras permanecen inconclusas y las tuberías que se instalaron presentaron graves deterioros. Por todo lo anterior, los habitantes aún no cuentan con el servicio.\n\n¿A cuál de las siguientes entidades podrían acudir los ciudadanos para que se investigue el manejo inadecuado de los recursos públicos y se logre su recuperación?",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "aiExplanation": "",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "optionText": "Al Concejo municipal, para que en ejercicio del control político expida un acuerdo mediante el cual sancione a los responsables.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "optionText": "Al Ministerio de Ambiente, para que verifique las condiciones de insalubridad que genera la falta de alcantarillado.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "optionText": "Al Congreso de la República, para que impulse un proyecto de ley que endurezca las penas por este tipo de actos.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "optionText": "A la Contraloría General de la República, para que ejerza el control fiscal y la vigilancia de los bienes del Estado.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            }
+          ],
+          "correctOptionId": "",
+          "irt_parameters": {
+            "discrimination_a": 1.0,
+            "difficulty_b": 0.0,
+            "guessing_c": 0.25
+          }
+        }
+      ]
+    },
+    {
+      "sectionIndex": 12,
+      "sectionTitle": "",
+      "sectionText": "Según la Organización de Naciones Unidas, \"la globalización es un fenómeno inevitable en la historia humana que ha acercado al mundo a través del intercambio de bienes y productos, información, conocimientos y cultura [...] Los críticos de la globalización se quejan de que las disparidades que se producen en el sistema comercial mundial de hoy perjudican a los países en desarrollo [...] sostienen que el proceso ha significado la explotación de gente en estos países, producido perturbaciones masivas y aportado pocos beneficios\".",
+      "sectionSource": "*Tomado y adaptado de: Organización de Naciones Unidas. (2010). Los objetivos de desarrollo del Milenio. http://www.un.org/es/aboutun/booklet/globalization.shtml*",
+      "hasSectionImage": false,
+      "sectionImageUrl": "",
+      "sectionImageAiDescription": "",
+      "questions": [
+        {
+          "questionId": "q_12",
+          "questionText": "¿Por qué la globalización, a pesar de haber \"acercado al mundo a través del intercambio de bienes y productos, información, conocimientos y cultura\", afecta laboralmente a los países en vías de desarrollo?",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "aiExplanation": "",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "optionText": "Porque la cultura de masas global ha determinado patrones de consumo en países en desarrollo.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "optionText": "Porque se presentan dificultades para el intercambio de conocimientos productivos en países en desarrollo.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "optionText": "Porque se generan problemáticas medioambientales, principalmente en los países en desarrollo.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "optionText": "Porque la división internacional del trabajo ofrece una mano de obra barata en los países en desarrollo.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            }
+          ],
+          "correctOptionId": "",
+          "irt_parameters": {
+            "discrimination_a": 1.0,
+            "difficulty_b": 0.0,
+            "guessing_c": 0.25
+          }
+        }
+      ]
+    },
+    {
+      "sectionIndex": 13,
+      "sectionTitle": "",
+      "sectionText": "En un país, la licencia de maternidad consiste en un período remunerado de \\(20\\) semanas que, por ley, se le otorga a la mujer que acaba de tener un hijo; sin embargo, esta remuneración ha traído consigo un aumento en los niveles de desempleo en las mujeres, ya que las empresas privadas prefieren contratar hombres, quienes, en caso de tener un hijo, tendrán por ley tan solo \\(13\\) días de licencia remunerada. Así, las empresas prefieren evitar el riesgo de tener que pagarles más tiempo de licencia a las madres, si saben que les pueden pagar menos tiempo de licencia a los padres.",
+      "sectionSource": "",
+      "hasSectionImage": false,
+      "sectionImageUrl": "",
+      "sectionImageAiDescription": "",
+      "questions": [
+        {
+          "questionId": "q_13",
+          "questionText": "De las siguientes soluciones posibles, ¿cuál de ellas podría afectar de manera negativa el desarrollo adecuado de los recién nacidos?",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "aiExplanation": "",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "optionText": "Diseñar una estrategia para que el Gobierno ayude a las empresas privadas a pagarles a las mujeres el costo total de la licencia.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "optionText": "Reducir impuestos a las empresas privadas por cada mujer en edad reproductiva que contraten.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "optionText": "Crear una nueva ley que permita reducir la licencia de maternidad de \\(20\\) a \\(8\\) semanas.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "optionText": "Modificar la ley que establece la licencia de paternidad, aumentando la licencia remunerada a \\(20\\) semanas.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            }
+          ],
+          "correctOptionId": "",
+          "irt_parameters": {
+            "discrimination_a": 1.0,
+            "difficulty_b": 0.0,
+            "guessing_c": 0.25
+          }
+        }
+      ]
+    },
+    {
+      "sectionIndex": 14,
+      "sectionTitle": "",
+      "sectionText": "En un debate televisivo sobre la eficacia del dióxido de cloro para tratar el COVID-19, un investigador de la Organización Mundial de la Salud señaló que: \"Jamás se debe pulverizar cloro u otros desinfectantes sobre el cuerpo ni introducirlos en el organismo. Estas sustancias pueden ser tóxicas si se ingieren, y el contacto con ellas irrita y daña la piel y los ojos. El cloro y los desinfectantes deben utilizarse únicamente para la desinfección de superficies y siempre con las debidas precauciones. Recuerde mantener el cloro y otros desinfectantes fuera del alcance de los niños\".",
+      "sectionSource": "*Tomado y adaptado de: Organización Mundial de la Salud. (s. f.). Brote de enfermedad por coronavirus (COVID-19): orientaciones para el público. https://www.who.int/es/emergencies/diseases/novel-coronavirus-2019/advice-for-public*",
+      "hasSectionImage": false,
+      "sectionImageUrl": "",
+      "sectionImageAiDescription": "",
+      "questions": [
+        {
+          "questionId": "q_14",
+          "questionText": "¿Esta fuente puede considerarse confiable?",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "aiExplanation": "",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "optionText": "No, porque existen testimonios en redes sociales de personas que se han curado de COVID-19 al ingerir cloro.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "optionText": "Sí, porque la Organización Mundial de la Salud es infalible en sus análisis sobre las enfermedades en el mundo.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "optionText": "No, porque algunos líderes políticos del mundo han afirmado públicamente que el dióxido de cloro sí es efectivo contra el COVID-19.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "optionText": "Sí, porque la Organización Mundial de la Salud basa sus recomendaciones en estudios realizados y validados por comunidades científicas.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            }
+          ],
+          "correctOptionId": "",
+          "irt_parameters": {
+            "discrimination_a": 1.0,
+            "difficulty_b": 0.0,
+            "guessing_c": 0.25
+          }
+        }
+      ]
+    },
+    {
+      "sectionIndex": 15,
+      "sectionTitle": "",
+      "sectionText": "",
+      "sectionSource": "",
+      "hasSectionImage": false,
+      "sectionImageUrl": "",
+      "sectionImageAiDescription": "",
+      "questions": [
+        {
+          "questionId": "q_15",
+          "questionText": "Se ha generado un conflicto entre empresarios y sindicatos franceses por la contratación de inmigrantes africanos. Para los empresarios, la contratación de africanos beneficia a sectores como la construcción y la agricultura, que tienen pocos trabajadores, mientras que, para los sindicatos, estas contrataciones podrían afectarlos, pues sus sueldos y puestos de trabajo estarían en riesgo. Para dar solución a este conflicto, el Gobierno francés ha propuesto que las empresas francesas tengan un límite de diez empleados africanos y que su sueldo sea inferior al de los trabajadores franceses.\n\n¿Qué efectos NO esperados tendría la solución propuesta por el Gobierno francés?",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "aiExplanation": "",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "optionText": "Que las empresas estarían obligadas a contratar a empleados africanos.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "optionText": "Que los trabajadores africanos no podrían unirse a los sindicatos franceses.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "optionText": "Que las empresas de otros sectores comenzarían a contratar inmigrantes.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "optionText": "Que el sector de la construcción tendría exceso de trabajadores.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            }
+          ],
+          "correctOptionId": "",
+          "irt_parameters": {
+            "discrimination_a": 1.0,
+            "difficulty_b": 0.0,
+            "guessing_c": 0.25
+          }
+        }
+      ]
+    },
+    {
+      "sectionIndex": 16,
+      "sectionTitle": "",
+      "sectionText": "En una ciudad se discute cuál es la mejor manera de reducir el problema de la obesidad infantil, pues el número de casos de esta enfermedad ha ido aumentando significativamente en los últimos años. Al respecto, una organización internacional que realiza campañas para prevenir el sobrepeso y la obesidad infantil, propone organizar espacios en los colegios de la ciudad para capacitar a las familias de los estudiantes sobre la importancia de la alimentación saludable y de la actividad física. Por su parte, un grupo de padres de familia está liderando una campaña para exigir a las autoridades locales que las grandes empresas productoras de bebidas azucaradas, y otros productos empacados altos en grasa y sodio, incluyan una etiqueta que alarme y explique la baja calidad nutricional de estos productos. Finalmente, los empresarios que producen alimentos empacados altos en grasa y sodio consideran que incluir etiquetas en sus productos generaría una alarma innecesaria en la población y que, si el consumo de estos productos disminuye, tendrían que despedir trabajadores porque no podrían pagar sus salarios.",
+      "sectionSource": "",
+      "hasSectionImage": false,
+      "sectionImageUrl": "",
+      "sectionImageAiDescription": "",
+      "questions": [
+        {
+          "questionId": "q_16",
+          "questionText": "¿Cuál de las siguientes soluciones propuestas para reducir el problema de la obesidad infantil es incompatible con los intereses de los empresarios?",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "aiExplanation": "",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "optionText": "Realizar talleres y campañas educativas orientadas a promover el deporte y la actividad física.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "optionText": "Promover un programa de refrigerios balanceados en los colegios que incluya porciones de diferentes tipos de alimentos.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "optionText": "Aprobar una ley que prohíba en los colegios la venta y distribución de productos empacados altos en grasa y sodio.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "optionText": "Crear una comisión de padres que trabaje en temas de nutrición y prácticas saludables capacitando a los colegios y las familias.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            }
+          ],
+          "correctOptionId": "",
+          "irt_parameters": {
+            "discrimination_a": 1.0,
+            "difficulty_b": 0.0,
+            "guessing_c": 0.25
+          }
+        }
+      ]
+    },
+    {
+      "sectionIndex": 17,
+      "sectionTitle": "",
+      "sectionText": "De acuerdo con la Convención de Ginebra sobre el Estatuto de los Refugiados, un refugiado es una persona que \"debido a fundados temores de ser perseguida por motivos de raza, religión, nacionalidad, pertenencia a un determinado grupo social u opiniones políticas, se encuentre fuera del país de su nacionalidad y no pueda o, a causa de dichos temores, no quiera acogerse a la protección de su país; o que careciendo de nacionalidad y hallándose, a consecuencia de tales acontecimientos, fuera del país donde antes tuviera su residencia habitual, no pueda o, a causa de dichos temores, no quiera regresar a él\".",
+      "sectionSource": "*Tomado y adaptado de: Alto Comisionado de las Naciones Unidas para los Refugiados. (s. f.). Refugiados. http://www.acnur.org/acnur/que-ayudamos/refugiados#:~:text=Los%20refugiados%20son%20personas%20que,por%20motivos%20de%20medio%20siglo*",
+      "hasSectionImage": false,
+      "sectionImageUrl": "",
+      "sectionImageAiDescription": "",
+      "questions": [
+        {
+          "questionId": "q_17",
+          "questionText": "Esta definición del término \"refugiado\" es útil para explicar",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "aiExplanation": "",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "optionText": "la discriminación que sufren quienes se ven obligados a desplazarse desde zonas rurales hacia cascos urbanos de un país en razón de un conflicto armado interno.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "optionText": "la situación por la que atraviesan los presos políticos en las cárceles de un país que ha violado sistemáticamente su derecho a la libertad de expresión.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "optionText": "la falta de garantías a la que se ve sometida una víctima de un conflicto armado interno a quien se le niega asilo en un país y es obligada a volver a su país de origen.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "optionText": "la estigmatización y el rechazo que sufren los miembros de una comunidad étnica minoritaria que migran a otros países por motivos económicos.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            }
+          ],
+          "correctOptionId": "",
+          "irt_parameters": {
+            "discrimination_a": 1.0,
+            "difficulty_b": 0.0,
+            "guessing_c": 0.25
+          }
+        }
+      ]
+    },
+    {
+      "sectionIndex": 18,
+      "sectionTitle": "",
+      "sectionText": "Tras los impactos generados por la pandemia de la COVID-19, la alcaldía de una ciudad ha propuesto la terminación del aislamiento obligatorio de los ciudadanos y la reactivación gradual de la economía. En el caso puntual de un sector comercial y residencial de la ciudad, la alcaldía estudia la posibilidad de permitir la apertura del comercio formal durante dos días a la semana, siempre y cuando se respeten los protocolos de bioseguridad. Al respecto, los distintos actores involucrados en la decisión han dado a conocer sus puntos de vista:\n\n- Los comerciantes desean reabrir sus negocios para evitar que se pierdan más puestos de trabajo.\n- Los vecinos desean medidas para evitar aglomeraciones que faciliten su desplazamiento en el sector.\n- Los funcionarios de la alcaldía propenden por el cuidado de la salud de los ciudadanos y la dinamización de la economía.\n- Los profesionales de la salud se oponen a cualquier medida de reactivación económica porque implicaría el aumento en el número de contagios.",
+      "sectionSource": "",
+      "hasSectionImage": false,
+      "sectionImageUrl": "",
+      "sectionImageAiDescription": "",
+      "questions": [
+        {
+          "questionId": "q_18",
+          "questionText": "Si se materializa la propuesta de la alcaldía, es probable que se genere un conflicto entre",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "aiExplanation": "",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "optionText": "la alcaldía y los comerciantes, por el posible aumento en el número de empleos y de contagios dada la activación económica.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "optionText": "los vecinos y la alcaldía, por la falta de garantías para una reactivación económica segura.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "optionText": "los vecinos y los profesionales de la salud, por la ausencia de medidas efectivas para cuidar la salud pública.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "optionText": "los comerciantes y los profesionales de la salud, por el posible aumento de contagios dada la activación económica en el sector.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            }
+          ],
+          "correctOptionId": "",
+          "irt_parameters": {
+            "discrimination_a": 1.0,
+            "difficulty_b": 0.0,
+            "guessing_c": 0.25
+          }
+        }
+      ]
+    },
+    {
+      "sectionIndex": 19,
+      "sectionTitle": "",
+      "sectionText": "Una profesora está investigando sobre el fenómeno del narcotráfico en Colombia y sus objetivos de investigación son:\n\n1. Analizar la situación social y de ingresos de los campesinos en los territorios donde se produce hoja de coca.\n2. Determinar las causas del aumento de la violencia en las zonas de cultivo de hoja de coca.\n3. Identificar las distintas formas de resistencia que implementaron los campesinos para mitigar el impacto del narcotráfico.\n4. Explicar las consecuencias ambientales que produce el aumento de los cultivos de hoja de coca para uso del narcotráfico.\n\nDurante la investigación, la profesora encuentra el siguiente testimonio:\n\n\"¿Cuáles serán esos otros medios? ¡Mire!, por lo menos, ¿qué saca uno con llevar yuca a La Macarena, maíz o plátano si no se lo van a comprar? ¿Usted con qué va a comprar sus cosas? En cambio, lleva usted un kilo de coca o unos poquitos gramos y se la compran rápido. Sale usted a vender una res y no se la compran. Lleva usted \\(20\\), \\(100\\), \\(200\\) o \\(600\\) gramos de coca y ahí sí se ve la plata. ¿Qué hace entonces uno? Entonces, nosotros ya no vivimos de los marranos, no es del ganado, sino realmente de la coca\".",
+      "sectionSource": "*Tomado y adaptado de: Trejo, A. (2002). Los procesos de colonización vistos desde una mirada de género. Un estudio de caso en el municipio de La Macarena, Meta [tesis de pregrado, Universidad Nacional de Colombia]. Acervo. Catálogo de tesis en antropología social. https://co.antropotesis.alterum.info/acervo/los-procesos-de-colonizacion-vistos-desde-una-mirada-de-genero-un-estudio-de-caso-en-el-municipio-de-la-macarena-meta*",
+      "hasSectionImage": false,
+      "sectionImageUrl": "",
+      "sectionImageAiDescription": "",
+      "questions": [
+        {
+          "questionId": "q_19",
+          "questionText": "¿Para qué objetivo de investigación le sirve a la profesora el testimonio encontrado?",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "aiExplanation": "",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "optionText": "Para el \\(3\\), porque en el testimonio se evidencia cómo el cultivo de hoja de coca fue una forma de resistencia cultural ante la imposición de otros cultivos.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "optionText": "Para el \\(1\\), porque en el testimonio se evidencia cómo las condiciones económicas llevaron a los campesinos a elegir el cultivo de hoja de coca.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "optionText": "Para el \\(2\\), porque en el testimonio se evidencian los factores que generaron fenómenos de violencia dentro de las zonas de cultivo de coca.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "optionText": "Para el \\(4\\), porque en el testimonio se evidencian las afectaciones ambientales producto de la expansión de la economía del narcotráfico en el territorio.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            }
+          ],
+          "correctOptionId": "",
+          "irt_parameters": {
+            "discrimination_a": 1.0,
+            "difficulty_b": 0.0,
+            "guessing_c": 0.25
+          }
+        }
+      ]
+    },
+    {
+      "sectionIndex": 20,
+      "sectionTitle": "",
+      "sectionText": "El \\*fracking\\* es una técnica para posibilitar o aumentar la extracción de gas y petróleo del subsuelo; es una de las técnicas de estimulación de pozos en yacimientos de hidrocarburos, a través de la inyección de agua a alta presión, mezclada con otros químicos.\n\nEl gobernador de un departamento aseguró, mientras estaba en campaña electoral, que: \"Nuestra región no puede lanzarse al \\*fracking\\* poniendo, además, en riesgo un gran debate social que se tiene que sortear con mucha responsabilidad. Se tiene que entender que ningún proyecto de \\*fracking\\* puede ser viable, pues compromete los acuíferos subterráneos, la biodiversidad y los ecosistemas sensibles del departamento\".\n\nMeses después de su elección, el mandatario aprobó la aplicación de pilotos de \\*fracking\\* y afirmó que: \"En nuestra agenda de reactivación está ser líderes regionales en materia de energías renovables no convencionales, pero también buscamos siempre asumir, en las soluciones convencionales relacionadas con hidrocarburos, una agenda de sostenibilidad compensatoria y armoniosa\".",
+      "sectionSource": "",
+      "hasSectionImage": false,
+      "sectionImageUrl": "",
+      "sectionImageAiDescription": "",
+      "questions": [
+        {
+          "questionId": "q_20",
+          "questionText": "¿Cuál de las siguientes opciones explica la diferencia en las afirmaciones del gobernador?",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "aiExplanation": "",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "optionText": "Tanto en campaña electoral como luego de su elección, el gobernador expresa razones de distinto tipo a favor del fracking.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "optionText": "En campaña electoral, el gobernador estaba en contra del fracking por razones ambientales; luego de su elección, sus razones a favor son económicas.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "optionText": "En campaña electoral, el gobernador estaba en contra del fracking por razones económicas; luego de su elección, sus razones a favor son ambientales.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "optionText": "Tanto en campaña electoral como luego de su elección, el gobernador expresa razones de distinto tipo en contra del fracking.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            }
+          ],
+          "correctOptionId": "",
+          "irt_parameters": {
+            "discrimination_a": 1.0,
+            "difficulty_b": 0.0,
+            "guessing_c": 0.25
+          }
+        }
+      ]
+    },
+    {
+      "sectionIndex": 21,
+      "sectionTitle": "",
+      "sectionText": "El yagé es una preparación de la medicina tradicional indígena del Putumayo colombiano. De acuerdo con los indígenas de la región, su acción es integral, física, mental y espiritual. La toma de esta bebida es cada vez más común fuera de las comunidades indígenas, dado que su popularidad ha generado que algunos conocedores de la planta organicen encuentros para beberla a cambio de un aporte económico. Sin embargo, el uso de esta bebida sagrada puede resultar letal cuando no se toman las precauciones adecuadas.\n\nRecientemente, como consecuencia de la muerte de algunas personas por el consumo de yagé, se han planteado algunas propuestas: \\(1\\) prohibir el consumo de la bebida porque contiene peligrosos psicoactivos y \\(2\\) permitir que únicamente los indígenas puedan consumir la bebida.\n\nTeniendo en cuenta la problemática planteada, desde el ámbito cultural, la implementación de la solución \\(1\\) sería",
+      "sectionSource": "",
+      "hasSectionImage": false,
+      "sectionImageUrl": "",
+      "sectionImageAiDescription": "",
+      "questions": [
+        {
+          "questionId": "q_21",
+          "questionText": "",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "aiExplanation": "",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "optionText": "negativa, porque los conocedores de la planta no podrían obtener ingresos por las ceremonias.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "optionText": "positiva, porque no se presentarían más casos de muerte a causa del consumo de yagé.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "optionText": "negativa, porque se estaría vulnerando el derecho de los indígenas a mantener sus tradiciones.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "optionText": "positiva, porque protege la tradición al permitir que solo los indígenas puedan beber yagé.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            }
+          ],
+          "correctOptionId": "",
+          "irt_parameters": {
+            "discrimination_a": 1.0,
+            "difficulty_b": 0.0,
+            "guessing_c": 0.25
+          }
+        }
+      ]
+    },
+    {
+      "sectionIndex": 22,
+      "sectionTitle": "",
+      "sectionText": "Varias productoras de televisión actuales quieren volver a reproducir una famosa serie televisiva antigua. No obstante, algunos medios de comunicación han manifestado que en esta serie hay \"varios ejemplos de violencia, machismo, gordofobia y otras formas de discriminación como parte habitual del lenguaje propuesto por el programa\". Especialmente, se resalta la constante burla a personajes que sufrían de obesidad. Por esto, se considera inadecuado reproducir de nuevo esta serie porque fomenta la discriminación.",
+      "sectionSource": "*Tomado y adaptado de: Pairone, J. (9 de agosto de 2020). ¿No te vayas Chavo?: por qué la salida del aire del programa puede ser una oportunidad de pasar la página. La Voz. https://www.lavoz.com.ar/vos/tv/no-te-vayas-chavo-por-que-la-salida-del-aire-del-programa-puede-ser-una-oportunidad-de-pasar-la-p/*",
+      "hasSectionImage": false,
+      "sectionImageUrl": "",
+      "sectionImageAiDescription": "",
+      "questions": [
+        {
+          "questionId": "q_22",
+          "questionText": "¿Cuál de las siguientes posiciones es semejante a la posición expresada por algunos medios de comunicación?",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "aiExplanation": "",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "optionText": "Aunque en la serie los personajes se burlen de individuos con sobrepeso, los espectadores tienen criterio para no reproducir comportamientos ofensivos.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "optionText": "Las series televisivas usualmente se burlan de personajes con cualquier tipo de característica física y eso no es una buena razón para dejar de emitirlas.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "optionText": "Aunque muchas series actuales se burlen de personajes con ciertos rasgos físicos, no deberían emitir ese tipo de contenido ofensivo.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "optionText": "No es adecuado emitir series televisivas tan antiguas porque habría problemas con los programas de televisión actuales.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            }
+          ],
+          "correctOptionId": "",
+          "irt_parameters": {
+            "discrimination_a": 1.0,
+            "difficulty_b": 0.0,
+            "guessing_c": 0.25
+          }
+        }
+      ]
+    },
+    {
+      "sectionIndex": 23,
+      "sectionTitle": "",
+      "sectionText": "Considere la siguiente intervención, realizada por un congresista en un debate sobre la despenalización del aborto en un país latinoamericano:\n\n\"El derecho a la vida no puede seguir siendo ultrajado por algunas ideologías [...] hacemos un llamado a todas las colectividades políticas, gremios educativos, sociales y a las asociaciones de padres de familia para que nos unamos\".",
+      "sectionSource": "",
+      "hasSectionImage": false,
+      "sectionImageUrl": "",
+      "sectionImageAiDescription": "",
+      "questions": [
+        {
+          "questionId": "q_23",
+          "questionText": "Teniendo en cuenta la intervención, se puede afirmar que",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "aiExplanation": "",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "optionText": "acompaña a sectores sociales que buscan legalizar el aborto solo en los casos de violación.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "optionText": "expone posiciones políticas que no representan de ninguna manera a los ciudadanos.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "optionText": "representa a sectores específicos de la sociedad que están en contra de la despenalización del aborto.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "optionText": "muestra el descontento de las mujeres incitadas a abortar porque no cuentan con subsidios.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            }
+          ],
+          "correctOptionId": "",
+          "irt_parameters": {
+            "discrimination_a": 1.0,
+            "difficulty_b": 0.0,
+            "guessing_c": 0.25
+          }
+        }
+      ]
+    },
+    {
+      "sectionIndex": 24,
+      "sectionTitle": "",
+      "sectionText": "",
+      "sectionSource": "",
+      "hasSectionImage": false,
+      "sectionImageUrl": "",
+      "sectionImageAiDescription": "",
+      "questions": [
+        {
+          "questionId": "q_24",
+          "questionText": "Un candidato al Congreso de la República afirma que es necesario que las decisiones gubernamentales sean más democráticas. Por esta razón, propone que cada ministerio del Gobierno nacional, antes de implementar una política, deba realizar una rueda de prensa explicándola en detalle; luego de esto, se daría un plazo de \\(15\\) días para que los diferentes sectores interesados (académicos, gremios, medios de comunicación, congresistas y la ciudadanía en general) puedan analizar la propuesta y enviar sus opiniones e inquietudes al correspondiente ministerio. Posteriormente, los funcionarios de dicho ministerio modificarían o no la política, partiendo de estos insumos para, finalmente, justificar públicamente sus decisiones.\n\nDe acuerdo con lo anterior, ¿cuál es el objetivo de la propuesta del candidato?",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "aiExplanation": "",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "optionText": "Evitar la controversia y la polarización que se puede generar a partir del debate público.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "optionText": "Agilizar los procesos de toma de decisiones sobre políticas que afectan a la ciudadanía.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "optionText": "Permitir que los ciudadanos sean quienes tomen las decisiones sobre las políticas que los afectan.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "optionText": "Promover una toma de decisiones más abierta a los aportes y al debate por parte de los ciudadanos.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            }
+          ],
+          "correctOptionId": "",
+          "irt_parameters": {
+            "discrimination_a": 1.0,
+            "difficulty_b": 0.0,
+            "guessing_c": 0.25
+          }
+        }
+      ]
+    },
+    {
+      "sectionIndex": 25,
+      "sectionTitle": "",
+      "sectionText": "Debido a los problemas de corrupción presentes en un país, el presidente propone terminar con el Congreso o reducir el número de sus miembros. Al respecto, una parte de la población apoya la idea propuesta, ya que considera que muchos congresistas son corruptos y que, además, reciben un salario muy alto para los resultados que presentan al país. Por su parte, un sector de la oposición advierte que estas ideas son antidemocráticas, puesto que el Congreso es fundamental para garantizar una división equitativa del poder.\n\n¿Cuál de las siguientes opciones apoya el argumento de la oposición?",
+      "sectionSource": "",
+      "hasSectionImage": false,
+      "sectionImageUrl": "",
+      "sectionImageAiDescription": "",
+      "questions": [
+        {
+          "questionId": "q_25",
+          "questionText": "",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "aiExplanation": "",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "optionText": "El Congreso no es la única fuente de corrupción e ineficiencia en las instituciones que conforman un Estado.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "optionText": "La reducción del Congreso permitiría que el Estado invierta los recursos de los salarios de los congresistas en obras sociales.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "optionText": "El Congreso permite representar, de manera indirecta, los múltiples intereses de los diferentes grupos que conforman un país.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "optionText": "El presidente es la máxima autoridad de una nación, por lo que las decisiones que la afectan no requieren la aprobación del Congreso.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            }
+          ],
+          "correctOptionId": "",
+          "irt_parameters": {
+            "discrimination_a": 1.0,
+            "difficulty_b": 0.0,
+            "guessing_c": 0.25
+          }
+        }
+      ]
+    }
+  ]
+}
