@@ -20,7 +20,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** identificar qué opción reformula fielmente el segundo párrafo.\n- **Datos clave del párrafo:** Epicuro da **dos razones complementarias** para sostener que la buena vida debe orientarse al placer:\n  - desde el nacimiento, los seres vivos buscan por instinto el placer y rehúyen el dolor;\n  - los sentimientos de placer y dolor son criterios reales y confiables para decidir.\n- **Evaluación:**\n  - A habla de *dos formas de concebir la vida*, lo cual no aparece en el texto.\n  - B invierte completamente el sentido: habla de buscar dolor y huir del placer.\n  - C dice que buscamos la buena vida *sin pensar en dolor o placer*, contrario al texto.\n  - D recoge correctamente las dos ideas: búsqueda del placer y rechazo del dolor, y el papel de los sentimientos en las decisiones.\n- **Conclusión:** la paráfrasis correcta es **D**.",
           "options": [
             {
               "optionId": "A",
@@ -28,7 +28,7 @@
               "optionText": "Para Epicuro hay dos formas de concebir la vida: aquella que busca el placer y aquella que busca evitar el dolor del nacimiento.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** El párrafo no habla de *dos formas de concebir la vida*, sino de **dos razones** para justificar por qué la buena vida debe orientarse al placer.\n- Además, *evitar el dolor del nacimiento* no aparece en el texto."
             },
             {
               "optionId": "B",
@@ -36,7 +36,7 @@
               "optionText": "Para Epicuro hay dos formas en la que todo ser vivo concibe la buena vida: la primera es la búsqueda del dolor y la segunda es huir del placer.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Invierte el sentido del texto.\n- Epicuro sostiene exactamente lo contrario: los seres vivos **buscan el placer** y **rechazan el dolor**."
             },
             {
               "optionId": "C",
@@ -44,7 +44,7 @@
               "optionText": "Para Epicuro todos buscamos alcanzar una buena vida sin pensar en el dolor o en el placer. Desde que nacemos obramos guiados por el instinto.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Aunque menciona el instinto, elimina lo esencial del párrafo: que ese instinto está orientado precisamente hacia **el placer** y contra **el dolor**.\n- Decir *sin pensar en el dolor o en el placer* contradice la idea central."
             },
             {
               "optionId": "D",
@@ -52,10 +52,10 @@
               "optionText": "Para Epicuro son ciertas dos cosas: que todos buscamos el placer y rechazamos el dolor, y que los sentimientos son los que determinan nuestras decisiones.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** Resume las **dos razones complementarias** del segundo párrafo:\n  - la tendencia natural a buscar placer y evitar dolor;\n  - el papel de los sentimientos de placer y dolor como criterio para decidir."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "D",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -69,7 +69,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** establecer la relación lógica entre los dos enunciados.\n- **Lectura:**\n  - El primer enunciado afirma algo general: la filosofía epicúrea busca guiarnos hacia la buena vida.\n  - El segundo precisa en qué consiste esa buena vida para el epicureísmo: la vida placentera.\n- **Relación:** el segundo no rechaza ni refuta al primero; tampoco lo sintetiza. Más bien lo **desarrolla** y lo hace más específico.\n- **Conclusión:** el segundo enunciado **amplía** lo dicho en el primero. La respuesta es **D**.",
           "options": [
             {
               "optionId": "A",
@@ -77,7 +77,7 @@
               "optionText": "El primer enunciado rechaza la idea expuesta en el segundo enunciado.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** No hay rechazo entre los enunciados.\n- El segundo explica cuál es esa *buena vida* mencionada en el primero."
             },
             {
               "optionId": "B",
@@ -85,7 +85,7 @@
               "optionText": "El segundo enunciado es una síntesis del primer enunciado.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** No sintetiza, sino que **especifica** el contenido del primero.\n- Añade información sobre qué entiende el epicureísmo por *buena vida*."
             },
             {
               "optionId": "C",
@@ -93,7 +93,7 @@
               "optionText": "El primer enunciado da una hipótesis y el segundo enunciado la refuta.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** El primer enunciado no formula una hipótesis, y el segundo no la refuta.\n- Ambos son compatibles y forman parte de la misma explicación."
             },
             {
               "optionId": "D",
@@ -101,10 +101,10 @@
               "optionText": "El segundo enunciado amplía lo dicho en el primer enunciado.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** El primer enunciado plantea la finalidad ética del epicureísmo y el segundo **desarrolla** esa idea al definir la *buena vida* como vida placentera."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "D",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -118,7 +118,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** explicar por qué el fragmento apoya la tesis principal del texto.\n- **Dato relevante:** el fragmento sostiene que placer y dolor son **criterios esenciales de decisión**, porque son sentimientos reales e irrefutables.\n- **Inferencia:** si las decisiones humanas se guían por placer y dolor, entonces resulta razonable afirmar que nuestras acciones tienden a buscar placer y evitar dolor.\n- **Revisión de opciones:**\n  - A conecta la realidad del placer y el dolor con la elección de cómo actuamos.\n  - B dice *ejemplifica*, pero el fragmento no pone un ejemplo: ofrece una **justificación**.\n  - C introduce la relación bien/mal, que no es el foco del fragmento citado.\n  - D mezcla instinto y bien/mal, elementos que no están en el enunciado citado.\n- **Conclusión:** la mejor respuesta es **A**.",
           "options": [
             {
               "optionId": "A",
@@ -126,7 +126,7 @@
               "optionText": "Porque justifica la idea de que el dolor y el placer son reales e inevitables al momento de elegir la forma en la que actuamos.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** El fragmento apoya la tesis porque muestra que placer y dolor son **criterios reales** que intervienen en nuestras decisiones, lo cual respalda que actuemos para buscar uno y evitar el otro."
             },
             {
               "optionId": "B",
@@ -134,7 +134,7 @@
               "optionText": "Porque ejemplifica la teoría de que el placer y el dolor son criterios de decisión al ser sentimientos reales que tiene todo ser humano.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** El fragmento no **ejemplifica** una teoría, sino que la **fundamenta** o justifica.\n- La clave no es dar un ejemplo, sino argumentar que esos sentimientos son reales e irrefutables."
             },
             {
               "optionId": "C",
@@ -142,7 +142,7 @@
               "optionText": "Porque explica que el fin último de todas las acciones humanas consiste en relacionar el placer con el bien y el dolor con el mal.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Esa relación entre placer/bien y dolor/mal aparece en otra parte del texto, pero no es lo que explica el fragmento citado.\n- Aquí el énfasis está en los sentimientos como **criterios de decisión**."
             },
             {
               "optionId": "D",
@@ -150,10 +150,10 @@
               "optionText": "Porque relaciona los sentimientos reales de dolor y de placer existentes instintivamente en el ser humano con los conceptos de bien y de mal.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Introduce dos elementos ajenos al fragmento: el **instinto** y los conceptos de **bien y mal**.\n- El enunciado citado se centra en la realidad del dolor y el placer como base para decidir."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "A",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -167,7 +167,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** hallar la afirmación con una perspectiva semejante a la del fragmento.\n- **Idea del fragmento:** los seres humanos tienen una tendencia natural e instintiva a buscar placer y evitar dolor, y eso sirve como criterio de conducta.\n- **Comparación:**\n  - A habla de que la conducta puede ser moldeada por experiencias agradables y desagradables: es la más cercana a la idea de orientar el comportamiento por placer/dolor.\n  - B menciona la capacidad de sentir placer y dolor, pero no su función como criterio ético o de conducta.\n  - C habla de felicidad y naturaleza de forma muy general.\n  - D contradice abiertamente el epicureísmo al negar que el placer sea el asunto central.\n- **Conclusión:** la perspectiva más similar es **A**.",
           "options": [
             {
               "optionId": "A",
@@ -175,7 +175,7 @@
               "optionText": "\"El comportamiento del ser humano puede ser moldeado de acuerdo con las experiencias agradables y desagradables que se desprenden de cada acción\". B. F. Skinner.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** Esta frase coincide con la idea de que la conducta humana se orienta según experiencias **agradables** y **desagradables**, análogas al placer y al dolor."
             },
             {
               "optionId": "B",
@@ -183,7 +183,7 @@
               "optionText": "\"No hay ninguna diferencia fundamental entre el hombre y los animales en su capacidad de sentir placer y dolor, felicidad y miseria\". C. Darwin.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Aunque menciona placer y dolor, se centra en la similitud entre humanos y animales, no en que esos sentimientos sean el **criterio ético fundamental**."
             },
             {
               "optionId": "C",
@@ -191,7 +191,7 @@
               "optionText": "\"La felicidad es un fin cuya posibilidad descansa en condiciones que solo pueden ser esperadas de la naturaleza, es decir, los medios para la felicidad propia están en la naturaleza tanto externa como interna\". I. Kant.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Habla de felicidad y naturaleza, pero no de la orientación de la conducta por la búsqueda de placer y la evitación del dolor."
             },
             {
               "optionId": "D",
@@ -199,10 +199,10 @@
               "optionText": "\"No se trata de concebir el placer como asunto único y verdadero de felicidad, sino de hallar la mejor manera para alcanzar la virtud que es universal y que no se supedita a la sensibilidad\". I. Kant.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Esta opción se **opone** al fragmento, porque rechaza que el placer sea el criterio fundamental de la buena vida."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "A",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -216,7 +216,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** identificar la intención retórica de la pregunta.\n- **Contexto:** el autor viene afirmando que el dolor y el placer son hechos reales que no pueden refutarse.\n- **Función de la pregunta:** no busca obtener información, sino reforzar una idea ya defendida: que no es razonable dudar de la realidad del dolor sentido.\n- **Conclusión:** la intención es **afirmar que no se puede dudar del dolor**. La respuesta correcta es **C**.",
           "options": [
             {
               "optionId": "A",
@@ -224,7 +224,7 @@
               "optionText": "Advertir sobre el peligro de dolor ante una decisión.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** La pregunta no advierte sobre un peligro futuro ni sobre decisiones; se refiere a la certeza de una sensación presente."
             },
             {
               "optionId": "B",
@@ -232,7 +232,7 @@
               "optionText": "Dar la orden de huir del dolor ante un golpe.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** No hay ninguna orden en el enunciado.\n- Se trata de una pregunta retórica para sostener una afirmación."
             },
             {
               "optionId": "C",
@@ -240,7 +240,7 @@
               "optionText": "Afirmar la idea de que no se puede dudar del dolor.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** La pregunta retórica reafirma que la sensación de dolor es un hecho real e imposible de negar."
             },
             {
               "optionId": "D",
@@ -248,10 +248,10 @@
               "optionText": "Expresar que los dolores pueden inventarse.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** El autor sostiene justamente lo contrario: que el dolor sentido **no puede ser falso** ni inventado."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "C",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -276,7 +276,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** identificar un supuesto implícito del tercer párrafo.\n- **Contenido del párrafo:** contrapone dos finalidades de la educación: una **teórica**, orientada a la verdad, y otra **práctica**, orientada a convencer y triunfar en política o en juicios.\n- **Supuesto implícito:** si se contraponen *alcanzar la verdad* y *tener una finalidad práctica*, el párrafo supone que la búsqueda de la verdad **no es en sí un fin práctico**.\n- **Conclusión:** la opción correcta es **A**.",
           "options": [
             {
               "optionId": "A",
@@ -284,7 +284,7 @@
               "optionText": "Que la búsqueda de la verdad no es un fin práctico.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** El párrafo contrapone explícitamente el objetivo **teórico** de hallar la verdad con la finalidad **práctica** de imponer argumentos."
             },
             {
               "optionId": "B",
@@ -292,7 +292,7 @@
               "optionText": "Que la participación política en la actualidad no es alta.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** El párrafo habla de la democracia ateniense, no de la participación política actual."
             },
             {
               "optionId": "C",
@@ -300,7 +300,7 @@
               "optionText": "Que los sofistas engañaban a sus discípulos con técnicas retóricas.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** El texto critica su orientación práctica y relativista, pero no afirma directamente que engañaran a sus discípulos."
             },
             {
               "optionId": "D",
@@ -308,10 +308,10 @@
               "optionText": "Que la búsqueda teórica de la verdad puede ayudar a vencer en un juicio.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** El párrafo más bien separa el descubrimiento de la verdad del entrenamiento retórico útil para los litigios."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "A",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -325,7 +325,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** explicar por qué la afirmación relativista de 1 no justifica el escepticismo extremo de 2.\n- **Lectura:**\n  - 1 sostiene que la verdad depende del punto de vista, la cultura o la fuerza argumentativa.\n  - 2 afirma algo mucho más radical: que nada existe, o que si existe no puede conocerse ni comunicarse.\n- **Razón:** del hecho de que la verdad dependa del punto de vista **no se sigue** que nada exista.\n- **Conclusión:** la mejor opción es **B**.",
           "options": [
             {
               "optionId": "A",
@@ -333,7 +333,7 @@
               "optionText": "Que todo dependa del punto de vista y la cultura prueba que nada existe.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Esta opción afirma justamente el salto lógico inválido.\n- El relativismo no prueba la inexistencia de la realidad."
             },
             {
               "optionId": "B",
@@ -341,7 +341,7 @@
               "optionText": "Que todo dependa del punto de vista y la cultura no prueba que nada existe.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** Esta opción identifica la falla lógica: del relativismo sobre la verdad **no se deriva** una negación absoluta de la existencia."
             },
             {
               "optionId": "C",
@@ -349,7 +349,7 @@
               "optionText": "Que el hombre sea la medida de todas las cosas prueba que hay muchas verdades universales.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** *Muchas verdades universales* es contradictorio, y además no expresa la razón por la cual 1 no justifica 2."
             },
             {
               "optionId": "D",
@@ -357,10 +357,10 @@
               "optionText": "Que el hombre sea la medida de todas las cosas muestra que no dependen del punto de vista de alguien.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Esa frase significa precisamente lo contrario: que las cosas sí dependen de la medida humana o del punto de vista."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "B",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -385,7 +385,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** hallar un sinónimo contextual de *deslumbrar*.\n- **Contexto:** *por medio del dinero se espera poder deslumbrar o comprar a los otros*.\n- Aquí *deslumbrar* significa causar admiración o impacto en otros, no literalmente cegarlos.\n- **Conclusión:** el mejor reemplazo es **impresionar**. Respuesta: **B**.",
           "options": [
             {
               "optionId": "A",
@@ -393,7 +393,7 @@
               "optionText": "Encandilar.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Aunque puede ser sinónimo en algunos contextos, tiene un matiz más cercano a *fascinar* o incluso a *cegar con luz*.\n- Aquí la idea social es más precisa con **impresionar**."
             },
             {
               "optionId": "B",
@@ -401,7 +401,7 @@
               "optionText": "Impresionar.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** En este contexto, *deslumbrar* significa causar admiración o impacto en los demás, es decir, **impresionarlos**."
             },
             {
               "optionId": "C",
@@ -409,7 +409,7 @@
               "optionText": "Ilusionar.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** *Ilusionar* significa despertar esperanza o entusiasmo, no causar admiración social mediante el dinero."
             },
             {
               "optionId": "D",
@@ -417,10 +417,10 @@
               "optionText": "Engañar.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** El autor no dice que el dinero sirva para mentir, sino para llamar la atención o generar admiración."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "B",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -434,7 +434,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** establecer la función del fragmento dentro del texto.\n- **Observación:** el fragmento aparece al inicio y abre la reflexión sobre qué es *la buena vida humana*.\n- No presenta todavía toda la tesis desarrollada ni la conclusión final; introduce el tema y lo orienta.\n- **Conclusión:** cumple la función de **introducir el tema**. Respuesta: **B**.",
           "options": [
             {
               "optionId": "A",
@@ -442,7 +442,7 @@
               "optionText": "Presenta la tesis general del texto.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** La tesis completa se formula más claramente al final: la buena vida humana es una vida entre seres humanos."
             },
             {
               "optionId": "B",
@@ -450,7 +450,7 @@
               "optionText": "Introduce el tema que se trata en el texto.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** El fragmento abre la reflexión sobre qué significa vivir **una buena vida humana**, tema central del texto."
             },
             {
               "optionId": "C",
@@ -458,7 +458,7 @@
               "optionText": "Expone la conclusión general del texto.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** No es una conclusión, porque aparece al comienzo y da pie al desarrollo posterior."
             },
             {
               "optionId": "D",
@@ -466,10 +466,10 @@
               "optionText": "Sintetiza el contenido del texto.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** El fragmento no resume todos los argumentos; solo introduce el asunto principal."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "B",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -483,7 +483,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** identificar la estrategia argumentativa predominante.\n- **Rasgos del texto:**\n  - introduce el tema de la buena vida humana;\n  - formula varias **preguntas retóricas**;\n  - ofrece ejemplos concretos: dinero, casa, ropas, alimentos, soledad;\n  - termina con una conclusión explícita.\n- **Conclusión:** la estrategia descrita corresponde a la opción **C**.",
           "options": [
             {
               "optionId": "A",
@@ -491,7 +491,7 @@
               "optionText": "El autor introduce el tema y la tesis con ironía, para hacer entender lo contrario de lo que dice, con la intención de restarle credibilidad a dicha tesis.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Aunque hay un tono coloquial e incluso humorístico, el autor no usa ironía para negar su propia tesis."
             },
             {
               "optionId": "B",
@@ -499,7 +499,7 @@
               "optionText": "El autor contextualiza el problema sobre la buena vida, presenta algunas opiniones suyas sobre el tema y concluye con la tesis contraria.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** No concluye con una tesis contraria, sino con la misma idea que viene defendiendo."
             },
             {
               "optionId": "C",
@@ -507,7 +507,7 @@
               "optionText": "El autor introduce el tema y la tesis, a través de diversas preguntas retóricas, ofreciendo ejemplos que lo conducen a una conclusión.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** El texto utiliza **preguntas retóricas** y **ejemplos** para conducir al lector hacia la conclusión sobre la buena vida humana."
             },
             {
               "optionId": "D",
@@ -515,10 +515,10 @@
               "optionText": "El autor contextualiza el problema sobre la buena vida, presenta su tesis y la defiende con la ayuda de ejemplos dados por autoridades en el tema.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** No apela a autoridades externas; los ejemplos provienen del propio razonamiento del autor."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "C",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -543,7 +543,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** identificar la función conectiva de *lo que* en la oración.\n- La estructura es: *casi todas las sociedades humanas conocidas han tenido música*, **lo que sugiere** que nuestra apreciación es innata.\n- La segunda parte se presenta como una **consecuencia inferida** de la primera.\n- **Conclusión:** introduce una relación de **causalidad/inferencia** entre la primera idea y la segunda. Respuesta: **B**.",
           "options": [
             {
               "optionId": "A",
@@ -551,7 +551,7 @@
               "optionText": "Plantear dos opciones opuestas sobre una teoría.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** No hay oposición entre teorías ni presentación de alternativas contrarias."
             },
             {
               "optionId": "B",
@@ -559,7 +559,7 @@
               "optionText": "Introducir una relación de causalidad entre la primera y la segunda idea.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** *Lo que* enlaza el hecho de la universalidad de la música con la inferencia de que su apreciación podría ser innata."
             },
             {
               "optionId": "C",
@@ -567,7 +567,7 @@
               "optionText": "Aclarar el sentido de la primera idea a partir de la segunda.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** La segunda parte no aclara el significado de la primera; extrae una conclusión a partir de ella."
             },
             {
               "optionId": "D",
@@ -575,10 +575,10 @@
               "optionText": "Añadir una idea similar a la que se presenta al principio de la oración.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** No se añade una idea semejante, sino una consecuencia interpretativa."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "B",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -592,7 +592,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** ubicar temporalmente la invención de la trompeta según la secuencia del texto.\n- **Secuencia del texto:** primero *flautas de hueso y percusiones*; luego instrumentos de *madera, cuerda y metal*; después guitarras eléctricas y consolas electrónicas.\n- Como la trompeta es de metal, debió surgir **después** de las percusiones y antes de las guitarras eléctricas.\n- **Conclusión:** la respuesta correcta es **C**.",
           "options": [
             {
               "optionId": "A",
@@ -600,7 +600,7 @@
               "optionText": "Antes de la invención de la flauta de hueso.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** El texto ubica las flautas de hueso entre los instrumentos más antiguos."
             },
             {
               "optionId": "B",
@@ -608,7 +608,7 @@
               "optionText": "Antes de la aparición de los instrumentos de percusión.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Las percusiones aparecen desde los orígenes mencionados en el texto."
             },
             {
               "optionId": "C",
@@ -616,7 +616,7 @@
               "optionText": "Después de la aparición de los instrumentos de percusión.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** Los instrumentos de metal aparecen en una etapa posterior a las primeras percusiones mencionadas en el texto."
             },
             {
               "optionId": "D",
@@ -624,10 +624,10 @@
               "optionText": "Después de la aparición de la guitarra eléctrica.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** La guitarra eléctrica se menciona como muy posterior a los instrumentos de metal."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "C",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -641,7 +641,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** determinar el significado contextual de *disonantes*.\n- El texto dice que los bebés se voltean ante sonidos agradables y les dan la espalda a los *disonantes*.\n- Por oposición contextual, *disonantes* significa sonidos **desagradables** o poco armónicos.\n- **Conclusión:** la respuesta es **D**.",
           "options": [
             {
               "optionId": "A",
@@ -649,7 +649,7 @@
               "optionText": "Sonidos cautivantes.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** *Cautivantes* se acerca a sonidos agradables, no a *disonantes*."
             },
             {
               "optionId": "B",
@@ -657,7 +657,7 @@
               "optionText": "Sonidos intensos.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** La intensidad no es el rasgo señalado por el contexto."
             },
             {
               "optionId": "C",
@@ -665,7 +665,7 @@
               "optionText": "Sonidos agudos.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** *Disonante* no significa necesariamente *agudo*."
             },
             {
               "optionId": "D",
@@ -673,10 +673,10 @@
               "optionText": "Sonidos desagradables.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** Por contraste con *sonidos agradables*, la palabra *disonantes* alude a sonidos **desagradables** o no armónicos."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "D",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -690,7 +690,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** identificar la función del fragmento inicial.\n- El enunciado abre el texto y sitúa el tema general: la antigua relación entre humanidad y música.\n- No formula por sí solo la tesis ni la conclusión, sino que sirve como punto de partida para el desarrollo posterior.\n- **Conclusión:** su función es **introducir el tema**. Respuesta: **B**.",
           "options": [
             {
               "optionId": "A",
@@ -698,7 +698,7 @@
               "optionText": "Presentar la tesis central del texto.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** La tesis o pregunta central del texto se desarrolla después, cuando se indaga si la música aportó ventajas evolutivas."
             },
             {
               "optionId": "B",
@@ -706,7 +706,7 @@
               "optionText": "Introducir el tema que se trata en el texto.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** El fragmento presenta el tema general: la larga relación histórica entre los humanos y la música."
             },
             {
               "optionId": "C",
@@ -714,7 +714,7 @@
               "optionText": "Resumir el contenido del texto.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** No resume todas las ideas del texto, solo enmarca el asunto inicial."
             },
             {
               "optionId": "D",
@@ -722,10 +722,10 @@
               "optionText": "Plantear la conclusión central del texto.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** No es una conclusión, porque aparece al inicio y abre la discusión."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "B",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -750,7 +750,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** reconocer el recurso retórico con que el autor ilustra la esclavitud de la literatura.\n- El texto dice explícitamente: *me gusta comparar la situación del escritor con la de mi amigo José María cuando llevaba adentro la solitaria*.\n- Esa estrategia es una **comparación** sostenida entre la vocación literaria y el parásito.\n- **Conclusión:** la respuesta correcta es **C**.",
           "options": [
             {
               "optionId": "A",
@@ -758,7 +758,7 @@
               "optionText": "Contraste.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** El recurso dominante no es oponer dos elementos, sino **comparar** la literatura con la solitaria."
             },
             {
               "optionId": "B",
@@ -766,7 +766,7 @@
               "optionText": "Exageración.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Hay intensidad expresiva, pero el mecanismo central del pasaje es la analogía o comparación."
             },
             {
               "optionId": "C",
@@ -774,7 +774,7 @@
               "optionText": "Comparación.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** El autor explica la esclavitud de la literatura comparándola con la experiencia de vivir dominado por una solitaria."
             },
             {
               "optionId": "D",
@@ -782,10 +782,10 @@
               "optionText": "Cita de autoridades.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** El autor no apela a expertos o autoridades, sino a una experiencia personal usada como comparación."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "C",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -799,7 +799,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** elegir el fragmento que describe directamente el funcionamiento de la solitaria en el cuerpo.\n- La opción correcta debe responder **cómo actúa**: qué hace dentro del organismo.\n- La oración que lo explica de manera directa es: *se consubstancia con él, se alimenta de él, crece y se fortalece a expensas de él*.\n- **Conclusión:** la respuesta es **B**.",
           "options": [
             {
               "optionId": "A",
@@ -807,7 +807,7 @@
               "optionText": "Pero todo lo que comía y bebía no era para su gusto y placer, sino para los de la solitaria.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Este fragmento describe un efecto sobre José María, no explica directamente el modo de acción biológica de la solitaria."
             },
             {
               "optionId": "B",
@@ -815,7 +815,7 @@
               "optionText": "Una vez que la solitaria se instala en el organismo se consubstancia con él, se alimenta de él, crece y se fortalece a expensas de él.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** Este fragmento explica de forma directa **cómo actúa** la solitaria dentro del organismo: se instala, se alimenta del cuerpo y se fortalece a costa de él."
             },
             {
               "optionId": "C",
@@ -823,7 +823,7 @@
               "optionText": "José María enflaquecía a pesar de que debía comer y beber líquidos (leche, sobre todo) constantemente para aplacar la ansiedad del animal aposentado en sus entrañas.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Describe una consecuencia del parásito en José María, pero no su mecanismo interno de acción de manera tan directa como la opción B."
             },
             {
               "optionId": "D",
@@ -831,10 +831,10 @@
               "optionText": "Nosotros hacemos tantas cosas juntos. Y tú crees que yo estoy haciendo esas cosas como las haces tú, porque te divierte hacerlas. Pero te equivocas. Yo las hago para ella, la solitaria.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Este fragmento caracteriza la dominación psicológica o simbólica que siente José María, no el funcionamiento de la solitaria dentro del organismo."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "B",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -848,7 +848,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** determinar qué se caracteriza en el fragmento.\n- José María afirma que ya no vive para sí mismo, sino para la solitaria, de la cual es *un sirviente*.\n- Esa idea describe pérdida de autonomía y sometimiento.\n- **Conclusión:** el fragmento caracteriza **la esclavitud de José María**. Respuesta: **B**.",
           "options": [
             {
               "optionId": "A",
@@ -856,7 +856,7 @@
               "optionText": "la libertad de José María.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** El fragmento muestra lo contrario de la libertad: subordinación completa a la solitaria."
             },
             {
               "optionId": "B",
@@ -864,7 +864,7 @@
               "optionText": "la esclavitud de José María.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** La expresión *ya no soy más que un sirviente* caracteriza claramente su condición de **esclavitud** frente al parásito."
             },
             {
               "optionId": "C",
@@ -872,7 +872,7 @@
               "optionText": "la soledad de José María.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Aunque su situación es dura, el foco del fragmento no es la soledad, sino la subordinación de su vida a la solitaria."
             },
             {
               "optionId": "D",
@@ -880,10 +880,10 @@
               "optionText": "la inteligencia de José María.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** No se describe su capacidad intelectual, sino su condición de sometimiento."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "B",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -908,7 +908,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** interpretar una comparación de la infografía.\n- *Hacen efervescencia como champaña* significa que las burbujas liberan gas y ascienden/estallan de modo semejante a las de la champaña.\n- **Conclusión:** la opción que conserva ese sentido es **C**.",
           "options": [
             {
               "optionId": "A",
@@ -916,7 +916,7 @@
               "optionText": "Las burbujas de agua están llenas de alcohol, al igual que las burbujas de champaña.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** La comparación no tiene que ver con alcohol, sino con el modo en que las burbujas liberan gas."
             },
             {
               "optionId": "B",
@@ -924,7 +924,7 @@
               "optionText": "El agua hierve de la misma manera que la champaña crea burbujas.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** *Efervescencia* aquí no significa hervir por calor, sino liberar burbujas como una bebida gaseosa."
             },
             {
               "optionId": "C",
@@ -932,7 +932,7 @@
               "optionText": "El gas sale de las burbujas de agua del mismo modo que de las burbujas de champaña.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** Esta opción reproduce el sentido de la comparación: las burbujas liberan gas y partículas de modo similar a la champaña."
             },
             {
               "optionId": "D",
@@ -940,10 +940,10 @@
               "optionText": "Las burbujas que salen de la champaña son del mismo color que las del agua.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** La comparación no se refiere al color, sino al proceso de efervescencia."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "C",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -957,7 +957,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** identificar la función del último cuadro dentro de una secuencia explicativa.\n- La infografía presenta etapas sucesivas: impacto de la lluvia, atrapamiento de partículas y liberación al ambiente.\n- El último cuadro muestra la etapa final del proceso, por lo que actúa como **cierre**.\n- **Conclusión:** la respuesta correcta es **D**.",
           "options": [
             {
               "optionId": "A",
@@ -965,7 +965,7 @@
               "optionText": "Sintetiza el contenido del texto.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** No resume toda la infografía; muestra específicamente la fase final del proceso."
             },
             {
               "optionId": "B",
@@ -973,7 +973,7 @@
               "optionText": "Presenta los contenidos del texto.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Esa sería la función de una introducción, no del último cuadro."
             },
             {
               "optionId": "C",
@@ -981,7 +981,7 @@
               "optionText": "Anuncia la estructura del texto.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** El último cuadro no anticipa la estructura; la culmina."
             },
             {
               "optionId": "D",
@@ -989,10 +989,10 @@
               "optionText": "Funciona como el cierre del texto.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** Al mostrar la última etapa del proceso, el cuadro funciona como **cierre** de la explicación."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "D",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -1006,7 +1006,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** determinar la relación semántica que introduce la conjunción *o*.\n- En el contexto, *petricor* y *tierra mojada* nombran el mismo fenómeno.\n- La *o* introduce una **denominación alternativa** o reformulación más cotidiana.\n- **Conclusión:** la respuesta es **C**.",
           "options": [
             {
               "optionId": "A",
@@ -1014,7 +1014,7 @@
               "optionText": "Permite establecer una relación de oposición, pues el segundo enunciado se opone al primero.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** No hay oposición entre *petricor* y *tierra mojada*; son dos maneras de nombrar el mismo olor."
             },
             {
               "optionId": "B",
@@ -1022,7 +1022,7 @@
               "optionText": "Permite establecer una relación de causa-efecto, pues el primer enunciado es la causa del segundo.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** No se trata de causa y efecto, sino de equivalencia denominativa."
             },
             {
               "optionId": "C",
@@ -1030,7 +1030,7 @@
               "optionText": "Permite expresar una alternativa, pues el segundo enunciado presenta otra manera de denominar al primero.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** La palabra *o* introduce una forma alternativa y más familiar de nombrar el *petricor*: *tierra mojada*."
             },
             {
               "optionId": "D",
@@ -1038,10 +1038,10 @@
               "optionText": "Permite expresar una adición, pues el segundo enunciado agrega nuevas ideas al tema presentado por el primero.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** El segundo enunciado no añade una idea nueva, sino que reformula la anterior con otro nombre."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "C",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -1055,7 +1055,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** reconocer la estrategia expositiva de la infografía.\n- La información está organizada en **etapas**: gotas impactan, burbujas atrapan partículas, luego las liberan.\n- El propósito es explicar un proceso paso a paso.\n- **Conclusión:** la estrategia es **señalar y explicar pasos o etapas**. Respuesta: **D**.",
           "options": [
             {
               "optionId": "A",
@@ -1063,7 +1063,7 @@
               "optionText": "Muestra las similitudes y las diferencias entre dos temas con el propósito de demostrar preferencia.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** La infografía no compara dos temas; describe un proceso."
             },
             {
               "optionId": "B",
@@ -1071,7 +1071,7 @@
               "optionText": "Utiliza detalles y lenguaje figurado con el fin de apoyar una impresión dominante con respecto al tema.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Aunque hay una comparación con la champaña, el propósito central no es descriptivo-literario sino explicativo."
             },
             {
               "optionId": "C",
@@ -1079,7 +1079,7 @@
               "optionText": "Explica el significado de un término relevante para el texto y así deja claro cómo este se va a entender.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** No solo define *petricor*; sobre todo explica **cómo se produce**."
             },
             {
               "optionId": "D",
@@ -1087,10 +1087,10 @@
               "optionText": "Señala y explica pasos o etapas según sus características.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** La infografía organiza la información en **fases** y explica paso a paso el proceso que origina el olor a lluvia."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "D",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -1115,7 +1115,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** identificar la idea defendida por el texto.\n- **Tesis del texto:** la infancia representa la sinceridad; los niños aman y detestan con claridad y sin hipocresía.\n- Entre las opciones, la que mejor recoge esa idea es que cuando se es niño se ama con claridad.\n- **Conclusión:** la respuesta correcta es **B**.",
           "options": [
             {
               "optionId": "A",
@@ -1123,7 +1123,7 @@
               "optionText": "Cuando se es viejo siempre se ama con libertad.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** El texto no sostiene eso; más bien critica a los adultos por mentir, disimular y fingir."
             },
             {
               "optionId": "B",
@@ -1131,7 +1131,7 @@
               "optionText": "Cuando se es niño siempre se ama con claridad.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** Resume bien la tesis del texto: los niños aman con **sinceridad**, **claridad** y sin hipocresía."
             },
             {
               "optionId": "C",
@@ -1139,7 +1139,7 @@
               "optionText": "Cuando se es viejo siempre se miente.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Aunque el texto critica la madurez por su tendencia al fingimiento, esta opción exagera y simplifica en exceso la idea defendida."
             },
             {
               "optionId": "D",
@@ -1147,10 +1147,10 @@
               "optionText": "Cuando se es niño siempre se dice la verdad.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** El texto se centra sobre todo en la sinceridad afectiva de la infancia, especialmente en el amor y el desamor, no en que los niños digan siempre toda la verdad en cualquier sentido."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "B",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -1164,7 +1164,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** reconocer cómo construye el autor su defensa.\n- El texto presenta una tesis inicial sobre la sinceridad de la infancia y luego enumera varios ejemplos y descripciones: cómo aman, cómo detestan, qué cosas aman.\n- Es decir, el autor defiende su tesis mediante **evidencias o ilustraciones** acumuladas.\n- **Conclusión:** la respuesta correcta es **B**.",
           "options": [
             {
               "optionId": "A",
@@ -1172,7 +1172,7 @@
               "optionText": "El autor presenta el tema, seguido de una tesis y de una antítesis, y concluye con una síntesis.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** No hay estructura dialéctica de tesis, antítesis y síntesis."
             },
             {
               "optionId": "B",
@@ -1180,7 +1180,7 @@
               "optionText": "El autor emprende la tarea de defender una tesis enumerando evidencias a favor de ella.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** El autor sostiene una tesis sobre la sinceridad infantil y la respalda con una serie de descripciones y ejemplos."
             },
             {
               "optionId": "C",
@@ -1188,7 +1188,7 @@
               "optionText": "El autor presenta diferentes argumentos y concluye refutando esos argumentos.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** No refuta sus propios argumentos; los acumula para reforzar su postura."
             },
             {
               "optionId": "D",
@@ -1196,10 +1196,10 @@
               "optionText": "El autor expone una tesis, pero no presenta argumentos para apoyarla.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Sí presenta apoyo argumentativo, mediante enumeraciones y ejemplos del comportamiento infantil."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "B",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -1224,7 +1224,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** deducir qué tipo de texto está dividido en versículos.\n- En el cómic se menciona explícitamente el **Corán** y se habla de un *versículo*.\n- Los textos divididos en versículos suelen ser **textos religiosos**, como la Biblia o el Corán.\n- **Conclusión:** la respuesta es **B**.",
           "options": [
             {
               "optionId": "A",
@@ -1232,7 +1232,7 @@
               "optionText": "Un diccionario de una lengua de Oriente Medio.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Un diccionario no se organiza en *versículos*."
             },
             {
               "optionId": "B",
@@ -1240,7 +1240,7 @@
               "optionText": "Un texto religioso como la Biblia.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** La referencia al **Corán** y a los **versículos** permite deducir que se trata de un texto religioso."
             },
             {
               "optionId": "C",
@@ -1248,7 +1248,7 @@
               "optionText": "Una colección de cuentos de los hermanos Grimm.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Los cuentos no se dividen típicamente en versículos ni hay indicio alguno de ello."
             },
             {
               "optionId": "D",
@@ -1256,10 +1256,10 @@
               "optionText": "Una novela como *María*, de Jorge Isaacs.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Las novelas suelen dividirse en capítulos, no en versículos."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "B",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -1273,7 +1273,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** establecer la relación entre narración en cursiva y diálogo en globo en la viñeta 6.\n- En el globo, la maestra dice: *Bismilá arramán arrahím*.\n- Debajo, la nota en cursiva dice: *Escucharla era muy agradable*.\n- La cursiva expresa la reacción o valoración del niño respecto de la voz de la maestra.\n- **Conclusión:** la respuesta correcta es **C**.",
           "options": [
             {
               "optionId": "A",
@@ -1281,7 +1281,7 @@
               "optionText": "Mediante el texto en cursiva la mujer corrige la pronunciación de la niña, cuyas palabras aparecen en el globo.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** La cursiva no corrige pronunciación; expresa una impresión subjetiva del narrador."
             },
             {
               "optionId": "B",
@@ -1289,7 +1289,7 @@
               "optionText": "Con el texto en el globo la niña busca hacer una pregunta, que la mujer responde con el texto en cursiva.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** El globo no contiene una pregunta de una niña, sino una frase pronunciada por la maestra."
             },
             {
               "optionId": "C",
@@ -1297,7 +1297,7 @@
               "optionText": "Mediante el texto en cursiva la niña expresa gusto por la voz de la mujer, cuyas palabras están en el globo.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** La frase en cursiva expresa agrado al escuchar la voz de la maestra, cuya habla aparece en el globo."
             },
             {
               "optionId": "D",
@@ -1305,10 +1305,10 @@
               "optionText": "Con el texto en el globo la mujer responde las observaciones de la niña, que aparecen en cursiva.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** No hay una respuesta a observaciones previas; la cursiva es un comentario del narrador sobre lo que oye."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "C",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -1322,7 +1322,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** identificar la voz narrativa de los recuadros superiores.\n- Esos textos dicen cosas como *mi padre creían*, *me obligaron*, *yo me preguntaba*, *escucharla era muy agradable*.\n- Son formulaciones en **primera persona** del protagonista que recuerda lo vivido.\n- **Conclusión:** corresponden a la voz del niño de la historia. Respuesta: **D**.",
           "options": [
             {
               "optionId": "A",
@@ -1330,7 +1330,7 @@
               "optionText": "La maestra que aparece en el cómic, que cuenta todo en tercera persona.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Los recuadros no están en tercera persona ni corresponden a la voz de la maestra."
             },
             {
               "optionId": "B",
@@ -1338,7 +1338,7 @@
               "optionText": "El director de la escuela, que no aparece en los recuadros pero conoció la historia.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** No hay indicios de que el director narre la historia."
             },
             {
               "optionId": "C",
@@ -1346,7 +1346,7 @@
               "optionText": "El padre de la niña del cómic, que recuerda los eventos en segunda persona.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** No está narrado en segunda persona y además el protagonista es quien habla de *mi padre*."
             },
             {
               "optionId": "D",
@@ -1354,10 +1354,10 @@
               "optionText": "La niña de la historia, que hace su relato en primera persona.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** Los recuadros usan la **primera persona** y corresponden a la voz del protagonista que relata su experiencia."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "D",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -1382,7 +1382,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** comparar la función de dos predicciones mencionadas por el autor.\n- En el párrafo, la primera predicción específica sobre el papa aparece como un ejemplo de predicción más precisa que falla.\n- La segunda, *habrá más refugiados*, es una predicción general que el autor admite como acierto precisamente por su vaguedad.\n- **Conclusión:** tienen funciones opuestas: una muestra el fracaso de predicciones particulares y la otra el acierto aparente de las generales. Respuesta: **D**.",
           "options": [
             {
               "optionId": "A",
@@ -1390,7 +1390,7 @@
               "optionText": "Son complementarias, puesto que ambas sirven para probar que las predicciones específicas de los astrólogos son ciertas.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** El autor no usa ambas para probar que los astrólogos aciertan; más bien critica su falta de precisión."
             },
             {
               "optionId": "B",
@@ -1398,7 +1398,7 @@
               "optionText": "Tienen la misma función, ya que ambas prueban que las predicciones generales de los astrólogos suelen resultar falsas.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** No cumplen la misma función: una es específica y otra general."
             },
             {
               "optionId": "C",
@@ -1406,7 +1406,7 @@
               "optionText": "Son contradictorias, puesto que 1) dice lo contrario que 2), mostrando que los horóscopos son una práctica incoherente.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** No son contradictorias entre sí; hablan de asuntos distintos."
             },
             {
               "optionId": "D",
@@ -1414,10 +1414,10 @@
               "optionText": "Tienen funciones opuestas, ya que 1) prueba que las predicciones particulares fallan, y 2) que las generales aciertan.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** La primera ilustra el fracaso de una predicción **específica**; la segunda, el aparente acierto de una predicción **general** y fácilmente verificable."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "D",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -1431,7 +1431,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** determinar qué demuestra el experimento de Forer.\n- **Dato clave:** Forer entregó a todos sus estudiantes la misma descripción y, aun así, todos la evaluaron como precisa.\n- **Inferencia:** personas con personalidades distintas pueden sentirse identificadas con una misma descripción general.\n- **Conclusión:** la respuesta correcta es **D**.",
           "options": [
             {
               "optionId": "A",
@@ -1439,7 +1439,7 @@
               "optionText": "la mayoría de la gente es proclive a creer en los test de personalidad, sobre todo si estos afirman cosas positivas.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Aunque se insinúa cierta predisposición, el experimento no se centra en que las afirmaciones sean positivas, sino en su **generalidad**."
             },
             {
               "optionId": "B",
@@ -1447,7 +1447,7 @@
               "optionText": "los estudiantes están sesgados y predispuestos a considerar como verdadero lo que su profesor de psicología les dice.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** El texto no atribuye el resultado a obediencia al profesor, sino al efecto de identificarse con descripciones vagas."
             },
             {
               "optionId": "C",
@@ -1455,7 +1455,7 @@
               "optionText": "debido a las diferencias normales entre sus personalidades, los estudiantes no le otorgaron a la prueba una calificación más alta.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Esa no es la lección del experimento. Lo importante es que, pese a ser diferentes, **todos** aceptaron la misma descripción."
             },
             {
               "optionId": "D",
@@ -1463,10 +1463,10 @@
               "optionText": "a pesar de las diferentes personalidades de los estudiantes, todos ellos se sintieron identificados con una misma descripción general.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** Eso es exactamente lo que evidencia el experimento y lo que permite mostrar por qué ciertos análisis de personalidad pueden ser engañosos."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "D",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -1491,7 +1491,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** ubicar el lugar de la firma del armisticio.\n- El texto indica que los alemanes entraron al cuartel de Foch, *un antiguo coche-cama francés*, y luego señala que *en el mismo vagón, Erzberger firmó la tregua*.\n- Ese vagón estaba en un bosque, pero seguía siendo territorio aliado y un coche francés.\n- **Conclusión:** la firma se da en **un vagón de tren en territorio aliado**. Respuesta: **B**.",
           "options": [
             {
               "optionId": "A",
@@ -1499,7 +1499,7 @@
               "optionText": "una zona neutral para aliados y alemanes.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** El texto no menciona neutralidad del territorio; el vagón es francés y Foch es el comandante aliado."
             },
             {
               "optionId": "B",
@@ -1507,7 +1507,7 @@
               "optionText": "un vagón de tren en territorio aliado.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** El texto señala que la firma ocurrió *en el mismo vagón*, descrito como un coche-cama francés en el contexto del mando aliado."
             },
             {
               "optionId": "C",
@@ -1515,7 +1515,7 @@
               "optionText": "un batallón militar del ejército francés.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** No fue en un batallón, sino en un vagón acondicionado como cuartel."
             },
             {
               "optionId": "D",
@@ -1523,10 +1523,10 @@
               "optionText": "una estación de tren en medio de un bosque.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Aunque el tren estaba en el bosque, el texto no habla de una estación; precisa que la firma fue en un vagón."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "B",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -1540,7 +1540,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** caracterizar a los alemanes según el relato.\n- El texto afirma que al escuchar las condiciones *quedaron aturdidos, comprendiendo por primera vez la magnitud de su derrota*.\n- Eso indica que estaban vencidos, pero no entendían del todo su situación real hasta ese momento.\n- **Conclusión:** la respuesta correcta es **B**.",
           "options": [
             {
               "optionId": "A",
@@ -1548,7 +1548,7 @@
               "optionText": "desesperados, pues hicieron un largo viaje para poder hablar con Foch.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Aunque el viaje fue duro, el texto enfatiza más su desconocimiento de la magnitud de la derrota que una desesperación explícita."
             },
             {
               "optionId": "B",
@@ -1556,7 +1556,7 @@
               "optionText": "vencidos, pero ignorantes de su situación real.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** El texto dice que solo al oír las condiciones comprendieron **por primera vez** la magnitud de su derrota."
             },
             {
               "optionId": "C",
@@ -1564,7 +1564,7 @@
               "optionText": "indecisos, pues les tomó alrededor de tres días decidir firmar el armisticio.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Los tres días no se presentan como indecisión, sino como el lapso hasta la firma."
             },
             {
               "optionId": "D",
@@ -1572,10 +1572,10 @@
               "optionText": "combativos, pero con voluntad de hacer la paz.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** El énfasis no está en su combatividad, sino en su derrota y en la solicitud de tregua."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "B",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -1589,7 +1589,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** identificar quién era Matthias Erzberger en el texto.\n- Se dice que era *portavoz del grupo* de seis alemanes que iba a recibir las condiciones de Foch.\n- Por tanto, era el representante alemán encargado de negociar la tregua con el mando aliado.\n- **Conclusión:** la mejor opción es **B**.",
           "options": [
             {
               "optionId": "A",
@@ -1597,7 +1597,7 @@
               "optionText": "un político francés que sirvió como mediador en la negociación entre los alemanes y Foch.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Erzberger no era francés; pertenecía al grupo alemán."
             },
             {
               "optionId": "B",
@@ -1605,7 +1605,7 @@
               "optionText": "un diplomático alemán encargado de negociar con el supremo comandante de las fuerzas aliadas.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** El texto lo presenta como **portavoz del grupo** alemán que negocia la tregua con Foch, comandante aliado."
             },
             {
               "optionId": "C",
@@ -1613,7 +1613,7 @@
               "optionText": "un oficial del ejército aliado que acompañó a los alemanes al momento de negociar con Foch.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** El oficial aliado es otro personaje; Erzberger pertenece a la delegación alemana."
             },
             {
               "optionId": "D",
@@ -1621,10 +1621,10 @@
               "optionText": "un edecán encargado de comandar el grupo de negociación conformado por alemanes y aliados.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** El edecán es quien lee las condiciones, no Erzberger."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "B",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -1638,7 +1638,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** establecer la relación entre el fragmento adicional y el texto principal.\n- El texto principal sostiene que el final de la Primera Guerra Mundial contenía ya fuerzas que condujeron a la Segunda.\n- El fragmento complementa esa idea mostrando que incluso Foch vio que Versalles no traería paz duradera, sino una tregua temporal.\n- **Conclusión:** el fragmento **complementa** el texto al dar más razones para sostener que el fin de la Primera Guerra fue el inicio de la Segunda. Respuesta: **C**.",
           "options": [
             {
               "optionId": "A",
@@ -1646,7 +1646,7 @@
               "optionText": "Lo complementa, pues muestra un aspecto desconocido del mariscal Foch que está en contra de aceptar el armisticio.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** El punto no es que Foch estuviera en contra del armisticio, sino que veía la paz posterior como insuficiente y temporal."
             },
             {
               "optionId": "B",
@@ -1654,7 +1654,7 @@
               "optionText": "Lo contradice, pues en el texto principal se advierte que Foch apoyaba las condiciones impuestas a los alemanes para la firma del armisticio.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** No lo contradice. Ambas piezas apuntan a que el cierre del conflicto dejó condiciones que alimentarían otro."
             },
             {
               "optionId": "C",
@@ -1662,7 +1662,7 @@
               "optionText": "Lo complementa, pues da más razones para asegurar que el fin de la Primera Guerra Mundial fue el inicio de la Segunda.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** El fragmento refuerza la idea central del texto: la supuesta paz posterior a la Primera Guerra contenía ya las semillas de la Segunda."
             },
             {
               "optionId": "D",
@@ -1670,10 +1670,10 @@
               "optionText": "Lo contradice, pues en el texto principal se advierte que el fin de la Primera Guerra Mundial solo tuvo consecuencias negativas para Alemania.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** El texto principal no dice *solo* eso; analiza fuerzas de rencor y orgullo en ambos bandos."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "C",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -1698,7 +1698,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** establecer la relación entre la afirmación y la pregunta retórica.\n- El primer enunciado presenta el argumento: la extinción es natural.\n- El segundo no lo cuestiona, sino que formula una pregunta retórica que **refuerza** esa misma postura: si es natural, no habría motivo para preocuparse.\n- **Conclusión:** ambos enunciados apoyan una misma tesis. Respuesta: **D**.",
           "options": [
             {
               "optionId": "A",
@@ -1706,7 +1706,7 @@
               "optionText": "La pregunta pone en duda la tesis de la frase que la precede.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** La pregunta no pone en duda la idea previa; la prolonga y la fortalece retóricamente."
             },
             {
               "optionId": "B",
@@ -1714,7 +1714,7 @@
               "optionText": "Los enunciados se oponen entre sí.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** No hay oposición; ambos forman parte del mismo argumento contra la preservación."
             },
             {
               "optionId": "C",
@@ -1722,7 +1722,7 @@
               "optionText": "La pregunta busca aclarar una idea de la frase que la precede.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Más que aclarar, la pregunta **refuerza** la conclusión implícita del primer enunciado."
             },
             {
               "optionId": "D",
@@ -1730,10 +1730,10 @@
               "optionText": "Los enunciados apoyan una misma tesis.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** El primero expone la idea y el segundo la refuerza mediante una pregunta retórica que sostiene el mismo punto."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "D",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -1747,7 +1747,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** identificar cómo interpretarían ese texto quienes están contra la preservación.\n- La cita ridiculiza la idea de ayudar a la naturaleza y presenta la extinción como parte de una lucha natural por sobrevivir.\n- Esa postura coincide con quienes creen que la desaparición de especies es aceptable por ser natural e inevitable.\n- **Conclusión:** para ellos, esa idea **apoya** su tesis al ofrecer otra forma de entender la inevitabilidad de la extinción. Respuesta: **D**.",
           "options": [
             {
               "optionId": "A",
@@ -1755,7 +1755,7 @@
               "optionText": "contradice su tesis, porque favorece el rechazo del autor a quienes dudan de la extinción.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** La cita no rechaza la idea de la extinción natural; más bien la caricaturiza desde una posición afín a quienes no ven problema en ella."
             },
             {
               "optionId": "B",
@@ -1763,7 +1763,7 @@
               "optionText": "complementa su tesis, porque contradice la defensa del autor de que la extinción es antinatural.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** El autor no defiende que toda extinción sea antinatural; critica el aumento **anómalo** de la extinción causada por humanos."
             },
             {
               "optionId": "C",
@@ -1771,7 +1771,7 @@
               "optionText": "debilita su tesis, porque caricaturiza el argumento de que la extinción es aceptable por tratarse de un proceso natural.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Aunque la cita tiene tono caricaturesco, la pregunta pide cómo la verían **quienes están en contra de la preservación**, y ellos la tomarían como apoyo, no como debilitamiento."
             },
             {
               "optionId": "D",
@@ -1779,10 +1779,10 @@
               "optionText": "apoya su tesis, porque presenta una nueva manera de comprender la teoría de la inevitabilidad de la extinción.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** Desde la perspectiva de quienes se oponen a la preservación, la cita respalda su postura al presentar la extinción como parte de una lucha natural e inevitable."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "D",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -1807,7 +1807,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** encontrar el sinónimo contextual de *inmune*.\n- En el texto, *inmune a la infección* significa que no puede ser afectado por virus o gusanos.\n- El mejor reemplazo es **invulnerable**.\n- **Conclusión:** respuesta **C**.",
           "options": [
             {
               "optionId": "A",
@@ -1815,7 +1815,7 @@
               "optionText": "inatacable.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Aunque se aproxima, *inatacable* suele usarse más en sentido argumentativo o moral; no es tan preciso como **invulnerable** en este contexto técnico."
             },
             {
               "optionId": "B",
@@ -1823,7 +1823,7 @@
               "optionText": "proclive.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** *Proclive* significa inclinado o propenso, casi lo contrario de *inmune*."
             },
             {
               "optionId": "C",
@@ -1831,7 +1831,7 @@
               "optionText": "invulnerable.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** *Inmune* aquí equivale a **invulnerable** a la infección por virus o gusanos."
             },
             {
               "optionId": "D",
@@ -1839,10 +1839,10 @@
               "optionText": "propenso.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** *Propenso* es lo opuesto al sentido de *inmune*."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "C",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -1856,7 +1856,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** interpretar la comparación con los soldados.\n- El autor subraya que los computadores obedecen instrucciones sin evaluar si son buenas o malas.\n- La comparación apunta a la obediencia **sin cuestionamiento**.\n- **Conclusión:** la respuesta correcta es **C**.",
           "options": [
             {
               "optionId": "A",
@@ -1864,7 +1864,7 @@
               "optionText": "siempre están expuestos a los virus.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Esa es una consecuencia del texto, pero no es el significado directo de la comparación con los soldados."
             },
             {
               "optionId": "B",
@@ -1872,7 +1872,7 @@
               "optionText": "desconocen si una instrucción es correcta.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Es una idea cercana, pero la frase quiere destacar sobre todo la obediencia sin cuestionamiento, no solo la ignorancia sobre la corrección."
             },
             {
               "optionId": "C",
@@ -1880,7 +1880,7 @@
               "optionText": "siguen las órdenes sin cuestionarlas.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** Esa es la idea central de la comparación: los computadores ejecutan órdenes sin juzgarlas."
             },
             {
               "optionId": "D",
@@ -1888,10 +1888,10 @@
               "optionText": "son capaces de tomar decisiones.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** El texto afirma justamente lo contrario: no tienen modo de determinar si el efecto será bueno o malo."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "C",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -1905,7 +1905,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** establecer la relación argumentativa entre 1 y 2.\n- El enunciado 2 presenta la idea general: la obediencia ciega hace útiles a los computadores, pero también vulnerables.\n- El enunciado 1 ofrece un ejemplo concreto de cómo un programa malicioso se aprovecha de esa obediencia.\n- **Conclusión:** el enunciado 1 funciona como **evidencia a favor** del enunciado 2. Respuesta: **C**.",
           "options": [
             {
               "optionId": "A",
@@ -1913,7 +1913,7 @@
               "optionText": "El enunciado 1 es una evidencia en contra del enunciado 2.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** El ejemplo del virus no contradice la idea general; la confirma."
             },
             {
               "optionId": "B",
@@ -1921,7 +1921,7 @@
               "optionText": "El enunciado 2 es una evidencia a favor del enunciado 1.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** El orden lógico va al revés: 2 es la tesis general y 1 es el caso ilustrativo."
             },
             {
               "optionId": "C",
@@ -1929,7 +1929,7 @@
               "optionText": "El enunciado 1 es una evidencia a favor del enunciado 2.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** El enunciado 1 ejemplifica cómo la obediencia automática de los computadores los vuelve vulnerables a programas maliciosos, tal como afirma el enunciado 2."
             },
             {
               "optionId": "D",
@@ -1937,10 +1937,10 @@
               "optionText": "El enunciado 2 es una evidencia en contra del enunciado 1.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** El enunciado 2 no refuta el 1; lo explica de manera general."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "C",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -1954,7 +1954,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** inferir la pregunta guía del texto.\n- El texto se concentra en un rasgo principal de los computadores: su obediencia total a las instrucciones.\n- Luego examina las implicaciones de ese rasgo: utilidad y vulnerabilidad frente a virus.\n- **Conclusión:** la pregunta principal corresponde a la opción **B**.",
           "options": [
             {
               "optionId": "A",
@@ -1962,7 +1962,7 @@
               "optionText": "¿Por qué los computadores pueden ser invulnerables a los virus?",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** El texto no explica por qué pueden ser invulnerables; al contrario, afirma que eso es muy difícil o casi imposible."
             },
             {
               "optionId": "B",
@@ -1970,7 +1970,7 @@
               "optionText": "¿Cuál es el principal rasgo de los computadores y qué implicaciones tiene dicho rasgo?",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** El texto expone la obediencia como rasgo central de los computadores y analiza sus dos consecuencias: utilidad y vulnerabilidad."
             },
             {
               "optionId": "C",
@@ -1978,7 +1978,7 @@
               "optionText": "¿Cuál es la principal característica de los computadores y qué ventajas posee dicho rasgo?",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Se queda solo en las ventajas y omite una parte esencial del texto: las desventajas o riesgos."
             },
             {
               "optionId": "D",
@@ -1986,10 +1986,10 @@
               "optionText": "¿Por qué los computadores, a pesar de ser vulnerables, tienen la utilidad de detectar buenos y malos efectos?",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** El texto dice expresamente que los computadores **no** pueden determinar si una instrucción tendrá un buen o mal efecto."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "B",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -2003,7 +2003,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** aplicar al caso concreto la descripción del programa malicioso.\n- El autor explica que un programa que diga *cópiame y envíame a todas las direcciones que puedas encontrar en el disco duro* será obedecido.\n- Por tanto, un computador infectado realizará exactamente esa acción.\n- **Conclusión:** la respuesta correcta es **B**.",
           "options": [
             {
               "optionId": "A",
@@ -2011,7 +2011,7 @@
               "optionText": "no podrá obedecer otro tipo de instrucciones dadas en el lenguaje de programación.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** El texto no afirma que deje de obedecer otras instrucciones; solo explica que obedecerá también la instrucción maliciosa."
             },
             {
               "optionId": "B",
@@ -2019,7 +2019,7 @@
               "optionText": "enviará el programa a todas las direcciones que encuentre en el disco duro.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** Eso reproduce literalmente el comportamiento descrito por el autor para un programa malicioso de autorreplicación."
             },
             {
               "optionId": "C",
@@ -2027,7 +2027,7 @@
               "optionText": "no podrá realizar acciones útiles como procesar textos o realizar hojas de cálculo.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** El texto no dice que el computador pierda necesariamente toda funcionalidad útil."
             },
             {
               "optionId": "D",
@@ -2035,10 +2035,10 @@
               "optionText": "será incapaz de ser útil y, al mismo tiempo, invulnerable a diferentes virus.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Esta opción reformula una idea general del texto, pero no responde al caso específico de qué hará el computador infectado."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "B",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -2063,7 +2063,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "En el primer párrafo, el narrador explica explícitamente: 'Como la pequeñez de las partes constituía un gran obstáculo para la rapidez de mi trabajo, decidí... hacer un ser de estatura gigantesca'. Esto indica que manipular partes pequeñas era lento, por lo que hacer un ser pequeño le tomaría más tiempo.",
+          "aiExplanation": "- **Problema central:** identificar la razón explícita de crear un ser gigantesco.\n- **Dato textual clave:** *Como la pequeñez de las partes constituía un gran obstáculo para la rapidez de mi trabajo, decidí... hacer un ser de estatura gigantesca*.\n- **Inferencia:** trabajar con partes pequeñas habría hecho el proceso más lento; por eso optó por un cuerpo grande.\n- **Conclusión:** la respuesta correcta es **B**.",
           "options": [
             {
               "optionId": "A",
@@ -2071,7 +2071,7 @@
               "optionText": "su intención era que aquel nuevo ser infundiera terror en quienes lo vieran.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** El texto no dice que buscara causar terror; la razón dada es práctica: facilitar y acelerar el trabajo."
             },
             {
               "optionId": "B",
@@ -2079,7 +2079,7 @@
               "optionText": "hacer un ser pequeño le iba a tomar más tiempo que hacer uno gigante.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** El narrador explica que la pequeñez de las partes obstaculizaba la rapidez de su trabajo, por lo que eligió un ser gigantesco."
             },
             {
               "optionId": "C",
@@ -2087,7 +2087,7 @@
               "optionText": "en la sala de disección y en el matadero solo había materiales de gran tamaño.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** El texto menciona esos lugares como fuente de materiales, pero no dice que solo hubiera materiales grandes."
             },
             {
               "optionId": "D",
@@ -2095,7 +2095,7 @@
               "optionText": "sentía un deseo irresistible por crear una criatura de esa dimensión.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** El deseo irresistible se refiere a culminar la creación, no específicamente al tamaño del ser."
             }
           ],
           "correctOptionId": "B",
@@ -2112,7 +2112,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "La frase citada expresa el estado anímico, la obsesión y el nivel de entrega emocional del narrador hacia su meta. Describe cómo sus emociones humanas ('el alma y la sensibilidad') fueron anuladas por el impulso febril de dar vida a su creación. Por tanto, manifiesta una emoción respecto a su actitud.",
+          "aiExplanation": "- **Problema central:** interpretar la intención comunicativa de esa frase.\n- **Contexto:** el narrador recuerda su estado durante la creación del ser y describe cómo estaba dominado por una obsesión casi frenética.\n- La frase no informa un procedimiento técnico ni formula una promesa; expresa su estado emocional y su deshumanización momentánea frente al objetivo.\n- **Conclusión:** la intención es **manifestar una emoción respecto a su actitud** durante la creación. Respuesta: **B**.",
           "options": [
             {
               "optionId": "A",
@@ -2120,7 +2120,7 @@
               "optionText": "Hacer una afirmación acerca de la creación del nuevo ser y la manera en que lo hizo.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** La frase no describe el procedimiento de creación, sino el estado interior del narrador."
             },
             {
               "optionId": "B",
@@ -2128,7 +2128,7 @@
               "optionText": "Manifestar una emoción con respecto a su actitud durante la creación del nuevo ser.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** El narrador expresa retrospectivamente la intensidad obsesiva de su actitud y cómo perdió sensibilidad frente a todo lo demás."
             },
             {
               "optionId": "C",
@@ -2136,7 +2136,7 @@
               "optionText": "Dirigir una pregunta indirecta al lector sobre su opinión al respecto del nuevo ser.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** No hay pregunta al lector ni solicitud de opinión."
             },
             {
               "optionId": "D",
@@ -2144,7 +2144,7 @@
               "optionText": "Comprometerse con el lector a no volver a actuar de la manera en que lo hizo.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** El narrador expresa arrepentimiento implícito, pero no formula ningún compromiso explícito."
             }
           ],
           "correctOptionId": "B",
