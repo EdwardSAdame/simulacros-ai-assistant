@@ -2046,6 +2046,115 @@
           }
         }
       ]
+    },
+    {
+      "sectionIndex": 13,
+      "sectionTitle": "RESPONDA LAS PREGUNTAS 40 Y 41 DE ACUERDO CON LA SIGUIENTE INFORMACIÓN",
+      "sectionText": "Con estos sentimientos, empecé la creación de un ser humano. Como la pequeñez de las partes constituía un gran obstáculo para la rapidez de mi trabajo, decidí, en contra de mi primera intención, hacer un ser de estatura gigantesca; es decir, de unos ocho pies de alto, y de una anchura proporcionada. Y tras adoptar esta decisión, y pasar meses recogiendo y ordenando material, emprendí mi trabajo.\n\nNadie puede imaginar la diversidad de sentimientos que me empujaron a seguir, como un huracán, desde el primer entusiasmo de éxito. La vida y la muerte me parecían barreras ideales que yo sería el primero en romper, derramando un torrente de luz sobre nuestro mundo en tinieblas. Una nueva especie me bendeciría como su origen y creador; muchas naturalezas excelentes y dichosas me deberían su ser. Ningún padre podría reclamar la gratitud de sus hijos con tanto derecho como yo merecería la de ellos. Siguiendo con estas reflexiones, pensé que si podía infundir animación en la materia inerte, en el curso del tiempo (pues ahora resultaba imposible), podría renovar la vida allí donde la muerte había sometido el cuerpo aparentemente a la corrupción.\n\nHoy me tiemblan las piernas y se me humedecen los ojos ante el recuerdo; pero entonces me empujaba un deseo irresistible y casi frenético; parecía haber perdido por completo el alma y la sensibilidad salvo para este objetivo.\n\nLa sala de disección y el matadero me proporcionaron muchos de mis materiales; con frecuencia, mi naturaleza abominaba mi empresa mientras, impulsado por una ansiedad perpetuamente en aumento, mi trabajo se acercaba a su fin.",
+      "sectionSource": "*Tomado de: Shelley, Mary. (2018). Frankenstein, p. 74. Madrid: Alianza Editorial.*",
+      "hasSectionImage": false,
+      "sectionImageUrl": "",
+      "sectionImageAiDescription": "",
+      "questions": [
+        {
+          "questionId": "q_40",
+          "questionText": "El narrador decide crear un ser de estatura gigantesca porque",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "aiExplanation": "En el primer párrafo, el narrador explica explícitamente: 'Como la pequeñez de las partes constituía un gran obstáculo para la rapidez de mi trabajo, decidí... hacer un ser de estatura gigantesca'. Esto indica que manipular partes pequeñas era lento, por lo que hacer un ser pequeño le tomaría más tiempo.",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "optionText": "su intención era que aquel nuevo ser infundiera terror en quienes lo vieran.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "optionText": "hacer un ser pequeño le iba a tomar más tiempo que hacer uno gigante.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "optionText": "en la sala de disección y en el matadero solo había materiales de gran tamaño.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "optionText": "sentía un deseo irresistible por crear una criatura de esa dimensión.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            }
+          ],
+          "correctOptionId": "B",
+          "irt_parameters": {
+            "discrimination_a": 1.0,
+            "difficulty_b": 0.0,
+            "guessing_c": 0.25
+          }
+        },
+        {
+          "questionId": "q_41",
+          "questionText": "La intención del narrador cuando dice \"parecía haber perdido por completo el alma y la sensibilidad salvo para este objetivo\", es:",
+          "hasQuestionImage": false,
+          "questionImageUrl": "",
+          "questionImageAiDescription": "",
+          "optionsType": "text",
+          "aiExplanation": "La frase citada expresa el estado anímico, la obsesión y el nivel de entrega emocional del narrador hacia su meta. Describe cómo sus emociones humanas ('el alma y la sensibilidad') fueron anuladas por el impulso febril de dar vida a su creación. Por tanto, manifiesta una emoción respecto a su actitud.",
+          "options": [
+            {
+              "optionId": "A",
+              "type": "text",
+              "optionText": "Hacer una afirmación acerca de la creación del nuevo ser y la manera en que lo hizo.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            },
+            {
+              "optionId": "B",
+              "type": "text",
+              "optionText": "Manifestar una emoción con respecto a su actitud durante la creación del nuevo ser.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            },
+            {
+              "optionId": "C",
+              "type": "text",
+              "optionText": "Dirigir una pregunta indirecta al lector sobre su opinión al respecto del nuevo ser.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            },
+            {
+              "optionId": "D",
+              "type": "text",
+              "optionText": "Comprometerse con el lector a no volver a actuar de la manera en que lo hizo.",
+              "optionImageUrl": "",
+              "optionAiDescription": "",
+              "optionFeedback": ""
+            }
+          ],
+          "correctOptionId": "B",
+          "irt_parameters": {
+            "discrimination_a": 1.0,
+            "difficulty_b": 0.0,
+            "guessing_c": 0.25
+          }
+        }
+      ]
     }
   ]
 }
