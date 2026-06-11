@@ -59,7 +59,7 @@
       "componentId": "sociales-y-ciudadanas",
       "componentTitle": "Sociales y Ciudadanas",
       "componentDescription": "ICFES 2025-2, sesión 2",
-      "componentImage": "",
+      "componentImage": "https://cdn.invicto.com.co/icfes/general/social_vol_02.png",
       "questionCount": 25,
       "timeLimitMinutes": 90
     }
