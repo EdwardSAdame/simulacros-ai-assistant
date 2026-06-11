@@ -1,13 +1,14 @@
 {
   "examType": "ICFES",
   "component": "ingles",
-  "examVolume": "2.a sesion",
+  "examVolume": "2.ª sesión",
   "totalSections": 8,
   "sections": [
     {
       "sectionIndex": 1,
-      "sectionTitle": "PARTE 1.A",
-      "sectionText": "RESPONDA LAS PREGUNTAS \\(80\\) A \\(84\\) DE ACUERDO CON EL EJEMPLO\n\nLea las descripciones de la columna de la izquierda \\((80 - 84)\\). \\u00bfCu\\u00e1l palabra de la columna de la derecha \\((A - G)\\) concuerda con cada descripci\\u00f3n?\n\nLa opci\\u00f3n \\(H\\) se usa para el ejemplo. Sobran dos palabras m\\u00e1s.\nEn las preguntas \\(80 - 84\\), marque la letra correcta \\(A - G\\) en su hoja de respuestas.\n\nHouse",
+      "sectionTitle": "## House",
+      "sectionText": "Lea las descripciones de la columna de la izquierda \\(80 - 84\\). ¿Cuál palabra de la columna de la derecha \\((A - G)\\) concuerda con cada descripción?\n\nLa opción \\(H\\) se usa para el ejemplo. Sobran dos palabras más.\n\nEn las preguntas \\(80 - 84\\), marque la letra correcta \\(A - G\\) en su hoja de respuestas.",
+      "sectionSource": "",
       "hasSectionImage": false,
       "sectionImageUrl": "",
       "sectionImageAiDescription": "",
@@ -19,66 +20,79 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
+          "aiExplanation": "",
           "options": [
             {
               "optionId": "A",
               "type": "text",
               "optionText": "armchair",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "B",
               "type": "text",
               "optionText": "bed",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "C",
               "type": "text",
               "optionText": "blanket",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "D",
               "type": "text",
               "optionText": "bookcase",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "E",
               "type": "text",
               "optionText": "cupboard",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "F",
               "type": "text",
               "optionText": "picture",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "G",
               "type": "text",
               "optionText": "shower",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "H",
               "type": "text",
               "optionText": "towel",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             }
           ],
           "correctOptionId": "",
-          "aiExplanation": ""
+          "irt_parameters": {
+            "discrimination_a": 1.0,
+            "difficulty_b": 0.0,
+            "guessing_c": 0.125
+          }
         },
         {
           "questionId": "q_02",
@@ -87,66 +101,79 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
+          "aiExplanation": "",
           "options": [
             {
               "optionId": "A",
               "type": "text",
               "optionText": "armchair",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "B",
               "type": "text",
               "optionText": "bed",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "C",
               "type": "text",
               "optionText": "blanket",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "D",
               "type": "text",
               "optionText": "bookcase",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "E",
               "type": "text",
               "optionText": "cupboard",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "F",
               "type": "text",
               "optionText": "picture",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "G",
               "type": "text",
               "optionText": "shower",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "H",
               "type": "text",
               "optionText": "towel",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             }
           ],
           "correctOptionId": "",
-          "aiExplanation": ""
+          "irt_parameters": {
+            "discrimination_a": 1.0,
+            "difficulty_b": 0.0,
+            "guessing_c": 0.125
+          }
         },
         {
           "questionId": "q_03",
@@ -155,66 +182,79 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
+          "aiExplanation": "",
           "options": [
             {
               "optionId": "A",
               "type": "text",
               "optionText": "armchair",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "B",
               "type": "text",
               "optionText": "bed",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "C",
               "type": "text",
               "optionText": "blanket",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "D",
               "type": "text",
               "optionText": "bookcase",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "E",
               "type": "text",
               "optionText": "cupboard",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "F",
               "type": "text",
               "optionText": "picture",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "G",
               "type": "text",
               "optionText": "shower",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "H",
               "type": "text",
               "optionText": "towel",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             }
           ],
           "correctOptionId": "",
-          "aiExplanation": ""
+          "irt_parameters": {
+            "discrimination_a": 1.0,
+            "difficulty_b": 0.0,
+            "guessing_c": 0.125
+          }
         },
         {
           "questionId": "q_04",
@@ -223,66 +263,79 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
+          "aiExplanation": "",
           "options": [
             {
               "optionId": "A",
               "type": "text",
               "optionText": "armchair",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "B",
               "type": "text",
               "optionText": "bed",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "C",
               "type": "text",
               "optionText": "blanket",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "D",
               "type": "text",
               "optionText": "bookcase",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "E",
               "type": "text",
               "optionText": "cupboard",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "F",
               "type": "text",
               "optionText": "picture",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "G",
               "type": "text",
               "optionText": "shower",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "H",
               "type": "text",
               "optionText": "towel",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             }
           ],
           "correctOptionId": "",
-          "aiExplanation": ""
+          "irt_parameters": {
+            "discrimination_a": 1.0,
+            "difficulty_b": 0.0,
+            "guessing_c": 0.125
+          }
         },
         {
           "questionId": "q_05",
@@ -291,73 +344,87 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
+          "aiExplanation": "",
           "options": [
             {
               "optionId": "A",
               "type": "text",
               "optionText": "armchair",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "B",
               "type": "text",
               "optionText": "bed",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "C",
               "type": "text",
               "optionText": "blanket",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "D",
               "type": "text",
               "optionText": "bookcase",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "E",
               "type": "text",
               "optionText": "cupboard",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "F",
               "type": "text",
               "optionText": "picture",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "G",
               "type": "text",
               "optionText": "shower",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "H",
               "type": "text",
               "optionText": "towel",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             }
           ],
           "correctOptionId": "",
-          "aiExplanation": ""
+          "irt_parameters": {
+            "discrimination_a": 1.0,
+            "difficulty_b": 0.0,
+            "guessing_c": 0.125
+          }
         }
       ]
     },
     {
       "sectionIndex": 2,
-      "sectionTitle": "PARTE 1.B",
-      "sectionText": "RESPONDA LAS PREGUNTAS \\(85\\) A \\(89\\) DE ACUERDO CON EL EJEMPLO\n\nLea las descripciones de la columna de la izquierda \\((85 - 89)\\). \\u00bfCu\\u00e1l palabra de la columna de la derecha \\((A - G)\\) concuerda con cada descripci\\u00f3n?\n\nLa opci\\u00f3n \\(H\\) se usa para el ejemplo. Sobran dos palabras m\\u00e1s.\nEn las preguntas \\(85 - 89\\), marque la letra correcta \\(A - G\\) en su hoja de respuestas.\n\nProfessions",
+      "sectionTitle": "## Professions",
+      "sectionText": "Lea las descripciones de la columna de la izquierda \\(85 - 89\\). ¿Cuál palabra de la columna de la derecha \\((A - G)\\) concuerda con cada descripción?\n\nLa opción \\(H\\) se usa para el ejemplo. Sobran dos palabras más.\n\nEn las preguntas \\(85 - 89\\), marque la letra correcta \\(A - G\\) en su hoja de respuestas.",
+      "sectionSource": "",
       "hasSectionImage": false,
       "sectionImageUrl": "",
       "sectionImageAiDescription": "",
@@ -369,66 +436,79 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
+          "aiExplanation": "",
           "options": [
             {
               "optionId": "A",
               "type": "text",
               "optionText": "chefs",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "B",
               "type": "text",
               "optionText": "dentists",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "C",
               "type": "text",
               "optionText": "drivers",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "D",
               "type": "text",
               "optionText": "farmers",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "E",
               "type": "text",
               "optionText": "guitarists",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "F",
               "type": "text",
               "optionText": "nurses",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "G",
               "type": "text",
               "optionText": "painters",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "H",
               "type": "text",
               "optionText": "teachers",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             }
           ],
           "correctOptionId": "",
-          "aiExplanation": ""
+          "irt_parameters": {
+            "discrimination_a": 1.0,
+            "difficulty_b": 0.0,
+            "guessing_c": 0.125
+          }
         },
         {
           "questionId": "q_07",
@@ -437,66 +517,79 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
+          "aiExplanation": "",
           "options": [
             {
               "optionId": "A",
               "type": "text",
               "optionText": "chefs",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "B",
               "type": "text",
               "optionText": "dentists",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "C",
               "type": "text",
               "optionText": "drivers",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "D",
               "type": "text",
               "optionText": "farmers",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "E",
               "type": "text",
               "optionText": "guitarists",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "F",
               "type": "text",
               "optionText": "nurses",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "G",
               "type": "text",
               "optionText": "painters",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "H",
               "type": "text",
               "optionText": "teachers",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             }
           ],
           "correctOptionId": "",
-          "aiExplanation": ""
+          "irt_parameters": {
+            "discrimination_a": 1.0,
+            "difficulty_b": 0.0,
+            "guessing_c": 0.125
+          }
         },
         {
           "questionId": "q_08",
@@ -505,66 +598,79 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
+          "aiExplanation": "",
           "options": [
             {
               "optionId": "A",
               "type": "text",
               "optionText": "chefs",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "B",
               "type": "text",
               "optionText": "dentists",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "C",
               "type": "text",
               "optionText": "drivers",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "D",
               "type": "text",
               "optionText": "farmers",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "E",
               "type": "text",
               "optionText": "guitarists",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "F",
               "type": "text",
               "optionText": "nurses",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "G",
               "type": "text",
               "optionText": "painters",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "H",
               "type": "text",
               "optionText": "teachers",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             }
           ],
           "correctOptionId": "",
-          "aiExplanation": ""
+          "irt_parameters": {
+            "discrimination_a": 1.0,
+            "difficulty_b": 0.0,
+            "guessing_c": 0.125
+          }
         },
         {
           "questionId": "q_09",
@@ -573,66 +679,79 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
+          "aiExplanation": "",
           "options": [
             {
               "optionId": "A",
               "type": "text",
               "optionText": "chefs",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "B",
               "type": "text",
               "optionText": "dentists",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "C",
               "type": "text",
               "optionText": "drivers",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "D",
               "type": "text",
               "optionText": "farmers",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "E",
               "type": "text",
               "optionText": "guitarists",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "F",
               "type": "text",
               "optionText": "nurses",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "G",
               "type": "text",
               "optionText": "painters",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "H",
               "type": "text",
               "optionText": "teachers",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             }
           ],
           "correctOptionId": "",
-          "aiExplanation": ""
+          "irt_parameters": {
+            "discrimination_a": 1.0,
+            "difficulty_b": 0.0,
+            "guessing_c": 0.125
+          }
         },
         {
           "questionId": "q_10",
@@ -641,248 +760,303 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
+          "aiExplanation": "",
           "options": [
             {
               "optionId": "A",
               "type": "text",
               "optionText": "chefs",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "B",
               "type": "text",
               "optionText": "dentists",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "C",
               "type": "text",
               "optionText": "drivers",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "D",
               "type": "text",
               "optionText": "farmers",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "E",
               "type": "text",
               "optionText": "guitarists",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "F",
               "type": "text",
               "optionText": "nurses",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "G",
               "type": "text",
               "optionText": "painters",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "H",
               "type": "text",
               "optionText": "teachers",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             }
           ],
           "correctOptionId": "",
-          "aiExplanation": ""
+          "irt_parameters": {
+            "discrimination_a": 1.0,
+            "difficulty_b": 0.0,
+            "guessing_c": 0.125
+          }
         }
       ]
     },
     {
       "sectionIndex": 3,
-      "sectionTitle": "PARTE 2",
-      "sectionText": "RESPONDA LAS PREGUNTAS \\(90\\) A \\(94\\) DE ACUERDO CON EL EJEMPLO\n\n\\u00bfD\\u00f3nde puede ver estos avisos?\nEn las preguntas \\(90 - 94\\), marque \\(A\\), \\(B\\) o \\(C\\) en su hoja de respuestas.",
+      "sectionTitle": "## PARTE 2",
+      "sectionText": "¿Dónde puede ver estos avisos?\n\nEn las preguntas \\(90 - 94\\), marque \\(A\\), \\(B\\) o \\(C\\) en su hoja de respuestas.",
+      "sectionSource": "",
       "hasSectionImage": false,
       "sectionImageUrl": "",
       "sectionImageAiDescription": "",
       "questions": [
         {
           "questionId": "q_11",
-          "questionText": "\\u00bfD\\u00f3nde puede ver este aviso?",
+          "questionText": "Find Lucy's stories here.\n\n\\(2x1\\) today!",
           "hasQuestionImage": true,
           "questionImageUrl": "",
-          "questionImageAiDescription": "Light right-pointing arrow sign with italic text in two lines: 'Find Lucy's stories here.' and below it '2x1 today!'.",
+          "questionImageAiDescription": "Horizontal arrow-shaped sign pointing to the right. Inside the sign there are two centered lines of text: first line in italic/bold style reads \"Find Lucy's stories here.\" Second line reads \"2x1 today!\".",
           "optionsType": "text",
+          "aiExplanation": "",
           "options": [
             {
               "optionId": "A",
               "type": "text",
               "optionText": "in a bookstore",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "B",
               "type": "text",
               "optionText": "in a classroom",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "C",
               "type": "text",
               "optionText": "in a cinema",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             }
           ],
           "correctOptionId": "",
-          "aiExplanation": ""
+          "irt_parameters": {
+            "discrimination_a": 1.0,
+            "difficulty_b": 0.0,
+            "guessing_c": 0.3333333333
+          }
         },
         {
           "questionId": "q_12",
-          "questionText": "\\u00bfD\\u00f3nde puede ver este aviso?",
+          "questionText": "NO CAMERAS\nNO PHOTOS\nDo not take pictures of the tigers",
           "hasQuestionImage": true,
           "questionImageUrl": "",
-          "questionImageAiDescription": "Rectangular bordered warning sign with three centered lines: 'NO CAMERAS', 'NO PHOTOS', 'Do not take pictures of the tigers'.",
+          "questionImageAiDescription": "Rectangular framed notice with three centered lines of text. Top line: \"NO CAMERAS\". Second line: \"NO PHOTOS\". Third line: \"Do not take pictures of the tigers\".",
           "optionsType": "text",
+          "aiExplanation": "",
           "options": [
             {
               "optionId": "A",
               "type": "text",
               "optionText": "on the beach",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "B",
               "type": "text",
               "optionText": "in a pet shop",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "C",
               "type": "text",
               "optionText": "at the zoo",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             }
           ],
           "correctOptionId": "",
-          "aiExplanation": ""
+          "irt_parameters": {
+            "discrimination_a": 1.0,
+            "difficulty_b": 0.0,
+            "guessing_c": 0.3333333333
+          }
         },
         {
           "questionId": "q_13",
-          "questionText": "\\u00bfD\\u00f3nde puede ver este aviso?",
+          "questionText": "TODAY\nPiano lessons with Mrs. Wilson\nRoom \\(11\\) - \\(2{:}00\\) p.m.",
           "hasQuestionImage": true,
           "questionImageUrl": "",
-          "questionImageAiDescription": "Small notice with a decorative left border shape and text: 'TODAY' on top, then 'Piano lessons with Mrs. Wilson', then 'Room 11 - 2:00 p.m.'.",
+          "questionImageAiDescription": "Notice designed like a small posted sign with a thick black left border and bottom border. Text appears in three lines: \"TODAY\" at top, then \"Piano lessons with Mrs. Wilson\", then \"Room 11 - 2:00 p.m.\".",
           "optionsType": "text",
+          "aiExplanation": "",
           "options": [
             {
               "optionId": "A",
               "type": "text",
               "optionText": "at a school",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "B",
               "type": "text",
               "optionText": "in a mall",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "C",
               "type": "text",
               "optionText": "at a playground",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             }
           ],
           "correctOptionId": "",
-          "aiExplanation": ""
+          "irt_parameters": {
+            "discrimination_a": 1.0,
+            "difficulty_b": 0.0,
+            "guessing_c": 0.3333333333
+          }
         },
         {
           "questionId": "q_14",
-          "questionText": "\\u00bfD\\u00f3nde puede ver este aviso?",
+          "questionText": "Happy birthday, Anna!\nWe love you.",
           "hasQuestionImage": true,
           "questionImageUrl": "",
-          "questionImageAiDescription": "Horizontal banner between two vertical supports with text: 'Happy birthday, Anna! We love you.'",
+          "questionImageAiDescription": "Horizontal banner-like image with vertical supports at both sides. Centered bold text in two lines reads: \"Happy birthday, Anna!\" and \"We love you.\"",
           "optionsType": "text",
+          "aiExplanation": "",
           "options": [
             {
               "optionId": "A",
               "type": "text",
               "optionText": "on a cake",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "B",
               "type": "text",
               "optionText": "on a candy bag",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "C",
               "type": "text",
               "optionText": "on a box of cereal",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             }
           ],
           "correctOptionId": "",
-          "aiExplanation": ""
+          "irt_parameters": {
+            "discrimination_a": 1.0,
+            "difficulty_b": 0.0,
+            "guessing_c": 0.3333333333
+          }
         },
         {
           "questionId": "q_15",
-          "questionText": "\\u00bfD\\u00f3nde puede ver este aviso?",
+          "questionText": "Big bedrooms with TVs\n\\(\\text{Breakfast at } 8{:}30\\text{ a.m.}\\)",
           "hasQuestionImage": true,
           "questionImageUrl": "",
-          "questionImageAiDescription": "Decorative rectangular sign with text: 'Big bedrooms with TVs' and below in parentheses '(Breakfast at 8:30 a.m.)'.",
+          "questionImageAiDescription": "Decorative rectangular framed notice with two lines of text. First line: \"Big bedrooms with TVs\". Second line in parentheses: \"Breakfast at 8:30 a.m.\"",
           "optionsType": "text",
+          "aiExplanation": "",
           "options": [
             {
               "optionId": "A",
               "type": "text",
               "optionText": "in a hotel",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "B",
               "type": "text",
               "optionText": "in a cafeteria",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "C",
               "type": "text",
               "optionText": "in a sports center",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             }
           ],
           "correctOptionId": "",
-          "aiExplanation": ""
+          "irt_parameters": {
+            "discrimination_a": 1.0,
+            "difficulty_b": 0.0,
+            "guessing_c": 0.3333333333
+          }
         }
       ]
     },
     {
       "sectionIndex": 4,
-      "sectionTitle": "PARTE 3",
-      "sectionText": "RESPONDA LAS PREGUNTAS \\(95\\) A \\(99\\) DE ACUERDO CON EL EJEMPLO\n\nComplete las cinco conversaciones.\nEn las preguntas \\(95 - 99\\), marque \\(A\\), \\(B\\) o \\(C\\) en su hoja de respuestas.",
+      "sectionTitle": "## PARTE 3",
+      "sectionText": "Complete las cinco conversaciones.\n\nEn las preguntas \\(95 - 99\\), marque \\(A\\), \\(B\\) o \\(C\\) en su hoja de respuestas.",
+      "sectionSource": "",
       "hasSectionImage": false,
       "sectionImageUrl": "",
       "sectionImageAiDescription": "",
@@ -894,31 +1068,39 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
+          "aiExplanation": "",
           "options": [
             {
               "optionId": "A",
               "type": "text",
               "optionText": "I liked jeans.",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "B",
               "type": "text",
               "optionText": "Let's dress up.",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "C",
               "type": "text",
               "optionText": "It was too warm.",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             }
           ],
           "correctOptionId": "",
-          "aiExplanation": ""
+          "irt_parameters": {
+            "discrimination_a": 1.0,
+            "difficulty_b": 0.0,
+            "guessing_c": 0.3333333333
+          }
         },
         {
           "questionId": "q_17",
@@ -927,31 +1109,39 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
+          "aiExplanation": "",
           "options": [
             {
               "optionId": "A",
               "type": "text",
               "optionText": "Is it good?",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "B",
               "type": "text",
               "optionText": "Is that a lot?",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "C",
               "type": "text",
               "optionText": "Is your mom OK?",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             }
           ],
           "correctOptionId": "",
-          "aiExplanation": ""
+          "irt_parameters": {
+            "discrimination_a": 1.0,
+            "difficulty_b": 0.0,
+            "guessing_c": 0.3333333333
+          }
         },
         {
           "questionId": "q_18",
@@ -960,31 +1150,39 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
+          "aiExplanation": "",
           "options": [
             {
               "optionId": "A",
               "type": "text",
               "optionText": "Come here now!",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "B",
               "type": "text",
               "optionText": "I've got no idea.",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "C",
               "type": "text",
               "optionText": "Is it near?",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             }
           ],
           "correctOptionId": "",
-          "aiExplanation": ""
+          "irt_parameters": {
+            "discrimination_a": 1.0,
+            "difficulty_b": 0.0,
+            "guessing_c": 0.3333333333
+          }
         },
         {
           "questionId": "q_19",
@@ -993,31 +1191,39 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
+          "aiExplanation": "",
           "options": [
             {
               "optionId": "A",
               "type": "text",
               "optionText": "Is it on Saturday?",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "B",
               "type": "text",
               "optionText": "There was noise.",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "C",
               "type": "text",
               "optionText": "It is fair!",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             }
           ],
           "correctOptionId": "",
-          "aiExplanation": ""
+          "irt_parameters": {
+            "discrimination_a": 1.0,
+            "difficulty_b": 0.0,
+            "guessing_c": 0.3333333333
+          }
         },
         {
           "questionId": "q_20",
@@ -1026,315 +1232,389 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
+          "aiExplanation": "",
           "options": [
             {
               "optionId": "A",
               "type": "text",
               "optionText": "Excuse me!",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "B",
               "type": "text",
               "optionText": "It's ready!",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "C",
               "type": "text",
               "optionText": "Congratulations!",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             }
           ],
           "correctOptionId": "",
-          "aiExplanation": ""
+          "irt_parameters": {
+            "discrimination_a": 1.0,
+            "difficulty_b": 0.0,
+            "guessing_c": 0.3333333333
+          }
         }
       ]
     },
     {
       "sectionIndex": 5,
-      "sectionTitle": "PARTE 4",
-      "sectionText": "RESPONDA LAS PREGUNTAS \\(100\\) A \\(107\\) DE ACUERDO CON EL SIGUIENTE TEXTO\n\nLea el texto y seleccione la palabra correcta para cada espacio.\nEn las preguntas \\(100 - 107\\), marque \\(A\\), \\(B\\) o \\(C\\) en su hoja de respuestas.\n\nGrandma Gatewood\n\nThis strange story \\((0)\\) ______ in April \\(1955\\). On a foggy morning, Emma Gatewood, an American school teacher, told her family, \"I will go for a walk after breakfast.\" She left her small Ohio town with the clothes she had on and less \\((100)\\) ______ US\\$\\(200\\). No one \\((101)\\) ______ guess her plans: not one of her \\(11\\) children or her \\(23\\) grandchildren.\n\nAt the age of \\(67\\), Emma became the first woman \\((102)\\) ______ walked the Appalachian Trail, a \\(2{,}050\\)-mile way \\((103)\\) ______ forests and mountains. She didn't have \\((104)\\) ______ money or good equipment, but during her long journey, people helped her \\((105)\\) ______ she went.\n\nToday, even sixty years later, \"Grandma\" Gatewood's story is \\((106)\\) ______ amazing. Her story shows how any person can \\((107)\\) ______ stronger than they were before.",
+      "sectionTitle": "## Grandma Gatewood",
+      "sectionText": "Lea el texto y seleccione la palabra correcta para cada espacio.\n\nEn las preguntas \\(100 - 107\\), marque \\(A\\), \\(B\\) o \\(C\\) en su hoja de respuestas.\n\nThis strange story \\((0)\\) ______ in April \\(1955\\). On a foggy morning, Emma Gatewood, an American school teacher, told her family, “I will go for a walk after breakfast.” She left her small Ohio town with the clothes she had on and less \\((100)\\) ______ US\\$\\(200\\). No one \\((101)\\) ______ guess her plans: not one of her \\(11\\) children or her \\(23\\) grandchildren.\n\nAt the age of \\(67\\), Emma became the first woman \\((102)\\) ______ walked the Appalachian Trail, a \\(2{,}050\\)-mile way \\((103)\\) ______ forests and mountains. She didn't have \\((104)\\) ______ money or good equipment, but during her long journey, people helped her \\((105)\\) ______ she went.\n\nToday, even sixty years later, “Grandma” Gatewood’s story is \\((106)\\) ______ amazing. Her story shows how any person can \\((107)\\) ______ stronger than they were before.",
+      "sectionSource": "",
       "hasSectionImage": false,
       "sectionImageUrl": "",
       "sectionImageAiDescription": "",
       "questions": [
         {
           "questionId": "q_21",
-          "questionText": "In the text, the word that correctly completes blank \\((100)\\) is:",
+          "questionText": "Question \\((100)\\): She left her small Ohio town with the clothes she had on and less \\((100)\\) ______ US\\$\\(200\\).",
           "hasQuestionImage": false,
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
+          "aiExplanation": "",
           "options": [
             {
               "optionId": "A",
               "type": "text",
               "optionText": "than",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "B",
               "type": "text",
               "optionText": "as",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "C",
               "type": "text",
               "optionText": "that",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             }
           ],
           "correctOptionId": "",
-          "aiExplanation": ""
+          "irt_parameters": {
+            "discrimination_a": 1.0,
+            "difficulty_b": 0.0,
+            "guessing_c": 0.3333333333
+          }
         },
         {
           "questionId": "q_22",
-          "questionText": "In the text, the word that correctly completes blank \\((101)\\) is:",
+          "questionText": "Question \\((101)\\): No one \\((101)\\) ______ guess her plans: not one of her \\(11\\) children or her \\(23\\) grandchildren.",
           "hasQuestionImage": false,
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
+          "aiExplanation": "",
           "options": [
             {
               "optionId": "A",
               "type": "text",
               "optionText": "could",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "B",
               "type": "text",
               "optionText": "must",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "C",
               "type": "text",
               "optionText": "shall",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             }
           ],
           "correctOptionId": "",
-          "aiExplanation": ""
+          "irt_parameters": {
+            "discrimination_a": 1.0,
+            "difficulty_b": 0.0,
+            "guessing_c": 0.3333333333
+          }
         },
         {
           "questionId": "q_23",
-          "questionText": "In the text, the word that correctly completes blank \\((102)\\) is:",
+          "questionText": "Question \\((102)\\): At the age of \\(67\\), Emma became the first woman \\((102)\\) ______ walked the Appalachian Trail, a \\(2{,}050\\)-mile way \\((103)\\) ______ forests and mountains.",
           "hasQuestionImage": false,
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
+          "aiExplanation": "",
           "options": [
             {
               "optionId": "A",
               "type": "text",
               "optionText": "where",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "B",
               "type": "text",
               "optionText": "who",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "C",
               "type": "text",
               "optionText": "which",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             }
           ],
           "correctOptionId": "",
-          "aiExplanation": ""
+          "irt_parameters": {
+            "discrimination_a": 1.0,
+            "difficulty_b": 0.0,
+            "guessing_c": 0.3333333333
+          }
         },
         {
           "questionId": "q_24",
-          "questionText": "In the text, the word that correctly completes blank \\((103)\\) is:",
+          "questionText": "Question \\((103)\\): At the age of \\(67\\), Emma became the first woman \\((102)\\) ______ walked the Appalachian Trail, a \\(2{,}050\\)-mile way \\((103)\\) ______ forests and mountains.",
           "hasQuestionImage": false,
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
+          "aiExplanation": "",
           "options": [
             {
               "optionId": "A",
               "type": "text",
               "optionText": "under",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "B",
               "type": "text",
               "optionText": "until",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "C",
               "type": "text",
               "optionText": "through",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             }
           ],
           "correctOptionId": "",
-          "aiExplanation": ""
+          "irt_parameters": {
+            "discrimination_a": 1.0,
+            "difficulty_b": 0.0,
+            "guessing_c": 0.3333333333
+          }
         },
         {
           "questionId": "q_25",
-          "questionText": "In the text, the word that correctly completes blank \\((104)\\) is:",
+          "questionText": "Question \\((104)\\): She didn't have \\((104)\\) ______ money or good equipment, but during her long journey, people helped her \\((105)\\) ______ she went.",
           "hasQuestionImage": false,
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
+          "aiExplanation": "",
           "options": [
             {
               "optionId": "A",
               "type": "text",
               "optionText": "few",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "B",
               "type": "text",
               "optionText": "enough",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "C",
               "type": "text",
               "optionText": "little",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             }
           ],
           "correctOptionId": "",
-          "aiExplanation": ""
+          "irt_parameters": {
+            "discrimination_a": 1.0,
+            "difficulty_b": 0.0,
+            "guessing_c": 0.3333333333
+          }
         },
         {
           "questionId": "q_26",
-          "questionText": "In the text, the word that correctly completes blank \\((105)\\) is:",
+          "questionText": "Question \\((105)\\): She didn't have \\((104)\\) ______ money or good equipment, but during her long journey, people helped her \\((105)\\) ______ she went.",
           "hasQuestionImage": false,
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
+          "aiExplanation": "",
           "options": [
             {
               "optionId": "A",
               "type": "text",
               "optionText": "everyone",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "B",
               "type": "text",
               "optionText": "everywhere",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "C",
               "type": "text",
               "optionText": "everything",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             }
           ],
           "correctOptionId": "",
-          "aiExplanation": ""
+          "irt_parameters": {
+            "discrimination_a": 1.0,
+            "difficulty_b": 0.0,
+            "guessing_c": 0.3333333333
+          }
         },
         {
           "questionId": "q_27",
-          "questionText": "In the text, the word that correctly completes blank \\((106)\\) is:",
+          "questionText": "Question \\((106)\\): Today, even sixty years later, “Grandma” Gatewood’s story is \\((106)\\) ______ amazing.",
           "hasQuestionImage": false,
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
+          "aiExplanation": "",
           "options": [
             {
               "optionId": "A",
               "type": "text",
               "optionText": "ever",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "B",
               "type": "text",
               "optionText": "still",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "C",
               "type": "text",
               "optionText": "already",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             }
           ],
           "correctOptionId": "",
-          "aiExplanation": ""
+          "irt_parameters": {
+            "discrimination_a": 1.0,
+            "difficulty_b": 0.0,
+            "guessing_c": 0.3333333333
+          }
         },
         {
           "questionId": "q_28",
-          "questionText": "In the text, the word that correctly completes blank \\((107)\\) is:",
+          "questionText": "Question \\((107)\\): Her story shows how any person can \\((107)\\) ______ stronger than they were before.",
           "hasQuestionImage": false,
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
+          "aiExplanation": "",
           "options": [
             {
               "optionId": "A",
               "type": "text",
               "optionText": "become",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "B",
               "type": "text",
               "optionText": "became",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "C",
               "type": "text",
               "optionText": "becoming",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             }
           ],
           "correctOptionId": "",
-          "aiExplanation": ""
+          "irt_parameters": {
+            "discrimination_a": 1.0,
+            "difficulty_b": 0.0,
+            "guessing_c": 0.3333333333
+          }
         }
       ]
     },
     {
       "sectionIndex": 6,
-      "sectionTitle": "PARTE 5",
-      "sectionText": "RESPONDA LAS PREGUNTAS \\(108\\) A \\(114\\) DE ACUERDO CON EL SIGUIENTE TEXTO\n\nLea el texto y responda las preguntas.\nEn las preguntas \\(108 - 114\\), marque \\(A\\), \\(B\\) o \\(C\\) en su hoja de respuestas.\n\nGolf\n\nGolf is an outdoor sport played with a club and a ball on a field called a course. Players hit the ball with the club, usually very hard, across the course until it goes into a hole. When the player hits the ball, it is called a stroke.\n\nHistorians believe that early forms of golf were played in the Netherlands and then in Scotland, where the oldest golf organization was created. The first golf courses were fields of grass; sheep ate the grass to keep it short. In the United States, the first course was on a farm in Illinois, and it's still there today. British players like John Taylor were considered the best in the \\(1800\\)s, but in the \\(1920\\)s Americans became well-known. In the \\(1960\\)s, amazing players like Arnold Palmer and Jack Nicklaus began to appear.\n\nWhile playing, golfers choose between different clubs depending on how far they want to hit the ball. The balls are small, hard, white, and made of a strong material. They were originally wooden, but then they were made of leather in the \\(1600\\)s. The modern balls made since the \\(1900\\)s have very advanced technology in their design, which has improved the game a lot.\n\nThere are different popular ways of playing, like match play or stroke play. However, in all cases, the golf player with the lowest number of strokes for all the holes wins.",
+      "sectionTitle": "## Golf",
+      "sectionText": "Lea el texto y responda las preguntas.\n\nEn las preguntas \\(108 - 114\\), marque \\(A\\), \\(B\\) o \\(C\\) en su hoja de respuestas.\n\nGolf is an outdoor sport played with a club and a ball on a field called a course. Players hit the ball with the club, usually very hard, across the course until it goes into a hole. When the player hits the ball, it is called a stroke.\n\nHistorians believe that early forms of golf were played in the Netherlands and then in Scotland, where the oldest golf organization was created. The first golf courses were fields of grass; sheep ate the grass to keep it short. In the United States, the first course was on a farm in Illinois, and it’s still there today. British players like John Taylor were considered the best in the \\(1800\\)s, but in the \\(1920\\)s Americans became well-known. In the \\(1960\\)s, amazing players like Arnold Palmer and Jack Nicklaus began to appear.\n\nWhile playing, golfers choose between different clubs depending on how far they want to hit the ball. The balls are small, hard, white, and made of a strong material. They were originally wooden, but then they were made of leather in the \\(1600\\)s. The modern balls made since the \\(1900\\)s have very advanced technology in their design, which has improved the game a lot.\n\nThere are different popular ways of playing, like *match play* or *stroke play*. However, in all cases, the golf player with the lowest number of strokes for all the holes wins.",
+      "sectionSource": "",
       "hasSectionImage": true,
       "sectionImageUrl": "",
-      "sectionImageAiDescription": "Small illustration at the right side of the passage showing a golfer standing on a flat golf course, holding a club and preparing to hit a ball. A flag marks the hole on the left side of the illustration. Two labels with arrows identify 'Club' pointing to the golf club and 'Hole' pointing to the hole near the flag.",
+      "sectionImageAiDescription": "Small diagram on the right side of the text box showing a golfer standing and hitting a ball with a club. A flag marks the hole on the left side of the diagram. Two labels with arrows identify \"Club\" pointing to the stick in the golfer's hands and \"Hole\" pointing to the opening near the flag. Ground is shown as a horizontal strip with simple background vegetation.",
       "questions": [
         {
           "questionId": "q_29",
@@ -1343,31 +1623,39 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
+          "aiExplanation": "",
           "options": [
             {
               "optionId": "A",
               "type": "text",
               "optionText": "gives instructions.",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "B",
               "type": "text",
               "optionText": "takes a hole.",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "C",
               "type": "text",
               "optionText": "hits the ball.",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             }
           ],
           "correctOptionId": "",
-          "aiExplanation": ""
+          "irt_parameters": {
+            "discrimination_a": 1.0,
+            "difficulty_b": 0.0,
+            "guessing_c": 0.3333333333
+          }
         },
         {
           "questionId": "q_30",
@@ -1376,31 +1664,39 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
+          "aiExplanation": "",
           "options": [
             {
               "optionId": "A",
               "type": "text",
               "optionText": "the Netherlands",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "B",
               "type": "text",
               "optionText": "Scotland",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "C",
               "type": "text",
               "optionText": "the United States",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             }
           ],
           "correctOptionId": "",
-          "aiExplanation": ""
+          "irt_parameters": {
+            "discrimination_a": 1.0,
+            "difficulty_b": 0.0,
+            "guessing_c": 0.3333333333
+          }
         },
         {
           "questionId": "q_31",
@@ -1409,31 +1705,39 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
+          "aiExplanation": "",
           "options": [
             {
               "optionId": "A",
               "type": "text",
               "optionText": "People from Illinois did it.",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "B",
               "type": "text",
               "optionText": "A company cut it.",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "C",
               "type": "text",
               "optionText": "Animals ate it.",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             }
           ],
           "correctOptionId": "",
-          "aiExplanation": ""
+          "irt_parameters": {
+            "discrimination_a": 1.0,
+            "difficulty_b": 0.0,
+            "guessing_c": 0.3333333333
+          }
         },
         {
           "questionId": "q_32",
@@ -1442,31 +1746,39 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
+          "aiExplanation": "",
           "options": [
             {
               "optionId": "A",
               "type": "text",
               "optionText": "John Taylor",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "B",
               "type": "text",
               "optionText": "Jack Nicklaus",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "C",
               "type": "text",
               "optionText": "Arnold Palmer",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             }
           ],
           "correctOptionId": "",
-          "aiExplanation": ""
+          "irt_parameters": {
+            "discrimination_a": 1.0,
+            "difficulty_b": 0.0,
+            "guessing_c": 0.3333333333
+          }
         },
         {
           "questionId": "q_33",
@@ -1475,31 +1787,39 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
+          "aiExplanation": "",
           "options": [
             {
               "optionId": "A",
               "type": "text",
               "optionText": "leather.",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "B",
               "type": "text",
               "optionText": "club.",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "C",
               "type": "text",
               "optionText": "field.",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             }
           ],
           "correctOptionId": "",
-          "aiExplanation": ""
+          "irt_parameters": {
+            "discrimination_a": 1.0,
+            "difficulty_b": 0.0,
+            "guessing_c": 0.3333333333
+          }
         },
         {
           "questionId": "q_34",
@@ -1508,31 +1828,39 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
+          "aiExplanation": "",
           "options": [
             {
               "optionId": "A",
               "type": "text",
               "optionText": "the game better than before.",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "B",
               "type": "text",
               "optionText": "players use leather balls.",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "C",
               "type": "text",
               "optionText": "balls go much further.",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             }
           ],
           "correctOptionId": "",
-          "aiExplanation": ""
+          "irt_parameters": {
+            "discrimination_a": 1.0,
+            "difficulty_b": 0.0,
+            "guessing_c": 0.3333333333
+          }
         },
         {
           "questionId": "q_35",
@@ -1541,38 +1869,47 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
+          "aiExplanation": "",
           "options": [
             {
               "optionId": "A",
               "type": "text",
               "optionText": "making more holes.",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "B",
               "type": "text",
               "optionText": "hitting the ball fewer times.",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "C",
               "type": "text",
               "optionText": "playing in famous matches.",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             }
           ],
           "correctOptionId": "",
-          "aiExplanation": ""
+          "irt_parameters": {
+            "discrimination_a": 1.0,
+            "difficulty_b": 0.0,
+            "guessing_c": 0.3333333333
+          }
         }
       ]
     },
     {
       "sectionIndex": 7,
-      "sectionTitle": "PARTE 6.A",
-      "sectionText": "RESPONDA LAS PREGUNTAS \\(115\\) A \\(119\\) DE ACUERDO CON EL SIGUIENTE TEXTO\n\nLea el texto y responda las preguntas.\nEn las preguntas \\(115 - 119\\), marque \\(A\\), \\(B\\), \\(C\\) o \\(D\\) en su hoja de respuestas.\n\nI do not like when someone makes a mistake about my age. When someone says I look younger than I am, I don't think that person is accurate, because I'm a different person from who I was at \\(24\\), \\(25\\), even \\(26\\). I don't consider I actually look physically younger than \\(30\\). However, that doesn't explain why we don't always look like being \\(30\\) or why I can't get champagne in my local supermarket.\n\nThere are loads of videos on TikTok about why millennials (people born after the \\(80\\)s) don't appear to be getting old \"normally\". Some have the hypothesis that it's because cosmetic operations are cheaper and more available now. Others have said that it's because millennials \"have depression, so we're indoors all day, and we don't let our skin feel the sun.\" Still others have wondered whether it's due to camera phones, and the fact that we use them regularly, meaning we pay more attention to our looks. Or maybe we are getting old normally, but we just don't consider we are, so we don't act like it. Before I continue, I must add: I'm sure that age is not a main issue, and that putting labels to a person as a result of an arbitrary age opinion is not fair to their identities.\n\nI know that most people don't actually \"feel\" their age, because they just feel like themselves (same here). But that doesn't mean I am not interested and curious about how I appear to others now that I'm in my \\(30\\)s.",
+      "sectionTitle": "## PARTE 6.A",
+      "sectionText": "Lea el texto y responda las preguntas.\n\nEn las preguntas \\(115 - 119\\), marque \\(A\\), \\(B\\), \\(C\\) o \\(D\\) en su hoja de respuestas.\n\nI do not like when someone makes a mistake about my age. **When someone says I look younger than I am, I don’t think that person is accurate, because I’m a different person from who I was at \\(24\\), \\(25\\), even \\(26\\).** I don’t consider I actually look physically younger than \\(30\\). However, that doesn’t explain why we don’t always look like being \\(30\\) or why I can’t get champagne in my local supermarket.\n\nThere are loads of videos on TikTok about why millennials (people born after the \\(80\\)s) don’t appear to be getting old “normally”. Some have the hypothesis that it’s because cosmetic operations are cheaper and more available now. Others have said that it’s because millennials “have depression, so we’re indoors all day, and we don’t let our skin feel the sun.” Still others have wondered whether it’s due to camera phones, and the fact that we use them regularly, meaning we pay more attention to our looks. Or maybe we are getting old normally but we just don’t consider we are, so we don’t act like it. Before I continue, I must add: I’m sure that age is not a main issue, and that putting labels to a person as a result of an arbitrary age opinion is not fair to their identities.\n\nI know that most people don’t actually “feel” their age, because they just feel like themselves (same here). **But that doesn’t mean I am not interested and curious about how I appear to others now that I’m in my \\(30\\)s.**",
+      "sectionSource": "",
       "hasSectionImage": false,
       "sectionImageUrl": "",
       "sectionImageAiDescription": "",
@@ -1584,38 +1921,47 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
+          "aiExplanation": "",
           "options": [
             {
               "optionId": "A",
               "type": "text",
               "optionText": "arguing about what social networks say regarding youths",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "B",
               "type": "text",
               "optionText": "presenting facts about how to appear to be younger than you are",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "C",
               "type": "text",
               "optionText": "discussing her thoughts about looking younger than you actually are",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "D",
               "type": "text",
               "optionText": "mentioning how different she is nowadays than when she was in her youth",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             }
           ],
           "correctOptionId": "",
-          "aiExplanation": ""
+          "irt_parameters": {
+            "discrimination_a": 1.0,
+            "difficulty_b": 0.0,
+            "guessing_c": 0.25
+          }
         },
         {
           "questionId": "q_37",
@@ -1624,38 +1970,47 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
+          "aiExplanation": "",
           "options": [
             {
               "optionId": "A",
               "type": "text",
               "optionText": "that the writer does not care about her real age",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "B",
               "type": "text",
               "optionText": "how people behave in front of a camera to display their age",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "C",
               "type": "text",
               "optionText": "that the writer knows her age according to the people around her",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "D",
               "type": "text",
               "optionText": "how some people are not accurate when telling other people's age",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             }
           ],
           "correctOptionId": "",
-          "aiExplanation": ""
+          "irt_parameters": {
+            "discrimination_a": 1.0,
+            "difficulty_b": 0.0,
+            "guessing_c": 0.25
+          }
         },
         {
           "questionId": "q_38",
@@ -1664,38 +2019,47 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
+          "aiExplanation": "",
           "options": [
             {
               "optionId": "A",
               "type": "text",
               "optionText": "considers people usually are right about her real age.",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "B",
               "type": "text",
               "optionText": "considers she is younger than some people say she actually is.",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "C",
               "type": "text",
               "optionText": "doesn't agree with what people say regarding how young she appears to be.",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "D",
               "type": "text",
               "optionText": "doesn't understand what some people say regarding how young she really is.",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             }
           ],
           "correctOptionId": "",
-          "aiExplanation": ""
+          "irt_parameters": {
+            "discrimination_a": 1.0,
+            "difficulty_b": 0.0,
+            "guessing_c": 0.25
+          }
         },
         {
           "questionId": "q_39",
@@ -1704,85 +2068,104 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
+          "aiExplanation": "",
           "options": [
             {
               "optionId": "A",
               "type": "text",
               "optionText": "She feels younger than \\(30\\) and agrees with people's opinion on this.",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "B",
               "type": "text",
               "optionText": "She doesn't feel comfortable based on what people say about her age.",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "C",
               "type": "text",
               "optionText": "She wishes to know how people identify her being a \\(30\\)-year-old person.",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "D",
               "type": "text",
               "optionText": "She isn't anxious about what people say regarding how young she actually is.",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             }
           ],
           "correctOptionId": "",
-          "aiExplanation": ""
+          "irt_parameters": {
+            "discrimination_a": 1.0,
+            "difficulty_b": 0.0,
+            "guessing_c": 0.25
+          }
         },
         {
           "questionId": "q_40",
           "questionText": "What piece of advice would the writer give people according to the text?",
-          "hasQuestionImage": false,
+          "hasQuestionImage": true,
           "questionImageUrl": "",
-          "questionImageAiDescription": "",
+          "questionImageAiDescription": "The answer options are presented as four boxed quotation-style statements, one for each option, arranged in two rows. Each box contains a short advisory sentence in quotation marks.",
           "optionsType": "text",
+          "aiExplanation": "",
           "options": [
             {
               "optionId": "A",
               "type": "text",
-              "optionText": "\"Take photos of yourself frequently to present to people that you are younger than they say you are.\"",
+              "optionText": "“Take photos of yourself frequently to present to people that you are younger than they say you are.”",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "B",
               "type": "text",
-              "optionText": "\"Do not worry about looking younger than you actually are, people often realize your real age.\"",
+              "optionText": "“Do not worry about looking younger than you actually are, people often realize your real age.”",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "C",
               "type": "text",
-              "optionText": "\"Go to the nearest supermarket and ask for a bottle of wine, they will let you got it as you look like an old person\".",
+              "optionText": "“Go to the nearest supermarket and ask for a bottle of wine, they will let you get it as you look like an old person.”",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "D",
               "type": "text",
-              "optionText": "\"Do not pay attention to what people say about your age and how younger you look. The important thing is how you feel.\"",
+              "optionText": "“Do not pay attention to what people say about your age and how younger you look. The important thing is how you feel.”",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             }
           ],
           "correctOptionId": "",
-          "aiExplanation": ""
+          "irt_parameters": {
+            "discrimination_a": 1.0,
+            "difficulty_b": 0.0,
+            "guessing_c": 0.25
+          }
         }
       ]
     },
     {
       "sectionIndex": 8,
-      "sectionTitle": "PARTE 6.B",
-      "sectionText": "RESPONDA LAS PREGUNTAS \\(120\\) A \\(124\\) DE ACUERDO CON EL SIGUIENTE TEXTO\n\nLea el texto y responda las preguntas.\nEn las preguntas \\(120 - 124\\), marque \\(A\\), \\(B\\), \\(C\\) o \\(D\\) en su hoja de respuestas.\n\nDoes something about living abroad seem extraordinary to you? I understand. That's what inspired me to leave America for the first time and set out on my journey to start high school in France. However, I was shocked that there were several things I had absolutely no idea about until I landed in France and took part in daily activities there.\n\nBefore I arrived, I had only experienced foreign exchange students coming to America, never being one. All those students spoke other languages unknown to me. For me, as an English speaker, that was not the case. Once in France, most of my foreign partners spoke English. In some ways, it's positive that people communicate with you in your own language because it's convenient. The disadvantage is you never have that secret moment where you can say things, and no one can imagine what you're saying.\n\nIt will feel shocking to install yourself in a new family's house, but you can handle this. As you start getting along with them, you can start doing things the way you like them, and it gets cozy. However, there are some things you can't do your usual way. It's those little things that separate your life in your home country from your life abroad.\n\nIf you're thinking about doing this, my advice is \"say yes more than you say no.\" Of course, there will be times when it is acceptable to say no, but if you're turning down a weekend of excitement with classmates or your family there, you're not taking advantage of your exchange. Part of the reason you are living this adventure is to experience things. Say yes and you will not be disappointed.",
+      "sectionTitle": "## PARTE 6.B",
+      "sectionText": "Lea el texto y responda las preguntas.\n\nEn las preguntas \\(120 - 124\\), marque \\(A\\), \\(B\\), \\(C\\) o \\(D\\) en su hoja de respuestas.\n\nDoes something about living abroad seem extraordinary to you? I understand. That’s what inspired me to leave America for the first time and set out on my journey to start high school in France. However, I was shocked that there were several things I had absolutely no idea about until I landed in France and took part in daily activities there.\n\nBefore I arrived, I had only experienced foreign exchange students coming to America, never being one. All those students spoke other languages unknown to me. For me, as an English speaker, that was not the case. Once in France, most of my foreign partners spoke English. In some ways, it’s positive that people communicate with you in your own language because it’s convenient. The disadvantage is you never have that secret moment where you can say things, and no one can imagine what you’re saying.\n\nIt will feel shocking to install yourself in a new family’s house, but you can handle this. As you start getting along with them, you can start doing things the way you like them, and it gets cozy. However, there are some things you can’t do your usual way. It’s those little things that separate your life in your home country from your life abroad.\n\nIf you’re thinking about doing this, my advice is “say yes more than you say no.” Of course, there will be times when it is acceptable to say no, but if you’re turning down a weekend of excitement with your classmates or your family there, you’re not taking advantage of your exchange. Part of the reason you are living this adventure is to experience things. Say yes and you will not be disappointed.",
+      "sectionSource": "",
       "hasSectionImage": false,
       "sectionImageUrl": "",
       "sectionImageAiDescription": "",
@@ -1794,38 +2177,47 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
+          "aiExplanation": "",
           "options": [
             {
               "optionId": "A",
               "type": "text",
               "optionText": "convincing people of the benefits to study foreign languages in France",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "B",
               "type": "text",
               "optionText": "warning exchange students about the culture shock they may deal with",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "C",
               "type": "text",
               "optionText": "informing students about what he learned after being in an exchange program",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "D",
               "type": "text",
               "optionText": "encouraging French people to discover what being an international student is like",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             }
           ],
           "correctOptionId": "",
-          "aiExplanation": ""
+          "irt_parameters": {
+            "discrimination_a": 1.0,
+            "difficulty_b": 0.0,
+            "guessing_c": 0.25
+          }
         },
         {
           "questionId": "q_42",
@@ -1834,38 +2226,47 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
+          "aiExplanation": "",
           "options": [
             {
               "optionId": "A",
               "type": "text",
               "optionText": "He had a good time studying high school in his hometown.",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "B",
               "type": "text",
               "optionText": "He ignored several issues about life in France before his arrival.",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "C",
               "type": "text",
               "optionText": "He had traveled abroad before his departure to France.",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "D",
               "type": "text",
               "optionText": "He had many unbelievable experiences during his stay in America.",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             }
           ],
           "correctOptionId": "",
-          "aiExplanation": ""
+          "irt_parameters": {
+            "discrimination_a": 1.0,
+            "difficulty_b": 0.0,
+            "guessing_c": 0.25
+          }
         },
         {
           "questionId": "q_43",
@@ -1874,38 +2275,47 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
+          "aiExplanation": "",
           "options": [
             {
               "optionId": "A",
               "type": "text",
               "optionText": "speakers of other languages are quite rare.",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "B",
               "type": "text",
               "optionText": "learning a foreign language is considered unnecessary.",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "C",
               "type": "text",
               "optionText": "English is familiar to people from different nationalities.",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "D",
               "type": "text",
               "optionText": "English is rarely spoken if compared to other languages.",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             }
           ],
           "correctOptionId": "",
-          "aiExplanation": ""
+          "irt_parameters": {
+            "discrimination_a": 1.0,
+            "difficulty_b": 0.0,
+            "guessing_c": 0.25
+          }
         },
         {
           "questionId": "q_44",
@@ -1914,38 +2324,47 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
+          "aiExplanation": "",
           "options": [
             {
               "optionId": "A",
               "type": "text",
               "optionText": "being surrounded by unkind strangers.",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "B",
               "type": "text",
               "optionText": "the new and surprising accommodations.",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "C",
               "type": "text",
               "optionText": "the habits you must change to get on with your new life.",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "D",
               "type": "text",
               "optionText": "the time it takes to have a friendly relationship with the homeowners.",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             }
           ],
           "correctOptionId": "",
-          "aiExplanation": ""
+          "irt_parameters": {
+            "discrimination_a": 1.0,
+            "difficulty_b": 0.0,
+            "guessing_c": 0.25
+          }
         },
         {
           "questionId": "q_45",
@@ -1954,38 +2373,47 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
+          "aiExplanation": "",
           "options": [
             {
               "optionId": "A",
               "type": "text",
               "optionText": "How to Handle your Life and Not Die in the Attempt.",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "B",
               "type": "text",
               "optionText": "The Value of English Not All International Students Realize.",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "C",
               "type": "text",
-              "optionText": "The Truth Nobody Told you About French Exchange Students.",
+              "optionText": "The Truth Nobody Told You About French Exchange Students.",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             },
             {
               "optionId": "D",
               "type": "text",
               "optionText": "What No One Told you About Going on a Foreign Exchange Program.",
               "optionImageUrl": "",
-              "optionAiDescription": ""
+              "optionAiDescription": "",
+              "optionFeedback": ""
             }
           ],
           "correctOptionId": "",
-          "aiExplanation": ""
+          "irt_parameters": {
+            "discrimination_a": 1.0,
+            "difficulty_b": 0.0,
+            "guessing_c": 0.25
+          }
         }
       ]
     }
