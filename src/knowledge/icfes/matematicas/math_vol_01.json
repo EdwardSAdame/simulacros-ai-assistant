@@ -20,7 +20,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** hallar el promedio de las edades dadas en la tabla.\n- **Datos relevantes:** \\(21, 26, 20, 21, 22, 28, 30\\).\n- **Cálculo:**\n  - Suma: \\(21+26+20+21+22+28+30=168\\).\n  - Número de datos: \\(7\\).\n  - Promedio: \\(168\\div 7=24\\).\n- **Conclusión:** el promedio de las edades es **\\(24\\)**.",
           "options": [
             {
               "optionId": "A",
@@ -28,7 +28,7 @@
               "optionText": "\\(18\\)",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** \\(18\\) no corresponde al promedio.\n- Al sumar las edades y dividir entre \\(7\\), se obtiene \\(24\\), no \\(18\\)."
             },
             {
               "optionId": "B",
@@ -36,7 +36,7 @@
               "optionText": "\\(22\\)",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** \\(22\\) está por debajo del valor real del promedio.\n- El cálculo correcto es \\(168\\div 7=24\\)."
             },
             {
               "optionId": "C",
@@ -44,7 +44,7 @@
               "optionText": "\\(24\\)",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** La suma de las edades es \\(168\\) y al dividir entre \\(7\\) se obtiene \\(24\\)."
             },
             {
               "optionId": "D",
@@ -52,10 +52,10 @@
               "optionText": "\\(28\\)",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** \\(28\\) es una de las edades registradas, pero no el promedio.\n- El promedio verdadero es \\(24\\)."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "C",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -80,7 +80,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** decidir si se puede calcular el valor total exacto.\n- **Datos relevantes:**\n  - Jueves: \\(\\$80.000\\).\n  - Sábado: \\(\\$150.000\\).\n  - Se compran \\(5\\) y \\(2\\) tiquetes, respectivamente.\n  - El impuesto puede ser \\(12\\%\\) o \\(19\\%\\), según la temporada, y esa temporada **no se conoce**.\n- **Análisis:**\n  - El subtotal sí puede calcularse: \\(5\\times 80.000+2\\times 150.000=700.000\\).\n  - Pero el total es \\(700.000(1+y)\\), y falta saber si \\(y=0,12\\) o \\(y=0,19\\).\n- **Conclusión:** **no es posible** calcular el valor total exacto porque el impuesto depende de una temporada desconocida.",
           "options": [
             {
               "optionId": "A",
@@ -88,7 +88,7 @@
               "optionText": "Es posible calcular el valor total a pagar, ya que se aplica el impuesto del \\(12\\%\\) a los tiquetes comprados para el día jueves y el impuesto del \\(19\\%\\) a los tiquetes para el día sábado.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** El enunciado no dice que el impuesto dependa del día de viaje.\n- El impuesto depende de la **temporada del año**, no de si el vuelo es jueves o sábado."
             },
             {
               "optionId": "B",
@@ -96,7 +96,7 @@
               "optionText": "No es posible calcular el valor total a pagar, ya que el impuesto del \\(12\\%\\) y \\(19\\%\\) depende de la temporada del año, y esta se desconoce.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** Aunque el subtotal es calculable, el valor exacto total depende de conocer si el impuesto es \\(12\\%\\) o \\(19\\%\\)."
             },
             {
               "optionId": "C",
@@ -104,7 +104,7 @@
               "optionText": "Es posible calcular el valor total a pagar, ya que se ejecuta la multiplicación entre la cantidad de tiquetes comprados para cada día y el valor respectivo.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Esa multiplicación solo permite hallar el **subtotal**.\n- Aún falta aplicar \\((1+y)\\), y \\(y\\) no está determinado."
             },
             {
               "optionId": "D",
@@ -112,10 +112,10 @@
               "optionText": "No es posible calcular el valor total a pagar, ya que falta conocer la tarifa correspondiente para asignar el valor de los tiquetes para el día jueves y sábado.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Las tarifas sí se conocen: jueves \\(\\$80.000\\) y sábado \\(\\$150.000\\).\n- Lo que falta conocer es el impuesto aplicable."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "B",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -140,7 +140,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** verificar si la tabla del médico coincide con el diagrama.\n- **Datos del diagrama:**\n  - Dolor de cabeza: \\(10+8+6=24\\).\n  - Mareo: \\(5+8+1=14\\).\n  - Náuseas: \\(15+6+1=22\\).\n  - Triple intersección: \\(0\\).\n  - Fuera de los tres síntomas: \\(15\\).\n  - Total: \\(10+5+8+15+6+1+15=60\\).\n- **Análisis:**\n  - La tabla sería válida si las frecuencias por síntoma fueran \\(24,14,22\\).\n  - La opción que justifica correctamente la validez es la que afirma que las cantidades por síntoma coinciden con el diagrama.\n  - No basta con que la suma total sea \\(60\\), porque en tablas por síntoma puede haber doble conteo en intersecciones.\n- **Conclusión:** la justificación correcta es **sí**, porque las cantidades por síntoma coinciden con el diagrama.",
           "options": [
             {
               "optionId": "A",
@@ -148,7 +148,7 @@
               "optionText": "No, porque en el diagrama se evidencia que el efecto secundario que más presentaron los pacientes fue el de náuseas.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** En el diagrama, el síntoma más frecuente es **dolor de cabeza** con \\(24\\) pacientes, no náuseas con \\(22\\)."
             },
             {
               "optionId": "B",
@@ -156,7 +156,7 @@
               "optionText": "Sí, porque la cantidad de pacientes que presentó cada síntoma, según la tabla, coincide con la cantidad de pacientes que indica el diagrama.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** Del diagrama se obtiene: dolor de cabeza \\(24\\), mareo \\(14\\) y náuseas \\(22\\). Si la tabla registra esas cantidades, sí es válida."
             },
             {
               "optionId": "C",
@@ -164,7 +164,7 @@
               "optionText": "Sí, porque la cantidad de pacientes a los que se les aplicó el tratamiento, según el diagrama, coincide con la suma de las frecuencias que se presentan en la tabla.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Esa justificación no es suficiente.\n- En una tabla por síntomas, las intersecciones pueden hacer que una suma simple no represente correctamente el total de pacientes únicos."
             },
             {
               "optionId": "D",
@@ -172,10 +172,10 @@
               "optionText": "No, porque falta tener en cuenta la cantidad de pacientes que presentaron los tres efectos secundarios.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** La intersección de los tres efectos es \\(0\\), así que no falta agregar ningún paciente allí."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "B",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -200,7 +200,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** identificar qué tipos de grupos cumplen *al menos un hombre*.\n- **Tabla:**\n  - \\(X\\): tres hombres.\n  - \\(Y\\): una mujer y dos hombres.\n  - \\(Z\\): dos mujeres y un hombre.\n  - \\(W\\): tres mujeres.\n- **Datos de la clase:** hay solo \\(2\\) hombres, así que grupos de **tres hombres** son imposibles; por tanto, \\(X=0\\).\n- **Condición pedida:** al menos un hombre.\n  - Sirven los grupos de tipo \\(Y\\) y \\(Z\\).\n  - No sirve \\(W\\), porque tiene cero hombres.\n- **Conclusión:** se deben conocer **solamente \\(Y\\) y \\(Z\\)**.",
           "options": [
             {
               "optionId": "A",
@@ -208,7 +208,7 @@
               "optionText": "Solamente \\(Z\\).",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** También deben contarse los grupos con **dos hombres y una mujer**, representados por \\(Y\\)."
             },
             {
               "optionId": "B",
@@ -216,7 +216,7 @@
               "optionText": "Solamente \\(Z\\) y \\(W\\).",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** \\(W\\) representa grupos de **tres mujeres**, que no cumplen la condición de tener al menos un hombre."
             },
             {
               "optionId": "C",
@@ -224,7 +224,7 @@
               "optionText": "Solamente \\(X\\).",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** \\(X\\) representa tres hombres, pero en el grupo solo hay \\(2\\) hombres en total, así que ese caso es imposible."
             },
             {
               "optionId": "D",
@@ -232,10 +232,10 @@
               "optionText": "Solamente \\(Y\\) y \\(Z\\).",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** Los grupos con al menos un hombre son los de tipo \\(Y\\) y \\(Z\\)."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "D",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -260,7 +260,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "image",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** calcular el dinero total entregado por cada tipo de premio.\n- **Datos relevantes:**\n  - Oro: \\(5\\) premios de \\(\\$10.000.000\\).\n  - Plata: \\(25\\) premios de \\(\\$5.000.000\\).\n  - Bronce: \\(100\\) premios de \\(\\$1.000.000\\).\n- **Cálculos:**\n  - Oro: \\(5\\times 10.000.000=50.000.000\\).\n  - Plata: \\(25\\times 5.000.000=125.000.000\\).\n  - Bronce: \\(100\\times 1.000.000=100.000.000\\).\n- **Conclusión:** la tabla correcta es la que muestra **Oro \\(\\$50.000.000\\), Plata \\(\\$125.000.000\\), Bronce \\(\\$100.000.000\\)**.",
           "options": [
             {
               "optionId": "A",
@@ -268,7 +268,7 @@
               "optionText": "",
               "optionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session1/q_05_a.png",
               "optionAiDescription": "Tabla con \\(2\\) columnas: \"Tipo de premio\" y \"Dinero entregado\". Filas: Oro \\($10.000.000\\); Plata \\($5.000.000\\); Bronce \\($1.000.000\\).",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Esa tabla muestra el valor de **cada premio individual**, no el total entregado por tipo."
             },
             {
               "optionId": "B",
@@ -276,7 +276,7 @@
               "optionText": "",
               "optionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session1/q_05_b.png",
               "optionAiDescription": "Tabla con \\(2\\) columnas: \"Tipo de premio\" y \"Dinero entregado\". Filas: Oro \\($50.000.000\\); Plata \\($125.000.000\\); Bronce \\($100.000.000\\).",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** Multiplica correctamente la cantidad de premios por el monto de cada uno en las tres categorías."
             },
             {
               "optionId": "C",
@@ -284,7 +284,7 @@
               "optionText": "",
               "optionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session1/q_05_c.png",
               "optionAiDescription": "Tabla con \\(2\\) columnas: \"Tipo de premio\" y \"Dinero entregado\". Filas: Oro \\($1.000.000.000\\); Plata \\($125.000.000\\); Bronce \\($5.000.000\\).",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Solo el valor de Plata coincide.\n- Oro y Bronce están mal calculados: deben ser \\(\\$50.000.000\\) y \\(\\$100.000.000\\), respectivamente."
             },
             {
               "optionId": "D",
@@ -292,10 +292,10 @@
               "optionText": "",
               "optionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session1/q_05_d.png",
               "optionAiDescription": "Tabla con \\(2\\) columnas: \"Tipo de premio\" y \"Dinero entregado\". Filas: Oro \\($50.000.000\\); Plata \\($100.000.000\\); Bronce \\($125.000.000\\).",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Intercambia los valores correctos de Plata y Bronce.\n- Debe ser Plata \\(\\$125.000.000\\) y Bronce \\(\\$100.000.000\\)."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "B",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -320,7 +320,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** determinar cuántos meses se necesitan si el ahorro se duplica cada mes.\n- **Paso 1:** \\(750.000\\div 50.000=15\\).\n- **Paso 2:** buscar \\(x\\) tal que\n  \\[\n  2^0+2^1+\\cdots+2^x=15\n  \\]\n  Probando:\n  \\[\n  1+2+4+8=15\n  \\]\n  Entonces \\(x=3\\).\n- **Paso 3:** sumar \\(1\\): \\(3+1=4\\).\n- **Verificación mensual:**\n  - Mes \\(1\\): \\(50.000\\)\n  - Mes \\(2\\): \\(100.000\\)\n  - Mes \\(3\\): \\(200.000\\)\n  - Mes \\(4\\): \\(400.000\\)\n  - Total: \\(750.000\\)\n- **Conclusión:** necesitan **\\(4\\) meses**.",
           "options": [
             {
               "optionId": "A",
@@ -328,7 +328,7 @@
               "optionText": "\\(16\\)",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Ese valor no corresponde ni a la suma geométrica ni al número de meses."
             },
             {
               "optionId": "B",
@@ -336,7 +336,7 @@
               "optionText": "\\(8\\)",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** En \\(4\\) meses ya completan exactamente \\(\\$750.000\\)."
             },
             {
               "optionId": "C",
@@ -344,7 +344,7 @@
               "optionText": "\\(4\\)",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** La suma \\(50.000+100.000+200.000+400.000=750.000\\), así que son \\(4\\) meses."
             },
             {
               "optionId": "D",
@@ -352,10 +352,10 @@
               "optionText": "\\(2\\)",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** En \\(2\\) meses solo ahorrarían \\(50.000+100.000=150.000\\)."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "C",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -380,7 +380,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** calcular el \\(3\\%\\) de \\(\\$900.000\\) y luego multiplicar por \\(10\\) meses.\n- **Ahorro mensual:**\n  \\[\n  3\\%\\text{ de }900.000=0,03\\times 900.000=27.000\n  \\]\n- **En \\(10\\) meses:**\n  \\[\n  27.000\\times 10=270.000\n  \\]\n- **Conclusión:** Estefanía ahorrará **\\(\\$270.000\\)** en total.",
           "options": [
             {
               "optionId": "A",
@@ -388,7 +388,7 @@
               "optionText": "\\($297.000\\)",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Ese valor no corresponde a multiplicar \\(27.000\\) por \\(10\\)."
             },
             {
               "optionId": "B",
@@ -396,7 +396,7 @@
               "optionText": "\\($270.000\\)",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** El \\(3\\%\\) de \\(900.000\\) es \\(27.000\\), y en \\(10\\) meses ahorra \\(270.000\\)."
             },
             {
               "optionId": "C",
@@ -404,7 +404,7 @@
               "optionText": "\\($240.000\\)",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Equivale a asumir un ahorro mensual de \\(24.000\\), que no es el \\(3\\%\\) de \\(900.000\\)."
             },
             {
               "optionId": "D",
@@ -412,10 +412,10 @@
               "optionText": "\\($180.000\\)",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Ese valor sería \\(18.000\\times 10\\), pero \\(18.000\\) no es el \\(3\\%\\) de \\(900.000\\)."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "B",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -440,7 +440,7 @@
           "questionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session1/q_08.png",
           "questionImageAiDescription": "Gráfica de líneas. Eje X: años 2011 a 2015. Eje Y: 0 a 45. Cuatro series con marcadores y etiquetas de datos exactas. Serie 1 ('Pacífica', marcadores cuadrados): \\(41,4\\) en 2011, \\(36,3\\) en 2012, \\(37,6\\) en 2013, \\(34,6\\) en 2014, \\(33,8\\) en 2015. Serie 2 ('Central', marcadores circulares): \\(30,7\\) en 2011, \\(26,7\\) en 2012, \\(26,1\\) en 2013, \\(28,1\\) en 2014, \\(22,1\\) en 2015. Serie 3 ('Antioquia', marcadores triangulares): \\(25,7\\) en 2011, \\(20,5\\) en 2012, \\(18,3\\) en 2013, \\(19,5\\) en 2014, \\(18,7\\) en 2015. Serie 4 ('Bogotá, D. C.', línea inferior): \\(11,9\\) en 2011, \\(11,1\\) en 2012, \\(8,7\\) en 2013, \\(5,4\\) en 2014, \\(7,6\\) en 2015. Ubicar la leyenda en la parte superior.",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** comparar los valores de la tabla con los de la gráfica.\n- **Coincidencias:**\n  - Pacífica coincide en todos los años.\n  - Central coincide en todos los años.\n- **Diferencias encontradas:**\n  - Antioquia:\n    - Tabla \\(2012=21,7\\), gráfica \\(2012=20,5\\).\n    - Tabla \\(2013=22,4\\), gráfica \\(2013=18,3\\).\n  - Bogotá, D. C.:\n    - Tabla \\(2015=4,7\\), gráfica \\(2015=7,6\\).\n- **Conclusión:** **no** es la misma información; hay diferencias en Antioquia para \\(2012\\) y \\(2013\\), y en Bogotá, D. C. para \\(2015\\).",
           "options": [
             {
               "optionId": "A",
@@ -448,7 +448,7 @@
               "optionText": "Sí, porque la información incluida en la gráfica es semejante a la información presentada en la tabla, para las regiones en mención.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** No basta con que sea *semejante*; debe ser la misma.\n- Hay valores distintos en Antioquia y Bogotá, D. C."
             },
             {
               "optionId": "B",
@@ -456,7 +456,7 @@
               "optionText": "No, porque, en vez de graficar los datos de Antioquia, se graficaron los datos de la región Central.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** La región Central sí aparece bien graficada y Antioquia también aparece, pero con algunos datos equivocados."
             },
             {
               "optionId": "C",
@@ -464,7 +464,7 @@
               "optionText": "No, porque los datos de la gráfica de Antioquia para \\(2012\\) y \\(2013\\), y de Bogotá, D. C. para \\(2015\\), son diferentes a los datos presentados en la tabla.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** Esa opción identifica exactamente los años y regiones donde la gráfica no coincide con la tabla."
             },
             {
               "optionId": "D",
@@ -472,10 +472,10 @@
               "optionText": "Sí, porque los datos de la gráfica de Antioquia para \\(2013\\) y de la región Central para \\(2012\\) corresponden a los datos presentados en la tabla.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Antioquia en \\(2013\\) no coincide: la tabla tiene \\(22,4\\) y la gráfica \\(18,3\\)."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "C",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -500,7 +500,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "image",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** elegir la gráfica que represente correctamente las cantidades por intervalo de peso.\n- **Datos:**\n  - \\(15\\leq p<20\\): \\(700\\)\n  - \\(20\\leq p<25\\): \\(500\\)\n  - \\(25\\leq p<30\\): \\(800\\)\n  - Total: \\(2000\\)\n- **Porcentajes:**\n  - \\(700/2000=35\\%\\)\n  - \\(500/2000=25\\%\\)\n  - \\(800/2000=40\\%\\)\n- **Conclusión:** la gráfica correcta es la que muestra sectores o valores equivalentes a **\\(35\\%\\), \\(25\\%\\) y \\(40\\%\\)** con las cantidades \\(700,500,800\\).",
           "options": [
             {
               "optionId": "A",
@@ -508,7 +508,7 @@
               "optionText": "",
               "optionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session1/q_09_a.png",
               "optionAiDescription": "Gráfico circular titulado \"Distribución del peso en gramos\" con tres sectores, sin bordes externos y rellenos con colores pastel desvanecidos (faded colours). Leyenda identificada únicamente por color desvanecido, sin texturas. Sectores rotulados con cantidades y porcentajes: sector de \\(800\\) y \\(40\\,\\%\\) para el intervalo \\(25 \\leq p < 30\\); sector de \\(700\\) y \\(35\\,\\%\\) para \\(15 \\leq p < 20\\); sector de \\(500\\) y \\(25\\,\\%\\) para \\(20 \\leq p < 25\\).",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** Representa exactamente las cantidades \\(700\\), \\(500\\), \\(800\\) y sus porcentajes \\(35\\%\\), \\(25\\%\\), \\(40\\%\\)."
             },
             {
               "optionId": "B",
@@ -516,7 +516,7 @@
               "optionText": "",
               "optionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session1/q_09_b.png",
               "optionAiDescription": "Gráfico circular titulado \"Distribución del peso en gramos\" con tres sectores iguales, sin bordes externos y rellenos con colores pastel desvanecidos (faded colours). Leyenda identificada únicamente por color desvanecido, sin texturas. Cada uno marcado con \\(33,3\\,\\%\\). Etiquetas visibles: \\(25\\text{–}30\\), \\(15\\text{–}20\\), \\(20\\text{–}25\\).",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Los tres intervalos no tienen la misma frecuencia.\n- Las cantidades son \\(700\\), \\(500\\) y \\(800\\), no tres partes iguales."
             },
             {
               "optionId": "C",
@@ -524,7 +524,7 @@
               "optionText": "",
               "optionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session1/q_09_c.png",
               "optionAiDescription": "Gráfica de barras con eje vertical \"Cantidad\" y eje horizontal \"Peso (gramos)\". Tres barras de igual altura aproximada \\(5\\) para intervalos \\(15\\text{–}20\\), \\(20\\text{–}25\\), \\(25\\text{–}30\\).",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Muestra barras iguales, pero las cantidades reales son distintas."
             },
             {
               "optionId": "D",
@@ -532,10 +532,10 @@
               "optionText": "",
               "optionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session1/q_09_d.png",
               "optionAiDescription": "Gráfica de barras con eje vertical \"Intervalo\" y eje horizontal \"Cantidad de papas\". Barras para \\(15\\text{–}20\\) de valor aproximado \\(800\\), para \\(20\\text{–}25\\) de valor aproximado \\(500\\), para \\(25\\text{–}30\\) de valor aproximado \\(700\\).",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Intercambia los valores de los intervalos extremos.\n- Debe ser \\(700\\) para \\(15\\text{–}20\\) y \\(800\\) para \\(25\\text{–}30\\)."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "A",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -560,7 +560,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** identificar el sesgo de la muestra.\n- **Datos relevantes:** se llama a \\(1000\\) personas, pero todas pertenecen a **un solo municipio** del departamento.\n- **Análisis estadístico:**\n  - Aunque \\(1000\\) personas puede ser una muestra grande, no es representativa del departamento completo si solo proviene de un municipio.\n  - Las preferencias electorales pueden variar mucho entre municipios.\n- **Conclusión:** la encuesta puede diferir de la realidad porque solo considera la opinión de la población de **un municipio**.",
           "options": [
             {
               "optionId": "A",
@@ -568,7 +568,7 @@
               "optionText": "Porque la única manera de obtener resultados precisos es encuestar a toda la población del departamento.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** No es necesario encuestar a toda la población; una **muestra representativa** puede dar buenas estimaciones."
             },
             {
               "optionId": "B",
@@ -576,7 +576,7 @@
               "optionText": "Porque la encuesta solo representará la opinión de las personas del departamento, si el municipio escogido es el más grande.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Que sea el municipio más grande no garantiza representatividad de todo el departamento."
             },
             {
               "optionId": "C",
@@ -584,7 +584,7 @@
               "optionText": "Porque de esta manera solo están tomándose en cuenta las opiniones de la población de un municipio del departamento.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** La muestra está sesgada geográficamente, ya que no incluye personas de los demás municipios."
             },
             {
               "optionId": "D",
@@ -592,10 +592,10 @@
               "optionText": "Porque la muestra es muy grande, lo cual permite que existan grandes diferencias entre las respuestas de las personas.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** El problema no es que la muestra sea grande, sino que **no es representativa** del departamento."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "C",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -620,7 +620,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** hallar el área de la región \\(1\\).\n- **Interpretación de la figura:**\n  - El rectángulo total mide \\(60\\text{ cm}\\times 20\\text{ cm}\\).\n  - Las líneas lo dividen en mitades y luego en rectángulos interiores de \\(15\\text{ cm}\\times 5\\text{ cm}\\).\n  - La región \\(1\\) es la parte superior derecha exterior, con dimensiones:\n    - ancho: de \\(15\\) a \\(30\\), o sea \\(15\\text{ cm}\\)\n    - alto: de \\(5\\) a \\(10\\), o sea \\(5\\text{ cm}\\)\n- **Cálculo:**\n  \\[\n  A=15\\times 5=75\\text{ cm}^2\n  \\]\n- **Conclusión:** el trozo \\(1\\) tiene área **\\(75\\text{ cm}^2\\)**.",
           "options": [
             {
               "optionId": "A",
@@ -628,7 +628,7 @@
               "optionText": "\\(225\\text{ cm}^2\\)",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Ese valor sería \\(15\\times 15\\), pero la altura de la región no es \\(15\\text{ cm}\\), sino \\(5\\text{ cm}\\)."
             },
             {
               "optionId": "B",
@@ -636,7 +636,7 @@
               "optionText": "\\(150\\text{ cm}^2\\)",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Correspondería a \\(30\\times 5\\) o \\(15\\times 10\\), no a las dimensiones de la región \\(1\\)."
             },
             {
               "optionId": "C",
@@ -644,7 +644,7 @@
               "optionText": "\\(75\\text{ cm}^2\\)",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** La región \\(1\\) mide \\(15\\text{ cm}\\) de base y \\(5\\text{ cm}\\) de altura, así que su área es \\(75\\text{ cm}^2\\)."
             },
             {
               "optionId": "D",
@@ -652,10 +652,10 @@
               "optionText": "\\(40\\text{ cm}^2\\)",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** No corresponde a las medidas indicadas en el diagrama."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "C",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -680,7 +680,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** decidir si la suma \\(500+200+1=701\\text{ ton}\\) es válida.\n- **Datos relevantes:**\n  - Pedido \\(1\\): \\(500\\text{ kg}\\)\n  - Pedido \\(2\\): \\(200\\text{ kg}\\)\n  - Pedido \\(3\\): \\(1\\text{ ton}\\)\n- **Análisis:**\n  - No se pueden sumar directamente cantidades expresadas en unidades diferentes sin convertir primero.\n  - Por ejemplo, \\(1\\text{ ton}=1000\\text{ kg}\\).\n  - Entonces el total sería \\(500+200+1000=1700\\text{ kg}\\), o \\(1,7\\text{ ton}\\).\n- **Conclusión:** la solución es **incorrecta**, porque los datos están en unidades distintas y no pueden sumarse directamente.",
           "options": [
             {
               "optionId": "A",
@@ -688,7 +688,7 @@
               "optionText": "incorrecta; el resultado debe estar dado en \\(\\text{kg}\\), ya que la mayoría de los valores están en esta unidad.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Aunque puede expresarse en \\(\\text{kg}\\), ese no es el motivo principal del error.\n- También podría expresarse en toneladas si antes se convierten las unidades."
             },
             {
               "optionId": "B",
@@ -696,7 +696,7 @@
               "optionText": "correcta; se suman correctamente los tres valores y se utiliza una de las unidades de los pedidos.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** No se suman correctamente, porque \\(500\\text{ kg}\\), \\(200\\text{ kg}\\) y \\(1\\text{ ton}\\) no están en la misma unidad."
             },
             {
               "optionId": "C",
@@ -704,7 +704,7 @@
               "optionText": "incorrecta; como los datos están en unidades diferentes, no pueden sumarse directamente.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** Primero hay que convertir todo a una misma unidad y después sumar."
             },
             {
               "optionId": "D",
@@ -712,10 +712,10 @@
               "optionText": "correcta; el resultado se calcula bien y la unidad utilizada corresponde a la unidad de mayor peso.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Elegir la unidad mayor no corrige el error de sumar sin conversión previa."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "C",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -740,7 +740,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** identificar el paso equivocado en el cálculo del área de la región \\(3\\).\n- **Paso 1:** correcto. Área del rectángulo: \\(8\\times 5\\).\n- **Paso 2:** incorrecto.\n  - La región \\(1\\) es un **triángulo** con base \\(4\\text{ m}\\) y altura \\(3\\text{ m}\\).\n  - Su área debe ser:\n    \\[\n    \\frac{4\\times 3}{2}=6\\text{ m}^2\n    \\]\n- **Paso 3:** correcto.\n  - La región \\(2\\) es un cuarto de círculo de radio \\(4\\), así que:\n    \\[\n    \\frac{\\pi(4)^2}{4}=\\frac{16\\pi}{4}=4\\pi\n    \\]\n- **Conclusión:** el error está en el **paso \\(2\\)** y se corrige dividiendo entre \\(2\\).",
           "options": [
             {
               "optionId": "A",
@@ -748,7 +748,7 @@
               "optionText": "En el paso \\(2\\), porque se debe multiplicar \\(3\\text{ m}\\times 4\\text{ m}\\times 5\\text{ m}\\).",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Esa operación no corresponde al área de un triángulo."
             },
             {
               "optionId": "B",
@@ -756,7 +756,7 @@
               "optionText": "En el paso \\(3\\), porque se debe multiplicar \\(2\\pi\\times 4\\text{ m}\\) y luego dividir entre \\(4\\).",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Esa expresión corresponde a una longitud de circunferencia, no al área del cuarto de círculo."
             },
             {
               "optionId": "C",
@@ -764,7 +764,7 @@
               "optionText": "En el paso \\(2\\), porque se debe multiplicar \\(4\\text{ m}\\times 3\\text{ m}\\) y luego dividir entre \\(2\\).",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** La región \\(1\\) es triangular, por lo que su área es \\(\\frac{bh}{2}\\)."
             },
             {
               "optionId": "D",
@@ -772,10 +772,10 @@
               "optionText": "En el paso \\(3\\), porque se debe multiplicar \\(\\pi\\times 4\\text{ m}\\) y luego dividir entre \\(4\\).",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Para el área del cuarto de círculo se usa \\(\\pi r^2/4\\), no \\(\\pi r/4\\)."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "C",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -800,7 +800,7 @@
           "questionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session1/q_14.png",
           "questionImageAiDescription": "Gráfico circular (pie chart) analítico, sin marcos ni bordes externos. Contiene 5 sectores proporcionales rellenos con colores pastel desvanecidos (faded colours), estrictamente sin texturas. Los datos matemáticos para renderizar las proporciones exactas son: Candidato E \\(2.000\\), Candidato F \\(5.000\\), Candidato G \\(4.500\\), Candidato H \\(7.000\\), Candidato I \\(3.400\\). Cada sector debe estar etiquetado claramente indicando a qué candidato pertenece (ej. 'Candidato H').",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** identificar la afirmación falsa sobre la relación entre tabla y gráfica circular.\n- **Análisis:**\n  - Con la **tabla** sí se pueden construir las proporciones de la gráfica. Entonces A es verdadera.\n  - Con la **gráfica** sí se puede ver quién tiene mayor intención de voto. Entonces B es verdadera.\n  - Con la **tabla** también se puede calcular la proporción de cada candidato respecto al total. Entonces D es verdadera.\n  - Pero con la **gráfica circular** no se obtienen con exactitud todos los valores numéricos de la tabla, salvo que estén escritos explícitamente, y aquí la función principal es mostrar proporciones.\n- **Conclusión:** la afirmación falsa es la **C**.",
           "options": [
             {
               "optionId": "A",
@@ -808,7 +808,7 @@
               "optionText": "Con la información de la tabla se obtienen los datos de la gráfica.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta como respuesta.** Esta afirmación es verdadera, porque con los votos de la tabla se pueden calcular las proporciones del gráfico circular."
             },
             {
               "optionId": "B",
@@ -816,7 +816,7 @@
               "optionText": "Con la información de la gráfica se obtiene cuál es el candidato con mayor intención de voto.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta como respuesta.** Esta afirmación es verdadera: el sector más grande permite identificar al candidato con mayor intención de voto."
             },
             {
               "optionId": "C",
@@ -824,7 +824,7 @@
               "optionText": "Con la información de la gráfica se obtienen los datos de la tabla.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** Esta es la afirmación **falsa**.\n- La gráfica circular muestra proporciones relativas, pero no necesariamente permite recuperar con exactitud todos los datos numéricos de la tabla."
             },
             {
               "optionId": "D",
@@ -832,10 +832,10 @@
               "optionText": "Con la información de la tabla se obtiene la proporción entre los votos por un candidato y el total.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta como respuesta.** Esta afirmación es verdadera, porque con la tabla se puede dividir el número de votos de un candidato entre el total de votos."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "C",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -860,7 +860,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** identificar cómo cambia el dinero ahorrado al finalizar cada mes.\n- **Datos de la columna correspondiente:**\n  - Enero: \\(130.000\\)\n  - Febrero: \\(160.000\\)\n  - Marzo: \\(190.000\\)\n  - Abril: \\(220.000\\)\n- **Diferencias sucesivas:**\n  - \\(160.000-130.000=30.000\\)\n  - \\(190.000-160.000=30.000\\)\n  - \\(220.000-190.000=30.000\\)\n- **Conclusión:** el dinero ahorrado al finalizar cada mes **aumenta \\(\\$30.000\\)** cada mes.",
           "options": [
             {
               "optionId": "A",
@@ -868,7 +868,7 @@
               "optionText": "Disminuye \\($30.000\\) cada mes.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Los valores van subiendo, no bajando."
             },
             {
               "optionId": "B",
@@ -876,7 +876,7 @@
               "optionText": "Aumenta \\($30.000\\) cada mes.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** Cada mes el valor final aumenta exactamente en \\(\\$30.000\\)."
             },
             {
               "optionId": "C",
@@ -884,7 +884,7 @@
               "optionText": "Aumenta \\($100.000\\) cada mes.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** El aumento observado es de \\(\\$30.000\\), no de \\(\\$100.000\\)."
             },
             {
               "optionId": "D",
@@ -892,10 +892,10 @@
               "optionText": "Disminuye \\($100.000\\) cada mes.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** No disminuye; de hecho aumenta mes a mes."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "B",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -920,7 +920,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** hallar el promedio de piezas reemplazadas.\n- **Datos:** \\(6, 5, 10\\).\n- **Cálculo:**\n  \\[\n  \\frac{6+5+10}{3}=\\frac{21}{3}=7\n  \\]\n- **Conclusión:** el promedio es **\\(7\\)**.",
           "options": [
             {
               "optionId": "A",
@@ -928,7 +928,7 @@
               "optionText": "\\(21\\)",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** \\(21\\) es la suma total, no el promedio."
             },
             {
               "optionId": "B",
@@ -936,7 +936,7 @@
               "optionText": "\\(7\\)",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** El promedio es \\(21\\div 3=7\\)."
             },
             {
               "optionId": "C",
@@ -944,7 +944,7 @@
               "optionText": "\\(10\\)",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** \\(10\\) es el mayor valor, pero no el promedio."
             },
             {
               "optionId": "D",
@@ -952,10 +952,10 @@
               "optionText": "\\(6\\)",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** \\(6\\) es uno de los datos, no la media."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "B",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -980,7 +980,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** sumar todas las regiones que pertenecen al conjunto **Bicicleta**.\n- **Regiones dentro de Bicicleta:**\n  - Solo bicicleta: \\(50\\)\n  - Carro y bicicleta: \\(20\\)\n  - Bicicleta y transporte público: \\(25\\)\n  - Los tres medios: \\(5\\)\n- **Suma necesaria:** \\(50+20+25+5\\).\n- **Conclusión:** se deben sumar **\\(5\\), \\(20\\), \\(25\\) y \\(50\\)**.",
           "options": [
             {
               "optionId": "A",
@@ -988,7 +988,7 @@
               "optionText": "\\(5\\), \\(15\\), \\(20\\) y \\(25\\).",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Incluye \\(15\\), que corresponde a carro y transporte público, sin bicicleta."
             },
             {
               "optionId": "B",
@@ -996,7 +996,7 @@
               "optionText": "\\(5\\) y \\(20\\).",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Faltan las regiones de solo bicicleta \\(50\\) y bicicleta con transporte público \\(25\\)."
             },
             {
               "optionId": "C",
@@ -1004,7 +1004,7 @@
               "optionText": "\\(25\\), \\(35\\) y \\(50\\).",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Incluye \\(35\\), que corresponde solo a carro, y omite \\(20\\) y \\(5\\)."
             },
             {
               "optionId": "D",
@@ -1012,10 +1012,10 @@
               "optionText": "\\(5\\), \\(20\\), \\(25\\) y \\(50\\).",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** Esas son exactamente las regiones que pertenecen al conjunto bicicleta."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "D",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -1040,7 +1040,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** determinar cuántas duplicaciones ocurren entre \\(2010\\) y \\(2016\\).\n- **Tiempo transcurrido:** \\(2016-2010=6\\) años.\n- **Como se duplica cada \\(2\\) años:**\n  \\[\n  6\\div 2=3\n  \\]\n  Hay \\(3\\) duplicaciones.\n- **Cálculo:**\n  \\[\n  10.000\\times 2^3=10.000\\times 8=80.000\n  \\]\n- **Conclusión:** en \\(2016\\) tenía **\\(80.000\\)** transistores.",
           "options": [
             {
               "optionId": "A",
@@ -1048,7 +1048,7 @@
               "optionText": "\\(20.000\\) transistores.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Eso correspondería a una sola duplicación, es decir, después de \\(2\\) años."
             },
             {
               "optionId": "B",
@@ -1056,7 +1056,7 @@
               "optionText": "\\(40.000\\) transistores.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Eso corresponde a dos duplicaciones, es decir, después de \\(4\\) años."
             },
             {
               "optionId": "C",
@@ -1064,7 +1064,7 @@
               "optionText": "\\(60.000\\) transistores.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** El crecimiento es por duplicación, no por suma de \\(10.000\\) cada \\(2\\) años."
             },
             {
               "optionId": "D",
@@ -1072,10 +1072,10 @@
               "optionText": "\\(80.000\\) transistores.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** En \\(6\\) años hay \\(3\\) duplicaciones, así que \\(10.000\\times 2^3=80.000\\)."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "D",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -1100,7 +1100,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** encontrar qué paso repite un cálculo ya realizado.\n- **Interpretación:**\n  - Paso \\(1\\): calcula base por altura de un triángulo.\n  - Paso \\(2\\): divide entre \\(2\\), obteniendo el área de **un** triángulo sombreado.\n  - Paso \\(3\\): multiplica por \\(4\\), obteniendo el área de los **cuatro** triángulos sombreados.\n  - Paso \\(4\\): sumar cuatro veces el resultado del paso \\(2\\) también da el área total sombreada.\n- **Conclusión:** el paso redundante es el **paso \\(4\\)**, porque produce exactamente lo mismo que el paso \\(3\\).",
           "options": [
             {
               "optionId": "A",
@@ -1108,7 +1108,7 @@
               "optionText": "El paso \\(4\\), porque, al sumar cuatro veces el resultado del paso \\(2\\), se obtiene el resultado del paso \\(3\\).",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** El paso \\(3\\) y el paso \\(4\\) hacen esencialmente lo mismo: obtener cuatro veces el área de un triángulo."
             },
             {
               "optionId": "B",
@@ -1116,7 +1116,7 @@
               "optionText": "El paso \\(3\\), porque, al multiplicar por \\(4\\) el resultado del paso \\(2\\), se obtiene el mismo resultado que se obtuvo en el paso \\(1\\).",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** El paso \\(1\\) calcula base por altura, mientras que el paso \\(3\\) calcula el área total de los cuatro triángulos; no son iguales en general."
             },
             {
               "optionId": "C",
@@ -1124,7 +1124,7 @@
               "optionText": "El paso \\(2\\), porque, al dividir entre \\(2\\) el resultado del paso \\(1\\), se obtiene el mismo resultado del paso \\(3\\).",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** El paso \\(2\\) da el área de un solo triángulo; el paso \\(3\\) da la suma de cuatro triángulos."
             },
             {
               "optionId": "D",
@@ -1132,10 +1132,10 @@
               "optionText": "El paso \\(1\\), porque, al multiplicar la altura de uno de los triángulos por la base, se obtiene el área total de la figura.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Base por altura no da el área de un triángulo completo; falta dividir entre \\(2\\)."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "A",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -1160,7 +1160,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** verificar si la segunda expresión es equivalente a la primera.\n- **Expresión original:**\n  \\[\n  \\left(10\\frac{\\text{m}}{\\text{s}}\\right)(15\\text{ s})+\\frac{1}{2}\\left(3\\frac{\\text{m}}{\\text{s}^2}\\right)(15\\text{ s})^2\n  \\]\n- **Análisis algebraico:**\n  - Sí se puede factorizar un \\(15\\text{ s}\\) común, pero quedaría:\n    \\[\n    15\\text{ s}\\left(10\\frac{\\text{m}}{\\text{s}}+\\frac{1}{2}\\left(3\\frac{\\text{m}}{\\text{s}^2}\\right)(15\\text{ s})\\right)\n    \\]\n  - La persona omitió un factor adicional de \\(15\\text{ s}\\) que proviene de \\((15\\text{ s})^2\\).\n- **Conclusión:** la afirmación es **falsa** porque omitió que el tiempo está elevado al cuadrado en el segundo término.",
           "options": [
             {
               "optionId": "A",
@@ -1168,7 +1168,7 @@
               "optionText": "Sí, porque lo que hizo fue factorizar el tiempo que tarda en recorrer el túnel.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** La factorización está incompleta, porque el segundo término contiene \\((15\\text{ s})^2\\), no solo \\(15\\text{ s}\\)."
             },
             {
               "optionId": "B",
@@ -1176,7 +1176,7 @@
               "optionText": "No, porque omitió que hay unos \\(15\\) segundos elevados al cuadrado.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** Al pasar a la nueva expresión desaparece un factor \\(15\\text{ s}\\) del término cuadrático."
             },
             {
               "optionId": "C",
@@ -1184,7 +1184,7 @@
               "optionText": "Sí, porque el exponente \\(2\\), al que está elevado el tiempo, se puede cancelar.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** No existe ninguna operación válida que permita *cancelar* ese exponente en este contexto."
             },
             {
               "optionId": "D",
@@ -1192,10 +1192,10 @@
               "optionText": "No, porque también se tiene que factorizar el fraccionario \\(\\frac{1}{2}\\).",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** El problema no es el factor \\(\\frac{1}{2}\\), sino la pérdida de un factor de tiempo."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "B",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -1220,7 +1220,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** identificar cuál procedimiento **no** calcula correctamente el tiempo.\n- **Relación correcta:**\n  \\[\n  \\text{tiempo} = \\frac{\\text{tamaño del archivo}}{\\text{velocidad}}\n  \\]\n- **Conversión del archivo:**\n  \\[\n  12,6\\text{ MB} = 12,6\\times 1024\\text{ KB}\n  \\]\n- **Entonces:**\n  \\[\n  t=\\frac{12,6\\times 1024}{300}\n  \\]\n- **Revisión de opciones:**\n  - A: \\((12,6\\times 1024)/300\\), correcta.\n  - C: \\((12,6/300)\\times 1024\\), equivalente, correcta.\n  - D: \\((1024/300)\\times 12,6\\), equivalente, correcta.\n  - B: \\((1024\\times 300)/12,6\\), invierte la relación y no da tiempo.\n- **Conclusión:** el procedimiento que **no** sirve es **B**.",
           "options": [
             {
               "optionId": "A",
@@ -1228,7 +1228,7 @@
               "optionText": "**Paso 1.** Multiplicar \\(12,6\\) por \\(1.024\\)\n\n**Paso 2.** Dividir el resultado del paso \\(1\\) entre \\(300\\)",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta como respuesta.** Sí permite calcular el tiempo, porque primero convierte a kilobytes y luego divide entre la velocidad."
             },
             {
               "optionId": "B",
@@ -1236,7 +1236,7 @@
               "optionText": "**Paso 1.** Multiplicar \\(1.024\\) por \\(300\\)\n\n**Paso 2.** Dividir el resultado del paso \\(1\\) entre \\(12,6\\)",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** Este procedimiento invierte la operación correcta.\n- El tiempo debe ser \\(\\frac{12,6\\times 1024}{300}\\), no \\(\\frac{1024\\times 300}{12,6}\\)."
             },
             {
               "optionId": "C",
@@ -1244,7 +1244,7 @@
               "optionText": "**Paso 1.** Dividir \\(12,6\\) entre \\(300\\)\n\n**Paso 2.** Multiplicar el resultado del paso \\(1\\) por \\(1.024\\)",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta como respuesta.** Aunque cambia el orden, es equivalente a \\(\\frac{12,6\\times 1024}{300}\\)."
             },
             {
               "optionId": "D",
@@ -1252,10 +1252,10 @@
               "optionText": "**Paso 1.** Dividir \\(1.024\\) entre \\(300\\)\n\n**Paso 2.** Multiplicar el resultado del paso \\(1\\) por \\(12,6\\)",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta como respuesta.** También es equivalente a la expresión correcta del tiempo de descarga."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "B",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -1280,7 +1280,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** hallar la altura de la rampa a \\(2\\text{ m}\\) del muro usando proporcionalidad.\n- **Datos de la figura:**\n  - La rampa completa forma un triángulo rectángulo de base \\(4\\text{ m}\\) y altura \\(3\\text{ m}\\).\n  - La columna está a \\(2\\text{ m}\\) del muro, es decir, a la mitad de la base.\n- **Proporción:**\n  \\[\n  \\frac{h}{3}=\\frac{2}{4}\n  \\]\n  Entonces:\n  \\[\n  h=3\\times \\frac{2}{4}=3\\div 2=1,5\n  \\]\n- **Procedimiento equivalente:**\n  - Dividir \\(4\\) entre \\(2\\), obteniendo \\(2\\).\n  - Dividir \\(3\\) entre \\(2\\).\n- **Conclusión:** el procedimiento correcto es el de la opción **C**.",
           "options": [
             {
               "optionId": "A",
@@ -1288,7 +1288,7 @@
               "optionText": "**Paso 1.** Dividir \\(2\\text{ m}\\) entre \\(4\\text{ m}\\), obteniendo \\(0,5\\).\n\n**Paso 2.** Dividir \\(3\\text{ m}\\) entre el valor calculado en el paso \\(1\\).",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Si se divide \\(3\\) entre \\(0,5\\), se obtiene \\(6\\), que no puede ser la altura de una rampa cuya altura total es \\(3\\text{ m}\\)."
             },
             {
               "optionId": "B",
@@ -1296,7 +1296,7 @@
               "optionText": "**Paso 1.** Dividir \\(4\\text{ m}\\) entre \\(2\\text{ m}\\), obteniendo \\(0,5\\).\n\n**Paso 2.** Multiplicar \\(3\\text{ m}\\) por el valor calculado en el paso \\(1\\).",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** \\(4\\div 2=2\\), no \\(0,5\\). El procedimiento presenta un error desde el primer paso."
             },
             {
               "optionId": "C",
@@ -1304,7 +1304,7 @@
               "optionText": "**Paso 1.** Dividir \\(4\\text{ m}\\) entre \\(2\\text{ m}\\), obteniendo \\(2\\).\n\n**Paso 2.** Dividir \\(3\\text{ m}\\) entre el valor calculado en el paso \\(1\\).",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** Como \\(2\\) es la mitad de \\(4\\), la altura buscada es la mitad de \\(3\\): \\(3\\div 2=1,5\\text{ m}\\)."
             },
             {
               "optionId": "D",
@@ -1312,10 +1312,10 @@
               "optionText": "**Paso 1.** Dividir \\(2\\text{ m}\\) entre \\(4\\text{ m}\\), obteniendo \\(2\\).\n\n**Paso 2.** Multiplicar \\(3\\text{ m}\\) por el valor calculado en el paso \\(1\\).",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** \\(2\\div 4=0,5\\), no \\(2\\). Además, así daría \\(6\\), que es imposible."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "C",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -1340,7 +1340,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** ordenar los aviones por distancia al polo.\n- **En coordenadas polares, la distancia al polo es \\(r\\).**\n- **Datos:**\n  - \\(W=(20\\text{ km},90^{\\circ})\\)\n  - \\(V=(30\\text{ km},30^{\\circ})\\)\n  - \\(Y=(40\\text{ km},60^{\\circ})\\)\n  - \\(X=(60\\text{ km},180^{\\circ})\\)\n- **Orden de menor a mayor distancia:**\n  \\[\n  20<30<40<60\n  \\]\n  Por tanto:\n  \\[\n  W, V, Y, X\n  \\]\n- **Conclusión:** el orden correcto es **\\(W, V, Y, X\\)**.",
           "options": [
             {
               "optionId": "A",
@@ -1348,7 +1348,7 @@
               "optionText": "\\(W, V, Y, X\\).",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** Ordena los radios \\(20,30,40,60\\) de menor a mayor."
             },
             {
               "optionId": "B",
@@ -1356,7 +1356,7 @@
               "optionText": "\\(X, Y, W, Y\\).",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Empieza con el más lejano y además repite \\(Y\\), omitiendo \\(V\\)."
             },
             {
               "optionId": "C",
@@ -1364,7 +1364,7 @@
               "optionText": "\\(V, Y, W, X\\).",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Coloca a \\(W\\), que es el más cercano, después de \\(V\\) y \\(Y\\)."
             },
             {
               "optionId": "D",
@@ -1372,10 +1372,10 @@
               "optionText": "\\(X, Y, V, W\\).",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Ese es el orden de mayor a menor, no de menor a mayor."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "A",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -1400,7 +1400,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** construir la operación que represente el desplazamiento total neto desde la farmacia hasta la casa.\n- **Recorrido:**\n  - Primer pedido: \\(+3\\)\n  - Segundo pedido: el doble de \\(3\\), entonces \\(+6\\)\n  - Tercer pedido: la mitad de \\(6\\), entonces \\(+3\\)\n  - Último pedido: se devuelve \\(10\\), entonces \\(-10\\)\n  - De allí a la casa: \\(+1\\)\n- **Operación:**\n  \\[\n  3+6+3-10+1\n  \\]\n- **Conclusión:** la operación correcta es la de la opción **C**.",
           "options": [
             {
               "optionId": "A",
@@ -1408,7 +1408,7 @@
               "optionText": "\\(3+3+3-10+1\\)",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** El segundo desplazamiento debe ser el doble del primero, es decir, \\(6\\), no \\(3\\)."
             },
             {
               "optionId": "B",
@@ -1416,7 +1416,7 @@
               "optionText": "\\(3+6+6+10\\)",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** El tercer avance debe ser \\(3\\), no \\(6\\), y además el regreso de \\(10\\) debe restarse, no sumarse."
             },
             {
               "optionId": "C",
@@ -1424,7 +1424,7 @@
               "optionText": "\\(3+6+3-10+1\\)",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** Representa exactamente los avances, el retroceso y la última cuadra hasta la casa."
             },
             {
               "optionId": "D",
@@ -1432,10 +1432,10 @@
               "optionText": "\\(6+3+10-1\\)",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Omite el primer avance de \\(3\\) cuadras y trata mal el regreso y el trayecto final."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "C",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -1460,7 +1460,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "image",
-          "aiExplanation": "",
+          "aiExplanation": "- **Problema central:** ordenar de menor a mayor números decimales negativos.\n- **Datos:**\n  - Santiago: \\(-7,6\\)\n  - Ximena: \\(-7,09\\)\n  - Mariana: \\(-7,62\\)\n  - Orlando: \\(-7,53\\)\n- **Análisis de negativos:** el menor es el más negativo.\n- **Orden de menor a mayor:**\n  \\[\n  -7,62 < -7,6 < -7,53 < -7,09\n  \\]\n  Entonces:\n  - Mariana\n  - Santiago\n  - Orlando\n  - Ximena\n- **Conclusión:** la tabla correcta es la opción **C**.",
           "options": [
             {
               "optionId": "A",
@@ -1468,7 +1468,7 @@
               "optionText": "",
               "optionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session1/q_25_a.png",
               "optionAiDescription": "Tabla de \\(2\\) columnas: \"Orden en que se va a recibir el tratamiento\" y \"Paciente\". Filas: Primero \\rightarrow Ximena; Segundo \\rightarrow Mariana; Tercero \\rightarrow Santiago; Cuarto \\rightarrow Orlando.",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Ximena tiene \\(-7,09\\), que es el valor mayor, no el menor, así que no debe ir primero."
             },
             {
               "optionId": "B",
@@ -1476,7 +1476,7 @@
               "optionText": "",
               "optionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session1/q_25_b.png",
               "optionAiDescription": "Tabla de \\(2\\) columnas: \"Orden en que se va a recibir el tratamiento\" y \"Paciente\". Filas: Primero \\rightarrow Orlando; Segundo \\rightarrow Santiago; Tercero \\rightarrow Mariana; Cuarto \\rightarrow Ximena.",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Orlando \\(-7,53\\) no es el menor valor; Mariana \\(-7,62\\) debería ir primero."
             },
             {
               "optionId": "C",
@@ -1484,7 +1484,7 @@
               "optionText": "",
               "optionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session1/q_25_c.png",
               "optionAiDescription": "Tabla de \\(2\\) columnas: \"Orden en que se va a recibir el tratamiento\" y \"Paciente\". Filas: Primero \\rightarrow Mariana; Segundo \\rightarrow Santiago; Tercero \\rightarrow Orlando; Cuarto \\rightarrow Ximena.",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correcta.** Ordena de menor a mayor las presiones: \\(-7,62\\), \\(-7,6\\), \\(-7,53\\), \\(-7,09\\)."
             },
             {
               "optionId": "D",
@@ -1492,10 +1492,10 @@
               "optionText": "",
               "optionImageUrl": "https://cdn.invicto.com.co/icfes/math/2025_2_session1/q_25_d.png",
               "optionAiDescription": "Tabla de \\(2\\) columnas: \"Orden en que se va a recibir el tratamiento\" y \"Paciente\". Filas: Primero \\rightarrow Santiago; Segundo \\rightarrow Ximena; Tercero \\rightarrow Mariana; Cuarto \\rightarrow Orlando.",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrecta.** Ubica a Ximena demasiado pronto y a Mariana demasiado tarde; no respeta el orden ascendente de los valores negativos."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "C",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
