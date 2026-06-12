@@ -7,7 +7,7 @@
     {
       "sectionIndex": 1,
       "sectionTitle": "## House",
-      "sectionText": "Lea las descripciones de la columna de la izquierda \\(80 - 84\\). ¿Cuál palabra de la columna de la derecha \\((A - G)\\) concuerda con cada descripción?\n\nLa opción \\(H\\) se usa para el ejemplo. Sobran dos palabras más.\n\nEn las preguntas \\(80 - 84\\), marque la letra correcta \\(A - G\\) en su hoja de respuestas.",
+      "sectionText": "Lea las descripciones de la columna de la izquierda \\(1 - 5\\). ¿Cuál palabra de la columna de la derecha \\((A - G)\\) concuerda con cada descripción?\n\nLa opción \\(H\\) se usa para el ejemplo. Sobran dos palabras más.\n\nEn las preguntas \\(1 - 5\\), marque la letra correcta \\(A - G\\) en su hoja de respuestas.",
       "sectionSource": "",
       "hasSectionImage": false,
       "sectionImageUrl": "",
@@ -423,7 +423,7 @@
     {
       "sectionIndex": 2,
       "sectionTitle": "## Professions",
-      "sectionText": "Lea las descripciones de la columna de la izquierda \\(85 - 89\\). ¿Cuál palabra de la columna de la derecha \\((A - G)\\) concuerda con cada descripción?\n\nLa opción \\(H\\) se usa para el ejemplo. Sobran dos palabras más.\n\nEn las preguntas \\(85 - 89\\), marque la letra correcta \\(A - G\\) en su hoja de respuestas.",
+      "sectionText": "Lea las descripciones de la columna de la izquierda \\(6 - 10\\). ¿Cuál palabra de la columna de la derecha \\((A - G)\\) concuerda con cada descripción?\n\nLa opción \\(H\\) se usa para el ejemplo. Sobran dos palabras más.\n\nEn las preguntas \\(85 - 89\\), marque la letra correcta \\(A - G\\) en su hoja de respuestas.",
       "sectionSource": "",
       "hasSectionImage": false,
       "sectionImageUrl": "",
@@ -839,7 +839,7 @@
     {
       "sectionIndex": 3,
       "sectionTitle": "## PARTE 2",
-      "sectionText": "¿Dónde puede ver estos avisos?\n\nEn las preguntas \\(90 - 94\\), marque \\(A\\), \\(B\\) o \\(C\\) en su hoja de respuestas.",
+      "sectionText": "¿Dónde puede ver estos avisos?\n\nEn las preguntas \\(11 - 15\\), marque \\(A\\), \\(B\\) o \\(C\\) en su hoja de respuestas.",
       "sectionSource": "",
       "hasSectionImage": false,
       "sectionImageUrl": "",
@@ -849,7 +849,7 @@
           "questionId": "q_11",
           "questionText": "Find Lucy's stories here.\n\n\\(2x1\\) today!",
           "hasQuestionImage": true,
-          "questionImageUrl": "",
+          "questionImageUrl": "https://cdn.invicto.com.co/icfes/english/q_11.png",
           "questionImageAiDescription": "Horizontal arrow-shaped sign pointing to the right. Inside the sign there are two centered lines of text: first line in italic/bold style reads \"Find Lucy's stories here.\" Second line reads \"2x1 today!\".",
           "optionsType": "text",
           "aiExplanation": "",
@@ -890,7 +890,7 @@
           "questionId": "q_12",
           "questionText": "NO CAMERAS\nNO PHOTOS\nDo not take pictures of the tigers",
           "hasQuestionImage": true,
-          "questionImageUrl": "",
+          "questionImageUrl": "https://cdn.invicto.com.co/icfes/english/q_12.png",
           "questionImageAiDescription": "Rectangular framed notice with three centered lines of text. Top line: \"NO CAMERAS\". Second line: \"NO PHOTOS\". Third line: \"Do not take pictures of the tigers\".",
           "optionsType": "text",
           "aiExplanation": "",
@@ -931,7 +931,7 @@
           "questionId": "q_13",
           "questionText": "TODAY\nPiano lessons with Mrs. Wilson\nRoom \\(11\\) - \\(2{:}00\\) p.m.",
           "hasQuestionImage": true,
-          "questionImageUrl": "",
+          "questionImageUrl": "https://cdn.invicto.com.co/icfes/english/q_13.png",
           "questionImageAiDescription": "Notice designed like a small posted sign with a thick black left border and bottom border. Text appears in three lines: \"TODAY\" at top, then \"Piano lessons with Mrs. Wilson\", then \"Room 11 - 2:00 p.m.\".",
           "optionsType": "text",
           "aiExplanation": "",
@@ -972,7 +972,7 @@
           "questionId": "q_14",
           "questionText": "Happy birthday, Anna!\nWe love you.",
           "hasQuestionImage": true,
-          "questionImageUrl": "",
+          "questionImageUrl": "https://cdn.invicto.com.co/icfes/english/q_14.png",
           "questionImageAiDescription": "Horizontal banner-like image with vertical supports at both sides. Centered bold text in two lines reads: \"Happy birthday, Anna!\" and \"We love you.\"",
           "optionsType": "text",
           "aiExplanation": "",
@@ -1013,7 +1013,7 @@
           "questionId": "q_15",
           "questionText": "Big bedrooms with TVs\n\\(\\text{Breakfast at } 8{:}30\\text{ a.m.}\\)",
           "hasQuestionImage": true,
-          "questionImageUrl": "",
+          "questionImageUrl": "https://cdn.invicto.com.co/icfes/english/q_15.png",
           "questionImageAiDescription": "Decorative rectangular framed notice with two lines of text. First line: \"Big bedrooms with TVs\". Second line in parentheses: \"Breakfast at 8:30 a.m.\"",
           "optionsType": "text",
           "aiExplanation": "",
@@ -1055,7 +1055,7 @@
     {
       "sectionIndex": 4,
       "sectionTitle": "## PARTE 3",
-      "sectionText": "Complete las cinco conversaciones.\n\nEn las preguntas \\(95 - 99\\), marque \\(A\\), \\(B\\) o \\(C\\) en su hoja de respuestas.",
+      "sectionText": "Complete las cinco conversaciones.\n\nEn las preguntas \\(16 - 20\\), marque \\(A\\), \\(B\\) o \\(C\\) en su hoja de respuestas.",
       "sectionSource": "",
       "hasSectionImage": false,
       "sectionImageUrl": "",
@@ -1271,7 +1271,7 @@
     {
       "sectionIndex": 5,
       "sectionTitle": "## Grandma Gatewood",
-      "sectionText": "Lea el texto y seleccione la palabra correcta para cada espacio.\n\nEn las preguntas \\(100 - 107\\), marque \\(A\\), \\(B\\) o \\(C\\) en su hoja de respuestas.\n\nThis strange story \\((0)\\) ______ in April \\(1955\\). On a foggy morning, Emma Gatewood, an American school teacher, told her family, “I will go for a walk after breakfast.” She left her small Ohio town with the clothes she had on and less \\((100)\\) ______ US\\$\\(200\\). No one \\((101)\\) ______ guess her plans: not one of her \\(11\\) children or her \\(23\\) grandchildren.\n\nAt the age of \\(67\\), Emma became the first woman \\((102)\\) ______ walked the Appalachian Trail, a \\(2{,}050\\)-mile way \\((103)\\) ______ forests and mountains. She didn't have \\((104)\\) ______ money or good equipment, but during her long journey, people helped her \\((105)\\) ______ she went.\n\nToday, even sixty years later, “Grandma” Gatewood’s story is \\((106)\\) ______ amazing. Her story shows how any person can \\((107)\\) ______ stronger than they were before.",
+      "sectionText": "Lea el texto y seleccione la palabra correcta para cada espacio.\n\nEn las preguntas \\(21 - 28\\), marque \\(A\\), \\(B\\) o \\(C\\) en su hoja de respuestas.\n\nThis strange story began in April \\(1955\\). On a foggy morning, Emma Gatewood, an American school teacher, told her family, “I will go for a walk after breakfast.” She left her small Ohio town with the clothes she had on and less \\((21)\\) ______ US\\$\\(200\\). No one \\((22)\\) ______ guess her plans: not one of her \\(11\\) children or her \\(23\\) grandchildren.\n\nAt the age of \\(67\\), Emma became the first woman \\((23)\\) ______ walked the Appalachian Trail, a \\(2{,}050\\)-mile way \\((24)\\) ______ forests and mountains. She didn't have \\((25)\\) ______ money or good equipment, but during her long journey, people helped her \\((26)\\) ______ she went.\n\nToday, even sixty years later, “Grandma” Gatewood’s story is \\((27)\\) ______ amazing. Her story shows how any person can \\((28)\\) ______ stronger than they were before.",
       "sectionSource": "",
       "hasSectionImage": false,
       "sectionImageUrl": "",
@@ -1279,7 +1279,7 @@
       "questions": [
         {
           "questionId": "q_21",
-          "questionText": "Question \\((100)\\): She left her small Ohio town with the clothes she had on and less \\((100)\\) ______ US\\$\\(200\\).",
+          "questionText": "Question \\((21)\\): She left her small Ohio town with the clothes she had on and less \\((100)\\) ______ US\\$\\(200\\).",
           "hasQuestionImage": false,
           "questionImageUrl": "",
           "questionImageAiDescription": "",
@@ -1320,7 +1320,7 @@
         },
         {
           "questionId": "q_22",
-          "questionText": "Question \\((101)\\): No one \\((101)\\) ______ guess her plans: not one of her \\(11\\) children or her \\(23\\) grandchildren.",
+          "questionText": "Question \\((22)\\): No one \\((101)\\) ______ guess her plans: not one of her \\(11\\) children or her \\(23\\) grandchildren.",
           "hasQuestionImage": false,
           "questionImageUrl": "",
           "questionImageAiDescription": "",
@@ -1361,7 +1361,7 @@
         },
         {
           "questionId": "q_23",
-          "questionText": "Question \\((102)\\): At the age of \\(67\\), Emma became the first woman \\((102)\\) ______ walked the Appalachian Trail, a \\(2{,}050\\)-mile way \\((103)\\) ______ forests and mountains.",
+          "questionText": "Question \\((23)\\): At the age of \\(67\\), Emma became the first woman \\((102)\\) ______ walked the Appalachian Trail, a \\(2{,}050\\)-mile way \\((103)\\) ______ forests and mountains.",
           "hasQuestionImage": false,
           "questionImageUrl": "",
           "questionImageAiDescription": "",
@@ -1402,7 +1402,7 @@
         },
         {
           "questionId": "q_24",
-          "questionText": "Question \\((103)\\): At the age of \\(67\\), Emma became the first woman \\((102)\\) ______ walked the Appalachian Trail, a \\(2{,}050\\)-mile way \\((103)\\) ______ forests and mountains.",
+          "questionText": "Question \\((24)\\): At the age of \\(67\\), Emma became the first woman \\((102)\\) ______ walked the Appalachian Trail, a \\(2{,}050\\)-mile way \\((103)\\) ______ forests and mountains.",
           "hasQuestionImage": false,
           "questionImageUrl": "",
           "questionImageAiDescription": "",
@@ -1443,7 +1443,7 @@
         },
         {
           "questionId": "q_25",
-          "questionText": "Question \\((104)\\): She didn't have \\((104)\\) ______ money or good equipment, but during her long journey, people helped her \\((105)\\) ______ she went.",
+          "questionText": "Question \\((25)\\): She didn't have \\((104)\\) ______ money or good equipment, but during her long journey, people helped her \\((105)\\) ______ she went.",
           "hasQuestionImage": false,
           "questionImageUrl": "",
           "questionImageAiDescription": "",
@@ -1484,7 +1484,7 @@
         },
         {
           "questionId": "q_26",
-          "questionText": "Question \\((105)\\): She didn't have \\((104)\\) ______ money or good equipment, but during her long journey, people helped her \\((105)\\) ______ she went.",
+          "questionText": "Question \\((26)\\): She didn't have \\((104)\\) ______ money or good equipment, but during her long journey, people helped her \\((105)\\) ______ she went.",
           "hasQuestionImage": false,
           "questionImageUrl": "",
           "questionImageAiDescription": "",
@@ -1525,7 +1525,7 @@
         },
         {
           "questionId": "q_27",
-          "questionText": "Question \\((106)\\): Today, even sixty years later, “Grandma” Gatewood’s story is \\((106)\\) ______ amazing.",
+          "questionText": "Question \\((27)\\): Today, even sixty years later, “Grandma” Gatewood’s story is \\((106)\\) ______ amazing.",
           "hasQuestionImage": false,
           "questionImageUrl": "",
           "questionImageAiDescription": "",
@@ -1566,7 +1566,7 @@
         },
         {
           "questionId": "q_28",
-          "questionText": "Question \\((107)\\): Her story shows how any person can \\((107)\\) ______ stronger than they were before.",
+          "questionText": "Question \\((28)\\): Her story shows how any person can \\((107)\\) ______ stronger than they were before.",
           "hasQuestionImage": false,
           "questionImageUrl": "",
           "questionImageAiDescription": "",
@@ -1610,10 +1610,10 @@
     {
       "sectionIndex": 6,
       "sectionTitle": "## Golf",
-      "sectionText": "Lea el texto y responda las preguntas.\n\nEn las preguntas \\(108 - 114\\), marque \\(A\\), \\(B\\) o \\(C\\) en su hoja de respuestas.\n\nGolf is an outdoor sport played with a club and a ball on a field called a course. Players hit the ball with the club, usually very hard, across the course until it goes into a hole. When the player hits the ball, it is called a stroke.\n\nHistorians believe that early forms of golf were played in the Netherlands and then in Scotland, where the oldest golf organization was created. The first golf courses were fields of grass; sheep ate the grass to keep it short. In the United States, the first course was on a farm in Illinois, and it’s still there today. British players like John Taylor were considered the best in the \\(1800\\)s, but in the \\(1920\\)s Americans became well-known. In the \\(1960\\)s, amazing players like Arnold Palmer and Jack Nicklaus began to appear.\n\nWhile playing, golfers choose between different clubs depending on how far they want to hit the ball. The balls are small, hard, white, and made of a strong material. They were originally wooden, but then they were made of leather in the \\(1600\\)s. The modern balls made since the \\(1900\\)s have very advanced technology in their design, which has improved the game a lot.\n\nThere are different popular ways of playing, like *match play* or *stroke play*. However, in all cases, the golf player with the lowest number of strokes for all the holes wins.",
+      "sectionText": "Lea el texto y responda las preguntas.\n\nEn las preguntas \\(29 - 35\\), marque \\(A\\), \\(B\\) o \\(C\\) en su hoja de respuestas.\n\nGolf is an outdoor sport played with a club and a ball on a field called a course. Players hit the ball with the club, usually very hard, across the course until it goes into a hole. When the player hits the ball, it is called a stroke.\n\nHistorians believe that early forms of golf were played in the Netherlands and then in Scotland, where the oldest golf organization was created. The first golf courses were fields of grass; sheep ate the grass to keep it short. In the United States, the first course was on a farm in Illinois, and it’s still there today. British players like John Taylor were considered the best in the \\(1800\\)s, but in the \\(1920\\)s Americans became well-known. In the \\(1960\\)s, amazing players like Arnold Palmer and Jack Nicklaus began to appear.\n\nWhile playing, golfers choose between different clubs depending on how far they want to hit the ball. The balls are small, hard, white, and made of a strong material. They were originally wooden, but then they were made of leather in the \\(1600\\)s. The modern balls made since the \\(1900\\)s have very advanced technology in their design, which has improved the game a lot.\n\nThere are different popular ways of playing, like *match play* or *stroke play*. However, in all cases, the golf player with the lowest number of strokes for all the holes wins.",
       "sectionSource": "",
       "hasSectionImage": true,
-      "sectionImageUrl": "",
+      "sectionImageUrl": "https://cdn.invicto.com.co/icfes/english/q_29_section.png",
       "sectionImageAiDescription": "Small diagram on the right side of the text box showing a golfer standing and hitting a ball with a club. A flag marks the hole on the left side of the diagram. Two labels with arrows identify \"Club\" pointing to the stick in the golfer's hands and \"Hole\" pointing to the opening near the flag. Ground is shown as a horizontal strip with simple background vegetation.",
       "questions": [
         {
@@ -1908,7 +1908,7 @@
     {
       "sectionIndex": 7,
       "sectionTitle": "## PARTE 6.A",
-      "sectionText": "Lea el texto y responda las preguntas.\n\nEn las preguntas \\(115 - 119\\), marque \\(A\\), \\(B\\), \\(C\\) o \\(D\\) en su hoja de respuestas.\n\nI do not like when someone makes a mistake about my age. **When someone says I look younger than I am, I don’t think that person is accurate, because I’m a different person from who I was at \\(24\\), \\(25\\), even \\(26\\).** I don’t consider I actually look physically younger than \\(30\\). However, that doesn’t explain why we don’t always look like being \\(30\\) or why I can’t get champagne in my local supermarket.\n\nThere are loads of videos on TikTok about why millennials (people born after the \\(80\\)s) don’t appear to be getting old “normally”. Some have the hypothesis that it’s because cosmetic operations are cheaper and more available now. Others have said that it’s because millennials “have depression, so we’re indoors all day, and we don’t let our skin feel the sun.” Still others have wondered whether it’s due to camera phones, and the fact that we use them regularly, meaning we pay more attention to our looks. Or maybe we are getting old normally but we just don’t consider we are, so we don’t act like it. Before I continue, I must add: I’m sure that age is not a main issue, and that putting labels to a person as a result of an arbitrary age opinion is not fair to their identities.\n\nI know that most people don’t actually “feel” their age, because they just feel like themselves (same here). **But that doesn’t mean I am not interested and curious about how I appear to others now that I’m in my \\(30\\)s.**",
+      "sectionText": "Lea el texto y responda las preguntas.\n\nEn las preguntas \\(36 - 40\\), marque \\(A\\), \\(B\\), \\(C\\) o \\(D\\) en su hoja de respuestas.\n\nI do not like when someone makes a mistake about my age. **When someone says I look younger than I am, I don’t think that person is accurate, because I’m a different person from who I was at \\(24\\), \\(25\\), even \\(26\\).** I don’t consider I actually look physically younger than \\(30\\). However, that doesn’t explain why we don’t always look like being \\(30\\) or why I can’t get champagne in my local supermarket.\n\nThere are loads of videos on TikTok about why millennials (people born after the \\(80\\)s) don’t appear to be getting old “normally”. Some have the hypothesis that it’s because cosmetic operations are cheaper and more available now. Others have said that it’s because millennials “have depression, so we’re indoors all day, and we don’t let our skin feel the sun.” Still others have wondered whether it’s due to camera phones, and the fact that we use them regularly, meaning we pay more attention to our looks. Or maybe we are getting old normally but we just don’t consider we are, so we don’t act like it. Before I continue, I must add: I’m sure that age is not a main issue, and that putting labels to a person as a result of an arbitrary age opinion is not fair to their identities.\n\nI know that most people don’t actually “feel” their age, because they just feel like themselves (same here). **But that doesn’t mean I am not interested and curious about how I appear to others now that I’m in my \\(30\\)s.**",
       "sectionSource": "",
       "hasSectionImage": false,
       "sectionImageUrl": "",
@@ -2164,7 +2164,7 @@
     {
       "sectionIndex": 8,
       "sectionTitle": "## PARTE 6.B",
-      "sectionText": "Lea el texto y responda las preguntas.\n\nEn las preguntas \\(120 - 124\\), marque \\(A\\), \\(B\\), \\(C\\) o \\(D\\) en su hoja de respuestas.\n\nDoes something about living abroad seem extraordinary to you? I understand. That’s what inspired me to leave America for the first time and set out on my journey to start high school in France. However, I was shocked that there were several things I had absolutely no idea about until I landed in France and took part in daily activities there.\n\nBefore I arrived, I had only experienced foreign exchange students coming to America, never being one. All those students spoke other languages unknown to me. For me, as an English speaker, that was not the case. Once in France, most of my foreign partners spoke English. In some ways, it’s positive that people communicate with you in your own language because it’s convenient. The disadvantage is you never have that secret moment where you can say things, and no one can imagine what you’re saying.\n\nIt will feel shocking to install yourself in a new family’s house, but you can handle this. As you start getting along with them, you can start doing things the way you like them, and it gets cozy. However, there are some things you can’t do your usual way. It’s those little things that separate your life in your home country from your life abroad.\n\nIf you’re thinking about doing this, my advice is “say yes more than you say no.” Of course, there will be times when it is acceptable to say no, but if you’re turning down a weekend of excitement with your classmates or your family there, you’re not taking advantage of your exchange. Part of the reason you are living this adventure is to experience things. Say yes and you will not be disappointed.",
+      "sectionText": "Lea el texto y responda las preguntas.\n\nEn las preguntas \\(41 - 45\\), marque \\(A\\), \\(B\\), \\(C\\) o \\(D\\) en su hoja de respuestas.\n\nDoes something about living abroad seem extraordinary to you? I understand. That’s what inspired me to leave America for the first time and set out on my journey to start high school in France. However, I was shocked that there were several things I had absolutely no idea about until I landed in France and took part in daily activities there.\n\nBefore I arrived, I had only experienced foreign exchange students coming to America, never being one. All those students spoke other languages unknown to me. For me, as an English speaker, that was not the case. Once in France, most of my foreign partners spoke English. In some ways, it’s positive that people communicate with you in your own language because it’s convenient. The disadvantage is you never have that secret moment where you can say things, and no one can imagine what you’re saying.\n\nIt will feel shocking to install yourself in a new family’s house, but you can handle this. As you start getting along with them, you can start doing things the way you like them, and it gets cozy. However, there are some things you can’t do your usual way. It’s those little things that separate your life in your home country from your life abroad.\n\nIf you’re thinking about doing this, my advice is “say yes more than you say no.” Of course, there will be times when it is acceptable to say no, but if you’re turning down a weekend of excitement with your classmates or your family there, you’re not taking advantage of your exchange. Part of the reason you are living this adventure is to experience things. Say yes and you will not be disappointed.",
       "sectionSource": "",
       "hasSectionImage": false,
       "sectionImageUrl": "",
