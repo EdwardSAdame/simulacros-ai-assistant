@@ -20,7 +20,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Core problem:** Match the description *“People put their books in this”* with the correct house object.\n- **Relevant data:** The options include furniture and household objects such as *armchair, bed, blanket, bookcase,* and *cupboard*.\n- **Method:** Identify which object is specifically designed to store books.\n- **Conclusion:** A **bookcase** is the piece of furniture used to put books in. Therefore, the correct answer is **D**.",
           "options": [
             {
               "optionId": "A",
@@ -28,7 +28,7 @@
               "optionText": "armchair",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** An *armchair* is for sitting, not for storing books."
             },
             {
               "optionId": "B",
@@ -36,7 +36,7 @@
               "optionText": "bed",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** A *bed* is used for sleeping, not for keeping books."
             },
             {
               "optionId": "C",
@@ -44,7 +44,7 @@
               "optionText": "blanket",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** A *blanket* keeps you warm; it is not a place to put books."
             },
             {
               "optionId": "D",
@@ -52,7 +52,7 @@
               "optionText": "bookcase",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correct.** A **bookcase** is specifically used to store books."
             },
             {
               "optionId": "E",
@@ -60,7 +60,7 @@
               "optionText": "cupboard",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** A *cupboard* is usually for dishes, food, or clothes, not mainly for books."
             },
             {
               "optionId": "F",
@@ -68,7 +68,7 @@
               "optionText": "picture",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** A *picture* is something you hang on a wall; it does not hold books."
             },
             {
               "optionId": "G",
@@ -76,7 +76,7 @@
               "optionText": "shower",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** A *shower* is for washing your body, not for storing books."
             },
             {
               "optionId": "H",
@@ -84,10 +84,10 @@
               "optionText": "towel",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** A *towel* is used for drying yourself, not for putting books in."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "D",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -101,7 +101,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Core problem:** Match the description *“You wash your body in this place”* with the correct word.\n- **Relevant data:** Among the options, only one names a place used for washing.\n- **Method:** Eliminate objects used for sitting, sleeping, covering, or storing.\n- **Conclusion:** The place where you wash your body is the **shower**. Therefore, the correct answer is **G**.",
           "options": [
             {
               "optionId": "A",
@@ -109,7 +109,7 @@
               "optionText": "armchair",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** An *armchair* is for sitting in the living room."
             },
             {
               "optionId": "B",
@@ -117,7 +117,7 @@
               "optionText": "bed",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** A *bed* is for sleeping, not washing."
             },
             {
               "optionId": "C",
@@ -125,7 +125,7 @@
               "optionText": "blanket",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** A *blanket* is used to keep warm."
             },
             {
               "optionId": "D",
@@ -133,7 +133,7 @@
               "optionText": "bookcase",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** A *bookcase* is for books, not for washing your body."
             },
             {
               "optionId": "E",
@@ -141,7 +141,7 @@
               "optionText": "cupboard",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** A *cupboard* is storage furniture, not a washing place."
             },
             {
               "optionId": "F",
@@ -149,7 +149,7 @@
               "optionText": "picture",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** A *picture* is wall decoration."
             },
             {
               "optionId": "G",
@@ -157,7 +157,7 @@
               "optionText": "shower",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correct.** A **shower** is the place where you wash your body."
             },
             {
               "optionId": "H",
@@ -165,10 +165,10 @@
               "optionText": "towel",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** A *towel* is used after washing, not the place where you wash."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "G",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -182,7 +182,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Core problem:** Identify the object described by *“You usually sleep on it at night.”*\n- **Relevant data:** The options include *bed* and *blanket*, which are related to sleeping.\n- **Method:** Distinguish between the object you sleep **on** and the item you sleep **under**.\n- **Conclusion:** You sleep **on** a **bed**, so the correct answer is **B**.",
           "options": [
             {
               "optionId": "A",
@@ -190,7 +190,7 @@
               "optionText": "armchair",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** You may sit in an *armchair*, but you do not usually sleep on it at night."
             },
             {
               "optionId": "B",
@@ -198,7 +198,7 @@
               "optionText": "bed",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correct.** A **bed** is the object people usually sleep on at night."
             },
             {
               "optionId": "C",
@@ -206,7 +206,7 @@
               "optionText": "blanket",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** You sleep *under* a blanket, not *on* it in the usual expression."
             },
             {
               "optionId": "D",
@@ -214,7 +214,7 @@
               "optionText": "bookcase",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** A *bookcase* is for books."
             },
             {
               "optionId": "E",
@@ -222,7 +222,7 @@
               "optionText": "cupboard",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** A *cupboard* is for storing things."
             },
             {
               "optionId": "F",
@@ -230,7 +230,7 @@
               "optionText": "picture",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** A *picture* is decoration, not something you sleep on."
             },
             {
               "optionId": "G",
@@ -238,7 +238,7 @@
               "optionText": "shower",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** A *shower* is for washing."
             },
             {
               "optionId": "H",
@@ -246,10 +246,10 @@
               "optionText": "towel",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** A *towel* is for drying, not for sleeping on."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "B",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -263,7 +263,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Core problem:** Identify what you can sit on in the living room.\n- **Relevant data:** The options include several house objects, but only one is mainly for sitting.\n- **Method:** Choose the furniture intended for sitting.\n- **Conclusion:** An **armchair** is something you can sit on in the living room. Therefore, the correct answer is **A**.",
           "options": [
             {
               "optionId": "A",
@@ -271,7 +271,7 @@
               "optionText": "armchair",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correct.** An **armchair** is a chair used for sitting, often in a living room."
             },
             {
               "optionId": "B",
@@ -279,7 +279,7 @@
               "optionText": "bed",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** A *bed* is mainly for sleeping, not typically for sitting in the living room."
             },
             {
               "optionId": "C",
@@ -287,7 +287,7 @@
               "optionText": "blanket",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** A *blanket* is something you cover yourself with."
             },
             {
               "optionId": "D",
@@ -295,7 +295,7 @@
               "optionText": "bookcase",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** A *bookcase* stores books."
             },
             {
               "optionId": "E",
@@ -303,7 +303,7 @@
               "optionText": "cupboard",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** A *cupboard* is for storage, not sitting."
             },
             {
               "optionId": "F",
@@ -311,7 +311,7 @@
               "optionText": "picture",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** A *picture* hangs on a wall."
             },
             {
               "optionId": "G",
@@ -319,7 +319,7 @@
               "optionText": "shower",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** A *shower* is in a bathroom and is for washing."
             },
             {
               "optionId": "H",
@@ -327,10 +327,10 @@
               "optionText": "towel",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** A *towel* is for drying yourself."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "A",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -344,7 +344,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Core problem:** Identify the item people use when they are cold.\n- **Relevant data:** The options include *blanket* and *towel*, both cloth items.\n- **Method:** Choose the item used to keep warm.\n- **Conclusion:** A **blanket** is used when people are cold, so the correct answer is **C**.",
           "options": [
             {
               "optionId": "A",
@@ -352,7 +352,7 @@
               "optionText": "armchair",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** An *armchair* is for sitting, not specifically for warmth."
             },
             {
               "optionId": "B",
@@ -360,7 +360,7 @@
               "optionText": "bed",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** A *bed* is for sleeping; the clue focuses on something used when feeling cold."
             },
             {
               "optionId": "C",
@@ -368,7 +368,7 @@
               "optionText": "blanket",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correct.** A **blanket** is used to keep warm when you are cold."
             },
             {
               "optionId": "D",
@@ -376,7 +376,7 @@
               "optionText": "bookcase",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** A *bookcase* stores books."
             },
             {
               "optionId": "E",
@@ -384,7 +384,7 @@
               "optionText": "cupboard",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** A *cupboard* stores objects, not body heat."
             },
             {
               "optionId": "F",
@@ -392,7 +392,7 @@
               "optionText": "picture",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** A *picture* is decoration."
             },
             {
               "optionId": "G",
@@ -400,7 +400,7 @@
               "optionText": "shower",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** A *shower* is for washing, and it may even make you colder."
             },
             {
               "optionId": "H",
@@ -408,10 +408,10 @@
               "optionText": "towel",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** A *towel* dries your body, but it is not the usual item for keeping warm."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "C",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -436,7 +436,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Core problem:** Match the description about tooth pain with the correct profession.\n- **Relevant data:** The options include professions such as *dentists, nurses,* and *teachers*.\n- **Method:** Identify which professional treats teeth.\n- **Conclusion:** When your teeth hurt, you visit **dentists**. The correct answer is **B**.",
           "options": [
             {
               "optionId": "A",
@@ -444,7 +444,7 @@
               "optionText": "chefs",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** *Chefs* cook food; they do not treat teeth."
             },
             {
               "optionId": "B",
@@ -452,7 +452,7 @@
               "optionText": "dentists",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correct.** **Dentists** are the professionals you visit for tooth problems."
             },
             {
               "optionId": "C",
@@ -460,7 +460,7 @@
               "optionText": "drivers",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** *Drivers* transport people, not treat dental pain."
             },
             {
               "optionId": "D",
@@ -468,7 +468,7 @@
               "optionText": "farmers",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** *Farmers* work in agriculture."
             },
             {
               "optionId": "E",
@@ -476,7 +476,7 @@
               "optionText": "guitarists",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** *Guitarists* play music, not fix teeth."
             },
             {
               "optionId": "F",
@@ -484,7 +484,7 @@
               "optionText": "nurses",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** *Nurses* help sick or injured people, but tooth pain specifically points to dentists."
             },
             {
               "optionId": "G",
@@ -492,7 +492,7 @@
               "optionText": "painters",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** *Painters* create art or paint surfaces; they do not treat dental issues."
             },
             {
               "optionId": "H",
@@ -500,10 +500,10 @@
               "optionText": "teachers",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** *Teachers* work in education, not dentistry."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "B",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -517,7 +517,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Core problem:** Identify the profession that makes food in restaurants.\n- **Relevant data:** Several professions appear, but only one works preparing meals professionally.\n- **Method:** Choose the job connected with restaurant cooking.\n- **Conclusion:** The correct profession is **chefs**, so the answer is **A**.",
           "options": [
             {
               "optionId": "A",
@@ -525,7 +525,7 @@
               "optionText": "chefs",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correct.** **Chefs** prepare food in restaurants."
             },
             {
               "optionId": "B",
@@ -533,7 +533,7 @@
               "optionText": "dentists",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** *Dentists* care for teeth, not restaurant meals."
             },
             {
               "optionId": "C",
@@ -541,7 +541,7 @@
               "optionText": "drivers",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** *Drivers* take people from one place to another."
             },
             {
               "optionId": "D",
@@ -549,7 +549,7 @@
               "optionText": "farmers",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** *Farmers* produce food ingredients, but they do not usually make dishes in restaurants."
             },
             {
               "optionId": "E",
@@ -557,7 +557,7 @@
               "optionText": "guitarists",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** *Guitarists* perform music."
             },
             {
               "optionId": "F",
@@ -565,7 +565,7 @@
               "optionText": "nurses",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** *Nurses* work in health care."
             },
             {
               "optionId": "G",
@@ -573,7 +573,7 @@
               "optionText": "painters",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** *Painters* create or apply paint, not restaurant food."
             },
             {
               "optionId": "H",
@@ -581,10 +581,10 @@
               "optionText": "teachers",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** *Teachers* educate students."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "A",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -598,7 +598,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Core problem:** Match the description of transporting people on a bus.\n- **Relevant data:** One option directly refers to that activity.\n- **Method:** Select the profession that operates a bus.\n- **Conclusion:** Those people are **drivers**, so the correct answer is **C**.",
           "options": [
             {
               "optionId": "A",
@@ -606,7 +606,7 @@
               "optionText": "chefs",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** *Chefs* cook food; they do not drive buses."
             },
             {
               "optionId": "B",
@@ -614,7 +614,7 @@
               "optionText": "dentists",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** *Dentists* treat teeth."
             },
             {
               "optionId": "C",
@@ -622,7 +622,7 @@
               "optionText": "drivers",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correct.** **Drivers** take people from one place to another on a bus."
             },
             {
               "optionId": "D",
@@ -630,7 +630,7 @@
               "optionText": "farmers",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** *Farmers* work on farms."
             },
             {
               "optionId": "E",
@@ -638,7 +638,7 @@
               "optionText": "guitarists",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** *Guitarists* play instruments, not buses."
             },
             {
               "optionId": "F",
@@ -646,7 +646,7 @@
               "optionText": "nurses",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** *Nurses* help in medical care."
             },
             {
               "optionId": "G",
@@ -654,7 +654,7 @@
               "optionText": "painters",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** *Painters* do not transport passengers."
             },
             {
               "optionId": "H",
@@ -662,10 +662,10 @@
               "optionText": "teachers",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** *Teachers* work with students."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "C",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -679,7 +679,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Core problem:** Identify the profession that helps sick or injured people recover.\n- **Relevant data:** The medical options are *dentists* and *nurses*.\n- **Method:** Choose the broader health-care profession related to illness or accidents in general.\n- **Conclusion:** The best match is **nurses**, so the answer is **F**.",
           "options": [
             {
               "optionId": "A",
@@ -687,7 +687,7 @@
               "optionText": "chefs",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** *Chefs* prepare meals, not medical care."
             },
             {
               "optionId": "B",
@@ -695,7 +695,7 @@
               "optionText": "dentists",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** *Dentists* help specifically with teeth, not general sickness or accidents."
             },
             {
               "optionId": "C",
@@ -703,7 +703,7 @@
               "optionText": "drivers",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** *Drivers* transport people."
             },
             {
               "optionId": "D",
@@ -711,7 +711,7 @@
               "optionText": "farmers",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** *Farmers* grow crops or raise animals."
             },
             {
               "optionId": "E",
@@ -719,7 +719,7 @@
               "optionText": "guitarists",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** *Guitarists* perform music."
             },
             {
               "optionId": "F",
@@ -727,7 +727,7 @@
               "optionText": "nurses",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correct.** **Nurses** help people get better when they are sick or injured."
             },
             {
               "optionId": "G",
@@ -735,7 +735,7 @@
               "optionText": "painters",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** *Painters* are artists or workers with paint, not health professionals."
             },
             {
               "optionId": "H",
@@ -743,10 +743,10 @@
               "optionText": "teachers",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** *Teachers* help students learn, not recover from illness."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "F",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -760,7 +760,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Core problem:** Match the clue about artists who show art in museums.\n- **Relevant data:** Among the options, *painters* are artists associated with museum exhibitions.\n- **Method:** Choose the profession linked to visual art.\n- **Conclusion:** The correct answer is **painters**, option **G**.",
           "options": [
             {
               "optionId": "A",
@@ -768,7 +768,7 @@
               "optionText": "chefs",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** *Chefs* create food, not museum art."
             },
             {
               "optionId": "B",
@@ -776,7 +776,7 @@
               "optionText": "dentists",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** *Dentists* are health professionals, not museum artists."
             },
             {
               "optionId": "C",
@@ -784,7 +784,7 @@
               "optionText": "drivers",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** *Drivers* do not show art in museums."
             },
             {
               "optionId": "D",
@@ -792,7 +792,7 @@
               "optionText": "farmers",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** *Farmers* work in agriculture."
             },
             {
               "optionId": "E",
@@ -800,7 +800,7 @@
               "optionText": "guitarists",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** *Guitarists* are musicians; they perform music rather than show visual art in museums."
             },
             {
               "optionId": "F",
@@ -808,7 +808,7 @@
               "optionText": "nurses",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** *Nurses* work in hospitals or clinics."
             },
             {
               "optionId": "G",
@@ -816,7 +816,7 @@
               "optionText": "painters",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correct.** **Painters** are artists whose works can be shown in museums."
             },
             {
               "optionId": "H",
@@ -824,10 +824,10 @@
               "optionText": "teachers",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** *Teachers* educate people, not exhibit art as artists."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "G",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -852,7 +852,7 @@
           "questionImageUrl": "https://cdn.invicto.com.co/icfes/english/q_11.png",
           "questionImageAiDescription": "Horizontal arrow-shaped sign pointing to the right. Inside the sign there are two centered lines of text: first line in italic/bold style reads \"Find Lucy's stories here.\" Second line reads \"2x1 today!\".",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Core problem:** Decide where a sign saying *“Find Lucy's stories here. 2x1 today!”* would appear.\n- **Relevant data:** The key word is *stories*, which refers to books. The phrase *\\(2x1\\) today!* suggests a store promotion.\n- **Method:** Match the content of the sign with the most logical place.\n- **Conclusion:** This sign would be seen **in a bookstore**. Therefore, the correct answer is **A**.",
           "options": [
             {
               "optionId": "A",
@@ -860,7 +860,7 @@
               "optionText": "in a bookstore",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correct.** *Stories* suggests books, and a *\\(2x1\\)* offer fits a bookstore promotion."
             },
             {
               "optionId": "B",
@@ -868,7 +868,7 @@
               "optionText": "in a classroom",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** A classroom may have stories, but a *\\(2x1\\)* sales sign does not fit that place."
             },
             {
               "optionId": "C",
@@ -876,10 +876,10 @@
               "optionText": "in a cinema",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** A cinema shows movies, not usually books or stories for sale."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "A",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -893,7 +893,7 @@
           "questionImageUrl": "https://cdn.invicto.com.co/icfes/english/q_12.png",
           "questionImageAiDescription": "Rectangular framed notice with three centered lines of text. Top line: \"NO CAMERAS\". Second line: \"NO PHOTOS\". Third line: \"Do not take pictures of the tigers\".",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Core problem:** Identify where a sign about not taking pictures of tigers would be found.\n- **Relevant data:** The word *tigers* is decisive.\n- **Method:** Choose the place where people normally see tigers.\n- **Conclusion:** Tigers are found **at the zoo**, so the correct answer is **C**.",
           "options": [
             {
               "optionId": "A",
@@ -901,7 +901,7 @@
               "optionText": "on the beach",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** Tigers are not normally found on a beach."
             },
             {
               "optionId": "B",
@@ -909,7 +909,7 @@
               "optionText": "in a pet shop",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** Pet shops do not normally keep tigers."
             },
             {
               "optionId": "C",
@@ -917,10 +917,10 @@
               "optionText": "at the zoo",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correct.** A zoo is the place where visitors might see tigers and be told not to take photos."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "C",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -934,7 +934,7 @@
           "questionImageUrl": "https://cdn.invicto.com.co/icfes/english/q_13.png",
           "questionImageAiDescription": "Notice designed like a small posted sign with a thick black left border and bottom border. Text appears in three lines: \"TODAY\" at top, then \"Piano lessons with Mrs. Wilson\", then \"Room 11 - 2:00 p.m.\".",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Core problem:** Determine where a notice about piano lessons in *Room \\(11\\)* at *\\(2{:}00\\) p.m.* would be posted.\n- **Relevant data:** The mention of a room number and lessons suggests an educational setting.\n- **Method:** Match the format of the notice to the place.\n- **Conclusion:** This would most likely be **at a school**. The correct answer is **A**.",
           "options": [
             {
               "optionId": "A",
@@ -942,7 +942,7 @@
               "optionText": "at a school",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correct.** *Lessons*, a teacher name, a room number, and a time all fit a school setting."
             },
             {
               "optionId": "B",
@@ -950,7 +950,7 @@
               "optionText": "in a mall",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** A mall may host events, but *Room \\(11\\)* and *piano lessons* strongly suggest a school."
             },
             {
               "optionId": "C",
@@ -958,10 +958,10 @@
               "optionText": "at a playground",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** A playground is for outdoor play, not organized room-based piano lessons."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "A",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -975,7 +975,7 @@
           "questionImageUrl": "https://cdn.invicto.com.co/icfes/english/q_14.png",
           "questionImageAiDescription": "Horizontal banner-like image with vertical supports at both sides. Centered bold text in two lines reads: \"Happy birthday, Anna!\" and \"We love you.\"",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Core problem:** Identify where a birthday message like this is commonly seen.\n- **Relevant data:** The text directly celebrates a birthday.\n- **Method:** Choose the object most commonly associated with birthday messages.\n- **Conclusion:** This message is most likely found **on a cake**. Therefore, the correct answer is **A**.",
           "options": [
             {
               "optionId": "A",
@@ -983,7 +983,7 @@
               "optionText": "on a cake",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correct.** Birthday messages like *“Happy birthday”* are commonly written on cakes."
             },
             {
               "optionId": "B",
@@ -991,7 +991,7 @@
               "optionText": "on a candy bag",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** A candy bag may have a label, but this personal birthday message is much more typical on a cake."
             },
             {
               "optionId": "C",
@@ -999,10 +999,10 @@
               "optionText": "on a box of cereal",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** A cereal box would not normally contain a personal birthday message for Anna."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "A",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -1016,7 +1016,7 @@
           "questionImageUrl": "https://cdn.invicto.com.co/icfes/english/q_15.png",
           "questionImageAiDescription": "Decorative rectangular framed notice with two lines of text. First line: \"Big bedrooms with TVs\". Second line in parentheses: \"Breakfast at 8:30 a.m.\"",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Core problem:** Decide where a notice about bedrooms and breakfast would appear.\n- **Relevant data:** *Bedrooms with TVs* and *Breakfast at \\(8{:}30\\) a.m.* are features of accommodation.\n- **Method:** Match these services with the correct place.\n- **Conclusion:** This sign belongs **in a hotel**. The correct answer is **A**.",
           "options": [
             {
               "optionId": "A",
@@ -1024,7 +1024,7 @@
               "optionText": "in a hotel",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correct.** Hotels offer bedrooms and breakfast, so this notice fits that context perfectly."
             },
             {
               "optionId": "B",
@@ -1032,7 +1032,7 @@
               "optionText": "in a cafeteria",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** A cafeteria may serve breakfast, but it does not offer bedrooms with TVs."
             },
             {
               "optionId": "C",
@@ -1040,10 +1040,10 @@
               "optionText": "in a sports center",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** A sports center is for exercise and activities, not hotel-style bedrooms and breakfast."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "A",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -1068,7 +1068,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Core problem:** Choose the response that logically answers *why* the person did not wear the coat.\n- **Relevant data:** A correct response must explain a reason.\n- **Method:** Eliminate answers that are unrelated or not reasons.\n- **Conclusion:** *It was too warm* gives a clear reason for not wearing a coat. The correct answer is **C**.",
           "options": [
             {
               "optionId": "A",
@@ -1076,7 +1076,7 @@
               "optionText": "I liked jeans.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** This talks about jeans, not the reason for not wearing the coat."
             },
             {
               "optionId": "B",
@@ -1084,7 +1084,7 @@
               "optionText": "Let's dress up.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** This is a suggestion, not an answer to *why*."
             },
             {
               "optionId": "C",
@@ -1092,10 +1092,10 @@
               "optionText": "It was too warm.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correct.** This directly explains why the person did not put the coat on."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "C",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -1109,7 +1109,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Core problem:** Pick the most natural continuation in a conversation after hearing about a movie.\n- **Relevant data:** The speaker mentions a movie topic, so the next line should respond to that information.\n- **Method:** Choose the answer that naturally asks about the movie.\n- **Conclusion:** *Is it good?* is the most coherent reply. The correct answer is **A**.",
           "options": [
             {
               "optionId": "A",
@@ -1117,7 +1117,7 @@
               "optionText": "Is it good?",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correct.** This is a natural question to ask after someone mentions a movie."
             },
             {
               "optionId": "B",
@@ -1125,7 +1125,7 @@
               "optionText": "Is that a lot?",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** Although it refers to *big family*, it sounds unnatural in this context and is less appropriate than asking about the movie itself."
             },
             {
               "optionId": "C",
@@ -1133,10 +1133,10 @@
               "optionText": "Is your mom OK?",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** This is unrelated to a movie about a family."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "A",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -1150,7 +1150,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Core problem:** Choose the response that answers the question *Why are they hiding?*\n- **Relevant data:** A suitable reply should either give a reason or admit not knowing.\n- **Method:** Compare the options for conversational logic.\n- **Conclusion:** *I've got no idea* is the only natural reply. The correct answer is **B**.",
           "options": [
             {
               "optionId": "A",
@@ -1158,7 +1158,7 @@
               "optionText": "Come here now!",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** This is a command, not an answer to the question."
             },
             {
               "optionId": "B",
@@ -1166,7 +1166,7 @@
               "optionText": "I've got no idea.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correct.** This is a natural response when you do not know why they are hiding."
             },
             {
               "optionId": "C",
@@ -1174,10 +1174,10 @@
               "optionText": "Is it near?",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** This asks another question and does not answer the original one."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "B",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -1191,7 +1191,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Core problem:** Find the most logical conversational response to the statement about tickets for a rock concert.\n- **Relevant data:** The response should connect naturally to the event.\n- **Method:** Compare the options and choose the one that continues the topic sensibly.\n- **Conclusion:** *Is it on Saturday?* is the most appropriate follow-up question. The correct answer is **A**.",
           "options": [
             {
               "optionId": "A",
@@ -1199,7 +1199,7 @@
               "optionText": "Is it on Saturday?",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correct.** This is a logical follow-up question about the concert."
             },
             {
               "optionId": "B",
@@ -1207,7 +1207,7 @@
               "optionText": "There was noise.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** This is grammatically possible but does not respond naturally to the statement about buying tickets."
             },
             {
               "optionId": "C",
@@ -1215,10 +1215,10 @@
               "optionText": "It is fair!",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** This reaction is unnatural and unclear in this context."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "A",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -1232,7 +1232,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Core problem:** Choose the best response to someone saying they may become the new boss.\n- **Relevant data:** This is positive news about a promotion.\n- **Method:** Identify the socially appropriate reaction.\n- **Conclusion:** The best response is **Congratulations!**, so the correct answer is **C**.",
           "options": [
             {
               "optionId": "A",
@@ -1240,7 +1240,7 @@
               "optionText": "Excuse me!",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** This expression is used to get attention or apologize, not to respond to good news."
             },
             {
               "optionId": "B",
@@ -1248,7 +1248,7 @@
               "optionText": "It's ready!",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** This does not relate to becoming the new boss."
             },
             {
               "optionId": "C",
@@ -1256,10 +1256,10 @@
               "optionText": "Congratulations!",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correct.** This is the appropriate response to positive news such as a promotion."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "C",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -1271,7 +1271,7 @@
     {
       "sectionIndex": 5,
       "sectionTitle": "## Grandma Gatewood",
-      "sectionText": "Lea el texto y seleccione la palabra correcta para cada espacio.\n\nEn las preguntas \\(21 - 28\\), marque \\(A\\), \\(B\\) o \\(C\\) en su hoja de respuestas.\n\nThis strange story began in April \\(1955\\). On a foggy morning, Emma Gatewood, an American school teacher, told her family, “I will go for a walk after breakfast.” She left her small Ohio town with the clothes she had on and less \\((21)\\) ______ US\\$\\(200\\). No one \\((22)\\) ______ guess her plans: not one of her \\(11\\) children or her \\(23\\) grandchildren.\n\nAt the age of \\(67\\), Emma became the first woman \\((23)\\) ______ walked the Appalachian Trail, a \\(2{,}050\\)-mile way \\((24)\\) ______ forests and mountains. She didn't have \\((25)\\) ______ money or good equipment, but during her long journey, people helped her \\((26)\\) ______ she went.\n\nToday, even sixty years later, “Grandma” Gatewood’s story is \\((27)\\) ______ amazing. Her story shows how any person can \\((28)\\) ______ stronger than they were before.",
+      "sectionText": "Lea el texto y seleccione la palabra correcta para cada espacio.\n\nEn las preguntas \\(21 - 28\\), marque \\(A\\), \\(B\\) o \\(C\\) en su hoja de respuestas.\n\nThis strange story began in April \\(1955\\). On a foggy morning, Emma Gatewood, an American school teacher, told her family, “I will go for a walk after breakfast.” She left her small Ohio town with the clothes she had on and less \\((21)\\) ______ US$\\(200\\). No one \\((22)\\) ______ guess her plans: not one of her \\(11\\) children or her \\(23\\) grandchildren.\n\nAt the age of \\(67\\), Emma became the first woman \\((23)\\) ______ walked the Appalachian Trail, a \\(2{,}050\\)-mile way \\((24)\\) ______ forests and mountains. She didn't have \\((25)\\) ______ money or good equipment, but during her long journey, people helped her \\((26)\\) ______ she went.\n\nToday, even sixty years later, “Grandma” Gatewood’s story is \\((27)\\) ______ amazing. Her story shows how any person can \\((28)\\) ______ stronger than they were before.",
       "sectionSource": "",
       "hasSectionImage": false,
       "sectionImageUrl": "",
@@ -1279,12 +1279,12 @@
       "questions": [
         {
           "questionId": "q_21",
-          "questionText": "Question \\((21)\\): She left her small Ohio town with the clothes she had on and less \\((100)\\) ______ US\\$\\(200\\).",
+          "questionText": "Question \\((21)\\): She left her small Ohio town with the clothes she had on and less \\((100)\\) ______ US$\\(200\\).",
           "hasQuestionImage": false,
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Core problem:** Complete the phrase *“less ___ US\\$\\(200\\)”*.\n- **Relevant data:** The standard expression is *less than*.\n- **Method:** Choose the word that forms the correct comparative structure.\n- **Conclusion:** The correct answer is **A: than**.",
           "options": [
             {
               "optionId": "A",
@@ -1292,7 +1292,7 @@
               "optionText": "than",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correct.** The fixed expression is **less than** US\\$\\(200\\)."
             },
             {
               "optionId": "B",
@@ -1300,7 +1300,7 @@
               "optionText": "as",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** *Less as* is not a correct English comparative structure here."
             },
             {
               "optionId": "C",
@@ -1308,10 +1308,10 @@
               "optionText": "that",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** *Less that* is grammatically incorrect in this sentence."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "A",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -1325,7 +1325,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Core problem:** Complete the sentence *“No one ___ guess her plans.”*\n- **Relevant data:** The sentence refers to inability in the past.\n- **Method:** Select the modal verb expressing past inability.\n- **Conclusion:** The correct word is **could**, so the answer is **A**.",
           "options": [
             {
               "optionId": "A",
@@ -1333,7 +1333,7 @@
               "optionText": "could",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correct.** **Could** expresses that nobody was able to guess her plans."
             },
             {
               "optionId": "B",
@@ -1341,7 +1341,7 @@
               "optionText": "must",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** *Must* expresses obligation or strong certainty, not past inability here."
             },
             {
               "optionId": "C",
@@ -1349,10 +1349,10 @@
               "optionText": "shall",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** *Shall* does not fit this past-tense meaning."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "A",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -1366,7 +1366,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Core problem:** Choose the relative pronoun for *“the first woman ___ walked...”*\n- **Relevant data:** The antecedent is *woman*, a person.\n- **Method:** Use the relative pronoun for people.\n- **Conclusion:** The correct answer is **B: who**.",
           "options": [
             {
               "optionId": "A",
@@ -1374,7 +1374,7 @@
               "optionText": "where",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** *Where* is used for places, not for a person like *woman*."
             },
             {
               "optionId": "B",
@@ -1382,7 +1382,7 @@
               "optionText": "who",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correct.** **Who** correctly refers to a person: *the first woman who walked...*"
             },
             {
               "optionId": "C",
@@ -1390,10 +1390,10 @@
               "optionText": "which",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** *Which* is generally used for things or animals, not people in this sentence."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "B",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -1407,7 +1407,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Core problem:** Complete *“a \\(2{,}050\\)-mile way ___ forests and mountains.”*\n- **Relevant data:** The trail passes inside forests and mountains.\n- **Method:** Choose the preposition indicating movement across an area.\n- **Conclusion:** The best word is **through**, so the correct answer is **C**.",
           "options": [
             {
               "optionId": "A",
@@ -1415,7 +1415,7 @@
               "optionText": "under",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** *Under* means below something, which does not describe the trail."
             },
             {
               "optionId": "B",
@@ -1423,7 +1423,7 @@
               "optionText": "until",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** *Until* refers to time or an endpoint, not movement across places."
             },
             {
               "optionId": "C",
@@ -1431,10 +1431,10 @@
               "optionText": "through",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correct.** **Through** correctly describes a path going across forests and mountains."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "C",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -1448,7 +1448,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Core problem:** Complete *“She didn't have ___ money...”*\n- **Relevant data:** *Money* is uncountable.\n- **Method:** Choose the adjective that correctly modifies an uncountable noun.\n- **Conclusion:** The correct answer is **B: enough**.",
           "options": [
             {
               "optionId": "A",
@@ -1456,7 +1456,7 @@
               "optionText": "few",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** *Few* is used with countable plural nouns, not with *money*."
             },
             {
               "optionId": "B",
@@ -1464,7 +1464,7 @@
               "optionText": "enough",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correct.** **Enough money** is the natural expression, meaning she did not have a sufficient amount."
             },
             {
               "optionId": "C",
@@ -1472,10 +1472,10 @@
               "optionText": "little",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** *Little money* is possible in English, but after *didn't have*, the most natural and grammatically complete idea here is *didn't have enough money*."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "B",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -1489,7 +1489,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Core problem:** Complete *“people helped her ___ she went.”*\n- **Relevant data:** The sentence refers to places along her journey.\n- **Method:** Choose the word related to all places.\n- **Conclusion:** The correct word is **everywhere**, so the answer is **B**.",
           "options": [
             {
               "optionId": "A",
@@ -1497,7 +1497,7 @@
               "optionText": "everyone",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** *Everyone* refers to people, but the sentence needs a word about places."
             },
             {
               "optionId": "B",
@@ -1505,7 +1505,7 @@
               "optionText": "everywhere",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correct.** **Everywhere** means in every place she went during the journey."
             },
             {
               "optionId": "C",
@@ -1513,10 +1513,10 @@
               "optionText": "everything",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** *Everything* refers to all things, not all places."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "B",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -1530,7 +1530,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Core problem:** Complete *“her story is ___ amazing.”*\n- **Relevant data:** The expression *even sixty years later* suggests the story continues to be amazing now.\n- **Method:** Choose the adverb showing continuation.\n- **Conclusion:** The best answer is **still**, so the correct option is **B**.",
           "options": [
             {
               "optionId": "A",
@@ -1538,7 +1538,7 @@
               "optionText": "ever",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** *Ever amazing* is not natural in this sentence."
             },
             {
               "optionId": "B",
@@ -1546,7 +1546,7 @@
               "optionText": "still",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correct.** **Still** shows that after many years, the story continues to be amazing."
             },
             {
               "optionId": "C",
@@ -1554,10 +1554,10 @@
               "optionText": "already",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** *Already amazing* does not fit the meaning of continuation across time."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "B",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -1571,7 +1571,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Core problem:** Complete *“can ___ stronger”*.\n- **Relevant data:** After the modal verb *can*, the base form of the verb is needed.\n- **Method:** Select the infinitive without *to*.\n- **Conclusion:** The correct answer is **A: become**.",
           "options": [
             {
               "optionId": "A",
@@ -1579,7 +1579,7 @@
               "optionText": "become",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correct.** After *can*, the verb must be in base form: **can become** stronger."
             },
             {
               "optionId": "B",
@@ -1587,7 +1587,7 @@
               "optionText": "became",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** *Became* is past tense and cannot follow *can*."
             },
             {
               "optionId": "C",
@@ -1595,10 +1595,10 @@
               "optionText": "becoming",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** *Becoming* is a gerund or participle and does not fit after *can*."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "A",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -1623,7 +1623,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Core problem:** Determine what *a stroke* means in golf.\n- **Relevant data:** The text says, *“When the player hits the ball, it is called a stroke.”*\n- **Method:** Match the definition directly from the passage.\n- **Conclusion:** A player making a stroke **hits the ball**. The correct answer is **C**.",
           "options": [
             {
               "optionId": "A",
@@ -1631,7 +1631,7 @@
               "optionText": "gives instructions.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** The text defines a *stroke* as hitting the ball, not giving instructions."
             },
             {
               "optionId": "B",
@@ -1639,7 +1639,7 @@
               "optionText": "takes a hole.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** A stroke happens when the player hits the ball, not when taking a hole."
             },
             {
               "optionId": "C",
@@ -1647,10 +1647,10 @@
               "optionText": "hits the ball.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correct.** The passage explicitly says that when the player hits the ball, it is called a *stroke*."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "C",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -1664,7 +1664,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Core problem:** Identify the earliest place mentioned for golf.\n- **Relevant data:** The text says early forms of golf were played *in the Netherlands and then in Scotland*.\n- **Method:** Choose the first place in that sequence.\n- **Conclusion:** The first place mentioned is **the Netherlands**, so the answer is **A**.",
           "options": [
             {
               "optionId": "A",
@@ -1672,7 +1672,7 @@
               "optionText": "the Netherlands",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correct.** The passage says early forms of golf were played first in **the Netherlands** and later in Scotland."
             },
             {
               "optionId": "B",
@@ -1680,7 +1680,7 @@
               "optionText": "Scotland",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** Scotland came after the Netherlands in the text."
             },
             {
               "optionId": "C",
@@ -1688,10 +1688,10 @@
               "optionText": "the United States",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** The United States is mentioned later, not as the first place."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "A",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -1705,7 +1705,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Core problem:** Find how course grass was kept short in the past.\n- **Relevant data:** The text states that *sheep ate the grass to keep it short*.\n- **Method:** Select the option paraphrasing that sentence.\n- **Conclusion:** The grass was kept short because **animals ate it**. The correct answer is **C**.",
           "options": [
             {
               "optionId": "A",
@@ -1713,7 +1713,7 @@
               "optionText": "People from Illinois did it.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** Illinois is mentioned for the first course in the United States, not for cutting the grass."
             },
             {
               "optionId": "B",
@@ -1721,7 +1721,7 @@
               "optionText": "A company cut it.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** The passage does not mention a company; it says sheep ate the grass."
             },
             {
               "optionId": "C",
@@ -1729,10 +1729,10 @@
               "optionText": "Animals ate it.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correct.** Sheep, which are animals, ate the grass to keep it short."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "C",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -1746,7 +1746,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Core problem:** Identify the British player famous in the \\(1800\\)s.\n- **Relevant data:** The text says *British players like John Taylor were considered the best in the \\(1800\\)s*.\n- **Method:** Match the name with the correct time period.\n- **Conclusion:** The correct answer is **A: John Taylor**.",
           "options": [
             {
               "optionId": "A",
@@ -1754,7 +1754,7 @@
               "optionText": "John Taylor",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correct.** The passage states that **John Taylor** was among the best British players in the \\(1800\\)s."
             },
             {
               "optionId": "B",
@@ -1762,7 +1762,7 @@
               "optionText": "Jack Nicklaus",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** Jack Nicklaus is mentioned as appearing in the \\(1960\\)s, not the \\(1800\\)s."
             },
             {
               "optionId": "C",
@@ -1770,10 +1770,10 @@
               "optionText": "Arnold Palmer",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** Arnold Palmer is also associated with the \\(1960\\)s, not the \\(1800\\)s."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "A",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -1787,7 +1787,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Core problem:** Determine what golfers choose based on how far they want the ball to go.\n- **Relevant data:** The passage says golfers choose between different clubs depending on how far they want to hit the ball.\n- **Method:** Select the object that changes distance.\n- **Conclusion:** They need a special **club**. The correct answer is **B**.",
           "options": [
             {
               "optionId": "A",
@@ -1795,7 +1795,7 @@
               "optionText": "leather.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** Leather describes an old ball material, not the item players choose to hit farther."
             },
             {
               "optionId": "B",
@@ -1803,7 +1803,7 @@
               "optionText": "club.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correct.** Golfers use different **clubs** depending on the distance they want."
             },
             {
               "optionId": "C",
@@ -1811,10 +1811,10 @@
               "optionText": "field.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** The field is the course, but it is not what players select to control distance."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "B",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -1828,7 +1828,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Core problem:** Understand the effect of modern ball technology.\n- **Relevant data:** The text says advanced technology in the design of modern balls *has improved the game a lot*.\n- **Method:** Choose the option that paraphrases this idea.\n- **Conclusion:** New technology has made **the game better than before**. The correct answer is **A**.",
           "options": [
             {
               "optionId": "A",
@@ -1836,7 +1836,7 @@
               "optionText": "the game better than before.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correct.** This directly paraphrases *has improved the game a lot*."
             },
             {
               "optionId": "B",
@@ -1844,7 +1844,7 @@
               "optionText": "players use leather balls.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** Leather balls were used in the past, not because of new technology."
             },
             {
               "optionId": "C",
@@ -1852,10 +1852,10 @@
               "optionText": "balls go much further.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** The passage says technology improved the game, but it does not specifically state that balls go much further."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "A",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -1869,7 +1869,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Core problem:** Identify how a player wins in golf according to the passage.\n- **Relevant data:** The text says the player with the **lowest number of strokes** wins.\n- **Method:** Convert *lowest number of strokes* into simpler wording.\n- **Conclusion:** The player wins by **hitting the ball fewer times**. The correct answer is **B**.",
           "options": [
             {
               "optionId": "A",
@@ -1877,7 +1877,7 @@
               "optionText": "making more holes.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** The text focuses on the number of strokes, not on *more holes*."
             },
             {
               "optionId": "B",
@@ -1885,7 +1885,7 @@
               "optionText": "hitting the ball fewer times.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correct.** Fewer strokes means hitting the ball fewer times overall."
             },
             {
               "optionId": "C",
@@ -1893,10 +1893,10 @@
               "optionText": "playing in famous matches.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** Fame or famous matches do not determine the winner in the passage."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "B",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -1921,7 +1921,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Core problem:** Identify the main purpose of the text.\n- **Relevant data:** The writer reflects on people saying she looks younger, discusses social ideas about millennials and aging, and expresses her own thoughts and curiosity.\n- **Method:** Choose the option that best summarizes the overall focus, not just one detail.\n- **Conclusion:** The writer is mainly **discussing her thoughts about looking younger than you actually are**. The correct answer is **C**.",
           "options": [
             {
               "optionId": "A",
@@ -1929,7 +1929,7 @@
               "optionText": "arguing about what social networks say regarding youths",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** Social networks are mentioned only as part of the discussion, not as the main focus of the text."
             },
             {
               "optionId": "B",
@@ -1937,7 +1937,7 @@
               "optionText": "presenting facts about how to appear to be younger than you are",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** The writer is not giving advice or factual steps on how to look younger."
             },
             {
               "optionId": "C",
@@ -1945,7 +1945,7 @@
               "optionText": "discussing her thoughts about looking younger than you actually are",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correct.** This accurately captures the text’s main purpose: the writer reflects on age, appearance, and how others perceive her."
             },
             {
               "optionId": "D",
@@ -1953,10 +1953,10 @@
               "optionText": "mentioning how different she is nowadays than when she was in her youth",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** This idea appears briefly, but it is not the central purpose of the whole text."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "C",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -1970,7 +1970,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Core problem:** Identify a statement that is supported by the passage.\n- **Relevant data:** The writer says that when someone says she looks younger, she does not think that person is accurate.\n- **Method:** Choose the option that directly reflects that idea.\n- **Conclusion:** The reader can find out **how some people are not accurate when telling other people's age**. The correct answer is **D**.",
           "options": [
             {
               "optionId": "A",
@@ -1978,7 +1978,7 @@
               "optionText": "that the writer does not care about her real age",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** The writer does care enough to discuss it and is curious about how others see her."
             },
             {
               "optionId": "B",
@@ -1986,7 +1986,7 @@
               "optionText": "how people behave in front of a camera to display their age",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** Camera phones are mentioned as a possible explanation, but the text does not explain behavior in front of cameras in detail."
             },
             {
               "optionId": "C",
@@ -1994,7 +1994,7 @@
               "optionText": "that the writer knows her age according to the people around her",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** The writer knows her actual age, but the option is awkward and not the point made in the text."
             },
             {
               "optionId": "D",
@@ -2002,10 +2002,10 @@
               "optionText": "how some people are not accurate when telling other people's age",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correct.** The writer explicitly says people who claim she looks younger are not accurate."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "D",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -2019,7 +2019,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Core problem:** Interpret the underlined sentence in paragraph \\(1\\).\n- **Relevant data:** The writer says that when people say she looks younger than she is, she does not think they are accurate.\n- **Method:** Choose the option that paraphrases her disagreement.\n- **Conclusion:** She **doesn't agree with what people say regarding how young she appears to be**. The correct answer is **C**.",
           "options": [
             {
               "optionId": "A",
@@ -2027,7 +2027,7 @@
               "optionText": "considers people usually are right about her real age.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** This says the opposite of the text; she thinks they are *not* accurate."
             },
             {
               "optionId": "B",
@@ -2035,7 +2035,7 @@
               "optionText": "considers she is younger than some people say she actually is.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** She does not think she is younger; she rejects that idea."
             },
             {
               "optionId": "C",
@@ -2043,7 +2043,7 @@
               "optionText": "doesn't agree with what people say regarding how young she appears to be.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correct.** This is the clearest paraphrase of her statement that people are not accurate when saying she looks younger."
             },
             {
               "optionId": "D",
@@ -2051,10 +2051,10 @@
               "optionText": "doesn't understand what some people say regarding how young she really is.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** The issue is not lack of understanding; it is disagreement."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "C",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -2068,7 +2068,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Core problem:** Interpret the underlined sentence in paragraph \\(3\\).\n- **Relevant data:** The writer says that although people do not always feel their age, she is still interested in how others see her now that she is in her \\(30\\)s.\n- **Method:** Choose the option that captures this curiosity about others’ perception.\n- **Conclusion:** She **wishes to know how people identify her being a \\(30\\)-year-old person**. The correct answer is **C**.",
           "options": [
             {
               "optionId": "A",
@@ -2076,7 +2076,7 @@
               "optionText": "She feels younger than \\(30\\) and agrees with people's opinion on this.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** She does not say she feels younger than \\(30\\), nor that she agrees with people."
             },
             {
               "optionId": "B",
@@ -2084,7 +2084,7 @@
               "optionText": "She doesn't feel comfortable based on what people say about her age.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** The underlined sentence emphasizes curiosity, not discomfort."
             },
             {
               "optionId": "C",
@@ -2092,7 +2092,7 @@
               "optionText": "She wishes to know how people identify her being a \\(30\\)-year-old person.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correct.** The sentence clearly shows she is curious about how she appears to others in her \\(30\\)s."
             },
             {
               "optionId": "D",
@@ -2100,10 +2100,10 @@
               "optionText": "She isn't anxious about what people say regarding how young she actually is.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** The sentence is not about anxiety; it is about interest and curiosity."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "C",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -2117,7 +2117,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "The answer options are presented as four boxed quotation-style statements, one for each option, arranged in two rows. Each box contains a short advisory sentence in quotation marks.",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Core problem:** Infer the advice the writer would most likely give.\n- **Relevant data:** The writer says age is not a main issue and that labeling people by age is unfair. She also notes that most people simply feel like themselves.\n- **Method:** Choose the option aligned with that viewpoint.\n- **Conclusion:** The writer would advise people not to focus on others’ comments about age, but on how they feel. The correct answer is **D**.",
           "options": [
             {
               "optionId": "A",
@@ -2125,7 +2125,7 @@
               "optionText": "“Take photos of yourself frequently to present to people that you are younger than they say you are.”",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** The writer does not recommend using photos to prove age or appearance."
             },
             {
               "optionId": "B",
@@ -2133,7 +2133,7 @@
               "optionText": "“Do not worry about looking younger than you actually are, people often realize your real age.”",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** The writer does not say people often realize the real age; instead, she questions people’s accuracy."
             },
             {
               "optionId": "C",
@@ -2141,7 +2141,7 @@
               "optionText": "“Go to the nearest supermarket and ask for a bottle of wine, they will let you get it as you look like an old person.”",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** This is ironic and contradicts the writer’s example about not being able to get champagne easily."
             },
             {
               "optionId": "D",
@@ -2149,10 +2149,10 @@
               "optionText": "“Do not pay attention to what people say about your age and how younger you look. The important thing is how you feel.”",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correct.** This best matches the text’s message that age labels are unfair and that people mainly feel like themselves."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "D",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -2177,7 +2177,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Core problem:** Identify the writer’s purpose in the article.\n- **Relevant data:** The writer shares personal experience about going on exchange in France, describes surprises and lessons learned, and gives advice.\n- **Method:** Choose the option that best summarizes this informative personal reflection.\n- **Conclusion:** The writer is **informing students about what he learned after being in an exchange program**. The correct answer is **C**.",
           "options": [
             {
               "optionId": "A",
@@ -2185,7 +2185,7 @@
               "optionText": "convincing people of the benefits to study foreign languages in France",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** The text is not mainly about language study benefits."
             },
             {
               "optionId": "B",
@@ -2193,7 +2193,7 @@
               "optionText": "warning exchange students about the culture shock they may deal with",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** The writer mentions surprises, but the tone is not mainly a warning."
             },
             {
               "optionId": "C",
@@ -2201,7 +2201,7 @@
               "optionText": "informing students about what he learned after being in an exchange program",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correct.** This best captures the text: a personal account of lessons and advice from an exchange experience."
             },
             {
               "optionId": "D",
@@ -2209,10 +2209,10 @@
               "optionText": "encouraging French people to discover what being an international student is like",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** The target readers are people considering an exchange, not specifically French people."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "C",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -2226,7 +2226,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Core problem:** Determine what paragraph \\(1\\) reveals about the writer.\n- **Relevant data:** He says there were several things he had absolutely no idea about until he arrived in France.\n- **Method:** Select the option that paraphrases this lack of prior knowledge.\n- **Conclusion:** The correct answer is **B**.",
           "options": [
             {
               "optionId": "A",
@@ -2234,7 +2234,7 @@
               "optionText": "He had a good time studying high school in his hometown.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** Paragraph \\(1\\) does not discuss his hometown school experience."
             },
             {
               "optionId": "B",
@@ -2242,7 +2242,7 @@
               "optionText": "He ignored several issues about life in France before his arrival.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correct.** The writer says there were many things he did not know until he got to France."
             },
             {
               "optionId": "C",
@@ -2250,7 +2250,7 @@
               "optionText": "He had traveled abroad before his departure to France.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** He says he left America **for the first time**, so this is false."
             },
             {
               "optionId": "D",
@@ -2258,10 +2258,10 @@
               "optionText": "He had many unbelievable experiences during his stay in America.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** Paragraph \\(1\\) focuses on expectations and arrival in France, not experiences in America."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "B",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -2275,7 +2275,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Core problem:** Interpret what the writer implies about English in paragraph \\(2\\).\n- **Relevant data:** He says that once in France, most of his foreign partners spoke English.\n- **Method:** Infer the broader meaning from that detail.\n- **Conclusion:** The writer means that **English is familiar to people from different nationalities**. The correct answer is **C**.",
           "options": [
             {
               "optionId": "A",
@@ -2283,7 +2283,7 @@
               "optionText": "speakers of other languages are quite rare.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** The paragraph mentions many students who spoke other languages, so this is the opposite idea."
             },
             {
               "optionId": "B",
@@ -2291,7 +2291,7 @@
               "optionText": "learning a foreign language is considered unnecessary.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** The text never says learning another language is unnecessary."
             },
             {
               "optionId": "C",
@@ -2299,7 +2299,7 @@
               "optionText": "English is familiar to people from different nationalities.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correct.** Since most of his foreign partners spoke English, the text suggests English is widely known internationally."
             },
             {
               "optionId": "D",
@@ -2307,10 +2307,10 @@
               "optionText": "English is rarely spoken if compared to other languages.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** The paragraph suggests the opposite: English is commonly spoken."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "C",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -2324,7 +2324,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Core problem:** Identify what the text says separates life abroad from life at home.\n- **Relevant data:** The writer says there are some things you cannot do your usual way, and *those little things* separate life at home from life abroad.\n- **Method:** Choose the option that paraphrases changing everyday habits.\n- **Conclusion:** The difference is **the habits you must change to get on with your new life**. The correct answer is **C**.",
           "options": [
             {
               "optionId": "A",
@@ -2332,7 +2332,7 @@
               "optionText": "being surrounded by unkind strangers.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** The text does not describe the people abroad as unkind."
             },
             {
               "optionId": "B",
@@ -2340,7 +2340,7 @@
               "optionText": "the new and surprising accommodations.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** Living in a new house is part of the experience, but the text emphasizes everyday things you cannot do your usual way."
             },
             {
               "optionId": "C",
@@ -2348,7 +2348,7 @@
               "optionText": "the habits you must change to get on with your new life.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correct.** This directly reflects the idea that little everyday differences and changed routines separate life abroad from life at home."
             },
             {
               "optionId": "D",
@@ -2356,10 +2356,10 @@
               "optionText": "the time it takes to have a friendly relationship with the homeowners.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** The text says you can eventually get along with the family, but that is not the main difference highlighted."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "C",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
@@ -2373,7 +2373,7 @@
           "questionImageUrl": "",
           "questionImageAiDescription": "",
           "optionsType": "text",
-          "aiExplanation": "",
+          "aiExplanation": "- **Core problem:** Select the most suitable title for the whole article.\n- **Relevant data:** The text is about unexpected realities of being abroad in an exchange program, what the writer discovered, and advice for future students.\n- **Method:** Choose the broadest and most accurate title.\n- **Conclusion:** The best title is **What No One Told you About Going on a Foreign Exchange Program.** The correct answer is **D**.",
           "options": [
             {
               "optionId": "A",
@@ -2381,7 +2381,7 @@
               "optionText": "How to Handle your Life and Not Die in the Attempt.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** This is exaggerated and does not match the tone or topic of the article."
             },
             {
               "optionId": "B",
@@ -2389,7 +2389,7 @@
               "optionText": "The Value of English Not All International Students Realize.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** English is only one part of the article, not its overall focus."
             },
             {
               "optionId": "C",
@@ -2397,7 +2397,7 @@
               "optionText": "The Truth Nobody Told You About French Exchange Students.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Incorrect.** The text is not specifically about French exchange students; it is about the writer’s own exchange experience abroad."
             },
             {
               "optionId": "D",
@@ -2405,10 +2405,10 @@
               "optionText": "What No One Told you About Going on a Foreign Exchange Program.",
               "optionImageUrl": "",
               "optionAiDescription": "",
-              "optionFeedback": ""
+              "optionFeedback": "- **Correct.** This title matches the article’s emphasis on unexpected aspects of exchange life and personal lessons learned."
             }
           ],
-          "correctOptionId": "",
+          "correctOptionId": "D",
           "irt_parameters": {
             "discrimination_a": 1.0,
             "difficulty_b": 0.0,
