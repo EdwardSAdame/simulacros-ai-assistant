@@ -8,8 +8,7 @@ logger = logging.getLogger(__name__)
 
 class MockExamService:
     """
-    Dedicated service to fetch and serve static historical exams (Mock Exams / Simulacros).
-    Supports fetching a dynamic catalog menu and specific exam volumes.
+    Dedicated service to generate dynamic catalog menus for Mock Exams.
     """
 
     @classmethod
@@ -34,7 +33,7 @@ class MockExamService:
                 logger.error(f"Catalog file not found: {target_file}")
                 return "Error: No se encontró el catálogo de simulacros.", None
 
-            logger.info(f"Serving dynamic exam catalog for: {clean_exam_type}")
+            logger.info(f"Generating dynamic exam catalog for: {clean_exam_type}")
 
             with open(target_file, 'r', encoding='utf-8') as f:
                 catalog_data = json.load(f)
@@ -62,39 +61,3 @@ class MockExamService:
         except Exception as e:
             logger.error(f"Failed to load catalog for {exam_type}: {e}", exc_info=True)
             return "**Error**: Hubo un problema al cargar el catálogo de simulacros.", None
-
-
-    @classmethod
-    def get_specific_exam(cls, exam_type: str, component: str, exam_id: str) -> Tuple[str, Optional[Dict]]:
-        """
-        Fetches a specific static exam JSON payload based on its filename.
-        """
-        try:
-            clean_component = component.replace("-", "_").lower()
-            clean_exam_type = exam_type.lower()
-            
-            secure_exam_id = os.path.basename(exam_id)
-            
-            base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-            file_path = os.path.join(base_dir, "knowledge", clean_exam_type, clean_component, secure_exam_id)
-            
-            if not os.path.exists(file_path):
-                logger.error(f"Exam file not found: {file_path}")
-                return "Error: El simulacro solicitado no existe o fue removido.", None
-
-            logger.info(f"Serving specific static exam: {clean_exam_type}/{clean_component} -> {secure_exam_id}")
-
-            with open(file_path, 'r', encoding='utf-8') as f:
-                exam_data = json.load(f)
-
-            meta_payload = {
-                "type": "static_exam_data",
-                "exam_data": exam_data
-            }
-            
-            success_message = "¡Simulacro cargado con éxito! Buena suerte."
-            return success_message, meta_payload
-
-        except Exception as e:
-            logger.error(f"Failed to load specific exam {exam_id} for {exam_type}/{component}: {e}", exc_info=True)
-            return "**Error**: Hubo un problema al cargar el simulacro histórico.", None

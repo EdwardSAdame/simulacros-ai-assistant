@@ -8,9 +8,8 @@ logger.setLevel(logging.INFO)
 
 def lambda_handler(event, context):
     """
-    AWS Lambda entry point for fetching mock exams and catalogs.
-    Expects an 'action' parameter ('get_catalog' or 'get_exam').
-    For 'get_exam', expects 'component' and 'examId'.
+    AWS Lambda entry point for generating dynamic mock exam catalogs.
+    Expects an 'action' parameter equal to 'get_catalog'.
     """
     try:
         logger.info(f"Received event: {json.dumps(event)}")
@@ -32,29 +31,12 @@ def lambda_handler(event, context):
 
         # 3. Route to the correct service method based on 'action'
         if action == 'get_catalog':
-            logger.info(f"Routing request to fetch catalog for type: {exam_type}")
+            logger.info(f"Routing request to fetch dynamic catalog for type: {exam_type}")
             message, payload = MockExamService.get_catalog(exam_type=exam_type)
-
-        elif action == 'get_exam':
-            component = params.get('component')
-            exam_id = params.get('examId')
-
-            # Validation specifically for fetching an exam
-            if not component or not exam_id:
-                logger.warning("Missing required parameters for get_exam: component or examId")
-                return build_response(400, {'error': 'Missing required parameters: component and examId are required.'})
-
-            logger.info(f"Routing request to fetch specific exam: {exam_type} -> {component} -> {exam_id}")
-            message, payload = MockExamService.get_specific_exam(
-                exam_type=exam_type, 
-                component=component,
-                exam_id=exam_id
-            )
-
         else:
             # Handle missing or invalid action parameter
             logger.warning(f"Invalid or missing action parameter: {action}")
-            return build_response(400, {'error': "A valid 'action' parameter is required ('get_catalog' or 'get_exam')."})
+            return build_response(400, {'error': "A valid 'action' parameter is required (must be 'get_catalog')."})
 
         # 4. Handle Service Failure (e.g., file not found)
         if payload is None:
