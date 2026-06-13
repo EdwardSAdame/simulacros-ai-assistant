@@ -19,7 +19,7 @@ from src.services.creative_image_service import CreativeImageService
 from src.services.admission_chat_service import AdmissionChatService
 from src.services.mindmap_service import mindmap_service
 from src.services.flashcard_service import FlashcardsService
-from src.services.mock_exam_service import MockExamService
+# Removed the deleted mock_exam_service import
 
 logger = logging.getLogger(__name__)
 
@@ -82,7 +82,7 @@ class OrchestratorService:
             mode=mode,
             exam_context=raw_exam_context,
             arena_id=arena_id,
-            intent=intent # NEW: Pass intent down to lock sticky UI state
+            intent=intent # Pass intent down to lock sticky UI state
         )
 
         # 4. Save User Input
@@ -189,12 +189,7 @@ class OrchestratorService:
                     category=category, actual_conversation_id=actual_conversation_id
                 )
                 
-            elif intent == "static_exam":
-                exam_type = "icfes" # Hardcoded for now based on your immediate need, scalable later
-                final_reply_text, meta_payload = MockExamService.get_random_exam(
-                    exam_type=exam_type,
-                    component=category
-                )
+            # Note: "static_exam" routing block completely removed!
                 
             else:
                 final_reply_text, meta_payload = ChatService.execute_standard_chat(
