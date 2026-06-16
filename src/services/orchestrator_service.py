@@ -48,6 +48,7 @@ class OrchestratorService:
         requires_visuals: bool = False,
         stream_manager: Any | None = None,
         arena_id: str | None = None,
+        exam_id: str | None = None,  # --- NEW: Receive exam_id from Lambda Worker ---
         is_hidden: bool = False,
         num_questions: int = 0
     ) -> Tuple[str, str, str, Dict | None]:
@@ -189,12 +190,11 @@ class OrchestratorService:
                     category=category, actual_conversation_id=actual_conversation_id
                 )
                 
-            # Note: "static_exam" routing block completely removed!
-                
             else:
                 final_reply_text, meta_payload = ChatService.execute_standard_chat(
                     conversation_input=conversation_input, user_id=user_id, page=page, 
                     name=name, email=email, message=message, mode=mode, exam_context=locked_exam_context, 
+                    exam_id=exam_id, # --- NEW: Pass exam_id down to ChatService ---
                     category=category, requires_visuals=requires_visuals, arena_id=arena_id, 
                     clean_pdfs=clean_pdfs, actual_conversation_id=actual_conversation_id
                 )

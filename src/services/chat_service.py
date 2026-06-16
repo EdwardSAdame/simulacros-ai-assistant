@@ -83,6 +83,7 @@ class ChatService:
         message: str | None,
         mode: str,
         exam_context: str,
+        exam_id: str | None,  # --- NEW: Receive the examId from the Lambda/SQS payload ---
         category: str,
         requires_visuals: bool,
         arena_id: str | None,
@@ -103,7 +104,8 @@ class ChatService:
             return random.choice(identity_responses), None
 
         # 2. Setup Resources
-        selected_vector_stores = get_stores_for_page(page)
+        # --- NEW: Pass the exam_id into the vector store router ---
+        selected_vector_stores = get_stores_for_page(page, exam_id=exam_id)
         web_search_config = get_search_filters(exam_context)
         is_web_search_active = (web_search_config is not None)
 

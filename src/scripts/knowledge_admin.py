@@ -1,27 +1,15 @@
-# src/scripts/knowledge_admin.py
 #!/usr/bin/env python3
 """
 CLI to create/cleanup vector stores and upload knowledge files.
-
-Usage:
-  # 1. DELETE ALL existing stores (Start Fresh)
-  python src/scripts/knowledge_admin.py cleanup
-
-  # 2. Bootstrap all stores from 'knowledge/' and upload files
-  python src/scripts/knowledge_admin.py bootstrap --root src/knowledge
-
-  # 3. List vector stores to verify
-  python src/scripts/knowledge_admin.py list-stores
-
-Notes:
-- Requires OPENAI_API_KEY in .env
+UPDATED: Creates a unique Vector Store for EVERY SINGLE FILE in ICFES, 
+skipping 'general' and applying explicit ICFES prefix markers.
 """
 
 import argparse
 import os
 import sys
 from pathlib import Path
-from typing import Dict, List, Tuple
+from typing import Dict, List
 
 from dotenv import load_dotenv
 from openai import OpenAI
@@ -37,48 +25,7 @@ if not api_key:
 
 client = OpenAI(api_key=api_key)
 
-SUPPORTED_EXTS = {
-    ".json", ".pdf", ".md", ".txt", ".docx", ".pptx", ".html",
-}
-
-# 🟢 UPDATED: Removed 'general', 'icfes/general', and 'unal/general'
-ENV_KEYS = {
-    # ICFES
-    "icfes/ingles": "VECTOR_STORE_ICFES_INGLES",
-    "icfes/ciencias_naturales": "VECTOR_STORE_ICFES_CIENCIAS_NATURALES",
-    "icfes/matematicas": "VECTOR_STORE_ICFES_MATEMATICAS",
-    "icfes/sociales_ciudadanas": "VECTOR_STORE_ICFES_SOCIALES_CIUDADANAS",
-    "icfes/lectura_critica": "VECTOR_STORE_ICFES_LECTURA_CRITICA",
-    
-    # UNAL
-    "unal/analisis_imagen": "VECTOR_STORE_UNAL_ANALISIS_IMAGEN",
-    "unal/matematicas": "VECTOR_STORE_UNAL_MATEMATICAS",
-    "unal/tematica_comun": "VECTOR_STORE_UNAL_TEMATICA_COMUN",
-    "unal/ciencias_sociales": "VECTOR_STORE_UNAL_CIENCIAS_SOCIALES",
-    "unal/ciencias_naturales": "VECTOR_STORE_UNAL_CIENCIAS_NATURALES",
-}
-
-
-def _store_name_for(path: Path) -> Tuple[str, str]:
-    """
-    Given a folder under knowledge/, return (store_name, env_key).
-    """
-    # normalize path relative to knowledge root
-    try:
-        rel = path.relative_to(path.parent.parent).as_posix() # e.g. "icfes/matematicas"
-    except ValueError:
-        # fallback for top level
-        rel = path.name
-
-    # Check explicit map first (handles icfes/matematicas, etc)
-    if rel in ENV_KEYS:
-        # e.g., "icfes-matematicas"
-        store_name = rel.replace("/", "-")
-        return store_name, ENV_KEYS[rel]
-
-    print(f"⚠️ Warning: No mapping found for folder '{rel}', skipping...")
-    return None, None
-
+SUPPORTED_EXTS = {".json"}
 
 def _collect_files(dirpath: Path) -> List[Path]:
     files = []
@@ -120,8 +67,6 @@ def cmd_cleanup(_args):
     stores = client.vector_stores.list(limit=100)
     count = 0
     for vs in stores.data:
-        # Optional: Filter by name prefix if you share this project
-        # if not vs.name.startswith("icfes") and not vs.name.startswith("unal"): continue
         print(f"Deleting store: {vs.name} ({vs.id})...")
         client.vector_stores.delete(vs.id)
         count += 1
@@ -155,44 +100,42 @@ def cmd_bootstrap(args):
         sys.exit(1)
 
     env_out: Dict[str, str] = {}
-
-    # 1. Sub-folders (icfes/*, unal/*)
-    # We now strictly iterate only these folders looking for keys in ENV_KEYS
-    for category in ["icfes", "unal"]:
-        cat_path = root / category
-        if cat_path.exists():
-            for sub in cat_path.iterdir():
-                if sub.is_dir():
-                    _process_folder(sub, root, env_out)
-
-    print("\n# ---- Paste into .env ----")
-    for k, v in sorted(env_out.items()):
-        print(f"{k}={v}")
-
-def _process_folder(folder_path, root, env_out):
-    # Calculate relative path string e.g., "icfes/matematicas"
-    rel_path = folder_path.relative_to(root).as_posix()
+    all_files = []
     
-    if rel_path in ENV_KEYS:
-        env_key = ENV_KEYS[rel_path]
-        store_name = rel_path.replace("/", "-")
-    else:
-        # Skip obsolete general folders or unknown folders
+    cat_path = root / "icfes"
+    if cat_path.exists():
+        for sub_dir in cat_path.iterdir():
+            if sub_dir.is_dir():
+                if sub_dir.name == "general":
+                    print("Skipping 'general' folder...")
+                    continue
+                all_files.extend(_collect_files(sub_dir))
+
+    if not all_files:
+        print("No JSON files found in valid icfes directories.")
         return
 
-    files = _collect_files(folder_path)
-    if not files:
-        return
+    print(f"Found {len(all_files)} files. Creating individual Vector Stores...")
 
-    print(f"\nProcessing [{store_name}]...")
-    store_id = _ensure_store(store_name)
-    
-    for fp in files:
+    for fp in all_files:
+        file_stem = fp.stem  # e.g., math_vol_02
+        
+        # Prefixed named architecture to allow clean domain separation
+        store_name = f"ExamStore_ICFES_{file_stem}"
+        env_key = f"VECTOR_STORE_ICFES_{file_stem.upper()}"
+
+        print(f"\nProcessing File: [{fp.name}] -> Store: [{store_name}]")
+        
+        store_id = _ensure_store(store_name)
         fid = _upload_file(fp)
         _attach_file(store_id, fid)
-        print(f"  + {fp.name}")
+        
+        env_out[env_key] = store_id
+        print(f"  + Uploaded and attached successfully.")
 
-    env_out[env_key] = store_id
+    print("\n# ---- Paste into your AWS Lambda Environment Variables (.env) ----")
+    for k, v in sorted(env_out.items()):
+        print(f"{k}={v}")
 
 
 # ----------------- CLI -----------------

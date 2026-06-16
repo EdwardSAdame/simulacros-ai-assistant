@@ -6,7 +6,6 @@ import os
 import uuid
 
 from src.utils.logging_utils import log_event, set_invocation_context
-# --- NEW: Import the purchase service ---
 from src.services.purchase_service import is_user_paid
 
 logger = logging.getLogger()
@@ -45,6 +44,7 @@ def lambda_handler(event, context):
         pdf_urls = meta.get("pdfUrls") or body.get("pdfUrls", [])
         
         arena_id = meta.get("arenaId") or body.get("arenaId")
+        exam_id = meta.get("examId") # --- NEW: Extract examId from Wix frontend metadata ---
         
         is_hidden_flag = body.get("is_hidden") or meta.get("is_hidden", False)
         is_hidden_magic = isinstance(message, str) and message.strip().startswith("[CONTEXTO INTERNO:")
@@ -72,7 +72,6 @@ def lambda_handler(event, context):
         if not isinstance(pdf_urls, list): pdf_urls = []
         if not isinstance(media_items, list): media_items = []
 
-        # --- NEW: Secure the AI Mode ---
         # Prevent non-paid users from forcing alpha mode via API manipulation
         if ai_mode == "alpha":
             is_paid = is_user_paid(user_id)
@@ -97,6 +96,7 @@ def lambda_handler(event, context):
             "client_row_id": client_row_id,
             "mode": ai_mode,
             "arena_id": arena_id,
+            "exam_id": exam_id, # --- NEW: Append exam_id to SQS payload ---
             "is_hidden": is_hidden,
             
             "audioDurationSeconds": audio_duration,
@@ -117,6 +117,7 @@ def lambda_handler(event, context):
             "mode": ai_mode,
             "has_media_items": bool(media_items),
             "arena_id": arena_id,
+            "exam_id": exam_id,
             "is_hidden": is_hidden,
             "has_stt_telemetry": audio_duration is not None,
             "has_sts_telemetry": sts_in_text is not None or sts_in_audio is not None

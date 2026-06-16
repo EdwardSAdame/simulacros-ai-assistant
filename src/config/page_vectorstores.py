@@ -3,30 +3,15 @@ import os
 from urllib.parse import urlparse
 from typing import List
 
-# --- ICFES SPECIFIC STORES ---
-VSTORE_ICFES_INGLES              = os.getenv("VECTOR_STORE_ICFES_INGLES", "")
-VSTORE_ICFES_CIENCIAS_NATURALES  = os.getenv("VECTOR_STORE_ICFES_CIENCIAS_NATURALES", "")
-VSTORE_ICFES_MATEMATICAS         = os.getenv("VECTOR_STORE_ICFES_MATEMATICAS", "")
-VSTORE_ICFES_SOCIALES_CIUDADANAS = os.getenv("VECTOR_STORE_ICFES_SOCIALES_CIUDADANAS", "")
-VSTORE_ICFES_LECTURA_CRITICA     = os.getenv("VECTOR_STORE_ICFES_LECTURA_CRITICA", "")
-
-# --- UNAL SPECIFIC STORES ---
+# --- UNAL SPECIFIC STORES (Legacy - Kept exactly as before) ---
 VSTORE_UNAL_ANALISIS_IMAGEN      = os.getenv("VECTOR_STORE_UNAL_ANALISIS_IMAGEN", "")
 VSTORE_UNAL_MATEMATICAS          = os.getenv("VECTOR_STORE_UNAL_MATEMATICAS", "")
 VSTORE_UNAL_TEMATICA_COMUN       = os.getenv("VECTOR_STORE_UNAL_TEMATICA_COMUN", "")
 VSTORE_UNAL_CIENCIAS_SOCIALES    = os.getenv("VECTOR_STORE_UNAL_CIENCIAS_SOCIALES", "")
 VSTORE_UNAL_CIENCIAS_NATURALES   = os.getenv("VECTOR_STORE_UNAL_CIENCIAS_NATURALES", "")
 
-# Mapping ONLY for specific simulation zones
+# Mapping ONLY for legacy simulation zones (UNAL)
 _PAGE_MAP = {
-    # ICFES SPECIFIC SIMULATION ZONES
-    "/simulacro-icfes/ingles":                VSTORE_ICFES_INGLES,
-    "/simulacro-icfes/ciencias-naturales":    VSTORE_ICFES_CIENCIAS_NATURALES,
-    "/simulacro-icfes/matematicas":           VSTORE_ICFES_MATEMATICAS,
-    "/simulacro-icfes/sociales-y-cuidadanas": VSTORE_ICFES_SOCIALES_CIUDADANAS,
-    "/simulacro-icfes/lectura-critica":       VSTORE_ICFES_LECTURA_CRITICA,
-
-    # UNAL SPECIFIC SIMULATION ZONES
     "/simulacro-unal/analisis-de-imagen":     VSTORE_UNAL_ANALISIS_IMAGEN,
     "/simulacro-unal/matematicas":            VSTORE_UNAL_MATEMATICAS,
     "/simulacro-unal/tematica-comun":         VSTORE_UNAL_TEMATICA_COMUN,
@@ -41,26 +26,37 @@ def _normalize_path(page: str | None) -> str:
     path = parsed.path or s
     return path.lower()
 
-def get_stores_for_page(page: str | None) -> List[str]:
+def get_stores_for_page(page: str | None, exam_id: str | None = None) -> List[str]:
+    stores: List[str] = []
+
+    # 1. NEW LOGIC: Dynamic ICFES Exam Lookup
+    # If the frontend sent an examId (e.g., 'math_vol_02.json'), look up its specific Vector Store
+    if exam_id:
+        # Clean the exam_id (remove .json if present)
+        clean_exam_id = exam_id.lower().replace(".json", "").strip()
+        
+        # Convert to the environment variable format with the ICFES prefix:
+        # math_vol_02 -> VECTOR_STORE_ICFES_MATH_VOL_02
+        env_var_name = f"VECTOR_STORE_ICFES_{clean_exam_id.upper()}"
+        
+        # Dynamically fetch the ID from the environment variables
+        specific_exam_store = os.getenv(env_var_name, "")
+        if specific_exam_store:
+            stores.append(specific_exam_store)
+            return stores # If we found the specific exam, return immediately!
+
+    # 2. LEGACY LOGIC: UNAL Path Lookup (Fallback)
     path = _normalize_path(page)
-    
-    # 1. Try Exact Match
     specific = _PAGE_MAP.get(path)
     
-    # 2. Try Prefix Match (Deep linking)
-    # This allows /simulacro-icfes/matematicas/pregunta-1 to still catch the vector store
     if not specific:
         for prefix, sid in _PAGE_MAP.items():
             if sid and (path == prefix or path.startswith(prefix + "/")):
                 specific = sid
                 break
 
-    stores: List[str] = []
-    
-    # Only append if we found a specific store for this simulation zone
     if specific:
         stores.append(specific)
 
     # NOTE: Global/General stores logic has been removed as requested.
-    
     return stores

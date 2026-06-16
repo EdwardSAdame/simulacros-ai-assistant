@@ -14,7 +14,6 @@ from src.services.token_usage_service import TokenUsageService
 from src.services.context_resolution import determine_exam_context
 from src.storage.conversations_table import get_conversation_metadata
 
-# --- NEW: Import history builder to feed the router ---
 from src.services.history_service import build_history_list 
 
 # For Audio FinOps
@@ -122,6 +121,7 @@ def lambda_handler(event, context):
             pdf_urls = payload.get("pdf_urls", [])
             media_items = payload.get("media_items", [])
             arena_id = payload.get("arena_id")
+            exam_id = payload.get("exam_id") # --- NEW: Extract exam_id from payload ---
             is_hidden = payload.get("is_hidden", False)
             name = payload.get("name")
             email = payload.get("email")
@@ -142,30 +142,27 @@ def lambda_handler(event, context):
             if connection_ids and not is_hidden:
                 try:
                     persisted_exam_context = None
-                    current_activity = "chat" # NEW: Default fallback activity
-                    # --- NEW: Fetch recent conversation history to pass to the router ---
+                    current_activity = "chat"
                     recent_history = [] 
                     if conv_id_in and user_id:
                         try:
-                            # 🔹 FIX: Pass include_system_logs=False to hide widget JSON from the router
                             recent_history = build_history_list(conv_id_in, max_user=2, max_assistant=2, include_system_logs=False)
                             existing_meta = get_conversation_metadata(user_id, conv_id_in)
                             if existing_meta:
                                 persisted_exam_context = existing_meta.get("ExamContext")
-                                current_activity = existing_meta.get("CurrentActivity", "chat") # NEW: Extract sticky state
+                                current_activity = existing_meta.get("CurrentActivity", "chat")
                         except Exception as meta_e:
                             logger.warning(f"Could not fetch conversation metadata/history: {meta_e}")
 
                     current_exam_context = determine_exam_context(page, message, current_locked_context=persisted_exam_context)
 
-                    # --- UPDATED: Passing the history array and current_activity into the router ---
                     routing_result = semantic_router.determine_category(
                         text=message, 
                         user_id=user_id, 
                         conversation_id=conv_id_in, 
                         exam_context=current_exam_context,
                         history=recent_history,
-                        current_activity=current_activity # NEW: Pass state to router
+                        current_activity=current_activity 
                     )
                     
                     category_key = routing_result.get("category", "general")
@@ -183,13 +180,6 @@ def lambda_handler(event, context):
                         client_action = "OPEN_QUIZ_PANEL"
                     elif intent == "mentalmap" or intent == "mind_map":
                         client_action = "OPEN_MENTAL_MAP_PANEL"
-                    # =========================================================
-                    # FIX: We NO LONGER trigger OPEN_FLASHCARDS_PANEL instantly here.
-                    # This allows the frontend Chat UI to stay open and display the 
-                    # loading phrases typed out by the #aiRichRenderer.
-                    # =========================================================
-                    # elif intent in ["flashcard", "flashcards"]:
-                    #     client_action = "OPEN_FLASHCARDS_PANEL"
 
                     status_payload = json.dumps({
                         "action": "status_update",
@@ -221,6 +211,7 @@ def lambda_handler(event, context):
                         "source": source_type,
                         "mode": ai_mode,
                         "arena_id": arena_id,
+                        "exam_id": exam_id,
                         "exam_context": current_exam_context 
                     })
 
@@ -243,6 +234,7 @@ def lambda_handler(event, context):
                 requires_visuals=requires_visuals, 
                 stream_manager=stream_manager,
                 arena_id=arena_id,
+                exam_id=exam_id, # --- NEW: Pass exam_id to the Orchestrator ---
                 is_hidden=is_hidden, 
                 num_questions=num_questions
             )
