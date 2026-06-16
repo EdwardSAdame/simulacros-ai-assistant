@@ -44,7 +44,9 @@ def lambda_handler(event, context):
         pdf_urls = meta.get("pdfUrls") or body.get("pdfUrls", [])
         
         arena_id = meta.get("arenaId") or body.get("arenaId")
-        exam_id = meta.get("examId") # --- NEW: Extract examId from Wix frontend metadata ---
+        
+        # 🟢 UPDATED: Extract exam_id from root body OR meta
+        exam_id = body.get("examId") or meta.get("examId") 
         
         is_hidden_flag = body.get("is_hidden") or meta.get("is_hidden", False)
         is_hidden_magic = isinstance(message, str) and message.strip().startswith("[CONTEXTO INTERNO:")
@@ -96,7 +98,7 @@ def lambda_handler(event, context):
             "client_row_id": client_row_id,
             "mode": ai_mode,
             "arena_id": arena_id,
-            "exam_id": exam_id, # --- NEW: Append exam_id to SQS payload ---
+            "exam_id": exam_id, 
             "is_hidden": is_hidden,
             
             "audioDurationSeconds": audio_duration,
