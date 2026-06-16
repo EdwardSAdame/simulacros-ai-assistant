@@ -83,7 +83,7 @@ class ChatService:
         message: str | None,
         mode: str,
         exam_context: str,
-        exam_id: str | None,  # --- NEW: Receive the examId from the Lambda/SQS payload ---
+        exam_id: str | None,  # Receive exam_id from Lambda/SQS
         category: str,
         requires_visuals: bool,
         arena_id: str | None,
@@ -91,6 +91,9 @@ class ChatService:
         actual_conversation_id: str
     ) -> Tuple[str, Dict | None]:
         
+        # 🟢 DEBUG LINE: Check what the backend receives
+        logger.info(f"ChatService Debug -> ExamID: {exam_id}, Page: {page}")
+
         # 1. Identity Protection Fast-Path
         if category == "identity_protection":
             logger.info("Intercepted identity question. Returning minimalist Invicto response.")
@@ -104,8 +107,11 @@ class ChatService:
             return random.choice(identity_responses), None
 
         # 2. Setup Resources
-        # --- NEW: Pass the exam_id into the vector store router ---
         selected_vector_stores = get_stores_for_page(page, exam_id=exam_id)
+        
+        # 🟢 DEBUG LINE: Confirm what store was selected
+        logger.info(f"ChatService Debug -> Selected Vector Stores: {selected_vector_stores}")
+        
         web_search_config = get_search_filters(exam_context)
         is_web_search_active = (web_search_config is not None)
 
