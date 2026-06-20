@@ -12,11 +12,17 @@ def lambda_handler(event, context):
     # Attach AWS context to logs
     set_invocation_context(context)
 
+    # 1. Intercept and handle CORS Preflight (OPTIONS request) immediately
+    http_method = event.get("httpMethod") or event.get("requestContext", {}).get("httpMethod")
+    if http_method == "OPTIONS":
+        return _response(200, {"ok": True})
+
     try:
         # Lightweight invocation log
         log_event("exam_results_lambda_invocation", {
             "source": "ExamResultsHandler",
-            "has_body": "body" in (event or {}),
+            "has_body": "body" in (event or {}) and event.get("body") is not None,
+            "method": http_method
         })
 
         # Parse API Gateway body
