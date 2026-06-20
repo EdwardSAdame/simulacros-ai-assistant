@@ -9,20 +9,22 @@ logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
 def lambda_handler(event, context):
-    # Attach AWS context to logs
     set_invocation_context(context)
 
-    # 1. Intercept and handle CORS Preflight (OPTIONS request) immediately
-    http_method = event.get("httpMethod") or event.get("requestContext", {}).get("httpMethod")
-    if http_method == "OPTIONS":
+    # 1. UNIVERSAL CORS PREFLIGHT HANDLING
+    # Browsers send 'Access-Control-Request-Method' for preflight requests.
+    # This check is reliable regardless of whether 'httpMethod' is null.
+    headers = event.get("headers") or {}
+    normalized_headers = {k.lower(): v for k, v in headers.items()}
+    
+    if "access-control-request-method" in normalized_headers:
         return _response(200, {"ok": True})
 
     try:
         # Lightweight invocation log
         log_event("exam_results_lambda_invocation", {
             "source": "ExamResultsHandler",
-            "has_body": "body" in (event or {}) and event.get("body") is not None,
-            "method": http_method
+            "has_body": "body" in (event or {}) and event.get("body") is not None
         })
 
         # Parse API Gateway body
@@ -55,7 +57,6 @@ def lambda_handler(event, context):
         return _response(200, {"ok": True, "saved": saved_record})
 
     except ValueError as ve:
-        # Catch specific business logic validation errors from the service layer
         log_event("exam_results_validation_error", {
             "source": "ExamResultsHandler",
             "error": str(ve)
@@ -63,8 +64,7 @@ def lambda_handler(event, context):
         return _response(400, {"error": str(ve)})
 
     except Exception as e:
-        # Catch all other exceptions and log the stack trace
-        log_event("exam_results_lambda_exception", {
+        log_event("lambda_exception", {
             "source": "ExamResultsHandler"
         }, level="error", error=e)
         return _response(500, {"error": "Internal error processing exam results"})
