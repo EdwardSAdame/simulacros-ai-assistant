@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 11",
+  "questionId": "q_11",
+  "sectionText": "La relación entre los humanos y lo que hoy reconocemos como música se remonta a más de 40.000 años atrás, desde los principios de nuestra civilización. Nuestros antepasados, en ese entonces, ya tocaban flautas de hueso y percusiones. Los instrumentos se fueron diversificando y multiplicando, pasando por la creación de instrumentos de madera, cuerda y metal, hasta llegar a las guitarras eléctricas y consolas de música electrónica de hoy en día. Casi todas las sociedades humanas conocidas han tenido música, lo que sugiere que nuestra apreciación por ella es innata; incluso bebés de dos meses de nacidos se voltean cuando escuchan sonidos agradables y le dan la espalda a los disonantes. Dada su universalidad, entonces, ¿será que la música podría haber ayudado en la supervivencia humana de alguna forma? ¿Tendría alguna ventaja o beneficio? Algunos investigadores sugieren que puede haber ayudado en el cortejo. Otros dicen que promueve la cohesión de grupo, tal como lo hace hoy en día. Incluso, puede ser un simple accidente feliz, una dulzura auditiva, que casualmente terminó creando una rumba cerebral.",
+  "questionText": "Pregunta 11: Considere el siguiente apartado del texto:\n\n> \"Casi todas las sociedades humanas conocidas han tenido música, lo que sugiere que nuestra apreciación por ella es innata\".\n\n¿Cuál es la función de la expresión \"lo que\"?",
+  "correctOptionId": "B",
+  "aiExplanation": "- **Problema central:** identificar la función conectiva de *lo que* en la oración.\n- La estructura es: *casi todas las sociedades humanas conocidas han tenido música*, **lo que sugiere** que nuestra apreciación es innata.\n- La segunda parte se presenta como una **consecuencia inferida** de la primera.\n- **Conclusión:** introduce una relación de **causalidad/inferencia** entre la primera idea y la segunda. Respuesta: **B**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "Plantear dos opciones opuestas sobre una teoría.",
+      "optionFeedback": "- **Incorrecta.** No hay oposición entre teorías ni presentación de alternativas contrarias."
+    },
+    {
+      "optionId": "B",
+      "optionText": "Introducir una relación de causalidad entre la primera y la segunda idea.",
+      "optionFeedback": "- **Correcta.** *Lo que* enlaza el hecho de la universalidad de la música con la inferencia de que su apreciación podría ser innata."
+    },
+    {
+      "optionId": "C",
+      "optionText": "Aclarar el sentido de la primera idea a partir de la segunda.",
+      "optionFeedback": "- **Incorrecta.** La segunda parte no aclara el significado de la primera; extrae una conclusión a partir de ella."
+    },
+    {
+      "optionId": "D",
+      "optionText": "Añadir una idea similar a la que se presenta al principio de la oración.",
+      "optionFeedback": "- **Incorrecta.** No se añade una idea semejante, sino una consecuencia interpretativa."
+    }
+  ]
+}

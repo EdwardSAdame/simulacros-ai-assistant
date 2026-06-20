@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 31",
+  "questionId": "q_31",
+  "sectionText": "El tren se detuvo en el interior del bosque. La niebla envolvía los robles alrededor del claro. Eran las 7 a. m. del 8 de noviembre de 1918. Estaba finalizando la Primera Guerra Mundial. Estaba empezando la Segunda.\n\nDesde el último coche, cuya tapicería de raso verde era una reliquia de los tiempos en que había sido el vagón privado del emperador Napoleón III de Francia, los pasajeros pudieron ver otro coche en un apartadero. Ignoraban dónde estaban, pero sabían que aquella era la última parada de un viaje de pesadilla... un viaje, que esperaban, pondría fin a los combates.\n\nUn oficial del ejército francés apareció en la puerta para informar a los recién llegados, seis alemanes, que el mariscal Ferdinand Foch, supremo comandante de las fuerzas aliadas, les recibiría a las 9 a. m. Para Matthias Erzberger, portavoz del grupo, la perspectiva de esperar solo podía aumentar su incomodidad. Le dolía el pesado cuerpo, su sombrero estaba aplastado y, en algún lugar del camino había perdido las gafas.\n\nUnos minutos antes de las 9 a. m., los alemanes cruzaron un caminillo de tablillas que había sido colocado entre las vías y entraron en el cuartel de Foch, un antiguo coche-cama francés. Luego, de porte erguido a la edad de 67 años, apareció Foch, acompañado por el Primer Lord de la Marina de Inglaterra, almirante Rosslyn Wemyss.\n\nFoch se mostró glacialmente formal:\n\n—¿Qué trae a estos caballeros por aquí? ¿Qué quieren de mí?\n\nErzerberger dijo que habían ido con el fin de recibir las propuestas aliadas para una tregua.\n\n—No tengo ninguna propuesta que hacer —dijo Foch.\n\nHubo un momento de consternación; uno de los alemanes preguntó cómo quería que se expresaran.\n\n—¿Desean una tregua? —respondió Foch—. Si es así, les puedo comunicar las condiciones bajo las cuales la pueden obtener.\n\nPidieron tregua.\n\nEl silencio fue absoluto mientras un edecán leía las condiciones. Foch permaneció sentado como una estatua. El almirante jugaba con su monóculo. Mientras escuchaban, los alemanes quedaron aturdidos, comprendiendo por primera vez la magnitud de su derrota.\n\nTres días más tarde, el 11 de noviembre de 1918, a las 5:20 a. m., en el mismo vagón, Erzberger firmó la tregua y, al hacerlo, su propia sentencia de muerte. Tres años después sería abatido a tiros por compatriotas resentidos, un par de exoficiales del ejército, nacionalistas y fanáticos.\n\nLa intransigencia de Foch y el fatídico destino de Erzberger son vívidos ejemplos de las fuerzas desatadas al final del primer gran conflicto, que condujeron —y hoy nos parece inevitable— al segundo. Estas fuerzas, compuestas de rencor y orgullo, tanto en los alemanes como en sus vencedores, iban a cobrar impulso aún después de que se acallaran las armas.",
+  "questionText": "Pregunta 31: De acuerdo con el texto, Matthias Erzberger era",
+  "correctOptionId": "B",
+  "aiExplanation": "- **Problema central:** identificar quién era Matthias Erzberger en el texto.\n- Se dice que era *portavoz del grupo* de seis alemanes que iba a recibir las condiciones de Foch.\n- Por tanto, era el representante alemán encargado de negociar la tregua con el mando aliado.\n- **Conclusión:** la mejor opción es **B**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "un político francés que sirvió como mediador en la negociación entre los alemanes y Foch.",
+      "optionFeedback": "- **Incorrecta.** Erzberger no era francés; pertenecía al grupo alemán."
+    },
+    {
+      "optionId": "B",
+      "optionText": "un diplomático alemán encargado de negociar con el supremo comandante de las fuerzas aliadas.",
+      "optionFeedback": "- **Correcta.** El texto lo presenta como **portavoz del grupo** alemán que negocia la tregua con Foch, comandante aliado."
+    },
+    {
+      "optionId": "C",
+      "optionText": "un oficial del ejército aliado que acompañó a los alemanes al momento de negociar con Foch.",
+      "optionFeedback": "- **Incorrecta.** El oficial aliado es otro personaje; Erzberger pertenece a la delegación alemana."
+    },
+    {
+      "optionId": "D",
+      "optionText": "un edecán encargado de comandar el grupo de negociación conformado por alemanes y aliados.",
+      "optionFeedback": "- **Incorrecta.** El edecán es quien lee las condiciones, no Erzberger."
+    }
+  ]
+}

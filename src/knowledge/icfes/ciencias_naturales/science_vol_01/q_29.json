@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 29",
+  "questionId": "q_29",
+  "questionImageAiDescription": "Tabla con 2 columnas: Temperatura (°C) y Estado del hierro. Contiene 6 filas con los siguientes valores (Temperatura, Estado): (0, Sólido), (750, Sólido), (1.535, Cambio de sólido a líquido), (2.255, Líquido), (2.750, Cambio de líquido a gaseoso), (3.000, Gaseoso).",
+  "questionText": "Pregunta 29: Un investigador realizó un experimento en el que sometió un bloque de hierro a temperaturas muy altas. Él descubrió que la temperatura del hierro no cambia mientras cambia su fase. La siguiente tabla muestra los registros que hizo el investigador de temperatura, fase y cambios de fase del hierro durante el experimento.\n\n¿Cuál de las siguientes gráficas corresponde a los datos de temperatura en el tiempo registrados por el investigador?",
+  "correctOptionId": "C",
+  "aiExplanation": "- **Problema central:** escoger la gráfica de temperatura frente al tiempo para un material que presenta mesetas durante los cambios de fase.\n- **Datos relevantes de la tabla:**\n  - el hierro es sólido hasta \\(1.535\\ ^\\circ\\text{C}\\);\n  - en \\(1.535\\ ^\\circ\\text{C}\\) ocurre cambio de sólido a líquido con temperatura constante;\n  - luego aumenta hasta \\(2.750\\ ^\\circ\\text{C}\\);\n  - en \\(2.750\\ ^\\circ\\text{C}\\) ocurre cambio de líquido a gas con temperatura constante;\n  - finalmente aumenta hasta \\(3.000\\ ^\\circ\\text{C}\\).\n- **Análisis:** la gráfica correcta debe mostrar dos mesetas, una en \\(1.535\\ ^\\circ\\text{C}\\) y otra en \\(2.750\\ ^\\circ\\text{C}\\), con tramos crecientes entre ellas.\n- **Conclusión:** la respuesta correcta es **C**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "[Imagen de la opción: Gráfica temperatura vs. tiempo con aumento continuo por tramos inclinados desde \\(0\\) hasta cerca de \\(3.000\\ ^\\circ\\text{C}\\), etiquetando regiones de sólido, líquido y gaseoso, sin mesetas en los cambios de fase.]",
+      "optionFeedback": "- **Incorrecta.** No muestra tramos horizontales durante los cambios de fase, pese a que el enunciado dice que la temperatura no cambia en esas etapas."
+    },
+    {
+      "optionId": "B",
+      "optionText": "[Imagen de la opción: Gráfica de Temperatura (°C) vs. Tiempo. Muestra una sola línea recta diagonal ascendente desde el origen en 0 hasta un punto final en 3.000 °C. A lo largo de esta recta se ubican las etiquetas 'Sólido' en la parte inferior, 'Líquido' en el medio y 'Gaseoso' en la parte superior. No presenta tramos horizontales que representen los cambios de fase.]",
+      "optionFeedback": "- **Incorrecta.** Una línea recta continua ignora por completo la constancia de temperatura durante la fusión y la ebullición."
+    },
+    {
+      "optionId": "C",
+      "optionText": "[Imagen de la opción: Gráfica temperatura vs. tiempo con ascenso inicial desde \\(0\\) hasta alrededor de \\(1.500\\ ^\\circ\\text{C}\\), primera meseta horizontal cerca de \\(1.535\\ ^\\circ\\text{C}\\), nuevo ascenso hasta alrededor de \\(2.750\\ ^\\circ\\text{C}\\), segunda meseta horizontal cerca de \\(2.750\\ ^\\circ\\text{C}\\), y ascenso final hasta alrededor de \\(3.000\\ ^\\circ\\text{C}\\). Etiquetas de regiones: sólido, líquido y gaseoso.]",
+      "optionFeedback": "- **Correcta.** Representa los aumentos de temperatura y las dos mesetas correspondientes a los cambios de fase del hierro."
+    },
+    {
+      "optionId": "D",
+      "optionText": "[Imagen de la opción: Gráfica de Temperatura (°C) vs. Tiempo con múltiples escalones. Muestra tramos ascendentes intercalados con tramos horizontales (mesetas) en aproximadamente 750 °C, 1.500 °C, 2.250 °C y 2.750 °C. Se observan las etiquetas 'Sólido' bajo la primera meseta, 'Líquido' bajo la meseta de 2.250 °C, y 'Gaseoso' en el punto final superior de 3.000 °C.]",
+      "optionFeedback": "- **Incorrecta.** Agrega mesetas adicionales en temperaturas que la tabla no reporta como cambios de fase."
+    }
+  ]
+}

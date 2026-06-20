@@ -1,0 +1,29 @@
+{
+  "questionLabel": "Pregunta 20",
+  "questionId": "q_20",
+  "questionText": "Pregunta 20: El oro blanco es una aleación metálica que se usa para elaborar joyas preciosas y está compuesto de un \\(90\\,\\%\\) de oro puro y un \\(10\\,\\%\\) de níquel. Al respecto, se requiere fabricar \\(60\\) anillos de oro blanco; cada uno con un peso de \\(5\\) gramos. Para determinar la cantidad de níquel que se necesita, se puede efectuar el siguiente procedimiento:\n\n**Paso 1.** Multiplicar el número de anillos por el peso de cada uno.\n\n**Paso 2.** Multiplicar el resultado anterior por el porcentaje de níquel en el oro blanco.\n\nSi se sigue el procedimiento, ¿cuántos gramos de níquel se necesitan para elaborar los \\(60\\) anillos?",
+  "correctOptionId": "D",
+  "aiExplanation": "- **Problema central:** hallar el \\(10\\%\\) del peso total de los anillos.\n- **Paso 1:** peso total:\n  \\[\n  60\\times 5=300\\ \\text{g}\n  \\]\n- **Paso 2:** níquel necesario:\n  \\[\n  10\\%\\text{ de }300=0{,}10\\times 300=30\\ \\text{g}\n  \\]\n- **Conclusión:** se necesitan **\\(30\\) gramos** de níquel.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "\\(300\\)",
+      "optionFeedback": "**Incorrecta.** Ese es el peso total de los anillos, no solo la parte de níquel."
+    },
+    {
+      "optionId": "B",
+      "optionText": "\\(270\\)",
+      "optionFeedback": "**Incorrecta.** Ese valor corresponde al \\(90\\%\\), es decir, al oro puro."
+    },
+    {
+      "optionId": "C",
+      "optionText": "\\(50\\)",
+      "optionFeedback": "**Incorrecta.** No equivale al \\(10\\%\\) de \\(300\\)."
+    },
+    {
+      "optionId": "D",
+      "optionText": "\\(30\\)",
+      "optionFeedback": "**Correcta.** El \\(10\\%\\) de \\(300\\ \\text{g}\\) es \\(30\\ \\text{g}\\)."
+    }
+  ]
+}

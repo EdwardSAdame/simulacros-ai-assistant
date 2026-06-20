@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 36",
+  "questionId": "q_36",
+  "sectionText": "Lea el texto y responda las preguntas.\n\nEn las preguntas \\(36 - 40\\), marque \\(A\\), \\(B\\), \\(C\\) o \\(D\\) en su hoja de respuestas.\n\nI do not like when someone makes a mistake about my age. **When someone says I look younger than I am, I don’t think that person is accurate, because I’m a different person from who I was at \\(24\\), \\(25\\), even \\(26\\).** I don’t consider I actually look physically younger than \\(30\\). However, that doesn’t explain why we don’t always look like being \\(30\\) or why I can’t get champagne in my local supermarket.\n\nThere are loads of videos on TikTok about why millennials (people born after the \\(80\\)s) don’t appear to be getting old “normally”. Some have the hypothesis that it’s because cosmetic operations are cheaper and more available now. Others have said that it’s because millennials “have depression, so we’re indoors all day, and we don’t let our skin feel the sun.” Still others have wondered whether it’s due to camera phones, and the fact that we use them regularly, meaning we pay more attention to our looks. Or maybe we are getting old normally but we just don’t consider we are, so we don’t act like it. Before I continue, I must add: I’m sure that age is not a main issue, and that putting labels to a person as a result of an arbitrary age opinion is not fair to their identities.\n\nI know that most people don’t actually “feel” their age, because they just feel like themselves (same here). **But that doesn’t mean I am not interested and curious about how I appear to others now that I’m in my \\(30\\)s.**",
+  "questionText": "Pregunta 36: What is the writer mainly doing in the text?",
+  "correctOptionId": "C",
+  "aiExplanation": "- **Core problem:** Identify the main purpose of the text.\n- **Relevant data:** The writer reflects on people saying she looks younger, discusses social ideas about millennials and aging, and expresses her own thoughts and curiosity.\n- **Method:** Choose the option that best summarizes the overall focus, not just one detail.\n- **Conclusion:** The writer is mainly **discussing her thoughts about looking younger than you actually are**. The correct answer is **C**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "arguing about what social networks say regarding youths",
+      "optionFeedback": "- **Incorrect.** Social networks are mentioned only as part of the discussion, not as the main focus of the text."
+    },
+    {
+      "optionId": "B",
+      "optionText": "presenting facts about how to appear to be younger than you are",
+      "optionFeedback": "- **Incorrect.** The writer is not giving advice or factual steps on how to look younger."
+    },
+    {
+      "optionId": "C",
+      "optionText": "discussing her thoughts about looking younger than you actually are",
+      "optionFeedback": "- **Correct.** This accurately captures the text’s main purpose: the writer reflects on age, appearance, and how others perceive her."
+    },
+    {
+      "optionId": "D",
+      "optionText": "mentioning how different she is nowadays than when she was in her youth",
+      "optionFeedback": "- **Incorrect.** This idea appears briefly, but it is not the central purpose of the whole text."
+    }
+  ]
+}

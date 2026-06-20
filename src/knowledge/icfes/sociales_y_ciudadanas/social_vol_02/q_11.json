@@ -1,0 +1,29 @@
+{
+  "questionLabel": "Pregunta 11",
+  "questionId": "q_11",
+  "questionText": "Pregunta 11: El alcalde de un municipio contrató la construcción de una red de alcantarillado con la que se buscaba beneficiar a cuatro barrios de escasos recursos; sin embargo, luego de diez años de haberse iniciado la construcción, las obras permanecen inconclusas y las tuberías que se instalaron presentaron graves deterioros. Por todo lo anterior, los habitantes aún no cuentan con el servicio.\n\n¿A cuál de las siguientes entidades podrían acudir los ciudadanos para que se investigue el manejo inadecuado de los recursos públicos y se logre su recuperación?",
+  "correctOptionId": "D",
+  "aiExplanation": "- **Problema central:** identificar la entidad competente para investigar el mal manejo de recursos públicos y procurar su recuperación.\n- **Datos relevantes:**\n  - Hay una obra inconclusa tras \\(10\\) años.\n  - Se deterioraron tuberías ya instaladas.\n  - Se pregunta por investigación sobre recursos públicos y recuperación de estos.\n- **Método lógico:** relacionar el caso con la función de control fiscal en Colombia.\n- **Conclusión:** la entidad competente es la **Contraloría General de la República**, encargada del control fiscal y de vigilar bienes y recursos del Estado.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "Al Concejo municipal, para que en ejercicio del control político expida un acuerdo mediante el cual sancione a los responsables.",
+      "optionFeedback": "- **Incorrecta.** El Concejo ejerce control político local, pero no es la entidad principal para adelantar control fiscal ni recuperar recursos públicos."
+    },
+    {
+      "optionId": "B",
+      "optionText": "Al Ministerio de Ambiente, para que verifique las condiciones de insalubridad que genera la falta de alcantarillado.",
+      "optionFeedback": "- **Incorrecta.** Puede existir un problema ambiental o sanitario, pero la pregunta apunta al manejo inadecuado de recursos públicos."
+    },
+    {
+      "optionId": "C",
+      "optionText": "Al Congreso de la República, para que impulse un proyecto de ley que endurezca las penas por este tipo de actos.",
+      "optionFeedback": "- **Incorrecta.** El Congreso legisla, pero no investiga ni recupera directamente recursos mal administrados en este caso concreto."
+    },
+    {
+      "optionId": "D",
+      "optionText": "A la Contraloría General de la República, para que ejerza el control fiscal y la vigilancia de los bienes del Estado.",
+      "optionFeedback": "- **Correcta.** La Contraloría es la entidad encargada de investigar el manejo fiscal de los recursos públicos y promover su recuperación cuando hay detrimento patrimonial."
+    }
+  ]
+}

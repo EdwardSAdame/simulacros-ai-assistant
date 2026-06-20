@@ -1,0 +1,50 @@
+{
+  "questionLabel": "Pregunta 4",
+  "questionId": "q_04",
+  "sectionText": "Lea las descripciones de la columna de la izquierda \\(1 - 5\\). ¿Cuál palabra de la columna de la derecha \\((A - G)\\) concuerda con cada descripción?\n\nLa opción \\(H\\) se usa para el ejemplo. Sobran dos palabras más.\n\nEn las preguntas \\(1 - 5\\), marque la letra correcta \\(A - G\\) en su hoja de respuestas.",
+  "questionText": "Pregunta 4: You can sit on one of these in the living room.",
+  "correctOptionId": "A",
+  "aiExplanation": "- **Core problem:** Identify what you can sit on in the living room.\n- **Relevant data:** The options include several house objects, but only one is mainly for sitting.\n- **Method:** Choose the furniture intended for sitting.\n- **Conclusion:** An **armchair** is something you can sit on in the living room. Therefore, the correct answer is **A**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "armchair",
+      "optionFeedback": "- **Correct.** An **armchair** is a chair used for sitting, often in a living room."
+    },
+    {
+      "optionId": "B",
+      "optionText": "bed",
+      "optionFeedback": "- **Incorrect.** A *bed* is mainly for sleeping, not typically for sitting in the living room."
+    },
+    {
+      "optionId": "C",
+      "optionText": "blanket",
+      "optionFeedback": "- **Incorrect.** A *blanket* is something you cover yourself with."
+    },
+    {
+      "optionId": "D",
+      "optionText": "bookcase",
+      "optionFeedback": "- **Incorrect.** A *bookcase* stores books."
+    },
+    {
+      "optionId": "E",
+      "optionText": "cupboard",
+      "optionFeedback": "- **Incorrect.** A *cupboard* is for storage, not sitting."
+    },
+    {
+      "optionId": "F",
+      "optionText": "picture",
+      "optionFeedback": "- **Incorrect.** A *picture* hangs on a wall."
+    },
+    {
+      "optionId": "G",
+      "optionText": "shower",
+      "optionFeedback": "- **Incorrect.** A *shower* is in a bathroom and is for washing."
+    },
+    {
+      "optionId": "H",
+      "optionText": "towel",
+      "optionFeedback": "- **Incorrect.** A *towel* is for drying yourself."
+    }
+  ]
+}

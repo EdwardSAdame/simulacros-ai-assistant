@@ -1,0 +1,31 @@
+{
+  "questionLabel": "Pregunta 1",
+  "questionId": "q_01",
+  "sectionText": "Un grupo de expertos quiere llevar a cabo un plan de recuperación de un ecosistema en el que una fuente de agua, y varias especies de peces y de plantas se han visto afectadas por un grave problema de contaminación, la cual es causada por la actividad humana de un barrio cercano que tiene sus tuberías de desagüe conectadas a la fuente de agua. Al respecto, los expertos afirman que el foco de la contaminación son sustancias como el aceite que se usa en casas, restaurantes y en la industria, y que esto no solo afecta la calidad del agua, sino que también ha causado la disminución de los individuos de especies acuáticas de animales y el desmejoramiento de especies vegetales.",
+  "sectionImageAiDescription": "Diagrama de una planta completa con raíces dentro del suelo. En la parte superior izquierda aparece un sol rotulado \"Luz solar\" con flechas onduladas dirigidas hacia la planta. A la izquierda media aparece el texto \"Dióxido de carbono\" con flechas onduladas entrando a la planta. A la derecha media aparece el texto \"Oxígeno \\(O_2\\)\" con flechas onduladas saliendo de la planta. En la zona de raíces, dentro del suelo, aparece el texto \"Agua\" con flechas onduladas dirigidas hacia las raíces. Sobre hojas, tallo y suelo hay puntos o manchas negras que representan aceite contaminante adherido y acumulado.",
+  "questionText": "Pregunta 1: Los expertos saben que la causa de la contaminación de la fuente de agua se debe a una actividad en concreto que se desarrolla en el barrio.\n\nDe acuerdo con lo anterior, ¿cuál de las siguientes es la causa de la contaminación de la fuente de agua?",
+  "correctOptionId": "C",
+  "aiExplanation": "- **Problema central:** identificar la actividad humana específica que causa la contaminación de la fuente de agua.\n- **Datos relevantes del contexto:** el barrio tiene sus tuberías de desagüe conectadas a la fuente de agua y los expertos señalan como foco contaminante sustancias como el aceite usado en casas, restaurantes e industria.\n- **Análisis:** la causa no es consumir grasa ni la marca del aceite, sino el **vertimiento** de esos aceites residuales al sistema de desagüe que desemboca en la fuente hídrica.\n- **Conclusión:** la respuesta correcta es **C**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "El consumo de comidas rápidas altas en grasas por parte de los habitantes del barrio.",
+      "optionFeedback": "- **Incorrecta.** Comer alimentos grasos no contamina directamente la fuente de agua. El problema descrito es el **vertimiento de residuos** al desagüe, no el consumo de esos alimentos."
+    },
+    {
+      "optionId": "B",
+      "optionText": "El uso de una marca de aceite que se emplea en las cocinas de los restaurantes y las casas.",
+      "optionFeedback": "- **Incorrecta.** El texto no menciona que una marca específica cause el problema. La contaminación se debe al manejo inadecuado del aceite residual."
+    },
+    {
+      "optionId": "C",
+      "optionText": "El vertimiento al desagüe de aceites residuales de los hogares, la industria y los restaurantes.",
+      "optionFeedback": "- **Correcta.** Esta opción coincide exactamente con la causa descrita: los aceites residuales llegan por las tuberías de desagüe a la fuente de agua y la contaminan."
+    },
+    {
+      "optionId": "D",
+      "optionText": "El tipo de maquinaria obsoleta que utilizan las diferentes industrias que se ubican en el barrio.",
+      "optionFeedback": "- **Incorrecta.** Aunque una maquinaria obsoleta podría generar otros problemas, el texto identifica como foco contaminante los **aceites vertidos al desagüe**."
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "questionLabel": "Pregunta 15",
+  "questionId": "q_15",
+  "sectionText": "¿Dónde puede ver estos avisos?\n\nEn las preguntas \\(11 - 15\\), marque \\(A\\), \\(B\\) o \\(C\\) en su hoja de respuestas.",
+  "questionImageAiDescription": "Decorative rectangular framed notice with two lines of text. First line: \"Big bedrooms with TVs\". Second line in parentheses: \"Breakfast at 8:30 a.m.\"",
+  "questionText": "Pregunta 15: Big bedrooms with TVs\n\\(\\text{Breakfast at } 8{:}30\\text{ a.m.}\\)",
+  "correctOptionId": "A",
+  "aiExplanation": "- **Core problem:** Decide where a notice about bedrooms and breakfast would appear.\n- **Relevant data:** *Bedrooms with TVs* and *Breakfast at \\(8{:}30\\) a.m.* are features of accommodation.\n- **Method:** Match these services with the correct place.\n- **Conclusion:** This sign belongs **in a hotel**. The correct answer is **A**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "in a hotel",
+      "optionFeedback": "- **Correct.** Hotels offer bedrooms and breakfast, so this notice fits that context perfectly."
+    },
+    {
+      "optionId": "B",
+      "optionText": "in a cafeteria",
+      "optionFeedback": "- **Incorrect.** A cafeteria may serve breakfast, but it does not offer bedrooms with TVs."
+    },
+    {
+      "optionId": "C",
+      "optionText": "in a sports center",
+      "optionFeedback": "- **Incorrect.** A sports center is for exercise and activities, not hotel-style bedrooms and breakfast."
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 11",
+  "questionId": "q_11",
+  "questionImageAiDescription": "Esquema del folículo piloso en corte. Se observan etiquetas: Cabello, Superficie de la piel, Sebo, Folículo, Glándula sebácea y Célula capilar. A la derecha hay un diagrama celular: una \"Célula madre\" \\(2n\\) entra en \"Mitosis\" y produce dos células hijas también marcadas \\(2n\\). Debajo se lee \"Producción de clones de la célula madre\" y una nota \"\\(n =\\) número de cromosomas\".",
+  "questionText": "Pregunta 11: El cuero cabelludo se compone de una parte fibrosa, formada de queratina (cabello o pelo), y una parte celular. En las células capilares sucede la división celular solamente mediante el proceso de mitosis. Estas células nuevas secretan las fibras de queratina, como se muestra en la figura.\n\n¿Qué papel específico cumple la mitosis en el pelo?",
+  "correctOptionId": "C",
+  "aiExplanation": "- **Problema central:** determinar la función de la mitosis en el crecimiento del pelo.\n- **Datos relevantes:** la figura muestra que una célula madre \\(2n\\) por mitosis produce dos células hijas \\(2n\\), es decir, clones con el mismo número de cromosomas.\n- **Análisis:** la mitosis aumenta el número de células del folículo piloso, lo que permite producir más queratina y crecer el pelo. No genera recombinación ni cambia el número de cromosomas.\n- **Conclusión:** la respuesta correcta es **C**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "Permite la variabilidad genética del pelo, mediante la recombinación.",
+      "optionFeedback": "- **Incorrecta.** La recombinación genética es característica de la meiosis, no de la mitosis."
+    },
+    {
+      "optionId": "B",
+      "optionText": "Produce células madre, a partir de una fibra de queratina.",
+      "optionFeedback": "- **Incorrecta.** La queratina es una fibra producida por las células; no origina células madre."
+    },
+    {
+      "optionId": "C",
+      "optionText": "Permite el crecimiento del pelo, al aumentar las células del folículo.",
+      "optionFeedback": "- **Correcta.** La mitosis incrementa la cantidad de células del folículo piloso y así favorece el crecimiento del pelo."
+    },
+    {
+      "optionId": "D",
+      "optionText": "Produce células con diferente número de cromosomas.",
+      "optionFeedback": "- **Incorrecta.** En la mitosis se conserva el número cromosómico; las células hijas siguen siendo \\(2n\\)."
+    }
+  ]
+}

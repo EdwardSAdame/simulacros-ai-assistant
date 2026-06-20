@@ -1,0 +1,29 @@
+{
+  "questionLabel": "Pregunta 9",
+  "questionId": "q_09",
+  "questionText": "Pregunta 9: En un laboratorio, un estudiante debe transportar los materiales para un experimento utilizando una mesa con ruedas. Para esto, el estudiante ejerce primero una fuerza a la mesa, que aumenta a medida que se desplaza hasta recorrer \\(4\\ \\text{m}\\); luego, ejerce una fuerza constante hasta finalizar el recorrido a los \\(6\\ \\text{m}\\). Teniendo en cuenta la información anterior, ¿cuál de las siguientes gráficas representa la fuerza como función de la posición en esta situación?",
+  "correctOptionId": "C",
+  "aiExplanation": "- **Problema central:** elegir la gráfica de fuerza en función de la posición.\n- **Datos relevantes:**\n  - desde \\(0\\) hasta \\(4\\ \\text{m}\\), la fuerza **aumenta**;\n  - desde \\(4\\) hasta \\(6\\ \\text{m}\\), la fuerza es **constante**.\n- **Análisis:** la única opción con un tramo creciente seguido de una meseta horizontal es la **C**.\n- **Conclusión:** la respuesta correcta es **C**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "[Imagen de la opción: Gráfica fuerza vs. desplazamiento. Desde \\(0\\) hasta \\(4\\ \\text{m}\\) la fuerza es aproximadamente constante. De \\(4\\) a \\(6\\ \\text{m}\\) la fuerza aumenta linealmente.]",
+      "optionFeedback": "- **Incorrecta.** Presenta primero fuerza constante y luego creciente, exactamente al revés de lo descrito."
+    },
+    {
+      "optionId": "B",
+      "optionText": "[Imagen de la opción: Gráfica fuerza vs. desplazamiento. Desde \\(0\\) hasta \\(4\\ \\text{m}\\) la fuerza es aproximadamente constante. De \\(4\\) a \\(6\\ \\text{m}\\) la fuerza disminuye linealmente.]",
+      "optionFeedback": "- **Incorrecta.** No muestra el aumento inicial de la fuerza hasta \\(4\\ \\text{m}\\)."
+    },
+    {
+      "optionId": "C",
+      "optionText": "[Imagen de la opción: Gráfica fuerza vs. desplazamiento. Desde \\(0\\) hasta \\(4\\ \\text{m}\\) la fuerza aumenta linealmente. De \\(4\\) a \\(6\\ \\text{m}\\) la fuerza permanece constante en un valor alto.]",
+      "optionFeedback": "- **Correcta.** Representa exactamente un incremento de fuerza hasta \\(4\\ \\text{m}\\) y luego una fuerza constante hasta \\(6\\ \\text{m}\\)."
+    },
+    {
+      "optionId": "D",
+      "optionText": "[Imagen de la opción: Gráfica fuerza vs. desplazamiento. Desde \\(0\\) hasta \\(4\\) o \\(5\\ \\text{m}\\) la fuerza disminuye linealmente. Luego permanece constante hasta \\(6\\ \\text{m}\\).]",
+      "optionFeedback": "- **Incorrecta.** Muestra una disminución inicial de la fuerza, cuando el enunciado indica que **aumenta**."
+    }
+  ]
+}

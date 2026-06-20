@@ -1,0 +1,29 @@
+{
+  "questionLabel": "Pregunta 9",
+  "questionId": "q_09",
+  "questionText": "Pregunta 9: En un municipio, un grupo de mineros artesanales ha aumentado sus ingresos al encontrar otro en un punto del río en el cual se puede extraer oro con la ayuda de mercurio. La comunidad del municipio aledaño se ha visto afectada por esta situación, porque el río se ha contaminado con los desechos tóxicos que genera la actividad minera y es la única fuente de agua que tienen los habitantes para el consumo y riego de cultivos. Ante esto, la alcaldesa del municipio considera necesario establecer una normatividad que regule este tipo de actividades.\n\n¿Cuál es la razón que mejor justifica por qué debería establecerse allí una normatividad que regule las actividades de extracción minera en el municipio?",
+  "correctOptionId": "B",
+  "aiExplanation": "- **Problema central:** justificar por qué debe regularse la extracción minera con mercurio.\n- **Datos clave:**\n  - Los mineros aumentan ingresos \\(trabajo\\).\n  - La comunidad vecina sufre contaminación del río, única fuente de agua \\(salud y ambiente sano\\).\n- **Razonamiento:**\n  - La regulación debe equilibrar derechos en tensión: el derecho al trabajo de los mineros y los derechos colectivos e individuales de la población afectada.\n  - Una norma sirve para proteger la salud y el ambiente sin desconocer totalmente la actividad económica.\n- **Conclusión:** la mejor justificación es garantizar simultáneamente salud, ambiente sano y trabajo. ",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "Para que los mineros busquen más lugares de extracción de oro sin tener problemas con las autoridades.",
+      "optionFeedback": "- **Incorrecta.** Regular no significa facilitar expansión sin límites.\n- La necesidad de la norma surge por el daño al río y a la comunidad, no por evitar problemas de autoridad a los mineros."
+    },
+    {
+      "optionId": "B",
+      "optionText": "Para garantizar los derechos a la salud y a un ambiente sano de los pobladores y el derecho de los mineros al trabajo.",
+      "optionFeedback": "- **Correcta.** La regulación busca equilibrar el **derecho al trabajo** con los derechos de la comunidad a la **salud** y a un **ambiente sano**, afectados por la contaminación con mercurio."
+    },
+    {
+      "optionId": "C",
+      "optionText": "Para que se pueda subsidiar la compra de agua para los pobladores, por medio de las ganancias que genera la explotación minera.",
+      "optionFeedback": "- **Incorrecta.** La respuesta no soluciona el problema de fondo: la contaminación de la única fuente de agua.\n- Además, la regulación no se justifica principalmente para crear subsidios, sino para **prevenir y controlar el daño ambiental**."
+    },
+    {
+      "optionId": "D",
+      "optionText": "Para establecer periodos de alternancia en la extracción del oro, para que los mineros descansen y permitan que el agua no se contamine tanto.",
+      "optionFeedback": "- **Incorrecta.** La idea de alternancia y descanso no enfrenta adecuadamente el uso de mercurio ni protege de manera suficiente el agua.\n- La regulación necesaria es más amplia y apunta a derechos fundamentales y ambientales."
+    }
+  ]
+}

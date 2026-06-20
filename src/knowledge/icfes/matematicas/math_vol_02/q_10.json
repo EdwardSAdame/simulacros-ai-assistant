@@ -1,0 +1,29 @@
+{
+  "questionLabel": "Pregunta 10",
+  "questionId": "q_10",
+  "questionText": "Pregunta 10: En un examen de optometría aplicado a los empleados de una compañía, \\(\\frac{6}{20}\\) obtuvieron una puntuación en su agudeza visual mayor o igual que \\(80\\) puntos (sobre \\(100\\)), \\(160\\) obtuvieron una puntuación mayor o igual que \\(60\\) puntos y menor que \\(80\\) puntos, y \\(\\frac{1}{3}\\) obtuvieron una puntuación mayor o igual que \\(40\\) puntos y menor que \\(60\\) puntos.\n\nCon el propósito de determinar la cantidad de empleados que obtuvieron una puntuación mayor o igual que \\(0\\) y menor que \\(20\\) puntos en el examen de optometría, ¿cuál de las siguientes opciones presenta los datos que hacen falta para determinar dicha cantidad?",
+  "correctOptionId": "C",
+  "aiExplanation": "- **Problema central:** hallar cuántos empleados están en el intervalo \\([0,20)\\).\n- Los intervalos del examen son:\n  - \\([80,100]\\): se da una fracción \\(\\frac{6}{20}=\\frac{3}{10}\\).\n  - \\([60,80)\\): se da \\(160\\) empleados.\n  - \\([40,60)\\): se da la fracción \\(\\frac{1}{3}\\).\n  - Faltan \\([20,40)\\) y \\([0,20)\\).\n- Para calcular \\([0,20)\\), se necesita conocer el **total de empleados** y además cuántos están en \\([20,40)\\), porque ese grupo también falta en la distribución.\n- **Conclusión:** los datos faltantes son el total de empleados y la cantidad de empleados con puntuación mayor o igual que \\(20\\) y menor que \\(40\\).",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "El total de empleados a los que fue realizado el examen y la fracción que representa a los empleados que obtuvieron una puntuación mayor o igual que \\(60\\) puntos y menor que \\(80\\) puntos.",
+      "optionFeedback": "**Incorrecta.** Aunque el total ayudaría, la fracción del intervalo \\([60,80)\\) puede deducirse del dato \\(160\\) una vez se conozca el total; sigue faltando el grupo \\([20,40)\\)."
+    },
+    {
+      "optionId": "B",
+      "optionText": "El total de empleados a los que fue realizado el examen y el número de empleados que obtuvieron una puntuación mayor o igual que \\(80\\) puntos.",
+      "optionFeedback": "**Incorrecta.** Con eso aún faltaría saber cuántos están entre \\(20\\) y \\(40\\) puntos."
+    },
+    {
+      "optionId": "C",
+      "optionText": "El total de empleados a los que fue realizado el examen y la cantidad de empleados que obtuvieron una puntuación mayor o igual que \\(20\\) puntos y menor que \\(40\\) puntos.",
+      "optionFeedback": "**Correcta.** Con el total se pueden convertir las fracciones en cantidades y, restando además el grupo \\([20,40)\\), se obtiene el número en \\([0,20)\\)."
+    },
+    {
+      "optionId": "D",
+      "optionText": "El total de empleados a los que fue realizado el examen y el número entero positivo de empleados que obtuvieron una puntuación mayor o igual que \\(40\\) puntos y menor que \\(60\\) puntos.",
+      "optionFeedback": "**Incorrecta.** Ese dato ya se puede calcular con el total, porque se conoce la fracción \\(\\frac{1}{3}\\). Sigue faltando \\([20,40)\\)."
+    }
+  ]
+}

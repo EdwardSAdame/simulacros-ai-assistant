@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 7",
+  "questionId": "q_07",
+  "sectionText": "El \\*fracking\\* es un método para extraer gas y petróleo fracturando las rocas del subsuelo; aunque este método podría fortalecer la economía colombiana, parece no ser completamente seguro. Al respecto, una persona afirmó que \"el \\*fracking\\* es una técnica cuestionada en el mundo porque afecta las aguas, el suelo y el subsuelo, así como la biodiversidad y el paisaje; también puede inducir a la generación de sismos. Su posible desarrollo en el país con mayor diversidad biológica por kilómetro cuadrado del planeta y con una amplia riqueza hídrica amerita consideraciones especiales\".",
+  "questionText": "Pregunta 7: Se podría decir que la persona que hizo la anterior afirmación es un ambientalista, o sea, un individuo comprometido con el cuidado y la conservación de la biodiversidad de un territorio, porque",
+  "correctOptionId": "B",
+  "aiExplanation": "- **Problema central:** identificar por qué la afirmación corresponde a una postura ambientalista.\n- **Datos relevantes:**\n  - Señala afectaciones al agua, suelo, subsuelo, biodiversidad y paisaje.\n  - Destaca la especial riqueza biológica e hídrica de Colombia.\n- **Método lógico:** elegir la opción que se centre en la protección de fauna, flora y ecosistemas, no en otros aspectos secundarios.\n- **Conclusión:** se considera ambientalista porque **advierte el impacto del fracking sobre la biodiversidad** del país.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "estudia los posibles sismos que puede causar el fracking en un país con alto nivel de biodiversidad.",
+      "optionFeedback": "- **Incorrecta.** Los sismos se mencionan, pero como un efecto más. Lo que define la postura ambientalista es la preocupación por los ecosistemas y la biodiversidad."
+    },
+    {
+      "optionId": "B",
+      "optionText": "advierte sobre el impacto que puede tener este método en la fauna y flora del país con mayor diversidad biológica.",
+      "optionFeedback": "- **Correcta.** La afirmación subraya los daños sobre agua, suelo, biodiversidad y paisaje, lo que refleja una defensa directa de la fauna, la flora y los ecosistemas."
+    },
+    {
+      "optionId": "C",
+      "optionText": "cree que es más importante la crisis económica del país que el cuidado y la conservación de la biodiversidad.",
+      "optionFeedback": "- **Incorrecta.** La persona no prioriza la economía sobre el ambiente; precisamente pide precaución por los riesgos ecológicos."
+    },
+    {
+      "optionId": "D",
+      "optionText": "está a favor de la precaución, debido a que no es posible saber si un método tan inseguro podrá generar un beneficio económico real.",
+      "optionFeedback": "- **Incorrecta.** La precaución aparece, pero el rasgo ambientalista no se define por dudar del beneficio económico, sino por proteger la biodiversidad."
+    }
+  ]
+}

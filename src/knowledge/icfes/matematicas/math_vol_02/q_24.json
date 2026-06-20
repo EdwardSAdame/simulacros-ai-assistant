@@ -1,0 +1,29 @@
+{
+  "questionLabel": "Pregunta 24",
+  "questionId": "q_24",
+  "questionText": "Pregunta 24: La calculadora de un computador quedó mal configurada y, ahora, al pedirle que haga la multiplicación entre dos números, ejecuta el siguiente proceso:\n\n- Suma los dos números.\n- Eleva el resultado de la suma al cuadrado.\n- Al resultado del paso anterior le suma \\(1\\).\n\n¿Qué resultado obtendrá una persona que le pida a esta calculadora el producto entre \\(-1\\) y \\(5\\)?",
+  "correctOptionId": "A",
+  "aiExplanation": "- **Problema central:** aplicar el procedimiento defectuoso de la calculadora a \\(-1\\) y \\(5\\).\n- **Paso 1:** sumar:\n  \\[\n  -1+5=4\n  \\]\n- **Paso 2:** elevar al cuadrado:\n  \\[\n  4^2=16\n  \\]\n- **Paso 3:** sumar \\(1\\):\n  \\[\n  16+1=17\n  \\]\n- **Conclusión:** la calculadora mostrará **\\(17\\)**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "\\(17\\)",
+      "optionFeedback": "**Correcta.** El proceso indicado produce \\(({-1}+5)^2+1=4^2+1=16+1=17\\)."
+    },
+    {
+      "optionId": "B",
+      "optionText": "\\(26\\)",
+      "optionFeedback": "**Incorrecta.** No resulta del proceso dado."
+    },
+    {
+      "optionId": "C",
+      "optionText": "\\(-5\\)",
+      "optionFeedback": "**Incorrecta.** Ese sería el producto real entre \\(-1\\) y \\(5\\), pero la calculadora no multiplica correctamente."
+    },
+    {
+      "optionId": "D",
+      "optionText": "\\(-15\\)",
+      "optionFeedback": "**Incorrecta.** No coincide ni con el producto real ni con el procedimiento defectuoso."
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 15",
+  "questionId": "q_15",
+  "sectionImageAiDescription": "Tabla matemática de 4 columnas y 5 filas (incluyendo la fila de encabezados). Para evitar desbordamientos y colisiones, la figura debe ser ancha y las celdas con texto largo deben incluir saltos de línea (text wrap). Fila 1 (Encabezados): \"Mes\", \"Dinero ahorrado\\nal inicio del mes\", \"Dinero ahorrado\\nal finalizar el mes\", \"Dinero que hace falta\\npara completar\\nel ahorro\". Fila 2: \"Enero\", \\(\\$100.000\\), \\(\\$130.000\\), \\(\\$670.000\\). Fila 3: \"Febrero\", \\(\\$130.000\\), \\(\\$160.000\\), \\(\\$640.000\\). Fila 4: \"Marzo\", \\(\\$160.000\\), \\(\\$190.000\\), \\(\\$610.000\\). Fila 5: \"Abril\", \\(\\$190.000\\), \\(\\$220.000\\), \\(\\$580.000\\). Todo el texto y los números deben estar alineados al centro.",
+  "questionText": "Pregunta 15: Un estudiante está ahorrando para un paseo que tiene un costo de \\($800.000\\); él empezó su ahorro en enero con \\($100.000\\), que su abuela le regaló, y, al final de cada mes está ahorrando cierta cantidad de dinero. La tabla resume el progreso del ahorro del estudiante durante los primeros cuatro meses.\n\n¿Cuál es la tendencia del dinero ahorrado al finalizar cada mes?",
+  "correctOptionId": "B",
+  "aiExplanation": "- **Problema central:** identificar cómo cambia el dinero ahorrado al finalizar cada mes.\n- **Datos de la columna correspondiente:**\n  - Enero: \\(130.000\\)\n  - Febrero: \\(160.000\\)\n  - Marzo: \\(190.000\\)\n  - Abril: \\(220.000\\)\n- **Diferencias sucesivas:**\n  - \\(160.000-130.000=30.000\\)\n  - \\(190.000-160.000=30.000\\)\n  - \\(220.000-190.000=30.000\\)\n- **Conclusión:** el dinero ahorrado al finalizar cada mes **aumenta \\(\\$30.000\\)** cada mes.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "Disminuye \\($30.000\\) cada mes.",
+      "optionFeedback": "- **Incorrecta.** Los valores van subiendo, no bajando."
+    },
+    {
+      "optionId": "B",
+      "optionText": "Aumenta \\($30.000\\) cada mes.",
+      "optionFeedback": "- **Correcta.** Cada mes el valor final aumenta exactamente en \\(\\$30.000\\)."
+    },
+    {
+      "optionId": "C",
+      "optionText": "Aumenta \\($100.000\\) cada mes.",
+      "optionFeedback": "- **Incorrecta.** El aumento observado es de \\(\\$30.000\\), no de \\(\\$100.000\\)."
+    },
+    {
+      "optionId": "D",
+      "optionText": "Disminuye \\($100.000\\) cada mes.",
+      "optionFeedback": "- **Incorrecta.** No disminuye; de hecho aumenta mes a mes."
+    }
+  ]
+}

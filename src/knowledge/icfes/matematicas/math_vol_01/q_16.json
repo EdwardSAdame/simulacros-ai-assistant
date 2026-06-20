@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 16",
+  "questionId": "q_16",
+  "sectionImageAiDescription": "Tabla con \\(2\\) columnas: \"Vehículo\" y \"Número de piezas reemplazadas\". Filas: vehículo \\(1\\): \\(6\\); vehículo \\(2\\): \\(5\\); vehículo \\(3\\): \\(10\\).",
+  "questionText": "Pregunta 16: La tabla muestra el registro que llevó un mecánico automotriz de las piezas que tuvieron que reemplazarse durante el mantenimiento de tres vehículos.\n\nDe acuerdo con esta información, ¿cuál es el promedio del número de piezas reemplazadas de los tres vehículos?",
+  "correctOptionId": "B",
+  "aiExplanation": "- **Problema central:** hallar el promedio de piezas reemplazadas.\n- **Datos:** \\(6, 5, 10\\).\n- **Cálculo:**\n  \\[\n  \\frac{6+5+10}{3}=\\frac{21}{3}=7\n  \\]\n- **Conclusión:** el promedio es **\\(7\\)**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "\\(21\\)",
+      "optionFeedback": "- **Incorrecta.** \\(21\\) es la suma total, no el promedio."
+    },
+    {
+      "optionId": "B",
+      "optionText": "\\(7\\)",
+      "optionFeedback": "- **Correcta.** El promedio es \\(21\\div 3=7\\)."
+    },
+    {
+      "optionId": "C",
+      "optionText": "\\(10\\)",
+      "optionFeedback": "- **Incorrecta.** \\(10\\) es el mayor valor, pero no el promedio."
+    },
+    {
+      "optionId": "D",
+      "optionText": "\\(6\\)",
+      "optionFeedback": "- **Incorrecta.** \\(6\\) es uno de los datos, no la media."
+    }
+  ]
+}

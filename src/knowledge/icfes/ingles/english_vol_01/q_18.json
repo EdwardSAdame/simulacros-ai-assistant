@@ -1,0 +1,25 @@
+{
+  "questionLabel": "Pregunta 18",
+  "questionId": "q_18",
+  "sectionText": "Complete las cinco conversaciones.\n\nEn las preguntas \\(16 - 20\\), marque \\(A\\), \\(B\\) o \\(C\\) en su hoja de respuestas.",
+  "questionText": "Pregunta 18: Why are they hiding?",
+  "correctOptionId": "B",
+  "aiExplanation": "- **Core problem:** Choose the response that answers the question *Why are they hiding?*\n- **Relevant data:** A suitable reply should either give a reason or admit not knowing.\n- **Method:** Compare the options for conversational logic.\n- **Conclusion:** *I've got no idea* is the only natural reply. The correct answer is **B**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "Come here now!",
+      "optionFeedback": "- **Incorrect.** This is a command, not an answer to the question."
+    },
+    {
+      "optionId": "B",
+      "optionText": "I've got no idea.",
+      "optionFeedback": "- **Correct.** This is a natural response when you do not know why they are hiding."
+    },
+    {
+      "optionId": "C",
+      "optionText": "Is it near?",
+      "optionFeedback": "- **Incorrect.** This asks another question and does not answer the original one."
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "questionLabel": "Pregunta 20",
+  "questionId": "q_20",
+  "questionText": "Pregunta 20: Al entrar a un túnel, un carro que lleva una velocidad de \\(10\\ \\frac{\\text{m}}{\\text{s}}\\), acelera a \\(3\\ \\frac{\\text{m}}{\\text{s}^2}\\) durante \\(15\\) segundos, que es lo que dura recorriéndolo. La longitud del túnel se puede calcular mediante la siguiente fórmula:\n\n\\[\n\\left(10\\frac{\\text{m}}{\\text{s}}\\right)(15\\text{ s})+\\frac{1}{2}\\left(3\\frac{\\text{m}}{\\text{s}^2}\\right)(15\\text{ s})^2\n\\]\n\nAl ver la fórmula, una persona afirma que esta es equivalente a:\n\n\\[\n15\\text{ s}\\times\\left(10\\frac{\\text{m}}{\\text{s}}+\\frac{1}{2}\\left(3\\frac{\\text{m}}{\\text{s}^2}\\right)\\right)\n\\]\n\n¿Es verdadera la afirmación de la persona?",
+  "correctOptionId": "B",
+  "aiExplanation": "- **Problema central:** verificar si la segunda expresión es equivalente a la primera.\n- **Expresión original:**\n  \\[\n  \\left(10\\frac{\\text{m}}{\\text{s}}\\right)(15\\text{ s})+\\frac{1}{2}\\left(3\\frac{\\text{m}}{\\text{s}^2}\\right)(15\\text{ s})^2\n  \\]\n- **Análisis algebraico:**\n  - Sí se puede factorizar un \\(15\\text{ s}\\) común, pero quedaría:\n    \\[\n    15\\text{ s}\\left(10\\frac{\\text{m}}{\\text{s}}+\\frac{1}{2}\\left(3\\frac{\\text{m}}{\\text{s}^2}\\right)(15\\text{ s})\\right)\n    \\]\n  - La persona omitió un factor adicional de \\(15\\text{ s}\\) que proviene de \\((15\\text{ s})^2\\).\n- **Conclusión:** la afirmación es **falsa** porque omitió que el tiempo está elevado al cuadrado en el segundo término.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "Sí, porque lo que hizo fue factorizar el tiempo que tarda en recorrer el túnel.",
+      "optionFeedback": "- **Incorrecta.** La factorización está incompleta, porque el segundo término contiene \\((15\\text{ s})^2\\), no solo \\(15\\text{ s}\\)."
+    },
+    {
+      "optionId": "B",
+      "optionText": "No, porque omitió que hay unos \\(15\\) segundos elevados al cuadrado.",
+      "optionFeedback": "- **Correcta.** Al pasar a la nueva expresión desaparece un factor \\(15\\text{ s}\\) del término cuadrático."
+    },
+    {
+      "optionId": "C",
+      "optionText": "Sí, porque el exponente \\(2\\), al que está elevado el tiempo, se puede cancelar.",
+      "optionFeedback": "- **Incorrecta.** No existe ninguna operación válida que permita *cancelar* ese exponente en este contexto."
+    },
+    {
+      "optionId": "D",
+      "optionText": "No, porque también se tiene que factorizar el fraccionario \\(\\frac{1}{2}\\).",
+      "optionFeedback": "- **Incorrecta.** El problema no es el factor \\(\\frac{1}{2}\\), sino la pérdida de un factor de tiempo."
+    }
+  ]
+}

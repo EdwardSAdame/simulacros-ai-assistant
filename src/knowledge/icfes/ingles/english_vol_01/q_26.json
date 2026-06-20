@@ -1,0 +1,25 @@
+{
+  "questionLabel": "Pregunta 26",
+  "questionId": "q_26",
+  "sectionText": "Lea el texto y seleccione la palabra correcta para cada espacio.\n\nEn las preguntas \\(21 - 28\\), marque \\(A\\), \\(B\\) o \\(C\\) en su hoja de respuestas.\n\nThis strange story began in April \\(1955\\). On a foggy morning, Emma Gatewood, an American school teacher, told her family, “I will go for a walk after breakfast.” She left her small Ohio town with the clothes she had on and less \\((21)\\) ______ US$\\(200\\). No one \\((22)\\) ______ guess her plans: not one of her \\(11\\) children or her \\(23\\) grandchildren.\n\nAt the age of \\(67\\), Emma became the first woman \\((23)\\) ______ walked the Appalachian Trail, a \\(2{,}050\\)-mile way \\((24)\\) ______ forests and mountains. She didn't have \\((25)\\) ______ money or good equipment, but during her long journey, people helped her \\((26)\\) ______ she went.\n\nToday, even sixty years later, “Grandma” Gatewood’s story is \\((27)\\) ______ amazing. Her story shows how any person can \\((28)\\) ______ stronger than they were before.",
+  "questionText": "Pregunta 26: Question \\((26)\\): She didn't have \\((104)\\) ______ money or good equipment, but during her long journey, people helped her \\((105)\\) ______ she went.",
+  "correctOptionId": "B",
+  "aiExplanation": "- **Core problem:** Complete *“people helped her ___ she went.”*\n- **Relevant data:** The sentence refers to places along her journey.\n- **Method:** Choose the word related to all places.\n- **Conclusion:** The correct word is **everywhere**, so the answer is **B**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "everyone",
+      "optionFeedback": "- **Incorrect.** *Everyone* refers to people, but the sentence needs a word about places."
+    },
+    {
+      "optionId": "B",
+      "optionText": "everywhere",
+      "optionFeedback": "- **Correct.** **Everywhere** means in every place she went during the journey."
+    },
+    {
+      "optionId": "C",
+      "optionText": "everything",
+      "optionFeedback": "- **Incorrect.** *Everything* refers to all things, not all places."
+    }
+  ]
+}

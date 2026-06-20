@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 39",
+  "questionId": "q_39",
+  "sectionText": "Los computadores hacen lo que se les manda. Servilmente obedecen cualquier instrucción dada en su propio lenguaje de programación. Así es como hacen cosas útiles como procesar textos y realizar operaciones en hojas de cálculo. Pero, como inevitable subproducto, son igualmente robóticos a la hora de obedecer instrucciones incorrectas. No tienen modo alguno de decir si una instrucción tendrá un buen efecto o uno malo.\n\nSimplemente, obedecen, como se supone que lo hacen los soldados. Es su incuestionable obediencia lo que hace que los computadores sean útiles, y exactamente eso mismo hace que sean inevitablemente vulnerables a la infección de virus y gusanos. Un programa maliciosamente diseñado que diga «cópiame y envíame a todas las direcciones que puedas encontrar en el disco duro» será simplemente obedecido y vuelto a obedecer por los demás computadores de la línea por la que se está enviando, en una expansión exponencial. Es difícil, por no decir imposible, diseñar un computador que sea obedientemente útil y, al mismo tiempo, inmune a la infección.",
+  "questionText": "Pregunta 39: De acuerdo con la información dada en el texto, si su computador es infectado por un programa con las características descritas por el autor,",
+  "correctOptionId": "B",
+  "aiExplanation": "- **Problema central:** aplicar al caso concreto la descripción del programa malicioso.\n- El autor explica que un programa que diga *cópiame y envíame a todas las direcciones que puedas encontrar en el disco duro* será obedecido.\n- Por tanto, un computador infectado realizará exactamente esa acción.\n- **Conclusión:** la respuesta correcta es **B**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "no podrá obedecer otro tipo de instrucciones dadas en el lenguaje de programación.",
+      "optionFeedback": "- **Incorrecta.** El texto no afirma que deje de obedecer otras instrucciones; solo explica que obedecerá también la instrucción maliciosa."
+    },
+    {
+      "optionId": "B",
+      "optionText": "enviará el programa a todas las direcciones que encuentre en el disco duro.",
+      "optionFeedback": "- **Correcta.** Eso reproduce literalmente el comportamiento descrito por el autor para un programa malicioso de autorreplicación."
+    },
+    {
+      "optionId": "C",
+      "optionText": "no podrá realizar acciones útiles como procesar textos o realizar hojas de cálculo.",
+      "optionFeedback": "- **Incorrecta.** El texto no dice que el computador pierda necesariamente toda funcionalidad útil."
+    },
+    {
+      "optionId": "D",
+      "optionText": "será incapaz de ser útil y, al mismo tiempo, invulnerable a diferentes virus.",
+      "optionFeedback": "- **Incorrecta.** Esta opción reformula una idea general del texto, pero no responde al caso específico de qué hará el computador infectado."
+    }
+  ]
+}

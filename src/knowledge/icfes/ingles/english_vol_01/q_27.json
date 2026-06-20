@@ -1,0 +1,25 @@
+{
+  "questionLabel": "Pregunta 27",
+  "questionId": "q_27",
+  "sectionText": "Lea el texto y seleccione la palabra correcta para cada espacio.\n\nEn las preguntas \\(21 - 28\\), marque \\(A\\), \\(B\\) o \\(C\\) en su hoja de respuestas.\n\nThis strange story began in April \\(1955\\). On a foggy morning, Emma Gatewood, an American school teacher, told her family, “I will go for a walk after breakfast.” She left her small Ohio town with the clothes she had on and less \\((21)\\) ______ US$\\(200\\). No one \\((22)\\) ______ guess her plans: not one of her \\(11\\) children or her \\(23\\) grandchildren.\n\nAt the age of \\(67\\), Emma became the first woman \\((23)\\) ______ walked the Appalachian Trail, a \\(2{,}050\\)-mile way \\((24)\\) ______ forests and mountains. She didn't have \\((25)\\) ______ money or good equipment, but during her long journey, people helped her \\((26)\\) ______ she went.\n\nToday, even sixty years later, “Grandma” Gatewood’s story is \\((27)\\) ______ amazing. Her story shows how any person can \\((28)\\) ______ stronger than they were before.",
+  "questionText": "Pregunta 27: Question \\((27)\\): Today, even sixty years later, “Grandma” Gatewood’s story is \\((106)\\) ______ amazing.",
+  "correctOptionId": "B",
+  "aiExplanation": "- **Core problem:** Complete *“her story is ___ amazing.”*\n- **Relevant data:** The expression *even sixty years later* suggests the story continues to be amazing now.\n- **Method:** Choose the adverb showing continuation.\n- **Conclusion:** The best answer is **still**, so the correct option is **B**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "ever",
+      "optionFeedback": "- **Incorrect.** *Ever amazing* is not natural in this sentence."
+    },
+    {
+      "optionId": "B",
+      "optionText": "still",
+      "optionFeedback": "- **Correct.** **Still** shows that after many years, the story continues to be amazing."
+    },
+    {
+      "optionId": "C",
+      "optionText": "already",
+      "optionFeedback": "- **Incorrect.** *Already amazing* does not fit the meaning of continuation across time."
+    }
+  ]
+}

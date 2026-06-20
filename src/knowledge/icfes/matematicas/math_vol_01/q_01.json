@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 1",
+  "questionId": "q_01",
+  "sectionImageAiDescription": "Tabla de \\(2\\) columnas y \\(8\\) filas, incluyendo encabezado. Encabezados: columna \\(1\\): \"Madre\"; columna \\(2\\): \"Edad (años)\". Filas de datos: fila \\(1\\): madre \\(1\\), edad \\(21\\); fila \\(2\\): madre \\(2\\), edad \\(26\\); fila \\(3\\): madre \\(3\\), edad \\(20\\); fila \\(4\\): madre \\(4\\), edad \\(21\\); fila \\(5\\): madre \\(5\\), edad \\(22\\); fila \\(6\\): madre \\(6\\), edad \\(28\\); fila \\(7\\): madre \\(7\\), edad \\(30\\).",
+  "questionText": "Pregunta 1: En la siguiente tabla se evidencian los resultados de una entrevista realizada a siete mujeres, madres de familia, en donde se les preguntó a qué edad tuvieron su primer hijo.\n\nA partir de la información suministrada, ¿cuál es el promedio de las edades?",
+  "correctOptionId": "C",
+  "aiExplanation": "- **Problema central:** hallar el promedio de las edades dadas en la tabla.\n- **Datos relevantes:** \\(21, 26, 20, 21, 22, 28, 30\\).\n- **Cálculo:**\n  - Suma: \\(21+26+20+21+22+28+30=168\\).\n  - Número de datos: \\(7\\).\n  - Promedio: \\(168\\div 7=24\\).\n- **Conclusión:** el promedio de las edades es **\\(24\\)**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "\\(18\\)",
+      "optionFeedback": "- **Incorrecta.** \\(18\\) no corresponde al promedio.\n- Al sumar las edades y dividir entre \\(7\\), se obtiene \\(24\\), no \\(18\\)."
+    },
+    {
+      "optionId": "B",
+      "optionText": "\\(22\\)",
+      "optionFeedback": "- **Incorrecta.** \\(22\\) está por debajo del valor real del promedio.\n- El cálculo correcto es \\(168\\div 7=24\\)."
+    },
+    {
+      "optionId": "C",
+      "optionText": "\\(24\\)",
+      "optionFeedback": "- **Correcta.** La suma de las edades es \\(168\\) y al dividir entre \\(7\\) se obtiene \\(24\\)."
+    },
+    {
+      "optionId": "D",
+      "optionText": "\\(28\\)",
+      "optionFeedback": "- **Incorrecta.** \\(28\\) es una de las edades registradas, pero no el promedio.\n- El promedio verdadero es \\(24\\)."
+    }
+  ]
+}

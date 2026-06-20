@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 24",
+  "questionId": "q_24",
+  "sectionText": "El Gobierno está investigando el impacto que tiene el pez león en los ecosistemas marítimos colombianos y las formas de combatirlo. El pez león, especie originaria de Asia, se ha convertido en una amenaza o \"plaga\" para los ecosistemas marítimos y se ha extendido a las costas del Caribe colombiano. Según un artículo de prensa, este pez genera dos tipos de peligro: \"Por un lado, es una amenaza para el hombre, que puede sufrir accidentes al pisar o tocar sus nocivas púas venenosas, y, por otro, es una amenaza para las especies nativas, pues se alimenta de peces jóvenes que sirven de alimentación para el hombre, como el pargo y el mero\".",
+  "questionText": "Pregunta 24: ¿Para cuál de los siguientes objetivos de investigación del Gobierno sería útil la anterior información?",
+  "correctOptionId": "C",
+  "aiExplanation": "- **Problema central:** determinar para qué objetivo investigativo sirve la información dada.\n- **Datos clave:**\n  - El pez león amenaza a especies nativas porque se alimenta de peces jóvenes.\n  - Eso afecta la fauna local y también puede afectar a humanos.\n- **Razonamiento:**\n  - La información ayuda a identificar una **causa** de disminución de fauna marina en ciertas costas.\n  - No permite calcular cantidades previas exactas ni promover directamente una política económica de caza.\n- **Conclusión:** sirve para investigar factores de disminución de fauna en costas colombianas. ",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "Establecer el impacto económico que provocan las plagas en la fauna y flora del Caribe colombiano.",
+      "optionFeedback": "- **Incorrecta.** La información habla de amenazas ecológicas y riesgos para humanos, pero no aporta datos suficientes para medir **impacto económico**."
+    },
+    {
+      "optionId": "B",
+      "optionText": "Promover la caza del pez león para fortalecer la economía de las zonas pesqueras en el Caribe.",
+      "optionFeedback": "- **Incorrecta.** El texto no ofrece elementos para diseñar una estrategia económica de caza ni para evaluar su conveniencia productiva.\n- Solo describe el riesgo ecológico y sanitario."
+    },
+    {
+      "optionId": "C",
+      "optionText": "Determinar los factores que han provocado una disminución de la fauna en algunas costas colombianas.",
+      "optionFeedback": "- **Correcta.** La información indica que el pez león consume peces jóvenes de especies nativas, por lo que resulta útil para investigar **causas de disminución de fauna** en las costas colombianas."
+    },
+    {
+      "optionId": "D",
+      "optionText": "Establecer la cantidad de especies nativas existentes antes de la aparición del pez león.",
+      "optionFeedback": "- **Incorrecta.** Para eso se necesitarían registros históricos o censos biológicos previos.\n- El texto solo describe el tipo de amenaza actual del pez león."
+    }
+  ]
+}

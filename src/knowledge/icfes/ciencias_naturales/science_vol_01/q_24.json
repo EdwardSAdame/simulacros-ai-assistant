@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 24",
+  "questionId": "q_24",
+  "questionImageAiDescription": "Diagrama de un rociador emitiendo un abanico. Se muestran arcos concéntricos a distancias de 1 m, 2 m, 3 m y 4 m. A 1 m, el área abarcada es 1 unidad completa sombreada. A 2 m, la misma porción del abanico se divide en 4 cuadrículas y solo 1 está sombreada. A 3 m, se divide en 9 cuadrículas con 1 sombreada. A 4 m, se divide en 16 cuadrículas con 1 sombreada. Esto ilustra visualmente cómo la concentración disminuye proporcionalmente al cuadrado de la distancia.",
+  "questionText": "Pregunta 24: Un jardinero utiliza un rociador y observa que a medida que aumenta la distancia, la intensidad de gotas de agua que llega a los cuerpos disminuye. Por ejemplo, a los \\(2\\ \\text{m}\\) de distancia la intensidad será de \\(\\frac{1}{4}\\ \\text{mm}\\), como se muestra en la imagen.\n\nTeniendo en cuenta la información anterior, ¿cómo debe ser la intensidad de gotas a los \\(5\\ \\text{m}\\) de distancia?",
+  "correctOptionId": "C",
+  "aiExplanation": "- **Problema central:** establecer cómo cambia la intensidad de gotas al aumentar la distancia.\n- **Dato clave del esquema:** la intensidad sigue una relación inversa con el cuadrado de la distancia, es decir, \\(I \\propto \\frac{1}{d^2}\\).\n- **Análisis:** si a mayor distancia la misma cantidad de agua se distribuye sobre un área mayor, la intensidad disminuye. A \\(5\\ \\text{m}\\) sería menor aún, específicamente proporcional a \\(\\frac{1}{25}\\).\n- **Conclusión:** la respuesta correcta es **C**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "Menor, porque la cantidad de gotas de agua siempre es igual al aumentar la distancia.",
+      "optionFeedback": "- **Incorrecta.** Aunque la intensidad sí es menor, la justificación es incompleta y no expresa la relación física correcta con el cuadrado de la distancia."
+    },
+    {
+      "optionId": "B",
+      "optionText": "Mayor, porque las gotas de agua al aumentar la distancia son cada vez más grandes.",
+      "optionFeedback": "- **Incorrecta.** El fenómeno mostrado indica disminución de intensidad, no aumento del tamaño de las gotas."
+    },
+    {
+      "optionId": "C",
+      "optionText": "Menor, porque la intensidad es inversamente proporcional al cuadrado de la distancia.",
+      "optionFeedback": "- **Correcta.** El diagrama muestra que la intensidad se distribuye como \\(\\frac{1}{d^2}\\), por lo que a \\(5\\ \\text{m}\\) será menor que a distancias más cortas."
+    },
+    {
+      "optionId": "D",
+      "optionText": "Mayor, porque la intensidad es directamente proporcional al cuadrado de la distancia.",
+      "optionFeedback": "- **Incorrecta.** Es lo contrario: la intensidad disminuye cuando la distancia aumenta."
+    }
+  ]
+}

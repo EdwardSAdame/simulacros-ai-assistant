@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 13",
+  "questionId": "q_13",
+  "questionImageAiDescription": "Tabla con \\(3\\) columnas: Átomo | Protones | Neutrones. Filas:\nÑ | \\(1\\) | \\(0\\)\nX | \\(2\\) | \\(1\\)\nY | \\(1\\) | \\(2\\)\nZ | \\(2\\) | \\(2\\)",
+  "questionText": "Pregunta 13: Dos átomos pertenecen al mismo elemento químico cuando tienen la misma cantidad de protones. De esta forma, si dos átomos tienen la misma cantidad de protones, pero distinta cantidad de neutrones, serán isótopos. En la siguiente tabla, se representa el número de protones y neutrones para algunos átomos.\n\nSegún la información suministrada, ¿cuál de las siguientes parejas de átomos son isótopos?",
+  "correctOptionId": "B",
+  "aiExplanation": "- **Problema central:** identificar una pareja de isótopos.\n- **Criterio:** los isótopos tienen igual número de protones y diferente número de neutrones.\n- **Revisión de pares:**\n  - Ñ: \\(1\\) protón, \\(0\\) neutrones.\n  - Y: \\(1\\) protón, \\(2\\) neutrones.\n  - X y Z también comparten \\(2\\) protones, pero ese par no aparece como opción.\n- **Conclusión:** la pareja correcta entre las opciones es **Ñ y Y**, es decir, **B**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "Ñ y X.",
+      "optionFeedback": "- **Incorrecta.** No tienen el mismo número de protones: Ñ tiene \\(1\\) y X tiene \\(2\\)."
+    },
+    {
+      "optionId": "B",
+      "optionText": "Ñ y Y.",
+      "optionFeedback": "- **Correcta.** Ambos tienen \\(1\\) protón, pero difieren en neutrones: Ñ tiene \\(0\\) y Y tiene \\(2\\)."
+    },
+    {
+      "optionId": "C",
+      "optionText": "Y y X.",
+      "optionFeedback": "- **Incorrecta.** Tienen distinto número de protones: Y tiene \\(1\\) y X tiene \\(2\\)."
+    },
+    {
+      "optionId": "D",
+      "optionText": "Y y Z.",
+      "optionFeedback": "- **Incorrecta.** No pertenecen al mismo elemento porque tienen diferente cantidad de protones."
+    }
+  ]
+}

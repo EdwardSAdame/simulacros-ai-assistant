@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 45",
+  "questionId": "q_45",
+  "sectionText": "Lea el texto y responda las preguntas.\n\nEn las preguntas \\(41 - 45\\), marque \\(A\\), \\(B\\), \\(C\\) o \\(D\\) en su hoja de respuestas.\n\nDoes something about living abroad seem extraordinary to you? I understand. That’s what inspired me to leave America for the first time and set out on my journey to start high school in France. However, I was shocked that there were several things I had absolutely no idea about until I landed in France and took part in daily activities there.\n\nBefore I arrived, I had only experienced foreign exchange students coming to America, never being one. All those students spoke other languages unknown to me. For me, as an English speaker, that was not the case. Once in France, most of my foreign partners spoke English. In some ways, it’s positive that people communicate with you in your own language because it’s convenient. The disadvantage is you never have that secret moment where you can say things, and no one can imagine what you’re saying.\n\nIt will feel shocking to install yourself in a new family’s house, but you can handle this. As you start getting along with them, you can start doing things the way you like them, and it gets cozy. However, there are some things you can’t do your usual way. It’s those little things that separate your life in your home country from your life abroad.\n\nIf you’re thinking about doing this, my advice is “say yes more than you say no.” Of course, there will be times when it is acceptable to say no, but if you’re turning down a weekend of excitement with your classmates or your family there, you’re not taking advantage of your exchange. Part of the reason you are living this adventure is to experience things. Say yes and you will not be disappointed.",
+  "questionText": "Pregunta 45: The best title for this article could be",
+  "correctOptionId": "D",
+  "aiExplanation": "- **Core problem:** Select the most suitable title for the whole article.\n- **Relevant data:** The text is about unexpected realities of being abroad in an exchange program, what the writer discovered, and advice for future students.\n- **Method:** Choose the broadest and most accurate title.\n- **Conclusion:** The best title is **What No One Told you About Going on a Foreign Exchange Program.** The correct answer is **D**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "How to Handle your Life and Not Die in the Attempt.",
+      "optionFeedback": "- **Incorrect.** This is exaggerated and does not match the tone or topic of the article."
+    },
+    {
+      "optionId": "B",
+      "optionText": "The Value of English Not All International Students Realize.",
+      "optionFeedback": "- **Incorrect.** English is only one part of the article, not its overall focus."
+    },
+    {
+      "optionId": "C",
+      "optionText": "The Truth Nobody Told You About French Exchange Students.",
+      "optionFeedback": "- **Incorrect.** The text is not specifically about French exchange students; it is about the writer’s own exchange experience abroad."
+    },
+    {
+      "optionId": "D",
+      "optionText": "What No One Told you About Going on a Foreign Exchange Program.",
+      "optionFeedback": "- **Correct.** This title matches the article’s emphasis on unexpected aspects of exchange life and personal lessons learned."
+    }
+  ]
+}

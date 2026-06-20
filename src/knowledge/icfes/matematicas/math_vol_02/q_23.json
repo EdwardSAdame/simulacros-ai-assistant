@@ -1,0 +1,29 @@
+{
+  "questionLabel": "Pregunta 23",
+  "questionId": "q_23",
+  "questionText": "Pregunta 23: En una tienda se planea ordenar los productos por vitrinas. Hay tres vitrinas y tres tipos de productos: aseo, congelados y golosinas. Las golosinas y los productos de aseo no pueden quedar en vitrinas seguidas. Para esto, uno de los encargados los organiza de la siguiente manera:\n\n**Aseo – Congelados – Golosinas**\n\nEl encargado afirma que esta era la única manera de hacerlo. ¿Es verdadera esta afirmación?",
+  "correctOptionId": "C",
+  "aiExplanation": "- **Problema central:** decidir si la distribución dada es la única posible.\n- Como **aseo** y **golosinas** no pueden quedar seguidos, deben ir en los extremos, y **congelados** debe ir en la vitrina del medio.\n- Pero en los extremos se pueden intercambiar:\n  - Aseo – Congelados – Golosinas\n  - Golosinas – Congelados – Aseo\n- **Conclusión:** no es la única manera. Hay al menos **dos** formas válidas.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "Sí, porque en la vitrina del medio solo pueden estar los congelados.",
+      "optionFeedback": "**Incorrecta.** Aunque el medio sí debe ser congelados, aún pueden intercambiarse aseo y golosinas en los extremos."
+    },
+    {
+      "optionId": "B",
+      "optionText": "No, porque aseo, congelados y golosinas se pueden permutar de seis formas.",
+      "optionFeedback": "**Incorrecta.** Sin restricción habría \\(6\\) permutaciones, pero no todas cumplen la condición de no dejar juntos aseo y golosinas."
+    },
+    {
+      "optionId": "C",
+      "optionText": "No, porque aseo y golosinas se pueden permutar entre sí, y siguen separados.",
+      "optionFeedback": "**Correcta.** Al intercambiar los extremos se obtiene otra organización válida: golosinas – congelados – aseo."
+    },
+    {
+      "optionId": "D",
+      "optionText": "Sí, porque hay una sola permutación entre dos tipos de productos, al dejar fijo uno de ellos.",
+      "optionFeedback": "**Incorrecta.** Dejar fijo a congelados en el centro permite dos permutaciones de los extremos, no una."
+    }
+  ]
+}

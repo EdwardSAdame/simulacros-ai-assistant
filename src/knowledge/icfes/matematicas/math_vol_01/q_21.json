@@ -1,0 +1,29 @@
+{
+  "questionLabel": "Pregunta 21",
+  "questionId": "q_21",
+  "questionText": "Pregunta 21: Arturo quiere calcular el tiempo que se necesita para descargar un archivo de internet que tiene un tamaño de \\(12,6\\) megabytes. Él sabe que en su computador la velocidad de descarga es de \\(300\\) kilobytes por segundo y que \\(1\\) megabyte equivale a \\(1.024\\) kilobytes. ¿Cuál de los siguientes procedimientos **NO** permite calcular el tiempo necesario para descargar el archivo?",
+  "correctOptionId": "B",
+  "aiExplanation": "- **Problema central:** identificar cuál procedimiento **no** calcula correctamente el tiempo.\n- **Relación correcta:**\n  \\[\n  \\text{tiempo} = \\frac{\\text{tamaño del archivo}}{\\text{velocidad}}\n  \\]\n- **Conversión del archivo:**\n  \\[\n  12,6\\text{ MB} = 12,6\\times 1024\\text{ KB}\n  \\]\n- **Entonces:**\n  \\[\n  t=\\frac{12,6\\times 1024}{300}\n  \\]\n- **Revisión de opciones:**\n  - A: \\((12,6\\times 1024)/300\\), correcta.\n  - C: \\((12,6/300)\\times 1024\\), equivalente, correcta.\n  - D: \\((1024/300)\\times 12,6\\), equivalente, correcta.\n  - B: \\((1024\\times 300)/12,6\\), invierte la relación y no da tiempo.\n- **Conclusión:** el procedimiento que **no** sirve es **B**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "**Paso 1.** Multiplicar \\(12,6\\) por \\(1.024\\)\n\n**Paso 2.** Dividir el resultado del paso \\(1\\) entre \\(300\\)",
+      "optionFeedback": "- **Incorrecta como respuesta.** Sí permite calcular el tiempo, porque primero convierte a kilobytes y luego divide entre la velocidad."
+    },
+    {
+      "optionId": "B",
+      "optionText": "**Paso 1.** Multiplicar \\(1.024\\) por \\(300\\)\n\n**Paso 2.** Dividir el resultado del paso \\(1\\) entre \\(12,6\\)",
+      "optionFeedback": "- **Correcta.** Este procedimiento invierte la operación correcta.\n- El tiempo debe ser \\(\\frac{12,6\\times 1024}{300}\\), no \\(\\frac{1024\\times 300}{12,6}\\)."
+    },
+    {
+      "optionId": "C",
+      "optionText": "**Paso 1.** Dividir \\(12,6\\) entre \\(300\\)\n\n**Paso 2.** Multiplicar el resultado del paso \\(1\\) por \\(1.024\\)",
+      "optionFeedback": "- **Incorrecta como respuesta.** Aunque cambia el orden, es equivalente a \\(\\frac{12,6\\times 1024}{300}\\)."
+    },
+    {
+      "optionId": "D",
+      "optionText": "**Paso 1.** Dividir \\(1.024\\) entre \\(300\\)\n\n**Paso 2.** Multiplicar el resultado del paso \\(1\\) por \\(12,6\\)",
+      "optionFeedback": "- **Incorrecta como respuesta.** También es equivalente a la expresión correcta del tiempo de descarga."
+    }
+  ]
+}

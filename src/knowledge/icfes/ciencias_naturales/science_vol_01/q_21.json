@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 21",
+  "questionId": "q_21",
+  "questionImageAiDescription": "Gráfica titulada \"Con presión constante\". Eje vertical: Volumen. Eje horizontal: Temperatura. Se muestra una recta ascendente que pasa cerca del origen, indicando relación lineal directa entre temperatura y volumen a presión constante. Hay líneas punteadas horizontal y vertical que marcan un punto intermedio de la recta.",
+  "questionText": "Pregunta 21: La siguiente gráfica muestra cómo varía la temperatura y el volumen de un gas ideal a presión constante.\n\nUn estudiante tiene un gas ideal en un recipiente cerrado de paredes flexibles sobre el cual se aplica una presión externa constante de \\(1\\ \\text{atm}\\). ¿Qué pasará si hay un aumento en su temperatura?",
+  "correctOptionId": "C",
+  "aiExplanation": "- **Problema central:** predecir qué ocurre al aumentar la temperatura de un gas ideal a presión constante.\n- **Dato clave:** la gráfica indica relación directa entre temperatura y volumen a presión constante, consistente con la ley de Charles.\n- **Análisis:** si aumenta la temperatura, las partículas chocan con más energía; como la presión externa se mantiene constante y el recipiente tiene paredes flexibles, el gas se expande hasta recuperar el equilibrio de presión.\n- **Conclusión:** el volumen **aumenta**. La respuesta correcta es **C**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "Aumentará la presión del gas, ya que se eleva la presión externa.",
+      "optionFeedback": "- **Incorrecta.** La presión externa se mantiene constante en \\(1\\ \\text{atm}\\), no aumenta."
+    },
+    {
+      "optionId": "B",
+      "optionText": "Disminuirá la presión del gas, ya que se eleva la cantidad de choques entre sus partículas.",
+      "optionFeedback": "- **Incorrecta.** Más choques no explican una disminución de presión, y además la condición importante es que la presión total se mantiene constante mientras cambia el volumen."
+    },
+    {
+      "optionId": "C",
+      "optionText": "Aumentará el volumen del gas, ya que se eleva la cantidad de choques entre sus partículas.",
+      "optionFeedback": "- **Correcta.** A presión constante, un aumento de temperatura hace que el gas se expanda y aumente su volumen."
+    },
+    {
+      "optionId": "D",
+      "optionText": "Disminuirá el volumen del gas, ya que se eleva la presión externa.",
+      "optionFeedback": "- **Incorrecta.** La presión externa no aumenta y, según la gráfica dada, al subir la temperatura el volumen aumenta."
+    }
+  ]
+}

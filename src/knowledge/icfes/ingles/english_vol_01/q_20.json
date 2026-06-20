@@ -1,0 +1,25 @@
+{
+  "questionLabel": "Pregunta 20",
+  "questionId": "q_20",
+  "sectionText": "Complete las cinco conversaciones.\n\nEn las preguntas \\(16 - 20\\), marque \\(A\\), \\(B\\) o \\(C\\) en su hoja de respuestas.",
+  "questionText": "Pregunta 20: It seems I'll be the new boss of the business department.",
+  "correctOptionId": "C",
+  "aiExplanation": "- **Core problem:** Choose the best response to someone saying they may become the new boss.\n- **Relevant data:** This is positive news about a promotion.\n- **Method:** Identify the socially appropriate reaction.\n- **Conclusion:** The best response is **Congratulations!**, so the correct answer is **C**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "Excuse me!",
+      "optionFeedback": "- **Incorrect.** This expression is used to get attention or apologize, not to respond to good news."
+    },
+    {
+      "optionId": "B",
+      "optionText": "It's ready!",
+      "optionFeedback": "- **Incorrect.** This does not relate to becoming the new boss."
+    },
+    {
+      "optionId": "C",
+      "optionText": "Congratulations!",
+      "optionFeedback": "- **Correct.** This is the appropriate response to positive news such as a promotion."
+    }
+  ]
+}

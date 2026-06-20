@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 5",
+  "questionId": "q_05",
+  "sectionText": "La filosofía epicúrea tiene una finalidad ética*, pues pretende guiarnos para alcanzar la buena vida. Para el epicureísmo esta es la vida placentera, ya que considera que el fin último de todas nuestras acciones es conseguir placer y evitar dolor; por ello, el epicureísmo identifica el placer con el bien y el dolor con el mal.\n\nEpicuro da por lo menos dos razones complementarias por las cuales considera que el propósito de la buena vida debe ser el placer. Por un lado, menciona el hecho de que, sin necesidad de pensarlo y desde su nacimiento, todas las criaturas vivientes, por instinto, se contentan con el placer y son reacias al dolor. Por otro lado, Epicuro toma a los sentimientos de placer y dolor como criterios esenciales de decisión y conducta, en tanto que son eventos reales que no pueden ser refutados: no hay razón o evidencia alguna que pueda hacernos dudar de que estamos sintiendo dolor o placer; es un hecho real que lo sentimos, pues, ¿cómo podría ser falsa la sensación de dolor ante un golpe?\n\nAsí, si lo que trae placer es lo que elegimos y lo que trae dolor es lo que evitamos, son nuestros sentimientos los que nos permiten deliberar qué debemos elegir y evitar, pues ellos no se equivocan. De esta manera, esa tendencia instintiva y natural hacia buscar el placer y evitar el dolor concuerda con lo que, para el epicureísmo, es el criterio ético más fundamental y verdadero.\n\n*La ética es el campo de la filosofía que estudia los principios para decidir correctamente.",
+  "questionText": "Pregunta 5: Lea la siguiente pregunta tomada del texto:\n\n> \"¿cómo podría ser falsa la sensación de dolor ante un golpe?\"\n\n¿Cuál es la intención del autor con esa pregunta?",
+  "correctOptionId": "C",
+  "aiExplanation": "- **Problema central:** identificar la intención retórica de la pregunta.\n- **Contexto:** el autor viene afirmando que el dolor y el placer son hechos reales que no pueden refutarse.\n- **Función de la pregunta:** no busca obtener información, sino reforzar una idea ya defendida: que no es razonable dudar de la realidad del dolor sentido.\n- **Conclusión:** la intención es **afirmar que no se puede dudar del dolor**. La respuesta correcta es **C**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "Advertir sobre el peligro de dolor ante una decisión.",
+      "optionFeedback": "- **Incorrecta.** La pregunta no advierte sobre un peligro futuro ni sobre decisiones; se refiere a la certeza de una sensación presente."
+    },
+    {
+      "optionId": "B",
+      "optionText": "Dar la orden de huir del dolor ante un golpe.",
+      "optionFeedback": "- **Incorrecta.** No hay ninguna orden en el enunciado.\n- Se trata de una pregunta retórica para sostener una afirmación."
+    },
+    {
+      "optionId": "C",
+      "optionText": "Afirmar la idea de que no se puede dudar del dolor.",
+      "optionFeedback": "- **Correcta.** La pregunta retórica reafirma que la sensación de dolor es un hecho real e imposible de negar."
+    },
+    {
+      "optionId": "D",
+      "optionText": "Expresar que los dolores pueden inventarse.",
+      "optionFeedback": "- **Incorrecta.** El autor sostiene justamente lo contrario: que el dolor sentido **no puede ser falso** ni inventado."
+    }
+  ]
+}

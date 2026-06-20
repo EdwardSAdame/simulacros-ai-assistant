@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 27",
+  "questionId": "q_27",
+  "sectionText": "Me pregunto qué diría un comité de ética si un periódico indujera a sus lectores a cambiar comportamientos, a vender o comprar propiedades, a suspender relaciones amorosas o a cambiar de trabajo. Todo eso con el agravante de que la intromisión proviene de afirmaciones sin base científica o factual, producto de la pluma de alguien que ya había demostrado estar equivocado y se lucra de la ingenuidad de la gente. Pues eso es exactamente lo que pasa con los horóscopos que nos inundan por esta época, incluso en los medios de la mayor seriedad.\n\nHoróscopos y cartas astrales se basan en creencias y mitos de diversas culturas, en escritos antiguos que están equivocados y se contradicen en sus predicciones. Los signos del Zodíaco, por ejemplo, no son 12 sino 13, y hay quienes piensan que 14. Los astrólogos esconden ese hecho, que nos obligaría a reubicarnos en signos diferentes al nuestro tradicional, cambiando el análisis de personalidad y las predicciones de toda la vida. ¡Qué oso!\n\nEl nombre y carácter de los signos se derivan de lo que creían ver en las estrellas astrónomos de la Antigüedad. Podrían haber imaginado cosas distintas. Hoy, por ejemplo, no verían una balanza (pieza de museo) en los astros del signo Libra. Quizás verían un brasier, y eso nos dañaría a los del signo nuestra proverbial fama de equilibrados.\n\nEn los análisis de personalidad hacen afirmaciones generales que le cuadran a cualquiera. Aprovechan lo que en psicología se llama efecto Forer. Forer sometió a sus estudiantes a un test que supuestamente había elaborado para definir la personalidad. Posteriormente, le entregó a cada uno su resultado y le pidió que calificara su precisión de 0 a 5. El test recibió una excelente calificación promedio de 4,2.\n\nEl asunto fue que Forer no leyó los exámenes y entregó a todos los estudiantes el mismo resultado. Este le decía al examinado que tenía gran necesidad de aprecio, pero que era crítico consigo mismo. Que trataba de compensar sus debilidades, y así muchas otras cosas, muy personales e íntimas. El texto les cuadró a todos. Así, la mayoría de astrólogos usan esta técnica, y la gente siente que acertaron.\n\nAlgunos se arriesgan a pronósticos más precisos, y en ellos casi siempre se equivocan, pero nos recuerdan solo sus aciertos. Este año habrá quienes se vanaglorien de haber predicho la muerte de Fidel Castro; no nos recordarán que llevan 10 años prediciéndola. Busquen en la web las predicciones de sus astrólogos preferidos para el 2016. Una conocida astróloga mexicana pronosticó la caída de Maduro y que Jeb Bush iba a ser presidente. Otro lamentó informarnos que el papa Francisco sufriría una grave enfermedad. Acertó, eso sí, al predecir que en el mundo habría más refugiados.\n\nA mí, el astrólogo colombiano de cabecera me predijo que iba a participar en eventos al aire libre y me recomendó utilizar mi capacidad creativa para labrarme un buen futuro. Comparto feliz estas buenas predicciones con otros 625 millones de terrícolas.",
+  "questionText": "Pregunta 27: Considere las siguientes predicciones, presentadas en el penúltimo párrafo del texto:\n\n1. El papa Francisco sufrirá una grave enfermedad.\n2. En el mundo habrá más refugiados.\n\n¿Cuál es la relación entre estas dos afirmaciones?",
+  "correctOptionId": "D",
+  "aiExplanation": "- **Problema central:** comparar la función de dos predicciones mencionadas por el autor.\n- En el párrafo, la primera predicción específica sobre el papa aparece como un ejemplo de predicción más precisa que falla.\n- La segunda, *habrá más refugiados*, es una predicción general que el autor admite como acierto precisamente por su vaguedad.\n- **Conclusión:** tienen funciones opuestas: una muestra el fracaso de predicciones particulares y la otra el acierto aparente de las generales. Respuesta: **D**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "Son complementarias, puesto que ambas sirven para probar que las predicciones específicas de los astrólogos son ciertas.",
+      "optionFeedback": "- **Incorrecta.** El autor no usa ambas para probar que los astrólogos aciertan; más bien critica su falta de precisión."
+    },
+    {
+      "optionId": "B",
+      "optionText": "Tienen la misma función, ya que ambas prueban que las predicciones generales de los astrólogos suelen resultar falsas.",
+      "optionFeedback": "- **Incorrecta.** No cumplen la misma función: una es específica y otra general."
+    },
+    {
+      "optionId": "C",
+      "optionText": "Son contradictorias, puesto que 1) dice lo contrario que 2), mostrando que los horóscopos son una práctica incoherente.",
+      "optionFeedback": "- **Incorrecta.** No son contradictorias entre sí; hablan de asuntos distintos."
+    },
+    {
+      "optionId": "D",
+      "optionText": "Tienen funciones opuestas, ya que 1) prueba que las predicciones particulares fallan, y 2) que las generales aciertan.",
+      "optionFeedback": "- **Correcta.** La primera ilustra el fracaso de una predicción **específica**; la segunda, el aparente acierto de una predicción **general** y fácilmente verificable."
+    }
+  ]
+}

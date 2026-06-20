@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 36",
+  "questionId": "q_36",
+  "sectionText": "Los computadores hacen lo que se les manda. Servilmente obedecen cualquier instrucción dada en su propio lenguaje de programación. Así es como hacen cosas útiles como procesar textos y realizar operaciones en hojas de cálculo. Pero, como inevitable subproducto, son igualmente robóticos a la hora de obedecer instrucciones incorrectas. No tienen modo alguno de decir si una instrucción tendrá un buen efecto o uno malo.\n\nSimplemente, obedecen, como se supone que lo hacen los soldados. Es su incuestionable obediencia lo que hace que los computadores sean útiles, y exactamente eso mismo hace que sean inevitablemente vulnerables a la infección de virus y gusanos. Un programa maliciosamente diseñado que diga «cópiame y envíame a todas las direcciones que puedas encontrar en el disco duro» será simplemente obedecido y vuelto a obedecer por los demás computadores de la línea por la que se está enviando, en una expansión exponencial. Es difícil, por no decir imposible, diseñar un computador que sea obedientemente útil y, al mismo tiempo, inmune a la infección.",
+  "questionText": "Pregunta 36: Considere el siguiente enunciado del texto:\n\n“Simplemente, [los computadores] obedecen; como se supone que lo hacen los soldados”.\n\nLo que el autor quiere decir con este enunciado es que los computadores",
+  "correctOptionId": "C",
+  "aiExplanation": "- **Problema central:** interpretar la comparación con los soldados.\n- El autor subraya que los computadores obedecen instrucciones sin evaluar si son buenas o malas.\n- La comparación apunta a la obediencia **sin cuestionamiento**.\n- **Conclusión:** la respuesta correcta es **C**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "siempre están expuestos a los virus.",
+      "optionFeedback": "- **Incorrecta.** Esa es una consecuencia del texto, pero no es el significado directo de la comparación con los soldados."
+    },
+    {
+      "optionId": "B",
+      "optionText": "desconocen si una instrucción es correcta.",
+      "optionFeedback": "- **Incorrecta.** Es una idea cercana, pero la frase quiere destacar sobre todo la obediencia sin cuestionamiento, no solo la ignorancia sobre la corrección."
+    },
+    {
+      "optionId": "C",
+      "optionText": "siguen las órdenes sin cuestionarlas.",
+      "optionFeedback": "- **Correcta.** Esa es la idea central de la comparación: los computadores ejecutan órdenes sin juzgarlas."
+    },
+    {
+      "optionId": "D",
+      "optionText": "son capaces de tomar decisiones.",
+      "optionFeedback": "- **Incorrecta.** El texto afirma justamente lo contrario: no tienen modo de determinar si el efecto será bueno o malo."
+    }
+  ]
+}

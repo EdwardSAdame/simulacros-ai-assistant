@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 6",
+  "questionId": "q_06",
+  "sectionText": "Auténticas bestias negras para Platón, los sofistas fueron unos filósofos y educadores que dominaron la escena intelectual de Atenas a finales del siglo IV a. C. De hecho, la palabra \"sofista\" no tenía entonces la connotación peyorativa que tiene hoy y que debemos, en buena medida, a la mala imagen que de ellos transmitió Platón. Sofista significaba simplemente \"profesor\", y con el término se designaba a una serie de educadores que se ganaban la vida instruyendo jóvenes a cambio de una retribución.\n\nEran dos los elementos de la sofística que despertaban el recelo, por decir lo menos, entre una nutrida parte de la población griega. El primero de ellos residía en que, contrario a los sabios de antaño, los sofistas no reunían en torno a sí a un grupo de discípulos por el mero placer de difundir sus ideas, sino que cobraban y vivían de ello. Esto, que probablemente hoy no nos parezca grave, era visto con escándalo por los sectores más esnobs y aristocráticos de la polis. En definitiva, y sin que hayan cambiado las cosas, los que despreciaban el \"vil metal\" eran precisamente aquellos que lo tenían garantizado y no tenían necesidad de ganárselo.\n\nEn segundo lugar, y también como diferencia sustancial con los modelos del pasado, la educación impartida por los sofistas no tenía el objetivo teórico de alcanzar y descubrir la verdad, sino que su finalidad era eminentemente práctica; adquirir las técnicas necesarias para imponer el propio argumento. En efecto, en la democracia ateniense, regida un sistema de participación directa de los ciudadanos en los asuntos de la polis, y con abundantes litigios y juicios, la capacidad de desenvolverse con habilidad en el arte de la palabra era imprescindible para el éxito en la política. En este contexto nacieron y se multiplicaron los sofistas, como maestros de la retórica y la oratoria cuya principal preocupación fue desarrollar y transmitir las técnicas necesarias para defender y convencer al público de un planteamiento, independientemente de que este fuera verdadero o no, moral o inmoral. Este énfasis práctico los condujo con frecuencia a posiciones escépticas o relativistas: no existía una verdad con mayúsculas, sino que todo dependía del punto de vista, de los usos y costumbres, de la fuerza de los argumentos. Para Protágoras \"el hombre es la medida de todas las cosas\" y, para Gorgias, nada existía; si existiera, sería incognoscible, y si existiera y fuera cognoscible, sería incomunicable.",
+  "questionText": "Pregunta 6: ¿Qué supuesto se encuentra presente en el tercer párrafo del texto?",
+  "correctOptionId": "A",
+  "aiExplanation": "- **Problema central:** identificar un supuesto implícito del tercer párrafo.\n- **Contenido del párrafo:** contrapone dos finalidades de la educación: una **teórica**, orientada a la verdad, y otra **práctica**, orientada a convencer y triunfar en política o en juicios.\n- **Supuesto implícito:** si se contraponen *alcanzar la verdad* y *tener una finalidad práctica*, el párrafo supone que la búsqueda de la verdad **no es en sí un fin práctico**.\n- **Conclusión:** la opción correcta es **A**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "Que la búsqueda de la verdad no es un fin práctico.",
+      "optionFeedback": "- **Correcta.** El párrafo contrapone explícitamente el objetivo **teórico** de hallar la verdad con la finalidad **práctica** de imponer argumentos."
+    },
+    {
+      "optionId": "B",
+      "optionText": "Que la participación política en la actualidad no es alta.",
+      "optionFeedback": "- **Incorrecta.** El párrafo habla de la democracia ateniense, no de la participación política actual."
+    },
+    {
+      "optionId": "C",
+      "optionText": "Que los sofistas engañaban a sus discípulos con técnicas retóricas.",
+      "optionFeedback": "- **Incorrecta.** El texto critica su orientación práctica y relativista, pero no afirma directamente que engañaran a sus discípulos."
+    },
+    {
+      "optionId": "D",
+      "optionText": "Que la búsqueda teórica de la verdad puede ayudar a vencer en un juicio.",
+      "optionFeedback": "- **Incorrecta.** El párrafo más bien separa el descubrimiento de la verdad del entrenamiento retórico útil para los litigios."
+    }
+  ]
+}

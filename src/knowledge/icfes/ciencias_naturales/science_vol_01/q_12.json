@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 12",
+  "questionId": "q_12",
+  "questionImageAiDescription": "Diagrama cíclico del ciclo de vida del parásito. Elementos alrededor del ciclo: un zancudo, un ave, un órgano del ave (hígado) y una imagen de células sanguíneas. Textos alrededor de las flechas: \"Reproducción del parásito y desarrollo de los huevos\", \"Transmisión del parásito a otra ave\", \"Reinicio del ciclo\", \"El zancudo se alimenta de sangre infectada\", \"Infección del hígado y daño de los glóbulos rojos del ave\", \"Transmisión del parásito al ave\". En el centro se lee: \"El parásito se reproduce en el intestino del insecto sin afectar su funcionamiento\".",
+  "questionText": "Pregunta 12: La malaria aviar es una enfermedad causada por parásitos del género *Plasmodium* y es transmitida por la picadura de zancudos a las diferentes especies de aves. A continuación, se muestra una parte del ciclo de vida de este parásito:\n\nSegún el anterior diagrama, ¿qué tipo de interacción tiene el parásito con el ave y con el zancudo?",
+  "correctOptionId": "B",
+  "aiExplanation": "- **Problema central:** clasificar la interacción del parásito con el ave y con el zancudo.\n- **Datos relevantes del diagrama:**\n  - en el ave, el parásito causa infección y daño en hígado y glóbulos rojos;\n  - en el zancudo, se reproduce en el intestino **sin afectar su funcionamiento**.\n- **Análisis:** con el ave la relación es negativa para el ave, es decir, de parasitismo. Con el zancudo, según el diagrama, la convivencia ocurre sin daño aparente, por lo que la interacción es neutral para el zancudo.\n- **Conclusión:** la respuesta correcta es **B**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "El parásito interactúa con el ave y con el zancudo de manera negativa, al causar la enfermedad de la malaria que deriva en daños internos en los dos organismos.",
+      "optionFeedback": "- **Incorrecta.** El diagrama indica que el zancudo no resulta afectado en su funcionamiento."
+    },
+    {
+      "optionId": "B",
+      "optionText": "El parásito interactúa con el ave de manera negativa al causar la enfermedad, mientras que con el zancudo interactúa de manera neutral, dado que convive dentro de él sin causar ningún daño.",
+      "optionFeedback": "- **Correcta.** Coincide con el diagrama: hay daño en el ave, pero el parásito se reproduce en el zancudo sin afectarlo."
+    },
+    {
+      "optionId": "C",
+      "optionText": "El parásito interactúa con el ave y con el zancudo de manera neutral, ya que convive con ellos para cumplir su ciclo de vida sin causar daño a ninguno de los dos.",
+      "optionFeedback": "- **Incorrecta.** En el ave sí hay daño evidente: infección del hígado y de los glóbulos rojos."
+    },
+    {
+      "optionId": "D",
+      "optionText": "El parásito interactúa con el ave de manera neutral, ya que el hígado es el único órgano afectado, mientras que con el zancudo de manera negativa, dado que se reproduce dentro de él.",
+      "optionFeedback": "- **Incorrecta.** Afectar el hígado y los glóbulos rojos ya implica una interacción negativa con el ave, y el zancudo no aparece perjudicado."
+    }
+  ]
+}

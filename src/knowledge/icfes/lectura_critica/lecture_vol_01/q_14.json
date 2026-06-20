@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 14",
+  "questionId": "q_14",
+  "sectionText": "La relación entre los humanos y lo que hoy reconocemos como música se remonta a más de 40.000 años atrás, desde los principios de nuestra civilización. Nuestros antepasados, en ese entonces, ya tocaban flautas de hueso y percusiones. Los instrumentos se fueron diversificando y multiplicando, pasando por la creación de instrumentos de madera, cuerda y metal, hasta llegar a las guitarras eléctricas y consolas de música electrónica de hoy en día. Casi todas las sociedades humanas conocidas han tenido música, lo que sugiere que nuestra apreciación por ella es innata; incluso bebés de dos meses de nacidos se voltean cuando escuchan sonidos agradables y le dan la espalda a los disonantes. Dada su universalidad, entonces, ¿será que la música podría haber ayudado en la supervivencia humana de alguna forma? ¿Tendría alguna ventaja o beneficio? Algunos investigadores sugieren que puede haber ayudado en el cortejo. Otros dicen que promueve la cohesión de grupo, tal como lo hace hoy en día. Incluso, puede ser un simple accidente feliz, una dulzura auditiva, que casualmente terminó creando una rumba cerebral.",
+  "questionText": "Pregunta 14: Considere el siguiente fragmento del texto:\n\n> \"La relación entre los humanos y lo que hoy reconocemos como música se remonta a más de 40.000 años atrás, desde los principios de nuestra civilización\".\n\n¿Qué función cumple el fragmento en el texto?",
+  "correctOptionId": "B",
+  "aiExplanation": "- **Problema central:** identificar la función del fragmento inicial.\n- El enunciado abre el texto y sitúa el tema general: la antigua relación entre humanidad y música.\n- No formula por sí solo la tesis ni la conclusión, sino que sirve como punto de partida para el desarrollo posterior.\n- **Conclusión:** su función es **introducir el tema**. Respuesta: **B**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "Presentar la tesis central del texto.",
+      "optionFeedback": "- **Incorrecta.** La tesis o pregunta central del texto se desarrolla después, cuando se indaga si la música aportó ventajas evolutivas."
+    },
+    {
+      "optionId": "B",
+      "optionText": "Introducir el tema que se trata en el texto.",
+      "optionFeedback": "- **Correcta.** El fragmento presenta el tema general: la larga relación histórica entre los humanos y la música."
+    },
+    {
+      "optionId": "C",
+      "optionText": "Resumir el contenido del texto.",
+      "optionFeedback": "- **Incorrecta.** No resume todas las ideas del texto, solo enmarca el asunto inicial."
+    },
+    {
+      "optionId": "D",
+      "optionText": "Plantear la conclusión central del texto.",
+      "optionFeedback": "- **Incorrecta.** No es una conclusión, porque aparece al inicio y abre la discusión."
+    }
+  ]
+}

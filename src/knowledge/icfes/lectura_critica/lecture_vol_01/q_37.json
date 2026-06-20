@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 37",
+  "questionId": "q_37",
+  "sectionText": "Los computadores hacen lo que se les manda. Servilmente obedecen cualquier instrucción dada en su propio lenguaje de programación. Así es como hacen cosas útiles como procesar textos y realizar operaciones en hojas de cálculo. Pero, como inevitable subproducto, son igualmente robóticos a la hora de obedecer instrucciones incorrectas. No tienen modo alguno de decir si una instrucción tendrá un buen efecto o uno malo.\n\nSimplemente, obedecen, como se supone que lo hacen los soldados. Es su incuestionable obediencia lo que hace que los computadores sean útiles, y exactamente eso mismo hace que sean inevitablemente vulnerables a la infección de virus y gusanos. Un programa maliciosamente diseñado que diga «cópiame y envíame a todas las direcciones que puedas encontrar en el disco duro» será simplemente obedecido y vuelto a obedecer por los demás computadores de la línea por la que se está enviando, en una expansión exponencial. Es difícil, por no decir imposible, diseñar un computador que sea obedientemente útil y, al mismo tiempo, inmune a la infección.",
+  "questionText": "Pregunta 37: Considere los siguientes enunciados del texto:\n\n1. Un programa maliciosamente diseñado que diga «cópiame y envíame a todas las direcciones que puedas encontrar en el disco duro» será simplemente obedecido y vuelto a obedecer por los demás computadores.\n2. Es su incuestionable obediencia lo que hace que los computadores sean útiles, y exactamente eso mismo hace que sean inevitablemente vulnerables a la infección de virus y gusanos.\n\nLa relación entre los enunciados 1 y 2 puede describirse de la siguiente manera:",
+  "correctOptionId": "C",
+  "aiExplanation": "- **Problema central:** establecer la relación argumentativa entre 1 y 2.\n- El enunciado 2 presenta la idea general: la obediencia ciega hace útiles a los computadores, pero también vulnerables.\n- El enunciado 1 ofrece un ejemplo concreto de cómo un programa malicioso se aprovecha de esa obediencia.\n- **Conclusión:** el enunciado 1 funciona como **evidencia a favor** del enunciado 2. Respuesta: **C**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "El enunciado 1 es una evidencia en contra del enunciado 2.",
+      "optionFeedback": "- **Incorrecta.** El ejemplo del virus no contradice la idea general; la confirma."
+    },
+    {
+      "optionId": "B",
+      "optionText": "El enunciado 2 es una evidencia a favor del enunciado 1.",
+      "optionFeedback": "- **Incorrecta.** El orden lógico va al revés: 2 es la tesis general y 1 es el caso ilustrativo."
+    },
+    {
+      "optionId": "C",
+      "optionText": "El enunciado 1 es una evidencia a favor del enunciado 2.",
+      "optionFeedback": "- **Correcta.** El enunciado 1 ejemplifica cómo la obediencia automática de los computadores los vuelve vulnerables a programas maliciosos, tal como afirma el enunciado 2."
+    },
+    {
+      "optionId": "D",
+      "optionText": "El enunciado 2 es una evidencia en contra del enunciado 1.",
+      "optionFeedback": "- **Incorrecta.** El enunciado 2 no refuta el 1; lo explica de manera general."
+    }
+  ]
+}

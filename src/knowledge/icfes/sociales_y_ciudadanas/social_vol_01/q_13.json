@@ -1,0 +1,29 @@
+{
+  "questionLabel": "Pregunta 13",
+  "questionId": "q_13",
+  "questionText": "Pregunta 13: Un político de una ciudad del país se encuentra muy preocupado por el aumento en la inseguridad que se ha venido presentando en los últimos años. Recientemente, afirma el político, el número de robos y atracos a mano armada se ha intensificado y esta problemática se debería, en gran parte, a la llegada de personas de un país vecino, que migran por la crisis económica y social que viven al interior de su país. En palabras del político: \"Ya se han registrado muchos casos de personas atracadas por estos ciudadanos inmigrantes. Recomiendo a la población tener mucho cuidado al momento de relacionarse en la calle con cualquier persona que parezca tener un acento del país vecino. También, hago un llamado a la comunidad para que continúe denunciando los casos de atraco que cometen las personas de ese país\".\n\nAhora bien, en esta situación, las palabras pronunciadas por el político",
+  "correctOptionId": "A",
+  "aiExplanation": "- **Problema central:** identificar el efecto de las palabras del político.\n- **Dato clave:** asocia inseguridad con inmigración y pide desconfiar de cualquiera que tenga acento del país vecino.\n- **Razonamiento:**\n  - Esto generaliza y estigmatiza a todo un grupo por la conducta de algunos individuos.\n  - Promueve prejuicio, sospecha y rechazo social contra inmigrantes, incluso inocentes.\n- **Conclusión:** sus palabras fomentan el rechazo y la discriminación hacia los inmigrantes. ",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "promueven el rechazo hacia los inmigrantes del país vecino porque la gente va a tratarlos con sospecha, sean o no atracadores.",
+      "optionFeedback": "- **Correcta.** El político invita a desconfiar de cualquier persona con determinado acento, lo que estigmatiza a todos los inmigrantes y promueve su rechazo, **sean o no responsables de delitos**."
+    },
+    {
+      "optionId": "B",
+      "optionText": "ignoran que el origen de la inseguridad puede deberse a las necesidades económicas que atraviesan los inmigrantes.",
+      "optionFeedback": "- **Incorrecta.** Aunque menciona un posible factor social, no es la crítica principal al discurso.\n- El problema central es que generaliza y estigmatiza a toda una población migrante."
+    },
+    {
+      "optionId": "C",
+      "optionText": "desconocen que la comunidad no está obligada a participar ni a denunciar los atracos que se cometen en la ciudad.",
+      "optionFeedback": "- **Incorrecta.** La denuncia ciudadana sí puede ser un deber cívico relevante.\n- El aspecto cuestionable no es invitar a denunciar delitos, sino asociarlos indiscriminadamente con todos los inmigrantes."
+    },
+    {
+      "optionId": "D",
+      "optionText": "motivan a que las personas de un país que se encuentran en situaciones de pobreza, decidan irse a vivir a otro país.",
+      "optionFeedback": "- **Incorrecta.** El discurso no motiva la migración; más bien alimenta hostilidad hacia quienes ya migraron.\n- La consecuencia señalada en el texto va en sentido contrario: rechazo social."
+    }
+  ]
+}

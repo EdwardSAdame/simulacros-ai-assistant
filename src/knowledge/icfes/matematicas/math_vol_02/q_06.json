@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 6",
+  "questionId": "q_06",
+  "questionImageAiDescription": "Un recuadro rectangular que funciona como contenedor de información. Dentro del contenedor se encuentra el siguiente texto. IMPORTANTE: El texto debe tener ajuste de línea automático (text-wrap) y márgenes internos para asegurar que encaje perfectamente y no se desborde de los límites del recuadro:\n\n\"Puerto Carreño fue fundado en \\(1992\\), y Mitú fue fundado \\(13\\) años después.\n\nArauca fue fundada antes que Puerto Carreño, e Inírida fue fundada después de Mitú.\"",
+  "questionText": "Pregunta 6: La imagen muestra una afirmación que escribió el profesor de Historia.\n\n¿Cuál de las siguientes opciones ordena las ciudades desde la primera que se fundó hasta la última que se fundó?",
+  "correctOptionId": "C",
+  "aiExplanation": "- **Problema central:** ordenar cronológicamente las ciudades.\n- **Datos:**\n  - Puerto Carreño: \\(1992\\).\n  - Mitú: \\(13\\) años después, o sea \\(2005\\).\n  - Arauca: antes que Puerto Carreño.\n  - Inírida: después de Mitú.\n- **Orden de más antigua a más reciente:**\n  \\[\n  \\text{Arauca} \\rightarrow \\text{Puerto Carreño} \\rightarrow \\text{Mitú} \\rightarrow \\text{Inírida}\n  \\]\n- **Conclusión:** esa secuencia corresponde a la opción **C**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "Arauca – Inírida – Puerto Carreño – Mitú.",
+      "optionFeedback": "**Incorrecta.** Inírida debe ir después de Mitú, no antes de Puerto Carreño ni de Mitú."
+    },
+    {
+      "optionId": "B",
+      "optionText": "Puerto Carreño – Mitú – Arauca – Inírida.",
+      "optionFeedback": "**Incorrecta.** Arauca fue fundada antes que Puerto Carreño, así que no puede aparecer después."
+    },
+    {
+      "optionId": "C",
+      "optionText": "Arauca – Puerto Carreño – Mitú – Inírida.",
+      "optionFeedback": "**Correcta.** Respeta que Arauca es anterior a Puerto Carreño, que Mitú es posterior a Puerto Carreño, y que Inírida es posterior a Mitú."
+    },
+    {
+      "optionId": "D",
+      "optionText": "Puerto Carreño – Arauca – Mitú – Inírida.",
+      "optionFeedback": "**Incorrecta.** Arauca debe estar antes de Puerto Carreño."
+    }
+  ]
+}

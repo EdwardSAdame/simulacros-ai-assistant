@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 22",
+  "questionId": "q_22",
+  "sectionText": "En la vasta comedia de los sentimientos y de las pasiones humanas, la infancia representa la única certeza de sinceridad. Nos hacemos hombres adultos, nos hacemos viejos; maduramos principal y casi exclusivamente para mentir, para disimular, para fingir acerca del amor, de la amistad, del aprecio, entre otras cosas. Sobre ninguna de tales categorías morales conoce la infancia el recurso de la hipocresía. Los niños aman y detestan integral, honda y sinceramente con diáfana lealtad. Confiesan su desamor por una cosa o por una persona, con esplendorosa claridad, sin agregar vanas razones al mandato interior que los fuerza a declarar su pueril odio o abominación. Afirman, de la misma manera honesta, su prodigiosa ternura por una persona o un juguete, por un desaprovechado trozo de madera, por un inservible artefacto, resto de un naufragio de cosas domésticas, por un perro de ojos tristes y de estampa maltrecha, por un gato envejecido y cojo, por una piedrecilla minúscula, cuyos hostiles bordes se han ido suavizando al roce de las caricias entre las manos incansables. Los niños aman el viento y la lluvia, la tierra mojada, el agua que brota y que salta en los estanques públicos, el sol y el cielo, la yerba, los árboles, la luz, los colores, todo el universo real y todo el universo irreal de sus sueños.",
+  "questionText": "Pregunta 22: ¿Cuál de las siguientes opciones presenta la idea que defiende el texto?",
+  "correctOptionId": "B",
+  "aiExplanation": "- **Problema central:** identificar la idea defendida por el texto.\n- **Tesis del texto:** la infancia representa la sinceridad; los niños aman y detestan con claridad y sin hipocresía.\n- Entre las opciones, la que mejor recoge esa idea es que cuando se es niño se ama con claridad.\n- **Conclusión:** la respuesta correcta es **B**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "Cuando se es viejo siempre se ama con libertad.",
+      "optionFeedback": "- **Incorrecta.** El texto no sostiene eso; más bien critica a los adultos por mentir, disimular y fingir."
+    },
+    {
+      "optionId": "B",
+      "optionText": "Cuando se es niño siempre se ama con claridad.",
+      "optionFeedback": "- **Correcta.** Resume bien la tesis del texto: los niños aman con **sinceridad**, **claridad** y sin hipocresía."
+    },
+    {
+      "optionId": "C",
+      "optionText": "Cuando se es viejo siempre se miente.",
+      "optionFeedback": "- **Incorrecta.** Aunque el texto critica la madurez por su tendencia al fingimiento, esta opción exagera y simplifica en exceso la idea defendida."
+    },
+    {
+      "optionId": "D",
+      "optionText": "Cuando se es niño siempre se dice la verdad.",
+      "optionFeedback": "- **Incorrecta.** El texto se centra sobre todo en la sinceridad afectiva de la infancia, especialmente en el amor y el desamor, no en que los niños digan siempre toda la verdad en cualquier sentido."
+    }
+  ]
+}

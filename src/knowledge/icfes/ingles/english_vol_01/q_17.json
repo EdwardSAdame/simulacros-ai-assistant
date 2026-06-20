@@ -1,0 +1,25 @@
+{
+  "questionLabel": "Pregunta 17",
+  "questionId": "q_17",
+  "sectionText": "Complete las cinco conversaciones.\n\nEn las preguntas \\(16 - 20\\), marque \\(A\\), \\(B\\) o \\(C\\) en su hoja de respuestas.",
+  "questionText": "Pregunta 17: This movie is about a really big family.",
+  "correctOptionId": "A",
+  "aiExplanation": "- **Core problem:** Pick the most natural continuation in a conversation after hearing about a movie.\n- **Relevant data:** The speaker mentions a movie topic, so the next line should respond to that information.\n- **Method:** Choose the answer that naturally asks about the movie.\n- **Conclusion:** *Is it good?* is the most coherent reply. The correct answer is **A**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "Is it good?",
+      "optionFeedback": "- **Correct.** This is a natural question to ask after someone mentions a movie."
+    },
+    {
+      "optionId": "B",
+      "optionText": "Is that a lot?",
+      "optionFeedback": "- **Incorrect.** Although it refers to *big family*, it sounds unnatural in this context and is less appropriate than asking about the movie itself."
+    },
+    {
+      "optionId": "C",
+      "optionText": "Is your mom OK?",
+      "optionFeedback": "- **Incorrect.** This is unrelated to a movie about a family."
+    }
+  ]
+}

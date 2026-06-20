@@ -1,0 +1,29 @@
+{
+  "questionLabel": "Pregunta 24",
+  "questionId": "q_24",
+  "questionText": "Pregunta 24: Kevin trabaja en una farmacia que entrega los medicamentos a domicilio. Los días viernes, Kevin tiene la posibilidad de salir tres horas antes de su trabajo, pero la condición es que debe repartir los pedidos que hacen falta por entregar y que estén ubicados en la ruta que toma hacia su casa. Por ejemplo, el último viernes que salió tuvo que entregar un total de cuatro pedidos, así:\n\n- Para entregar el primer pedido, tuvo que avanzar \\(3\\) cuadras.\n- Para entregar el segundo pedido, tuvo que avanzar el doble de cuadras de las que había hecho para entregar el primer pedido.\n- Para llegar a la dirección del tercer pedido, tuvo que avanzar la mitad de cuadras que avanzó para entregar el pedido anterior.\n- Para el último pedido, tuvo que regresarse \\(10\\) cuadras y, así, acabar su ruta de entregas.\n- Después de terminar las entregas, solo tuvo que caminar una cuadra para llegar a su casa.\n\n¿Cuál de las siguientes operaciones permite obtener la distancia que hay desde la farmacia hasta la casa de Kevin?",
+  "correctOptionId": "C",
+  "aiExplanation": "- **Problema central:** construir la operación que represente el desplazamiento total neto desde la farmacia hasta la casa.\n- **Recorrido:**\n  - Primer pedido: \\(+3\\)\n  - Segundo pedido: el doble de \\(3\\), entonces \\(+6\\)\n  - Tercer pedido: la mitad de \\(6\\), entonces \\(+3\\)\n  - Último pedido: se devuelve \\(10\\), entonces \\(-10\\)\n  - De allí a la casa: \\(+1\\)\n- **Operación:**\n  \\[\n  3+6+3-10+1\n  \\]\n- **Conclusión:** la operación correcta es la de la opción **C**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "\\(3+3+3-10+1\\)",
+      "optionFeedback": "- **Incorrecta.** El segundo desplazamiento debe ser el doble del primero, es decir, \\(6\\), no \\(3\\)."
+    },
+    {
+      "optionId": "B",
+      "optionText": "\\(3+6+6+10\\)",
+      "optionFeedback": "- **Incorrecta.** El tercer avance debe ser \\(3\\), no \\(6\\), y además el regreso de \\(10\\) debe restarse, no sumarse."
+    },
+    {
+      "optionId": "C",
+      "optionText": "\\(3+6+3-10+1\\)",
+      "optionFeedback": "- **Correcta.** Representa exactamente los avances, el retroceso y la última cuadra hasta la casa."
+    },
+    {
+      "optionId": "D",
+      "optionText": "\\(6+3+10-1\\)",
+      "optionFeedback": "- **Incorrecta.** Omite el primer avance de \\(3\\) cuadras y trata mal el regreso y el trayecto final."
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 20",
+  "questionId": "q_20",
+  "sectionText": "En Estados Unidos existe un debate sobre el cambio climático, definido como variaciones del clima atribuidas directa o indirectamente a la actividad humana, que alteran la composición de la atmósfera mundial y que se suman a la variabilidad natural del clima observada durante periodos de tiempo comparables. Este debate ha llevado a que algunos Gobiernos se resistan a suscribir acuerdos internacionales que comprometan a los Estados a reducir la emisión de gases. El ejemplo más reciente fue el retiro de Estados Unidos del Acuerdo de París. Esta situación ha generado que grupos ambientalistas protesten e insistan en que el desarrollo económico no puede seguir poniendo en peligro la existencia misma del planeta.\n\nAl respecto, el presidente de un país, escéptico del cambio climático, escribió en su red social de internet las siguientes dos frases:\n\n1. \"Por el cambio climático que deberíamos estar preocupados es el provocado por las armas nucleares que están en las manos de líderes locos e incompetentes\".\n2. \"Hace frío afuera. ¿Dónde demonios está el cambio climático?\".",
+  "questionText": "Pregunta 20: A partir de la información anterior, ¿resultan confiables las afirmaciones del presidente en su red social acerca del cambio climático?",
+  "correctOptionId": "B",
+  "aiExplanation": "- **Problema central:** evaluar si las afirmaciones del presidente son confiables.\n- **Dato científico del texto:** el cambio climático se refiere a variaciones del clima observadas en periodos comparables y asociadas a la actividad humana; no se invalida porque un día haga frío.\n- **Razonamiento:**\n  - La frase \\(2\\) confunde **tiempo atmosférico puntual** con **clima de largo plazo**.\n  - La confiabilidad no depende del cargo ni del número de seguidores, sino de la validez del argumento y de posibles intereses involucrados.\n  - Entre las opciones, la mejor crítica disponible es que el presidente puede tener intereses políticos y económicos para minimizar el problema.\n- **Conclusión:** **no** resultan confiables. ",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "Sí, porque, como presidente, tiene acceso a información precisa sobre los aspectos relevantes del planeta.",
+      "optionFeedback": "- **Incorrecta.** Tener un cargo alto no garantiza que lo dicho sea científicamente correcto.\n- En este caso, una de sus frases confunde un episodio de frío con el fenómeno climático global."
+    },
+    {
+      "optionId": "B",
+      "optionText": "No, porque, como presidente, tiene intereses en que el país que gobierna siga siendo competitivo en la economía mundial.",
+      "optionFeedback": "- **Correcta.** Entre las opciones dadas, es la mejor razón para desconfiar: sus afirmaciones pueden estar influidas por **intereses políticos y económicos** contrarios a compromisos ambientales internacionales.\n- Además, sus frases no se apoyan en una comprensión rigurosa del cambio climático."
+    },
+    {
+      "optionId": "C",
+      "optionText": "No, porque, al ser un político, los temas de las ciencias naturales le son ajenos a sus conocimientos de la vida diaria.",
+      "optionFeedback": "- **Incorrecta.** Ser político no implica automáticamente desconocer temas científicos.\n- La objeción correcta no depende de su profesión, sino de la **falta de rigor** de sus afirmaciones y de los intereses en juego."
+    },
+    {
+      "optionId": "D",
+      "optionText": "Sí, porque, al ser difundido en una red social con tantos seguidores, lo expresado tiene un impacto a nivel de la economía internacional.",
+      "optionFeedback": "- **Incorrecta.** El impacto o alcance de un mensaje no lo vuelve confiable.\n- La confiabilidad depende de su fundamento, y aquí las afirmaciones no siguen el concepto científico de cambio climático."
+    }
+  ]
+}

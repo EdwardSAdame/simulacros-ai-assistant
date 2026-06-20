@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 43",
+  "questionId": "q_43",
+  "sectionText": "Lea el texto y responda las preguntas.\n\nEn las preguntas \\(41 - 45\\), marque \\(A\\), \\(B\\), \\(C\\) o \\(D\\) en su hoja de respuestas.\n\nDoes something about living abroad seem extraordinary to you? I understand. That’s what inspired me to leave America for the first time and set out on my journey to start high school in France. However, I was shocked that there were several things I had absolutely no idea about until I landed in France and took part in daily activities there.\n\nBefore I arrived, I had only experienced foreign exchange students coming to America, never being one. All those students spoke other languages unknown to me. For me, as an English speaker, that was not the case. Once in France, most of my foreign partners spoke English. In some ways, it’s positive that people communicate with you in your own language because it’s convenient. The disadvantage is you never have that secret moment where you can say things, and no one can imagine what you’re saying.\n\nIt will feel shocking to install yourself in a new family’s house, but you can handle this. As you start getting along with them, you can start doing things the way you like them, and it gets cozy. However, there are some things you can’t do your usual way. It’s those little things that separate your life in your home country from your life abroad.\n\nIf you’re thinking about doing this, my advice is “say yes more than you say no.” Of course, there will be times when it is acceptable to say no, but if you’re turning down a weekend of excitement with your classmates or your family there, you’re not taking advantage of your exchange. Part of the reason you are living this adventure is to experience things. Say yes and you will not be disappointed.",
+  "questionText": "Pregunta 43: In paragraph \\(2\\), when talking about his own language, the author means that",
+  "correctOptionId": "C",
+  "aiExplanation": "- **Core problem:** Interpret what the writer implies about English in paragraph \\(2\\).\n- **Relevant data:** He says that once in France, most of his foreign partners spoke English.\n- **Method:** Infer the broader meaning from that detail.\n- **Conclusion:** The writer means that **English is familiar to people from different nationalities**. The correct answer is **C**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "speakers of other languages are quite rare.",
+      "optionFeedback": "- **Incorrect.** The paragraph mentions many students who spoke other languages, so this is the opposite idea."
+    },
+    {
+      "optionId": "B",
+      "optionText": "learning a foreign language is considered unnecessary.",
+      "optionFeedback": "- **Incorrect.** The text never says learning another language is unnecessary."
+    },
+    {
+      "optionId": "C",
+      "optionText": "English is familiar to people from different nationalities.",
+      "optionFeedback": "- **Correct.** Since most of his foreign partners spoke English, the text suggests English is widely known internationally."
+    },
+    {
+      "optionId": "D",
+      "optionText": "English is rarely spoken if compared to other languages.",
+      "optionFeedback": "- **Incorrect.** The paragraph suggests the opposite: English is commonly spoken."
+    }
+  ]
+}

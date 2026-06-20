@@ -1,0 +1,50 @@
+{
+  "questionLabel": "Pregunta 9",
+  "questionId": "q_09",
+  "sectionText": "Lea las descripciones de la columna de la izquierda \\(6 - 10\\). ¿Cuál palabra de la columna de la derecha \\((A - G)\\) concuerda con cada descripción?\n\nLa opción \\(H\\) se usa para el ejemplo. Sobran dos palabras más.\n\nEn las preguntas \\(85 - 89\\), marque la letra correcta \\(A - G\\) en su hoja de respuestas.",
+  "questionText": "Pregunta 9: They help you get better when you're sick or had an accident.",
+  "correctOptionId": "F",
+  "aiExplanation": "- **Core problem:** Identify the profession that helps sick or injured people recover.\n- **Relevant data:** The medical options are *dentists* and *nurses*.\n- **Method:** Choose the broader health-care profession related to illness or accidents in general.\n- **Conclusion:** The best match is **nurses**, so the answer is **F**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "chefs",
+      "optionFeedback": "- **Incorrect.** *Chefs* prepare meals, not medical care."
+    },
+    {
+      "optionId": "B",
+      "optionText": "dentists",
+      "optionFeedback": "- **Incorrect.** *Dentists* help specifically with teeth, not general sickness or accidents."
+    },
+    {
+      "optionId": "C",
+      "optionText": "drivers",
+      "optionFeedback": "- **Incorrect.** *Drivers* transport people."
+    },
+    {
+      "optionId": "D",
+      "optionText": "farmers",
+      "optionFeedback": "- **Incorrect.** *Farmers* grow crops or raise animals."
+    },
+    {
+      "optionId": "E",
+      "optionText": "guitarists",
+      "optionFeedback": "- **Incorrect.** *Guitarists* perform music."
+    },
+    {
+      "optionId": "F",
+      "optionText": "nurses",
+      "optionFeedback": "- **Correct.** **Nurses** help people get better when they are sick or injured."
+    },
+    {
+      "optionId": "G",
+      "optionText": "painters",
+      "optionFeedback": "- **Incorrect.** *Painters* are artists or workers with paint, not health professionals."
+    },
+    {
+      "optionId": "H",
+      "optionText": "teachers",
+      "optionFeedback": "- **Incorrect.** *Teachers* help students learn, not recover from illness."
+    }
+  ]
+}

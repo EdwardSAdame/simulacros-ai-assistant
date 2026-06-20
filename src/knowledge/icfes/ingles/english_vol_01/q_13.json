@@ -1,0 +1,26 @@
+{
+  "questionLabel": "Pregunta 13",
+  "questionId": "q_13",
+  "sectionText": "¿Dónde puede ver estos avisos?\n\nEn las preguntas \\(11 - 15\\), marque \\(A\\), \\(B\\) o \\(C\\) en su hoja de respuestas.",
+  "questionImageAiDescription": "Notice designed like a small posted sign with a thick black left border and bottom border. Text appears in three lines: \"TODAY\" at top, then \"Piano lessons with Mrs. Wilson\", then \"Room 11 - 2:00 p.m.\".",
+  "questionText": "Pregunta 13: TODAY\nPiano lessons with Mrs. Wilson\nRoom \\(11\\) - \\(2{:}00\\) p.m.",
+  "correctOptionId": "A",
+  "aiExplanation": "- **Core problem:** Determine where a notice about piano lessons in *Room \\(11\\)* at *\\(2{:}00\\) p.m.* would be posted.\n- **Relevant data:** The mention of a room number and lessons suggests an educational setting.\n- **Method:** Match the format of the notice to the place.\n- **Conclusion:** This would most likely be **at a school**. The correct answer is **A**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "at a school",
+      "optionFeedback": "- **Correct.** *Lessons*, a teacher name, a room number, and a time all fit a school setting."
+    },
+    {
+      "optionId": "B",
+      "optionText": "in a mall",
+      "optionFeedback": "- **Incorrect.** A mall may host events, but *Room \\(11\\)* and *piano lessons* strongly suggest a school."
+    },
+    {
+      "optionId": "C",
+      "optionText": "at a playground",
+      "optionFeedback": "- **Incorrect.** A playground is for outdoor play, not organized room-based piano lessons."
+    }
+  ]
+}

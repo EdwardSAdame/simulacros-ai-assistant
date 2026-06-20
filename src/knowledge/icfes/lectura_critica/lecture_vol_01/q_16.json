@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 16",
+  "questionId": "q_16",
+  "sectionText": "Querido amigo,\n\nUsted ha decidido dedicarse a la literatura, ¿ahora qué?\n\nSu decisión de asumir su afición por la literatura como un destino deberá convertirse en servidumbre, en nada menos que esclavitud. Para explicarlo de una manera gráfica, le diré que acaba usted de hacer algo que, por lo visto, hacían en el siglo XIX algunas damas espantadas con el grosor de su cuerpo, que, a fin de recobrar una silueta de sílfide, se tragaban una solitaria. ¿Ha tenido usted ocasión de ver a alguien que lleva en sus entrañas ese horrendo parásito? Yo sí, y puedo asegurarle que aquellas damas eran unas heroínas, unas mártires de la belleza. A comienzos de los años sesenta, en París, yo tenía un magnífico amigo, José María, un muchacho español, pintor y cineasta, que padeció esa enfermedad. Una vez que la solitaria se instala en el organismo se consubstancia con él, se alimenta de él, crece y se fortalece a expensas de él, y es dificilísimo expulsarla de ese cuerpo del que se aprovecha, al que tiene colonizado. José María enflaquecía, a pesar de que debía comer y beber líquidos (leche, sobre todo) constantemente para aplacar la ansiedad del animal aposentado en sus entrañas, pues, si no, su malestar se volvía insoportable. Pero todo lo que comía y bebía no era para su gusto y placer, sino para los de la solitaria. Un día, que estábamos conversando en un pequeño bistrot de Montparnasse, me sorprendió con esta confesión: \"Nosotros hacemos tantas cosas juntos. Vamos al cine, a exposiciones, a recorrer librerías, y discutimos horas de horas sobre política, libros, amigos comunes. Y tú crees que yo estoy haciendo esas cosas como las haces tú, porque te divierte hacerlas. Pero te equivocas. Yo las hago para ella, la solitaria. Esa es la impresión que tengo: que todo en mi vida, ahora, no lo vivo para mí, sino para ese ser que llevo adentro, del que ya no soy más que un sirviente\".\n\nDesde entonces, me gusta comparar la situación del escritor con la de mi amigo José María cuando llevaba adentro la solitaria.",
+  "questionText": "Pregunta 16: El fragmento del texto que responde la pregunta \"¿cómo actúa la solitaria dentro del organismo?\" es:",
+  "correctOptionId": "B",
+  "aiExplanation": "- **Problema central:** elegir el fragmento que describe directamente el funcionamiento de la solitaria en el cuerpo.\n- La opción correcta debe responder **cómo actúa**: qué hace dentro del organismo.\n- La oración que lo explica de manera directa es: *se consubstancia con él, se alimenta de él, crece y se fortalece a expensas de él*.\n- **Conclusión:** la respuesta es **B**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "Pero todo lo que comía y bebía no era para su gusto y placer, sino para los de la solitaria.",
+      "optionFeedback": "- **Incorrecta.** Este fragmento describe un efecto sobre José María, no explica directamente el modo de acción biológica de la solitaria."
+    },
+    {
+      "optionId": "B",
+      "optionText": "Una vez que la solitaria se instala en el organismo se consubstancia con él, se alimenta de él, crece y se fortalece a expensas de él.",
+      "optionFeedback": "- **Correcta.** Este fragmento explica de forma directa **cómo actúa** la solitaria dentro del organismo: se instala, se alimenta del cuerpo y se fortalece a costa de él."
+    },
+    {
+      "optionId": "C",
+      "optionText": "José María enflaquecía a pesar de que debía comer y beber líquidos (leche, sobre todo) constantemente para aplacar la ansiedad del animal aposentado en sus entrañas.",
+      "optionFeedback": "- **Incorrecta.** Describe una consecuencia del parásito en José María, pero no su mecanismo interno de acción de manera tan directa como la opción B."
+    },
+    {
+      "optionId": "D",
+      "optionText": "Nosotros hacemos tantas cosas juntos. Y tú crees que yo estoy haciendo esas cosas como las haces tú, porque te divierte hacerlas. Pero te equivocas. Yo las hago para ella, la solitaria.",
+      "optionFeedback": "- **Incorrecta.** Este fragmento caracteriza la dominación psicológica o simbólica que siente José María, no el funcionamiento de la solitaria dentro del organismo."
+    }
+  ]
+}

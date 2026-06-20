@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 23",
+  "questionId": "q_23",
+  "sectionText": "En la vasta comedia de los sentimientos y de las pasiones humanas, la infancia representa la única certeza de sinceridad. Nos hacemos hombres adultos, nos hacemos viejos; maduramos principal y casi exclusivamente para mentir, para disimular, para fingir acerca del amor, de la amistad, del aprecio, entre otras cosas. Sobre ninguna de tales categorías morales conoce la infancia el recurso de la hipocresía. Los niños aman y detestan integral, honda y sinceramente con diáfana lealtad. Confiesan su desamor por una cosa o por una persona, con esplendorosa claridad, sin agregar vanas razones al mandato interior que los fuerza a declarar su pueril odio o abominación. Afirman, de la misma manera honesta, su prodigiosa ternura por una persona o un juguete, por un desaprovechado trozo de madera, por un inservible artefacto, resto de un naufragio de cosas domésticas, por un perro de ojos tristes y de estampa maltrecha, por un gato envejecido y cojo, por una piedrecilla minúscula, cuyos hostiles bordes se han ido suavizando al roce de las caricias entre las manos incansables. Los niños aman el viento y la lluvia, la tierra mojada, el agua que brota y que salta en los estanques públicos, el sol y el cielo, la yerba, los árboles, la luz, los colores, todo el universo real y todo el universo irreal de sus sueños.",
+  "questionText": "Pregunta 23: ¿Cuál es la estrategia argumentativa usada por el autor?",
+  "correctOptionId": "B",
+  "aiExplanation": "- **Problema central:** reconocer cómo construye el autor su defensa.\n- El texto presenta una tesis inicial sobre la sinceridad de la infancia y luego enumera varios ejemplos y descripciones: cómo aman, cómo detestan, qué cosas aman.\n- Es decir, el autor defiende su tesis mediante **evidencias o ilustraciones** acumuladas.\n- **Conclusión:** la respuesta correcta es **B**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "El autor presenta el tema, seguido de una tesis y de una antítesis, y concluye con una síntesis.",
+      "optionFeedback": "- **Incorrecta.** No hay estructura dialéctica de tesis, antítesis y síntesis."
+    },
+    {
+      "optionId": "B",
+      "optionText": "El autor emprende la tarea de defender una tesis enumerando evidencias a favor de ella.",
+      "optionFeedback": "- **Correcta.** El autor sostiene una tesis sobre la sinceridad infantil y la respalda con una serie de descripciones y ejemplos."
+    },
+    {
+      "optionId": "C",
+      "optionText": "El autor presenta diferentes argumentos y concluye refutando esos argumentos.",
+      "optionFeedback": "- **Incorrecta.** No refuta sus propios argumentos; los acumula para reforzar su postura."
+    },
+    {
+      "optionId": "D",
+      "optionText": "El autor expone una tesis, pero no presenta argumentos para apoyarla.",
+      "optionFeedback": "- **Incorrecta.** Sí presenta apoyo argumentativo, mediante enumeraciones y ejemplos del comportamiento infantil."
+    }
+  ]
+}

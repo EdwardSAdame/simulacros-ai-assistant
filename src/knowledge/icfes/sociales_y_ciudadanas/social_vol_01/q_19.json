@@ -1,0 +1,29 @@
+{
+  "questionLabel": "Pregunta 19",
+  "questionId": "q_19",
+  "questionText": "Pregunta 19: Como resultado del acuerdo de paz firmado por un Gobierno y un grupo armado al margen de la ley, se establecieron zonas veredales transitorias de normalización (ZVTN), las cuales consisten en locaciones rurales donde se concentran los militantes del grupo armado para iniciar su transición a la vida civil. En estas zonas, el ejército del país debe custodiar a los miembros del grupo armado, en lugar de combatirlo. De acuerdo con lo expuesto, ¿por qué es posible que se dé esta situación?",
+  "correctOptionId": "D",
+  "aiExplanation": "- **Problema central:** explicar por qué el Ejército pasa de combatir a custodiar en las ZVTN.\n- **Dato clave:** existe un **acuerdo de paz** y esas zonas sirven para la transición del grupo armado a la vida civil.\n- **Razonamiento:**\n  - Con el cambio del contexto político y jurídico, también cambia la función operativa de la Fuerza Pública en esas zonas.\n  - No significa subordinación del Ejército al grupo armado, sino adaptación institucional al proceso de paz.\n- **Conclusión:** esto es posible porque las Fuerzas Armadas adecuaron su función al nuevo contexto sociopolítico. ",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "Porque el Gobierno nacional quiere que el grupo armado conviva con el Ejército, para que en el futuro haga parte de él.",
+      "optionFeedback": "- **Incorrecta.** El objetivo no es incorporar automáticamente al grupo armado al Ejército.\n- La finalidad es facilitar la **transición a la vida civil** dentro del acuerdo de paz."
+    },
+    {
+      "optionId": "B",
+      "optionText": "Porque el Gobierno nacional ha dado un giro hacia el socialismo y ha decidido poner a su Ejército al servicio del grupo armado.",
+      "optionFeedback": "- **Incorrecta.** La afirmación introduce una interpretación ideológica que no aparece en el texto.\n- La custodia se explica por el acuerdo de paz, no por un cambio al socialismo."
+    },
+    {
+      "optionId": "C",
+      "optionText": "Porque el grupo armado ahora controla las ZVTN y tienen miembros del Ejército a su disposición.",
+      "optionFeedback": "- **Incorrecta.** El texto no dice que el grupo armado controle al Ejército.\n- Señala que el Ejército **custodia** a los miembros del grupo en el marco del proceso de normalización."
+    },
+    {
+      "optionId": "D",
+      "optionText": "Porque la función de las Fuerzas Armadas se adecuó al nuevo contexto sociopolítico del país.",
+      "optionFeedback": "- **Correcta.** Tras el acuerdo de paz, la función del Ejército en esas zonas cambia: deja de combatir y pasa a **custodiar** para apoyar la transición a la vida civil.\n- Es una adecuación al nuevo contexto sociopolítico."
+    }
+  ]
+}

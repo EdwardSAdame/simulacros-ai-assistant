@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 18",
+  "questionId": "q_18",
+  "sectionImageAiDescription": "Infografía sobre el petricor estructurada en tres fases horizontales.\n\nFase 1:\n- Imagen: Una gota de lluvia azul impacta sobre una superficie de tierra, formando burbujas de aire.\n- Texto: 'CUANDO LAS GOTAS DE LLUVIA IMPACTAN CONTRA EL SUELO,\n  SE FORMAN BURBUJAS DE AIRE.'\n\nFase 2:\n- Imagen: Burbujas blancas bajo la superficie contienen pequeños puntos verdes y amarillos. Etiqueta superior: 'PARTÍCULAS ATRAPADAS'.\n- Texto: 'ESTAS BURBUJAS \"ATRAPAN\" PARTÍCULAS DE LA TIERRA\n  (ACEITES Y QUÍMICOS PRODUCIDOS POR BACTERIAS).'\n\nFase 3:\n- Imagen: Las burbujas estallan en la superficie liberando los puntos verdes y amarillos hacia el aire.\n- Texto: 'LAS BURBUJAS HACEN EFERVESCENCIA COMO CHAMPAÑA\n  Y ESPARCEN LAS PARTÍCULAS EN EL AMBIENTE.'",
+  "questionText": "Pregunta 18: Considere el siguiente fragmento del texto: \"Las burbujas hacen efervescencia como champaña\". ¿Cuál de las siguientes opciones expresa el mismo significado que este fragmento?",
+  "correctOptionId": "C",
+  "aiExplanation": "- **Problema central:** interpretar una comparación de la infografía.\n- *Hacen efervescencia como champaña* significa que las burbujas liberan gas y ascienden/estallan de modo semejante a las de la champaña.\n- **Conclusión:** la opción que conserva ese sentido es **C**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "Las burbujas de agua están llenas de alcohol, al igual que las burbujas de champaña.",
+      "optionFeedback": "- **Incorrecta.** La comparación no tiene que ver con alcohol, sino con el modo en que las burbujas liberan gas."
+    },
+    {
+      "optionId": "B",
+      "optionText": "El agua hierve de la misma manera que la champaña crea burbujas.",
+      "optionFeedback": "- **Incorrecta.** *Efervescencia* aquí no significa hervir por calor, sino liberar burbujas como una bebida gaseosa."
+    },
+    {
+      "optionId": "C",
+      "optionText": "El gas sale de las burbujas de agua del mismo modo que de las burbujas de champaña.",
+      "optionFeedback": "- **Correcta.** Esta opción reproduce el sentido de la comparación: las burbujas liberan gas y partículas de modo similar a la champaña."
+    },
+    {
+      "optionId": "D",
+      "optionText": "Las burbujas que salen de la champaña son del mismo color que las del agua.",
+      "optionFeedback": "- **Incorrecta.** La comparación no se refiere al color, sino al proceso de efervescencia."
+    }
+  ]
+}

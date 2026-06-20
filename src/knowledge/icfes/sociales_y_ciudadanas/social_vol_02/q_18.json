@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 18",
+  "questionId": "q_18",
+  "sectionText": "Tras los impactos generados por la pandemia de la COVID-19, la alcaldía de una ciudad ha propuesto la terminación del aislamiento obligatorio de los ciudadanos y la reactivación gradual de la economía. En el caso puntual de un sector comercial y residencial de la ciudad, la alcaldía estudia la posibilidad de permitir la apertura del comercio formal durante dos días a la semana, siempre y cuando se respeten los protocolos de bioseguridad. Al respecto, los distintos actores involucrados en la decisión han dado a conocer sus puntos de vista:\n\n- Los comerciantes desean reabrir sus negocios para evitar que se pierdan más puestos de trabajo.\n- Los vecinos desean medidas para evitar aglomeraciones que faciliten su desplazamiento en el sector.\n- Los funcionarios de la alcaldía propenden por el cuidado de la salud de los ciudadanos y la dinamización de la economía.\n- Los profesionales de la salud se oponen a cualquier medida de reactivación económica porque implicaría el aumento en el número de contagios.",
+  "questionText": "Pregunta 18: Si se materializa la propuesta de la alcaldía, es probable que se genere un conflicto entre",
+  "correctOptionId": "D",
+  "aiExplanation": "- **Problema central:** prever qué actores tendrán intereses más claramente opuestos si se reabre el comercio dos días por semana.\n- **Datos relevantes:**\n  - Los comerciantes quieren reabrir para evitar pérdida de empleos.\n  - Los profesionales de la salud se oponen a cualquier reactivación por aumento de contagios.\n  - La alcaldía busca un punto intermedio.\n- **Método lógico:** identificar el par de actores con posturas directamente enfrentadas respecto a la reapertura.\n- **Conclusión:** el conflicto más probable sería entre **comerciantes** y **profesionales de la salud**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "la alcaldía y los comerciantes, por el posible aumento en el número de empleos y de contagios dada la activación económica.",
+      "optionFeedback": "- **Incorrecta.** La alcaldía también propone reactivar gradualmente la economía, así que no es el actor más enfrentado a los comerciantes."
+    },
+    {
+      "optionId": "B",
+      "optionText": "los vecinos y la alcaldía, por la falta de garantías para una reactivación económica segura.",
+      "optionFeedback": "- **Incorrecta.** Puede haber tensiones, pero el choque más directo del texto está entre reabrir para trabajar y no reabrir para evitar contagios."
+    },
+    {
+      "optionId": "C",
+      "optionText": "los vecinos y los profesionales de la salud, por la ausencia de medidas efectivas para cuidar la salud pública.",
+      "optionFeedback": "- **Incorrecta.** Ambos comparten preocupación por medidas de cuidado y control de aglomeraciones; no son los actores más opuestos."
+    },
+    {
+      "optionId": "D",
+      "optionText": "los comerciantes y los profesionales de la salud, por el posible aumento de contagios dada la activación económica en el sector.",
+      "optionFeedback": "- **Correcta.** Los comerciantes priorizan la reapertura y los profesionales de la salud rechazan cualquier reactivación por el riesgo de contagios, lo que genera un conflicto directo."
+    }
+  ]
+}

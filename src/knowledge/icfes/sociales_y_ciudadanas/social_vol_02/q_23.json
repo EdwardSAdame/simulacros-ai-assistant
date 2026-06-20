@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 23",
+  "questionId": "q_23",
+  "sectionText": "Considere la siguiente intervención, realizada por un congresista en un debate sobre la despenalización del aborto en un país latinoamericano:\n\n\"El derecho a la vida no puede seguir siendo ultrajado por algunas ideologías [...] hacemos un llamado a todas las colectividades políticas, gremios educativos, sociales y a las asociaciones de padres de familia para que nos unamos\".",
+  "questionText": "Pregunta 23: Teniendo en cuenta la intervención, se puede afirmar que",
+  "correctOptionId": "C",
+  "aiExplanation": "- **Problema central:** interpretar la postura política del congresista.\n- **Datos relevantes:**\n  - Habla de defender el \"derecho a la vida\".\n  - Convoca a colectividades políticas, gremios y asociaciones de padres.\n  - El contexto es un debate sobre despenalización del aborto.\n- **Método lógico:** inferir si apoya o rechaza la despenalización y a qué sectores representa.\n- **Conclusión:** el congresista **representa sectores específicos de la sociedad que están en contra de la despenalización del aborto**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "acompaña a sectores sociales que buscan legalizar el aborto solo en los casos de violación.",
+      "optionFeedback": "- **Incorrecta.** La intervención usa un lenguaje de oposición al aborto, no de apoyo a su legalización parcial."
+    },
+    {
+      "optionId": "B",
+      "optionText": "expone posiciones políticas que no representan de ninguna manera a los ciudadanos.",
+      "optionFeedback": "- **Incorrecta.** Como congresista, justamente expresa una posición que sí representa a ciertos sectores ciudadanos, aunque no a todos."
+    },
+    {
+      "optionId": "C",
+      "optionText": "representa a sectores específicos de la sociedad que están en contra de la despenalización del aborto.",
+      "optionFeedback": "- **Correcta.** El llamado a unirse para defender el \"derecho a la vida\" muestra una postura contraria a la despenalización y alineada con sectores sociales conservadores."
+    },
+    {
+      "optionId": "D",
+      "optionText": "muestra el descontento de las mujeres incitadas a abortar porque no cuentan con subsidios.",
+      "optionFeedback": "- **Incorrecta.** Esa idea no aparece en la intervención ni se deriva del llamado político citado."
+    }
+  ]
+}

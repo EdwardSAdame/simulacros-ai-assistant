@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 3",
+  "questionId": "q_03",
+  "sectionImageAiDescription": "Diagrama de Venn de 3 conjuntos sin rectángulo delimitador ni borde exterior. Las etiquetas de los conjuntos flotan libremente de forma analítica junto a cada círculo, estrictamente sin líneas indicadoras, sin cajas y sin flechas que las conecten: \"Dolor de cabeza\" arriba a la izquierda, \"Mareo\" arriba a la derecha, \"Náuseas\" en la parte inferior. Los tres círculos están rellenos con colores pastel desvanecidos. Los valores exactos para las regiones son: Solo \"Dolor de cabeza\" \\(10\\); Solo \"Mareo\" \\(5\\); intersección \"Dolor de cabeza\" y \"Mareo\" excluyendo \"Náuseas\" \\(8\\); Solo \"Náuseas\" \\(15\\); intersección \"Dolor de cabeza\" y \"Náuseas\" excluyendo \"Mareo\" \\(6\\); intersección \"Mareo\" y \"Náuseas\" excluyendo \"Dolor de cabeza\" \\(1\\); la intersección central de los tres conjuntos está matemáticamente vacía (valor cero, estrictamente no dibujar ni mostrar ningún dato aquí). MUY IMPORTANTE: El valor del universo exterior es \\(15\\). Este número \\(15\\) debe colocarse flotando libremente en la parte inferior izquierda del diagrama. En la esquina inferior derecha aparece el texto \"Diagrama\". Todos los números mostrados están en formato LaTeX.",
+  "questionText": "Pregunta 3: Un laboratorio aplicó un tratamiento médico a \\(60\\) pacientes y registró en un diagrama los tres efectos secundarios que padecieron algunos de ellos.\n\nLuego, un médico del laboratorio registró la información en una tabla de la siguiente manera.\n\n¿Es válida la información que registró el médico en la tabla?",
+  "correctOptionId": "B",
+  "aiExplanation": "- **Problema central:** verificar si la tabla del médico coincide con el diagrama.\n- **Datos del diagrama:**\n  - Dolor de cabeza: \\(10+8+6=24\\).\n  - Mareo: \\(5+8+1=14\\).\n  - Náuseas: \\(15+6+1=22\\).\n  - Triple intersección: \\(0\\).\n  - Fuera de los tres síntomas: \\(15\\).\n  - Total: \\(10+5+8+15+6+1+15=60\\).\n- **Análisis:**\n  - La tabla sería válida si las frecuencias por síntoma fueran \\(24,14,22\\).\n  - La opción que justifica correctamente la validez es la que afirma que las cantidades por síntoma coinciden con el diagrama.\n  - No basta con que la suma total sea \\(60\\), porque en tablas por síntoma puede haber doble conteo en intersecciones.\n- **Conclusión:** la justificación correcta es **sí**, porque las cantidades por síntoma coinciden con el diagrama.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "No, porque en el diagrama se evidencia que el efecto secundario que más presentaron los pacientes fue el de náuseas.",
+      "optionFeedback": "- **Incorrecta.** En el diagrama, el síntoma más frecuente es **dolor de cabeza** con \\(24\\) pacientes, no náuseas con \\(22\\)."
+    },
+    {
+      "optionId": "B",
+      "optionText": "Sí, porque la cantidad de pacientes que presentó cada síntoma, según la tabla, coincide con la cantidad de pacientes que indica el diagrama.",
+      "optionFeedback": "- **Correcta.** Del diagrama se obtiene: dolor de cabeza \\(24\\), mareo \\(14\\) y náuseas \\(22\\). Si la tabla registra esas cantidades, sí es válida."
+    },
+    {
+      "optionId": "C",
+      "optionText": "Sí, porque la cantidad de pacientes a los que se les aplicó el tratamiento, según el diagrama, coincide con la suma de las frecuencias que se presentan en la tabla.",
+      "optionFeedback": "- **Incorrecta.** Esa justificación no es suficiente.\n- En una tabla por síntomas, las intersecciones pueden hacer que una suma simple no represente correctamente el total de pacientes únicos."
+    },
+    {
+      "optionId": "D",
+      "optionText": "No, porque falta tener en cuenta la cantidad de pacientes que presentaron los tres efectos secundarios.",
+      "optionFeedback": "- **Incorrecta.** La intersección de los tres efectos es \\(0\\), así que no falta agregar ningún paciente allí."
+    }
+  ]
+}

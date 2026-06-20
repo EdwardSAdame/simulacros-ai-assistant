@@ -1,0 +1,29 @@
+{
+  "questionLabel": "Pregunta 6",
+  "questionId": "q_06",
+  "questionText": "Pregunta 6: La erradicación de cultivos ilícitos, como la coca, es una de las principales problemáticas que vive Colombia. Este flagelo ha generado un debate sobre la forma correcta de erradicar los cultivos: si se debe hacer de manera manual o a través de aspersión aérea, con químicos que eliminan las plantas. En esta problemática confluyen varios actores e intereses a la hora de buscar soluciones que satisfagan las necesidades del país, entre los cuales se encuentran los siguientes:\n\n- Por un lado, está el Estado, que tiene como misión, bajo el mando de la fuerza pública, eliminar los cultivos para disminuir el número de hectáreas cultivadas y mejorar los índices nacionales de erradicación.\n- Por otro lado, están los grupos armados organizados —GAO— que promueven la siembra de cultivos para que estos sean usados, posteriormente, en el narcotráfico y financiar sus actividades delictivas.\n- Otro actor importante son los campesinos que han sido obligados por los GAO a cultivar coca, y a quienes no se contempla judicializar dentro de la política de erradicación manual.\n- Adicionalmente, se encuentran las organizaciones, como las Naciones Unidas, que elaboran informes para mostrar el avance o retroceso de la siembra de cultivos ilícitos.\n- Finalmente, existen algunos países, como Estados Unidos, que, a través de recursos internacionales, se encargan de financiar actividades que logren erradicar los cultivos que son usados para actividades ilegales.\n\nSi se lleva a cabo la estrategia de erradicación manual de cultivos ilícitos, ¿entre quiénes es probable que se dé un conflicto?",
+  "correctOptionId": "D",
+  "aiExplanation": "- **Problema central:** identificar entre qué actores es más probable un conflicto si se aplica la erradicación manual.\n- **Datos clave:**\n  - La fuerza pública debe eliminar cultivos.\n  - Los **GAO** promueven esos cultivos porque financian sus actividades ilegales.\n  - Los campesinos obligados a cultivar no serían judicializados en la erradicación manual.\n- **Razonamiento:**\n  - La erradicación manual afecta directamente el interés económico y criminal de los GAO.\n  - Por eso, quienes ejecutan la erradicación \\(fuerza pública\\) entrarían en choque con quienes desean mantener los cultivos \\(GAO\\).\n- **Conclusión:** el conflicto más probable se da entre la **fuerza pública** y los **GAO**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "Los campesinos víctimas de los GAO y las Naciones Unidas.",
+      "optionFeedback": "- **Incorrecta.** Las Naciones Unidas aparecen como un actor que elabora informes, no como parte de una confrontación directa con los campesinos.\n- No hay en el texto intereses opuestos entre estos dos actores."
+    },
+    {
+      "optionId": "B",
+      "optionText": "Los Estados Unidos y las Naciones Unidas.",
+      "optionFeedback": "- **Incorrecta.** Ambos actores participan de manera indirecta: uno financia acciones y el otro produce informes.\n- El texto no sugiere un choque directo entre sus intereses frente a la erradicación manual."
+    },
+    {
+      "optionId": "C",
+      "optionText": "La fuerza pública y los campesinos víctimas de los GAO.",
+      "optionFeedback": "- **Incorrecta.** Aunque podría haber tensiones prácticas, el texto aclara que a esos campesinos **no se contempla judicializarlos** en la erradicación manual.\n- El conflicto principal es con quienes promueven y protegen el negocio ilícito: los GAO."
+    },
+    {
+      "optionId": "D",
+      "optionText": "La fuerza pública y los grupos armados organizados.",
+      "optionFeedback": "- **Correcta.** La fuerza pública busca erradicar los cultivos, mientras que los **GAO** los promueven para financiar el narcotráfico.\n- Sus intereses son directamente opuestos, así que allí se ubica el conflicto más probable."
+    }
+  ]
+}

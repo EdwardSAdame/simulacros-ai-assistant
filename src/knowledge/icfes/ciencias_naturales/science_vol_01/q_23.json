@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 23",
+  "questionId": "q_23",
+  "questionImageAiDescription": "Tabla titulada \"Tolerancia (niveles máximos y mínimos)\" con columnas: Temperatura mínima, Temperatura máxima, pH ácido, pH alcalino, Amoníaco máximo, Nitrito máximo. Valores: temperatura mínima \\(19{,}6\\ ^\\circ\\text{C}\\); temperatura máxima \\(33{,}7\\ ^\\circ\\text{C}\\); pH ácido \\(2{,}9\\); pH alcalino \\(8{,}8\\); amoníaco máximo \\(23{,}7\\ \\text{mg/L}\\); nitrito máximo \\(1{,}1\\ \\text{mg/L}\\).",
+  "questionText": "Pregunta 23: El tetra cardenal (*Paracheirodon axelrodi*) es un pez común en los acuarios de las casas, muy llamativo por su cuerpo colorido y alargado. Estos peces requieren acuarios con condiciones de temperatura, pH y concentraciones de amoníaco y nitritos muy específicas, como se muestra en la tabla.\n\nMario tiene en su casa un acuario con varios peces, y al limpiarlo, no enjuagó bien el detergente y dejó residuos. Las condiciones del agua del acuario se afectaron y se llegó a una temperatura de \\(22,4\\ ^\\circ\\text{C}\\), un pH de \\(10,4\\) y concentraciones de \\(25,8\\ \\text{mg/L}\\) y \\(0,9\\ \\text{mg/L}\\) de amoníaco y nitritos, respectivamente. En consecuencia, ¿qué le sucederá a los peces en estas nuevas condiciones?",
+  "correctOptionId": "D",
+  "aiExplanation": "- **Problema central:** decidir si los peces sobreviven con las nuevas condiciones del acuario.\n- **Comparación con la tabla de tolerancia:**\n  - temperatura: \\(22{,}4\\ ^\\circ\\text{C}\\), dentro del rango \\(19{,}6\\) a \\(33{,}7\\ ^\\circ\\text{C}\\);\n  - pH: \\(10{,}4\\), supera el máximo alcalino de \\(8{,}8\\);\n  - amoníaco: \\(25{,}8\\ \\text{mg/L}\\), supera el máximo de \\(23{,}7\\ \\text{mg/L}\\);\n  - nitritos: \\(0{,}9\\ \\text{mg/L}\\), está por debajo del máximo de \\(1{,}1\\ \\text{mg/L}\\).\n- **Análisis:** dos variables superan el rango de tolerancia: pH y amoníaco.\n- **Conclusión:** los peces no sobrevivirán. La respuesta correcta es **D**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "Los peces sobrevivirán porque la temperatura y el nivel de nitritos no superan los rangos de tolerancia de esta especie.",
+      "optionFeedback": "- **Incorrecta.** Aunque temperatura y nitritos están dentro del rango, el pH y el amoníaco sí lo superan."
+    },
+    {
+      "optionId": "B",
+      "optionText": "Los peces no sobrevivirán, porque los niveles de pH y nitritos superan los rangos de tolerancia de esta especie.",
+      "optionFeedback": "- **Incorrecta.** El nitrito \\(0{,}9\\ \\text{mg/L}\\) no supera el máximo de \\(1{,}1\\ \\text{mg/L}\\)."
+    },
+    {
+      "optionId": "C",
+      "optionText": "Los peces sobrevivirán, porque la temperatura y el nivel de amoníaco no superan los rangos de tolerancia de esta especie.",
+      "optionFeedback": "- **Incorrecta.** El amoníaco sí supera el valor máximo tolerado, además del pH."
+    },
+    {
+      "optionId": "D",
+      "optionText": "Los peces no sobrevivirán, porque los niveles de pH y amoníaco superan los rangos de tolerancia de esta especie.",
+      "optionFeedback": "- **Correcta.** El pH \\(10{,}4\\) supera \\(8{,}8\\) y el amoníaco \\(25{,}8\\ \\text{mg/L}\\) supera \\(23{,}7\\ \\text{mg/L}\\), por lo que las condiciones son letales."
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "questionLabel": "Pregunta 17",
+  "questionId": "q_17",
+  "questionText": "Pregunta 17: Una estudiante tiene la hipótesis de que al hacer reaccionar agua oxigenada con papa criolla, entre más grande sea el trozo de papa, mayor será el tiempo que dure reaccionando con el agua oxigenada. Si ella quiere representar gráficamente este fenómeno, ¿cuál de las siguientes gráficas debe elegir?",
+  "correctOptionId": "C",
+  "aiExplanation": "- **Problema central:** elegir la gráfica que represente la hipótesis *a mayor tamaño de papa, mayor tiempo de reacción*.\n- **Relación esperada:**\n  - trozo grande \\(\\rightarrow\\) mayor tiempo;\n  - trozo mediano \\(\\rightarrow\\) tiempo intermedio;\n  - trozo pequeño \\(\\rightarrow\\) menor tiempo.\n- **Análisis:** la opción C muestra exactamente esa tendencia de manera clara en un gráfico de barras. Los gráficos circulares no son los más adecuados para esta relación ordenada, y la opción A no es monotónica.\n- **Conclusión:** la respuesta correcta es **C**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "[Imagen de la opción: Gráfico de barras. Eje X: Tamaño de papa criolla (Grande, Mediana, Pequeña). Eje Y: Tiempo de reacción (s). Alturas aproximadas de las barras: Grande = 30, Mediana = 60, Pequeña = 30.]",
+      "optionFeedback": "- **Incorrecta.** No representa la hipótesis, porque el tiempo del trozo grande no es el mayor y además grande y pequeña quedan iguales."
+    },
+    {
+      "optionId": "B",
+      "optionText": "[Imagen de la opción: Gráfico circular titulado 'Tiempo de reacción (s)'. La porción 'Grande' ocupa casi la mitad del círculo, 'Mediana' algo más de un cuarto, y 'Pequeña' la porción restante más pequeña.]",
+      "optionFeedback": "- **Incorrecta.** Aunque sugiere que *Grande* tiene mayor valor, un gráfico circular no es la mejor representación para comparar esta relación experimental entre tamaño y tiempo."
+    },
+    {
+      "optionId": "C",
+      "optionText": "[Imagen de la opción: Gráfico de barras. Eje X: Tamaño de papa criolla (Grande, Mediana, Pequeña). Eje Y: Tiempo de reacción (s). Alturas aproximadas de las barras: Grande = 120, Mediana = 60, Pequeña = 30. Muestra una tendencia descendente clara.]",
+      "optionFeedback": "- **Correcta.** Muestra que al aumentar el tamaño del trozo de papa, aumenta el tiempo de reacción, tal como plantea la hipótesis."
+    },
+    {
+      "optionId": "D",
+      "optionText": "[Imagen de la opción: Gráfico circular titulado 'Tiempo de reacción (s)'. La porción 'Pequeña' ocupa exactamente la mitad (semicírculo superior), mientras que 'Grande' y 'Mediana' se dividen la otra mitad inferior.]",
+      "optionFeedback": "- **Incorrecta.** Representa lo contrario a la hipótesis, pues asigna a *Pequeña* el mayor tiempo."
+    }
+  ]
+}

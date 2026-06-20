@@ -1,0 +1,29 @@
+{
+  "questionLabel": "Pregunta 25",
+  "questionId": "q_25",
+  "questionText": "Pregunta 25: En una práctica de laboratorio, el profesor afirma que el agua y el aceite no se mezclan y pregunta, ¿el alcohol y el aceite se mezclan? Para responder a la pregunta solicita que mezclen las dos sustancias. Un estudiante escribe como hipótesis que estos dos líquidos se mezclan formando una solución homogénea; luego, vierte los dos líquidos en un recipiente, los agita y pasado unos minutos observa que se forman dos capas: en el fondo se encuentra el aceite y en la capa superior está el alcohol. Al analizar los resultados, ¿será válida la hipótesis del estudiante y qué conclusión se puede dar?",
+  "correctOptionId": "D",
+  "aiExplanation": "- **Problema central:** decidir si la hipótesis de mezcla homogénea fue validada por el experimento.\n- **Dato observado:** después de agitar, al cabo de unos minutos se forman **dos capas**: aceite abajo y alcohol arriba.\n- **Análisis:** dos capas visibles indican que los líquidos **no se disolvieron entre sí** y forman una mezcla heterogénea. Por tanto, la hipótesis de solución homogénea es falsa.\n- **Conclusión:** la respuesta correcta es **D**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "La hipótesis es válida y se concluye que los resultados obtenidos se dieron debido a que estas sustancias no se mezclaron.",
+      "optionFeedback": "- **Incorrecta.** Si no se mezclaron homogéneamente, la hipótesis no puede considerarse válida."
+    },
+    {
+      "optionId": "B",
+      "optionText": "La hipótesis es válida y se concluye que el alcohol tiene enlaces que impiden que se forme una mezcla heterogénea con el aceite.",
+      "optionFeedback": "- **Incorrecta.** Los resultados muestran justamente una mezcla heterogénea en dos capas, así que la hipótesis no fue validada."
+    },
+    {
+      "optionId": "C",
+      "optionText": "La hipótesis es falsa y se concluye que la mezcla obtenida luego de agitar las dos sustancias es de carácter homogéneo.",
+      "optionFeedback": "- **Incorrecta.** Si se forman dos capas, la mezcla no es homogénea."
+    },
+    {
+      "optionId": "D",
+      "optionText": "La hipótesis es falsa y se concluye que el alcohol no se disuelve en el aceite por lo que se obtiene una mezcla heterogénea.",
+      "optionFeedback": "- **Correcta.** La presencia de dos capas demuestra que no se formó una solución homogénea, sino una mezcla heterogénea."
+    }
+  ]
+}

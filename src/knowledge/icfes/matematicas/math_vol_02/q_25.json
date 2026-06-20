@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 25",
+  "questionId": "q_25",
+  "questionImageAiDescription": "Se observan \\(6\\) cartas organizadas en \\(2\\) filas por \\(3\\) columnas. Dos cartas están destapadas.\n\nCarta superior izquierda: contiene un rectángulo horizontal. Sobre el lado superior del rectángulo aparece una medida de \\(2\\) cm asociada a la altura vertical del rectángulo. Dentro del rectángulo hay una diagonal o segmento oblicuo rotulado \\(3\\) cm, desde la esquina inferior izquierda hacia la parte superior derecha.\n\nCarta inferior derecha: contiene un triángulo rectángulo. La base horizontal (uno de los catetos) está rotulada con \\(3\\) cm y forma un ángulo recto con el cateto vertical. El lado oblicuo o más largo (la hipotenusa) está rotulado con \\(5\\) cm.\n\nLas otras cuatro cartas están boca abajo y no muestran información.",
+  "questionText": "Pregunta 25: En una versión del juego de armar parejas con cartas, se busca encontrar pares de cartas con figuras geométricas que tengan la misma área. A continuación, se muestra un juego con dos cartas visibles:\n\n¿Qué datos se deben calcular para determinar si las cartas destapadas forman una pareja?",
+  "correctOptionId": "C",
+  "aiExplanation": "- **Problema central:** decidir qué datos faltan para comparar las áreas de las dos figuras visibles.\n- **Rectángulo:** se conoce un lado de \\(2\\ \\text{cm}\\) y la diagonal de \\(3\\ \\text{cm}\\). Para hallar su área hace falta calcular el **otro lado**.\n- **Triángulo rectángulo:** se conoce base \\(3\\ \\text{cm}\\) e hipotenusa \\(5\\ \\text{cm}\\). Para hallar su área hace falta calcular la **altura** (el otro cateto).\n- Es decir, para decidir si tienen la misma área se necesitan ambos datos faltantes.\n- **Conclusión:** se debe calcular **la altura del triángulo y un lado del rectángulo**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "Solamente la altura del triángulo.",
+      "optionFeedback": "**Incorrecta.** También hace falta un lado del rectángulo para calcular su área."
+    },
+    {
+      "optionId": "B",
+      "optionText": "Solamente un lado del rectángulo.",
+      "optionFeedback": "**Incorrecta.** También falta la altura del triángulo rectángulo."
+    },
+    {
+      "optionId": "C",
+      "optionText": "La altura del triángulo y un lado del rectángulo.",
+      "optionFeedback": "**Correcta.** Con esos dos datos ya se pueden calcular ambas áreas y compararlas."
+    },
+    {
+      "optionId": "D",
+      "optionText": "Se puede determinar sin calcular ningún dato adicional.",
+      "optionFeedback": "**Incorrecta.** Con la información visible no se conocen directamente las dos áreas."
+    }
+  ]
+}

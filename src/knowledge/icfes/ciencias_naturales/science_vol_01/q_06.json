@@ -1,0 +1,31 @@
+{
+  "questionLabel": "Pregunta 6",
+  "questionId": "q_06",
+  "sectionText": "Un ingeniero investiga cómo se dará la transmisión de información para que su pueblo se conecte a internet. Él encuentra que esto ocurrirá a través de la integración de dos tecnologías:\n\n- Un cable de fibra óptica por el que se transporta la información desde internet hasta la antena principal del pueblo.\n- Un grupo de antenas que emiten y reciben la información por medio de ondas electromagnéticas (antenas de wifi).\n\nAmbas tecnologías se comunican con la antena principal en la cabecera del pueblo, que repite la señal a otras antenas ubicadas estratégicamente en las plazas y zonas comunes, como se muestra a continuación.\n\nA partir de su investigación, el ingeniero propone realizar una conexión por medio de ondas electromagnéticas, con todas las antenas conectadas entre sí y con frecuencias de onda, sin costo, como las ondas de radio. Su propuesta se llama \"Megazonas wifi\" y se muestra en el siguiente esquema:",
+  "sectionImageAiDescription": "La sección contiene dos esquemas.\n\nEsquema superior titulado \"Esquema wifi zonas comunitarias\": representación de un pueblo circular con casas, árboles, personas y una plaza central con una fuente. Hay una \"Antena principal\" en la parte alta del pueblo, una \"Antena secundaria\" en la parte baja, y un tercer punto de acceso en el lado izquierdo. A la derecha aparece una nube etiquetada \"Internet\" conectada por una flecha vertical a un icono de antena. Entre la antena derecha y la antena principal hay una flecha horizontal doble rotulada \"Conexión por ondas\". Desde la antena principal del pueblo hacia la nube de Internet sale una flecha curva gruesa rotulada \"Conexión por fibra óptica\". Hay un recuadro de leyenda con un icono y el texto \"Punto de acceso\".\n\nEsquema inferior titulado \"Esquema Megazonas wifi\": varias antenas interconectadas por líneas punteadas formando una red mallada. A la izquierda hay una \"Escuela\" conectada a la red. En la parte central superior aparece \"Cabecera rural 3\". A la derecha superior está la nube \"Internet\" conectada verticalmente a una antena y por una flecha horizontal doble hacia la red; cerca de ahí aparece la etiqueta \"Red fija\". En la parte inferior izquierda está la \"Cabecera rural 1\" con su \"Antena principal\" y \"Antena secundaria\". En la parte inferior derecha está la \"Cabecera rural 2\" con su \"Antena principal\" y \"Antena secundaria\". Un recuadro indica: \"Las ondas de la señal pueden tener frecuencias entre los 928 MHz y los 5.850 MHz, para mayor cobertura\".",
+  "questionText": "Pregunta 6: En una encuesta aplicada a la población, se resaltó que dibujar en el esquema la conexión entre las antenas es una fortaleza en la comunicación de la propuesta de las Megazonas wifi.\n\n¿Por qué mostrar la conexión entre las antenas es una fortaleza en la comunicación?",
+  "correctOptionId": "D",
+  "aiExplanation": "- **Problema central:** determinar por qué representar gráficamente las conexiones entre antenas mejora la comunicación de la propuesta.\n- **Datos relevantes:** el esquema inferior muestra varias antenas interconectadas entre cabeceras rurales y una escuela.\n- **Análisis:** dibujar esas conexiones permite comprender cómo se enlazan diferentes poblaciones y cómo circula la señal dentro de una red más amplia. No permite deducir frecuencias exactas ni que cada antena solo se conecte a una.\n- **Conclusión:** la respuesta correcta es **D**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "Porque se puede deducir que cada antena se comunica con una sola antena, y de esta manera, llevan la señal.",
+      "optionFeedback": "- **Incorrecta.** El esquema muestra una red con varias interconexiones, no una comunicación de una sola antena con otra."
+    },
+    {
+      "optionId": "B",
+      "optionText": "Porque, de acuerdo con la conexión entre las antenas, se puede determinar qué frecuencias usa cada una de ellas.",
+      "optionFeedback": "- **Incorrecta.** El dibujo de las conexiones no especifica la frecuencia usada por cada antena."
+    },
+    {
+      "optionId": "C",
+      "optionText": "Porque se puede saber cuántas antenas se necesitan para llevar la señal de internet a la escuela.",
+      "optionFeedback": "- **Incorrecta.** Aunque el esquema ayuda a visualizar la ruta, la fortaleza comunicativa principal es mostrar la **interconexión de poblaciones**, no contar antenas para un solo punto."
+    },
+    {
+      "optionId": "D",
+      "optionText": "Porque ilustra cómo pueden conectarse varias poblaciones entre sí y con una señal muy estable.",
+      "optionFeedback": "- **Correcta.** Mostrar la red entre antenas permite entender visualmente cómo varias zonas o poblaciones pueden quedar enlazadas y compartir la señal."
+    }
+  ]
+}

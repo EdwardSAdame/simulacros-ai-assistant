@@ -1,0 +1,31 @@
+{
+  "questionLabel": "Pregunta 5",
+  "questionId": "q_05",
+  "sectionText": "Un ingeniero investiga cómo se dará la transmisión de información para que su pueblo se conecte a internet. Él encuentra que esto ocurrirá a través de la integración de dos tecnologías:\n\n- Un cable de fibra óptica por el que se transporta la información desde internet hasta la antena principal del pueblo.\n- Un grupo de antenas que emiten y reciben la información por medio de ondas electromagnéticas (antenas de wifi).\n\nAmbas tecnologías se comunican con la antena principal en la cabecera del pueblo, que repite la señal a otras antenas ubicadas estratégicamente en las plazas y zonas comunes, como se muestra a continuación.\n\nA partir de su investigación, el ingeniero propone realizar una conexión por medio de ondas electromagnéticas, con todas las antenas conectadas entre sí y con frecuencias de onda, sin costo, como las ondas de radio. Su propuesta se llama \"Megazonas wifi\" y se muestra en el siguiente esquema:",
+  "sectionImageAiDescription": "La sección contiene dos esquemas.\n\nEsquema superior titulado \"Esquema wifi zonas comunitarias\": representación de un pueblo circular con casas, árboles, personas y una plaza central con una fuente. Hay una \"Antena principal\" en la parte alta del pueblo, una \"Antena secundaria\" en la parte baja, y un tercer punto de acceso en el lado izquierdo. A la derecha aparece una nube etiquetada \"Internet\" conectada por una flecha vertical a un icono de antena. Entre la antena derecha y la antena principal hay una flecha horizontal doble rotulada \"Conexión por ondas\". Desde la antena principal del pueblo hacia la nube de Internet sale una flecha curva gruesa rotulada \"Conexión por fibra óptica\". Hay un recuadro de leyenda con un icono y el texto \"Punto de acceso\".\n\nEsquema inferior titulado \"Esquema Megazonas wifi\": varias antenas interconectadas por líneas punteadas formando una red mallada. A la izquierda hay una \"Escuela\" conectada a la red. En la parte central superior aparece \"Cabecera rural 3\". A la derecha superior está la nube \"Internet\" conectada verticalmente a una antena y por una flecha horizontal doble hacia la red; cerca de ahí aparece la etiqueta \"Red fija\". En la parte inferior izquierda está la \"Cabecera rural 1\" con su \"Antena principal\" y \"Antena secundaria\". En la parte inferior derecha está la \"Cabecera rural 2\" con su \"Antena principal\" y \"Antena secundaria\". Un recuadro indica: \"Las ondas de la señal pueden tener frecuencias entre los 928 MHz y los 5.850 MHz, para mayor cobertura\".",
+  "questionText": "Pregunta 5: En el esquema Mega zonas wifi, el ingeniero sugiere utilizar dos grupos de ondas, en donde se observa que la frecuencia de las ondas del Grupo 2 es, aproximadamente, \\(5\\) veces mayor que la del Grupo 1. ¿Cómo serían las ondas de estas frecuencias?",
+  "correctOptionId": "D",
+  "aiExplanation": "- **Problema central:** identificar la representación en la que la frecuencia del Grupo \\(2\\) sea aproximadamente \\(5\\) veces la del Grupo \\(1\\).\n- **Dato clave:** mayor frecuencia significa más oscilaciones en el mismo intervalo de tiempo.\n- **Análisis:** si el Grupo \\(1\\) tiene cerca de \\(2\\) ciclos, el Grupo \\(2\\) debería tener cerca de \\(10\\), que es aproximadamente \\(5\\) veces más.\n- **Conclusión:** la opción que cumple esto es **D**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "[Imagen de la opción: Opción con dos gráficos de onda seno rotulados, plot in the same graph \"Grupo \\(1\\)\" y \"Grupo \\(2\\)\", ambos con ejes amplitud-tiempo. En ambos paneles se observan casi el mismo número de oscilaciones en el mismo intervalo de tiempo, aproximadamente \\(9\\) a \\(10\\) ciclos cada uno. La frecuencia aparente de ambos grupos es muy similar.]",
+      "optionFeedback": "- **Incorrecta.** Ambas ondas tienen frecuencias casi iguales, no una relación aproximada de \\(5:1\\)."
+    },
+    {
+      "optionId": "B",
+      "optionText": "[Imagen de la opción: Opción con dos gráficos de onda seno. En \"Grupo \\(1\\)\" hay alta frecuencia, aproximadamente \\(9\\) a \\(10\\) oscilaciones en el intervalo. En \"Grupo \\(2\\)\" hay baja frecuencia, aproximadamente \\(2\\) ciclos en el mismo intervalo. La frecuencia del Grupo \\(2\\) es menor que la del Grupo \\(1\\).]",
+      "optionFeedback": "- **Incorrecta.** Invierte la relación pedida: aquí el Grupo \\(2\\) tiene menor frecuencia que el Grupo \\(1\\)."
+    },
+    {
+      "optionId": "C",
+      "optionText": "[Imagen de la opción: Opción con dos gráficos de onda seno. Tanto \"Grupo \\(1\\)\" como \"Grupo \\(2\\)\" muestran baja frecuencia, alrededor de \\(2\\) ciclos en el intervalo temporal. Las frecuencias son parecidas entre sí y bajas.]",
+      "optionFeedback": "- **Incorrecta.** Las dos frecuencias son similares, por lo que no representan que una sea aproximadamente \\(5\\) veces la otra."
+    },
+    {
+      "optionId": "D",
+      "optionText": "[Imagen de la opción: Opción con dos gráficos de onda seno. \"Grupo \\(1\\)\" muestra baja frecuencia, cerca de \\(2\\) ciclos en el intervalo temporal. \"Grupo \\(2\\)\" muestra alta frecuencia, cerca de \\(10\\) ciclos en el mismo intervalo. La frecuencia del Grupo \\(2\\) es aproximadamente \\(5\\) veces la del Grupo \\(1\\).]",
+      "optionFeedback": "- **Correcta.** Muestra aproximadamente \\(2\\) oscilaciones para el Grupo \\(1\\) y \\(10\\) para el Grupo \\(2\\), es decir, una frecuencia cerca de \\(5\\) veces mayor."
+    }
+  ]
+}

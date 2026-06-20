@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 4",
+  "questionId": "q_04",
+  "sectionText": "La filosofía epicúrea tiene una finalidad ética*, pues pretende guiarnos para alcanzar la buena vida. Para el epicureísmo esta es la vida placentera, ya que considera que el fin último de todas nuestras acciones es conseguir placer y evitar dolor; por ello, el epicureísmo identifica el placer con el bien y el dolor con el mal.\n\nEpicuro da por lo menos dos razones complementarias por las cuales considera que el propósito de la buena vida debe ser el placer. Por un lado, menciona el hecho de que, sin necesidad de pensarlo y desde su nacimiento, todas las criaturas vivientes, por instinto, se contentan con el placer y son reacias al dolor. Por otro lado, Epicuro toma a los sentimientos de placer y dolor como criterios esenciales de decisión y conducta, en tanto que son eventos reales que no pueden ser refutados: no hay razón o evidencia alguna que pueda hacernos dudar de que estamos sintiendo dolor o placer; es un hecho real que lo sentimos, pues, ¿cómo podría ser falsa la sensación de dolor ante un golpe?\n\nAsí, si lo que trae placer es lo que elegimos y lo que trae dolor es lo que evitamos, son nuestros sentimientos los que nos permiten deliberar qué debemos elegir y evitar, pues ellos no se equivocan. De esta manera, esa tendencia instintiva y natural hacia buscar el placer y evitar el dolor concuerda con lo que, para el epicureísmo, es el criterio ético más fundamental y verdadero.\n\n*La ética es el campo de la filosofía que estudia los principios para decidir correctamente.",
+  "questionText": "Pregunta 4: Considere el siguiente fragmento del texto:\n\n> \"Esa tendencia instintiva y natural hacia buscar el placer y evitar el dolor concuerda con lo que, para el epicureísmo, es el criterio ético más fundamental y verdadero\".\n\n¿Cuál de los siguientes enunciados presenta una perspectiva similar a la del fragmento?",
+  "correctOptionId": "A",
+  "aiExplanation": "- **Problema central:** hallar la afirmación con una perspectiva semejante a la del fragmento.\n- **Idea del fragmento:** los seres humanos tienen una tendencia natural e instintiva a buscar placer y evitar dolor, y eso sirve como criterio de conducta.\n- **Comparación:**\n  - A habla de que la conducta puede ser moldeada por experiencias agradables y desagradables: es la más cercana a la idea de orientar el comportamiento por placer/dolor.\n  - B menciona la capacidad de sentir placer y dolor, pero no su función como criterio ético o de conducta.\n  - C habla de felicidad y naturaleza de forma muy general.\n  - D contradice abiertamente el epicureísmo al negar que el placer sea el asunto central.\n- **Conclusión:** la perspectiva más similar es **A**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "\"El comportamiento del ser humano puede ser moldeado de acuerdo con las experiencias agradables y desagradables que se desprenden de cada acción\". B. F. Skinner.",
+      "optionFeedback": "- **Correcta.** Esta frase coincide con la idea de que la conducta humana se orienta según experiencias **agradables** y **desagradables**, análogas al placer y al dolor."
+    },
+    {
+      "optionId": "B",
+      "optionText": "\"No hay ninguna diferencia fundamental entre el hombre y los animales en su capacidad de sentir placer y dolor, felicidad y miseria\". C. Darwin.",
+      "optionFeedback": "- **Incorrecta.** Aunque menciona placer y dolor, se centra en la similitud entre humanos y animales, no en que esos sentimientos sean el **criterio ético fundamental**."
+    },
+    {
+      "optionId": "C",
+      "optionText": "\"La felicidad es un fin cuya posibilidad descansa en condiciones que solo pueden ser esperadas de la naturaleza, es decir, los medios para la felicidad propia están en la naturaleza tanto externa como interna\". I. Kant.",
+      "optionFeedback": "- **Incorrecta.** Habla de felicidad y naturaleza, pero no de la orientación de la conducta por la búsqueda de placer y la evitación del dolor."
+    },
+    {
+      "optionId": "D",
+      "optionText": "\"No se trata de concebir el placer como asunto único y verdadero de felicidad, sino de hallar la mejor manera para alcanzar la virtud que es universal y que no se supedita a la sensibilidad\". I. Kant.",
+      "optionFeedback": "- **Incorrecta.** Esta opción se **opone** al fragmento, porque rechaza que el placer sea el criterio fundamental de la buena vida."
+    }
+  ]
+}

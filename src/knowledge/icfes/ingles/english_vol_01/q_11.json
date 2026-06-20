@@ -1,0 +1,26 @@
+{
+  "questionLabel": "Pregunta 11",
+  "questionId": "q_11",
+  "sectionText": "¿Dónde puede ver estos avisos?\n\nEn las preguntas \\(11 - 15\\), marque \\(A\\), \\(B\\) o \\(C\\) en su hoja de respuestas.",
+  "questionImageAiDescription": "Horizontal arrow-shaped sign pointing to the right. Inside the sign there are two centered lines of text: first line in italic/bold style reads \"Find Lucy's stories here.\" Second line reads \"2x1 today!\".",
+  "questionText": "Pregunta 11: Find Lucy's stories here.\n\n\\(2x1\\) today!",
+  "correctOptionId": "A",
+  "aiExplanation": "- **Core problem:** Decide where a sign saying *“Find Lucy's stories here. 2x1 today!”* would appear.\n- **Relevant data:** The key word is *stories*, which refers to books. The phrase *\\(2x1\\) today!* suggests a store promotion.\n- **Method:** Match the content of the sign with the most logical place.\n- **Conclusion:** This sign would be seen **in a bookstore**. Therefore, the correct answer is **A**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "in a bookstore",
+      "optionFeedback": "- **Correct.** *Stories* suggests books, and a *\\(2x1\\)* offer fits a bookstore promotion."
+    },
+    {
+      "optionId": "B",
+      "optionText": "in a classroom",
+      "optionFeedback": "- **Incorrect.** A classroom may have stories, but a *\\(2x1\\)* sales sign does not fit that place."
+    },
+    {
+      "optionId": "C",
+      "optionText": "in a cinema",
+      "optionFeedback": "- **Incorrect.** A cinema shows movies, not usually books or stories for sale."
+    }
+  ]
+}

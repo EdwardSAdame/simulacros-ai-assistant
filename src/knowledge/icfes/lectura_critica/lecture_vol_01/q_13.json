@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 13",
+  "questionId": "q_13",
+  "sectionText": "La relación entre los humanos y lo que hoy reconocemos como música se remonta a más de 40.000 años atrás, desde los principios de nuestra civilización. Nuestros antepasados, en ese entonces, ya tocaban flautas de hueso y percusiones. Los instrumentos se fueron diversificando y multiplicando, pasando por la creación de instrumentos de madera, cuerda y metal, hasta llegar a las guitarras eléctricas y consolas de música electrónica de hoy en día. Casi todas las sociedades humanas conocidas han tenido música, lo que sugiere que nuestra apreciación por ella es innata; incluso bebés de dos meses de nacidos se voltean cuando escuchan sonidos agradables y le dan la espalda a los disonantes. Dada su universalidad, entonces, ¿será que la música podría haber ayudado en la supervivencia humana de alguna forma? ¿Tendría alguna ventaja o beneficio? Algunos investigadores sugieren que puede haber ayudado en el cortejo. Otros dicen que promueve la cohesión de grupo, tal como lo hace hoy en día. Incluso, puede ser un simple accidente feliz, una dulzura auditiva, que casualmente terminó creando una rumba cerebral.",
+  "questionText": "Pregunta 13: En el texto, la palabra \"disonantes\" hace referencia a:",
+  "correctOptionId": "D",
+  "aiExplanation": "- **Problema central:** determinar el significado contextual de *disonantes*.\n- El texto dice que los bebés se voltean ante sonidos agradables y les dan la espalda a los *disonantes*.\n- Por oposición contextual, *disonantes* significa sonidos **desagradables** o poco armónicos.\n- **Conclusión:** la respuesta es **D**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "Sonidos cautivantes.",
+      "optionFeedback": "- **Incorrecta.** *Cautivantes* se acerca a sonidos agradables, no a *disonantes*."
+    },
+    {
+      "optionId": "B",
+      "optionText": "Sonidos intensos.",
+      "optionFeedback": "- **Incorrecta.** La intensidad no es el rasgo señalado por el contexto."
+    },
+    {
+      "optionId": "C",
+      "optionText": "Sonidos agudos.",
+      "optionFeedback": "- **Incorrecta.** *Disonante* no significa necesariamente *agudo*."
+    },
+    {
+      "optionId": "D",
+      "optionText": "Sonidos desagradables.",
+      "optionFeedback": "- **Correcta.** Por contraste con *sonidos agradables*, la palabra *disonantes* alude a sonidos **desagradables** o no armónicos."
+    }
+  ]
+}

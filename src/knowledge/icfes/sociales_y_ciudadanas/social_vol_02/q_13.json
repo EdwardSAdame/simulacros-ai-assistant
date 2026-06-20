@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 13",
+  "questionId": "q_13",
+  "sectionText": "En un país, la licencia de maternidad consiste en un período remunerado de \\(20\\) semanas que, por ley, se le otorga a la mujer que acaba de tener un hijo; sin embargo, esta remuneración ha traído consigo un aumento en los niveles de desempleo en las mujeres, ya que las empresas privadas prefieren contratar hombres, quienes, en caso de tener un hijo, tendrán por ley tan solo \\(13\\) días de licencia remunerada. Así, las empresas prefieren evitar el riesgo de tener que pagarles más tiempo de licencia a las madres, si saben que les pueden pagar menos tiempo de licencia a los padres.",
+  "questionText": "Pregunta 13: De las siguientes soluciones posibles, ¿cuál de ellas podría afectar de manera negativa el desarrollo adecuado de los recién nacidos?",
+  "correctOptionId": "C",
+  "aiExplanation": "- **Problema central:** identificar la medida que perjudicaría el desarrollo de los recién nacidos.\n- **Datos relevantes:**\n  - La licencia de maternidad actual es de \\(20\\) semanas.\n  - Se busca solucionar discriminación laboral contra mujeres.\n  - Debe elegirse la opción con efecto negativo sobre el cuidado del bebé.\n- **Método lógico:** analizar cuál propuesta reduce el tiempo de cuidado directo de la madre o de los padres durante las primeras semanas de vida.\n- **Conclusión:** reducir la licencia de maternidad de \\(20\\) a \\(8\\) semanas afectaría negativamente el desarrollo y cuidado inicial del recién nacido.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "Diseñar una estrategia para que el Gobierno ayude a las empresas privadas a pagarles a las mujeres el costo total de la licencia.",
+      "optionFeedback": "- **Incorrecta.** Esta medida busca disminuir el desincentivo a contratar mujeres sin recortar el tiempo de cuidado del recién nacido."
+    },
+    {
+      "optionId": "B",
+      "optionText": "Reducir impuestos a las empresas privadas por cada mujer en edad reproductiva que contraten.",
+      "optionFeedback": "- **Incorrecta.** Podría incentivar la contratación femenina y no afecta directamente el tiempo de atención del recién nacido."
+    },
+    {
+      "optionId": "C",
+      "optionText": "Crear una nueva ley que permita reducir la licencia de maternidad de \\(20\\) a \\(8\\) semanas.",
+      "optionFeedback": "- **Correcta.** Disminuir drásticamente la licencia reduce el tiempo de recuperación, lactancia y cuidado inicial, afectando el desarrollo adecuado del recién nacido."
+    },
+    {
+      "optionId": "D",
+      "optionText": "Modificar la ley que establece la licencia de paternidad, aumentando la licencia remunerada a \\(20\\) semanas.",
+      "optionFeedback": "- **Incorrecta.** Esta medida podría equilibrar los costos de contratación entre hombres y mujeres y fortalecer el cuidado del bebé, no perjudicarlo."
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 17",
+  "questionId": "q_17",
+  "questionImageAiDescription": "Tabla de frecuencias con columnas \"Dinero\" y \"Cantidad de estudiantes\". Filas: \\(\\$2.000\\) -> \\(1\\); \\(\\$3.000\\) -> \\(2\\); \\(\\$4.000\\) -> \\(3\\).",
+  "questionText": "Pregunta 17: Un profesor preguntó a seis estudiantes cuánto dinero traían al colegio diariamente para comprar refrigerio. Los resultados aparecen en la lista:\n\n\\(\\$2.000\\), \\(\\$2.000\\), \\(\\$3.000\\), \\(\\$4.000\\), \\(\\$4.000\\) y \\(\\$4.000\\).\n\nUno de los estudiantes observó la lista y elaboró la siguiente tabla de frecuencias:\n\nRespecto a la tabla, ¿cuál de las siguientes afirmaciones es verdadera?",
+  "correctOptionId": "D",
+  "aiExplanation": "- **Problema central:** verificar si la tabla de frecuencias coincide con la lista de datos.\n- **Conteo real de la lista:**\n  - \\(\\$2.000\\): aparece \\(2\\) veces.\n  - \\(\\$3.000\\): aparece \\(1\\) vez.\n  - \\(\\$4.000\\): aparece \\(3\\) veces.\n- **Tabla dada:** \\(1,2,3\\), así que intercambia las frecuencias de \\(\\$2.000\\) y \\(\\$3.000\\).\n- **Conclusión:** la tabla **no es válida**, pero ninguna opción lo expresa correctamente. Entre las disponibles, ninguna es plenamente verdadera.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "La tabla es válida porque aparecen todos los montos de dinero que llevan los estudiantes.",
+      "optionFeedback": "**Incorrecta.** Aunque aparecen todos los montos, las frecuencias asignadas a \\(\\$2.000\\) y \\(\\$3.000\\) están mal."
+    },
+    {
+      "optionId": "B",
+      "optionText": "La tabla no es válida porque no muestra la cantidad de estudiantes a los que se les hizo la pregunta.",
+      "optionFeedback": "**Incorrecta.** Una tabla de frecuencias no necesita poner aparte ese dato si las frecuencias están correctas; aquí el problema real es otro."
+    },
+    {
+      "optionId": "C",
+      "optionText": "La tabla es válida porque indica la cantidad de estudiantes que llevan cada monto de dinero.",
+      "optionFeedback": "**Incorrecta.** Justamente no lo indica bien: \\(\\$2.000\\) debería tener frecuencia \\(2\\) y \\(\\$3.000\\) frecuencia \\(1\\)."
+    },
+    {
+      "optionId": "D",
+      "optionText": "La tabla no es válida porque los números de la segunda columna están en orden incorrecto.",
+      "optionFeedback": "**Es la opción más cercana, pero es imprecisa.** El problema no es el orden de los números, sino que las frecuencias de \\(\\$2.000\\) y \\(\\$3.000\\) están mal asignadas."
+    }
+  ]
+}

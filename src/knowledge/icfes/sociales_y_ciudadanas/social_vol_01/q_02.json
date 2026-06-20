@@ -1,0 +1,29 @@
+{
+  "questionLabel": "Pregunta 2",
+  "questionId": "q_02",
+  "questionText": "Pregunta 2: Las autoridades de un cabildo indígena prohibieron la caza del jaguar en su territorio, pues en su cosmovisión este animal tiene un valor espiritual y cumple un papel esencial para el equilibrio ecológico. Pedro, un campesino que no pertenece a la comunidad indígena, fue sorprendido cazando un jaguar en el territorio del cabildo, por lo que fue condenado por las autoridades indígenas a una multa para compensar a la comunidad por el daño causado. Pedro se opone a la condena porque no hace parte de la comunidad indígena y el jaguar atacaba con frecuencia el ganado de su propiedad.\n\n¿Cuáles dimensiones se encuentran en conflicto en la problemática presentada?",
+  "correctOptionId": "B",
+  "aiExplanation": "- **Problema central:** identificar qué dimensiones chocan en el caso.\n- **Datos relevantes:**\n  - El cabildo indígena actúa desde su **cosmovisión** sobre el jaguar, lo cual remite a la dimensión **cultural**.\n  - Además, impone una **sanción** a Pedro, quien no pertenece a la comunidad, lo que introduce un problema de **jurisdicción** o alcance de la autoridad indígena.\n- **Análisis:**\n  - El conflicto principal no es entre protección ambiental y economía, sino entre la autoridad propia del cabildo y la pertenencia de Pedro a esa jurisdicción.\n  - La cosmovisión indígena fundamenta la norma y la sanción, por eso también está presente la dimensión cultural.\n- **Conclusión:** el conflicto es entre la **dimensión jurisdiccional** y la **dimensión cultural**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "La cultural y la ambiental, porque la cosmovisión del cabildo indígena respecto al jaguar se opone al interés de Pedro en el cuidado del medio ambiente.",
+      "optionFeedback": "- **Incorrecta.** La dimensión cultural sí aparece por la cosmovisión indígena.\n- Pero Pedro no está defendiendo el cuidado del medio ambiente; su interés es proteger su ganado. Además, el conflicto más claro gira sobre la **autoridad para sancionarlo**."
+    },
+    {
+      "optionId": "B",
+      "optionText": "La jurisdiccional y la cultural, porque al interés de la comunidad indígena de imponer una sanción se opone el hecho de que Pedro no pertenece a esa comunidad.",
+      "optionFeedback": "- **Correcta.** La dimensión **cultural** aparece en la valoración espiritual del jaguar y la **jurisdiccional** en la discusión sobre si el cabildo puede sancionar a alguien externo a la comunidad.\n- Esa es justamente la tensión central del caso."
+    },
+    {
+      "optionId": "C",
+      "optionText": "La ambiental y la religiosa, porque el interés del cabildo indígena en la protección del jaguar se opone a su cosmovisión respecto al valor espiritual de este animal.",
+      "optionFeedback": "- **Incorrecta.** La opción plantea una oposición falsa.\n- La protección ambiental del jaguar y su valor espiritual **no se oponen entre sí**; ambas razones sustentan la postura del cabildo. El conflicto real está con Pedro y con la sanción impuesta."
+    },
+    {
+      "optionId": "D",
+      "optionText": "La económica y la ambiental, porque el interés del cabildo indígena de imponer una sanción económica va en contra de la protección del jaguar en su territorio.",
+      "optionFeedback": "- **Incorrecta.** La multa económica no va en contra de la protección del jaguar; es una consecuencia de esa protección.\n- Además, esta opción omite el elemento esencial del caso: la disputa sobre la **autoridad indígena** frente a una persona ajena a la comunidad."
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 22",
+  "questionId": "q_22",
+  "sectionText": "Varias productoras de televisión actuales quieren volver a reproducir una famosa serie televisiva antigua. No obstante, algunos medios de comunicación han manifestado que en esta serie hay \"varios ejemplos de violencia, machismo, gordofobia y otras formas de discriminación como parte habitual del lenguaje propuesto por el programa\". Especialmente, se resalta la constante burla a personajes que sufrían de obesidad. Por esto, se considera inadecuado reproducir de nuevo esta serie porque fomenta la discriminación.",
+  "questionText": "Pregunta 22: ¿Cuál de las siguientes posiciones es semejante a la posición expresada por algunos medios de comunicación?",
+  "correctOptionId": "C",
+  "aiExplanation": "- **Problema central:** encontrar una postura semejante a la de quienes consideran inadecuado emitir contenido discriminatorio.\n- **Datos relevantes:**\n  - Los medios sostienen que la serie fomenta violencia, machismo, gordofobia y discriminación.\n  - Por eso consideran inadecuado volver a emitirla.\n- **Método lógico:** buscar una opción que también rechace la emisión de contenidos ofensivos o discriminatorios, aun si son frecuentes.\n- **Conclusión:** la postura semejante es la que afirma que, aunque muchas series hagan burlas por rasgos físicos, **no deberían emitir ese tipo de contenido ofensivo**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "Aunque en la serie los personajes se burlen de individuos con sobrepeso, los espectadores tienen criterio para no reproducir comportamientos ofensivos.",
+      "optionFeedback": "- **Incorrecta.** Esta postura minimiza el problema del contenido discriminatorio y defiende su emisión, lo contrario de la posición de los medios."
+    },
+    {
+      "optionId": "B",
+      "optionText": "Las series televisivas usualmente se burlan de personajes con cualquier tipo de característica física y eso no es una buena razón para dejar de emitirlas.",
+      "optionFeedback": "- **Incorrecta.** Justifica la continuidad de la emisión pese al contenido ofensivo, lo cual se opone a la postura planteada."
+    },
+    {
+      "optionId": "C",
+      "optionText": "Aunque muchas series actuales se burlen de personajes con ciertos rasgos físicos, no deberían emitir ese tipo de contenido ofensivo.",
+      "optionFeedback": "- **Correcta.** Coincide con la idea de que los contenidos discriminatorios no deben difundirse, aunque sean comunes en ciertos productos audiovisuales."
+    },
+    {
+      "optionId": "D",
+      "optionText": "No es adecuado emitir series televisivas tan antiguas porque habría problemas con los programas de televisión actuales.",
+      "optionFeedback": "- **Incorrecta.** El problema no es la antigüedad de la serie, sino el contenido discriminatorio que transmite."
+    }
+  ]
+}

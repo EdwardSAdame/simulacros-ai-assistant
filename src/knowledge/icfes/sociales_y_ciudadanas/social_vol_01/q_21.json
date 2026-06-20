@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 21",
+  "questionId": "q_21",
+  "sectionText": "La teoría de la dependencia argumenta que la pobreza que existe en los países del sur se debe a condiciones históricas que han estructurado el mercado global de tal manera que favorece a los países del norte y mantiene a los países del sur en un estado de constante de pobreza. Es así como, desde sus inicios, los países del sur han servido como proveedores de materia prima para los países del norte y, a cambio, han sido receptores de aquellos productos terminados que ya han cumplido su ciclo en los mercados del norte. De esta manera, se crea un vínculo de dependencia, en el que las economías del sur dependen de la voluntad de compra de materias primas por parte de los países del norte.",
+  "questionText": "Pregunta 21: ¿Cuál de las siguientes situaciones se ajusta al modelo teórico descrito?",
+  "correctOptionId": "B",
+  "aiExplanation": "- **Problema central:** identificar la situación que se ajusta a la teoría de la dependencia.\n- **Datos clave del modelo:**\n  - Países pobres exportan materias primas baratas.\n  - Países ricos o actores vinculados a ellos procesan esas materias y venden productos con mayor valor agregado.\n  - Esto reproduce dependencia y desigualdad.\n- **Conclusión:** la opción que muestra compra barata de materias primas en un país pobre, procesamiento y venta posterior de productos elaborados al mismo país es la que mejor encaja. ",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "Un país latinoamericano desarrolla tecnología industrial que le permite procesar materias primas para generar productos con valor añadido, que se venden dentro del mismo país.",
+      "optionFeedback": "- **Incorrecta.** Esta situación rompe parcialmente la dependencia, porque el país agrega valor internamente y no queda limitado al papel de proveedor de materias primas."
+    },
+    {
+      "optionId": "B",
+      "optionText": "Una compañía multinacional adquiere, en un país pobre, materias primas a bajo costo, las procesa e incrementa su valor añadido para, luego, vender sus productos en el país pobre.",
+      "optionFeedback": "- **Correcta.** Describe exactamente la lógica de la dependencia: el país pobre vende **materias primas baratas** y luego compra productos **procesados y más costosos**, manteniendo la subordinación económica."
+    },
+    {
+      "optionId": "C",
+      "optionText": "Un país desarrollado de Europa genera riquezas gracias a sus adelantos tecnológicos y, luego, impulsa el avance de la industria de países en desarrollo, porque comparte con ellos esta nueva tecnología.",
+      "optionFeedback": "- **Incorrecta.** Esta opción describe cooperación tecnológica, no una relación de dependencia estructural basada en extracción de materias primas y subordinación comercial."
+    },
+    {
+      "optionId": "D",
+      "optionText": "Una organización internacional regula las relaciones comerciales entre países, para asegurarse de que los países que venden materias primas no cobren de más a los países que más las necesitan.",
+      "optionFeedback": "- **Incorrecta.** La opción se centra en regulación de precios, pero no expresa la estructura desigual descrita por la teoría.\n- Incluso podría reforzar una relación asimétrica, pero no la representa tan directamente como la opción B."
+    }
+  ]
+}

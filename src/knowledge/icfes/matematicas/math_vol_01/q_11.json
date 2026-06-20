@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 11",
+  "questionId": "q_11",
+  "sectionImageAiDescription": "Plano geométrico centrado en el origen (0,0). 1) Rectángulo exterior: límites x=[-30, 30], y=[-10, 10], relleno con color institucional de baja opacidad. 2) Ejes divisorios: línea horizontal continua en y=0; línea vertical punteada en x=0. 3) Rectángulo interior (líneas punteadas): x=[-15, 15], y=[-5, 5], con opacidad distinta. 4) Etiquetas numéricas (ESTRICTO: usar bbox con fondo sólido claro/blanco para cada número y evitar solapamiento con líneas): '1' en (24, 7); '2' en (-24, 7); '3' en (-24, -7); '4' en (24, -7); '5' en (12, 3.5); '6' en (-12, 3.5); '7' en (-12, -3.5); '8' en (12, -3.5). 5) Acotaciones (flechas con texto en LaTeX, usar bbox para que no toquen las líneas ni los números): flecha horizontal de x=0 a x=15 sobre y=0 con texto '\\(15\\text{ cm}\\)' desplazado ligeramente hacia arriba; flecha vertical de y=0 a y=5 en x=0 con texto '\\(5\\text{ cm}\\)' desplazado a la izquierda; flecha de x=0 a x=30 bajo y=-10 con texto '\\(30\\text{ cm}\\)'; flecha de y=0 a y=-10 a la derecha de x=30 con texto '\\(10\\text{ cm}\\)'.",
+  "questionText": "Pregunta 11: Una torta con forma rectangular, que tiene \\(60\\) cm de base por \\(20\\) cm de altura, fue repartida entre \\(8\\) personas por medio de los siguientes cortes rectos:\n\nConsiderando la información anterior, ¿cuál es el área del trozo de torta número \\(1\\)?",
+  "correctOptionId": "C",
+  "aiExplanation": "- **Problema central:** hallar el área de la región \\(1\\).\n- **Interpretación de la figura:**\n  - El rectángulo total mide \\(60\\text{ cm}\\times 20\\text{ cm}\\).\n  - Las líneas lo dividen en mitades y luego en rectángulos interiores de \\(15\\text{ cm}\\times 5\\text{ cm}\\).\n  - La región \\(1\\) es la parte superior derecha exterior, con dimensiones:\n    - ancho: de \\(15\\) a \\(30\\), o sea \\(15\\text{ cm}\\)\n    - alto: de \\(5\\) a \\(10\\), o sea \\(5\\text{ cm}\\)\n- **Cálculo:**\n  \\[\n  A=15\\times 5=75\\text{ cm}^2\n  \\]\n- **Conclusión:** el trozo \\(1\\) tiene área **\\(75\\text{ cm}^2\\)**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "\\(225\\text{ cm}^2\\)",
+      "optionFeedback": "- **Incorrecta.** Ese valor sería \\(15\\times 15\\), pero la altura de la región no es \\(15\\text{ cm}\\), sino \\(5\\text{ cm}\\)."
+    },
+    {
+      "optionId": "B",
+      "optionText": "\\(150\\text{ cm}^2\\)",
+      "optionFeedback": "- **Incorrecta.** Correspondería a \\(30\\times 5\\) o \\(15\\times 10\\), no a las dimensiones de la región \\(1\\)."
+    },
+    {
+      "optionId": "C",
+      "optionText": "\\(75\\text{ cm}^2\\)",
+      "optionFeedback": "- **Correcta.** La región \\(1\\) mide \\(15\\text{ cm}\\) de base y \\(5\\text{ cm}\\) de altura, así que su área es \\(75\\text{ cm}^2\\)."
+    },
+    {
+      "optionId": "D",
+      "optionText": "\\(40\\text{ cm}^2\\)",
+      "optionFeedback": "- **Incorrecta.** No corresponde a las medidas indicadas en el diagrama."
+    }
+  ]
+}

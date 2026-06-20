@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 16",
+  "questionId": "q_16",
+  "questionImageAiDescription": "Tabla con \\(2\\) columnas: Tipo de compuesto | Función en el organismo. Filas:\n- Vitaminas: \"Mantienen el buen funcionamiento del cuerpo; son esenciales para los huesos, el corazón, el cerebro, las enzimas y las hormonas.\"\n- Minerales: \"Son esenciales para el metabolismo, el desarrollo, el crecimiento y la regulación del funcionamiento de las células.\"\n- Fibra insoluble: \"Absorbe agua y favorece el paso de los alimentos por el tracto digestivo, y regulariza la función del intestino.\"\n- Fibra soluble: \"Reduce el colesterol y la absorción de azúcares en la sangre, retarda la digestión y produce sensación de saciedad.\"",
+  "questionText": "Pregunta 16: Juan asiste al médico porque nota que está teniendo problemas de estreñimiento. El médico le enseña la siguiente tabla sobre algunos tipos de compuestos presentes en los alimentos y su función en el organismo.\n\nDe acuerdo con la información de la tabla, ¿qué tipo de alimentos debe consumir Juan para solucionar su problema de estreñimiento?",
+  "correctOptionId": "C",
+  "aiExplanation": "- **Problema central:** identificar qué compuesto ayuda específicamente con el estreñimiento.\n- **Dato clave de la tabla:** la **fibra insoluble** absorbe agua, favorece el paso de los alimentos por el tracto digestivo y regulariza la función del intestino.\n- **Análisis:** esa función se relaciona directamente con aliviar el estreñimiento.\n- **Conclusión:** la respuesta correcta es **C**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "Alimentos ricos en vitaminas.",
+      "optionFeedback": "- **Incorrecta.** Las vitaminas son importantes para múltiples funciones del cuerpo, pero la tabla no las relaciona con regular el tránsito intestinal."
+    },
+    {
+      "optionId": "B",
+      "optionText": "Alimentos ricos en minerales.",
+      "optionFeedback": "- **Incorrecta.** Los minerales cumplen funciones metabólicas y regulatorias, pero no son los señalados para el estreñimiento."
+    },
+    {
+      "optionId": "C",
+      "optionText": "Alimentos ricos en fibra insoluble.",
+      "optionFeedback": "- **Correcta.** La tabla indica que la fibra insoluble favorece el paso de los alimentos por el tracto digestivo y regulariza la función intestinal."
+    },
+    {
+      "optionId": "D",
+      "optionText": "Alimentos ricos en fibra soluble.",
+      "optionFeedback": "- **Incorrecta.** La fibra soluble se relaciona en la tabla con colesterol, absorción de azúcares y saciedad, no con el alivio directo del estreñimiento."
+    }
+  ]
+}

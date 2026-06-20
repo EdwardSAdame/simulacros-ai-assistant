@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 14",
+  "questionId": "q_14",
+  "questionImageAiDescription": "Tabla con \\(4\\) columnas: Disolución | Porcentaje \\((\\%\\ p/p)\\) | Porcentaje \\((\\%\\ p/v)\\) | Molaridad \\((M)\\). Filas:\n\\(1\\) | \\(12\\) | \\(12\\) | \\(2{,}05\\)\n\\(2\\) | \\(24\\) | \\(24\\) | \\(4{,}10\\)",
+  "questionText": "Pregunta 14: Las unidades de concentración de disoluciones indican la cantidad de soluto disuelto en una solución. Por ejemplo tenemos las siguientes unidades:\n\n- **% p/p**: es la cantidad en gramos del soluto presente en \\(100\\) gramos de la disolución.\n- **% p/v**: indica el número de gramos de soluto que hay en cada \\(100\\ \\text{mL}\\) de disolución.\n- **Molaridad (M)**: es el número de moles de soluto en \\(1\\ \\text{L}\\) de disolución.\n\nLas concentraciones de dos disoluciones del mismo soluto se reportaron en la siguiente tabla.\n\nDe acuerdo con la información anterior, si se tienen dos volúmenes iguales de las disoluciones, ¿cuál de las disoluciones tiene mayor masa de soluto?",
+  "correctOptionId": "A",
+  "aiExplanation": "- **Problema central:** comparar la masa de soluto en volúmenes iguales de dos disoluciones del mismo soluto.\n- **Datos relevantes:** la disolución \\(2\\) tiene mayores valores en \\(%\\ p/v\\), \\(%\\ p/p\\) y molaridad que la disolución \\(1\\).\n- **Análisis:** para volúmenes iguales, una mayor concentración implica mayor cantidad de soluto. Como es el mismo soluto, mayor molaridad también significa más moles y, por tanto, más masa de soluto en el mismo volumen.\n- **Conclusión:** la respuesta correcta es **A**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "La disolución \\(2\\), porque a mayor masa de soluto mayor es el valor de la molaridad.",
+      "optionFeedback": "- **Correcta.** En volúmenes iguales y siendo el mismo soluto, la disolución con mayor concentración \\(\\left(4{,}10\\ M\\right)\\) contiene mayor masa de soluto."
+    },
+    {
+      "optionId": "B",
+      "optionText": "La disolución \\(1\\), porque los valores de \\(%\\ p/p\\) y \\(%\\ p/v\\) son mayores que el valor la molaridad.",
+      "optionFeedback": "- **Incorrecta.** La disolución \\(1\\) no tiene mayores concentraciones; además, comparar numéricamente \\(%\\) con molaridad no justifica la masa de soluto."
+    },
+    {
+      "optionId": "C",
+      "optionText": "La disolución \\(1\\), porque a mayor masa de soluto menor es el valor de la molaridad.",
+      "optionFeedback": "- **Incorrecta.** La relación planteada es al contrario: para el mismo soluto y mismo volumen, mayor molaridad implica mayor cantidad de soluto."
+    },
+    {
+      "optionId": "D",
+      "optionText": "La disolución \\(2\\), porque los valores de \\(%\\ p/p\\) y \\(%\\ p/v\\) son menores que el valor la molaridad.",
+      "optionFeedback": "- **Incorrecta.** La elección de la disolución \\(2\\) es correcta, pero la justificación es errónea: no se decide comparando si un porcentaje es menor o mayor que la molaridad."
+    }
+  ]
+}

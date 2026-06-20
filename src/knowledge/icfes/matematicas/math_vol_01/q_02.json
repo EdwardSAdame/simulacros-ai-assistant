@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 2",
+  "questionId": "q_02",
+  "sectionImageAiDescription": "Tabla de tarifas de 2 columnas y 2 filas (incluyendo encabezado). Las dos columnas deben estar ampliamente separadas entre sí, incrementando el ancho de cada columna para dejar un espacio horizontal generoso en el centro que evite que los encabezados se toquen. Todo el texto y los valores están estrictamente alineados a la izquierda (left-aligned) y con suficiente padding vertical. Encabezado Columna 1: \\'Costo de lunes, martes,\\' (línea 1) y \\'miércoles o jueves\\' (línea 2); valor en la celda inferior: \\($80.000\\). Encabezado Columna 2: \\'Costo de viernes,\\' (línea 1) y \\'sábado o domingo\\' (línea 2); valor en la celda inferior: \\($150.000\\). A la izquierda de las celdas de precio se incluye la etiqueta de fila: \\'Trayecto nacional\\'.",
+  "questionText": "Pregunta 2: Una aerolínea ofrece vuelos nacionales manejando las siguientes tarifas y aclarando que, al precio relacionado, se debe agregar el impuesto del \\(12\\%\\) o \\(19\\%\\) según la temporada del año seleccionada para el viaje.\n\nUn usuario compra \\(5\\) tiquetes para viajar el día jueves y \\(2\\) tiquetes para viajar el día sábado, para lo que debe usar la fórmula:\n\n\\[\n\\text{Valor total a pagar}=(5\\times 80.000+2\\times 150.000)(1+y)\n\\]\n\nDonde \\(y\\) es el porcentaje del impuesto.\n\nSobre el valor total a pagar, ¿cuál de las siguientes afirmaciones es verdadera?",
+  "correctOptionId": "B",
+  "aiExplanation": "- **Problema central:** decidir si se puede calcular el valor total exacto.\n- **Datos relevantes:**\n  - Jueves: \\(\\$80.000\\).\n  - Sábado: \\(\\$150.000\\).\n  - Se compran \\(5\\) y \\(2\\) tiquetes, respectivamente.\n  - El impuesto puede ser \\(12\\%\\) o \\(19\\%\\), según la temporada, y esa temporada **no se conoce**.\n- **Análisis:**\n  - El subtotal sí puede calcularse: \\(5\\times 80.000+2\\times 150.000=700.000\\).\n  - Pero el total es \\(700.000(1+y)\\), y falta saber si \\(y=0,12\\) o \\(y=0,19\\).\n- **Conclusión:** **no es posible** calcular el valor total exacto porque el impuesto depende de una temporada desconocida.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "Es posible calcular el valor total a pagar, ya que se aplica el impuesto del \\(12\\%\\) a los tiquetes comprados para el día jueves y el impuesto del \\(19\\%\\) a los tiquetes para el día sábado.",
+      "optionFeedback": "- **Incorrecta.** El enunciado no dice que el impuesto dependa del día de viaje.\n- El impuesto depende de la **temporada del año**, no de si el vuelo es jueves o sábado."
+    },
+    {
+      "optionId": "B",
+      "optionText": "No es posible calcular el valor total a pagar, ya que el impuesto del \\(12\\%\\) y \\(19\\%\\) depende de la temporada del año, y esta se desconoce.",
+      "optionFeedback": "- **Correcta.** Aunque el subtotal es calculable, el valor exacto total depende de conocer si el impuesto es \\(12\\%\\) o \\(19\\%\\)."
+    },
+    {
+      "optionId": "C",
+      "optionText": "Es posible calcular el valor total a pagar, ya que se ejecuta la multiplicación entre la cantidad de tiquetes comprados para cada día y el valor respectivo.",
+      "optionFeedback": "- **Incorrecta.** Esa multiplicación solo permite hallar el **subtotal**.\n- Aún falta aplicar \\((1+y)\\), y \\(y\\) no está determinado."
+    },
+    {
+      "optionId": "D",
+      "optionText": "No es posible calcular el valor total a pagar, ya que falta conocer la tarifa correspondiente para asignar el valor de los tiquetes para el día jueves y sábado.",
+      "optionFeedback": "- **Incorrecta.** Las tarifas sí se conocen: jueves \\(\\$80.000\\) y sábado \\(\\$150.000\\).\n- Lo que falta conocer es el impuesto aplicable."
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 27",
+  "questionId": "q_27",
+  "questionImageAiDescription": "Esquema de cruce genético. A la izquierda, \"Mosca de ojos rojos\" asociada a un par de cromosomas con ambos alelos marcados \\(G\\) y \\(G\\). A la derecha, \"Mosca de ojos blancos\" asociada a un par de cromosomas con ambos alelos marcados \\(g\\) y \\(g\\). Flechas convergen hacia abajo a un individuo resultante con un par de cromosomas que porta alelos \\(G\\) y \\(g\\), acompañado del dibujo de una \"Mosca de ojos rojos\".",
+  "questionText": "Pregunta 27: En un laboratorio se usan los cromosomas de dos individuos de una especie de mosca para hacer el siguiente cruce:\n\nDe acuerdo con la información del cruce, el individuo resultante es homocigoto o heterocigoto para este gen?",
+  "correctOptionId": "D",
+  "aiExplanation": "- **Problema central:** clasificar el genotipo del descendiente mostrado en el cruce.\n- **Datos relevantes:** el individuo resultante tiene los alelos \\(G\\) y \\(g\\).\n- **Análisis:** un organismo es **heterocigoto** cuando posee dos alelos diferentes para un gen. Homocigoto sería \\(GG\\) o \\(gg\\).\n- **Conclusión:** la respuesta correcta es **D**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "Homocigoto, porque tiene dos alelos.",
+      "optionFeedback": "- **Incorrecta.** Tener dos alelos no implica ser homocigoto; lo importante es si son iguales o diferentes."
+    },
+    {
+      "optionId": "B",
+      "optionText": "Heterocigoto, porque tiene un solo alelo.",
+      "optionFeedback": "- **Incorrecta.** Un individuo diploide tiene dos alelos para ese gen, no uno solo."
+    },
+    {
+      "optionId": "C",
+      "optionText": "Homocigoto, porque tiene el alelo \\(G\\) y el alelo \\(g\\).",
+      "optionFeedback": "- **Incorrecta.** Tener \\(G\\) y \\(g\\) significa justamente que los alelos son distintos, es decir, heterocigosis."
+    },
+    {
+      "optionId": "D",
+      "optionText": "Heterocigoto, porque tiene el alelo \\(G\\) y el alelo \\(g\\).",
+      "optionFeedback": "- **Correcta.** El genotipo \\(Gg\\) tiene dos alelos diferentes, por lo que es heterocigoto."
+    }
+  ]
+}

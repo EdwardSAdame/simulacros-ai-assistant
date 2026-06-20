@@ -1,0 +1,29 @@
+{
+  "questionLabel": "Pregunta 4",
+  "questionId": "q_04",
+  "questionText": "Pregunta 4: En un país, se abrió una investigación judicial por corrupción a un político perteneciente al mismo partido del presidente de la República y, a esto, se le suma su detención preventiva, para que no se obstruya la administración de justicia. Al respecto, el primer mandatario anunció, en los medios de comunicación de su país, su apoyo incondicional a su copartidario y exigió a la autoridad judicial su liberación.\n\n¿Cuál de las siguientes situaciones demuestra una extralimitación de sus funciones por parte del presidente de la República frente al proceso en contra de su copartidario?",
+  "correctOptionId": "A",
+  "aiExplanation": "- **Problema central:** establecer cuál acción del presidente invade competencias ajenas.\n- **Datos relevantes:**\n  - Existe una investigación judicial por corrupción.\n  - Hubo detención preventiva ordenada para proteger la justicia.\n  - El presidente exigió públicamente la liberación del investigado.\n- **Método lógico:** distinguir entre la rama ejecutiva y la judicial. El presidente pertenece a la ejecutiva y no puede interferir en decisiones judiciales.\n- **Conclusión:** la extralimitación consiste en desconocer la **autonomía de la rama judicial**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "El desconocimiento de la autonomía de la rama judicial.",
+      "optionFeedback": "- **Correcta.** Al exigir la liberación de su copartidario, el presidente interfiere indebidamente en un proceso que corresponde a la rama judicial, desconociendo su independencia."
+    },
+    {
+      "optionId": "B",
+      "optionText": "El desconocimiento del partido político como primer investigador.",
+      "optionFeedback": "- **Incorrecta.** Los partidos no son la autoridad judicial competente para investigar delitos de corrupción."
+    },
+    {
+      "optionId": "C",
+      "optionText": "El conocimiento del pasado judicial de su copartidario.",
+      "optionFeedback": "- **Incorrecta.** Conocer antecedentes no constituye por sí mismo una extralimitación funcional; el problema es intervenir en la decisión judicial."
+    },
+    {
+      "optionId": "D",
+      "optionText": "El uso de los medios de comunicación para expresarse.",
+      "optionFeedback": "- **Incorrecta.** El uso de medios no es el punto central; lo reprochable es el contenido de su exigencia frente a una autoridad judicial."
+    }
+  ]
+}

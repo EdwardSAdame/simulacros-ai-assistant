@@ -1,0 +1,50 @@
+{
+  "questionLabel": "Pregunta 3",
+  "questionId": "q_03",
+  "sectionText": "Lea las descripciones de la columna de la izquierda \\(1 - 5\\). ¿Cuál palabra de la columna de la derecha \\((A - G)\\) concuerda con cada descripción?\n\nLa opción \\(H\\) se usa para el ejemplo. Sobran dos palabras más.\n\nEn las preguntas \\(1 - 5\\), marque la letra correcta \\(A - G\\) en su hoja de respuestas.",
+  "questionText": "Pregunta 3: You usually sleep on it at night.",
+  "correctOptionId": "B",
+  "aiExplanation": "- **Core problem:** Identify the object described by *“You usually sleep on it at night.”*\n- **Relevant data:** The options include *bed* and *blanket*, which are related to sleeping.\n- **Method:** Distinguish between the object you sleep **on** and the item you sleep **under**.\n- **Conclusion:** You sleep **on** a **bed**, so the correct answer is **B**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "armchair",
+      "optionFeedback": "- **Incorrect.** You may sit in an *armchair*, but you do not usually sleep on it at night."
+    },
+    {
+      "optionId": "B",
+      "optionText": "bed",
+      "optionFeedback": "- **Correct.** A **bed** is the object people usually sleep on at night."
+    },
+    {
+      "optionId": "C",
+      "optionText": "blanket",
+      "optionFeedback": "- **Incorrect.** You sleep *under* a blanket, not *on* it in the usual expression."
+    },
+    {
+      "optionId": "D",
+      "optionText": "bookcase",
+      "optionFeedback": "- **Incorrect.** A *bookcase* is for books."
+    },
+    {
+      "optionId": "E",
+      "optionText": "cupboard",
+      "optionFeedback": "- **Incorrect.** A *cupboard* is for storing things."
+    },
+    {
+      "optionId": "F",
+      "optionText": "picture",
+      "optionFeedback": "- **Incorrect.** A *picture* is decoration, not something you sleep on."
+    },
+    {
+      "optionId": "G",
+      "optionText": "shower",
+      "optionFeedback": "- **Incorrect.** A *shower* is for washing."
+    },
+    {
+      "optionId": "H",
+      "optionText": "towel",
+      "optionFeedback": "- **Incorrect.** A *towel* is for drying, not for sleeping on."
+    }
+  ]
+}

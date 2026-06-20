@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 14",
+  "questionId": "q_14",
+  "questionImageAiDescription": "Plano cartesiano con eje horizontal rotulado Oriente (metros) hacia la derecha y Occidente hacia la izquierda, y eje vertical rotulado Norte (metros) hacia arriba y Sur hacia abajo. La figura es un polígono irregular cerrado con \\(6\\) vértices marcados con puntos negros, aproximadamente en las coordenadas \\((0,50)\\), \\((10,40)\\), \\((30,40)\\), \\((50,10)\\), \\((60,20)\\), \\((30,60)\\), y regreso a \\((0,50)\\). Los segmentos conectan esos puntos en ese orden. El polígono está completamente en el primer cuadrante o sobre el eje \\(y\\).",
+  "questionText": "Pregunta 14: Un ganadero utilizó \\(6\\) postes y alambre para cercar una parte de su finca. La imagen muestra un plano de la cerca.\n\nUn mes después, el ganadero decidió trasladar la cerca \\(100\\) metros al oriente y dijo que simplemente debía mover horizontalmente cada uno de los vértices de la figura \\(100\\) metros hacia la derecha y luego unir los puntos; sin embargo, una persona afirma que lo que dijo el ganadero es incorrecto, pues la figura resultante no representaría la traslación de la cerca. ¿Es verdadera la afirmación de la persona?",
+  "correctOptionId": "B",
+  "aiExplanation": "- **Problema central:** decidir si mover cada vértice \\(100\\) metros al oriente representa una traslación.\n- **Concepto clave:** trasladar \\(100\\) metros al oriente significa sumar \\(100\\) a la coordenada \\(x\\) de cada vértice y dejar igual la coordenada \\(y\\).\n- Eso mantiene:\n  - la forma,\n  - el tamaño,\n  - las distancias entre puntos,\n  - y el área.\n- **Conclusión:** la persona está equivocada. Lo dicho por el ganadero **sí** representa una traslación.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "Sí, puesto que la afirmación del ganadero no tiene en cuenta la traslación de \\(100\\) metros de los vértices en el eje \\(y\\), por lo que no se mantiene la misma forma de la figura original.",
+      "optionFeedback": "**Incorrecta.** En una traslación horizontal no se modifica el eje \\(y\\); solo cambian las abscisas."
+    },
+    {
+      "optionId": "B",
+      "optionText": "No, puesto que, como la traslación es en una sola dirección, basta con sumar \\(100\\) metros a las abscisas de los vértices y se mantiene la misma forma de la figura original.",
+      "optionFeedback": "**Correcta.** Trasladar \\(100\\) metros al oriente equivale a sumar \\(100\\) a cada coordenada \\(x\\), conservando la figura."
+    },
+    {
+      "optionId": "C",
+      "optionText": "Sí, puesto que, si se aplica lo afirmado por el ganadero, la figura resultante sería de un área mayor que la original.",
+      "optionFeedback": "**Incorrecta.** Una traslación no cambia el área."
+    },
+    {
+      "optionId": "D",
+      "optionText": "No, puesto que la distancia a trasladar es más grande que el ancho de toda la estructura.",
+      "optionFeedback": "**Incorrecta.** El tamaño del desplazamiento no afecta si el movimiento sigue siendo una traslación."
+    }
+  ]
+}

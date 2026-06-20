@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 33",
+  "questionId": "q_33",
+  "sectionText": "Existen argumentos en contra de la preservación de las especies, esgrimidos por quienes no consideran fatal que la humanidad colabore en la desaparición del escenario de otras especies. Quizás el más extendido es el de que la extinción es un proceso evolutivo perfectamente natural, que se ha venido produciendo durante millones de años con o sin la participación humana. ¿Por qué hay que preocuparse si en realidad se está ayudando a la naturaleza a seguir su curso?\n\nCuando en 1859, Charles Darwin expuso la teoría de la evolución, junto a las correspondientes pruebas a su favor, no proponía solo la selección natural como fuerza directriz del proceso evolutivo, sino que reconocía también la inevitabilidad de la extinción. Decía Darwin que “como las nuevas formas se producen lenta y constantemente, a menos de que admitamos que el número de formas específicas puede seguir aumentando perpetua y casi indefinidamente, es inevitable que haya grupos que se extingan”.\n\nAntes de Darwin, la idea de la extinción ya había sido tratada por varios geólogos y naturalistas; sin embargo, a mediados del siglo XIX, el concepto resultaba escandaloso para la mayoría de personas. Se creía que todo ser vivo había sido creado por Dios, según una secuencia de complejidad creciente, y que las especies aparecieron en un único acto creador, así que la visión “creacionista” de las especies no contemplaba la extinción. No obstante, actualmente parece haberse cerrado el ciclo; no solo ya no escandaliza la idea de la extinción, sino que se toma el nombre de Darwin en vano cuando se pretende justificar el exterminio de las otras especies a manos del *Homo sapiens*.\n\nEs evidente que quienes recurren a este tipo de argumentos pasan por alto un dato importante, y es que la humanidad ya ha elevado la tasa de extinción de especies muy por encima de las tasas históricas de aparición de las mismas. Las especies desaparecen ahora mucho más deprisa de lo que aparecen, y la tasa de desaparición promete seguir aumentando vertiginosamente. El argumento que justifica el exterminio recuerda a aquel hombre que, al ver cómo el agua escapaba por unas grietas cada vez más anchas del muro de una gran presa, decía a las gentes que vivían río abajo: “No hay por qué preocuparse; después de todo, el agua siempre ha salido por el sobradro”.",
+  "questionText": "Pregunta 33: Considere el siguiente fragmento del texto:\n\n“Quizás el [argumento contra la preservación de las especies] más extendido es el de que la extinción es un proceso evolutivo perfectamente natural, que se ha venido produciendo durante millones de años con o sin la participación humana. ¿Por qué hay que preocuparse si en realidad se está ayudando a la naturaleza a seguir su curso?”.\n\n¿Cuál es la relación entre los dos enunciados que componen este fragmento?",
+  "correctOptionId": "D",
+  "aiExplanation": "- **Problema central:** establecer la relación entre la afirmación y la pregunta retórica.\n- El primer enunciado presenta el argumento: la extinción es natural.\n- El segundo no lo cuestiona, sino que formula una pregunta retórica que **refuerza** esa misma postura: si es natural, no habría motivo para preocuparse.\n- **Conclusión:** ambos enunciados apoyan una misma tesis. Respuesta: **D**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "La pregunta pone en duda la tesis de la frase que la precede.",
+      "optionFeedback": "- **Incorrecta.** La pregunta no pone en duda la idea previa; la prolonga y la fortalece retóricamente."
+    },
+    {
+      "optionId": "B",
+      "optionText": "Los enunciados se oponen entre sí.",
+      "optionFeedback": "- **Incorrecta.** No hay oposición; ambos forman parte del mismo argumento contra la preservación."
+    },
+    {
+      "optionId": "C",
+      "optionText": "La pregunta busca aclarar una idea de la frase que la precede.",
+      "optionFeedback": "- **Incorrecta.** Más que aclarar, la pregunta **refuerza** la conclusión implícita del primer enunciado."
+    },
+    {
+      "optionId": "D",
+      "optionText": "Los enunciados apoyan una misma tesis.",
+      "optionFeedback": "- **Correcta.** El primero expone la idea y el segundo la refuerza mediante una pregunta retórica que sostiene el mismo punto."
+    }
+  ]
+}

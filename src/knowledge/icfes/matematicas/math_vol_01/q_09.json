@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 9",
+  "questionId": "q_09",
+  "sectionImageAiDescription": "Tabla con \\(2\\) columnas: \"Peso (gramos)\" y \"Cantidad de papas\". Filas: \\(15 \\leq P < 20\\) corresponde a \\(700\\); \\(20 \\leq P < 25\\) corresponde a \\(500\\); \\(25 \\leq P < 30\\) corresponde a \\(800\\).",
+  "questionText": "Pregunta 9: Una máquina separa las \\(2.000\\) papas de un bulto de acuerdo con su peso \\(p\\), obteniendo los datos de la tabla.\n\n¿Cuál es la gráfica que representa la distribución de las papas del bulto de acuerdo con su peso?",
+  "correctOptionId": "A",
+  "aiExplanation": "- **Problema central:** elegir la gráfica que represente correctamente las cantidades por intervalo de peso.\n- **Datos:**\n  - \\(15\\leq p<20\\): \\(700\\)\n  - \\(20\\leq p<25\\): \\(500\\)\n  - \\(25\\leq p<30\\): \\(800\\)\n  - Total: \\(2000\\)\n- **Porcentajes:**\n  - \\(700/2000=35\\%\\)\n  - \\(500/2000=25\\%\\)\n  - \\(800/2000=40\\%\\)\n- **Conclusión:** la gráfica correcta es la que muestra sectores o valores equivalentes a **\\(35\\%\\), \\(25\\%\\) y \\(40\\%\\)** con las cantidades \\(700,500,800\\).",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "[Imagen de la opción: Gráfico circular titulado \"Distribución del peso en gramos\" con tres sectores, sin bordes externos y rellenos con colores pastel desvanecidos (faded colours). Leyenda identificada únicamente por color desvanecido, sin texturas. Sectores rotulados con cantidades y porcentajes: sector de \\(800\\) y \\(40\\,\\%\\) para el intervalo \\(25 \\leq p < 30\\); sector de \\(700\\) y \\(35\\,\\%\\) para \\(15 \\leq p < 20\\); sector de \\(500\\) y \\(25\\,\\%\\) para \\(20 \\leq p < 25\\).]",
+      "optionFeedback": "- **Correcta.** Representa exactamente las cantidades \\(700\\), \\(500\\), \\(800\\) y sus porcentajes \\(35\\%\\), \\(25\\%\\), \\(40\\%\\)."
+    },
+    {
+      "optionId": "B",
+      "optionText": "[Imagen de la opción: Gráfico circular titulado \"Distribución del peso en gramos\" con tres sectores iguales, sin bordes externos y rellenos con colores pastel desvanecidos (faded colours). Leyenda identificada únicamente por color desvanecido, sin texturas. Cada uno marcado con \\(33,3\\,\\%\\). Etiquetas visibles: \\(25\\text{–}30\\), \\(15\\text{–}20\\), \\(20\\text{–}25\\).]",
+      "optionFeedback": "- **Incorrecta.** Los tres intervalos no tienen la misma frecuencia.\n- Las cantidades son \\(700\\), \\(500\\) y \\(800\\), no tres partes iguales."
+    },
+    {
+      "optionId": "C",
+      "optionText": "[Imagen de la opción: Gráfica de barras con eje vertical \"Cantidad\" y eje horizontal \"Peso (gramos)\". Tres barras de igual altura aproximada \\(5\\) para intervalos \\(15\\text{–}20\\), \\(20\\text{–}25\\), \\(25\\text{–}30\\).]",
+      "optionFeedback": "- **Incorrecta.** Muestra barras iguales, pero las cantidades reales son distintas."
+    },
+    {
+      "optionId": "D",
+      "optionText": "[Imagen de la opción: Gráfica de barras con eje vertical \"Intervalo\" y eje horizontal \"Cantidad de papas\". Barras para \\(15\\text{–}20\\) de valor aproximado \\(800\\), para \\(20\\text{–}25\\) de valor aproximado \\(500\\), para \\(25\\text{–}30\\) de valor aproximado \\(700\\).]",
+      "optionFeedback": "- **Incorrecta.** Intercambia los valores de los intervalos extremos.\n- Debe ser \\(700\\) para \\(15\\text{–}20\\) y \\(800\\) para \\(25\\text{–}30\\)."
+    }
+  ]
+}

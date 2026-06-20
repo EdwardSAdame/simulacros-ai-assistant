@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 11",
+  "questionId": "q_11",
+  "questionImageAiDescription": "La imagen del enunciado contiene una tabla con \\(2\\) columnas: \"País\" y \"Esperanza de vida en \\(1960\\)\". Filas: Afganistán -> \\(32\\) años; Bután -> \\(34\\) años; Malí -> \\(28\\) años; Nepal -> \\(34\\) años.",
+  "questionText": "Pregunta 11: En la tabla se muestra la esperanza de vida de algunos países para \\(1960\\).\n\nSi se sabe que para el año \\(2016\\), estos países habían duplicado su esperanza de vida respecto a lo consignado en la tabla, ¿cuál de las siguientes gráficas representa correctamente la esperanza de vida de estos países para el año \\(2016\\)?",
+  "correctOptionId": "C",
+  "aiExplanation": "- **Problema central:** duplicar los valores de esperanza de vida de \\(1960\\).\n- **Cálculos:**\n  - Afganistán: \\(32\\times 2=64\\)\n  - Bután: \\(34\\times 2=68\\)\n  - Malí: \\(28\\times 2=56\\)\n  - Nepal: \\(34\\times 2=68\\)\n- **Comparación con las opciones:** la única gráfica con barras \\(64,68,56,68\\) es la **C**.\n- **Conclusión:** la gráfica correcta es la opción **C**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "[Imagen de la opción: Gráfica de barras para Afganistán, Bután, Malí y Nepal. Alturas etiquetadas respectivamente: \\(16\\), \\(17\\), \\(14\\), \\(17\\). Eje vertical aproximado de \\(0\\) a \\(18\\).]",
+      "optionFeedback": "**Incorrecta.** Esos valores son la mitad de los datos originales, no el doble."
+    },
+    {
+      "optionId": "B",
+      "optionText": "[Imagen de la opción: Gráfica de barras para Afganistán, Bután, Malí y Nepal. Alturas etiquetadas respectivamente: \\(34\\), \\(36\\), \\(30\\), \\(36\\). Eje vertical aproximado de \\(27\\) a \\(37\\).]",
+      "optionFeedback": "**Incorrecta.** Los valores no corresponden al doble exacto de \\(32,34,28,34\\)."
+    },
+    {
+      "optionId": "C",
+      "optionText": "[Imagen de la opción: Gráfica de barras para Afganistán, Bután, Malí y Nepal. Alturas etiquetadas respectivamente: \\(64\\), \\(68\\), \\(56\\), \\(68\\). Eje vertical aproximado de \\(0\\) a \\(80\\).]",
+      "optionFeedback": "**Correcta.** Representa exactamente el doble de cada valor de la tabla: \\(64,68,56,68\\)."
+    },
+    {
+      "optionId": "D",
+      "optionText": "[Imagen de la opción: Gráfica de barras para Afganistán, Bután, Malí y Nepal. Alturas etiquetadas respectivamente: \\(96\\), \\(102\\), \\(84\\), \\(102\\). Eje vertical aproximado de \\(0\\) a \\(120\\).]",
+      "optionFeedback": "**Incorrecta.** Esos valores triplican los originales, no los duplican."
+    }
+  ]
+}

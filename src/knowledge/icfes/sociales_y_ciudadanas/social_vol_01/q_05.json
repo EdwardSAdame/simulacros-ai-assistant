@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 5",
+  "questionId": "q_05",
+  "sectionText": "Los siguientes son reportes periodísticos sobre dos discursos diferentes pronunciados acerca de los atentados terroristas ocurridos en Francia, en 2015. Léalos detenidamente:\n\n**Fragmento A.** \"Aunque el presidente francés dijo que el Gobierno ha hecho grandes avances aprobando nuevas leyes y reforzando la seguridad, de acuerdo con el Gobierno, el nivel de alerta sigue siendo alto [...] Igualmente, explicó que en el último año [...] se dictaron medidas contra medio centenar de extranjeros a fin de impedir que puedan entrar en territorio francés por sospechas terroristas\".\n\n**Fragmento B.** \"[...] el presidente francés se dirige por segunda vez en 48 horas a la nación, para condenar los hechos, y llamar a la calma y la unidad sin fisuras. El miércoles calificó a las víctimas como héroes que habían muerto por defender los valores de la República y pidió que los franceses dejaran a un lado sus diferencias (nada puede dividirnos)\".",
+  "questionText": "Pregunta 5: A partir de la información contenida en los dos discursos, es correcto afirmar que se pronunció primero",
+  "correctOptionId": "D",
+  "aiExplanation": "- **Problema central:** establecer cuál discurso ocurrió primero.\n- **Datos relevantes:**\n  - El **fragmento B** habla de una reacción inmediata: *segunda vez en \\(48\\) horas*, condena de los hechos, llamado a la calma y a la unidad.\n  - El **fragmento A** menciona avances en leyes, seguridad y medidas adoptadas en el último año, lo que sugiere un momento posterior y de balance institucional.\n- **Razonamiento:**\n  - Tras un atentado, lo más inmediato suele ser condenar los hechos y llamar a la unidad.\n  - Tiempo después vienen las respuestas de largo plazo: leyes, controles y políticas de seguridad.\n- **Conclusión:** primero se pronunció el **fragmento B**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "el fragmento A, porque promueve el caos y la confusión inmediata luego de los atentados; el B se refiere a un momento de calma y unidad que solo se logra después de un consenso nacional.",
+      "optionFeedback": "- **Incorrecta.** El fragmento A no promueve caos; habla de leyes y medidas de seguridad ya adoptadas.\n- Además, el fragmento B sí corresponde a una reacción inmediata, no a un momento necesariamente posterior de consenso."
+    },
+    {
+      "optionId": "B",
+      "optionText": "el fragmento B, porque este garantiza el cubrimiento inmediato de la noticia de los atentados; el A se refiere a un momento en el que ya se ha superado la crisis que se desató a raíz de los atentados.",
+      "optionFeedback": "- **Incorrecta.** Acierta en que el fragmento B es más inmediato.\n- Pero falla al afirmar que en A la crisis ya se superó: allí se dice que el nivel de alerta **sigue siendo alto**, así que no puede hablarse de crisis superada."
+    },
+    {
+      "optionId": "C",
+      "optionText": "el fragmento A, porque es una respuesta que hace un llamado a la prevención en contra de los extranjeros; el B habla sobre procesos a largo plazo, como fortalecer la sociedad a futuro.",
+      "optionFeedback": "- **Incorrecta.** Invierte el orden temporal.\n- El B es el discurso inmediato de condena y unidad; el A recoge acciones más elaboradas y sostenidas en el tiempo, como leyes y medidas de seguridad."
+    },
+    {
+      "optionId": "D",
+      "optionText": "el fragmento B porque es una respuesta inmediata que hace un llamado a la calma y la unidad; el A habla sobre procesos a largo plazo, como la aprobación de leyes y políticas de seguridad.",
+      "optionFeedback": "- **Correcta.** El fragmento B muestra la reacción inicial ante el atentado: condena, calma y unidad.\n- El fragmento A, en cambio, se ubica después, cuando ya se evalúan **leyes** y **políticas de seguridad**."
+    }
+  ]
+}

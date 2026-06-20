@@ -1,0 +1,29 @@
+{
+  "questionLabel": "Pregunta 7",
+  "questionId": "q_07",
+  "questionText": "Pregunta 7: Para confeccionar una camiseta, un sastre utiliza \\(2\\) metros de tela. El precio de cada metro de tela es de \\(6.000\\) pesos, y cada camiseta se puede vender a un precio de \\(20.000\\) pesos. Adicionalmente, si el sastre no incurre en ningún costo adicional, la ganancia que obtiene se puede calcular por medio de la expresión\n\n\\[\ny = 8.000x\n\\]\n\nSi la ganancia fue \\(80.000\\) pesos, ¿cuál fue la cantidad de camisetas que confeccionó el sastre?",
+  "correctOptionId": "A",
+  "aiExplanation": "- **Problema central:** encontrar \\(x\\) en la expresión \\(y=8.000x\\).\n- **Dato:** la ganancia fue \\(y=80.000\\).\n- **Cálculo:**\n  \\[\n  80.000=8.000x\n  \\]\n  \n  \\[\n  x=\\frac{80.000}{8.000}=10\n  \\]\n- **Conclusión:** confeccionó **\\(10\\)** camisetas.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "\\(10\\)",
+      "optionFeedback": "**Correcta.** Al resolver \\(80.000=8.000x\\), se obtiene \\(x=10\\)."
+    },
+    {
+      "optionId": "B",
+      "optionText": "\\(8\\)",
+      "optionFeedback": "**Incorrecta.** Si fueran \\(8\\) camisetas, la ganancia sería \\(8.000\\times 8=64.000\\)."
+    },
+    {
+      "optionId": "C",
+      "optionText": "\\(6\\)",
+      "optionFeedback": "**Incorrecta.** Con \\(6\\) camisetas la ganancia sería \\(48.000\\), no \\(80.000\\)."
+    },
+    {
+      "optionId": "D",
+      "optionText": "\\(2\\)",
+      "optionFeedback": "**Incorrecta.** Con \\(2\\) camisetas la ganancia sería apenas \\(16.000\\)."
+    }
+  ]
+}

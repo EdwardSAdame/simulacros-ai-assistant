@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 17",
+  "questionId": "q_17",
+  "sectionText": "De acuerdo con la Convención de Ginebra sobre el Estatuto de los Refugiados, un refugiado es una persona que \"debido a fundados temores de ser perseguida por motivos de raza, religión, nacionalidad, pertenencia a un determinado grupo social u opiniones políticas, se encuentre fuera del país de su nacionalidad y no pueda o, a causa de dichos temores, no quiera acogerse a la protección de su país; o que careciendo de nacionalidad y hallándose, a consecuencia de tales acontecimientos, fuera del país donde antes tuviera su residencia habitual, no pueda o, a causa de dichos temores, no quiera regresar a él\".",
+  "questionText": "Pregunta 17: Esta definición del término \"refugiado\" es útil para explicar",
+  "correctOptionId": "C",
+  "aiExplanation": "- **Problema central:** aplicar la definición jurídica de refugiado a un caso concreto.\n- **Datos relevantes de la definición:**\n  - La persona debe estar **fuera de su país**.\n  - Debe tener fundados temores de persecución.\n  - No puede o no quiere acogerse a la protección de su país.\n- **Método lógico:** descartar opciones de desplazamiento interno, migración económica o prisión política dentro del mismo país.\n- **Conclusión:** la definición explica mejor el caso de una víctima de conflicto armado que busca asilo fuera de su país y es obligada a regresar, quedando desprotegida.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "la discriminación que sufren quienes se ven obligados a desplazarse desde zonas rurales hacia cascos urbanos de un país en razón de un conflicto armado interno.",
+      "optionFeedback": "- **Incorrecta.** Aquí se trata de desplazamiento interno dentro del mismo país, no de refugio internacional."
+    },
+    {
+      "optionId": "B",
+      "optionText": "la situación por la que atraviesan los presos políticos en las cárceles de un país que ha violado sistemáticamente su derecho a la libertad de expresión.",
+      "optionFeedback": "- **Incorrecta.** Aunque hay persecución política, estas personas siguen dentro de su país y no corresponde directamente a la definición de refugiado."
+    },
+    {
+      "optionId": "C",
+      "optionText": "la falta de garantías a la que se ve sometida una víctima de un conflicto armado interno a quien se le niega asilo en un país y es obligada a volver a su país de origen.",
+      "optionFeedback": "- **Correcta.** Esta situación encaja con la definición: una persona fuera de su país, con temor fundado, que necesita protección internacional y sufre al ser obligada a regresar."
+    },
+    {
+      "optionId": "D",
+      "optionText": "la estigmatización y el rechazo que sufren los miembros de una comunidad étnica minoritaria que migran a otros países por motivos económicos.",
+      "optionFeedback": "- **Incorrecta.** La migración por motivos económicos no corresponde, por sí sola, a la categoría jurídica de refugio."
+    }
+  ]
+}

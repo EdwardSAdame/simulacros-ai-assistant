@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 20",
+  "questionId": "q_20",
+  "sectionImageAiDescription": "Infografía sobre el petricor estructurada en tres fases horizontales.\n\nFase 1:\n- Imagen: Una gota de lluvia azul impacta sobre una superficie de tierra, formando burbujas de aire.\n- Texto: 'CUANDO LAS GOTAS DE LLUVIA IMPACTAN CONTRA EL SUELO,\n  SE FORMAN BURBUJAS DE AIRE.'\n\nFase 2:\n- Imagen: Burbujas blancas bajo la superficie contienen pequeños puntos verdes y amarillos. Etiqueta superior: 'PARTÍCULAS ATRAPADAS'.\n- Texto: 'ESTAS BURBUJAS \"ATRAPAN\" PARTÍCULAS DE LA TIERRA\n  (ACEITES Y QUÍMICOS PRODUCIDOS POR BACTERIAS).'\n\nFase 3:\n- Imagen: Las burbujas estallan en la superficie liberando los puntos verdes y amarillos hacia el aire.\n- Texto: 'LAS BURBUJAS HACEN EFERVESCENCIA COMO CHAMPAÑA\n  Y ESPARCEN LAS PARTÍCULAS EN EL AMBIENTE.'",
+  "questionText": "Pregunta 20: En el último recuadro se presentan dos enunciados:\n\n1. \"El conjunto de partículas es lo que produce ese olor llamado petricor\".\n2. \"o como lo conoces tú: tierra mojada\".\n\n¿Qué relación establece la palabra \"o\" entre estas dos frases?",
+  "correctOptionId": "C",
+  "aiExplanation": "- **Problema central:** determinar la relación semántica que introduce la conjunción *o*.\n- En el contexto, *petricor* y *tierra mojada* nombran el mismo fenómeno.\n- La *o* introduce una **denominación alternativa** o reformulación más cotidiana.\n- **Conclusión:** la respuesta es **C**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "Permite establecer una relación de oposición, pues el segundo enunciado se opone al primero.",
+      "optionFeedback": "- **Incorrecta.** No hay oposición entre *petricor* y *tierra mojada*; son dos maneras de nombrar el mismo olor."
+    },
+    {
+      "optionId": "B",
+      "optionText": "Permite establecer una relación de causa-efecto, pues el primer enunciado es la causa del segundo.",
+      "optionFeedback": "- **Incorrecta.** No se trata de causa y efecto, sino de equivalencia denominativa."
+    },
+    {
+      "optionId": "C",
+      "optionText": "Permite expresar una alternativa, pues el segundo enunciado presenta otra manera de denominar al primero.",
+      "optionFeedback": "- **Correcta.** La palabra *o* introduce una forma alternativa y más familiar de nombrar el *petricor*: *tierra mojada*."
+    },
+    {
+      "optionId": "D",
+      "optionText": "Permite expresar una adición, pues el segundo enunciado agrega nuevas ideas al tema presentado por el primero.",
+      "optionFeedback": "- **Incorrecta.** El segundo enunciado no añade una idea nueva, sino que reformula la anterior con otro nombre."
+    }
+  ]
+}

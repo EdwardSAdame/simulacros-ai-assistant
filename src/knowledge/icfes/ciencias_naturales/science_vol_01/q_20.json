@@ -1,0 +1,31 @@
+{
+  "questionLabel": "Pregunta 20",
+  "questionId": "q_20",
+  "sectionText": "Para el reciclaje de los neumáticos usados, se está implementando un proceso llamado \"trituración criogénica\". Este proceso consiste en depositar trozos de neumáticos en un recipiente; posteriormente, se hacen pasar por un túnel de enfriamiento, donde el caucho se pone en contacto con nitrógeno líquido, que está a una temperatura aproximada de \\(-200\\ ^\\circ\\text{C}\\), para extraer energía del caucho y llevarlo a temperaturas menores a \\(-70\\ ^\\circ\\text{C}\\), a las que es muy frágil y susceptible de quebrarse con golpes. En último lugar, el caucho se pasa por un molino de martillos en el que se tritura y se pulveriza, como se muestra a continuación.",
+  "sectionImageAiDescription": "Diagrama de proceso industrial. A la izquierda hay un recipiente superior etiquetado \"Recipiente de neumáticos\" que alimenta trozos hacia un conducto. En el centro hay un \"Túnel de enfriamiento\" horizontal con tornillo o hélice interna y flechas de dirección del flujo. A la derecha hay un tanque cilíndrico vertical etiquetado \"Nitrógeno líquido\" conectado por tuberías al túnel y a un equipo inferior. En la parte inferior central hay un equipo etiquetado \"Molino\". A la salida del molino, en la parte inferior derecha, aparece un recipiente con producto etiquetado \"Caucho pulverizado\". Una tubería inferior retorna gas etiquetado \"Gas nitrógeno\". Flechas muestran circulación del nitrógeno y del material a través del sistema.",
+  "questionText": "Pregunta 20: ¿Qué ocurre con la energía interna del caucho en el túnel de enfriamiento?",
+  "correctOptionId": "C",
+  "aiExplanation": "- **Problema central:** describir qué pasa con la energía interna del caucho al enfriarse en contacto con nitrógeno líquido.\n- **Dato clave del texto:** el nitrógeno líquido **extrae energía del caucho** para llevarlo a temperaturas menores a \\(-70\\ ^\\circ\\text{C}\\).\n- **Análisis:** si el caucho pierde energía interna, esa energía se transfiere al nitrógeno en forma de calor.\n- **Conclusión:** la respuesta correcta es **C**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "Se convierte en química al contacto con el nitrógeno.",
+      "optionFeedback": "- **Incorrecta.** No se describe una transformación en energía química, sino una transferencia térmica."
+    },
+    {
+      "optionId": "B",
+      "optionText": "Permanece sin cambios hasta que llega al molino.",
+      "optionFeedback": "- **Incorrecta.** La energía interna sí cambia, porque el caucho se enfría notablemente en el túnel."
+    },
+    {
+      "optionId": "C",
+      "optionText": "Se transfiere al nitrógeno en forma de calor.",
+      "optionFeedback": "- **Correcta.** El caucho pierde energía interna al enfriarse, y esta se transfiere al nitrógeno como calor."
+    },
+    {
+      "optionId": "D",
+      "optionText": "Se convierte en mecánica para mover el molino.",
+      "optionFeedback": "- **Incorrecta.** La energía interna del caucho no se transforma en energía mecánica del molino."
+    }
+  ]
+}

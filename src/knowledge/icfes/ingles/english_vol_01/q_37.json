@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 37",
+  "questionId": "q_37",
+  "sectionText": "Lea el texto y responda las preguntas.\n\nEn las preguntas \\(36 - 40\\), marque \\(A\\), \\(B\\), \\(C\\) o \\(D\\) en su hoja de respuestas.\n\nI do not like when someone makes a mistake about my age. **When someone says I look younger than I am, I don’t think that person is accurate, because I’m a different person from who I was at \\(24\\), \\(25\\), even \\(26\\).** I don’t consider I actually look physically younger than \\(30\\). However, that doesn’t explain why we don’t always look like being \\(30\\) or why I can’t get champagne in my local supermarket.\n\nThere are loads of videos on TikTok about why millennials (people born after the \\(80\\)s) don’t appear to be getting old “normally”. Some have the hypothesis that it’s because cosmetic operations are cheaper and more available now. Others have said that it’s because millennials “have depression, so we’re indoors all day, and we don’t let our skin feel the sun.” Still others have wondered whether it’s due to camera phones, and the fact that we use them regularly, meaning we pay more attention to our looks. Or maybe we are getting old normally but we just don’t consider we are, so we don’t act like it. Before I continue, I must add: I’m sure that age is not a main issue, and that putting labels to a person as a result of an arbitrary age opinion is not fair to their identities.\n\nI know that most people don’t actually “feel” their age, because they just feel like themselves (same here). **But that doesn’t mean I am not interested and curious about how I appear to others now that I’m in my \\(30\\)s.**",
+  "questionText": "Pregunta 37: What can a reader find out in the text?",
+  "correctOptionId": "D",
+  "aiExplanation": "- **Core problem:** Identify a statement that is supported by the passage.\n- **Relevant data:** The writer says that when someone says she looks younger, she does not think that person is accurate.\n- **Method:** Choose the option that directly reflects that idea.\n- **Conclusion:** The reader can find out **how some people are not accurate when telling other people's age**. The correct answer is **D**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "that the writer does not care about her real age",
+      "optionFeedback": "- **Incorrect.** The writer does care enough to discuss it and is curious about how others see her."
+    },
+    {
+      "optionId": "B",
+      "optionText": "how people behave in front of a camera to display their age",
+      "optionFeedback": "- **Incorrect.** Camera phones are mentioned as a possible explanation, but the text does not explain behavior in front of cameras in detail."
+    },
+    {
+      "optionId": "C",
+      "optionText": "that the writer knows her age according to the people around her",
+      "optionFeedback": "- **Incorrect.** The writer knows her actual age, but the option is awkward and not the point made in the text."
+    },
+    {
+      "optionId": "D",
+      "optionText": "how some people are not accurate when telling other people's age",
+      "optionFeedback": "- **Correct.** The writer explicitly says people who claim she looks younger are not accurate."
+    }
+  ]
+}

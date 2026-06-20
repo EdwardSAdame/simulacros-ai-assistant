@@ -1,0 +1,50 @@
+{
+  "questionLabel": "Pregunta 2",
+  "questionId": "q_02",
+  "sectionText": "Lea las descripciones de la columna de la izquierda \\(1 - 5\\). ¿Cuál palabra de la columna de la derecha \\((A - G)\\) concuerda con cada descripción?\n\nLa opción \\(H\\) se usa para el ejemplo. Sobran dos palabras más.\n\nEn las preguntas \\(1 - 5\\), marque la letra correcta \\(A - G\\) en su hoja de respuestas.",
+  "questionText": "Pregunta 2: You wash your body in this place.",
+  "correctOptionId": "G",
+  "aiExplanation": "- **Core problem:** Match the description *“You wash your body in this place”* with the correct word.\n- **Relevant data:** Among the options, only one names a place used for washing.\n- **Method:** Eliminate objects used for sitting, sleeping, covering, or storing.\n- **Conclusion:** The place where you wash your body is the **shower**. Therefore, the correct answer is **G**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "armchair",
+      "optionFeedback": "- **Incorrect.** An *armchair* is for sitting in the living room."
+    },
+    {
+      "optionId": "B",
+      "optionText": "bed",
+      "optionFeedback": "- **Incorrect.** A *bed* is for sleeping, not washing."
+    },
+    {
+      "optionId": "C",
+      "optionText": "blanket",
+      "optionFeedback": "- **Incorrect.** A *blanket* is used to keep warm."
+    },
+    {
+      "optionId": "D",
+      "optionText": "bookcase",
+      "optionFeedback": "- **Incorrect.** A *bookcase* is for books, not for washing your body."
+    },
+    {
+      "optionId": "E",
+      "optionText": "cupboard",
+      "optionFeedback": "- **Incorrect.** A *cupboard* is storage furniture, not a washing place."
+    },
+    {
+      "optionId": "F",
+      "optionText": "picture",
+      "optionFeedback": "- **Incorrect.** A *picture* is wall decoration."
+    },
+    {
+      "optionId": "G",
+      "optionText": "shower",
+      "optionFeedback": "- **Correct.** A **shower** is the place where you wash your body."
+    },
+    {
+      "optionId": "H",
+      "optionText": "towel",
+      "optionFeedback": "- **Incorrect.** A *towel* is used after washing, not the place where you wash."
+    }
+  ]
+}

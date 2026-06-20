@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 8",
+  "questionId": "q_08",
+  "questionImageAiDescription": "Tabla con \\(3\\) filas de datos y \\(3\\) columnas. Encabezados de las dos últimas columnas: \"Firma X\" y \"Firma Y\". Filas: Candidato \\(1\\): \\(44\\%\\) en Firma X, \\(45\\%\\) en Firma Y. Candidato \\(2\\): \\(44\\%\\) en Firma X, \\(52\\%\\) en Firma Y. Margen de error: \\(5\\%\\) en Firma X, \\(8\\%\\) en Firma Y.",
+  "questionText": "Pregunta 8: Una semana antes de la elección del alcalde de una ciudad, a la pregunta “¿Por cuál de los dos candidatos votará la próxima semana?”, dos firmas encuestadoras (Firma X y Firma Y), basadas en muestras de igual tamaño, reportan la intención de voto que se relaciona en la tabla.\n\nDe acuerdo con la información presentada, ¿cuál de las siguientes afirmaciones es verdadera?",
+  "correctOptionId": "B",
+  "aiExplanation": "- **Problema central:** decidir qué afirmación es segura considerando los márgenes de error.\n- **Firma X:**\n  - Candidato \\(1\\): \\(44\\%\\pm 5\\%\\Rightarrow [39\\%,49\\%]\\)\n  - Candidato \\(2\\): \\(44\\%\\pm 5\\%\\Rightarrow [39\\%,49\\%]\\)\n  Ninguno supera con certeza el \\(50\\%\\).\n- **Firma Y:**\n  - Candidato \\(1\\): \\(45\\%\\pm 8\\%\\Rightarrow [37\\%,53\\%]\\)\n  - Candidato \\(2\\): \\(52\\%\\pm 8\\%\\Rightarrow [44\\%,60\\%]\\)\n- **Evaluación de opciones:**\n  - No puede decirse que solo uno tenga opciones de ganar, porque con margen de error ambos podrían hacerlo.\n  - Tampoco puede afirmarse que en Y nadie obtenga menos de \\(40\\%\\), porque el candidato \\(1\\) podría bajar a \\(37\\%\\).\n- **Conclusión:** la afirmación verdadera es que, según la firma X, ningún candidato obtendrá más del \\(50\\%\\).",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "Según las dos firmas, solamente el candidato \\(2\\) tiene opciones de ganar.",
+      "optionFeedback": "**Incorrecta.** En la firma Y, el candidato \\(1\\) podría llegar hasta \\(53\\%\\), así que también tiene opciones."
+    },
+    {
+      "optionId": "B",
+      "optionText": "Según la firma X, ningún candidato obtendrá más del \\(50\\,\\%\\) de los votos.",
+      "optionFeedback": "**Correcta.** Con \\(44\\%\\) y margen de error de \\(5\\%\\), el máximo posible es \\(49\\%\\), menor que \\(50\\%\\)."
+    },
+    {
+      "optionId": "C",
+      "optionText": "Según la firma Y, ningún candidato obtendrá menos del \\(40\\,\\%\\) de los votos.",
+      "optionFeedback": "**Incorrecta.** El candidato \\(1\\) podría obtener hasta \\(45\\%-8\\%=37\\%\\)."
+    },
+    {
+      "optionId": "D",
+      "optionText": "Según las dos firmas, solamente el candidato \\(1\\) tiene opciones de ganar.",
+      "optionFeedback": "**Incorrecta.** El candidato \\(2\\) también tiene opciones, especialmente en la firma Y."
+    }
+  ]
+}

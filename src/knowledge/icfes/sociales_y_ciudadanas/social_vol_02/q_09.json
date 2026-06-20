@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 9",
+  "questionId": "q_09",
+  "sectionText": "En Colombia, la Constitución política establece que es deber del Estado proteger la diversidad e integridad del ambiente y conservar las áreas de especial importancia ecológica; sin embargo, hay muchas especies en peligro de extinción, una de las cuales es el oso de anteojos. Este oso habita en los páramos andinos y ayuda a dispersar semillas, generando, así, la renovación de estos ecosistemas, pero, a pesar de su importancia ecológica, es una especie vulnerable a causa de la pérdida de su hábitat. Esto es generado principalmente por la intervención del ser humano en las zonas en las que vive; al respecto, algunas de las actividades que ponen en peligro la existencia de esta especie son: la tala de los bosques, la implementación de actividades productivas en sus territorios y la cacería, que, en ocasiones, se da como respuesta al eventual sacrificio por parte de los osos del ganado o a daños causados a los cultivos de las comunidades aledañas a su hábitat. En estos casos es importante que las comunidades entiendan, de antemano, que somos los humanos quienes, en un principio, invadimos el hábitat del oso, no al contrario.",
+  "questionText": "Pregunta 9: En la descripción de la situación anterior, ¿en qué se está haciendo énfasis?",
+  "correctOptionId": "A",
+  "aiExplanation": "- **Problema central:** identificar el foco principal del texto.\n- **Datos relevantes:**\n  - Se menciona que el oso de anteojos es vulnerable.\n  - Se enumeran causas: pérdida de hábitat, tala, actividades productivas, cacería.\n  - Se insiste en que la intervención humana invade su hábitat.\n- **Método lógico:** distinguir entre una descripción de causas, de distribución, de políticas estatales o de peligros para humanos.\n- **Conclusión:** el énfasis está en **las razones por las que el oso de anteojos está en peligro de extinción**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "En las razones por las que el oso de anteojos está en peligro de extinción.",
+      "optionFeedback": "- **Correcta.** El texto se concentra en explicar las causas humanas de su vulnerabilidad: pérdida de hábitat, tala, actividades productivas y cacería."
+    },
+    {
+      "optionId": "B",
+      "optionText": "En los peligros que representa el oso de anteojos para los humanos.",
+      "optionFeedback": "- **Incorrecta.** Aunque se menciona que a veces afecta ganado o cultivos, eso aparece como una reacción de comunidades; no es el énfasis principal."
+    },
+    {
+      "optionId": "C",
+      "optionText": "En los esfuerzos del Estado por proteger al oso de anteojos.",
+      "optionFeedback": "- **Incorrecta.** Solo se menciona de manera general el deber constitucional del Estado, pero no se desarrollan medidas concretas de protección."
+    },
+    {
+      "optionId": "D",
+      "optionText": "En la distribución geográfica del oso de anteojos.",
+      "optionFeedback": "- **Incorrecta.** Se dice que habita en los páramos andinos, pero ese dato es secundario frente a las causas de su amenaza."
+    }
+  ]
+}

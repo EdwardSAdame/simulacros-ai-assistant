@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 11",
+  "questionId": "q_11",
+  "sectionText": "En Colombia, se debe tener un Plan de Ordenamiento Territorial (POT) en cada uno de los municipios, para organizar y planear el desarrollo físico del territorio. \"Un POT se define como el conjunto de objetivos, directrices, políticas, estrategias, metas, programas, actuaciones y normas adoptadas para orientar y administrar el desarrollo físico del territorio y la utilización del suelo. Señala, pues, los derroteros de las diferentes acciones urbanísticas posibles que pueden emprenderse. Las ciudades deben crecer ordenadamente, de manera tal que los recursos con que se cuenta para el desarrollo de la comunidad, se empleen eficientemente y de manera sostenible en el tiempo. El POT nos pone de presente que no todo está permitido y que lo que sí lo está, debe ser en función de la obtención del desarrollo más equitativo posible\".",
+  "questionText": "Pregunta 11: ¿Cuál de los siguientes conceptos se aplica en la anterior definición de un POT?",
+  "correctOptionId": "A",
+  "aiExplanation": "- **Problema central:** identificar el concepto presente en la definición del POT.\n- **Datos clave del texto:**\n  - Uso eficiente de recursos.\n  - Crecimiento ordenado.\n  - Sostenibilidad en el tiempo.\n  - Búsqueda del desarrollo más equitativo posible.\n- **Conclusión:** el concepto aplicado es el de **desarrollo equitativo y sustentable**. ",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "Desarrollo equitativo y sustentable.",
+      "optionFeedback": "- **Correcta.** Resume exactamente lo que dice el texto: crecimiento ordenado, uso eficiente de recursos, sostenibilidad en el tiempo y búsqueda de un desarrollo **equitativo**."
+    },
+    {
+      "optionId": "B",
+      "optionText": "Capital político y social.",
+      "optionFeedback": "- **Incorrecta.** El texto no se enfoca en redes de confianza, participación o capital político, sino en ordenar el uso del suelo y promover un desarrollo sostenible y equitativo."
+    },
+    {
+      "optionId": "C",
+      "optionText": "Participación política.",
+      "optionFeedback": "- **Incorrecta.** Aunque los POT pueden involucrar participación, ese no es el concepto central expresado en la definición citada.\n- La definición destaca ordenamiento, sostenibilidad y equidad."
+    },
+    {
+      "optionId": "D",
+      "optionText": "Crecimiento económico.",
+      "optionFeedback": "- **Incorrecta.** El POT no se reduce al crecimiento económico.\n- El texto insiste en que el desarrollo debe ser **ordenado, sostenible y equitativo**, no solo económicamente expansivo."
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 4",
+  "questionId": "q_04",
+  "questionImageAiDescription": "Tabla de \\(2\\) columnas y \\(6\\) filas incluyendo encabezado. Encabezados: \"Día\" y \"Hora de llegada (a. m.)\". Filas de datos: Lunes -> \\(7{:}02\\); Martes -> \\(7{:}04\\); Miércoles -> \\(7{:}05\\); Jueves -> \\(7{:}08\\); Viernes -> \\(7{:}01\\).",
+  "questionText": "Pregunta 4: Una ruta escolar se encarga de recoger \\(8\\) estudiantes para llevarlos al colegio diariamente antes del inicio de clases que es a las \\(7{:}10\\) a. m. Con el fin de ver el promedio de las horas de llegada de la ruta al colegio, se realizó un registro en una semana, como se muestra en la siguiente tabla.\n\nCon esto se calcula que en promedio a las \\(7{:}05\\) a. m. llega la ruta al colegio. Al respecto, ¿cuál de las siguientes afirmaciones sobre el promedio calculado es válida?",
+  "correctOptionId": "C",
+  "aiExplanation": "- **Problema central:** verificar si el promedio \\(7{:}05\\) a. m. está bien calculado.\n- **Datos:** los tiempos de llegada son \\(7{:}02\\), \\(7{:}04\\), \\(7{:}05\\), \\(7{:}08\\) y \\(7{:}01\\).\n- **Método correcto:** promediar sobre los **\\(5\\) días**, no sobre los \\(8\\) estudiantes.\n- Si tomamos los minutos después de las \\(7{:}00\\):\n  \\[\n  2+4+5+8+1=20\n  \\]\n  \n  \\[\n  \\frac{20}{5}=4\n  \\]\n  El promedio exacto sería \\(7{:}04\\) a. m.\n- **Conclusión:** la afirmación válida es que el cálculo dado es **incorrecto** porque debían sumarse los minutos y dividir entre \\(5\\) días.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "Es incorrecto porque se deben sumar los minutos de llegada y dividir entre los \\(8\\) estudiantes.",
+      "optionFeedback": "**Incorrecta.** El promedio pedido es de las horas de llegada por **día**, no por estudiante."
+    },
+    {
+      "optionId": "B",
+      "optionText": "Es correcto porque corresponde a la hora de llegada del miércoles que es la mitad de la semana.",
+      "optionFeedback": "**Incorrecta.** Coincidir con el dato del miércoles no justifica que sea el promedio."
+    },
+    {
+      "optionId": "C",
+      "optionText": "Es incorrecto porque se deben sumar los minutos de llegada y dividir en los \\(5\\) días de la semana.",
+      "optionFeedback": "**Correcta.** El promedio de llegada se obtiene sumando los minutos de los \\(5\\) días y dividiendo entre \\(5\\). Así se obtiene \\(7{:}04\\), no \\(7{:}05\\)."
+    },
+    {
+      "optionId": "D",
+      "optionText": "Es correcto porque corresponde a la mitad entre las \\(7{:}00\\) a. m. y las \\(7{:}10\\) a. m.",
+      "optionFeedback": "**Incorrecta.** El promedio no se decide por estar a mitad de un intervalo arbitrario, sino usando los datos observados."
+    }
+  ]
+}

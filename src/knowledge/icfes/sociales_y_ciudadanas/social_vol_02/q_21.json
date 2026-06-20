@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 21",
+  "questionId": "q_21",
+  "sectionText": "El yagé es una preparación de la medicina tradicional indígena del Putumayo colombiano. De acuerdo con los indígenas de la región, su acción es integral, física, mental y espiritual. La toma de esta bebida es cada vez más común fuera de las comunidades indígenas, dado que su popularidad ha generado que algunos conocedores de la planta organicen encuentros para beberla a cambio de un aporte económico. Sin embargo, el uso de esta bebida sagrada puede resultar letal cuando no se toman las precauciones adecuadas.\n\nRecientemente, como consecuencia de la muerte de algunas personas por el consumo de yagé, se han planteado algunas propuestas: \\(1\\) prohibir el consumo de la bebida porque contiene peligrosos psicoactivos y \\(2\\) permitir que únicamente los indígenas puedan consumir la bebida.",
+  "questionText": "Pregunta 21: Teniendo en cuenta la problemática planteada, desde el ámbito cultural, la implementación de la solución \\(1\\) sería",
+  "correctOptionId": "C",
+  "aiExplanation": "- **Problema central:** valorar culturalmente la propuesta \\(1\\): prohibir el consumo del yagé.\n- **Datos relevantes:**\n  - El yagé es parte de la medicina tradicional indígena.\n  - Tiene significado físico, mental y espiritual para las comunidades.\n  - Prohibirlo afectaría una práctica cultural sagrada.\n- **Método lógico:** analizar la solución desde el derecho a la preservación de tradiciones culturales, no solo desde seguridad o economía.\n- **Conclusión:** desde el ámbito cultural, la medida sería **negativa**, porque vulnera el derecho de los pueblos indígenas a mantener sus tradiciones.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "negativa, porque los conocedores de la planta no podrían obtener ingresos por las ceremonias.",
+      "optionFeedback": "- **Incorrecta.** Ese argumento es económico, no cultural. La pregunta pide valorar la medida desde el ámbito cultural."
+    },
+    {
+      "optionId": "B",
+      "optionText": "positiva, porque no se presentarían más casos de muerte a causa del consumo de yagé.",
+      "optionFeedback": "- **Incorrecta.** Ese es un enfoque de salud o seguridad, no cultural; además la prohibición desconoce el valor tradicional del yagé."
+    },
+    {
+      "optionId": "C",
+      "optionText": "negativa, porque se estaría vulnerando el derecho de los indígenas a mantener sus tradiciones.",
+      "optionFeedback": "- **Correcta.** Prohibir el yagé afectaría una práctica propia de la medicina y espiritualidad indígena, vulnerando su derecho a conservar sus tradiciones culturales."
+    },
+    {
+      "optionId": "D",
+      "optionText": "positiva, porque protege la tradición al permitir que solo los indígenas puedan beber yagé.",
+      "optionFeedback": "- **Incorrecta.** Esta opción mezcla la valoración de la solución \\(2\\), no de la solución \\(1\\), que consiste en prohibir totalmente el consumo."
+    }
+  ]
+}

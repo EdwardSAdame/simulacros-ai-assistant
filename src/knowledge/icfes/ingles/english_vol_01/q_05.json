@@ -1,0 +1,50 @@
+{
+  "questionLabel": "Pregunta 5",
+  "questionId": "q_05",
+  "sectionText": "Lea las descripciones de la columna de la izquierda \\(1 - 5\\). ¿Cuál palabra de la columna de la derecha \\((A - G)\\) concuerda con cada descripción?\n\nLa opción \\(H\\) se usa para el ejemplo. Sobran dos palabras más.\n\nEn las preguntas \\(1 - 5\\), marque la letra correcta \\(A - G\\) en su hoja de respuestas.",
+  "questionText": "Pregunta 5: People like to use this when they are cold.",
+  "correctOptionId": "C",
+  "aiExplanation": "- **Core problem:** Identify the item people use when they are cold.\n- **Relevant data:** The options include *blanket* and *towel*, both cloth items.\n- **Method:** Choose the item used to keep warm.\n- **Conclusion:** A **blanket** is used when people are cold, so the correct answer is **C**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "armchair",
+      "optionFeedback": "- **Incorrect.** An *armchair* is for sitting, not specifically for warmth."
+    },
+    {
+      "optionId": "B",
+      "optionText": "bed",
+      "optionFeedback": "- **Incorrect.** A *bed* is for sleeping; the clue focuses on something used when feeling cold."
+    },
+    {
+      "optionId": "C",
+      "optionText": "blanket",
+      "optionFeedback": "- **Correct.** A **blanket** is used to keep warm when you are cold."
+    },
+    {
+      "optionId": "D",
+      "optionText": "bookcase",
+      "optionFeedback": "- **Incorrect.** A *bookcase* stores books."
+    },
+    {
+      "optionId": "E",
+      "optionText": "cupboard",
+      "optionFeedback": "- **Incorrect.** A *cupboard* stores objects, not body heat."
+    },
+    {
+      "optionId": "F",
+      "optionText": "picture",
+      "optionFeedback": "- **Incorrect.** A *picture* is decoration."
+    },
+    {
+      "optionId": "G",
+      "optionText": "shower",
+      "optionFeedback": "- **Incorrect.** A *shower* is for washing, and it may even make you colder."
+    },
+    {
+      "optionId": "H",
+      "optionText": "towel",
+      "optionFeedback": "- **Incorrect.** A *towel* dries your body, but it is not the usual item for keeping warm."
+    }
+  ]
+}

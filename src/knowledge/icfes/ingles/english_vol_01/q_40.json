@@ -1,0 +1,31 @@
+{
+  "questionLabel": "Pregunta 40",
+  "questionId": "q_40",
+  "sectionText": "Lea el texto y responda las preguntas.\n\nEn las preguntas \\(36 - 40\\), marque \\(A\\), \\(B\\), \\(C\\) o \\(D\\) en su hoja de respuestas.\n\nI do not like when someone makes a mistake about my age. **When someone says I look younger than I am, I don’t think that person is accurate, because I’m a different person from who I was at \\(24\\), \\(25\\), even \\(26\\).** I don’t consider I actually look physically younger than \\(30\\). However, that doesn’t explain why we don’t always look like being \\(30\\) or why I can’t get champagne in my local supermarket.\n\nThere are loads of videos on TikTok about why millennials (people born after the \\(80\\)s) don’t appear to be getting old “normally”. Some have the hypothesis that it’s because cosmetic operations are cheaper and more available now. Others have said that it’s because millennials “have depression, so we’re indoors all day, and we don’t let our skin feel the sun.” Still others have wondered whether it’s due to camera phones, and the fact that we use them regularly, meaning we pay more attention to our looks. Or maybe we are getting old normally but we just don’t consider we are, so we don’t act like it. Before I continue, I must add: I’m sure that age is not a main issue, and that putting labels to a person as a result of an arbitrary age opinion is not fair to their identities.\n\nI know that most people don’t actually “feel” their age, because they just feel like themselves (same here). **But that doesn’t mean I am not interested and curious about how I appear to others now that I’m in my \\(30\\)s.**",
+  "questionImageAiDescription": "The answer options are presented as four boxed quotation-style statements, one for each option, arranged in two rows. Each box contains a short advisory sentence in quotation marks.",
+  "questionText": "Pregunta 40: What piece of advice would the writer give people according to the text?",
+  "correctOptionId": "D",
+  "aiExplanation": "- **Core problem:** Infer the advice the writer would most likely give.\n- **Relevant data:** The writer says age is not a main issue and that labeling people by age is unfair. She also notes that most people simply feel like themselves.\n- **Method:** Choose the option aligned with that viewpoint.\n- **Conclusion:** The writer would advise people not to focus on others’ comments about age, but on how they feel. The correct answer is **D**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "“Take photos of yourself frequently to present to people that you are younger than they say you are.”",
+      "optionFeedback": "- **Incorrect.** The writer does not recommend using photos to prove age or appearance."
+    },
+    {
+      "optionId": "B",
+      "optionText": "“Do not worry about looking younger than you actually are, people often realize your real age.”",
+      "optionFeedback": "- **Incorrect.** The writer does not say people often realize the real age; instead, she questions people’s accuracy."
+    },
+    {
+      "optionId": "C",
+      "optionText": "“Go to the nearest supermarket and ask for a bottle of wine, they will let you get it as you look like an old person.”",
+      "optionFeedback": "- **Incorrect.** This is ironic and contradicts the writer’s example about not being able to get champagne easily."
+    },
+    {
+      "optionId": "D",
+      "optionText": "“Do not pay attention to what people say about your age and how younger you look. The important thing is how you feel.”",
+      "optionFeedback": "- **Correct.** This best matches the text’s message that age labels are unfair and that people mainly feel like themselves."
+    }
+  ]
+}

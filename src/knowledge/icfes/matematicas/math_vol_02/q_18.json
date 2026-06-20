@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 18",
+  "questionId": "q_18",
+  "questionImageAiDescription": "Figura compuesta. En la parte superior hay una semicircunferencia orientada hacia arriba. Su diámetro es horizontal, pero una parte central-izquierda del diámetro coincide con el lado superior de un cuadrado abierto hacia abajo dentro de la semicircunferencia. El cuadrado tiene lado vertical izquierdo visible y lado vertical derecho coincidente parcialmente con un extremo del segmento horizontal superior. El segmento horizontal superior del cuadrado está rotulado \\(S\\). El lado del cuadrado mide \\(4\\) cm según el enunciado. El radio de la semicircunferencia es \\(5\\) cm, por lo que el diámetro total de la semicircunferencia es \\(10\\) cm. El segmento \\(S\\) representa la porción del diámetro desde el vértice superior derecho del cuadrado hasta el extremo derecho del diámetro de la semicircunferencia.",
+  "questionText": "Pregunta 18: Olivia tiene una figura plana compuesta por una semicircunferencia y un cuadrado, como se muestra a continuación:\n\nOlivia necesita medir el segmento de recta \\(S\\). Si se sabe que el radio de la semicircunferencia mide \\(5\\ \\text{cm}\\) y el lado del cuadrado mide \\(4\\ \\text{cm}\\), ¿cuánto mide el segmento de recta \\(S\\)?",
+  "correctOptionId": "B",
+  "aiExplanation": "- **Problema central:** hallar la parte del diámetro que no ocupa el lado superior del cuadrado.\n- **Dato 1:** radio de la semicircunferencia \\(=5\\ \\text{cm}\\), por tanto el diámetro mide\n  \\[\n  2\\times 5=10\\ \\text{cm}\n  \\]\n- **Dato 2:** el lado del cuadrado mide \\(4\\ \\text{cm}\\).\n- El diámetro está formado por el lado superior del cuadrado más el segmento \\(S\\):\n  \\[\n  4+S=10\n  \\]\n  \n  \\[\n  S=10-4=6\\ \\text{cm}\n  \\]\n- **Conclusión:** el segmento \\(S\\) mide **\\(6\\ \\text{cm}\\)**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "\\(9\\ \\text{cm}\\)",
+      "optionFeedback": "**Incorrecta.** Sería casi todo el diámetro; no se está restando el lado del cuadrado correctamente."
+    },
+    {
+      "optionId": "B",
+      "optionText": "\\(6\\ \\text{cm}\\)",
+      "optionFeedback": "**Correcta.** Como el diámetro es \\(10\\ \\text{cm}\\) y el lado del cuadrado es \\(4\\ \\text{cm}\\), resulta \\(S=10-4=6\\ \\text{cm}\\)."
+    },
+    {
+      "optionId": "C",
+      "optionText": "\\(5{,}5\\ \\text{cm}\\)",
+      "optionFeedback": "**Incorrecta.** No surge de los datos dados; el cálculo correcto es exacto y da \\(6\\)."
+    },
+    {
+      "optionId": "D",
+      "optionText": "\\(4{,}5\\ \\text{cm}\\)",
+      "optionFeedback": "**Incorrecta.** Se subestima la longitud al no usar bien el diámetro de la semicircunferencia."
+    }
+  ]
+}

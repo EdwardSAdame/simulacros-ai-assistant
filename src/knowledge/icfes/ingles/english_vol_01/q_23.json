@@ -1,0 +1,25 @@
+{
+  "questionLabel": "Pregunta 23",
+  "questionId": "q_23",
+  "sectionText": "Lea el texto y seleccione la palabra correcta para cada espacio.\n\nEn las preguntas \\(21 - 28\\), marque \\(A\\), \\(B\\) o \\(C\\) en su hoja de respuestas.\n\nThis strange story began in April \\(1955\\). On a foggy morning, Emma Gatewood, an American school teacher, told her family, “I will go for a walk after breakfast.” She left her small Ohio town with the clothes she had on and less \\((21)\\) ______ US$\\(200\\). No one \\((22)\\) ______ guess her plans: not one of her \\(11\\) children or her \\(23\\) grandchildren.\n\nAt the age of \\(67\\), Emma became the first woman \\((23)\\) ______ walked the Appalachian Trail, a \\(2{,}050\\)-mile way \\((24)\\) ______ forests and mountains. She didn't have \\((25)\\) ______ money or good equipment, but during her long journey, people helped her \\((26)\\) ______ she went.\n\nToday, even sixty years later, “Grandma” Gatewood’s story is \\((27)\\) ______ amazing. Her story shows how any person can \\((28)\\) ______ stronger than they were before.",
+  "questionText": "Pregunta 23: Question \\((23)\\): At the age of \\(67\\), Emma became the first woman \\((102)\\) ______ walked the Appalachian Trail, a \\(2{,}050\\)-mile way \\((103)\\) ______ forests and mountains.",
+  "correctOptionId": "B",
+  "aiExplanation": "- **Core problem:** Choose the relative pronoun for *“the first woman ___ walked...”*\n- **Relevant data:** The antecedent is *woman*, a person.\n- **Method:** Use the relative pronoun for people.\n- **Conclusion:** The correct answer is **B: who**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "where",
+      "optionFeedback": "- **Incorrect.** *Where* is used for places, not for a person like *woman*."
+    },
+    {
+      "optionId": "B",
+      "optionText": "who",
+      "optionFeedback": "- **Correct.** **Who** correctly refers to a person: *the first woman who walked...*"
+    },
+    {
+      "optionId": "C",
+      "optionText": "which",
+      "optionFeedback": "- **Incorrect.** *Which* is generally used for things or animals, not people in this sentence."
+    }
+  ]
+}

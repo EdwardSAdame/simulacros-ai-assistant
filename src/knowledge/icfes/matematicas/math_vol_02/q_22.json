@@ -1,0 +1,29 @@
+{
+  "questionLabel": "Pregunta 22",
+  "questionId": "q_22",
+  "questionText": "Pregunta 22: En un polígono regular la medida de todos sus lados es la misma. El perímetro del polígono regular es el producto entre el número de lados que tiene y la medida de uno de ellos. La apotema es la menor medida entre el centro del polígono y cualquiera de sus lados.\n\n¿Cuál de las siguientes opciones representa el polígono regular que tiene \\(5\\ \\text{cm}\\) de lado, \\(30\\ \\text{cm}\\) de perímetro y \\(4\\ \\text{cm}\\) de apotema?",
+  "correctOptionId": "C",
+  "aiExplanation": "- **Problema central:** identificar el polígono regular con las medidas dadas.\n- **Número de lados:**\n  \\[\n  n=\\frac{30}{5}=6\n  \\]\n  Entonces debe ser un **hexágono regular**.\n- **Apotema:** debe ser un segmento desde el centro hasta un lado, y además perpendicular a ese lado, de longitud \\(4\\ \\text{cm}\\).\n- **Conclusión:** la opción correcta es la que muestra un hexágono regular con lado \\(5\\ \\text{cm}\\) y apotema \\(4\\ \\text{cm}\\), es decir, la **C**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "[Imagen de la opción: Triángulo regular con lado inferior rotulado \\(5\\) cm. Desde un punto interior se traza un segmento oblicuo de \\(4\\) cm hasta un lado, representando la apotema.]",
+      "optionFeedback": "**Incorrecta.** Un triángulo regular con lado \\(5\\) tendría perímetro \\(15\\ \\text{cm}\\), no \\(30\\ \\text{cm}\\)."
+    },
+    {
+      "optionId": "B",
+      "optionText": "[Imagen de la opción: Figura geométrica de un pentágono regular. Su lado inferior tiene una cota de medida que indica \\(5\\) cm. Desde un punto marcado en el centro exacto de la figura se traza un segmento de línea recta hasta uno de sus vértices (específicamente el vértice lateral derecho), el cual está etiquetado con una longitud de \\(4\\) cm.]",
+      "optionFeedback": "**Incorrecta.** Un pentágono con lado \\(5\\) tendría perímetro \\(25\\ \\text{cm}\\), y además el segmento al vértice no es la apotema."
+    },
+    {
+      "optionId": "C",
+      "optionText": "[Imagen de la opción: Hexágono regular con lado inferior rotulado \\(5\\) cm. Desde el centro se traza un segmento de \\(4\\) cm perpendicular a un lado inclinado, representando la apotema.]",
+      "optionFeedback": "**Correcta.** El perímetro \\(30\\ \\text{cm}\\) con lado \\(5\\ \\text{cm}\\) implica \\(6\\) lados, y la apotema está bien representada."
+    },
+    {
+      "optionId": "D",
+      "optionText": "[Imagen de la opción: Octágono regular con lado inferior rotulado \\(5\\) cm. Desde el centro se traza un segmento horizontal de \\(4\\) cm hasta un lado vertical, representando la apotema.]",
+      "optionFeedback": "**Incorrecta.** Un octágono con lado \\(5\\) tendría perímetro \\(40\\ \\text{cm}\\), no \\(30\\ \\text{cm}\\)."
+    }
+  ]
+}

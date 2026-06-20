@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 10",
+  "questionId": "q_10",
+  "sectionText": "Lea con atención el siguiente fragmento:\n\n\"El reconocimiento de la diversidad, de los derechos diferenciados y de la igualdad como condición estructural de la vida en comunidad, es la legitimación de luchas históricas de grupos étnicos vernáculos y minorías sociales, que han sido sujetos paradigmáticos de las luchas por la participación económica, social y política en Colombia. La Constitución de 1991 hace un claro y normativo reconocimiento del multiculturalismo, del principio del reconocimiento y de la protección a la diversidad étnica y cultural de la nación colombiana (art. 7); en esa medida, se hace reconocimiento de la igualdad y la dignidad de todas las culturas que conviven en el país (art. 70), y del principio de la autonomía normativa y judicial consagrada en el artículo 246 de la Constitución, gracias al cual los pueblos indígenas podrán ejercer funciones jurisdiccionales dentro de su ámbito territorial, de conformidad con sus propias normas y procedimientos [...]\".",
+  "questionText": "Pregunta 10: ¿Cuál de las siguientes opciones describe una situación que justifica la adopción de las políticas mencionadas?",
+  "correctOptionId": "A",
+  "aiExplanation": "- **Problema central:** escoger una situación que justifique políticas de reconocimiento multicultural, protección de diversidad étnica y derechos diferenciados.\n- **Datos relevantes del fragmento:**\n  - Se habla de grupos étnicos y minorías sociales.\n  - Se defiende la igualdad, dignidad cultural y autonomía de pueblos indígenas.\n- **Método lógico:** buscar una situación de discriminación o persecución contra un grupo étnico o cultural minoritario.\n- **Conclusión:** la opción que mejor justifica esas políticas es la persecución y estigmatización del pueblo rom o gitano.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "En una ciudad intermedia de Colombia, los miembros del pueblo rom o gitano son constantemente perseguidos y desalojados violentamente por algunas personas que los consideran brujos, ladrones, supersticiosos y nocivos para la sociedad.",
+      "optionFeedback": "- **Correcta.** Esta situación muestra discriminación contra una minoría étnica y cultural, justamente el tipo de problema que las políticas multiculturales buscan enfrentar."
+    },
+    {
+      "optionId": "B",
+      "optionText": "En la capital colombiana, \\(12\\) de cada \\(100\\) habitantes vive en condiciones de pobreza o pobreza extrema, con ingresos de \\(\\$200.000\\) mensuales o menos, siendo en su mayoría personas desplazadas por la violencia en otras regiones.",
+      "optionFeedback": "- **Incorrecta.** Es un problema social y económico grave, pero no se relaciona directamente con reconocimiento multicultural o derechos diferenciados de grupos étnicos."
+    },
+    {
+      "optionId": "C",
+      "optionText": "Entre \\(2015\\) y \\(2016\\), aumentaron en un \\(19 \\%\\) los suicidios en Medellín, y se ha reportado que la mayoría de los suicidios los cometen niños entre los \\(5\\) y los \\(16\\) años, en plena etapa escolar, pero también jóvenes entre los \\(18\\) y los \\(28\\) años, es decir, en plena edad productiva.",
+      "optionFeedback": "- **Incorrecta.** Se trata de un problema de salud pública, no de diversidad étnica, reconocimiento cultural o derechos diferenciados."
+    },
+    {
+      "optionId": "D",
+      "optionText": "El consumo de alcohol entre hombres y mujeres en \\(2014\\) presentó una amplia diferencia: se observó que el \\(54{,}73 \\%\\) de los hombres consume alcohol, mientras que solo el \\(38{,}89 \\%\\) de las mujeres lo hace.",
+      "optionFeedback": "- **Incorrecta.** Es una diferencia estadística de consumo y no justifica por sí misma políticas multiculturales dirigidas a minorías étnicas o culturales."
+    }
+  ]
+}

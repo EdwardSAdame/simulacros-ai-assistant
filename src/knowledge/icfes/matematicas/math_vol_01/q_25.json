@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 25",
+  "questionId": "q_25",
+  "sectionImageAiDescription": "La imagen del enunciado contiene una tabla principal con \\(2\\) columnas: \"Paciente\" y \"Presión pleural (cmH\\(_2\\)O)\". Filas: Santiago \\(-7,6\\); Ximena \\(-7,09\\); Mariana \\(-7,62\\); Orlando \\(-7,53\\).",
+  "questionText": "Pregunta 25: La presión pleural se genera entre algunas paredes de los pulmones en el proceso de respiración del ser humano. Al respecto, se midió la presión pleural de cuatro pacientes para determinar el orden en que deben recibir un tratamiento pulmonar.\n\nPara determinar el orden en que los pacientes van a recibir el tratamiento médico, se les debe ordenar de menor a mayor según su presión pleural. ¿Cuál de las siguientes tablas indica el orden en que deben recibir el tratamiento los pacientes?",
+  "correctOptionId": "C",
+  "aiExplanation": "- **Problema central:** ordenar de menor a mayor números decimales negativos.\n- **Datos:**\n  - Santiago: \\(-7,6\\)\n  - Ximena: \\(-7,09\\)\n  - Mariana: \\(-7,62\\)\n  - Orlando: \\(-7,53\\)\n- **Análisis de negativos:** el menor es el más negativo.\n- **Orden de menor a mayor:**\n  \\[\n  -7,62 < -7,6 < -7,53 < -7,09\n  \\]\n  Entonces:\n  - Mariana\n  - Santiago\n  - Orlando\n  - Ximena\n- **Conclusión:** la tabla correcta es la opción **C**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "[Imagen de la opción: Tabla de \\(2\\) columnas: \"Orden en que se va a recibir el tratamiento\" y \"Paciente\". Filas: Primero \\rightarrow Ximena; Segundo \\rightarrow Mariana; Tercero \\rightarrow Santiago; Cuarto \\rightarrow Orlando.]",
+      "optionFeedback": "- **Incorrecta.** Ximena tiene \\(-7,09\\), que es el valor mayor, no el menor, así que no debe ir primero."
+    },
+    {
+      "optionId": "B",
+      "optionText": "[Imagen de la opción: Tabla de \\(2\\) columnas: \"Orden en que se va a recibir el tratamiento\" y \"Paciente\". Filas: Primero \\rightarrow Orlando; Segundo \\rightarrow Santiago; Tercero \\rightarrow Mariana; Cuarto \\rightarrow Ximena.]",
+      "optionFeedback": "- **Incorrecta.** Orlando \\(-7,53\\) no es el menor valor; Mariana \\(-7,62\\) debería ir primero."
+    },
+    {
+      "optionId": "C",
+      "optionText": "[Imagen de la opción: Tabla de \\(2\\) columnas: \"Orden en que se va a recibir el tratamiento\" y \"Paciente\". Filas: Primero \\rightarrow Mariana; Segundo \\rightarrow Santiago; Tercero \\rightarrow Orlando; Cuarto \\rightarrow Ximena.]",
+      "optionFeedback": "- **Correcta.** Ordena de menor a mayor las presiones: \\(-7,62\\), \\(-7,6\\), \\(-7,53\\), \\(-7,09\\)."
+    },
+    {
+      "optionId": "D",
+      "optionText": "[Imagen de la opción: Tabla de \\(2\\) columnas: \"Orden en que se va a recibir el tratamiento\" y \"Paciente\". Filas: Primero \\rightarrow Santiago; Segundo \\rightarrow Ximena; Tercero \\rightarrow Mariana; Cuarto \\rightarrow Orlando.]",
+      "optionFeedback": "- **Incorrecta.** Ubica a Ximena demasiado pronto y a Mariana demasiado tarde; no respeta el orden ascendente de los valores negativos."
+    }
+  ]
+}

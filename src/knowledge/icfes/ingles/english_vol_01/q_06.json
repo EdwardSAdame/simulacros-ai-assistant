@@ -1,0 +1,50 @@
+{
+  "questionLabel": "Pregunta 6",
+  "questionId": "q_06",
+  "sectionText": "Lea las descripciones de la columna de la izquierda \\(6 - 10\\). ¿Cuál palabra de la columna de la derecha \\((A - G)\\) concuerda con cada descripción?\n\nLa opción \\(H\\) se usa para el ejemplo. Sobran dos palabras más.\n\nEn las preguntas \\(85 - 89\\), marque la letra correcta \\(A - G\\) en su hoja de respuestas.",
+  "questionText": "Pregunta 6: You visit them when your teeth hurt.",
+  "correctOptionId": "B",
+  "aiExplanation": "- **Core problem:** Match the description about tooth pain with the correct profession.\n- **Relevant data:** The options include professions such as *dentists, nurses,* and *teachers*.\n- **Method:** Identify which professional treats teeth.\n- **Conclusion:** When your teeth hurt, you visit **dentists**. The correct answer is **B**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "chefs",
+      "optionFeedback": "- **Incorrect.** *Chefs* cook food; they do not treat teeth."
+    },
+    {
+      "optionId": "B",
+      "optionText": "dentists",
+      "optionFeedback": "- **Correct.** **Dentists** are the professionals you visit for tooth problems."
+    },
+    {
+      "optionId": "C",
+      "optionText": "drivers",
+      "optionFeedback": "- **Incorrect.** *Drivers* transport people, not treat dental pain."
+    },
+    {
+      "optionId": "D",
+      "optionText": "farmers",
+      "optionFeedback": "- **Incorrect.** *Farmers* work in agriculture."
+    },
+    {
+      "optionId": "E",
+      "optionText": "guitarists",
+      "optionFeedback": "- **Incorrect.** *Guitarists* play music, not fix teeth."
+    },
+    {
+      "optionId": "F",
+      "optionText": "nurses",
+      "optionFeedback": "- **Incorrect.** *Nurses* help sick or injured people, but tooth pain specifically points to dentists."
+    },
+    {
+      "optionId": "G",
+      "optionText": "painters",
+      "optionFeedback": "- **Incorrect.** *Painters* create art or paint surfaces; they do not treat dental issues."
+    },
+    {
+      "optionId": "H",
+      "optionText": "teachers",
+      "optionFeedback": "- **Incorrect.** *Teachers* work in education, not dentistry."
+    }
+  ]
+}

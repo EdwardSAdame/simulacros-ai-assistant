@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 38",
+  "questionId": "q_38",
+  "sectionText": "Lea el texto y responda las preguntas.\n\nEn las preguntas \\(36 - 40\\), marque \\(A\\), \\(B\\), \\(C\\) o \\(D\\) en su hoja de respuestas.\n\nI do not like when someone makes a mistake about my age. **When someone says I look younger than I am, I don’t think that person is accurate, because I’m a different person from who I was at \\(24\\), \\(25\\), even \\(26\\).** I don’t consider I actually look physically younger than \\(30\\). However, that doesn’t explain why we don’t always look like being \\(30\\) or why I can’t get champagne in my local supermarket.\n\nThere are loads of videos on TikTok about why millennials (people born after the \\(80\\)s) don’t appear to be getting old “normally”. Some have the hypothesis that it’s because cosmetic operations are cheaper and more available now. Others have said that it’s because millennials “have depression, so we’re indoors all day, and we don’t let our skin feel the sun.” Still others have wondered whether it’s due to camera phones, and the fact that we use them regularly, meaning we pay more attention to our looks. Or maybe we are getting old normally but we just don’t consider we are, so we don’t act like it. Before I continue, I must add: I’m sure that age is not a main issue, and that putting labels to a person as a result of an arbitrary age opinion is not fair to their identities.\n\nI know that most people don’t actually “feel” their age, because they just feel like themselves (same here). **But that doesn’t mean I am not interested and curious about how I appear to others now that I’m in my \\(30\\)s.**",
+  "questionText": "Pregunta 38: In paragraph \\(1\\), with the underlined sentence the writer means she",
+  "correctOptionId": "C",
+  "aiExplanation": "- **Core problem:** Interpret the underlined sentence in paragraph \\(1\\).\n- **Relevant data:** The writer says that when people say she looks younger than she is, she does not think they are accurate.\n- **Method:** Choose the option that paraphrases her disagreement.\n- **Conclusion:** She **doesn't agree with what people say regarding how young she appears to be**. The correct answer is **C**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "considers people usually are right about her real age.",
+      "optionFeedback": "- **Incorrect.** This says the opposite of the text; she thinks they are *not* accurate."
+    },
+    {
+      "optionId": "B",
+      "optionText": "considers she is younger than some people say she actually is.",
+      "optionFeedback": "- **Incorrect.** She does not think she is younger; she rejects that idea."
+    },
+    {
+      "optionId": "C",
+      "optionText": "doesn't agree with what people say regarding how young she appears to be.",
+      "optionFeedback": "- **Correct.** This is the clearest paraphrase of her statement that people are not accurate when saying she looks younger."
+    },
+    {
+      "optionId": "D",
+      "optionText": "doesn't understand what some people say regarding how young she really is.",
+      "optionFeedback": "- **Incorrect.** The issue is not lack of understanding; it is disagreement."
+    }
+  ]
+}

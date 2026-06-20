@@ -1,0 +1,31 @@
+{
+  "questionLabel": "Pregunta 19",
+  "questionId": "q_19",
+  "sectionImageAiDescription": "Tabla de doble entrada que relaciona el estrato social con el nivel de satisfacción. IMPORTANTE: Los encabezados de las columnas deben permitir saltos de línea verticales y suficiente espaciado (padding) para evitar colisiones entre textos contiguos. Las columnas son: 'Estratos /\nNivel de\nsatisfacción', 'Insatisfecho', 'Poco\nsatisfecho', 'Conforme', 'Satisfecho', 'Muy\nsatisfecho' y 'Total'. Las filas contienen la distribución de frecuencias de la siguiente manera:\n- Bajo: \\(15\\), \\(10\\), \\(5\\), \\(0\\), \\(5\\), con un total de \\(35\\).\n- Medio: \\(5\\), \\(0\\), \\(10\\), \\(5\\), \\(10\\), con un total de \\(30\\).\n- Alto: \\(5\\), \\(10\\), \\(10\\), \\(5\\), \\(5\\), con un total de \\(35\\).\n- Total: \\(25\\), \\(20\\), \\(25\\), \\(10\\), \\(20\\), con un total general de \\(100\\).",
+  "questionImageAiDescription": "Diagrama circular o de pastel compuesto por \\(5\\) sectores que representa la distribución consolidada del nivel de satisfacción general, acompañado de su respectiva leyenda explicativa. Los porcentajes explícitos mostrados en cada uno de los sectores son los siguientes:\n- Insatisfecho: \\(25\\%\\)\n- Poco satisfecho: \\(20\\%\\)\n- Conforme: \\(25\\%\\)\n- Satisfecho: \\(10\\%\\)\n- Muy satisfecho: \\(20\\%\\)\nEl diagrama resume exclusivamente los totales acumulados por nivel de satisfacción obtenidos en la última fila de la tabla de datos, sin incluir la desagregación por los estratos bajo, medio o alto.",
+  "questionText": "Pregunta 19: Una empresa de servicios de internet realizó una encuesta a \\(100\\) familias de estratos sociales bajo, medio y alto, preguntándoles por el nivel de satisfacción frente al servicio en sus hogares; a continuación se presentan sus percepciones:\n\nA partir de la tabla realizada, se ha diseñado el siguiente diagrama circular:\n\nLa directora de la empresa se percata de que los gráficos no presentan la misma información. En este sentido, ¿qué información es posible obtener de la tabla, pero NO del diagrama circular?",
+  "correctOptionId": "B",
+  "aiExplanation": "- **Problema central:** identificar qué dato aparece en la tabla pero no en el diagrama circular.\n- **Diagrama circular:** solo muestra la distribución global por nivel de satisfacción:\n  - Insatisfecho \\(25\\%\\)\n  - Poco satisfecho \\(20\\%\\)\n  - Conforme \\(25\\%\\)\n  - Satisfecho \\(10\\%\\)\n  - Muy satisfecho \\(20\\%\\)\n- **Tabla:** además de esos totales, muestra la desagregación por **estrato social** y los totales por estrato:\n  - Bajo \\(35\\%\\)\n  - Medio \\(30\\%\\)\n  - Alto \\(35\\%\\)\n- **Conclusión:** de la tabla sí puede obtenerse el porcentaje de familias por estrato social entrevistadas, pero del diagrama circular no.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "El porcentaje de familias poco satisfechas con el servicio.",
+      "optionFeedback": "**Incorrecta.** Ese dato sí aparece en el diagrama circular: \\(20\\%\\)."
+    },
+    {
+      "optionId": "B",
+      "optionText": "El porcentaje de familias por estrato social que se entrevistaron.",
+      "optionFeedback": "**Correcta.** La tabla permite ver cuánto representa cada estrato del total, pero el diagrama solo resume niveles de satisfacción globales."
+    },
+    {
+      "optionId": "C",
+      "optionText": "El porcentaje de familias conformes con el servicio.",
+      "optionFeedback": "**Incorrecta.** Ese porcentaje también aparece en el diagrama: \\(25\\%\\)."
+    },
+    {
+      "optionId": "D",
+      "optionText": "El porcentaje de familias satisfechas que fueron entrevistadas.",
+      "optionFeedback": "**Incorrecta.** El diagrama también muestra el porcentaje de satisfechas: \\(10\\%\\)."
+    }
+  ]
+}

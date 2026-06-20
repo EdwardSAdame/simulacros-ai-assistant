@@ -1,0 +1,29 @@
+{
+  "questionLabel": "Pregunta 3",
+  "questionId": "q_03",
+  "questionText": "Pregunta 3: La alcaldía de un municipio decidió invertir el \\(90 \\%\\) de los recursos destinados a educación en la construcción de un megacolegio, con el fin de resolver los problemas de falta de cupos en el centro del municipio. En la zona donde se construyó la nueva institución educativa hay un alto flujo de personas y de vehículos, por lo que, en su interior, se construyó un parqueadero amplio para los profesores y algunas rutas escolares; de igual manera, la puerta de ingreso y salida de vehículos fue ubicada sobre una calle poco transitada. Adicionalmente, la alcaldía invirtió en la compra de televisores, tableros digitales, computadores, libros y materiales didácticos para la institución y, con apoyo de algunas organizaciones privadas, construyó una cancha múltiple para uso del colegio en el parque contiguo a la institución educativa, donde los profesores de Educación Física les dan clases a sus estudiantes.\n\n¿Qué efecto indeseado podría traer la solución ejecutada por la alcaldía?",
+  "correctOptionId": "C",
+  "aiExplanation": "- **Problema central:** identificar un efecto no deseado de concentrar \\(90\\%\\) de los recursos educativos en un solo megacolegio.\n- **Datos relevantes:**\n  - Se invirtió casi todo el presupuesto de educación en una sola institución.\n  - El megacolegio quedó bien dotado y con infraestructura amplia.\n  - La pregunta pide un efecto indeseado de esa solución.\n- **Método lógico:** analizar qué consecuencia social puede surgir al privilegiar un solo colegio frente a las demás necesidades educativas del municipio.\n- **Conclusión:** el efecto más probable es el descontento de otros ciudadanos por la concentración de recursos en un único establecimiento, lo que puede generar protestas para exigir inversión en otros colegios.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "Que los profesores del megacolegio protesten por la falta de recursos para el desarrollo de su labor educativa.",
+      "optionFeedback": "- **Incorrecta.** El texto muestra que el megacolegio sí recibió abundantes recursos: parqueadero, tecnología, libros, materiales y cancha múltiple."
+    },
+    {
+      "optionId": "B",
+      "optionText": "Que los vecinos del colegio se quejen por cuenta del impacto generado por el alto flujo vehicular en la puerta del colegio.",
+      "optionFeedback": "- **Incorrecta.** La alcaldía precisamente ubicó la entrada y salida de vehículos en una calle poco transitada para mitigar ese problema."
+    },
+    {
+      "optionId": "C",
+      "optionText": "Que se generen protestas pacíficas por parte de ciudadanos del municipio que piden a la alcaldía invertir recursos en otros colegios del municipio.",
+      "optionFeedback": "- **Correcta.** Si \\(90\\%\\) del presupuesto educativo se concentra en un solo megacolegio, es razonable que otros sectores del municipio reclamen inversión para sus propias instituciones."
+    },
+    {
+      "optionId": "D",
+      "optionText": "Que los padres de familia se quejen porque los estudiantes deben desplazarse a un lugar desconocido para practicar deportes en la cancha múltiple.",
+      "optionFeedback": "- **Incorrecta.** La cancha queda en el parque contiguo a la institución, así que no se trata de un lugar lejano ni desconocido."
+    }
+  ]
+}

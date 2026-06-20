@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 9",
+  "questionId": "q_09",
+  "sectionText": "Quieres darte la buena vida: estupendo. Pero también quieres que esa buena vida no sea la buena vida de una coliflor o de un escarabajo, con todo mi respeto para ambas especies, sino una buena vida humana. Es lo que te corresponde, creo yo. Y estoy seguro de que a ello no renunciarías por nada del mundo. Ser humano, ya lo hemos indicado antes, consiste principalmente en tener relaciones con los otros seres humanos. Si pudieras tener muchísimo dinero, una casa más lujosa que un palacio de las mil y una noches, las mejores ropas, los más exquisitos alimentos —en tu caso, muchísimas lentejas—, los más sofisticados aparatos, etc., pero todo ello a costa de no volver a ver ni a ser visto por ningún ser humano jamás, ¿estarías contento? ¿Cuánto tiempo podrías vivir así sin volverte loco? ¿No es la mayor de las locuras querer las cosas a costa de la relación con las personas? ¡Pero si precisamente la gracia de todas esas cosas radica en que te permiten —o parecen permitirte— relacionarte más favorablemente con los demás! Por medio del dinero se espera poder deslumbrar o comprar a los otros; las ropas para gustarles, y lo mismo la buena casa, los mejores vinos, etcétera. Muy pocas cosas conservan su gracia en la soledad; y si la soledad es completa y definitiva, todas las cosas resultan tristes inevitablemente. La buena vida humana es una buena vida entre seres humanos o de lo contrario puede que sea vida, pero no será ni buena ni humana.",
+  "questionText": "Pregunta 9: Lea el siguiente fragmento del texto:\n\n> \"Quieres darte la buena vida: estupendo. Pero también quieres que esa buena vida no sea la buena vida de una coliflor o de un escarabajo, con todo mi respeto para ambas especies, sino una buena vida humana\".\n\n¿Qué función cumple este fragmento dentro del texto?",
+  "correctOptionId": "B",
+  "aiExplanation": "- **Problema central:** establecer la función del fragmento dentro del texto.\n- **Observación:** el fragmento aparece al inicio y abre la reflexión sobre qué es *la buena vida humana*.\n- No presenta todavía toda la tesis desarrollada ni la conclusión final; introduce el tema y lo orienta.\n- **Conclusión:** cumple la función de **introducir el tema**. Respuesta: **B**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "Presenta la tesis general del texto.",
+      "optionFeedback": "- **Incorrecta.** La tesis completa se formula más claramente al final: la buena vida humana es una vida entre seres humanos."
+    },
+    {
+      "optionId": "B",
+      "optionText": "Introduce el tema que se trata en el texto.",
+      "optionFeedback": "- **Correcta.** El fragmento abre la reflexión sobre qué significa vivir **una buena vida humana**, tema central del texto."
+    },
+    {
+      "optionId": "C",
+      "optionText": "Expone la conclusión general del texto.",
+      "optionFeedback": "- **Incorrecta.** No es una conclusión, porque aparece al comienzo y da pie al desarrollo posterior."
+    },
+    {
+      "optionId": "D",
+      "optionText": "Sintetiza el contenido del texto.",
+      "optionFeedback": "- **Incorrecta.** El fragmento no resume todos los argumentos; solo introduce el asunto principal."
+    }
+  ]
+}

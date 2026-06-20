@@ -1,0 +1,29 @@
+{
+  "questionLabel": "Pregunta 18",
+  "questionId": "q_18",
+  "questionText": "Pregunta 18: Para llevar agua a varios municipios, el gobernador de un departamento propone la extensión del sistema de acueducto con presupuesto del Gobierno nacional. Después de varios estudios, un equipo de ingenieros entrega el diseño del proyecto.\n\nEste diseño contempla el trazado que tendrá el acueducto, el presupuesto general que se requiere para construirlo, el plan para proteger la flora y la fauna de la región, y la reubicación temporal de algunas familias que viven donde se llevarán a cabo las obras. Ahora bien, cuando el gobernador pretende dar inicio al proyecto, el Gobierno nacional le comunica que, si se considera el diseño entregado por los ingenieros, no habrá dinero suficiente para ejecutar la obra.\n\n¿Qué aspecto descrito anteriormente obstaculiza el desarrollo del acueducto?",
+  "correctOptionId": "B",
+  "aiExplanation": "- **Problema central:** identificar qué aspecto obstaculiza la obra.\n- **Dato clave del enunciado:** el Gobierno comunica que **no habrá dinero suficiente** para ejecutar el diseño propuesto.\n- **Razonamiento:**\n  - El trazado sí está definido.\n  - Hay plan ambiental.\n  - La reubicación es temporal y prevista.\n  - El obstáculo explícito es la falta de ajuste entre costo del diseño y presupuesto disponible.\n- **Conclusión:** el obstáculo es el **aspecto económico**. ",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "El aspecto social, pues las familias que viven en la zona de la obra no podrán ser reubicadas permanentemente.",
+      "optionFeedback": "- **Incorrecta.** El texto habla de **reubicación temporal**, no de imposibilidad de reubicación permanente.\n- Además, el obstáculo explícito señalado es la falta de dinero."
+    },
+    {
+      "optionId": "B",
+      "optionText": "El aspecto económico, pues los requerimientos de diseño de la obra no se ajustan al presupuesto del Gobierno.",
+      "optionFeedback": "- **Correcta.** El problema expresamente mencionado es que **no hay dinero suficiente** para ejecutar la obra conforme al diseño entregado, lo que corresponde al aspecto **económico**."
+    },
+    {
+      "optionId": "C",
+      "optionText": "El aspecto ambiental, pues el diseño no especifica qué sucederá con la flora y la fauna presente en la zona.",
+      "optionFeedback": "- **Incorrecta.** El enunciado sí dice que el diseño contempla **un plan para proteger la flora y la fauna**.\n- Por tanto, ese no es el obstáculo."
+    },
+    {
+      "optionId": "D",
+      "optionText": "El aspecto logístico, pues los ingenieros no especifican el trazado definitivo del acueducto.",
+      "optionFeedback": "- **Incorrecta.** El texto afirma que el diseño sí contempla **el trazado** del acueducto.\n- No hay un problema logístico principal señalado, sino presupuestal."
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 28",
+  "questionId": "q_28",
+  "questionImageAiDescription": "Tabla dispuesta verticalmente con 4 columnas y encabezados divididos en múltiples líneas: 'Sustancia', 'Punto de\nebullición\n(°C)', '¿Es soluble\nen agua?' y '¿Es\nconductora?'. Contiene 4 filas con los siguientes valores: (Sustancia 1, -196, Sí, Sí), (Sustancia 2, 59, Sí, Sí), (Sustancia 3, -188, No, No), (Sustancia 4, -34, Sí, No).",
+  "questionText": "Pregunta 28: Para efectuar un procedimiento, un estudiante tiene las sustancias que se relacionan en la tabla.\n\nSi el estudiante debe usar una sustancia cuyo punto de ebullición sea menor que \\(130\\ ^\\circ\\text{C}\\), soluble en agua y que no conduzca la electricidad, ¿cuál sustancia debería elegir?",
+  "correctOptionId": "D",
+  "aiExplanation": "- **Problema central:** escoger la sustancia que cumpla simultáneamente tres condiciones:\n  - punto de ebullición menor que \\(130\\ ^\\circ\\text{C}\\);\n  - soluble en agua;\n  - no conductora.\n- **Revisión de la tabla:**\n  - Sustancia \\(1\\): sí soluble, pero conductora.\n  - Sustancia \\(2\\): sí soluble, pero conductora.\n  - Sustancia \\(3\\): no conductora, pero no soluble.\n  - Sustancia \\(4\\): \\(-34\\ ^\\circ\\text{C}\\), sí soluble y no conductora.\n- **Conclusión:** la respuesta correcta es **D**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "La sustancia \\(1\\).",
+      "optionFeedback": "- **Incorrecta.** Aunque su punto de ebullición es menor que \\(130\\ ^\\circ\\text{C}\\) y es soluble, sí conduce la electricidad."
+    },
+    {
+      "optionId": "B",
+      "optionText": "La sustancia \\(2\\).",
+      "optionFeedback": "- **Incorrecta.** Cumple con el punto de ebullición y la solubilidad, pero también es conductora."
+    },
+    {
+      "optionId": "C",
+      "optionText": "La sustancia \\(3\\).",
+      "optionFeedback": "- **Incorrecta.** No conduce la electricidad, pero no es soluble en agua."
+    },
+    {
+      "optionId": "D",
+      "optionText": "La sustancia \\(4\\).",
+      "optionFeedback": "- **Correcta.** Tiene punto de ebullición menor que \\(130\\ ^\\circ\\text{C}\\), es soluble en agua y no conduce la electricidad."
+    }
+  ]
+}

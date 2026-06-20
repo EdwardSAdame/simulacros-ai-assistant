@@ -1,0 +1,29 @@
+{
+  "questionLabel": "Pregunta 7",
+  "questionId": "q_07",
+  "questionText": "Pregunta 7: El clientelismo consiste en un arreglo de intercambios entre gobernantes y terceros, de manera que ambos pueden beneficiarse recíprocamente: los primeros, al recibir apoyo político, y los segundos, al recibir bienes y servicios o un tratamiento privilegiado o excepcional en ciertos asuntos.\n\nTeniendo en cuenta esta definición, el clientelismo justifica la creación de entes de control a los gobernantes, porque",
+  "correctOptionId": "C",
+  "aiExplanation": "- **Problema central:** explicar por qué el clientelismo hace necesarios los entes de control.\n- **Dato clave de la definición:** el gobernante intercambia favores, bienes o tratos privilegiados a cambio de apoyo político.\n- **Razonamiento:**\n  - Esto implica un uso indebido del poder público para obtener beneficios electorales.\n  - Los entes de control existen precisamente para vigilar y sancionar ese abuso del cargo.\n- **Conclusión:** se justifica crear controles para evitar que los gobernantes usen su posición para conseguir votos mediante favores. ",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "es antitético que un gobernante o dirigente político busque beneficiarse electoralmente de un grupo de ciudadanos.",
+      "optionFeedback": "- **Incorrecta.** Un gobernante sí puede buscar apoyo electoral legítimo.\n- El problema no es beneficiarse electoralmente en sí mismo, sino hacerlo mediante **favores indebidos** o trato privilegiado."
+    },
+    {
+      "optionId": "B",
+      "optionText": "es inconveniente que un gobernante haga alianzas políticas con otros dirigentes para mantenerse en el poder.",
+      "optionFeedback": "- **Incorrecta.** Hacer alianzas políticas no equivale necesariamente a clientelismo.\n- El clientelismo, según la definición, implica intercambio de favores con uso de recursos o privilegios, no cualquier alianza política."
+    },
+    {
+      "optionId": "C",
+      "optionText": "es necesario evitar que los gobernantes usen su posición privilegiada para ser elegidos con favores, a cambio de votos.",
+      "optionFeedback": "- **Correcta.** Describe exactamente el riesgo del clientelismo: usar el poder para conseguir apoyo político mediante favores.\n- Por eso se justifican los **entes de control** sobre los gobernantes."
+    },
+    {
+      "optionId": "D",
+      "optionText": "es reprochable que los gobernantes adopten medidas populares para aumentar su aceptación entre los ciudadanos.",
+      "optionFeedback": "- **Incorrecta.** Adoptar medidas populares no es necesariamente clientelismo.\n- El problema aparece cuando hay **intercambio particularista de favores** a cambio de respaldo político, no cuando se aplican políticas públicas generales."
+    }
+  ]
+}

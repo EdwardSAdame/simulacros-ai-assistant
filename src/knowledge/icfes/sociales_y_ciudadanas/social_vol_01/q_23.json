@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 23",
+  "questionId": "q_23",
+  "sectionText": "Para Adam Smith, economista y filósofo escocés del siglo XVIII, la división del trabajo aumenta la productividad, pues cada persona se enfoca en producir aquello en lo que es mejor y, luego, lo intercambia de forma mercantil por los otros bienes y servicios que necesita. Si cada uno dependiera del autosuministro, tendría menos posibilidades de fabricar la misma cantidad de bienes que le es posible conseguir en el intercambio.",
+  "questionText": "Pregunta 23: Según el concepto de división del trabajo, para Smith, el mercado",
+  "correctOptionId": "D",
+  "aiExplanation": "- **Problema central:** interpretar el papel del mercado en la división del trabajo según Adam Smith.\n- **Dato clave:** cada persona se especializa en lo que hace mejor y luego intercambia por otros bienes.\n- **Razonamiento:**\n  - Si hay especialización, el mercado sirve para distribuir e intercambiar eficientemente esos bienes producidos.\n  - El texto no critica al mercado como fuente principal de injusticia, fracaso o ignorancia.\n- **Conclusión:** para Smith, el mercado es una forma eficiente de repartir bienes producidos mediante especialización. ",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "genera injusticias sociales al separar a las personas en clases sociales según sus ingresos.",
+      "optionFeedback": "- **Incorrecta.** Esa crítica no corresponde a la idea expuesta de Smith en el texto.\n- Aquí el mercado aparece como mecanismo de intercambio ligado a productividad, no como origen principal de clases sociales."
+    },
+    {
+      "optionId": "B",
+      "optionText": "lleva la economía al fracaso, pues no hay coordinación entre productores y consumidores.",
+      "optionFeedback": "- **Incorrecta.** Según Smith, el intercambio de mercado precisamente permite coordinar necesidades y producción, no llevar al fracaso económico."
+    },
+    {
+      "optionId": "C",
+      "optionText": "hace que las personas se vuelvan más ignorantes, pues no saben cómo producir ciertos bienes.",
+      "optionFeedback": "- **Incorrecta.** Aunque la especialización puede limitar conocimientos amplios, esa no es la idea central del fragmento.\n- El texto resalta la **productividad** y el intercambio eficiente."
+    },
+    {
+      "optionId": "D",
+      "optionText": "es una forma eficiente de repartir los bienes que se han producido mediante la especialización.",
+      "optionFeedback": "- **Correcta.** Resume fielmente la teoría expuesta: la **división del trabajo** aumenta la productividad y el **mercado** permite intercambiar y distribuir eficientemente lo producido."
+    }
+  ]
+}

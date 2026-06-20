@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 19",
+  "questionId": "q_19",
+  "sectionImageAiDescription": "Diagrama geométrico puro. ESTRICTO: Desactivar/Ocultar todos los ejes cartesianos (spines, ticks, labels) y el grid. Para renderizar proporciones perfectas, asuma internamente x=2 y y=5, creando un cuadrado exterior de lado 7 con vértice inferior izquierdo en H(0,0). 1) Vértices exteriores: H(0,0), G(7,0), F(7,7), E(0,7). 2) Vértices interiores: S(0,2), R(5,0), Q(7,5), P(2,7). Trazar los lados del cuadrado EFGH y los segmentos PQ, QR, RS y SP para formar el cuadrado inscrito. 3) Puntos: Dibujar pequeños círculos sólidos (marcadores) en los 8 vértices. 4) Relleno (Opacity/Fade): Sombrear ÚNICAMENTE los 4 triángulos de las esquinas (el área entre el cuadrado exterior y el interior) usando el color principal con baja opacidad. El cuadrado central PQRS debe quedar en blanco. 5) Letras de vértices (flotando ligeramente hacia afuera): 'E' en (0,7); 'F' en (7,7); 'G' en (7,0); 'H' en (0,0); 'P' arriba de (2,7); 'Q' a la derecha de (7,5); 'R' abajo de (5,0); 'S' a la izquierda de (0,2). 6) Acotaciones de segmentos (solo texto LaTeX flotando): '\\(x\\)' en el segmento superior EP; '\\(y\\)' en el segmento superior PF; '\\(x\\)' en el derecho superior FQ; '\\(y\\)' en el derecho inferior QG; '\\(y\\)' en el inferior izquierdo HR; '\\(x\\)' en el inferior derecho RG; '\\(y\\)' en el izquierdo superior ES; '\\(x\\)' en el izquierdo inferior SH. 7) Acotaciones totales: '\\(x + y\\)' flotando centrado arriba de todo el lado superior (y=7.8); '\\(x + y\\)' flotando centrado a la derecha de todo el lado derecho (x=7.8).",
+  "questionText": "Pregunta 19: Un jardín con forma cuadrada, de vértices \\(EFGH\\), tiene lado \\(x+y\\). Otro cuadrado, de vértices \\(PQRS\\) está inscrito en el cuadrado \\(EFGH\\), de tal manera que la distancia más cercana entre dos vértices consecutivos mide \\(x\\).\n\nPara encontrar una fórmula que corresponda al área de la región sombreada, el jardinero propuso los siguientes pasos:\n\n**Paso 1.** Escoger uno de los cuatro triángulos sombreados y multiplicar la medida de la altura por la medida de la base.\n\n**Paso 2.** Dividir entre \\(2\\) el resultado obtenido en el paso \\(1\\).\n\n**Paso 3.** Multiplicar por \\(4\\) el resultado del paso anterior.\n\n**Paso 4.** Sumar cuatro veces el resultado del paso \\(2\\).\n\nDe los pasos propuestos, ¿cuál es redundante para el cálculo del área de la región sombreada?",
+  "correctOptionId": "A",
+  "aiExplanation": "- **Problema central:** encontrar qué paso repite un cálculo ya realizado.\n- **Interpretación:**\n  - Paso \\(1\\): calcula base por altura de un triángulo.\n  - Paso \\(2\\): divide entre \\(2\\), obteniendo el área de **un** triángulo sombreado.\n  - Paso \\(3\\): multiplica por \\(4\\), obteniendo el área de los **cuatro** triángulos sombreados.\n  - Paso \\(4\\): sumar cuatro veces el resultado del paso \\(2\\) también da el área total sombreada.\n- **Conclusión:** el paso redundante es el **paso \\(4\\)**, porque produce exactamente lo mismo que el paso \\(3\\).",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "El paso \\(4\\), porque, al sumar cuatro veces el resultado del paso \\(2\\), se obtiene el resultado del paso \\(3\\).",
+      "optionFeedback": "- **Correcta.** El paso \\(3\\) y el paso \\(4\\) hacen esencialmente lo mismo: obtener cuatro veces el área de un triángulo."
+    },
+    {
+      "optionId": "B",
+      "optionText": "El paso \\(3\\), porque, al multiplicar por \\(4\\) el resultado del paso \\(2\\), se obtiene el mismo resultado que se obtuvo en el paso \\(1\\).",
+      "optionFeedback": "- **Incorrecta.** El paso \\(1\\) calcula base por altura, mientras que el paso \\(3\\) calcula el área total de los cuatro triángulos; no son iguales en general."
+    },
+    {
+      "optionId": "C",
+      "optionText": "El paso \\(2\\), porque, al dividir entre \\(2\\) el resultado del paso \\(1\\), se obtiene el mismo resultado del paso \\(3\\).",
+      "optionFeedback": "- **Incorrecta.** El paso \\(2\\) da el área de un solo triángulo; el paso \\(3\\) da la suma de cuatro triángulos."
+    },
+    {
+      "optionId": "D",
+      "optionText": "El paso \\(1\\), porque, al multiplicar la altura de uno de los triángulos por la base, se obtiene el área total de la figura.",
+      "optionFeedback": "- **Incorrecta.** Base por altura no da el área de un triángulo completo; falta dividir entre \\(2\\)."
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 20",
+  "questionId": "q_20",
+  "sectionText": "El \\*fracking\\* es una técnica para posibilitar o aumentar la extracción de gas y petróleo del subsuelo; es una de las técnicas de estimulación de pozos en yacimientos de hidrocarburos, a través de la inyección de agua a alta presión, mezclada con otros químicos.\n\nEl gobernador de un departamento aseguró, mientras estaba en campaña electoral, que: \"Nuestra región no puede lanzarse al \\*fracking\\* poniendo, además, en riesgo un gran debate social que se tiene que sortear con mucha responsabilidad. Se tiene que entender que ningún proyecto de \\*fracking\\* puede ser viable, pues compromete los acuíferos subterráneos, la biodiversidad y los ecosistemas sensibles del departamento\".\n\nMeses después de su elección, el mandatario aprobó la aplicación de pilotos de \\*fracking\\* y afirmó que: \"En nuestra agenda de reactivación está ser líderes regionales en materia de energías renovables no convencionales, pero también buscamos siempre asumir, en las soluciones convencionales relacionadas con hidrocarburos, una agenda de sostenibilidad compensatoria y armoniosa\".",
+  "questionText": "Pregunta 20: ¿Cuál de las siguientes opciones explica la diferencia en las afirmaciones del gobernador?",
+  "correctOptionId": "B",
+  "aiExplanation": "- **Problema central:** explicar por qué cambian las afirmaciones del gobernador entre campaña y ejercicio del cargo.\n- **Datos relevantes:**\n  - En campaña estaba en contra del fracking por riesgo a acuíferos, biodiversidad y ecosistemas: razones **ambientales**.\n  - Después de elegido aprueba pilotos y habla de reactivación y agenda energética: razones **económicas** y de gestión.\n- **Método lógico:** comparar el tipo de justificación antes y después.\n- **Conclusión:** primero se opone por razones ambientales; luego lo respalda con argumentos ligados a la reactivación económica.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "Tanto en campaña electoral como luego de su elección, el gobernador expresa razones de distinto tipo a favor del fracking.",
+      "optionFeedback": "- **Incorrecta.** En campaña no estaba a favor del fracking; expresó oposición clara."
+    },
+    {
+      "optionId": "B",
+      "optionText": "En campaña electoral, el gobernador estaba en contra del fracking por razones ambientales; luego de su elección, sus razones a favor son económicas.",
+      "optionFeedback": "- **Correcta.** Esa es la diferencia central: primero enfatiza riesgos ecológicos y después prioriza la reactivación y sostenibilidad asociadas a hidrocarburos."
+    },
+    {
+      "optionId": "C",
+      "optionText": "En campaña electoral, el gobernador estaba en contra del fracking por razones económicas; luego de su elección, sus razones a favor son ambientales.",
+      "optionFeedback": "- **Incorrecta.** Invierte el sentido del texto: en campaña las razones eran ambientales, no económicas."
+    },
+    {
+      "optionId": "D",
+      "optionText": "Tanto en campaña electoral como luego de su elección, el gobernador expresa razones de distinto tipo en contra del fracking.",
+      "optionFeedback": "- **Incorrecta.** Después de su elección ya no se manifiesta en contra, sino que aprueba pilotos de fracking."
+    }
+  ]
+}

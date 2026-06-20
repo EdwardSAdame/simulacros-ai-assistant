@@ -1,0 +1,29 @@
+{
+  "questionLabel": "Pregunta 9",
+  "questionId": "q_09",
+  "questionText": "Pregunta 9: Una persona está esperando en una entidad bancaria y tiene asignado el turno \\(100\\). Cuando están atendiendo al turno \\(52\\) decide estimar el tiempo de espera, teniendo en cuenta que hay \\(4\\) personas encargadas de la atención al público y que el tiempo promedio de atención por cliente es de \\(6\\) minutos. Para esto efectúa el siguiente procedimiento:\n\n**Paso 1.** Cuenta la cantidad de turnos que hay entre el turno que están atendiendo y el suyo.\n\n**Paso 2.** Divide la cantidad obtenida en el paso anterior entre el número de personas que atienden al público.\n\n**Paso 3.** Multiplica el resultado del paso 2 por el tiempo promedio de atención por cliente.\n\n¿Cuál es el tiempo estimado de espera de esta persona?",
+  "correctOptionId": "C",
+  "aiExplanation": "- **Problema central:** aplicar el procedimiento dado.\n- **Paso 1:** entre el turno \\(52\\) y el turno \\(100\\) hay\n  \\[\n  100-52=48\n  \\]\n  turnos.\n- **Paso 2:** dividir entre las \\(4\\) personas que atienden:\n  \\[\n  \\frac{48}{4}=12\n  \\]\n- **Paso 3:** multiplicar por \\(6\\) minutos por cliente:\n  \\[\n  12\\times 6=72\n  \\]\n- **Conclusión:** el tiempo estimado de espera es **\\(72\\) minutos**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "\\(32\\) minutos.",
+      "optionFeedback": "**Incorrecta.** No corresponde al procedimiento dado con \\(48\\) turnos, \\(4\\) cajeros y \\(6\\) minutos."
+    },
+    {
+      "optionId": "B",
+      "optionText": "\\(78\\) minutos.",
+      "optionFeedback": "**Incorrecta.** Ese valor no sale de aplicar correctamente los tres pasos."
+    },
+    {
+      "optionId": "C",
+      "optionText": "\\(72\\) minutos.",
+      "optionFeedback": "**Correcta.** \\((100-52)\\div 4\\times 6=48\\div 4\\times 6=12\\times 6=72\\)."
+    },
+    {
+      "optionId": "D",
+      "optionText": "\\(150\\) minutos.",
+      "optionFeedback": "**Incorrecta.** Sería una sobreestimación que ignora que atienden \\(4\\) personas simultáneamente."
+    }
+  ]
+}

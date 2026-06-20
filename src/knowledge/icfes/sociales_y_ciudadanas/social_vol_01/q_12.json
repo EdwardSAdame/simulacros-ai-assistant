@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 12",
+  "questionId": "q_12",
+  "sectionText": "En España, se han instalado miles de generadores de energía eólica (aquellos que producen energía a partir del viento) que, actualmente, ocupan grandes extensiones de tierra. A diferencia de los combustibles fósiles o de las centrales nucleares, los generadores de energía eólica son fuentes de energía limpia y amigable con el medio ambiente.\n\nEn este momento, se está analizando la posibilidad de instalar este tipo de generadores en una región desértica en el norte de Colombia, para satisfacer las necesidades energéticas de la población del lugar. Esta población produce la mayor parte de la energía que consume a partir de la quema de madera, lo que genera problemas de contaminación y deforestación.",
+  "questionText": "Pregunta 12: ¿Cuál de las siguientes condiciones **NO** sería necesaria para implementar esta medida, de energía eólica, en dicha región del territorio colombiano?",
+  "correctOptionId": "C",
+  "aiExplanation": "- **Problema central:** hallar la condición que **no** es necesaria para implementar energía eólica.\n- **Datos relevantes:** se busca reemplazar una fuente contaminante \\(quema de madera\\) por una energía limpia que satisfaga necesidades locales.\n- **Evaluación:**\n  - Es necesario que la población acepte el cambio o al menos que pueda adoptarlo \\(A\\).\n  - También es necesario que la instalación no genere un rechazo social fuerte por el paisaje \\(B\\), y que la capacidad sea suficiente \\(D\\).\n  - En cambio, **reforestar las selvas de donde antes se extrajo madera** puede ser deseable ambientalmente, pero no es una condición indispensable para instalar los generadores eólicos.\n- **Conclusión:** la condición no necesaria es la **reforestación previa o paralela** de esas selvas. ",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "Que sea posible convencer a la población de los efectos negativos de la quema de madera para que abandone dicha práctica.",
+      "optionFeedback": "- **Incorrecta.** Esta condición sí puede ser necesaria para facilitar la adopción de una nueva fuente energética.\n- Si la población no acepta abandonar la quema de madera, la medida perdería viabilidad social."
+    },
+    {
+      "optionId": "B",
+      "optionText": "Que la población no se vea incomodada por el impacto que tendría la instalación de los generadores en el paisaje.",
+      "optionFeedback": "- **Incorrecta.** La aceptación social del proyecto es relevante para implementarlo.\n- Si la comunidad rechaza fuertemente el impacto visual o territorial, la medida puede fracasar."
+    },
+    {
+      "optionId": "C",
+      "optionText": "Que sea posible reforestar las selvas de donde se ha extraído la madera que la población ha utilizado tradicionalmente para generar energía.",
+      "optionFeedback": "- **Correcta.** Reforestar sería una medida positiva, pero **no es una condición necesaria** para instalar generadores eólicos.\n- La implementación de la energía eólica depende más de su viabilidad técnica, suficiencia energética y aceptación social."
+    },
+    {
+      "optionId": "D",
+      "optionText": "Que la capacidad de producción de los generadores eólicos que se instalarían sea suficiente para satisfacer las necesidades energéticas de la población.",
+      "optionFeedback": "- **Incorrecta.** Esta condición sí es indispensable.\n- Si los generadores no producen suficiente energía, la medida no cumpliría su objetivo principal."
+    }
+  ]
+}

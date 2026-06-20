@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 8",
+  "questionId": "q_08",
+  "questionImageAiDescription": "Las opciones muestran secuencias temporales con cuatro etapas rotuladas: \"Población inicial de monos\", \"Aparece el río\", \"Aislamiento reproductivo\" y \"Dos especies de monos\". En cada secuencia se usan círculos sombreados para representar una población inicial, su separación por un río vertical y el resultado final en dos especies. La pregunta pide identificar el modelo visual correcto del proceso de especiación por aislamiento geográfico.",
+  "questionText": "Pregunta 8: Existe una población de monos que vive en un ecosistema boscoso. Este ecosistema, durante un largo periodo de tiempo, ha estado dividido por un gran río, dejando a la población de monos dividida en dos lugares diferentes. Algunos científicos han investigado este fenómeno y han resuelto que la población de monos, que en principio se creía pertenecían a una misma especie, sufrió un aislamiento reproductivo a causa de la división causada por el río y, posteriormente, se demostró que pertenecen a dos especies diferentes.\n\nDe acuerdo con la información anterior, ¿cuál de los siguientes modelos representa el fenómeno?",
+  "correctOptionId": "A",
+  "aiExplanation": "- **Problema central:** identificar el modelo visual de especiación por aislamiento geográfico.\n- **Secuencia correcta del fenómeno:**\n  - primero existe **una sola población**;\n  - luego **aparece el río** y divide físicamente la población;\n  - con el tiempo ocurre **aislamiento reproductivo** y las poblaciones divergen;\n  - finalmente aparecen **dos especies diferentes**.\n- **Análisis:** la opción A representa exactamente esa secuencia: población única, barrera geográfica, diferenciación en cada lado y resultado final en dos especies separadas.\n- **Conclusión:** la respuesta correcta es **A**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "[Imagen de la opción: Secuencia temporal de 4 etapas con una flecha rotulada \"Tiempo\". Etapa 1: un círculo único claro rotulado \"Población inicial de monos\". Etapa 2: un círculo dividido físicamente por una franja vertical blanca, formando dos mitades del mismo tono claro, rotulado \"Aparece el río\". Etapa 3: un círculo dividido físicamente por una franja vertical blanca, con el lado izquierdo claro y el derecho oscuro, rotulado \"Aislamiento reproductivo\". Etapa 4: dos círculos pequeños y separados, uno claro y otro oscuro, rotulados \"Dos especies de monos\".]",
+      "optionFeedback": "- **Correcta.** Representa adecuadamente una población inicial única, la aparición de una barrera geográfica, la divergencia por aislamiento reproductivo y el surgimiento final de dos especies."
+    },
+    {
+      "optionId": "B",
+      "optionText": "[Imagen de la opción: Secuencia temporal de 4 etapas con una flecha rotulada \"Tiempo\". Etapa 1: un círculo único claro rotulado \"Población inicial de monos\". Etapa 2: un círculo con un degradado horizontal de claro a oscuro rotulado \"Aparece el río\". Etapa 3: un círculo dividido verticalmente mostrando un degradado, con el lado izquierdo claro y el derecho oscuro, rotulado \"Aislamiento reproductivo\". Etapa 4: dos círculos pequeños y separados, uno claro y otro oscuro, rotulados \"Dos especies de monos\".]",
+      "optionFeedback": "- **Incorrecta.** En la etapa *Aparece el río* no muestra claramente la barrera física que divide la población; el degradado no representa bien el aislamiento geográfico."
+    },
+    {
+      "optionId": "C",
+      "optionText": "[Imagen de la opción: Secuencia temporal de 4 etapas con una flecha rotulada \"Tiempo\". Etapa 1: un círculo único claro rotulado \"Población inicial de monos\". Etapa 2: un círculo dividido físicamente por una franja vertical blanca, formando dos mitades del mismo tono claro, rotulado \"Aparece el río\". Etapa 3: un círculo unido mostrando un degradado, con el lado izquierdo claro y el derecho oscuro, rotulado \"Aislamiento reproductivo\". Etapa 4: dos círculos pequeños y separados, uno claro y otro oscuro, rotulados \"Dos especies de monos\".]",
+      "optionFeedback": "- **Incorrecta.** Tras aparecer el río, la población debería seguir mostrarse separada físicamente. Aquí la etapa de aislamiento vuelve a unir visualmente la población."
+    },
+    {
+      "optionId": "D",
+      "optionText": "[Imagen de la opción: Secuencia temporal de 4 etapas con una flecha rotulada \"Tiempo\". Etapa 1: un círculo único claro rotulado \"Población inicial de monos\". Etapa 2: un círculo mostrando un degradado, con el lado izquierdo claro y el derecho oscuro, rotulado \"Aparece el río\". Etapa 3: un círculo claro con una zona oscura difusa en el centro, rotulado \"Aislamiento reproductivo\". Etapa 4: dos círculos concéntricos, uno exterior claro y otro interior oscuro, rotulados \"Dos especies de monos\".]",
+      "optionFeedback": "- **Incorrecta.** El resultado final debería ser **dos poblaciones separadas**, no círculos concéntricos. Además, no representa bien la barrera del río."
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 19",
+  "questionId": "q_19",
+  "sectionImageAiDescription": "Infografía sobre el petricor estructurada en tres fases horizontales.\n\nFase 1:\n- Imagen: Una gota de lluvia azul impacta sobre una superficie de tierra, formando burbujas de aire.\n- Texto: 'CUANDO LAS GOTAS DE LLUVIA IMPACTAN CONTRA EL SUELO,\n  SE FORMAN BURBUJAS DE AIRE.'\n\nFase 2:\n- Imagen: Burbujas blancas bajo la superficie contienen pequeños puntos verdes y amarillos. Etiqueta superior: 'PARTÍCULAS ATRAPADAS'.\n- Texto: 'ESTAS BURBUJAS \"ATRAPAN\" PARTÍCULAS DE LA TIERRA\n  (ACEITES Y QUÍMICOS PRODUCIDOS POR BACTERIAS).'\n\nFase 3:\n- Imagen: Las burbujas estallan en la superficie liberando los puntos verdes y amarillos hacia el aire.\n- Texto: 'LAS BURBUJAS HACEN EFERVESCENCIA COMO CHAMPAÑA\n  Y ESPARCEN LAS PARTÍCULAS EN EL AMBIENTE.'",
+  "questionText": "Pregunta 19: Teniendo en cuenta el proceso descrito en el texto, ¿qué función cumple el último cuadro?",
+  "correctOptionId": "D",
+  "aiExplanation": "- **Problema central:** identificar la función del último cuadro dentro de una secuencia explicativa.\n- La infografía presenta etapas sucesivas: impacto de la lluvia, atrapamiento de partículas y liberación al ambiente.\n- El último cuadro muestra la etapa final del proceso, por lo que actúa como **cierre**.\n- **Conclusión:** la respuesta correcta es **D**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "Sintetiza el contenido del texto.",
+      "optionFeedback": "- **Incorrecta.** No resume toda la infografía; muestra específicamente la fase final del proceso."
+    },
+    {
+      "optionId": "B",
+      "optionText": "Presenta los contenidos del texto.",
+      "optionFeedback": "- **Incorrecta.** Esa sería la función de una introducción, no del último cuadro."
+    },
+    {
+      "optionId": "C",
+      "optionText": "Anuncia la estructura del texto.",
+      "optionFeedback": "- **Incorrecta.** El último cuadro no anticipa la estructura; la culmina."
+    },
+    {
+      "optionId": "D",
+      "optionText": "Funciona como el cierre del texto.",
+      "optionFeedback": "- **Correcta.** Al mostrar la última etapa del proceso, el cuadro funciona como **cierre** de la explicación."
+    }
+  ]
+}

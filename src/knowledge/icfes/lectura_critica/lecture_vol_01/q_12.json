@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 12",
+  "questionId": "q_12",
+  "sectionText": "La relación entre los humanos y lo que hoy reconocemos como música se remonta a más de 40.000 años atrás, desde los principios de nuestra civilización. Nuestros antepasados, en ese entonces, ya tocaban flautas de hueso y percusiones. Los instrumentos se fueron diversificando y multiplicando, pasando por la creación de instrumentos de madera, cuerda y metal, hasta llegar a las guitarras eléctricas y consolas de música electrónica de hoy en día. Casi todas las sociedades humanas conocidas han tenido música, lo que sugiere que nuestra apreciación por ella es innata; incluso bebés de dos meses de nacidos se voltean cuando escuchan sonidos agradables y le dan la espalda a los disonantes. Dada su universalidad, entonces, ¿será que la música podría haber ayudado en la supervivencia humana de alguna forma? ¿Tendría alguna ventaja o beneficio? Algunos investigadores sugieren que puede haber ayudado en el cortejo. Otros dicen que promueve la cohesión de grupo, tal como lo hace hoy en día. Incluso, puede ser un simple accidente feliz, una dulzura auditiva, que casualmente terminó creando una rumba cerebral.",
+  "questionText": "Pregunta 12: La trompeta es un instrumento de metal. Teniendo en cuenta lo que dice el texto, la invención de la trompeta ocurrió:",
+  "correctOptionId": "C",
+  "aiExplanation": "- **Problema central:** ubicar temporalmente la invención de la trompeta según la secuencia del texto.\n- **Secuencia del texto:** primero *flautas de hueso y percusiones*; luego instrumentos de *madera, cuerda y metal*; después guitarras eléctricas y consolas electrónicas.\n- Como la trompeta es de metal, debió surgir **después** de las percusiones y antes de las guitarras eléctricas.\n- **Conclusión:** la respuesta correcta es **C**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "Antes de la invención de la flauta de hueso.",
+      "optionFeedback": "- **Incorrecta.** El texto ubica las flautas de hueso entre los instrumentos más antiguos."
+    },
+    {
+      "optionId": "B",
+      "optionText": "Antes de la aparición de los instrumentos de percusión.",
+      "optionFeedback": "- **Incorrecta.** Las percusiones aparecen desde los orígenes mencionados en el texto."
+    },
+    {
+      "optionId": "C",
+      "optionText": "Después de la aparición de los instrumentos de percusión.",
+      "optionFeedback": "- **Correcta.** Los instrumentos de metal aparecen en una etapa posterior a las primeras percusiones mencionadas en el texto."
+    },
+    {
+      "optionId": "D",
+      "optionText": "Después de la aparición de la guitarra eléctrica.",
+      "optionFeedback": "- **Incorrecta.** La guitarra eléctrica se menciona como muy posterior a los instrumentos de metal."
+    }
+  ]
+}

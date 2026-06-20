@@ -1,0 +1,29 @@
+{
+  "questionLabel": "Pregunta 1",
+  "questionId": "q_01",
+  "questionText": "Pregunta 1: Los habitantes de un barrio pintaron una cancha de microfútbol en la calle, ya que suelen hacer encuentros futbolísticos, en el marco de un torneo local, los sábados desde las \\(11{:}00\\ \\text{a. m.}\\) hasta la \\(1{:}00\\ \\text{p. m.}\\). Sin embargo, no se han podido llevar a cabo varias fechas del torneo, ya que los habitantes del barrio contiguo mandan a estacionar las camionetas blindadas de sus escoltas en la cancha y las dejan ahí, a veces, hasta las \\(6{:}00\\ \\text{p. m.}\\). Más tarde, entre las \\(7{:}00\\ \\text{p. m.}\\) y las \\(9{:}00\\ \\text{p. m.}\\), otros de los habitantes del barrio organizan un bingo en la cancha, por lo que no es posible jugar fútbol a esa hora.\n\nEn esta situación, ¿entre quiénes es probable que se presente un conflicto?",
+  "correctOptionId": "D",
+  "aiExplanation": "- **Problema central:** identificar qué actores tienen intereses opuestos sobre el uso de la cancha.\n- **Datos relevantes:**\n  - El torneo de microfútbol se juega los sábados entre \\(11{:}00\\ \\text{a. m.}\\) y \\(1{:}00\\ \\text{p. m.}\\).\n  - Las camionetas de los escoltas ocupan la cancha y por eso no se pueden realizar varias fechas.\n  - El bingo ocurre después, entre \\(7{:}00\\ \\text{p. m.}\\) y \\(9{:}00\\ \\text{p. m.}\\), así que no interfiere con el horario del torneo.\n- **Método lógico:** buscar el grupo que directamente impide el desarrollo del torneo en el mismo espacio y en un horario que afecta esa actividad.\n- **Conclusión:** el conflicto más probable es entre quienes quieren jugar microfútbol y quienes estacionan las camionetas en la cancha, es decir, **los escoltas** frente a **los habitantes del barrio que quieren participar del torneo**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "Entre los dueños de las camionetas y los habitantes del barrio que organizan el bingo.",
+      "optionFeedback": "- **Incorrecta.** El bingo se realiza entre \\(7{:}00\\ \\text{p. m.}\\) y \\(9{:}00\\ \\text{p. m.}\\), mientras que las camionetas se retiran, a veces, hasta las \\(6{:}00\\ \\text{p. m.}\\). No hay un choque directo de horarios entre estos dos grupos."
+    },
+    {
+      "optionId": "B",
+      "optionText": "Entre los habitantes del barrio que juegan microfútbol y los habitantes del barrio que organizan el bingo.",
+      "optionFeedback": "- **Incorrecta.** Aunque ambos usan la cancha, lo hacen en horarios distintos: el microfútbol al mediodía y el bingo en la noche. El problema descrito no surge entre ellos."
+    },
+    {
+      "optionId": "C",
+      "optionText": "Entre los escoltas y los habitantes del barrio contiguo que son dueños de las camionetas.",
+      "optionFeedback": "- **Incorrecta.** El texto no muestra un conflicto entre escoltas y dueños de las camionetas; más bien, los escoltas las estacionan por encargo de esos habitantes."
+    },
+    {
+      "optionId": "D",
+      "optionText": "Entre los escoltas y los habitantes del barrio que quieren participar del torneo de microfútbol.",
+      "optionFeedback": "- **Correcta.** Los escoltas ocupan la cancha con las camionetas justo en un período que impide realizar el torneo, por lo que sus intereses chocan directamente con los de quienes quieren jugar."
+    }
+  ]
+}

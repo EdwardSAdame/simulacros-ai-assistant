@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 7",
+  "questionId": "q_07",
+  "sectionText": "Auténticas bestias negras para Platón, los sofistas fueron unos filósofos y educadores que dominaron la escena intelectual de Atenas a finales del siglo IV a. C. De hecho, la palabra \"sofista\" no tenía entonces la connotación peyorativa que tiene hoy y que debemos, en buena medida, a la mala imagen que de ellos transmitió Platón. Sofista significaba simplemente \"profesor\", y con el término se designaba a una serie de educadores que se ganaban la vida instruyendo jóvenes a cambio de una retribución.\n\nEran dos los elementos de la sofística que despertaban el recelo, por decir lo menos, entre una nutrida parte de la población griega. El primero de ellos residía en que, contrario a los sabios de antaño, los sofistas no reunían en torno a sí a un grupo de discípulos por el mero placer de difundir sus ideas, sino que cobraban y vivían de ello. Esto, que probablemente hoy no nos parezca grave, era visto con escándalo por los sectores más esnobs y aristocráticos de la polis. En definitiva, y sin que hayan cambiado las cosas, los que despreciaban el \"vil metal\" eran precisamente aquellos que lo tenían garantizado y no tenían necesidad de ganárselo.\n\nEn segundo lugar, y también como diferencia sustancial con los modelos del pasado, la educación impartida por los sofistas no tenía el objetivo teórico de alcanzar y descubrir la verdad, sino que su finalidad era eminentemente práctica; adquirir las técnicas necesarias para imponer el propio argumento. En efecto, en la democracia ateniense, regida un sistema de participación directa de los ciudadanos en los asuntos de la polis, y con abundantes litigios y juicios, la capacidad de desenvolverse con habilidad en el arte de la palabra era imprescindible para el éxito en la política. En este contexto nacieron y se multiplicaron los sofistas, como maestros de la retórica y la oratoria cuya principal preocupación fue desarrollar y transmitir las técnicas necesarias para defender y convencer al público de un planteamiento, independientemente de que este fuera verdadero o no, moral o inmoral. Este énfasis práctico los condujo con frecuencia a posiciones escépticas o relativistas: no existía una verdad con mayúsculas, sino que todo dependía del punto de vista, de los usos y costumbres, de la fuerza de los argumentos. Para Protágoras \"el hombre es la medida de todas las cosas\" y, para Gorgias, nada existía; si existiera, sería incognoscible, y si existiera y fuera cognoscible, sería incomunicable.",
+  "questionText": "Pregunta 7: Considere las siguientes afirmaciones del texto:\n\n1. \"no existía una verdad con mayúsculas, sino que todo dependía del punto de vista, de los usos y costumbres, de la fuerza de los argumentos\".\n2. \"nada existía; si existiera sería incognoscible, y si existiera y fuera cognoscible, sería incomunicable\".\n\nLa afirmación 1 NO justifica la afirmación 2 por la siguiente razón:",
+  "correctOptionId": "B",
+  "aiExplanation": "- **Problema central:** explicar por qué la afirmación relativista de 1 no justifica el escepticismo extremo de 2.\n- **Lectura:**\n  - 1 sostiene que la verdad depende del punto de vista, la cultura o la fuerza argumentativa.\n  - 2 afirma algo mucho más radical: que nada existe, o que si existe no puede conocerse ni comunicarse.\n- **Razón:** del hecho de que la verdad dependa del punto de vista **no se sigue** que nada exista.\n- **Conclusión:** la mejor opción es **B**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "Que todo dependa del punto de vista y la cultura prueba que nada existe.",
+      "optionFeedback": "- **Incorrecta.** Esta opción afirma justamente el salto lógico inválido.\n- El relativismo no prueba la inexistencia de la realidad."
+    },
+    {
+      "optionId": "B",
+      "optionText": "Que todo dependa del punto de vista y la cultura no prueba que nada existe.",
+      "optionFeedback": "- **Correcta.** Esta opción identifica la falla lógica: del relativismo sobre la verdad **no se deriva** una negación absoluta de la existencia."
+    },
+    {
+      "optionId": "C",
+      "optionText": "Que el hombre sea la medida de todas las cosas prueba que hay muchas verdades universales.",
+      "optionFeedback": "- **Incorrecta.** *Muchas verdades universales* es contradictorio, y además no expresa la razón por la cual 1 no justifica 2."
+    },
+    {
+      "optionId": "D",
+      "optionText": "Que el hombre sea la medida de todas las cosas muestra que no dependen del punto de vista de alguien.",
+      "optionFeedback": "- **Incorrecta.** Esa frase significa precisamente lo contrario: que las cosas sí dependen de la medida humana o del punto de vista."
+    }
+  ]
+}

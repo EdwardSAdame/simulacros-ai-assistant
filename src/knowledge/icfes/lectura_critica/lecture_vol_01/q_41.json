@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 41",
+  "questionId": "q_41",
+  "sectionText": "Con estos sentimientos, empecé la creación de un ser humano. Como la pequeñez de las partes constituía un gran obstáculo para la rapidez de mi trabajo, decidí, en contra de mi primera intención, hacer un ser de estatura gigantesca; es decir, de unos ocho pies de alto, y de una anchura proporcionada. Y tras adoptar esta decisión, y pasar meses recogiendo y ordenando material, emprendí mi trabajo.\n\nNadie puede imaginar la diversidad de sentimientos que me empujaron a seguir, como un huracán, desde el primer entusiasmo de éxito. La vida y la muerte me parecían barreras ideales que yo sería el primero en romper, derramando un torrente de luz sobre nuestro mundo en tinieblas. Una nueva especie me bendeciría como su origen y creador; muchas naturalezas excelentes y dichosas me deberían su ser. Ningún padre podría reclamar la gratitud de sus hijos con tanto derecho como yo merecería la de ellos. Siguiendo con estas reflexiones, pensé que si podía infundir animación en la materia inerte, en el curso del tiempo (pues ahora resultaba imposible), podría renovar la vida allí donde la muerte había sometido el cuerpo aparentemente a la corrupción.\n\nHoy me tiemblan las piernas y se me humedecen los ojos ante el recuerdo; pero entonces me empujaba un deseo irresistible y casi frenético; parecía haber perdido por completo el alma y la sensibilidad salvo para este objetivo.\n\nLa sala de disección y el matadero me proporcionaron muchos de mis materiales; con frecuencia, mi naturaleza abominaba mi empresa mientras, impulsado por una ansiedad perpetuamente en aumento, mi trabajo se acercaba a su fin.",
+  "questionText": "Pregunta 41: La intención del narrador cuando dice \"parecía haber perdido por completo el alma y la sensibilidad salvo para este objetivo\", es:",
+  "correctOptionId": "B",
+  "aiExplanation": "- **Problema central:** interpretar la intención comunicativa de esa frase.\n- **Contexto:** el narrador recuerda su estado durante la creación del ser y describe cómo estaba dominado por una obsesión casi frenética.\n- La frase no informa un procedimiento técnico ni formula una promesa; expresa su estado emocional y su deshumanización momentánea frente al objetivo.\n- **Conclusión:** la intención es **manifestar una emoción respecto a su actitud** durante la creación. Respuesta: **B**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "Hacer una afirmación acerca de la creación del nuevo ser y la manera en que lo hizo.",
+      "optionFeedback": "- **Incorrecta.** La frase no describe el procedimiento de creación, sino el estado interior del narrador."
+    },
+    {
+      "optionId": "B",
+      "optionText": "Manifestar una emoción con respecto a su actitud durante la creación del nuevo ser.",
+      "optionFeedback": "- **Correcta.** El narrador expresa retrospectivamente la intensidad obsesiva de su actitud y cómo perdió sensibilidad frente a todo lo demás."
+    },
+    {
+      "optionId": "C",
+      "optionText": "Dirigir una pregunta indirecta al lector sobre su opinión al respecto del nuevo ser.",
+      "optionFeedback": "- **Incorrecta.** No hay pregunta al lector ni solicitud de opinión."
+    },
+    {
+      "optionId": "D",
+      "optionText": "Comprometerse con el lector a no volver a actuar de la manera en que lo hizo.",
+      "optionFeedback": "- **Incorrecta.** El narrador expresa arrepentimiento implícito, pero no formula ningún compromiso explícito."
+    }
+  ]
+}

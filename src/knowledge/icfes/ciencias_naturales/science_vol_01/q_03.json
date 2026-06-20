@@ -1,0 +1,32 @@
+{
+  "questionLabel": "Pregunta 3",
+  "questionId": "q_03",
+  "sectionText": "Un grupo de expertos quiere llevar a cabo un plan de recuperación de un ecosistema en el que una fuente de agua, y varias especies de peces y de plantas se han visto afectadas por un grave problema de contaminación, la cual es causada por la actividad humana de un barrio cercano que tiene sus tuberías de desagüe conectadas a la fuente de agua. Al respecto, los expertos afirman que el foco de la contaminación son sustancias como el aceite que se usa en casas, restaurantes y en la industria, y que esto no solo afecta la calidad del agua, sino que también ha causado la disminución de los individuos de especies acuáticas de animales y el desmejoramiento de especies vegetales.",
+  "sectionImageAiDescription": "Diagrama de una planta completa con raíces dentro del suelo. En la parte superior izquierda aparece un sol rotulado \"Luz solar\" con flechas onduladas dirigidas hacia la planta. A la izquierda media aparece el texto \"Dióxido de carbono\" con flechas onduladas entrando a la planta. A la derecha media aparece el texto \"Oxígeno \\(O_2\\)\" con flechas onduladas saliendo de la planta. En la zona de raíces, dentro del suelo, aparece el texto \"Agua\" con flechas onduladas dirigidas hacia las raíces. Sobre hojas, tallo y suelo hay puntos o manchas negras que representan aceite contaminante adherido y acumulado.",
+  "questionImageAiDescription": "La imagen contiene una tabla y, debajo, cuatro gráficos de opciones rotulados A, B, C y D.\n\nTabla con \\(3\\) columnas y \\(5\\) filas de datos.\nColumnas: Año | Riqueza | Cantidad de individuos.\nFilas:\n- \\(2003\\) | \\(68\\) | \\(1.563\\)\n- \\(2008\\) | \\(62\\) | \\(1.621\\)\n- \\(2013\\) | \\(45\\) | \\(803\\)\n- \\(2018\\) | \\(22\\) | \\(456\\)\n- \\(2023\\) | \\(12\\) | \\(102\\)\n\nNo describir aquí los gráficos de las opciones, porque pertenecen a las opciones de respuesta.",
+  "questionText": "Pregunta 3: Con el fin de evidenciar la variación en la biodiversidad animal de especies acuáticas, se revisaron los registros de la entidad ambiental competente, tomando en cuenta las variables de riqueza (número de especies) y el número total de individuos de todas las especies presentes, y se compilaron en la siguiente tabla:\n\nDe acuerdo con la información anterior, ¿cuál de los siguientes gráficos representa adecuadamente los datos recolectados?",
+  "correctOptionId": "D",
+  "aiExplanation": "- **Problema central:** escoger el gráfico que represente correctamente dos variables, *riqueza* y *cantidad de individuos*, a lo largo de los años \\(2003\\), \\(2008\\), \\(2013\\), \\(2018\\) y \\(2023\\).\n- **Datos relevantes:** la riqueza baja de \\(68\\) a \\(12\\), y la cantidad de individuos pasa de \\(1.563\\) a \\(102\\), con un leve aumento entre \\(2003\\) y \\(2008\\) en individuos.\n- **Análisis:** el gráfico adecuado debe tener los **años** en el eje horizontal y mostrar ambas series con esos valores absolutos. La opción D cumple esto. Las otras opciones mezclan variables, apilan inadecuadamente o usan porcentajes.\n- **Conclusión:** la respuesta correcta es **D**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "[Imagen de la opción: }Gráfico de barras apiladas con eje vertical de \\(0\\) a \\(5.000\\) aproximadamente en intervalos de \\(500\\). En el eje horizontal hay dos categorías: \"Riqueza\" y \"Cantidad de individuos\". La leyenda usa \\(5\\) tonos para los años \\(2003\\), \\(2008\\), \\(2013\\), \\(2018\\), \\(2023\\). Sobre la categoría \"Riqueza\" aparece una barra apilada muy baja, suma aproximada \\(68+62+45+22+12=209\\). Sobre la categoría \"Cantidad de individuos\" aparece una barra apilada alta, suma aproximada \\(1.563+1.621+803+456+102=4.545\\). No representa cada año en el eje horizontal; agrupa por variable y apila por año.]",
+      "optionFeedback": "- **Incorrecta.** Suma los datos de todos los años en una sola barra por variable, por lo que no permite ver la variación temporal año a año."
+    },
+    {
+      "optionId": "B",
+      "optionText": "[Imagen de la opción: Gráfico de barras agrupadas. Eje horizontal con posiciones numéricas \\(1\\), \\(2\\), \\(3\\), \\(4\\), \\(5\\) en lugar de años. Eje vertical de \\(0\\) a \\(2.500\\). En cada posición hay \\(3\\) barras según leyenda: \"Año\", \"Riqueza\", \"Cantidad de individuos\". La barra \"Año\" es casi constante alrededor de \\(2000\\) en las \\(5\\) posiciones; las barras de \"Riqueza\" son pequeñas alrededor de \\(68,62,45,22,12\\); las barras de \"Cantidad de individuos\" son alrededor de \\(1563,1621,803,456,102\\). Mezcla el año como variable cuantitativa graficada junto con las otras dos.]",
+      "optionFeedback": "- **Incorrecta.** Trata el año como si fuera una serie de datos adicional, cuando debe funcionar como variable del eje horizontal."
+    },
+    {
+      "optionId": "C",
+      "optionText": "[Imagen de la opción: Gráfico de barras apiladas al \\(100\\%\\). Eje vertical expresado en porcentaje de \\(0\\%\\) a \\(100\\%\\). Eje horizontal con años \\(2003\\), \\(2008\\), \\(2013\\), \\(2018\\), \\(2023\\). Cada barra anual está compuesta por dos segmentos según leyenda: riqueza y cantidad de individuos. Todas las barras llegan al \\(100\\%\\), por lo que solo muestra proporciones internas y no los valores absolutos de la tabla.]",
+      "optionFeedback": "- **Incorrecta.** La tabla da valores absolutos, no porcentajes. Esta representación distorsiona la información al normalizar cada año al \\(100\\%\\)."
+    },
+    {
+      "optionId": "D",
+      "optionText": "[Imagen de la opción: Gráfico de líneas con eje horizontal de años desde aproximadamente \\(2000\\) hasta \\(2025\\). Eje vertical de \\(0\\) a \\(1.800\\). Dos series según leyenda: riqueza y cantidad de individuos. Serie de cantidad de individuos con puntos etiquetados \\(1.563\\) en \\(2003\\), \\(1.621\\) en \\(2008\\), \\(803\\) en \\(2013\\), \\(456\\) en \\(2018\\), \\(102\\) en \\(2023\\). Serie de riqueza cercana al eje inferior con puntos etiquetados \\(68\\), \\(62\\), \\(45\\), \\(22\\), \\(12\\) en esos mismos años. Representa los datos por año para ambas variables.]",
+      "optionFeedback": "- **Correcta.** Ubica los años en el eje horizontal y representa ambas variables con sus valores absolutos, permitiendo comparar su cambio en el tiempo."
+    }
+  ]
+}

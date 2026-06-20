@@ -1,0 +1,29 @@
+{
+  "questionLabel": "Pregunta 4",
+  "questionId": "q_04",
+  "questionText": "Pregunta 4: Con relación a la construcción de la represa Gibe, un columnista escribió:\n\n\"La construcción de la represa Gibe puede convertirse en un evento trascendental para el continente africano. Se espera que esta represa sea la más grande de África y que funcione como una hidroeléctrica que genere grandes ingresos, al brindar empleo y llevar electricidad a muchas partes del continente. Sin embargo, para su construcción, es necesario hacer varias intervenciones en el río Omo, algo que alarma a algunas entidades, pues este río es uno de los más biodiversos del planeta y su intervención podría acabar con miles de animales y plantas nativas\".\n\n¿Cuáles de las siguientes dimensiones están presentes en la anterior descripción de la situación?",
+  "correctOptionId": "D",
+  "aiExplanation": "- **Problema central:** identificar las dimensiones mencionadas en la descripción.\n- **Datos relevantes del texto:**\n  - Se habla de **ingresos**, **empleo** y **electricidad**, lo cual corresponde a la dimensión **económica**.\n  - También se menciona el riesgo para un río muy biodiverso y para especies nativas, lo cual corresponde a la dimensión **ambiental**.\n- **Conclusión:** las dos dimensiones explícitas son la **ambiental** y la **económica**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "La social y la cultural.",
+      "optionFeedback": "- **Incorrecta.** El texto no se centra en prácticas culturales ni en identidad cultural.\n- Aunque el empleo puede tener efectos sociales, las dimensiones más explícitas y centrales son la **económica** y la **ambiental**."
+    },
+    {
+      "optionId": "B",
+      "optionText": "La económica y la social.",
+      "optionFeedback": "- **Incorrecta.** La dimensión económica sí aparece claramente.\n- Pero la segunda dimensión central no es la social sino la **ambiental**, por el impacto sobre el río Omo y su biodiversidad."
+    },
+    {
+      "optionId": "C",
+      "optionText": "La cultural y la ambiental.",
+      "optionFeedback": "- **Incorrecta.** La dimensión ambiental sí está presente.\n- Sin embargo, el texto no desarrolla una dimensión cultural; sí desarrolla una **económica** mediante ingresos, empleo y energía."
+    },
+    {
+      "optionId": "D",
+      "optionText": "La ambiental y la económica.",
+      "optionFeedback": "- **Correcta.** La construcción de la represa se presenta como fuente de **ingresos, empleo y electricidad** \\(dimensión económica\\), pero también como amenaza para la **biodiversidad del río Omo** \\(dimensión ambiental\\)."
+    }
+  ]
+}

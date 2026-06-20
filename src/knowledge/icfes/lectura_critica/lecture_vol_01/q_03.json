@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 3",
+  "questionId": "q_03",
+  "sectionText": "La filosofía epicúrea tiene una finalidad ética*, pues pretende guiarnos para alcanzar la buena vida. Para el epicureísmo esta es la vida placentera, ya que considera que el fin último de todas nuestras acciones es conseguir placer y evitar dolor; por ello, el epicureísmo identifica el placer con el bien y el dolor con el mal.\n\nEpicuro da por lo menos dos razones complementarias por las cuales considera que el propósito de la buena vida debe ser el placer. Por un lado, menciona el hecho de que, sin necesidad de pensarlo y desde su nacimiento, todas las criaturas vivientes, por instinto, se contentan con el placer y son reacias al dolor. Por otro lado, Epicuro toma a los sentimientos de placer y dolor como criterios esenciales de decisión y conducta, en tanto que son eventos reales que no pueden ser refutados: no hay razón o evidencia alguna que pueda hacernos dudar de que estamos sintiendo dolor o placer; es un hecho real que lo sentimos, pues, ¿cómo podría ser falsa la sensación de dolor ante un golpe?\n\nAsí, si lo que trae placer es lo que elegimos y lo que trae dolor es lo que evitamos, son nuestros sentimientos los que nos permiten deliberar qué debemos elegir y evitar, pues ellos no se equivocan. De esta manera, esa tendencia instintiva y natural hacia buscar el placer y evitar el dolor concuerda con lo que, para el epicureísmo, es el criterio ético más fundamental y verdadero.\n\n*La ética es el campo de la filosofía que estudia los principios para decidir correctamente.",
+  "questionText": "Pregunta 3: Lea el siguiente fragmento tomado del texto:\n\n> \"Epicuro toma a los sentimientos de placer y dolor como criterios esenciales de decisión y conducta, en tanto que son eventos reales que no pueden ser refutados: no hay razón o evidencia alguna que pueda hacernos dudar de que estamos sintiendo dolor o placer; es un hecho real que lo sentimos\".\n\n¿Por qué el enunciado anterior puede ser considerado un argumento a favor de la tesis de que **el fin último de todas las acciones humanas es conseguir placer y evitar dolor**?",
+  "correctOptionId": "A",
+  "aiExplanation": "- **Problema central:** explicar por qué el fragmento apoya la tesis principal del texto.\n- **Dato relevante:** el fragmento sostiene que placer y dolor son **criterios esenciales de decisión**, porque son sentimientos reales e irrefutables.\n- **Inferencia:** si las decisiones humanas se guían por placer y dolor, entonces resulta razonable afirmar que nuestras acciones tienden a buscar placer y evitar dolor.\n- **Revisión de opciones:**\n  - A conecta la realidad del placer y el dolor con la elección de cómo actuamos.\n  - B dice *ejemplifica*, pero el fragmento no pone un ejemplo: ofrece una **justificación**.\n  - C introduce la relación bien/mal, que no es el foco del fragmento citado.\n  - D mezcla instinto y bien/mal, elementos que no están en el enunciado citado.\n- **Conclusión:** la mejor respuesta es **A**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "Porque justifica la idea de que el dolor y el placer son reales e inevitables al momento de elegir la forma en la que actuamos.",
+      "optionFeedback": "- **Correcta.** El fragmento apoya la tesis porque muestra que placer y dolor son **criterios reales** que intervienen en nuestras decisiones, lo cual respalda que actuemos para buscar uno y evitar el otro."
+    },
+    {
+      "optionId": "B",
+      "optionText": "Porque ejemplifica la teoría de que el placer y el dolor son criterios de decisión al ser sentimientos reales que tiene todo ser humano.",
+      "optionFeedback": "- **Incorrecta.** El fragmento no **ejemplifica** una teoría, sino que la **fundamenta** o justifica.\n- La clave no es dar un ejemplo, sino argumentar que esos sentimientos son reales e irrefutables."
+    },
+    {
+      "optionId": "C",
+      "optionText": "Porque explica que el fin último de todas las acciones humanas consiste en relacionar el placer con el bien y el dolor con el mal.",
+      "optionFeedback": "- **Incorrecta.** Esa relación entre placer/bien y dolor/mal aparece en otra parte del texto, pero no es lo que explica el fragmento citado.\n- Aquí el énfasis está en los sentimientos como **criterios de decisión**."
+    },
+    {
+      "optionId": "D",
+      "optionText": "Porque relaciona los sentimientos reales de dolor y de placer existentes instintivamente en el ser humano con los conceptos de bien y de mal.",
+      "optionFeedback": "- **Incorrecta.** Introduce dos elementos ajenos al fragmento: el **instinto** y los conceptos de **bien y mal**.\n- El enunciado citado se centra en la realidad del dolor y el placer como base para decidir."
+    }
+  ]
+}

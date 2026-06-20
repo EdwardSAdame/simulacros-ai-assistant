@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 42",
+  "questionId": "q_42",
+  "sectionText": "Lea el texto y responda las preguntas.\n\nEn las preguntas \\(41 - 45\\), marque \\(A\\), \\(B\\), \\(C\\) o \\(D\\) en su hoja de respuestas.\n\nDoes something about living abroad seem extraordinary to you? I understand. That’s what inspired me to leave America for the first time and set out on my journey to start high school in France. However, I was shocked that there were several things I had absolutely no idea about until I landed in France and took part in daily activities there.\n\nBefore I arrived, I had only experienced foreign exchange students coming to America, never being one. All those students spoke other languages unknown to me. For me, as an English speaker, that was not the case. Once in France, most of my foreign partners spoke English. In some ways, it’s positive that people communicate with you in your own language because it’s convenient. The disadvantage is you never have that secret moment where you can say things, and no one can imagine what you’re saying.\n\nIt will feel shocking to install yourself in a new family’s house, but you can handle this. As you start getting along with them, you can start doing things the way you like them, and it gets cozy. However, there are some things you can’t do your usual way. It’s those little things that separate your life in your home country from your life abroad.\n\nIf you’re thinking about doing this, my advice is “say yes more than you say no.” Of course, there will be times when it is acceptable to say no, but if you’re turning down a weekend of excitement with your classmates or your family there, you’re not taking advantage of your exchange. Part of the reason you are living this adventure is to experience things. Say yes and you will not be disappointed.",
+  "questionText": "Pregunta 42: What can the reader find out about the writer in paragraph \\(1\\)?",
+  "correctOptionId": "B",
+  "aiExplanation": "- **Core problem:** Determine what paragraph \\(1\\) reveals about the writer.\n- **Relevant data:** He says there were several things he had absolutely no idea about until he arrived in France.\n- **Method:** Select the option that paraphrases this lack of prior knowledge.\n- **Conclusion:** The correct answer is **B**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "He had a good time studying high school in his hometown.",
+      "optionFeedback": "- **Incorrect.** Paragraph \\(1\\) does not discuss his hometown school experience."
+    },
+    {
+      "optionId": "B",
+      "optionText": "He ignored several issues about life in France before his arrival.",
+      "optionFeedback": "- **Correct.** The writer says there were many things he did not know until he got to France."
+    },
+    {
+      "optionId": "C",
+      "optionText": "He had traveled abroad before his departure to France.",
+      "optionFeedback": "- **Incorrect.** He says he left America **for the first time**, so this is false."
+    },
+    {
+      "optionId": "D",
+      "optionText": "He had many unbelievable experiences during his stay in America.",
+      "optionFeedback": "- **Incorrect.** Paragraph \\(1\\) focuses on expectations and arrival in France, not experiences in America."
+    }
+  ]
+}

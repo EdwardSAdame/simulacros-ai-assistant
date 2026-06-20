@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 17",
+  "questionId": "q_17",
+  "sectionText": "Querido amigo,\n\nUsted ha decidido dedicarse a la literatura, ¿ahora qué?\n\nSu decisión de asumir su afición por la literatura como un destino deberá convertirse en servidumbre, en nada menos que esclavitud. Para explicarlo de una manera gráfica, le diré que acaba usted de hacer algo que, por lo visto, hacían en el siglo XIX algunas damas espantadas con el grosor de su cuerpo, que, a fin de recobrar una silueta de sílfide, se tragaban una solitaria. ¿Ha tenido usted ocasión de ver a alguien que lleva en sus entrañas ese horrendo parásito? Yo sí, y puedo asegurarle que aquellas damas eran unas heroínas, unas mártires de la belleza. A comienzos de los años sesenta, en París, yo tenía un magnífico amigo, José María, un muchacho español, pintor y cineasta, que padeció esa enfermedad. Una vez que la solitaria se instala en el organismo se consubstancia con él, se alimenta de él, crece y se fortalece a expensas de él, y es dificilísimo expulsarla de ese cuerpo del que se aprovecha, al que tiene colonizado. José María enflaquecía, a pesar de que debía comer y beber líquidos (leche, sobre todo) constantemente para aplacar la ansiedad del animal aposentado en sus entrañas, pues, si no, su malestar se volvía insoportable. Pero todo lo que comía y bebía no era para su gusto y placer, sino para los de la solitaria. Un día, que estábamos conversando en un pequeño bistrot de Montparnasse, me sorprendió con esta confesión: \"Nosotros hacemos tantas cosas juntos. Vamos al cine, a exposiciones, a recorrer librerías, y discutimos horas de horas sobre política, libros, amigos comunes. Y tú crees que yo estoy haciendo esas cosas como las haces tú, porque te divierte hacerlas. Pero te equivocas. Yo las hago para ella, la solitaria. Esa es la impresión que tengo: que todo en mi vida, ahora, no lo vivo para mí, sino para ese ser que llevo adentro, del que ya no soy más que un sirviente\".\n\nDesde entonces, me gusta comparar la situación del escritor con la de mi amigo José María cuando llevaba adentro la solitaria.",
+  "questionText": "Pregunta 17: Considere el siguiente fragmento del texto:\n\n> \"Un día, que estábamos conversando en un pequeño bistrot de Montparnasse, me sorprendió con esta confesión: 'Nosotros hacemos tantas cosas juntos. Vamos al cine, a exposiciones, a recorrer librerías, y discutimos horas de horas sobre política, libros, amigos comunes. Y tú crees que yo estoy haciendo esas cosas como las haces tú, porque te divierte hacerlas. Pero te equivocas. Yo las hago para ella, la solitaria. Esa es la impresión que tengo: que todo en mi vida, ahora, no lo vivo para mí, sino para ese ser que llevo adentro, del que ya no soy más que un sirviente'\".\n\nEl anterior fragmento hace una caracterización de",
+  "correctOptionId": "B",
+  "aiExplanation": "- **Problema central:** determinar qué se caracteriza en el fragmento.\n- José María afirma que ya no vive para sí mismo, sino para la solitaria, de la cual es *un sirviente*.\n- Esa idea describe pérdida de autonomía y sometimiento.\n- **Conclusión:** el fragmento caracteriza **la esclavitud de José María**. Respuesta: **B**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "la libertad de José María.",
+      "optionFeedback": "- **Incorrecta.** El fragmento muestra lo contrario de la libertad: subordinación completa a la solitaria."
+    },
+    {
+      "optionId": "B",
+      "optionText": "la esclavitud de José María.",
+      "optionFeedback": "- **Correcta.** La expresión *ya no soy más que un sirviente* caracteriza claramente su condición de **esclavitud** frente al parásito."
+    },
+    {
+      "optionId": "C",
+      "optionText": "la soledad de José María.",
+      "optionFeedback": "- **Incorrecta.** Aunque su situación es dura, el foco del fragmento no es la soledad, sino la subordinación de su vida a la solitaria."
+    },
+    {
+      "optionId": "D",
+      "optionText": "la inteligencia de José María.",
+      "optionFeedback": "- **Incorrecta.** No se describe su capacidad intelectual, sino su condición de sometimiento."
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 17",
+  "questionId": "q_17",
+  "sectionImageAiDescription": "Diagrama de Venn de \\(3\\) conjuntos con etiquetas: \"Carro privado\" a la izquierda, \"Bicicleta\" a la derecha, \"Transporte público\" abajo. Valores en las regiones: solo carro \\(35\\); solo bicicleta \\(50\\); solo transporte público \\(10\\); intersección carro-bicicleta sin transporte público \\(20\\); intersección carro-transporte público sin bicicleta \\(15\\); intersección bicicleta-transporte público sin carro \\(25\\); intersección triple \\(5\\).",
+  "questionText": "Pregunta 17: La figura muestra la distribución de los tipos de transporte que utilizan \\(160\\) personas para llegar al trabajo. Algunas personas usan únicamente un medio de transporte, otras dos, y otras tres.\n\nSi se necesita saber la cantidad total de personas que se transportan en bicicleta, ¿cuáles son los datos que se deben sumar?",
+  "correctOptionId": "D",
+  "aiExplanation": "- **Problema central:** sumar todas las regiones que pertenecen al conjunto **Bicicleta**.\n- **Regiones dentro de Bicicleta:**\n  - Solo bicicleta: \\(50\\)\n  - Carro y bicicleta: \\(20\\)\n  - Bicicleta y transporte público: \\(25\\)\n  - Los tres medios: \\(5\\)\n- **Suma necesaria:** \\(50+20+25+5\\).\n- **Conclusión:** se deben sumar **\\(5\\), \\(20\\), \\(25\\) y \\(50\\)**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "\\(5\\), \\(15\\), \\(20\\) y \\(25\\).",
+      "optionFeedback": "- **Incorrecta.** Incluye \\(15\\), que corresponde a carro y transporte público, sin bicicleta."
+    },
+    {
+      "optionId": "B",
+      "optionText": "\\(5\\) y \\(20\\).",
+      "optionFeedback": "- **Incorrecta.** Faltan las regiones de solo bicicleta \\(50\\) y bicicleta con transporte público \\(25\\)."
+    },
+    {
+      "optionId": "C",
+      "optionText": "\\(25\\), \\(35\\) y \\(50\\).",
+      "optionFeedback": "- **Incorrecta.** Incluye \\(35\\), que corresponde solo a carro, y omite \\(20\\) y \\(5\\)."
+    },
+    {
+      "optionId": "D",
+      "optionText": "\\(5\\), \\(20\\), \\(25\\) y \\(50\\).",
+      "optionFeedback": "- **Correcta.** Esas son exactamente las regiones que pertenecen al conjunto bicicleta."
+    }
+  ]
+}

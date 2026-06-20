@@ -1,0 +1,29 @@
+{
+  "questionLabel": "Pregunta 12",
+  "questionId": "q_12",
+  "questionText": "Pregunta 12: Se planea llenar una piscina con capacidad de \\(100\\ \\text{m}^3\\), que contiene inicialmente \\(20\\ \\text{m}^3\\) de agua, para lo cual se enciende una máquina que bombea agua a la piscina a una razón de \\(5\\ \\text{m}^3/\\text{min}\\).\n\n¿Cuál gráfica representa de forma correcta el volumen de agua de la piscina en función del tiempo?",
+  "correctOptionId": "D",
+  "aiExplanation": "- **Problema central:** identificar la gráfica de una relación lineal entre volumen y tiempo.\n- **Datos:**\n  - Volumen inicial: \\(20\\ \\text{m}^3\\), así que en \\(t=0\\) debe cumplirse \\(V=20\\).\n  - Tasa de llenado constante: \\(5\\ \\text{m}^3/\\text{min}\\), por lo que la gráfica debe ser una **línea recta** creciente.\n- **Tiempo para llenarse:**\n  \\[\n  100-20=80\\ \\text{m}^3\n  \\]\n  \n  \\[\n  \\frac{80}{5}=16\\ \\text{min}\n  \\]\n- **Entonces** la recta debe ir de \\((0,20)\\) a \\((16,100)\\).\n- **Conclusión:** la opción correcta es **D**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "[Imagen de la opción: Plano cartesiano con eje horizontal \\(t\\) en minutos de \\(0\\) a \\(20\\), y eje vertical \\(V\\) en \\(\\text{m}^3\\) de \\(0\\) a \\(100\\). La curva inicia cerca de \\((0,0)\\) y crece de manera cóncava hacia arriba hasta cerca de \\((20,100)\\). No es lineal.]",
+      "optionFeedback": "**Incorrecta.** Empieza en \\((0,0)\\) y además no es lineal; la piscina ya tiene \\(20\\ \\text{m}^3\\) al inicio."
+    },
+    {
+      "optionId": "B",
+      "optionText": "[Imagen de la opción: Plano cartesiano con eje horizontal \\(t\\) en minutos de \\(0\\) a \\(20\\), y eje vertical \\(V\\) en \\(\\text{m}^3\\) de \\(0\\) a \\(100\\). Segmento recto que inicia en \\((0,0)\\) y termina en \\((20,100)\\).]",
+      "optionFeedback": "**Incorrecta.** Aunque es recta, parte de \\((0,0)\\) y no de \\((0,20)\\)."
+    },
+    {
+      "optionId": "C",
+      "optionText": "[Imagen de la opción: Plano cartesiano con eje horizontal \\(t\\) en minutos de \\(0\\) a \\(16\\), y eje vertical \\(V\\) en \\(\\text{m}^3\\) de \\(0\\) a \\(100\\). Curva creciente cóncava hacia arriba que inicia en \\((0,20)\\) y llega aproximadamente a \\((16,100)\\).]",
+      "optionFeedback": "**Incorrecta.** Tiene el punto inicial correcto, pero la tasa es constante, así que la gráfica debe ser una recta, no una curva."
+    },
+    {
+      "optionId": "D",
+      "optionText": "[Imagen de la opción: Plano cartesiano con eje horizontal \\(t\\) en minutos de \\(0\\) a \\(16\\), y eje vertical \\(V\\) en \\(\\text{m}^3\\) de \\(0\\) a \\(100\\). Segmento recto que inicia en \\((0,20)\\) y termina aproximadamente en \\((16,95\\text{ a }100)\\).]",
+      "optionFeedback": "**Correcta.** Representa un aumento lineal desde \\(20\\ \\text{m}^3\\) en \\(t=0\\) hasta llenarse en \\(16\\) minutos."
+    }
+  ]
+}

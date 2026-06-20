@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 13",
+  "questionId": "q_13",
+  "questionImageAiDescription": "Tabla con \\(4\\) columnas principales: Atleta, Prueba \\(1\\), Prueba \\(2\\), Prueba \\(3\\). Cada prueba tiene subcolumnas \"Puesto\" y \"Tiempo (s)\". Filas:\nRosa: Prueba \\(1\\) puesto \\(2\\), tiempo \\(12\\); Prueba \\(2\\) puesto \\(1\\), tiempo \\(26\\); Prueba \\(3\\) puesto \\(2\\), tiempo \\(22\\).\nMónica: Prueba \\(1\\) puesto \\(1\\), tiempo \\(16\\); Prueba \\(2\\) puesto \\(3\\), tiempo \\(14\\); Prueba \\(3\\) puesto \\(1\\), tiempo \\(15\\).\nVerónica: Prueba \\(1\\) puesto \\(3\\), tiempo \\(22\\); Prueba \\(2\\) puesto \\(2\\), tiempo \\(22\\); Prueba \\(3\\) puesto \\(3\\), tiempo \\(22\\).",
+  "questionText": "Pregunta 13: La tabla muestra los resultados obtenidos por tres atletas en una competencia que consistió en tres pruebas diferentes.\n\nPara escoger la ganadora de la competencia, se proponen dos opciones:\n\n**Opción 1.** La ganadora será quien haya ganado más pruebas.\n\n**Opción 2.** La ganadora será quien tenga el menor tiempo promedio en las tres pruebas.\n\n¿Cuál de las siguientes afirmaciones es correcta sobre la ganadora de la competencia?",
+  "correctOptionId": "A",
+  "aiExplanation": "- **Problema central:** comparar las ganadoras según dos criterios diferentes.\n- **Opción 1: más pruebas ganadas.**\n  - Rosa gana \\(1\\) prueba.\n  - Mónica gana \\(2\\) pruebas.\n  - Verónica gana \\(0\\) pruebas.\n  Entonces gana **Mónica**.\n- **Opción 2: menor tiempo promedio.**\n  - Rosa: \\(\\frac{12+26+22}{3}=\\frac{60}{3}=20\\)\n  - Mónica: \\(\\frac{16+14+15}{3}=\\frac{45}{3}=15\\)\n  - Verónica: \\(\\frac{22+22+22}{3}=22\\)\n  Entonces también gana **Mónica**.\n- **Conclusión:** con ambas opciones gana **Mónica**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "Con las dos opciones gana Mónica.",
+      "optionFeedback": "**Correcta.** Mónica gana \\(2\\) pruebas y además tiene el menor promedio de tiempo: \\(15\\) s."
+    },
+    {
+      "optionId": "B",
+      "optionText": "Con la opción \\(1\\) gana Rosa y con la opción \\(2\\) gana Mónica.",
+      "optionFeedback": "**Incorrecta.** En la opción \\(1\\), Rosa solo gana una prueba; Mónica gana dos."
+    },
+    {
+      "optionId": "C",
+      "optionText": "Con las dos opciones gana Verónica.",
+      "optionFeedback": "**Incorrecta.** Verónica no gana ninguna prueba y su promedio \\(22\\) s es el mayor."
+    },
+    {
+      "optionId": "D",
+      "optionText": "Con la opción \\(1\\) gana Verónica y con la opción \\(2\\) gana Rosa.",
+      "optionFeedback": "**Incorrecta.** Ninguna de esas dos afirmaciones coincide con los datos de la tabla."
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 25",
+  "questionId": "q_25",
+  "sectionText": "En Colombia, una importante firma encuestadora reveló que, desde hace cuatro años, la corrupción es percibida por la ciudadanía como uno de los problemas más graves que afecta al país. En la versión más reciente de la encuesta aplicada, se muestra que el \\(84\\%\\) de los encuestados piensa que el problema está empeorando. Al respecto, un grupo de jóvenes decide promover el aumento de las penas para los delitos de corrupción y fortalecer a las entidades de control como la Procuraduría General de la Nación y la Contraloría General de la República.\n\nSin embargo, al buscar apoyo para promover su ley, los jóvenes se dan cuenta de que en todos los partidos políticos hay escándalos de corrupción, por lo que reciben poco apoyo para su iniciativa. Ante esta situación, los jóvenes deciden promover un referendo aprobatorio de iniciativa ciudadana.",
+  "questionText": "Pregunta 25: En esta situación, y teniendo en cuenta la Constitución Política de Colombia, ¿pueden los jóvenes continuar con su propuesta de referendo?",
+  "correctOptionId": "C",
+  "aiExplanation": "- **Problema central:** establecer si los jóvenes pueden impulsar un referendo de iniciativa ciudadana.\n- **Dato constitucional relevante:** en Colombia existen mecanismos de participación ciudadana mediante los cuales los ciudadanos pueden intervenir directamente en asuntos normativos y políticos, entre ellos el **referendo**.\n- **Razonamiento:**\n  - La ciudadanía no depende exclusivamente del Congreso o del Gobierno para impulsar cambios normativos.\n  - Sin embargo, eso no significa que toda decisión pública deba consultarse siempre por referendo.\n- **Conclusión:** **sí** pueden continuar, porque el referendo es un mecanismo de participación para proponer cambios normativos de manera directa. ",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "No, pues solo pueden proponer leyes de la República los integrantes del Congreso de la República y del Gobierno nacional.",
+      "optionFeedback": "- **Incorrecta.** La Constitución colombiana reconoce mecanismos de participación ciudadana que permiten intervención directa de los ciudadanos en la producción normativa y decisiones públicas."
+    },
+    {
+      "optionId": "B",
+      "optionText": "No, pues solo pueden pronunciarse sobre temas políticos los expertos y los representantes elegidos popularmente.",
+      "optionFeedback": "- **Incorrecta.** Esta opción desconoce el principio democrático participativo.\n- Los ciudadanos sí pueden pronunciarse e impulsar mecanismos constitucionales como el referendo."
+    },
+    {
+      "optionId": "C",
+      "optionText": "Sí, pues en Colombia existen los referendos como mecanismos para que los ciudadanos propongan cambios normativos de manera directa.",
+      "optionFeedback": "- **Correcta.** El **referendo** es un mecanismo de participación ciudadana reconocido en Colombia, por medio del cual los ciudadanos pueden impulsar directamente cambios normativos."
+    },
+    {
+      "optionId": "D",
+      "optionText": "Sí, pues en Colombia existen los referendos para que cada una de las decisiones públicas en el país sea consultada a la ciudadanía.",
+      "optionFeedback": "- **Incorrecta.** El referendo no se usa para consultar **cada** decisión pública.\n- Es un mecanismo específico de participación, no una consulta obligatoria sobre toda actuación estatal."
+    }
+  ]
+}

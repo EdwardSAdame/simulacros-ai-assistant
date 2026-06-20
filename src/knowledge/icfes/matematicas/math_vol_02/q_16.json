@@ -1,0 +1,29 @@
+{
+  "questionLabel": "Pregunta 16",
+  "questionId": "q_16",
+  "questionText": "Pregunta 16: Un estudiante va a hacer una cartelera para una tarea. Para comprar los materiales su mamá le dio \\(\\$5.000\\), y con ese dinero el estudiante compró una cartulina que cuesta \\(\\$1.000\\) y \\(4\\) marcadores que cuestan \\(\\$900\\) cada uno. ¿Cuánto dinero le sobró de la compra de los materiales?",
+  "correctOptionId": "D",
+  "aiExplanation": "- **Problema central:** restar al dinero inicial el costo total de la compra.\n- **Costo de marcadores:**\n  \\[\n  4\\times 900=3.600\n  \\]\n- **Costo total:**\n  \\[\n  1.000+3.600=4.600\n  \\]\n- **Dinero sobrante:**\n  \\[\n  5.000-4.600=400\n  \\]\n- **Conclusión:** sobran \\(\\$400\\).",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "\\(\\$1.900\\)",
+      "optionFeedback": "**Incorrecta.** No corresponde al costo total real de los materiales."
+    },
+    {
+      "optionId": "B",
+      "optionText": "\\(\\$4.100\\)",
+      "optionFeedback": "**Incorrecta.** Ese valor sería demasiado alto para ser el sobrante después de gastar \\(\\$4.600\\)."
+    },
+    {
+      "optionId": "C",
+      "optionText": "\\(\\$4.600\\)",
+      "optionFeedback": "**Incorrecta.** Ese es el **costo total** de la compra, no el dinero que sobró."
+    },
+    {
+      "optionId": "D",
+      "optionText": "\\(\\$1.400\\)",
+      "optionFeedback": "**Incorrecta.** El sobrante correcto es \\(\\$400\\), pero esa opción no aparece. Hay inconsistencia en las opciones proporcionadas."
+    }
+  ]
+}

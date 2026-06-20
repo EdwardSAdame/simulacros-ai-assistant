@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 6",
+  "questionId": "q_06",
+  "sectionText": "En una escuela municipal del estado de Río de Janeiro, la profesora de Literatura Brasileña, una mujer afrobrasileña, orgullosa de sus raíces culturales y religiosas, propuso trabajar con el libro \"Leyendas de Exú\". Esta obra trata acerca de una de las principales divinidades de la cultura afrobrasileña. Ahora bien, a pesar de ser una obra recomendada por el Ministerio de Educación de ese país, algunas madres evangélicas acusaron a la profesora de usar la clase para \"alabar al diablo\". La rectora, también evangélica, despidió a la profesora para evitar enfrentamientos con las madres. Finalmente, la profesora acudió a las autoridades públicas y fue reintegrada a su trabajo. En esta instancia, las autoridades públicas decidieron abrir una investigación a la rectora por presunta intolerancia religiosa.",
+  "questionText": "Pregunta 6: La intervención de las autoridades públicas para solucionar el conflicto que se dio en la escuela fue",
+  "correctOptionId": "C",
+  "aiExplanation": "- **Problema central:** evaluar para quién fue deseable o indeseable la intervención de las autoridades.\n- **Datos relevantes:**\n  - La profesora fue despedida.\n  - Luego fue reintegrada por intervención de autoridades públicas.\n  - Las autoridades investigaron a la rectora por presunta intolerancia religiosa.\n- **Método lógico:** analizar quién resultó afectado negativamente por esa intervención.\n- **Conclusión:** la intervención fue **indeseable para la rectora**, porque cuestionó sus decisiones y abrió una investigación sobre su conducta directiva.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "deseable para las madres, porque lograron el despido de la profesora de Literatura.",
+      "optionFeedback": "- **Incorrecta.** Aunque inicialmente se produjo el despido, la intervención de las autoridades revirtió esa decisión y reintegró a la profesora."
+    },
+    {
+      "optionId": "B",
+      "optionText": "indeseable para la profesora, porque mostró la importancia de la posición religiosa de las madres.",
+      "optionFeedback": "- **Incorrecta.** La intervención benefició a la profesora, pues recuperó su trabajo y se investigó la posible intolerancia en su contra."
+    },
+    {
+      "optionId": "C",
+      "optionText": "indeseable para la rectora, porque puso en entredicho sus actuaciones en ejercicio de su labor directiva.",
+      "optionFeedback": "- **Correcta.** La rectora quedó cuestionada por haber despedido a la profesora y además fue objeto de investigación por presunta intolerancia religiosa."
+    },
+    {
+      "optionId": "D",
+      "optionText": "deseable para el Ministerio de Educación, porque le dio visibilidad a uno de los libros que recomienda a los colegios.",
+      "optionFeedback": "- **Incorrecta.** El objetivo de la intervención no fue dar visibilidad al libro, sino resolver una situación de posible discriminación religiosa."
+    }
+  ]
+}

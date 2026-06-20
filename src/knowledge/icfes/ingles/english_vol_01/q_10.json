@@ -1,0 +1,50 @@
+{
+  "questionLabel": "Pregunta 10",
+  "questionId": "q_10",
+  "sectionText": "Lea las descripciones de la columna de la izquierda \\(6 - 10\\). ¿Cuál palabra de la columna de la derecha \\((A - G)\\) concuerda con cada descripción?\n\nLa opción \\(H\\) se usa para el ejemplo. Sobran dos palabras más.\n\nEn las preguntas \\(85 - 89\\), marque la letra correcta \\(A - G\\) en su hoja de respuestas.",
+  "questionText": "Pregunta 10: Some of these famous artists show their art in museums.",
+  "correctOptionId": "G",
+  "aiExplanation": "- **Core problem:** Match the clue about artists who show art in museums.\n- **Relevant data:** Among the options, *painters* are artists associated with museum exhibitions.\n- **Method:** Choose the profession linked to visual art.\n- **Conclusion:** The correct answer is **painters**, option **G**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "chefs",
+      "optionFeedback": "- **Incorrect.** *Chefs* create food, not museum art."
+    },
+    {
+      "optionId": "B",
+      "optionText": "dentists",
+      "optionFeedback": "- **Incorrect.** *Dentists* are health professionals, not museum artists."
+    },
+    {
+      "optionId": "C",
+      "optionText": "drivers",
+      "optionFeedback": "- **Incorrect.** *Drivers* do not show art in museums."
+    },
+    {
+      "optionId": "D",
+      "optionText": "farmers",
+      "optionFeedback": "- **Incorrect.** *Farmers* work in agriculture."
+    },
+    {
+      "optionId": "E",
+      "optionText": "guitarists",
+      "optionFeedback": "- **Incorrect.** *Guitarists* are musicians; they perform music rather than show visual art in museums."
+    },
+    {
+      "optionId": "F",
+      "optionText": "nurses",
+      "optionFeedback": "- **Incorrect.** *Nurses* work in hospitals or clinics."
+    },
+    {
+      "optionId": "G",
+      "optionText": "painters",
+      "optionFeedback": "- **Correct.** **Painters** are artists whose works can be shown in museums."
+    },
+    {
+      "optionId": "H",
+      "optionText": "teachers",
+      "optionFeedback": "- **Incorrect.** *Teachers* educate people, not exhibit art as artists."
+    }
+  ]
+}

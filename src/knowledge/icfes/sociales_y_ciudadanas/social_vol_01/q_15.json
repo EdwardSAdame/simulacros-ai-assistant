@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 15",
+  "questionId": "q_15",
+  "sectionText": "## RESPONDA LAS PREGUNTAS 15 Y 16 DE ACUERDO CON LA SIGUIENTE INFORMACIÓN\n\nRepresentantes de los gremios minero y petrolero han enviado un comunicado al Gobierno con la intención de obtener los permisos necesarios para intervenir la selva amazónica. Estos gremios argumentan que esta intervención les permitiría mejorar la competitividad de este sector del mercado y generar empleos para las comunidades de la región del Amazonas. Por otra parte, los líderes de algunos pueblos indígenas del Amazonas llevan varios meses pidiendo la ayuda del Gobierno para proteger los territorios de sus \"hermanos aislados\", pueblos indígenas que han decidido voluntariamente aislarse en las selvas huyendo de la esclavitud, la violencia y las enfermedades que la civilización occidental ha traído consigo durante los últimos cinco siglos. La amenaza para estos pueblos aún sigue latente; por ejemplo, en el último año varias comunidades indígenas se han visto seriamente afectadas por cuenta de contagios de gripa y sarampión, producto de encuentros imprevistos con leñadores de grupos madereros ilegales en el Amazonas.\n\nPara tomar una decisión informada sobre este tema, el Gobierno ha pedido la colaboración, tanto de su Ministerio de Minas y Energía, como de los académicos estudiosos de la cultura y la cosmovisión de estos pueblos indígenas del Amazonas. Los académicos argumentan que, teniendo en cuenta la gran vulnerabilidad que estos pueblos antiguos presentan frente a las enfermedades más comunes de Occidente, es necesario crear estructuras legales que protejan los territorios en donde podrían habitar los pueblos indígenas en aislamiento voluntario, respetando su autodeterminación a no ser contactados y protegiendo el gran patrimonio cultural, espiritual y natural que ellos poseen. Por otra parte, desde el Ministerio de Minas y Energía se argumenta que la solución está en que se reúnan los gremios minero, petrolero y maderero con las comunidades indígenas del Amazonas, incluyendo a las comunidades indígenas en aislamiento voluntario, para así poder negociar qué partes de la selva amazónica pueden ser explotadas legalmente para beneficio del desarrollo económico del país.",
+  "questionText": "Pregunta 15: De acuerdo con los intereses involucrados en la situación descrita, ¿entre quiénes sería más probable que se generara un conflicto?",
+  "correctOptionId": "B",
+  "aiExplanation": "- **Problema central:** identificar los actores con intereses más opuestos.\n- **Datos clave:**\n  - El gremio minero quiere intervenir la selva para competitividad y empleo.\n  - Los pueblos indígenas buscan proteger territorios, salud, autodeterminación y evitar contacto.\n- **Razonamiento:**\n  - Hay una tensión directa entre **explotación económica del territorio** y **protección territorial y cultural**.\n  - Académicos e indígenas comparten posiciones cercanas, no conflictivas.\n- **Conclusión:** el conflicto más probable es entre el **gremio minero** y los **pueblos indígenas**. ",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "Entre los pueblos indígenas y los académicos.",
+      "optionFeedback": "- **Incorrecta.** Los académicos defienden proteger los territorios y respetar la autodeterminación indígena.\n- Sus intereses son afines, no opuestos."
+    },
+    {
+      "optionId": "B",
+      "optionText": "Entre el gremio minero y los pueblos indígenas.",
+      "optionFeedback": "- **Correcta.** El gremio minero busca explotar la selva amazónica, mientras que los pueblos indígenas defienden su territorio, su salud y su derecho al aislamiento.\n- Son intereses claramente enfrentados."
+    },
+    {
+      "optionId": "C",
+      "optionText": "Entre el Ministerio de Minas y Energía y el gremio petrolero.",
+      "optionFeedback": "- **Incorrecta.** El Ministerio de Minas y Energía propone una salida negociada que favorece la explotación legal; no se observa un choque directo con el gremio petrolero."
+    },
+    {
+      "optionId": "D",
+      "optionText": "Entre los grupos madereros ilegales y el gremio petrolero.",
+      "optionFeedback": "- **Incorrecta.** El texto menciona a los madereros ilegales como una amenaza, pero no presenta un conflicto principal entre ellos y el gremio petrolero.\n- La tensión central es entre extracción y protección indígena."
+    }
+  ]
+}

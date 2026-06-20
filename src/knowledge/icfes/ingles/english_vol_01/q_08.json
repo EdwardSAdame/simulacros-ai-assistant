@@ -1,0 +1,50 @@
+{
+  "questionLabel": "Pregunta 8",
+  "questionId": "q_08",
+  "sectionText": "Lea las descripciones de la columna de la izquierda \\(6 - 10\\). ¿Cuál palabra de la columna de la derecha \\((A - G)\\) concuerda con cada descripción?\n\nLa opción \\(H\\) se usa para el ejemplo. Sobran dos palabras más.\n\nEn las preguntas \\(85 - 89\\), marque la letra correcta \\(A - G\\) en su hoja de respuestas.",
+  "questionText": "Pregunta 8: They take people from one place to another on a bus.",
+  "correctOptionId": "C",
+  "aiExplanation": "- **Core problem:** Match the description of transporting people on a bus.\n- **Relevant data:** One option directly refers to that activity.\n- **Method:** Select the profession that operates a bus.\n- **Conclusion:** Those people are **drivers**, so the correct answer is **C**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "chefs",
+      "optionFeedback": "- **Incorrect.** *Chefs* cook food; they do not drive buses."
+    },
+    {
+      "optionId": "B",
+      "optionText": "dentists",
+      "optionFeedback": "- **Incorrect.** *Dentists* treat teeth."
+    },
+    {
+      "optionId": "C",
+      "optionText": "drivers",
+      "optionFeedback": "- **Correct.** **Drivers** take people from one place to another on a bus."
+    },
+    {
+      "optionId": "D",
+      "optionText": "farmers",
+      "optionFeedback": "- **Incorrect.** *Farmers* work on farms."
+    },
+    {
+      "optionId": "E",
+      "optionText": "guitarists",
+      "optionFeedback": "- **Incorrect.** *Guitarists* play instruments, not buses."
+    },
+    {
+      "optionId": "F",
+      "optionText": "nurses",
+      "optionFeedback": "- **Incorrect.** *Nurses* help in medical care."
+    },
+    {
+      "optionId": "G",
+      "optionText": "painters",
+      "optionFeedback": "- **Incorrect.** *Painters* do not transport passengers."
+    },
+    {
+      "optionId": "H",
+      "optionText": "teachers",
+      "optionFeedback": "- **Incorrect.** *Teachers* work with students."
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "questionLabel": "Pregunta 19",
+  "questionId": "q_19",
+  "sectionText": "Complete las cinco conversaciones.\n\nEn las preguntas \\(16 - 20\\), marque \\(A\\), \\(B\\) o \\(C\\) en su hoja de respuestas.",
+  "questionText": "Pregunta 19: Everyone bought tickets for the rock concert.",
+  "correctOptionId": "A",
+  "aiExplanation": "- **Core problem:** Find the most logical conversational response to the statement about tickets for a rock concert.\n- **Relevant data:** The response should connect naturally to the event.\n- **Method:** Compare the options and choose the one that continues the topic sensibly.\n- **Conclusion:** *Is it on Saturday?* is the most appropriate follow-up question. The correct answer is **A**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "Is it on Saturday?",
+      "optionFeedback": "- **Correct.** This is a logical follow-up question about the concert."
+    },
+    {
+      "optionId": "B",
+      "optionText": "There was noise.",
+      "optionFeedback": "- **Incorrect.** This is grammatically possible but does not respond naturally to the statement about buying tickets."
+    },
+    {
+      "optionId": "C",
+      "optionText": "It is fair!",
+      "optionFeedback": "- **Incorrect.** This reaction is unnatural and unclear in this context."
+    }
+  ]
+}

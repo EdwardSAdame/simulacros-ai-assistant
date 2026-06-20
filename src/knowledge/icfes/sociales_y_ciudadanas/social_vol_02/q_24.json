@@ -1,0 +1,29 @@
+{
+  "questionLabel": "Pregunta 24",
+  "questionId": "q_24",
+  "questionText": "Pregunta 24: Un candidato al Congreso de la República afirma que es necesario que las decisiones gubernamentales sean más democráticas. Por esta razón, propone que cada ministerio del Gobierno nacional, antes de implementar una política, deba realizar una rueda de prensa explicándola en detalle; luego de esto, se daría un plazo de \\(15\\) días para que los diferentes sectores interesados (académicos, gremios, medios de comunicación, congresistas y la ciudadanía en general) puedan analizar la propuesta y enviar sus opiniones e inquietudes al correspondiente ministerio. Posteriormente, los funcionarios de dicho ministerio modificarían o no la política, partiendo de estos insumos para, finalmente, justificar públicamente sus decisiones.\n\nDe acuerdo con lo anterior, ¿cuál es el objetivo de la propuesta del candidato?",
+  "correctOptionId": "D",
+  "aiExplanation": "- **Problema central:** identificar el propósito democrático de la propuesta.\n- **Datos relevantes:**\n  - Los ministerios explicarían públicamente sus políticas.\n  - Habría \\(15\\) días para comentarios de distintos sectores y ciudadanía.\n  - Luego las decisiones se justificarían públicamente.\n- **Método lógico:** distinguir entre participación consultiva, decisión directa de la ciudadanía, agilidad administrativa o reducción del debate.\n- **Conclusión:** el objetivo es **abrir la toma de decisiones al debate y a los aportes ciudadanos**, no transferirles la decisión final.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "Evitar la controversia y la polarización que se puede generar a partir del debate público.",
+      "optionFeedback": "- **Incorrecta.** La propuesta no evita el debate; al contrario, lo promueve explícitamente."
+    },
+    {
+      "optionId": "B",
+      "optionText": "Agilizar los procesos de toma de decisiones sobre políticas que afectan a la ciudadanía.",
+      "optionFeedback": "- **Incorrecta.** Incorporar ruedas de prensa, plazos y comentarios probablemente hace el proceso más deliberativo, no más rápido."
+    },
+    {
+      "optionId": "C",
+      "optionText": "Permitir que los ciudadanos sean quienes tomen las decisiones sobre las políticas que los afectan.",
+      "optionFeedback": "- **Incorrecta.** Los ciudadanos opinan y aportan, pero la decisión final sigue en manos del ministerio."
+    },
+    {
+      "optionId": "D",
+      "optionText": "Promover una toma de decisiones más abierta a los aportes y al debate por parte de los ciudadanos.",
+      "optionFeedback": "- **Correcta.** La propuesta busca más deliberación, transparencia y apertura a observaciones de la ciudadanía y otros sectores interesados."
+    }
+  ]
+}

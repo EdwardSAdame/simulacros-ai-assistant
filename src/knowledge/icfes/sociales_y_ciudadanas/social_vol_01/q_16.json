@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 16",
+  "questionId": "q_16",
+  "sectionText": "## RESPONDA LAS PREGUNTAS 15 Y 16 DE ACUERDO CON LA SIGUIENTE INFORMACIÓN\n\nRepresentantes de los gremios minero y petrolero han enviado un comunicado al Gobierno con la intención de obtener los permisos necesarios para intervenir la selva amazónica. Estos gremios argumentan que esta intervención les permitiría mejorar la competitividad de este sector del mercado y generar empleos para las comunidades de la región del Amazonas. Por otra parte, los líderes de algunos pueblos indígenas del Amazonas llevan varios meses pidiendo la ayuda del Gobierno para proteger los territorios de sus \"hermanos aislados\", pueblos indígenas que han decidido voluntariamente aislarse en las selvas huyendo de la esclavitud, la violencia y las enfermedades que la civilización occidental ha traído consigo durante los últimos cinco siglos. La amenaza para estos pueblos aún sigue latente; por ejemplo, en el último año varias comunidades indígenas se han visto seriamente afectadas por cuenta de contagios de gripa y sarampión, producto de encuentros imprevistos con leñadores de grupos madereros ilegales en el Amazonas.\n\nPara tomar una decisión informada sobre este tema, el Gobierno ha pedido la colaboración, tanto de su Ministerio de Minas y Energía, como de los académicos estudiosos de la cultura y la cosmovisión de estos pueblos indígenas del Amazonas. Los académicos argumentan que, teniendo en cuenta la gran vulnerabilidad que estos pueblos antiguos presentan frente a las enfermedades más comunes de Occidente, es necesario crear estructuras legales que protejan los territorios en donde podrían habitar los pueblos indígenas en aislamiento voluntario, respetando su autodeterminación a no ser contactados y protegiendo el gran patrimonio cultural, espiritual y natural que ellos poseen. Por otra parte, desde el Ministerio de Minas y Energía se argumenta que la solución está en que se reúnan los gremios minero, petrolero y maderero con las comunidades indígenas del Amazonas, incluyendo a las comunidades indígenas en aislamiento voluntario, para así poder negociar qué partes de la selva amazónica pueden ser explotadas legalmente para beneficio del desarrollo económico del país.",
+  "questionText": "Pregunta 16: En relación con la propuesta planteada por el Ministerio de Minas y Energía, ¿cuál de las siguientes opciones describe una posible reacción o respuesta que **NO** se tuvo en cuenta en dicha propuesta?",
+  "correctOptionId": "C",
+  "aiExplanation": "- **Problema central:** hallar qué respuesta posible no fue considerada por la propuesta del Ministerio.\n- **Dato clave:** el Ministerio propone reunir también a los pueblos indígenas en aislamiento voluntario para negociar.\n- **Razonamiento:**\n  - Esa propuesta ignora precisamente que dichos pueblos han decidido **no establecer contacto** con la sociedad occidental.\n  - Su autodeterminación a no ser contactados es un punto central destacado por los académicos.\n- **Conclusión:** no se tuvo en cuenta la posibilidad de que estos pueblos **no acepten ningún tipo de relación o negociación**. ",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "Que los gremios petroleros y mineros solo quieran beneficiarse de la extracción ilegal de la mayor cantidad de recursos del Amazonas.",
+      "optionFeedback": "- **Incorrecta.** Esta posibilidad no es la más directamente omitida por la propuesta.\n- Además, el Ministerio habla de explotación **legal**, por lo que la extracción ilegal no es el punto central del vacío de la propuesta."
+    },
+    {
+      "optionId": "B",
+      "optionText": "Que los académicos no tengan en cuenta los beneficios que conlleva el modelo extractivo legal que busca el desarrollo económico del país.",
+      "optionFeedback": "- **Incorrecta.** Esto no describe una reacción omitida por la propuesta ministerial, sino una crítica a la postura de los académicos.\n- No es el problema principal señalado en el texto."
+    },
+    {
+      "optionId": "C",
+      "optionText": "Que los pueblos indígenas aislados voluntariamente no acepten entablar ningún tipo de relación con la sociedad occidental.",
+      "optionFeedback": "- **Correcta.** La propuesta del Ministerio supone que estos pueblos podrían sentarse a negociar.\n- Pero el texto enfatiza su **aislamiento voluntario** y su derecho a **no ser contactados**, reacción que claramente no fue considerada."
+    },
+    {
+      "optionId": "D",
+      "optionText": "Que los grupos madereros ilegales no tengan las vías para poder negociar la explotación legal de los bosques amazónicos.",
+      "optionFeedback": "- **Incorrecta.** Los grupos madereros ilegales no son el foco de la propuesta ministerial como sujetos legítimos de negociación.\n- El punto omitido central es la imposibilidad misma de contactar a los pueblos aislados."
+    }
+  ]
+}

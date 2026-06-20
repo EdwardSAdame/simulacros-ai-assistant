@@ -1,0 +1,31 @@
+{
+  "questionLabel": "Pregunta 19",
+  "questionId": "q_19",
+  "sectionText": "Para el reciclaje de los neumáticos usados, se está implementando un proceso llamado \"trituración criogénica\". Este proceso consiste en depositar trozos de neumáticos en un recipiente; posteriormente, se hacen pasar por un túnel de enfriamiento, donde el caucho se pone en contacto con nitrógeno líquido, que está a una temperatura aproximada de \\(-200\\ ^\\circ\\text{C}\\), para extraer energía del caucho y llevarlo a temperaturas menores a \\(-70\\ ^\\circ\\text{C}\\), a las que es muy frágil y susceptible de quebrarse con golpes. En último lugar, el caucho se pasa por un molino de martillos en el que se tritura y se pulveriza, como se muestra a continuación.",
+  "sectionImageAiDescription": "Diagrama de proceso industrial. A la izquierda hay un recipiente superior etiquetado \"Recipiente de neumáticos\" que alimenta trozos hacia un conducto. En el centro hay un \"Túnel de enfriamiento\" horizontal con tornillo o hélice interna y flechas de dirección del flujo. A la derecha hay un tanque cilíndrico vertical etiquetado \"Nitrógeno líquido\" conectado por tuberías al túnel y a un equipo inferior. En la parte inferior central hay un equipo etiquetado \"Molino\". A la salida del molino, en la parte inferior derecha, aparece un recipiente con producto etiquetado \"Caucho pulverizado\". Una tubería inferior retorna gas etiquetado \"Gas nitrógeno\". Flechas muestran circulación del nitrógeno y del material a través del sistema.",
+  "questionText": "Pregunta 19: La trituración simple es otro proceso que muele los neumáticos utilizando únicamente molinos; sin embargo, si se desean granos del tamaño de la trituración criogénica, se debe pasar el caucho varias veces por los molinos.\n\nAl respecto, ¿qué beneficio presenta la trituración criogénica con relación a la trituración simple?",
+  "correctOptionId": "A",
+  "aiExplanation": "- **Problema central:** identificar la ventaja de la trituración criogénica frente a la trituración simple.\n- **Datos relevantes:** la trituración simple requiere pasar varias veces el caucho por los molinos para lograr el mismo tamaño de grano. En la criogénica, el caucho se vuelve frágil y se rompe más fácilmente.\n- **Análisis:** al estar frágil, el material puede triturarse más eficientemente y en menos pasadas, es decir, con mayor rapidez a bajas temperaturas.\n- **Conclusión:** la respuesta correcta es **A**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "Tritura con mayor rapidez a bajas temperaturas.",
+      "optionFeedback": "- **Correcta.** Al enfriarse, el caucho se vuelve frágil y se puede triturar más fácilmente, logrando tamaños pequeños en menos etapas."
+    },
+    {
+      "optionId": "B",
+      "optionText": "Tritura sin generar gastos energéticos.",
+      "optionFeedback": "- **Incorrecta.** El proceso sí requiere energía para enfriar, bombear y triturar."
+    },
+    {
+      "optionId": "C",
+      "optionText": "Tritura con mayor fuerza que a temperatura ambiente.",
+      "optionFeedback": "- **Incorrecta.** La ventaja principal no es que el equipo ejerza más fuerza, sino que el material está más frágil y se rompe más fácil."
+    },
+    {
+      "optionId": "D",
+      "optionText": "Tritura sin generar ningún impacto ambiental.",
+      "optionFeedback": "- **Incorrecta.** Ningún proceso industrial puede afirmarse aquí como libre de impacto ambiental."
+    }
+  ]
+}

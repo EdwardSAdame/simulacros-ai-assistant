@@ -1,0 +1,29 @@
+{
+  "questionLabel": "Pregunta 3",
+  "questionId": "q_03",
+  "questionText": "Pregunta 3: Un periodista ha estado divulgando notas de prensa con el fin de acusar de actos de corrupción a la alcaldesa de un municipio, sin haber verificado la credibilidad de las fuentes consultadas para elaborar los señalamientos.\n\nAnte el reclamo que le hizo la alcaldesa, el periodista argumentó que podía seguir publicando estas acusaciones porque en el país existe la libertad de prensa y él, como periodista, puede difundir todo lo que considere importante para la opinión pública, así no haya sido verificado.\n\nDe las siguientes opciones, ¿cuál representa un argumento que contradice lo señalado por el periodista con respecto a la libertad de prensa en el país?",
+  "correctOptionId": "A",
+  "aiExplanation": "- **Problema central:** encontrar el argumento que contradice la idea de que un periodista puede publicar cualquier cosa sin verificarla.\n- **Dato clave:** la libertad de prensa no es absoluta; está ligada a deberes como la **veracidad** y la **imparcialidad**.\n- **Análisis de fondo:**\n  - Si la información no ha sido verificada, no cumple con estándares periodísticos básicos.\n  - Por eso, la mejor contradicción es la que afirma que la libertad de prensa protege la difusión de información **veraz e imparcial**, no rumores o acusaciones infundadas.\n- **Conclusión:** la opción correcta es la que limita la libertad de prensa mediante el deber de informar responsablemente.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "La libertad de prensa en el país protege a los periodistas cuando divulgan información de manera veraz e imparcial.",
+      "optionFeedback": "- **Correcta.** Contradice directamente al periodista, porque señala que la protección de la libertad de prensa está asociada a la difusión de información **veraz e imparcial**.\n- Si no verifica sus fuentes, no puede ampararse plenamente en ese derecho."
+    },
+    {
+      "optionId": "B",
+      "optionText": "La libertad de expresión es un derecho constitucional que respalda la actividad periodística en el país sin restricción alguna.",
+      "optionFeedback": "- **Incorrecta.** Esta opción más bien **respalda** al periodista, porque presenta la libertad de expresión como un derecho sin límites.\n- Eso contradice los principios de responsabilidad y veracidad propios del ejercicio periodístico."
+    },
+    {
+      "optionId": "C",
+      "optionText": "La libertad de prensa sobre hechos políticos es una de las bases que sostiene la libertad y la democracia de cualquier país.",
+      "optionFeedback": "- **Incorrecta.** Aunque la afirmación puede ser verdadera en general, no contradice el punto específico del periodista sobre publicar sin verificación.\n- Defiende la importancia de la prensa, pero no establece el límite de la **responsabilidad informativa**."
+    },
+    {
+      "optionId": "D",
+      "optionText": "Existe persecución a los periodistas cuando las noticias que publican ellos son cuestionadas por actores políticos.",
+      "optionFeedback": "- **Incorrecta.** Cuestionar una noticia no equivale automáticamente a persecución.\n- Además, esta opción no rebate la idea central del caso: que un periodista no puede justificar acusaciones no verificadas solo invocando la libertad de prensa."
+    }
+  ]
+}

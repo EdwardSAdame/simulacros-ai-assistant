@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 22",
+  "questionId": "q_22",
+  "sectionText": "La Organización de las Naciones Unidas (ONU) define el \"desarrollo sostenible\" como\n\n\"[...] la satisfacción de las necesidades de la generación presente sin comprometer la capacidad de las generaciones futuras para satisfacer sus propias necesidades\". El desarrollo sostenible ha emergido como el principio rector para el desarrollo mundial a largo plazo. Consta de tres pilares: el desarrollo sostenible trata de lograr, de manera equilibrada, el desarrollo económico, el desarrollo social y la protección del medio ambiente. [A partir de lo anterior] la Conferencia de las Naciones Unidas sobre el Desarrollo Sostenible, o Cumbre de la Tierra de Río 20, se centrará en dos temas: 1) la economía verde en el contexto del desarrollo sostenible y la erradicación de la pobreza y 2) el marco institucional para el desarrollo sostenible\".",
+  "questionText": "Pregunta 22: De acuerdo con la anterior definición, una política económica es sostenible cuando",
+  "correctOptionId": "C",
+  "aiExplanation": "- **Problema central:** identificar cuándo una política económica es sostenible según la ONU.\n- **Dato clave:** el desarrollo sostenible exige equilibrio entre **desarrollo económico**, **desarrollo social** y **protección del medio ambiente**.\n- **Razonamiento:**\n  - No puede privilegiarse totalmente la riqueza sacrificando el ambiente.\n  - Tampoco implica prohibir toda actividad económica.\n  - La mejor respuesta es la que plantea un equilibrio entre generación de riqueza y protección ambiental.\n- **Conclusión:** una política económica sostenible da igual importancia a la riqueza y al cuidado del ambiente. ",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "privilegia la industrialización para generar empleo por encima de la necesidad de disminuir los gases de efecto invernadero.",
+      "optionFeedback": "- **Incorrecta.** Esta opción rompe el equilibrio del desarrollo sostenible, porque prioriza la industrialización **por encima** de la protección ambiental."
+    },
+    {
+      "optionId": "B",
+      "optionText": "le da la misma importancia a la generación de riqueza y a la explotación ilimitada de los recursos naturales.",
+      "optionFeedback": "- **Incorrecta.** La explotación **ilimitada** de recursos es incompatible con la sostenibilidad y con la protección de las generaciones futuras."
+    },
+    {
+      "optionId": "C",
+      "optionText": "le da la misma importancia a la generación de riqueza para las personas y a la protección del medio ambiente.",
+      "optionFeedback": "- **Correcta.** Resume el principio del desarrollo sostenible: equilibrar **crecimiento económico** y **protección ambiental**, pensando también en el bienestar humano presente y futuro."
+    },
+    {
+      "optionId": "D",
+      "optionText": "prohíbe totalmente aprovechar económicamente los bienes y servicios ecosistémicos de lagos, ríos y bosques para lograr su conservación.",
+      "optionFeedback": "- **Incorrecta.** El desarrollo sostenible no exige prohibición total del uso económico de la naturaleza.\n- Exige un uso **responsable y equilibrado**, no una negación absoluta del aprovechamiento."
+    }
+  ]
+}

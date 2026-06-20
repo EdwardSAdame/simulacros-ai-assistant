@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 15",
+  "questionId": "q_15",
+  "questionImageAiDescription": "Tabla de \\(2\\) columnas: \"Producto\" y \"Peso de cada paquete\". Filas: Arroz -> \\(2\\ \\text{kg}\\); Fríjol -> \\(1\\ \\text{kg}\\); Lenteja -> \\(0,5\\ \\text{kg}\\).",
+  "questionText": "Pregunta 15: Una persona compra \\(3\\) paquetes de arroz, \\(2\\) de fríjol y \\(2\\) de lentejas. La siguiente tabla muestra el peso de cada uno de los paquetes.\n\n¿Cuál tabla muestra el peso total de los paquetes?",
+  "correctOptionId": "D",
+  "aiExplanation": "- **Problema central:** calcular el peso total por producto.\n- **Cálculos:**\n  - Arroz: \\(3\\times 2=6\\ \\text{kg}\\)\n  - Fríjol: \\(2\\times 1=2\\ \\text{kg}\\)\n  - Lenteja: \\(2\\times 0,5=1\\ \\text{kg}\\)\n- **Conclusión:** la tabla correcta debe mostrar \\(6\\ \\text{kg}\\), \\(2\\ \\text{kg}\\) y \\(1\\ \\text{kg}\\).",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "[Imagen de la opción: Tabla con columna \"Producto\" y columna \"Peso total de los paquetes comprados\". Filas: Arroz -> \\(2\\ \\text{kg}\\); Fríjol -> \\(1\\ \\text{kg}\\); Lenteja -> \\(0,5\\ \\text{kg}\\).]",
+      "optionFeedback": "**Incorrecta.** Repite el peso de cada paquete, no el peso total comprado."
+    },
+    {
+      "optionId": "B",
+      "optionText": "[Imagen de la opción: Tabla con columna \"Producto\" y columna \"Peso total de los paquetes comprados\". Filas: Arroz -> \\(5\\ \\text{kg}\\); Fríjol -> \\(3\\ \\text{kg}\\); Lenteja -> \\(7\\ \\text{kg}\\).]",
+      "optionFeedback": "**Incorrecta.** Ninguno de esos totales coincide con multiplicar cantidad por peso unitario."
+    },
+    {
+      "optionId": "C",
+      "optionText": "[Imagen de la opción: Tabla con columna \"Producto\" y columna \"Peso total de los paquetes comprados\". Filas: Arroz -> \\(6\\ \\text{kg}\\); Fríjol -> \\(2\\ \\text{kg}\\); Lenteja -> \\(10\\ \\text{kg}\\).]",
+      "optionFeedback": "**Incorrecta.** Arroz y fríjol están bien, pero lenteja debería ser \\(1\\ \\text{kg}\\), no \\(10\\ \\text{kg}\\)."
+    },
+    {
+      "optionId": "D",
+      "optionText": "[Imagen de la opción: Tabla con columna \"Producto\" y columna \"Peso total de los paquetes comprados\". Filas: Arroz -> \\(6\\ \\text{kg}\\); Fríjol -> \\(2\\ \\text{kg}\\); Lenteja -> \\(1\\ \\text{kg}\\).]",
+      "optionFeedback": "**Correcta.** Corresponde a \\(3\\times 2\\), \\(2\\times 1\\) y \\(2\\times 0,5\\)."
+    }
+  ]
+}

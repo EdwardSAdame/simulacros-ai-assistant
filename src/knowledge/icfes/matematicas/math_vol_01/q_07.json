@@ -1,0 +1,29 @@
+{
+  "questionLabel": "Pregunta 7",
+  "questionId": "q_07",
+  "questionText": "Pregunta 7: Alberto tiene un salario mensual de \\($800.000\\) y quiere ahorrar, cada mes, el \\(2\\%\\) de su sueldo para comprar una trompeta. Para determinar cuánto dinero ahorrará cada mes, realizó los siguientes cálculos:\n\n- \\(8\\times 2=16\\)\n- Como \\(800.000\\) tiene \\(5\\) ceros a la derecha, solo considera \\(3\\), y forma el número \\(1.000\\)\n- Finalmente, con los dos valores anteriores forma el número \\(16.000\\)\n\nEsto quiere decir que Alberto ahorrará \\($16.000\\) cada mes. Estefanía quiere comprar una guitarra y planea seguir la misma estrategia de Alberto, pero ella tiene un sueldo mensual de \\($900.000\\) y quiere ahorrar, cada mes, el \\(3\\%\\).\n\nSi Estefanía ahorra durante \\(10\\) meses consecutivos, ¿cuánto dinero ahorrará en total?",
+  "correctOptionId": "B",
+  "aiExplanation": "- **Problema central:** calcular el \\(3\\%\\) de \\(\\$900.000\\) y luego multiplicar por \\(10\\) meses.\n- **Ahorro mensual:**\n  \\[\n  3\\%\\text{ de }900.000=0,03\\times 900.000=27.000\n  \\]\n- **En \\(10\\) meses:**\n  \\[\n  27.000\\times 10=270.000\n  \\]\n- **Conclusión:** Estefanía ahorrará **\\(\\$270.000\\)** en total.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "\\($297.000\\)",
+      "optionFeedback": "- **Incorrecta.** Ese valor no corresponde a multiplicar \\(27.000\\) por \\(10\\)."
+    },
+    {
+      "optionId": "B",
+      "optionText": "\\($270.000\\)",
+      "optionFeedback": "- **Correcta.** El \\(3\\%\\) de \\(900.000\\) es \\(27.000\\), y en \\(10\\) meses ahorra \\(270.000\\)."
+    },
+    {
+      "optionId": "C",
+      "optionText": "\\($240.000\\)",
+      "optionFeedback": "- **Incorrecta.** Equivale a asumir un ahorro mensual de \\(24.000\\), que no es el \\(3\\%\\) de \\(900.000\\)."
+    },
+    {
+      "optionId": "D",
+      "optionText": "\\($180.000\\)",
+      "optionFeedback": "- **Incorrecta.** Ese valor sería \\(18.000\\times 10\\), pero \\(18.000\\) no es el \\(3\\%\\) de \\(900.000\\)."
+    }
+  ]
+}

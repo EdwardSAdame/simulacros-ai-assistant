@@ -1,0 +1,29 @@
+{
+  "questionLabel": "Pregunta 8",
+  "questionId": "q_08",
+  "questionText": "Pregunta 8: Los vecinos de un barrio están solicitando la reparación y mantenimiento del parque principal, incluyendo los espacios deportivos y recreativos, como la cancha de microfútbol. Esta cancha se encuentra en un alto grado de deterioro, pues es el espacio más utilizado por niños, jóvenes y familias del sector, dado que, años atrás, la cancha de fútbol fue remodelada y reservada para encuentros deportivos especiales.\n\nEl Gobierno municipal se comprometería a remodelar el parque, siempre y cuando se incluya la construcción de la primera pista de patinaje profesional del municipio. Sin embargo, por las dimensiones de la pista, tendría que ocuparse el espacio donde queda la cancha de microfútbol del barrio.\n\n¿De qué manera se relaciona la propuesta de remodelación del Gobierno municipal con los intereses de los vecinos?",
+  "correctOptionId": "C",
+  "aiExplanation": "- **Problema central:** comparar la propuesta del Gobierno con los intereses reales de los vecinos.\n- **Datos relevantes:**\n  - Los vecinos quieren reparar el parque y conservar espacios recreativos.\n  - La cancha de microfútbol es el espacio más usado del barrio.\n  - La nueva pista ocuparía justamente el lugar de esa cancha.\n- **Método lógico:** evaluar si la propuesta satisface o contradice el interés principal de uso comunitario del parque.\n- **Conclusión:** la propuesta **va en contra de los intereses recreativos de los vecinos**, porque elimina el escenario más utilizado por ellos.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "Se ajusta completamente a sus intereses, porque va a mejorar el parque principal del barrio como solicitaron.",
+      "optionFeedback": "- **Incorrecta.** No se ajusta completamente, porque la mejora del parque implicaría perder la cancha de microfútbol, que es el espacio más usado."
+    },
+    {
+      "optionId": "B",
+      "optionText": "Beneficia a los vecinos del barrio y al municipio, porque mejora el parque y agrega una pista profesional.",
+      "optionFeedback": "- **Incorrecta.** Puede beneficiar al municipio en términos generales, pero no responde al interés principal de los vecinos si desaparece su cancha más utilizada."
+    },
+    {
+      "optionId": "C",
+      "optionText": "Va en contra de los intereses de recreación de los vecinos, porque va a quitar el escenario que más utilizan.",
+      "optionFeedback": "- **Correcta.** La propuesta elimina la cancha de microfútbol, que es justamente el espacio recreativo central para niños, jóvenes y familias del barrio."
+    },
+    {
+      "optionId": "D",
+      "optionText": "Afecta parcialmente los intereses del municipio, porque debe pagar la pista y además la remodelación.",
+      "optionFeedback": "- **Incorrecta.** La pregunta pide la relación con los intereses de los vecinos, no con los costos o intereses administrativos del municipio."
+    }
+  ]
+}

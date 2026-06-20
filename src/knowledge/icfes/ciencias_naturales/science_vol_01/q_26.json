@@ -1,0 +1,29 @@
+{
+  "questionLabel": "Pregunta 26",
+  "questionId": "q_26",
+  "questionText": "Pregunta 26: Un estudiante realizó un experimento para analizar el crecimiento de un grupo de bacterias durante un periodo de \\(14\\) horas. Los datos que obtuvo le permitieron identificar cuatro etapas diferentes, que se presentaron en el siguiente orden:\n\n**Etapa 1:** las bacterias se adaptan al nuevo medio, comienzan a madurar y no pueden dividirse; no hay crecimiento.\n\n**Etapa 2:** se caracteriza por la duplicación de las bacterias; su crecimiento es exponencial.\n\n**Etapa 3:** los nutrientes empiezan a agotarse y se acumulan toxinas; el número de bacterias permanece constante.\n\n**Etapa 4:** los nutrientes se terminan y el nivel de toxinas es muy alto, por lo que las bacterias terminan muriendo progresivamente.\n\n¿Cuál de los siguientes formatos representa los datos obtenidos por el estudiante sobre el crecimiento del grupo bacteriano?",
+  "correctOptionId": "C",
+  "aiExplanation": "- **Problema central:** identificar el formato que represente las cuatro etapas clásicas del crecimiento bacteriano.\n- **Forma esperada de la curva:**\n  - fase de adaptación: tramo horizontal sin crecimiento;\n  - fase exponencial: ascenso;\n  - fase estacionaria: meseta;\n  - fase de muerte: descenso.\n- **Análisis:** la opción C muestra exactamente esa secuencia en un gráfico de líneas con tiempo y número de bacterias.\n- **Conclusión:** la respuesta correcta es **C**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "[Imagen de la opción: Gráfico de líneas titulado \"Curva de crecimiento bacteriano\". Eje horizontal tiempo hasta \\(16\\ \\text{h}\\), eje vertical número de bacterias \\((\\log)\\). La curva inicia en \\(0\\), crece linealmente desde el comienzo hasta cerca de \\(5\\) en \\(5\\ \\text{h}\\), permanece constante entre aproximadamente \\(5\\) y \\(9\\ \\text{h}\\), y luego desciende linealmente hasta \\(0\\) en \\(14\\ \\text{h}\\). No presenta fase inicial de adaptación sin crecimiento.]",
+      "optionFeedback": "- **Incorrecta.** No incluye una fase inicial de adaptación sin crecimiento; empieza aumentando desde el inicio."
+    },
+    {
+      "optionId": "B",
+      "optionText": "[Imagen de la opción: Tabla dispuesta verticalmente con 3 columnas: Crecimiento bacteriano, Tiempo (h) y Número de bacterias (log). Contiene 14 filas con los siguientes valores correspondientes (Crecimiento, Tiempo, Número): (0, 1, 0), (1, 2, 1), (2, 3, 1), (3, 4, 1), (4, 5, 2), (5, 6, 3), (6, 7, 4), (7, 8, 5), (8, 9, 5), (9, 10, 4), (10, 11, 3), (11, 12, 2), (12, 13, 1), (13, 14, 0).]",
+      "optionFeedback": "- **Incorrecta.** Aunque contiene datos, no es el formato más claro ni representa directamente las cuatro etapas como la curva de crecimiento esperada."
+    },
+    {
+      "optionId": "C",
+      "optionText": "[Imagen de la opción: Gráfico de líneas titulado \"Curva de crecimiento bacteriano\". Eje horizontal tiempo hasta \\(16\\ \\text{h}\\), eje vertical número de bacterias \\((\\log)\\). La curva empieza con un tramo horizontal alrededor de \\(1\\) desde \\(0\\) hasta cerca de \\(3\\ \\text{h}\\) (fase sin crecimiento), luego asciende hasta alrededor de \\(5\\) entre \\(3\\) y \\(7\\ \\text{h}\\), permanece constante cerca de \\(5\\) entre \\(7\\) y \\(9\\ \\text{h}\\), y finalmente desciende progresivamente hasta \\(0\\) en \\(14\\ \\text{h}\\).]",
+      "optionFeedback": "- **Correcta.** Muestra la secuencia esperada: adaptación, crecimiento exponencial, fase estacionaria y muerte progresiva."
+    },
+    {
+      "optionId": "D",
+      "optionText": "[Imagen de la opción: Tabla con dos columnas: \"Crecimiento bacteriano\" y \"Número de bacterias \\((\\log)\\)\". Filas para \\(0\\) a \\(14\\): \\(1,1,1,1,2,3,4,5,5,5,4,3,2,1,0\\). La primera columna no representa tiempo explícitamente y el formato no identifica el eje temporal como horas.]",
+      "optionFeedback": "- **Incorrecta.** No representa de forma explícita el tiempo en horas ni la forma típica de la curva de crecimiento bacteriano."
+    }
+  ]
+}

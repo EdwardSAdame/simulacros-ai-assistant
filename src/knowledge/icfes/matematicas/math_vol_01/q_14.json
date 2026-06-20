@@ -1,0 +1,31 @@
+{
+  "questionLabel": "Pregunta 14",
+  "questionId": "q_14",
+  "sectionImageAiDescription": "Tabla analítica de 2 columnas y 6 filas (incluyendo encabezados). Todo el texto y los valores numéricos deben estar estrictamente alineados a la izquierda (left-aligned). Columna 1: \"Candidato\". Columna 2: \"Votos\". Fila 1 de datos: \"Candidato E\", \\(2.000\\). Fila 2 de datos: \"Candidato F\", \\(5.000\\). Fila 3 de datos: \"Candidato G\", \\(4.500\\). Fila 4 de datos: \"Candidato H\", \\(7.000\\). Fila 5 de datos: \"Candidato I\", \\(3.400\\).",
+  "questionImageAiDescription": "Gráfico circular (pie chart) analítico, sin marcos ni bordes externos. Contiene 5 sectores proporcionales rellenos con colores pastel desvanecidos (faded colours), estrictamente sin texturas. Los datos matemáticos para renderizar las proporciones exactas son: Candidato E \\(2.000\\), Candidato F \\(5.000\\), Candidato G \\(4.500\\), Candidato H \\(7.000\\), Candidato I \\(3.400\\). Cada sector debe estar etiquetado claramente indicando a qué candidato pertenece (ej. 'Candidato H').",
+  "questionText": "Pregunta 14: En una encuesta sobre la intención de voto para la elección de presidente en un país, se registraron los resultados que se observan en tabla y en la gráfica.\n\nDe acuerdo con lo anterior, ¿cuál de las siguientes afirmaciones es falsa?",
+  "correctOptionId": "C",
+  "aiExplanation": "- **Problema central:** identificar la afirmación falsa sobre la relación entre tabla y gráfica circular.\n- **Análisis:**\n  - Con la **tabla** sí se pueden construir las proporciones de la gráfica. Entonces A es verdadera.\n  - Con la **gráfica** sí se puede ver quién tiene mayor intención de voto. Entonces B es verdadera.\n  - Con la **tabla** también se puede calcular la proporción de cada candidato respecto al total. Entonces D es verdadera.\n  - Pero con la **gráfica circular** no se obtienen con exactitud todos los valores numéricos de la tabla, salvo que estén escritos explícitamente, y aquí la función principal es mostrar proporciones.\n- **Conclusión:** la afirmación falsa es la **C**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "Con la información de la tabla se obtienen los datos de la gráfica.",
+      "optionFeedback": "- **Incorrecta como respuesta.** Esta afirmación es verdadera, porque con los votos de la tabla se pueden calcular las proporciones del gráfico circular."
+    },
+    {
+      "optionId": "B",
+      "optionText": "Con la información de la gráfica se obtiene cuál es el candidato con mayor intención de voto.",
+      "optionFeedback": "- **Incorrecta como respuesta.** Esta afirmación es verdadera: el sector más grande permite identificar al candidato con mayor intención de voto."
+    },
+    {
+      "optionId": "C",
+      "optionText": "Con la información de la gráfica se obtienen los datos de la tabla.",
+      "optionFeedback": "- **Correcta.** Esta es la afirmación **falsa**.\n- La gráfica circular muestra proporciones relativas, pero no necesariamente permite recuperar con exactitud todos los datos numéricos de la tabla."
+    },
+    {
+      "optionId": "D",
+      "optionText": "Con la información de la tabla se obtiene la proporción entre los votos por un candidato y el total.",
+      "optionFeedback": "- **Incorrecta como respuesta.** Esta afirmación es verdadera, porque con la tabla se puede dividir el número de votos de un candidato entre el total de votos."
+    }
+  ]
+}

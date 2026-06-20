@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 14",
+  "questionId": "q_14",
+  "sectionText": "Un líder político afirmó lo siguiente durante una entrevista:\n\n\"Volveremos a participar en las elecciones cuando:\n\n1. El calendario electoral vuelva a ser estable y no haya intervención por parte del presidente.\n2. Aumenten los controles por parte de entes independientes en los puestos de votación.\n3. Los ciudadanos no sufran represalias por expresar su preferencia electoral.\n4. Se les permita a los ciudadanos crear y pertenecer a partidos políticos diferentes al de Gobierno.\n5. Las decisiones tomadas en las urnas se respeten y los candidatos elegidos puedan posesionarse\".",
+  "questionText": "Pregunta 14: ¿Cuál es el propósito de las medidas propuestas?",
+  "correctOptionId": "D",
+  "aiExplanation": "- **Problema central:** determinar para qué sirven las medidas propuestas.\n- **Datos del enunciado:** se pide estabilidad del calendario, controles independientes, ausencia de represalias, pluralismo de partidos y respeto por los resultados electorales.\n- **Razonamiento:**\n  - Todas estas condiciones apuntan a elecciones libres, competitivas y con garantías para la oposición.\n  - Eso fortalece la democracia representativa y reduce obstáculos al ejercicio electoral.\n- **Conclusión:** las medidas buscan **fortalecer la democracia representativa** y garantizar condiciones reales para la oposición. ",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "Establecer límites a la democracia, modificando el calendario electoral y concentrando el poder en los partidos políticos existentes.",
+      "optionFeedback": "- **Incorrecta.** Las propuestas buscan lo contrario: estabilidad del calendario y pluralismo político.\n- No pretenden concentrar poder, sino abrir condiciones democráticas."
+    },
+    {
+      "optionId": "B",
+      "optionText": "Fortalecer la democracia, priorizando la gobernabilidad del partido político en el poder y creando un consenso nacional, al disminuir la oposición.",
+      "optionFeedback": "- **Incorrecta.** La propuesta no busca disminuir la oposición, sino **garantizarla**.\n- Además, no prioriza al partido de Gobierno, sino que limita su intervención."
+    },
+    {
+      "optionId": "C",
+      "optionText": "Establecer límites a la democracia, controlando el número de partidos que pueden postular candidatos y debilitando la figura presidencial.",
+      "optionFeedback": "- **Incorrecta.** El punto \\(4\\) pide justamente permitir la creación de partidos diferentes al de Gobierno.\n- No se trata de restringir el pluralismo, sino de ampliarlo."
+    },
+    {
+      "optionId": "D",
+      "optionText": "Fortalecer la democracia representativa, garantizando condiciones para ejercer la oposición y disminuyendo los límites al ejercicio electoral.",
+      "optionFeedback": "- **Correcta.** Todas las medidas mencionadas apuntan a elecciones con garantías: controles independientes, libertad política, pluralismo y respeto a los resultados.\n- Eso fortalece la **democracia representativa** y la participación opositora."
+    }
+  ]
+}

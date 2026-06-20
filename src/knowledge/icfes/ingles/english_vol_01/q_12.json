@@ -1,0 +1,26 @@
+{
+  "questionLabel": "Pregunta 12",
+  "questionId": "q_12",
+  "sectionText": "¿Dónde puede ver estos avisos?\n\nEn las preguntas \\(11 - 15\\), marque \\(A\\), \\(B\\) o \\(C\\) en su hoja de respuestas.",
+  "questionImageAiDescription": "Rectangular framed notice with three centered lines of text. Top line: \"NO CAMERAS\". Second line: \"NO PHOTOS\". Third line: \"Do not take pictures of the tigers\".",
+  "questionText": "Pregunta 12: NO CAMERAS\nNO PHOTOS\nDo not take pictures of the tigers",
+  "correctOptionId": "C",
+  "aiExplanation": "- **Core problem:** Identify where a sign about not taking pictures of tigers would be found.\n- **Relevant data:** The word *tigers* is decisive.\n- **Method:** Choose the place where people normally see tigers.\n- **Conclusion:** Tigers are found **at the zoo**, so the correct answer is **C**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "on the beach",
+      "optionFeedback": "- **Incorrect.** Tigers are not normally found on a beach."
+    },
+    {
+      "optionId": "B",
+      "optionText": "in a pet shop",
+      "optionFeedback": "- **Incorrect.** Pet shops do not normally keep tigers."
+    },
+    {
+      "optionId": "C",
+      "optionText": "at the zoo",
+      "optionFeedback": "- **Correct.** A zoo is the place where visitors might see tigers and be told not to take photos."
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 22",
+  "questionId": "q_22",
+  "questionImageAiDescription": "Cuadro comparativo con dos columnas tituladas \"Modelo 1\" y \"Modelo 2\". En el Modelo 1 aparece la secuencia: huevo, seguido de un insecto juvenil similar al adulto con la etiqueta \"Ausencia de alas\", y luego \"Presencia de alas\" hacia la etapa adulta, representada por un saltamontes. En el Modelo 2 aparece la secuencia: huevo, seguido de larva, luego pupa y finalmente la etapa adulta, representada por un mosquito.",
+  "questionText": "Pregunta 22: La metamorfosis en los insectos puede seguir uno de los dos modelos descritos a continuación:\n\n- **Modelo 1 de crecimiento gradual**: en el cual el insecto, en sus primeras etapas de vida, es muy similar a los adultos.\n- **Modelo 2 con transformaciones bruscas**: en el cual las larvas son diferentes a los adultos y existe una fase intermedia o pupal entre la larva y el adulto.\n\nA continuación, se muestran los dos modelos:\n\nAhora, observe el siguiente ciclo de vida:\n\n¿A qué modelo pertenece el tipo de metamorfosis que tienen las mariposas?",
+  "correctOptionId": "B",
+  "aiExplanation": "- **Problema central:** identificar el modelo de metamorfosis de la mariposa.\n- **Dato biológico clave:** la mariposa pasa por las etapas **huevo \\(\u001a\\) larva \\(\u001a\\) pupa \\(\u001a\\) adulto**, con cambios drásticos entre etapas.\n- **Análisis:** eso corresponde al **Modelo 2**, que incluye transformaciones bruscas y fase pupal.\n- **Conclusión:** la respuesta correcta es **B**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "Al modelo \\(1\\), porque la mariposa mantiene su forma en todas las etapas del ciclo de vida.",
+      "optionFeedback": "- **Incorrecta.** La mariposa no mantiene la misma forma: oruga, crisálida y adulto son etapas muy distintas."
+    },
+    {
+      "optionId": "B",
+      "optionText": "Al modelo \\(2\\), porque en el ciclo de vida de la mariposa existen transformaciones drásticas.",
+      "optionFeedback": "- **Correcta.** La mariposa presenta metamorfosis completa, con larva y pupa antes del estado adulto."
+    },
+    {
+      "optionId": "C",
+      "optionText": "Al modelo \\(1\\), porque las alas de la mariposa aparecen en estadios intermedios.",
+      "optionFeedback": "- **Incorrecta.** En las mariposas hay fase pupal y cambios bruscos, por lo que no corresponde al crecimiento gradual del modelo \\(1\\)."
+    },
+    {
+      "optionId": "D",
+      "optionText": "Al modelo \\(2\\), porque el ciclo de vida de la mariposa inicia con la fase de huevo.",
+      "optionFeedback": "- **Incorrecta.** Empezar por huevo no distingue entre modelos, ya que ambos inician así. Lo decisivo es la presencia de larva y pupa con cambios drásticos."
+    }
+  ]
+}

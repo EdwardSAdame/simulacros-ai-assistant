@@ -1,0 +1,29 @@
+{
+  "questionLabel": "Pregunta 17",
+  "questionId": "q_17",
+  "questionText": "Pregunta 17: Un grupo de campesinos productores de papa se ha visto afectado por la entrada en vigencia de un tratado de libre comercio que ha permitido el ingreso al país de alimentos extranjeros que son más económicos, incluyendo la papa. La situación se ha complicado tanto para ellos, que sus ingresos se han reducido considerablemente y se ha puesto en riesgo su permanencia como agricultores. Esto afecta aspectos esenciales de su vida, dado que muchas de sus tradiciones y elementos culturales están relacionados con el cultivo de la tierra. Los campesinos mencionan que los políticos prometieron, en sus campañas, que los tratados no los afectarían, pues sus cultivos y productos serían protegidos.\n\nAnte esta situación, deciden rescatar una antigua tradición: los mercados campesinos, donde pueden vender sus productos sin intermediarios y a precios más bajos. Con esto se busca mejorar la calidad de vida de los productores, que más personas accedan a alimentos de alta calidad y que sus productos compitan en mejores condiciones frente a los productos extranjeros. Ahora bien, se busca ampliar este tipo de mercados a todo el país, pues la medida ha sido altamente beneficiosa para los cultivadores de papa, para los consumidores y para la tradición, pues se rescatan prácticas olvidadas.\n\n¿Cuáles de las siguientes dimensiones se privilegiaron en la solución propuesta por los campesinos?",
+  "correctOptionId": "C",
+  "aiExplanation": "- **Problema central:** identificar qué dimensiones prioriza la solución de los mercados campesinos.\n- **Datos clave:**\n  - Permiten vender sin intermediarios y competir mejor \\(dimensión **económica**\\).\n  - Rescatan una antigua tradición y prácticas olvidadas \\(dimensión **cultural**\\).\n- **Conclusión:** la solución privilegia las dimensiones **económica y cultural**. ",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "Social y política.",
+      "optionFeedback": "- **Incorrecta.** Aunque hay efectos sociales, la propuesta no se centra en participación política ni en reformas institucionales.\n- El texto destaca más la mejora en ingresos y el rescate de tradiciones."
+    },
+    {
+      "optionId": "B",
+      "optionText": "Cultural y social.",
+      "optionFeedback": "- **Incorrecta.** La dimensión cultural sí está presente, pero falta la **económica**, que es fundamental porque la solución mejora condiciones de venta y competencia."
+    },
+    {
+      "optionId": "C",
+      "optionText": "Económica y cultural.",
+      "optionFeedback": "- **Correcta.** Los mercados campesinos mejoran la comercialización de los productos \\(dimensión económica\\) y rescatan una tradición campesina olvidada \\(dimensión cultural\\)."
+    },
+    {
+      "optionId": "D",
+      "optionText": "Política y comercial.",
+      "optionFeedback": "- **Incorrecta.** Aunque hay un componente comercial, la opción reemplaza indebidamente la dimensión cultural por una política que no es la central en la solución propuesta."
+    }
+  ]
+}

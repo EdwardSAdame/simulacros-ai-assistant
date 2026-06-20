@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 16",
+  "questionId": "q_16",
+  "sectionText": "En una ciudad se discute cuál es la mejor manera de reducir el problema de la obesidad infantil, pues el número de casos de esta enfermedad ha ido aumentando significativamente en los últimos años. Al respecto, una organización internacional que realiza campañas para prevenir el sobrepeso y la obesidad infantil, propone organizar espacios en los colegios de la ciudad para capacitar a las familias de los estudiantes sobre la importancia de la alimentación saludable y de la actividad física. Por su parte, un grupo de padres de familia está liderando una campaña para exigir a las autoridades locales que las grandes empresas productoras de bebidas azucaradas, y otros productos empacados altos en grasa y sodio, incluyan una etiqueta que alarme y explique la baja calidad nutricional de estos productos. Finalmente, los empresarios que producen alimentos empacados altos en grasa y sodio consideran que incluir etiquetas en sus productos generaría una alarma innecesaria en la población y que, si el consumo de estos productos disminuye, tendrían que despedir trabajadores porque no podrían pagar sus salarios.",
+  "questionText": "Pregunta 16: ¿Cuál de las siguientes soluciones propuestas para reducir el problema de la obesidad infantil es incompatible con los intereses de los empresarios?",
+  "correctOptionId": "C",
+  "aiExplanation": "- **Problema central:** identificar qué propuesta choca con los intereses de los empresarios de productos altos en grasa y sodio.\n- **Datos relevantes:**\n  - Los empresarios temen que disminuya el consumo de sus productos.\n  - Consideran que medidas de advertencia o restricción afectan sus ventas.\n- **Método lógico:** buscar la opción que reduzca de forma directa la comercialización de esos productos.\n- **Conclusión:** la solución incompatible es **prohibir en los colegios la venta y distribución de productos empacados altos en grasa y sodio**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "Realizar talleres y campañas educativas orientadas a promover el deporte y la actividad física.",
+      "optionFeedback": "- **Incorrecta.** Esta medida no afecta directamente la venta de los productos de los empresarios; se centra en hábitos saludables."
+    },
+    {
+      "optionId": "B",
+      "optionText": "Promover un programa de refrigerios balanceados en los colegios que incluya porciones de diferentes tipos de alimentos.",
+      "optionFeedback": "- **Incorrecta.** Aunque puede competir indirectamente con productos poco saludables, no los prohíbe de forma directa."
+    },
+    {
+      "optionId": "C",
+      "optionText": "Aprobar una ley que prohíba en los colegios la venta y distribución de productos empacados altos en grasa y sodio.",
+      "optionFeedback": "- **Correcta.** Esta medida afecta directamente el mercado de esos productos en los colegios, por lo que es claramente incompatible con los intereses comerciales de los empresarios."
+    },
+    {
+      "optionId": "D",
+      "optionText": "Crear una comisión de padres que trabaje en temas de nutrición y prácticas saludables capacitando a los colegios y las familias.",
+      "optionFeedback": "- **Incorrecta.** Es una propuesta educativa y organizativa; no restringe de manera inmediata la comercialización de los productos."
+    }
+  ]
+}

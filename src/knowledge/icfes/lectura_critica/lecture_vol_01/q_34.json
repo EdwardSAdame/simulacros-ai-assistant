@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 34",
+  "questionId": "q_34",
+  "sectionText": "Existen argumentos en contra de la preservación de las especies, esgrimidos por quienes no consideran fatal que la humanidad colabore en la desaparición del escenario de otras especies. Quizás el más extendido es el de que la extinción es un proceso evolutivo perfectamente natural, que se ha venido produciendo durante millones de años con o sin la participación humana. ¿Por qué hay que preocuparse si en realidad se está ayudando a la naturaleza a seguir su curso?\n\nCuando en 1859, Charles Darwin expuso la teoría de la evolución, junto a las correspondientes pruebas a su favor, no proponía solo la selección natural como fuerza directriz del proceso evolutivo, sino que reconocía también la inevitabilidad de la extinción. Decía Darwin que “como las nuevas formas se producen lenta y constantemente, a menos de que admitamos que el número de formas específicas puede seguir aumentando perpetua y casi indefinidamente, es inevitable que haya grupos que se extingan”.\n\nAntes de Darwin, la idea de la extinción ya había sido tratada por varios geólogos y naturalistas; sin embargo, a mediados del siglo XIX, el concepto resultaba escandaloso para la mayoría de personas. Se creía que todo ser vivo había sido creado por Dios, según una secuencia de complejidad creciente, y que las especies aparecieron en un único acto creador, así que la visión “creacionista” de las especies no contemplaba la extinción. No obstante, actualmente parece haberse cerrado el ciclo; no solo ya no escandaliza la idea de la extinción, sino que se toma el nombre de Darwin en vano cuando se pretende justificar el exterminio de las otras especies a manos del *Homo sapiens*.\n\nEs evidente que quienes recurren a este tipo de argumentos pasan por alto un dato importante, y es que la humanidad ya ha elevado la tasa de extinción de especies muy por encima de las tasas históricas de aparición de las mismas. Las especies desaparecen ahora mucho más deprisa de lo que aparecen, y la tasa de desaparición promete seguir aumentando vertiginosamente. El argumento que justifica el exterminio recuerda a aquel hombre que, al ver cómo el agua escapaba por unas grietas cada vez más anchas del muro de una gran presa, decía a las gentes que vivían río abajo: “No hay por qué preocuparse; después de todo, el agua siempre ha salido por el sobradro”.",
+  "questionText": "Pregunta 34: Considere el siguiente texto:\n\n“¡Ah, la madre naturaleza necesita favores! Debió pensarlo cuando nos asoló con inundaciones, sequías y monos enfermos. ¿Ella inició la lucha por sobrevivir y ahora quiere renunciar porque está perdiendo? Pues yo digo, ¡mala noche!”. (Montgomery Burns, *Los Simpsons*).\n\nQuienes están en contra de la preservación de las especies podrían argumentar que la idea del párrafo anterior",
+  "correctOptionId": "D",
+  "aiExplanation": "- **Problema central:** identificar cómo interpretarían ese texto quienes están contra la preservación.\n- La cita ridiculiza la idea de ayudar a la naturaleza y presenta la extinción como parte de una lucha natural por sobrevivir.\n- Esa postura coincide con quienes creen que la desaparición de especies es aceptable por ser natural e inevitable.\n- **Conclusión:** para ellos, esa idea **apoya** su tesis al ofrecer otra forma de entender la inevitabilidad de la extinción. Respuesta: **D**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "contradice su tesis, porque favorece el rechazo del autor a quienes dudan de la extinción.",
+      "optionFeedback": "- **Incorrecta.** La cita no rechaza la idea de la extinción natural; más bien la caricaturiza desde una posición afín a quienes no ven problema en ella."
+    },
+    {
+      "optionId": "B",
+      "optionText": "complementa su tesis, porque contradice la defensa del autor de que la extinción es antinatural.",
+      "optionFeedback": "- **Incorrecta.** El autor no defiende que toda extinción sea antinatural; critica el aumento **anómalo** de la extinción causada por humanos."
+    },
+    {
+      "optionId": "C",
+      "optionText": "debilita su tesis, porque caricaturiza el argumento de que la extinción es aceptable por tratarse de un proceso natural.",
+      "optionFeedback": "- **Incorrecta.** Aunque la cita tiene tono caricaturesco, la pregunta pide cómo la verían **quienes están en contra de la preservación**, y ellos la tomarían como apoyo, no como debilitamiento."
+    },
+    {
+      "optionId": "D",
+      "optionText": "apoya su tesis, porque presenta una nueva manera de comprender la teoría de la inevitabilidad de la extinción.",
+      "optionFeedback": "- **Correcta.** Desde la perspectiva de quienes se oponen a la preservación, la cita respalda su postura al presentar la extinción como parte de una lucha natural e inevitable."
+    }
+  ]
+}

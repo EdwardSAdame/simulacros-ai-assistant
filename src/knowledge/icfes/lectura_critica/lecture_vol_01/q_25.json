@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 25",
+  "questionId": "q_25",
+  "sectionImageAiDescription": "Página de cómic en estilo caricatura (blanco, negro y gris) con 6 viñetas.\n\nViñeta 1:\n- Imagen: Exterior de un edificio escolar con personajes dibujados\n  con trazos expresivos y caricaturescos en el patio.\n- Narración: 'El director de la escuela y mi padre creían que\n  mi nivel de Corán* era muy deficiente.'\n\nViñeta 2:\n- Imagen: Primer plano de un niño rubio con nariz prominente\n  y expresión de agobio/estrés, señalando un libro abierto.\n- Texto: 'El árabe del Corán no es el mismo que\n  el que se hablaba en clase'\n\nViñeta 3:\n- Imagen: La maestra (joven, cabello oscuro) y el niño en un pupitre.\n- Narración: 'Así que me obligaron a pasarme todos los recreos\n  haciendo recuperación con la maestra.'\n- Diálogo (Maestra): '¡Venga, Riad!' / 'Explícame de qué habla este versículo.'\n- Nota: 'Como todo el mundo quería matarme a la hora del recreo, me venía bien'\n\nViñeta 4:\n- Imagen: La maestra estira los brazos hacia arriba con la boca abierta\n  en un gran bostezo o grito. El niño la mira asustado.\n- Narración: 'Yo me preguntaba si iba en serio o disimulaba.\n  Si apenas conseguía leer...'\n- Diálogos: Maestra: 'BUAAA' / Niño: 'Yo... No sé...'\n\nViñeta 5:\n- Imagen: La maestra se inclina con expresión paciente y amable\n  hacia el libro; el niño la mira con atención.\n- Diálogo: 'Venga, no pasa nada, volvemos a empezar, escucha bien.'\n\nViñeta 6:\n- Imagen: Primer plano del rostro sereno y sonriente de la maestra.\n- Narración: 'Olía a una fragancia jabonosa y, de fondo,\n  a un sudor embriagador y reconfortante.'\n- Diálogo (Maestra): 'Bismilá arramán arrahím.'\n- Nota: 'Escucharla era muy agradable'",
+  "questionText": "Pregunta 25: En el sexto recuadro del cómic, ¿cuál es la relación entre el texto en cursiva debajo de la flecha y el texto dentro del globo?",
+  "correctOptionId": "C",
+  "aiExplanation": "- **Problema central:** establecer la relación entre narración en cursiva y diálogo en globo en la viñeta 6.\n- En el globo, la maestra dice: *Bismilá arramán arrahím*.\n- Debajo, la nota en cursiva dice: *Escucharla era muy agradable*.\n- La cursiva expresa la reacción o valoración del niño respecto de la voz de la maestra.\n- **Conclusión:** la respuesta correcta es **C**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "Mediante el texto en cursiva la mujer corrige la pronunciación de la niña, cuyas palabras aparecen en el globo.",
+      "optionFeedback": "- **Incorrecta.** La cursiva no corrige pronunciación; expresa una impresión subjetiva del narrador."
+    },
+    {
+      "optionId": "B",
+      "optionText": "Con el texto en el globo la niña busca hacer una pregunta, que la mujer responde con el texto en cursiva.",
+      "optionFeedback": "- **Incorrecta.** El globo no contiene una pregunta de una niña, sino una frase pronunciada por la maestra."
+    },
+    {
+      "optionId": "C",
+      "optionText": "Mediante el texto en cursiva la niña expresa gusto por la voz de la mujer, cuyas palabras están en el globo.",
+      "optionFeedback": "- **Correcta.** La frase en cursiva expresa agrado al escuchar la voz de la maestra, cuya habla aparece en el globo."
+    },
+    {
+      "optionId": "D",
+      "optionText": "Con el texto en el globo la mujer responde las observaciones de la niña, que aparecen en cursiva.",
+      "optionFeedback": "- **Incorrecta.** No hay una respuesta a observaciones previas; la cursiva es un comentario del narrador sobre lo que oye."
+    }
+  ]
+}

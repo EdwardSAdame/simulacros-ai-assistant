@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 1",
+  "questionId": "q_01",
+  "sectionText": "A continuación, se presentan dos textos escritos por Antonio Nariño sobre la polémica entre centralistas y federalistas durante la independencia de la Nueva Granada. El primero fue escrito en 1811, cuando acababan de ocurrir los primeros gritos de independencia a lo largo de todo el reino. El segundo, mucho más tardío, se publicó en 1823, cuando las últimas acciones militares contra los españoles se estaban librando en lo que entonces era ya Colombia.\n\n1. \"[...] el sistema de convertir nuestras provincias en estados soberanos para hacer la federación es una locura hija de la precipitación de nuestros juicios y de una ambición mal entendida. No es la extensión del terreno, no es la población, no son las riquezas ni las luces que forman la fuerza de un imperio por sí solas: la suma total de todas estas cosas forman su fuerza; y si nosotros en lugar de acumular nuestras luces, nuestras riquezas y nuestras fuerzas, las dividimos en otras tantas partes como tenemos de provincias, ¿cuál será el resultado?\".\n\n2. \"[...] el Gobierno federal es [...] el más adecuado para la libertad y el menos expuesto al abuso por el contrapeso que oponen las partes federadas. De aquí se deduce que, mientras tengamos sobre nosotros el Gobierno español, mientras este no reconozca nuestra independencia, lo que nos conviene es unidad de acción y el sistema centralista; pero que reconocida la independencia por la España, hallándonos sin peligros y con los elementos necesarios, la federación será la llama de la libertad\".",
+  "questionText": "Pregunta 1: En el plazo de doce años, Antonio Nariño cambió su percepción sobre el sistema federalista: pasó de atacarlo en 1811 a defenderlo en 1823. ¿Qué razón explica el cambio de perspectiva del prócer de la independencia sobre este modelo político?",
+  "correctOptionId": "D",
+  "aiExplanation": "- **Problema central:** explicar por qué Nariño pasa de criticar el federalismo en \\(1811\\) a defenderlo en \\(1823\\).\n- **Datos clave del texto:**\n  - En \\(1811\\), Nariño afirma que dividir las provincias en estados soberanos debilita las fuerzas necesarias para enfrentar la situación política y militar.\n  - En \\(1823\\), dice explícitamente que **mientras exista el peligro español conviene el centralismo**, pero **una vez reconocida la independencia**, la federación favorece la libertad.\n- **Método lógico:** comparar las condiciones históricas de ambos momentos.\n  - En \\(1811\\), la independencia no estaba consolidada; por eso defendía la **unidad de acción**.\n  - En \\(1823\\), con la independencia más avanzada, considera que el federalismo ya es conveniente para preservar la libertad.\n- **Conclusión:** el cambio no se debe a que Nariño alabara siempre el federalismo o el centralismo, sino a que veía cada sistema como adecuado según el contexto histórico. **Rechazó el federalismo en guerra y lo defendió para un país libre.**",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "Porque, para Nariño, el modelo centralista garantizaba la unión de fuerzas de todas las provincias en la guerra contra España, algo necesario en 1823.",
+      "optionFeedback": "- **Incorrecta.** La primera parte sí recoge una idea del texto: el centralismo servía para unir fuerzas contra España.\n- Pero falla al decir que eso era lo necesario en \\(1823\\). En ese segundo texto, Nariño sostiene que, con la independencia reconocida, **la federación** sería adecuada para la libertad."
+    },
+    {
+      "optionId": "B",
+      "optionText": "Porque, para Nariño, el modelo federalista velaba por las libertades individuales, pero imponía límites en el ejercicio del poder de cada provincia federada.",
+      "optionFeedback": "- **Incorrecta.** El texto de \\(1823\\) sí relaciona federalismo con libertad y contrapesos al poder.\n- Sin embargo, eso **no explica el cambio temporal** entre \\(1811\\) y \\(1823\\). La razón del cambio está en el contexto de guerra e independencia, no en una supuesta limitación del poder de cada provincia como idea central."
+    },
+    {
+      "optionId": "C",
+      "optionText": "Porque, para Nariño, el modelo centralista era adecuado para la Nueva Granada, ya que se asemejaba al modelo de administración que tenía la Corona española.",
+      "optionFeedback": "- **Incorrecta.** Nariño no defiende el centralismo porque se parezca al modelo español.\n- Al contrario, lo justifica como una estrategia de **unidad de acción** mientras existía la amenaza de España. La semejanza con la administración colonial no aparece como argumento en los fragmentos."
+    },
+    {
+      "optionId": "D",
+      "optionText": "Porque, para Nariño, el modelo federalista era útil en países libres y, por tanto, lo rechaza en 1811, pero lo defiende en 1823 con la independencia consolidada.",
+      "optionFeedback": "- **Correcta.** Resume con precisión la idea central de los dos textos.\n- Nariño considera que en medio de la guerra conviene el **centralismo** para mantener la unidad, pero una vez alcanzada o consolidada la independencia, el **federalismo** favorece la libertad."
+    }
+  ]
+}

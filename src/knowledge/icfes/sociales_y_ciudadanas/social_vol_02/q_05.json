@@ -1,0 +1,29 @@
+{
+  "questionLabel": "Pregunta 5",
+  "questionId": "q_05",
+  "questionText": "Pregunta 5: En el marco del conflicto colombiano, una comunidad indígena fue víctima de despojo de tierras por parte de un actor armado. Años después, el cabildo indígena que representa a la comunidad reclama la restitución de la porción de tierra perdida por el resguardo, la cual fue comprada por una familia campesina a un tercero. Al respecto, los indígenas manifiestan que la Constitución política respalda su derecho a la propiedad colectiva, mientras que la familia campesina expresa que el pago que hicieron por la tierra les da la propiedad sobre la misma.\n\nFrente a este conflicto, ¿qué aspecto en común está presente en los reclamos de la comunidad indígena y de la familia campesina?",
+  "correctOptionId": "A",
+  "aiExplanation": "- **Problema central:** hallar el elemento común entre dos reclamos de propiedad sobre la misma tierra.\n- **Datos relevantes:**\n  - La comunidad indígena reclama restitución por despojo.\n  - La familia campesina alega haber comprado la tierra.\n  - Ambos grupos son poblaciones rurales vulnerables y consideran la tierra como base de su subsistencia.\n- **Método lógico:** identificar no las diferencias jurídicas, sino el interés común subyacente en ambos reclamos.\n- **Conclusión:** en ambos casos aparece el interés por el **acceso a recursos de subsistencia** ligados a la tierra en contextos rurales.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "El derecho al acceso a recursos de subsistencia por parte de habitantes rurales.",
+      "optionFeedback": "- **Correcta.** Tanto la comunidad indígena como la familia campesina fundamentan sus reclamos en la importancia de la tierra como medio de vida, subsistencia y permanencia en el territorio."
+    },
+    {
+      "optionId": "B",
+      "optionText": "La vulneración indiscriminada de los derechos de las comunidades por parte de actores armados.",
+      "optionFeedback": "- **Incorrecta.** Ese elemento aplica claramente a la comunidad indígena despojada, pero no necesariamente a la familia campesina compradora."
+    },
+    {
+      "optionId": "C",
+      "optionText": "Las facilidades en el acceso a la justicia en procesos de restitución de tierras en Colombia.",
+      "optionFeedback": "- **Incorrecta.** El texto no habla de facilidades de acceso a la justicia, sino de una disputa por la propiedad."
+    },
+    {
+      "optionId": "D",
+      "optionText": "Las consecuencias de la concentración de la tierra para las poblaciones vulnerables de nuestro país.",
+      "optionFeedback": "- **Incorrecta.** La situación descrita se refiere a despojo y conflicto de propiedad, no específicamente a concentración de la tierra."
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 12",
+  "questionId": "q_12",
+  "sectionImageAiDescription": "Tabla titulada \"Peso de los pedidos\" con \\(2\\) columnas. Primera columna contiene \"Pedido \\(1\\)\", \"Pedido \\(2\\)\", \"Pedido \\(3\\)\". Segunda columna, encabezada \"Peso\", contiene respectivamente \\(500\\) kg, \\(200\\) kg y \\(1\\) ton.",
+  "questionText": "Pregunta 12: En la tabla se muestra el peso de tres pedidos de mercancía que una empresa necesita enviar a otro país:\n\nPara saber el costo total del envío se debe calcular primero el peso total de los tres pedidos. Para esto, un empleado de la empresa efectúa el siguiente cálculo:\n\n\\[\n500+200+1=701\\text{ ton}\n\\]\n\nEsta solución es",
+  "correctOptionId": "C",
+  "aiExplanation": "- **Problema central:** decidir si la suma \\(500+200+1=701\\text{ ton}\\) es válida.\n- **Datos relevantes:**\n  - Pedido \\(1\\): \\(500\\text{ kg}\\)\n  - Pedido \\(2\\): \\(200\\text{ kg}\\)\n  - Pedido \\(3\\): \\(1\\text{ ton}\\)\n- **Análisis:**\n  - No se pueden sumar directamente cantidades expresadas en unidades diferentes sin convertir primero.\n  - Por ejemplo, \\(1\\text{ ton}=1000\\text{ kg}\\).\n  - Entonces el total sería \\(500+200+1000=1700\\text{ kg}\\), o \\(1,7\\text{ ton}\\).\n- **Conclusión:** la solución es **incorrecta**, porque los datos están en unidades distintas y no pueden sumarse directamente.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "incorrecta; el resultado debe estar dado en \\(\\text{kg}\\), ya que la mayoría de los valores están en esta unidad.",
+      "optionFeedback": "- **Incorrecta.** Aunque puede expresarse en \\(\\text{kg}\\), ese no es el motivo principal del error.\n- También podría expresarse en toneladas si antes se convierten las unidades."
+    },
+    {
+      "optionId": "B",
+      "optionText": "correcta; se suman correctamente los tres valores y se utiliza una de las unidades de los pedidos.",
+      "optionFeedback": "- **Incorrecta.** No se suman correctamente, porque \\(500\\text{ kg}\\), \\(200\\text{ kg}\\) y \\(1\\text{ ton}\\) no están en la misma unidad."
+    },
+    {
+      "optionId": "C",
+      "optionText": "incorrecta; como los datos están en unidades diferentes, no pueden sumarse directamente.",
+      "optionFeedback": "- **Correcta.** Primero hay que convertir todo a una misma unidad y después sumar."
+    },
+    {
+      "optionId": "D",
+      "optionText": "correcta; el resultado se calcula bien y la unidad utilizada corresponde a la unidad de mayor peso.",
+      "optionFeedback": "- **Incorrecta.** Elegir la unidad mayor no corrige el error de sumar sin conversión previa."
+    }
+  ]
+}

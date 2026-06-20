@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 25",
+  "questionId": "q_25",
+  "sectionText": "Debido a los problemas de corrupción presentes en un país, el presidente propone terminar con el Congreso o reducir el número de sus miembros. Al respecto, una parte de la población apoya la idea propuesta, ya que considera que muchos congresistas son corruptos y que, además, reciben un salario muy alto para los resultados que presentan al país. Por su parte, un sector de la oposición advierte que estas ideas son antidemocráticas, puesto que el Congreso es fundamental para garantizar una división equitativa del poder.",
+  "questionText": "Pregunta 25: ¿Cuál de las siguientes opciones apoya el argumento de la oposición?",
+  "correctOptionId": "C",
+  "aiExplanation": "- **Problema central:** escoger el argumento que respalde la idea de que el Congreso es esencial para la democracia y la división del poder.\n- **Datos relevantes:**\n  - La oposición afirma que eliminar o reducir drásticamente el Congreso es antidemocrático.\n  - El Congreso cumple funciones de representación y equilibrio frente al poder ejecutivo.\n- **Método lógico:** identificar la opción que defiende el papel representativo e institucional del Congreso.\n- **Conclusión:** la mejor opción es la que señala que el Congreso **representa indirectamente los múltiples intereses de los distintos grupos del país**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "El Congreso no es la única fuente de corrupción e ineficiencia en las instituciones que conforman un Estado.",
+      "optionFeedback": "- **Incorrecta.** Aunque relativiza la culpa del Congreso, no explica por qué este es importante para la democracia y la división del poder."
+    },
+    {
+      "optionId": "B",
+      "optionText": "La reducción del Congreso permitiría que el Estado invierta los recursos de los salarios de los congresistas en obras sociales.",
+      "optionFeedback": "- **Incorrecta.** Este argumento apoya más bien la propuesta presidencial, no la posición de la oposición."
+    },
+    {
+      "optionId": "C",
+      "optionText": "El Congreso permite representar, de manera indirecta, los múltiples intereses de los diferentes grupos que conforman un país.",
+      "optionFeedback": "- **Correcta.** Este argumento respalda la idea de que el Congreso es clave en una democracia porque canaliza la representación plural y equilibra el poder político."
+    },
+    {
+      "optionId": "D",
+      "optionText": "El presidente es la máxima autoridad de una nación, por lo que las decisiones que la afectan no requieren la aprobación del Congreso.",
+      "optionFeedback": "- **Incorrecta.** Esta afirmación contradice directamente la defensa de la división de poderes y del papel democrático del Congreso."
+    }
+  ]
+}

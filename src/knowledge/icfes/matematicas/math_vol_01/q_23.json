@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 23",
+  "questionId": "q_23",
+  "sectionImageAiDescription": "Gráfico de coordenadas polares. 1) Cuadrícula (grid) polar: Círculos concéntricos con radios en 10, 20, 30, 40, 50 y 60. Líneas radiales en ángulos múltiplos de 30 grados. 2) Etiquetas del plano: El centro (origen) etiquetado inferiormente como 'Torre de control (polo)'. El rayo horizontal derecho (ángulo 0°) etiquetado como 'Eje polar'. 3) Puntos de datos (marcadores exactos): Punto en radio 30 y ángulo 30°, con texto '\\(V (30\\text{ km}, 30^{\\circ})\\)'; Punto en radio 40 y ángulo 60°, con texto '\\(Y (40\\text{ km}, 60^{\\circ})\\)'; Punto en radio 20 y ángulo 90°, con texto '\\(W (20\\text{ km}, 90^{\\circ})\\)'; Punto en radio 60 y ángulo 180°, con texto '\\(X (60\\text{ km}, 180^{\\circ})\\)'.",
+  "questionText": "Pregunta 23: En la gráfica se muestra la ubicación, en coordenadas polares, de cuatro aviones \\((V, W, X, Y)\\) respecto a la torre de control de un aeropuerto.\n\nSi las coordenadas polares de un punto son de la forma \\((r,\\theta)\\), donde \\(r\\) es la distancia al polo y \\(\\theta\\) es el ángulo respecto al eje polar, ¿cuál es el orden de los aviones, del que está más cerca al que está más lejos de la torre de control?",
+  "correctOptionId": "A",
+  "aiExplanation": "- **Problema central:** ordenar los aviones por distancia al polo.\n- **En coordenadas polares, la distancia al polo es \\(r\\).**\n- **Datos:**\n  - \\(W=(20\\text{ km},90^{\\circ})\\)\n  - \\(V=(30\\text{ km},30^{\\circ})\\)\n  - \\(Y=(40\\text{ km},60^{\\circ})\\)\n  - \\(X=(60\\text{ km},180^{\\circ})\\)\n- **Orden de menor a mayor distancia:**\n  \\[\n  20<30<40<60\n  \\]\n  Por tanto:\n  \\[\n  W, V, Y, X\n  \\]\n- **Conclusión:** el orden correcto es **\\(W, V, Y, X\\)**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "\\(W, V, Y, X\\).",
+      "optionFeedback": "- **Correcta.** Ordena los radios \\(20,30,40,60\\) de menor a mayor."
+    },
+    {
+      "optionId": "B",
+      "optionText": "\\(X, Y, W, Y\\).",
+      "optionFeedback": "- **Incorrecta.** Empieza con el más lejano y además repite \\(Y\\), omitiendo \\(V\\)."
+    },
+    {
+      "optionId": "C",
+      "optionText": "\\(V, Y, W, X\\).",
+      "optionFeedback": "- **Incorrecta.** Coloca a \\(W\\), que es el más cercano, después de \\(V\\) y \\(Y\\)."
+    },
+    {
+      "optionId": "D",
+      "optionText": "\\(X, Y, V, W\\).",
+      "optionFeedback": "- **Incorrecta.** Ese es el orden de mayor a menor, no de menor a mayor."
+    }
+  ]
+}

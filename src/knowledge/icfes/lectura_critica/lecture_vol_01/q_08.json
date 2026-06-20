@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 8",
+  "questionId": "q_08",
+  "sectionText": "Quieres darte la buena vida: estupendo. Pero también quieres que esa buena vida no sea la buena vida de una coliflor o de un escarabajo, con todo mi respeto para ambas especies, sino una buena vida humana. Es lo que te corresponde, creo yo. Y estoy seguro de que a ello no renunciarías por nada del mundo. Ser humano, ya lo hemos indicado antes, consiste principalmente en tener relaciones con los otros seres humanos. Si pudieras tener muchísimo dinero, una casa más lujosa que un palacio de las mil y una noches, las mejores ropas, los más exquisitos alimentos —en tu caso, muchísimas lentejas—, los más sofisticados aparatos, etc., pero todo ello a costa de no volver a ver ni a ser visto por ningún ser humano jamás, ¿estarías contento? ¿Cuánto tiempo podrías vivir así sin volverte loco? ¿No es la mayor de las locuras querer las cosas a costa de la relación con las personas? ¡Pero si precisamente la gracia de todas esas cosas radica en que te permiten —o parecen permitirte— relacionarte más favorablemente con los demás! Por medio del dinero se espera poder deslumbrar o comprar a los otros; las ropas para gustarles, y lo mismo la buena casa, los mejores vinos, etcétera. Muy pocas cosas conservan su gracia en la soledad; y si la soledad es completa y definitiva, todas las cosas resultan tristes inevitablemente. La buena vida humana es una buena vida entre seres humanos o de lo contrario puede que sea vida, pero no será ni buena ni humana.",
+  "questionText": "Pregunta 8: Entre las siguientes opciones, ¿cuál podría reemplazar, sin cambiar el sentido, la palabra \"deslumbrar\" que aparece en la frase: \"Por medio del dinero se espera poder deslumbrar o comprar a los otros [...]\"?",
+  "correctOptionId": "B",
+  "aiExplanation": "- **Problema central:** hallar un sinónimo contextual de *deslumbrar*.\n- **Contexto:** *por medio del dinero se espera poder deslumbrar o comprar a los otros*.\n- Aquí *deslumbrar* significa causar admiración o impacto en otros, no literalmente cegarlos.\n- **Conclusión:** el mejor reemplazo es **impresionar**. Respuesta: **B**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "Encandilar.",
+      "optionFeedback": "- **Incorrecta.** Aunque puede ser sinónimo en algunos contextos, tiene un matiz más cercano a *fascinar* o incluso a *cegar con luz*.\n- Aquí la idea social es más precisa con **impresionar**."
+    },
+    {
+      "optionId": "B",
+      "optionText": "Impresionar.",
+      "optionFeedback": "- **Correcta.** En este contexto, *deslumbrar* significa causar admiración o impacto en los demás, es decir, **impresionarlos**."
+    },
+    {
+      "optionId": "C",
+      "optionText": "Ilusionar.",
+      "optionFeedback": "- **Incorrecta.** *Ilusionar* significa despertar esperanza o entusiasmo, no causar admiración social mediante el dinero."
+    },
+    {
+      "optionId": "D",
+      "optionText": "Engañar.",
+      "optionFeedback": "- **Incorrecta.** El autor no dice que el dinero sirva para mentir, sino para llamar la atención o generar admiración."
+    }
+  ]
+}

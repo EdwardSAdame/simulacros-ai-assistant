@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 15",
+  "questionId": "q_15",
+  "questionImageAiDescription": "Tabla con 2 columnas: Distancia del imán a la esfera (cm) y Velocidad de la esfera (m/s). Las 4 filas tienen la misma distancia 5 cm, y velocidades 3,0, 2,0, 1,0, 0,6. La tabla no identifica qué líquido corresponde a cada velocidad ni reporta viscosidades.",
+  "questionText": "Pregunta 15: Camila elabora un experimento donde acerca un imán a una jarra que tiene una esfera de hierro en su interior, y mide la velocidad que alcanza la esfera al acercar el imán usando diferentes líquidos, como se muestra en la figura.\n\nElla anota los resultados en la siguiente tabla.\n\nCamila concluye que los resultados de la tabla demuestran que las sustancias viscosas disminuyen la velocidad de la esfera.\n\nDe acuerdo con la información anterior, ¿qué se debería modificar para apoyar de manera correcta la conclusión de Camila?",
+  "correctOptionId": "C",
+  "aiExplanation": "- **Problema central:** determinar qué hace falta para sustentar la conclusión de que la viscosidad disminuye la velocidad de la esfera.\n- **Datos relevantes:** la tabla solo presenta la distancia fija de \\(5\\ \\text{cm}\\) y distintas velocidades, pero no indica **qué líquido** se usó ni su **viscosidad**.\n- **Análisis:** sin identificar los líquidos y sus viscosidades, no se puede relacionar la variable *viscosidad* con la velocidad observada.\n- **Conclusión:** se deben mostrar datos del líquido usado y su viscosidad. La respuesta correcta es **C**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "Se deberían variar las distancias entre el imán y la jarra.",
+      "optionFeedback": "- **Incorrecta.** Cambiar la distancia introduciría otra variable. El problema no es la distancia, sino que faltan datos sobre la viscosidad de cada líquido."
+    },
+    {
+      "optionId": "B",
+      "optionText": "Se debería mantener siempre la misma velocidad de la esfera.",
+      "optionFeedback": "- **Incorrecta.** Si la velocidad fuera siempre la misma, no se podría estudiar el efecto de la viscosidad."
+    },
+    {
+      "optionId": "C",
+      "optionText": "Se deberían mostrar datos del líquido usado y su viscosidad.",
+      "optionFeedback": "- **Correcta.** Para apoyar la conclusión, es necesario identificar cada líquido y cuantificar su viscosidad, de modo que pueda relacionarse con la velocidad medida."
+    },
+    {
+      "optionId": "D",
+      "optionText": "Se debería mantener constante la fuerza magnética.",
+      "optionFeedback": "- **Incorrecta.** Mantener constante la fuerza magnética puede ser útil experimentalmente, pero el dato faltante clave para sostener la conclusión es la **viscosidad** de cada líquido."
+    }
+  ]
+}

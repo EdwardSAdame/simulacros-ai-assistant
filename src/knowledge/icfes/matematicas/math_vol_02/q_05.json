@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 5",
+  "questionId": "q_05",
+  "questionImageAiDescription": "Plano cartesiano. El eje horizontal está etiquetado como 'Temperatura (°C)' y muestra valores continuos desde \\(24\\) hasta \\(30\\) con incrementos de \\(1\\). El eje vertical está etiquetado como 'Cantidad de peces' con valores desde \\(0\\) hasta \\(2.500\\) marcados en incrementos de \\(500\\). Sobre la cuadrícula se traza una única línea recta horizontal y continua que se mantiene constante en el valor de \\(2.000\\) en el eje vertical, extendiéndose a lo largo de todo el rango de temperaturas mostrado (desde \\(24\\) hasta \\(30\\)).",
+  "questionText": "Pregunta 5: Una familia que se dedica al cultivo de mojarras consulta a un experto, que sugiere que un aumento de la temperatura del agua produciría un aumento proporcional en la cantidad de peces. La familia midió la cantidad de peces obtenidos a diferentes temperaturas y obtuvo la siguiente gráfica.\n\nSegún estos resultados, ¿es verdadera la afirmación del experto?",
+  "correctOptionId": "C",
+  "aiExplanation": "- **Problema central:** comprobar si al aumentar la temperatura aumenta proporcionalmente la cantidad de peces.\n- **Observación de la gráfica:** para temperaturas entre \\(24\\) y \\(30\\) °C, la cantidad de peces permanece constante en \\(2000\\).\n- **Interpretación:** hay cambio en la temperatura, pero **no cambia** la cantidad de peces.\n- **Conclusión:** la afirmación del experto es **falsa**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "No, puesto que a medida que aumenta la cantidad de peces, la temperatura permanece constante.",
+      "optionFeedback": "**Incorrecta.** La gráfica no muestra que aumente la cantidad de peces; justamente permanece constante."
+    },
+    {
+      "optionId": "B",
+      "optionText": "Sí, puesto que la gráfica muestra un aumento en la temperatura del agua.",
+      "optionFeedback": "**Incorrecta.** Que la temperatura cambie no significa que aumente la cantidad de peces. La gráfica muestra cantidad constante."
+    },
+    {
+      "optionId": "C",
+      "optionText": "No, puesto que al variar la temperatura, no cambia la cantidad de peces.",
+      "optionFeedback": "**Correcta.** La línea horizontal en \\(2000\\) peces indica que la cantidad no depende de la temperatura en los datos mostrados."
+    },
+    {
+      "optionId": "D",
+      "optionText": "Sí, puesto que para todas las temperaturas mostradas hay una cantidad de peces mayor que cero.",
+      "optionFeedback": "**Incorrecta.** Tener una cantidad positiva no demuestra aumento proporcional."
+    }
+  ]
+}

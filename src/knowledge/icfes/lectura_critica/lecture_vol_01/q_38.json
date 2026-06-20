@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 38",
+  "questionId": "q_38",
+  "sectionText": "Los computadores hacen lo que se les manda. Servilmente obedecen cualquier instrucción dada en su propio lenguaje de programación. Así es como hacen cosas útiles como procesar textos y realizar operaciones en hojas de cálculo. Pero, como inevitable subproducto, son igualmente robóticos a la hora de obedecer instrucciones incorrectas. No tienen modo alguno de decir si una instrucción tendrá un buen efecto o uno malo.\n\nSimplemente, obedecen, como se supone que lo hacen los soldados. Es su incuestionable obediencia lo que hace que los computadores sean útiles, y exactamente eso mismo hace que sean inevitablemente vulnerables a la infección de virus y gusanos. Un programa maliciosamente diseñado que diga «cópiame y envíame a todas las direcciones que puedas encontrar en el disco duro» será simplemente obedecido y vuelto a obedecer por los demás computadores de la línea por la que se está enviando, en una expansión exponencial. Es difícil, por no decir imposible, diseñar un computador que sea obedientemente útil y, al mismo tiempo, inmune a la infección.",
+  "questionText": "Pregunta 38: ¿Cuál es la pregunta principal que busca responder el texto?",
+  "correctOptionId": "B",
+  "aiExplanation": "- **Problema central:** inferir la pregunta guía del texto.\n- El texto se concentra en un rasgo principal de los computadores: su obediencia total a las instrucciones.\n- Luego examina las implicaciones de ese rasgo: utilidad y vulnerabilidad frente a virus.\n- **Conclusión:** la pregunta principal corresponde a la opción **B**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "¿Por qué los computadores pueden ser invulnerables a los virus?",
+      "optionFeedback": "- **Incorrecta.** El texto no explica por qué pueden ser invulnerables; al contrario, afirma que eso es muy difícil o casi imposible."
+    },
+    {
+      "optionId": "B",
+      "optionText": "¿Cuál es el principal rasgo de los computadores y qué implicaciones tiene dicho rasgo?",
+      "optionFeedback": "- **Correcta.** El texto expone la obediencia como rasgo central de los computadores y analiza sus dos consecuencias: utilidad y vulnerabilidad."
+    },
+    {
+      "optionId": "C",
+      "optionText": "¿Cuál es la principal característica de los computadores y qué ventajas posee dicho rasgo?",
+      "optionFeedback": "- **Incorrecta.** Se queda solo en las ventajas y omite una parte esencial del texto: las desventajas o riesgos."
+    },
+    {
+      "optionId": "D",
+      "optionText": "¿Por qué los computadores, a pesar de ser vulnerables, tienen la utilidad de detectar buenos y malos efectos?",
+      "optionFeedback": "- **Incorrecta.** El texto dice expresamente que los computadores **no** pueden determinar si una instrucción tendrá un buen o mal efecto."
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 35",
+  "questionId": "q_35",
+  "sectionText": "Los computadores hacen lo que se les manda. Servilmente obedecen cualquier instrucción dada en su propio lenguaje de programación. Así es como hacen cosas útiles como procesar textos y realizar operaciones en hojas de cálculo. Pero, como inevitable subproducto, son igualmente robóticos a la hora de obedecer instrucciones incorrectas. No tienen modo alguno de decir si una instrucción tendrá un buen efecto o uno malo.\n\nSimplemente, obedecen, como se supone que lo hacen los soldados. Es su incuestionable obediencia lo que hace que los computadores sean útiles, y exactamente eso mismo hace que sean inevitablemente vulnerables a la infección de virus y gusanos. Un programa maliciosamente diseñado que diga «cópiame y envíame a todas las direcciones que puedas encontrar en el disco duro» será simplemente obedecido y vuelto a obedecer por los demás computadores de la línea por la que se está enviando, en una expansión exponencial. Es difícil, por no decir imposible, diseñar un computador que sea obedientemente útil y, al mismo tiempo, inmune a la infección.",
+  "questionText": "Pregunta 35: Considere la siguiente oración del texto:\n\n“Es difícil, por no decir imposible, diseñar un ordenador que sea obedientemente útil y, al mismo tiempo, inmune a la infección”.\n\nEn la oración anterior, la palabra “inmune” se podría reemplazar por",
+  "correctOptionId": "C",
+  "aiExplanation": "- **Problema central:** encontrar el sinónimo contextual de *inmune*.\n- En el texto, *inmune a la infección* significa que no puede ser afectado por virus o gusanos.\n- El mejor reemplazo es **invulnerable**.\n- **Conclusión:** respuesta **C**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "inatacable.",
+      "optionFeedback": "- **Incorrecta.** Aunque se aproxima, *inatacable* suele usarse más en sentido argumentativo o moral; no es tan preciso como **invulnerable** en este contexto técnico."
+    },
+    {
+      "optionId": "B",
+      "optionText": "proclive.",
+      "optionFeedback": "- **Incorrecta.** *Proclive* significa inclinado o propenso, casi lo contrario de *inmune*."
+    },
+    {
+      "optionId": "C",
+      "optionText": "invulnerable.",
+      "optionFeedback": "- **Correcta.** *Inmune* aquí equivale a **invulnerable** a la infección por virus o gusanos."
+    },
+    {
+      "optionId": "D",
+      "optionText": "propenso.",
+      "optionFeedback": "- **Incorrecta.** *Propenso* es lo opuesto al sentido de *inmune*."
+    }
+  ]
+}

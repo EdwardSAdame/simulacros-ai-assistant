@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 19",
+  "questionId": "q_19",
+  "sectionText": "Una profesora está investigando sobre el fenómeno del narcotráfico en Colombia y sus objetivos de investigación son:\n\n1. Analizar la situación social y de ingresos de los campesinos en los territorios donde se produce hoja de coca.\n2. Determinar las causas del aumento de la violencia en las zonas de cultivo de hoja de coca.\n3. Identificar las distintas formas de resistencia que implementaron los campesinos para mitigar el impacto del narcotráfico.\n4. Explicar las consecuencias ambientales que produce el aumento de los cultivos de hoja de coca para uso del narcotráfico.\n\nDurante la investigación, la profesora encuentra el siguiente testimonio:\n\n\"¿Cuáles serán esos otros medios? ¡Mire!, por lo menos, ¿qué saca uno con llevar yuca a La Macarena, maíz o plátano si no se lo van a comprar? ¿Usted con qué va a comprar sus cosas? En cambio, lleva usted un kilo de coca o unos poquitos gramos y se la compran rápido. Sale usted a vender una res y no se la compran. Lleva usted \\(20\\), \\(100\\), \\(200\\) o \\(600\\) gramos de coca y ahí sí se ve la plata. ¿Qué hace entonces uno? Entonces, nosotros ya no vivimos de los marranos, no es del ganado, sino realmente de la coca\".",
+  "questionText": "Pregunta 19: ¿Para qué objetivo de investigación le sirve a la profesora el testimonio encontrado?",
+  "correctOptionId": "B",
+  "aiExplanation": "- **Problema central:** relacionar el contenido del testimonio con uno de los objetivos de investigación.\n- **Datos relevantes del testimonio:**\n  - Los campesinos no logran vender yuca, maíz, plátano o ganado.\n  - La coca sí se compra rápido y genera ingresos.\n  - Se muestra una decisión económica basada en la supervivencia.\n- **Método lógico:** elegir el objetivo que trate sobre condiciones sociales e ingresos, no sobre violencia, resistencia o ambiente.\n- **Conclusión:** el testimonio sirve para el objetivo **\\(1\\)**, porque evidencia cómo las condiciones económicas e ingresos campesinos favorecieron el cultivo de coca.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "Para el \\(3\\), porque en el testimonio se evidencia cómo el cultivo de hoja de coca fue una forma de resistencia cultural ante la imposición de otros cultivos.",
+      "optionFeedback": "- **Incorrecta.** El testimonio no habla de resistencia cultural, sino de necesidad económica y falta de mercado para otros productos."
+    },
+    {
+      "optionId": "B",
+      "optionText": "Para el \\(1\\), porque en el testimonio se evidencia cómo las condiciones económicas llevaron a los campesinos a elegir el cultivo de hoja de coca.",
+      "optionFeedback": "- **Correcta.** El relato muestra claramente problemas de comercialización e ingresos, y cómo eso empuja a los campesinos hacia la economía de la coca."
+    },
+    {
+      "optionId": "C",
+      "optionText": "Para el \\(2\\), porque en el testimonio se evidencian los factores que generaron fenómenos de violencia dentro de las zonas de cultivo de coca.",
+      "optionFeedback": "- **Incorrecta.** No se describen hechos de violencia ni causas de aumento de esta; el foco está en la economía campesina."
+    },
+    {
+      "optionId": "D",
+      "optionText": "Para el \\(4\\), porque en el testimonio se evidencian las afectaciones ambientales producto de la expansión de la economía del narcotráfico en el territorio.",
+      "optionFeedback": "- **Incorrecta.** El testimonio no aborda daños ambientales, sino decisiones de subsistencia económica."
+    }
+  ]
+}

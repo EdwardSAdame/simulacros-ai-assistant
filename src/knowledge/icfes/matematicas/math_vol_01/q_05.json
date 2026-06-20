@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 5",
+  "questionId": "q_05",
+  "sectionImageAiDescription": "La imagen del enunciado es una tabla con \\(3\\) columnas: \"Tipo de premio\", \"Cantidad de premios\", \"Monto de cada premio\". Filas: Oro, cantidad \\(5\\), monto \\($10.000.000\\); Plata, cantidad \\(25\\), monto \\($5.000.000\\); Bronce, cantidad \\(100\\), monto \\($1.000.000\\).",
+  "questionText": "Pregunta 5: Un banco organizó un concurso para premiar a los usuarios que más utilizan las tarjetas de crédito. La tabla muestra el tipo de premio, la cantidad de premios que se entregó de cada tipo y el monto correspondiente a cada tipo de premio.\n\n¿Cuál de las siguientes tablas muestra el total de dinero entregado por el banco para cada tipo de premio?",
+  "correctOptionId": "B",
+  "aiExplanation": "- **Problema central:** calcular el dinero total entregado por cada tipo de premio.\n- **Datos relevantes:**\n  - Oro: \\(5\\) premios de \\(\\$10.000.000\\).\n  - Plata: \\(25\\) premios de \\(\\$5.000.000\\).\n  - Bronce: \\(100\\) premios de \\(\\$1.000.000\\).\n- **Cálculos:**\n  - Oro: \\(5\\times 10.000.000=50.000.000\\).\n  - Plata: \\(25\\times 5.000.000=125.000.000\\).\n  - Bronce: \\(100\\times 1.000.000=100.000.000\\).\n- **Conclusión:** la tabla correcta es la que muestra **Oro \\(\\$50.000.000\\), Plata \\(\\$125.000.000\\), Bronce \\(\\$100.000.000\\)**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "[Imagen de la opción: Tabla con \\(2\\) columnas: \"Tipo de premio\" y \"Dinero entregado\". Filas: Oro \\($10.000.000\\); Plata \\($5.000.000\\); Bronce \\($1.000.000\\).]",
+      "optionFeedback": "- **Incorrecta.** Esa tabla muestra el valor de **cada premio individual**, no el total entregado por tipo."
+    },
+    {
+      "optionId": "B",
+      "optionText": "[Imagen de la opción: Tabla con \\(2\\) columnas: \"Tipo de premio\" y \"Dinero entregado\". Filas: Oro \\($50.000.000\\); Plata \\($125.000.000\\); Bronce \\($100.000.000\\).]",
+      "optionFeedback": "- **Correcta.** Multiplica correctamente la cantidad de premios por el monto de cada uno en las tres categorías."
+    },
+    {
+      "optionId": "C",
+      "optionText": "[Imagen de la opción: Tabla con \\(2\\) columnas: \"Tipo de premio\" y \"Dinero entregado\". Filas: Oro \\($1.000.000.000\\); Plata \\($125.000.000\\); Bronce \\($5.000.000\\).]",
+      "optionFeedback": "- **Incorrecta.** Solo el valor de Plata coincide.\n- Oro y Bronce están mal calculados: deben ser \\(\\$50.000.000\\) y \\(\\$100.000.000\\), respectivamente."
+    },
+    {
+      "optionId": "D",
+      "optionText": "[Imagen de la opción: Tabla con \\(2\\) columnas: \"Tipo de premio\" y \"Dinero entregado\". Filas: Oro \\($50.000.000\\); Plata \\($100.000.000\\); Bronce \\($125.000.000\\).]",
+      "optionFeedback": "- **Incorrecta.** Intercambia los valores correctos de Plata y Bronce.\n- Debe ser Plata \\(\\$125.000.000\\) y Bronce \\(\\$100.000.000\\)."
+    }
+  ]
+}

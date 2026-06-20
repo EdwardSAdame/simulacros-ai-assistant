@@ -1,0 +1,29 @@
+{
+  "questionLabel": "Pregunta 3",
+  "questionId": "q_03",
+  "questionText": "Pregunta 3: Camila quería ayudar en su casa a pintar las paredes de dos habitaciones. Ella contaba inicialmente con \\(2\\) colores diferentes de pintura. En la primera habitación deseaba que la fracción pintada de cada color fuese \\(\\frac{1}{3}\\) y en la segunda \\(\\frac{1}{4}\\). En este sentido, ¿qué debió hacer para cumplir con sus objetivos?",
+  "correctOptionId": "C",
+  "aiExplanation": "- **Problema central:** cada color debe ocupar la misma fracción del total en cada habitación.\n- **Primera habitación:** si cada color ocupa \\(\\frac{1}{3}\\), se necesitan \\(3\\) colores en total. Como ya tenía \\(2\\), debe agregar \\(1\\) color.\n- **Segunda habitación:** si cada color ocupa \\(\\frac{1}{4}\\), se necesitan \\(4\\) colores en total. Como ya tenía \\(2\\), debe agregar \\(2\\) colores.\n- **Conclusión:** debe incluir **\\(1\\)** color más para el primer cuarto y **\\(2\\)** colores más para el segundo.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "Incluir \\(2\\) colores más para pintar el primer cuarto y \\(1\\) color más para pintar el segundo.",
+      "optionFeedback": "**Incorrecta.** Para fracciones de \\(\\frac{1}{3}\\) se requieren \\(3\\) colores, no \\(4\\); y para \\(\\frac{1}{4}\\) se requieren \\(4\\) colores, no \\(3\\)."
+    },
+    {
+      "optionId": "B",
+      "optionText": "Incluir \\(3\\) colores más para pintar el primer cuarto y \\(4\\) colores más para pintar el segundo.",
+      "optionFeedback": "**Incorrecta.** Aquí se estaría confundiendo el número total de partes con el número de colores adicionales."
+    },
+    {
+      "optionId": "C",
+      "optionText": "Incluir \\(1\\) color más para pintar el primer cuarto y \\(2\\) colores más para pintar el segundo.",
+      "optionFeedback": "**Correcta.** Con \\(3\\) colores en el primer cuarto cada uno puede representar \\(\\frac{1}{3}\\), y con \\(4\\) colores en el segundo cada uno puede representar \\(\\frac{1}{4}\\)."
+    },
+    {
+      "optionId": "D",
+      "optionText": "Incluir \\(4\\) colores más para pintar el primer cuarto y \\(3\\) colores más para pintar el segundo.",
+      "optionFeedback": "**Incorrecta.** Agrega muchos más colores de los necesarios y no responde a las fracciones pedidas."
+    }
+  ]
+}

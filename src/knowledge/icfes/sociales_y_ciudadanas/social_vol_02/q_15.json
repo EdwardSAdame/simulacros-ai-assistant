@@ -1,0 +1,29 @@
+{
+  "questionLabel": "Pregunta 15",
+  "questionId": "q_15",
+  "questionText": "Pregunta 15: Se ha generado un conflicto entre empresarios y sindicatos franceses por la contratación de inmigrantes africanos. Para los empresarios, la contratación de africanos beneficia a sectores como la construcción y la agricultura, que tienen pocos trabajadores, mientras que, para los sindicatos, estas contrataciones podrían afectarlos, pues sus sueldos y puestos de trabajo estarían en riesgo. Para dar solución a este conflicto, el Gobierno francés ha propuesto que las empresas francesas tengan un límite de diez empleados africanos y que su sueldo sea inferior al de los trabajadores franceses.\n\n¿Qué efectos NO esperados tendría la solución propuesta por el Gobierno francés?",
+  "correctOptionId": "B",
+  "aiExplanation": "- **Problema central:** identificar un efecto no previsto de limitar el número de trabajadores africanos y pagarles menos.\n- **Datos relevantes:**\n  - El Gobierno propone un máximo de \\(10\\) empleados africanos por empresa.\n  - Además, plantea que ganen menos que los trabajadores franceses.\n- **Método lógico:** pensar qué consecuencia discriminatoria o laboral puede surgir de esa regulación y que no esté planteada como propósito explícito.\n- **Conclusión:** un efecto no esperado sería la exclusión sindical o debilitamiento de sus derechos laborales; entre las opciones, la que mejor recoge esa consecuencia es que **los trabajadores africanos no podrían unirse a los sindicatos franceses**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "Que las empresas estarían obligadas a contratar a empleados africanos.",
+      "optionFeedback": "- **Incorrecta.** La propuesta fija un límite máximo, no una obligación de contratar inmigrantes africanos."
+    },
+    {
+      "optionId": "B",
+      "optionText": "Que los trabajadores africanos no podrían unirse a los sindicatos franceses.",
+      "optionFeedback": "- **Correcta.** Aunque la medida no lo dice expresamente, al establecer condiciones laborales discriminatorias e inferiores, puede producir exclusión y debilitamiento de sus derechos de asociación y defensa laboral."
+    },
+    {
+      "optionId": "C",
+      "optionText": "Que las empresas de otros sectores comenzarían a contratar inmigrantes.",
+      "optionFeedback": "- **Incorrecta.** La medida no sugiere directamente que otros sectores empiecen a contratar más inmigrantes; más bien impone restricciones."
+    },
+    {
+      "optionId": "D",
+      "optionText": "Que el sector de la construcción tendría exceso de trabajadores.",
+      "optionFeedback": "- **Incorrecta.** El contexto inicial señala falta de trabajadores en sectores como la construcción y la agricultura, no un posible exceso."
+    }
+  ]
+}

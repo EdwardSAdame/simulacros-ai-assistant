@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 8",
+  "questionId": "q_08",
+  "sectionText": "En el 2011, la Corte Constitucional de Colombia estableció que las parejas conformadas por personas del mismo sexo sí constituyen una familia. Cinco años después, la misma entidad reconoció la validez del matrimonio igualitario para estas mismas parejas. Antes de eso, solo las parejas heterosexuales podían casarse legalmente, mientras que las homosexuales solo podían acceder a una figura contractual llamada \"unión solemne\", la cual otorgaba solo algunos de los derechos conferidos a los matrimonios. Con esto, la Corte Constitucional busca responder a los nuevos patrones en la conformación de las familias en el país y evitar que los derechos de cerca de cuatro millones de colombianos sigan siendo vulnerados.",
+  "questionText": "Pregunta 8: Con base en la información anterior, ¿cuál de las siguientes afirmaciones es una de las razones por las cuales se modificó el concepto legal de matrimonio y familia en Colombia?",
+  "correctOptionId": "C",
+  "aiExplanation": "- **Problema central:** identificar la razón de la modificación legal del matrimonio y la familia.\n- **Dato clave del texto:** la Corte busca responder a **nuevos patrones en la conformación de las familias** y evitar vulneración de derechos.\n- **Razonamiento:**\n  - La sociedad cambia y el derecho se ajusta para reconocer esas transformaciones.\n  - No se trata de privilegiar a un grupo ni de restringir derechos de otros, sino de adaptar la norma para garantizar igualdad y convivencia.\n- **Conclusión:** la mejor razón es que las normas deben adaptarse a los cambios sociales. ",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "Para restringir los derechos de las familias católicas, ya que, al considerar todos los matrimonios como iguales, se reduce la dimensión sagrada del matrimonio.",
+      "optionFeedback": "- **Incorrecta.** El texto no habla de restringir derechos de familias católicas.\n- La decisión judicial busca ampliar derechos y reconocer nuevas formas de familia, no disminuir libertades religiosas."
+    },
+    {
+      "optionId": "B",
+      "optionText": "Para privilegiar los derechos de los homosexuales, ya que estas personas ahora recibirán un trato preferencial por su orientación sexual.",
+      "optionFeedback": "- **Incorrecta.** No se trata de trato preferencial, sino de **igualdad de derechos**.\n- La Corte pretende evitar la vulneración de derechos, no crear privilegios."
+    },
+    {
+      "optionId": "C",
+      "optionText": "Para facilitar la convivencia en una sociedad cambiante, ya que las normas deben adaptarse a las transformaciones sociales.",
+      "optionFeedback": "- **Correcta.** Coincide con lo que señala el texto: la Corte responde a **nuevos patrones** de conformación familiar y adapta la norma para proteger derechos en una sociedad cambiante."
+    },
+    {
+      "optionId": "D",
+      "optionText": "Para priorizar los valores de la sociedad, ya que estos son el centro de la vida en comunidad y no deberían modificarse.",
+      "optionFeedback": "- **Incorrecta.** La opción contradice el texto, porque allí justamente se muestra que el derecho **sí se modifica** ante cambios sociales.\n- No se trata de inmovilizar valores, sino de ajustar la regulación a nuevas realidades familiares."
+    }
+  ]
+}

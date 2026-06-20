@@ -1,0 +1,50 @@
+{
+  "questionLabel": "Pregunta 1",
+  "questionId": "q_01",
+  "sectionText": "Lea las descripciones de la columna de la izquierda \\(1 - 5\\). ¿Cuál palabra de la columna de la derecha \\((A - G)\\) concuerda con cada descripción?\n\nLa opción \\(H\\) se usa para el ejemplo. Sobran dos palabras más.\n\nEn las preguntas \\(1 - 5\\), marque la letra correcta \\(A - G\\) en su hoja de respuestas.",
+  "questionText": "Pregunta 1: People put their books in this.",
+  "correctOptionId": "D",
+  "aiExplanation": "- **Core problem:** Match the description *“People put their books in this”* with the correct house object.\n- **Relevant data:** The options include furniture and household objects such as *armchair, bed, blanket, bookcase,* and *cupboard*.\n- **Method:** Identify which object is specifically designed to store books.\n- **Conclusion:** A **bookcase** is the piece of furniture used to put books in. Therefore, the correct answer is **D**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "armchair",
+      "optionFeedback": "- **Incorrect.** An *armchair* is for sitting, not for storing books."
+    },
+    {
+      "optionId": "B",
+      "optionText": "bed",
+      "optionFeedback": "- **Incorrect.** A *bed* is used for sleeping, not for keeping books."
+    },
+    {
+      "optionId": "C",
+      "optionText": "blanket",
+      "optionFeedback": "- **Incorrect.** A *blanket* keeps you warm; it is not a place to put books."
+    },
+    {
+      "optionId": "D",
+      "optionText": "bookcase",
+      "optionFeedback": "- **Correct.** A **bookcase** is specifically used to store books."
+    },
+    {
+      "optionId": "E",
+      "optionText": "cupboard",
+      "optionFeedback": "- **Incorrect.** A *cupboard* is usually for dishes, food, or clothes, not mainly for books."
+    },
+    {
+      "optionId": "F",
+      "optionText": "picture",
+      "optionFeedback": "- **Incorrect.** A *picture* is something you hang on a wall; it does not hold books."
+    },
+    {
+      "optionId": "G",
+      "optionText": "shower",
+      "optionFeedback": "- **Incorrect.** A *shower* is for washing your body, not for storing books."
+    },
+    {
+      "optionId": "H",
+      "optionText": "towel",
+      "optionFeedback": "- **Incorrect.** A *towel* is used for drying yourself, not for putting books in."
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "questionLabel": "Pregunta 2",
+  "questionId": "q_02",
+  "questionText": "Pregunta 2: En un conocido juego virtual, una forma de progresar es caminar y que un dispositivo mida la distancia recorrida. Lo importante es que se haga pie y no en un medio motorizado de transporte.\n\nLa empresa administradora del juego, preocupada por la conducta irregular de algunos de sus participantes, suspendió la cuenta de uno de sus jugadores por reportar \\(300\\) kilómetros caminados en un día, dando como argumento: “Es conocido que a cualquier persona le toma, en trayectos medios a largos, más de \\(6\\) minutos caminar un kilómetro”.\n\n¿Cuál de los siguientes argumentos sustenta la decisión de la suspensión del jugador?",
+  "correctOptionId": "B",
+  "aiExplanation": "- **Problema central:** verificar si \\(300\\) km caminados en un día son compatibles con la afirmación *más de \\(6\\) minutos por kilómetro*.\n- **Dato clave:** si caminar \\(1\\) km toma más de \\(6\\) min, entonces la velocidad es menor que\n  \\[\n  \\frac{60}{6}=10\\ \\text{km/h}\n  \\]\n- **Máximo en \\(24\\) horas:**\n  \\[\n  10\\times 24=240\\ \\text{km}\n  \\]\n  pero en realidad sería **menos** de \\(240\\) km, porque tarda más de \\(6\\) min por km.\n- **Comparación:** \\(300>240\\).\n- **Conclusión:** ese recorrido no puede corresponder a caminar; el argumento de suspensión sí se sustenta.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "Lo dicho implica que \\(300\\) kilómetros en un día son posibles pero requieren caminar sin descanso y eso es increíble para una persona.",
+      "optionFeedback": "**Incorrecta.** No solo sería difícil: con la información dada resulta **imposible**, porque incluso caminando \\(24\\) horas no alcanzaría \\(300\\) km."
+    },
+    {
+      "optionId": "B",
+      "optionText": "Lo dicho implica que la velocidad máxima es menos de \\(10\\) kilómetros por hora y menos de \\(240\\) kilómetros al día; un recorrido mayor corresponde entonces a un medio motorizado.",
+      "optionFeedback": "**Correcta.** Si tarda más de \\(6\\) min por km, la velocidad es menor que \\(10\\ \\text{km/h}\\), así que en un día recorre menos de \\(240\\) km. Por eso \\(300\\) km no corresponde a caminar."
+    },
+    {
+      "optionId": "C",
+      "optionText": "Lo dicho implica que el jugador debe reportar mayor distancia porque un kilómetro se cubre en apenas \\(6\\) minutos; un recorrido así, corresponde entonces a un medio motorizado.",
+      "optionFeedback": "**Incorrecta.** El enunciado dice *más de* \\(6\\) minutos por kilómetro, no *apenas* \\(6\\) minutos."
+    },
+    {
+      "optionId": "D",
+      "optionText": "Lo dicho implica una falta de relación con los \\(300\\) kilómetros reportados por el jugador y es solo un mensaje automático del juego.",
+      "optionFeedback": "**Incorrecta.** Sí hay relación directa entre el tiempo por kilómetro y la distancia máxima posible en un día."
+    }
+  ]
+}

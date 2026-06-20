@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 10",
+  "questionId": "q_10",
+  "sectionText": "Quieres darte la buena vida: estupendo. Pero también quieres que esa buena vida no sea la buena vida de una coliflor o de un escarabajo, con todo mi respeto para ambas especies, sino una buena vida humana. Es lo que te corresponde, creo yo. Y estoy seguro de que a ello no renunciarías por nada del mundo. Ser humano, ya lo hemos indicado antes, consiste principalmente en tener relaciones con los otros seres humanos. Si pudieras tener muchísimo dinero, una casa más lujosa que un palacio de las mil y una noches, las mejores ropas, los más exquisitos alimentos —en tu caso, muchísimas lentejas—, los más sofisticados aparatos, etc., pero todo ello a costa de no volver a ver ni a ser visto por ningún ser humano jamás, ¿estarías contento? ¿Cuánto tiempo podrías vivir así sin volverte loco? ¿No es la mayor de las locuras querer las cosas a costa de la relación con las personas? ¡Pero si precisamente la gracia de todas esas cosas radica en que te permiten —o parecen permitirte— relacionarte más favorablemente con los demás! Por medio del dinero se espera poder deslumbrar o comprar a los otros; las ropas para gustarles, y lo mismo la buena casa, los mejores vinos, etcétera. Muy pocas cosas conservan su gracia en la soledad; y si la soledad es completa y definitiva, todas las cosas resultan tristes inevitablemente. La buena vida humana es una buena vida entre seres humanos o de lo contrario puede que sea vida, pero no será ni buena ni humana.",
+  "questionText": "Pregunta 10: ¿Qué tipo de estrategia argumentativa utiliza el autor para convencer al lector de su posición?",
+  "correctOptionId": "C",
+  "aiExplanation": "- **Problema central:** identificar la estrategia argumentativa predominante.\n- **Rasgos del texto:**\n  - introduce el tema de la buena vida humana;\n  - formula varias **preguntas retóricas**;\n  - ofrece ejemplos concretos: dinero, casa, ropas, alimentos, soledad;\n  - termina con una conclusión explícita.\n- **Conclusión:** la estrategia descrita corresponde a la opción **C**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "El autor introduce el tema y la tesis con ironía, para hacer entender lo contrario de lo que dice, con la intención de restarle credibilidad a dicha tesis.",
+      "optionFeedback": "- **Incorrecta.** Aunque hay un tono coloquial e incluso humorístico, el autor no usa ironía para negar su propia tesis."
+    },
+    {
+      "optionId": "B",
+      "optionText": "El autor contextualiza el problema sobre la buena vida, presenta algunas opiniones suyas sobre el tema y concluye con la tesis contraria.",
+      "optionFeedback": "- **Incorrecta.** No concluye con una tesis contraria, sino con la misma idea que viene defendiendo."
+    },
+    {
+      "optionId": "C",
+      "optionText": "El autor introduce el tema y la tesis, a través de diversas preguntas retóricas, ofreciendo ejemplos que lo conducen a una conclusión.",
+      "optionFeedback": "- **Correcta.** El texto utiliza **preguntas retóricas** y **ejemplos** para conducir al lector hacia la conclusión sobre la buena vida humana."
+    },
+    {
+      "optionId": "D",
+      "optionText": "El autor contextualiza el problema sobre la buena vida, presenta su tesis y la defiende con la ayuda de ejemplos dados por autoridades en el tema.",
+      "optionFeedback": "- **Incorrecta.** No apela a autoridades externas; los ejemplos provienen del propio razonamiento del autor."
+    }
+  ]
+}

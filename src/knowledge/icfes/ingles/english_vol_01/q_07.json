@@ -1,0 +1,50 @@
+{
+  "questionLabel": "Pregunta 7",
+  "questionId": "q_07",
+  "sectionText": "Lea las descripciones de la columna de la izquierda \\(6 - 10\\). ¿Cuál palabra de la columna de la derecha \\((A - G)\\) concuerda con cada descripción?\n\nLa opción \\(H\\) se usa para el ejemplo. Sobran dos palabras más.\n\nEn las preguntas \\(85 - 89\\), marque la letra correcta \\(A - G\\) en su hoja de respuestas.",
+  "questionText": "Pregunta 7: They make fantastic food in restaurants.",
+  "correctOptionId": "A",
+  "aiExplanation": "- **Core problem:** Identify the profession that makes food in restaurants.\n- **Relevant data:** Several professions appear, but only one works preparing meals professionally.\n- **Method:** Choose the job connected with restaurant cooking.\n- **Conclusion:** The correct profession is **chefs**, so the answer is **A**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "chefs",
+      "optionFeedback": "- **Correct.** **Chefs** prepare food in restaurants."
+    },
+    {
+      "optionId": "B",
+      "optionText": "dentists",
+      "optionFeedback": "- **Incorrect.** *Dentists* care for teeth, not restaurant meals."
+    },
+    {
+      "optionId": "C",
+      "optionText": "drivers",
+      "optionFeedback": "- **Incorrect.** *Drivers* take people from one place to another."
+    },
+    {
+      "optionId": "D",
+      "optionText": "farmers",
+      "optionFeedback": "- **Incorrect.** *Farmers* produce food ingredients, but they do not usually make dishes in restaurants."
+    },
+    {
+      "optionId": "E",
+      "optionText": "guitarists",
+      "optionFeedback": "- **Incorrect.** *Guitarists* perform music."
+    },
+    {
+      "optionId": "F",
+      "optionText": "nurses",
+      "optionFeedback": "- **Incorrect.** *Nurses* work in health care."
+    },
+    {
+      "optionId": "G",
+      "optionText": "painters",
+      "optionFeedback": "- **Incorrect.** *Painters* create or apply paint, not restaurant food."
+    },
+    {
+      "optionId": "H",
+      "optionText": "teachers",
+      "optionFeedback": "- **Incorrect.** *Teachers* educate students."
+    }
+  ]
+}

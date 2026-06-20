@@ -1,0 +1,25 @@
+{
+  "questionLabel": "Pregunta 16",
+  "questionId": "q_16",
+  "sectionText": "Complete las cinco conversaciones.\n\nEn las preguntas \\(16 - 20\\), marque \\(A\\), \\(B\\) o \\(C\\) en su hoja de respuestas.",
+  "questionText": "Pregunta 16: Why didn't you put your new coat on yesterday?",
+  "correctOptionId": "C",
+  "aiExplanation": "- **Core problem:** Choose the response that logically answers *why* the person did not wear the coat.\n- **Relevant data:** A correct response must explain a reason.\n- **Method:** Eliminate answers that are unrelated or not reasons.\n- **Conclusion:** *It was too warm* gives a clear reason for not wearing a coat. The correct answer is **C**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "I liked jeans.",
+      "optionFeedback": "- **Incorrect.** This talks about jeans, not the reason for not wearing the coat."
+    },
+    {
+      "optionId": "B",
+      "optionText": "Let's dress up.",
+      "optionFeedback": "- **Incorrect.** This is a suggestion, not an answer to *why*."
+    },
+    {
+      "optionId": "C",
+      "optionText": "It was too warm.",
+      "optionFeedback": "- **Correct.** This directly explains why the person did not put the coat on."
+    }
+  ]
+}

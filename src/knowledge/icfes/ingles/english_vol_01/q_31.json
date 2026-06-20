@@ -1,0 +1,26 @@
+{
+  "questionLabel": "Pregunta 31",
+  "questionId": "q_31",
+  "sectionText": "Lea el texto y responda las preguntas.\n\nEn las preguntas \\(29 - 35\\), marque \\(A\\), \\(B\\) o \\(C\\) en su hoja de respuestas.\n\nGolf is an outdoor sport played with a club and a ball on a field called a course. Players hit the ball with the club, usually very hard, across the course until it goes into a hole. When the player hits the ball, it is called a stroke.\n\nHistorians believe that early forms of golf were played in the Netherlands and then in Scotland, where the oldest golf organization was created. The first golf courses were fields of grass; sheep ate the grass to keep it short. In the United States, the first course was on a farm in Illinois, and it’s still there today. British players like John Taylor were considered the best in the \\(1800\\)s, but in the \\(1920\\)s Americans became well-known. In the \\(1960\\)s, amazing players like Arnold Palmer and Jack Nicklaus began to appear.\n\nWhile playing, golfers choose between different clubs depending on how far they want to hit the ball. The balls are small, hard, white, and made of a strong material. They were originally wooden, but then they were made of leather in the \\(1600\\)s. The modern balls made since the \\(1900\\)s have very advanced technology in their design, which has improved the game a lot.\n\nThere are different popular ways of playing, like *match play* or *stroke play*. However, in all cases, the golf player with the lowest number of strokes for all the holes wins.",
+  "sectionImageAiDescription": "Small diagram on the right side of the text box showing a golfer standing and hitting a ball with a club. A flag marks the hole on the left side of the diagram. Two labels with arrows identify \"Club\" pointing to the stick in the golfer's hands and \"Hole\" pointing to the opening near the flag. Ground is shown as a horizontal strip with simple background vegetation.",
+  "questionText": "Pregunta 31: In the past, how was the grass in courses kept short?",
+  "correctOptionId": "C",
+  "aiExplanation": "- **Core problem:** Find how course grass was kept short in the past.\n- **Relevant data:** The text states that *sheep ate the grass to keep it short*.\n- **Method:** Select the option paraphrasing that sentence.\n- **Conclusion:** The grass was kept short because **animals ate it**. The correct answer is **C**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "People from Illinois did it.",
+      "optionFeedback": "- **Incorrect.** Illinois is mentioned for the first course in the United States, not for cutting the grass."
+    },
+    {
+      "optionId": "B",
+      "optionText": "A company cut it.",
+      "optionFeedback": "- **Incorrect.** The passage does not mention a company; it says sheep ate the grass."
+    },
+    {
+      "optionId": "C",
+      "optionText": "Animals ate it.",
+      "optionFeedback": "- **Correct.** Sheep, which are animals, ate the grass to keep it short."
+    }
+  ]
+}

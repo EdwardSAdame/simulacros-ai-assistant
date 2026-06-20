@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 1",
+  "questionId": "q_01",
+  "sectionText": "La filosofía epicúrea tiene una finalidad ética*, pues pretende guiarnos para alcanzar la buena vida. Para el epicureísmo esta es la vida placentera, ya que considera que el fin último de todas nuestras acciones es conseguir placer y evitar dolor; por ello, el epicureísmo identifica el placer con el bien y el dolor con el mal.\n\nEpicuro da por lo menos dos razones complementarias por las cuales considera que el propósito de la buena vida debe ser el placer. Por un lado, menciona el hecho de que, sin necesidad de pensarlo y desde su nacimiento, todas las criaturas vivientes, por instinto, se contentan con el placer y son reacias al dolor. Por otro lado, Epicuro toma a los sentimientos de placer y dolor como criterios esenciales de decisión y conducta, en tanto que son eventos reales que no pueden ser refutados: no hay razón o evidencia alguna que pueda hacernos dudar de que estamos sintiendo dolor o placer; es un hecho real que lo sentimos, pues, ¿cómo podría ser falsa la sensación de dolor ante un golpe?\n\nAsí, si lo que trae placer es lo que elegimos y lo que trae dolor es lo que evitamos, son nuestros sentimientos los que nos permiten deliberar qué debemos elegir y evitar, pues ellos no se equivocan. De esta manera, esa tendencia instintiva y natural hacia buscar el placer y evitar el dolor concuerda con lo que, para el epicureísmo, es el criterio ético más fundamental y verdadero.\n\n*La ética es el campo de la filosofía que estudia los principios para decidir correctamente.",
+  "questionText": "Pregunta 1: ¿Cuál de las siguientes opciones es una paráfrasis correcta del segundo párrafo del texto?",
+  "correctOptionId": "D",
+  "aiExplanation": "- **Problema central:** identificar qué opción reformula fielmente el segundo párrafo.\n- **Datos clave del párrafo:** Epicuro da **dos razones complementarias** para sostener que la buena vida debe orientarse al placer:\n  - desde el nacimiento, los seres vivos buscan por instinto el placer y rehúyen el dolor;\n  - los sentimientos de placer y dolor son criterios reales y confiables para decidir.\n- **Evaluación:**\n  - A habla de *dos formas de concebir la vida*, lo cual no aparece en el texto.\n  - B invierte completamente el sentido: habla de buscar dolor y huir del placer.\n  - C dice que buscamos la buena vida *sin pensar en dolor o placer*, contrario al texto.\n  - D recoge correctamente las dos ideas: búsqueda del placer y rechazo del dolor, y el papel de los sentimientos en las decisiones.\n- **Conclusión:** la paráfrasis correcta es **D**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "Para Epicuro hay dos formas de concebir la vida: aquella que busca el placer y aquella que busca evitar el dolor del nacimiento.",
+      "optionFeedback": "- **Incorrecta.** El párrafo no habla de *dos formas de concebir la vida*, sino de **dos razones** para justificar por qué la buena vida debe orientarse al placer.\n- Además, *evitar el dolor del nacimiento* no aparece en el texto."
+    },
+    {
+      "optionId": "B",
+      "optionText": "Para Epicuro hay dos formas en la que todo ser vivo concibe la buena vida: la primera es la búsqueda del dolor y la segunda es huir del placer.",
+      "optionFeedback": "- **Incorrecta.** Invierte el sentido del texto.\n- Epicuro sostiene exactamente lo contrario: los seres vivos **buscan el placer** y **rechazan el dolor**."
+    },
+    {
+      "optionId": "C",
+      "optionText": "Para Epicuro todos buscamos alcanzar una buena vida sin pensar en el dolor o en el placer. Desde que nacemos obramos guiados por el instinto.",
+      "optionFeedback": "- **Incorrecta.** Aunque menciona el instinto, elimina lo esencial del párrafo: que ese instinto está orientado precisamente hacia **el placer** y contra **el dolor**.\n- Decir *sin pensar en el dolor o en el placer* contradice la idea central."
+    },
+    {
+      "optionId": "D",
+      "optionText": "Para Epicuro son ciertas dos cosas: que todos buscamos el placer y rechazamos el dolor, y que los sentimientos son los que determinan nuestras decisiones.",
+      "optionFeedback": "- **Correcta.** Resume las **dos razones complementarias** del segundo párrafo:\n  - la tendencia natural a buscar placer y evitar dolor;\n  - el papel de los sentimientos de placer y dolor como criterio para decidir."
+    }
+  ]
+}

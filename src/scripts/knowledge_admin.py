@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """
 CLI to create/cleanup vector stores and upload knowledge files.
-UPDATED: Creates a unique Vector Store for EVERY SINGLE FILE in ICFES, 
-skipping 'general' and applying explicit ICFES prefix markers.
+UPDATED: Traverses exam directories, creates ONE vector store per exam folder, 
+and uploads all split JSON questions inside it. Supports single-exam execution.
+Includes a safe cleanup command to target specific exam types (e.g., ICFES).
 """
 
 import argparse
@@ -56,9 +57,10 @@ def _attach_file(store_id: str, file_id: str) -> None:
 
 # ----------------- commands -----------------
 
-def cmd_cleanup(_args):
-    """Deletes all vector stores created by this bot to start fresh."""
-    print("WARNING: This will delete ALL vector stores in your OpenAI project.")
+def cmd_cleanup(args):
+    """Deletes vector stores containing a specific target string to avoid wiping everything."""
+    target = args.target.upper()
+    print(f"WARNING: This will delete vector stores containing '{target}' in their name.")
     confirm = input("Are you sure? (type 'yes' to confirm): ")
     if confirm != "yes":
         print("Aborted.")
@@ -67,9 +69,11 @@ def cmd_cleanup(_args):
     stores = client.vector_stores.list(limit=100)
     count = 0
     for vs in stores.data:
-        print(f"Deleting store: {vs.name} ({vs.id})...")
-        client.vector_stores.delete(vs.id)
-        count += 1
+        vs_name = getattr(vs, "name", "")
+        if target in vs_name.upper():
+            print(f"Deleting store: {vs_name} ({vs.id})...")
+            client.vector_stores.delete(vs.id)
+            count += 1
     print(f"Done. Deleted {count} stores.")
 
 
@@ -95,43 +99,57 @@ def cmd_upload(args):
 
 def cmd_bootstrap(args):
     root = Path(args.root).resolve()
+    target_exam = args.exam
+
     if not root.exists():
         print(f"Knowledge root not found: {root}", file=sys.stderr)
         sys.exit(1)
 
     env_out: Dict[str, str] = {}
-    all_files = []
-    
     cat_path = root / "icfes"
-    if cat_path.exists():
-        for sub_dir in cat_path.iterdir():
-            if sub_dir.is_dir():
-                if sub_dir.name == "general":
-                    print("Skipping 'general' folder...")
-                    continue
-                all_files.extend(_collect_files(sub_dir))
-
-    if not all_files:
-        print("No JSON files found in valid icfes directories.")
+    
+    if not cat_path.exists():
+        print("No 'icfes' directory found in knowledge root.")
         return
 
-    print(f"Found {len(all_files)} files. Creating individual Vector Stores...")
+    # Iterate through subject folders (e.g., matematicas, lectura_critica)
+    for subject_dir in cat_path.iterdir():
+        if not subject_dir.is_dir() or subject_dir.name == "general":
+            continue
 
-    for fp in all_files:
-        file_stem = fp.stem  # e.g., math_vol_02
-        
-        # Prefixed named architecture to allow clean domain separation
-        store_name = f"ExamStore_ICFES_{file_stem}"
-        env_key = f"VECTOR_STORE_ICFES_{file_stem.upper()}"
+        # Iterate through exam folders (e.g., math_vol_01, lecture_vol_01)
+        for exam_dir in subject_dir.iterdir():
+            if not exam_dir.is_dir():
+                continue
 
-        print(f"\nProcessing File: [{fp.name}] -> Store: [{store_name}]")
-        
-        store_id = _ensure_store(store_name)
-        fid = _upload_file(fp)
-        _attach_file(store_id, fid)
-        
-        env_out[env_key] = store_id
-        print(f"  + Uploaded and attached successfully.")
+            exam_name = exam_dir.name
+
+            # If the user passed --exam, skip any folder that does not match
+            if target_exam and target_exam.lower() != exam_name.lower():
+                continue
+
+            json_files = _collect_files(exam_dir)
+            if not json_files:
+                print(f"Skipping empty exam folder: {exam_name}")
+                continue
+
+            store_name = f"ExamStore_ICFES_{exam_name}"
+            env_key = f"VECTOR_STORE_ICFES_{exam_name.upper()}"
+
+            print(f"\nProcessing Exam Directory: [{exam_name}] -> Store: [{store_name}]")
+            print(f"Found {len(json_files)} questions. Uploading...")
+
+            store_id = _ensure_store(store_name)
+            env_out[env_key] = store_id
+
+            for fp in json_files:
+                fid = _upload_file(fp)
+                _attach_file(store_id, fid)
+                print(f"  + Attached {fp.name}")
+
+    if not env_out:
+        print("\nNo stores were created or updated.")
+        return
 
     print("\n# ---- Paste into your AWS Lambda Environment Variables (.env) ----")
     for k, v in sorted(env_out.items()):
@@ -144,7 +162,10 @@ def main():
     sub = ap.add_subparsers(dest="cmd")
 
     sub.add_parser("list-stores").set_defaults(func=cmd_list_stores)
-    sub.add_parser("cleanup").set_defaults(func=cmd_cleanup)
+    
+    clean = sub.add_parser("cleanup")
+    clean.add_argument("--target", default="ICFES", help="Delete only stores containing this string in their name")
+    clean.set_defaults(func=cmd_cleanup)
 
     up = sub.add_parser("upload")
     up.add_argument("--store", required=True)
@@ -153,6 +174,7 @@ def main():
 
     boot = sub.add_parser("bootstrap")
     boot.add_argument("--root", default="src/knowledge")
+    boot.add_argument("--exam", default=None, help="Process only a specific exam folder (e.g., math_vol_01)")
     boot.set_defaults(func=cmd_bootstrap)
 
     args = ap.parse_args()

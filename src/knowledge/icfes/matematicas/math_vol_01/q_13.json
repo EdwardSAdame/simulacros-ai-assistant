@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 13",
+  "questionId": "q_13",
+  "sectionImageAiDescription": "Plano geométrico cartesiano, origen en (0,0). 1) Contorno: Rectángulo de (0,0) a (8,5). 2) Divisiones: Recta de (0,2) a (4,5); y un arco de (4,5) a (8,1) que es un cuarto de círculo con centro en (8,5) y radio 4. 3) Relleno estricto (Opacity/Fade): 'Región 1' y 'Región 2' SIN relleno (fondo limpio). 'Región 3' con relleno de color institucional de baja opacidad. IMPORTANTE PARA EL RELLENO: Para evitar que el color invada la Región 2, el polígono de la Región 3 debe generarse evaluando matemáticamente su límite superior: desde x=0 a x=4 usar la recta, y desde x=4 a x=8 usar la ecuación exacta del arco circular y = 5 - sqrt(16 - (x - 8)^2). El límite inferior es y=0. 4) Etiquetas: 'Región 1' en (1.5, 3.8); 'Región 2' en (6.5, 3.8); 'Región 3' en (4, 1.5). 5) Acotaciones (ESTRICTO: dibujar líneas de cota con flechas en ambos extremos y texto en LaTeX centrado sobre/junto a la línea): flecha horizontal indicando la medida de x=0 a x=4 ligeramente por encima del límite superior (y=5) con texto '\\(4\\text{ m}\\)'; flecha horizontal de x=4 a x=8 ligeramente por encima del límite superior con texto '\\(4\\text{ m}\\)'; flecha vertical de y=2 a y=5 ligeramente a la izquierda de x=0 con texto '\\(3\\text{ m}\\)'; flecha diagonal paralela y desplazada hacia arriba del segmento (0,2)-(4,5) con texto '\\(5\\text{ m}\\)'; flecha vertical de y=0 a y=5 a la derecha de x=8 con texto '\\(5\\text{ m}\\)'; flecha horizontal de x=0 a x=8 bajo el límite inferior (y=0) con texto '\\(8\\text{ m}\\)'.",
+  "questionText": "Pregunta 13: Un pintor tiene un lienzo rectangular que quiere dividir en tres regiones: la región \\(1\\), que es triangular; la región \\(2\\), con forma de un cuarto de círculo; y la región \\(3\\), que ocupa el resto del lienzo, como se muestra en la figura.\n\nPara calcular el área de la región \\(3\\), el pintor realizó el siguiente procedimiento:\n\n**Paso 1.** Calculó el área del lienzo, multiplicando \\(8\\text{ m}\\times 5\\text{ m}\\).\n\n**Paso 2.** Calculó el área de región \\(1\\), multiplicando \\(4\\text{ m}\\times 3\\text{ m}\\).\n\n**Paso 3.** Calculó el área de la región \\(2\\), multiplicando \\(\\pi\\times 16\\text{ m}^2\\) y dividiendo el resultado entre \\(4\\).\n\n**Paso 4.** Al resultado del paso \\(1\\), le restó los resultados del paso \\(2\\) y del paso \\(3\\).\n\n¿En cuál paso hay un error y cómo se puede corregir?",
+  "correctOptionId": "C",
+  "aiExplanation": "- **Problema central:** identificar el paso equivocado en el cálculo del área de la región \\(3\\).\n- **Paso 1:** correcto. Área del rectángulo: \\(8\\times 5\\).\n- **Paso 2:** incorrecto.\n  - La región \\(1\\) es un **triángulo** con base \\(4\\text{ m}\\) y altura \\(3\\text{ m}\\).\n  - Su área debe ser:\n    \\[\n    \\frac{4\\times 3}{2}=6\\text{ m}^2\n    \\]\n- **Paso 3:** correcto.\n  - La región \\(2\\) es un cuarto de círculo de radio \\(4\\), así que:\n    \\[\n    \\frac{\\pi(4)^2}{4}=\\frac{16\\pi}{4}=4\\pi\n    \\]\n- **Conclusión:** el error está en el **paso \\(2\\)** y se corrige dividiendo entre \\(2\\).",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "En el paso \\(2\\), porque se debe multiplicar \\(3\\text{ m}\\times 4\\text{ m}\\times 5\\text{ m}\\).",
+      "optionFeedback": "- **Incorrecta.** Esa operación no corresponde al área de un triángulo."
+    },
+    {
+      "optionId": "B",
+      "optionText": "En el paso \\(3\\), porque se debe multiplicar \\(2\\pi\\times 4\\text{ m}\\) y luego dividir entre \\(4\\).",
+      "optionFeedback": "- **Incorrecta.** Esa expresión corresponde a una longitud de circunferencia, no al área del cuarto de círculo."
+    },
+    {
+      "optionId": "C",
+      "optionText": "En el paso \\(2\\), porque se debe multiplicar \\(4\\text{ m}\\times 3\\text{ m}\\) y luego dividir entre \\(2\\).",
+      "optionFeedback": "- **Correcta.** La región \\(1\\) es triangular, por lo que su área es \\(\\frac{bh}{2}\\)."
+    },
+    {
+      "optionId": "D",
+      "optionText": "En el paso \\(3\\), porque se debe multiplicar \\(\\pi\\times 4\\text{ m}\\) y luego dividir entre \\(4\\).",
+      "optionFeedback": "- **Incorrecta.** Para el área del cuarto de círculo se usa \\(\\pi r^2/4\\), no \\(\\pi r/4\\)."
+    }
+  ]
+}

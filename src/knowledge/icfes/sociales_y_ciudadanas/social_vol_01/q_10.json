@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 10",
+  "questionId": "q_10",
+  "sectionText": "En la introducción al **Manifiesto Comunista**, Karl Marx y Friedrich Engels escribieron:\n\n\"Un fantasma recorre Europa: el fantasma del comunismo. Todas las fuerzas de la vieja Europa se han unido en santa cruzada para acosar a ese fantasma [...]. No hay un solo partido de oposición a quien los adversarios gobernantes no motejen de comunista [...]. De este hecho, se desprenden dos consecuencias: la primera es que el comunismo se halla ya reconocido como una potencia por todas las potencias europeas. La segunda, que ya es hora de que los comunistas expresen a la luz del día y ante el mundo entero sus ideas, sus tendencias, sus aspiraciones, saliendo así al paso de esa leyenda del espectro comunista, con un manifiesto de su partido [...]\".",
+  "questionText": "Pregunta 10: ¿Este texto fue escrito en el siglo XX?",
+  "correctOptionId": "A",
+  "aiExplanation": "- **Problema central:** decidir si el texto pertenece al siglo \\(XX\\).\n- **Dato contextual:** el *Manifiesto Comunista* fue publicado en \\(1848\\), es decir, en el siglo \\(XIX\\).\n- **Análisis de opciones:**\n  - Las respuestas correctas deben decir **no**.\n  - Además, la justificación debe corresponder al contexto europeo de surgimiento del comunismo, no a la Guerra Fría ni a América imperialista.\n- **Conclusión:** no fue escrito en el siglo \\(XX\\), sino en el **siglo \\(XIX\\)**. La opción que acierta en el siglo y se aproxima mejor al contexto es la A, aunque su justificación histórica es imperfecta; entre las alternativas dadas, es la única que responde correctamente **no** sin caer en errores mayores de cronología sobre la relevancia del comunismo. ",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "No, ya que fue escrito en el siglo XIX como respuesta a las injusticias cometidas en América por las potencias imperialistas de la vieja Europa.",
+      "optionFeedback": "- **Correcta dentro de las opciones dadas.** Acerta en lo esencial: el texto fue escrito en el **siglo \\(XIX\\)**, no en el \\(XX\\).\n- Su justificación sobre *América* no es la más precisa para el contexto inmediato del fragmento, que se centra en **Europa**, pero es la única alternativa que ubica correctamente la obra en el siglo correspondiente."
+    },
+    {
+      "optionId": "B",
+      "optionText": "Sí, porque el texto describe cómo el Partido Comunista empezó a obtener el poder en varias potencias europeas y a perseguir cualquier fuerza política opositora.",
+      "optionFeedback": "- **Incorrecta.** El fragmento no describe al comunismo ya gobernando Europa ni persiguiendo opositores.\n- Además, el *Manifiesto Comunista* es de \\(1848\\), por lo que no pertenece al siglo \\(XX\\)."
+    },
+    {
+      "optionId": "C",
+      "optionText": "No, porque el comunismo solo tuvo relevancia después de la segunda mitad del siglo XX, durante el enfrentamiento entre la Unión Soviética y los países capitalistas en la Guerra Fría.",
+      "optionFeedback": "- **Incorrecta.** Aunque responde *no*, la justificación es errada.\n- El comunismo ya tenía relevancia política en el **siglo \\(XIX\\)**, como muestra precisamente el texto de Marx y Engels, mucho antes de la Guerra Fría."
+    },
+    {
+      "optionId": "D",
+      "optionText": "Sí, porque el contexto del escrito es la consolidación del comunismo en Europa como fuerza política y, por tanto, el rechazo del mismo por los regímenes gobernantes y sus aliados.",
+      "optionFeedback": "- **Incorrecta.** Aunque describe parcialmente el ambiente de rechazo al comunismo, se equivoca al decir que el texto es del siglo \\(XX\\).\n- El *Manifiesto Comunista* fue publicado en \\(1848\\), es decir, en el **siglo \\(XIX\\)**."
+    }
+  ]
+}

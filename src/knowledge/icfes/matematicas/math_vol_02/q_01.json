@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 1",
+  "questionId": "q_01",
+  "questionImageAiDescription": "Gráfica titulada: \"Distribución del ingreso per cápita de la UG entre \\(\\$0\\) y \\(\\$1.000.000\\). Total nacional GEIH 2021\". Eje vertical con flecha hacia arriba y etiqueta \"Cantidad de hogares\". Eje horizontal con flecha hacia la derecha y etiqueta \"Ingreso per cápita de la unidad de gastos\". En el eje horizontal aparecen las marcas \\(0\\), \\(161.099\\), \\(354.031\\) y \\(1.000.000\\). Hay una curva de distribución unimodal: inicia cerca del origen con valor bajo, sube hasta un máximo ligeramente a la derecha de \\(161.099\\), luego desciende gradualmente hacia la derecha formando una cola larga hasta cerca de \\(1.000.000\\). Dos líneas verticales negras atraviesan la región de la curva: una en \\(161.099\\) rotulada verticalmente \"Línea de pobreza extrema\" y otra en \\(354.031\\) rotulada verticalmente \"Línea de pobreza monetaria\". La región comprendida entre ambas líneas está sombreada en gris más oscuro; la región a la izquierda de la primera línea está sombreada en gris más claro bajo la curva. Fuente al pie: \"Fuente: DANE. (\\(15\\) de abril de \\(2015\\)). Gran Encuesta Integrada de Hogares GEIH - \\(2012\\).\"",
+  "questionText": "Pregunta 1: El ingreso per cápita se calcula dividiendo el total de los ingresos mensuales de un hogar entre la cantidad de personas que conforman el hogar. La gráfica muestra la distribución del ingreso per cápita de los hogares de un municipio y las líneas de pobreza extrema y monetaria.\n\nEl gobierno decidió que va a subsidiar a los hogares que tienen un ingreso per cápita por debajo de la línea de pobreza monetaria. Esteban es un trabajador independiente que vive únicamente con su hija Sara y los ingresos mensuales de su hogar son de \\(\\$600.000\\). Él afirma que es beneficiario del subsidio del gobierno.\n\n¿Es correcta la afirmación de Esteban?",
+  "correctOptionId": "C",
+  "aiExplanation": "- **Problema central:** decidir si Esteban recibe el subsidio, que se entrega a hogares con ingreso per cápita menor que la línea de pobreza monetaria, es decir, menor que \\(\\$354.031\\).\n- **Datos relevantes:** en el hogar viven \\(2\\) personas y el ingreso mensual total es \\(\\$600.000\\).\n- **Cálculo:**\n  \\[\n  \\text{Ingreso per cápita}=\\frac{600.000}{2}=300.000\n  \\]\n- **Comparación:** \\(\\$300.000 < \\$354.031\\).\n- **Conclusión:** sí cumple la condición del subsidio. La afirmación de Esteban es **correcta**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "No, porque el ingreso total en el hogar de Esteban es mayor que \\(\\$161.099\\).",
+      "optionFeedback": "**Incorrecta.** El criterio no usa el ingreso total del hogar ni la línea de pobreza extrema. Debe compararse el **ingreso per cápita** con la línea de pobreza monetaria."
+    },
+    {
+      "optionId": "B",
+      "optionText": "Sí, porque el ingreso de Esteban es mayor que \\(\\$354.031\\).",
+      "optionFeedback": "**Incorrecta.** Se está usando el ingreso total \\(\\$600.000\\), pero el subsidio depende del **ingreso per cápita**. Además, ser mayor que \\(\\$354.031\\) no daría derecho al subsidio."
+    },
+    {
+      "optionId": "C",
+      "optionText": "Sí, porque el ingreso per cápita del hogar de Esteban es menor que \\(\\$354.031\\).",
+      "optionFeedback": "**Correcta.** El ingreso per cápita es \\(\\$300.000\\), y como \\(300.000<354.031\\), el hogar queda por debajo de la línea de pobreza monetaria."
+    },
+    {
+      "optionId": "D",
+      "optionText": "No, porque el ingreso per cápita del hogar de Esteban es mayor que \\(\\$161.099\\).",
+      "optionFeedback": "**Incorrecta.** Aunque \\(\\$300.000\\) sí es mayor que \\(\\$161.099\\), esa es la línea de pobreza extrema, no la condición usada para otorgar el subsidio."
+    }
+  ]
+}

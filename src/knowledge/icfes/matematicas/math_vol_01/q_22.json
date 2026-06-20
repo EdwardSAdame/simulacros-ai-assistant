@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 22",
+  "questionId": "q_22",
+  "sectionImageAiDescription": "1) Polígonos: Rectángulo definido por los vértices (-1, 0), (0, 0), (0, 3) y (-1, 3). Triángulo rectángulo definido por los vértices (0, 0), (4, 0) y (0, 3). 2) Segmentos: Segmento vertical en x=2, desde y=0 hasta y=1.5. 3) Cotas dimensionales: Cota vertical en x=-1.3 desde y=0 hasta y=3 con texto '\\(3\\text{ m}\\)'. Cota horizontal en y=-0.8 desde x=0 hasta x=4 con texto '\\(4\\text{ m}\\)'. Cota horizontal en y=-0.3 desde x=0 hasta x=2 con texto '\\(2\\text{ m}\\)'. 4) Etiquetas de texto independientes: '\\(h\\)' posicionado en la coordenada (2.1, 0.75).",
+  "questionText": "Pregunta 22: Una persona construyó una rampa, como se muestra en la figura, pero se necesita un refuerzo para evitar que esta se parta. Para esto, a dos metros del muro, se va a construir una columna que fortalezca la estructura.\n\n¿Cuál de los siguientes procedimientos permite calcular la altura \\(h\\) que debe tener la columna?",
+  "correctOptionId": "C",
+  "aiExplanation": "- **Problema central:** hallar la altura de la rampa a \\(2\\text{ m}\\) del muro usando proporcionalidad.\n- **Datos de la figura:**\n  - La rampa completa forma un triángulo rectángulo de base \\(4\\text{ m}\\) y altura \\(3\\text{ m}\\).\n  - La columna está a \\(2\\text{ m}\\) del muro, es decir, a la mitad de la base.\n- **Proporción:**\n  \\[\n  \\frac{h}{3}=\\frac{2}{4}\n  \\]\n  Entonces:\n  \\[\n  h=3\\times \\frac{2}{4}=3\\div 2=1,5\n  \\]\n- **Procedimiento equivalente:**\n  - Dividir \\(4\\) entre \\(2\\), obteniendo \\(2\\).\n  - Dividir \\(3\\) entre \\(2\\).\n- **Conclusión:** el procedimiento correcto es el de la opción **C**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "**Paso 1.** Dividir \\(2\\text{ m}\\) entre \\(4\\text{ m}\\), obteniendo \\(0,5\\).\n\n**Paso 2.** Dividir \\(3\\text{ m}\\) entre el valor calculado en el paso \\(1\\).",
+      "optionFeedback": "- **Incorrecta.** Si se divide \\(3\\) entre \\(0,5\\), se obtiene \\(6\\), que no puede ser la altura de una rampa cuya altura total es \\(3\\text{ m}\\)."
+    },
+    {
+      "optionId": "B",
+      "optionText": "**Paso 1.** Dividir \\(4\\text{ m}\\) entre \\(2\\text{ m}\\), obteniendo \\(0,5\\).\n\n**Paso 2.** Multiplicar \\(3\\text{ m}\\) por el valor calculado en el paso \\(1\\).",
+      "optionFeedback": "- **Incorrecta.** \\(4\\div 2=2\\), no \\(0,5\\). El procedimiento presenta un error desde el primer paso."
+    },
+    {
+      "optionId": "C",
+      "optionText": "**Paso 1.** Dividir \\(4\\text{ m}\\) entre \\(2\\text{ m}\\), obteniendo \\(2\\).\n\n**Paso 2.** Dividir \\(3\\text{ m}\\) entre el valor calculado en el paso \\(1\\).",
+      "optionFeedback": "- **Correcta.** Como \\(2\\) es la mitad de \\(4\\), la altura buscada es la mitad de \\(3\\): \\(3\\div 2=1,5\\text{ m}\\)."
+    },
+    {
+      "optionId": "D",
+      "optionText": "**Paso 1.** Dividir \\(2\\text{ m}\\) entre \\(4\\text{ m}\\), obteniendo \\(2\\).\n\n**Paso 2.** Multiplicar \\(3\\text{ m}\\) por el valor calculado en el paso \\(1\\).",
+      "optionFeedback": "- **Incorrecta.** \\(2\\div 4=0,5\\), no \\(2\\). Además, así daría \\(6\\), que es imposible."
+    }
+  ]
+}

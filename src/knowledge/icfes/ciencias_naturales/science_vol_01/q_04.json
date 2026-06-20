@@ -1,0 +1,31 @@
+{
+  "questionLabel": "Pregunta 4",
+  "questionId": "q_04",
+  "sectionText": "Un ingeniero investiga cómo se dará la transmisión de información para que su pueblo se conecte a internet. Él encuentra que esto ocurrirá a través de la integración de dos tecnologías:\n\n- Un cable de fibra óptica por el que se transporta la información desde internet hasta la antena principal del pueblo.\n- Un grupo de antenas que emiten y reciben la información por medio de ondas electromagnéticas (antenas de wifi).\n\nAmbas tecnologías se comunican con la antena principal en la cabecera del pueblo, que repite la señal a otras antenas ubicadas estratégicamente en las plazas y zonas comunes, como se muestra a continuación.\n\nA partir de su investigación, el ingeniero propone realizar una conexión por medio de ondas electromagnéticas, con todas las antenas conectadas entre sí y con frecuencias de onda, sin costo, como las ondas de radio. Su propuesta se llama \"Megazonas wifi\" y se muestra en el siguiente esquema:",
+  "sectionImageAiDescription": "La sección contiene dos esquemas.\n\nEsquema superior titulado \"Esquema wifi zonas comunitarias\": representación de un pueblo circular con casas, árboles, personas y una plaza central con una fuente. Hay una \"Antena principal\" en la parte alta del pueblo, una \"Antena secundaria\" en la parte baja, y un tercer punto de acceso en el lado izquierdo. A la derecha aparece una nube etiquetada \"Internet\" conectada por una flecha vertical a un icono de antena. Entre la antena derecha y la antena principal hay una flecha horizontal doble rotulada \"Conexión por ondas\". Desde la antena principal del pueblo hacia la nube de Internet sale una flecha curva gruesa rotulada \"Conexión por fibra óptica\". Hay un recuadro de leyenda con un icono y el texto \"Punto de acceso\".\n\nEsquema inferior titulado \"Esquema Megazonas wifi\": varias antenas interconectadas por líneas punteadas formando una red mallada. A la izquierda hay una \"Escuela\" conectada a la red. En la parte central superior aparece \"Cabecera rural 3\". A la derecha superior está la nube \"Internet\" conectada verticalmente a una antena y por una flecha horizontal doble hacia la red; cerca de ahí aparece la etiqueta \"Red fija\". En la parte inferior izquierda está la \"Cabecera rural 1\" con su \"Antena principal\" y \"Antena secundaria\". En la parte inferior derecha está la \"Cabecera rural 2\" con su \"Antena principal\" y \"Antena secundaria\". Un recuadro indica: \"Las ondas de la señal pueden tener frecuencias entre los 928 MHz y los 5.850 MHz, para mayor cobertura\".",
+  "questionText": "Pregunta 4: De acuerdo con el esquema de wifi zonas comunitarias, ¿cuál de las siguientes razones puede argumentar la necesidad de conectar el cable de fibra óptica?",
+  "correctOptionId": "C",
+  "aiExplanation": "- **Problema central:** justificar por qué es necesario el cable de fibra óptica en el esquema.\n- **Datos relevantes:** el texto indica que la fibra óptica transporta la información **desde internet hasta la antena principal**; luego, las antenas distribuyen la señal por ondas.\n- **Análisis:** la fibra óptica funciona como el enlace de acceso a internet y las ondas wifi como la distribución local. Por eso puede entenderse como una forma adicional o complementaria de conexión dentro del sistema mostrado.\n- **Conclusión:** la respuesta correcta es **C**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "El cable de fibra óptica es el que lleva la corriente a las antenas.",
+      "optionFeedback": "- **Incorrecta.** La fibra óptica transporta **información**, no la corriente eléctrica de las antenas."
+    },
+    {
+      "optionId": "B",
+      "optionText": "El cable de fibra óptica es la única forma de comunicarse con internet.",
+      "optionFeedback": "- **Incorrecta.** En el contexto se integran dos tecnologías. No se afirma que sea la única forma posible, sino la usada para llevar la señal a la antena principal."
+    },
+    {
+      "optionId": "C",
+      "optionText": "El cable de fibra óptica es una segunda forma de conectarse con internet.",
+      "optionFeedback": "- **Correcta.** En el sistema descrito, la conexión combina fibra óptica y ondas electromagnéticas; la fibra aporta el enlace de internet hacia la antena principal."
+    },
+    {
+      "optionId": "D",
+      "optionText": "El cable de fibra óptica llega a cada antena y repite la señal de internet.",
+      "optionFeedback": "- **Incorrecta.** El esquema muestra que la fibra llega a la **antena principal**, y desde allí la señal se repite a otras antenas por ondas."
+    }
+  ]
+}

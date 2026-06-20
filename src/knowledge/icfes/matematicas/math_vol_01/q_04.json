@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 4",
+  "questionId": "q_04",
+  "sectionImageAiDescription": "Tabla matemática de 5 columnas y 3 filas. Para evitar desbordamientos, la figura debe ser ancha y las celdas con texto largo deben incluir saltos de línea (text wrap). Fila 1 (Encabezados): [Celda vacía], \"Grupo 1\", \"Grupo 2\", \"Grupo 3\", \"Grupo 4\". Fila 2 (Datos): \"Característica\" (columna 1), \"Tres hombres\", \"Una mujer\\ny dos hombres\", \"Dos mujeres\\ny un hombre\", \"Tres mujeres\". Fila 3 (Datos): \"Cantidad de formas\\nde escoger\\nel grupo\", \\(X\\), \\(Y\\), \\(Z\\), \\(W\\). Todo el texto debe estar alineado al centro.",
+  "questionText": "Pregunta 4: En una clase de Inglés hay \\(6\\) estudiantes, \\(4\\) son mujeres y \\(2\\) son hombres. Para una exposición, el profesor quiere conformar grupos de \\(3\\) estudiantes.\n\nEn la tabla, \\(X\\), \\(Y\\), \\(Z\\), y \\(W\\) representan la cantidad de formas que tiene el profesor para escoger cada grupo de \\(3\\) estudiantes.\n\nDe acuerdo con los datos de la tabla, ¿cuáles valores se deben conocer para determinar la cantidad total de formas que hay para escoger un grupo de \\(3\\) estudiantes en donde, al menos, uno de ellos sea hombre?",
+  "correctOptionId": "D",
+  "aiExplanation": "- **Problema central:** identificar qué tipos de grupos cumplen *al menos un hombre*.\n- **Tabla:**\n  - \\(X\\): tres hombres.\n  - \\(Y\\): una mujer y dos hombres.\n  - \\(Z\\): dos mujeres y un hombre.\n  - \\(W\\): tres mujeres.\n- **Datos de la clase:** hay solo \\(2\\) hombres, así que grupos de **tres hombres** son imposibles; por tanto, \\(X=0\\).\n- **Condición pedida:** al menos un hombre.\n  - Sirven los grupos de tipo \\(Y\\) y \\(Z\\).\n  - No sirve \\(W\\), porque tiene cero hombres.\n- **Conclusión:** se deben conocer **solamente \\(Y\\) y \\(Z\\)**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "Solamente \\(Z\\).",
+      "optionFeedback": "- **Incorrecta.** También deben contarse los grupos con **dos hombres y una mujer**, representados por \\(Y\\)."
+    },
+    {
+      "optionId": "B",
+      "optionText": "Solamente \\(Z\\) y \\(W\\).",
+      "optionFeedback": "- **Incorrecta.** \\(W\\) representa grupos de **tres mujeres**, que no cumplen la condición de tener al menos un hombre."
+    },
+    {
+      "optionId": "C",
+      "optionText": "Solamente \\(X\\).",
+      "optionFeedback": "- **Incorrecta.** \\(X\\) representa tres hombres, pero en el grupo solo hay \\(2\\) hombres en total, así que ese caso es imposible."
+    },
+    {
+      "optionId": "D",
+      "optionText": "Solamente \\(Y\\) y \\(Z\\).",
+      "optionFeedback": "- **Correcta.** Los grupos con al menos un hombre son los de tipo \\(Y\\) y \\(Z\\)."
+    }
+  ]
+}

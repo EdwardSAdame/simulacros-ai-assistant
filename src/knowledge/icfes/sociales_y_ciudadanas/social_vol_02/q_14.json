@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 14",
+  "questionId": "q_14",
+  "sectionText": "En un debate televisivo sobre la eficacia del dióxido de cloro para tratar el COVID-19, un investigador de la Organización Mundial de la Salud señaló que: \"Jamás se debe pulverizar cloro u otros desinfectantes sobre el cuerpo ni introducirlos en el organismo. Estas sustancias pueden ser tóxicas si se ingieren, y el contacto con ellas irrita y daña la piel y los ojos. El cloro y los desinfectantes deben utilizarse únicamente para la desinfección de superficies y siempre con las debidas precauciones. Recuerde mantener el cloro y otros desinfectantes fuera del alcance de los niños\".",
+  "questionText": "Pregunta 14: ¿Esta fuente puede considerarse confiable?",
+  "correctOptionId": "D",
+  "aiExplanation": "- **Problema central:** valorar la confiabilidad de una fuente de información sobre salud.\n- **Datos relevantes:**\n  - La fuente es la Organización Mundial de la Salud.\n  - La OMS emite orientaciones públicas basadas en evidencia científica.\n  - Algunas opciones apelan a testimonios o afirmaciones políticas, que no equivalen a evidencia científica validada.\n- **Método lógico:** una fuente es más confiable cuando sus recomendaciones se sustentan en estudios y validación científica, no en testimonios aislados.\n- **Conclusión:** la fuente sí es confiable porque la **OMS basa sus recomendaciones en estudios científicos validados**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "No, porque existen testimonios en redes sociales de personas que se han curado de COVID-19 al ingerir cloro.",
+      "optionFeedback": "- **Incorrecta.** Los testimonios en redes sociales no constituyen evidencia científica confiable y no invalidan las recomendaciones de una entidad especializada."
+    },
+    {
+      "optionId": "B",
+      "optionText": "Sí, porque la Organización Mundial de la Salud es infalible en sus análisis sobre las enfermedades en el mundo.",
+      "optionFeedback": "- **Incorrecta.** Una fuente científica puede ser confiable sin ser infalible. La confiabilidad depende del método y la evidencia, no de una supuesta perfección."
+    },
+    {
+      "optionId": "C",
+      "optionText": "No, porque algunos líderes políticos del mundo han afirmado públicamente que el dióxido de cloro sí es efectivo contra el COVID-19.",
+      "optionFeedback": "- **Incorrecta.** La opinión de líderes políticos no reemplaza la evidencia científica especializada."
+    },
+    {
+      "optionId": "D",
+      "optionText": "Sí, porque la Organización Mundial de la Salud basa sus recomendaciones en estudios realizados y validados por comunidades científicas.",
+      "optionFeedback": "- **Correcta.** Esa es precisamente la base de confiabilidad de una fuente científica en salud pública: recomendaciones sustentadas en investigación y validación especializada."
+    }
+  ]
+}

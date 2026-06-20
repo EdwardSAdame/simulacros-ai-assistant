@@ -1,0 +1,31 @@
+{
+  "questionLabel": "Pregunta 18",
+  "questionId": "q_18",
+  "sectionText": "Para el reciclaje de los neumáticos usados, se está implementando un proceso llamado \"trituración criogénica\". Este proceso consiste en depositar trozos de neumáticos en un recipiente; posteriormente, se hacen pasar por un túnel de enfriamiento, donde el caucho se pone en contacto con nitrógeno líquido, que está a una temperatura aproximada de \\(-200\\ ^\\circ\\text{C}\\), para extraer energía del caucho y llevarlo a temperaturas menores a \\(-70\\ ^\\circ\\text{C}\\), a las que es muy frágil y susceptible de quebrarse con golpes. En último lugar, el caucho se pasa por un molino de martillos en el que se tritura y se pulveriza, como se muestra a continuación.",
+  "sectionImageAiDescription": "Diagrama de proceso industrial. A la izquierda hay un recipiente superior etiquetado \"Recipiente de neumáticos\" que alimenta trozos hacia un conducto. En el centro hay un \"Túnel de enfriamiento\" horizontal con tornillo o hélice interna y flechas de dirección del flujo. A la derecha hay un tanque cilíndrico vertical etiquetado \"Nitrógeno líquido\" conectado por tuberías al túnel y a un equipo inferior. En la parte inferior central hay un equipo etiquetado \"Molino\". A la salida del molino, en la parte inferior derecha, aparece un recipiente con producto etiquetado \"Caucho pulverizado\". Una tubería inferior retorna gas etiquetado \"Gas nitrógeno\". Flechas muestran circulación del nitrógeno y del material a través del sistema.",
+  "questionText": "Pregunta 18: Se supone que si el túnel de enfriamiento deja de funcionar se puede continuar con el proceso de trituración. Sin embargo, se debe considerar que el caucho a temperatura ambiente requiere de otras condiciones para ser triturado. ¿Qué puede cambiarse en el proceso para continuar con la trituración?",
+  "correctOptionId": "C",
+  "aiExplanation": "- **Problema central:** decidir qué cambio permitiría triturar el caucho si no se puede enfriar criogénicamente.\n- **Datos relevantes:** el enfriamiento vuelve al caucho frágil; a temperatura ambiente el caucho es menos quebradizo.\n- **Análisis:** si el caucho ya no está frágil por frío, para triturarlo se requerirá **más fuerza mecánica** en el molino.\n- **Conclusión:** la respuesta correcta es **C**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "Emplear recipientes de mayor volumen para contener el caucho.",
+      "optionFeedback": "- **Incorrecta.** Cambiar el volumen del recipiente no modifica la facilidad con que el caucho se rompe."
+    },
+    {
+      "optionId": "B",
+      "optionText": "Utilizar agua a temperatura ambiente en lugar de nitrógeno.",
+      "optionFeedback": "- **Incorrecta.** El agua a temperatura ambiente no enfría el caucho hasta volverlo frágil."
+    },
+    {
+      "optionId": "C",
+      "optionText": "Utilizar un molino con mayor fuerza de trituración.",
+      "optionFeedback": "- **Correcta.** Si el caucho no está fragilizado por el frío, se necesita mayor fuerza mecánica para triturarlo."
+    },
+    {
+      "optionId": "D",
+      "optionText": "Emplear mayor cantidad de nitrógeno en estado líquido.",
+      "optionFeedback": "- **Incorrecta.** Si el túnel de enfriamiento dejó de funcionar, aumentar nitrógeno no resuelve por sí mismo la etapa de trituración en las nuevas condiciones planteadas."
+    }
+  ]
+}

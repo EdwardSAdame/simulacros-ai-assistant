@@ -1,0 +1,29 @@
+{
+  "questionLabel": "Pregunta 7",
+  "questionId": "q_07",
+  "questionText": "Pregunta 7: Pedro dejó una fruta al aire libre para ver cuánto tardaba en descomponerse. Los días pasaban y seguía sin descomponerse totalmente, entonces planteó la hipótesis de que todos los cambios químicos necesitan de varios días para que ocurran. Al otro día, leyó en un libro de ciencias lo siguiente: \"Es fundamental controlar la velocidad de las reacciones químicas, ya que existen varios factores que la afectan, como la concentración de los reactivos, el tamaño de partícula, la temperatura y los catalizadores, entre otros\".\n\nTeniendo en cuenta la información anterior, ¿la hipótesis planteada por Pedro es compatible con el fenómeno observado y la información del libro?",
+  "correctOptionId": "D",
+  "aiExplanation": "- **Problema central:** evaluar si la hipótesis de Pedro es compatible con su observación y con la información científica del libro.\n- **Datos relevantes:** Pedro observó un caso particular de descomposición lenta. El libro dice que la velocidad de las reacciones depende de varios factores.\n- **Análisis:** a partir de una sola observación no se puede concluir que **todos** los cambios químicos tardan varios días. Esa generalización contradice la idea de que algunas reacciones pueden ser rápidas y otras lentas según las condiciones.\n- **Conclusión:** la hipótesis **no es compatible**. La respuesta correcta es **D**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "Es compatible, porque tuvo en cuenta las observaciones realizadas y consideró que algunas reacciones tardan bastante tiempo.",
+      "optionFeedback": "- **Incorrecta.** Pedro no afirmó que *algunas* reacciones tardan bastante, sino que **todas** necesitan varios días."
+    },
+    {
+      "optionId": "B",
+      "optionText": "No es compatible, porque las frutas se descomponen en un día al aire libre, además no tuvo en cuenta la información del libro.",
+      "optionFeedback": "- **Incorrecta.** El error principal no es afirmar que toda fruta se descompone en un día, sino que Pedro hizo una generalización indebida ignorando que la velocidad depende de varios factores."
+    },
+    {
+      "optionId": "C",
+      "optionText": "Es compatible, porque existen factores que aceleran las reacciones, de tal forma que su experimento pudo tardar varias semanas.",
+      "optionFeedback": "- **Incorrecta.** Que existan factores que cambian la velocidad no vuelve válida la afirmación de que **todos** los cambios químicos tardan varios días."
+    },
+    {
+      "optionId": "D",
+      "optionText": "No es compatible, porque no se puede generalizar que todos los cambios tardan varios días, desconociendo la información del libro.",
+      "optionFeedback": "- **Correcta.** La observación de una fruta no permite generalizar a todos los cambios químicos, y el libro aclara que la velocidad de reacción varía según múltiples factores."
+    }
+  ]
+}

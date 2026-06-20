@@ -1,0 +1,29 @@
+{
+  "questionLabel": "Pregunta 2",
+  "questionId": "q_02",
+  "questionText": "Pregunta 2: En un barrio de una ciudad principal, se han elevado múltiples quejas por la construcción de un lugar de reunión para personas que profesan una religión cuyas prácticas se vinculan con la exaltación de la magia y de ritos de religiones antiguas. La inconformidad ha propiciado la aparición de distintos panfletos en los que se acusa a los integrantes de la iglesia de ser promotores de violencia contra otras religiones y hacia poblaciones vulnerables. Para detener estas acusaciones, que encuentran infundadas, los miembros de la asociación barrial buscan generar espacios de conciliación y de diálogo para evitar comentarios que afectan la unidad de la comunidad y que les impiden a los habitantes del sector conocer nuevas culturas y diversificar su pensamiento.\n\n¿Por qué se puede afirmar que la asociación barrial actúa en derecho?",
+  "correctOptionId": "B",
+  "aiExplanation": "- **Problema central:** determinar qué derecho constitucional protege la actuación de la asociación barrial.\n- **Datos relevantes:**\n  - Hay rechazo hacia un lugar de reunión religiosa.\n  - Circulan acusaciones infundadas contra esa iglesia.\n  - La asociación promueve diálogo y conciliación para evitar discriminación y permitir conocer nuevas culturas.\n- **Método lógico:** identificar cuál derecho está siendo vulnerado por los panfletos y cuál está defendiendo la asociación.\n- **Conclusión:** la situación se relaciona directamente con el respeto a profesar una religión y reunirse para su práctica. Por eso la asociación actúa en defensa de la **libertad de culto**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "Porque reconoce el derecho a la libre asociación, estipulado en la Constitución.",
+      "optionFeedback": "- **Incorrecta.** Aunque la iglesia se reúne como grupo, el conflicto descrito no gira principalmente sobre crear asociaciones, sino sobre poder practicar una religión sin ser estigmatizados."
+    },
+    {
+      "optionId": "B",
+      "optionText": "Porque reconoce el derecho a la libertad de culto, estipulado en la Constitución.",
+      "optionFeedback": "- **Correcta.** La asociación barrial busca proteger a un grupo religioso frente a acusaciones y rechazo social, defendiendo su derecho constitucional a practicar libremente su religión."
+    },
+    {
+      "optionId": "C",
+      "optionText": "Porque reconoce el derecho a la libre participación, estipulado en la Constitución.",
+      "optionFeedback": "- **Incorrecta.** La participación puede aparecer en el diálogo comunitario, pero no es el núcleo del conflicto jurídico planteado."
+    },
+    {
+      "optionId": "D",
+      "optionText": "Porque reconoce el derecho a la igualdad y a la libertad, estipulado en la Constitución.",
+      "optionFeedback": "- **Incorrecta.** Son principios amplios que pueden relacionarse con el caso, pero la pregunta apunta al derecho específico comprometido: la **libertad de culto**."
+    }
+  ]
+}

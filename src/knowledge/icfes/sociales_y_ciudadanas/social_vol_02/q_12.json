@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 12",
+  "questionId": "q_12",
+  "sectionText": "Según la Organización de Naciones Unidas, \"la globalización es un fenómeno inevitable en la historia humana que ha acercado al mundo a través del intercambio de bienes y productos, información, conocimientos y cultura [...] Los críticos de la globalización se quejan de que las disparidades que se producen en el sistema comercial mundial de hoy perjudican a los países en desarrollo [...] sostienen que el proceso ha significado la explotación de gente en estos países, producido perturbaciones masivas y aportado pocos beneficios\".",
+  "questionText": "Pregunta 12: ¿Por qué la globalización, a pesar de haber \"acercado al mundo a través del intercambio de bienes y productos, información, conocimientos y cultura\", afecta laboralmente a los países en vías de desarrollo?",
+  "correctOptionId": "D",
+  "aiExplanation": "- **Problema central:** explicar el efecto laboral negativo de la globalización sobre países en desarrollo.\n- **Datos relevantes:**\n  - La ONU menciona disparidades del sistema comercial mundial.\n  - Los críticos hablan de explotación de personas en países en desarrollo.\n- **Método lógico:** relacionar esa explotación con la estructura económica global y el papel asignado a esos países en el mercado laboral.\n- **Conclusión:** la afectación laboral ocurre porque la división internacional del trabajo convierte a los países en desarrollo en proveedores de **mano de obra barata**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "Porque la cultura de masas global ha determinado patrones de consumo en países en desarrollo.",
+      "optionFeedback": "- **Incorrecta.** Eso puede explicar cambios culturales o de consumo, pero no la afectación laboral central mencionada por la fuente."
+    },
+    {
+      "optionId": "B",
+      "optionText": "Porque se presentan dificultades para el intercambio de conocimientos productivos en países en desarrollo.",
+      "optionFeedback": "- **Incorrecta.** La cita no destaca ese factor; el énfasis está en las desigualdades del sistema comercial y en la explotación laboral."
+    },
+    {
+      "optionId": "C",
+      "optionText": "Porque se generan problemáticas medioambientales, principalmente en los países en desarrollo.",
+      "optionFeedback": "- **Incorrecta.** Puede ser una consecuencia de la globalización, pero no responde específicamente a la pregunta por el impacto laboral."
+    },
+    {
+      "optionId": "D",
+      "optionText": "Porque la división internacional del trabajo ofrece una mano de obra barata en los países en desarrollo.",
+      "optionFeedback": "- **Correcta.** Esa división económica hace que muchos países en desarrollo sean usados como fuente de trabajo barato, lo que favorece relaciones de explotación y desigualdad laboral."
+    }
+  ]
+}

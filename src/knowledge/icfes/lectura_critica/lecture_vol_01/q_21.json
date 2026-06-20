@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 21",
+  "questionId": "q_21",
+  "sectionImageAiDescription": "Infografía sobre el petricor estructurada en tres fases horizontales.\n\nFase 1:\n- Imagen: Una gota de lluvia azul impacta sobre una superficie de tierra, formando burbujas de aire.\n- Texto: 'CUANDO LAS GOTAS DE LLUVIA IMPACTAN CONTRA EL SUELO,\n  SE FORMAN BURBUJAS DE AIRE.'\n\nFase 2:\n- Imagen: Burbujas blancas bajo la superficie contienen pequeños puntos verdes y amarillos. Etiqueta superior: 'PARTÍCULAS ATRAPADAS'.\n- Texto: 'ESTAS BURBUJAS \"ATRAPAN\" PARTÍCULAS DE LA TIERRA\n  (ACEITES Y QUÍMICOS PRODUCIDOS POR BACTERIAS).'\n\nFase 3:\n- Imagen: Las burbujas estallan en la superficie liberando los puntos verdes y amarillos hacia el aire.\n- Texto: 'LAS BURBUJAS HACEN EFERVESCENCIA COMO CHAMPAÑA\n  Y ESPARCEN LAS PARTÍCULAS EN EL AMBIENTE.'",
+  "questionText": "Pregunta 21: A partir de la lectura de la infografía, ¿qué tipo de estrategia utiliza el autor del texto para lograr su propósito?",
+  "correctOptionId": "D",
+  "aiExplanation": "- **Problema central:** reconocer la estrategia expositiva de la infografía.\n- La información está organizada en **etapas**: gotas impactan, burbujas atrapan partículas, luego las liberan.\n- El propósito es explicar un proceso paso a paso.\n- **Conclusión:** la estrategia es **señalar y explicar pasos o etapas**. Respuesta: **D**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "Muestra las similitudes y las diferencias entre dos temas con el propósito de demostrar preferencia.",
+      "optionFeedback": "- **Incorrecta.** La infografía no compara dos temas; describe un proceso."
+    },
+    {
+      "optionId": "B",
+      "optionText": "Utiliza detalles y lenguaje figurado con el fin de apoyar una impresión dominante con respecto al tema.",
+      "optionFeedback": "- **Incorrecta.** Aunque hay una comparación con la champaña, el propósito central no es descriptivo-literario sino explicativo."
+    },
+    {
+      "optionId": "C",
+      "optionText": "Explica el significado de un término relevante para el texto y así deja claro cómo este se va a entender.",
+      "optionFeedback": "- **Incorrecta.** No solo define *petricor*; sobre todo explica **cómo se produce**."
+    },
+    {
+      "optionId": "D",
+      "optionText": "Señala y explica pasos o etapas según sus características.",
+      "optionFeedback": "- **Correcta.** La infografía organiza la información en **fases** y explica paso a paso el proceso que origina el olor a lluvia."
+    }
+  ]
+}

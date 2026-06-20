@@ -1,0 +1,26 @@
+{
+  "questionLabel": "Pregunta 14",
+  "questionId": "q_14",
+  "sectionText": "¿Dónde puede ver estos avisos?\n\nEn las preguntas \\(11 - 15\\), marque \\(A\\), \\(B\\) o \\(C\\) en su hoja de respuestas.",
+  "questionImageAiDescription": "Horizontal banner-like image with vertical supports at both sides. Centered bold text in two lines reads: \"Happy birthday, Anna!\" and \"We love you.\"",
+  "questionText": "Pregunta 14: Happy birthday, Anna!\nWe love you.",
+  "correctOptionId": "A",
+  "aiExplanation": "- **Core problem:** Identify where a birthday message like this is commonly seen.\n- **Relevant data:** The text directly celebrates a birthday.\n- **Method:** Choose the object most commonly associated with birthday messages.\n- **Conclusion:** This message is most likely found **on a cake**. Therefore, the correct answer is **A**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "on a cake",
+      "optionFeedback": "- **Correct.** Birthday messages like *“Happy birthday”* are commonly written on cakes."
+    },
+    {
+      "optionId": "B",
+      "optionText": "on a candy bag",
+      "optionFeedback": "- **Incorrect.** A candy bag may have a label, but this personal birthday message is much more typical on a cake."
+    },
+    {
+      "optionId": "C",
+      "optionText": "on a box of cereal",
+      "optionFeedback": "- **Incorrect.** A cereal box would not normally contain a personal birthday message for Anna."
+    }
+  ]
+}

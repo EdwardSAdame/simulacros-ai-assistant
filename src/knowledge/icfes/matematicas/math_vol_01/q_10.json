@@ -1,0 +1,29 @@
+{
+  "questionLabel": "Pregunta 10",
+  "questionId": "q_10",
+  "questionText": "Pregunta 10: Un candidato a la gobernación de un departamento quiere estimar el porcentaje de la población que votará por él. Para ello, contrata una firma encuestadora que realizará \\(1.000\\) llamadas telefónicas, en las que se pregunta por la preferencia de las personas a la hora de votar en las elecciones para gobernador. Para realizar la encuesta, la firma escoge aleatoriamente un municipio del departamento y llama a \\(1.000\\) personas de este lugar.\n\n¿Por qué el resultado de la encuesta puede diferir mucho de la realidad?",
+  "correctOptionId": "C",
+  "aiExplanation": "- **Problema central:** identificar el sesgo de la muestra.\n- **Datos relevantes:** se llama a \\(1000\\) personas, pero todas pertenecen a **un solo municipio** del departamento.\n- **Análisis estadístico:**\n  - Aunque \\(1000\\) personas puede ser una muestra grande, no es representativa del departamento completo si solo proviene de un municipio.\n  - Las preferencias electorales pueden variar mucho entre municipios.\n- **Conclusión:** la encuesta puede diferir de la realidad porque solo considera la opinión de la población de **un municipio**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "Porque la única manera de obtener resultados precisos es encuestar a toda la población del departamento.",
+      "optionFeedback": "- **Incorrecta.** No es necesario encuestar a toda la población; una **muestra representativa** puede dar buenas estimaciones."
+    },
+    {
+      "optionId": "B",
+      "optionText": "Porque la encuesta solo representará la opinión de las personas del departamento, si el municipio escogido es el más grande.",
+      "optionFeedback": "- **Incorrecta.** Que sea el municipio más grande no garantiza representatividad de todo el departamento."
+    },
+    {
+      "optionId": "C",
+      "optionText": "Porque de esta manera solo están tomándose en cuenta las opiniones de la población de un municipio del departamento.",
+      "optionFeedback": "- **Correcta.** La muestra está sesgada geográficamente, ya que no incluye personas de los demás municipios."
+    },
+    {
+      "optionId": "D",
+      "optionText": "Porque la muestra es muy grande, lo cual permite que existan grandes diferencias entre las respuestas de las personas.",
+      "optionFeedback": "- **Incorrecta.** El problema no es que la muestra sea grande, sino que **no es representativa** del departamento."
+    }
+  ]
+}

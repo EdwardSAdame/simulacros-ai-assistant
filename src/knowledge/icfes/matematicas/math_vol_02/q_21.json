@@ -1,0 +1,29 @@
+{
+  "questionLabel": "Pregunta 21",
+  "questionId": "q_21",
+  "questionText": "Pregunta 21: Se realizó una encuesta a \\(50\\) estudiantes de un colegio para determinar cuál es el género musical más popular entre estos jóvenes. Los resultados obtenidos fueron:\n\n- Al \\(25\\,\\%\\) de los estudiantes les gusta la salsa.\n- Al \\(60\\,\\%\\) de los estudiantes les gusta el vallenato.\n- Al \\(10\\,\\%\\) de los estudiantes les gusta el pop.\n- Al \\(5\\,\\%\\) de los estudiantes les gusta el hip hop.\n\n¿Cuál de las siguientes gráficas representa correctamente la cantidad de estudiantes a quienes les gusta el vallenato?",
+  "correctOptionId": "C",
+  "aiExplanation": "- **Problema central:** convertir el \\(60\\%\\) de \\(50\\) estudiantes a cantidad.\n- **Cálculo:**\n  \\[\n  0{,}60\\times 50=30\n  \\]\n- **Conclusión:** la gráfica correcta es la que muestra una barra de **\\(30\\)** estudiantes.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "[Imagen de la opción: Gráfica de barras con una sola barra etiquetada \"Vallenato\". Eje vertical \"Total de estudiantes\" con escala hasta \\(60\\). La barra alcanza aproximadamente \\(60\\).]",
+      "optionFeedback": "**Incorrecta.** Confunde \\(60\\%\\) con \\(60\\) estudiantes; la encuesta fue a \\(50\\) estudiantes."
+    },
+    {
+      "optionId": "B",
+      "optionText": "[Imagen de la opción: Gráfica de barras con una sola barra etiquetada \"Vallenato\". Eje vertical hasta \\(60\\). La barra alcanza aproximadamente \\(20\\).]",
+      "optionFeedback": "**Incorrecta.** \\(20\\) estudiantes representan \\(40\\%\\), no \\(60\\%\\)."
+    },
+    {
+      "optionId": "C",
+      "optionText": "[Imagen de la opción: Gráfica de barras con una sola barra etiquetada \"Vallenato\". Eje vertical hasta \\(60\\). La barra alcanza aproximadamente \\(30\\).]",
+      "optionFeedback": "**Correcta.** \\(60\\%\\) de \\(50\\) es \\(30\\) estudiantes."
+    },
+    {
+      "optionId": "D",
+      "optionText": "[Imagen de la opción: Gráfica de barras con una sola barra etiquetada \"Vallenato\". Eje vertical hasta \\(60\\). La barra alcanza aproximadamente \\(50\\).]",
+      "optionFeedback": "**Incorrecta.** \\(50\\) estudiantes sería el \\(100\\%\\) de la muestra."
+    }
+  ]
+}

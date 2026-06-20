@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 10",
+  "questionId": "q_10",
+  "questionImageAiDescription": "Tabla de \\(4\\) columnas con encabezados: Mineral | Color | Brillo | Transparencia. Filas:\n\\(1\\) | Azul | Metálico | Sí\n\\(2\\) | Rojo | No metálico | No\n\\(3\\) | Azul | No metálico | Sí\n\\(4\\) | Verde | Metálico | No\n\\(5\\) | Rojo | Metálico | No\n\\(6\\) | Azul | No metálico | Sí\n\\(7\\) | Rojo | No metálico | No\n\\(8\\) | Verde | Metálico | Sí",
+  "questionText": "Pregunta 10: Una estudiante encuentra en un libro información sobre algunos minerales y sus características (ver tabla).\n\nDe acuerdo con la tabla, ¿cuáles minerales tienen las mismas características?",
+  "correctOptionId": "B",
+  "aiExplanation": "- **Problema central:** identificar pares de minerales con las mismas tres características: color, brillo y transparencia.\n- **Revisión de la tabla:**\n  - \\(3\\) y \\(6\\): azul, no metálico, sí.\n  - \\(2\\) y \\(7\\): rojo, no metálico, no.\n- **Análisis de opciones:** la única opción que contiene ambos pares correctos es la **B**.\n- **Conclusión:** la respuesta correcta es **B**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "Los minerales \\(3\\) y \\(6\\), y los minerales \\(4\\) y \\(8\\).",
+      "optionFeedback": "- **Incorrecta.** Aunque \\(3\\) y \\(6\\) sí coinciden, \\(4\\) y \\(8\\) no tienen la misma transparencia: \\(4\\) es *No* y \\(8\\) es *Sí*."
+    },
+    {
+      "optionId": "B",
+      "optionText": "Los minerales \\(3\\) y \\(6\\), y los minerales \\(2\\) y \\(7\\).",
+      "optionFeedback": "- **Correcta.** \\(3\\) y \\(6\\) comparten azul, brillo no metálico y transparencia *Sí*; \\(2\\) y \\(7\\) comparten rojo, brillo no metálico y transparencia *No*."
+    },
+    {
+      "optionId": "C",
+      "optionText": "Los minerales \\(2\\) y \\(5\\), y los minerales \\(4\\) y \\(8\\).",
+      "optionFeedback": "- **Incorrecta.** \\(2\\) y \\(5\\) no coinciden en brillo, y \\(4\\) y \\(8\\) no coinciden en transparencia."
+    },
+    {
+      "optionId": "D",
+      "optionText": "Los minerales \\(2\\) y \\(7\\), y los minerales \\(1\\) y \\(6\\).",
+      "optionFeedback": "- **Incorrecta.** \\(2\\) y \\(7\\) sí coinciden, pero \\(1\\) y \\(6\\) no: uno tiene brillo metálico y el otro no metálico."
+    }
+  ]
+}

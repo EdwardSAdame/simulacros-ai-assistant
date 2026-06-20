@@ -1,0 +1,32 @@
+{
+  "questionLabel": "Pregunta 2",
+  "questionId": "q_02",
+  "sectionText": "Un grupo de expertos quiere llevar a cabo un plan de recuperación de un ecosistema en el que una fuente de agua, y varias especies de peces y de plantas se han visto afectadas por un grave problema de contaminación, la cual es causada por la actividad humana de un barrio cercano que tiene sus tuberías de desagüe conectadas a la fuente de agua. Al respecto, los expertos afirman que el foco de la contaminación son sustancias como el aceite que se usa en casas, restaurantes y en la industria, y que esto no solo afecta la calidad del agua, sino que también ha causado la disminución de los individuos de especies acuáticas de animales y el desmejoramiento de especies vegetales.",
+  "sectionImageAiDescription": "Diagrama de una planta completa con raíces dentro del suelo. En la parte superior izquierda aparece un sol rotulado \"Luz solar\" con flechas onduladas dirigidas hacia la planta. A la izquierda media aparece el texto \"Dióxido de carbono\" con flechas onduladas entrando a la planta. A la derecha media aparece el texto \"Oxígeno \\(O_2\\)\" con flechas onduladas saliendo de la planta. En la zona de raíces, dentro del suelo, aparece el texto \"Agua\" con flechas onduladas dirigidas hacia las raíces. Sobre hojas, tallo y suelo hay puntos o manchas negras que representan aceite contaminante adherido y acumulado.",
+  "questionImageAiDescription": "A la derecha del dibujo aparece el título \"Ecuación de la fotosíntesis\" y la ecuación \\(6CO_2 + 6H_2O +\\) Energía solar \\(\\rightarrow C_6H_{12}O_6 + 6O_2\\). Debajo de cada término se leen las etiquetas: dióxido de carbono, agua, carbohidratos y oxígeno.",
+  "questionText": "Pregunta 2: Un experto en botánica muestra la siguiente figura:\n\nÉl explica que el aceite contaminante, representado en negro, se adhiere a los órganos de la planta como las hojas y el tallo, y, además, se acumula en el suelo, lo cual impide que se realice correctamente la fotosíntesis y la planta no crezca adecuadamente.\n\nDe acuerdo con la información anterior, ¿por qué el no realizar correctamente la fotosíntesis impide el crecimiento de las plantas?",
+  "correctOptionId": "D",
+  "aiExplanation": "- **Problema central:** explicar por qué una fotosíntesis deficiente impide el crecimiento vegetal.\n- **Datos relevantes:** la ecuación de fotosíntesis muestra que a partir de \\(CO_2\\), \\(H_2O\\) y energía solar se producen **carbohidratos** y \\(O_2\\).\n- **Análisis:** los carbohidratos son materia orgánica y fuente de energía para la planta. Si la fotosíntesis falla, la planta no fabrica suficientes carbohidratos para crecer.\n- **Conclusión:** la respuesta correcta es **D**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "Porque el tallo no hace la circulación de nutrientes a las partes altas de la planta.",
+      "optionFeedback": "- **Incorrecta.** El problema señalado no es el transporte por el tallo, sino la disminución en la **producción de alimento** por fotosíntesis."
+    },
+    {
+      "optionId": "B",
+      "optionText": "Porque las raíces no absorben la suficiente agua para el crecimiento de la planta.",
+      "optionFeedback": "- **Incorrecta.** El agua es un reactivo de la fotosíntesis, pero la pregunta pide por qué no hacer fotosíntesis impide crecer. La razón directa es que no se forman carbohidratos."
+    },
+    {
+      "optionId": "C",
+      "optionText": "Porque no se permite la entrada a la planta del oxígeno necesario para la fotosíntesis.",
+      "optionFeedback": "- **Incorrecta.** En la fotosíntesis el \\(O_2\\) no es reactivo principal; es **producto**. La planta necesita sobre todo \\(CO_2\\), agua y luz."
+    },
+    {
+      "optionId": "D",
+      "optionText": "Porque no se producen los carbohidratos necesarios para el crecimiento de las plantas.",
+      "optionFeedback": "- **Correcta.** Los carbohidratos \\(C_6H_{12}O_6\\) producidos en la fotosíntesis son esenciales para aportar materia y energía al crecimiento de la planta."
+    }
+  ]
+}

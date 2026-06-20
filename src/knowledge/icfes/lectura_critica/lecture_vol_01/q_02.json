@@ -1,0 +1,30 @@
+{
+  "questionLabel": "Pregunta 2",
+  "questionId": "q_02",
+  "sectionText": "La filosofía epicúrea tiene una finalidad ética*, pues pretende guiarnos para alcanzar la buena vida. Para el epicureísmo esta es la vida placentera, ya que considera que el fin último de todas nuestras acciones es conseguir placer y evitar dolor; por ello, el epicureísmo identifica el placer con el bien y el dolor con el mal.\n\nEpicuro da por lo menos dos razones complementarias por las cuales considera que el propósito de la buena vida debe ser el placer. Por un lado, menciona el hecho de que, sin necesidad de pensarlo y desde su nacimiento, todas las criaturas vivientes, por instinto, se contentan con el placer y son reacias al dolor. Por otro lado, Epicuro toma a los sentimientos de placer y dolor como criterios esenciales de decisión y conducta, en tanto que son eventos reales que no pueden ser refutados: no hay razón o evidencia alguna que pueda hacernos dudar de que estamos sintiendo dolor o placer; es un hecho real que lo sentimos, pues, ¿cómo podría ser falsa la sensación de dolor ante un golpe?\n\nAsí, si lo que trae placer es lo que elegimos y lo que trae dolor es lo que evitamos, son nuestros sentimientos los que nos permiten deliberar qué debemos elegir y evitar, pues ellos no se equivocan. De esta manera, esa tendencia instintiva y natural hacia buscar el placer y evitar el dolor concuerda con lo que, para el epicureísmo, es el criterio ético más fundamental y verdadero.\n\n*La ética es el campo de la filosofía que estudia los principios para decidir correctamente.",
+  "questionText": "Pregunta 2: Lea los siguientes dos enunciados tomados del texto:\n\n1. La filosofía epicúrea tiene una finalidad ética, pues pretende guiarnos para alcanzar la buena vida.\n2. Para el epicureísmo esta es la vida placentera, ya que considera que el fin último de todas nuestras acciones es conseguir placer y evitar dolor.\n\n¿Qué relación hay entre ambos enunciados?",
+  "correctOptionId": "D",
+  "aiExplanation": "- **Problema central:** establecer la relación lógica entre los dos enunciados.\n- **Lectura:**\n  - El primer enunciado afirma algo general: la filosofía epicúrea busca guiarnos hacia la buena vida.\n  - El segundo precisa en qué consiste esa buena vida para el epicureísmo: la vida placentera.\n- **Relación:** el segundo no rechaza ni refuta al primero; tampoco lo sintetiza. Más bien lo **desarrolla** y lo hace más específico.\n- **Conclusión:** el segundo enunciado **amplía** lo dicho en el primero. La respuesta es **D**.",
+  "options": [
+    {
+      "optionId": "A",
+      "optionText": "El primer enunciado rechaza la idea expuesta en el segundo enunciado.",
+      "optionFeedback": "- **Incorrecta.** No hay rechazo entre los enunciados.\n- El segundo explica cuál es esa *buena vida* mencionada en el primero."
+    },
+    {
+      "optionId": "B",
+      "optionText": "El segundo enunciado es una síntesis del primer enunciado.",
+      "optionFeedback": "- **Incorrecta.** No sintetiza, sino que **especifica** el contenido del primero.\n- Añade información sobre qué entiende el epicureísmo por *buena vida*."
+    },
+    {
+      "optionId": "C",
+      "optionText": "El primer enunciado da una hipótesis y el segundo enunciado la refuta.",
+      "optionFeedback": "- **Incorrecta.** El primer enunciado no formula una hipótesis, y el segundo no la refuta.\n- Ambos son compatibles y forman parte de la misma explicación."
+    },
+    {
+      "optionId": "D",
+      "optionText": "El segundo enunciado amplía lo dicho en el primer enunciado.",
+      "optionFeedback": "- **Correcta.** El primer enunciado plantea la finalidad ética del epicureísmo y el segundo **desarrolla** esa idea al definir la *buena vida* como vida placentera."
+    }
+  ]
+}
