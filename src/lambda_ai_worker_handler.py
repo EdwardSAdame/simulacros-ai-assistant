@@ -121,7 +121,8 @@ def lambda_handler(event, context):
             pdf_urls = payload.get("pdf_urls", [])
             media_items = payload.get("media_items", [])
             arena_id = payload.get("arena_id")
-            exam_id = payload.get("exam_id") # --- NEW: Extract exam_id from payload ---
+            exam_id = payload.get("exam_id") 
+            exam_state = payload.get("exam_state") # <-- NEW: Extract exam_state from payload
             is_hidden = payload.get("is_hidden", False)
             name = payload.get("name")
             email = payload.get("email")
@@ -234,7 +235,8 @@ def lambda_handler(event, context):
                 requires_visuals=requires_visuals, 
                 stream_manager=stream_manager,
                 arena_id=arena_id,
-                exam_id=exam_id, # --- NEW: Pass exam_id to the Orchestrator ---
+                exam_id=exam_id, 
+                exam_state=exam_state, # <-- NEW: Pass exam_state to the Orchestrator
                 is_hidden=is_hidden, 
                 num_questions=num_questions
             )

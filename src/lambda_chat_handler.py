@@ -45,8 +45,9 @@ def lambda_handler(event, context):
         
         arena_id = meta.get("arenaId") or body.get("arenaId")
         
-        # 🟢 UPDATED: Extract exam_id from root body OR meta
+        # 🟢 UPDATED: Extract exam_id and exam_state from root body OR meta
         exam_id = body.get("examId") or meta.get("examId") 
+        exam_state = body.get("examState") or meta.get("examState") # <-- NEW: Extracting the lockdown flag
         
         is_hidden_flag = body.get("is_hidden") or meta.get("is_hidden", False)
         is_hidden_magic = isinstance(message, str) and message.strip().startswith("[CONTEXTO INTERNO:")
@@ -99,6 +100,7 @@ def lambda_handler(event, context):
             "mode": ai_mode,
             "arena_id": arena_id,
             "exam_id": exam_id, 
+            "exam_state": exam_state, # <-- NEW: Pass the flag down the pipeline
             "is_hidden": is_hidden,
             
             "audioDurationSeconds": audio_duration,
@@ -120,6 +122,7 @@ def lambda_handler(event, context):
             "has_media_items": bool(media_items),
             "arena_id": arena_id,
             "exam_id": exam_id,
+            "exam_state": exam_state, # <-- NEW: Added to telemetry
             "is_hidden": is_hidden,
             "has_stt_telemetry": audio_duration is not None,
             "has_sts_telemetry": sts_in_text is not None or sts_in_audio is not None

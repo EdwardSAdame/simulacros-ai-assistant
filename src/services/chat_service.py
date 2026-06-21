@@ -84,6 +84,7 @@ class ChatService:
         mode: str,
         exam_context: str,
         exam_id: str | None,  # Receive exam_id from Lambda/SQS
+        exam_state: str | None, # <-- NEW: Receive exam_state from Orchestrator
         category: str,
         requires_visuals: bool,
         arena_id: str | None,
@@ -92,7 +93,7 @@ class ChatService:
     ) -> Tuple[str, Dict | None]:
         
         # 🟢 DEBUG LINE: Check what the backend receives
-        logger.info(f"ChatService Debug -> ExamID: {exam_id}, Page: {page}")
+        logger.info(f"ChatService Debug -> ExamID: {exam_id}, Page: {page}, ExamState: {exam_state}")
 
         # 1. Identity Protection Fast-Path
         if category == "identity_protection":
@@ -115,8 +116,9 @@ class ChatService:
         web_search_config = get_search_filters(exam_context)
         is_web_search_active = (web_search_config is not None)
 
+        # <-- NEW: Pass exam_state into the runtime context builder
         runtime_signals = build_runtime_context(
-            page=page, user_id=user_id, name=name, email=email, requires_visuals=requires_visuals 
+            page=page, user_id=user_id, name=name, email=email, requires_visuals=requires_visuals, exam_state=exam_state 
         )
         system_prompt = ""
 
