@@ -5,6 +5,7 @@ from src.config.visual_instructions import build_visual_instructions
 from src.config.search_instructions import build_search_instructions
 from src.config.creative_image_instructions import get_creative_image_system_prompt
 from src.config.exam_frameworks import get_exam_framework
+from src.config.exam_constraints import get_active_exam_lockdown_instruction # <-- NEW IMPORT
 
 # --- 1. CORE PERSONA (GLOBAL DNA) ---
 CORE_PERSONA = """
@@ -38,7 +39,8 @@ def build_system_instructions(
     web_search_active: bool = False,
     requires_creative_image: bool = False,
     intent: str = "chat",
-    category: str = "general" 
+    category: str = "general",
+    exam_state: str | None = None # <-- NEW: Receive the lockdown flag
 ) -> str:
     
     blocks = [CORE_PERSONA.strip()]
@@ -50,8 +52,15 @@ def build_system_instructions(
     # Academic Mode Logic
     if intent != "quiz":
         doctrine_parts = [ACADEMIC_TUTORING_DOCTRINE.strip()]
+        
         if requires_visuals:
             doctrine_parts.append(PROACTIVE_VISUAL_DOCTRINE.strip())
+            
+        # --- NEW: INJECT LOCKDOWN HERE ---
+        if exam_state == "ACTIVE":
+            doctrine_parts.append(get_active_exam_lockdown_instruction().strip())
+        # ---------------------------------
+            
         blocks.append("## ACADEMIC TUTORING DOCTRINE\n" + "\n\n".join(doctrine_parts))
 
     # Contextual Frameworks
