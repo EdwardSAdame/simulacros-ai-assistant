@@ -56,10 +56,10 @@ def build_system_instructions(
         if requires_visuals:
             doctrine_parts.append(PROACTIVE_VISUAL_DOCTRINE.strip())
             
-        # --- NEW: INJECT LOCKDOWN HERE ---
-        if exam_state == "ACTIVE":
+        # --- NEW: INJECT LOCKDOWN HERE (BULLETPROOF STRING MATCH) ---
+        if exam_state and exam_state.strip().upper() == "ACTIVE":
             doctrine_parts.append(get_active_exam_lockdown_instruction().strip())
-        # ---------------------------------
+        # ------------------------------------------------------------
             
         blocks.append("## ACADEMIC TUTORING DOCTRINE\n" + "\n\n".join(doctrine_parts))
 
