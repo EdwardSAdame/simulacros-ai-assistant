@@ -18,7 +18,8 @@ def save_exam_result(
     subject_scores: Optional[Dict[str, float]] = None
 ) -> Dict[str, Any]:
     """
-    Saves a user's exam result to the UserExamResults DynamoDB table.
+    Saves or overwrites a user's exam result to the UserExamResults DynamoDB table.
+    Because the Sort Key is now ExamId, this automatically overwrites previous attempts.
     """
     if not user_id or not exam_id:
         raise ValueError("user_id and exam_id are required to save an exam result.")
@@ -27,8 +28,8 @@ def save_exam_result(
     
     item = {
         "UserId": user_id,
-        "Timestamp": timestamp,
         "ExamId": exam_id,
+        "Timestamp": timestamp,
         "TotalScore": total_score,
         "TimeUsedSeconds": time_used_seconds
     }
@@ -38,7 +39,7 @@ def save_exam_result(
 
     try:
         table.put_item(Item=item)
-        logger.info(f"Successfully saved exam result for UserId: {user_id}, ExamId: {exam_id}")
+        logger.info(f"Successfully saved/overwritten exam result for UserId: {user_id}, ExamId: {exam_id}")
     except Exception as e:
         logger.error(f"Failed to save exam result for UserId {user_id}: {e}")
         raise e
@@ -66,13 +67,15 @@ def get_exam_leaderboard(exam_id: str, limit: int = 100) -> List[Dict[str, Any]]
 
 def get_user_exam_history(user_id: str, limit: int = 50) -> List[Dict[str, Any]]:
     """
-    Fetches the chronological exam history for a specific user.
+    Fetches the chronological exam history for a specific user using the new UserHistoryIndex.
     """
     if not user_id:
         raise ValueError("user_id is required to fetch exam history.")
 
     try:
+        # Added the new IndexName here to query by Timestamp correctly
         response = table.query(
+            IndexName='UserHistoryIndex',
             KeyConditionExpression=Key('UserId').eq(user_id),
             ScanIndexForward=False,
             Limit=limit
