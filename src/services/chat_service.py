@@ -116,7 +116,6 @@ class ChatService:
         web_search_config = get_search_filters(exam_context)
         is_web_search_active = (web_search_config is not None)
 
-        # <-- NEW: Pass exam_state into the runtime context builder
         runtime_signals = build_runtime_context(
             page=page, user_id=user_id, name=name, email=email, requires_visuals=requires_visuals, exam_state=exam_state 
         )
@@ -161,7 +160,8 @@ class ChatService:
                 requires_visuals=False, 
                 web_search_active=is_web_search_active, 
                 intent="chat",
-                category=category  
+                category=category,
+                exam_state=exam_state # <-- FIX: THIS IS NOW INCLUDED!
             )
 
         # Look up explicit container ID to prevent duplicate billing
