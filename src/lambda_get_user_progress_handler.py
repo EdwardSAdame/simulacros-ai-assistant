@@ -1,12 +1,19 @@
 # src/lambda_get_user_progress_handler.py
 import json
 import logging
+import decimal
 
 from src.services.exam_results_service import get_user_progress
 from src.utils.logging_utils import log_event, set_invocation_context
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
+
+# This helper handles the Decimal serialization error
+def default_serializer(obj):
+    if isinstance(obj, decimal.Decimal):
+        return float(obj)
+    raise TypeError(f"Type {type(obj)} not serializable")
 
 def lambda_handler(event, context):
     set_invocation_context(context)
@@ -70,5 +77,6 @@ def _response(status_code, body):
             "Access-Control-Allow-Headers": "Content-Type,Authorization",
             "Access-Control-Allow-Methods": "OPTIONS,GET,POST"
         },
-        "body": json.dumps(body)
+        # Pass the default_serializer here to fix the Decimal issue
+        "body": json.dumps(body, default=default_serializer)
     }
