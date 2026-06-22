@@ -64,8 +64,11 @@ jobs:
           # Purchase Webhook Handler
           cp src/lambda_purchase_handler.py package/
 
-          # Exam Results Handler (NEW)
+          # Exam Results Handler
           cp src/lambda_exam_results_handler.py package/
+
+          # Get User Progress Handler (NEW)
+          cp src/lambda_get_user_progress_handler.py package/
 
           # Zip the contents of the package directory
           cd package
@@ -194,6 +197,13 @@ jobs:
         run: |
           aws lambda update-function-code \
             --function-name ${{ vars.LAMBDA_EXAM_RESULTS_HANDLER_NAME }} \
+            --zip-file fileb://deployment.zip \
+            --region ${{ vars.AWS_REGION }}
+
+      - name: Deploy GetUserProgressHandler
+        run: |
+          aws lambda update-function-code \
+            --function-name ${{ vars.LAMBDA_GET_USER_PROGRESS_HANDLER_NAME }} \
             --zip-file fileb://deployment.zip \
             --region ${{ vars.AWS_REGION }}
 
