@@ -5,7 +5,7 @@ from src.config.visual_instructions import build_visual_instructions
 from src.config.search_instructions import build_search_instructions
 from src.config.creative_image_instructions import get_creative_image_system_prompt
 from src.config.exam_frameworks import get_exam_framework
-from src.config.exam_constraints import get_active_exam_lockdown_instruction # <-- NEW IMPORT
+from src.config.exam_constraints import get_active_exam_lockdown_instruction # <-- IMPORT THE FUNCTION
 
 # --- 1. CORE PERSONA (GLOBAL DNA) ---
 CORE_PERSONA = """
