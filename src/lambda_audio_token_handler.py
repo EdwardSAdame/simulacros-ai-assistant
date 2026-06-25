@@ -58,15 +58,14 @@ def handler(event, context):
             "Content-Type": "application/json"
         }
         
-        # THE FIX: OpenAI GA Migration specifies all requests go to client_secrets
+        # Target the official GA client_secrets endpoint
         target_url = "https://api.openai.com/v1/realtime/client_secrets"
         
         if profile_name == 'language_tutor':
-            # THE FIX: GA Migration requires wrapping config inside a 'session' object
+            # 🟢 THE FIX: GA Migration removes 'modalities' and groups audio config under the 'audio' block
             session_config = {
                 "model": profile.get("model", "gpt-4o-realtime-preview-2024-12-17"),
                 "type": "realtime",
-                "modalities": ["audio", "text"],
                 "instructions": profile.get("instructions", "You are a helpful assistant."),
                 "turn_detection": {
                     "type": "server_vad",
@@ -74,38 +73,35 @@ def handler(event, context):
                     "prefix_padding_ms": 300,
                     "silence_duration_ms": int(profile.get("silence_duration_ms", 500))
                 },
-                "input_audio_format": "pcm16"
-            }
-
-            if profile.get("voice"):
-                session_config["voice"] = profile["voice"]
-                session_config["output_audio_format"] = "pcm16"
-                
-            if profile.get("requires_transcription_model"):
-                session_config["input_audio_transcription"] = {
-                    "model": "whisper-1"
+                "audio": {
+                    "input": {
+                        "type": "audio/pcm"
+                    },
+                    "output": {
+                        "type": "audio/pcm",
+                        "voice": profile.get("voice", "alloy")
+                    }
                 }
-                
+            }
             payload = {"session": session_config}
                 
         else:
-            # 🟢 THE FIX: Replaced fake/deprecated transcription_sessions url with client_secrets
+            # 🟢 THE FIX: Cleaned up deprecated fields for standard transcription mode
             session_config = {
                 "model": profile.get("model", "gpt-4o-mini-realtime-preview-2024-12-17"),
                 "type": "realtime",
-                "modalities": ["text"], # Modalities set to text for transcription-only
-                "input_audio_format": "pcm16",
-                "input_audio_transcription": {
-                    "model": "whisper-1" 
-                },
                 "turn_detection": {
                     "type": "server_vad",
                     "threshold": float(profile.get("vad_threshold", 0.5)),
                     "prefix_padding_ms": 300,
                     "silence_duration_ms": int(profile.get("silence_duration_ms", 2000))
+                },
+                "audio": {
+                    "input": {
+                        "type": "audio/pcm"
+                    }
                 }
             }
-            
             payload = {"session": session_config}
 
         selected_model = payload.get("session", {}).get("model", "unknown")
@@ -129,10 +125,9 @@ def handler(event, context):
         
         data = response.json()
         
-        # 🟢 THE FIX: The new GA endpoint returns the ephemeral token directly in 'value'
+        # The GA endpoint returns the token in the root 'value' field
         client_secret = data.get("value")
         
-        # Fallback parser for safety
         if not client_secret:
             client_secret_data = data.get("client_secret", {})
             client_secret = client_secret_data.get("value") if isinstance(client_secret_data, dict) else client_secret_data
