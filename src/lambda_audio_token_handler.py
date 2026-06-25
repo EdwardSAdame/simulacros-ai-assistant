@@ -7,8 +7,6 @@ import os
 import requests
 from src.config.settings import settings
 from src.config.audio_config import get_audio_profile
-
-# 🟢 NEW: Import your centralized structured logging utility
 from src.utils.logging_utils import log_event, set_invocation_context
 
 logger = logging.getLogger(__name__)
@@ -21,7 +19,6 @@ else:
     logger.error("Missing APIGW_AUDIO_ENDPOINT_URL environment variable")
 
 def handler(event, context):
-    # 🟢 Set context so all logs in this execution inherit the Request ID
     set_invocation_context(context)
 
     request_context = event.get('requestContext', {})
@@ -46,7 +43,6 @@ def handler(event, context):
             log_event("audio_profile_not_found", {"requested_profile": profile_name, "fallback": "transcription/omega"}, level="warning")
             profile = get_audio_profile('transcription', 'omega')
         
-        # 🟢 FIX: Structured Log instead of plain text string
         log_event("audio_token_requested", {
             "connection_id": connection_id,
             "profile": profile_name,
@@ -62,11 +58,14 @@ def handler(event, context):
             "Content-Type": "application/json"
         }
         
+        # 🟢 THE FIX: OpenAI GA Migration specifies all requests go to client_secrets
+        target_url = "https://api.openai.com/v1/realtime/client_secrets"
+        
         if profile_name == 'language_tutor':
-            target_url = "https://api.openai.com/v1/realtime/sessions"
-            
-            payload = {
+            # 🟢 THE FIX: GA Migration requires wrapping config inside a 'session' object
+            session_config = {
                 "model": profile.get("model", "gpt-4o-realtime-preview-2024-12-17"),
+                "type": "realtime",
                 "modalities": ["audio", "text"],
                 "instructions": profile.get("instructions", "You are a helpful assistant."),
                 "turn_detection": {
@@ -79,21 +78,25 @@ def handler(event, context):
             }
 
             if profile.get("voice"):
-                payload["voice"] = profile["voice"]
-                payload["output_audio_format"] = "pcm16"
+                session_config["voice"] = profile["voice"]
+                session_config["output_audio_format"] = "pcm16"
                 
             if profile.get("requires_transcription_model"):
-                payload["input_audio_transcription"] = {
+                session_config["input_audio_transcription"] = {
                     "model": "whisper-1"
                 }
                 
+            payload = {"session": session_config}
+                
         else:
-            target_url = "https://api.openai.com/v1/realtime/transcription_sessions"
-            
-            payload = {
+            # 🟢 THE FIX: Replaced fake/deprecated transcription_sessions url with client_secrets
+            session_config = {
+                "model": profile.get("model", "gpt-4o-mini-realtime-preview-2024-12-17"),
+                "type": "realtime",
+                "modalities": ["text"], # Modalities set to text for transcription-only
                 "input_audio_format": "pcm16",
                 "input_audio_transcription": {
-                    "model": profile.get("model", "gpt-4o-mini-transcribe") 
+                    "model": "whisper-1" 
                 },
                 "turn_detection": {
                     "type": "server_vad",
@@ -102,10 +105,11 @@ def handler(event, context):
                     "silence_duration_ms": int(profile.get("silence_duration_ms", 2000))
                 }
             }
+            
+            payload = {"session": session_config}
 
-        selected_model = payload.get('input_audio_transcription', {}).get('model', payload.get('model'))
+        selected_model = payload.get("session", {}).get("model", "unknown")
         
-        # 🟢 FIX: Structured Log instead of plain text string
         log_event("openai_realtime_api_call", {
             "target_url": target_url,
             "model": selected_model
@@ -124,10 +128,18 @@ def handler(event, context):
             return {'statusCode': 400, 'body': 'OpenAI rejected request'}
         
         data = response.json()
-        client_secret_data = data.get("client_secret", {})
-        client_secret = client_secret_data.get("value") if isinstance(client_secret_data, dict) else client_secret_data
+        
+        # 🟢 THE FIX: The new GA endpoint returns the ephemeral token directly in 'value'
+        client_secret = data.get("value")
+        
+        # Fallback parser for safety
+        if not client_secret:
+            client_secret_data = data.get("client_secret", {})
+            client_secret = client_secret_data.get("value") if isinstance(client_secret_data, dict) else client_secret_data
 
         if not client_secret:
+            error_msg = f"OpenAI did not return a valid ephemeral token. Response: {data}"
+            log_event("audio_token_missing", {"error": error_msg}, level="error")
             raise ValueError("OpenAI did not return a client_secret")
 
         response_data = {
@@ -141,7 +153,6 @@ def handler(event, context):
             Data=json.dumps(response_data)
         )
         
-        # 🟢 Log success
         log_event("audio_token_generated", {"profile": profile_name, "tier": ai_tier})
         
         return {'statusCode': 200, 'body': f'Token generated for profile: {profile_name}'}
