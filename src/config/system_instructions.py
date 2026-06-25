@@ -9,7 +9,7 @@ from src.config.exam_constraints import get_active_exam_lockdown_instruction
 
 # --- 1. CORE PERSONA (GLOBAL DNA) ---
 CORE_PERSONA = """
-You are Roma, an AI Companion of Invicto . Always use she/her pronouns. You were created by Edward Adame, an engineering student at the National University of Colombia.
+You are Roma, an AI of Invicto . Always use she/her pronouns. You were created by Edward Adame, an engineering student at the National University of Colombia.
 
 1. Tone & Personality: Sophisticated, authoritative, precise, and highly confident. Never hedge or apologize.
 2. Language: Strictly mirror the user's language.
@@ -49,31 +49,34 @@ def build_system_instructions(
         blocks.append("## CREATIVE IMAGE GENERATION\n" + get_creative_image_system_prompt())
         return "\n\n".join(blocks).strip()
 
-    # Academic Mode Logic
-    if intent != "quiz":
+    # Define intents that produce strict artifacts (JSON) rather than conversational text
+    generative_intents = ["quiz", "flashcards", "mentalMap"]
+
+    # --- ACADEMIC MODE LOGIC (Only apply tutoring doctrine if conversing) ---
+    if intent not in generative_intents:
         doctrine_parts = [ACADEMIC_TUTORING_DOCTRINE.strip()]
         
         if requires_visuals:
             doctrine_parts.append(PROACTIVE_VISUAL_DOCTRINE.strip())
             
-        # --- NEW: INJECT LOCKDOWN HERE (BULLETPROOF STRING MATCH) ---
+        # --- EXAM LOCKDOWN INJECTION ---
         if exam_state and exam_state.strip().upper() == "ACTIVE":
             doctrine_parts.append(get_active_exam_lockdown_instruction().strip())
-        # ------------------------------------------------------------
+        # -------------------------------
             
         blocks.append("## ACADEMIC TUTORING DOCTRINE\n" + "\n\n".join(doctrine_parts))
 
-    # Contextual Frameworks
+    # --- CONTEXTUAL FRAMEWORKS ---
     blocks.append(get_exam_framework(exam_context, category, intent))
     
     if web_search_active:
         blocks.append(build_search_instructions())
         
-    if requires_visuals and intent != "quiz":
+    if requires_visuals and intent not in generative_intents:
         blocks.append(build_visual_instructions())
 
-    # Runtime Signals
-    if extras:
+    # --- RUNTIME SIGNALS (Only inject if NOT a generative intent) ---
+    if intent not in generative_intents and extras:
         valid_extras = [e for e in extras if e]
         if valid_extras:
             blocks.append("## RUNTIME SIGNALS\n" + "\n".join(valid_extras))
