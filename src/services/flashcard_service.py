@@ -2,6 +2,7 @@
 import logging
 import threading
 import base64
+import random
 from typing import Dict, Any, List, Tuple
 
 from src.utils.logging_utils import log_event
@@ -191,8 +192,12 @@ class FlashcardsService:
         num_questions: int = 0
     ) -> Tuple[str, Dict | None]:
         
+        # --- NEW CENTRALIZED BOUNDING LOGIC ---
         if num_questions < 1:
-            num_questions = 5
+            num_questions = random.randint(7, 13) # 10 plus or minus 3
+        elif num_questions > 30:
+            num_questions = 30
+        # --------------------------------------
 
         topic_hint = message if message else "General Topic"
 
