@@ -122,7 +122,7 @@ def lambda_handler(event, context):
             media_items = payload.get("media_items", [])
             arena_id = payload.get("arena_id")
             exam_id = payload.get("exam_id") 
-            exam_state = payload.get("exam_state") # <-- NEW: Extract exam_state from payload
+            exam_state = payload.get("exam_state")
             is_hidden = payload.get("is_hidden", False)
             name = payload.get("name")
             email = payload.get("email")
@@ -197,7 +197,12 @@ def lambda_handler(event, context):
                         try:
                             api_gateway_client.post_to_connection(ConnectionId=conn_id, Data=status_payload)
                         except api_gateway_client.exceptions.GoneException:
-                            pass
+                            # THE FIX: Database Pruning (Status)
+                            logger.info(f"Ghost connection detected during status send. Pruning {conn_id} from DB.")
+                            try:
+                                ws_connections_table.remove_connection_by_id(conn_id)
+                            except Exception as db_err:
+                                logger.error(f"Failed to prune ghost connection {conn_id}: {db_err}")
                         except Exception as inner_e:
                             logger.warning(f"Failed to send status to {conn_id}: {inner_e}")
                     
@@ -236,7 +241,7 @@ def lambda_handler(event, context):
                 stream_manager=stream_manager,
                 arena_id=arena_id,
                 exam_id=exam_id, 
-                exam_state=exam_state, # <-- NEW: Pass exam_state to the Orchestrator
+                exam_state=exam_state,
                 is_hidden=is_hidden, 
                 num_questions=num_questions
             )
@@ -286,7 +291,12 @@ def lambda_handler(event, context):
                                 })
 
                     except api_gateway_client.exceptions.GoneException:
-                        log_event("ws_send_failed_gone", {"user_id": user_id, "connection_id": conn_id}, level="warning")
+                        # THE FIX: Database Pruning (Final Reply)
+                        logger.info(f"Ghost connection detected during final reply. Pruning {conn_id} from DB.")
+                        try:
+                            ws_connections_table.remove_connection_by_id(conn_id)
+                        except Exception as db_err:
+                            logger.error(f"Failed to prune ghost connection {conn_id}: {db_err}")
                     except Exception as e:
                         log_event("ws_send_failed_exception", {"user_id": user_id, "connection_id": conn_id}, level="error", error=e)
 
@@ -319,8 +329,17 @@ def lambda_handler(event, context):
                                 ConnectionId=conn_id,
                                 Data=err_payload
                             )
+                        except api_gateway_client.exceptions.GoneException:
+                             try:
+                                 ws_connections_table.remove_connection_by_id(conn_id)
+                             except: pass
                         except Exception as inner_e:
-                            log_event("failed_to_send_error_fallback", {"error": str(inner_e)}, level="error")
+                             if "GoneException" in str(inner_e) or "410" in str(inner_e):
+                                 try:
+                                     ws_connections_table.remove_connection_by_id(conn_id)
+                                 except: pass
+                             else:
+                                 log_event("failed_to_send_error_fallback", {"error": str(inner_e)}, level="error")
                 
                 continue 
             
