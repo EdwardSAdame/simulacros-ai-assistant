@@ -58,11 +58,11 @@ def handler(event, context):
             "Content-Type": "application/json"
         }
         
-        # 🟢 THE FIX: OpenAI GA Migration specifies all requests go to client_secrets
+        # THE FIX: OpenAI GA Migration specifies all requests go to client_secrets
         target_url = "https://api.openai.com/v1/realtime/client_secrets"
         
         if profile_name == 'language_tutor':
-            # 🟢 THE FIX: GA Migration requires wrapping config inside a 'session' object
+            # THE FIX: GA Migration requires wrapping config inside a 'session' object
             session_config = {
                 "model": profile.get("model", "gpt-4o-realtime-preview-2024-12-17"),
                 "type": "realtime",
