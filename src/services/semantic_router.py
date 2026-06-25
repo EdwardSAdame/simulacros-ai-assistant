@@ -25,11 +25,11 @@ class SemanticRouter:
         self.client = get_openai_client()
         
         # Unified validation list containing all possible dynamic categories
-        # FIXED: Changed "sociales_ciudadanas" to "sociales_y_ciudadanas"
+        # FIXED: Changed "sociales_y_ciudadanas" to "sociales_ciudadanas" to match frameworks
         self.valid_categories = [
             "matematicas", "ciencias_naturales", "analisis_textual", 
             "ciencias_sociales", "analisis_imagen", "lectura_critica", 
-            "sociales_y_ciudadanas", "ingles", "admisiones", 
+            "sociales_ciudadanas", "ingles", "admisiones", 
             "identity_protection", "general"
         ]
         
@@ -49,7 +49,7 @@ class SemanticRouter:
             }
             
         try:
-            # NEW: Pass current_activity to the LLM classifier
+            # Pass current_activity to the LLM classifier
             result = self._classify_with_llm(text, user_id, conversation_id, exam_context, history, current_activity)
             return {
                 "category": result.get("category", "general"),
