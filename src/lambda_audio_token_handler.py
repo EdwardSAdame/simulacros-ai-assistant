@@ -61,9 +61,9 @@ def handler(event, context):
         target_url = "https://api.openai.com/v1/realtime/client_secrets"
         
         if profile_name == 'language_tutor':
-            # 🟢 THE FIX: Everything properly nested inside audio.input per the GA docs
+            # 🟢 UPDATED: Use the new GA model gpt-realtime-2 as fallback
             session_config = {
-                "model": profile.get("model", "gpt-4o-realtime-preview-2024-12-17"),
+                "model": profile.get("model", "gpt-realtime-2"),
                 "type": "realtime",
                 "instructions": profile.get("instructions", "You are a helpful assistant."),
                 "audio": {
@@ -91,9 +91,9 @@ def handler(event, context):
             payload = {"session": session_config}
                 
         else:
-            # 🟢 THE FIX: Standard transcription mode, using output_modalities to save tokens
+            # 🟢 UPDATED: Use the new GA model gpt-realtime-mini as fallback
             session_config = {
-                "model": profile.get("model", "gpt-4o-mini-realtime-preview-2024-12-17"),
+                "model": profile.get("model", "gpt-realtime-mini"),
                 "type": "realtime",
                 "output_modalities": ["text"],
                 "audio": {
