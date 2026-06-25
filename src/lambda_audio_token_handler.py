@@ -58,27 +58,32 @@ def handler(event, context):
             "Content-Type": "application/json"
         }
         
-        # Target the official GA client_secrets endpoint
         target_url = "https://api.openai.com/v1/realtime/client_secrets"
         
         if profile_name == 'language_tutor':
-            # 🟢 THE FIX: GA Migration removes 'modalities' and groups audio config under the 'audio' block
+            # 🟢 THE FIX: Everything properly nested inside audio.input per the GA docs
             session_config = {
                 "model": profile.get("model", "gpt-4o-realtime-preview-2024-12-17"),
                 "type": "realtime",
                 "instructions": profile.get("instructions", "You are a helpful assistant."),
-                "turn_detection": {
-                    "type": "server_vad",
-                    "threshold": float(profile.get("vad_threshold", 0.5)),
-                    "prefix_padding_ms": 300,
-                    "silence_duration_ms": int(profile.get("silence_duration_ms", 500))
-                },
                 "audio": {
                     "input": {
-                        "type": "audio/pcm"
+                        "format": {
+                            "type": "audio/pcm",
+                            "rate": 24000
+                        },
+                        "turn_detection": {
+                            "type": "server_vad",
+                            "threshold": float(profile.get("vad_threshold", 0.5)),
+                            "prefix_padding_ms": 300,
+                            "silence_duration_ms": int(profile.get("silence_duration_ms", 500))
+                        }
                     },
                     "output": {
-                        "type": "audio/pcm",
+                        "format": {
+                            "type": "audio/pcm",
+                            "rate": 24000
+                        },
                         "voice": profile.get("voice", "alloy")
                     }
                 }
@@ -86,19 +91,26 @@ def handler(event, context):
             payload = {"session": session_config}
                 
         else:
-            # 🟢 THE FIX: Cleaned up deprecated fields for standard transcription mode
+            # 🟢 THE FIX: Standard transcription mode, using output_modalities to save tokens
             session_config = {
                 "model": profile.get("model", "gpt-4o-mini-realtime-preview-2024-12-17"),
                 "type": "realtime",
-                "turn_detection": {
-                    "type": "server_vad",
-                    "threshold": float(profile.get("vad_threshold", 0.5)),
-                    "prefix_padding_ms": 300,
-                    "silence_duration_ms": int(profile.get("silence_duration_ms", 2000))
-                },
+                "output_modalities": ["text"],
                 "audio": {
                     "input": {
-                        "type": "audio/pcm"
+                        "format": {
+                            "type": "audio/pcm",
+                            "rate": 24000
+                        },
+                        "turn_detection": {
+                            "type": "server_vad",
+                            "threshold": float(profile.get("vad_threshold", 0.5)),
+                            "prefix_padding_ms": 300,
+                            "silence_duration_ms": int(profile.get("silence_duration_ms", 2000))
+                        },
+                        "transcription": {
+                            "model": "whisper-1"
+                        }
                     }
                 }
             }
@@ -125,7 +137,6 @@ def handler(event, context):
         
         data = response.json()
         
-        # The GA endpoint returns the token in the root 'value' field
         client_secret = data.get("value")
         
         if not client_secret:
