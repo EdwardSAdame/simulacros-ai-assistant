@@ -35,6 +35,7 @@ class StreamManager:
 
         payload_str = json.dumps(payload, ensure_ascii=False)
         success_count = 0
+        dead_connections = []
 
         for connection_id in self.connection_ids:
             try:
@@ -45,9 +46,17 @@ class StreamManager:
                 success_count += 1
             except Exception as e:
                 if "GoneException" in str(e) or "410" in str(e):
-                    logger.warning(f"StreamManager: Connection {connection_id} is gone.")
+                    # Only log it ONCE as info, and queue it for removal
+                    if connection_id not in dead_connections:
+                        logger.info(f"StreamManager: Connection {connection_id} disconnected. Removing from active pool.")
+                        dead_connections.append(connection_id)
                 else:
                     logger.error(f"StreamManager: Failed to send data to {connection_id}: {e}")
+
+        # Clean up dead connections so we don't try (and log) them again on the next packet
+        for dead_id in dead_connections:
+            if dead_id in self.connection_ids:
+                self.connection_ids.remove(dead_id)
 
         if success_count > 0:
             self.packet_count += 1
