@@ -56,8 +56,7 @@ CRITICAL CATEGORY RULES:
 - Set to true if the query involves analyzing functions, statistical distributions, probabilities, data trends, physical kinematics, OR formatting structured data into visual tables where a graphical representation drastically improves human understanding.
 
 4. QUANTITY EXTRACTION (num_questions): 
-- If intent is "quiz", extract the requested QUANTITY of questions to generate (min 1, max 30).
-- If intent is "flashcards", extract the requested number of flashcards (min 1, max 30).
+- If intent is "quiz" or "flashcards", extract the explicitly requested raw integer QUANTITY that the user wants to generate. If the user does not explicitly state a number, output 0.
 - If intent is "chat" or any other non-generation intent, this MUST be 0. Do NOT extract a number if you are not generating a quiz or flashcards.
 
 5. LOADING PHRASES (loading_phrases): 

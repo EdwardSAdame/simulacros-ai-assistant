@@ -1,6 +1,5 @@
 # src/services/semantic_router.py
 import logging
-import random
 from typing import List, Literal, Optional
 from pydantic import BaseModel, Field
 from src.config.settings import settings, get_openai_client
@@ -25,7 +24,6 @@ class SemanticRouter:
         self.client = get_openai_client()
         
         # Unified validation list containing all possible dynamic categories
-        # FIXED: Changed "sociales_y_ciudadanas" to "sociales_ciudadanas" to match frameworks
         self.valid_categories = [
             "matematicas", "ciencias_naturales", "analisis_textual", 
             "ciencias_sociales", "analisis_imagen", "lectura_critica", 
@@ -173,7 +171,6 @@ class SemanticRouter:
             raw_intent = data.get("intent", "chat").strip()
             intent_lower = raw_intent.lower()
             
-            # Safe parsing for mentalMap and flashcards intents
             if intent_lower in ["mentalmap", "mental_map"]:
                 intent = "mentalMap"
             elif intent_lower in ["quiz", "chat", "creative_image", "admission_stats", "flashcards"]: 
@@ -187,20 +184,14 @@ class SemanticRouter:
                 requires_visuals = True
                 logger.info(f"Router Override: Enforcing requires_visuals=True for {category} quiz to apply visual doctrine styling.")
 
+            # ----- CLEAN ARCHITECTURE UPDATE -----
+            # The router no longer decides limits or randomizes numbers.
+            # It just extracts the explicit user intent and passes it down.
             if intent not in ["quiz", "flashcards"]:
                 num_questions = 0
             else:
                 num_questions = data.get("num_questions", 0)
-                if intent == "flashcards":
-                    if num_questions < 1:
-                        num_questions = 10
-                    elif num_questions > 30:
-                        num_questions = 30
-                else: # intent is quiz
-                    if num_questions < 1: 
-                        num_questions = random.randint(5, 7)
-                    elif num_questions > 30: 
-                        num_questions = 30
+            # -------------------------------------
                 
             phrases = data.get("loading_phrases", [])
             if not phrases:

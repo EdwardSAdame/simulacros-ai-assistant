@@ -191,8 +191,12 @@ class QuizService:
         
         topic_hint = category if category else "General Knowledge"
         
+        # --- NEW CENTRALIZED BOUNDING LOGIC ---
         if num_questions < 1:
-            num_questions = random.randint(5, 7)
+            num_questions = random.randint(12, 17)
+        elif num_questions > 45:
+            num_questions = 45
+        # --------------------------------------
 
         visual_subjects_list = [
             "matematicas", "matematica", "matemática", "fisica", "física", 
@@ -310,7 +314,7 @@ class QuizService:
                                 "type": "image_generation", 
                                 "model": active_config.image_model, 
                                 "partial_images": get_image_generation_partials(),
-                                "size": get_image_generation_size(),          
+                                "size": get_image_generation_size(),         
                                 "quality": active_config.image_quality 
                             }],
                             "instructions": instructions,
