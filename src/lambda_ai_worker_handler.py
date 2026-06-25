@@ -68,7 +68,6 @@ def lambda_handler(event, context):
 
             # THE BULLETPROOF FAILSAFE: Intercept exactly by message text
             if message in ["[AUDIO_TELEMETRY]", "[STS_TELEMETRY]"]:
-                logger.info(f"Intercepting Telemetry Ghost Message: {message} for user {user_id}")
                 
                 if message == "[AUDIO_TELEMETRY]" and audio_duration is not None and int(audio_duration) > 0:
                     cfg = get_model_config(ai_mode)
@@ -193,18 +192,22 @@ def lambda_handler(event, context):
                         "intent": intent  
                     })
                     
+                    dead_conns = []
                     for conn_id in connection_ids:
                         try:
                             api_gateway_client.post_to_connection(ConnectionId=conn_id, Data=status_payload)
                         except api_gateway_client.exceptions.GoneException:
-                            # THE FIX: Database Pruning (Status)
-                            logger.info(f"Ghost connection detected during status send. Pruning {conn_id} from DB.")
+                            dead_conns.append(conn_id)
                             try:
                                 ws_connections_table.remove_connection_by_id(conn_id)
-                            except Exception as db_err:
-                                logger.error(f"Failed to prune ghost connection {conn_id}: {db_err}")
+                            except Exception: pass
                         except Exception as inner_e:
                             logger.warning(f"Failed to send status to {conn_id}: {inner_e}")
+                            
+                    # Remove dead connections from the active list so we don't try them again
+                    for dc in dead_conns:
+                        if dc in connection_ids:
+                            connection_ids.remove(dc)
                     
                     log_event("visual_feedback_sent", {
                         "user_id": user_id, 
@@ -291,12 +294,9 @@ def lambda_handler(event, context):
                                 })
 
                     except api_gateway_client.exceptions.GoneException:
-                        # THE FIX: Database Pruning (Final Reply)
-                        logger.info(f"Ghost connection detected during final reply. Pruning {conn_id} from DB.")
                         try:
                             ws_connections_table.remove_connection_by_id(conn_id)
-                        except Exception as db_err:
-                            logger.error(f"Failed to prune ghost connection {conn_id}: {db_err}")
+                        except Exception: pass
                     except Exception as e:
                         log_event("ws_send_failed_exception", {"user_id": user_id, "connection_id": conn_id}, level="error", error=e)
 

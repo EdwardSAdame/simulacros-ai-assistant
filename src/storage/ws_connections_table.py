@@ -15,7 +15,6 @@ class WsConnectionsTable:
         
         self.table = self.dynamodb.Table(actual_table_name)
 
-    # 🟢 THE FIX: Renamed from 'save_connection' to 'add_connection' to match your Lambda handler
     def add_connection(self, user_id: str, connection_id: str):
         """
         Saves a new WebSocket connection ID for the user using a DynamoDB String Set.
@@ -26,7 +25,6 @@ class WsConnectionsTable:
                 UpdateExpression="ADD connectionIds :c",
                 ExpressionAttributeValues={":c": set([connection_id])}
             )
-            logger.info(f"Saved connection {connection_id} for user {user_id}")
         except Exception as e:
             logger.error(f"Failed to save connection: {e}")
             raise
@@ -49,10 +47,10 @@ class WsConnectionsTable:
         """
         Removes a connection using the connectionId from the String Set.
         If it was the user's last connection, it deletes the entire user row to keep the database clean.
+        Silently returns if the connection is already gone.
         """
         if not connection_id:
-            logger.warning("remove_connection_by_id failed: connection_id is empty.")
-            raise ValueError("connectionId cannot be empty")
+            return
             
         try:
             # Step 1: Scan to find which user owns this connectionId
@@ -62,12 +60,11 @@ class WsConnectionsTable:
             
             items = response.get('Items', [])
             if not items:
-                logger.warning(f"No user found owning connectionId: {connection_id} to remove.")
+                # Already deleted or never existed. Fail silently to avoid log spam.
                 return
 
             for item in items:
                 user_id = item['userId']
-                logger.info(f"Removing connection {connection_id} from userId: {user_id}")
                 
                 # Step 2: Remove the specific connection ID AND ask DynamoDB to return the remaining attributes
                 update_response = self.table.update_item(
@@ -80,7 +77,6 @@ class WsConnectionsTable:
                 # Step 3: Check if the set is empty/missing. If so, delete the zombie row entirely.
                 remaining_attributes = update_response.get('Attributes', {})
                 if 'connectionIds' not in remaining_attributes or not remaining_attributes['connectionIds']:
-                    logger.info(f"User {user_id} has no more connections. Deleting row to save space.")
                     self.table.delete_item(Key={'userId': user_id})
                     
         except Exception as e:
