@@ -96,7 +96,6 @@ def get_model_config(mode: str = "omega") -> ModelConfig:
     audio_transcription_model = os.getenv(f"OPENAI_REALTIME_TRANSCRIPTION_MODEL_{suffix}", fallback_audio_model)
 
     # --- LOAD REALTIME AUDIO CONFIG (Speech-to-Speech) ---
-    # FIX: Added _SPEECH_ to match the exact keys in the .env file
     realtime_model = os.getenv(f"OPENAI_REALTIME_SPEECH_MODEL_{suffix}", fallback_realtime_model)
     realtime_voice = os.getenv(f"OPENAI_REALTIME_SPEECH_VOICE_{suffix}", fallback_realtime_voice)
 
@@ -118,3 +117,11 @@ def get_model_config(mode: str = "omega") -> ModelConfig:
         realtime_model=realtime_model,
         realtime_voice=realtime_voice
     )
+
+def get_search_model_name() -> str:
+    """
+    Returns the model to use specifically for Web Search tasks.
+    Defaults to 'gpt-4o' if not set in env vars.
+    This enables the Hybrid Routing strategy.
+    """
+    return os.getenv("OPENAI_MODEL_SEARCH", "gpt-4o")
