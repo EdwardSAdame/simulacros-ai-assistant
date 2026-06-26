@@ -58,7 +58,6 @@ def handler(event, context):
                             "prefix_padding_ms": 300,
                             "silence_duration_ms": int(profile.get("silence_duration_ms", 500))
                         },
-                        # 🟢 THE FIX: Whisper transcription enabled to unlock the UI saving logic!
                         "transcription": {
                             "model": "whisper-1"
                         }
@@ -70,10 +69,9 @@ def handler(event, context):
                 }
             }
         else:
+            # 🟢 THE FIX: Use the dedicated GA transcription schema!
             session_config = {
-                "model": profile.get("model"),
-                "type": "realtime",
-                "output_modalities": ["text"],
+                "type": "transcription",
                 "audio": {
                     "input": {
                         "format": {"type": "audio/pcm", "rate": 24000},
@@ -84,7 +82,8 @@ def handler(event, context):
                             "silence_duration_ms": int(profile.get("silence_duration_ms", 2000))
                         },
                         "transcription": {
-                            "model": "whisper-1"
+                            # Move the transcription model (e.g. gpt-4o-mini-transcribe) in here
+                            "model": profile.get("model") 
                         }
                     }
                 }
