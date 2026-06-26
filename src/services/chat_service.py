@@ -1,304 +1,352 @@
 # src/services/chat_service.py
+import json
+import re
 import logging
-import random
-import concurrent.futures
-from typing import Tuple, Dict, Any, List
+from decimal import Decimal
+from typing import List, Dict, Any, Tuple, Optional
 
-# CONFIG
-from src.config.settings import get_vector_search_max_results, get_code_interpreter_memory
+# 🟢 CONFIG & UTILS
+from src.config.settings import get_openai_client, get_vector_search_max_results
+from src.config.model_config import get_model_config, get_search_model_name
+from src.config.system_instructions import build_system_instructions
 from src.config.page_vectorstores import get_stores_for_page
 from src.config.web_search_config import get_search_filters 
-from src.config.model_config import get_model_config
 from src.utils.logging_utils import log_event
 
-# SERVICES
+# 🟢 NEW: Import the Context Builder
 from src.services.context_builder import build_runtime_context
-from src.services.arena_service import arena_service
-from src.config.system_instructions import build_system_instructions
-from src.assistant.assistant_client import (
-    send_message_to_assistant,
-    generate_plot_blueprint,
-    execute_plot_generation
-)
-from src.services.token_usage_service import TokenUsageService
-from src.services.container_usage_service import ContainerUsageService
+
+# 🟢 STORAGE
+from src.storage.conversations_table import save_conversation, _find_conversation_timestamp
+from src.storage.messages_table import save_message, get_recent_messages
 
 logger = logging.getLogger(__name__)
 
-class ChatService:
+def _normalize_email_for_storage(val):
+    if val is None: return None
+    if isinstance(val, str) and val.strip() == "": return None
+    return val
+
+def _normalize_page(val: str | None) -> str:
+    if not val or (isinstance(val, str) and val.strip() == ""):
+        return "/"
+    return val
+
+def decimal_default(obj):
+    if isinstance(obj, Decimal):
+        return int(obj) if obj % 1 == 0 else float(obj)
+    raise TypeError
+
+# 🟢 NEW LOGIC: Context Resolution Engine
+def determine_exam_context(page_url: str, message_text: str | None = None) -> str:
     """
-    Handles standard conversational AI interactions, including identity protection,
-    custom Arena context injection, and high-performance parallel visualization generation.
+    Decides the Exam Context (UNAL vs ICFES vs GENERAL).
+    Priority:
+    1. URL Explicit Context (e.g. user is inside /simulacro-unal)
+    2. User Intent in Message (e.g. user says "quiero unal" on homepage)
+    3. Default (General)
     """
+    # 1. Analyze URL (The "Room" the user is in)
+    if page_url:
+        url_lower = page_url.lower()
+        if "unal" in url_lower: return "UNAL"
+        if "icfes" in url_lower: return "ICFES"
+    
+    # 2. Analyze Message (Only if URL is generic)
+    if message_text:
+        msg_lower = message_text.lower()
+        # Check for UNAL keywords
+        if any(x in msg_lower for x in ["unal", "nacional", "universidad nacional"]):
+            return "UNAL"
+        # Check for ICFES keywords
+        if any(x in msg_lower for x in ["icfes", "saber 11", "saber pro", "estado"]):
+            return "ICFES"
+            
+    # 3. Fallback
+    return "GENERAL" 
 
-    @staticmethod
-    def _log_usage(usage_data: dict, current_user: str | None, conversation_id: str, active_mode: str):
-        if not usage_data or not current_user: return
-        try:
-            active_config = get_model_config(active_mode)
-            engine_name = active_config.model
+def _build_history_list(conversation_id: str, max_user: int = 3, max_assistant: int = 3) -> List[Dict[str, Any]]:
+    try:
+        msgs = get_recent_messages(conversation_id=conversation_id, limit=20, ascending=True)
+        if not msgs: return []
 
-            input_val = usage_data.get("input_tokens", usage_data.get("prompt_tokens", 0))
-            output_val = usage_data.get("output_tokens", usage_data.get("completion_tokens", 0))
+        user_msgs = [m for m in msgs if m.get("Role") == "user"][-max_user:]
+        asst_msgs = [m for m in msgs if m.get("Role") == "assistant"][-max_assistant:]
+        merged = sorted(user_msgs + asst_msgs, key=lambda m: m["Timestamp"])
 
-            TokenUsageService().log_token_usage(
-                user_id=current_user,
-                conversation_id=conversation_id, 
-                source="chat",                   
-                tier=active_mode,   
-                engine=engine_name, 
-                input_tokens=input_val,
-                output_tokens=output_val,
-                total_tokens=usage_data.get("total_tokens", 0),
-                reasoning_tokens=usage_data.get("reasoning_tokens", 0),
-                cached_tokens=usage_data.get("cached_tokens", 0)
-            )
-        except Exception as e:
-            logger.error(f"Failed to log token usage: {e}")
+        history_list = []
+        for m in merged:
+            role = m.get("Role", "user")
+            text_content = m.get("MessageText", "")
+            
+            metadata = m.get("Metadata") or m.get("Meta")
+            if role == "assistant" and metadata:
+                try:
+                    metadata_str = json.dumps(metadata, default=decimal_default)
+                    hidden_context = (
+                        f"\n\n[SYSTEM CONTEXT: User cannot see this. "
+                        f"I previously generated this interactive content: {metadata_str}. "
+                        f"I must use this data to answer follow-up questions.]"
+                    )
+                    text_content += hidden_context
+                except Exception:
+                    pass
 
-    @staticmethod
-    def _log_container(user_id: str | None, conversation_id: str, container_id: str | None):
-        if not user_id or not container_id: 
-            return
-        try:
-            memory_limit = get_code_interpreter_memory()
-            ContainerUsageService().log_container_usage(
-                user_id=user_id,
-                conversation_id=conversation_id,
-                container_id=container_id,
-                source="chat", 
-                memory_limit=memory_limit
-            )
-        except Exception as e:
-            logger.error(f"Failed to log container usage: {e}")
-
-    @classmethod
-    def execute_standard_chat(
-        cls,
-        conversation_input: List[Dict[str, Any]],
-        user_id: str | None,
-        page: str | None,
-        name: str | None,
-        email: str | None,
-        message: str | None,
-        mode: str,
-        exam_context: str,
-        exam_id: str | None,  # Receive exam_id from Lambda/SQS
-        exam_state: str | None, # <-- NEW: Receive exam_state from Orchestrator
-        category: str,
-        requires_visuals: bool,
-        arena_id: str | None,
-        clean_pdfs: List[str],
-        actual_conversation_id: str
-    ) -> Tuple[str, Dict | None]:
+            content = [{"type": "input_text" if role == "user" else "output_text", "text": text_content}]
+            history_list.append({"role": role, "content": content})
         
-        # 🟢 DEBUG LINE: Check what the backend receives
-        logger.info(f"ChatService Debug -> ExamID: {exam_id}, Page: {page}, ExamState: {exam_state}")
+        return history_list
+    except Exception as e:
+        log_event("history_fetch_failed", {"conversation_id": conversation_id}, level="warning", error=e)
+        return []
 
-        # 1. Identity Protection Fast-Path
-        if category == "identity_protection":
-            logger.info("Intercepted identity question. Returning minimalist Invicto response.")
-            identity_responses = [
-                "Soy Invicto AI.",
-                "Soy una inteligencia artificial desarrollada por Invicto.",
-                "Soy Invicto AI, un sistema exclusivo de Invicto.",
-                "Mi tecnologia fue desarrollada internamente por Invicto.",
-                "Soy el asistente de inteligencia artificial de Invicto."
-            ]
-            return random.choice(identity_responses), None
+# ------------------------------------------------------------------
+# MAIN FUNCTION
+# ------------------------------------------------------------------
+def get_ai_response(
+    message: str | None,
+    user_id: str | None,
+    name: str | None,
+    email: str | None,
+    page: str | None,
+    conversation_id: str | None = None,
+    image_urls: list[str] | None = None,
+    mode: str = "omega",
+    intent: str = "chat",
+    requires_visuals: bool = False,
+    stream_manager: Any | None = None,
+    exam_state: str | None = None # 🟢 NEW: Receive the exam state
+) -> Tuple[str, str, str, Dict | None]: 
+    
+    # 🟢 LAZY IMPORTS
+    from src.assistant.assistant_client import send_message_to_assistant, generate_structured_quiz, stream_structured_quiz
+    from src.assistant.image_handler import format_image_urls_for_openai
+    from src.services.quiz_service import QuizService
 
-        # 2. Setup Resources
-        selected_vector_stores = get_stores_for_page(page, exam_id=exam_id)
-        
-        # 🟢 DEBUG LINE: Confirm what store was selected
-        logger.info(f"ChatService Debug -> Selected Vector Stores: {selected_vector_stores}")
-        
-        web_search_config = get_search_filters(exam_context)
-        is_web_search_active = (web_search_config is not None)
+    page = _normalize_page(page)
 
-        runtime_signals = build_runtime_context(
-            page=page, user_id=user_id, name=name, email=email, requires_visuals=requires_visuals, exam_state=exam_state 
-        )
-        system_prompt = ""
+    # 🟢 1. INTELLIGENCE LAYER: Check URL AND Message
+    exam_context = determine_exam_context(page, message)
+    selected_vector_stores = get_stores_for_page(page)
 
-        # 3. Handle Arenas Context
-        if arena_id:
-            try:
-                arena_context = arena_service.get_arena_context(user_id, arena_id)
-                if arena_context:
-                    arena_title = arena_context.get('Title', 'Custom Arena')
-                    arena_instructions = arena_context.get('SystemInstructions', '')
-                    
-                    arena_vector_store = arena_context.get('VectorStoreId')
-                    if arena_vector_store:
-                        if not selected_vector_stores:
-                            selected_vector_stores = []
-                        selected_vector_stores.append(arena_vector_store)
+    # 🟢 2. DETERMINE WEB SEARCH CONFIG & MODEL
+    # Get filters based on context (ICFES -> icfes.gov.co, etc.)
+    web_search_config = get_search_filters(exam_context)
+    
+    is_web_search_active = (web_search_config is not None)
+    
+    actual_model_override = None
+    if is_web_search_active:
+        actual_model_override = get_search_model_name()
 
-                    if arena_instructions and str(arena_instructions).strip():
-                        base_tech_prompt = (
-                            "You are an advanced AI Assistant. \n"
-                            "OUTPUT RULES:\n"
-                            "- Use Markdown for formatting.\n"
-                            "- Use LaTeX for math equations.\n"
-                            "- Be helpful, clear, and accurate.\n"
-                        )
-                        if runtime_signals:
-                            context_str = "\n".join(runtime_signals)
-                            base_tech_prompt += f"\nCONTEXT:\n{context_str}\n"
+    # 🔍 OBSERVABILITY: LOG THE DECISION
+    log_event("context_resolution", {
+        "user_id": user_id,
+        "input_url": page,
+        "derived_exam": exam_context, 
+        "vector_stores_selected": selected_vector_stores,
+        "intent": intent,
+        "requires_visuals": requires_visuals,
+        "web_search_config": web_search_config,
+        "web_search_active": is_web_search_active,
+        "model_override": actual_model_override,
+        "exam_state": exam_state, # 🟢 Log exam_state for observability
+        "trigger_message": message[:50] if message else "None"
+    })
 
-                        injection = f"\n\n## Identity: {arena_title}\n{arena_instructions}"
-                        system_prompt = base_tech_prompt + injection
-            except Exception as e:
-                logger.error(f"Failed to load arena context: {e}")
+    # Step 2: Find-or-create conversation
+    actual_conversation_id = conversation_id
+    should_create_new = True
 
-        # 4. Standard System Prompt Fallback
-        if not system_prompt:
-            system_prompt = build_system_instructions(
-                extras=runtime_signals, 
-                exam_context=exam_context, 
-                requires_visuals=False, 
-                web_search_active=is_web_search_active, 
-                intent="chat",
-                category=category,
-                exam_state=exam_state # <-- FIX: THIS IS NOW INCLUDED!
+    if conversation_id and user_id:
+        exists_timestamp = _find_conversation_timestamp(user_id, conversation_id)
+        if exists_timestamp:
+            should_create_new = False
+            log_event("conversation_verified_and_reused", {"conversation_id": conversation_id})
+        else:
+            log_event("conversation_not_found_forcing_new", {"input_id": conversation_id})
+            actual_conversation_id = None 
+
+    try:
+        if should_create_new:
+            sanitized_email = _normalize_email_for_storage(email)
+            conversation_data = save_conversation(
+                user_id=user_id, name=name or "", email=sanitized_email,
+                title=(message or "[Sin texto]")[:40], page=page,
             )
+            actual_conversation_id = conversation_data["ConversationId"]
+    except Exception as e:
+        raise RuntimeError(f"❌ Failed to save/reuse conversation: {e}")
 
-        # Look up explicit container ID to prevent duplicate billing
-        active_container_id = None
-        if requires_visuals or (clean_pdfs and len(clean_pdfs) > 0):
-            try:
-                active_container_id = ContainerUsageService().get_active_container_for_session(actual_conversation_id)
-                if active_container_id:
-                    logger.info(f"Reusing existing container ID: {active_container_id} for session {actual_conversation_id}")
-            except Exception as e:
-                logger.error(f"Failed to fetch active container: {e}")
+    # Step 3: Build Input
+    conversation_input = _build_history_list(actual_conversation_id)
+    
+    current_user_content = []
+    if message:
+        current_user_content.append({"type": "input_text", "text": message})
+    current_user_content.extend(format_image_urls_for_openai(image_urls or []))
 
-        # 5. Call AI (Parallel Execution for Visuals)
+    if current_user_content:
+        conversation_input.append({"role": "user", "content": current_user_content})
+
+    # ------------------------------------------------------------------
+    # 🟢 BRANCH: QUIZ (Structured) vs CHAT (Standard)
+    # ------------------------------------------------------------------
+    quiz_data = None
+    final_reply_text = ""
+    generated_assets = [] 
+    
+    if intent == "quiz":
+        topic_hint = message if message else "General Knowledge"
+        num_questions = 5
+        if message:
+            match = re.search(r'\b(\d+)\b', message)
+            if match:
+                parsed_num = int(match.group(1))
+                if 1 <= parsed_num <= 10: 
+                    num_questions = parsed_num
+
+        conversation_input.append(QuizService.get_system_instruction(topic=topic_hint, num_questions=num_questions))
+
         try:
-            if requires_visuals:
-                # Phase 1: Micro-latency Blueprint Generation
-                blueprint_instruction = (
-                    "You are the analytical engine. Based on the user's request, "
-                    "generate a strict analytical blueprint for a mathematical or data plot. "
+            if stream_manager:
+                log_event("quiz_streaming_started", {"user_id": user_id, "mode": mode, "exam_context": exam_context})
+                
+                stream_gen = stream_structured_quiz(
+                    conversation_input=conversation_input,
+                    user_id=user_id,
+                    page=page,
+                    name=(name or None),
+                    email=_normalize_email_for_storage(email),
+                    mode=mode,
+                    exam_context=exam_context 
                 )
                 
-                blueprint, blueprint_usage = generate_plot_blueprint(
-                    conversation_input=conversation_input,
-                    mode=mode,
-                    system_instruction=blueprint_instruction
-                )
+                seen_indices = set()
+                accumulated_questions = []
+                final_reply_text = "Aquí tienes tu simulacro."
+                ai_generated_title = "Simulacro Generado" 
 
-                # Phase 1.5: Short-circuit validation
-                is_valid_plot = blueprint.chart_type and "none" not in blueprint.chart_type.lower()
+                for event in stream_gen:
+                    evt_type = event.get("type")
+                    if evt_type == "intro":
+                        final_reply_text = event.get("text", "")
+                    elif evt_type == "question":
+                        q_data = event.get("data")
+                        q_dict = q_data.dict()
+                        idx = event.get("index", 0)
+                        stream_manager.send_quiz_item(question_data=q_dict, index=idx)
+                        if idx not in seen_indices:
+                            accumulated_questions.append(q_dict)
+                            seen_indices.add(idx)
+                    elif evt_type == "done":
+                        final_obj = event.get("full_response")
+                        parsed_response = None
+                        if hasattr(final_obj, 'questions'): parsed_response = final_obj
+                        elif hasattr(final_obj, 'parsed') and hasattr(final_obj.parsed, 'questions'): parsed_response = final_obj.parsed
+                        elif hasattr(final_obj, 'output_parsed') and hasattr(final_obj.output_parsed, 'questions'): parsed_response = final_obj.output_parsed
+                        
+                        if parsed_response:
+                            final_reply_text = parsed_response.intro_message
+                            accumulated_questions = [q.dict() for q in parsed_response.questions]
+                            if hasattr(parsed_response, 'title') and parsed_response.title:
+                                ai_generated_title = parsed_response.title
 
-                if is_valid_plot:
-                    text_prompt = system_prompt + (
-                        f"\n\n[SYSTEM NOTE: A visual plot is simultaneously being generated with the following blueprint:\n"
-                        f"Concept: {blueprint.analytical_concept}\n"
-                        f"Type: {blueprint.chart_type}\n"
-                        f"Ensure your conversational text explanation naturally aligns with this upcoming visualization. "
-                        f"CRITICAL: Do NOT write any Python code, do NOT use Matplotlib, and do NOT output code blocks. "
-                        f"Your only job is to explain the concept.]"
-                    )
-                else:
-                    text_prompt = system_prompt
+                    elif evt_type == "error":
+                        error_msg = event.get("error", "Unknown stream error")
+                        stream_manager.send_error(error_msg)
 
-                # Phase 2: Parallel Execution of Text and Conditionally Visual Code
-                with concurrent.futures.ThreadPoolExecutor(max_workers=2) as executor:
-                    
-                    future_text = executor.submit(
-                        send_message_to_assistant,
-                        conversation_input=conversation_input, 
-                        user_id=user_id, 
-                        page=page, 
-                        name=(name or None), 
-                        email=email,
-                        mode=mode, 
-                        system_instruction=text_prompt, 
-                        vector_store_ids=selected_vector_stores, 
-                        requires_visuals=False, 
-                        web_search_config=web_search_config, 
-                        user_location=None,
-                        pdf_urls=clean_pdfs,
-                        active_container_id=active_container_id,
-                        conversation_id=actual_conversation_id
-                    )
-
-                    future_plot = None
-                    if is_valid_plot:
-                        future_plot = executor.submit(
-                            execute_plot_generation,
-                            blueprint=blueprint, 
-                            mode=mode, 
-                            active_container_id=active_container_id
-                        )
-
-                    response_tuple = future_text.result()
-                    
-                    plot_urls = []
-                    plot_usage = {}
-                    container_id = response_tuple[4] if len(response_tuple) > 4 else None
-
-                    if future_plot:
-                        plot_urls, plot_container_id, plot_usage = future_plot.result()
-                        if plot_container_id:
-                            container_id = plot_container_id
-
-                    final_reply_text = response_tuple[0]
-                    generated_assets = plot_urls
-                    sources_data = response_tuple[2] if len(response_tuple) > 2 else []
-                    
-                    text_usage = response_tuple[3] if len(response_tuple) > 3 else {}
-                    usage_data = {}
-                    for key in ["input_tokens", "output_tokens", "total_tokens", "reasoning_tokens", "cached_tokens"]:
-                        usage_data[key] = (
-                            text_usage.get(key, 0) + 
-                            blueprint_usage.get(key, 0) + 
-                            plot_usage.get(key, 0)
-                        )
+                quiz_data = {
+                    "quiz_mode": "batch", 
+                    "topic": ai_generated_title,
+                    "questions": accumulated_questions
+                }
 
             else:
-                # Standard linear chat execution (No visuals required)
-                response_tuple = send_message_to_assistant(
-                    conversation_input=conversation_input, 
-                    user_id=user_id, 
-                    page=page, 
-                    name=(name or None), 
-                    email=email,
-                    mode=mode, 
-                    system_instruction=system_prompt, 
-                    vector_store_ids=selected_vector_stores, 
-                    requires_visuals=requires_visuals,
-                    web_search_config=web_search_config, 
-                    pdf_urls=clean_pdfs,
-                    active_container_id=active_container_id,
-                    conversation_id=actual_conversation_id  
+                quiz_model = generate_structured_quiz(
+                    conversation_input=conversation_input,
+                    user_id=user_id,
+                    page=page,
+                    name=(name or None),
+                    email=_normalize_email_for_storage(email),
+                    mode=mode,
+                    exam_context=exam_context 
                 )
-                
-                final_reply_text = response_tuple[0]
-                generated_assets = response_tuple[1]
-                sources_data = response_tuple[2] if len(response_tuple) > 2 else []
-                usage_data = response_tuple[3] if len(response_tuple) > 3 else {}
-                container_id = response_tuple[4] if len(response_tuple) > 4 else None
-
-            cls._log_usage(usage_data, user_id, actual_conversation_id, mode)
-            cls._log_container(user_id, actual_conversation_id, container_id)
+                quiz_data = {
+                    "quiz_mode": "batch", 
+                    "topic": quiz_model.title,
+                    "questions": [q.dict() for q in quiz_model.questions]
+                }
+                final_reply_text = quiz_model.intro_message
 
         except Exception as e:
-            logger.error(f"OpenAI Chat API failed: {e}")
+            logger.error(f"Quiz Generation Error: {e}")
+            log_event("quiz_generation_failed", {"error": str(e)}, level="error")
+            final_reply_text = "**Error**: No pudimos generar el simulacro."
+            quiz_data = None
+
+    else:
+        # 🟢 STANDARD CHAT MODE
+        try:
+            # 1. Build the dynamic System Prompt
+            runtime_signals = build_runtime_context(
+                page=page,
+                user_id=user_id,
+                name=name,
+                email=email,
+                requires_visuals=requires_visuals 
+            )
+
+            # 🟢 PASS `exam_state` to the instruction builder
+            system_prompt = build_system_instructions(
+                extras=runtime_signals,
+                exam_context=exam_context,
+                requires_visuals=requires_visuals,
+                web_search_active=is_web_search_active,
+                exam_state=exam_state # <-- NEW ADDITION
+            )
+
+            final_reply_text, generated_assets = send_message_to_assistant(
+                conversation_input=conversation_input,
+                user_id=user_id,
+                page=page,
+                name=(name or None),
+                email=_normalize_email_for_storage(email),
+                mode=mode,
+                system_instruction=system_prompt,
+                vector_store_ids=selected_vector_stores,
+                requires_visuals=requires_visuals,
+                web_search_config=web_search_config, 
+                model_override=actual_model_override 
+            )
+        except Exception as e:
             raise RuntimeError(f"OpenAI Chat API failed: {e}")
 
-        # 6. Format Metadata Payload
-        meta_payload = {}  
-        if generated_assets and requires_visuals:
-            meta_payload["type"] = "rich_chat"
-            meta_payload["assets"] = [{"type": "image", "url": url, "alt": "Generated Visualization"} for url in generated_assets]
+    # Step 7: Persist
+    assistant_timestamp = ""
+    try:
+        if message:
+            save_message(actual_conversation_id, role="user", message_text=message)
+        for img in image_urls or []:
+            save_message(actual_conversation_id, role="user", message_text=f"[Imagen] {img}")
         
-        if sources_data:
-            meta_payload["sources"] = sources_data
-            
-        if not meta_payload: 
-            meta_payload = None
+        meta_payload = quiz_data
+        if not meta_payload and generated_assets:
+            meta_payload = {
+                "type": "rich_chat",
+                "assets": [{"type": "image", "url": url, "alt": "Generated Visualization"} for url in generated_assets]
+            }
 
-        return final_reply_text, meta_payload
+        saved_item = save_message(
+            actual_conversation_id, 
+            role="assistant", 
+            message_text=final_reply_text,
+            metadata=meta_payload
+        )
+        if saved_item and isinstance(saved_item, dict):
+            assistant_timestamp = saved_item.get("Timestamp", "")
+
+    except Exception as e:
+        raise RuntimeError(f" Failed to save messages: {e}")
+
+    return final_reply_text, actual_conversation_id, assistant_timestamp, meta_payload
