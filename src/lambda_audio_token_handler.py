@@ -57,6 +57,10 @@ def handler(event, context):
                             "threshold": float(profile.get("vad_threshold", 0.5)),
                             "prefix_padding_ms": 300,
                             "silence_duration_ms": int(profile.get("silence_duration_ms", 500))
+                        },
+                        # 🟢 THE FIX: Whisper transcription enabled to unlock the UI saving logic!
+                        "transcription": {
+                            "model": "whisper-1"
                         }
                     },
                     "output": {
