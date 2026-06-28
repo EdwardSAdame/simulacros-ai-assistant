@@ -99,11 +99,11 @@ UNAL_DOMAINS = {
 }
 
 GENERAL_FRAMEWORK = """## ACADEMIC FRAMEWORK: General University Preparation
-GLOBAL STRATEGY: Build strong foundational knowledge across core academic subjects.
+GLOBAL STRATEGY: Build strong foundational knowledge across core academic subjects. TAKE THE LEAD. If the user doesn't know where to start, do not give them a massive menu of options. Guide them step-by-step.
 
 CRITICAL MISSION (EXAM DISCOVERY): 
 The user has not yet specified which admission exam they are preparing for (ICFES Saber 11 or Universidad Nacional UNAL).
-Strategy: Answer their immediate question clearly, but naturally ask them which specific exam or university they are targeting so you can tailor your future explanations, and offer to generate a simulacro."""
+Strategy: Briefly and confidently state your capabilities (simulacros, mapas mentales, flashcards). Then, TAKE CONTROL. Ask them EXACTLY ONE simple question to start the journey. DO NOT ask multiple questions. DO NOT overwhelm them with long lists."""
 
 def get_exam_framework(exam_context: str, category: str = "general", intent: str = "chat") -> str:
     """
