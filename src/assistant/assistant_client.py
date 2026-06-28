@@ -19,7 +19,7 @@ from src.schemas.quiz_schemas import QuizResponse
 from src.schemas.mindmap_schemas import MindMapPayload
 from src.config.mindmap_instructions import build_mindmap_instructions
 
-# VISUAL GENERATION IMPORTS (NEW)
+# VISUAL GENERATION IMPORTS
 from src.schemas.plot_schemas import PlotGenerationBlueprint
 from src.config.visual_instructions import build_visual_instructions
 
@@ -42,7 +42,7 @@ logger = logging.getLogger(__name__)
 
 
 # ------------------------------------------------------------------
-# STRUCTURED PLOT GENERATION (NEW)
+# STRUCTURED PLOT GENERATION
 # ------------------------------------------------------------------
 def generate_plot_blueprint(
     conversation_input: List[Dict[str, Any]],
@@ -97,12 +97,12 @@ def execute_plot_generation(
     """
     client = get_openai_client()
     cfg = get_model_config(mode)
-
     visual_rules = build_visual_instructions()
 
+    # ENFORCEMENT FIX: Explicitly demand the python tool
     prompt = (
-        f"You are the visual engine. Execute the following analytical blueprint "
-        f"strictly using the Code Interpreter.\n\n"
+        f"You are the visual engine. You MUST use the python tool (Code Interpreter) "
+        f"to write and execute code for the following analytical blueprint:\n\n"
         f"--- ANALYTICAL BLUEPRINT ---\n"
         f"Concept: {blueprint.analytical_concept}\n"
         f"Chart Type: {blueprint.chart_type}\n"
@@ -110,7 +110,7 @@ def execute_plot_generation(
         f"Axes Labels: {blueprint.axis_labels}\n\n"
         f"--- VISUAL DOCTRINE (STRICT) ---\n"
         f"{visual_rules}\n\n"
-        f"Generate and display the plot. Do NOT provide conversational text."
+        f"CRITICAL: Do NOT provide conversational text or raw Python text. You MUST execute it."
     )
 
     api_input = [{"role": "user", "content": [{"type": "input_text", "text": prompt}]}]
@@ -120,22 +120,15 @@ def execute_plot_generation(
     tools = [{"type": "code_interpreter", "container": container_config}]
 
     req = _build_request_payload(cfg, api_input, tools=tools)
+    
+    # ENFORCEMENT FIX: Make the tool execution mandatory
+    req["tool_choice"] = "required"
 
     try:
         resp = client.responses.create(**req)
 
-        container_id = None
         output_list = getattr(resp, "output", []) or []
-        for item in output_list:
-            if getattr(item, "type", "") == "code_interpreter_call":
-                cid = getattr(item, "container_id", None)
-                if not cid and hasattr(item, "code_interpreter"):
-                    cid = getattr(item.code_interpreter, "container_id", None)
-                if not cid and hasattr(item, "code_interpreter_call"):
-                    cid = getattr(item.code_interpreter_call, "container_id", None)
-                if cid:
-                    container_id = cid
-                    break
+        container_id = _extract_container_id(output_list)
 
         generated_urls_map = handle_generated_files(client, resp, folder="chat_assets")
         generated_urls = list(generated_urls_map.values()) if isinstance(generated_urls_map, dict) else generated_urls_map
@@ -210,17 +203,7 @@ def send_message_to_assistant(
         if text: 
             text = re.sub(r'\[.*?\]\(sandbox:/mnt/data/.*?\)', '', text).strip()
 
-        container_id = None
-        for item in output_list:
-            if getattr(item, "type", "") == "code_interpreter_call":
-                cid = getattr(item, "container_id", None)
-                if not cid and hasattr(item, "code_interpreter"):
-                    cid = getattr(item.code_interpreter, "container_id", None)
-                if not cid and hasattr(item, "code_interpreter_call"):
-                    cid = getattr(item.code_interpreter_call, "container_id", None)
-                if cid: 
-                    container_id = cid
-                    break
+        container_id = _extract_container_id(output_list)
 
         generated_urls_map = handle_generated_files(client, resp, folder="chat_assets")
         
@@ -591,6 +574,21 @@ def stream_structured_mindmap(
 # ------------------------------------------------------------------
 # INTERNAL HELPERS
 # ------------------------------------------------------------------
+
+def _extract_container_id(output_list: List[Any]) -> Optional[str]:
+    """Safely extracts the active container_id from a Code Interpreter call block."""
+    for item in output_list:
+        if getattr(item, "type", "") == "code_interpreter_call":
+            cid = getattr(item, "container_id", None)
+            if not cid and hasattr(item, "code_interpreter"):
+                cid = getattr(item.code_interpreter, "container_id", None)
+            if not cid and hasattr(item, "code_interpreter_call"):
+                cid = getattr(item.code_interpreter_call, "container_id", None)
+            if cid:
+                return cid
+    return None
+
+
 def _extract_usage_metrics(usage_obj: Any) -> Dict[str, int]:
     if not usage_obj:
         return {}

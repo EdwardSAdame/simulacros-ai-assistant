@@ -379,8 +379,10 @@ class QuizService:
                     active_config = get_model_config(mode)
                     memory_limit = get_code_interpreter_memory()
                     
+                    # ENFORCEMENT FIX: Update instructions to demand the python tool specifically
                     base_instruction = (
-                        "Write and run Python code to generate the requested plot.\n"
+                        "You MUST use the 'python' tool (Code Interpreter) to write and execute Python code to generate the requested plot.\n"
+                        "Do NOT output raw code as text. You must execute it.\n"
                         "CRITICAL KERNEL STATE: This is a shared, persistent Python environment. You MUST begin your script EXACTLY with these lines to clear the memory:\n"
                         "import matplotlib.pyplot as plt\n"
                         "plt.clf()\n"
@@ -416,10 +418,12 @@ class QuizService:
                                 "explicit_id": current_container_id
                             })
                             
+                            # ENFORCEMENT FIX: Add tool_choice="required" to ensure guaranteed execution
                             bg_req = {
                                 "model": active_config.model,
-                                "input": [{"role": "user", "content": f"Generate a plot for this mathematical request: {plot_prompt}"}],
-                                "tools": [{"type": "code_interpreter", "container": container_config}], 
+                                "input": [{"role": "user", "content": f"You MUST use the python tool to generate a plot for this mathematical request: {plot_prompt}"}],
+                                "tools": [{"type": "code_interpreter", "container": container_config}],
+                                "tool_choice": "required",
                                 "instructions": instructions
                             }
                             
