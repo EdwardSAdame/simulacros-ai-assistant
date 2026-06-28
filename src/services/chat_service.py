@@ -1,6 +1,5 @@
 # src/services/chat_service.py
 import logging
-import random
 import concurrent.futures
 from typing import Tuple, Dict, Any, List
 
@@ -27,8 +26,8 @@ logger = logging.getLogger(__name__)
 
 class ChatService:
     """
-    Handles standard conversational AI interactions, including identity protection,
-    custom Arena context injection, and high-performance parallel visualization generation.
+    Handles standard conversational AI interactions, including custom Arena 
+    context injection, and high-performance parallel visualization generation.
     """
 
     @staticmethod
@@ -84,7 +83,7 @@ class ChatService:
         mode: str,
         exam_context: str,
         exam_id: str | None,
-        exam_state: str | None, # 🟢 NEW: Receive exam_state from Orchestrator
+        exam_state: str | None, 
         category: str,
         requires_visuals: bool,
         arena_id: str | None,
@@ -94,19 +93,7 @@ class ChatService:
         
         logger.info(f"ChatService Debug -> ExamID: {exam_id}, Page: {page}, ExamState: {exam_state}")
 
-        # 1. Identity Protection Fast-Path
-        if category == "identity_protection":
-            logger.info("Intercepted identity question. Returning minimalist Invicto response.")
-            identity_responses = [
-                "Soy Invicto AI.",
-                "Soy una inteligencia artificial desarrollada por Invicto.",
-                "Soy Invicto AI, un sistema exclusivo de Invicto.",
-                "Mi tecnologia fue desarrollada internamente por Invicto.",
-                "Soy el asistente de inteligencia artificial de Invicto."
-            ]
-            return random.choice(identity_responses), None
-
-        # 2. Setup Resources
+        # 1. Setup Resources
         selected_vector_stores = get_stores_for_page(page, exam_id=exam_id)
         
         web_search_config = get_search_filters(exam_context)
@@ -117,7 +104,7 @@ class ChatService:
         )
         system_prompt = ""
 
-        # 3. Handle Arenas Context
+        # 2. Handle Arenas Context
         if arena_id:
             try:
                 arena_context = arena_service.get_arena_context(user_id, arena_id)
@@ -148,7 +135,7 @@ class ChatService:
             except Exception as e:
                 logger.error(f"Failed to load arena context: {e}")
 
-        # 4. Standard System Prompt Fallback
+        # 3. Standard System Prompt Fallback
         if not system_prompt:
             system_prompt = build_system_instructions(
                 extras=runtime_signals, 
@@ -157,7 +144,7 @@ class ChatService:
                 web_search_active=is_web_search_active, 
                 intent="chat",
                 category=category,
-                exam_state=exam_state # 🟢 THIS IS THE EXAM LOCKDOWN FIX
+                exam_state=exam_state 
             )
 
         # Look up explicit container ID to prevent duplicate billing
@@ -170,7 +157,7 @@ class ChatService:
             except Exception as e:
                 logger.error(f"Failed to fetch active container: {e}")
 
-        # 5. Call AI (Parallel Execution for Visuals)
+        # 4. Call AI (Parallel Execution for Visuals)
         try:
             if requires_visuals:
                 # Phase 1: Micro-latency Blueprint Generation
@@ -285,7 +272,7 @@ class ChatService:
             logger.error(f"OpenAI Chat API failed: {e}")
             raise RuntimeError(f"OpenAI Chat API failed: {e}")
 
-        # 6. Format Metadata Payload
+        # 5. Format Metadata Payload
         meta_payload = {}  
         if generated_assets and requires_visuals:
             meta_payload["type"] = "rich_chat"
