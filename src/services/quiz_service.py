@@ -3,8 +3,6 @@ from typing import Dict, Any, List, Tuple
 import math
 import random
 import base64
-import threading
-import queue
 import logging
 
 from src.utils.logging_utils import log_event
@@ -15,6 +13,10 @@ from src.config.web_search_config import get_search_filters
 from src.config.model_config import get_model_config 
 from src.services.token_usage_service import TokenUsageService
 from src.services.container_usage_service import ContainerUsageService
+
+# NEW IMPORTS FOR REFACTORED ARCHITECTURE
+from src.assistant.clients.base_client import BaseAssistantClient
+from src.services.visual_worker_service import VisualWorkerService
 
 logger = logging.getLogger(__name__)
 
@@ -35,48 +37,24 @@ class QuizService:
         try:
             active_config = get_model_config(active_mode)
             engine_name = active_config.model
-
-            input_val = usage_data.get("input_tokens", usage_data.get("prompt_tokens", 0))
-            output_val = usage_data.get("output_tokens", usage_data.get("completion_tokens", 0))
+            
+            # Use our clean Base Client to do the heavy math
+            usage_dict = BaseAssistantClient.extract_usage_metrics(usage_data)
 
             TokenUsageService().log_token_usage(
                 user_id=current_user,
                 conversation_id=conversation_id, 
-                source="quiz",                  
+                source="quiz",                
                 tier=active_mode,   
                 engine=engine_name, 
-                input_tokens=input_val,
-                output_tokens=output_val,
-                total_tokens=usage_data.get("total_tokens", 0),
-                reasoning_tokens=usage_data.get("reasoning_tokens", 0),
-                cached_tokens=usage_data.get("cached_tokens", 0)
+                input_tokens=usage_dict["input_tokens"],
+                output_tokens=usage_dict["output_tokens"],
+                total_tokens=usage_dict["total_tokens"],
+                reasoning_tokens=usage_dict["reasoning_tokens"],
+                cached_tokens=usage_dict["cached_tokens"]
             )
         except Exception as e:
             logger.error(f"Failed to log token usage in quiz service: {e}")
-
-    @staticmethod
-    def _extract_usage_from_obj(usage_obj: Any) -> Dict[str, int]:
-        """Helper to extract usage dict from OpenAI objects"""
-        if not usage_obj:
-            return {}
-        if isinstance(usage_obj, dict):
-            return {
-                "input_tokens": usage_obj.get("input_tokens", usage_obj.get("prompt_tokens", 0)),
-                "output_tokens": usage_obj.get("output_tokens", usage_obj.get("completion_tokens", 0)),
-                "total_tokens": usage_obj.get("total_tokens", 0),
-                "reasoning_tokens": usage_obj.get("output_tokens_details", {}).get("reasoning_tokens", 0) if isinstance(usage_obj.get("output_tokens_details"), dict) else 0,
-                "cached_tokens": usage_obj.get("input_tokens_details", {}).get("cached_tokens", 0) if isinstance(usage_obj.get("input_tokens_details"), dict) else 0
-            }
-        else:
-            comp_details = getattr(usage_obj, "output_tokens_details", getattr(usage_obj, "completion_tokens_details", None))
-            prompt_details = getattr(usage_obj, "input_tokens_details", getattr(usage_obj, "prompt_tokens_details", None))
-            return {
-                "input_tokens": getattr(usage_obj, "input_tokens", getattr(usage_obj, "prompt_tokens", 0)),
-                "output_tokens": getattr(usage_obj, "output_tokens", getattr(usage_obj, "completion_tokens", 0)),
-                "total_tokens": getattr(usage_obj, "total_tokens", 0),
-                "reasoning_tokens": getattr(comp_details, "reasoning_tokens", 0) if comp_details else 0,
-                "cached_tokens": getattr(prompt_details, "cached_tokens", 0) if prompt_details else 0
-            }
 
     @staticmethod
     def get_system_instruction(
@@ -191,12 +169,11 @@ class QuizService:
         
         topic_hint = category if category else "General Knowledge"
         
-        # --- NEW CENTRALIZED BOUNDING LOGIC ---
+        # Centralized Bounds
         if num_questions < 1:
             num_questions = random.randint(12, 17)
         elif num_questions > 45:
             num_questions = 45
-        # --------------------------------------
 
         visual_subjects_list = [
             "matematicas", "matematica", "matemática", "fisica", "física", 
@@ -218,7 +195,6 @@ class QuizService:
 
         max_visuals = 0
         target_visuals = 0
-        
         stem_visual_indices = []
         options_visual_indices = []
         hybrid_visual_indices = []
@@ -233,12 +209,9 @@ class QuizService:
             
             if target_visuals > 0:
                 raw_indices = random.sample(range(num_questions), target_visuals)
-                
-                # If strictly creative (e.g. social sciences), we only put visuals in the Stem
                 if is_creative_subject and not is_general_subject and not is_visual_subject:
                     stem_visual_indices = sorted(raw_indices)
                 else:
-                    # Implement Modular Options Distribution (50% Stem, 30% Options, 20% Hybrid)
                     num_stem = math.floor(target_visuals * 0.5)
                     num_opts = math.floor(target_visuals * 0.3)
                     
@@ -305,184 +278,16 @@ class QuizService:
                 ai_generated_title = "Simulacro Generado" 
                 
                 ghost_easier, ghost_harder, ghost_retry = None, None, None
-                image_threads = []
-                plot_queue = queue.Queue()
                 
-                # Key: (question_index, option_index). Option index is None if it's the stem.
-                image_urls_map = {}
-
-                def _bg_image_generator(img_prompt: str, q_index: int):
-                    try:
-                        from src.config.settings import (
-                            get_openai_client, 
-                            get_image_generation_size, 
-                            get_image_generation_partials
-                        )
-                        from src.config.model_config import get_model_config 
-                        from src.config.creative_image_instructions import get_creative_image_system_prompt
-                        from src.services.image_usage_service import ImageUsageService
-                        
-                        bg_client = get_openai_client()
-                        active_config = get_model_config(mode) 
-                        
-                        base_instruction = "You are an expert AI illustrator for Invicto. Use the image_generation tool to create the requested image.\n\n"
-                        instructions = base_instruction + get_creative_image_system_prompt()
-                        
-                        bg_req = {
-                            "model": active_config.model, 
-                            "input": [{"role": "user", "content": f"Generate this image: {img_prompt}"}],
-                            "tools": [{
-                                "type": "image_generation", 
-                                "model": active_config.image_model, 
-                                "partial_images": get_image_generation_partials(),
-                                "size": get_image_generation_size(),         
-                                "quality": active_config.image_quality 
-                            }],
-                            "instructions": instructions,
-                            "stream": True
-                        }
-                        
-                        bg_stream = bg_client.responses.create(**bg_req)
-                        final_url = None
-                        
-                        for bg_event in bg_stream:
-                            if getattr(bg_event, "type", "") == "response.completed":
-                                resp_obj = getattr(bg_event, "response", bg_event)
-                                usage_obj = getattr(resp_obj, "usage", None)
-                                if usage_obj and actual_conversation_id:
-                                    bg_usage = cls._extract_usage_from_obj(usage_obj)
-                                    cls._log_usage(bg_usage, user_id, actual_conversation_id, mode)
-
-                            if getattr(bg_event, "type", "") == "response.image_generation_call.partial_image":
-                                bg_b64 = getattr(bg_event, "partial_image_b64", "")
-                                if bg_b64:
-                                    try:
-                                        img_bytes = base64.b64decode(bg_b64)
-                                        s3_url = storage_service.upload_image_from_bytes(img_bytes, "image/png", folder="quiz_assets")
-                                        # Creative images are ONLY for the stem, so opt_index is None
-                                        stream_manager.send_partial_image(index=q_index, b64_data=s3_url, opt_index=None)
-                                        final_url = s3_url
-                                    except Exception as upload_err:
-                                        logger.warning(f"BG image upload failed: {upload_err}")
-                        
-                        if final_url: 
-                            image_urls_map[(q_index, None)] = final_url
-                            
-                            if user_id:
-                                try:
-                                    active_session = actual_conversation_id if actual_conversation_id else f"quiz_bg_{user_id[-6:]}"
-                                    image_tracker = ImageUsageService()
-                                    image_tracker.log_image_usage(
-                                        user_id=user_id,
-                                        conversation_id=active_session,
-                                        source="quiz",  
-                                        tier=mode,
-                                        engine=active_config.image_model,
-                                        size=get_image_generation_size(),
-                                        quality=active_config.image_quality,
-                                        partials=get_image_generation_partials(),
-                                        image_count=1,
-                                        image_url=final_url  
-                                    )
-                                except Exception as tracker_err:
-                                    logger.error(f"Failed to log background quiz image usage: {tracker_err}")
-
-                    except Exception as e:
-                        logger.error(f"BG image generation failed: {e}")
-
-                def _plot_worker():
-                    from src.config.settings import get_openai_client, get_code_interpreter_memory
-                    from src.config.model_config import get_model_config
-                    from src.services.ai_assets_service import AiAssetsService
-                    from src.config.visual_instructions import build_visual_instructions
-                    
-                    bg_client = get_openai_client()
-                    active_config = get_model_config(mode)
-                    memory_limit = get_code_interpreter_memory()
-                    
-                    base_instruction = (
-                        "You MUST use the 'python' tool (Code Interpreter) to write and execute Python code to generate the requested plot.\n"
-                        "Do NOT output raw code as text. You must execute it.\n"
-                        "CRITICAL KERNEL STATE: This is a shared, persistent Python environment. You MUST begin your script EXACTLY with these lines to clear the memory:\n"
-                        "import matplotlib.pyplot as plt\n"
-                        "plt.clf()\n"
-                        "plt.cla()\n"
-                        "plt.close('all')\n"
-                        "You MUST use Matplotlib. After building your plot, you MUST display it using `plt.show()`. Do NOT save it to disk. Do NOT use plt.savefig().\n\n"
-                    )
-                    instructions = base_instruction + build_visual_instructions()
-
-                    current_container_id = active_container_id
-
-                    while True:
-                        item = plot_queue.get()
-                        if item is None:
-                            break
-                            
-                        plot_prompt, q_index, opt_index = item
-                        try:
-                            if not plot_prompt or not str(plot_prompt).strip() or str(plot_prompt).lower() == "none":
-                                plot_queue.task_done()
-                                continue
-
-                            if current_container_id:
-                                container_config = current_container_id
-                            else:
-                                container_config = {"type": "auto", "memory_limit": memory_limit}
-                            
-                            bg_req = {
-                                "model": active_config.model,
-                                "input": [{"role": "user", "content": f"You MUST use the python tool to generate a plot for this mathematical request: {plot_prompt}"}],
-                                "tools": [{"type": "code_interpreter", "container": container_config}],
-                                "tool_choice": "required",
-                                "instructions": instructions
-                            }
-                            
-                            response = bg_client.responses.create(**bg_req)
-                            
-                            bg_usage_obj = getattr(response, "usage", None)
-                            if bg_usage_obj and actual_conversation_id:
-                                bg_plot_usage = cls._extract_usage_from_obj(bg_usage_obj)
-                                cls._log_usage(bg_plot_usage, user_id, actual_conversation_id, mode)
-
-                            if not current_container_id:
-                                output_list = getattr(response, "output", []) or []
-                                for out_item in output_list:
-                                    if getattr(out_item, "type", "") == "code_interpreter_call":
-                                        cid = getattr(out_item, "container_id", None)
-                                        if not cid and hasattr(out_item, "code_interpreter"):
-                                            cid = getattr(out_item.code_interpreter, "container_id", None)
-                                        if not cid and hasattr(out_item, "code_interpreter_call"):
-                                            cid = getattr(out_item.code_interpreter_call, "container_id", None)
-                                        if cid: 
-                                            current_container_id = cid
-                                            if actual_conversation_id and user_id:
-                                                try:
-                                                    ContainerUsageService().log_container_usage(
-                                                        user_id=user_id,
-                                                        conversation_id=actual_conversation_id, 
-                                                        container_id=cid,
-                                                        source="quiz", 
-                                                        memory_limit=memory_limit
-                                                    )
-                                                except Exception as e:
-                                                    logger.error(f"Failed to save background container: {e}")
-                                            break
-
-                            uploaded_map = AiAssetsService.handle_generated_files(bg_client, response, folder="quiz_assets")
-                            
-                            if uploaded_map:
-                                s3_url = list(uploaded_map.values())[0]
-                                # Note: Pass the opt_index securely down to the WebSocket stream
-                                stream_manager.send_partial_image(index=q_index, b64_data=s3_url, opt_index=opt_index)
-                                image_urls_map[(q_index, opt_index)] = s3_url
-                        except Exception as e:
-                            logger.error(f"BG plot generation failed for index {q_index}, opt {opt_index}: {e}")
-                        finally:
-                            plot_queue.task_done()
-
-                plot_worker_thread = threading.Thread(target=_plot_worker)
-                plot_worker_thread.start()
+                # REFACTORED: Initialize our clean Visual Worker Service
+                worker = VisualWorkerService(
+                    mode=mode,
+                    user_id=user_id,
+                    conversation_id=actual_conversation_id,
+                    stream_manager=stream_manager,
+                    active_container_id=active_container_id
+                )
+                worker.start_plot_worker()
 
                 for event in stream_gen:
                     evt_type = event.get("type")
@@ -492,10 +297,7 @@ class QuizService:
                     elif evt_type == "image_request":
                         q_idx = event.get("index", 0)
                         if q_idx in allowed_stem_visuals:
-                            prompt_str = event.get("prompt", "")
-                            t = threading.Thread(target=_bg_image_generator, args=(prompt_str, q_idx))
-                            t.start()
-                            image_threads.append(t)
+                            worker.spawn_image_worker(event.get("prompt", ""), q_idx)
 
                     elif evt_type == "plot_request":
                         q_idx = event.get("index", 0)
@@ -508,15 +310,14 @@ class QuizService:
                             is_allowed = True
 
                         if is_allowed:
-                            prompt_str = event.get("prompt", "")
-                            plot_queue.put((prompt_str, q_idx, opt_idx))
+                            worker.enqueue_plot(event.get("prompt", ""), q_idx, opt_idx)
 
                     elif evt_type == "question":
                         q_data = event.get("data")
                         q_dict = q_data.dict() if hasattr(q_data, 'dict') else q_data
                         idx = event.get("index", 0)
                         
-                        # Clean up hallucinations dynamically based on the allocated buckets
+                        # Clean up hallucinations dynamically
                         if idx not in allowed_stem_visuals:
                             q_dict["image_prompt"] = None
                             q_dict["plot_prompt"] = None
@@ -535,6 +336,7 @@ class QuizService:
                             seen_indices.add(idx)
                             
                     elif evt_type == "partial_image":
+                        # Legacy fallback processing
                         b64_data = event.get("b64_data", "")
                         if b64_data:
                             try:
@@ -542,7 +344,6 @@ class QuizService:
                                 s3_url = storage_service.upload_image_from_bytes(
                                     image_bytes, "image/png", folder="quiz_assets"
                                 )
-                                # Note: For legacy support, DALL-E events do not have opt_index, default to None (Stem)
                                 stream_manager.send_partial_image(index=event.get("index", 0), b64_data=s3_url, opt_index=None)
                             except Exception as upload_err:
                                 logger.warning(f"Partial image S3 upload failed during quiz: {upload_err}")
@@ -564,7 +365,6 @@ class QuizService:
                             accumulated_questions = [q.dict() if hasattr(q, 'dict') else q for q in parsed_response.questions]
                             
                             for i, q_dict in enumerate(accumulated_questions):
-                                # Clean up hallucinations
                                 if i not in allowed_stem_visuals:
                                     q_dict["image_prompt"] = None
                                     q_dict["plot_prompt"] = None
@@ -587,20 +387,17 @@ class QuizService:
                         error_msg = event.get("error", "Unknown stream error")
                         stream_manager.send_error(error_msg)
 
-                for t in image_threads:
-                    t.join()
+                # REFACTORED: Elegantly wait for background tasks to finish
+                worker.shutdown_and_wait()
                     
-                plot_queue.put(None)
-                plot_worker_thread.join()
-                    
-                # Reconstruct URLs strictly mapped by tuples
+                # Map the generated URLs from the worker back to our questions
                 for i, q in enumerate(accumulated_questions):
-                    if (i, None) in image_urls_map:
-                        q["image_url"] = image_urls_map[(i, None)]
+                    if (i, None) in worker.image_urls_map:
+                        q["image_url"] = worker.image_urls_map[(i, None)]
                     
                     for o_idx, opt in enumerate(q.get("options", [])):
-                        if isinstance(opt, dict) and (i, o_idx) in image_urls_map:
-                            opt["image_url"] = image_urls_map[(i, o_idx)]
+                        if isinstance(opt, dict) and (i, o_idx) in worker.image_urls_map:
+                            opt["image_url"] = worker.image_urls_map[(i, o_idx)]
 
                 quiz_data = {
                     "quiz_mode": "batch", 
