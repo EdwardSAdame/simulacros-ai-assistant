@@ -3,8 +3,36 @@ from pydantic import BaseModel, Field
 from typing import List, Optional, Literal
 
 class QuizOption(BaseModel):
-    text: str = Field(..., description="The answer text. FORMATTING RULES: 1. If the answer is just words/text, write normally WITHOUT delimiters. 2. If the answer is a number, equation, or symbol, wrap it in standard LaTeX delimiters \\( and \\). 3. Mixed: 'El valor es \\( 5 \\)'. CRITICAL: Do NOT include meta-words like 'Failure Path'.")
-    feedback: str = Field(..., description="Short feedback explaining why this option is right/wrong to the student. Speak directly to the student. Do NOT use meta-words like 'Failure Path' or 'Trap'.")
+    # -------------------------------------------------------------------------
+    # OPTION TEXT & VISUALS (PATH 2: MODULAR OPTIONS)
+    # -------------------------------------------------------------------------
+    text: str = Field(..., description=(
+        "The answer text. FORMATTING RULES: "
+        "1. If the answer is just words/text, write normally WITHOUT delimiters. "
+        "2. If the answer is a number, equation, or symbol, wrap it in standard LaTeX delimiters \\( and \\). "
+        "3. Mixed: 'El valor es \\( 5 \\)'. "
+        "CRITICAL: If this option has a plot_prompt, do NOT leave this empty. Write the mathematical equation or a short label (e.g., 'Option A') here. "
+        "Do NOT include meta-words like 'Failure Path'."
+    ))
+    
+    plot_prompt: Optional[str] = Field(
+        None, 
+        description=(
+            "Mathematical instructions for Matplotlib to generate a graph for THIS SPECIFIC OPTION. "
+            "Leave null unless the system instruction explicitly forces you to generate visual options."
+        )
+    )
+
+    image_url: Optional[str] = Field(
+        None, 
+        description="URL of the generated option graph. If you wrote a plot_prompt, LEAVE THIS NULL. The backend will populate it automatically."
+    )
+
+    feedback: str = Field(..., description=(
+        "Short feedback explaining why this option is right/wrong to the student. Speak directly to the student. "
+        "Do NOT use meta-words like 'Failure Path' or 'Trap'."
+    ))
+
 
 class QuizQuestion(BaseModel):
     question_title: str = Field(..., description="Title with number, e.g., '# 1. Topic'")
@@ -15,9 +43,9 @@ class QuizQuestion(BaseModel):
     plot_prompt: Optional[str] = Field(
         None, 
         description=(
-            "Mathematical instructions for Matplotlib. "
+            "Mathematical instructions for Matplotlib for the main question stem. "
             "The generated graph must contain the critical data needed to solve the problem. "
-            "Leave null if no data visual is required."
+            "Leave null if no data visual is required for the stem."
         )
     )
 
@@ -69,12 +97,13 @@ class QuizQuestion(BaseModel):
         "specific data points required for the solution."
     ))
     
-    image_url: Optional[str] = Field(None, description="URL of the generated image/graph. If you wrote an image_prompt or plot_prompt, LEAVE THIS NULL. The backend will populate it automatically.")
+    image_url: Optional[str] = Field(None, description="URL of the generated image/graph for the question stem. If you wrote an image_prompt or plot_prompt, LEAVE THIS NULL. The backend will populate it automatically.")
 
     difficulty: Literal[1, 2, 3] = Field(1, description="Difficulty weight: 1 (Basic/Easy), 2 (Application/Medium), 3 (Analysis/Hard).")
 
     options: List[QuizOption] = Field(..., description="Exactly 4 options.")
     correct_option_index: Literal[0, 1, 2, 3] = Field(..., description="Index of the correct option (0-3).")
+
 
 class QuizResponse(BaseModel):
     title: str = Field(..., description="An engaging short title for the quiz. (max. 6 words)")

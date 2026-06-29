@@ -24,8 +24,10 @@ class StreamParser:
         last_checkpoint = None
         has_refused = False
         
-        # Track which questions we have already requested visuals for
+        # Track which questions/options we have already requested visuals for
         yielded_image_prompts = set()
+        
+        # Now stores tuples of (q_index, opt_index) to handle Path 2 modular options
         yielded_plot_prompts = set()
 
         try:
@@ -64,17 +66,16 @@ class StreamParser:
                     
                     # -------------------------------------------------------------------------
                     # ASYNC INTERCEPTOR FOR CREATIVE IMAGES
+                    # (Creative images only apply to the stem, never the options)
                     # -------------------------------------------------------------------------
                     prompt_matches = re.finditer(r'"image_prompt"\s*:\s*"((?:[^"\\]|\\.)*)"', buffer)
                     for match in prompt_matches:
-                        # Calculate actual question index by counting how many "question_title" keys came before this
                         q_titles_before = buffer.count('"question_title"', 0, match.start())
                         actual_q_index = max(0, q_titles_before - 1)
                         
                         if actual_q_index not in yielded_image_prompts:
                             prompt_text = match.group(1).replace('\\"', '"').replace('\\n', '\n').replace('\\/', '/')
                             
-                            # Only trigger if the AI actually wrote a prompt (ignored if null or empty)
                             if prompt_text and prompt_text.lower() not in ["null", "", "none"]:
                                 yield {
                                     "type": "image_request", 
@@ -84,23 +85,40 @@ class StreamParser:
                             yielded_image_prompts.add(actual_q_index)
 
                     # -------------------------------------------------------------------------
-                    # ASYNC INTERCEPTOR FOR CODE INTERPRETER PLOTS
+                    # ASYNC INTERCEPTOR FOR CODE INTERPRETER PLOTS (MODULAR PATH 2 UPGRADE)
                     # -------------------------------------------------------------------------
                     plot_matches = re.finditer(r'"plot_prompt"\s*:\s*"((?:[^"\\]|\\.)*)"', buffer)
                     for match in plot_matches:
                         q_titles_before = buffer.count('"question_title"', 0, match.start())
                         actual_q_index = max(0, q_titles_before - 1)
                         
-                        if actual_q_index not in yielded_plot_prompts:
+                        # Determine if this plot prompt is inside the options array or the question stem
+                        options_starts_before = buffer.count('"options"', 0, match.start())
+                        
+                        if options_starts_before < q_titles_before:
+                            # We haven't reached the "options" array for this question yet. It's the STEM.
+                            opt_index = None
+                        else:
+                            # We are inside the "options" array. Count how many options have appeared.
+                            last_options_pos = buffer.rfind('"options"', 0, match.start())
+                            # The schema guarantees "text" comes before "plot_prompt" in QuizOption
+                            texts_since_options = buffer.count('"text"', last_options_pos, match.start())
+                            opt_index = max(0, texts_since_options - 1)
+                            opt_index = min(opt_index, 3) # Bound to 0-3 just in case
+
+                        tracker_key = (actual_q_index, opt_index)
+                        
+                        if tracker_key not in yielded_plot_prompts:
                             prompt_text = match.group(1).replace('\\"', '"').replace('\\n', '\n').replace('\\/', '/')
                             
                             if prompt_text and prompt_text.lower() not in ["null", "", "none"]:
                                 yield {
                                     "type": "plot_request", 
                                     "index": actual_q_index, 
+                                    "opt_index": opt_index,
                                     "prompt": prompt_text
                                 }
-                            yielded_plot_prompts.add(actual_q_index)
+                            yielded_plot_prompts.add(tracker_key)
                     # -------------------------------------------------------------------------
 
                     # Detect Intro Message

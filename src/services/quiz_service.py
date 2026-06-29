@@ -82,62 +82,61 @@ class QuizService:
     def get_system_instruction(
         topic: str = "general", 
         num_questions: int = 5,
-        target_indices: List[int] = None,
+        stem_indices: List[int] = None,
+        opt_indices: List[int] = None,
+        hyb_indices: List[int] = None,
         is_general_subject: bool = False,
         is_visual_subject: bool = False,
         is_creative_subject: bool = False
     ) -> Dict[str, Any]:
         """
         Returns the system instruction with optimized token usage and strict, 
-        deterministic visual index assignments.
+        deterministic visual index assignments partitioned by stem/options.
         """
-        target_indices = target_indices or []
-        target_visuals = len(target_indices)
-        null_count = num_questions - target_visuals
-
-        human_indices = [i + 1 for i in target_indices]
-        human_indices_str = ", ".join([f"#{i}" for i in human_indices])
+        stem_indices = stem_indices or []
+        opt_indices = opt_indices or []
+        hyb_indices = hyb_indices or []
+        
+        target_visuals = len(stem_indices) + len(opt_indices) + len(hyb_indices)
+        
+        stem_human = [i + 1 for i in stem_indices]
+        opt_human = [i + 1 for i in opt_indices]
+        hyb_human = [i + 1 for i in hyb_indices]
 
         visual_instruction = ""
 
-        if is_general_subject and target_visuals > 0:
-            visual_instruction = (
-                f"## VISUAL GENERATION PROTOCOL (HYBRID MULTI-SUBJECT - MANDATORY)\n"
-                f"You MUST generate EXACTLY {target_visuals} visual(s) across this quiz.\n"
-                f"DETERMINISTIC ENFORCEMENT: You MUST generate a visual (`plot_prompt` or `image_prompt`) ONLY for the following specific question numbers: {human_indices_str}.\n"
-                f"For the remaining {null_count} questions, BOTH fields MUST be set to a literal JSON null. Do not violate this assignment.\n"
-                "CRITICAL VISUAL DEPENDENCY: For questions with a visual, the visual MUST contain the critical data. Do not repeat the data in the text.\n"
-                "Analyze the question and select exactly ONE visual engine per visual question:\n"
-                "  - **DATA**: For charts, graphs, or geometry -> Write a description in `plot_prompt`. Keep `image_prompt` null.\n"
-                "  - **CREATIVE**: For thematic illustrations -> Write a description in `image_prompt`. Keep `plot_prompt` null.\n"
-                "CRITICAL: Rely entirely on the background system to execute the chosen visual engine.\n\n"
-            )
-        elif is_visual_subject and target_visuals > 0:
-            visual_instruction = (
-                f"## VISUAL GENERATION PROTOCOL (DATA GRAPHS - MANDATORY)\n"
-                f"You MUST generate EXACTLY {target_visuals} graph(s) for this quiz.\n"
-                f"DETERMINISTIC ENFORCEMENT: You MUST write a mathematical description in `plot_prompt` ONLY for the following specific question numbers: {human_indices_str}.\n"
-                f"For the remaining {null_count} questions, `plot_prompt` MUST be set to a literal JSON null. Do not write 'none' or empty strings.\n"
-                "CRITICAL VISUAL DEPENDENCY: If a question has a graph, the text MUST refer to it (e.g., 'Segun la grafica...') and the student MUST need to look at the graph to find the data. Do NOT give them the numbers in the text.\n"
-                "CRITICAL: The background system handles all Python code, Matplotlib styling, colors, and layouts automatically.\n"
-                "  - **NATURAL LANGUAGE ONLY**: Write the `plot_prompt` strictly as a plain English/Spanish mathematical description.\n"
-                "  - **MATH FOCUSED**: Restrict the `plot_prompt` entirely to mathematical parameters, functions, domains, points, and axis labels. Focus your intelligence on making the math complex and interesting.\n"
-                "  - **FIELD ROUTING**: Keep `image_prompt` always null.\n\n"
-            )
-        elif is_creative_subject and target_visuals > 0:
-            visual_instruction = (
-                f"## VISUAL GENERATION PROTOCOL (CREATIVE ILLUSTRATIONS - MANDATORY)\n"
-                f"You MUST include EXACTLY {target_visuals} contextual illustration(s) in this quiz.\n"
-                f"DETERMINISTIC ENFORCEMENT: You MUST write a visual description in `image_prompt` ONLY for the following specific question numbers: {human_indices_str}.\n"
-                f"For the remaining {null_count} questions, `image_prompt` MUST be set to a literal JSON null. Do not write 'none' or empty strings.\n"
-                "CRITICAL DECORATIVE RULE: The image MUST be purely decorative and metaphorical. It MUST NOT contain any text, sentences, or data required to solve the question. The student should be able to answer the question solely by reading the `context_text` or `question_text`.\n"
-                "CRITICAL: Delegate image creation to the background renderer by describing the image exclusively in the `image_prompt` field.\n"
-                "  - **FIELD ROUTING**: Keep `plot_prompt` always null.\n\n"
-            )
+        if target_visuals > 0:
+            if is_general_subject:
+                visual_instruction = "## VISUAL GENERATION PROTOCOL (HYBRID MULTI-SUBJECT - MANDATORY)\n"
+            elif is_visual_subject:
+                visual_instruction = "## VISUAL GENERATION PROTOCOL (DATA GRAPHS - MANDATORY)\n"
+            elif is_creative_subject:
+                visual_instruction = "## VISUAL GENERATION PROTOCOL (CREATIVE ILLUSTRATIONS - MANDATORY)\n"
+                
+            visual_instruction += f"You MUST generate EXACTLY {target_visuals} visual question(s).\n"
+            visual_instruction += "DETERMINISTIC DISTRIBUTION ENFORCEMENT:\n"
+            
+            if stem_human:
+                visual_instruction += f"- BUCKET A (Stem Visual Only): For question numbers {stem_human}, you MUST write a visual prompt (`plot_prompt` or `image_prompt`) for the QUESTION STEM ONLY. Leave all option visuals null.\n"
+            if opt_human:
+                visual_instruction += f"- BUCKET B (Option Visuals Only): For question numbers {opt_human}, the stem visual MUST be null. You MUST write a mathematical description in `plot_prompt` for EVERY option (A, B, C, D).\n"
+            if hyb_human:
+                visual_instruction += f"- BUCKET C (Hybrid Visuals): For question numbers {hyb_human}, write a visual prompt for the QUESTION STEM AND a `plot_prompt` for EVERY option (A, B, C, D).\n"
+                
+            visual_instruction += "For the remaining questions not listed above, ALL visual fields (stem and options) MUST be a literal JSON null. Do not violate this assignment.\n\n"
+            
+            if is_visual_subject:
+                visual_instruction += "CRITICAL: For stem visuals, use `plot_prompt`. Keep `image_prompt` always null. Write mathematical instructions strictly as plain English/Spanish.\n"
+            elif is_creative_subject:
+                visual_instruction += "CRITICAL: For stem visuals, use `image_prompt`. Keep `plot_prompt` always null. (Options will only ever be math graphs if assigned).\n"
+            elif is_general_subject:
+                visual_instruction += "CRITICAL: For stem visuals, select exactly ONE engine (`plot_prompt` for math/data, OR `image_prompt` for creative). Keep the other null.\n"
+                
+            visual_instruction += "CRITICAL VISUAL DEPENDENCY: If a question or option has a graph/image, the text MUST refer to it. Do NOT repeat the exact data points in the text.\n\n"
         else:
             visual_instruction = (
                 "## VISUAL & TOOL EXECUTION PROTOCOL (TEXT ONLY)\n"
-                "Produce a strictly text-based quiz. Keep `image_url`, `image_prompt`, and `plot_prompt` strictly as literal JSON null.\n\n"
+                "Produce a strictly text-based quiz. Keep `image_url`, `image_prompt`, and all `plot_prompt`s strictly as literal JSON null.\n\n"
             )
 
         instruction_text = (
@@ -218,30 +217,48 @@ class QuizService:
 
         max_visuals = 0
         target_visuals = 0
-        target_indices = []
+        
+        stem_visual_indices = []
+        options_visual_indices = []
+        hybrid_visual_indices = []
 
         if is_analisis_imagen:
-            # Enforce 100 percent visuals for analisis_imagen
             max_visuals = num_questions
             target_visuals = num_questions
-            target_indices = list(range(num_questions))
+            stem_visual_indices = list(range(num_questions))
         elif is_general_subject or is_visual_subject or is_creative_subject:
-            # Apply standard 40 percent randomizer for other visual or creative subjects
             max_visuals = math.floor(num_questions * 0.4)
             target_visuals = random.randint(0, max_visuals) if max_visuals > 0 else 0
+            
             if target_visuals > 0:
-                target_indices = sorted(random.sample(range(num_questions), target_visuals))
+                raw_indices = random.sample(range(num_questions), target_visuals)
+                
+                # If strictly creative (e.g. social sciences), we only put visuals in the Stem
+                if is_creative_subject and not is_general_subject and not is_visual_subject:
+                    stem_visual_indices = sorted(raw_indices)
+                else:
+                    # Implement Modular Options Distribution (50% Stem, 30% Options, 20% Hybrid)
+                    num_stem = math.floor(target_visuals * 0.5)
+                    num_opts = math.floor(target_visuals * 0.3)
+                    
+                    random.shuffle(raw_indices)
+                    stem_visual_indices = sorted(raw_indices[:num_stem])
+                    options_visual_indices = sorted(raw_indices[num_stem:num_stem+num_opts])
+                    hybrid_visual_indices = sorted(raw_indices[num_stem+num_opts:])
+
+        allowed_stem_visuals = set(stem_visual_indices + hybrid_visual_indices)
+        allowed_opt_visuals = set(options_visual_indices + hybrid_visual_indices)
 
         log_event("dynamic_visual_quota_calculated", {
             "subject_topic": topic_lower,
             "is_general_subject": is_general_subject,
             "is_visual_subject": is_visual_subject,
             "is_creative_subject": is_creative_subject,
-            "is_analisis_imagen": is_analisis_imagen,
             "num_questions_requested": num_questions,
-            "max_allowed_visuals": max_visuals, 
             "target_visuals_enforced": target_visuals,
-            "target_indices_assigned": target_indices
+            "stem_indices": stem_visual_indices,
+            "options_indices": options_visual_indices,
+            "hybrid_indices": hybrid_visual_indices
         })
 
         active_container_id = None
@@ -256,7 +273,9 @@ class QuizService:
         system_instruction = cls.get_system_instruction(
             topic=topic_hint, 
             num_questions=num_questions, 
-            target_indices=target_indices,
+            stem_indices=stem_visual_indices,
+            opt_indices=options_visual_indices,
+            hyb_indices=hybrid_visual_indices,
             is_general_subject=is_general_subject,
             is_visual_subject=is_visual_subject,
             is_creative_subject=is_creative_subject
@@ -287,8 +306,9 @@ class QuizService:
                 ghost_easier, ghost_harder, ghost_retry = None, None, None
                 image_threads = []
                 plot_queue = queue.Queue()
+                
+                # Key: (question_index, option_index). Option index is None if it's the stem.
                 image_urls_map = {}
-                allowed_visual_indices = set(target_indices)
 
                 def _bg_image_generator(img_prompt: str, q_index: int):
                     try:
@@ -331,7 +351,6 @@ class QuizService:
                                 if usage_obj and actual_conversation_id:
                                     bg_usage = cls._extract_usage_from_obj(usage_obj)
                                     cls._log_usage(bg_usage, user_id, actual_conversation_id, mode)
-                                    logger.info(f"Background Image Gen Tokens Tracked for Q{q_index}: {bg_usage}")
 
                             if getattr(bg_event, "type", "") == "response.image_generation_call.partial_image":
                                 bg_b64 = getattr(bg_event, "partial_image_b64", "")
@@ -345,7 +364,7 @@ class QuizService:
                                         logger.warning(f"BG image upload failed: {upload_err}")
                         
                         if final_url: 
-                            image_urls_map[q_index] = final_url
+                            image_urls_map[(q_index, None)] = final_url
                             
                             if user_id:
                                 try:
@@ -379,7 +398,6 @@ class QuizService:
                     active_config = get_model_config(mode)
                     memory_limit = get_code_interpreter_memory()
                     
-                    # ENFORCEMENT FIX: Update instructions to demand the python tool specifically
                     base_instruction = (
                         "You MUST use the 'python' tool (Code Interpreter) to write and execute Python code to generate the requested plot.\n"
                         "Do NOT output raw code as text. You must execute it.\n"
@@ -399,10 +417,9 @@ class QuizService:
                         if item is None:
                             break
                             
-                        plot_prompt, q_index = item
+                        plot_prompt, q_index, opt_index = item
                         try:
                             if not plot_prompt or not str(plot_prompt).strip() or str(plot_prompt).lower() == "none":
-                                logger.warning(f"plot_prompt is empty for index {q_index}. Skipping background plot.")
                                 plot_queue.task_done()
                                 continue
 
@@ -410,15 +427,7 @@ class QuizService:
                                 container_config = current_container_id
                             else:
                                 container_config = {"type": "auto", "memory_limit": memory_limit}
-
-                            log_event("container_requested", {
-                                "context": "quiz_background_plot",
-                                "question_index": q_index,
-                                "memory_limit": memory_limit,
-                                "explicit_id": current_container_id
-                            })
                             
-                            # ENFORCEMENT FIX: Add tool_choice="required" to ensure guaranteed execution
                             bg_req = {
                                 "model": active_config.model,
                                 "input": [{"role": "user", "content": f"You MUST use the python tool to generate a plot for this mathematical request: {plot_prompt}"}],
@@ -433,7 +442,6 @@ class QuizService:
                             if bg_usage_obj and actual_conversation_id:
                                 bg_plot_usage = cls._extract_usage_from_obj(bg_usage_obj)
                                 cls._log_usage(bg_plot_usage, user_id, actual_conversation_id, mode)
-                                logger.info(f"Background Plot Gen Tokens Tracked for Q{q_index}: {bg_plot_usage}")
 
                             if not current_container_id:
                                 output_list = getattr(response, "output", []) or []
@@ -463,10 +471,11 @@ class QuizService:
                             
                             if uploaded_map:
                                 s3_url = list(uploaded_map.values())[0]
+                                # Note: If opt_index is None, it targets the question stem.
                                 stream_manager.send_partial_image(index=q_index, b64_data=s3_url)
-                                image_urls_map[q_index] = s3_url
+                                image_urls_map[(q_index, opt_index)] = s3_url
                         except Exception as e:
-                            logger.error(f"BG plot generation failed for index {q_index}: {e}")
+                            logger.error(f"BG plot generation failed for index {q_index}, opt {opt_index}: {e}")
                         finally:
                             plot_queue.task_done()
 
@@ -480,7 +489,7 @@ class QuizService:
                     
                     elif evt_type == "image_request":
                         q_idx = event.get("index", 0)
-                        if q_idx in allowed_visual_indices:
+                        if q_idx in allowed_stem_visuals:
                             prompt_str = event.get("prompt", "")
                             t = threading.Thread(target=_bg_image_generator, args=(prompt_str, q_idx))
                             t.start()
@@ -488,19 +497,34 @@ class QuizService:
 
                     elif evt_type == "plot_request":
                         q_idx = event.get("index", 0)
-                        if q_idx in allowed_visual_indices:
+                        opt_idx = event.get("opt_index", None)
+                        
+                        is_allowed = False
+                        if opt_idx is None and q_idx in allowed_stem_visuals:
+                            is_allowed = True
+                        elif opt_idx is not None and q_idx in allowed_opt_visuals:
+                            is_allowed = True
+
+                        if is_allowed:
                             prompt_str = event.get("prompt", "")
-                            plot_queue.put((prompt_str, q_idx))
+                            plot_queue.put((prompt_str, q_idx, opt_idx))
 
                     elif evt_type == "question":
                         q_data = event.get("data")
                         q_dict = q_data.dict() if hasattr(q_data, 'dict') else q_data
                         idx = event.get("index", 0)
                         
-                        if idx not in allowed_visual_indices:
+                        # Clean up hallucinations dynamically based on the allocated buckets
+                        if idx not in allowed_stem_visuals:
                             q_dict["image_prompt"] = None
                             q_dict["plot_prompt"] = None
                             q_dict["image_url"] = None
+                            
+                        if idx not in allowed_opt_visuals:
+                            for opt in q_dict.get("options", []):
+                                if isinstance(opt, dict):
+                                    opt["plot_prompt"] = None
+                                    opt["image_url"] = None
 
                         stream_manager.send_quiz_item(question_data=q_dict, index=idx)
                         
@@ -537,10 +561,17 @@ class QuizService:
                             accumulated_questions = [q.dict() if hasattr(q, 'dict') else q for q in parsed_response.questions]
                             
                             for i, q_dict in enumerate(accumulated_questions):
-                                if i not in allowed_visual_indices:
+                                # Clean up hallucinations
+                                if i not in allowed_stem_visuals:
                                     q_dict["image_prompt"] = None
                                     q_dict["plot_prompt"] = None
                                     q_dict["image_url"] = None
+                                    
+                                if i not in allowed_opt_visuals:
+                                    for opt in q_dict.get("options", []):
+                                        if isinstance(opt, dict):
+                                            opt["plot_prompt"] = None
+                                            opt["image_url"] = None
                             
                             if hasattr(parsed_response, 'title') and parsed_response.title:
                                 ai_generated_title = parsed_response.title
@@ -559,9 +590,14 @@ class QuizService:
                 plot_queue.put(None)
                 plot_worker_thread.join()
                     
+                # Reconstruct URLs strictly mapped by tuples
                 for i, q in enumerate(accumulated_questions):
-                    if i in image_urls_map:
-                        q["image_url"] = image_urls_map[i]
+                    if (i, None) in image_urls_map:
+                        q["image_url"] = image_urls_map[(i, None)]
+                    
+                    for o_idx, opt in enumerate(q.get("options", [])):
+                        if isinstance(opt, dict) and (i, o_idx) in image_urls_map:
+                            opt["image_url"] = image_urls_map[(i, o_idx)]
 
                 quiz_data = {
                     "quiz_mode": "batch", 
@@ -597,10 +633,16 @@ class QuizService:
                 }
                 
                 for i, q_dict in enumerate(quiz_data["questions"]):
-                    if i not in target_indices:
+                    if i not in allowed_stem_visuals:
                         q_dict["image_prompt"] = None
                         q_dict["plot_prompt"] = None
                         q_dict["image_url"] = None
+                        
+                    if i not in allowed_opt_visuals:
+                        for opt in q_dict.get("options", []):
+                            if isinstance(opt, dict):
+                                opt["plot_prompt"] = None
+                                opt["image_url"] = None
 
                 final_reply_text = getattr(quiz_model, 'intro_message', "Aqui tienes tu simulacro.")
 
