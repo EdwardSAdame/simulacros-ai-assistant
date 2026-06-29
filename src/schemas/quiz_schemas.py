@@ -6,14 +6,16 @@ class QuizOption(BaseModel):
     # -------------------------------------------------------------------------
     # OPTION TEXT & VISUALS (PATH 2: MODULAR OPTIONS)
     # -------------------------------------------------------------------------
-    text: str = Field(..., description=(
-        "The answer text. FORMATTING RULES: "
-        "1. If the answer is just words/text, write normally WITHOUT delimiters. "
-        "2. If the answer is a number, equation, or symbol, wrap it in standard LaTeX delimiters \\( and \\). "
-        "3. Mixed: 'El valor es \\( 5 \\)'. "
-        "CRITICAL: If this option has a plot_prompt, do NOT leave this empty. Write the mathematical equation or a short label (e.g., 'Option A') here. "
-        "Do NOT include meta-words like 'Failure Path'."
-    ))
+    text: Optional[str] = Field(
+        None, 
+        description=(
+            "The answer text. FORMATTING RULES: "
+            "1. If the answer is just words/text, write normally WITHOUT delimiters. "
+            "2. If the answer is a number, equation, or symbol, wrap it in standard LaTeX delimiters \\( and \\). "
+            "CRITICAL: If you generate a `plot_prompt` for this option, you MUST leave this text field as a literal JSON null. "
+            "Do NOT write 'Option A' or redundant equations if a visual is present."
+        )
+    )
     
     plot_prompt: Optional[str] = Field(
         None, 

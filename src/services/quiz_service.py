@@ -119,9 +119,9 @@ class QuizService:
             if stem_human:
                 visual_instruction += f"- BUCKET A (Stem Visual Only): For question numbers {stem_human}, you MUST write a visual prompt (`plot_prompt` or `image_prompt`) for the QUESTION STEM ONLY. Leave all option visuals null.\n"
             if opt_human:
-                visual_instruction += f"- BUCKET B (Option Visuals Only): For question numbers {opt_human}, the stem visual MUST be null. You MUST write a mathematical description in `plot_prompt` for EVERY option (A, B, C, D).\n"
+                visual_instruction += f"- BUCKET B (Option Visuals Only): For question numbers {opt_human}, the stem visual MUST be null. You MUST write a mathematical description in `plot_prompt` for EVERY option (A, B, C, D) AND set the `text` field for every option to a literal JSON null.\n"
             if hyb_human:
-                visual_instruction += f"- BUCKET C (Hybrid Visuals): For question numbers {hyb_human}, write a visual prompt for the QUESTION STEM AND a `plot_prompt` for EVERY option (A, B, C, D).\n"
+                visual_instruction += f"- BUCKET C (Hybrid Visuals): For question numbers {hyb_human}, write a visual prompt for the QUESTION STEM AND a `plot_prompt` for EVERY option (A, B, C, D). You MUST set the `text` field for every option to a literal JSON null.\n"
                 
             visual_instruction += "For the remaining questions not listed above, ALL visual fields (stem and options) MUST be a literal JSON null. Do not violate this assignment.\n\n"
             
@@ -160,7 +160,8 @@ class QuizService:
             "- Questions must be challenging, non-trivial, and require multi-step reasoning.\n\n"
             "## SCHEMA & FIELD RESTRICTIONS\n"
             "- **SOURCES**: Keep `source_url` as null unless you actively hold a verified URL in your context for this specific question.\n"
-            "- **CONTEXT**: Use `context_text` ONLY if the question requires a large foundational text, reading passage, or shared scenario. Otherwise, keep it null.\n\n"
+            "- **CONTEXT**: Use `context_text` ONLY if the question requires a large foundational text, reading passage, or shared scenario. Otherwise, keep it null.\n"
+            "- **OPTION VISUALS**: If an option has a `plot_prompt`, its `text` field MUST be null. Do not write fallback text.\n\n"
             "## SMART FOLLOW-UP PROTOCOL\n"
             "Generate 3 'Ghost Prompts' (easier_payload, harder_payload, retry_payload) in the EXACT SAME LANGUAGE as the quiz, using First Person format.\n"
         )
@@ -644,7 +645,7 @@ class QuizService:
                                 opt["plot_prompt"] = None
                                 opt["image_url"] = None
 
-                final_reply_text = getattr(quiz_model, 'intro_message', "Aqui tienes tu simulacro.")
+                final_reply_text = getattr(quizmodel, 'intro_message', "Aqui tienes tu simulacro.")
 
         except Exception as e:
             logger.error(f"Quiz Generation Error: {e}")
