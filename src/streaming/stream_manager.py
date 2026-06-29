@@ -1,7 +1,7 @@
 # src/streaming/stream_manager.py
 import json
 import logging
-from typing import Any, Dict, List, Union
+from typing import Any, Dict, List, Union, Optional
 
 logger = logging.getLogger(__name__)
 
@@ -98,7 +98,6 @@ class StreamManager:
         payload = {
             "action": "status_update",
             "category": category,
-            # 🟢 FIX: Matches what the frontend chat.handlers.js expects!
             "loading_phrases": loading_phrases or []
         }
         self._send(payload)
@@ -128,13 +127,17 @@ class StreamManager:
         self._send(payload)
 
     # ------------------------------------------------------------------
-    # CREATIVE IMAGE STREAMING METHODS
+    # IMAGE & PLOT STREAMING METHODS
     # ------------------------------------------------------------------
-    def send_partial_image(self, index: int, b64_data: str):
-        """Streams a partial, incomplete image chunk during generation."""
+    def send_partial_image(self, index: int, b64_data: str, opt_index: Optional[int] = None):
+        """
+        Streams an image chunk (or final background plot) to the frontend.
+        Includes opt_index to securely target modular options (Bucket B/C).
+        """
         payload = {
             "action": "partial_image_stream",
             "index": index,
+            "opt_index": opt_index,
             "image_b64": b64_data
         }
         self._send(payload)

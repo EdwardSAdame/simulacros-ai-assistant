@@ -359,7 +359,8 @@ class QuizService:
                                     try:
                                         img_bytes = base64.b64decode(bg_b64)
                                         s3_url = storage_service.upload_image_from_bytes(img_bytes, "image/png", folder="quiz_assets")
-                                        stream_manager.send_partial_image(index=q_index, b64_data=s3_url)
+                                        # Creative images are ONLY for the stem, so opt_index is None
+                                        stream_manager.send_partial_image(index=q_index, b64_data=s3_url, opt_index=None)
                                         final_url = s3_url
                                     except Exception as upload_err:
                                         logger.warning(f"BG image upload failed: {upload_err}")
@@ -472,8 +473,8 @@ class QuizService:
                             
                             if uploaded_map:
                                 s3_url = list(uploaded_map.values())[0]
-                                # Note: If opt_index is None, it targets the question stem.
-                                stream_manager.send_partial_image(index=q_index, b64_data=s3_url)
+                                # Note: Pass the opt_index securely down to the WebSocket stream
+                                stream_manager.send_partial_image(index=q_index, b64_data=s3_url, opt_index=opt_index)
                                 image_urls_map[(q_index, opt_index)] = s3_url
                         except Exception as e:
                             logger.error(f"BG plot generation failed for index {q_index}, opt {opt_index}: {e}")
@@ -541,7 +542,8 @@ class QuizService:
                                 s3_url = storage_service.upload_image_from_bytes(
                                     image_bytes, "image/png", folder="quiz_assets"
                                 )
-                                stream_manager.send_partial_image(index=event.get("index", 0), b64_data=s3_url)
+                                # Note: For legacy support, DALL-E events do not have opt_index, default to None (Stem)
+                                stream_manager.send_partial_image(index=event.get("index", 0), b64_data=s3_url, opt_index=None)
                             except Exception as upload_err:
                                 logger.warning(f"Partial image S3 upload failed during quiz: {upload_err}")
 
@@ -645,7 +647,7 @@ class QuizService:
                                 opt["plot_prompt"] = None
                                 opt["image_url"] = None
 
-                final_reply_text = getattr(quizmodel, 'intro_message', "Aqui tienes tu simulacro.")
+                final_reply_text = getattr(quiz_model, 'intro_message', "Aqui tienes tu simulacro.")
 
         except Exception as e:
             logger.error(f"Quiz Generation Error: {e}")
