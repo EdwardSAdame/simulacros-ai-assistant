@@ -105,10 +105,11 @@ class QuizService:
                 visual_instruction += "CRITICAL: For stem visuals, use `visual_metaphor_planning` and `image_prompt`. Keep `plot_prompt` always null. (Options will only ever be math graphs if assigned).\n"
                 visual_instruction += "CRITICAL CREATIVE DOCTRINE: For creative subjects, you MUST NEVER generate visuals for the options. The options MUST ALWAYS be purely text.\n"
                 visual_instruction += "CRITICAL DECORATIVE DOCTRINE: The `image_prompt` is a decorative background. The question logic MUST rely entirely on the `context_text` or reading comprehension. Never mention the image in the question.\n"
-                visual_instruction += "CRITICAL METAPHOR DOCTRINE: You MUST use the `visual_metaphor_planning` field first to brainstorm a purely physical, tangible, real-world scene (e.g. nature, architecture, historical settings) that captures the mood of the topic. Then base the image_prompt entirely on that physical scene.\n"
+                visual_instruction += "CRITICAL METAPHOR DOCTRINE: For `visual_metaphor_planning` and `image_prompt`, you MUST be extremely concise. IGNORE the specific logic, variables, or data of the question. Just identify the broad academic domain and describe a generic, static physical scene.\n"
             elif is_general_subject:
                 visual_instruction += "CRITICAL: For stem visuals, select exactly ONE engine (`plot_prompt` for math/data, OR `visual_metaphor_planning` + `image_prompt` for creative). Keep the other null.\n"
                 visual_instruction += "CRITICAL DECORATIVE DOCTRINE: If you use `image_prompt`, use `visual_metaphor_planning` first to describe a physical scene. DO NOT refer to the image in the `question_text`.\n"
+                visual_instruction += "CRITICAL METAPHOR DOCTRINE: If using `image_prompt`, IGNORE specific problem logic. Just describe a generic physical scene.\n"
                 
         else:
             visual_instruction = (

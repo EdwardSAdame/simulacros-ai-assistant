@@ -59,19 +59,18 @@ class QuizQuestion(BaseModel):
     visual_metaphor_planning: Optional[str] = Field(
         None,
         description=(
-            "INTERNAL THINKING STEP (Only if an ornamental image is required). "
-            "Brainstorm how to translate the academic topic into a purely physical, tangible scene from the real world. "
-            "Focus entirely on natural landscapes, architecture, historical settings, or physical objects. "
-            "Describe the lighting, the atmosphere, and the tangible elements that will represent the concept."
+            "INTERNAL THINKING STEP. Identify the broad, general subject of the question. "
+            "Brainstorm a generic, static, real-world physical scene that fits this subject. "
+            "Ignore the specific logic, variables, or data of the question. Focus EXCLUSIVELY on setting a beautiful, unrelated background mood."
         )
     )
 
     image_prompt: Optional[str] = Field(
         None, 
         description=(
-            "The final illustration instructions based entirely on your `visual_metaphor_planning`. "
-            "Describe a beautiful, atmospheric physical scene in the requested art style. "
-            "Focus exclusively on visual aesthetics, colors, lighting, and physical subjects. "
+            "The final illustration instructions based on your `visual_metaphor_planning`. "
+            "Describe a generic, atmospheric physical scene in the requested art style. "
+            "Keep this extremely concise. Focus only on the physical setting, lighting, and mood. "
             "Leave null if no creative visual is required."
         )
     )
