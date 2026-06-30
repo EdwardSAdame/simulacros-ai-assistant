@@ -109,6 +109,7 @@ class QuizService:
                 visual_instruction += "CRITICAL BLINDNESS DOCTRINE: The stem visual MUST ONLY contain raw input data. It MUST NEVER contain the derived answer, explicit formulas, or text annotations that give away the final solution. The student must infer the solution from the raw visual data.\n"
             elif is_creative_subject:
                 visual_instruction += "CRITICAL: For stem visuals, use `image_prompt`. Keep `plot_prompt` always null. (Options will only ever be math graphs if assigned).\n"
+                visual_instruction += "CRITICAL CREATIVE DOCTRINE: For creative subjects, you MUST NEVER generate visuals for the options. The options MUST ALWAYS be purely text.\n"
             elif is_general_subject:
                 visual_instruction += "CRITICAL: For stem visuals, select exactly ONE engine (`plot_prompt` for math/data, OR `image_prompt` for creative). Keep the other null.\n"
                 
@@ -210,9 +211,14 @@ class QuizService:
             
             if target_visuals > 0:
                 raw_indices = random.sample(range(num_questions), target_visuals)
+                
+                # CRITICAL ARCHITECTURE FIX: Creative subjects MUST ONLY use Bucket A (Image -> Text Options)
                 if is_creative_subject and not is_general_subject and not is_visual_subject:
                     stem_visual_indices = sorted(raw_indices)
+                    options_visual_indices = []
+                    hybrid_visual_indices = []
                 else:
+                    # Analytical subjects (Math, Physics, General) can safely use all Buckets
                     num_stem = math.floor(target_visuals * 0.5)
                     num_opts = math.floor(target_visuals * 0.3)
                     
