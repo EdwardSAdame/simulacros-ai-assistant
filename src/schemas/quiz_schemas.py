@@ -35,6 +35,11 @@ class QuizOption(BaseModel):
         "Do NOT use meta-words like 'Failure Path' or 'Trap'."
     ))
 
+    original_index: Optional[int] = Field(
+        None, 
+        description="Internal field used by the backend to track the option's original position before shuffling."
+    )
+
 
 class QuizQuestion(BaseModel):
     question_title: str = Field(..., description="Title with number, e.g., '# 1. Topic'")
@@ -54,9 +59,12 @@ class QuizQuestion(BaseModel):
     image_prompt: Optional[str] = Field(
         None, 
         description=(
-            "Instructions for a creative, decorative illustration. "
-            "CRITICAL: You MUST use natural, realistic metaphors suitable for classic Impressionist art (e.g., landscapes, nature, gardens, or 19th-century everyday physical scenes) to represent abstract concepts. "
-            "Translate the core concept into an implicit, real-world physical scene. "
+            "Instructions for a purely ORNAMENTAL and DECORATIVE illustration to set the mood. "
+            "CRITICAL CONSTRAINTS: "
+            "1. NO TEXT, NO LETTERS, NO NUMBERS, NO WORDS under any circumstances. "
+            "2. NO DIAGRAMS, no charts, no maps, no literal academic representations. "
+            "3. The image is strictly for aesthetic visual appeal, NOT for solving the question. "
+            "Use beautiful, atmospheric metaphors (e.g., classic Impressionist art, oil paintings of landscapes, nature, or 19th-century scenes) that loosely relate to the general theme. "
             "Leave null if no creative visual is required."
         )
     )

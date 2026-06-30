@@ -33,7 +33,14 @@ class FlashcardsPayload(BaseModel):
     """
     image_prompt: Optional[str] = Field(
         None,
-        description="A highly descriptive conceptualization of an Impressionist painting representing the academic topic. Describe tangible objects, landscapes, or generic figures. Do not include text, formulas, letters, or numbers."
+        description=(
+            "Instructions for a purely ORNAMENTAL and DECORATIVE illustration to set the mood for this flashcard deck. "
+            "CRITICAL CONSTRAINTS: "
+            "1. NO TEXT, NO LETTERS, NO NUMBERS, NO WORDS under any circumstances. "
+            "2. NO DIAGRAMS, no charts, no maps, no literal academic representations. "
+            "3. The image is strictly for aesthetic visual appeal. "
+            "Use beautiful, atmospheric metaphors (e.g., classic Impressionist art, oil paintings of landscapes, nature, or 19th-century scenes) that loosely relate to the general theme."
+        )
     )
     topic: str = Field(
         ..., 
