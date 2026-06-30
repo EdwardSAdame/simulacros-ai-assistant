@@ -103,8 +103,8 @@ class QuizQuestion(BaseModel):
     question_text: str = Field(..., description=(
         "The student-facing question stem. "
         "Wrap math expressions, numbers, and symbols in standard LaTeX \\( and \\). "
-        "If a plot_prompt is present, the text must refer to the graph and omit the "
-        "specific data points required for the solution."
+        "If a `plot_prompt` is present, the text must refer to the graph. "
+        "CRITICAL: If an `image_prompt` is present, the image is strictly DECORATIVE. You MUST NOT refer to the image, the 'estímulo visual', or the picture in this text. The question MUST be 100 percent solvable from the text or `context_text` alone."
     ))
     
     image_url: Optional[str] = Field(None, description="URL of the generated image/graph for the question stem. If you wrote an image_prompt or plot_prompt, LEAVE THIS NULL. The backend will populate it automatically.")

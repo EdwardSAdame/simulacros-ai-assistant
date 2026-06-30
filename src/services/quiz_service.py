@@ -14,7 +14,6 @@ from src.config.model_config import get_model_config
 from src.services.token_usage_service import TokenUsageService
 from src.services.container_usage_service import ContainerUsageService
 
-# NEW IMPORTS FOR REFACTORED ARCHITECTURE
 from src.assistant.clients.base_client import BaseAssistantClient
 from src.services.visual_worker_service import VisualWorkerService
 
@@ -38,7 +37,6 @@ class QuizService:
             active_config = get_model_config(active_mode)
             engine_name = active_config.model
             
-            # Use our clean Base Client to do the heavy math
             usage_dict = BaseAssistantClient.extract_usage_metrics(usage_data)
 
             TokenUsageService().log_token_usage(
@@ -67,11 +65,7 @@ class QuizService:
         is_visual_subject: bool = False,
         is_creative_subject: bool = False
     ) -> Dict[str, Any]:
-        """
-        Returns the system instruction with optimized token usage and strict, 
-        deterministic visual index assignments partitioned by stem/options.
-        Includes Dual-Engine logic to prevent Hybrid Visual hallucinations.
-        """
+        
         stem_indices = stem_indices or []
         opt_indices = opt_indices or []
         hyb_indices = hyb_indices or []
@@ -110,8 +104,10 @@ class QuizService:
             elif is_creative_subject:
                 visual_instruction += "CRITICAL: For stem visuals, use `image_prompt`. Keep `plot_prompt` always null. (Options will only ever be math graphs if assigned).\n"
                 visual_instruction += "CRITICAL CREATIVE DOCTRINE: For creative subjects, you MUST NEVER generate visuals for the options. The options MUST ALWAYS be purely text.\n"
+                visual_instruction += "CRITICAL DECORATIVE DOCTRINE: The `image_prompt` is PURELY DECORATIVE. You MUST NOT ask the student to analyze or read the image. The `question_text` MUST NOT mention 'la imagen', 'el estímulo visual', 'el gráfico', etc. The question logic MUST rely entirely on the `context_text` or general reading comprehension.\n"
             elif is_general_subject:
                 visual_instruction += "CRITICAL: For stem visuals, select exactly ONE engine (`plot_prompt` for math/data, OR `image_prompt` for creative). Keep the other null.\n"
+                visual_instruction += "CRITICAL DECORATIVE DOCTRINE: If you use `image_prompt`, it is PURELY DECORATIVE. DO NOT refer to the image in the `question_text`.\n"
                 
         else:
             visual_instruction = (
@@ -171,7 +167,6 @@ class QuizService:
         
         topic_hint = category if category else "General Knowledge"
         
-        # Centralized Bounds
         if num_questions < 1:
             num_questions = random.randint(12, 17)
         elif num_questions > 45:
@@ -212,13 +207,11 @@ class QuizService:
             if target_visuals > 0:
                 raw_indices = random.sample(range(num_questions), target_visuals)
                 
-                # CRITICAL ARCHITECTURE FIX: Creative subjects MUST ONLY use Bucket A (Image -> Text Options)
                 if is_creative_subject and not is_general_subject and not is_visual_subject:
                     stem_visual_indices = sorted(raw_indices)
                     options_visual_indices = []
                     hybrid_visual_indices = []
                 else:
-                    # Analytical subjects (Math, Physics, General) can safely use all Buckets
                     num_stem = math.floor(target_visuals * 0.5)
                     num_opts = math.floor(target_visuals * 0.3)
                     
