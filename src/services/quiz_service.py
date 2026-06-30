@@ -70,6 +70,7 @@ class QuizService:
         """
         Returns the system instruction with optimized token usage and strict, 
         deterministic visual index assignments partitioned by stem/options.
+        Includes Dual-Engine logic to prevent Hybrid Visual hallucinations.
         """
         stem_indices = stem_indices or []
         opt_indices = opt_indices or []
@@ -105,12 +106,12 @@ class QuizService:
             
             if is_visual_subject:
                 visual_instruction += "CRITICAL: For stem visuals, use `plot_prompt`. Keep `image_prompt` always null. Write mathematical instructions strictly as plain English/Spanish.\n"
+                visual_instruction += "CRITICAL BLINDNESS DOCTRINE: The stem visual MUST ONLY contain raw input data. It MUST NEVER contain the derived answer, explicit formulas, or text annotations that give away the final solution. The student must infer the solution from the raw visual data.\n"
             elif is_creative_subject:
                 visual_instruction += "CRITICAL: For stem visuals, use `image_prompt`. Keep `plot_prompt` always null. (Options will only ever be math graphs if assigned).\n"
             elif is_general_subject:
                 visual_instruction += "CRITICAL: For stem visuals, select exactly ONE engine (`plot_prompt` for math/data, OR `image_prompt` for creative). Keep the other null.\n"
                 
-            visual_instruction += "CRITICAL VISUAL DEPENDENCY: If a question or option has a graph/image, the text MUST refer to it. Do NOT repeat the exact data points in the text.\n\n"
         else:
             visual_instruction = (
                 "## VISUAL & TOOL EXECUTION PROTOCOL (TEXT ONLY)\n"
@@ -122,23 +123,23 @@ class QuizService:
             f"The user requested a quiz/exam about '{topic}'. "
             f"Generate exactly {num_questions} distinct questions.\n\n"
             f"{visual_instruction}"
-            "## CRITICAL CONSTRAINTS\n"
-            "1. **ORDER OF OPERATIONS**: FIRST, design visuals (`plot_prompt` / `image_prompt`). SECOND, write the `context_text` if a reading passage is required. THIRD, write the `explanation` based on those anchors. FOURTH, write the `question_text` and `options`.\n"
-            "2. **DISTINCT EXPLANATION**: Write the `explanation` focusing strictly on the Setup, Solution, and Traps.\n"
-            "3. **EXPLICIT ARITHMETIC**: Do NOT use mental math. In your `explanation`, you MUST write out every single arithmetic operation explicitly line-by-line.\n"
-            "4. **PREMISE MATCHING**: The mathematical variables, numbers, and scenarios in `question_text` MUST logically match your Setup.\n"
-            "5. **ANTI-LEAK DOCTRINE**: `question_text`, `options`, and `feedback` are strictly student-facing. NEVER leak internal meta-labels (e.g., 'Core Constraints', 'The Setup', 'Failure Paths', 'Traps') into these fields.\n\n"
-            "## DISTRACTOR GENERATION PROTOCOL\n"
-            "- Identify 3 distinct 'Failure Paths' in the `explanation`.\n"
-            "- The wrong `options` MUST be the logical result of these specific Failure Paths.\n"
-            "- In `feedback`, explicitly explain why the student might have chosen that wrong option without using the word 'Failure Path'.\n\n"
-            "## CONTENT & PEDAGOGY RULES\n"
-            "- Generate questions strictly applying the 'ACADEMIC FRAMEWORK'.\n"
-            "- Assign a `difficulty` integer (1-3) based on cognitive load.\n"
-            "- Questions must be challenging, non-trivial, and require multi-step reasoning.\n\n"
+            "## DUAL-ENGINE LOGIC TRACKS\n"
+            "You must choose your internal logic engine based strictly on the required option format (Text vs Image).\n\n"
+            "### ENGINE 1: THE ANALYTICAL ENGINE (Use for Text-Only Options)\n"
+            "If the options are TEXT, you must calculate a specific numerical or factual answer.\n"
+            "1. **SETUP**: Define the exact variables, facts, or numbers to be used.\n"
+            "2. **SOLUTION**: Explicitly calculate the step-by-step arithmetic or logical derivation.\n"
+            "3. **TRAPS**: Generate 3 wrong answers based on common computational errors, incorrect formulas, or factual misunderstandings.\n"
+            "4. **QUESTION**: Ask for a specific calculated or derived value.\n\n"
+            "### ENGINE 2: THE VISUAL TRANSLATION ENGINE (Use for Image Options ONLY)\n"
+            "If the options are IMAGES (`plot_prompt`), you CANNOT ask for a specific numerical calculation. You must test the student's ability to translate or infer visual relationships.\n"
+            "1. **SETUP**: Define the visual baseline presented in the stem.\n"
+            "2. **SOLUTION**: Define the exact visual transformation or structural outcome required to solve the problem.\n"
+            "3. **TRAPS**: Define 3 visually distinct wrong shapes, curves, or trends based on common visual misconceptions.\n"
+            "4. **QUESTION**: Ask a visual bridging question requiring the student to identify the correct visual representation of the concept.\n\n"
             "## SCHEMA & FIELD RESTRICTIONS\n"
-            "- **SOURCES**: Keep `source_url` as null unless you actively hold a verified URL in your context for this specific question.\n"
-            "- **CONTEXT**: Use `context_text` ONLY if the question requires a large foundational text, reading passage, or shared scenario. Otherwise, keep it null.\n"
+            "- **SOURCES**: Keep `source_url` as null unless you actively hold a verified URL in your context.\n"
+            "- **CONTEXT**: Use `context_text` ONLY if the question requires a large foundational reading passage or shared scenario. Otherwise, keep it null.\n"
             "- **OPTION VISUALS**: If an option has a `plot_prompt`, its `text` field MUST be null. Do not write fallback text.\n\n"
             "## SMART FOLLOW-UP PROTOCOL\n"
             "Generate 3 'Ghost Prompts' (easier_payload, harder_payload, retry_payload) in the EXACT SAME LANGUAGE as the quiz, using First Person format.\n"
@@ -279,7 +280,6 @@ class QuizService:
                 
                 ghost_easier, ghost_harder, ghost_retry = None, None, None
                 
-                # REFACTORED: Initialize our clean Visual Worker Service
                 worker = VisualWorkerService(
                     mode=mode,
                     user_id=user_id,
@@ -317,7 +317,6 @@ class QuizService:
                         q_dict = q_data.dict() if hasattr(q_data, 'dict') else q_data
                         idx = event.get("index", 0)
                         
-                        # Clean up hallucinations dynamically
                         if idx not in allowed_stem_visuals:
                             q_dict["image_prompt"] = None
                             q_dict["plot_prompt"] = None
@@ -336,7 +335,6 @@ class QuizService:
                             seen_indices.add(idx)
                             
                     elif evt_type == "partial_image":
-                        # Legacy fallback processing
                         b64_data = event.get("b64_data", "")
                         if b64_data:
                             try:
@@ -387,10 +385,8 @@ class QuizService:
                         error_msg = event.get("error", "Unknown stream error")
                         stream_manager.send_error(error_msg)
 
-                # REFACTORED: Elegantly wait for background tasks to finish
                 worker.shutdown_and_wait()
                     
-                # Map the generated URLs from the worker back to our questions
                 for i, q in enumerate(accumulated_questions):
                     if (i, None) in worker.image_urls_map:
                         q["image_url"] = worker.image_urls_map[(i, None)]
