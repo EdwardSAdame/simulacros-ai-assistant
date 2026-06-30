@@ -56,15 +56,22 @@ class QuizQuestion(BaseModel):
         )
     )
 
+    visual_metaphor_planning: Optional[str] = Field(
+        None,
+        description=(
+            "INTERNAL THINKING STEP (Only if an ornamental image is required). "
+            "Brainstorm how to translate the academic topic into a purely physical, tangible scene from the real world. "
+            "Focus entirely on natural landscapes, architecture, historical settings, or physical objects. "
+            "Describe the lighting, the atmosphere, and the tangible elements that will represent the concept."
+        )
+    )
+
     image_prompt: Optional[str] = Field(
         None, 
         description=(
-            "Instructions for a purely ORNAMENTAL and DECORATIVE illustration to set the mood. "
-            "CRITICAL CONSTRAINTS: "
-            "1. NO TEXT, NO LETTERS, NO NUMBERS, NO WORDS under any circumstances. "
-            "2. NO DIAGRAMS, no charts, no maps, no literal academic representations. "
-            "3. The image is strictly for aesthetic visual appeal, NOT for solving the question. "
-            "Use beautiful, atmospheric metaphors (e.g., classic Impressionist art, oil paintings of landscapes, nature, or 19th-century scenes) that loosely relate to the general theme. "
+            "The final illustration instructions based entirely on your `visual_metaphor_planning`. "
+            "Describe a beautiful, atmospheric physical scene in the requested art style. "
+            "Focus exclusively on visual aesthetics, colors, lighting, and physical subjects. "
             "Leave null if no creative visual is required."
         )
     )
@@ -104,7 +111,7 @@ class QuizQuestion(BaseModel):
         "The student-facing question stem. "
         "Wrap math expressions, numbers, and symbols in standard LaTeX \\( and \\). "
         "If a `plot_prompt` is present, the text must refer to the graph. "
-        "CRITICAL: If an `image_prompt` is present, the image is strictly DECORATIVE. You MUST NOT refer to the image, the 'estímulo visual', or the picture in this text. The question MUST be 100 percent solvable from the text or `context_text` alone."
+        "CRITICAL: If an `image_prompt` is present, the image is strictly DECORATIVE. You MUST NOT refer to the image, the 'estímulo visual', or the picture in this text. The question MUST be 100% solvable from the text or `context_text` alone."
     ))
     
     image_url: Optional[str] = Field(None, description="URL of the generated image/graph for the question stem. If you wrote an image_prompt or plot_prompt, LEAVE THIS NULL. The backend will populate it automatically.")
