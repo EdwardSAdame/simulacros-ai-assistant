@@ -8,7 +8,6 @@ from src.schemas.quiz_schemas import QuizResponse
 
 from src.services.signal_service import build_runtime_signals
 from src.assistant.artifact_handler import handle_generated_files, assign_urls_to_quiz
-from src.utils.quiz_utils import QuizUtils
 from src.utils.stream_parser import StreamParser
 
 from .base_client import BaseAssistantClient
@@ -65,10 +64,6 @@ class QuizClient:
             generated_urls = handle_generated_files(client, resp, folder="quiz_assets")
             assign_urls_to_quiz(quiz, generated_urls)
             
-            if quiz and quiz.questions:
-                for q in quiz.questions:
-                    QuizUtils.shuffle_options(q)
-
             usage_data = BaseAssistantClient.extract_usage_metrics(getattr(resp, "usage", None))
 
             return (quiz, usage_data)
@@ -124,7 +119,6 @@ class QuizClient:
                 for event in parser_generator:
                     if event["type"] == "question":
                         q_obj = event["data"]
-                        QuizUtils.shuffle_options(q_obj)
                         streamed_questions.append(q_obj)
                         yield event
                     
@@ -143,9 +137,6 @@ class QuizClient:
                         if final_parsed and hasattr(final_parsed, 'questions') and streamed_questions:
                             if len(final_parsed.questions) == len(streamed_questions):
                                 final_parsed.questions = streamed_questions 
-                            else:
-                                for q in final_parsed.questions:
-                                    QuizUtils.shuffle_options(q)
 
                         if final_parsed and generated_urls:
                             assign_urls_to_quiz(final_parsed, generated_urls)
