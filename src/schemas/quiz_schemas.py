@@ -93,14 +93,19 @@ class QuizQuestion(BaseModel):
     )
 
     # -------------------------------------------------------------------------
-    # 3. LOGIC ENGINE: Preserved 'THE SETUP' + Anti-Echo Constraint
+    # 3. LOGIC ENGINE: DUAL-TRACK CHAIN OF THOUGHT
     # -------------------------------------------------------------------------
     explanation: str = Field(..., description=(
-        "Internal reasoning plan structured as follows:\n"
-        "1. THE SETUP: Define the exact facts or numbers to be used. If a visual or context exists, state 'Data derived from graph/context'.\n"
-        "2. THE SOLUTION: A step-by-step derivation using only the setup. Explicitly state every logical or arithmetic step.\n"
-        "3. THE TRAPS: Identify 3 distinct failure paths based on the setup.\n"
-        "This field is for logic only; omit the final question text or options."
+        "Internal reasoning plan structured based on the active Engine:\n"
+        "FOR ENGINE 1 (TEXT OPTIONS - Math/Logic):\n"
+        "1. THE SETUP: Define exact facts or numbers.\n"
+        "2. THE SOLUTION: Step-by-step arithmetic or logical derivation.\n"
+        "3. THE TRAPS: Identify 3 calculation or logic errors.\n\n"
+        "FOR ENGINE 2 (IMAGE OPTIONS - Visual Translation):\n"
+        "1. THE SETUP: Define the visual baseline. Ensure the stem visual or context leaves a 'mystery' or unknown state to be solved.\n"
+        "2. THE SOLUTION: Define the expected trendline, geometric shape, or relational curve. CRITICAL: If the answer is a single number, DO NOT use Engine 2. Engine 2 MUST test visual trend/shape recognition.\n"
+        "3. THE TRAPS: Identify 3 incorrect visual trendlines or shapes.\n\n"
+        "This field is for internal logic only; omit final question text."
     ))
 
     # -------------------------------------------------------------------------
