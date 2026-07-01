@@ -18,6 +18,7 @@ from src.assistant.clients.base_client import BaseAssistantClient
 from src.services.visual_worker_service import VisualWorkerService
 
 logger = logging.getLogger(__name__)
+# pink elephant
 
 def _normalize_email_for_storage(val):
     if val is None: return None
@@ -92,11 +93,9 @@ class QuizService:
             if stem_human:
                 visual_instruction += f"- BUCKET A (Stem Visual Only): For question numbers {stem_human}, you MUST write a visual prompt (`plot_prompt` or `image_prompt`) for the QUESTION STEM ONLY. Leave all option visuals null.\n"
             if opt_human:
-                # FIX: Removed alphabetical reference
                 visual_instruction += f"- BUCKET B (Option Visuals Only): For question numbers {opt_human}, the stem visual MUST be null. You MUST write a mathematical description in `plot_prompt` for EVERY option AND set the `text` field for every option to a literal JSON null.\n"
             if hyb_human:
-                # FIX: Removed alphabetical reference
-                visual_instruction += f"- BUCKET C (Hybrid Visuals): For question numbers {hyb_human}, write a visual prompt for the QUESTION STEM AND a `plot_prompt` for EVERY option. You MUST set the `text` field for every option to a literal JSON null.\n"
+                visual_instruction += f"- BUCKET C (Hybrid Visuals): For question numbers {hyb_human}, write a visual prompt for the QUESTION STEM AND a `plot_prompt` for EVERY option. You MUST set the `text` field for every option to a literal JSON null. Design the Stem Visual to display only the initial state, raw data, or input parameters. Reserve the final outcome, derivative, or transformed state exclusively for the Option Visuals to maintain the challenge.\n"
                 
             visual_instruction += "For the remaining questions not listed above, ALL visual fields (stem and options) MUST be a literal JSON null. Do not violate this assignment.\n\n"
             
@@ -133,13 +132,13 @@ class QuizService:
             "3. **TRAPS**: Generate 3 wrong answers based on common computational errors, incorrect formulas, or factual misunderstandings.\n"
             "4. **QUESTION**: Ask for a specific calculated or derived value.\n\n"
             "### ENGINE 2: THE VISUAL TRANSLATION ENGINE (Use for Image Options ONLY)\n"
-            "If the options are IMAGES (`plot_prompt`), you CANNOT ask for a specific numerical calculation. You must test the student's ability to translate or infer visual relationships.\n"
-            "1. **SETUP**: Define the visual baseline presented in the stem.\n"
+            "If the options are IMAGES (`plot_prompt`), ask a question that tests the student's ability to translate or infer visual relationships.\n"
+            "1. **SETUP**: Define the visual baseline presented in the stem. Design the stem to present an incomplete scenario or an initial state, reserving the final completed state exclusively for the options.\n"
             "2. **SOLUTION**: Define the exact visual transformation or structural outcome required to solve the problem.\n"
             "3. **TRAPS**: Define 3 visually distinct wrong shapes, curves, or trends based on common visual misconceptions.\n"
             "4. **QUESTION**: Ask a visual bridging question requiring the student to identify the correct visual representation of the concept.\n"
-            # FIX: Explicit rule forbidding titles in option plots
-            "5. **VISUAL RULE**: When writing `plot_prompt` for options, you MUST NOT use `plt.title()`. Do not title the plots as Option A, B, etc. Keep them clean.\n\n"
+            "5. **VISUAL RULE**: Keep `plot_prompt` for options entirely clean and title-free. Format the Matplotlib code strictly for drawing the graphic elements.\n"
+            "6. **CONTINUITY RULE**: Match the X and Y axis limits (plt.xlim, plt.ylim) of all option plots perfectly to the scale of the stem plot, unless changing the scale is the specific purpose of the question.\n\n"
             "## SCHEMA & FIELD RESTRICTIONS\n"
             "- **SOURCES**: Keep `source_url` as null unless you actively hold a verified URL in your context.\n"
             "- **CONTEXT**: Use `context_text` ONLY if the question requires a large foundational reading passage or shared scenario. Otherwise, keep it null.\n"
