@@ -16,6 +16,7 @@ from src.services.container_usage_service import ContainerUsageService
 
 from src.assistant.clients.base_client import BaseAssistantClient
 from src.services.visual_worker_service import VisualWorkerService
+from src.config.visual_instructions import VISUAL_REASONING_DOCTRINE
 
 logger = logging.getLogger(__name__)
 
@@ -130,14 +131,7 @@ class QuizService:
             "2. **SOLUTION**: Explicitly calculate the step-by-step arithmetic or logical derivation.\n"
             "3. **TRAPS**: Generate 3 wrong answers based on common computational errors, incorrect formulas, or factual misunderstandings.\n"
             "4. **QUESTION**: Ask for a specific calculated or derived value.\n\n"
-            "### ENGINE 2: THE VISUAL TRANSLATION ENGINE (Use for Image Options ONLY)\n"
-            "If the options are IMAGES (`plot_prompt`), ask a question that tests the student's ability to translate or infer visual relationships.\n"
-            "1. **SETUP**: Define the visual baseline presented in the stem. Design the stem to present an incomplete scenario or an initial state, reserving the final completed state exclusively for the options.\n"
-            "2. **SOLUTION**: Define the exact visual transformation or structural outcome required to solve the problem.\n"
-            "3. **TRAPS**: Define 3 visually distinct wrong shapes, curves, or trends based on common visual misconceptions.\n"
-            "4. **QUESTION**: Ask a visual bridging question requiring the student to identify the correct visual representation of the concept.\n"
-            "5. **VISUAL RULE**: Omit titles from the plots. Instruct the visual tool to draw the mathematical data on standard Cartesian axes with visible coordinate numbers.\n"
-            "6. **CONTINUITY RULE**: Match the X and Y axis limits (plt.xlim, plt.ylim) of all option plots perfectly to the scale of the stem plot, unless changing the scale is the specific purpose of the question.\n\n"
+            f"{VISUAL_REASONING_DOCTRINE}\n\n"
             "## SCHEMA & FIELD RESTRICTIONS\n"
             "- **SOURCES**: Keep `source_url` as null unless you actively hold a verified URL in your context.\n"
             "- **CONTEXT**: Use `context_text` ONLY if the question requires a large foundational reading passage or shared scenario. Otherwise, keep it null.\n"

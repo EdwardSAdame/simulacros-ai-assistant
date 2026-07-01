@@ -101,10 +101,10 @@ class QuizQuestion(BaseModel):
         "1. THE SETUP: Define exact facts or numbers.\n"
         "2. THE SOLUTION: Step-by-step arithmetic or logical derivation.\n"
         "3. THE TRAPS: Identify 3 calculation or logic errors.\n\n"
-        "FOR ENGINE 2 (IMAGE OPTIONS - Visual Translation):\n"
-        "1. THE SETUP: Define the visual baseline. Ensure the stem visual or context leaves a 'mystery' or unknown state to be solved.\n"
-        "2. THE SOLUTION: Define the expected trendline, geometric shape, or relational curve. CRITICAL: If the answer is a single number, DO NOT use Engine 2. Engine 2 MUST test visual trend/shape recognition.\n"
-        "3. THE TRAPS: Identify 3 incorrect visual trendlines or shapes.\n\n"
+        "FOR ENGINE 2 (IMAGE OPTIONS - Pure Visual Reasoning):\n"
+        "1. THE VISUAL BASELINE: Define the initial visual state, data representation, or geometric structure in the STEM.\n"
+        "2. THE VISUAL INFERENCE: Define the logical visual jump required (e.g., translating data to a new format, applying a spatial rule, or recognizing a structural pattern). DO NOT solve algebraically to find a single numeric coordinate.\n"
+        "3. THE VISUAL TRAPS: Identify 3 plausible but visually flawed representations (e.g., incorrect axis mapping, inverted trends, distorted proportions).\n\n"
         "This field is for internal logic only; omit final question text."
     ))
 
