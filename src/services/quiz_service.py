@@ -16,7 +16,7 @@ from src.services.container_usage_service import ContainerUsageService
 
 from src.assistant.clients.base_client import BaseAssistantClient
 from src.services.visual_worker_service import VisualWorkerService
-from src.config.visual_instructions import VISUAL_REASONING_DOCTRINE
+from src.config.exam_reasoning_doctrine import VISUAL_REASONING_DOCTRINE
 
 logger = logging.getLogger(__name__)
 
