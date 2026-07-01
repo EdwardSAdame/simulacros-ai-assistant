@@ -18,7 +18,6 @@ from src.assistant.clients.base_client import BaseAssistantClient
 from src.services.visual_worker_service import VisualWorkerService
 
 logger = logging.getLogger(__name__)
-# pink elephant
 
 def _normalize_email_for_storage(val):
     if val is None: return None
@@ -87,30 +86,30 @@ class QuizService:
             elif is_creative_subject:
                 visual_instruction = "## VISUAL GENERATION PROTOCOL (CREATIVE ILLUSTRATIONS - MANDATORY)\n"
                 
-            visual_instruction += f"You MUST generate EXACTLY {target_visuals} visual question(s).\n"
+            visual_instruction += f"Generate EXACTLY {target_visuals} visual question(s).\n"
             visual_instruction += "DETERMINISTIC DISTRIBUTION ENFORCEMENT:\n"
             
             if stem_human:
-                visual_instruction += f"- BUCKET A (Stem Visual Only): For question numbers {stem_human}, you MUST write a visual prompt (`plot_prompt` or `image_prompt`) for the QUESTION STEM ONLY. Leave all option visuals null.\n"
+                visual_instruction += f"- BUCKET A (Stem Visual Only): For question numbers {stem_human}, write a visual prompt (`plot_prompt` or `image_prompt`) for the QUESTION STEM ONLY. Leave all option visuals null.\n"
             if opt_human:
-                visual_instruction += f"- BUCKET B (Option Visuals Only): For question numbers {opt_human}, the stem visual MUST be null. You MUST write a mathematical description in `plot_prompt` for EVERY option AND set the `text` field for every option to a literal JSON null.\n"
+                visual_instruction += f"- BUCKET B (Option Visuals Only): For question numbers {opt_human}, leave the stem visual null. Write a mathematical description in `plot_prompt` for EVERY option AND set the `text` field for every option to a literal JSON null.\n"
             if hyb_human:
-                visual_instruction += f"- BUCKET C (Hybrid Visuals): For question numbers {hyb_human}, write a visual prompt for the QUESTION STEM AND a `plot_prompt` for EVERY option. You MUST set the `text` field for every option to a literal JSON null. Design the Stem Visual to display only the initial state, raw data, or input parameters. Reserve the final outcome, derivative, or transformed state exclusively for the Option Visuals to maintain the challenge.\n"
+                visual_instruction += f"- BUCKET C (Hybrid Visuals): For question numbers {hyb_human}, write a visual prompt for the QUESTION STEM AND a `plot_prompt` for EVERY option. Set the `text` field for every option to a literal JSON null. Design the Stem Visual to display only the initial state or input parameters. Reserve the final outcome exclusively for the Option Visuals.\n"
                 
-            visual_instruction += "For the remaining questions not listed above, ALL visual fields (stem and options) MUST be a literal JSON null. Do not violate this assignment.\n\n"
+            visual_instruction += "For the remaining questions not listed above, set ALL visual fields (stem and options) to a literal JSON null.\n\n"
             
             if is_visual_subject:
                 visual_instruction += "CRITICAL: For stem visuals, use `plot_prompt`. Keep `image_prompt` and `visual_metaphor_planning` null. Write mathematical instructions strictly as plain English/Spanish.\n"
-                visual_instruction += "CRITICAL BLINDNESS DOCTRINE: The stem visual MUST ONLY contain raw input data. It MUST NEVER contain the derived answer, explicit formulas, or text annotations that give away the final solution. The student must infer the solution from the raw visual data.\n"
+                visual_instruction += "CRITICAL BLINDNESS DOCTRINE: Design the stem visual to display only the input data plotted on standard Cartesian axes with visible coordinate numbers. Reserve the derived answers for the options.\n"
             elif is_creative_subject:
-                visual_instruction += "CRITICAL: For stem visuals, use `visual_metaphor_planning` and `image_prompt`. Keep `plot_prompt` always null. (Options will only ever be math graphs if assigned).\n"
-                visual_instruction += "CRITICAL CREATIVE DOCTRINE: For creative subjects, you MUST NEVER generate visuals for the options. The options MUST ALWAYS be purely text.\n"
-                visual_instruction += "CRITICAL DECORATIVE DOCTRINE: The `image_prompt` is a decorative background. The question logic MUST rely entirely on the `context_text` or reading comprehension. Never mention the image in the question.\n"
-                visual_instruction += "CRITICAL METAPHOR DOCTRINE: For `visual_metaphor_planning` and `image_prompt`, you MUST be extremely concise. IGNORE the specific logic, variables, or data of the question. Just identify the broad academic domain and describe a generic, static physical scene.\n"
+                visual_instruction += "CRITICAL: For stem visuals, use `visual_metaphor_planning` and `image_prompt`. Keep `plot_prompt` always null.\n"
+                visual_instruction += "CRITICAL CREATIVE DOCTRINE: For creative subjects, ensure the options are purely text.\n"
+                visual_instruction += "CRITICAL DECORATIVE DOCTRINE: The `image_prompt` is a decorative background. Ensure the question logic relies entirely on the `context_text` or reading comprehension.\n"
+                visual_instruction += "CRITICAL METAPHOR DOCTRINE: For `visual_metaphor_planning` and `image_prompt`, be extremely concise. Identify the broad academic domain and describe a generic, static physical scene.\n"
             elif is_general_subject:
                 visual_instruction += "CRITICAL: For stem visuals, select exactly ONE engine (`plot_prompt` for math/data, OR `visual_metaphor_planning` + `image_prompt` for creative). Keep the other null.\n"
-                visual_instruction += "CRITICAL DECORATIVE DOCTRINE: If you use `image_prompt`, use `visual_metaphor_planning` first to describe a physical scene. DO NOT refer to the image in the `question_text`.\n"
-                visual_instruction += "CRITICAL METAPHOR DOCTRINE: If using `image_prompt`, IGNORE specific problem logic. Just describe a generic physical scene.\n"
+                visual_instruction += "CRITICAL DECORATIVE DOCTRINE: If you use `image_prompt`, use `visual_metaphor_planning` first to describe a physical scene.\n"
+                visual_instruction += "CRITICAL METAPHOR DOCTRINE: If using `image_prompt`, describe a generic physical scene.\n"
                 
         else:
             visual_instruction = (
@@ -124,9 +123,9 @@ class QuizService:
             f"Generate exactly {num_questions} distinct questions.\n\n"
             f"{visual_instruction}"
             "## DUAL-ENGINE LOGIC TRACKS\n"
-            "You must choose your internal logic engine based strictly on the required option format (Text vs Image).\n\n"
+            "Choose your internal logic engine based strictly on the required option format (Text vs Image).\n\n"
             "### ENGINE 1: THE ANALYTICAL ENGINE (Use for Text-Only Options)\n"
-            "If the options are TEXT, you must calculate a specific numerical or factual answer.\n"
+            "If the options are TEXT, calculate a specific numerical or factual answer.\n"
             "1. **SETUP**: Define the exact variables, facts, or numbers to be used.\n"
             "2. **SOLUTION**: Explicitly calculate the step-by-step arithmetic or logical derivation.\n"
             "3. **TRAPS**: Generate 3 wrong answers based on common computational errors, incorrect formulas, or factual misunderstandings.\n"
@@ -137,12 +136,12 @@ class QuizService:
             "2. **SOLUTION**: Define the exact visual transformation or structural outcome required to solve the problem.\n"
             "3. **TRAPS**: Define 3 visually distinct wrong shapes, curves, or trends based on common visual misconceptions.\n"
             "4. **QUESTION**: Ask a visual bridging question requiring the student to identify the correct visual representation of the concept.\n"
-            "5. **VISUAL RULE**: Keep `plot_prompt` for options entirely clean and title-free. Format the Matplotlib code strictly for drawing the graphic elements.\n"
+            "5. **VISUAL RULE**: Omit titles from the plots. Instruct the visual tool to draw the mathematical data on standard Cartesian axes with visible coordinate numbers.\n"
             "6. **CONTINUITY RULE**: Match the X and Y axis limits (plt.xlim, plt.ylim) of all option plots perfectly to the scale of the stem plot, unless changing the scale is the specific purpose of the question.\n\n"
             "## SCHEMA & FIELD RESTRICTIONS\n"
             "- **SOURCES**: Keep `source_url` as null unless you actively hold a verified URL in your context.\n"
             "- **CONTEXT**: Use `context_text` ONLY if the question requires a large foundational reading passage or shared scenario. Otherwise, keep it null.\n"
-            "- **OPTION VISUALS**: If an option has a `plot_prompt`, its `text` field MUST be null. Do not write fallback text.\n\n"
+            "- **OPTION VISUALS**: If an option has a `plot_prompt`, its `text` field MUST be null.\n\n"
             "## SMART FOLLOW-UP PROTOCOL\n"
             "Generate 3 'Ghost Prompts' (easier_payload, harder_payload, retry_payload) in the EXACT SAME LANGUAGE as the quiz, using First Person format.\n"
         )
