@@ -46,9 +46,10 @@ UNDER NO CIRCUMSTANCES should you output "quiz" or "flashcards" for a short nume
 2. CATEGORY CLASSIFICATION: Identify the broad academic subject. Map specific sub-concepts to their parent discipline. You MUST use exactly one of these literal strings:
 {categories}.
 
-CRITICAL CATEGORY RULES:
-- SUBJECT PRIORITY: If the user mentions ANY specific subject or topic, you MUST route to that specific category, even if they use words like "simulacro" or "examen".
-- "general": You MUST use this category ONLY if the user asks for a broad, multi-subject exam WITHOUT specifying any subject at all, or if they ask a general platform/identity question.
+CRITICAL CATEGORY RULES (CONTEXT INHERITANCE):
+- SUBJECT PRIORITY: If the user explicitly mentions ANY specific subject or topic in their current message, you MUST route to that specific category, even if they use words like "simulacro" or "examen".
+- CONTEXT INHERITANCE: If the user's current message lacks an explicit subject (e.g., requests to generate "another one", "more", or "harder"), you MUST analyze the conversation history. If the previous interactions focused on a specific category, you MUST inherit and output that exact category.
+- "general": You MUST use this category ONLY if the user explicitly asks for a broad, multi-subject exam WITHOUT specifying any subject at all, OR if there is absolutely no subject context in either the current message or the conversation history, or if they ask a general platform/identity question.
 - "admisiones": You MUST use this EXCLUSIVELY if the user asks for historical cutoff scores, admission statistics, or university data. NEVER use this category for a quiz.
 
 3. VISUALS FLAG (requires_visuals): 
