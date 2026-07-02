@@ -59,23 +59,23 @@ class QuizService:
     def get_system_instruction(
         topic: str = "general", 
         num_questions: int = 5,
-        stem_indices: List[int] = None,
-        opt_indices: List[int] = None,
-        hyb_indices: List[int] = None,
+        image_to_text_indices: List[int] = None,
+        text_to_image_indices: List[int] = None,
+        image_to_image_indices: List[int] = None,
         is_general_subject: bool = False,
         is_visual_subject: bool = False,
         is_creative_subject: bool = False
     ) -> Dict[str, Any]:
         
-        stem_indices = stem_indices or []
-        opt_indices = opt_indices or []
-        hyb_indices = hyb_indices or []
+        image_to_text_indices = image_to_text_indices or []
+        text_to_image_indices = text_to_image_indices or []
+        image_to_image_indices = image_to_image_indices or []
         
-        target_visuals = len(stem_indices) + len(opt_indices) + len(hyb_indices)
+        target_visuals = len(image_to_text_indices) + len(text_to_image_indices) + len(image_to_image_indices)
         
-        stem_human = [i + 1 for i in stem_indices]
-        opt_human = [i + 1 for i in opt_indices]
-        hyb_human = [i + 1 for i in hyb_indices]
+        image_to_text_human = [i + 1 for i in image_to_text_indices]
+        text_to_image_human = [i + 1 for i in text_to_image_indices]
+        image_to_image_human = [i + 1 for i in image_to_image_indices]
 
         visual_instruction = ""
 
@@ -90,12 +90,12 @@ class QuizService:
             visual_instruction += f"Generate EXACTLY {target_visuals} visual question(s).\n"
             visual_instruction += "DETERMINISTIC DISTRIBUTION ENFORCEMENT:\n"
             
-            if stem_human:
-                visual_instruction += f"- BUCKET A (Stem Visual Only): For question numbers {stem_human}, write a visual prompt (`plot_prompt` or `image_prompt`) for the QUESTION STEM ONLY. Leave all option visuals null.\n"
-            if opt_human:
-                visual_instruction += f"- BUCKET B (Option Visuals Only): For question numbers {opt_human}, leave the stem visual null. Write a mathematical description in `plot_prompt` for EVERY option AND set the `text` field for every option to a literal JSON null.\n"
-            if hyb_human:
-                visual_instruction += f"- BUCKET C (Hybrid Visuals): For question numbers {hyb_human}, write a visual prompt for the QUESTION STEM AND a `plot_prompt` for EVERY option. Set the `text` field for every option to a literal JSON null. Design the Stem Visual to display only the initial state or input parameters. Reserve the final outcome exclusively for the Option Visuals.\n"
+            if image_to_text_human:
+                visual_instruction += f"- IMAGE-TO-TEXT (Stem Visual Only): For question numbers {image_to_text_human}, write a visual prompt (`plot_prompt` or `image_prompt`) for the QUESTION STEM ONLY. Leave all option visuals null.\n"
+            if text_to_image_human:
+                visual_instruction += f"- TEXT-TO-IMAGE (Option Visuals Only): For question numbers {text_to_image_human}, leave the stem visual null. Write a mathematical description in `plot_prompt` for EVERY option AND set the `text` field for every option to a literal JSON null.\n"
+            if image_to_image_human:
+                visual_instruction += f"- IMAGE-TO-IMAGE (Stem & Option Visuals): For question numbers {image_to_image_human}, write a visual prompt for the QUESTION STEM AND a `plot_prompt` for EVERY option. Set the `text` field for every option to a literal JSON null. Design the Stem Visual to display only the initial state or input parameters. Reserve the final outcome exclusively for the Option Visuals.\n"
                 
             visual_instruction += "For the remaining questions not listed above, set ALL visual fields (stem and options) to a literal JSON null.\n\n"
             
@@ -190,14 +190,14 @@ class QuizService:
 
         max_visuals = 0
         target_visuals = 0
-        stem_visual_indices = []
-        options_visual_indices = []
-        hybrid_visual_indices = []
+        image_to_text_indices = []
+        text_to_image_indices = []
+        image_to_image_indices = []
 
         if is_analisis_imagen:
             max_visuals = num_questions
             target_visuals = num_questions
-            stem_visual_indices = list(range(num_questions))
+            image_to_text_indices = list(range(num_questions))
         elif is_general_subject or is_visual_subject or is_creative_subject:
             max_visuals = math.floor(num_questions * 0.4)
             target_visuals = random.randint(0, max_visuals) if max_visuals > 0 else 0
@@ -206,20 +206,20 @@ class QuizService:
                 raw_indices = random.sample(range(num_questions), target_visuals)
                 
                 if is_creative_subject and not is_general_subject and not is_visual_subject:
-                    stem_visual_indices = sorted(raw_indices)
-                    options_visual_indices = []
-                    hybrid_visual_indices = []
+                    image_to_text_indices = sorted(raw_indices)
+                    text_to_image_indices = []
+                    image_to_image_indices = []
                 else:
                     num_stem = math.floor(target_visuals * 0.5)
                     num_opts = math.floor(target_visuals * 0.3)
                     
                     random.shuffle(raw_indices)
-                    stem_visual_indices = sorted(raw_indices[:num_stem])
-                    options_visual_indices = sorted(raw_indices[num_stem:num_stem+num_opts])
-                    hybrid_visual_indices = sorted(raw_indices[num_stem+num_opts:])
+                    image_to_text_indices = sorted(raw_indices[:num_stem])
+                    text_to_image_indices = sorted(raw_indices[num_stem:num_stem+num_opts])
+                    image_to_image_indices = sorted(raw_indices[num_stem+num_opts:])
 
-        allowed_stem_visuals = set(stem_visual_indices + hybrid_visual_indices)
-        allowed_opt_visuals = set(options_visual_indices + hybrid_visual_indices)
+        allowed_stem_visuals = set(image_to_text_indices + image_to_image_indices)
+        allowed_opt_visuals = set(text_to_image_indices + image_to_image_indices)
 
         log_event("dynamic_visual_quota_calculated", {
             "subject_topic": topic_lower,
@@ -228,9 +228,9 @@ class QuizService:
             "is_creative_subject": is_creative_subject,
             "num_questions_requested": num_questions,
             "target_visuals_enforced": target_visuals,
-            "stem_indices": stem_visual_indices,
-            "options_indices": options_visual_indices,
-            "hybrid_indices": hybrid_visual_indices
+            "image_to_text_indices": image_to_text_indices,
+            "text_to_image_indices": text_to_image_indices,
+            "image_to_image_indices": image_to_image_indices
         })
 
         active_container_id = None
@@ -245,9 +245,9 @@ class QuizService:
         system_instruction = cls.get_system_instruction(
             topic=topic_hint, 
             num_questions=num_questions, 
-            stem_indices=stem_visual_indices,
-            opt_indices=options_visual_indices,
-            hyb_indices=hybrid_visual_indices,
+            image_to_text_indices=image_to_text_indices,
+            text_to_image_indices=text_to_image_indices,
+            image_to_image_indices=image_to_image_indices,
             is_general_subject=is_general_subject,
             is_visual_subject=is_visual_subject,
             is_creative_subject=is_creative_subject
