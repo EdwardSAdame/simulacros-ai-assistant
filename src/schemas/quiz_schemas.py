@@ -111,16 +111,16 @@ class QuizQuestion(BaseModel):
         "This field is for internal logic only; omit final question text."
     ))
 
-    # -------------------------------------------------------------------------
+# -------------------------------------------------------------------------
     # 4. STUDENT FACING TEXT
     # -------------------------------------------------------------------------
     question_text: str = Field(..., description=(
         "The complete student-facing question. "
-        "CRITICAL: For short word problems, put the ENTIRE scenario/setup AND the interrogative question here. Do not split it with `context_text`. "
-        "STRICT FORMATTING RULE: Write as a fluid paragraph. Do NOT use Markdown headers, bold labels, or structural tags like '## Estímulo', '## Pregunta', 'Contexto:', or 'Pregunta:'. Just write the text naturally. "
-        "Wrap math expressions, numbers, and symbols in standard LaTeX \\( and \\). "
-        "If a `plot_prompt` is present, the text must refer to the graph. "
-        "If an `image_prompt` is present, the image is strictly DECORATIVE. You MUST NOT refer to the image or 'estímulo visual' in this text."
+        "CRITICAL FORMATTING GUIDELINES:\n"
+        "1. NO META-LABELS: Do NOT use structural headers like '## Estímulo', '## Contexto', '## Pregunta' or any bolded section labels. The student already knows what the question is.\n"
+        "2. LATEX: Wrap all mathematical variables, formulas, and numbers in standard LaTeX \\( and \\).\n"
+        "3. FLOW: Start directly with the scenario or the data. If a scenario is needed, present it as the first paragraph, and follow it with the question as a logical continuation, not as a separate labeled section.\n"
+        "4. VISUAL INTEGRATION: If a `plot_prompt` is provided, the text should introduce the data shown in the graph naturally."
     ))
     
     image_url: Optional[str] = Field(None, description="URL of the generated image/graph for the question stem. If you wrote an image_prompt or plot_prompt, LEAVE THIS NULL. The backend will populate it automatically.")
