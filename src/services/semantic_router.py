@@ -80,8 +80,8 @@ class SemanticRouter:
 
         # Inject brief conversation history for context resolution
         if history:
-            # Only take the last 4 messages to avoid bloating token usage on the router
-            recent_history = history[-4:]
+            # Only take the last 6 messages to avoid bloating token usage on the router
+            recent_history = history[-6:]
             for msg in recent_history:
                 role = msg.get("role")
                 content = msg.get("content")
