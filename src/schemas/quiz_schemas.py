@@ -117,6 +117,7 @@ class QuizQuestion(BaseModel):
     question_text: str = Field(..., description=(
         "The complete student-facing question. "
         "CRITICAL: For short word problems, put the ENTIRE scenario/setup AND the interrogative question here. Do not split it with `context_text`. "
+        "STRICT FORMATTING RULE: Write as a fluid paragraph. Do NOT use Markdown headers, bold labels, or structural tags like '## Estímulo', '## Pregunta', 'Contexto:', or 'Pregunta:'. Just write the text naturally. "
         "Wrap math expressions, numbers, and symbols in standard LaTeX \\( and \\). "
         "If a `plot_prompt` is present, the text must refer to the graph. "
         "If an `image_prompt` is present, the image is strictly DECORATIVE. You MUST NOT refer to the image or 'estímulo visual' in this text."
