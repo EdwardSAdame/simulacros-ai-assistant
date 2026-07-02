@@ -83,10 +83,7 @@ class QuizQuestion(BaseModel):
         description=(
             "The foundational reading passage or shared scenario. "
             "CRITICAL RULES: "
-            "1. Use ONLY for long reading comprehension texts or massive science experiment descriptions. "
-            "2. Do NOT use this for standard math word problems or short setups. "
             "3. Do NOT put the actual interrogative question here. "
-            "If the setup is less than 3 sentences, leave this NULL and put everything inside `question_text`."
         )
     )
 
