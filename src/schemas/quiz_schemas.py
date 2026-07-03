@@ -104,11 +104,10 @@ class QuizQuestion(BaseModel):
     image_prompt: Optional[str] = Field(
         None, 
         description=(
-            "A strictly aesthetic, atmospheric illustration representing the historical, literary, "
-            "or social theme of this question. "
-            "CRITICAL: Use classical art styles (e.g., Claude Monet Impressionism). "
-            "NEVER describe academic items. "
-            "Make it a beautiful, disconnected scene. Leave null if no creative visual is required."
+            "A purely artistic and atmospheric representation of a physical environment related to the theme of the question. "
+            "Focus exclusively on natural landscapes, historical architecture, or tangible real-world scenes. "
+            "CRITICAL: You MUST absolutely BAN any mention of academic tropes. "
+            "Make it a beautiful, disconnected physical scene. Leave null if no creative visual is required."
         )
     )
     
