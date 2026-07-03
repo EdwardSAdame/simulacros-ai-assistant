@@ -59,83 +59,64 @@ class QuizService:
     def get_system_instruction(
         topic: str = "general", 
         num_questions: int = 5,
-        image_to_text_indices: List[int] = None,
-        text_to_image_indices: List[int] = None,
-        image_to_image_indices: List[int] = None,
-        is_general_subject: bool = False,
+        format_map: Dict[int, str] = None,
         is_visual_subject: bool = False,
-        is_creative_subject: bool = False
+        is_creative_subject: bool = False,
+        is_general_subject: bool = False
     ) -> Dict[str, Any]:
         
-        image_to_text_indices = image_to_text_indices or []
-        text_to_image_indices = text_to_image_indices or []
-        image_to_image_indices = image_to_image_indices or []
+        format_map = format_map or {}
         
-        target_visuals = len(image_to_text_indices) + len(text_to_image_indices) + len(image_to_image_indices)
-        
-        image_to_text_human = [i + 1 for i in image_to_text_indices]
-        text_to_image_human = [i + 1 for i in text_to_image_indices]
-        image_to_image_human = [i + 1 for i in image_to_image_indices]
+        # Build the explicit constraint map for the AI to follow
+        format_instructions = "## QUESTION FORMAT ENFORCEMENT\n"
+        format_instructions += "For each question index (0 to N-1), you MUST set the `format_type` field exactly as follows:\n"
+        for idx in range(num_questions):
+            fmt = format_map.get(idx, "text_to_text")
+            format_instructions += f"- Question {idx + 1} (Index {idx}): `format_type` = '{fmt}'\n"
 
-        visual_instruction = ""
-
-        if target_visuals > 0:
-            if is_general_subject:
-                visual_instruction = "## VISUAL GENERATION PROTOCOL (HYBRID MULTI-SUBJECT - MANDATORY)\n"
-            elif is_visual_subject:
-                visual_instruction = "## VISUAL GENERATION PROTOCOL (DATA GRAPHS - MANDATORY)\n"
-            elif is_creative_subject:
-                visual_instruction = "## VISUAL GENERATION PROTOCOL (CREATIVE ILLUSTRATIONS - MANDATORY)\n"
-                
-            visual_instruction += f"Generate EXACTLY {target_visuals} visual question(s).\n"
-            visual_instruction += "DETERMINISTIC DISTRIBUTION ENFORCEMENT:\n"
-            
-            if image_to_text_human:
-                visual_instruction += f"- IMAGE-TO-TEXT (Stem Visual Only): For question numbers {image_to_text_human}, write a visual prompt (`plot_prompt` or `image_prompt`) for the QUESTION STEM ONLY. Leave all option visuals null.\n"
-            if text_to_image_human:
-                visual_instruction += f"- TEXT-TO-IMAGE (Option Visuals Only): For question numbers {text_to_image_human}, leave the stem visual null. Write a mathematical description in `plot_prompt` for EVERY option AND set the `text` field for every option to a literal JSON null.\n"
-            if image_to_image_human:
-                visual_instruction += f"- IMAGE-TO-IMAGE (Stem & Option Visuals): For question numbers {image_to_image_human}, write a visual prompt for the QUESTION STEM AND a `plot_prompt` for EVERY option. Set the `text` field for every option to a literal JSON null. Design the Stem Visual to display only the initial state or input parameters. Reserve the final outcome exclusively for the Option Visuals.\n"
-                
-            visual_instruction += "For the remaining questions not listed above, set ALL visual fields (stem and options) to a literal JSON null.\n\n"
-            
-            if is_visual_subject:
-                visual_instruction += "CRITICAL: For stem visuals, use `plot_prompt`. Keep `image_prompt` null. Write mathematical instructions strictly as plain English/Spanish.\n"
-                visual_instruction += "CRITICAL BLINDNESS DOCTRINE: Design the stem visual to display only the input data plotted on standard Cartesian axes with visible coordinate numbers. Reserve the derived answers for the options.\n"
-            elif is_creative_subject:
-                visual_instruction += "CRITICAL: For stem visuals, use `image_prompt`. Keep `plot_prompt` always null.\n"
-                visual_instruction += "CRITICAL CREATIVE DOCTRINE: Ensure the options are purely text.\n"
-                visual_instruction += "CRITICAL AESTHETIC DOCTRINE: The `image_prompt` is strictly for decorative, atmospheric background art. You MUST use beautiful art styles like 'Claude Monet Impressionism' or '19th Century Oil Painting'. You MUST absolutely BAN any mention of academic tropes (no notebooks, no whiteboards, no post-its, no diagrams). If the question is about the French Revolution, paint a beautiful Parisian street, not a timeline on a corkboard.\n"
-            elif is_general_subject:
-                visual_instruction += "CRITICAL: For stem visuals, select exactly ONE engine (`plot_prompt` for math/data, OR `image_prompt` for creative). Keep the other null.\n"
-                visual_instruction += "CRITICAL AESTHETIC DOCTRINE: If using `image_prompt`, apply classic art styles (e.g., Impressionism) and strictly avoid academic tropes (no paper, no post-its).\n"
-                
-        else:
-            visual_instruction = (
-                "## VISUAL & TOOL EXECUTION PROTOCOL (TEXT ONLY)\n"
-                "Produce a strictly text-based quiz. Keep `image_url`, `image_prompt`, and all `plot_prompt`s strictly as literal JSON null.\n\n"
+        # Inject subject-specific visual doctrines
+        visual_doctrine = ""
+        if is_visual_subject:
+            visual_doctrine = (
+                "CRITICAL BLINDNESS DOCTRINE (MATH/SCIENCE): Use `plot_prompt` for all required visuals. Keep `image_prompt` null. "
+                "Design the stem visual to display only the input data plotted on standard Cartesian axes with visible coordinate numbers. "
+                "Reserve the derived answers for the options.\n"
+            )
+        elif is_creative_subject:
+            visual_doctrine = (
+                "CRITICAL AESTHETIC DOCTRINE (CREATIVE): Use `image_prompt` for stem visuals. Keep `plot_prompt` always null. "
+                "Ensure options are purely text. The `image_prompt` is strictly for decorative, atmospheric background art. "
+                "You MUST absolutely BAN any mention of academic tropes (no notebooks, no whiteboards, no post-its, no diagrams).\n"
+            )
+        elif is_general_subject:
+            visual_doctrine = (
+                "CRITICAL AESTHETIC DOCTRINE (HYBRID): For stem visuals, select exactly ONE engine (`plot_prompt` for math/data, OR `image_prompt` for creative). "
+                "If using `image_prompt`, apply classic art styles and strictly avoid academic tropes (no paper, no post-its).\n"
             )
 
         instruction_text = (
             f"## IMMEDIATE RUNTIME MISSION\n"
             f"The user requested a quiz/exam about '{topic}'. "
             f"Generate exactly {num_questions} distinct questions.\n\n"
-            f"{visual_instruction}"
-            "## DUAL-ENGINE LOGIC TRACKS\n"
-            "Choose your internal logic engine based strictly on the required option format (Text vs Image).\n\n"
+            f"{format_instructions}\n"
+            "## DUAL-ENGINE LOGIC TRACKS & FORMATTING\n"
+            "1. If `format_type` is 'text_to_text': Keep all image/plot prompts strictly null.\n"
+            "2. If `format_type` is 'image_to_text': Populate stem visual (`image_prompt` or `plot_prompt`), leave option visuals null.\n"
+            "3. If `format_type` is 'text_to_image': Leave stem visual null, populate `plot_prompt` in options.\n"
+            "4. If `format_type` is 'image_to_image': Populate stem visual AND option `plot_prompt`s.\n\n"
+            f"{visual_doctrine}\n"
+            "## LOGIC PATHS\n"
             "### ENGINE 1: THE ANALYTICAL ENGINE (Use for Text-Only Options)\n"
-            "If the options are TEXT, calculate a specific numerical or factual answer.\n"
             "1. **SETUP**: Define the exact variables, facts, or numbers to be used.\n"
             "2. **SOLUTION**: Explicitly calculate the step-by-step arithmetic or logical derivation.\n"
-            "3. **TRAPS**: Generate 3 wrong answers based on common computational errors, incorrect formulas, or factual misunderstandings.\n"
-            "4. **QUESTION**: Ask for a specific calculated or derived value.\n\n"
+            "3. **TRAPS**: Generate 3 wrong answers based on common computational errors.\n\n"
             f"{VISUAL_REASONING_DOCTRINE}\n\n"
             "## SCHEMA & FIELD RESTRICTIONS\n"
             "- **SOURCES**: Keep `source_url` as null unless you actively hold a verified URL in your context.\n"
-            "- **CONTEXT**: Use `context_text` ONLY if the question requires a large foundational reading passage or shared scenario. Otherwise, keep it null.\n"
-            "- **OPTION VISUALS**: If an option has a `plot_prompt`, its `text` field MUST be null.\n\n"
+            "- **CONTEXT**: Use `context_text` ONLY if the question requires a large foundational reading passage. Otherwise, keep it null.\n"
+            "- **OPTION VISUALS**: Even if an option has a `plot_prompt`, its `text` field MUST NEVER BE NULL (use it as a fallback).\n\n"
             "## SMART FOLLOW-UP PROTOCOL\n"
-            "Generate 3 'Ghost Prompts' (easier_payload, harder_payload, retry_payload) in the EXACT SAME LANGUAGE as the quiz, using First Person format.\n"
+            "Generate 3 'Ghost Prompts' (easier_payload, harder_payload, retry_payload) in the EXACT SAME LANGUAGE as the quiz.\n"
         )
 
         return {
@@ -219,6 +200,18 @@ class QuizService:
         allowed_stem_visuals = set(image_to_text_indices + image_to_image_indices)
         allowed_opt_visuals = set(text_to_image_indices + image_to_image_indices)
 
+        # Build the strictly defined format map for the new Schema Architecture
+        format_map = {}
+        for i in range(num_questions):
+            if i in image_to_text_indices:
+                format_map[i] = "image_to_text"
+            elif i in text_to_image_indices:
+                format_map[i] = "text_to_image"
+            elif i in image_to_image_indices:
+                format_map[i] = "image_to_image"
+            else:
+                format_map[i] = "text_to_text"
+
         log_event("dynamic_visual_quota_calculated", {
             "subject_topic": topic_lower,
             "is_general_subject": is_general_subject,
@@ -226,9 +219,7 @@ class QuizService:
             "is_creative_subject": is_creative_subject,
             "num_questions_requested": num_questions,
             "target_visuals_enforced": target_visuals,
-            "image_to_text_indices": image_to_text_indices,
-            "text_to_image_indices": text_to_image_indices,
-            "image_to_image_indices": image_to_image_indices
+            "format_map": format_map
         })
 
         active_container_id = None
@@ -243,12 +234,10 @@ class QuizService:
         system_instruction = cls.get_system_instruction(
             topic=topic_hint, 
             num_questions=num_questions, 
-            image_to_text_indices=image_to_text_indices,
-            text_to_image_indices=text_to_image_indices,
-            image_to_image_indices=image_to_image_indices,
-            is_general_subject=is_general_subject,
+            format_map=format_map,
             is_visual_subject=is_visual_subject,
-            is_creative_subject=is_creative_subject
+            is_creative_subject=is_creative_subject,
+            is_general_subject=is_general_subject
         )
         conversation_input.append(system_instruction)
 
@@ -312,6 +301,7 @@ class QuizService:
                         q_dict = q_data.dict() if hasattr(q_data, 'dict') else q_data
                         idx = event.get("index", 0)
                         
+                        # Double-enforce cleanup in backend just as a safety net
                         if idx not in allowed_stem_visuals:
                             q_dict["image_prompt"] = None
                             q_dict["plot_prompt"] = None

@@ -21,7 +21,7 @@ class QuizOption(BaseModel):
         None, 
         description=(
             "Mathematical instructions for Matplotlib to generate a graph for THIS SPECIFIC OPTION. "
-            "Leave null unless the system instruction explicitly forces you to generate visual options."
+            "Leave null if the question's `format_type` is `text_to_text` or `image_to_text`."
         )
     )
 
@@ -45,6 +45,17 @@ class QuizQuestion(BaseModel):
     question_title: str = Field(..., description="Title with number, e.g., '# 1. Topic'")
     
     # -------------------------------------------------------------------------
+    # 0. STRICT FORMAT ENFORCEMENT (The Structural Anchor)
+    # -------------------------------------------------------------------------
+    format_type: Literal["text_to_text", "image_to_text", "text_to_image", "image_to_image"] = Field(
+        ..., 
+        description=(
+            "CRITICAL: The required structural layout for this question as mandated by the system prompt. "
+            "You MUST select the exact format assigned to this question number in the instructions."
+        )
+    )
+
+    # -------------------------------------------------------------------------
     # 1. QUANTITATIVE VISUALS: Data/Math driven visuals
     # -------------------------------------------------------------------------
     plot_prompt: Optional[str] = Field(
@@ -52,7 +63,7 @@ class QuizQuestion(BaseModel):
         description=(
             "Mathematical instructions for Matplotlib for the main question stem. "
             "The generated graph must contain the critical data needed to solve the problem. "
-            "Leave null if no data visual is required for the stem."
+            "Leave null if `format_type` is `text_to_text` or `text_to_image`."
         )
     )
 
@@ -107,7 +118,7 @@ class QuizQuestion(BaseModel):
             "A purely artistic and atmospheric representation of a physical environment related to the theme of the question. "
             "Focus exclusively on natural landscapes, historical architecture, or tangible real-world scenes. "
             "CRITICAL: You MUST absolutely BAN any mention of academic tropes. "
-            "Make it a beautiful, disconnected physical scene. Leave null if no creative visual is required."
+            "Make it a beautiful, disconnected physical scene. Leave null if `format_type` is `text_to_text` or `text_to_image`."
         )
     )
     
