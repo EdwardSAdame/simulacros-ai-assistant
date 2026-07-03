@@ -100,22 +100,20 @@ class QuizService:
             visual_instruction += "For the remaining questions not listed above, set ALL visual fields (stem and options) to a literal JSON null.\n\n"
             
             if is_visual_subject:
-                visual_instruction += "CRITICAL: For stem visuals, use `plot_prompt`. Keep `image_prompt` and `visual_metaphor_planning` null. Write mathematical instructions strictly as plain English/Spanish.\n"
+                visual_instruction += "CRITICAL: For stem visuals, use `plot_prompt`. Keep `image_prompt` null. Write mathematical instructions strictly as plain English/Spanish.\n"
                 visual_instruction += "CRITICAL BLINDNESS DOCTRINE: Design the stem visual to display only the input data plotted on standard Cartesian axes with visible coordinate numbers. Reserve the derived answers for the options.\n"
             elif is_creative_subject:
-                visual_instruction += "CRITICAL: For stem visuals, use `visual_metaphor_planning` and `image_prompt`. Keep `plot_prompt` always null.\n"
-                visual_instruction += "CRITICAL CREATIVE DOCTRINE: For creative subjects, ensure the options are purely text.\n"
-                visual_instruction += "CRITICAL DECORATIVE DOCTRINE: The `image_prompt` is a decorative background. Ensure the question logic relies entirely on the `context_text` or reading comprehension.\n"
-                visual_instruction += "CRITICAL METAPHOR DOCTRINE: For `visual_metaphor_planning` and `image_prompt`, be extremely concise. Identify the broad academic domain and describe a generic, static physical scene.\n"
+                visual_instruction += "CRITICAL: For stem visuals, use `image_prompt`. Keep `plot_prompt` always null.\n"
+                visual_instruction += "CRITICAL CREATIVE DOCTRINE: Ensure the options are purely text.\n"
+                visual_instruction += "CRITICAL AESTHETIC DOCTRINE: The `image_prompt` is strictly for decorative, atmospheric background art. You MUST use beautiful art styles like 'Claude Monet Impressionism' or '19th Century Oil Painting'. You MUST absolutely BAN any mention of academic tropes (no notebooks, no whiteboards, no post-its, no diagrams). If the question is about the French Revolution, paint a beautiful Parisian street, not a timeline on a corkboard.\n"
             elif is_general_subject:
-                visual_instruction += "CRITICAL: For stem visuals, select exactly ONE engine (`plot_prompt` for math/data, OR `visual_metaphor_planning` + `image_prompt` for creative). Keep the other null.\n"
-                visual_instruction += "CRITICAL DECORATIVE DOCTRINE: If you use `image_prompt`, use `visual_metaphor_planning` first to describe a physical scene.\n"
-                visual_instruction += "CRITICAL METAPHOR DOCTRINE: If using `image_prompt`, describe a generic physical scene.\n"
+                visual_instruction += "CRITICAL: For stem visuals, select exactly ONE engine (`plot_prompt` for math/data, OR `image_prompt` for creative). Keep the other null.\n"
+                visual_instruction += "CRITICAL AESTHETIC DOCTRINE: If using `image_prompt`, apply classic art styles (e.g., Impressionism) and strictly avoid academic tropes (no paper, no post-its).\n"
                 
         else:
             visual_instruction = (
                 "## VISUAL & TOOL EXECUTION PROTOCOL (TEXT ONLY)\n"
-                "Produce a strictly text-based quiz. Keep `image_url`, `visual_metaphor_planning`, `image_prompt`, and all `plot_prompt`s strictly as literal JSON null.\n\n"
+                "Produce a strictly text-based quiz. Keep `image_url`, `image_prompt`, and all `plot_prompt`s strictly as literal JSON null.\n\n"
             )
 
         instruction_text = (
@@ -315,7 +313,6 @@ class QuizService:
                         idx = event.get("index", 0)
                         
                         if idx not in allowed_stem_visuals:
-                            q_dict["visual_metaphor_planning"] = None
                             q_dict["image_prompt"] = None
                             q_dict["plot_prompt"] = None
                             q_dict["image_url"] = None
@@ -362,7 +359,6 @@ class QuizService:
                             
                             for i, q_dict in enumerate(accumulated_questions):
                                 if i not in allowed_stem_visuals:
-                                    q_dict["visual_metaphor_planning"] = None
                                     q_dict["image_prompt"] = None
                                     q_dict["plot_prompt"] = None
                                     q_dict["image_url"] = None
@@ -429,7 +425,6 @@ class QuizService:
                 
                 for i, q_dict in enumerate(quiz_data["questions"]):
                     if i not in allowed_stem_visuals:
-                        q_dict["visual_metaphor_planning"] = None
                         q_dict["image_prompt"] = None
                         q_dict["plot_prompt"] = None
                         q_dict["image_url"] = None

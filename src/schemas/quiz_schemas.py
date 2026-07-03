@@ -45,7 +45,7 @@ class QuizQuestion(BaseModel):
     question_title: str = Field(..., description="Title with number, e.g., '# 1. Topic'")
     
     # -------------------------------------------------------------------------
-    # 1. VISUAL-FIRST ANCHORING: Decide the visual BEFORE the logic
+    # 1. QUANTITATIVE VISUALS: Data/Math driven visuals
     # -------------------------------------------------------------------------
     plot_prompt: Optional[str] = Field(
         None, 
@@ -56,27 +56,8 @@ class QuizQuestion(BaseModel):
         )
     )
 
-    visual_metaphor_planning: Optional[str] = Field(
-        None,
-        description=(
-            "INTERNAL THINKING STEP. Identify the broad, general subject of the question. "
-            "Brainstorm a generic, static, real-world physical scene that fits this subject. "
-            "Ignore the specific logic, variables, or data of the question. Focus EXCLUSIVELY on setting a beautiful, unrelated background mood."
-        )
-    )
-
-    image_prompt: Optional[str] = Field(
-        None, 
-        description=(
-            "The final illustration instructions based on your `visual_metaphor_planning`. "
-            "Describe a generic, atmospheric physical scene in the requested art style. "
-            "Keep this extremely concise. Focus only on the physical setting, lighting, and mood. "
-            "Leave null if no creative visual is required."
-        )
-    )
-
     # -------------------------------------------------------------------------
-    # 2. CONTEXT-FIRST ANCHORING (Foundational Texts)
+    # 2. CONTEXT & LOGIC (Foundational Texts & Chain of Thought)
     # -------------------------------------------------------------------------
     context_text: Optional[str] = Field(
         None, 
@@ -92,9 +73,6 @@ class QuizQuestion(BaseModel):
         description="The exact URL of the web search. CRITICAL: If you did not perform a web search, you MUST leave this as null. Do NOT hallucinate or invent URLs."
     )
 
-    # -------------------------------------------------------------------------
-    # 3. LOGIC ENGINE: DUAL-TRACK CHAIN OF THOUGHT
-    # -------------------------------------------------------------------------
     explanation: str = Field(..., description=(
         "Internal reasoning plan structured based on the active Engine:\n"
         "FOR ENGINE 1 (TEXT OPTIONS - Math/Logic):\n"
@@ -108,19 +86,36 @@ class QuizQuestion(BaseModel):
         "This field is for internal logic only; omit final question text."
     ))
 
-# -------------------------------------------------------------------------
-    # 4. STUDENT FACING TEXT
+    # -------------------------------------------------------------------------
+    # 3. STUDENT FACING TEXT
     # -------------------------------------------------------------------------
     question_text: str = Field(..., description=(
         "The complete student-facing question. "
         "CRITICAL FORMATTING GUIDELINES:\n"
-        "1. NO META-LABELS: Do NOT use structural headers like '## Estímulo', '## Contexto', '## Pregunta' or any bolded section labels. The student already knows what the question is.\n"
+        "1. NO META-LABELS: Do NOT use structural headers like '## Estimulo', '## Contexto', '## Pregunta' or any bolded section labels. The student already knows what the question is.\n"
         "2. LATEX: Wrap all mathematical variables, formulas, and numbers in standard LaTeX \\( and \\).\n"
         "3. FLOW: Start directly with the scenario or the data. If a scenario is needed, present it as the first paragraph, and follow it with the question as a logical continuation, not as a separate labeled section.\n"
         "4. VISUAL INTEGRATION: If a `plot_prompt` is provided, the text should introduce the data shown in the graph naturally."
     ))
+
+    # -------------------------------------------------------------------------
+    # 4. CREATIVE VISUALS (Moved to the bottom. Context is already established)
+    # -------------------------------------------------------------------------
+    image_prompt: Optional[str] = Field(
+        None, 
+        description=(
+            "A strictly aesthetic, atmospheric illustration representing the historical, literary, "
+            "or social theme of this question. "
+            "CRITICAL: Use classical art styles (e.g., Claude Monet Impressionism). "
+            "NEVER describe academic items. "
+            "Make it a beautiful, disconnected scene. Leave null if no creative visual is required."
+        )
+    )
     
-    image_url: Optional[str] = Field(None, description="URL of the generated image/graph for the question stem. If you wrote an image_prompt or plot_prompt, LEAVE THIS NULL. The backend will populate it automatically.")
+    image_url: Optional[str] = Field(
+        None, 
+        description="URL of the generated image/graph for the question stem. If you wrote an image_prompt or plot_prompt, LEAVE THIS NULL. The backend will populate it automatically."
+    )
 
     difficulty: Literal[1, 2, 3] = Field(1, description="Difficulty weight: 1 (Basic/Easy), 2 (Application/Medium), 3 (Analysis/Hard).")
 
