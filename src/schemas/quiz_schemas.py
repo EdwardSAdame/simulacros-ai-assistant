@@ -8,7 +8,7 @@ class QuizOption(BaseModel):
     feedback: str = Field(..., description=(
         "Short feedback explaining exactly why this specific option is right or wrong. "
         "By writing this first, you anchor the logical trap or solution this option represents. "
-        "Speak directly to the student."
+        "Speak directly to the student. DO NOT put the literal answer choice here; this field is exclusively for the explanation."
     ))
 
     # -------------------------------------------------------------------------
@@ -17,11 +17,13 @@ class QuizOption(BaseModel):
     text: Optional[str] = Field(
         None, 
         description=(
-            "The answer text. FORMATTING RULES: "
+            "The literal answer choice text that the student will select. "
+            "CRITICAL KERNEL RULE: If the question format is `text_to_text` or `image_to_text`, this field MUST NOT BE NULL. "
+            "You must write the actual answer here. "
+            "Only leave this as a literal JSON null if you are writing a `plot_prompt` for this specific option. "
+            "FORMATTING RULES: "
             "1. If the answer is just words/text, write normally WITHOUT delimiters. "
-            "2. If the answer is a number, equation, or symbol, wrap it in standard LaTeX delimiters \\( and \\). "
-            "CRITICAL: If you generate a `plot_prompt` below for this option, you MUST leave this text field as a literal JSON null. "
-            "Do NOT write 'Option A' or redundant equations if a visual is present."
+            "2. If the answer is a number, equation, or symbol, wrap it in standard LaTeX delimiters \\( and \\)."
         )
     )
     
@@ -29,7 +31,7 @@ class QuizOption(BaseModel):
         None, 
         description=(
             "A NATURAL LANGUAGE description of the graph needed for THIS SPECIFIC OPTION. "
-            "CRITICAL KERNEL RULE:ONLY write descriptive natural language. "
+            "CRITICAL KERNEL RULE: ONLY write descriptive natural language. "
             "Leave null if the question's `format_type` is `text_to_text` or `image_to_text`."
         )
     )

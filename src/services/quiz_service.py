@@ -80,7 +80,7 @@ class QuizService:
         format_instructions += (
             "A) If `image_to_image`:\n"
             "   - CONCEPT: A visual transformation or comparison.\n"
-            "   - MANDATORY: The main question `plot_prompt` MUST NOT BE NULL. ALL FOUR options' `plot_prompt`s MUST NOT BE NULL. You must write Matplotlib instructions for all 5.\n\n"
+            "   - MANDATORY: The main question `plot_prompt` MUST NOT BE NULL. ALL FOUR options' `plot_prompt`s MUST NOT BE NULL. You must write natural language instructions for all 5.\n\n"
             
             "B) If `image_to_text`:\n"
             "   - CONCEPT: Visual interpretation.\n"
@@ -126,7 +126,7 @@ class QuizService:
             "## 5. SCHEMA & FIELD RESTRICTIONS\n"
             "- SOURCES: Keep `source_url` null unless you hold a verified URL.\n"
             "- CONTEXT: Use `context_text` ONLY for large reading passages. NEVER use it to describe a graph that should be in a plot_prompt.\n"
-            "- OPTION VISUALS: Even if an option has a `plot_prompt`, its `text` field MUST NEVER BE NULL (use a brief fallback like 'Graph A').\n\n"
+            "- OPTION TEXT vs FEEDBACK: The `text` field in the options is the literal answer the student clicks. The `feedback` is the explanation. Do NOT put the answer inside the feedback and leave the text null. For `text_to_text` and `image_to_text` formats, the `text` field MUST BE POPULATED.\n\n"
             "## SMART FOLLOW-UP PROTOCOL\n"
             "Generate 3 'Ghost Prompts' (easier_payload, harder_payload, retry_payload) in the EXACT SAME LANGUAGE as the quiz.\n"
         )
