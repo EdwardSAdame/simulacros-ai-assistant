@@ -1,4 +1,3 @@
-# FILE: src/services/quiz_service.py
 from typing import Dict, Any, List, Tuple
 import math
 import random
@@ -67,54 +66,67 @@ class QuizService:
         
         format_map = format_map or {}
         
-        # Build the explicit constraint map for the AI to follow
-        format_instructions = "## QUESTION FORMAT ENFORCEMENT\n"
-        format_instructions += "For each question index (0 to N-1), you MUST set the `format_type` field exactly as follows:\n"
+        # 1. The Blueprint: Tell the AI exactly what format is required for each index
+        format_instructions = "## 1. ARCHITECTURAL BLUEPRINT (FATAL ERROR IF IGNORED)\n"
+        format_instructions += "You are bound by a hard-coded architectural matrix. For each question index, you MUST set `format_type` as follows:\n"
         for idx in range(num_questions):
             fmt = format_map.get(idx, "text_to_text")
             format_instructions += f"- Question {idx + 1} (Index {idx}): `format_type` = '{fmt}'\n"
 
-        # Inject subject-specific visual doctrines
+        # 2. The Pre-Conditioning: Tell the AI what kind of question to design based on the format
+        format_instructions += "\n## 2. FORMAT CONCEPTUALIZATION & MANDATORY FIELDS\n"
+        format_instructions += "Based on the assigned `format_type`, you MUST design the question conceptually inside the `explanation` field before writing the question text or options:\n\n"
+        
+        format_instructions += (
+            "A) If `image_to_image`:\n"
+            "   - CONCEPT: A visual transformation or comparison.\n"
+            "   - MANDATORY: The main question `plot_prompt` MUST NOT BE NULL. ALL FOUR options' `plot_prompt`s MUST NOT BE NULL. You must write Matplotlib instructions for all 5.\n\n"
+            
+            "B) If `image_to_text`:\n"
+            "   - CONCEPT: Visual interpretation.\n"
+            "   - MANDATORY: The main question `plot_prompt` MUST NOT BE NULL. You MUST NOT cheat by describing the graph in `context_text`. The option visuals must remain null.\n\n"
+            
+            "C) If `text_to_image`:\n"
+            "   - CONCEPT: Visual selection based on text data.\n"
+            "   - MANDATORY: The main question visual is null. ALL FOUR options' `plot_prompt`s MUST NOT BE NULL.\n\n"
+            
+            "D) If `text_to_text`:\n"
+            "   - CONCEPT: Standard analytical or theoretical question.\n"
+            "   - MANDATORY: ALL `plot_prompt` and `image_prompt` fields MUST remain purely null.\n"
+        )
+
         visual_doctrine = ""
         if is_visual_subject:
             visual_doctrine = (
                 "CRITICAL BLINDNESS DOCTRINE (MATH/SCIENCE): Use `plot_prompt` for all required visuals. Keep `image_prompt` null. "
-                "Design the stem visual to display only the input data plotted on standard Cartesian axes with visible coordinate numbers. "
-                "Reserve the derived answers for the options.\n"
+                "Design the stem visual to display only the input data plotted on standard Cartesian axes with visible coordinate numbers.\n"
             )
         elif is_creative_subject:
             visual_doctrine = (
                 "CRITICAL AESTHETIC DOCTRINE (CREATIVE): Use `image_prompt` for stem visuals. Keep `plot_prompt` always null. "
-                "Ensure options are purely text. The `image_prompt` is strictly for decorative, atmospheric background art. "
-                "You MUST absolutely BAN any mention of academic tropes (no notebooks, no whiteboards, no post-its, no diagrams).\n"
+                "You MUST absolutely BAN any mention of academic tropes (no notebooks, no whiteboards, no diagrams).\n"
             )
         elif is_general_subject:
             visual_doctrine = (
-                "CRITICAL AESTHETIC DOCTRINE (HYBRID): For stem visuals, select exactly ONE engine (`plot_prompt` for math/data, OR `image_prompt` for creative). "
-                "If using `image_prompt`, apply classic art styles and strictly avoid academic tropes (no paper, no post-its).\n"
+                "CRITICAL AESTHETIC DOCTRINE (HYBRID): For stem visuals, select exactly ONE engine (`plot_prompt` for math/data, OR `image_prompt` for creative).\n"
             )
 
         instruction_text = (
             f"## IMMEDIATE RUNTIME MISSION\n"
-            f"The user requested a quiz/exam about '{topic}'. "
-            f"Generate exactly {num_questions} distinct questions.\n\n"
+            f"The user requested a quiz/exam about '{topic}'. Generate exactly {num_questions} distinct questions.\n\n"
             f"{format_instructions}\n"
-            "## DUAL-ENGINE LOGIC TRACKS & FORMATTING\n"
-            "1. If `format_type` is 'text_to_text': Keep all image/plot prompts strictly null.\n"
-            "2. If `format_type` is 'image_to_text': Populate stem visual (`image_prompt` or `plot_prompt`), leave option visuals null.\n"
-            "3. If `format_type` is 'text_to_image': Leave stem visual null, populate `plot_prompt` in options.\n"
-            "4. If `format_type` is 'image_to_image': Populate stem visual AND option `plot_prompt`s.\n\n"
+            f"## 3. SUBJECT SPECIFIC DOCTRINES\n"
             f"{visual_doctrine}\n"
-            "## LOGIC PATHS\n"
+            "## 4. LOGIC PATHS & EXPLANATION\n"
             "### ENGINE 1: THE ANALYTICAL ENGINE (Use for Text-Only Options)\n"
-            "1. **SETUP**: Define the exact variables, facts, or numbers to be used.\n"
-            "2. **SOLUTION**: Explicitly calculate the step-by-step arithmetic or logical derivation.\n"
-            "3. **TRAPS**: Generate 3 wrong answers based on common computational errors.\n\n"
+            "1. SETUP: Define exact facts/numbers.\n"
+            "2. SOLUTION: Explicitly calculate step-by-step.\n"
+            "3. TRAPS: Generate 3 wrong answers based on common errors.\n\n"
             f"{VISUAL_REASONING_DOCTRINE}\n\n"
-            "## SCHEMA & FIELD RESTRICTIONS\n"
-            "- **SOURCES**: Keep `source_url` as null unless you actively hold a verified URL in your context.\n"
-            "- **CONTEXT**: Use `context_text` ONLY if the question requires a large foundational reading passage. Otherwise, keep it null.\n"
-            "- **OPTION VISUALS**: Even if an option has a `plot_prompt`, its `text` field MUST NEVER BE NULL (use it as a fallback).\n\n"
+            "## 5. SCHEMA & FIELD RESTRICTIONS\n"
+            "- SOURCES: Keep `source_url` null unless you hold a verified URL.\n"
+            "- CONTEXT: Use `context_text` ONLY for large reading passages. NEVER use it to describe a graph that should be in a plot_prompt.\n"
+            "- OPTION VISUALS: Even if an option has a `plot_prompt`, its `text` field MUST NEVER BE NULL (use a brief fallback like 'Graph A').\n\n"
             "## SMART FOLLOW-UP PROTOCOL\n"
             "Generate 3 'Ghost Prompts' (easier_payload, harder_payload, retry_payload) in the EXACT SAME LANGUAGE as the quiz.\n"
         )
@@ -301,7 +313,6 @@ class QuizService:
                         q_dict = q_data.dict() if hasattr(q_data, 'dict') else q_data
                         idx = event.get("index", 0)
                         
-                        # Double-enforce cleanup in backend just as a safety net
                         if idx not in allowed_stem_visuals:
                             q_dict["image_prompt"] = None
                             q_dict["plot_prompt"] = None

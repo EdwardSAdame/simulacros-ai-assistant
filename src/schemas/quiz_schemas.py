@@ -1,10 +1,18 @@
-# src/schemas/quiz_schemas.py
 from pydantic import BaseModel, Field
 from typing import List, Optional, Literal
 
 class QuizOption(BaseModel):
     # -------------------------------------------------------------------------
-    # OPTION TEXT & VISUALS (PATH 2: MODULAR OPTIONS)
+    # 1. OPTION REASONING (Chain of Thought first)
+    # -------------------------------------------------------------------------
+    feedback: str = Field(..., description=(
+        "Short feedback explaining exactly why this specific option is right or wrong. "
+        "By writing this first, you anchor the logical trap or solution this option represents. "
+        "Speak directly to the student."
+    ))
+
+    # -------------------------------------------------------------------------
+    # 2. OPTION EXECUTION (Text or Visual)
     # -------------------------------------------------------------------------
     text: Optional[str] = Field(
         None, 
@@ -12,7 +20,7 @@ class QuizOption(BaseModel):
             "The answer text. FORMATTING RULES: "
             "1. If the answer is just words/text, write normally WITHOUT delimiters. "
             "2. If the answer is a number, equation, or symbol, wrap it in standard LaTeX delimiters \\( and \\). "
-            "CRITICAL: If you generate a `plot_prompt` for this option, you MUST leave this text field as a literal JSON null. "
+            "CRITICAL: If you generate a `plot_prompt` below for this option, you MUST leave this text field as a literal JSON null. "
             "Do NOT write 'Option A' or redundant equations if a visual is present."
         )
     )
@@ -21,6 +29,7 @@ class QuizOption(BaseModel):
         None, 
         description=(
             "Mathematical instructions for Matplotlib to generate a graph for THIS SPECIFIC OPTION. "
+            "Execute the visual plan you defined in the question's main explanation. "
             "Leave null if the question's `format_type` is `text_to_text` or `image_to_text`."
         )
     )
@@ -29,11 +38,6 @@ class QuizOption(BaseModel):
         None, 
         description="URL of the generated option graph. If you wrote a plot_prompt, LEAVE THIS NULL. The backend will populate it automatically."
     )
-
-    feedback: str = Field(..., description=(
-        "Short feedback explaining why this option is right/wrong to the student. Speak directly to the student. "
-        "Do NOT use meta-words like 'Failure Path' or 'Trap'."
-    ))
 
     original_index: Optional[int] = Field(
         None, 
@@ -45,92 +49,86 @@ class QuizQuestion(BaseModel):
     question_title: str = Field(..., description="Title with number, e.g., '# 1. Topic'")
     
     # -------------------------------------------------------------------------
-    # 0. STRICT FORMAT ENFORCEMENT (The Structural Anchor)
+    # STEP 1: THE ARCHITECTURAL ANCHOR
     # -------------------------------------------------------------------------
     format_type: Literal["text_to_text", "image_to_text", "text_to_image", "image_to_image"] = Field(
         ..., 
         description=(
             "CRITICAL: The required structural layout for this question as mandated by the system prompt. "
-            "You MUST select the exact format assigned to this question number in the instructions."
+            "You MUST select the exact format assigned to this question number in the instructions. "
+            "This dictates whether you will write Matplotlib code in the stem, the options, both, or neither."
         )
     )
 
     # -------------------------------------------------------------------------
-    # 1. QUANTITATIVE VISUALS: Data/Math driven visuals
+    # STEP 2: THE MASTER REASONING BLOCK (Plan before executing)
     # -------------------------------------------------------------------------
-    plot_prompt: Optional[str] = Field(
-        None, 
-        description=(
-            "Mathematical instructions for Matplotlib for the main question stem. "
-            "The generated graph must contain the critical data needed to solve the problem. "
-            "Leave null if `format_type` is `text_to_text` or `text_to_image`."
-        )
-    )
+    explanation: str = Field(..., description=(
+        "Internal reasoning and structural blueprint. You MUST write this before generating the question text or visuals.\n"
+        "1. THE SCENARIO: Define the exact facts, numbers, or geometric properties.\n"
+        "2. THE VISUAL MAPPING: Based on the `format_type` above, explicitly state if the stem needs a `plot_prompt` and if the options need `plot_prompt`s.\n"
+        "3. THE SOLUTION: The step-by-step arithmetic, logical derivation, or visual transformation to reach the correct answer.\n"
+        "4. THE TRAPS: Identify 3 plausible calculation/visual errors to use as distractors.\n"
+        "This field is for internal logic only; omit final question text."
+    ))
 
     # -------------------------------------------------------------------------
-    # 2. CONTEXT & LOGIC (Foundational Texts & Chain of Thought)
+    # STEP 3: CONTEXT & QUESTION STEM EXECUTION
     # -------------------------------------------------------------------------
     context_text: Optional[str] = Field(
         None, 
         description=(
             "The foundational reading passage or shared scenario. "
-            "CRITICAL RULES: "
-            "3. Do NOT put the actual interrogative question here. "
+            "CRITICAL: Do NOT put the actual interrogative question here. "
+            "NEVER use this to describe data that should be rendered visually via a `plot_prompt`."
         )
     )
 
     source_url: Optional[str] = Field(
         None, 
-        description="The exact URL of the web search. CRITICAL: If you did not perform a web search, you MUST leave this as null. Do NOT hallucinate or invent URLs."
+        description="The exact URL of the web search. Leave null if no search was performed."
     )
 
-    explanation: str = Field(..., description=(
-        "Internal reasoning plan structured based on the active Engine:\n"
-        "FOR ENGINE 1 (TEXT OPTIONS - Math/Logic):\n"
-        "1. THE SETUP: Define exact facts or numbers.\n"
-        "2. THE SOLUTION: Step-by-step arithmetic or logical derivation.\n"
-        "3. THE TRAPS: Identify 3 calculation or logic errors.\n\n"
-        "FOR ENGINE 2 (IMAGE OPTIONS - Pure Visual Reasoning):\n"
-        "1. THE VISUAL BASELINE: Define the initial visual state, data representation, or geometric structure in the STEM.\n"
-        "2. THE VISUAL INFERENCE: Define the logical visual jump required (e.g., translating data to a new format, applying a spatial rule, or recognizing a structural pattern). DO NOT solve algebraically to find a single numeric coordinate.\n"
-        "3. THE VISUAL TRAPS: Identify 3 plausible but visually flawed representations (e.g., incorrect axis mapping, inverted trends, distorted proportions).\n\n"
-        "This field is for internal logic only; omit final question text."
-    ))
-
-    # -------------------------------------------------------------------------
-    # 3. STUDENT FACING TEXT
-    # -------------------------------------------------------------------------
     question_text: str = Field(..., description=(
         "The complete student-facing question. "
-        "CRITICAL FORMATTING GUIDELINES:\n"
-        "1. NO META-LABELS: Do NOT use structural headers like '## Estimulo', '## Contexto', '## Pregunta' or any bolded section labels. The student already knows what the question is.\n"
-        "2. LATEX: Wrap all mathematical variables, formulas, and numbers in standard LaTeX \\( and \\).\n"
-        "3. FLOW: Start directly with the scenario or the data. If a scenario is needed, present it as the first paragraph, and follow it with the question as a logical continuation, not as a separate labeled section.\n"
-        "4. VISUAL INTEGRATION: If a `plot_prompt` is provided, the text should introduce the data shown in the graph naturally."
+        "NO META-LABELS. Wrap math in \\( \\). "
+        "If a `plot_prompt` is provided below, the text should introduce the data shown in the graph naturally."
     ))
 
-    # -------------------------------------------------------------------------
-    # 4. CREATIVE VISUALS (Moved to the bottom. Context is already established)
-    # -------------------------------------------------------------------------
+    plot_prompt: Optional[str] = Field(
+        None, 
+        description=(
+            "Mathematical instructions for Matplotlib for the main question stem. "
+            "Execute the visual mapping you planned in the `explanation` field. "
+            "Leave null if `format_type` is `text_to_text` or `text_to_image`."
+        )
+    )
+
     image_prompt: Optional[str] = Field(
         None, 
         description=(
-            "A purely artistic and atmospheric representation of a physical environment related to the theme of the question. "
-            "Focus exclusively on natural landscapes, historical architecture, or tangible real-world scenes. "
-            "CRITICAL: You MUST absolutely BAN any mention of academic tropes. "
-            "Make it a beautiful, disconnected physical scene. Leave null if `format_type` is `text_to_text` or `text_to_image`."
+            "A purely artistic and atmospheric representation of a physical environment. "
+            "Focus exclusively on natural landscapes or tangible real-world scenes. No academic tropes. "
+            "Leave null if `format_type` is `text_to_text` or `text_to_image`."
         )
     )
     
     image_url: Optional[str] = Field(
         None, 
-        description="URL of the generated image/graph for the question stem. If you wrote an image_prompt or plot_prompt, LEAVE THIS NULL. The backend will populate it automatically."
+        description="URL of the generated image/graph for the question stem. LEAVE THIS NULL if you wrote a prompt."
     )
 
-    difficulty: Literal[1, 2, 3] = Field(1, description="Difficulty weight: 1 (Basic/Easy), 2 (Application/Medium), 3 (Analysis/Hard).")
+    difficulty: Literal[1, 2, 3] = Field(1, description="Difficulty weight: 1 (Easy), 2 (Medium), 3 (Hard).")
 
-    options: List[QuizOption] = Field(..., description="Exactly 4 options.")
-    correct_option_index: Literal[0, 1, 2, 3] = Field(..., description="Index of the correct option (0-3).")
+    # -------------------------------------------------------------------------
+    # STEP 4: DECISION & OPTIONS EXECUTION
+    # -------------------------------------------------------------------------
+    correct_option_index: Literal[0, 1, 2, 3] = Field(
+        ..., 
+        description="Index of the correct option (0-3). Decide this before generating the options array."
+    )
+
+    options: List[QuizOption] = Field(..., description="Exactly 4 options, executing the traps and solution planned in the explanation.")
 
 
 class QuizResponse(BaseModel):
