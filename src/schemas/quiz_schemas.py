@@ -28,8 +28,8 @@ class QuizOption(BaseModel):
     plot_prompt: Optional[str] = Field(
         None, 
         description=(
-            "Mathematical instructions for Matplotlib to generate a graph for THIS SPECIFIC OPTION. "
-            "Execute the visual plan you defined in the question's main explanation. "
+            "A NATURAL LANGUAGE description of the graph needed for THIS SPECIFIC OPTION. "
+            "CRITICAL KERNEL RULE:ONLY write descriptive natural language. "
             "Leave null if the question's `format_type` is `text_to_text` or `image_to_text`."
         )
     )
@@ -56,7 +56,7 @@ class QuizQuestion(BaseModel):
         description=(
             "CRITICAL: The required structural layout for this question as mandated by the system prompt. "
             "You MUST select the exact format assigned to this question number in the instructions. "
-            "This dictates whether you will write Matplotlib code in the stem, the options, both, or neither."
+            "This dictates whether you will write natural language plot descriptions in the stem, the options, both, or neither."
         )
     )
 
@@ -98,8 +98,9 @@ class QuizQuestion(BaseModel):
     plot_prompt: Optional[str] = Field(
         None, 
         description=(
-            "Mathematical instructions for Matplotlib for the main question stem. "
-            "Execute the visual mapping you planned in the `explanation` field. "
+            "A NATURAL LANGUAGE description of the data or math graph needed for the main question stem. "
+            "CRITICAL KERNEL RULE: You MUST NOT write Python or Matplotlib code here. ONLY write descriptive natural language. "
+            "Example: 'A bar chart showing sales for four months: Jan 24, Feb 30...' "
             "Leave null if `format_type` is `text_to_text` or `text_to_image`."
         )
     )
