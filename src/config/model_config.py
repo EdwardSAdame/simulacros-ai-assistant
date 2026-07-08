@@ -117,11 +117,3 @@ def get_model_config(mode: str = "omega") -> ModelConfig:
         realtime_model=realtime_model,
         realtime_voice=realtime_voice
     )
-
-def get_search_model_name() -> str:
-    """
-    Returns the model to use specifically for Web Search tasks.
-    Defaults to 'gpt-4o' if not set in env vars.
-    This enables the Hybrid Routing strategy.
-    """
-    return os.getenv("OPENAI_MODEL_SEARCH", "gpt-4o")
