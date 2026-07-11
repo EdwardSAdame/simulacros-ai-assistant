@@ -6,7 +6,6 @@ from typing import Tuple, Dict, Any, List
 # CONFIG
 from src.config.settings import get_vector_search_max_results, get_code_interpreter_memory
 from src.config.page_vectorstores import get_stores_for_page
-from src.config.web_search_config import get_search_filters 
 from src.config.model_config import get_model_config
 from src.utils.logging_utils import log_event
 
@@ -86,6 +85,7 @@ class ChatService:
         exam_state: str | None, 
         category: str,
         requires_visuals: bool,
+        requires_web_search: bool,  # 🔹 NEW PARAMETER ADDED HERE
         arena_id: str | None,
         clean_pdfs: List[str],
         actual_conversation_id: str
@@ -96,8 +96,9 @@ class ChatService:
         # 1. Setup Resources
         selected_vector_stores = get_stores_for_page(page, exam_id=exam_id)
         
-        web_search_config = get_search_filters(exam_context)
-        is_web_search_active = (web_search_config is not None)
+        # 🔹 ROUTER-DRIVEN WEB SEARCH: We completely bypass the old context check
+        web_search_config = {"scope": "open_web", "search_enabled": True} if requires_web_search else None
+        is_web_search_active = requires_web_search
 
         runtime_signals = build_runtime_context(
             page=page, user_id=user_id, name=name, email=email, requires_visuals=requires_visuals

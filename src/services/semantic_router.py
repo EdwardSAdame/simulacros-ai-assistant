@@ -12,6 +12,7 @@ class RouterResponse(BaseModel):
     category: str = Field(description="The academic category or subject of the query.")
     intent: Literal["chat", "quiz", "creative_image", "admission_stats", "mentalMap", "flashcards"] = Field(description="The primary intent of the user. Use 'mentalMap' if the user asks for a mind map, conceptual map, or structural diagram. Use 'flashcards' for studying, memorizing, or reviewing facts.")
     requires_visuals: bool = Field(description="True if the user is asking for graphs, charts, or visual analysis.")
+    requires_web_search: bool = Field(description="True if the query requires up-to-date real-time data, fact-verification, dates, schedules, costs, or historical university stats/cutoffs not present in core training.")
     num_questions: int = Field(description="The number of questions requested if the intent is 'quiz', or the number of cards if the intent is 'flashcards'. Return 0 if the user does not specify a number.")
     loading_phrases: List[str] = Field(description="2 to 3 engaging loading phrases in Spanish relevant to the query.")
 
@@ -41,6 +42,7 @@ class SemanticRouter:
                 "category": "general", 
                 "intent": "chat",
                 "requires_visuals": False,
+                "requires_web_search": False,
                 "num_questions": 0,
                 "loading_phrases": ["Procesando...", "Esperando datos..."], 
                 "source": "fallback"
@@ -53,16 +55,18 @@ class SemanticRouter:
                 "category": result.get("category", "general"),
                 "intent": result.get("intent", "chat"),
                 "requires_visuals": result.get("requires_visuals", False),
+                "requires_web_search": result.get("requires_web_search", False),
                 "num_questions": result.get("num_questions", 0),
                 "loading_phrases": result.get("loading_phrases", ["Analizando...", "Pensando..."]),
                 "source": "ai"
             }
         except Exception as e:
-            logger.warning(f"Router: LLM classification failed: {e}")
+            logger.error(f"Router: LLM classification failed: {e}")
             return {
                 "category": "general", 
                 "intent": "chat",
                 "requires_visuals": False,
+                "requires_web_search": False,
                 "num_questions": 0,
                 "loading_phrases": ["Analizando solicitud...", "Procesando información..."],
                 "source": "error_fallback"
@@ -151,7 +155,7 @@ class SemanticRouter:
                     TokenUsageService().log_token_usage(
                         user_id=user_id, 
                         conversation_id=conversation_id, 
-                        source="router",                 
+                        source="router",                  
                         tier="router",        
                         engine=router_model,  
                         input_tokens=input_val, 
@@ -179,29 +183,27 @@ class SemanticRouter:
                 intent = "chat"
 
             requires_visuals = data.get("requires_visuals", False)
+            requires_web_search = data.get("requires_web_search", False)
 
             if intent == "quiz" and category in self.visual_categories:
                 requires_visuals = True
                 logger.info(f"Router Override: Enforcing requires_visuals=True for {category} quiz to apply visual doctrine styling.")
 
-            # ----- CLEAN ARCHITECTURE UPDATE -----
-            # The router no longer decides limits or randomizes numbers.
-            # It just extracts the explicit user intent and passes it down.
             if intent not in ["quiz", "flashcards"]:
                 num_questions = 0
             else:
                 num_questions = data.get("num_questions", 0)
-            # -------------------------------------
                 
             phrases = data.get("loading_phrases", [])
             if not phrases:
                 phrases = ["Procesando...", "Analizando..."]
 
-            logger.info(f"Router: AI classified as '{category}' with intent '{intent}' in context '{exam_context}' and active state '{current_activity}'")
+            logger.info(f"Router: AI classified as '{category}' with intent '{intent}' and web_search='{requires_web_search}'")
             return {
                 "category": category, 
                 "intent": intent, 
                 "requires_visuals": requires_visuals, 
+                "requires_web_search": requires_web_search,
                 "num_questions": num_questions,
                 "loading_phrases": phrases
             }

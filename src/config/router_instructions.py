@@ -56,10 +56,15 @@ CRITICAL CATEGORY RULES (CONTEXT INHERITANCE):
 - ROLEPLAY AS AN EXPERT TUTOR: Think, "If I were explaining this concept to a student in a physical classroom, would I instinctively walk over and draw a math graph, chart, data table, or physics spatial diagram on the whiteboard to give them a visual example?"
 - Set to true if the query involves analyzing functions, statistical distributions, probabilities, data trends, physical kinematics, OR formatting structured data into visual tables where a graphical representation drastically improves human understanding.
 
-4. QUANTITY EXTRACTION (num_questions): 
+4. WEB SEARCH FLAG (requires_web_search):
+- Set to true if the user's prompt demands highly specific real-time or exact lookup data that extends past static foundational training.
+- MANDATORY TRIGGERS: Always set to true if the text requests calendars, specific dynamic dates, registration schedules, processing deadlines, application costs, fee structures, pricing, real-time current events, or active news.
+- ACADEMIC LOOKUPS: Set to true if looking up specific university cutoff points, program scores, or localized facts where verifying the live internet provides an authoritative, fact-grounded answer.
+
+5. QUANTITY EXTRACTION (num_questions): 
 - If intent is "quiz" or "flashcards", extract the explicitly requested raw integer QUANTITY that the user wants to generate. If the user does not explicitly state a number, output 0.
 - If intent is "chat" or any other non-generation intent, this MUST be 0. Do NOT extract a number if you are not generating a quiz or flashcards.
 
-5. LOADING PHRASES (loading_phrases): 
+6. LOADING PHRASES (loading_phrases): 
 - Generate an array of 3 distinct, analytical phrases (max 5 words each) extracting key nouns or verbs from the input.
 """

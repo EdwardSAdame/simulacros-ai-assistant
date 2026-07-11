@@ -136,6 +136,7 @@ def lambda_handler(event, context):
 
             intent = "chat" 
             requires_visuals = False 
+            requires_web_search = False
             category_key = "general" 
             num_questions = 5 
             
@@ -173,6 +174,7 @@ def lambda_handler(event, context):
                     intent = str(raw_intent).strip().lower()
                     
                     requires_visuals = routing_result.get("requires_visuals", False) 
+                    requires_web_search = routing_result.get("requires_web_search", False)
                     num_questions = routing_result.get("num_questions", 5)
                     
                     client_action = None
@@ -189,6 +191,7 @@ def lambda_handler(event, context):
                         "client_row_id": client_row_id,
                         "client_action": client_action,
                         "requires_visuals": requires_visuals,
+                        "requires_web_search": requires_web_search,
                         "intent": intent  
                     })
                     
@@ -214,6 +217,7 @@ def lambda_handler(event, context):
                         "category": category_key,
                         "intent": intent,
                         "requires_visuals": requires_visuals,
+                        "requires_web_search": requires_web_search,
                         "num_questions": num_questions,
                         "client_action": client_action,
                         "phrases_count": len(loading_phrases),
@@ -241,6 +245,7 @@ def lambda_handler(event, context):
                 intent=intent,
                 category=category_key, 
                 requires_visuals=requires_visuals, 
+                requires_web_search=requires_web_search,
                 stream_manager=stream_manager,
                 arena_id=arena_id,
                 exam_id=exam_id, 

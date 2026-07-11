@@ -46,10 +46,11 @@ class OrchestratorService:
         intent: str = "chat",
         category: str = "general",
         requires_visuals: bool = False,
+        requires_web_search: bool = False, # 🔹 NEW: Receive the router's web search flag
         stream_manager: Any | None = None,
         arena_id: str | None = None,
         exam_id: str | None = None,  
-        exam_state: str | None = None, # <-- NEW: Receive exam_state from Lambda Worker
+        exam_state: str | None = None, 
         is_hidden: bool = False,
         num_questions: int = 0
     ) -> Tuple[str, str, str, Dict | None]:
@@ -196,8 +197,10 @@ class OrchestratorService:
                     conversation_input=conversation_input, user_id=user_id, page=page, 
                     name=name, email=email, message=message, mode=mode, exam_context=locked_exam_context, 
                     exam_id=exam_id, 
-                    exam_state=exam_state, # <-- NEW: Pass exam_state down to ChatService
-                    category=category, requires_visuals=requires_visuals, arena_id=arena_id, 
+                    exam_state=exam_state, 
+                    category=category, requires_visuals=requires_visuals, 
+                    requires_web_search=requires_web_search, # 🔹 NEW: Pass the flag to the actual execution
+                    arena_id=arena_id, 
                     clean_pdfs=clean_pdfs, actual_conversation_id=actual_conversation_id
                 )
                 
