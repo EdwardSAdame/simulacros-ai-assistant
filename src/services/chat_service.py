@@ -85,7 +85,7 @@ class ChatService:
         exam_state: str | None, 
         category: str,
         requires_visuals: bool,
-        requires_web_search: bool,  # 🔹 NEW PARAMETER ADDED HERE
+        requires_web_search: bool,  
         arena_id: str | None,
         clean_pdfs: List[str],
         actual_conversation_id: str
@@ -99,6 +99,11 @@ class ChatService:
         # 🔹 ROUTER-DRIVEN WEB SEARCH: We completely bypass the old context check
         web_search_config = {"scope": "open_web", "search_enabled": True} if requires_web_search else None
         is_web_search_active = requires_web_search
+
+        # 🔹 EXCLUSIVE TOOL GATING: Prevent tool conflict by removing vector stores if web search is active
+        if is_web_search_active:
+            selected_vector_stores = None
+            logger.info("Web search flag active: File Search tool disabled to force Open Web execution.")
 
         runtime_signals = build_runtime_context(
             page=page, user_id=user_id, name=name, email=email, requires_visuals=requires_visuals
@@ -114,7 +119,8 @@ class ChatService:
                     arena_instructions = arena_context.get('SystemInstructions', '')
                     
                     arena_vector_store = arena_context.get('VectorStoreId')
-                    if arena_vector_store:
+                    # Respect tool gating for arena vector stores too
+                    if arena_vector_store and not is_web_search_active:
                         if not selected_vector_stores:
                             selected_vector_stores = []
                         selected_vector_stores.append(arena_vector_store)
