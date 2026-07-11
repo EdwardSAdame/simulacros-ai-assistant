@@ -15,8 +15,8 @@ from src.services.signal_service import build_runtime_signals
 from src.assistant.artifact_handler import handle_generated_files
 from src.utils.response_parser import extract_sources
 from src.services.image_usage_service import ImageUsageService
-from src.config.tools_config import get_custom_tools
-from src.services.admission_service import query_admission_data
+
+# 🔹 REMOVED: query_admission_data and get_custom_tools imports (Dead Code)
 
 from .base_client import BaseAssistantClient
 
@@ -127,7 +127,8 @@ class ChatClient:
         email: str | None = None, 
         mode: str = "omega",
         system_instruction: str | None = None,
-        enable_image_generation: bool = True
+        enable_image_generation: bool = True,
+        requires_web_search: bool = False # 🔹 NEW: Re-enable web search for streaming endpoints!
     ) -> Generator[Any, None, None]:
         
         client = get_openai_client()
@@ -140,7 +141,19 @@ class ChatClient:
         api_input = [{"role": "system", "content": [{"type": "input_text", "text": system_text}]}]
         api_input.extend(conversation_input)
 
-        tools = get_custom_tools()
+        # 🔹 NEW: Use configure_tools to properly map Web Search instead of the old get_custom_tools
+        web_search_config = {"scope": "open_web", "search_enabled": True} if requires_web_search else None
+        
+        tools = BaseAssistantClient.configure_tools(
+            vector_store_ids=None,
+            requires_visuals=False,
+            code_interpreter_only=False,
+            pdf_urls=None,
+            web_search_config=web_search_config,
+            user_location=None,
+            model_config=cfg,
+            active_container_id=None
+        )
         
         if enable_image_generation:
             tools.append({
@@ -154,12 +167,6 @@ class ChatClient:
         req = BaseAssistantClient.build_request_payload(cfg, api_input, tools)
         req["stream"] = True
 
-        tool_name = None
-        tool_call_id = ""
-        tool_args_buffer = ""
-        
-        pending_tool_calls = []
-
         try:
             stream = client.responses.create(**req)
             
@@ -172,87 +179,10 @@ class ChatClient:
                     if usage_obj is not None:
                         yield {"type": "usage_metrics", "data": BaseAssistantClient.extract_usage_metrics(usage_obj)}
 
-                if event_type == "response.output_text.delta":
-                    yield event
-                    
-                elif event_type == "response.output_item.added":
-                    item = getattr(event, "item", None)
-                    if item and getattr(item, "type", "") == "function_call":
-                        tool_name = getattr(item, "name", "")
-                        tool_call_id = getattr(item, "call_id", "") or getattr(item, "id", "")
-                        
-                elif event_type == "response.function_call_arguments.delta":
-                    tool_args_buffer += getattr(event, "delta", "")
-                    
-                elif event_type == "response.function_call_arguments.done":
-                    item = getattr(event, "item", None)
-                    if item:
-                        tool_call_id = getattr(item, "call_id", "") or getattr(item, "id", "") or tool_call_id
-                    
-                    if tool_name == "query_admission_data":
-                        pending_tool_calls.append({
-                            "name": tool_name,
-                            "id": tool_call_id,
-                            "args": tool_args_buffer
-                        })
-                    
-                    tool_name = None
-                    tool_call_id = ""
-                    tool_args_buffer = ""
-                
+                # 🔹 REMOVED: All manual function_call intercepts and secondary stream logic.
+                # OpenAI handles web_search completely autonomously and streams the text output directly!
                 else:
                     yield event
-
-            if pending_tool_calls:
-                logger.info(f"Executing {len(pending_tool_calls)} parallel tool calls.")
-                
-                for tc in pending_tool_calls:
-                    try:
-                        args = json.loads(tc["args"])
-                        tool_result = query_admission_data(
-                            career=args.get("career"),
-                            min_score=args.get("min_score"),
-                            max_score=args.get("max_score"),
-                            semester=args.get("semester"),
-                            sort_by=args.get("sort_by"),
-                            sort_order=args.get("sort_order"),
-                            limit=args.get("limit")
-                        )
-                        
-                        api_input.append({
-                            "type": "function_call",
-                            "call_id": tc["id"],
-                            "name": tc["name"],
-                            "arguments": tc["args"]
-                        })
-                        api_input.append({
-                            "type": "function_call_output",
-                            "call_id": tc["id"],
-                            "output": tool_result
-                        })
-                    except Exception as e:
-                        logger.error(f"Error executing tool {tc['name']}: {e}")
-                        api_input.append({
-                            "type": "function_call_output",
-                            "call_id": tc["id"],
-                            "output": json.dumps({"error": "Query execution failed."})
-                        })
-                
-                req2 = BaseAssistantClient.build_request_payload(cfg, api_input, tools)
-                req2["stream"] = True
-                stream2 = client.responses.create(**req2)
-                
-                for event2 in stream2:
-                    event_type2 = getattr(event2, "type", "")
-                    
-                    if event_type2 == "response.completed":
-                        resp_obj2 = getattr(event2, "response", event2)
-                        usage_obj2 = getattr(resp_obj2, "usage", None)
-                        if usage_obj2 is not None:
-                            yield {"type": "usage_metrics", "data": BaseAssistantClient.extract_usage_metrics(usage_obj2)}
-
-                    if event_type2 == "response.output_text.delta":
-                        yield event2
 
         except Exception as e:
             logger.error(f"Stream chat failed: {e}")

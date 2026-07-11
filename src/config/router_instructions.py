@@ -12,15 +12,15 @@ def build_router_instructions(exam_context: str, current_activity: str = "chat")
     
     # 1. UNAL MATRIX
     if exam_context == "UNAL":
-        categories = '"matematicas", "ciencias_naturales", "analisis_textual", "ciencias_sociales", "analisis_imagen", "admisiones", "identity_protection", "general"'
+        categories = '"matematicas", "ciencias_naturales", "analisis_textual", "ciencias_sociales", "analisis_imagen", "identity_protection", "general"'
     
     # 2. ICFES MATRIX
     elif exam_context == "ICFES":
-        categories = '"matematicas", "ciencias_naturales", "lectura_critica", "sociales_ciudadanas", "ingles", "admisiones", "identity_protection", "general"'
+        categories = '"matematicas", "ciencias_naturales", "lectura_critica", "sociales_ciudadanas", "ingles", "identity_protection", "general"'
     
     # 3. GENERAL MATRIX (Union of both, used for discovery)
     else:
-        categories = '"matematicas", "ciencias_naturales", "analisis_textual", "ciencias_sociales", "analisis_imagen", "lectura_critica", "sociales_ciudadanas", "ingles", "admisiones", "identity_protection", "general"'
+        categories = '"matematicas", "ciencias_naturales", "analisis_textual", "ciencias_sociales", "analisis_imagen", "lectura_critica", "sociales_ciudadanas", "ingles", "identity_protection", "general"'
 
     return f"""MISSION:
 Analyze user input AND the conversation history to output a strict JSON object. Use your universal knowledge to semantically route the query to the correct domain. Pay close attention to context from previous turns.
@@ -36,12 +36,11 @@ THEN you MUST strictly output:
 UNDER NO CIRCUMSTANCES should you output "quiz" or "flashcards" for a short numeric input. You may ONLY route to a generation intent if the user uses explicit creation verbs (e.g., "crea un nuevo simulacro", "dame otro quiz", "generar").
 
 1. INTENT CLASSIFICATION: Classify the user's goal using exactly one of these strings. Evaluate this BEFORE category mapping:
-- "chat": Standard conversational inquiries, explanations, mathematical plotting, data visualization charts (graphs, functions, tables), general statements, identity questions (e.g., "quien eres", "que puedes hacer"), OR follow-ups regarding the CURRENT_ACTIVITY. CRITICAL: Do NOT route mind maps or flashcards here.
+- "chat": Standard conversational inquiries, explanations, mathematical plotting, data visualization charts (graphs, functions, tables), general statements, identity questions (e.g., "quien eres", "que puedes hacer"), university admission cutoff scores or data, OR follow-ups regarding the CURRENT_ACTIVITY. CRITICAL: Do NOT route mind maps or flashcards here.
 - "quiz": User EXPLICITLY wants to GENERATE a NEW test, exam, simulacro, quiz, or practice session. (Subject to the Critical Algorithmic Override above).
 - "flashcards": User EXPLICITLY wants to learn facts, review, or memorize information quickly using NEW flashcards, fichas de estudio, or spaced repetition.
 - "mentalMap": User EXPLICITLY asks to visualize information through a NEW mind map, mapa mental, conceptual map, or node-based structural diagram.
 - "creative_image": User EXPLICITLY wants to generate an artistic, photorealistic, or fictional image. NEVER use this intent for any form of analytical data visualization, structural diagram, or mathematical plotting.
-- "admission_stats": User wants university admission cutoff scores or data.
 
 2. CATEGORY CLASSIFICATION: Identify the broad academic subject. Map specific sub-concepts to their parent discipline. You MUST use exactly one of these literal strings:
 {categories}.
@@ -50,7 +49,6 @@ CRITICAL CATEGORY RULES (CONTEXT INHERITANCE):
 - SUBJECT PRIORITY: If the user explicitly mentions ANY specific subject or topic in their current message, you MUST route to that specific category, even if they use words like "simulacro" or "examen".
 - CONTEXT INHERITANCE: If the user's current message lacks an explicit subject (e.g., requests to generate "another one", "more", or "harder"), you MUST analyze the conversation history. If the previous interactions focused on a specific category, you MUST inherit and output that exact category.
 - "general": You MUST use this category ONLY if the user explicitly asks for a broad, multi-subject exam WITHOUT specifying any subject at all, OR if there is absolutely no subject context in either the current message or the conversation history, or if they ask a general platform/identity question.
-- "admisiones": You MUST use this EXCLUSIVELY if the user asks for historical cutoff scores, admission statistics, or university data. NEVER use this category for a quiz.
 
 3. VISUALS FLAG (requires_visuals): 
 - ROLEPLAY AS AN EXPERT TUTOR: Think, "If I were explaining this concept to a student in a physical classroom, would I instinctively walk over and draw a math graph, chart, data table, or physics spatial diagram on the whiteboard to give them a visual example?"

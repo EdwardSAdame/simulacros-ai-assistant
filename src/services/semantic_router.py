@@ -10,7 +10,7 @@ logger = logging.getLogger(__name__)
 
 class RouterResponse(BaseModel):
     category: str = Field(description="The academic category or subject of the query.")
-    intent: Literal["chat", "quiz", "creative_image", "admission_stats", "mentalMap", "flashcards"] = Field(description="The primary intent of the user. Use 'mentalMap' if the user asks for a mind map, conceptual map, or structural diagram. Use 'flashcards' for studying, memorizing, or reviewing facts.")
+    intent: Literal["chat", "quiz", "creative_image", "mentalMap", "flashcards"] = Field(description="The primary intent of the user. Use 'mentalMap' if the user asks for a mind map, conceptual map, or structural diagram. Use 'flashcards' for studying, memorizing, or reviewing facts.")
     requires_visuals: bool = Field(description="True if the user is asking for graphs, charts, or visual analysis.")
     requires_web_search: bool = Field(description="True if the query requires up-to-date real-time data, fact-verification, dates, schedules, costs, or historical university stats/cutoffs not present in core training.")
     num_questions: int = Field(description="The number of questions requested if the intent is 'quiz', or the number of cards if the intent is 'flashcards'. Return 0 if the user does not specify a number.")
@@ -28,8 +28,7 @@ class SemanticRouter:
         self.valid_categories = [
             "matematicas", "ciencias_naturales", "analisis_textual", 
             "ciencias_sociales", "analisis_imagen", "lectura_critica", 
-            "sociales_ciudadanas", "ingles", "admisiones", 
-            "identity_protection", "general"
+            "sociales_ciudadanas", "ingles", "identity_protection", "general"
         ]
         
         self.visual_categories = [
@@ -177,7 +176,7 @@ class SemanticRouter:
             
             if intent_lower in ["mentalmap", "mental_map"]:
                 intent = "mentalMap"
-            elif intent_lower in ["quiz", "chat", "creative_image", "admission_stats", "flashcards"]: 
+            elif intent_lower in ["quiz", "chat", "creative_image", "flashcards"]: 
                 intent = intent_lower
             else:
                 intent = "chat"

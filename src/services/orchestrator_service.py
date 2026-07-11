@@ -16,10 +16,9 @@ from src.services.token_usage_service import TokenUsageService
 from src.services.chat_service import ChatService
 from src.services.quiz_service import QuizService
 from src.services.creative_image_service import CreativeImageService
-from src.services.admission_chat_service import AdmissionChatService
 from src.services.mindmap_service import mindmap_service
 from src.services.flashcard_service import FlashcardsService
-# Removed the deleted mock_exam_service import
+# Removed legacy admission and mock exam imports
 
 logger = logging.getLogger(__name__)
 
@@ -46,7 +45,7 @@ class OrchestratorService:
         intent: str = "chat",
         category: str = "general",
         requires_visuals: bool = False,
-        requires_web_search: bool = False, # 🔹 NEW: Receive the router's web search flag
+        requires_web_search: bool = False, # 🔹 Receive the router's web search flag
         stream_manager: Any | None = None,
         arena_id: str | None = None,
         exam_id: str | None = None,  
@@ -185,13 +184,6 @@ class OrchestratorService:
                     "token_usage": token_usage 
                 }
                 
-            elif intent == "admission_stats":
-                final_reply_text, meta_payload = AdmissionChatService.execute_admission_chat(
-                    conversation_input=conversation_input, user_id=user_id, page=page, 
-                    name=name, email=email, mode=mode, exam_context=locked_exam_context, 
-                    category=category, actual_conversation_id=actual_conversation_id
-                )
-                
             else:
                 final_reply_text, meta_payload = ChatService.execute_standard_chat(
                     conversation_input=conversation_input, user_id=user_id, page=page, 
@@ -199,7 +191,7 @@ class OrchestratorService:
                     exam_id=exam_id, 
                     exam_state=exam_state, 
                     category=category, requires_visuals=requires_visuals, 
-                    requires_web_search=requires_web_search, # 🔹 NEW: Pass the flag to the actual execution
+                    requires_web_search=requires_web_search, # 🔹 Pass the flag to the actual execution
                     arena_id=arena_id, 
                     clean_pdfs=clean_pdfs, actual_conversation_id=actual_conversation_id
                 )
