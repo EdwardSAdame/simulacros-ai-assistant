@@ -121,7 +121,6 @@ def lambda_handler(event, context):
             media_items = payload.get("media_items", [])
             arena_id = payload.get("arena_id")
             exam_id = payload.get("exam_id") 
-            exam_state = payload.get("exam_state")
             is_hidden = payload.get("is_hidden", False)
             name = payload.get("name")
             email = payload.get("email")
@@ -249,7 +248,6 @@ def lambda_handler(event, context):
                 stream_manager=stream_manager,
                 arena_id=arena_id,
                 exam_id=exam_id, 
-                exam_state=exam_state,
                 is_hidden=is_hidden, 
                 num_questions=num_questions
             )

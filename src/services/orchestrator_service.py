@@ -18,7 +18,6 @@ from src.services.quiz_service import QuizService
 from src.services.creative_image_service import CreativeImageService
 from src.services.mindmap_service import mindmap_service
 from src.services.flashcard_service import FlashcardsService
-# Removed legacy admission and mock exam imports
 
 logger = logging.getLogger(__name__)
 
@@ -45,11 +44,10 @@ class OrchestratorService:
         intent: str = "chat",
         category: str = "general",
         requires_visuals: bool = False,
-        requires_web_search: bool = False, # 🔹 Receive the router's web search flag
+        requires_web_search: bool = False, 
         stream_manager: Any | None = None,
         arena_id: str | None = None,
         exam_id: str | None = None,  
-        exam_state: str | None = None, 
         is_hidden: bool = False,
         num_questions: int = 0
     ) -> Tuple[str, str, str, Dict | None]:
@@ -189,9 +187,8 @@ class OrchestratorService:
                     conversation_input=conversation_input, user_id=user_id, page=page, 
                     name=name, email=email, message=message, mode=mode, exam_context=locked_exam_context, 
                     exam_id=exam_id, 
-                    exam_state=exam_state, 
                     category=category, requires_visuals=requires_visuals, 
-                    requires_web_search=requires_web_search, # 🔹 Pass the flag to the actual execution
+                    requires_web_search=requires_web_search,
                     arena_id=arena_id, 
                     clean_pdfs=clean_pdfs, actual_conversation_id=actual_conversation_id
                 )

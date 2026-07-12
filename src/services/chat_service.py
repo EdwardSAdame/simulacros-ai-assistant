@@ -82,7 +82,6 @@ class ChatService:
         mode: str,
         exam_context: str,
         exam_id: str | None,
-        exam_state: str | None, 
         category: str,
         requires_visuals: bool,
         requires_web_search: bool,  
@@ -91,16 +90,16 @@ class ChatService:
         actual_conversation_id: str
     ) -> Tuple[str, Dict | None]:
         
-        logger.info(f"ChatService Debug -> ExamID: {exam_id}, Page: {page}, ExamState: {exam_state}")
+        logger.info(f"ChatService Debug -> ExamID: {exam_id}, Page: {page}")
 
         # 1. Setup Resources
         selected_vector_stores = get_stores_for_page(page, exam_id=exam_id)
         
-        # 🔹 ROUTER-DRIVEN WEB SEARCH: We completely bypass the old context check
+        # ROUTER-DRIVEN WEB SEARCH: We completely bypass the old context check
         web_search_config = {"scope": "open_web", "search_enabled": True} if requires_web_search else None
         is_web_search_active = requires_web_search
 
-        # 🔹 EXCLUSIVE TOOL GATING: Prevent tool conflict by removing vector stores if web search is active
+        # EXCLUSIVE TOOL GATING: Prevent tool conflict by removing vector stores if web search is active
         if is_web_search_active:
             selected_vector_stores = None
             logger.info("Web search flag active: File Search tool disabled to force Open Web execution.")
@@ -150,8 +149,7 @@ class ChatService:
                 requires_visuals=requires_visuals, 
                 web_search_active=is_web_search_active, 
                 intent="chat",
-                category=category,
-                exam_state=exam_state 
+                category=category
             )
 
         # Look up explicit container ID to prevent duplicate billing

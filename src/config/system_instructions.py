@@ -6,7 +6,6 @@ from src.config.visual_instructions import build_visual_instructions
 from src.config.search_instructions import build_search_instructions
 from src.config.creative_image_instructions import get_creative_image_system_prompt
 from src.config.exam_frameworks import get_exam_framework
-from src.config.exam_constraints import get_active_exam_lockdown_instruction
 
 # --- 1. CORE PERSONA (GLOBAL DNA) ---
 CORE_PERSONA = """
@@ -59,8 +58,7 @@ def build_system_instructions(
     web_search_active: bool = False,
     requires_creative_image: bool = False,
     intent: str = "chat",
-    category: str = "general",
-    exam_state: str | None = None
+    category: str = "general"
 ) -> str:
     
     blocks = [CORE_PERSONA.strip()]
@@ -72,24 +70,18 @@ def build_system_instructions(
     # Define intents that produce strict artifacts (JSON) rather than conversational text
     generative_intents = ["quiz", "flashcards", "mentalMap"]
 
-    # --- ACADEMIC / PROCTOR MODE LOGIC ---
+    # --- ACADEMIC TUTORING LOGIC ---
     if intent not in generative_intents:
         
         # Inject Capabilities ONLY for conversational intents so she advertises her features
         blocks.append("## SYSTEM CAPABILITIES\n" + SYSTEM_CAPABILITIES.strip())
         
-        # Branch A: The user is in an active exam (Proctor Persona)
-        if exam_state and exam_state.strip().upper() == "ACTIVE":
-            blocks.append("## PROCTOR DOCTRINE\n" + get_active_exam_lockdown_instruction().strip())
+        doctrine_parts = [ACADEMIC_TUTORING_DOCTRINE.strip()]
+        
+        if requires_visuals:
+            doctrine_parts.append(PROACTIVE_VISUAL_DOCTRINE.strip())
             
-        # Branch B: The user is NOT in an exam (Tutor Persona)
-        else:
-            doctrine_parts = [ACADEMIC_TUTORING_DOCTRINE.strip()]
-            
-            if requires_visuals:
-                doctrine_parts.append(PROACTIVE_VISUAL_DOCTRINE.strip())
-                
-            blocks.append("## ACADEMIC TUTORING DOCTRINE\n" + "\n\n".join(doctrine_parts))
+        blocks.append("## ACADEMIC TUTORING DOCTRINE\n" + "\n\n".join(doctrine_parts))
 
     # --- CONTEXTUAL FRAMEWORKS ---
     blocks.append(get_exam_framework(exam_context, category, intent))
@@ -98,7 +90,7 @@ def build_system_instructions(
         blocks.append(build_search_instructions())
         
     # Only append visual instructions if the bot is actually allowed to tutor
-    if requires_visuals and intent not in generative_intents and (exam_state is None or exam_state.strip().upper() != "ACTIVE"):
+    if requires_visuals and intent not in generative_intents:
         blocks.append(build_visual_instructions())
 
     # --- RUNTIME SIGNALS (Only inject if NOT a generative intent) ---
