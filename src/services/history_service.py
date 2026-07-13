@@ -11,16 +11,15 @@ def decimal_default(obj):
         return int(obj) if obj % 1 == 0 else float(obj)
     raise TypeError
 
-# 🔹 FIX: Increased memory limits from 3 to 10 to support long educational interactions
-# 🔹 FIX: Added include_system_logs flag to prevent router hallucinations
-def build_history_list(conversation_id: str, max_user: int = 10, max_assistant: int = 10, include_system_logs: bool = True) -> List[Dict[str, Any]]:
+# 🔹 UPDATED: Increased default memory limits from 10 to 30 to support an elongated 30-turn context window
+def build_history_list(conversation_id: str, max_user: int = 30, max_assistant: int = 30, include_system_logs: bool = True) -> List[Dict[str, Any]]:
     """
     Retrieves recent messages from the database and formats them for the OpenAI API.
     Handles hidden context injection for assistant messages with metadata to prevent History Desync.
     """
     try:
-        # 🔹 FIX: Increased DB fetch limit to 40 to guarantee we retrieve the full requested window
-        msgs = get_recent_messages(conversation_id=conversation_id, limit=40, ascending=True)
+        # 🔹 UPDATED: Increased DB fetch limit to 100 to guarantee we retrieve the full 30-turn (60 message) requested window
+        msgs = get_recent_messages(conversation_id=conversation_id, limit=100, ascending=True)
         if not msgs: 
             return []
 
@@ -42,8 +41,6 @@ def build_history_list(conversation_id: str, max_user: int = 10, max_assistant: 
             if role == "assistant" and metadata and include_system_logs:
                 try:
                     metadata_str = json.dumps(metadata, default=decimal_default)
-                    # GENERALIZED ANTI-DESYNC FIX
-                    # Explicitly instruct the AI that the widget is already rendered.
                     hidden_context = (
                         f"\n\n[SYSTEM LOG: I successfully generated and delivered a rich interactive UI widget "
                         f"(type: {metadata.get('type', 'rich_payload')}) to the user with this payload: {metadata_str}. "
