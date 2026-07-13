@@ -94,7 +94,8 @@ class QuizQuestion(BaseModel):
     question_text: str = Field(..., description=(
         "The complete student-facing question. "
         "NO META-LABELS. Wrap math in \\( \\). "
-        "If a `plot_prompt` is provided below, the text should introduce the data shown in the graph naturally."
+        "If a `plot_prompt` is provided, the text should introduce the data shown in the graph naturally. "
+        "CRITICAL KERNEL RULE: DO NOT inject, list, or append the answer choices into this field under any circumstances. "
     ))
 
     plot_prompt: Optional[str] = Field(
