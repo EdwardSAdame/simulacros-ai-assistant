@@ -24,28 +24,18 @@ When the active logic path is ENGINE 1 (generating text-based options for math, 
 """
 
 VISUAL_REASONING_DOCTRINE = """
-## CRITICAL ENGINE 2 DOCTRINE: PURE VISUAL & SPATIAL REASONING
-When the active logic path is ENGINE 2 (generating visual plots for options in Buckets B or C), you must evaluate the student's spatial, graphical, or data-translation reasoning. 
+## CRITICAL ENGINE 2 DOCTRINE: PURE VISUAL REASONING
+When the active logic path is ENGINE 2 (handling visual questions like image_to_image, image_to_text, or text_to_image), you must execute deep cognitive evaluation where information is mapped across visual formats or states.
 
-**FORBIDDEN ACTIONS (The Duplication & Algebraic Traps):**
-1. THE DUPLICATION TRAP: If the format is `image_to_image`, you are STRICTLY FORBIDDEN from making the correct option's `plot_prompt` identical to the stem's `plot_prompt`. The correct answer MUST represent a state transformation, a different geometric perspective, a mathematical derivative, or a translated data format. It cannot be "the exact same graph."
-2. THE ALGEBRAIC TRAP: You are STRICTLY FORBIDDEN from asking a question whose primary solution relies on calculating a single numerical answer and simply plotting that number. Do NOT use functions where the only difference between the correct option and the traps is a simple numeric value.
+**CORE FORMAT STRUCTURAL MANDATES:**
+1. `image_to_image`: The question stem MUST contain a visual plot containing core information, and ALL FOUR options must also contain visual plots representing unique alternative states, transformations, or solutions. 
+2. `image_to_text`: The question stem MUST contain a visual plot containing core information, and options must be purely text-based.
+3. `text_to_image`: The question stem must be text-only, and ALL FOUR options must contain visual plots.
 
-**ALLOWED VISUAL ARCHETYPES:**
-To achieve true visual reasoning, you MUST dynamically select one of the following abstract frameworks for the question:
+**FORBIDDEN ACTIONS:**
+1. THE DUPLICATION TRAP: For `image_to_image`, the correct option plot MUST NOT be identical to the stem plot. They must represent a distinct state, layout transformation, or data conversion.
+2. THE ALGEBRAIC TRAP: You are STRICTLY FORBIDDEN from asking a question whose primary solution relies on calculating a single numerical answer and simply plotting that number. The visual difference between the correct option and the traps must be structural, not just a simple numeric value difference.
 
-1. DATA ISOMORPHISM (Format Translation):
-   - Present data in one visual format in the STEM.
-   - Ask the student to identify the logically equivalent data in a completely different visual format in the OPTIONS.
-
-2. GEOMETRIC & STRUCTURAL TRANSFORMATIONS:
-   - Present a baseline mathematical shape or conceptual state in the STEM.
-   - Ask the student to identify the outcome of applying a systemic spatial rule.
-
-3. VISUAL CALCULUS & TREND EXTRAPOLATION:
-   - Present an abstract graphical behavior or physical system in the STEM without relying on explicit numeric equations.
-   - Ask the student to identify the logically consistent derivative curve, integral relationship, or modulated behavior.
-   
 **THE VISUAL TRAPS:**
-Your 3 wrong options (Traps) MUST be based on geometric, spatial, or conceptual mapping mistakes. Do NOT generate traps based on arithmetic calculation errors.
+Your 3 wrong options (Traps) must be based on conceptual, layout, or structural mapping mistakes related to the problem statement. Ensure that all option choices are visually distinct and avoid trivial calculation errors as the sole point of differentiation.
 """
