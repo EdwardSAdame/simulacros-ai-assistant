@@ -84,7 +84,6 @@ class QuizQuestion(BaseModel):
             "The foundational premise, background information, or scenario setup. This establishes the facts of the problem. "
             "CRITICAL RULE: DO NOT include the actual interrogative question or task here. "
             "NEVER use this to describe data that should be rendered visually via a `plot_prompt`. "
-            "Leave null if the entire problem is just a single short sentence."
         )
     )
 
