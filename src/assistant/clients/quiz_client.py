@@ -55,6 +55,8 @@ class QuizClient:
         )
 
         req = BaseAssistantClient.build_request_payload(cfg, api_input, tools=tools)
+        
+        # Keep text_format to preserve shared framework orchestration
         req["text_format"] = QuizResponse
         
         try:
@@ -108,6 +110,8 @@ class QuizClient:
         )
 
         req = BaseAssistantClient.build_request_payload(cfg, api_input, tools=tools)
+        
+        # Keep text_format to preserve shared framework orchestration
         req["text_format"] = QuizResponse
         
         streamed_questions = []

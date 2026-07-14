@@ -15,7 +15,7 @@ from src.services.container_usage_service import ContainerUsageService
 
 from src.assistant.clients.base_client import BaseAssistantClient
 from src.services.visual_worker_service import VisualWorkerService
-from src.config.exam_reasoning_doctrine import VISUAL_REASONING_DOCTRINE
+from src.config.exam_reasoning_doctrine import VISUAL_REASONING_DOCTRINE, ANALYTICAL_REASONING_DOCTRINE
 
 logger = logging.getLogger(__name__)
 
@@ -118,10 +118,7 @@ class QuizService:
             f"## 3. SUBJECT SPECIFIC DOCTRINES\n"
             f"{visual_doctrine}\n"
             "## 4. LOGIC PATHS & EXPLANATION\n"
-            "### ENGINE 1: THE ANALYTICAL ENGINE (Use for Text-Only Options)\n"
-            "1. SETUP: Define exact facts/numbers.\n"
-            "2. SOLUTION: Explicitly calculate step-by-step.\n"
-            "3. TRAPS: Generate 3 wrong answers based on common errors.\n\n"
+            f"{ANALYTICAL_REASONING_DOCTRINE}\n\n"
             f"{VISUAL_REASONING_DOCTRINE}\n\n"
             "## 5. SCHEMA & FIELD RESTRICTIONS\n"
             "- SOURCES: Keep `source_url` null unless you hold a verified URL.\n"
