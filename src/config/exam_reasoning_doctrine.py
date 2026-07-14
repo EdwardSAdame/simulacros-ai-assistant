@@ -27,8 +27,9 @@ VISUAL_REASONING_DOCTRINE = """
 ## CRITICAL ENGINE 2 DOCTRINE: PURE VISUAL & SPATIAL REASONING
 When the active logic path is ENGINE 2 (generating visual plots for options in Buckets B or C), you must evaluate the student's spatial, graphical, or data-translation reasoning. 
 
-**FORBIDDEN ACTIONS (The Algebraic Trap):**
-You are STRICTLY FORBIDDEN from asking a question whose primary solution relies on calculating a single numerical answer and simply plotting that number. Do NOT use functions where the only difference between the correct option and the traps is a simple numeric intercept or slope.
+**FORBIDDEN ACTIONS (The Duplication & Algebraic Traps):**
+1. THE DUPLICATION TRAP: If the format is `image_to_image`, you are STRICTLY FORBIDDEN from making the correct option's `plot_prompt` identical to the stem's `plot_prompt`. The correct answer MUST represent a state transformation, a different geometric perspective, a mathematical derivative, or a translated data format. It cannot be "the exact same graph."
+2. THE ALGEBRAIC TRAP: You are STRICTLY FORBIDDEN from asking a question whose primary solution relies on calculating a single numerical answer and simply plotting that number. Do NOT use functions where the only difference between the correct option and the traps is a simple numeric value.
 
 **ALLOWED VISUAL ARCHETYPES:**
 To achieve true visual reasoning, you MUST dynamically select one of the following abstract frameworks for the question:
