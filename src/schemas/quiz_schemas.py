@@ -1,3 +1,4 @@
+# src/schemas/quiz_schemas.py
 from pydantic import BaseModel, Field
 from typing import List, Optional, Literal
 
@@ -80,9 +81,10 @@ class QuizQuestion(BaseModel):
     context_text: Optional[str] = Field(
         None, 
         description=(
-            "The foundational reading passage or shared scenario. "
-            "CRITICAL: Do NOT put the actual interrogative question here. "
-            "NEVER use this to describe data that should be rendered visually via a `plot_prompt`."
+            "The foundational premise, background information, or scenario setup. This establishes the facts of the problem. "
+            "CRITICAL RULE: DO NOT include the actual interrogative question or task here. "
+            "NEVER use this to describe data that should be rendered visually via a `plot_prompt`. "
+            "Leave null if the entire problem is just a single short sentence."
         )
     )
 
@@ -92,10 +94,12 @@ class QuizQuestion(BaseModel):
     )
 
     question_text: str = Field(..., description=(
-        "The complete student-facing question. "
+        "The specific interrogative sentence or direct command. "
+        "CRITICAL KERNEL RULE: DO NOT repeat any of the background facts or scenario details already provided in context_text. "
+        "This field must ONLY contain the final question being asked. "
         "NO META-LABELS. Wrap math in \\( \\). "
         "If a `plot_prompt` is provided, the text should introduce the data shown in the graph naturally. "
-        "CRITICAL KERNEL RULE: DO NOT inject, list, or append the answer choices into this field under any circumstances. "
+        "DO NOT inject, list, or append the answer choices into this field under any circumstances."
     ))
 
     plot_prompt: Optional[str] = Field(
