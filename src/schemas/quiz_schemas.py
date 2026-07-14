@@ -49,7 +49,11 @@ class QuizOption(BaseModel):
 
 
 class QuizQuestion(BaseModel):
-    question_title: str = Field(..., description="Title with number, e.g., '# 1. Topic'")
+    question_title: str = Field(..., description=(
+        "Title with question number, e.g., '# 1. Topic'. "
+        "CRITICAL KERNEL RULE: You MUST NOT include any structural metadata, layout notes, or format types "
+        "such as '(imagen a imagen)', '(imagen a texto)', '(texto)', or similar descriptive suffixes. "
+    ))
     
     # -------------------------------------------------------------------------
     # STEP 1: THE ARCHITECTURAL ANCHOR
@@ -83,7 +87,7 @@ class QuizQuestion(BaseModel):
         description=(
             "The foundational premise, background information, or scenario setup. This establishes the facts of the problem. "
             "CRITICAL RULE: DO NOT include the actual interrogative question or task here. "
-            "NEVER use this to describe data that should be rendered visually via a `plot_prompt`. "
+            "NEVER use this to describe data that should be rendered visually via a `plot_prompt`."
         )
     )
 
@@ -106,7 +110,6 @@ class QuizQuestion(BaseModel):
         description=(
             "A NATURAL LANGUAGE description of the data or math graph needed for the main question stem. "
             "CRITICAL KERNEL RULE: You MUST NOT write Python or Matplotlib code here. ONLY write descriptive natural language. "
-            "Example: 'A bar chart showing sales for four months: Jan 24, Feb 30...' "
             "Leave null if `format_type` is `text_to_text` or `text_to_image`."
         )
     )
