@@ -158,14 +158,22 @@ class BaseAssistantClient:
     @staticmethod
     def build_request_payload(cfg, api_input, tools) -> Dict[str, Any]:
         req = {"model": cfg.model, "input": api_input}
-        is_reasoning = (cfg.model.startswith("o") and not cfg.model.startswith("gpt")) or "reasoning" in cfg.model
+        
+        is_reasoning = (
+            cfg.model.startswith("o") or 
+            cfg.model.startswith("gpt-5") or 
+            "reasoning" in cfg.model or
+            (cfg.reasoning_effort is not None and cfg.reasoning_effort.lower() != "none")
+        )
         
         if is_reasoning:
-            if cfg.reasoning_effort: req["reasoning"] = {"effort": cfg.reasoning_effort}
+            if cfg.reasoning_effort: 
+                req["reasoning"] = {"effort": cfg.reasoning_effort}
         else:
             req["temperature"] = cfg.temperature
             req["top_p"] = cfg.top_p
         
-        if tools: req["tools"] = tools
+        if tools: 
+            req["tools"] = tools
         
         return {k: v for k, v in req.items() if v is not None}
