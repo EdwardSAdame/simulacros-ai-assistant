@@ -1,3 +1,4 @@
+# src/services/quiz_service.py
 from typing import Dict, Any, List, Tuple
 import math
 import random
@@ -83,8 +84,8 @@ class QuizService:
             "   - MANDATORY: The main question `plot_prompt` MUST NOT BE NULL. ALL FOUR options' `plot_prompt`s MUST NOT BE NULL. You must write natural language instructions for all 5.\n\n"
             
             "B) If `image_to_text`:\n"
-            "   - CONCEPT: Visual interpretation.\n"
-            "   - MANDATORY: The main question `plot_prompt` MUST NOT BE NULL. You MUST NOT cheat by describing the graph in `context_text`. The option visuals must remain null.\n\n"
+            "   - CONCEPT: Visual interpretation or thematic illustration.\n"
+            "   - MANDATORY: The main question visual MUST NOT BE NULL. You MUST populate EITHER `plot_prompt` OR `image_prompt` based on the active DOCTRINE below. The unselected field MUST remain null. The option visuals must remain null. You MUST NOT cheat by describing a graph in `context_text`.\n\n"
             
             "C) If `text_to_image`:\n"
             "   - CONCEPT: Visual selection based on text data.\n"
