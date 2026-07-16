@@ -80,16 +80,17 @@ class QuizService:
         
         format_instructions += (
             "A) If `image_to_image`:\n"
-            "   - CONCEPT: A visual transformation or comparison.\n"
-            "   - MANDATORY: The main question `plot_prompt` MUST NOT BE NULL. ALL FOUR options' `plot_prompt`s MUST NOT BE NULL. You must write natural language instructions for all 5.\n\n"
+            "    - CONCEPT: A visual transformation or comparison.\n"
+            "    - MANDATORY: The main question `plot_prompt` MUST NOT BE NULL. ALL FOUR options' `plot_prompt`s MUST NOT BE NULL. You must write natural language instructions for all 5.\n\n"
             
             "B) If `image_to_text`:\n"
-            "   - CONCEPT: Visual interpretation or thematic illustration.\n"
-            "   - MANDATORY: The main question visual MUST NOT BE NULL. You MUST populate EITHER `plot_prompt` OR `image_prompt` based on the active DOCTRINE below. The unselected field MUST remain null. The option visuals must remain null. You MUST NOT cheat by describing a graph in `context_text`.\n\n"
+            "    - CONCEPT: Visual interpretation (Analytical) or Environmental setting (Creative).\n"
+            "    - MANDATORY: The main question visual MUST NOT BE NULL. You MUST populate EITHER `plot_prompt` OR `image_prompt` based on the active DOCTRINE below. The unselected field MUST remain null. The option visuals must remain null. You MUST NOT cheat by describing a graph in `context_text`.\n"
+            "    - CRITICAL DECOUPLING ENFORCEMENT: If this is a creative/reading subject, the entire question, passage, and context data MUST be completely self-contained in text form. The visual must be purely ornamental and never contain text or information necessary to find the solution.\n\n"
             
             "C) If `text_to_image`:\n"
-            "   - CONCEPT: Visual selection based on text data.\n"
-            "   - MANDATORY: The main question visual is null. ALL FOUR options' `plot_prompt`s MUST NOT BE NULL.\n\n"
+            "    - CONCEPT: Visual selection based on text data.\n"
+            "    - MANDATORY: The main question visual is null. ALL FOUR options' `plot_prompt`s MUST NOT BE NULL.\n\n"
             
             "D) If `text_to_text`:\n"
             "   - CONCEPT: Standard analytical or theoretical question.\n"
@@ -105,7 +106,10 @@ class QuizService:
         elif is_creative_subject:
             visual_doctrine = (
                 "CRITICAL AESTHETIC DOCTRINE (CREATIVE): Use `image_prompt` for stem visuals. Keep `plot_prompt` always null. "
-                "You MUST absolutely BAN any mention of academic tropes (no notebooks, no whiteboards, no diagrams).\n"
+                "You MUST absolutely BAN any mention of academic tropes (no notebooks, no whiteboards, no diagrams). "
+                "CRITICAL VISUAL DECOUPLING: The visual generated from your `image_prompt` is strictly environmental and decorative. "
+                "The quiz item must be 100% solvable using only the text inside `context_text` and `question_text`. "
+                "NEVER attempt to embed text, reading blocks, infograms, timelines, or factual tables into the `image_prompt` for creative/reading categories.\n"
             )
         elif is_general_subject:
             visual_doctrine = (
@@ -270,7 +274,7 @@ class QuizService:
                 
                 seen_indices = set()
                 accumulated_questions = []
-                ai_generated_title = "Simulacro Generado" 
+                ai_generated_title = "Simulacro Generated" 
                 
                 ghost_easier, ghost_harder, ghost_retry = None, None, None
                 

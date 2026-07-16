@@ -87,7 +87,8 @@ class QuizQuestion(BaseModel):
         description=(
             "The foundational premise, background information, or scenario setup. This establishes the facts of the problem. "
             "CRITICAL RULE: DO NOT include the actual interrogative question or task here. "
-            "NEVER use this to describe data that should be rendered visually via a `plot_prompt`."
+            "NEVER use this to describe data that should be rendered visually via a `plot_prompt`. "
+            "For reading comprehension or creative subjects using `image_to_text`, this field MUST contain the complete reading passage or text stimulus required to answer the question."
         )
     )
 
@@ -119,6 +120,7 @@ class QuizQuestion(BaseModel):
         description=(
             "A purely artistic and atmospheric representation of a physical environment. "
             "Focus exclusively on natural landscapes or tangible real-world scenes. No academic tropes. "
+            "CRITICAL RULE: This image is strictly ornamental. It MUST NOT contain any text, reading passages, or data required to solve the question. "
             "Leave null if `format_type` is `text_to_text` or `text_to_image`."
         )
     )
