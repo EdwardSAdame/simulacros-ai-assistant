@@ -1,4 +1,3 @@
-# src/assistant/clients/base_client.py
 import logging
 from typing import List, Dict, Any, Optional
 
@@ -92,7 +91,10 @@ class BaseAssistantClient:
         }
 
     @staticmethod
-    def inject_pdf_inputs(api_input: List[Dict[str, Any]], pdf_urls: List[str]):
+    def inject_pdf_inputs(api_input: List[Dict[str, Any]], pdf_urls: List[str], detail_level: str = "high"):
+        """
+        Injects PDF file inputs into the message array with explicit resolution detail.
+        """
         target_message = None
         if api_input and api_input[-1].get("role") == "user":
             target_message = api_input[-1]
@@ -110,7 +112,8 @@ class BaseAssistantClient:
             if url and isinstance(url, str) and url.startswith("http"):
                 target_message["content"].append({
                     "type": "input_file",
-                    "file_url": url
+                    "file_url": url,
+                    "detail": detail_level
                 })
 
     @staticmethod

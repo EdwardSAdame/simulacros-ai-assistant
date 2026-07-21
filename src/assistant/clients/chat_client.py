@@ -1,4 +1,3 @@
-# src/assistant/clients/chat_client.py
 import logging
 import re
 import json
@@ -15,8 +14,6 @@ from src.services.signal_service import build_runtime_signals
 from src.assistant.artifact_handler import handle_generated_files
 from src.utils.response_parser import extract_sources
 from src.services.image_usage_service import ImageUsageService
-
-# 🔹 REMOVED: query_admission_data and get_custom_tools imports (Dead Code)
 
 from .base_client import BaseAssistantClient
 
@@ -55,7 +52,7 @@ class ChatClient:
         api_input.extend(conversation_input)
 
         if pdf_urls:
-            BaseAssistantClient.inject_pdf_inputs(api_input, pdf_urls)
+            BaseAssistantClient.inject_pdf_inputs(api_input, pdf_urls, cfg.pdf_detail_level)
 
         tools = BaseAssistantClient.configure_tools(
             vector_store_ids, requires_visuals, False, pdf_urls, web_search_config, user_location, cfg, active_container_id
@@ -128,7 +125,7 @@ class ChatClient:
         mode: str = "omega",
         system_instruction: str | None = None,
         enable_image_generation: bool = True,
-        requires_web_search: bool = False # 🔹 NEW: Re-enable web search for streaming endpoints!
+        requires_web_search: bool = False
     ) -> Generator[Any, None, None]:
         
         client = get_openai_client()
@@ -141,7 +138,6 @@ class ChatClient:
         api_input = [{"role": "system", "content": [{"type": "input_text", "text": system_text}]}]
         api_input.extend(conversation_input)
 
-        # 🔹 NEW: Use configure_tools to properly map Web Search instead of the old get_custom_tools
         web_search_config = {"scope": "open_web", "search_enabled": True} if requires_web_search else None
         
         tools = BaseAssistantClient.configure_tools(
@@ -179,8 +175,6 @@ class ChatClient:
                     if usage_obj is not None:
                         yield {"type": "usage_metrics", "data": BaseAssistantClient.extract_usage_metrics(usage_obj)}
 
-                # 🔹 REMOVED: All manual function_call intercepts and secondary stream logic.
-                # OpenAI handles web_search completely autonomously and streams the text output directly!
                 else:
                     yield event
 

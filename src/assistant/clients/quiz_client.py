@@ -1,4 +1,3 @@
-# src/assistant/clients/quiz_client.py
 import logging
 from typing import List, Dict, Any, Tuple, Generator
 
@@ -48,7 +47,7 @@ class QuizClient:
         api_input.extend(conversation_input)
 
         if pdf_urls:
-            BaseAssistantClient.inject_pdf_inputs(api_input, pdf_urls)
+            BaseAssistantClient.inject_pdf_inputs(api_input, pdf_urls, cfg.pdf_detail_level)
 
         tools = BaseAssistantClient.configure_tools(
             vector_store_ids, requires_visuals, requires_creative_images, pdf_urls, web_search_config, user_location, cfg
@@ -103,7 +102,7 @@ class QuizClient:
         api_input.extend(conversation_input)
 
         if pdf_urls:
-            BaseAssistantClient.inject_pdf_inputs(api_input, pdf_urls)
+            BaseAssistantClient.inject_pdf_inputs(api_input, pdf_urls, cfg.pdf_detail_level)
 
         tools = BaseAssistantClient.configure_tools(
             vector_store_ids, requires_visuals, requires_creative_images, pdf_urls, web_search_config, user_location, cfg
