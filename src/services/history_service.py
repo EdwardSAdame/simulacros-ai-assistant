@@ -68,7 +68,8 @@ def build_history_list(conversation_id: str, max_user: int = 30, max_assistant: 
                         if "pdf" in media_type or "pdf" in media_category or media_url.endswith(".pdf"):
                             content.append({
                                 "type": "input_file",
-                                "file_url": media_url
+                                "file_url": media_url,
+                                "detail": "high"
                             })
                         elif "image" in media_type or "image" in media_category:
                             content.append({

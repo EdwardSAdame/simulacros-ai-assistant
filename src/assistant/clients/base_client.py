@@ -108,6 +108,7 @@ class BaseAssistantClient:
         elif current_content is None:
              target_message["content"] = []
              
+        valid_pdf_count = 0
         for url in pdf_urls:
             if url and isinstance(url, str) and url.startswith("http"):
                 target_message["content"].append({
@@ -115,6 +116,13 @@ class BaseAssistantClient:
                     "file_url": url,
                     "detail": detail_level
                 })
+                valid_pdf_count += 1
+
+        # Emit a structured JSON log for CloudWatch Insights
+        log_event("pdf_inputs_injected", {
+            "pdf_count": valid_pdf_count,
+            "detail_level": detail_level
+        })
 
     @staticmethod
     def configure_tools(vector_store_ids, requires_visuals, requires_creative_images, pdf_urls, web_search_config, user_location, cfg, active_container_id=None) -> List[Dict[str, Any]]:
