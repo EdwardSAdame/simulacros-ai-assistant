@@ -1,4 +1,3 @@
-# src/services/history_service.py
 import json
 from decimal import Decimal
 from typing import List, Dict, Any
@@ -11,14 +10,13 @@ def decimal_default(obj):
         return int(obj) if obj % 1 == 0 else float(obj)
     raise TypeError
 
-# 🔹 UPDATED: Increased default memory limits from 10 to 30 to support an elongated 30-turn context window
 def build_history_list(conversation_id: str, max_user: int = 30, max_assistant: int = 30, include_system_logs: bool = True) -> List[Dict[str, Any]]:
     """
     Retrieves recent messages from the database and formats them for the OpenAI API.
     Handles hidden context injection for assistant messages with metadata to prevent History Desync.
+    Restores media items (PDFs and Images) into the context window for ongoing analysis.
     """
     try:
-        # 🔹 UPDATED: Increased DB fetch limit to 100 to guarantee we retrieve the full 30-turn (60 message) requested window
         msgs = get_recent_messages(conversation_id=conversation_id, limit=100, ascending=True)
         if not msgs: 
             return []
@@ -54,6 +52,30 @@ def build_history_list(conversation_id: str, max_user: int = 30, max_assistant: 
 
             msg_type = "input_text" if role == "user" else "output_text"
             content = [{"type": msg_type, "text": text_content}] 
+            
+            # Rehydrate media elements for user messages to maintain document context
+            if role == "user":
+                sent_images = m.get("sentImages", [])
+                if isinstance(sent_images, list):
+                    for media in sent_images:
+                        media_url = media.get("url")
+                        if not media_url:
+                            continue
+                            
+                        media_type = media.get("type", "").lower()
+                        media_category = media.get("category", "").lower()
+                        
+                        if "pdf" in media_type or "pdf" in media_category or media_url.endswith(".pdf"):
+                            content.append({
+                                "type": "input_file",
+                                "file_url": media_url
+                            })
+                        elif "image" in media_type or "image" in media_category:
+                            content.append({
+                                "type": "image_url",
+                                "image_url": {"url": media_url}
+                            })
+
             history_list.append({"role": role, "content": content})
         
         return history_list
