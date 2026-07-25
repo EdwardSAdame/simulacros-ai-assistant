@@ -85,7 +85,7 @@ class ChatService:
         requires_visuals: bool,
         requires_web_search: bool,  
         arena_id: str | None,
-        clean_pdfs: List[str],
+        clean_pdfs: List[Dict[str, str]],
         actual_conversation_id: str
     ) -> Tuple[str, Dict | None]:
         
@@ -109,7 +109,7 @@ class ChatService:
             name=name, 
             email=email, 
             requires_visuals=requires_visuals,
-            attached_pdfs=clean_pdfs
+            attached_documents=clean_pdfs
         )
         
         system_prompt = ""
