@@ -91,9 +91,10 @@ class BaseAssistantClient:
         }
 
     @staticmethod
-    def inject_pdf_inputs(api_input: List[Dict[str, Any]], pdf_urls: List[str], detail_level: str = "high"):
+    def inject_pdf_inputs(api_input: List[Dict[str, Any]], pdf_items: List[Any], detail_level: str = "high"):
         """
         Injects PDF file inputs into the message array with explicit resolution detail.
+        Safely handles both plain string URLs and dictionary objects.
         """
         target_message = None
         if api_input and api_input[-1].get("role") == "user":
@@ -109,7 +110,9 @@ class BaseAssistantClient:
              target_message["content"] = []
              
         valid_pdf_count = 0
-        for url in pdf_urls:
+        for item in pdf_items:
+            url = item.get("url") if isinstance(item, dict) else item
+            
             if url and isinstance(url, str) and url.startswith("http"):
                 target_message["content"].append({
                     "type": "input_file",
@@ -118,19 +121,18 @@ class BaseAssistantClient:
                 })
                 valid_pdf_count += 1
 
-        # Emit a structured JSON log for CloudWatch Insights
         log_event("pdf_inputs_injected", {
             "pdf_count": valid_pdf_count,
             "detail_level": detail_level
         })
 
     @staticmethod
-    def configure_tools(vector_store_ids, requires_visuals, requires_creative_images, pdf_urls, web_search_config, user_location, cfg, active_container_id=None) -> List[Dict[str, Any]]:
+    def configure_tools(vector_store_ids, requires_visuals, requires_creative_images, pdf_items, web_search_config, user_location, cfg, active_container_id=None) -> List[Dict[str, Any]]:
         tools = []
         if vector_store_ids:
             tools.append({"type": "file_search", "vector_store_ids": vector_store_ids, "max_num_results": get_vector_search_max_results()})
         
-        if requires_visuals or (pdf_urls and len(pdf_urls) > 0):
+        if requires_visuals or (pdf_items and len(pdf_items) > 0):
             memory_limit = get_code_interpreter_memory()
             
             if active_container_id:
@@ -164,6 +166,7 @@ class BaseAssistantClient:
                  web_tool["filters"] = {"allowed_domains": web_search_config["allowed_domains"]}
             if user_location: web_tool["user_location"] = user_location
             tools.append(web_tool)
+            
         return tools
 
     @staticmethod

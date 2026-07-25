@@ -1,4 +1,3 @@
-# src/services/orchestrator_service.py
 import logging
 from typing import Dict, Any, Tuple, List
 
@@ -63,7 +62,13 @@ class OrchestratorService:
                     media_items.append({"url": url, "type": "application/pdf", "name": "document.pdf"})
 
         clean_images = [m["url"] for m in media_items if "image" in m.get("type", "").lower() or not ".pdf" in m["url"].lower()]
-        clean_pdfs   = [m["url"] for m in media_items if "pdf" in m.get("type", "").lower() or ".pdf" in m["url"].lower()]
+        
+        # 🟢 UPDATED: Preserve the dictionary structure for PDFs to retain the file name for citations
+        clean_pdfs = [
+            {"url": m["url"], "name": m.get("name", "Document")} 
+            for m in media_items 
+            if "pdf" in m.get("type", "").lower() or ".pdf" in m["url"].lower()
+        ]
 
         # 2. Hidden Context Fast-Path
         if is_hidden:

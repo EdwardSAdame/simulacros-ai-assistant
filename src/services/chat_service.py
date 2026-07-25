@@ -1,4 +1,3 @@
-# src/services/chat_service.py
 import logging
 import concurrent.futures
 from typing import Tuple, Dict, Any, List
@@ -105,8 +104,14 @@ class ChatService:
             logger.info("Web search flag active: File Search tool disabled to force Open Web execution.")
 
         runtime_signals = build_runtime_context(
-            page=page, user_id=user_id, name=name, email=email, requires_visuals=requires_visuals
+            page=page, 
+            user_id=user_id, 
+            name=name, 
+            email=email, 
+            requires_visuals=requires_visuals,
+            attached_pdfs=clean_pdfs
         )
+        
         system_prompt = ""
 
         # 2. Handle Arenas Context

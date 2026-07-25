@@ -37,7 +37,7 @@ class ChatClient:
         requires_visuals: bool = False,
         web_search_config: Dict[str, Any] | None = None,
         user_location: Dict[str, str] | None = None,
-        pdf_urls: List[str] | None = None,
+        pdf_urls: List[Dict[str, str]] | None = None,
         active_container_id: str | None = None,
         conversation_id: str | None = None 
     ) -> Tuple[str, List[str], List[Dict[str, str]], Dict[str, int], Optional[str]]:
@@ -51,11 +51,14 @@ class ChatClient:
         api_input = [{"role": "system", "content": [{"type": "input_text", "text": system_text}]}]
         api_input.extend(conversation_input)
 
-        if pdf_urls:
-            BaseAssistantClient.inject_pdf_inputs(api_input, pdf_urls, cfg.pdf_detail_level)
+        # Extract raw string URLs for the OpenAI API payload
+        raw_pdf_urls = [doc["url"] for doc in pdf_urls] if pdf_urls else None
+
+        if raw_pdf_urls:
+            BaseAssistantClient.inject_pdf_inputs(api_input, raw_pdf_urls, cfg.pdf_detail_level)
 
         tools = BaseAssistantClient.configure_tools(
-            vector_store_ids, requires_visuals, False, pdf_urls, web_search_config, user_location, cfg, active_container_id
+            vector_store_ids, requires_visuals, False, raw_pdf_urls, web_search_config, user_location, cfg, active_container_id
         )
 
         req = BaseAssistantClient.build_request_payload(cfg, api_input, tools)
