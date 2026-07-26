@@ -1,5 +1,4 @@
-# Backend: simulacros-ai-assistant
-# File: src/services/orchestrator_service.py
+# FILE: src/services/orchestrator_service.py
 
 import logging
 from typing import Dict, Any, Tuple, List
@@ -58,6 +57,21 @@ class OrchestratorService:
         if not media_items:
             media_items = []
 
+        # Separate images from documents to prevent OpenAI Files API errors (400 - unsupported_file)
+        documents = []
+        images = []
+        for item in attachments:
+            mime_type = item.get("type", "").lower()
+            file_name = item.get("name", "").lower()
+            file_url = item.get("url", "").lower()
+            
+            is_image = mime_type.startswith("image/") or file_name.endswith(('.png', '.jpg', '.jpeg', '.webp', '.gif')) or file_url.endswith(('.png', '.jpg', '.jpeg', '.webp', '.gif'))
+            
+            if is_image:
+                images.append(item)
+            else:
+                documents.append(item)
+
         # 2. Hidden Context Fast-Path
         if is_hidden:
             return ConversationService.save_hidden_context(conversation_id or "temp", message)
@@ -78,14 +92,21 @@ class OrchestratorService:
             intent=intent
         )
 
-        # 4. Save User Input
+        # 4. Save User Input (Save all attachments to DB so the frontend history parser can read them)
         ConversationService.save_user_message(actual_conversation_id, message, attachments)
 
         # 5. Build Conversation History
         conversation_input = build_history_list(actual_conversation_id)
         current_user_content = []
+        
         if message:
-            current_user_content.append({"type": "input_text", "text": message})
+            current_user_content.append({"type": "text", "text": message})
+            
+        for img in images:
+            current_user_content.append({
+                "type": "image_url",
+                "image_url": {"url": img["url"]}
+            })
             
         if current_user_content:
             conversation_input.append({"role": "user", "content": current_user_content})
@@ -109,7 +130,7 @@ class OrchestratorService:
                     exam_context=locked_exam_context, 
                     stream_manager=stream_manager, 
                     category=category, 
-                    attachments=attachments,
+                    attachments=documents,
                     actual_conversation_id=actual_conversation_id,
                     num_questions=num_questions
                 )
@@ -182,14 +203,14 @@ class OrchestratorService:
                     category=category, requires_visuals=requires_visuals, 
                     requires_web_search=requires_web_search,
                     arena_id=arena_id, 
-                    attachments=attachments, actual_conversation_id=actual_conversation_id
+                    attachments=documents, actual_conversation_id=actual_conversation_id
                 )
                 
                 if meta_payload and meta_payload.get("type") == "rich_chat" and stream_manager:
                     assets = meta_payload.get("assets", [])
                     if assets:
                         stream_manager.send_chat_assets(assets)
-                
+            
         except Exception as e:
             logger.error(f"Domain Service Execution Failed: {e}")
             final_reply_text = "**Error**: Ha ocurrido un error interno de sistema. Intenta de nuevo."

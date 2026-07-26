@@ -96,24 +96,22 @@ class BaseAssistantClient:
     @staticmethod
     def sanitize_input_content(api_input: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
         """
-        Intercepts and reformats legacy frontend payload structures (like 'image_url') 
-        into the 'input_file' format required by the OpenAI Responses API.
+        Ensures input structures match OpenAI API specifications.
+        Preserves image_url structures for vision models while keeping text input structures intact.
         """
         for message in api_input:
             if "content" in message and isinstance(message["content"], list):
                 for content_part in message["content"]:
                     if content_part.get("type") == "image_url":
-                        img_url_data = content_part.pop("image_url", {})
-                        url = img_url_data.get("url") if isinstance(img_url_data, dict) else img_url_data
-                        
-                        content_part["type"] = "input_file"
-                        content_part["file_url"] = url
+                        img_url_data = content_part.get("image_url", {})
+                        if isinstance(img_url_data, str):
+                            content_part["image_url"] = {"url": img_url_data}
         return api_input
 
     @staticmethod
     def inject_file_inputs(api_input: List[Dict[str, Any]], attachments: List[Dict[str, str]], detail_level: str = "high") -> None:
         """
-        Injects file attachments into the message array using the correct Responses API format.
+        Injects document file attachments into the message array using the input_file format.
         """
         target_message = None
         if api_input and api_input[-1].get("role") == "user":
