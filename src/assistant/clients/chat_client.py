@@ -1,6 +1,7 @@
 import logging
 import re
 import json
+import openai
 from typing import List, Dict, Any, Tuple, Generator, Optional
 
 from src.config.settings import (
@@ -66,58 +67,67 @@ class ChatClient:
         try:
             resp = client.responses.create(**req)
             
-            text = getattr(resp, "output_text", None)
-            output_list = getattr(resp, "output", []) or []
-            
-            if not text:
-                chunks = []
-                for item in output_list:
-                    content_list = getattr(item, "content", []) or []
-                    for c in content_list:
-                        if getattr(c, "type", "") == "text": 
-                            chunks.append(getattr(c, "text", ""))
-                text = "\n".join(chunks).strip()
-            
-            if text: 
-                text = re.sub(r'\[.*?\]\(sandbox:/mnt/data/.*?\)', '', text).strip()
-
-            container_id = BaseAssistantClient.extract_container_id(output_list)
-
-            generated_urls_map = handle_generated_files(client, resp, folder="chat_assets")
-            
-            if isinstance(generated_urls_map, dict) and user_id:
-                creative_image_urls = [url for fname, url in generated_urls_map.items() if fname.startswith("creative_image_")]
-                creative_image_count = len(creative_image_urls)
-                
-                if creative_image_count > 0:
-                    try:
-                        active_conversation = conversation_id if conversation_id else f"chat_{user_id[-6:]}"
-                        image_tracker = ImageUsageService()
-                        image_tracker.log_image_usage(
-                            user_id=user_id,
-                            conversation_id=active_conversation,
-                            source="chat",  
-                            tier=mode,
-                            engine=cfg.image_model,
-                            size=get_image_generation_size(),
-                            quality=cfg.image_quality,
-                            partials=get_image_generation_partials(),
-                            image_count=creative_image_count,
-                            image_url=creative_image_urls[0] if creative_image_urls else None
-                        )
-                    except Exception as track_err:
-                        logger.error(f"Failed to log standard chat image usage: {track_err}")
-
-            sources_list = extract_sources(resp)
-            generated_urls = list(generated_urls_map.values()) if isinstance(generated_urls_map, dict) else generated_urls_map
-            usage_data = BaseAssistantClient.extract_usage_metrics(getattr(resp, "usage", None))
-
-            return (text or "[No response]", generated_urls, sources_list, usage_data, container_id)
-            
+        except openai.BadRequestError as e:
+            error_message = str(e)
+            if "context_length_exceeded" in error_message:
+                logger.warning(f"Context length exceeded for model {cfg.model}. Initiating fallback circuit breaker to gpt-5.6-luna.")
+                req["model"] = "gpt-5.6-luna"
+                resp = client.responses.create(**req)
+            else:
+                logger.error(f"Chat failed with BadRequestError: {error_message}")
+                raise e
         except Exception as e:
             logger.error(f"Chat failed: {e}")
             raise e
 
+        text = getattr(resp, "output_text", None)
+        output_list = getattr(resp, "output", []) or []
+        
+        if not text:
+            chunks = []
+            for item in output_list:
+                content_list = getattr(item, "content", []) or []
+                for c in content_list:
+                    if getattr(c, "type", "") == "text": 
+                        chunks.append(getattr(c, "text", ""))
+            text = "\n".join(chunks).strip()
+        
+        if text: 
+            text = re.sub(r'\[.*?\]\(sandbox:/mnt/data/.*?\)', '', text).strip()
+
+        container_id = BaseAssistantClient.extract_container_id(output_list)
+
+        generated_urls_map = handle_generated_files(client, resp, folder="chat_assets")
+        
+        if isinstance(generated_urls_map, dict) and user_id:
+            creative_image_urls = [url for fname, url in generated_urls_map.items() if fname.startswith("creative_image_")]
+            creative_image_count = len(creative_image_urls)
+            
+            if creative_image_count > 0:
+                try:
+                    active_conversation = conversation_id if conversation_id else f"chat_{user_id[-6:]}"
+                    image_tracker = ImageUsageService()
+                    image_tracker.log_image_usage(
+                        user_id=user_id,
+                        conversation_id=active_conversation,
+                        source="chat",  
+                        tier=mode,
+                        engine=cfg.image_model,
+                        size=get_image_generation_size(),
+                        quality=cfg.image_quality,
+                        partials=get_image_generation_partials(),
+                        image_count=creative_image_count,
+                        image_url=creative_image_urls[0] if creative_image_urls else None
+                    )
+                except Exception as track_err:
+                    logger.error(f"Failed to log standard chat image usage: {track_err}")
+
+        sources_list = extract_sources(resp)
+        generated_urls = list(generated_urls_map.values()) if isinstance(generated_urls_map, dict) else generated_urls_map
+        usage_data = BaseAssistantClient.extract_usage_metrics(getattr(resp, "usage", None))
+
+        return (text or "[No response]", generated_urls, sources_list, usage_data, container_id)
+            
     @staticmethod
     def stream_chat_response(
         conversation_input: List[Dict[str, Any]], 
@@ -169,18 +179,27 @@ class ChatClient:
         try:
             stream = client.responses.create(**req)
             
-            for event in stream:
-                event_type = getattr(event, "type", "")
-                
-                if event_type == "response.completed":
-                    resp_obj = getattr(event, "response", event)
-                    usage_obj = getattr(resp_obj, "usage", None)
-                    if usage_obj is not None:
-                        yield {"type": "usage_metrics", "data": BaseAssistantClient.extract_usage_metrics(usage_obj)}
-
-                else:
-                    yield event
-
+        except openai.BadRequestError as e:
+            error_message = str(e)
+            if "context_length_exceeded" in error_message:
+                logger.warning(f"Context length exceeded for model {cfg.model} during stream. Initiating fallback circuit breaker to gpt-5.6-luna.")
+                req["model"] = "gpt-5.6-luna"
+                stream = client.responses.create(**req)
+            else:
+                logger.error(f"Stream chat failed with BadRequestError: {error_message}")
+                raise e
         except Exception as e:
             logger.error(f"Stream chat failed: {e}")
             raise e
+
+        for event in stream:
+            event_type = getattr(event, "type", "")
+            
+            if event_type == "response.completed":
+                resp_obj = getattr(event, "response", event)
+                usage_obj = getattr(resp_obj, "usage", None)
+                if usage_obj is not None:
+                    yield {"type": "usage_metrics", "data": BaseAssistantClient.extract_usage_metrics(usage_obj)}
+
+            else:
+                yield event
