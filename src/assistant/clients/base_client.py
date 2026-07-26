@@ -1,3 +1,6 @@
+# Backend: simulacros-ai-assistant
+# File: src/assistant/clients/base_client.py
+
 import logging
 from typing import List, Dict, Any, Optional
 
@@ -14,7 +17,7 @@ logger = logging.getLogger(__name__)
 class BaseAssistantClient:
     """
     Provides foundational utilities for interacting with the OpenAI API.
-    Handles payload construction, tool configuration, and usage metric extraction.
+    Handles payload construction, tool configuration, payload sanitization, and usage metric extraction.
     """
 
     @staticmethod
@@ -91,10 +94,26 @@ class BaseAssistantClient:
         }
 
     @staticmethod
-    def inject_pdf_inputs(api_input: List[Dict[str, Any]], pdf_items: List[Any], detail_level: str = "high"):
+    def sanitize_input_content(api_input: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
         """
-        Injects PDF file inputs into the message array with explicit resolution detail.
-        Safely handles both plain string URLs and dictionary objects.
+        Intercepts and reformats legacy frontend payload structures (like 'image_url') 
+        into the 'input_file' format required by the OpenAI Responses API.
+        """
+        for message in api_input:
+            if "content" in message and isinstance(message["content"], list):
+                for content_part in message["content"]:
+                    if content_part.get("type") == "image_url":
+                        img_url_data = content_part.pop("image_url", {})
+                        url = img_url_data.get("url") if isinstance(img_url_data, dict) else img_url_data
+                        
+                        content_part["type"] = "input_file"
+                        content_part["file_url"] = url
+        return api_input
+
+    @staticmethod
+    def inject_file_inputs(api_input: List[Dict[str, Any]], attachments: List[Dict[str, str]], detail_level: str = "high") -> None:
+        """
+        Injects file attachments into the message array using the correct Responses API format.
         """
         target_message = None
         if api_input and api_input[-1].get("role") == "user":
@@ -109,8 +128,8 @@ class BaseAssistantClient:
         elif current_content is None:
              target_message["content"] = []
              
-        valid_pdf_count = 0
-        for item in pdf_items:
+        valid_file_count = 0
+        for item in attachments:
             url = item.get("url") if isinstance(item, dict) else item
             
             if url and isinstance(url, str) and url.startswith("http"):
@@ -119,20 +138,20 @@ class BaseAssistantClient:
                     "file_url": url,
                     "detail": detail_level
                 })
-                valid_pdf_count += 1
+                valid_file_count += 1
 
-        log_event("pdf_inputs_injected", {
-            "pdf_count": valid_pdf_count,
+        log_event("file_inputs_injected", {
+            "file_count": valid_file_count,
             "detail_level": detail_level
         })
 
     @staticmethod
-    def configure_tools(vector_store_ids, requires_visuals, requires_creative_images, pdf_items, web_search_config, user_location, cfg, active_container_id=None) -> List[Dict[str, Any]]:
+    def configure_tools(vector_store_ids, requires_visuals, requires_creative_images, attachments, web_search_config, user_location, cfg, active_container_id=None) -> List[Dict[str, Any]]:
         tools = []
         if vector_store_ids:
             tools.append({"type": "file_search", "vector_store_ids": vector_store_ids, "max_num_results": get_vector_search_max_results()})
         
-        if requires_visuals or (pdf_items and len(pdf_items) > 0):
+        if requires_visuals or (attachments and len(attachments) > 0):
             memory_limit = get_code_interpreter_memory()
             
             if active_container_id:
@@ -146,7 +165,7 @@ class BaseAssistantClient:
             })
             
             log_event("container_requested", {
-                "context": "chat/quiz", 
+                "context": "chat", 
                 "memory_limit": memory_limit,
                 "explicit_id": active_container_id
             })
@@ -171,7 +190,8 @@ class BaseAssistantClient:
 
     @staticmethod
     def build_request_payload(cfg, api_input, tools) -> Dict[str, Any]:
-        req = {"model": cfg.model, "input": api_input}
+        sanitized_input = BaseAssistantClient.sanitize_input_content(api_input)
+        req = {"model": cfg.model, "input": sanitized_input}
         
         is_reasoning = (
             cfg.model.startswith("o") or 

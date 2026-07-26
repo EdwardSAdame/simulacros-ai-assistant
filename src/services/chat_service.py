@@ -1,3 +1,6 @@
+# Backend: simulacros-ai-assistant
+# File: src/services/chat_service.py
+
 import logging
 import concurrent.futures
 from typing import Tuple, Dict, Any, List
@@ -85,7 +88,7 @@ class ChatService:
         requires_visuals: bool,
         requires_web_search: bool,  
         arena_id: str | None,
-        clean_pdfs: List[Dict[str, str]],
+        attachments: List[Dict[str, str]],
         actual_conversation_id: str
     ) -> Tuple[str, Dict | None]:
         
@@ -109,7 +112,7 @@ class ChatService:
             name=name, 
             email=email, 
             requires_visuals=requires_visuals,
-            attached_documents=clean_pdfs
+            attached_documents=attachments
         )
         
         system_prompt = ""
@@ -159,7 +162,7 @@ class ChatService:
 
         # Look up explicit container ID to prevent duplicate billing
         active_container_id = None
-        if requires_visuals or (clean_pdfs and len(clean_pdfs) > 0):
+        if requires_visuals or (attachments and len(attachments) > 0):
             try:
                 active_container_id = ContainerUsageService().get_active_container_for_session(actual_conversation_id)
                 if active_container_id:
@@ -213,7 +216,7 @@ class ChatService:
                         requires_visuals=False, 
                         web_search_config=web_search_config, 
                         user_location=None,
-                        pdf_urls=clean_pdfs,
+                        attachments=attachments,
                         active_container_id=active_container_id,
                         conversation_id=actual_conversation_id
                     )
@@ -264,7 +267,7 @@ class ChatService:
                     vector_store_ids=selected_vector_stores, 
                     requires_visuals=requires_visuals,
                     web_search_config=web_search_config, 
-                    pdf_urls=clean_pdfs,
+                    attachments=attachments,
                     active_container_id=active_container_id,
                     conversation_id=actual_conversation_id  
                 )

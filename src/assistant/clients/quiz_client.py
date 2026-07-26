@@ -1,3 +1,6 @@
+# Backend: simulacros-ai-assistant
+# File: src/assistant/clients/quiz_client.py
+
 import logging
 from typing import List, Dict, Any, Tuple, Generator
 
@@ -29,7 +32,7 @@ class QuizClient:
         exam_context: str = "GENERAL",  
         requires_visuals: bool = False,
         requires_creative_images: bool = False,
-        pdf_urls: List[str] | None = None,
+        attachments: List[Dict[str, str]] | None = None,
         vector_store_ids: List[str] | None = None,
         web_search_config: Dict[str, Any] | None = None,
         user_location: Dict[str, str] | None = None,
@@ -46,11 +49,11 @@ class QuizClient:
         api_input = [{"role": "system", "content": [{"type": "input_text", "text": system_text}]}]
         api_input.extend(conversation_input)
 
-        if pdf_urls:
-            BaseAssistantClient.inject_pdf_inputs(api_input, pdf_urls, cfg.pdf_detail_level)
+        if attachments:
+            BaseAssistantClient.inject_file_inputs(api_input, attachments, cfg.pdf_detail_level)
 
         tools = BaseAssistantClient.configure_tools(
-            vector_store_ids, requires_visuals, requires_creative_images, pdf_urls, web_search_config, user_location, cfg
+            vector_store_ids, requires_visuals, requires_creative_images, attachments, web_search_config, user_location, cfg
         )
 
         req = BaseAssistantClient.build_request_payload(cfg, api_input, tools=tools)
@@ -72,7 +75,6 @@ class QuizClient:
             logger.error(f"Quiz generation failed: {e}")
             raise e
 
-
     @staticmethod
     def stream_structured_quiz(
         conversation_input: List[Dict[str, Any]], 
@@ -84,7 +86,7 @@ class QuizClient:
         exam_context: str = "GENERAL", 
         requires_visuals: bool = False,
         requires_creative_images: bool = False,
-        pdf_urls: List[str] | None = None,
+        attachments: List[Dict[str, str]] | None = None,
         vector_store_ids: List[str] | None = None,
         web_search_config: Dict[str, Any] | None = None,
         user_location: Dict[str, str] | None = None,
@@ -101,11 +103,11 @@ class QuizClient:
         api_input = [{"role": "system", "content": [{"type": "input_text", "text": system_text}]}]
         api_input.extend(conversation_input)
 
-        if pdf_urls:
-            BaseAssistantClient.inject_pdf_inputs(api_input, pdf_urls, cfg.pdf_detail_level)
+        if attachments:
+            BaseAssistantClient.inject_file_inputs(api_input, attachments, cfg.pdf_detail_level)
 
         tools = BaseAssistantClient.configure_tools(
-            vector_store_ids, requires_visuals, requires_creative_images, pdf_urls, web_search_config, user_location, cfg
+            vector_store_ids, requires_visuals, requires_creative_images, attachments, web_search_config, user_location, cfg
         )
 
         req = BaseAssistantClient.build_request_payload(cfg, api_input, tools=tools)

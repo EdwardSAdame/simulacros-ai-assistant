@@ -1,15 +1,14 @@
-# src/storage/messages_table.py
+# Backend: simulacros-ai-assistant
+# File: src/storage/messages_table.py
 
-import boto3
 import logging
 from datetime import datetime
 from typing import Optional, Dict, Any, List
-from boto3.dynamodb.conditions import Key 
+import boto3
+from boto3.dynamodb.conditions import Key
 
-# Setup logger
 logger = logging.getLogger(__name__)
 
-# DynamoDB setup
 dynamodb = boto3.resource("dynamodb")
 table = dynamodb.Table("ConversationMessages")
 
@@ -20,46 +19,42 @@ def save_message(
     message_text: str,
     *,
     metadata: Optional[Dict[str, Any]] = None,
-):
+) -> Dict[str, Any]:
     """
     Save a single message to the ConversationMessages table.
-    Now supports saving structured 'Metadata' and promoting sent images to top-level.
+    Stores all extra payload data and file attachments inside the Metadata attribute.
     """
     timestamp = datetime.utcnow().isoformat()
 
     item = {
-        "ConversationId": conversation_id,  # PK
-        "Timestamp": timestamp,            # SK
+        "ConversationId": conversation_id,
+        "Timestamp": timestamp,
         "Role": role,
         "MessageText": message_text,
     }
 
     if metadata:
-        # UPDATED: Promote 'sentImages' to top-level ONLY if it is not empty.
-        if "sentImages" in metadata:
-            if metadata["sentImages"]:  # Evaluates to True only if the list has 1 or more items
-                item["sentImages"] = metadata["sentImages"]
-            
-            # Always remove it from metadata to avoid duplication or saving empty arrays
-            del metadata["sentImages"]
+        metadata_copy = dict(metadata)
 
-        # Save remaining metadata if any (and if it's not empty after deleting sentImages)
-        if metadata:
-            item["Metadata"] = metadata
+        if "sentImages" in metadata_copy and "attachments" not in metadata_copy:
+            metadata_copy["attachments"] = metadata_copy.pop("sentImages")
+
+        if metadata_copy:
+            item["Metadata"] = metadata_copy
 
     try:
         table.put_item(Item=item)
     except Exception as e:
         logger.error(f"Failed to save message for ConversationId {conversation_id}: {e}")
         raise
-        
+
     return item
 
 
 def get_recent_messages(
     conversation_id: str,
     limit: int = 10,
-    ascending: bool = False 
+    ascending: bool = False
 ) -> List[Dict[str, Any]]:
     """
     Fetch the most recent N messages from a conversation.
@@ -71,11 +66,11 @@ def get_recent_messages(
         resp = table.query(
             KeyConditionExpression=Key('ConversationId').eq(conversation_id),
             Limit=limit,
-            ScanIndexForward=ascending, 
+            ScanIndexForward=ascending,
         )
     except Exception as e:
         logger.error(f"Failed to get recent messages for ConversationId {conversation_id}: {e}")
-        return [] 
+        return []
 
     messages = resp.get("Items", [])
     return messages if ascending else list(reversed(messages))
@@ -97,7 +92,7 @@ def get_all_messages(
         try:
             query_kwargs = {
                 'KeyConditionExpression': Key('ConversationId').eq(conversation_id),
-                'ScanIndexForward': True 
+                'ScanIndexForward': True
             }
             if last_evaluated_key:
                 query_kwargs['ExclusiveStartKey'] = last_evaluated_key
@@ -108,7 +103,7 @@ def get_all_messages(
 
             last_evaluated_key = response.get('LastEvaluatedKey', None)
             if not last_evaluated_key:
-                break 
+                break
         except Exception as e:
             logger.error(f"Failed during paginated get_all_messages for ConversationId {conversation_id}: {e}")
             break
@@ -116,9 +111,9 @@ def get_all_messages(
     return messages
 
 
-def update_message_text(conversation_id: str, timestamp: str, partial_text: str):
+def update_message_text(conversation_id: str, timestamp: str, partial_text: str) -> None:
     """
-    Updates the 'MessageText' for a specific message.
+    Updates the MessageText for a specific message.
     """
     if not conversation_id or not timestamp:
         logger.warning("update_message_text called without conversation_id or timestamp.")
@@ -142,12 +137,9 @@ def update_message_text(conversation_id: str, timestamp: str, partial_text: str)
         raise
 
 
-# --- 🔹 BATCH DELETE FUNCTION ---
-def delete_messages_for_conversation(conversation_id: str):
+def delete_messages_for_conversation(conversation_id: str) -> bool:
     """
     Deletes ALL messages associated with a specific ConversationId using BatchWrite.
-    This is necessary because deleting the Conversation Header does not automatically
-    delete the messages (no cascade delete in DynamoDB).
     """
     if not conversation_id:
         raise ValueError("conversation_id is required for deletion")
@@ -155,19 +147,13 @@ def delete_messages_for_conversation(conversation_id: str):
     logger.info(f"Starting batch deletion of messages for ConversationId: {conversation_id}")
 
     try:
-        # 1. Use the batch_writer context manager. 
-        #    It automatically handles buffering (groups of 25) and retries.
         with table.batch_writer() as batch:
-            
-            # 2. Pagination Loop
-            # We need to query for the keys first to know what to delete.
-            # We use ProjectionExpression to fetch ONLY the keys (cheaper RCU).
             last_evaluated_key = None
-            
+
             while True:
                 query_params = {
                     'KeyConditionExpression': Key('ConversationId').eq(conversation_id),
-                    'ProjectionExpression': "#ts", # Only fetch Timestamp (SK)
+                    'ProjectionExpression': "#ts",
                     'ExpressionAttributeNames': {"#ts": "Timestamp"}
                 }
                 if last_evaluated_key:
@@ -176,7 +162,6 @@ def delete_messages_for_conversation(conversation_id: str):
                 response = table.query(**query_params)
                 items = response.get('Items', [])
 
-                # 3. Queue items for deletion in the batch
                 for item in items:
                     batch.delete_item(
                         Key={
@@ -185,13 +170,13 @@ def delete_messages_for_conversation(conversation_id: str):
                         }
                     )
 
-                # Check for next page
                 last_evaluated_key = response.get('LastEvaluatedKey')
                 if not last_evaluated_key:
-                    break 
-        
+                    break
+
         logger.info(f"Successfully deleted all messages for ConversationId: {conversation_id}")
         return True
 
     except Exception as e:
         logger.error(f"Failed to batch delete messages for {conversation_id}: {e}")
+        raise

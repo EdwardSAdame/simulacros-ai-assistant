@@ -1,8 +1,10 @@
+# Backend: simulacros-ai-assistant
+# File: src/services/orchestrator_service.py
+
 import logging
 from typing import Dict, Any, Tuple, List
 
 from src.utils.logging_utils import log_event
-from src.assistant.image_handler import format_image_urls_for_openai
 from src.services.context_resolution import determine_exam_context
 from src.config.model_config import get_model_config 
 
@@ -36,8 +38,7 @@ class OrchestratorService:
         email: str | None,
         page: str | None,
         conversation_id: str | None = None,
-        image_urls: list[str] | None = None,
-        pdf_urls: list[str] | None = None,
+        attachments: List[Dict[str, str]] | None = None,
         media_items: List[Dict[str, Any]] | None = None,
         mode: str = "omega",
         intent: str = "chat",
@@ -52,23 +53,10 @@ class OrchestratorService:
     ) -> Tuple[str, str, str, Dict | None]:
         
         # 1. Normalize Media
+        if not attachments:
+            attachments = []
         if not media_items:
             media_items = []
-            if image_urls:
-                for url in image_urls:
-                    media_items.append({"url": url, "type": "image", "name": "image"})
-            if pdf_urls:
-                for url in pdf_urls:
-                    media_items.append({"url": url, "type": "application/pdf", "name": "document.pdf"})
-
-        clean_images = [m["url"] for m in media_items if "image" in m.get("type", "").lower() or not ".pdf" in m["url"].lower()]
-        
-        # 🟢 UPDATED: Preserve the dictionary structure for PDFs to retain the file name for citations
-        clean_pdfs = [
-            {"url": m["url"], "name": m.get("name", "Document")} 
-            for m in media_items 
-            if "pdf" in m.get("type", "").lower() or ".pdf" in m["url"].lower()
-        ]
 
         # 2. Hidden Context Fast-Path
         if is_hidden:
@@ -87,19 +75,18 @@ class OrchestratorService:
             mode=mode,
             exam_context=raw_exam_context,
             arena_id=arena_id,
-            intent=intent # Pass intent down to lock sticky UI state
+            intent=intent
         )
 
         # 4. Save User Input
-        ConversationService.save_user_message(actual_conversation_id, message, media_items)
+        ConversationService.save_user_message(actual_conversation_id, message, attachments)
 
         # 5. Build Conversation History
         conversation_input = build_history_list(actual_conversation_id)
         current_user_content = []
         if message:
             current_user_content.append({"type": "input_text", "text": message})
-        if clean_images:
-            current_user_content.extend(format_image_urls_for_openai(clean_images))
+            
         if current_user_content:
             conversation_input.append({"role": "user", "content": current_user_content})
 
@@ -122,7 +109,7 @@ class OrchestratorService:
                     exam_context=locked_exam_context, 
                     stream_manager=stream_manager, 
                     category=category, 
-                    clean_pdfs=clean_pdfs,
+                    attachments=attachments,
                     actual_conversation_id=actual_conversation_id,
                     num_questions=num_questions
                 )
@@ -195,10 +182,9 @@ class OrchestratorService:
                     category=category, requires_visuals=requires_visuals, 
                     requires_web_search=requires_web_search,
                     arena_id=arena_id, 
-                    clean_pdfs=clean_pdfs, actual_conversation_id=actual_conversation_id
+                    attachments=attachments, actual_conversation_id=actual_conversation_id
                 )
                 
-                # Broadcats the rich plot assets dynamically to the frontend if available
                 if meta_payload and meta_payload.get("type") == "rich_chat" and stream_manager:
                     assets = meta_payload.get("assets", [])
                     if assets:

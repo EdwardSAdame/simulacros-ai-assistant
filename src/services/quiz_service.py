@@ -1,4 +1,6 @@
-# src/services/quiz_service.py
+# Backend: simulacros-ai-assistant
+# File: src/services/quiz_service.py
+
 from typing import Dict, Any, List, Tuple
 import math
 import random
@@ -151,7 +153,7 @@ class QuizService:
         exam_context: str,
         stream_manager: Any | None = None,
         category: str = "general",
-        clean_pdfs: List[str] | None = None,
+        attachments: List[Dict[str, str]] | None = None,
         actual_conversation_id: str | None = None,
         num_questions: int = 0
     ) -> Tuple[str, Dict | None]:
@@ -267,7 +269,7 @@ class QuizService:
                     conversation_input=conversation_input,
                     user_id=user_id, page=page, name=(name or None), email=_normalize_email_for_storage(email),
                     mode=mode, exam_context=exam_context, requires_visuals=False, 
-                    requires_creative_images=requires_creative_images, pdf_urls=clean_pdfs,
+                    requires_creative_images=requires_creative_images, attachments=attachments,
                     vector_store_ids=selected_vector_stores, web_search_config=web_search_config,
                     category=category
                 )
@@ -408,7 +410,7 @@ class QuizService:
                     conversation_input=conversation_input,
                     user_id=user_id, page=page, name=(name or None), email=_normalize_email_for_storage(email),
                     mode=mode, exam_context=exam_context, requires_visuals=False, 
-                    requires_creative_images=requires_creative_images, pdf_urls=clean_pdfs,
+                    requires_creative_images=requires_creative_images, attachments=attachments,
                     vector_store_ids=selected_vector_stores, web_search_config=web_search_config,
                     category=category
                 )

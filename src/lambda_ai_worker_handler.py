@@ -1,4 +1,6 @@
-# src/lambda_ai_worker_handler.py
+# Backend: simulacros-ai-assistant
+# File: src/lambda_ai_worker_handler.py
+
 import json
 import logging
 import boto3
@@ -16,7 +18,6 @@ from src.storage.conversations_table import get_conversation_metadata
 
 from src.services.history_service import build_history_list 
 
-# For Audio FinOps
 from src.services.audio_usage_service import AudioUsageService
 from src.config.model_config import get_model_config
 
@@ -66,7 +67,6 @@ def lambda_handler(event, context):
             sts_out_text = payload.get("stsOutputText", 0)
             sts_out_audio = payload.get("stsOutputAudio", 0)
 
-            # THE BULLETPROOF FAILSAFE: Intercept exactly by message text
             if message in ["[AUDIO_TELEMETRY]", "[STS_TELEMETRY]"]:
                 
                 if message == "[AUDIO_TELEMETRY]" and audio_duration is not None and int(audio_duration) > 0:
@@ -115,9 +115,9 @@ def lambda_handler(event, context):
                         )
                 
                 continue 
-
-            image_urls = payload.get("image_urls", [])
-            pdf_urls = payload.get("pdf_urls", [])
+            
+            # Extract the unified attachments array instead of isolated URLs
+            attachments = payload.get("attachments", [])
             media_items = payload.get("media_items", [])
             arena_id = payload.get("arena_id")
             exam_id = payload.get("exam_id") 
@@ -206,7 +206,6 @@ def lambda_handler(event, context):
                         except Exception as inner_e:
                             logger.warning(f"Failed to send status to {conn_id}: {inner_e}")
                             
-                    # Remove dead connections from the active list so we don't try them again
                     for dc in dead_conns:
                         if dc in connection_ids:
                             connection_ids.remove(dc)
@@ -237,8 +236,7 @@ def lambda_handler(event, context):
                 email=email,
                 page=page,
                 conversation_id=conv_id_in,
-                image_urls=image_urls,
-                pdf_urls=pdf_urls,
+                attachments=attachments,
                 media_items=media_items, 
                 mode=ai_mode,
                 intent=intent,

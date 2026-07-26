@@ -1,3 +1,6 @@
+# Backend: simulacros-ai-assistant
+# File: src/assistant/clients/chat_client.py
+
 import logging
 import re
 import json
@@ -38,7 +41,7 @@ class ChatClient:
         requires_visuals: bool = False,
         web_search_config: Dict[str, Any] | None = None,
         user_location: Dict[str, str] | None = None,
-        pdf_urls: List[Dict[str, str]] | None = None,
+        attachments: List[Dict[str, str]] | None = None,
         active_container_id: str | None = None,
         conversation_id: str | None = None 
     ) -> Tuple[str, List[str], List[Dict[str, str]], Dict[str, int], Optional[str]]:
@@ -52,14 +55,11 @@ class ChatClient:
         api_input = [{"role": "system", "content": [{"type": "input_text", "text": system_text}]}]
         api_input.extend(conversation_input)
 
-        # Extract raw string URLs for the OpenAI API payload
-        raw_pdf_urls = [doc["url"] for doc in pdf_urls] if pdf_urls else None
-
-        if raw_pdf_urls:
-            BaseAssistantClient.inject_pdf_inputs(api_input, raw_pdf_urls, cfg.pdf_detail_level)
+        if attachments:
+            BaseAssistantClient.inject_file_inputs(api_input, attachments, cfg.pdf_detail_level)
 
         tools = BaseAssistantClient.configure_tools(
-            vector_store_ids, requires_visuals, False, raw_pdf_urls, web_search_config, user_location, cfg, active_container_id
+            vector_store_ids, requires_visuals, False, attachments, web_search_config, user_location, cfg, active_container_id
         )
 
         req = BaseAssistantClient.build_request_payload(cfg, api_input, tools)
@@ -138,7 +138,8 @@ class ChatClient:
         mode: str = "omega",
         system_instruction: str | None = None,
         enable_image_generation: bool = True,
-        requires_web_search: bool = False
+        requires_web_search: bool = False,
+        attachments: List[Dict[str, str]] | None = None
     ) -> Generator[Any, None, None]:
         
         client = get_openai_client()
@@ -151,13 +152,16 @@ class ChatClient:
         api_input = [{"role": "system", "content": [{"type": "input_text", "text": system_text}]}]
         api_input.extend(conversation_input)
 
+        if attachments:
+            BaseAssistantClient.inject_file_inputs(api_input, attachments, cfg.pdf_detail_level)
+
         web_search_config = {"scope": "open_web", "search_enabled": True} if requires_web_search else None
         
         tools = BaseAssistantClient.configure_tools(
             vector_store_ids=None,
             requires_visuals=False,
             code_interpreter_only=False,
-            pdf_urls=None,
+            attachments=attachments,
             web_search_config=web_search_config,
             user_location=None,
             model_config=cfg,

@@ -1,4 +1,6 @@
-# src/lambda_chat_handler.py
+# Backend: simulacros-ai-assistant
+# File: src/lambda_chat_handler.py
+
 import json
 import logging
 import boto3
@@ -40,14 +42,25 @@ def lambda_handler(event, context):
 
         message = body.get("message") or body.get("text") or meta.get("text")
         media_items = meta.get("media") or body.get("media", [])
+        
+        attachments = body.get("attachments") or meta.get("attachments", [])
         image_urls = meta.get("imageUrls") or body.get("imageUrls", [])
         pdf_urls = meta.get("pdfUrls") or body.get("pdfUrls", [])
         
+        if not isinstance(attachments, list): attachments = []
+        if not isinstance(image_urls, list): image_urls = []
+        if not isinstance(pdf_urls, list): pdf_urls = []
+        if not isinstance(media_items, list): media_items = []
+
+        existing_urls = [a.get("url") if isinstance(a, dict) else a for a in attachments]
+        for url in image_urls + pdf_urls:
+            if url not in existing_urls:
+                attachments.append({"url": url})
+        
         arena_id = meta.get("arenaId") or body.get("arenaId")
         
-        # 🟢 UPDATED: Extract exam_id and exam_state from root body OR meta
         exam_id = body.get("examId") or meta.get("examId") 
-        exam_state = body.get("examState") or meta.get("examState") # <-- NEW: Extracting the lockdown flag
+        exam_state = body.get("examState") or meta.get("examState")
         
         is_hidden_flag = body.get("is_hidden") or meta.get("is_hidden", False)
         is_hidden_magic = isinstance(message, str) and message.strip().startswith("[CONTEXTO INTERNO:")
@@ -70,19 +83,14 @@ def lambda_handler(event, context):
         name = name if isinstance(name, str) else (name or "")
         email = _none_if_empty(email)
         page = page or "/"
-        
-        if not isinstance(image_urls, list): image_urls = []
-        if not isinstance(pdf_urls, list): pdf_urls = []
-        if not isinstance(media_items, list): media_items = []
 
-        # Prevent non-paid users from forcing alpha mode via API manipulation
         if ai_mode == "alpha":
             is_paid = is_user_paid(user_id)
             if not is_paid:
                 log_event("unauthorized_mode_access", {"user_id": user_id, "requested_mode": "alpha"}, level="warning")
-                ai_mode = "omega" # Force fallback to omega
+                ai_mode = "omega"
 
-        if not message and not image_urls and not pdf_urls and not media_items and audio_duration is None and sts_in_text is None and sts_in_audio is None:
+        if not message and not attachments and not media_items and audio_duration is None and sts_in_text is None and sts_in_audio is None:
             log_event("input_validation_failed", {"reason": "Missing message or media"}, level="warning")
             return response(400, {"error": "Missing message or media"})
 
@@ -93,16 +101,14 @@ def lambda_handler(event, context):
             "email": email,
             "page": page,
             "conversation_id": conversation_id_in, 
-            "image_urls": image_urls,
-            "pdf_urls": pdf_urls,
+            "attachments": attachments,
             "media_items": media_items, 
             "client_row_id": client_row_id,
             "mode": ai_mode,
             "arena_id": arena_id,
             "exam_id": exam_id, 
-            "exam_state": exam_state, # <-- NEW: Pass the flag down the pipeline
+            "exam_state": exam_state,
             "is_hidden": is_hidden,
-            
             "audioDurationSeconds": audio_duration,
             "stsInputText": sts_in_text,
             "stsInputAudio": sts_in_audio,
@@ -120,9 +126,10 @@ def lambda_handler(event, context):
             "conversation_id": conversation_id_in,
             "mode": ai_mode,
             "has_media_items": bool(media_items),
+            "attachment_count": len(attachments),
             "arena_id": arena_id,
             "exam_id": exam_id,
-            "exam_state": exam_state, # <-- NEW: Added to telemetry
+            "exam_state": exam_state,
             "is_hidden": is_hidden,
             "has_stt_telemetry": audio_duration is not None,
             "has_sts_telemetry": sts_in_text is not None or sts_in_audio is not None

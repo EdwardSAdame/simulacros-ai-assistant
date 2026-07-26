@@ -1,4 +1,6 @@
-# src/services/conversation_service.py
+# Backend: simulacros-ai-assistant
+# File: src/services/conversation_service.py
+
 import logging
 from typing import Dict, Any, Tuple, List, Optional
 
@@ -10,7 +12,7 @@ from src.storage.conversations_table import (
     update_conversation_last_active,
     update_conversation_mode,
     update_conversation_exam_context,
-    update_conversation_activity, # NEW: Import the activity updater
+    update_conversation_activity,
     get_latest_conversation_for_user 
 )
 from src.storage.messages_table import save_message
@@ -48,7 +50,7 @@ class ConversationService:
         mode: str,
         exam_context: str,
         arena_id: str | None = None,
-        intent: str = "chat" # NEW: Accept intent to manage sticky UI state
+        intent: str = "chat"
     ) -> Tuple[str, str]:
         """
         Checks if a conversation exists. 
@@ -64,7 +66,7 @@ class ConversationService:
         
         final_exam_context = str(exam_context).upper()
         persisted_exam_context = None
-        persisted_activity = "chat" # Default
+        persisted_activity = "chat"
 
         if conversation_id and user_id:
             exists_timestamp = _find_conversation_timestamp(user_id, conversation_id)
@@ -76,17 +78,13 @@ class ConversationService:
                     persisted_mode = existing_meta.get("AiMode")
                     persisted_activity = existing_meta.get("CurrentActivity", "chat")
                     
-                    # Update mode if changed
                     if persisted_mode and mode != persisted_mode:
                         update_conversation_mode(user_id, conversation_id, mode)
                         log_event("ai_mode_updated_in_db", {"old_mode": persisted_mode, "new_mode": mode})
 
-                    # Maintain arena consistency
                     if not arena_id and existing_meta.get("ArenaId"):
                         arena_id = existing_meta.get("ArenaId")
 
-        # Global User-Level Context Inheritance
-        # If this is a brand new session, query the database for the user's most recent conversation state
         if should_create_new and user_id and user_id != "anonymous":
             try:
                 latest_meta = get_latest_conversation_for_user(user_id)
@@ -96,15 +94,10 @@ class ConversationService:
             except Exception as e:
                 logger.warning(f"Could not retrieve latest user conversation for context inheritance: {e}")
 
-        # THE LOCK: Reject downgrade from specific exam to GENERAL
-        # This applies whether the persisted context came from an existing conversation or inherited from a previous one
         specific_exams = ["UNAL", "ICFES"]
         if persisted_exam_context in specific_exams and final_exam_context not in specific_exams:
             final_exam_context = persisted_exam_context
 
-        # STICKY STATE LOGIC
-        # If the intent is a major tool, lock it as the active state. 
-        # If it's just "chat", stick to the previous state so the router knows they are asking a follow-up.
         major_intents = ["quiz", "flashcards", "mentalmap", "mind_map", "creative_image", "admission_stats"]
         final_activity = intent if intent in major_intents else (persisted_activity if not should_create_new else "chat")
 
@@ -120,19 +113,16 @@ class ConversationService:
                     arena_id=arena_id,
                     ai_mode=mode,
                     exam_context=final_exam_context,
-                    current_activity=final_activity # Save the sticky state on creation
+                    current_activity=final_activity
                 )
                 actual_conversation_id = conversation_data["ConversationId"]
             else:
-                # Update DB only if we explicitly upgraded (General->UNAL) or swapped (UNAL->ICFES)
                 if persisted_exam_context and final_exam_context != persisted_exam_context:
                     update_conversation_exam_context(user_id, actual_conversation_id, final_exam_context)
                 
-                # Update activity state if the user moved to a new panel tool
                 if final_activity != persisted_activity:
                     update_conversation_activity(user_id, actual_conversation_id, final_activity)
             
-            # Update Activity Timestamps
             if user_id and actual_conversation_id:
                 update_conversation_last_active(user_id, actual_conversation_id)
                 if arena_id:
@@ -160,14 +150,14 @@ class ConversationService:
             raise RuntimeError(f"Failed to save hidden context: {e}")
 
     @classmethod
-    def save_user_message(cls, conversation_id: str, message: str | None, media_items: List[Dict[str, Any]] | None = None):
-        """Saves the user's incoming message and any attached media to the database."""
+    def save_user_message(cls, conversation_id: str, message: str | None, attachments: List[Dict[str, Any]] | None = None):
+        """Saves the user's incoming message and any attached files to the database."""
         try:
             save_message(
                 conversation_id, 
                 role="user", 
                 message_text=message if message else "[Archivo adjunto]", 
-                metadata={"sentImages": media_items} if media_items else None
+                metadata={"attachments": attachments} if attachments else None
             )
         except Exception as e:
             logger.error(f"Failed to save user message: {e}")
