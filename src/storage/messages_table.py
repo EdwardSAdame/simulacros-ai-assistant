@@ -2,7 +2,7 @@
 # File: src/storage/messages_table.py
 
 import logging
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Optional, Dict, Any, List
 import boto3
 from boto3.dynamodb.conditions import Key
@@ -24,7 +24,7 @@ def save_message(
     Save a single message to the ConversationMessages table.
     Stores all extra payload data and file attachments inside the Metadata attribute.
     """
-    timestamp = datetime.utcnow().isoformat()
+    timestamp = datetime.now(timezone.utc).isoformat()
 
     item = {
         "ConversationId": conversation_id,

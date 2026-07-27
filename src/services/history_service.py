@@ -1,3 +1,6 @@
+# Backend: simulacros-ai-assistant
+# File: src/services/history_service.py
+
 import json
 from decimal import Decimal
 from typing import List, Dict, Any
@@ -33,7 +36,7 @@ def build_history_list(conversation_id: str, max_user: int = 30, max_assistant: 
             text_content = m.get("MessageText", "")
             
             # Inject metadata context if available (Assistant only)
-            metadata = m.get("Metadata") or m.get("Meta")
+            metadata = m.get("Metadata") or m.get("Meta") or {}
             
             # ONLY inject the system log if include_system_logs is True
             if role == "assistant" and metadata and include_system_logs:
@@ -55,27 +58,35 @@ def build_history_list(conversation_id: str, max_user: int = 30, max_assistant: 
             
             # Rehydrate media elements for user messages to maintain document context
             if role == "user":
+                # Extract from both legacy top-level and current Metadata location
                 sent_images = m.get("sentImages", [])
+                attachments = metadata.get("attachments", [])
+                
+                all_media = []
                 if isinstance(sent_images, list):
-                    for media in sent_images:
-                        media_url = media.get("url")
-                        if not media_url:
-                            continue
-                            
-                        media_type = media.get("type", "").lower()
-                        media_category = media.get("category", "").lower()
+                    all_media.extend(sent_images)
+                if isinstance(attachments, list):
+                    all_media.extend(attachments)
+
+                for media in all_media:
+                    media_url = media.get("url") if isinstance(media, dict) else media
+                    if not media_url or not isinstance(media_url, str):
+                        continue
                         
-                        if "pdf" in media_type or "pdf" in media_category or media_url.endswith(".pdf"):
-                            content.append({
-                                "type": "input_file",
-                                "file_url": media_url,
-                                "detail": "high"
-                            })
-                        elif "image" in media_type or "image" in media_category:
-                            content.append({
-                                "type": "image_url",
-                                "image_url": {"url": media_url}
-                            })
+                    media_type = media.get("type", "").lower() if isinstance(media, dict) else ""
+                    media_category = media.get("category", "").lower() if isinstance(media, dict) else ""
+                    
+                    if "pdf" in media_type or "pdf" in media_category or media_url.endswith(".pdf"):
+                        content.append({
+                            "type": "input_file",
+                            "file_url": media_url,
+                            "detail": "high"
+                        })
+                    elif "image" in media_type or "image" in media_category or any(media_url.lower().endswith(ext) for ext in [".png", ".jpg", ".jpeg", ".webp", ".gif"]):
+                        content.append({
+                            "type": "input_image",
+                            "image_url": media_url
+                        })
 
             history_list.append({"role": role, "content": content})
         

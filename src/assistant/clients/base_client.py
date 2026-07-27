@@ -97,15 +97,16 @@ class BaseAssistantClient:
     def sanitize_input_content(api_input: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
         """
         Ensures input structures match OpenAI API specifications.
-        Preserves image_url structures for vision models while keeping text input structures intact.
+        Flattens legacy image_url structures to conform to the Responses API payload.
         """
         for message in api_input:
             if "content" in message and isinstance(message["content"], list):
                 for content_part in message["content"]:
-                    if content_part.get("type") == "image_url":
-                        img_url_data = content_part.get("image_url", {})
-                        if isinstance(img_url_data, str):
-                            content_part["image_url"] = {"url": img_url_data}
+                    if content_part.get("type") in ["image_url", "input_image"]:
+                        content_part["type"] = "input_image"
+                        img_url_data = content_part.get("image_url")
+                        if isinstance(img_url_data, dict) and "url" in img_url_data:
+                            content_part["image_url"] = img_url_data["url"]
         return api_input
 
     @staticmethod
