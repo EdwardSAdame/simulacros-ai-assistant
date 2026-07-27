@@ -1,4 +1,6 @@
-# src/config/settings.py
+# Backend: simulacros-ai-assistant
+# File: src/config/settings.py
+
 import os
 from dotenv import load_dotenv
 import openai
@@ -32,7 +34,7 @@ class Settings:
         self.FEEDBACK_TABLE_NAME: str = os.getenv("FEEDBACK_TABLE_NAME", "Feedback")
         self.WS_AUDIO_TABLE_NAME: str = os.getenv("WS_AUDIO_TABLE_NAME", "WsAudio")
         
-        # 🟢 Add mapping for the Audio Usage FinOps Table
+        # Add mapping for the Audio Usage FinOps Table
         self.AUDIO_USAGE_TABLE_NAME: str = os.getenv("AUDIO_USAGE_TABLE_NAME", "AudioUsage")
 
         # ---------------------------------------------------------
@@ -51,7 +53,7 @@ class Settings:
         # --- OpenAI Models ---
         self.OPENAI_AUDIO_MODEL: str = os.getenv("OPENAI_AUDIO_MODEL")
         
-        # 🟢 NOTE: AUDIO TRANSCRIPTION and REALTIME models have been removed from here.
+        # NOTE: AUDIO TRANSCRIPTION and REALTIME models have been removed from here.
         # They are now dynamically loaded via src.config.model_config.get_model_config(mode)
         
         # Router Model Configuration 
@@ -90,6 +92,10 @@ class Settings:
             logger.warning("IMAGE_GENERATION_PARTIALS in .env is not a valid int. Defaulting to 3.")
             self.IMAGE_GENERATION_PARTIALS: int = 3
 
+        # Document Detail Configuration
+        self.OPENAI_DOCUMENT_DETAIL_ALPHA: str = os.getenv("OPENAI_DOCUMENT_DETAIL_ALPHA", "high")
+        self.OPENAI_DOCUMENT_DETAIL_OMEGA: str = os.getenv("OPENAI_DOCUMENT_DETAIL_OMEGA", "high")
+
     def get_openai_client(self) -> openai.Client:
         if not self.OPENAI_API_KEY:
             raise ValueError("Cannot create OpenAI client: OPENAI_API_KEY is not set.")
@@ -107,7 +113,15 @@ class Settings:
     def get_image_generation_partials(self) -> int:
         return self.IMAGE_GENERATION_PARTIALS
 
+    def get_document_detail_alpha(self) -> str:
+        return self.OPENAI_DOCUMENT_DETAIL_ALPHA
+
+    def get_document_detail_omega(self) -> str:
+        return self.OPENAI_DOCUMENT_DETAIL_OMEGA
+
+
 settings = Settings()
+
 
 def get_openai_client() -> openai.Client:
     return settings.get_openai_client()
@@ -123,3 +137,9 @@ def get_image_generation_size() -> str:
 
 def get_image_generation_partials() -> int:
     return settings.get_image_generation_partials()
+
+def get_document_detail_alpha() -> str:
+    return settings.get_document_detail_alpha()
+
+def get_document_detail_omega() -> str:
+    return settings.get_document_detail_omega()

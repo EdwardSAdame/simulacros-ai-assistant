@@ -1,3 +1,6 @@
+# Backend: simulacros-ai-assistant
+# File: src/config/model_config.py
+
 import os
 from dataclasses import dataclass
 from typing import Optional
@@ -12,7 +15,7 @@ class ModelConfig:
     temperature: Optional[float]
     top_p: Optional[float]
     reasoning_effort: Optional[str]
-    pdf_detail_level: str
+    document_detail_level: str
 
     # 2. ROUTER MODE (Classification)
     router_model: str
@@ -55,7 +58,7 @@ def get_model_config(mode: str = "omega") -> ModelConfig:
         suffix = "ALPHA"
         fallback_model = "gpt-4o"
         fallback_temp = 0.4
-        fallback_pdf_detail = "high"
+        fallback_document_detail = "high"
         # Premium Image Settings
         fallback_image_model = "gpt-image-1.5"
         fallback_image_quality = "high"
@@ -69,7 +72,7 @@ def get_model_config(mode: str = "omega") -> ModelConfig:
         suffix = "OMEGA"
         fallback_model = "gpt-4o-mini"
         fallback_temp = 0.3
-        fallback_pdf_detail = "high"
+        fallback_document_detail = "high"
         # Standard Image Settings
         fallback_image_model = "gpt-image-1-mini"
         fallback_image_quality = "medium"
@@ -83,7 +86,7 @@ def get_model_config(mode: str = "omega") -> ModelConfig:
     temperature = _parse_float_or_none(os.getenv(f"OPENAI_TEMP_{suffix}"), fallback_temp)
     top_p = _parse_float_or_none(os.getenv(f"OPENAI_TOP_P_{suffix}"), 1.0)
     reasoning_effort = _parse_effort(os.getenv(f"OPENAI_REASONING_EFFORT_{suffix}"))
-    pdf_detail_level = os.getenv(f"OPENAI_PDF_DETAIL_{suffix}", fallback_pdf_detail)
+    document_detail_level = os.getenv(f"OPENAI_DOCUMENT_DETAIL_{suffix}", fallback_document_detail)
 
     # --- LOAD ROUTER (Independent) ---
     router_model = os.getenv("OPENAI_MODEL_ROUTER", "gpt-4o-mini")
@@ -107,7 +110,7 @@ def get_model_config(mode: str = "omega") -> ModelConfig:
         temperature=temperature,
         top_p=top_p,
         reasoning_effort=reasoning_effort,
-        pdf_detail_level=pdf_detail_level,
+        document_detail_level=document_detail_level,
 
         router_model=router_model,
         router_temperature=router_temp,

@@ -56,7 +56,7 @@ class ChatClient:
         api_input.extend(conversation_input)
 
         if attachments:
-            BaseAssistantClient.inject_file_inputs(api_input, attachments, cfg.pdf_detail_level)
+            BaseAssistantClient.inject_file_inputs(api_input, attachments, cfg.document_detail_level)
 
         tools = BaseAssistantClient.configure_tools(
             vector_store_ids, requires_visuals, False, attachments, web_search_config, user_location, cfg, active_container_id
@@ -153,7 +153,7 @@ class ChatClient:
         api_input.extend(conversation_input)
 
         if attachments:
-            BaseAssistantClient.inject_file_inputs(api_input, attachments, cfg.pdf_detail_level)
+            BaseAssistantClient.inject_file_inputs(api_input, attachments, cfg.document_detail_level)
 
         web_search_config = {"scope": "open_web", "search_enabled": True} if requires_web_search else None
         
