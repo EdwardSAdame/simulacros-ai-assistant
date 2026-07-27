@@ -109,9 +109,19 @@ class BaseAssistantClient:
         return api_input
 
     @staticmethod
+    def _is_image_url(url: str) -> bool:
+        """
+        Determines whether a given URL points to a standard image file based on extension.
+        """
+        image_extensions = (".png", ".jpg", ".jpeg", ".webp", ".gif", ".bmp", ".svg", ".tiff")
+        clean_url = url.split("?")[0].lower()
+        return any(clean_url.endswith(ext) for ext in image_extensions)
+
+    @staticmethod
     def inject_file_inputs(api_input: List[Dict[str, Any]], attachments: List[Dict[str, str]], detail_level: str = "high") -> None:
         """
-        Injects document file attachments into the message array using the input_file format.
+        Injects user attachments into the message array, routing standard images as input_image
+        and non-image document files as input_file according to API specifications.
         """
         target_message = None
         if api_input and api_input[-1].get("role") == "user":
@@ -124,22 +134,32 @@ class BaseAssistantClient:
         if isinstance(current_content, str):
             target_message["content"] = [{"type": "input_text", "text": current_content}]
         elif current_content is None:
-             target_message["content"] = []
+            target_message["content"] = []
              
         valid_file_count = 0
+        valid_image_count = 0
+
         for item in attachments:
             url = item.get("url") if isinstance(item, dict) else item
             
             if url and isinstance(url, str) and url.startswith("http"):
-                target_message["content"].append({
-                    "type": "input_file",
-                    "file_url": url,
-                    "detail": detail_level
-                })
-                valid_file_count += 1
+                if BaseAssistantClient._is_image_url(url):
+                    target_message["content"].append({
+                        "type": "input_image",
+                        "image_url": url.strip()
+                    })
+                    valid_image_count += 1
+                else:
+                    target_message["content"].append({
+                        "type": "input_file",
+                        "file_url": url,
+                        "detail": detail_level
+                    })
+                    valid_file_count += 1
 
         log_event("file_inputs_injected", {
             "file_count": valid_file_count,
+            "image_count": valid_image_count,
             "detail_level": detail_level
         })
 
