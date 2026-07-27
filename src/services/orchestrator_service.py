@@ -100,11 +100,13 @@ class OrchestratorService:
         current_user_content = []
         
         if message:
-            current_user_content.append({"type": "text", "text": message})
+            # Ensure compliance with strict API schema: use "input_text" instead of "text"
+            current_user_content.append({"type": "input_text", "text": message})
             
         for img in images:
+            # Ensure compliance with strict API schema: use "input_image" instead of "image_url"
             current_user_content.append({
-                "type": "image_url",
+                "type": "input_image",
                 "image_url": {"url": img["url"]}
             })
             
