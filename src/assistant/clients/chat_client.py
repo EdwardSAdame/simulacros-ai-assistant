@@ -1,6 +1,3 @@
-# Backend: simulacros-ai-assistant
-# File: src/assistant/clients/chat_client.py
-
 import logging
 import re
 import json
@@ -59,7 +56,15 @@ class ChatClient:
             BaseAssistantClient.inject_file_inputs(api_input, attachments, cfg.document_detail_level)
 
         tools = BaseAssistantClient.configure_tools(
-            vector_store_ids, requires_visuals, False, attachments, web_search_config, user_location, cfg, active_container_id
+            vector_store_ids=vector_store_ids,
+            requires_visuals=requires_visuals,
+            requires_creative_images=False,
+            attachments=attachments,
+            web_search_config=web_search_config,
+            user_location=user_location,
+            cfg=cfg,
+            active_container_id=active_container_id,
+            code_interpreter_only=False
         )
 
         req = BaseAssistantClient.build_request_payload(cfg, api_input, tools)
@@ -160,12 +165,13 @@ class ChatClient:
         tools = BaseAssistantClient.configure_tools(
             vector_store_ids=None,
             requires_visuals=False,
-            code_interpreter_only=False,
+            requires_creative_images=False,
             attachments=attachments,
             web_search_config=web_search_config,
             user_location=None,
-            model_config=cfg,
-            active_container_id=None
+            cfg=cfg,
+            active_container_id=None,
+            code_interpreter_only=False
         )
         
         if enable_image_generation:

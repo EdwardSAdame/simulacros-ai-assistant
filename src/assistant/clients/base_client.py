@@ -1,6 +1,3 @@
-# Backend: simulacros-ai-assistant
-# File: src/assistant/clients/base_client.py
-
 import logging
 from typing import List, Dict, Any, Optional
 
@@ -165,18 +162,41 @@ class BaseAssistantClient:
         })
 
     @staticmethod
-    def configure_tools(vector_store_ids, requires_visuals, requires_creative_images, attachments, web_search_config, user_location, cfg, active_container_id=None) -> List[Dict[str, Any]]:
+    def configure_tools(
+        vector_store_ids: Optional[List[str]] = None, 
+        requires_visuals: bool = False, 
+        requires_creative_images: bool = False, 
+        attachments: Optional[List[Any]] = None, 
+        web_search_config: Optional[Dict[str, Any]] = None, 
+        user_location: Optional[str] = None, 
+        cfg: Any = None, 
+        active_container_id: Optional[str] = None,
+        code_interpreter_only: bool = False,
+        model_config: Any = None
+    ) -> List[Dict[str, Any]]:
         tools = []
+        active_cfg = cfg or model_config
+
+        if code_interpreter_only:
+            memory_limit = get_code_interpreter_memory()
+            container_config = active_container_id if active_container_id else {"type": "auto", "memory_limit": memory_limit}
+            tools.append({
+                "type": "code_interpreter", 
+                "container": container_config
+            })
+            log_event("container_requested", {
+                "context": "forced_code_interpreter", 
+                "memory_limit": memory_limit,
+                "explicit_id": active_container_id
+            })
+            return tools
+
         if vector_store_ids:
             tools.append({"type": "file_search", "vector_store_ids": vector_store_ids, "max_num_results": get_vector_search_max_results()})
         
         if requires_visuals or (attachments and len(attachments) > 0):
             memory_limit = get_code_interpreter_memory()
-            
-            if active_container_id:
-                container_config = active_container_id
-            else:
-                container_config = {"type": "auto", "memory_limit": memory_limit}
+            container_config = active_container_id if active_container_id else {"type": "auto", "memory_limit": memory_limit}
 
             tools.append({
                 "type": "code_interpreter", 
@@ -189,13 +209,13 @@ class BaseAssistantClient:
                 "explicit_id": active_container_id
             })
             
-        if requires_creative_images:
+        if requires_creative_images and active_cfg:
             tools.append({
                 "type": "image_generation",
-                "model": cfg.image_model,
+                "model": getattr(active_cfg, "image_model", "gpt-image-2"),
                 "partial_images": get_image_generation_partials(),
                 "size": get_image_generation_size(),
-                "quality": cfg.image_quality
+                "quality": getattr(active_cfg, "image_quality", "auto")
             })
             
         if web_search_config:
