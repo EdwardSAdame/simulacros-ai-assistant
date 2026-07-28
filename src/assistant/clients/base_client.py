@@ -212,6 +212,7 @@ class BaseAssistantClient:
         if requires_creative_images and active_cfg:
             tools.append({
                 "type": "image_generation",
+                "action": "generate",
                 "model": getattr(active_cfg, "image_model", "gpt-image-2"),
                 "partial_images": get_image_generation_partials(),
                 "size": get_image_generation_size(),

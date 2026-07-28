@@ -165,7 +165,7 @@ class ChatClient:
         tools = BaseAssistantClient.configure_tools(
             vector_store_ids=None,
             requires_visuals=False,
-            requires_creative_images=False,
+            requires_creative_images=enable_image_generation,
             attachments=attachments,
             web_search_config=web_search_config,
             user_location=None,
@@ -173,15 +173,6 @@ class ChatClient:
             active_container_id=None,
             code_interpreter_only=False
         )
-        
-        if enable_image_generation:
-            tools.append({
-                "type": "image_generation",
-                "model": cfg.image_model,
-                "partial_images": get_image_generation_partials(), 
-                "size": get_image_generation_size(),
-                "quality": cfg.image_quality
-            })
 
         req = BaseAssistantClient.build_request_payload(cfg, api_input, tools)
         req["stream"] = True
