@@ -1,4 +1,6 @@
-# src/utils/response_parser.py
+# Backend: simulacros-ai-assistant
+# File: src/utils/response_parser.py
+
 import logging
 from typing import List, Dict, Any
 
@@ -15,7 +17,8 @@ def is_valid_image_url(url: str) -> bool:
 
 def extract_sources(response_obj: Any) -> List[Dict[str, str]]:
     """
-    Parses the OpenAI response object to find URL citations.
+    Parses the OpenAI response object to find URL citations and File citations.
+    Maps file citations into a pseudo-URL format compatible with the frontend renderer.
     """
     sources = []
     try:
@@ -26,11 +29,26 @@ def extract_sources(response_obj: Any) -> List[Dict[str, str]]:
                 for part in content_list:
                     annotations = getattr(part, "annotations", []) or []
                     for ann in annotations:
-                        if getattr(ann, "type", "") == "url_citation":
+                        ann_type = getattr(ann, "type", "")
+                        
+                        # Handle standard web search citations
+                        if ann_type == "url_citation":
                             url = getattr(ann, "url", None)
-                            title = getattr(ann, "title", "Fuente")
+                            title = getattr(ann, "title", "Fuente Web")
                             if url: 
                                 sources.append({"title": title, "url": url})
+                                
+                        # Handle vector store file citations
+                        elif ann_type == "file_citation":
+                            # Depending on the SDK version, properties may be nested or flat
+                            file_citation_obj = getattr(ann, "file_citation", ann)
+                            file_id = getattr(file_citation_obj, "file_id", "unknown_id")
+                            filename = getattr(file_citation_obj, "filename", "Documento de Arena")
+                            
+                            # Construct a pseudo-URL to satisfy the frontend URL parser
+                            pseudo_url = f"https://documento.arena/archivo/{file_id}"
+                            sources.append({"title": filename, "url": pseudo_url})
+                            
     except Exception as e:
         logger.error(f"Error extracting sources: {e}")
     

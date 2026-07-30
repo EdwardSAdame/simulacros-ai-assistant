@@ -1,3 +1,6 @@
+# Backend: simulacros-ai-assistant
+# File: src/assistant/clients/chat_client.py
+
 import logging
 import re
 import json
@@ -198,9 +201,16 @@ class ChatClient:
             
             if event_type == "response.completed":
                 resp_obj = getattr(event, "response", event)
+                
+                # Extract and yield usage metrics
                 usage_obj = getattr(resp_obj, "usage", None)
                 if usage_obj is not None:
                     yield {"type": "usage_metrics", "data": BaseAssistantClient.extract_usage_metrics(usage_obj)}
+                
+                # Extract and yield sources (citations)
+                sources_list = extract_sources(resp_obj)
+                if sources_list:
+                    yield {"type": "sources", "data": sources_list}
 
             else:
                 yield event
