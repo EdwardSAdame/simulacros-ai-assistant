@@ -15,6 +15,7 @@ from src.utils.logging_utils import log_event
 from src.services.context_builder import build_runtime_context
 from src.services.arena_service import arena_service
 from src.config.system_instructions import build_system_instructions
+from src.config.arena_instructions import build_arena_system_instructions
 from src.assistant.assistant_client import (
     send_message_to_assistant,
     generate_plot_blueprint,
@@ -133,19 +134,11 @@ class ChatService:
                         selected_vector_stores.append(arena_vector_store)
 
                     if arena_instructions and str(arena_instructions).strip():
-                        base_tech_prompt = (
-                            "You are an advanced AI Assistant. \n"
-                            "OUTPUT RULES:\n"
-                            "- Use Markdown for formatting.\n"
-                            "- Use LaTeX for math equations.\n"
-                            "- Be helpful, clear, and accurate.\n"
+                        system_prompt = build_arena_system_instructions(
+                            arena_title=arena_title,
+                            arena_instructions=arena_instructions,
+                            runtime_signals=runtime_signals
                         )
-                        if runtime_signals:
-                            context_str = "\n".join(runtime_signals)
-                            base_tech_prompt += f"\nCONTEXT:\n{context_str}\n"
-
-                        injection = f"\n\n## Identity: {arena_title}\n{arena_instructions}"
-                        system_prompt = base_tech_prompt + injection
             except Exception as e:
                 logger.error(f"Failed to load arena context: {e}")
 
