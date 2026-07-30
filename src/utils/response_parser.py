@@ -2,6 +2,7 @@
 # File: src/utils/response_parser.py
 
 import logging
+import urllib.parse
 from typing import List, Dict, Any
 
 logger = logging.getLogger(__name__)
@@ -19,7 +20,8 @@ def extract_sources(response_obj: Any, arena_files: List[Dict[str, Any]] = None)
     """
     Parses the OpenAI response object to find URL citations and File citations.
     Maps file citations into a pseudo-URL format compatible with the frontend renderer.
-    Cross-references hashed filenames against arena_files to restore original human-readable names.
+    Cross-references hashed filenames against arena_files to restore original human-readable names
+    by parsing the raw Wix document URL.
     """
     sources = []
     arena_files = arena_files or []
@@ -48,13 +50,24 @@ def extract_sources(response_obj: Any, arena_files: List[Dict[str, Any]] = None)
                             file_id = getattr(file_citation_obj, "file_id", "unknown_id")
                             hashed_filename = getattr(file_citation_obj, "filename", "Documento de Arena")
                             
-                            # Matchmake: Find original name using the hashed filename
+                            # Matchmake: Find original name by parsing the Wix URL
                             display_name = hashed_filename
                             for file_data in arena_files:
                                 file_url = file_data.get("url", "")
+                                
                                 # If the hashed filename from OpenAI is part of the original CDN URL
                                 if hashed_filename in file_url:
-                                    display_name = file_data.get("name", hashed_filename)
+                                    # Extract the real filename from the end of the Wix URL
+                                    # Example: wix:document://v1/hash.pdf/Real%20Name.pdf
+                                    url_parts = file_url.split("/")
+                                    extracted_name = url_parts[-1] if url_parts else ""
+                                    
+                                    if extracted_name and extracted_name != hashed_filename:
+                                        # Decode URL-encoded characters (e.g., %20 to space)
+                                        display_name = urllib.parse.unquote(extracted_name)
+                                    else:
+                                        # Fallback to the 'name' attribute or the hashed name
+                                        display_name = file_data.get("name", hashed_filename)
                                     break
                             
                             # Construct a pseudo-URL to satisfy the frontend URL parser
