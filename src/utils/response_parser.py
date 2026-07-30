@@ -15,12 +15,15 @@ def is_valid_image_url(url: str) -> bool:
     clean = url.lower().split('?')[0]
     return clean.endswith(('.png', '.jpg', '.jpeg', '.gif', '.webp'))
 
-def extract_sources(response_obj: Any) -> List[Dict[str, str]]:
+def extract_sources(response_obj: Any, arena_files: List[Dict[str, Any]] = None) -> List[Dict[str, str]]:
     """
     Parses the OpenAI response object to find URL citations and File citations.
     Maps file citations into a pseudo-URL format compatible with the frontend renderer.
+    Cross-references hashed filenames against arena_files to restore original human-readable names.
     """
     sources = []
+    arena_files = arena_files or []
+    
     try:
         output_items = getattr(response_obj, "output", []) or []
         for item in output_items:
@@ -43,11 +46,20 @@ def extract_sources(response_obj: Any) -> List[Dict[str, str]]:
                             # Depending on the SDK version, properties may be nested or flat
                             file_citation_obj = getattr(ann, "file_citation", ann)
                             file_id = getattr(file_citation_obj, "file_id", "unknown_id")
-                            filename = getattr(file_citation_obj, "filename", "Documento de Arena")
+                            hashed_filename = getattr(file_citation_obj, "filename", "Documento de Arena")
+                            
+                            # Matchmake: Find original name using the hashed filename
+                            display_name = hashed_filename
+                            for file_data in arena_files:
+                                file_url = file_data.get("url", "")
+                                # If the hashed filename from OpenAI is part of the original CDN URL
+                                if hashed_filename in file_url:
+                                    display_name = file_data.get("name", hashed_filename)
+                                    break
                             
                             # Construct a pseudo-URL to satisfy the frontend URL parser
                             pseudo_url = f"https://documento.arena/archivo/{file_id}"
-                            sources.append({"title": filename, "url": pseudo_url})
+                            sources.append({"title": display_name, "url": pseudo_url})
                             
     except Exception as e:
         logger.error(f"Error extracting sources: {e}")

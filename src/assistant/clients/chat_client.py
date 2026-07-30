@@ -43,7 +43,8 @@ class ChatClient:
         user_location: Dict[str, str] | None = None,
         attachments: List[Dict[str, str]] | None = None,
         active_container_id: str | None = None,
-        conversation_id: str | None = None 
+        conversation_id: str | None = None,
+        arena_files: List[Dict[str, Any]] | None = None
     ) -> Tuple[str, List[str], List[Dict[str, str]], Dict[str, int], Optional[str]]:
         
         client = get_openai_client()
@@ -130,7 +131,8 @@ class ChatClient:
                 except Exception as track_err:
                     logger.error(f"Failed to log standard chat image usage: {track_err}")
 
-        sources_list = extract_sources(resp)
+        # Pass arena_files down to the parser
+        sources_list = extract_sources(resp, arena_files)
         generated_urls = list(generated_urls_map.values()) if isinstance(generated_urls_map, dict) else generated_urls_map
         usage_data = BaseAssistantClient.extract_usage_metrics(getattr(resp, "usage", None))
 
@@ -147,7 +149,8 @@ class ChatClient:
         system_instruction: str | None = None,
         enable_image_generation: bool = True,
         requires_web_search: bool = False,
-        attachments: List[Dict[str, str]] | None = None
+        attachments: List[Dict[str, str]] | None = None,
+        arena_files: List[Dict[str, Any]] | None = None
     ) -> Generator[Any, None, None]:
         
         client = get_openai_client()
@@ -207,8 +210,8 @@ class ChatClient:
                 if usage_obj is not None:
                     yield {"type": "usage_metrics", "data": BaseAssistantClient.extract_usage_metrics(usage_obj)}
                 
-                # Extract and yield sources (citations)
-                sources_list = extract_sources(resp_obj)
+                # Pass arena_files down to the parser
+                sources_list = extract_sources(resp_obj, arena_files)
                 if sources_list:
                     yield {"type": "sources", "data": sources_list}
 

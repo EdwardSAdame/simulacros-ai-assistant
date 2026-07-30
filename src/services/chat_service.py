@@ -117,6 +117,7 @@ class ChatService:
         )
         
         system_prompt = ""
+        arena_files = []
 
         # 2. Handle Arenas Context
         if arena_id:
@@ -127,6 +128,8 @@ class ChatService:
                     arena_instructions = arena_context.get('SystemInstructions', '')
                     
                     arena_vector_store = arena_context.get('VectorStoreId')
+                    arena_files = arena_context.get('Files', [])
+                    
                     # Respect tool gating for arena vector stores too
                     if arena_vector_store and not is_web_search_active:
                         if not selected_vector_stores:
@@ -211,7 +214,8 @@ class ChatService:
                         user_location=None,
                         attachments=attachments,
                         active_container_id=active_container_id,
-                        conversation_id=actual_conversation_id
+                        conversation_id=actual_conversation_id,
+                        arena_files=arena_files
                     )
 
                     future_plot = None
@@ -262,7 +266,8 @@ class ChatService:
                     web_search_config=web_search_config, 
                     attachments=attachments,
                     active_container_id=active_container_id,
-                    conversation_id=actual_conversation_id  
+                    conversation_id=actual_conversation_id,
+                    arena_files=arena_files
                 )
                 
                 final_reply_text = response_tuple[0]
