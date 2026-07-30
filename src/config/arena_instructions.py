@@ -10,7 +10,7 @@ def build_arena_system_instructions(
 ) -> str:
     """
     Constructs the system prompt specifically for Arena contexts.
-    Enforces formatting rules and strict file_search tool usage.
+    Enforces formatting rules, strict file_search tool usage, and mandatory citations.
     """
     
     base_tech_prompt = (
@@ -18,7 +18,8 @@ def build_arena_system_instructions(
         "OUTPUT RULES:\n"
         "- Use Markdown for formatting.\n"
         "- Use LaTeX for math equations.\n"
-        "- Be helpful, clear, and accurate.\n\n"
+        "- Be helpful, clear, and accurate.\n"
+        "- STRICT CITATION REQUIREMENT: Whenever you extract, synthesize, or retrieve information using the file_search tool, you MUST include explicit inline annotations. Ground every factual claim by appending the source document citation directly at the end of the relevant sentence.\n\n"
         "CRITICAL TOOL INSTRUCTION:\n"
         "You have access to a file_search tool containing specific documents uploaded by the user for this Arena. "
         "You MUST prioritize querying the file_search tool to retrieve context before attempting to answer based on your general training data, even if the user's question seems broad or general. "
