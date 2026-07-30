@@ -3,6 +3,7 @@
 
 import logging
 import urllib.parse
+import re
 from typing import List, Dict, Any
 
 logger = logging.getLogger(__name__)
@@ -16,12 +17,28 @@ def is_valid_image_url(url: str) -> bool:
     clean = url.lower().split('?')[0]
     return clean.endswith(('.png', '.jpg', '.jpeg', '.gif', '.webp'))
 
+def clean_text_citations(text: str) -> str:
+    """
+    Replaces raw OpenAI annotation markers like 【13†source】 with clean sequential citation numbers [1], [2], etc.
+    """
+    if not text:
+        return ""
+    
+    # Find all unique citation markers in the text
+    markers = re.findall(r'【\d+†[^】]+】', text)
+    unique_markers = list(dict.fromkeys(markers))
+    
+    cleaned_text = text
+    for index, marker in enumerate(unique_markers, start=1):
+        cleaned_text = cleaned_text.replace(marker, f"[{index}]")
+        
+    return cleaned_text
+
 def extract_sources(response_obj: Any, arena_files: List[Dict[str, Any]] = None) -> List[Dict[str, str]]:
     """
     Parses the OpenAI response object to find URL citations and File citations.
-    Maps file citations into a pseudo-URL format compatible with the frontend renderer.
-    Cross-references hashed filenames against arena_files to restore original human-readable names
-    by parsing the raw Wix document URL.
+    Maps file citations to their real Wix CDN URL stored in DynamoDB.
+    Cross-references hashed filenames against arena_files to restore original human-readable names.
     """
     sources = []
     arena_files = arena_files or []
@@ -50,15 +67,19 @@ def extract_sources(response_obj: Any, arena_files: List[Dict[str, Any]] = None)
                             file_id = getattr(file_citation_obj, "file_id", "unknown_id")
                             hashed_filename = getattr(file_citation_obj, "filename", "Documento de Arena")
                             
-                            # Matchmake: Find original name by parsing the Wix URL
+                            # Matchmake: Find original name and real URL by parsing the Wix URL
                             display_name = hashed_filename
+                            real_url = f"https://documento.arena/archivo/{file_id}" # Fallback pseudo-URL
+                            
                             for file_data in arena_files:
                                 file_url = file_data.get("url", "")
                                 
                                 # If the hashed filename from OpenAI is part of the original CDN URL
                                 if hashed_filename in file_url:
+                                    # Override fallback with the real URL from DynamoDB
+                                    real_url = file_url
+                                    
                                     # Extract the real filename from the end of the Wix URL
-                                    # Example: wix:document://v1/hash.pdf/Real%20Name.pdf
                                     url_parts = file_url.split("/")
                                     extracted_name = url_parts[-1] if url_parts else ""
                                     
@@ -70,9 +91,7 @@ def extract_sources(response_obj: Any, arena_files: List[Dict[str, Any]] = None)
                                         display_name = file_data.get("name", hashed_filename)
                                     break
                             
-                            # Construct a pseudo-URL to satisfy the frontend URL parser
-                            pseudo_url = f"https://documento.arena/archivo/{file_id}"
-                            sources.append({"title": display_name, "url": pseudo_url})
+                            sources.append({"title": display_name, "url": real_url})
                             
     except Exception as e:
         logger.error(f"Error extracting sources: {e}")

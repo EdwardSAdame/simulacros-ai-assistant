@@ -16,7 +16,7 @@ from src.config.model_config import get_model_config
 
 from src.services.signal_service import build_runtime_signals
 from src.assistant.artifact_handler import handle_generated_files
-from src.utils.response_parser import extract_sources
+from src.utils.response_parser import extract_sources, clean_text_citations
 from src.services.image_usage_service import ImageUsageService
 
 from .base_client import BaseAssistantClient
@@ -103,6 +103,7 @@ class ChatClient:
         
         if text: 
             text = re.sub(r'\[.*?\]\(sandbox:/mnt/data/.*?\)', '', text).strip()
+            text = clean_text_citations(text)
 
         container_id = BaseAssistantClient.extract_container_id(output_list)
 
