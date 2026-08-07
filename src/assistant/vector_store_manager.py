@@ -2,98 +2,130 @@
 import logging
 import requests
 from io import BytesIO
-from typing import List, Optional, Tuple, Dict, Set
+from typing import List, Optional, Tuple, Dict, Set, Union
 from src.config.settings import get_openai_client
 
 logger = logging.getLogger(__name__)
 
 class VectorStoreManager:
     """
-    Handles interactions with OpenAI's File Search (Vector Store) API.
+    Handles interactions with OpenAI File Search Vector Store API.
     Responsible for creating stores, uploading files, and managing the lifecycle.
     """
 
     def __init__(self):
         self.client = get_openai_client()
 
-    def _download_file_content(self, url: str) -> Optional[Tuple[str, BytesIO]]:
-        """Downloads a file from a URL into a memory buffer for OpenAI upload."""
+    def _get_filename(self, url: str, name: Optional[str] = None) -> str:
+        """
+        Normalizes and derives a consistent filename from a URL or explicit name.
+        """
+        if name and isinstance(name, str) and name.strip():
+            clean_name = name.strip().split("?")[0]
+            if clean_name:
+                return clean_name
+
+        if url and isinstance(url, str):
+            clean_url = url.split("?")[0]
+            filename = clean_url.split("/")[-1]
+            if filename:
+                return filename
+
+        return "document.pdf"
+
+    def _download_file_content(self, url: str, name: Optional[str] = None) -> Optional[Tuple[str, BytesIO]]:
+        """
+        Downloads a file from a URL into a memory buffer for OpenAI upload.
+        """
         try:
-            # Added timeout to prevent hanging forever
             response = requests.get(url, timeout=30)
             response.raise_for_status()
-            
-            # Extract filename from URL or default to generic
-            # Clean query params: document.pdf?token=123 -> document.pdf
-            filename = url.split("/")[-1].split("?")[0]
-            if not filename:
-                filename = "document.pdf"
-                
+
+            filename = self._get_filename(url, name)
+
             return (filename, BytesIO(response.content))
         except Exception as e:
             logger.error(f"Failed to download file from {url}: {e}")
             return None
 
-    def create_arena_knowledge_base(self, arena_name: str, file_urls: List[str]) -> Optional[str]:
+    def create_arena_knowledge_base(
+        self, 
+        arena_name: str, 
+        files: List[Union[str, Dict[str, str]]]
+    ) -> Optional[str]:
         """
         Creates a Vector Store for an Arena and processes the initial files.
         Returns the vector_store_id.
         """
-        if not file_urls:
+        if not files:
             return None
 
         try:
             logger.info(f"Creating Vector Store for Arena: {arena_name}")
-            
-            # 1. Create the Vector Store Container
+
             vector_store = self.client.vector_stores.create(
                 name=f"Arena: {arena_name}"
             )
-            
-            # 2. Upload and Attach Files
+
             valid_streams = []
-            
-            # Download all files first
-            for url in file_urls:
-                file_data = self._download_file_content(url)
-                if file_data:
-                    # OpenAI expects a tuple (filename, file_obj)
-                    valid_streams.append(file_data)
+
+            for item in files:
+                if isinstance(item, dict):
+                    url = item.get("url")
+                    name = item.get("name")
+                else:
+                    url = item
+                    name = None
+
+                if url:
+                    file_data = self._download_file_content(url, name)
+                    if file_data:
+                        valid_streams.append(file_data)
 
             if not valid_streams:
                 logger.warning("No valid files could be downloaded for Arena creation.")
-                # We return the ID anyway so the Arena can be updated later
-                return vector_store.id 
+                return vector_store.id
 
-            # 3. Batch Upload to Vector Store
             file_batch = self.client.vector_stores.file_batches.upload_and_poll(
                 vector_store_id=vector_store.id,
                 files=valid_streams
             )
-            
+
             logger.info(f"Vector Store Created: {vector_store.id} | Status: {file_batch.status}")
             logger.info(f"File Counts: {file_batch.file_counts}")
-            
+
             return vector_store.id
 
         except Exception as e:
             logger.error(f"Error creating Arena Knowledge Base: {e}")
             return None
 
-    def add_files_to_arena(self, vector_store_id: str, file_urls: List[str]):
+    def add_files_to_arena(
+        self, 
+        vector_store_id: str, 
+        files: List[Union[str, Dict[str, str]]]
+    ):
         """
         Adds new files to an existing Vector Store.
         """
-        if not vector_store_id or not file_urls:
+        if not vector_store_id or not files:
             return
 
         try:
             valid_streams = []
-            for url in file_urls:
-                file_data = self._download_file_content(url)
-                if file_data:
-                    valid_streams.append(file_data)
-            
+            for item in files:
+                if isinstance(item, dict):
+                    url = item.get("url")
+                    name = item.get("name")
+                else:
+                    url = item
+                    name = None
+
+                if url:
+                    file_data = self._download_file_content(url, name)
+                    if file_data:
+                        valid_streams.append(file_data)
+
             if valid_streams:
                 logger.info(f"Uploading {len(valid_streams)} files to existing store: {vector_store_id}")
                 self.client.vector_stores.file_batches.upload_and_poll(
@@ -108,12 +140,8 @@ class VectorStoreManager:
     def sync_arena_files(self, vector_store_id: str, new_files: List[Dict[str, str]]):
         """
         Synchronizes the Vector Store with the provided list of files.
-        - Deletes files that are no longer in 'new_files'.
-        - Uploads files that are new.
-        
-        Args:
-            vector_store_id: The ID of the OpenAI Vector Store.
-            new_files: A list of dicts [{'name': 'foo.pdf', 'url': 'https://...'}]
+        Deletes files that are no longer in new_files.
+        Uploads files that are new.
         """
         if not vector_store_id:
             return
@@ -121,47 +149,35 @@ class VectorStoreManager:
         try:
             logger.info(f"Syncing files for Vector Store: {vector_store_id}")
 
-            # 1. Fetch CURRENT files from OpenAI
-            # We paginate just in case, though 100 is usually enough for an arena
             openai_files = self.client.vector_stores.files.list(
                 vector_store_id=vector_store_id,
                 limit=100
             )
-            
-            # Map Filename -> FileID (OpenAI doesn't store URLs, so we match by Name)
-            # NOTE: Matching by name is imperfect but the best we can do without storing OpenAI IDs in DynamoDB yet.
-            existing_file_map = {} 
+
+            existing_file_map = {}
             for f in openai_files.data:
-                # We need to fetch the file details to get the actual filename
-                # optimizing: the list object usually has the id, but we need the name.
-                # The file object in the list might not have the name directly depending on SDK version,
-                # but usually we can retrieve the file object itself.
                 try:
                     file_details = self.client.files.retrieve(f.id)
                     existing_file_map[file_details.filename] = f.id
                 except Exception:
                     continue
 
-            # 2. Analyze NEW state
             new_filenames = set()
-            urls_to_upload = []
+            items_to_upload = []
 
             for nf in new_files:
-                # Clean name logic must match _download_file_content logic
-                # Ideally, we trust the 'name' sent from frontend, or fallback to URL derivation
-                name = nf.get('name')
-                url = nf.get('url')
-                
-                if not name and url:
-                    name = url.split("/")[-1].split("?")[0]
-                
-                if name:
-                    new_filenames.add(name)
-                    # If this name is NOT in OpenAI, we need to upload it
-                    if name not in existing_file_map:
-                        urls_to_upload.append(url)
+                url = nf.get("url")
+                name = nf.get("name")
 
-            # 3. DELETE removed files
+                if not url:
+                    continue
+
+                filename = self._get_filename(url, name)
+                new_filenames.add(filename)
+
+                if filename not in existing_file_map:
+                    items_to_upload.append(nf)
+
             files_to_delete_ids = []
             for existing_name, existing_id in existing_file_map.items():
                 if existing_name not in new_filenames:
@@ -178,10 +194,9 @@ class VectorStoreManager:
                     except Exception as e:
                         logger.warning(f"Failed to delete file {fid}: {e}")
 
-            # 4. UPLOAD added files
-            if urls_to_upload:
-                logger.info(f"Uploading {len(urls_to_upload)} new files to Vector Store...")
-                self.add_files_to_arena(vector_store_id, urls_to_upload)
+            if items_to_upload:
+                logger.info(f"Uploading {len(items_to_upload)} new files to Vector Store...")
+                self.add_files_to_arena(vector_store_id, items_to_upload)
 
             logger.info("Vector Store Sync Complete.")
 
@@ -203,5 +218,5 @@ class VectorStoreManager:
             logger.error(f"Failed to delete vector store {vector_store_id}: {e}")
             return False
 
-# Singleton instance
+
 vector_store_manager = VectorStoreManager()
