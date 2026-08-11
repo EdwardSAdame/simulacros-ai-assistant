@@ -119,20 +119,54 @@ class QuizService:
                 "CRITICAL AESTHETIC DOCTRINE (HYBRID): For stem visuals, select exactly ONE engine (`plot_prompt` for math/data, OR `image_prompt` for creative).\n"
             )
 
-        # Psychometric parameters instructions
+        # Psychometric parameters instructions with dynamic scaling
         if exam_context.upper() == "UNAL":
-            psychometric_doctrine = (
-                "## 6. PSYCHOMETRIC EVALUATION METADATA (UNAL RASCH MODEL)\n"
-                "- `evaluation_metadata.exam_type` MUST be 'unal'.\n"
-                "- `scale_config` MUST be: min_score=0, max_score=20, mean=10, standard_deviation=1.\n"
-                "- `psychometric_params`: The UNAL exam uses the 1-Parameter Rasch model. Therefore, you MUST hardcode `a_discrimination` to exactly 1.0 and `c_guessing` to exactly 0.0. You must ONLY vary `b_difficulty` between -3.0 and 3.0 based on the cognitive complexity of the question.\n"
-            )
+            if is_general_subject:
+                psychometric_doctrine = (
+                    "## 6. PSYCHOMETRIC EVALUATION METADATA (UNAL GLOBAL RASCH MODEL)\n"
+                    "- `evaluation_metadata.exam_type` MUST be 'unal'.\n"
+                    "- `evaluation_metadata.evaluation_level` MUST be 'global'.\n"
+                    "- `evaluation_metadata.subject_category` MUST be 'Prueba de Admision UNAL'.\n"
+                    "- `scale_config` MUST be: min_score=0, max_score=1000, mean=500, standard_deviation=100.\n"
+                    "- `psychometric_params`: The UNAL exam uses the 1-Parameter Rasch model. Therefore, you MUST hardcode `a_discrimination` to exactly 1.0 and `c_guessing` to exactly 0.0. You must ONLY vary `b_difficulty` between -3.0 and 3.0 based on the cognitive complexity of the question.\n"
+                )
+            else:
+                psychometric_doctrine = (
+                    "## 6. PSYCHOMETRIC EVALUATION METADATA (UNAL COMPONENT RASCH MODEL)\n"
+                    "- `evaluation_metadata.exam_type` MUST be 'unal'.\n"
+                    "- `evaluation_metadata.evaluation_level` MUST be 'component'.\n"
+                    f"- `evaluation_metadata.subject_category` MUST be '{topic.capitalize()}'.\n"
+                    "- `scale_config` MUST be: min_score=0, max_score=20, mean=10, standard_deviation=1.\n"
+                    "- `psychometric_params`: The UNAL exam uses the 1-Parameter Rasch model. Therefore, you MUST hardcode `a_discrimination` to exactly 1.0 and `c_guessing` to exactly 0.0. You must ONLY vary `b_difficulty` between -3.0 and 3.0 based on the cognitive complexity of the question.\n"
+                )
         else:
-            psychometric_doctrine = (
-                "## 6. PSYCHOMETRIC EVALUATION METADATA (ICFES 3PL MODEL)\n"
-                "- `evaluation_metadata.exam_type` MUST be 'icfes'.\n"
-                "- `scale_config` MUST be: min_score=0, max_score=100, mean=50, standard_deviation=10.\n"
-                "- `psychometric_params`: The ICFES exam uses the 3-Parameter Logistic (3PL) model. You must generate realistic psychometric parameters. `a_discrimination` between 0.5 and 2.5. `b_difficulty` between -3.0 (easy) and 3.0 (hard). `c_guessing` between 0.0 and 0.25 (probability of a low-skill student guessing correctly).\n"
+            if is_general_subject:
+                psychometric_doctrine = (
+                    "## 6. PSYCHOMETRIC EVALUATION METADATA (ICFES GLOBAL 3PL MODEL)\n"
+                    "- `evaluation_metadata.exam_type` MUST be 'icfes'.\n"
+                    "- `evaluation_metadata.evaluation_level` MUST be 'global'.\n"
+                    "- `evaluation_metadata.subject_category` MUST be 'Competencias Integradas'.\n"
+                    "- `scale_config` MUST be: min_score=0, max_score=500, mean=250, standard_deviation=50.\n"
+                    "- `psychometric_params`: The ICFES exam uses the 3-Parameter Logistic (3PL) model. You must generate realistic psychometric parameters. `a_discrimination` between 0.5 and 2.5. `b_difficulty` between -3.0 (easy) and 3.0 (hard). `c_guessing` between 0.0 and 0.25.\n"
+                )
+            else:
+                psychometric_doctrine = (
+                    "## 6. PSYCHOMETRIC EVALUATION METADATA (ICFES COMPONENT 3PL MODEL)\n"
+                    "- `evaluation_metadata.exam_type` MUST be 'icfes'.\n"
+                    "- `evaluation_metadata.evaluation_level` MUST be 'component'.\n"
+                    f"- `evaluation_metadata.subject_category` MUST be '{topic.capitalize()}'.\n"
+                    "- `scale_config` MUST be: min_score=0, max_score=100, mean=50, standard_deviation=10.\n"
+                    "- `psychometric_params`: The ICFES exam uses the 3-Parameter Logistic (3PL) model. You must generate realistic psychometric parameters. `a_discrimination` between 0.5 and 2.5. `b_difficulty` between -3.0 (easy) and 3.0 (hard). `c_guessing` between 0.0 and 0.25.\n"
+                )
+
+        general_doctrine = ""
+        if is_general_subject:
+            general_doctrine = (
+                "## 7. MULTI-SUBJECT DISTRIBUTION ENFORCEMENT (CRITICAL)\n"
+                "The user requested a 'General' exam. You MUST generate an interdisciplinary test. "
+                "You are FORBIDDEN from generating all questions for a single subject (like Mathematics). "
+                "You MUST distribute the questions evenly across all core domains (Mathematics, Critical Reading, Natural Sciences, Social Sciences, English). "
+                "Force yourself to switch academic domains for every single question index.\n\n"
             )
 
         instruction_text = (
@@ -149,6 +183,7 @@ class QuizService:
             "- CONTEXT: Use `context_text` ONLY for large reading passages. NEVER use it to describe a graph that should be in a plot_prompt.\n"
             "- OPTION TEXT vs FEEDBACK: The `text` field in the options is the literal answer the student clicks. The `feedback` is the explanation. Do NOT put the answer inside the feedback and leave the text null. For `text_to_text` and `image_to_text` formats, the `text` field MUST BE POPULATED.\n\n"
             f"{psychometric_doctrine}\n"
+            f"{general_doctrine}"
             "## SMART FOLLOW-UP PROTOCOL\n"
             "Generate 3 'Ghost Prompts' (easier_payload, harder_payload, retry_payload) in the EXACT SAME LANGUAGE as the quiz.\n"
         )
