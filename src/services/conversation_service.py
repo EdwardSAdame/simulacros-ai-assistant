@@ -3,6 +3,7 @@
 
 import logging
 from typing import Dict, Any, Tuple, List, Optional
+from decimal import Decimal
 
 from src.utils.logging_utils import log_event
 from src.storage.conversations_table import (
@@ -37,6 +38,20 @@ class ConversationService:
         if not val or (isinstance(val, str) and val.strip() == ""):
             return "/"
         return val
+
+    @staticmethod
+    def _floats_to_decimals(obj: Any) -> Any:
+        """
+        Recursively traverses a dictionary or list and converts any float 
+        into a decimal.Decimal to comply with AWS Boto3 DynamoDB constraints.
+        """
+        if isinstance(obj, float):
+            return Decimal(str(obj))
+        elif isinstance(obj, dict):
+            return {k: ConversationService._floats_to_decimals(v) for k, v in obj.items()}
+        elif isinstance(obj, list):
+            return [ConversationService._floats_to_decimals(v) for v in obj]
+        return obj
 
     @classmethod
     def resolve_and_update_conversation(
@@ -171,10 +186,12 @@ class ConversationService:
         if safe_reply_text == "\u200b" and not (meta_payload and meta_payload.get("assets")):
              safe_reply_text = "[Generacion completada sin texto]"
 
+        sanitized_meta_payload = cls._floats_to_decimals(meta_payload) if meta_payload else None
+
         assistant_timestamp = ""
         try:
             saved_item = save_message(
-                conversation_id, role="assistant", message_text=safe_reply_text, metadata=meta_payload
+                conversation_id, role="assistant", message_text=safe_reply_text, metadata=sanitized_meta_payload
             )
             if saved_item and isinstance(saved_item, dict):
                 assistant_timestamp = saved_item.get("Timestamp", "")
