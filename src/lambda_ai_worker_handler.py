@@ -116,7 +116,6 @@ def lambda_handler(event, context):
                 
                 continue 
             
-            # Extract the unified attachments array instead of isolated URLs
             attachments = payload.get("attachments", [])
             media_items = payload.get("media_items", [])
             arena_id = payload.get("arena_id")
@@ -138,6 +137,7 @@ def lambda_handler(event, context):
             requires_web_search = False
             category_key = "general" 
             num_questions = 5 
+            exam_type = "icfes"
             
             if connection_ids and not is_hidden:
                 try:
@@ -175,6 +175,7 @@ def lambda_handler(event, context):
                     requires_visuals = routing_result.get("requires_visuals", False) 
                     requires_web_search = routing_result.get("requires_web_search", False)
                     num_questions = routing_result.get("num_questions", 5)
+                    exam_type = routing_result.get("exam_type", "icfes")
                     
                     client_action = None
                     if intent == "quiz":
@@ -191,7 +192,8 @@ def lambda_handler(event, context):
                         "client_action": client_action,
                         "requires_visuals": requires_visuals,
                         "requires_web_search": requires_web_search,
-                        "intent": intent  
+                        "intent": intent,
+                        "exam_type": exam_type
                     })
                     
                     dead_conns = []
@@ -214,6 +216,7 @@ def lambda_handler(event, context):
                         "user_id": user_id, 
                         "category": category_key,
                         "intent": intent,
+                        "exam_type": exam_type,
                         "requires_visuals": requires_visuals,
                         "requires_web_search": requires_web_search,
                         "num_questions": num_questions,
@@ -241,6 +244,7 @@ def lambda_handler(event, context):
                 mode=ai_mode,
                 intent=intent,
                 category=category_key, 
+                exam_type=exam_type,
                 requires_visuals=requires_visuals, 
                 requires_web_search=requires_web_search,
                 stream_manager=stream_manager,

@@ -1,5 +1,8 @@
-# src/utils/parsers/quiz_stream_parser.py
+# Backend: simulacros-ai-assistant
+# File: src/utils/parsers/quiz_stream_parser.py
+
 import re
+import json
 import logging
 from typing import Generator, Dict, Any
 
@@ -11,7 +14,7 @@ logger = logging.getLogger(__name__)
 class QuizStreamParser:
     """
     Consumes the OpenAI stream and yields structured events specifically for Quizzes.
-    Intercepts creative images and modular plot prompts for background processing,
+    Intercepts evaluation metadata, creative images, and modular plot prompts for background processing,
     strictly enforcing the format_type declared by the AI.
     """
 
@@ -19,6 +22,7 @@ class QuizStreamParser:
     def parse(stream) -> Generator[Dict[str, Any], None, None]:
         buffer = ""
         intro_yielded = False
+        metadata_yielded = False
         question_count = 0
         last_checkpoint = None
         has_refused = False
@@ -109,7 +113,48 @@ class QuizStreamParser:
                         yield {"type": "intro", "text": match.group(1).replace('\\"', '"')}
                         intro_yielded = True
 
-                # 6. Detect and Parse Question Array
+                # 6. Detect and Parse Evaluation Metadata
+                if not metadata_yielded and '"evaluation_metadata"' in buffer:
+                    start_idx = buffer.find('"evaluation_metadata"')
+                    brace_idx = buffer.find('{', start_idx)
+                    
+                    if brace_idx != -1:
+                        open_braces = 0
+                        in_string = False
+                        escape = False
+                        end_idx = -1
+                        
+                        for i in range(brace_idx, len(buffer)):
+                            char = buffer[i]
+                            if escape:
+                                escape = False
+                                continue
+                            if char == '\\':
+                                escape = True
+                                continue
+                            if char == '"':
+                                in_string = not in_string
+                                continue
+                            
+                            if not in_string:
+                                if char == '{':
+                                    open_braces += 1
+                                elif char == '}':
+                                    open_braces -= 1
+                                    if open_braces == 0:
+                                        end_idx = i
+                                        break
+                        
+                        if end_idx != -1:
+                            meta_str = buffer[brace_idx:end_idx+1]
+                            try:
+                                meta_obj = json.loads(meta_str)
+                                yield {"type": "evaluation_metadata", "data": meta_obj}
+                                metadata_yielded = True
+                            except json.JSONDecodeError:
+                                pass # Object not fully complete in the buffer yet
+
+                # 7. Detect and Parse Question Array
                 if last_checkpoint is None:
                     match = re.search(r'"questions"\s*:\s*\[', buffer)
                     if match:
@@ -131,7 +176,7 @@ class QuizStreamParser:
                         question_count += 1
                         last_checkpoint = new_checkpoint
 
-            # 7. Retrieve Final Response
+            # 8. Retrieve Final Response
             yield from BaseStreamParser.finalize_stream(stream, has_refused)
 
         except Exception as e:

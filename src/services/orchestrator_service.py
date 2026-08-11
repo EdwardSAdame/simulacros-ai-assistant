@@ -1,4 +1,5 @@
-# FILE: src/services/orchestrator_service.py
+# Backend: simulacros-ai-assistant
+# File: src/services/orchestrator_service.py
 
 import logging
 from typing import Dict, Any, Tuple, List
@@ -42,6 +43,7 @@ class OrchestratorService:
         mode: str = "omega",
         intent: str = "chat",
         category: str = "general",
+        exam_type: str = "icfes",
         requires_visuals: bool = False,
         requires_web_search: bool = False, 
         stream_manager: Any | None = None,
@@ -77,7 +79,8 @@ class OrchestratorService:
             return ConversationService.save_hidden_context(conversation_id or "temp", message)
 
         # 3. Resolve Context and Database State
-        raw_exam_context = determine_exam_context(page, message) 
+        # Override legacy page-based detection with the deterministic router output
+        resolved_exam_context = exam_type.upper() if exam_type else determine_exam_context(page, message)
 
         actual_conversation_id, locked_exam_context = ConversationService.resolve_and_update_conversation(
             user_id=user_id,
@@ -87,7 +90,7 @@ class OrchestratorService:
             page=page,
             message=message,
             mode=mode,
-            exam_context=raw_exam_context,
+            exam_context=resolved_exam_context,
             arena_id=arena_id,
             intent=intent
         )
@@ -114,7 +117,7 @@ class OrchestratorService:
             conversation_input.append({"role": "user", "content": current_user_content})
 
         # 6. Route to Specific Domain Service
-        log_event("orchestrator_routing", {"intent": intent, "category": category, "conversation_id": actual_conversation_id, "locked_exam_context": locked_exam_context})
+        log_event("orchestrator_routing", {"intent": intent, "category": category, "exam_type": exam_type, "conversation_id": actual_conversation_id, "locked_exam_context": locked_exam_context})
         
         final_reply_text = ""
         meta_payload = None
@@ -212,7 +215,7 @@ class OrchestratorService:
                     assets = meta_payload.get("assets", [])
                     if assets:
                         stream_manager.send_chat_assets(assets)
-            
+        
         except Exception as e:
             logger.error(f"Domain Service Execution Failed: {e}")
             final_reply_text = "**Error**: Ha ocurrido un error interno de sistema. Intenta de nuevo."

@@ -1,4 +1,5 @@
-# src/config/router_instructions.py
+# Backend: simulacros-ai-assistant
+# File: src/config/router_instructions.py
 
 """
 Configuration module for semantic router instructions.
@@ -23,7 +24,7 @@ def build_router_instructions(exam_context: str, current_activity: str = "chat")
         categories = '"matematicas", "ciencias_naturales", "analisis_textual", "ciencias_sociales", "analisis_imagen", "lectura_critica", "sociales_ciudadanas", "ingles", "identity_protection", "general"'
 
     return f"""MISSION:
-Analyze user input AND the conversation history to output a strict JSON object. Use your universal knowledge to semantically route the query to the correct domain. Pay close attention to context from previous turns.
+Analyze user input AND the conversation history to output a strict JSON object. Use your universal knowledge to semantically route the query to the correct domain and exam framework. Pay close attention to context from previous turns.
 
 === SYSTEM STATE & CRITICAL OVERRIDES ===
 CURRENT_ACTIVITY: "{current_activity}"
@@ -50,19 +51,23 @@ CRITICAL CATEGORY RULES (CONTEXT INHERITANCE):
 - CONTEXT INHERITANCE: If the user's current message lacks an explicit subject (e.g., requests to generate "another one", "more", or "harder"), you MUST analyze the conversation history. If the previous interactions focused on a specific category, you MUST inherit and output that exact category.
 - "general": You MUST use this category ONLY if the user explicitly asks for a broad, multi-subject exam WITHOUT specifying any subject at all, OR if there is absolutely no subject context in either the current message or the conversation history, or if they ask a general platform/identity question.
 
-3. VISUALS FLAG (requires_visuals): 
+3. EXAM FRAMEWORK CLASSIFICATION (exam_type):
+- "unal": Output this ONLY if the user explicitly mentions UNAL, Universidad Nacional, Nacho, or UN.
+- "icfes": Default framework. Output this if the user mentions ICFES, Saber 11, or if NO specific institution or exam is mentioned.
+
+4. VISUALS FLAG (requires_visuals): 
 - ROLEPLAY AS AN EXPERT TUTOR: Think, "If I were explaining this concept to a student in a physical classroom, would I instinctively walk over and draw a math graph, chart, data table, or physics spatial diagram on the whiteboard to give them a visual example?"
 - Set to true if the query involves analyzing functions, statistical distributions, probabilities, data trends, physical kinematics, OR formatting structured data into visual tables where a graphical representation drastically improves human understanding.
 
-4. WEB SEARCH FLAG (requires_web_search):
+5. WEB SEARCH FLAG (requires_web_search):
 - Set to true if the user's prompt demands highly specific real-time or exact lookup data that extends past static foundational training.
 - MANDATORY TRIGGERS: Always set to true if the text requests calendars, specific dynamic dates, registration schedules, processing deadlines, application costs, fee structures, pricing, real-time current events, or active news.
 - ACADEMIC LOOKUPS: Set to true if looking up specific university cutoff points, program scores, or localized facts where verifying the live internet provides an authoritative, fact-grounded answer.
 
-5. QUANTITY EXTRACTION (num_questions): 
+6. QUANTITY EXTRACTION (num_questions): 
 - If intent is "quiz" or "flashcards", extract the explicitly requested raw integer QUANTITY that the user wants to generate. If the user does not explicitly state a number, output 0.
 - If intent is "chat" or any other non-generation intent, this MUST be 0. Do NOT extract a number if you are not generating a quiz or flashcards.
 
-6. LOADING PHRASES (loading_phrases): 
+7. LOADING PHRASES (loading_phrases): 
 - Generate an array of 3 distinct, analytical phrases (max 5 words each) extracting key nouns or verbs from the input.
 """

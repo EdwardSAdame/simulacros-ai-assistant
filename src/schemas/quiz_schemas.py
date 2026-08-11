@@ -1,6 +1,34 @@
-# src/schemas/quiz_schemas.py
+# Backend: simulacros-ai-assistant
+# File: src/schemas/quiz_schemas.py
+
 from pydantic import BaseModel, Field
 from typing import List, Optional, Literal
+
+class ScaleConfig(BaseModel):
+    min_score: float = Field(..., description="Minimum possible score on this standardized scale.")
+    max_score: float = Field(..., description="Maximum possible score on this standardized scale.")
+    mean: float = Field(..., description="Statistical mean of the standard normal distribution for this exam.")
+    standard_deviation: float = Field(..., description="Standard deviation of the distribution for this exam.")
+
+class EvaluationMetadata(BaseModel):
+    exam_type: Literal["icfes", "unal"] = Field(..., description="The examination framework evaluated (icfes or unal).")
+    evaluation_level: Literal["component", "global"] = Field(..., description="Whether this evaluates a single component or the global exam.")
+    subject_category: str = Field(..., description="The specific academic subject being evaluated.")
+    scale_config: ScaleConfig = Field(..., description="The mathematical scaling configuration for this exam.")
+
+class PsychometricParams(BaseModel):
+    a_discrimination: float = Field(
+        ..., 
+        description="Item discrimination (a-parameter). If exam_type is 'unal' (Rasch model), this MUST be exactly 1.0. If 'icfes' (3PL), use a realistic value typically between 0.5 and 2.5."
+    )
+    b_difficulty: float = Field(
+        ..., 
+        description="Item difficulty (b-parameter) on a logit scale. Typically ranges from -3.0 (very easy) to +3.0 (very hard)."
+    )
+    c_guessing: float = Field(
+        ..., 
+        description="Pseudo-guessing probability (c-parameter). If exam_type is 'unal' (Rasch model), this MUST be exactly 0.0. If 'icfes' (3PL), use a realistic value typically between 0.0 and 0.25."
+    )
 
 class QuizOption(BaseModel):
     # -------------------------------------------------------------------------
@@ -130,7 +158,7 @@ class QuizQuestion(BaseModel):
         description="URL of the generated image/graph for the question stem. LEAVE THIS NULL if you wrote a prompt."
     )
 
-    difficulty: Literal[1, 2, 3] = Field(1, description="Difficulty weight: 1 (Easy), 2 (Medium), 3 (Hard).")
+    difficulty_label: Literal[1, 2, 3] = Field(1, description="Difficulty weight indicator: 1 (Easy), 2 (Medium), 3 (Hard).")
 
     # -------------------------------------------------------------------------
     # STEP 4: DECISION & OPTIONS EXECUTION
@@ -142,11 +170,25 @@ class QuizQuestion(BaseModel):
 
     options: List[QuizOption] = Field(..., description="Exactly 4 options, executing the traps and solution planned in the explanation.")
 
+    # -------------------------------------------------------------------------
+    # STEP 5: PSYCHOMETRIC EVALUATION (Calculated AFTER options and traps exist)
+    # -------------------------------------------------------------------------
+    psychometric_params: PsychometricParams = Field(
+        ..., 
+        description="Item Response Theory parameters representing the statistical properties of this question. Calculate this AFTER formulating the question and all 4 options."
+    )
+
 
 class QuizResponse(BaseModel):
     title: str = Field(..., description="An engaging short title for the quiz. (max. 6 words)")
     intro_message: str = Field(..., description="A single sentence introduction to the quiz in the Roma persona.")
     question_count: int = Field(..., description="The total number of questions generated in this quiz.")
+    
+    evaluation_metadata: EvaluationMetadata = Field(
+        ..., 
+        description="Mathematical and contextual metadata required by the frontend scoring engine to calculate the final score."
+    )
+    
     questions: List[QuizQuestion]
 
     easier_payload: str = Field(..., description="A user command to request an easier version of this quiz.")

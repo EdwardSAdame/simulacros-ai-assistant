@@ -64,7 +64,8 @@ class QuizService:
         format_map: Dict[int, str] = None,
         is_visual_subject: bool = False,
         is_creative_subject: bool = False,
-        is_general_subject: bool = False
+        is_general_subject: bool = False,
+        exam_context: str = "GENERAL"
     ) -> Dict[str, Any]:
         
         format_map = format_map or {}
@@ -118,6 +119,22 @@ class QuizService:
                 "CRITICAL AESTHETIC DOCTRINE (HYBRID): For stem visuals, select exactly ONE engine (`plot_prompt` for math/data, OR `image_prompt` for creative).\n"
             )
 
+        # Psychometric parameters instructions
+        if exam_context.upper() == "UNAL":
+            psychometric_doctrine = (
+                "## 6. PSYCHOMETRIC EVALUATION METADATA (UNAL RASCH MODEL)\n"
+                "- `evaluation_metadata.exam_type` MUST be 'unal'.\n"
+                "- `scale_config` MUST be: min_score=0, max_score=20, mean=10, standard_deviation=1.\n"
+                "- `psychometric_params`: The UNAL exam uses the 1-Parameter Rasch model. Therefore, you MUST hardcode `a_discrimination` to exactly 1.0 and `c_guessing` to exactly 0.0. You must ONLY vary `b_difficulty` between -3.0 and 3.0 based on the cognitive complexity of the question.\n"
+            )
+        else:
+            psychometric_doctrine = (
+                "## 6. PSYCHOMETRIC EVALUATION METADATA (ICFES 3PL MODEL)\n"
+                "- `evaluation_metadata.exam_type` MUST be 'icfes'.\n"
+                "- `scale_config` MUST be: min_score=0, max_score=100, mean=50, standard_deviation=10.\n"
+                "- `psychometric_params`: The ICFES exam uses the 3-Parameter Logistic (3PL) model. You must generate realistic psychometric parameters. `a_discrimination` between 0.5 and 2.5. `b_difficulty` between -3.0 (easy) and 3.0 (hard). `c_guessing` between 0.0 and 0.25 (probability of a low-skill student guessing correctly).\n"
+            )
+
         instruction_text = (
             f"## IMMEDIATE RUNTIME MISSION\n"
             f"The user requested a quiz/exam about '{topic}'. Generate exactly {num_questions} distinct questions.\n\n"
@@ -131,6 +148,7 @@ class QuizService:
             "- SOURCES: Keep `source_url` null unless you hold a verified URL.\n"
             "- CONTEXT: Use `context_text` ONLY for large reading passages. NEVER use it to describe a graph that should be in a plot_prompt.\n"
             "- OPTION TEXT vs FEEDBACK: The `text` field in the options is the literal answer the student clicks. The `feedback` is the explanation. Do NOT put the answer inside the feedback and leave the text null. For `text_to_text` and `image_to_text` formats, the `text` field MUST BE POPULATED.\n\n"
+            f"{psychometric_doctrine}\n"
             "## SMART FOLLOW-UP PROTOCOL\n"
             "Generate 3 'Ghost Prompts' (easier_payload, harder_payload, retry_payload) in the EXACT SAME LANGUAGE as the quiz.\n"
         )
@@ -253,7 +271,8 @@ class QuizService:
             format_map=format_map,
             is_visual_subject=is_visual_subject,
             is_creative_subject=is_creative_subject,
-            is_general_subject=is_general_subject
+            is_general_subject=is_general_subject,
+            exam_context=exam_context
         )
         conversation_input.append(system_instruction)
 
@@ -277,6 +296,7 @@ class QuizService:
                 seen_indices = set()
                 accumulated_questions = []
                 ai_generated_title = "Simulacro Generated" 
+                parsed_response = None
                 
                 ghost_easier, ghost_harder, ghost_retry = None, None, None
                 
@@ -353,7 +373,6 @@ class QuizService:
 
                     elif evt_type == "done":
                         final_obj = event.get("full_response")
-                        parsed_response = None
                         if hasattr(final_obj, 'questions'): parsed_response = final_obj
                         elif hasattr(final_obj, 'parsed') and hasattr(final_obj.parsed, 'questions'): parsed_response = final_obj.parsed
                         elif hasattr(final_obj, 'output_parsed') and hasattr(final_obj.output_parsed, 'questions'): parsed_response = final_obj.output_parsed
@@ -395,9 +414,15 @@ class QuizService:
                         if isinstance(opt, dict) and (i, o_idx) in worker.image_urls_map:
                             opt["image_url"] = worker.image_urls_map[(i, o_idx)]
 
+                evaluation_metadata = None
+                if parsed_response and hasattr(parsed_response, 'evaluation_metadata'):
+                    meta_obj = parsed_response.evaluation_metadata
+                    evaluation_metadata = meta_obj.dict() if hasattr(meta_obj, 'dict') else meta_obj
+
                 quiz_data = {
                     "quiz_mode": "batch", 
                     "topic": ai_generated_title,
+                    "evaluation_metadata": evaluation_metadata,
                     "questions": accumulated_questions,
                     "question_count": len(accumulated_questions),
                     "easier_payload": ghost_easier,
@@ -418,9 +443,13 @@ class QuizService:
                 if usage_data and actual_conversation_id:
                     cls._log_usage(usage_data, user_id, actual_conversation_id, mode)
 
+                meta_obj = getattr(quiz_model, 'evaluation_metadata', None)
+                evaluation_metadata = meta_obj.dict() if hasattr(meta_obj, 'dict') else meta_obj
+
                 quiz_data = {
                     "quiz_mode": "batch", 
                     "topic": getattr(quiz_model, 'title', 'Simulacro Generado'),
+                    "evaluation_metadata": evaluation_metadata,
                     "questions": [q.dict() if hasattr(q, 'dict') else q for q in quiz_model.questions],
                     "question_count": len(quiz_model.questions),
                     "easier_payload": getattr(quiz_model, 'easier_payload', None),

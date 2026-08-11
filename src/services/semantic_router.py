@@ -1,4 +1,6 @@
-# src/services/semantic_router.py
+# Backend: simulacros-ai-assistant
+# File: src/services/semantic_router.py
+
 import logging
 from typing import List, Literal, Optional
 from pydantic import BaseModel, Field
@@ -9,16 +11,32 @@ from src.services.token_usage_service import TokenUsageService
 logger = logging.getLogger(__name__)
 
 class RouterResponse(BaseModel):
-    category: str = Field(description="The academic category or subject of the query.")
-    intent: Literal["chat", "quiz", "creative_image", "mentalMap", "flashcards"] = Field(description="The primary intent of the user. Use 'mentalMap' if the user asks for a mind map, conceptual map, or structural diagram. Use 'flashcards' for studying, memorizing, or reviewing facts.")
-    requires_visuals: bool = Field(description="True if the user is asking for graphs, charts, or visual analysis.")
-    requires_web_search: bool = Field(description="True if the query requires up-to-date real-time data, fact-verification, dates, schedules, costs, or historical university stats/cutoffs not present in core training.")
-    num_questions: int = Field(description="The number of questions requested if the intent is 'quiz', or the number of cards if the intent is 'flashcards'. Return 0 if the user does not specify a number.")
-    loading_phrases: List[str] = Field(description="2 to 3 engaging loading phrases in Spanish relevant to the query.")
+    category: str = Field(
+        description="The academic category or subject of the query."
+    )
+    intent: Literal["chat", "quiz", "creative_image", "mentalMap", "flashcards"] = Field(
+        description="The primary intent of the user. Use 'mentalMap' if the user asks for a mind map, conceptual map, or structural diagram. Use 'flashcards' for studying, memorizing, or reviewing facts."
+    )
+    exam_type: Literal["icfes", "unal"] = Field(
+        default="icfes",
+        description="The target examination framework. Select 'unal' if the user explicitly mentions UNAL, Universidad Nacional, Nacho, or UN. Select 'icfes' if the user mentions ICFES, Saber 11, or if no specific exam is mentioned."
+    )
+    requires_visuals: bool = Field(
+        description="True if the user is asking for graphs, charts, or visual analysis."
+    )
+    requires_web_search: bool = Field(
+        description="True if the query requires up-to-date real-time data, fact-verification, dates, schedules, costs, or historical university stats/cutoffs not present in core training."
+    )
+    num_questions: int = Field(
+        description="The number of questions requested if the intent is 'quiz', or the number of cards if the intent is 'flashcards'. Return 0 if the user does not specify a number."
+    )
+    loading_phrases: List[str] = Field(
+        description="2 to 3 engaging loading phrases in Spanish relevant to the query."
+    )
 
 class SemanticRouter:
     """
-    Determines the intent/category of a user message dynamically based on Exam Context.
+    Determines the intent, category, and exam type of a user message dynamically based on Exam Context.
     """
     
     def __init__(self):
@@ -35,11 +53,20 @@ class SemanticRouter:
             "matematicas", "ciencias_naturales", "analisis_imagen", "general"
         ]
 
-    def determine_category(self, text: str, user_id: str = "system_router", conversation_id: str = "intent_resolution", exam_context: str = "GENERAL", history: Optional[List[dict]] = None, current_activity: str = "chat") -> dict:
+    def determine_category(
+        self, 
+        text: str, 
+        user_id: str = "system_router", 
+        conversation_id: str = "intent_resolution", 
+        exam_context: str = "GENERAL", 
+        history: Optional[List[dict]] = None, 
+        current_activity: str = "chat"
+    ) -> dict:
         if not text:
             return {
                 "category": "general", 
                 "intent": "chat",
+                "exam_type": "icfes",
                 "requires_visuals": False,
                 "requires_web_search": False,
                 "num_questions": 0,
@@ -48,11 +75,11 @@ class SemanticRouter:
             }
             
         try:
-            # Pass current_activity to the LLM classifier
             result = self._classify_with_llm(text, user_id, conversation_id, exam_context, history, current_activity)
             return {
                 "category": result.get("category", "general"),
                 "intent": result.get("intent", "chat"),
+                "exam_type": result.get("exam_type", "icfes"),
                 "requires_visuals": result.get("requires_visuals", False),
                 "requires_web_search": result.get("requires_web_search", False),
                 "num_questions": result.get("num_questions", 0),
@@ -64,32 +91,37 @@ class SemanticRouter:
             return {
                 "category": "general", 
                 "intent": "chat",
+                "exam_type": "icfes",
                 "requires_visuals": False,
                 "requires_web_search": False,
                 "num_questions": 0,
-                "loading_phrases": ["Analizando solicitud...", "Procesando información..."],
+                "loading_phrases": ["Analizando solicitud...", "Procesando informacion..."],
                 "source": "error_fallback"
             }
 
-    def _classify_with_llm(self, text: str, user_id: str, conversation_id: str, exam_context: str, history: Optional[List[dict]] = None, current_activity: str = "chat") -> dict:
+    def _classify_with_llm(
+        self, 
+        text: str, 
+        user_id: str, 
+        conversation_id: str, 
+        exam_context: str, 
+        history: Optional[List[dict]] = None, 
+        current_activity: str = "chat"
+    ) -> dict:
         router_model = settings.OPENAI_ROUTER_MODEL.lower()
         
-        # Build instructions dynamically based on context AND sticky state
         system_instruction = build_router_instructions(exam_context, current_activity)
         
         api_input = [
             {"role": "system", "content": system_instruction.strip()}
         ]
 
-        # Inject brief conversation history for context resolution
         if history:
-            # Only take the last 6 messages to avoid bloating token usage on the router
             recent_history = history[-6:]
             for msg in recent_history:
                 role = msg.get("role")
                 content = msg.get("content")
                 if role in ["user", "assistant"] and content:
-                    # Truncate assistant responses to save tokens, we only need the gist
                     content_str = str(content)
                     if role == "assistant" and len(content_str) > 300:
                         content_str = content_str[:300] + "... [truncated]"
@@ -132,7 +164,6 @@ class SemanticRouter:
             if not parsed_data:
                 raise ValueError("Failed to parse structured output from Responses API.")
 
-            # (Token Tracking Logic)
             usage = getattr(response, "usage", None)
             if usage:
                 try:
@@ -169,7 +200,8 @@ class SemanticRouter:
             data = parsed_data.model_dump() if hasattr(parsed_data, "model_dump") else parsed_data.dict()
             
             category = data.get("category", "general").lower()
-            if category not in self.valid_categories: category = "general"
+            if category not in self.valid_categories: 
+                category = "general"
 
             raw_intent = data.get("intent", "chat").strip()
             intent_lower = raw_intent.lower()
@@ -180,6 +212,12 @@ class SemanticRouter:
                 intent = intent_lower
             else:
                 intent = "chat"
+
+            raw_exam_type = str(data.get("exam_type", "icfes")).strip().lower()
+            if raw_exam_type in ["unal", "universidad_nacional", "nacho", "un"]:
+                exam_type = "unal"
+            else:
+                exam_type = "icfes"
 
             requires_visuals = data.get("requires_visuals", False)
             requires_web_search = data.get("requires_web_search", False)
@@ -197,10 +235,11 @@ class SemanticRouter:
             if not phrases:
                 phrases = ["Procesando...", "Analizando..."]
 
-            logger.info(f"Router: AI classified as '{category}' with intent '{intent}' and web_search='{requires_web_search}'")
+            logger.info(f"Router: AI classified as category='{category}', intent='{intent}', exam_type='{exam_type}', web_search='{requires_web_search}'")
             return {
                 "category": category, 
                 "intent": intent, 
+                "exam_type": exam_type,
                 "requires_visuals": requires_visuals, 
                 "requires_web_search": requires_web_search,
                 "num_questions": num_questions,
