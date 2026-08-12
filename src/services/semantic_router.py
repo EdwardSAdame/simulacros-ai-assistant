@@ -38,7 +38,7 @@ class RouterResponse(BaseModel):
 
 class SemanticRouter:
     """
-    Determunes the intent, category, and exam type of a user message dynamically based on Exam Context.
+    Determines the intent, category, and exam type of a user message dynamically based on Exam Context.
     """
     
     def __init__(self):
@@ -204,6 +204,8 @@ class SemanticRouter:
 
             data = parsed_data.model_dump() if hasattr(parsed_data, "model_dump") else parsed_data.dict()
             
+            category = data.get("category", "general").lower()
+            
             raw_intent = data.get("intent", "chat").strip()
             intent_lower = raw_intent.lower()
             
@@ -213,17 +215,6 @@ class SemanticRouter:
                 intent = intent_lower
             else:
                 intent = "chat"
-
-            category = data.get("category", "general").lower()
-            display_name = data.get("display_name", category.title())
-
-            # Allow arbitrary categories to pass through if the user explicitly requested a quiz or flashcards
-            if category not in self.valid_categories: 
-                if intent in ["quiz", "flashcards"]:
-                    logger.info(f"Router: Permitting arbitrary category '{category}' ('{display_name}') for intent '{intent}'.")
-                else:
-                    category = "general"
-                    display_name = "General"
 
             raw_exam_type = str(data.get("exam_type", "icfes")).strip().lower()
             if raw_exam_type in ["unal", "universidad_nacional", "nacho", "un"]:
@@ -247,10 +238,10 @@ class SemanticRouter:
             if not phrases:
                 phrases = ["Procesando...", "Analizando..."]
 
-            logger.info(f"Router: AI classified as category='{category}', display='{display_name}', intent='{intent}', exam_type='{exam_type}', web_search='{requires_web_search}'")
+            logger.info(f"Router: AI classified as category='{category}', intent='{intent}', exam_type='{exam_type}', web_search='{requires_web_search}'")
             return {
                 "category": category, 
-                "display_name": display_name,
+                "display_name": data.get("display_name", "General"),
                 "intent": intent, 
                 "exam_type": exam_type,
                 "requires_visuals": requires_visuals, 
@@ -262,3 +253,6 @@ class SemanticRouter:
         except Exception as e:
             logger.error(f"Router: Error calling OpenAI Responses API: {e}")
             raise e
+
+# Singleton instance required for module import by lambda_ai_worker_handler
+semantic_router = SemanticRouter()
