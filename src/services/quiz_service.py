@@ -161,11 +161,16 @@ class QuizService:
 
         general_doctrine = ""
         if is_general_subject:
+            if exam_context.upper() == "UNAL":
+                domain_distribution = "Mathematics, Textual Analysis, Natural Sciences, Social Sciences, and Image Analysis"
+            else:
+                domain_distribution = "Mathematics, Critical Reading, Natural Sciences, Social Sciences, and English"
+                
             general_doctrine = (
                 "## 7. MULTI-SUBJECT DISTRIBUTION ENFORCEMENT (CRITICAL)\n"
                 "The user requested a 'General' exam. You MUST generate an interdisciplinary test. "
-                "You are FORBIDDEN from generating all questions for a single subject (like Mathematics). "
-                "You MUST distribute the questions evenly across all core domains (Mathematics, Critical Reading, Natural Sciences, Social Sciences, English). "
+                "You are FORBIDDEN from generating all questions for a single subject. "
+                f"You MUST distribute the questions evenly across all core domains ({domain_distribution}). "
                 "Force yourself to switch academic domains for every single question index.\n\n"
             )
 
