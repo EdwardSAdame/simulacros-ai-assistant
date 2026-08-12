@@ -1,5 +1,4 @@
-# Backend: simulacros-ai-assistant
-# File: src/schemas/quiz_schemas.py
+# FILE: src/schemas/quiz_schemas.py
 
 from pydantic import BaseModel, Field
 from typing import List, Optional, Literal
@@ -13,7 +12,10 @@ class ScaleConfig(BaseModel):
 class EvaluationMetadata(BaseModel):
     exam_type: Literal["icfes", "unal"] = Field(..., description="The examination framework evaluated (icfes or unal).")
     evaluation_level: Literal["component", "global"] = Field(..., description="Whether this evaluates a single component or the global exam.")
-    subject_category: str = Field(..., description="The specific academic subject being evaluated.")
+    subject_category: str = Field(
+        ..., 
+        description="The properly capitalized and accented name of the specific academic subject being evaluated for the UI (e.g., 'Matemáticas', 'Geografía', 'Prueba de Admisión UNAL'). Do NOT use unaccented snake_case identifiers."
+    )
     scale_config: ScaleConfig = Field(..., description="The mathematical scaling configuration for this exam.")
 
 class PsychometricParams(BaseModel):
@@ -74,7 +76,6 @@ class QuizOption(BaseModel):
         None, 
         description="Internal field used by the backend to track the option's original position before shuffling."
     )
-
 
 class QuizQuestion(BaseModel):
     question_title: str = Field(..., description=(
@@ -177,7 +178,6 @@ class QuizQuestion(BaseModel):
         ..., 
         description="Item Response Theory parameters representing the statistical properties of this question. Calculate this AFTER formulating the question and all 4 options."
     )
-
 
 class QuizResponse(BaseModel):
     title: str = Field(..., description="An engaging short title for the quiz. (max. 6 words)")

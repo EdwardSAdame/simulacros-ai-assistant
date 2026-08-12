@@ -1,5 +1,4 @@
-# Backend: simulacros-ai-assistant
-# File: src/lambda_ai_worker_handler.py
+# FILE: src/lambda_ai_worker_handler.py
 
 import json
 import logging
@@ -136,6 +135,7 @@ def lambda_handler(event, context):
             requires_visuals = False 
             requires_web_search = False
             category_key = "general" 
+            display_name = "General"
             num_questions = 5 
             exam_type = "icfes"
             
@@ -166,6 +166,7 @@ def lambda_handler(event, context):
                     )
                     
                     category_key = routing_result.get("category", "general")
+                    display_name = routing_result.get("display_name", category_key.title())
                     loading_phrases = routing_result.get("loading_phrases", []) 
                     source_type = routing_result.get("source", "unknown")
                     
@@ -215,6 +216,7 @@ def lambda_handler(event, context):
                     log_event("visual_feedback_sent", {
                         "user_id": user_id, 
                         "category": category_key,
+                        "display_name": display_name,
                         "intent": intent,
                         "exam_type": exam_type,
                         "requires_visuals": requires_visuals,
@@ -244,6 +246,7 @@ def lambda_handler(event, context):
                 mode=ai_mode,
                 intent=intent,
                 category=category_key, 
+                display_name=display_name,
                 exam_type=exam_type,
                 requires_visuals=requires_visuals, 
                 requires_web_search=requires_web_search,

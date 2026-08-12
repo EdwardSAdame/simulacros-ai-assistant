@@ -1,5 +1,4 @@
-# Backend: simulacros-ai-assistant
-# File: src/services/quiz_service.py
+# FILE: src/services/quiz_service.py
 
 from typing import Dict, Any, List, Tuple
 import math
@@ -60,6 +59,7 @@ class QuizService:
     @staticmethod
     def get_system_instruction(
         topic: str = "general", 
+        display_name: str = "General",
         num_questions: int = 5,
         format_map: Dict[int, str] = None,
         is_visual_subject: bool = False,
@@ -135,7 +135,7 @@ class QuizService:
                     "## 6. PSYCHOMETRIC EVALUATION METADATA (UNAL COMPONENT RASCH MODEL)\n"
                     "- `evaluation_metadata.exam_type` MUST be 'unal'.\n"
                     "- `evaluation_metadata.evaluation_level` MUST be 'component'.\n"
-                    f"- `evaluation_metadata.subject_category` MUST be '{topic.capitalize()}'.\n"
+                    f"- `evaluation_metadata.subject_category` MUST be '{display_name}'.\n"
                     "- `scale_config` MUST be: min_score=0, max_score=20, mean=10, standard_deviation=1.\n"
                     "- `psychometric_params`: The UNAL exam uses the 1-Parameter Rasch model. Therefore, you MUST hardcode `a_discrimination` to exactly 1.0 and `c_guessing` to exactly 0.0. You must ONLY vary `b_difficulty` between -3.0 and 3.0 based on the cognitive complexity of the question.\n"
                 )
@@ -154,7 +154,7 @@ class QuizService:
                     "## 6. PSYCHOMETRIC EVALUATION METADATA (ICFES COMPONENT 3PL MODEL)\n"
                     "- `evaluation_metadata.exam_type` MUST be 'icfes'.\n"
                     "- `evaluation_metadata.evaluation_level` MUST be 'component'.\n"
-                    f"- `evaluation_metadata.subject_category` MUST be '{topic.capitalize()}'.\n"
+                    f"- `evaluation_metadata.subject_category` MUST be '{display_name}'.\n"
                     "- `scale_config` MUST be: min_score=0, max_score=100, mean=50, standard_deviation=10.\n"
                     "- `psychometric_params`: The ICFES exam uses the 3-Parameter Logistic (3PL) model. You must generate realistic psychometric parameters. `a_discrimination` between 0.5 and 2.5. `b_difficulty` between -3.0 (easy) and 3.0 (hard). `c_guessing` between 0.0 and 0.25.\n"
                 )
@@ -171,7 +171,7 @@ class QuizService:
 
         instruction_text = (
             f"## IMMEDIATE RUNTIME MISSION\n"
-            f"The user requested a quiz/exam about '{topic}'. Generate exactly {num_questions} distinct questions.\n\n"
+            f"The user requested a quiz/exam about '{display_name}'. Generate exactly {num_questions} distinct questions.\n\n"
             f"{format_instructions}\n"
             f"## 3. SUBJECT SPECIFIC DOCTRINES\n"
             f"{visual_doctrine}\n"
@@ -206,6 +206,7 @@ class QuizService:
         exam_context: str,
         stream_manager: Any | None = None,
         category: str = "general",
+        display_name: str = "General",
         attachments: List[Dict[str, str]] | None = None,
         actual_conversation_id: str | None = None,
         num_questions: int = 0
@@ -283,6 +284,7 @@ class QuizService:
 
         log_event("dynamic_visual_quota_calculated", {
             "subject_topic": topic_lower,
+            "display_name": display_name,
             "is_general_subject": is_general_subject,
             "is_visual_subject": is_visual_subject,
             "is_creative_subject": is_creative_subject,
@@ -302,6 +304,7 @@ class QuizService:
 
         system_instruction = cls.get_system_instruction(
             topic=topic_hint, 
+            display_name=display_name,
             num_questions=num_questions, 
             format_map=format_map,
             is_visual_subject=is_visual_subject,

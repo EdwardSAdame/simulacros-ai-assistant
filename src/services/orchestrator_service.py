@@ -1,5 +1,4 @@
-# Backend: simulacros-ai-assistant
-# File: src/services/orchestrator_service.py
+# FILE: src/services/orchestrator_service.py
 
 import logging
 from typing import Dict, Any, Tuple, List
@@ -43,6 +42,7 @@ class OrchestratorService:
         mode: str = "omega",
         intent: str = "chat",
         category: str = "general",
+        display_name: str = "General",
         exam_type: str = "icfes",
         requires_visuals: bool = False,
         requires_web_search: bool = False, 
@@ -117,7 +117,7 @@ class OrchestratorService:
             conversation_input.append({"role": "user", "content": current_user_content})
 
         # 6. Route to Specific Domain Service
-        log_event("orchestrator_routing", {"intent": intent, "category": category, "exam_type": exam_type, "conversation_id": actual_conversation_id, "locked_exam_context": locked_exam_context})
+        log_event("orchestrator_routing", {"intent": intent, "category": category, "display_name": display_name, "exam_type": exam_type, "conversation_id": actual_conversation_id, "locked_exam_context": locked_exam_context})
         
         final_reply_text = ""
         meta_payload = None
@@ -135,6 +135,7 @@ class OrchestratorService:
                     exam_context=locked_exam_context, 
                     stream_manager=stream_manager, 
                     category=category, 
+                    display_name=display_name,
                     attachments=documents,
                     actual_conversation_id=actual_conversation_id,
                     num_questions=num_questions
@@ -205,7 +206,7 @@ class OrchestratorService:
                     conversation_input=conversation_input, user_id=user_id, page=page, 
                     name=name, email=email, message=message, mode=mode, exam_context=locked_exam_context, 
                     exam_id=exam_id, 
-                    category=category, requires_visuals=requires_visuals, 
+                    category=category, display_name=display_name, requires_visuals=requires_visuals, 
                     requires_web_search=requires_web_search,
                     arena_id=arena_id, 
                     attachments=documents, actual_conversation_id=actual_conversation_id

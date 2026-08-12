@@ -1,5 +1,4 @@
-# Backend: simulacros-ai-assistant
-# File: src/services/chat_service.py
+# FILE: src/services/chat_service.py
 
 import logging
 import concurrent.futures
@@ -86,6 +85,7 @@ class ChatService:
         exam_context: str,
         exam_id: str | None,
         category: str,
+        display_name: str,
         requires_visuals: bool,
         requires_web_search: bool,  
         arena_id: str | None,
