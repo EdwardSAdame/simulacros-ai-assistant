@@ -1,5 +1,4 @@
-# Backend: simulacros-ai-assistant
-# File: src/config/router_instructions.py
+# FILE: src/config/router_instructions.py
 
 """
 Configuration module for semantic router instructions.
@@ -52,8 +51,9 @@ CRITICAL CATEGORY RULES (CONTEXT INHERITANCE):
 - "general": You MUST use this category ONLY if the user explicitly asks for a broad, multi-subject exam WITHOUT specifying any subject at all, OR if there is absolutely no subject context in either the current message or the conversation history, or if they ask a general platform/identity question.
 
 3. EXAM FRAMEWORK CLASSIFICATION (exam_type):
-- "unal": Output this ONLY if the user explicitly mentions UNAL, Universidad Nacional, Nacho, or UN.
-- "icfes": Default framework. Output this if the user mentions ICFES, Saber 11, or if NO specific institution or exam is mentioned.
+- "unal": Output this ONLY if the user explicitly mentions UNAL, Universidad Nacional, Nacho, or UN in the CURRENT message.
+- "icfes": Output this ONLY if the user explicitly mentions ICFES, Saber 11, or Saber in the CURRENT message.
+- "unknown": Output this if NO specific institution or exam is explicitly mentioned in the CURRENT message. Do not guess based on previous turns; output "unknown" to allow the system to inherit context automatically.
 
 4. VISUALS FLAG (requires_visuals): 
 - ROLEPLAY AS AN EXPERT TUTOR: Think, "If I were explaining this concept to a student in a physical classroom, would I instinctively walk over and draw a math graph, chart, data table, or physics spatial diagram on the whiteboard to give them a visual example?"
