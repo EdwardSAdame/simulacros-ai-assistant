@@ -14,7 +14,7 @@ class EvaluationMetadata(BaseModel):
     evaluation_level: Literal["component", "global"] = Field(..., description="Whether this evaluates a single component or the global exam.")
     subject_category: str = Field(
         ..., 
-        description="The properly capitalized and accented name of the specific academic subject being evaluated for the UI (e.g., 'Matemáticas', 'Geografía', 'Prueba de Admisión UNAL'). Do NOT use unaccented snake_case identifiers."
+        description="The properly capitalized and accented name of the specific academic subject being evaluated."
     )
     scale_config: ScaleConfig = Field(..., description="The mathematical scaling configuration for this exam.")
 

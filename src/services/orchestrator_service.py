@@ -79,8 +79,11 @@ class OrchestratorService:
             return ConversationService.save_hidden_context(conversation_id or "temp", message)
 
         # 3. Resolve Context and Database State
-        # Override legacy page-based detection with the deterministic router output
-        resolved_exam_context = exam_type.upper() if exam_type else determine_exam_context(page, message)
+        # Isolate the explicit LLM intent. If unknown, pass None to preserve the locked database state.
+        if exam_type and exam_type.strip().lower() not in ["", "unknown"]:
+            resolved_exam_context = exam_type.strip().upper()
+        else:
+            resolved_exam_context = None
 
         actual_conversation_id, locked_exam_context = ConversationService.resolve_and_update_conversation(
             user_id=user_id,

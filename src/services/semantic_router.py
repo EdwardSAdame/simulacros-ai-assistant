@@ -14,14 +14,14 @@ class RouterResponse(BaseModel):
         description="The academic category or subject of the query in snake_case without accents."
     )
     display_name: str = Field(
-        description="The perfectly capitalized and accented  name of the subject."
+        description="The perfectly capitalized and accented name of the subject."
     )
     intent: Literal["chat", "quiz", "creative_image", "mentalMap", "flashcards"] = Field(
         description="The primary intent of the user. Use 'mentalMap' if the user asks for a mind map, conceptual map, or structural diagram. Use 'flashcards' for studying, memorizing, or reviewing facts."
     )
-    exam_type: Literal["icfes", "unal"] = Field(
-        default="icfes",
-        description="The target examination framework. Select 'unal' if the user explicitly mentions UNAL, Universidad Nacional, Nacho, or UN. Select 'icfes' if the user mentions ICFES, Saber 11, or if no specific exam is mentioned."
+    exam_type: Literal["icfes", "unal", "unknown"] = Field(
+        default="unknown",
+        description="The target examination framework. Select 'unal' if the user explicitly mentions UNAL, Universidad Nacional, Nacho, or UN. Select 'icfes' if the user explicitly mentions ICFES, Saber 11, or Saber. Select 'unknown' if no specific examination framework is explicitly mentioned in the current user message."
     )
     requires_visuals: bool = Field(
         description="True if the user is asking for graphs, charts, or visual analysis."
@@ -69,7 +69,7 @@ class SemanticRouter:
                 "category": "general", 
                 "display_name": "General",
                 "intent": "chat",
-                "exam_type": "icfes",
+                "exam_type": "unknown",
                 "requires_visuals": False,
                 "requires_web_search": False,
                 "num_questions": 0,
@@ -83,7 +83,7 @@ class SemanticRouter:
                 "category": result.get("category", "general"),
                 "display_name": result.get("display_name", "General"),
                 "intent": result.get("intent", "chat"),
-                "exam_type": result.get("exam_type", "icfes"),
+                "exam_type": result.get("exam_type", "unknown"),
                 "requires_visuals": result.get("requires_visuals", False),
                 "requires_web_search": result.get("requires_web_search", False),
                 "num_questions": result.get("num_questions", 0),
@@ -96,7 +96,7 @@ class SemanticRouter:
                 "category": "general", 
                 "display_name": "General",
                 "intent": "chat",
-                "exam_type": "icfes",
+                "exam_type": "unknown",
                 "requires_visuals": False,
                 "requires_web_search": False,
                 "num_questions": 0,
@@ -216,11 +216,13 @@ class SemanticRouter:
             else:
                 intent = "chat"
 
-            raw_exam_type = str(data.get("exam_type", "icfes")).strip().lower()
+            raw_exam_type = str(data.get("exam_type", "unknown")).strip().lower()
             if raw_exam_type in ["unal", "universidad_nacional", "nacho", "un"]:
                 exam_type = "unal"
-            else:
+            elif raw_exam_type in ["icfes", "saber_11", "saber11", "saber"]:
                 exam_type = "icfes"
+            else:
+                exam_type = "unknown"
 
             requires_visuals = data.get("requires_visuals", False)
             requires_web_search = data.get("requires_web_search", False)

@@ -1,5 +1,4 @@
-# Backend: simulacros-ai-assistant
-# File: src/services/conversation_service.py
+# FILE: src/services/conversation_service.py
 
 import logging
 from typing import Dict, Any, Tuple, List, Optional
@@ -63,7 +62,7 @@ class ConversationService:
         page: str | None,
         message: str | None,
         mode: str,
-        exam_context: str,
+        exam_context: str | None,
         arena_id: str | None = None,
         intent: str = "chat"
     ) -> Tuple[str, str]:
@@ -79,7 +78,12 @@ class ConversationService:
         actual_conversation_id = conversation_id
         should_create_new = True
         
-        final_exam_context = str(exam_context).upper()
+        # Safely evaluate the incoming context to prevent casting None to "NONE"
+        if exam_context and str(exam_context).strip().lower() not in ["", "none", "unknown"]:
+            final_exam_context = str(exam_context).strip().upper()
+        else:
+            final_exam_context = None
+
         persisted_exam_context = None
         persisted_activity = "chat"
 
@@ -89,7 +93,10 @@ class ConversationService:
                 should_create_new = False
                 existing_meta = get_conversation_metadata(user_id, conversation_id)
                 if existing_meta:
-                    persisted_exam_context = str(existing_meta.get("ExamContext", "")).upper()
+                    raw_persisted_context = existing_meta.get("ExamContext")
+                    if raw_persisted_context:
+                        persisted_exam_context = str(raw_persisted_context).upper()
+                    
                     persisted_mode = existing_meta.get("AiMode")
                     persisted_activity = existing_meta.get("CurrentActivity", "chat")
                     
@@ -104,14 +111,22 @@ class ConversationService:
             try:
                 latest_meta = get_latest_conversation_for_user(user_id)
                 if latest_meta:
-                    persisted_exam_context = str(latest_meta.get("ExamContext", "")).upper()
-                    logger.info(f"Inheriting global exam context {persisted_exam_context} for new conversation.")
+                    raw_latest_context = latest_meta.get("ExamContext")
+                    if raw_latest_context:
+                        persisted_exam_context = str(raw_latest_context).upper()
+                        logger.info(f"Inheriting global exam context {persisted_exam_context} for new conversation.")
             except Exception as e:
                 logger.warning(f"Could not retrieve latest user conversation for context inheritance: {e}")
 
-        specific_exams = ["UNAL", "ICFES"]
-        if persisted_exam_context in specific_exams and final_exam_context not in specific_exams:
-            final_exam_context = persisted_exam_context
+        # State Retention Logic: 
+        # If the LLM router outputted "unknown" (passed as None), strictly inherit the database state
+        if not final_exam_context:
+            final_exam_context = persisted_exam_context or "ICFES"
+        else:
+            # Sticky Exam Context: Once UNAL/ICFES is locked, ignore arbitrary strings from the router
+            specific_exams = ["UNAL", "ICFES"]
+            if persisted_exam_context in specific_exams and final_exam_context not in specific_exams:
+                final_exam_context = persisted_exam_context
 
         major_intents = ["quiz", "flashcards", "mentalmap", "mind_map", "creative_image", "admission_stats"]
         final_activity = intent if intent in major_intents else (persisted_activity if not should_create_new else "chat")
