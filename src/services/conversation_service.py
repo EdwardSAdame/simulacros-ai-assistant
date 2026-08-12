@@ -121,7 +121,7 @@ class ConversationService:
         # State Retention Logic: 
         # If the LLM router outputted "unknown" (passed as None), strictly inherit the database state
         if not final_exam_context:
-            final_exam_context = persisted_exam_context or "ICFES"
+            final_exam_context = persisted_exam_context or "GENERAL"
         else:
             # Sticky Exam Context: Once UNAL/ICFES is locked, ignore arbitrary strings from the router
             specific_exams = ["UNAL", "ICFES"]
