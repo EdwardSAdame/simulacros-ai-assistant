@@ -137,7 +137,7 @@ def lambda_handler(event, context):
             category_key = "general" 
             display_name = "General"
             num_questions = 5 
-            exam_type = "icfes"
+            exam_type = "unknown"
             
             if connection_ids and not is_hidden:
                 try:
@@ -176,7 +176,7 @@ def lambda_handler(event, context):
                     requires_visuals = routing_result.get("requires_visuals", False) 
                     requires_web_search = routing_result.get("requires_web_search", False)
                     num_questions = routing_result.get("num_questions", 5)
-                    exam_type = routing_result.get("exam_type", "icfes")
+                    exam_type = routing_result.get("exam_type", "unknown")
                     
                     client_action = None
                     if intent == "quiz":
