@@ -116,10 +116,11 @@ class BaseAssistantClient:
         return any(clean_url.endswith(ext) for ext in image_extensions)
 
     @staticmethod
-    def inject_file_inputs(api_input: List[Dict[str, Any]], attachments: List[Dict[str, str]], detail_level: str = "high") -> None:
+    def inject_file_inputs(api_input: List[Dict[str, Any]], attachments: List[Any], detail_level: str = "high") -> None:
         """
         Injects user attachments into the message array, routing standard images as input_image
         and non-image document files as input_file according to API specifications.
+        Supports URLs, File IDs, and Base64 data.
         """
         target_message = None
         if api_input and api_input[-1].get("role") == "user":
@@ -138,9 +139,23 @@ class BaseAssistantClient:
         valid_image_count = 0
 
         for item in attachments:
-            url = item.get("url") if isinstance(item, dict) else item
+            url = None
+            file_id = None
+            file_data = None
             
-            if url and isinstance(url, str) and url.startswith("http"):
+            if isinstance(item, dict):
+                url = item.get("url")
+                file_id = item.get("file_id")
+                file_data = item.get("file_data")
+            elif isinstance(item, str):
+                if item.startswith("http"):
+                    url = item
+                elif item.startswith("file-"):
+                    file_id = item
+                elif item.startswith("data:"):
+                    file_data = item
+            
+            if url:
                 if BaseAssistantClient._is_image_url(url):
                     target_message["content"].append({
                         "type": "input_image",
@@ -150,10 +165,25 @@ class BaseAssistantClient:
                 else:
                     target_message["content"].append({
                         "type": "input_file",
-                        "file_url": url,
+                        "file_url": url.strip(),
                         "detail": detail_level
                     })
                     valid_file_count += 1
+            elif file_id:
+                target_message["content"].append({
+                    "type": "input_file",
+                    "file_id": file_id.strip(),
+                    "detail": detail_level
+                })
+                valid_file_count += 1
+            elif file_data:
+                target_message["content"].append({
+                    "type": "input_file",
+                    "filename": item.get("filename", "upload.pdf") if isinstance(item, dict) else "upload.pdf",
+                    "file_data": file_data.strip(),
+                    "detail": detail_level
+                })
+                valid_file_count += 1
 
         log_event("file_inputs_injected", {
             "file_count": valid_file_count,

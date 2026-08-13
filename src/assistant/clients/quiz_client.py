@@ -1,6 +1,3 @@
-# Backend: simulacros-ai-assistant
-# File: src/assistant/clients/quiz_client.py
-
 import logging
 from typing import List, Dict, Any, Tuple, Generator
 
@@ -50,7 +47,7 @@ class QuizClient:
         api_input.extend(conversation_input)
 
         if attachments:
-            BaseAssistantClient.inject_file_inputs(api_input, attachments, cfg.pdf_detail_level)
+            BaseAssistantClient.inject_file_inputs(api_input, attachments, cfg.document_detail_level)
 
         tools = BaseAssistantClient.configure_tools(
             vector_store_ids, requires_visuals, requires_creative_images, attachments, web_search_config, user_location, cfg
@@ -104,7 +101,7 @@ class QuizClient:
         api_input.extend(conversation_input)
 
         if attachments:
-            BaseAssistantClient.inject_file_inputs(api_input, attachments, cfg.pdf_detail_level)
+            BaseAssistantClient.inject_file_inputs(api_input, attachments, cfg.document_detail_level)
 
         tools = BaseAssistantClient.configure_tools(
             vector_store_ids, requires_visuals, requires_creative_images, attachments, web_search_config, user_location, cfg

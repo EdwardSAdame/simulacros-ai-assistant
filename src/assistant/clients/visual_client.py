@@ -1,4 +1,3 @@
-# src/assistant/clients/visual_client.py
 import logging
 from typing import List, Dict, Any, Tuple
 
@@ -21,7 +20,8 @@ class VisualClient:
     def generate_plot_blueprint(
         conversation_input: List[Dict[str, Any]],
         mode: str,
-        system_instruction: str
+        system_instruction: str,
+        attachments: List[Dict[str, str]] | None = None
     ) -> Tuple[PlotGenerationBlueprint, Dict[str, int]]:
         """
         Generates a strict JSON blueprint detailing the analytical structure 
@@ -32,6 +32,9 @@ class VisualClient:
 
         api_input = [{"role": "system", "content": [{"type": "input_text", "text": system_instruction}]}]
         api_input.extend(conversation_input)
+
+        if attachments:
+            BaseAssistantClient.inject_file_inputs(api_input, attachments, cfg.document_detail_level)
 
         req = BaseAssistantClient.build_request_payload(cfg, api_input, tools=None)
         req["text_format"] = PlotGenerationBlueprint
@@ -63,7 +66,8 @@ class VisualClient:
     def execute_plot_generation(
         blueprint: PlotGenerationBlueprint,
         mode: str,
-        active_container_id: str | None
+        active_container_id: str | None,
+        attachments: List[Dict[str, str]] | None = None
     ) -> Tuple[List[str], str | None, Dict[str, int]]:
         """
         Executes the code interpreter using the analytical blueprint combined 
@@ -82,11 +86,16 @@ class VisualClient:
             f"Data Generation: {blueprint.data_generation_rules}\n"
             f"Axes Labels: {blueprint.axis_labels}\n\n"
             f"--- VISUAL DOCTRINE (STRICT) ---\n"
-            f"{visual_rules}\n\n"
+            f"{visual_rules}\n"
+            f"- Completely remove all background grid elements to maintain a clean white background canvas.\n"
+            f"- The Y-axis label MUST align with floating data values rather than the physical axis border line.\n\n"
             f"CRITICAL: Do NOT provide conversational text or raw Python text. You MUST execute it."
         )
 
         api_input = [{"role": "user", "content": [{"type": "input_text", "text": prompt}]}]
+
+        if attachments:
+            BaseAssistantClient.inject_file_inputs(api_input, attachments, cfg.document_detail_level)
 
         memory_limit = get_code_interpreter_memory()
         container_config = active_container_id if active_container_id else {"type": "auto", "memory_limit": memory_limit}
