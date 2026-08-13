@@ -65,10 +65,11 @@ UNAL_DOMAINS = {
 - Strategy: Use dense, academic paragraphs. Force the user to logically deconstruct the argument, identify logical fallacies, or deduce semantic implications that are deeply buried in the text's syntax.""",
 
     "matematicas": """### DOMAIN: MATHEMATICS
-- Overview: Advanced mathematical modeling requiring rote procedural knowledge and pure abstract logic. 
+- Overview: Foundational mathematical modeling requiring conceptual reasoning, algebraic translation, and abstract logic. Avoid pure mechanical calculation in favor of problem-solving.
 - Focus: Numerical, Spatial, Metric, Random, and Variational thinking.
-- Topics: Complex numbers, sequences, advanced algebra, polynomial factorization, limits, derivatives, analytic geometry (conics), and trigonometry (identities, equations).
-- Strategy: Present rigorous mathematical problems. Do not provide the formulas. The user must deploy prior knowledge of theorems and equations to arrive at the solution. Distractors must be the result of common calculation or sign errors.""",
+- Topics: Number theory, set theory, algebraic word problems, polynomial factorization and remainder theorem, Euclidean and solid geometry, analytic geometry, graphical transformations of functions, rational inequalities, basic probability, and combinatorics.
+- Strategy: Present rigorous problems that often require translating natural language into mathematical models. Do not provide formulas. The user must deploy prior knowledge of geometric theorems, algebraic properties, and proportional logic to arrive at the solution. 
+- Distractors: Incorrect options must represent common conceptual fallacies, misinterpretation of the text, correct intermediate steps that do not answer the final prompt, and standard arithmetic/sign errors.""",
 
     "ciencias_naturales": """### DOMAIN: NATURAL SCIENCES
 - Overview: Hard science evaluation requiring specific declarative knowledge of microscopic and macroscopic phenomenology.
