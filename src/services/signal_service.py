@@ -1,4 +1,3 @@
-# src/services/signal_service.py
 from src.services.context_builder import build_runtime_context
 from src.config.system_instructions import build_system_instructions
 
@@ -10,7 +9,9 @@ def build_runtime_signals(
     exam_context: str = "ICFES",
     requires_visuals: bool = False,
     intent: str = "chat",
-    category: str = "general"  # <-- FIX 3: Accept category here
+    category: str = "general",
+    custom_topic: str = "",
+    is_document_grounded: bool = False
 ) -> str:
     """Generates the dynamic system context for the AI."""
     
@@ -33,5 +34,7 @@ def build_runtime_signals(
         exam_context=exam_context,
         requires_visuals=requires_visuals,
         intent=intent,
-        category=category  # <-- FIX 3: Push it down
+        category=category,
+        custom_topic=custom_topic,
+        is_document_grounded=is_document_grounded
     )

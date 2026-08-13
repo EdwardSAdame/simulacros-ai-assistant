@@ -1,4 +1,3 @@
-# src/config/system_instructions.py
 from typing import Iterable, Optional
 
 # IMPORTS
@@ -58,7 +57,9 @@ def build_system_instructions(
     web_search_active: bool = False,
     requires_creative_image: bool = False,
     intent: str = "chat",
-    category: str = "general"
+    category: str = "general",
+    custom_topic: str = "",
+    is_document_grounded: bool = False
 ) -> str:
     
     blocks = [CORE_PERSONA.strip()]
@@ -84,7 +85,13 @@ def build_system_instructions(
         blocks.append("## ACADEMIC TUTORING DOCTRINE\n" + "\n\n".join(doctrine_parts))
 
     # --- CONTEXTUAL FRAMEWORKS ---
-    blocks.append(get_exam_framework(exam_context, category, intent))
+    blocks.append(get_exam_framework(
+        exam_context=exam_context, 
+        category=category, 
+        intent=intent,
+        custom_topic=custom_topic,
+        is_document_grounded=is_document_grounded
+    ))
     
     if web_search_active:
         blocks.append(build_search_instructions())

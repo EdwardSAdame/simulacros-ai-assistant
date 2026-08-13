@@ -33,14 +33,25 @@ class QuizClient:
         vector_store_ids: List[str] | None = None,
         web_search_config: Dict[str, Any] | None = None,
         user_location: Dict[str, str] | None = None,
-        category: str = "general"
+        category: str = "general",
+        custom_topic: str = "",
+        is_document_grounded: bool = False
     ) -> Tuple[QuizResponse, Dict[str, int]]:
         
         client = get_openai_client()
         cfg = get_model_config(mode)
         
         system_text = build_runtime_signals(
-            user_id, page, name, email, exam_context=exam_context, requires_visuals=requires_visuals, intent="quiz", category=category
+            user_id=user_id, 
+            page=page, 
+            name=name, 
+            email=email, 
+            exam_context=exam_context, 
+            requires_visuals=requires_visuals, 
+            intent="quiz", 
+            category=category,
+            custom_topic=custom_topic,
+            is_document_grounded=is_document_grounded
         )
         
         api_input = [{"role": "system", "content": [{"type": "input_text", "text": system_text}]}]
@@ -87,14 +98,25 @@ class QuizClient:
         vector_store_ids: List[str] | None = None,
         web_search_config: Dict[str, Any] | None = None,
         user_location: Dict[str, str] | None = None,
-        category: str = "general"
+        category: str = "general",
+        custom_topic: str = "",
+        is_document_grounded: bool = False
     ) -> Generator[Dict[str, Any], None, None]:
         
         client = get_openai_client()
         cfg = get_model_config(mode)
         
         system_text = build_runtime_signals(
-            user_id, page, name, email, exam_context=exam_context, requires_visuals=requires_visuals, intent="quiz", category=category
+            user_id=user_id, 
+            page=page, 
+            name=name, 
+            email=email, 
+            exam_context=exam_context, 
+            requires_visuals=requires_visuals, 
+            intent="quiz", 
+            category=category,
+            custom_topic=custom_topic,
+            is_document_grounded=is_document_grounded
         )
         
         api_input = [{"role": "system", "content": [{"type": "input_text", "text": system_text}]}]

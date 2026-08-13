@@ -1,5 +1,3 @@
-# FILE: src/services/semantic_router.py
-
 import logging
 from typing import List, Literal, Optional
 from pydantic import BaseModel, Field
@@ -15,6 +13,10 @@ class RouterResponse(BaseModel):
     )
     display_name: str = Field(
         description="The perfectly capitalized and accented name of the subject."
+    )
+    custom_topic: str = Field(
+        default="",
+        description="The specific custom subject, topic, or document focus requested by the user (e.g., 'Ingles', 'Historia', 'Relaciones'). Leave empty if no specific custom topic is mentioned."
     )
     intent: Literal["chat", "quiz", "creative_image", "mentalMap", "flashcards"] = Field(
         description="The primary intent of the user. Use 'mentalMap' if the user asks for a mind map, conceptual map, or structural diagram. Use 'flashcards' for studying, memorizing, or reviewing facts."
@@ -62,19 +64,22 @@ class SemanticRouter:
         conversation_id: str = "intent_resolution", 
         exam_context: str = "GENERAL", 
         history: Optional[List[dict]] = None, 
-        current_activity: str = "chat"
+        current_activity: str = "chat",
+        has_attachments: bool = False
     ) -> dict:
-        if not text:
+        if not text and not has_attachments:
             return {
                 "category": "general", 
                 "display_name": "General",
+                "custom_topic": "",
                 "intent": "chat",
                 "exam_type": "unknown",
                 "requires_visuals": False,
                 "requires_web_search": False,
                 "num_questions": 0,
                 "loading_phrases": ["Procesando...", "Esperando datos..."], 
-                "source": "fallback"
+                "source": "fallback",
+                "is_document_grounded": False
             }
             
         try:
@@ -82,26 +87,30 @@ class SemanticRouter:
             return {
                 "category": result.get("category", "general"),
                 "display_name": result.get("display_name", "General"),
+                "custom_topic": result.get("custom_topic", ""),
                 "intent": result.get("intent", "chat"),
                 "exam_type": result.get("exam_type", "unknown"),
                 "requires_visuals": result.get("requires_visuals", False),
                 "requires_web_search": result.get("requires_web_search", False),
                 "num_questions": result.get("num_questions", 0),
                 "loading_phrases": result.get("loading_phrases", ["Analizando...", "Pensando..."]),
-                "source": "ai"
+                "source": "ai",
+                "is_document_grounded": has_attachments
             }
         except Exception as e:
             logger.error(f"Router: LLM classification failed: {e}")
             return {
                 "category": "general", 
                 "display_name": "General",
+                "custom_topic": "",
                 "intent": "chat",
                 "exam_type": "unknown",
                 "requires_visuals": False,
                 "requires_web_search": False,
                 "num_questions": 0,
                 "loading_phrases": ["Analizando solicitud...", "Procesando informacion..."],
-                "source": "error_fallback"
+                "source": "error_fallback",
+                "is_document_grounded": has_attachments
             }
 
     def _classify_with_llm(
@@ -244,6 +253,7 @@ class SemanticRouter:
             return {
                 "category": category, 
                 "display_name": data.get("display_name", "General"),
+                "custom_topic": data.get("custom_topic", ""),
                 "intent": intent, 
                 "exam_type": exam_type,
                 "requires_visuals": requires_visuals, 

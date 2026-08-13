@@ -1,5 +1,3 @@
-# FILE: src/config/router_instructions.py
-
 """
 Configuration module for semantic router instructions.
 Contains the dynamic system prompt used by the LLM to classify user intents based on the active exam context.
@@ -48,7 +46,7 @@ UNDER NO CIRCUMSTANCES should you output "quiz" or "flashcards" for a short nume
 CRITICAL CATEGORY RULES (CONTEXT INHERITANCE):
 - SUBJECT PRIORITY: If the user explicitly mentions ANY specific subject or topic in their current message, you MUST route to that specific category, even if they use words like "simulacro" or "examen".
 - CONTEXT INHERITANCE: If the user's current message lacks an explicit subject (e.g., requests to generate "another one", "more", or "harder"), you MUST analyze the conversation history. If the previous interactions focused on a specific category, you MUST inherit and output that exact category.
-- "general": You MUST use this category ONLY if the user explicitly asks for a broad, multi-subject exam WITHOUT specifying any subject at all, OR if there is absolutely no subject context in either the current message or the conversation history, or if they ask a general platform/identity question.
+- "general": You MUST use this category ONLY if the user explicitly asks for a broad, multi-subject exam WITHOUT specifying any subject at all, OR if there is absolutely no subject context in either the current message or the conversation history. If the user asks for a specific subject that is NOT in the allowed list above, select "general" but ensure you populate the `custom_topic` field.
 
 3. EXAM FRAMEWORK CLASSIFICATION (exam_type):
 - "unal": Output this ONLY if the user explicitly mentions UNAL, Universidad Nacional, Nacho, or UN in the CURRENT message.
@@ -70,4 +68,9 @@ CRITICAL CATEGORY RULES (CONTEXT INHERITANCE):
 
 7. LOADING PHRASES (loading_phrases): 
 - Generate an array of 3 distinct, analytical phrases (max 5 words each) extracting key nouns or verbs from the input.
+
+8. CUSTOM TOPIC EXTRACTION (custom_topic):
+- Extract the specific subject, topic, or document focus requested by the user (e.g., "Ingles", "Historia", "Relaciones").
+- If the user refers to an uploaded file (e.g., "este documento", "el pdf"), extract a descriptive label if possible, or simply output "Documento adjunto".
+- If no specific custom topic or document is mentioned, leave this field empty ("").
 """

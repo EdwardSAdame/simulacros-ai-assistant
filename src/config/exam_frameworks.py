@@ -1,5 +1,3 @@
-# src/config/exam_frameworks.py
-
 ICFES_GLOBAL = """## ACADEMIC FRAMEWORK: ICFES Saber 11
 GLOBAL STRATEGY: Evidence-Centered Design. The exam evaluates competencies applied to real-world scenarios. Do not test rote memorization of isolated facts. Provide the necessary data within texts, graphs, or tables, and force the user to interpret, deduce, and argue based solely on the provided stimulus.
 
@@ -105,30 +103,47 @@ CRITICAL MISSION (EXAM DISCOVERY):
 The user has not yet specified which admission exam they are preparing for (ICFES Saber 11 or Universidad Nacional UNAL).
 Strategy: Briefly and confidently state your capabilities (simulacros, mapas mentales, flashcards). Then, TAKE CONTROL. Ask them EXACTLY ONE simple question to start the journey. DO NOT ask multiple questions. DO NOT overwhelm them with long lists."""
 
-def get_exam_framework(exam_context: str, category: str = "general", intent: str = "chat") -> str:
+def get_exam_framework(
+    exam_context: str, 
+    category: str = "general", 
+    intent: str = "chat",
+    custom_topic: str = "",
+    is_document_grounded: bool = False
+) -> str:
     """
     Returns the appropriate pedagogical framework based on exam context, category, and intent.
-    - If intent is 'chat', returns ONLY the Global Strategy (saves tokens).
-    - If intent is 'quiz' and category is 'general', returns Global Strategy + ALL domains.
-    - If intent is 'quiz' and category is specific, returns Global Strategy + SPECIFIC domain.
+    Respects custom_topic and document attachments to bypass strict multi-subject rules.
     """
+    is_custom = is_document_grounded or bool(custom_topic.strip())
+    
+    custom_doctrine = ""
+    if is_custom:
+        focus = custom_topic.strip() if custom_topic.strip() else "the attached document"
+        custom_doctrine = (
+            f"### DOMAIN: CUSTOM FOCUS ({focus.upper()})\n"
+            f"- Overview: You must generate this artifact EXCLUSIVELY about '{focus}'.\n"
+            "- Strategy: Completely ignore standard multi-subject distribution rules. Every single question/interaction must be grounded in this specific custom topic or the provided document."
+        )
+
     if exam_context == "UNAL":
-        # If the user is just chatting, save tokens and only inject the core global rules
         if intent != "quiz":
             return UNAL_GLOBAL
             
-        # If they want a quiz, determine if it's general or subject-specific
+        if is_custom:
+            return UNAL_GLOBAL + "\n\n" + custom_doctrine
+            
         if category == "general" or category not in UNAL_DOMAINS:
             return UNAL_GLOBAL + "\n\n" + "\n\n".join(UNAL_DOMAINS.values())
         else:
             return UNAL_GLOBAL + "\n\n" + UNAL_DOMAINS[category]
             
     elif exam_context == "ICFES":
-        # If the user is just chatting, save tokens and only inject the core global rules
         if intent != "quiz":
             return ICFES_GLOBAL
             
-        # If they want a quiz, determine if it's general or subject-specific
+        if is_custom:
+            return ICFES_GLOBAL + "\n\n" + custom_doctrine
+            
         if category == "general" or category not in ICFES_DOMAINS:
             return ICFES_GLOBAL + "\n\n" + "\n\n".join(ICFES_DOMAINS.values())
         else:

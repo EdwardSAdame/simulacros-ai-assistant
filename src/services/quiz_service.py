@@ -1,5 +1,3 @@
-# FILE: src/services/quiz_service.py
-
 from typing import Dict, Any, List, Tuple
 import math
 import random
@@ -65,10 +63,15 @@ class QuizService:
         is_visual_subject: bool = False,
         is_creative_subject: bool = False,
         is_general_subject: bool = False,
-        exam_context: str = "GENERAL"
+        exam_context: str = "GENERAL",
+        custom_topic: str = "",
+        is_document_grounded: bool = False
     ) -> Dict[str, Any]:
         
         format_map = format_map or {}
+        
+        is_custom = is_document_grounded or bool(custom_topic.strip())
+        active_display_name = custom_topic.strip().title() if custom_topic.strip() else display_name
         
         # 1. The Blueprint: Tell the AI exactly what format is required for each index
         format_instructions = "## 1. ARCHITECTURAL BLUEPRINT (FATAL ERROR IF IGNORED)\n"
@@ -121,7 +124,7 @@ class QuizService:
 
         # Psychometric parameters instructions with dynamic scaling
         if exam_context.upper() == "UNAL":
-            if is_general_subject:
+            if is_general_subject and not is_custom:
                 psychometric_doctrine = (
                     "## 6. PSYCHOMETRIC EVALUATION METADATA (UNAL GLOBAL RASCH MODEL)\n"
                     "- `evaluation_metadata.exam_type` MUST be 'unal'.\n"
@@ -135,12 +138,12 @@ class QuizService:
                     "## 6. PSYCHOMETRIC EVALUATION METADATA (UNAL COMPONENT RASCH MODEL)\n"
                     "- `evaluation_metadata.exam_type` MUST be 'unal'.\n"
                     "- `evaluation_metadata.evaluation_level` MUST be 'component'.\n"
-                    f"- `evaluation_metadata.subject_category` MUST be '{display_name}'.\n"
+                    f"- `evaluation_metadata.subject_category` MUST be '{active_display_name}'.\n"
                     "- `scale_config` MUST be: min_score=0, max_score=20, mean=10, standard_deviation=1.\n"
                     "- `psychometric_params`: The UNAL exam uses the 1-Parameter Rasch model. Therefore, you MUST hardcode `a_discrimination` to exactly 1.0 and `c_guessing` to exactly 0.0. You must ONLY vary `b_difficulty` between -3.0 and 3.0 based on the cognitive complexity of the question.\n"
                 )
         else:
-            if is_general_subject:
+            if is_general_subject and not is_custom:
                 psychometric_doctrine = (
                     "## 6. PSYCHOMETRIC EVALUATION METADATA (ICFES GLOBAL 3PL MODEL)\n"
                     "- `evaluation_metadata.exam_type` MUST be 'icfes'.\n"
@@ -154,13 +157,13 @@ class QuizService:
                     "## 6. PSYCHOMETRIC EVALUATION METADATA (ICFES COMPONENT 3PL MODEL)\n"
                     "- `evaluation_metadata.exam_type` MUST be 'icfes'.\n"
                     "- `evaluation_metadata.evaluation_level` MUST be 'component'.\n"
-                    f"- `evaluation_metadata.subject_category` MUST be '{display_name}'.\n"
+                    f"- `evaluation_metadata.subject_category` MUST be '{active_display_name}'.\n"
                     "- `scale_config` MUST be: min_score=0, max_score=100, mean=50, standard_deviation=10.\n"
                     "- `psychometric_params`: The ICFES exam uses the 3-Parameter Logistic (3PL) model. You must generate realistic psychometric parameters. `a_discrimination` between 0.5 and 2.5. `b_difficulty` between -3.0 (easy) and 3.0 (hard). `c_guessing` between 0.0 and 0.25.\n"
                 )
 
         general_doctrine = ""
-        if is_general_subject:
+        if is_general_subject and not is_custom:
             if exam_context.upper() == "UNAL":
                 domain_distribution = "Mathematics, Textual Analysis, Natural Sciences, Social Sciences, and Image Analysis"
             else:
@@ -176,7 +179,7 @@ class QuizService:
 
         instruction_text = (
             f"## IMMEDIATE RUNTIME MISSION\n"
-            f"The user requested a quiz/exam about '{display_name}'. Generate exactly {num_questions} distinct questions.\n\n"
+            f"The user requested a quiz/exam about '{active_display_name}'. Generate exactly {num_questions} distinct questions.\n\n"
             f"{format_instructions}\n"
             f"## 3. SUBJECT SPECIFIC DOCTRINES\n"
             f"{visual_doctrine}\n"
@@ -214,8 +217,13 @@ class QuizService:
         display_name: str = "General",
         attachments: List[Dict[str, str]] | None = None,
         actual_conversation_id: str | None = None,
-        num_questions: int = 0
+        num_questions: int = 0,
+        custom_topic: str = "",
+        is_document_grounded: bool = False
     ) -> Tuple[str, Dict | None]:
+        
+        has_attachments = bool(attachments and len(attachments) > 0)
+        is_doc_grounded = is_document_grounded or has_attachments
         
         topic_hint = category if category else "General Knowledge"
         
@@ -290,9 +298,11 @@ class QuizService:
         log_event("dynamic_visual_quota_calculated", {
             "subject_topic": topic_lower,
             "display_name": display_name,
+            "custom_topic": custom_topic,
             "is_general_subject": is_general_subject,
             "is_visual_subject": is_visual_subject,
             "is_creative_subject": is_creative_subject,
+            "is_document_grounded": is_doc_grounded,
             "num_questions_requested": num_questions,
             "target_visuals_enforced": target_visuals,
             "format_map": format_map
@@ -315,7 +325,9 @@ class QuizService:
             is_visual_subject=is_visual_subject,
             is_creative_subject=is_creative_subject,
             is_general_subject=is_general_subject,
-            exam_context=exam_context
+            exam_context=exam_context,
+            custom_topic=custom_topic,
+            is_document_grounded=is_doc_grounded
         )
         conversation_input.append(system_instruction)
 
@@ -333,12 +345,12 @@ class QuizService:
                     mode=mode, exam_context=exam_context, requires_visuals=False, 
                     requires_creative_images=requires_creative_images, attachments=attachments,
                     vector_store_ids=selected_vector_stores, web_search_config=web_search_config,
-                    category=category
+                    category=category, custom_topic=custom_topic, is_document_grounded=is_doc_grounded
                 )
                 
                 seen_indices = set()
                 accumulated_questions = []
-                ai_generated_title = "Simulacro Generated" 
+                ai_generated_title = "Simulacro Generado" 
                 parsed_response = None
                 
                 ghost_easier, ghost_harder, ghost_retry = None, None, None
@@ -480,7 +492,7 @@ class QuizService:
                     mode=mode, exam_context=exam_context, requires_visuals=False, 
                     requires_creative_images=requires_creative_images, attachments=attachments,
                     vector_store_ids=selected_vector_stores, web_search_config=web_search_config,
-                    category=category
+                    category=category, custom_topic=custom_topic, is_document_grounded=is_doc_grounded
                 )
 
                 if usage_data and actual_conversation_id:
