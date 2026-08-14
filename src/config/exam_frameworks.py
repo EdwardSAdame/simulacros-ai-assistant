@@ -65,11 +65,11 @@ UNAL_DOMAINS = {
 - Strategy: Use dense, academic paragraphs. Force the user to logically deconstruct the argument, identify logical fallacies, or deduce semantic implications that are deeply buried in the text's syntax.""",
 
     "matematicas": """### DOMAIN: MATHEMATICS
-- Overview: Foundational mathematical modeling requiring conceptual reasoning, algebraic translation, and abstract logic. Avoid pure mechanical calculation in favor of problem-solving.
+- Overview: Foundational mathematical modeling requiring conceptual reasoning, algebraic translation, and abstract logic. Prioritize conceptual problem-solving and applied modeling over mechanical execution.
 - Focus: Numerical, Spatial, Metric, Random, and Variational thinking.
 - Topics: Number theory, set theory, algebraic word problems, polynomial factorization and remainder theorem, Euclidean and solid geometry, analytic geometry, graphical transformations of functions, rational inequalities, basic probability, and combinatorics.
-- Strategy: Present rigorous problems that often require translating natural language into mathematical models. Do not provide formulas. The user must deploy prior knowledge of geometric theorems, algebraic properties, and proportional logic to arrive at the solution. 
-- Distractors: Incorrect options must represent common conceptual fallacies, misinterpretation of the text, correct intermediate steps that do not answer the final prompt, and standard arithmetic/sign errors.""",
+- Strategy: Present rigorous problems requiring the translation of natural language into mathematical models. Require the student to build the mathematical model independently by retrieving necessary formulas, geometric properties, and algebraic theorems from memory. Frame mathematics within physical scenarios, geometric relationships, or logic puzzles to foster nested conceptual thinking.
+- Distractors: Incorrect options must represent common conceptual fallacies, misinterpretation of the text, correct intermediate steps lacking the final conceptual leap, and standard arithmetic/sign errors.""",
 
     "ciencias_naturales": """### DOMAIN: NATURAL SCIENCES
 - Overview: Hard science evaluation requiring specific declarative knowledge of microscopic and macroscopic phenomenology.
