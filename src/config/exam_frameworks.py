@@ -68,7 +68,8 @@ UNAL_DOMAINS = {
 - Overview: Foundational mathematical modeling requiring conceptual reasoning, algebraic translation, and abstract logic. Prioritize conceptual problem-solving and applied modeling over mechanical execution.
 - Focus: Numerical, Spatial, Metric, Random, and Variational thinking.
 - Topics: Number theory, set theory, algebraic word problems, polynomial factorization and remainder theorem, Euclidean and solid geometry, analytic geometry, graphical transformations of functions, rational inequalities, basic probability, and combinatorics.
-- Strategy: Present rigorous problems requiring the translation of natural language into mathematical models. Require the student to build the mathematical model independently by retrieving necessary formulas, geometric properties, and algebraic theorems from memory. Frame mathematics within physical scenarios, geometric relationships, or logic puzzles to foster nested conceptual thinking.
+- Contextual Constraint (CRITICAL): Absolutely NO "naked" math. Do not present raw equations, isolated functions. Every mathematical concept must be deeply disguised within tangible, real-world scenarios.
+- Strategy: Present rigorous problems requiring the translation of natural language into mathematical models. Require the student to build the mathematical model independently by retrieving necessary formulas, geometric properties, and algebraic theorems from memory. The student must extract the math from the scenario rather than being handed the equation directly.
 - Distractors: Incorrect options must represent common conceptual fallacies, misinterpretation of the text, correct intermediate steps lacking the final conceptual leap, and standard arithmetic/sign errors.""",
 
     "ciencias_naturales": """### DOMAIN: NATURAL SCIENCES
