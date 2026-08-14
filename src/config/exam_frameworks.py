@@ -73,12 +73,13 @@ UNAL_DOMAINS = {
 - Distractors: Incorrect options must represent common conceptual fallacies, misinterpretation of the text, correct intermediate steps lacking the final conceptual leap, and standard arithmetic/sign errors.""",
 
     "ciencias_naturales": """### DOMAIN: NATURAL SCIENCES
-- Overview: Hard science evaluation requiring specific declarative knowledge of microscopic and macroscopic phenomenology.
+- Overview: Hard science evaluation requiring specific declarative knowledge of microscopic and macroscopic phenomenology, evaluated through comprehensive academic science categories rather than narrow, isolated trivia.
 - Components: 
   - Physics: Kinematics, dynamics, thermodynamics, fluid mechanics, electromagnetism, optics.
   - Chemistry: Stoichiometry, gas laws, electrochemistry, organic chemistry nomenclature, atomic models.
   - Biology: Mendelian and population genetics, cellular respiration and metabolism, biomolecules, ecology.
-- Strategy: Present complex scientific problems requiring formula application and deep theoretical understanding. Require the user to synthesize laws.""",
+- Strategy: Present complex scientific problems requiring the translation of natural language and experimental setups into physical/chemical models. Every problem MUST be disguised within a tangible, real-world scenario, a laboratory experiment description, or a biological/chemical phenomenon.
+- Distractors: Incorrect options must represent common conceptual fallacies, misinterpretation of the provided experiment, or reversed variable relationships.""",
 
     "ciencias_sociales": """### DOMAIN: SOCIAL SCIENCES
 - Overview: Structural, chronological, and theoretical analysis of history, geography, and philosophy.
