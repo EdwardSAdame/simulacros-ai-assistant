@@ -1,3 +1,5 @@
+# src/config/exam_frameworks.py
+
 ICFES_GLOBAL = """## ACADEMIC FRAMEWORK: ICFES Saber 11
 GLOBAL STRATEGY: Evidence-Centered Design. The exam evaluates competencies applied to real-world scenarios. Do not test rote memorization of isolated facts. Provide the necessary data within texts, graphs, or tables, and force the user to interpret, deduce, and argue based solely on the provided stimulus.
 
@@ -71,8 +73,7 @@ UNAL_DOMAINS = {
 - Dual Format Strategy (CRITICAL): You must dynamically alternate between two distinct question structures:
   1. Applied Modeling: Present a concise real-world scenario. Require the student to translate natural language parameters into a mathematical model to find the solution.
   2. Formal Abstraction: Present raw equations, geometric axioms, coordinate sets, or rational inequalities directly. Require the student to execute polynomial division, identify asymptotes, evaluate truth values of mathematical postulates, or solve algebraic expressions without any real-world narrative.
-- Distractor Logic: Incorrect options must represent plausible procedural fallacies and cognitive traps. Each distractor must logically correspond to a specific misstep, such as selecting a valid intermediate calculation before completing the final conceptual step, applying a theorem under invalid conditions, making standard algebraic manipulation errors, or misinterpreting the problem parameters. Obvious or trivial options are strictly prohibited.
-- Formatting Constraint: Any mathematical expression, number set, variable, or equation appearing in text fields must be properly formatted using standard mathematical notation.""",
+- Distractor Logic: Incorrect options must represent plausible procedural fallacies and cognitive traps. Each distractor must logically correspond to a specific misstep, such as selecting a valid intermediate calculation before completing the final conceptual step, applying a theorem under invalid conditions, making standard algebraic manipulation errors, or misinterpreting the problem parameters. Obvious or trivial options are strictly prohibited.""",
 
     "ciencias_naturales": """### DOMAIN: NATURAL SCIENCES
 - Overview: Hard science evaluation requiring specific declarative knowledge of microscopic and macroscopic phenomenology, evaluated through comprehensive academic science categories rather than narrow, isolated trivia.
@@ -80,8 +81,8 @@ UNAL_DOMAINS = {
   - Physics: Kinematics, dynamics, thermodynamics, fluid mechanics, electromagnetism, optics.
   - Chemistry: Stoichiometry, gas laws, electrochemistry, organic chemistry nomenclature, atomic models.
   - Biology: Mendelian and population genetics, cellular respiration and metabolism, biomolecules, ecology.
-- Strategy: Present complex scientific problems requiring the translation of natural language and experimental setups into physical/chemical models. Every problem MUST be disguised within a tangible, real-world scenario, a laboratory experiment description, or a biological/chemical phenomenon.
-- Distractors: Incorrect options must represent common conceptual fallacies, misinterpretation of the provided experiment, or reversed variable relationships.""",
+- Strategy: Present complex scientific problems requiring the translation of natural language and experimental setups into physical/chemical models. Every problem MUST be disguised within a tangible, real-world scenario, a laboratory experiment description, or a biological/chemical phenomenon. Require multi-step reasoning where the student must deduce the underlying scientific principle before calculating or predicting the outcome.
+- Distractor Logic: Incorrect options must represent plausible scientific misconceptions and cognitive traps. Each distractor must logically correspond to a specific misstep, such as reversing dependent and independent variables, confusing direct and inverse proportionality, applying a physical law outside its valid scope, misidentifying a limiting reactant, or making standard unit conversion errors. Obvious or trivial options are strictly prohibited.""",
 
     "ciencias_sociales": """### DOMAIN: SOCIAL SCIENCES
 - Overview: Structural, chronological, and theoretical analysis of history, geography, and philosophy.
