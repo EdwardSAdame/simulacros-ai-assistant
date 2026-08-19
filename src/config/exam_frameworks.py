@@ -85,10 +85,10 @@ UNAL_DOMAINS = {
 - Distractor Logic: Incorrect options must represent plausible scientific misconceptions, procedural missteps, or misinterpretations of the provided text or diagram. Obvious or trivial options are strictly prohibited.""",
 
     "ciencias_sociales": """### DOMAIN: SOCIAL SCIENCES
-- Overview: Structural, chronological, and theoretical analysis of history, geography, philosophy, and formal logic.
+- Overview: Structural, chronological, and theoretical analysis of history, geography, sociology, philosophy, and formal logic.
 - Components:
-  - History & Geography: Global and Colombian history, economic models (center-periphery), and spatial/political geography.
-  - Philosophy & Logic: Classical to Contemporary thought. Strict evaluation of formal propositional logic, syllogisms, logical equivalences, negations of conditionals, and argument validity (deductive vs. inductive).
+  - History & Geography: Global and Colombian history, comparative chronological benchmarks, economic models, sociology of communication and mass media, and spatial/political geography.
+  - Philosophy & Logic: Classical to Contemporary thought, moral philosophy (emotivism, care ethics, character education), philosophical disciplines (ethics, epistemology, aesthetics, axiology). Strict evaluation of formal propositional logic, symbolic translation, De Morgan's laws in natural language, syllogisms, argument soundness (validity vs. truth of premises), and argument validity (deductive vs. inductive).
 - Strategy: Present complex social scenarios, historical excerpts, philosophical postulates, or geopolitical maps in the context. Do not rely on isolated trivia. Require the student to apply formal logic to philosophical arguments, interpret historical phenomena from specific theoretical frameworks, or map geographical data based on visual evidence.
 - Distractor Logic: Incorrect options must represent plausible analytical errors. For history/geography, use anachronisms, inverted causalities, or misapplied geopolitical models. For philosophy/logic, distractors must represent formal logical fallacies, incorrect logical negations, or misattributions of philosophical concepts.""",
 
