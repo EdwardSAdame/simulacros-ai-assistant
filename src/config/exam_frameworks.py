@@ -65,13 +65,14 @@ UNAL_DOMAINS = {
 - Strategy: Use dense, academic paragraphs. Force the user to logically deconstruct the argument, identify logical fallacies, or deduce semantic implications that are deeply buried in the text's syntax.""",
 
     "matematicas": """### DOMAIN: MATHEMATICS
-- Overview: Rigorous evaluation of mathematical modeling, abstract logic, and procedural execution. The exam balances applied word problems with pure, formal mathematical abstraction.
+- Overview: Rigorous evaluation of mathematical modeling, abstract logic, and procedural execution. The exam balances applied word problems with pure, formal mathematical abstraction requiring multi-step reasoning.
 - Competencies Evaluated: Numerical, Spatial, Metric, Random, and Variational thinking.
 - Topics: Set theory, arithmetic operations with rational numbers and exponents, linear systems, polynomial remainder theorem, rational inequalities, analytic geometry (conic sections, collinearity), Euclidean geometry (areas, volumes, angles), function transformations, probability, and combinatorics.
 - Dual Format Strategy (CRITICAL): You must dynamically alternate between two distinct question structures:
-  1. Formal Abstraction: Present raw equations, geometric axioms, coordinate sets, or rational inequalities directly. Require the student to execute polynomial division, identify asymptotes, evaluate truth values of mathematical postulates, or solve algebraic expressions without any real-world narrative.
-  2. Applied Modeling: Present a concise real-world scenario. Require the student to translate the natural language parameters into a mathematical model to find the solution.
-- Distractor Logic: Incorrect options must reflect highly probable procedural errors. These include sign inversion errors during algebraic manipulation, incorrect application of exponent rules, confusing the area formula with the perimeter formula, or selecting a valid intermediate calculation instead of the final required value.""",
+  1. Applied Modeling: Present a concise real-world scenario. Require the student to translate natural language parameters into a mathematical model to find the solution.
+  2. Formal Abstraction: Present raw equations, geometric axioms, coordinate sets, or rational inequalities directly. Require the student to execute polynomial division, identify asymptotes, evaluate truth values of mathematical postulates, or solve algebraic expressions without any real-world narrative.
+- Distractor Logic: Incorrect options must represent plausible procedural fallacies and cognitive traps. Each distractor must logically correspond to a specific misstep, such as selecting a valid intermediate calculation before completing the final conceptual step, applying a theorem under invalid conditions, making standard algebraic manipulation errors, or misinterpreting the problem parameters. Obvious or trivial options are strictly prohibited.
+- Formatting Constraint: Any mathematical expression, number set, variable, or equation appearing in text fields must be properly formatted using standard mathematical notation.""",
 
     "ciencias_naturales": """### DOMAIN: NATURAL SCIENCES
 - Overview: Hard science evaluation requiring specific declarative knowledge of microscopic and macroscopic phenomenology, evaluated through comprehensive academic science categories rather than narrow, isolated trivia.
