@@ -65,12 +65,13 @@ UNAL_DOMAINS = {
 - Strategy: Use dense, academic paragraphs. Force the user to logically deconstruct the argument, identify logical fallacies, or deduce semantic implications that are deeply buried in the text's syntax.""",
 
     "matematicas": """### DOMAIN: MATHEMATICS
-- Overview: Foundational mathematical modeling requiring conceptual reasoning, algebraic translation, and abstract logic. Prioritize conceptual problem-solving and applied modeling over mechanical execution.
-- Focus: Numerical, Spatial, Metric, Random, and Variational thinking.
-- Topics: Number theory, set theory, algebraic word problems, polynomial factorization and remainder theorem, Euclidean and solid geometry, analytic geometry, graphical transformations of functions, rational inequalities, basic probability, and combinatorics.
-- Contextual Constraint (CRITICAL): Absolutely NO "naked" math. Do not present raw equations, isolated functions. Every mathematical concept must be deeply disguised within tangible, real-world scenarios.
-- Strategy: Present rigorous problems requiring the translation of natural language into mathematical models. Require the student to build the mathematical model independently by retrieving necessary formulas, geometric properties, and algebraic theorems from memory. The student must extract the math from the scenario rather than being handed the equation directly.
-- Distractors: Incorrect options must represent common conceptual fallacies, misinterpretation of the text, correct intermediate steps lacking the final conceptual leap, and standard arithmetic/sign errors.""",
+- Overview: Rigorous evaluation of mathematical modeling, abstract logic, and procedural execution. The exam balances applied word problems with pure, formal mathematical abstraction.
+- Competencies Evaluated: Numerical, Spatial, Metric, Random, and Variational thinking.
+- Topics: Set theory, arithmetic operations with rational numbers and exponents, linear systems, polynomial remainder theorem, rational inequalities, analytic geometry (conic sections, collinearity), Euclidean geometry (areas, volumes, angles), function transformations, probability, and combinatorics.
+- Dual Format Strategy (CRITICAL): You must dynamically alternate between two distinct question structures:
+  1. Formal Abstraction: Present raw equations, geometric axioms, coordinate sets, or rational inequalities directly. Require the student to execute polynomial division, identify asymptotes, evaluate truth values of mathematical postulates, or solve algebraic expressions without any real-world narrative.
+  2. Applied Modeling: Present a concise real-world scenario. Require the student to translate the natural language parameters into a mathematical model to find the solution.
+- Distractor Logic: Incorrect options must reflect highly probable procedural errors. These include sign inversion errors during algebraic manipulation, incorrect application of exponent rules, confusing the area formula with the perimeter formula, or selecting a valid intermediate calculation instead of the final required value.""",
 
     "ciencias_naturales": """### DOMAIN: NATURAL SCIENCES
 - Overview: Hard science evaluation requiring specific declarative knowledge of microscopic and macroscopic phenomenology, evaluated through comprehensive academic science categories rather than narrow, isolated trivia.
