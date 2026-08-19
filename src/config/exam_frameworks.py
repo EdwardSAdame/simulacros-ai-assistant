@@ -73,7 +73,7 @@ UNAL_DOMAINS = {
 - Dual Format Strategy (CRITICAL): You must dynamically alternate between two distinct question structures:
   1. Applied Modeling: Present a concise real-world scenario. Require the student to translate natural language parameters into a mathematical model to find the solution.
   2. Formal Abstraction: Present raw equations, geometric axioms, coordinate sets, or rational inequalities directly. Require the student to execute polynomial division, identify asymptotes, evaluate truth values of mathematical postulates, or solve algebraic expressions without any real-world narrative.
-- Distractor Logic: Incorrect options must represent plausible procedural fallacies and cognitive traps. Each distractor must logically correspond to a specific misstep, such as selecting a valid intermediate calculation before completing the final conceptual step, applying a theorem under invalid conditions, making standard algebraic manipulation errors, or misinterpreting the problem parameters. Obvious or trivial options are strictly prohibited.""",
+- Distractor Logic: Incorrect options must represent plausible procedural fallacies and cognitive traps. Each distractor must logically correspond to a specific misstep, such as selecting a valid intermediate calculation before completing the final conceptual step, applying a theorem under invalid conditions, making standard algebraic manipulation errors, or misinterpreting the problem parameters.""",
 
     "ciencias_naturales": """### DOMAIN: NATURAL SCIENCES
 - Overview: Hard science evaluation requiring specific declarative knowledge of microscopic and macroscopic phenomenology, evaluated through comprehensive academic science categories rather than narrow, isolated trivia.
@@ -82,14 +82,15 @@ UNAL_DOMAINS = {
   - Chemistry: Stoichiometry, gas laws, electrochemistry, organic chemistry nomenclature, atomic models.
   - Biology: Mendelian and population genetics, cellular respiration and metabolism, biomolecules, ecology.
 - Strategy: Present complex scientific problems requiring the translation of natural language and experimental setups into physical/chemical models. Every problem MUST be disguised within a tangible, real-world scenario, a laboratory experiment description, or a biological/chemical phenomenon. Require multi-step reasoning where the student must deduce the underlying scientific principle before calculating or predicting the outcome.
-- Distractor Logic: Incorrect options must represent plausible scientific misconceptions and cognitive traps. Each distractor must logically correspond to a specific misstep, such as reversing dependent and independent variables, confusing direct and inverse proportionality, applying a physical law outside its valid scope, misidentifying a limiting reactant, or making standard unit conversion errors. Obvious or trivial options are strictly prohibited.""",
+- Distractor Logic: Incorrect options must represent plausible scientific misconceptions and cognitive traps. Each distractor must logically correspond to a specific misstep, such as reversing dependent and independent variables, confusing direct and inverse proportionality, applying a physical law outside its valid scope, misidentifying a limiting reactant, or making standard unit conversion errors.""",
 
     "ciencias_sociales": """### DOMAIN: SOCIAL SCIENCES
-- Overview: Structural, chronological, and theoretical analysis of history, geography, and philosophy.
+- Overview: Structural, chronological, and theoretical analysis of history, geography, philosophy, and formal logic.
 - Components: 
-  - History & Geography: Global and Colombian history (e.g., 1886 to 1991 constitutional shifts), astronomical dynamics, physical geography (orography).
-  - Philosophy & Logic: Classical to Contemporary thought. Formal propositional logic and syllogisms.
-- Strategy: Ask specific questions requiring prior knowledge of historical ruptures or philosophical paradigms. Do not provide the answer implicitly in the text. Distractors should be accurate statements belonging to the wrong historical period or philosopher.""",
+  - History & Geography: Global and Colombian history, economic models (center-periphery), and spatial/political geography.
+  - Philosophy & Logic: Classical to Contemporary thought. Strict evaluation of formal propositional logic, syllogisms, logical equivalences, negations of conditionals, and argument validity (deductive vs. inductive).
+- Strategy: Present complex social scenarios, historical excerpts, philosophical postulates, or geopolitical maps in the context. Do not rely on isolated trivia. Require the student to apply formal logic to philosophical arguments, interpret historical phenomena from specific theoretical frameworks, or map geographical data based on visual evidence.
+- Distractor Logic: Incorrect options must represent plausible analytical errors. For history/geography, use anachronisms, inverted causalities, or misapplied geopolitical models. For philosophy/logic, distractors must represent formal logical fallacies, incorrect logical negations, or misattributions of philosophical concepts.""",
 
     "analisis_imagen": """### DOMAIN: IMAGE ANALYSIS
 - Overview: Pure abstract logical reasoning, visuospatial cognition, and fluid intelligence. This is a unique hallmark of the UNAL exam.
