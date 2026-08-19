@@ -12,7 +12,7 @@ MANDATORY BEHAVIOR: Always frame questions with a stimulus (a short text, an exp
 
 ICFES_DOMAINS = {
     "matematicas": """### DOMAIN: MATHEMATICS (QUANTITATIVE REASONING)
-- Overview: Evaluates quantitative reasoning applied to daily life, citizenship, and basic STEM problems. 
+- Overview: Evaluates quantitative reasoning applied to daily life, citizenship, and basic STEM problems.
 - Competencies: Interpretation and Representation (34%), Formulation and Execution, Argumentation.
 - Focus: Avoid pure abstract algebra. Focus heavily on data literacy, statistics, financial math, and applied geometry.
 - Topics: Probabilities, interpreting complex statistical charts, variance, percentiles, spatial transformations, rates of change.
@@ -55,7 +55,7 @@ GLOBAL STRATEGY: Focus on extreme academic rigor, specific declarative knowledge
 
 PSYCHOMETRIC MODEL & SCORE INTERPRETATION:
 - Method: Rasch Model (IRT 1PL). Scores depend heavily on the calibrated difficulty of the item relative to the user's latent ability.
-- Distractor Logic: Distractors must represent predictable procedural failures. 
+- Distractor Logic: Distractors must represent predictable procedural failures.
 - Components: Each of the 5 components is standardized to a Mean of 10 and Standard Deviation of 1.
 - Total Score: Standardized to a Mean of 500 and Standard Deviation of 100. Highly competitive programs require scores >700."""
 
@@ -76,17 +76,17 @@ UNAL_DOMAINS = {
 - Distractor Logic: Incorrect options must represent plausible procedural fallacies and cognitive traps. Each distractor must logically correspond to a specific misstep, such as selecting a valid intermediate calculation before completing the final conceptual step, applying a theorem under invalid conditions, making standard algebraic manipulation errors, or misinterpreting the problem parameters.""",
 
     "ciencias_naturales": """### DOMAIN: NATURAL SCIENCES
-- Overview: Hard science evaluation requiring specific declarative knowledge of microscopic and macroscopic phenomenology, evaluated through comprehensive academic science categories rather than narrow, isolated trivia.
-- Components: 
-  - Physics: Classical mechanics (kinematics, dynamics, equilibrium), fluid dynamics (Bernoulli, static pressure), electromagnetism (magnetic fields, induction, magnetic force), and geometric optics.
-  - Chemistry: Stoichiometry and mass calculations, gas laws, chemical kinetics, redox reactions and oxidation states, inorganic and organic chemistry nomenclature, and atomic structure.
-  - Biology: Mendelian genetics, cellular respiration and bioenergetics, metabolism, biomolecules, and biochemistry.
-- Strategy: Present complex scientific problems requiring the translation of natural language and experimental setups into physical/chemical models. Every problem MUST be disguised within a tangible, real-world scenario, a laboratory experiment description, or a biological/chemical phenomenon. Require multi-step reasoning where the student must deduce the underlying scientific principle before calculating or predicting the outcome.
-- Distractor Logic: Incorrect options must represent plausible scientific misconceptions and cognitive traps. Each distractor must logically correspond to a specific misstep, such as reversing dependent and independent variables, confusing direct and inverse proportionality, applying a physical law outside its valid scope, misidentifying a limiting reactant, or making standard unit conversion errors.""",
+- Overview: Hard science evaluation requiring deep conceptual understanding, phenomenological reasoning, and reading comprehension applied to microscopic and macroscopic natural phenomena.
+- Components:
+  - Physics: Mechanics (kinematics, projectile motion, Newton's laws, static equilibrium, work and energy), fluid dynamics and aerodynamics (Bernoulli's principle, aerodynamic lift, air streams, static pressure, communicating vessels, hydrostatics), electromagnetism (magnetic fields, magnetic force on conductors, Lenz's law, electromagnetic induction, bar magnets, magnetic dipoles), and thermodynamics (PV and TV process diagrams, isothermal/isobaric processes, first law, specific heat capacity).
+  - Chemistry: Stoichiometry and mass calculations (limiting reactants, mole ratios, percentage composition in alloys/solutions), chemical kinetics and reaction orders (rate laws, half-life/radioactive decay), gas laws, redox and electrochemistry (oxidation states in organic and inorganic compounds, oxidizing and reducing agents, cell potential, galvanic cells, electron transfer), atomic structure (isotopes, subatomic particles, transition metal cations), and chemical classification (acids, bases, salts, oxysalts).
+  - Biology: Mendelian genetics and population genetics (monohybrid/dihybrid crosses, Hardy-Weinberg equilibrium), cellular bioenergetics and respiration (ATP production, mitochondrial membrane, electron transport chain), human physiology (digestive system, nutrient absorption sites), ecology and population dynamics (trophic levels, energy transfer efficiency, logistic population growth, carrying capacity K), and biochemistry (macromolecules, lipids, proteins, lipid solubility).
+- Strategy: CRITICAL: Do not generate pure, heavy mathematical or algebraic calculations. The UNAL exam focuses on qualitative, phenomenological, and conceptual reasoning. You MUST provide a rich, paragraph-length scientific text, historical context, or experimental description in the `context_text` field. Base each question on interpreting that stimulus, applying scientific laws, or analyzing qualitative relationships.
+- Distractor Logic: Incorrect options must represent plausible scientific misconceptions, procedural missteps, or misinterpretations of the provided text or diagram. Obvious or trivial options are strictly prohibited.""",
 
     "ciencias_sociales": """### DOMAIN: SOCIAL SCIENCES
 - Overview: Structural, chronological, and theoretical analysis of history, geography, philosophy, and formal logic.
-- Components: 
+- Components:
   - History & Geography: Global and Colombian history, economic models (center-periphery), and spatial/political geography.
   - Philosophy & Logic: Classical to Contemporary thought. Strict evaluation of formal propositional logic, syllogisms, logical equivalences, negations of conditionals, and argument validity (deductive vs. inductive).
 - Strategy: Present complex social scenarios, historical excerpts, philosophical postulates, or geopolitical maps in the context. Do not rely on isolated trivia. Require the student to apply formal logic to philosophical arguments, interpret historical phenomena from specific theoretical frameworks, or map geographical data based on visual evidence.
@@ -95,7 +95,7 @@ UNAL_DOMAINS = {
     "analisis_imagen": """### DOMAIN: IMAGE ANALYSIS
 - Overview: Pure abstract logical reasoning, visuospatial cognition, and fluid intelligence. This is a unique hallmark of the UNAL exam.
 - Focus: Mental rotation, deductive transformation, and comparative visual analytics.
-- Topics: 
+- Topics:
   - Isometry: Identifying orthogonal views (top, front, profile) of 3D solids.
   - Unfolding: Mentally assembling 3D shapes (Soma cubes, dice) from flat 2D templates.
   - Origami: Predicting the final shape of folded and cut paper.
@@ -106,13 +106,13 @@ UNAL_DOMAINS = {
 GENERAL_FRAMEWORK = """## ACADEMIC FRAMEWORK: General University Preparation
 GLOBAL STRATEGY: Build strong foundational knowledge across core academic subjects. TAKE THE LEAD. If the user doesn't know where to start, do not give them a massive menu of options. Guide them step-by-step.
 
-CRITICAL MISSION (EXAM DISCOVERY): 
+CRITICAL MISSION (EXAM DISCOVERY):
 The user has not yet specified which admission exam they are preparing for (ICFES Saber 11 or Universidad Nacional UNAL).
 Strategy: Briefly and confidently state your capabilities (simulacros, mapas mentales, flashcards). Then, TAKE CONTROL. Ask them EXACTLY ONE simple question to start the journey. DO NOT ask multiple questions. DO NOT overwhelm them with long lists."""
 
 def get_exam_framework(
-    exam_context: str, 
-    category: str = "general", 
+    exam_context: str,
+    category: str = "general",
     intent: str = "chat",
     custom_topic: str = "",
     is_document_grounded: bool = False
@@ -122,7 +122,7 @@ def get_exam_framework(
     Respects custom_topic and document attachments to bypass strict multi-subject rules.
     """
     is_custom = is_document_grounded or bool(custom_topic.strip())
-    
+
     custom_doctrine = ""
     if is_custom:
         focus = custom_topic.strip() if custom_topic.strip() else "the attached document"
@@ -135,25 +135,25 @@ def get_exam_framework(
     if exam_context == "UNAL":
         if intent != "quiz":
             return UNAL_GLOBAL
-            
+
         if is_custom:
             return UNAL_GLOBAL + "\n\n" + custom_doctrine
-            
+
         if category == "general" or category not in UNAL_DOMAINS:
             return UNAL_GLOBAL + "\n\n" + "\n\n".join(UNAL_DOMAINS.values())
         else:
             return UNAL_GLOBAL + "\n\n" + UNAL_DOMAINS[category]
-            
+
     elif exam_context == "ICFES":
         if intent != "quiz":
             return ICFES_GLOBAL
-            
+
         if is_custom:
             return ICFES_GLOBAL + "\n\n" + custom_doctrine
-            
+
         if category == "general" or category not in ICFES_DOMAINS:
             return ICFES_GLOBAL + "\n\n" + "\n\n".join(ICFES_DOMAINS.values())
         else:
             return ICFES_GLOBAL + "\n\n" + ICFES_DOMAINS[category]
-            
+
     return GENERAL_FRAMEWORK.strip()
