@@ -78,9 +78,9 @@ UNAL_DOMAINS = {
     "ciencias_naturales": """### DOMAIN: NATURAL SCIENCES
 - Overview: Hard science evaluation requiring specific declarative knowledge of microscopic and macroscopic phenomenology, evaluated through comprehensive academic science categories rather than narrow, isolated trivia.
 - Components: 
-  - Physics: Kinematics, dynamics, thermodynamics, fluid mechanics, electromagnetism, optics.
-  - Chemistry: Stoichiometry, gas laws, electrochemistry, organic chemistry nomenclature, atomic models.
-  - Biology: Mendelian and population genetics, cellular respiration and metabolism, biomolecules, ecology.
+  - Physics: Classical mechanics (kinematics, dynamics, equilibrium), fluid dynamics (Bernoulli, static pressure), electromagnetism (magnetic fields, induction, magnetic force), and geometric optics.
+  - Chemistry: Stoichiometry and mass calculations, gas laws, chemical kinetics, redox reactions and oxidation states, inorganic and organic chemistry nomenclature, and atomic structure.
+  - Biology: Mendelian genetics, cellular respiration and bioenergetics, metabolism, biomolecules, and biochemistry.
 - Strategy: Present complex scientific problems requiring the translation of natural language and experimental setups into physical/chemical models. Every problem MUST be disguised within a tangible, real-world scenario, a laboratory experiment description, or a biological/chemical phenomenon. Require multi-step reasoning where the student must deduce the underlying scientific principle before calculating or predicting the outcome.
 - Distractor Logic: Incorrect options must represent plausible scientific misconceptions and cognitive traps. Each distractor must logically correspond to a specific misstep, such as reversing dependent and independent variables, confusing direct and inverse proportionality, applying a physical law outside its valid scope, misidentifying a limiting reactant, or making standard unit conversion errors.""",
 
