@@ -1,5 +1,3 @@
-# FILE: src/schemas/quiz_schemas.py
-
 from pydantic import BaseModel, Field
 from typing import List, Optional, Literal
 
@@ -114,10 +112,9 @@ class QuizQuestion(BaseModel):
     context_text: Optional[str] = Field(
         None, 
         description=(
-            "The foundational premise, background information, or scenario setup. This establishes the facts of the problem. "
-            "CRITICAL RULE: DO NOT include the actual interrogative question or task here. "
-            "NEVER use this to describe data that should be rendered visually via a `plot_prompt`. "
-            "For reading comprehension or creative subjects using `image_to_text`, this field MUST contain the complete reading passage or text stimulus required to answer the question."
+            "Optional question-specific setup or formula premise. "
+            "CRITICAL RULE: For shared reading passages covering multiple questions, do NOT place the passage here. "
+            "Place it in the parent QuestionGroup's context_text field instead."
         )
     )
 
@@ -128,7 +125,7 @@ class QuizQuestion(BaseModel):
 
     question_text: str = Field(..., description=(
         "The specific interrogative sentence or direct command. "
-        "CRITICAL KERNEL RULE: DO NOT repeat any of the background facts or scenario details already provided in context_text. "
+        "CRITICAL KERNEL RULE: DO NOT repeat any of the background facts or reading passages already provided in context_text. "
         "This field must ONLY contain the final question being asked. "
         "NO META-LABELS. Wrap math in \\( \\). "
         "If a `plot_prompt` is provided, the text should introduce the data shown in the graph naturally. "
@@ -172,24 +169,48 @@ class QuizQuestion(BaseModel):
     options: List[QuizOption] = Field(..., description="Exactly 4 options, executing the traps and solution planned in the explanation.")
 
     # -------------------------------------------------------------------------
-    # STEP 5: PSYCHOMETRIC EVALUATION (Calculated AFTER options and traps exist)
+    # STEP 5: PSYCHOMETRIC EVALUATION
     # -------------------------------------------------------------------------
     psychometric_params: PsychometricParams = Field(
         ..., 
         description="Item Response Theory parameters representing the statistical properties of this question. Calculate this AFTER formulating the question and all 4 options."
     )
 
+class QuestionGroup(BaseModel):
+    group_title: Optional[str] = Field(
+        None, 
+        description="Optional short title for the shared reading passage or stimulus block."
+    )
+    
+    context_text: Optional[str] = Field(
+        None, 
+        description=(
+            "The shared reading passage, case study, dataset, or stimulus text for this group of questions. "
+            "For humanities and reading comprehension, write the complete passage here ONCE. "
+            "Do NOT repeat the passage inside child questions. "
+            "For standalone 1-on-1 questions without a shared reading passage, leave this field as null."
+        )
+    )
+    
+    questions: List[QuizQuestion] = Field(
+        ..., 
+        description="List of 1 to 5 questions associated with this shared context passage or standalone group."
+    )
+
 class QuizResponse(BaseModel):
     title: str = Field(..., description="An engaging short title for the quiz. (max. 6 words)")
     intro_message: str = Field(..., description="A single sentence introduction to the quiz in the Roma persona.")
-    question_count: int = Field(..., description="The total number of questions generated in this quiz.")
+    question_count: int = Field(..., description="The total number of questions generated across all groups in this quiz.")
     
     evaluation_metadata: EvaluationMetadata = Field(
         ..., 
         description="Mathematical and contextual metadata required by the frontend scoring engine to calculate the final score."
     )
     
-    questions: List[QuizQuestion]
+    groups: List[QuestionGroup] = Field(
+        ..., 
+        description="List of question groups. Each group contains an optional shared passage and 1 to 5 dependent questions."
+    )
 
     easier_payload: str = Field(..., description="A user command to request an easier version of this quiz.")
     harder_payload: str = Field(..., description="A user command to request a more advanced version of this quiz.")

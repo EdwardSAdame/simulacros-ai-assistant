@@ -1,4 +1,3 @@
-# src/streaming/stream_manager.py
 import json
 import logging
 from typing import Any, Dict, List, Union, Optional
@@ -46,14 +45,12 @@ class StreamManager:
                 success_count += 1
             except Exception as e:
                 if "GoneException" in str(e) or "410" in str(e):
-                    # Only log it ONCE as info, and queue it for removal
                     if connection_id not in dead_connections:
                         logger.info(f"StreamManager: Connection {connection_id} disconnected. Removing from active pool.")
                         dead_connections.append(connection_id)
                 else:
                     logger.error(f"StreamManager: Failed to send data to {connection_id}: {e}")
 
-        # Clean up dead connections so we don't try (and log) them again on the next packet
         for dead_id in dead_connections:
             if dead_id in self.connection_ids:
                 self.connection_ids.remove(dead_id)
@@ -65,25 +62,15 @@ class StreamManager:
         return False
 
     # ------------------------------------------------------------------
-    # INTENT SIGNALING
+    # INTENT & STATUS SIGNALING
     # ------------------------------------------------------------------
     def send_intent(self, intent: str):
-        """
-        Sends an early signal to the frontend to prepare the UI.
-        For example, passing "flashcards" sends {"action": "flashcardsMode"}
-        """
         payload = {
             "action": f"{intent}Mode"
         }
         self._send(payload)
 
-    # ------------------------------------------------------------------
-    # STATUS SIGNALING
-    # ------------------------------------------------------------------
     def send_status(self, message: str, step: str = "processing"):
-        """
-        Sends a transient status update.
-        """
         payload = {
             "action": "stream_status",
             "message": message,
@@ -92,9 +79,6 @@ class StreamManager:
         self._send(payload)
 
     def send_status_update(self, category: str, loading_phrases: List[str] = None):
-        """
-        Sends a rich status update to the frontend, allowing for rotating loading phrases.
-        """
         payload = {
             "action": "status_update",
             "category": category,
@@ -105,21 +89,33 @@ class StreamManager:
     # ------------------------------------------------------------------
     # QUIZ STREAMING METHODS
     # ------------------------------------------------------------------
-    def send_quiz_item(self, question_data: Dict[str, Any], index: int):
+    def send_group_start(self, group_index: int, group_title: Optional[str], context_text: Optional[str]):
+        """
+        Streams the beginning of a new QuestionGroup, including the shared reading passage.
+        The frontend uses this to render the split-screen context pane before questions arrive.
+        """
+        payload = {
+            "action": "quiz_stream_group_start",
+            "group_index": group_index,
+            "group_title": group_title,
+            "context_text": context_text
+        }
+        self._send(payload)
+
+    def send_quiz_item(self, question_data: Dict[str, Any], index: int, group_index: int = 0):
         """
         Sends a single completed question to the frontend.
+        Includes the group_index so the frontend knows which passage it belongs to.
         """
         payload = {
             "action": "quiz_stream_item",
             "index": index,
+            "group_index": group_index,
             "question": question_data
         }
         self._send(payload)
 
     def send_error(self, error_message: str):
-        """
-        Sends an error message to the frontend if streaming fails mid-way.
-        """
         payload = {
             "action": "stream_error",
             "error": error_message
@@ -130,10 +126,6 @@ class StreamManager:
     # IMAGE & PLOT STREAMING METHODS
     # ------------------------------------------------------------------
     def send_partial_image(self, index: int, b64_data: str, opt_index: Optional[int] = None):
-        """
-        Streams an image chunk (or final background plot) to the frontend.
-        Includes opt_index to securely target modular options (Bucket B/C).
-        """
         payload = {
             "action": "partial_image_stream",
             "index": index,
@@ -143,7 +135,6 @@ class StreamManager:
         self._send(payload)
 
     def send_final_image(self, b64_data: str, revised_prompt: str = ""):
-        """Streams the completed, high-resolution final image."""
         payload = {
             "action": "final_image_stream",
             "image_b64": b64_data,
@@ -151,14 +142,7 @@ class StreamManager:
         }
         self._send(payload)
 
-    # ------------------------------------------------------------------
-    # RICH ASSETS STREAMING METHODS (NEW)
-    # ------------------------------------------------------------------
     def send_chat_assets(self, assets: List[Dict[str, Any]]):
-        """
-        Streams generated assets (like parallel plot images) to the frontend.
-        The frontend custom element will receive this and render it.
-        """
         payload = {
             "action": "chat_assets_stream",
             "assets": assets
@@ -169,9 +153,6 @@ class StreamManager:
     # METRICS METHODS
     # ------------------------------------------------------------------
     def send_usage_metrics(self, usage_data: Dict[str, Any]):
-        """
-        Streams the exact token usage metrics to the frontend for visibility.
-        """
         payload = {
             "action": "usage_metrics_stream",
             "usage": usage_data
@@ -182,9 +163,6 @@ class StreamManager:
     # MIND MAP STREAMING METHODS
     # ------------------------------------------------------------------
     def send_mindmap_node(self, node_data: Dict[str, Any]):
-        """
-        Streams a single completed mind map node to the frontend.
-        """
         payload = {
             "action": "mindmap_stream_node",
             "node": node_data
@@ -192,9 +170,6 @@ class StreamManager:
         self._send(payload)
 
     def send_mindmap_edge(self, edge_data: Dict[str, Any]):
-        """
-        Streams a single completed mind map edge to the frontend.
-        """
         payload = {
             "action": "mindmap_stream_edge",
             "edge": edge_data
@@ -205,9 +180,6 @@ class StreamManager:
     # FLASHCARD STREAMING METHODS
     # ------------------------------------------------------------------
     def send_flashcard_item(self, card_data: Dict[str, Any], index: int):
-        """
-        Streams a single completed flashcard to the frontend.
-        """
         payload = {
             "action": "flashcard_stream_item",
             "index": index,

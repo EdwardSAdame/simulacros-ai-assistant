@@ -1,6 +1,3 @@
-# Backend: simulacros-ai-assistant
-# File: src/utils/parsers/quiz_stream_parser.py
-
 import re
 import json
 import logging
@@ -14,8 +11,8 @@ logger = logging.getLogger(__name__)
 class QuizStreamParser:
     """
     Consumes the OpenAI stream and yields structured events specifically for Quizzes.
-    Intercepts evaluation metadata, creative images, and modular plot prompts for background processing,
-    strictly enforcing the format_type declared by the AI.
+    Intercepts evaluation metadata, creative images, modular plot prompts, and grouped contexts.
+    Strictly isolates nested JSON arrays to prevent stack-parser overflow.
     """
 
     @staticmethod
@@ -23,13 +20,23 @@ class QuizStreamParser:
         buffer = ""
         intro_yielded = False
         metadata_yielded = False
-        question_count = 0
-        last_checkpoint = None
         has_refused = False
         
         yielded_image_prompts = set()
-        yielded_plot_prompts = set() # (q_index, opt_index)
-        q_format_types = {} # Maps actual_q_index -> format_type string
+        yielded_plot_prompts = set() # (global_q_index, opt_index)
+        q_format_types = {} # Maps global_q_index -> format_type string
+
+        yielded_groups = set()
+        group_checkpoints = {} # Maps group_index -> last_checkpoint
+        global_q_count = 0
+
+        # OpenAI Structured Outputs guarantees strict key ordering.
+        # This regex safely captures the group context before the questions array begins.
+        group_pattern = re.compile(
+            r'"group_title"\s*:\s*(null|"(?:[^"\\]|\\.)*")\s*,\s*'
+            r'"context_text"\s*:\s*(null|"(?:[^"\\]|\\.)*")\s*,\s*'
+            r'"questions"\s*:\s*\['
+        )
 
         try:
             for event in stream:
@@ -47,7 +54,6 @@ class QuizStreamParser:
                 buffer += delta
 
                 # 2. Intercept and Track Format Types
-                # Reads the AI's structural commitment on the fly
                 format_matches = re.finditer(r'"format_type"\s*:\s*"([^"]+)"', buffer)
                 for match in format_matches:
                     q_titles_before = buffer.count('"question_title"', 0, match.start())
@@ -61,7 +67,6 @@ class QuizStreamParser:
                     q_titles_before = buffer.count('"question_title"', 0, match.start())
                     actual_q_index = max(0, q_titles_before - 1)
                     
-                    # FORMAT VALIDATION: Only allow if format permits a stem visual
                     fmt = q_format_types.get(actual_q_index, "text_to_text")
                     is_allowed = fmt in ["image_to_text", "image_to_image"]
                     
@@ -80,7 +85,6 @@ class QuizStreamParser:
                     options_starts_before = buffer.count('"options"', 0, match.start())
                     is_stem = options_starts_before < q_titles_before
                     
-                    # FORMAT VALIDATION
                     fmt = q_format_types.get(actual_q_index, "text_to_text")
                     
                     if is_stem:
@@ -107,7 +111,7 @@ class QuizStreamParser:
                         yielded_plot_prompts.add(tracker_key)
 
                 # 5. Detect Intro Message
-                if not intro_yielded and '"questions"' in buffer:
+                if not intro_yielded and '"groups"' in buffer:
                     match = re.search(r'"intro_message"\s*:\s*"(.*?)"', buffer, re.DOTALL)
                     if match:
                         yield {"type": "intro", "text": match.group(1).replace('\\"', '"')}
@@ -152,29 +156,60 @@ class QuizStreamParser:
                                 yield {"type": "evaluation_metadata", "data": meta_obj}
                                 metadata_yielded = True
                             except json.JSONDecodeError:
-                                pass # Object not fully complete in the buffer yet
+                                pass
 
-                # 7. Detect and Parse Question Array
-                if last_checkpoint is None:
-                    match = re.search(r'"questions"\s*:\s*\[', buffer)
-                    if match:
-                        last_checkpoint = match.end() - 1
+                # 7. Detect and Parse Groups and their Nested Questions
+                group_matches = list(group_pattern.finditer(buffer))
+                
+                for i, match in enumerate(group_matches):
+                    group_idx = i
+                    
+                    # Yield the group passage to the frontend immediately
+                    if group_idx not in yielded_groups:
+                        title_raw = match.group(1)
+                        context_raw = match.group(2)
                         
-                if last_checkpoint is not None:
-                    # Delegate the heavy JSON parsing to the Base Parser
-                    for data, new_checkpoint in BaseStreamParser.extract_json_objects(buffer, last_checkpoint):
+                        group_title = json.loads(title_raw) if title_raw != "null" else None
+                        context_text = json.loads(context_raw) if context_raw != "null" else None
                         
+                        yield {
+                            "type": "group_start", 
+                            "group_index": group_idx, 
+                            "group_title": group_title, 
+                            "context_text": context_text
+                        }
+                        yielded_groups.add(group_idx)
+
+                    # Isolate the buffer for this specific group to prevent parser overflow
+                    questions_start = match.end() - 1
+                    
+                    if i + 1 < len(group_matches):
+                        buffer_slice_end = group_matches[i+1].start()
+                    else:
+                        buffer_slice_end = len(buffer)
+                        
+                    slice_buffer = buffer[:buffer_slice_end]
+                    checkpoint = group_checkpoints.get(group_idx, questions_start)
+                    
+                    # Delegate strictly bounds-checked buffer to the generic parser
+                    for data, new_ckpt in BaseStreamParser.extract_json_objects(slice_buffer, checkpoint):
                         class Wrapper:
                             def __init__(self, d): self.d = d
                             def dict(self): return self.d
+                            
                         try: 
                             q_obj = QuizQuestion(**data)
                         except Exception: 
                             q_obj = Wrapper(data)
                             
-                        yield {"type": "question", "index": question_count, "data": q_obj}
-                        question_count += 1
-                        last_checkpoint = new_checkpoint
+                        yield {
+                            "type": "question", 
+                            "index": global_q_count, 
+                            "group_index": group_idx,
+                            "data": q_obj
+                        }
+                        global_q_count += 1
+                        group_checkpoints[group_idx] = new_ckpt
 
             # 8. Retrieve Final Response
             yield from BaseStreamParser.finalize_stream(stream, has_refused)

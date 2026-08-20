@@ -73,15 +73,33 @@ class QuizService:
         is_custom = is_document_grounded or bool(custom_topic.strip())
         active_display_name = custom_topic.strip().title() if custom_topic.strip() else display_name
         
-        # 1. The Blueprint: Tell the AI exactly what format is required for each index
-        format_instructions = "## 1. ARCHITECTURAL BLUEPRINT (FATAL ERROR IF IGNORED)\n"
-        format_instructions += "You are bound by a hard-coded architectural matrix. For each question index, you MUST set `format_type` as follows:\n"
+        # 1. The Grouping Architecture: Dictate how questions relate to contexts
+        grouping_instructions = "## 1. GROUP ARCHITECTURE (CRITICAL)\n"
+        if is_creative_subject and not is_general_subject:
+            grouping_instructions += (
+                "This is a reading-heavy subject. You MUST organize the exam using `QuestionGroup` objects.\n"
+                "1. Generate a rich, comprehensive reading passage and place it EXACTLY ONCE in the `QuestionGroup.context_text`.\n"
+                "2. Attach 3 to 5 dependent `QuizQuestion` objects inside that group's `questions` array.\n"
+                f"3. Continue creating groups until you reach exactly {num_questions} total questions across all groups.\n"
+                "CRITICAL: Do NOT duplicate the reading passage inside the individual child questions.\n\n"
+            )
+        else:
+            grouping_instructions += (
+                "You MUST organize the exam using `QuestionGroup` objects. "
+                "Since this is an analytical or mixed exam, each group MUST contain EXACTLY 1 question (Standalone 1-on-1 format). "
+                "Set the `QuestionGroup.context_text` to null.\n"
+                f"Generate exactly {num_questions} groups, resulting in exactly {num_questions} total questions.\n\n"
+            )
+
+        # 2. The Blueprint: Tell the AI exactly what format is required for each global index
+        format_instructions = "## 2. ARCHITECTURAL BLUEPRINT (FATAL ERROR IF IGNORED)\n"
+        format_instructions += "You are bound by a hard-coded architectural matrix for the global question indices. For each overall question index, you MUST set `format_type` as follows:\n"
         for idx in range(num_questions):
             fmt = format_map.get(idx, "text_to_text")
-            format_instructions += f"- Question {idx + 1} (Index {idx}): `format_type` = '{fmt}'\n"
+            format_instructions += f"- Global Question Index {idx}: `format_type` = '{fmt}'\n"
 
-        # 2. The Pre-Conditioning: Tell the AI what kind of question to design based on the format
-        format_instructions += "\n## 2. FORMAT CONCEPTUALIZATION & MANDATORY FIELDS\n"
+        # 3. The Pre-Conditioning: Tell the AI what kind of question to design based on the format
+        format_instructions += "\n## 3. FORMAT CONCEPTUALIZATION & MANDATORY FIELDS\n"
         format_instructions += "Based on the assigned `format_type`, you MUST design the question conceptually inside the `explanation` field before writing the question text or options:\n\n"
         
         format_instructions += (
@@ -122,11 +140,10 @@ class QuizService:
                 "CRITICAL AESTHETIC DOCTRINE (HYBRID): For stem visuals, select exactly ONE engine (`plot_prompt` for math/data, OR `image_prompt` for creative).\n"
             )
 
-        # Psychometric parameters instructions with dynamic scaling
         if exam_context.upper() == "UNAL":
             if is_general_subject and not is_custom:
                 psychometric_doctrine = (
-                    "## 6. PSYCHOMETRIC EVALUATION METADATA (UNAL GLOBAL RASCH MODEL)\n"
+                    "## 7. PSYCHOMETRIC EVALUATION METADATA (UNAL GLOBAL RASCH MODEL)\n"
                     "- `evaluation_metadata.exam_type` MUST be 'unal'.\n"
                     "- `evaluation_metadata.evaluation_level` MUST be 'global'.\n"
                     "- `evaluation_metadata.subject_category` MUST be 'Prueba de Admision UNAL'.\n"
@@ -135,7 +152,7 @@ class QuizService:
                 )
             else:
                 psychometric_doctrine = (
-                    "## 6. PSYCHOMETRIC EVALUATION METADATA (UNAL COMPONENT RASCH MODEL)\n"
+                    "## 7. PSYCHOMETRIC EVALUATION METADATA (UNAL COMPONENT RASCH MODEL)\n"
                     "- `evaluation_metadata.exam_type` MUST be 'unal'.\n"
                     "- `evaluation_metadata.evaluation_level` MUST be 'component'.\n"
                     f"- `evaluation_metadata.subject_category` MUST be '{active_display_name}'.\n"
@@ -145,7 +162,7 @@ class QuizService:
         else:
             if is_general_subject and not is_custom:
                 psychometric_doctrine = (
-                    "## 6. PSYCHOMETRIC EVALUATION METADATA (ICFES GLOBAL 3PL MODEL)\n"
+                    "## 7. PSYCHOMETRIC EVALUATION METADATA (ICFES GLOBAL 3PL MODEL)\n"
                     "- `evaluation_metadata.exam_type` MUST be 'icfes'.\n"
                     "- `evaluation_metadata.evaluation_level` MUST be 'global'.\n"
                     "- `evaluation_metadata.subject_category` MUST be 'Competencias Integradas'.\n"
@@ -154,7 +171,7 @@ class QuizService:
                 )
             else:
                 psychometric_doctrine = (
-                    "## 6. PSYCHOMETRIC EVALUATION METADATA (ICFES COMPONENT 3PL MODEL)\n"
+                    "## 7. PSYCHOMETRIC EVALUATION METADATA (ICFES COMPONENT 3PL MODEL)\n"
                     "- `evaluation_metadata.exam_type` MUST be 'icfes'.\n"
                     "- `evaluation_metadata.evaluation_level` MUST be 'component'.\n"
                     f"- `evaluation_metadata.subject_category` MUST be '{active_display_name}'.\n"
@@ -170,25 +187,25 @@ class QuizService:
                 domain_distribution = "Mathematics, Critical Reading, Natural Sciences, Social Sciences, and English"
                 
             general_doctrine = (
-                "## 7. MULTI-SUBJECT DISTRIBUTION ENFORCEMENT (CRITICAL)\n"
+                "## 8. MULTI-SUBJECT DISTRIBUTION ENFORCEMENT (CRITICAL)\n"
                 "The user requested a 'General' exam. You MUST generate an interdisciplinary test. "
                 "You are FORBIDDEN from generating all questions for a single subject. "
                 f"You MUST distribute the questions evenly across all core domains ({domain_distribution}). "
-                "Force yourself to switch academic domains for every single question index.\n\n"
+                "Force yourself to switch academic domains logically.\n\n"
             )
 
         instruction_text = (
             f"## IMMEDIATE RUNTIME MISSION\n"
-            f"The user requested a quiz/exam about '{active_display_name}'. Generate exactly {num_questions} distinct questions.\n\n"
+            f"The user requested a quiz/exam about '{active_display_name}'. You must generate exactly {num_questions} questions in total.\n\n"
+            f"{grouping_instructions}\n"
             f"{format_instructions}\n"
-            f"## 3. SUBJECT SPECIFIC DOCTRINES\n"
+            f"## 4. SUBJECT SPECIFIC DOCTRINES\n"
             f"{visual_doctrine}\n"
-            "## 4. LOGIC PATHS & EXPLANATION\n"
+            "## 5. LOGIC PATHS & EXPLANATION\n"
             f"{ANALYTICAL_REASONING_DOCTRINE}\n\n"
             f"{VISUAL_REASONING_DOCTRINE}\n\n"
-            "## 5. SCHEMA & FIELD RESTRICTIONS\n"
+            "## 6. SCHEMA & FIELD RESTRICTIONS\n"
             "- SOURCES: Keep `source_url` null unless you hold a verified URL.\n"
-            "- CONTEXT: Use `context_text` ONLY for large reading passages. NEVER use it to describe a graph that should be in a plot_prompt.\n"
             "- OPTION TEXT vs FEEDBACK: The `text` field in the options is the literal answer the student clicks. The `feedback` is the explanation. Do NOT put the answer inside the feedback and leave the text null. For `text_to_text` and `image_to_text` formats, the `text` field MUST BE POPULATED.\n\n"
             f"{psychometric_doctrine}\n"
             f"{general_doctrine}"
@@ -283,7 +300,6 @@ class QuizService:
         allowed_stem_visuals = set(image_to_text_indices + image_to_image_indices)
         allowed_opt_visuals = set(text_to_image_indices + image_to_image_indices)
 
-        # Build the strictly defined format map for the new Schema Architecture
         format_map = {}
         for i in range(num_questions):
             if i in image_to_text_indices:
@@ -348,8 +364,6 @@ class QuizService:
                     category=category, custom_topic=custom_topic, is_document_grounded=is_doc_grounded
                 )
                 
-                seen_indices = set()
-                accumulated_questions = []
                 ai_generated_title = "Simulacro Generado" 
                 parsed_response = None
                 
@@ -387,10 +401,19 @@ class QuizService:
                         if is_allowed:
                             worker.enqueue_plot(event.get("prompt", ""), q_idx, opt_idx)
 
+                    # --- NEW INTEGRATION BRIDGE START ---
+                    elif evt_type == "group_start":
+                        stream_manager.send_group_start(
+                            group_index=event.get("group_index", 0),
+                            group_title=event.get("group_title"),
+                            context_text=event.get("context_text")
+                        )
+
                     elif evt_type == "question":
                         q_data = event.get("data")
                         q_dict = q_data.dict() if hasattr(q_data, 'dict') else q_data
                         idx = event.get("index", 0)
+                        group_idx = event.get("group_index", 0)
                         
                         if idx not in allowed_stem_visuals:
                             q_dict["image_prompt"] = None
@@ -403,11 +426,8 @@ class QuizService:
                                     opt["plot_prompt"] = None
                                     opt["image_url"] = None
 
-                        stream_manager.send_quiz_item(question_data=q_dict, index=idx)
-                        
-                        if idx not in seen_indices:
-                            accumulated_questions.append(q_dict)
-                            seen_indices.add(idx)
+                        stream_manager.send_quiz_item(question_data=q_dict, index=idx, group_index=group_idx)
+                    # --- NEW INTEGRATION BRIDGE END ---
                             
                     elif evt_type == "partial_image":
                         b64_data = event.get("b64_data", "")
@@ -428,25 +448,12 @@ class QuizService:
 
                     elif evt_type == "done":
                         final_obj = event.get("full_response")
-                        if hasattr(final_obj, 'questions'): parsed_response = final_obj
-                        elif hasattr(final_obj, 'parsed') and hasattr(final_obj.parsed, 'questions'): parsed_response = final_obj.parsed
-                        elif hasattr(final_obj, 'output_parsed') and hasattr(final_obj.output_parsed, 'questions'): parsed_response = final_obj.output_parsed
+                        if hasattr(final_obj, 'groups'): parsed_response = final_obj
+                        elif hasattr(final_obj, 'parsed') and hasattr(final_obj.parsed, 'groups'): parsed_response = final_obj.parsed
+                        elif hasattr(final_obj, 'output_parsed') and hasattr(final_obj.output_parsed, 'groups'): parsed_response = final_obj.output_parsed
                         
                         if parsed_response:
                             final_reply_text = getattr(parsed_response, 'intro_message', final_reply_text)
-                            accumulated_questions = [q.dict() if hasattr(q, 'dict') else q for q in parsed_response.questions]
-                            
-                            for i, q_dict in enumerate(accumulated_questions):
-                                if i not in allowed_stem_visuals:
-                                    q_dict["image_prompt"] = None
-                                    q_dict["plot_prompt"] = None
-                                    q_dict["image_url"] = None
-                                    
-                                if i not in allowed_opt_visuals:
-                                    for opt in q_dict.get("options", []):
-                                        if isinstance(opt, dict):
-                                            opt["plot_prompt"] = None
-                                            opt["image_url"] = None
                             
                             if hasattr(parsed_response, 'title') and parsed_response.title:
                                 ai_generated_title = parsed_response.title
@@ -460,26 +467,52 @@ class QuizService:
                         stream_manager.send_error(error_msg)
 
                 worker.shutdown_and_wait()
-                    
-                for i, q in enumerate(accumulated_questions):
-                    if (i, None) in worker.image_urls_map:
-                        q["image_url"] = worker.image_urls_map[(i, None)]
-                    
-                    for o_idx, opt in enumerate(q.get("options", [])):
-                        if isinstance(opt, dict) and (i, o_idx) in worker.image_urls_map:
-                            opt["image_url"] = worker.image_urls_map[(i, o_idx)]
 
+                # Reconstruct and map data safely from the final parsed output
+                accumulated_groups = []
+                total_questions = 0
                 evaluation_metadata = None
-                if parsed_response and hasattr(parsed_response, 'evaluation_metadata'):
-                    meta_obj = parsed_response.evaluation_metadata
-                    evaluation_metadata = meta_obj.dict() if hasattr(meta_obj, 'dict') else meta_obj
+                
+                if parsed_response:
+                    if hasattr(parsed_response, 'evaluation_metadata'):
+                        meta_obj = parsed_response.evaluation_metadata
+                        evaluation_metadata = meta_obj.dict() if hasattr(meta_obj, 'dict') else meta_obj
+
+                    accumulated_groups = [g.dict() if hasattr(g, 'dict') else g for g in parsed_response.groups]
+                    
+                    global_q_idx = 0
+                    for group in accumulated_groups:
+                        for q_dict in group.get("questions", []):
+                            # Wipe unauthorized visuals using the global index mapping
+                            if global_q_idx not in allowed_stem_visuals:
+                                q_dict["image_prompt"] = None
+                                q_dict["plot_prompt"] = None
+                                q_dict["image_url"] = None
+                                
+                            if global_q_idx not in allowed_opt_visuals:
+                                for opt in q_dict.get("options", []):
+                                    if isinstance(opt, dict):
+                                        opt["plot_prompt"] = None
+                                        opt["image_url"] = None
+
+                            # Assign resolved image URLs from worker using global index
+                            if (global_q_idx, None) in worker.image_urls_map:
+                                q_dict["image_url"] = worker.image_urls_map[(global_q_idx, None)]
+                            
+                            for o_idx, opt in enumerate(q_dict.get("options", [])):
+                                if isinstance(opt, dict) and (global_q_idx, o_idx) in worker.image_urls_map:
+                                    opt["image_url"] = worker.image_urls_map[(global_q_idx, o_idx)]
+                            
+                            global_q_idx += 1
+                    
+                    total_questions = global_q_idx
 
                 quiz_data = {
                     "quiz_mode": "batch", 
                     "topic": ai_generated_title,
                     "evaluation_metadata": evaluation_metadata,
-                    "questions": accumulated_questions,
-                    "question_count": len(accumulated_questions),
+                    "groups": accumulated_groups,
+                    "question_count": total_questions,
                     "easier_payload": ghost_easier,
                     "harder_payload": ghost_harder,
                     "retry_payload": ghost_retry
@@ -500,29 +533,33 @@ class QuizService:
 
                 meta_obj = getattr(quiz_model, 'evaluation_metadata', None)
                 evaluation_metadata = meta_obj.dict() if hasattr(meta_obj, 'dict') else meta_obj
+                
+                accumulated_groups = [g.dict() if hasattr(g, 'dict') else g for g in quiz_model.groups]
+                global_q_idx = 0
+                for group in accumulated_groups:
+                    for q_dict in group.get("questions", []):
+                        if global_q_idx not in allowed_stem_visuals:
+                            q_dict["image_prompt"] = None
+                            q_dict["plot_prompt"] = None
+                            q_dict["image_url"] = None
+                            
+                        if global_q_idx not in allowed_opt_visuals:
+                            for opt in q_dict.get("options", []):
+                                if isinstance(opt, dict):
+                                    opt["plot_prompt"] = None
+                                    opt["image_url"] = None
+                        global_q_idx += 1
 
                 quiz_data = {
                     "quiz_mode": "batch", 
                     "topic": getattr(quiz_model, 'title', 'Simulacro Generado'),
                     "evaluation_metadata": evaluation_metadata,
-                    "questions": [q.dict() if hasattr(q, 'dict') else q for q in quiz_model.questions],
-                    "question_count": len(quiz_model.questions),
+                    "groups": accumulated_groups,
+                    "question_count": global_q_idx,
                     "easier_payload": getattr(quiz_model, 'easier_payload', None),
                     "harder_payload": getattr(quiz_model, 'harder_payload', None),
                     "retry_payload": getattr(quiz_model, 'retry_payload', None)
                 }
-                
-                for i, q_dict in enumerate(quiz_data["questions"]):
-                    if i not in allowed_stem_visuals:
-                        q_dict["image_prompt"] = None
-                        q_dict["plot_prompt"] = None
-                        q_dict["image_url"] = None
-                        
-                    if i not in allowed_opt_visuals:
-                        for opt in q_dict.get("options", []):
-                            if isinstance(opt, dict):
-                                opt["plot_prompt"] = None
-                                opt["image_url"] = None
 
                 final_reply_text = getattr(quiz_model, 'intro_message', "Aqui tienes tu simulacro.")
 
