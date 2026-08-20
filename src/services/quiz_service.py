@@ -78,10 +78,10 @@ class QuizService:
         if is_creative_subject and not is_general_subject:
             grouping_instructions += (
                 "This is a reading-heavy subject. You MUST organize the exam using `QuestionGroup` objects.\n"
-                "1. Generate a rich, comprehensive reading passage and place it EXACTLY ONCE in the `QuestionGroup.context_text`.\n"
+                "1. For EACH group you create, you MUST generate a UNIQUE, comprehensive reading passage and assign it to that specific group's `context_text`.\n"
                 "2. Attach 3 to 5 dependent `QuizQuestion` objects inside that group's `questions` array.\n"
-                f"3. Continue creating groups until you reach exactly {num_questions} total questions across all groups.\n"
-                "CRITICAL: Do NOT duplicate the reading passage inside the individual child questions.\n\n"
+                f"3. Continue creating new groups (EACH with its own unique `context_text` passage) until you reach exactly {num_questions} total questions across all groups.\n"
+                "CRITICAL: Every single group MUST have its own distinct reading passage. Do NOT leave `context_text` null for any group. Do NOT duplicate the reading passage inside the individual child questions.\n\n"
             )
         else:
             grouping_instructions += (
