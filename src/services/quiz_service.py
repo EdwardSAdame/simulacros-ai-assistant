@@ -73,71 +73,75 @@ class QuizService:
         is_custom = is_document_grounded or bool(custom_topic.strip())
         active_display_name = custom_topic.strip().title() if custom_topic.strip() else display_name
         
-        # 1. The Grouping Architecture: Dictate how questions relate to contexts
-        grouping_instructions = "## 1. GROUP ARCHITECTURE (CRITICAL)\n"
+        # 1. The Grouping Architecture: Dictate the Parent-Child Permutations
+        grouping_instructions = "## 1. GROUP ARCHITECTURE & PERMUTATIONS (CRITICAL)\n"
+        grouping_instructions += "You operate on a polymorphic, hierarchical schema. ALL questions must be wrapped inside `QuestionGroup` objects.\n"
+        
         if is_creative_subject and not is_general_subject:
             grouping_instructions += (
-                "This is a reading-heavy subject. You MUST organize the exam using `QuestionGroup` objects.\n"
-                "1. For EACH group you create, you MUST generate a UNIQUE, comprehensive reading passage and assign it to that specific group's `context_text`.\n"
-                "2. Attach 3 to 5 dependent `QuizQuestion` objects inside that group's `questions` array.\n"
-                f"3. Continue creating new groups (EACH with its own unique `context_text` passage) until you reach exactly {num_questions} total questions across all groups.\n"
-                "CRITICAL: Every single group MUST have its own distinct reading passage. Do NOT leave `context_text` null for any group. Do NOT duplicate the reading passage inside the individual child questions.\n\n"
+                "SCENARIO A: SHARED CONTEXT (Nested Architecture)\n"
+                "This is a reading-heavy subject requiring shared stimulus blocks.\n"
+                "1. For EACH group you create, populate `context_text` with a unique reading passage.\n"
+                "2. If the passage requires a visual, populate `group_image_prompt` or `group_plot_prompt`. If not, leave them null.\n"
+                "3. Attach 3 to 5 dependent `QuizQuestion` objects inside that group's `questions` array.\n"
+                f"4. Continue creating new groups until you reach exactly {num_questions} total questions across all groups.\n"
+                "CRITICAL: Do NOT duplicate the shared reading passage inside the individual child questions.\n\n"
             )
         else:
             grouping_instructions += (
-                "You MUST organize the exam using `QuestionGroup` objects. "
-                "Since this is an analytical or mixed exam, each group MUST contain EXACTLY 1 question (Standalone 1-on-1 format). "
-                "Set the `QuestionGroup.context_text` to null.\n"
-                f"Generate exactly {num_questions} groups, resulting in exactly {num_questions} total questions.\n\n"
+                "SCENARIO B: ISOLATED QUESTIONS (1-on-1 Architecture)\n"
+                "This is an analytical or mixed exam where questions are independent.\n"
+                "1. Each `QuestionGroup` MUST contain EXACTLY 1 `QuizQuestion`.\n"
+                "2. The parent group is merely a structural wrapper. You MUST leave the parent's `group_title`, `context_text`, `group_image_prompt`, and `group_plot_prompt` strictly null.\n"
+                f"3. Generate exactly {num_questions} groups, resulting in exactly {num_questions} total questions.\n\n"
             )
 
-        # 2. The Blueprint: Tell the AI exactly what format is required for each global index
+        # 2. The Blueprint
         format_instructions = "## 2. ARCHITECTURAL BLUEPRINT (FATAL ERROR IF IGNORED)\n"
-        format_instructions += "You are bound by a hard-coded architectural matrix for the global question indices. For each overall question index, you MUST set `format_type` as follows:\n"
+        format_instructions += "You are bound by a hard-coded architectural matrix for the global question indices. For each overall question index, you MUST set the child's `format_type` as follows:\n"
         for idx in range(num_questions):
             fmt = format_map.get(idx, "text_to_text")
             format_instructions += f"- Global Question Index {idx}: `format_type` = '{fmt}'\n"
 
-        # 3. The Pre-Conditioning: Tell the AI what kind of question to design based on the format
-        format_instructions += "\n## 3. FORMAT CONCEPTUALIZATION & MANDATORY FIELDS\n"
-        format_instructions += "Based on the assigned `format_type`, you MUST design the question conceptually inside the `explanation` field before writing the question text or options:\n\n"
-        
+        # 3. The Pre-Conditioning: Child Independence
+        format_instructions += "\n## 3. FORMAT CONCEPTUALIZATION & CHILD INDEPENDENCE\n"
         format_instructions += (
+            "IMPORTANT: The assigned `format_type` dictates the visual behavior of the CHILD `QuizQuestion` ONLY. "
+            "It is completely independent of the parent group's shared context visuals. Based on the `format_type`, design the child question:\n\n"
+            
             "A) If `image_to_image`:\n"
             "    - CONCEPT: A visual transformation or comparison.\n"
-            "    - MANDATORY: The main question `plot_prompt` MUST NOT BE NULL. ALL FOUR options' `plot_prompt`s MUST NOT BE NULL. You must write natural language instructions for all 5.\n\n"
+            "    - MANDATORY: The child `plot_prompt` MUST NOT BE NULL. ALL FOUR options' `plot_prompt`s MUST NOT BE NULL.\n\n"
             
             "B) If `image_to_text`:\n"
-            "    - CONCEPT: Visual interpretation (Analytical) or Environmental setting (Creative).\n"
-            "    - MANDATORY: The main question visual MUST NOT BE NULL. You MUST populate EITHER `plot_prompt` OR `image_prompt` based on the active DOCTRINE below. The unselected field MUST remain null. The option visuals must remain null. You MUST NOT cheat by describing a graph in `context_text`.\n"
-            "    - CRITICAL DECOUPLING ENFORCEMENT: If this is a creative/reading subject, the entire question, passage, and context data MUST be completely self-contained in text form. The visual must be purely ornamental and never contain text or information necessary to find the solution.\n\n"
+            "    - CONCEPT: Visual interpretation or Environmental setting specific to this question.\n"
+            "    - MANDATORY: The child question visual MUST NOT BE NULL. Populate EITHER `plot_prompt` OR `image_prompt`. Option visuals must remain null.\n\n"
             
             "C) If `text_to_image`:\n"
             "    - CONCEPT: Visual selection based on text data.\n"
-            "    - MANDATORY: The main question visual is null. ALL FOUR options' `plot_prompt`s MUST NOT BE NULL.\n\n"
+            "    - MANDATORY: The child question visual is null. ALL FOUR options' `plot_prompt`s MUST NOT BE NULL.\n\n"
             
             "D) If `text_to_text`:\n"
             "   - CONCEPT: Standard analytical or theoretical question.\n"
-            "   - MANDATORY: ALL `plot_prompt` and `image_prompt` fields MUST remain purely null.\n"
+            "   - MANDATORY: ALL child `plot_prompt` and `image_prompt` fields MUST remain purely null.\n"
         )
 
         visual_doctrine = ""
         if is_visual_subject:
             visual_doctrine = (
                 "CRITICAL BLINDNESS DOCTRINE (MATH/SCIENCE): Use `plot_prompt` for all required visuals. Keep `image_prompt` null. "
-                "Design the stem visual to display only the input data plotted on standard Cartesian axes with visible coordinate numbers.\n"
+                "Design visuals to display only input data plotted on Cartesian axes with visible coordinate numbers.\n"
             )
         elif is_creative_subject:
             visual_doctrine = (
                 "CRITICAL AESTHETIC DOCTRINE (CREATIVE): Use `image_prompt` for stem visuals. Keep `plot_prompt` always null. "
-                "You MUST absolutely BAN any mention of academic tropes (no notebooks, no whiteboards, no diagrams). "
-                "CRITICAL VISUAL DECOUPLING: The visual generated from your `image_prompt` is strictly environmental and decorative. "
-                "The quiz item must be 100% solvable using only the text inside `context_text` and `question_text`. "
-                "NEVER attempt to embed text, reading blocks, infograms, timelines, or factual tables into the `image_prompt` for creative/reading categories.\n"
+                "You MUST absolutely BAN any mention of academic tropes (no notebooks, no whiteboards). "
+                "CRITICAL VISUAL DECOUPLING: Visuals must be strictly environmental and decorative. "
+                "NEVER attempt to embed text, reading blocks, or factual tables into the `image_prompt` or `group_image_prompt`.\n"
             )
         elif is_general_subject:
             visual_doctrine = (
-                "CRITICAL AESTHETIC DOCTRINE (HYBRID): For stem visuals, select exactly ONE engine (`plot_prompt` for math/data, OR `image_prompt` for creative).\n"
+                "CRITICAL AESTHETIC DOCTRINE (HYBRID): For visuals, select exactly ONE engine (`plot_prompt` for math/data, OR `image_prompt` for creative).\n"
             )
 
         if exam_context.upper() == "UNAL":
@@ -384,29 +388,39 @@ class QuizService:
                         final_reply_text = event.get("text", "")
                     
                     elif evt_type == "image_request":
-                        q_idx = event.get("index", 0)
-                        if q_idx in allowed_stem_visuals:
-                            worker.spawn_image_worker(event.get("prompt", ""), q_idx)
+                        is_group_level = event.get("is_group_level", False)
+                        if is_group_level:
+                            g_idx = event.get("group_index", 0)
+                            worker.spawn_image_worker(event.get("prompt", ""), f"group_{g_idx}")
+                        else:
+                            q_idx = event.get("index", 0)
+                            if q_idx in allowed_stem_visuals:
+                                worker.spawn_image_worker(event.get("prompt", ""), q_idx)
 
                     elif evt_type == "plot_request":
-                        q_idx = event.get("index", 0)
-                        opt_idx = event.get("opt_index", None)
-                        
-                        is_allowed = False
-                        if opt_idx is None and q_idx in allowed_stem_visuals:
-                            is_allowed = True
-                        elif opt_idx is not None and q_idx in allowed_opt_visuals:
-                            is_allowed = True
+                        is_group_level = event.get("is_group_level", False)
+                        if is_group_level:
+                            g_idx = event.get("group_index", 0)
+                            worker.enqueue_plot(event.get("prompt", ""), f"group_{g_idx}", None)
+                        else:
+                            q_idx = event.get("index", 0)
+                            opt_idx = event.get("opt_index", None)
+                            
+                            is_allowed = False
+                            if opt_idx is None and q_idx in allowed_stem_visuals:
+                                is_allowed = True
+                            elif opt_idx is not None and q_idx in allowed_opt_visuals:
+                                is_allowed = True
 
-                        if is_allowed:
-                            worker.enqueue_plot(event.get("prompt", ""), q_idx, opt_idx)
+                            if is_allowed:
+                                worker.enqueue_plot(event.get("prompt", ""), q_idx, opt_idx)
 
-                    # --- NEW INTEGRATION BRIDGE START ---
                     elif evt_type == "group_start":
                         stream_manager.send_group_start(
                             group_index=event.get("group_index", 0),
                             group_title=event.get("group_title"),
-                            context_text=event.get("context_text")
+                            context_text=event.get("context_text"),
+                            group_source_url=event.get("group_source_url") # Update applied here
                         )
 
                     elif evt_type == "question":
@@ -427,7 +441,6 @@ class QuizService:
                                     opt["image_url"] = None
 
                         stream_manager.send_quiz_item(question_data=q_dict, index=idx, group_index=group_idx)
-                    # --- NEW INTEGRATION BRIDGE END ---
                             
                     elif evt_type == "partial_image":
                         b64_data = event.get("b64_data", "")
@@ -481,9 +494,17 @@ class QuizService:
                     accumulated_groups = [g.dict() if hasattr(g, 'dict') else g for g in parsed_response.groups]
                     
                     global_q_idx = 0
-                    for group in accumulated_groups:
+                    for g_idx, group in enumerate(accumulated_groups):
+                        # Safely initialize group image URL before mapping
+                        group["group_image_url"] = group.get("group_image_url")
+                        
+                        # Reconstruct group-level image URLs
+                        group_key = (f"group_{g_idx}", None)
+                        if group_key in worker.image_urls_map:
+                            group["group_image_url"] = worker.image_urls_map[group_key]
+
                         for q_dict in group.get("questions", []):
-                            # Wipe unauthorized visuals using the global index mapping
+                            # Wipe unauthorized child visuals using the global index mapping
                             if global_q_idx not in allowed_stem_visuals:
                                 q_dict["image_prompt"] = None
                                 q_dict["plot_prompt"] = None
@@ -495,7 +516,7 @@ class QuizService:
                                         opt["plot_prompt"] = None
                                         opt["image_url"] = None
 
-                            # Assign resolved image URLs from worker using global index
+                            # Assign resolved image URLs from worker using global child index
                             if (global_q_idx, None) in worker.image_urls_map:
                                 q_dict["image_url"] = worker.image_urls_map[(global_q_idx, None)]
                             
@@ -537,6 +558,8 @@ class QuizService:
                 accumulated_groups = [g.dict() if hasattr(g, 'dict') else g for g in quiz_model.groups]
                 global_q_idx = 0
                 for group in accumulated_groups:
+                    group["group_image_url"] = group.get("group_image_url")
+                    
                     for q_dict in group.get("questions", []):
                         if global_q_idx not in allowed_stem_visuals:
                             q_dict["image_prompt"] = None

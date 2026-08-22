@@ -31,28 +31,18 @@ class PsychometricParams(BaseModel):
     )
 
 class QuizOption(BaseModel):
-    # -------------------------------------------------------------------------
-    # 1. OPTION REASONING (Chain of Thought first)
-    # -------------------------------------------------------------------------
     feedback: str = Field(..., description=(
         "Short feedback explaining exactly why this specific option is right or wrong. "
         "By writing this first, you anchor the logical trap or solution this option represents. "
-        "Speak directly to the student. DO NOT put the literal answer choice here; this field is exclusively for the explanation."
+        "Speak directly to the student. DO NOT put the literal answer choice here."
     ))
 
-    # -------------------------------------------------------------------------
-    # 2. OPTION EXECUTION (Text or Visual)
-    # -------------------------------------------------------------------------
     text: Optional[str] = Field(
         None, 
         description=(
             "The literal answer choice text that the student will select. "
             "CRITICAL KERNEL RULE: If the question format is `text_to_text` or `image_to_text`, this field MUST NOT BE NULL. "
-            "You must write the actual answer here. "
-            "Only leave this as a literal JSON null if you are writing a `plot_prompt` for this specific option. "
-            "FORMATTING RULES: "
-            "1. If the answer is just words/text, write normally WITHOUT delimiters. "
-            "2. If the answer is a number, equation, or symbol, wrap it in standard LaTeX delimiters \\( and \\)."
+            "Only leave this as a literal JSON null if you are writing a `plot_prompt` for this specific option."
         )
     )
     
@@ -60,14 +50,13 @@ class QuizOption(BaseModel):
         None, 
         description=(
             "A NATURAL LANGUAGE description of the graph needed for THIS SPECIFIC OPTION. "
-            "CRITICAL KERNEL RULE: ONLY write descriptive natural language. "
             "Leave null if the question's `format_type` is `text_to_text` or `image_to_text`."
         )
     )
 
     image_url: Optional[str] = Field(
         None, 
-        description="URL of the generated option graph. If you wrote a plot_prompt, LEAVE THIS NULL. The backend will populate it automatically."
+        description="URL of the generated option graph. If you wrote a plot_prompt, LEAVE THIS NULL."
     )
 
     original_index: Optional[int] = Field(
@@ -76,44 +65,20 @@ class QuizOption(BaseModel):
     )
 
 class QuizQuestion(BaseModel):
-    question_title: str = Field(..., description=(
-        "Title with question number, e.g., '# 1. Topic'. "
-        "CRITICAL KERNEL RULE: You MUST NOT include any structural metadata, layout notes, or format types "
-        "such as '(imagen a imagen)', '(imagen a texto)', '(texto)', or similar descriptive suffixes. "
-    ))
+    question_title: str = Field(..., description="Title with question number, e.g., '# 1. Topic'.")
     
-    # -------------------------------------------------------------------------
-    # STEP 1: THE ARCHITECTURAL ANCHOR
-    # -------------------------------------------------------------------------
     format_type: Literal["text_to_text", "image_to_text", "text_to_image", "image_to_image"] = Field(
         ..., 
-        description=(
-            "CRITICAL: The required structural layout for this question as mandated by the system prompt. "
-            "You MUST select the exact format assigned to this question number in the instructions. "
-            "This dictates whether you will write natural language plot descriptions in the stem, the options, both, or neither."
-        )
+        description="The required structural layout for this individual question."
     )
 
-    # -------------------------------------------------------------------------
-    # STEP 2: THE MASTER REASONING BLOCK (Plan before executing)
-    # -------------------------------------------------------------------------
-    explanation: str = Field(..., description=(
-        "Internal reasoning and structural blueprint. You MUST write this before generating the question text or visuals.\n"
-        "1. THE SCENARIO: Define the exact facts, numbers, or geometric properties.\n"
-        "2. THE VISUAL MAPPING: Based on the `format_type` above, explicitly state if the stem needs a `plot_prompt` and if the options need `plot_prompt`s.\n"
-        "3. THE SOLUTION: The step-by-step arithmetic, logical derivation, or visual transformation to reach the correct answer.\n"
-        "4. THE TRAPS: Identify 3 plausible calculation/visual errors to use as distractors.\n"
-        "This field is for internal logic only; omit final question text."
-    ))
+    explanation: str = Field(..., description="Internal reasoning and structural blueprint. Write this before generating the question text.")
 
-    # -------------------------------------------------------------------------
-    # STEP 3: CONTEXT & QUESTION STEM EXECUTION
-    # -------------------------------------------------------------------------
     context_text: Optional[str] = Field(
         None, 
         description=(
             "Optional question-specific setup or formula premise. "
-            "CRITICAL RULE: For shared reading passages covering multiple questions, do NOT place the passage here. "
+            "CRITICAL RULE: For shared reading passages, do NOT place the passage here. "
             "Place it in the parent QuestionGroup's context_text field instead."
         )
     )
@@ -123,32 +88,16 @@ class QuizQuestion(BaseModel):
         description="The exact URL of the web search. Leave null if no search was performed."
     )
 
-    question_text: str = Field(..., description=(
-        "The specific interrogative sentence or direct command. "
-        "CRITICAL KERNEL RULE: DO NOT repeat any of the background facts or reading passages already provided in context_text. "
-        "This field must ONLY contain the final question being asked. "
-        "NO META-LABELS. Wrap math in \\( \\). "
-        "If a `plot_prompt` is provided, the text should introduce the data shown in the graph naturally. "
-        "DO NOT inject, list, or append the answer choices into this field under any circumstances."
-    ))
+    question_text: str = Field(..., description="The specific interrogative sentence or direct command.")
 
     plot_prompt: Optional[str] = Field(
         None, 
-        description=(
-            "A NATURAL LANGUAGE description of the data or math graph needed for the main question stem. "
-            "CRITICAL KERNEL RULE: You MUST NOT write Python or Matplotlib code here. ONLY write descriptive natural language. "
-            "Leave null if `format_type` is `text_to_text` or `text_to_image`."
-        )
+        description="A NATURAL LANGUAGE description of the data or math graph needed for the main question stem."
     )
 
     image_prompt: Optional[str] = Field(
         None, 
-        description=(
-            "A purely artistic and atmospheric representation of a physical environment. "
-            "Focus exclusively on natural landscapes or tangible real-world scenes. No academic tropes. "
-            "CRITICAL RULE: This image is strictly ornamental. It MUST NOT contain any text, reading passages, or data required to solve the question. "
-            "Leave null if `format_type` is `text_to_text` or `text_to_image`."
-        )
+        description="A purely artistic and atmospheric representation of a physical environment for this specific question."
     )
     
     image_url: Optional[str] = Field(
@@ -158,23 +107,11 @@ class QuizQuestion(BaseModel):
 
     difficulty_label: Literal[1, 2, 3] = Field(1, description="Difficulty weight indicator: 1 (Easy), 2 (Medium), 3 (Hard).")
 
-    # -------------------------------------------------------------------------
-    # STEP 4: DECISION & OPTIONS EXECUTION
-    # -------------------------------------------------------------------------
-    correct_option_index: Literal[0, 1, 2, 3] = Field(
-        ..., 
-        description="Index of the correct option (0-3). Decide this before generating the options array."
-    )
+    correct_option_index: Literal[0, 1, 2, 3] = Field(..., description="Index of the correct option (0-3).")
 
-    options: List[QuizOption] = Field(..., description="Exactly 4 options, executing the traps and solution planned in the explanation.")
+    options: List[QuizOption] = Field(..., description="Exactly 4 options.")
 
-    # -------------------------------------------------------------------------
-    # STEP 5: PSYCHOMETRIC EVALUATION
-    # -------------------------------------------------------------------------
-    psychometric_params: PsychometricParams = Field(
-        ..., 
-        description="Item Response Theory parameters representing the statistical properties of this question. Calculate this AFTER formulating the question and all 4 options."
-    )
+    psychometric_params: PsychometricParams = Field(..., description="Item Response Theory parameters.")
 
 class QuestionGroup(BaseModel):
     group_title: Optional[str] = Field(
@@ -186,10 +123,34 @@ class QuestionGroup(BaseModel):
         None, 
         description=(
             "The shared reading passage, case study, dataset, or stimulus text for this group of questions. "
-            "For humanities and reading comprehension, write the complete passage here ONCE. "
-            "Do NOT repeat the passage inside child questions. "
             "For standalone 1-on-1 questions without a shared reading passage, leave this field as null."
         )
+    )
+
+    group_source_url: Optional[str] = Field(
+        None,
+        description="The exact URL or citation source for the shared reading passage. Leave null if no source is needed."
+    )
+
+    group_plot_prompt: Optional[str] = Field(
+        None,
+        description=(
+            "A NATURAL LANGUAGE description of a shared data or math graph needed for the ENTIRE group context. "
+            "Leave null if the group context does not require an analytical graph, or if this is a standalone question."
+        )
+    )
+
+    group_image_prompt: Optional[str] = Field(
+        None,
+        description=(
+            "A purely artistic and atmospheric representation for the shared reading passage or group context. "
+            "Leave null if the group context does not require a decorative image, or if this is a standalone question."
+        )
+    )
+
+    group_image_url: Optional[str] = Field(
+        None,
+        description="URL of the generated image/graph for the group context. LEAVE THIS NULL if you wrote a prompt."
     )
     
     questions: List[QuizQuestion] = Field(
@@ -198,20 +159,14 @@ class QuestionGroup(BaseModel):
     )
 
 class QuizResponse(BaseModel):
-    title: str = Field(..., description="An engaging short title for the quiz. (max. 6 words)")
-    intro_message: str = Field(..., description="A single sentence introduction to the quiz in the Roma persona.")
-    question_count: int = Field(..., description="The total number of questions generated across all groups in this quiz.")
+    title: str = Field(..., description="An engaging short title for the quiz.")
+    intro_message: str = Field(..., description="A single sentence introduction to the quiz in the persona.")
+    question_count: int = Field(..., description="The total number of questions generated across all groups.")
     
-    evaluation_metadata: EvaluationMetadata = Field(
-        ..., 
-        description="Mathematical and contextual metadata required by the frontend scoring engine to calculate the final score."
-    )
+    evaluation_metadata: EvaluationMetadata = Field(..., description="Mathematical and contextual metadata.")
     
-    groups: List[QuestionGroup] = Field(
-        ..., 
-        description="List of question groups. Each group contains an optional shared passage and 1 to 5 dependent questions."
-    )
+    groups: List[QuestionGroup] = Field(..., description="List of question groups.")
 
     easier_payload: str = Field(..., description="A user command to request an easier version of this quiz.")
     harder_payload: str = Field(..., description="A user command to request a more advanced version of this quiz.")
-    retry_payload: str = Field(..., description="A user command to request a new quiz on the same topics and difficulty.")
+    retry_payload: str = Field(..., description="A user command to request a new quiz on the same topics.")

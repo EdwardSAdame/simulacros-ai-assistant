@@ -89,16 +89,17 @@ class StreamManager:
     # ------------------------------------------------------------------
     # QUIZ STREAMING METHODS
     # ------------------------------------------------------------------
-    def send_group_start(self, group_index: int, group_title: Optional[str], context_text: Optional[str]):
+    def send_group_start(self, group_index: int, group_title: Optional[str], context_text: Optional[str], group_source_url: Optional[str] = None):
         """
-        Streams the beginning of a new QuestionGroup, including the shared reading passage.
+        Streams the beginning of a new QuestionGroup, including the shared reading passage and citation.
         The frontend uses this to render the split-screen context pane before questions arrive.
         """
         payload = {
             "action": "quiz_stream_group_start",
             "group_index": group_index,
             "group_title": group_title,
-            "context_text": context_text
+            "context_text": context_text,
+            "group_source_url": group_source_url
         }
         self._send(payload)
 
@@ -125,10 +126,18 @@ class StreamManager:
     # ------------------------------------------------------------------
     # IMAGE & PLOT STREAMING METHODS
     # ------------------------------------------------------------------
-    def send_partial_image(self, index: int, b64_data: str, opt_index: Optional[int] = None):
+    def send_partial_image(self, index: Union[int, str], b64_data: str, opt_index: Optional[int] = None):
+        """
+        Streams a generated image/plot to the frontend. 
+        Safely extracts the numeric index and sets the group-level flag if the index is a string identifier.
+        """
+        is_group_level = isinstance(index, str) and index.startswith("group_")
+        target_index = int(index.split("_")[1]) if is_group_level else index
+
         payload = {
             "action": "partial_image_stream",
-            "index": index,
+            "index": target_index,
+            "is_group_level": is_group_level,
             "opt_index": opt_index,
             "image_b64": b64_data
         }

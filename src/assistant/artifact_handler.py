@@ -1,8 +1,7 @@
-# src/assistant/artifact_handler.py
 import logging
 import os
 import base64
-from typing import List, Dict, Any
+from typing import List, Dict, Any, Union
 from src.services.storage_service import storage_service
 from src.schemas.quiz_schemas import QuizResponse
 from src.utils.logging_utils import log_event
@@ -118,14 +117,13 @@ def handle_generated_files(client, response_obj, folder: str = "chat_assets") ->
                 if cid: 
                     container_id = cid
                     
-                # FIX: Add 'or []' to prevent NoneType iteration errors
                 outputs = getattr(item, "outputs", []) or []
                 if not outputs and hasattr(item, "code_interpreter"):
                     outputs = getattr(item.code_interpreter, "outputs", []) or []
                 if not outputs and hasattr(item, "code_interpreter_call"):
                     outputs = getattr(item.code_interpreter_call, "outputs", []) or []
                     
-                outputs = outputs or [] # Final safety net
+                outputs = outputs or [] 
                 
                 for out in outputs:
                     if getattr(out, "type", "") == "image":
@@ -148,7 +146,6 @@ def handle_generated_files(client, response_obj, folder: str = "chat_assets") ->
                                 if file_id: 
                                     process_file(cf_client, container_id, file_id, fname, uploaded_urls_map, folder)
 
-        # Fallback ONLY if no files were explicitly extracted
         has_extracted_files = any(fname for fname in uploaded_urls_map.keys() if not fname.startswith("creative_image_"))
         if not has_extracted_files and container_id and cf_client:
             try:
@@ -182,8 +179,8 @@ def handle_generated_files(client, response_obj, folder: str = "chat_assets") ->
     
     return uploaded_urls_map
 
-def assign_urls_to_quiz(quiz_data: QuizResponse, urls_map: Dict[str, str] | List[str]):
-    """Maps generated image URLs to quiz questions based on matching filenames."""
+def assign_urls_to_quiz(quiz_data: QuizResponse, urls_map: Union[Dict[str, str], List[str]]):
+    """Maps generated image URLs to hierarchical question groups and nested options."""
     if not urls_map: 
         return
         
@@ -193,23 +190,37 @@ def assign_urls_to_quiz(quiz_data: QuizResponse, urls_map: Dict[str, str] | List
     fallback_urls = list(urls_map.values())
     fallback_idx = 0
 
-    for q in quiz_data.questions:
-        if not q.image_url:
-            continue
-            
-        if q.image_url == "PENDING_UPLOAD" or "/mnt/" in q.image_url or "creative_image_" in q.image_url or "plot_output_" in q.image_url:
-            target_filename = os.path.basename(q.image_url).lower()
+    def _map_url(current_url: str) -> str:
+        nonlocal fallback_idx
+        if not current_url:
+            return current_url
+        if current_url == "PENDING_UPLOAD" or "/mnt/" in current_url or "creative_image_" in current_url or "plot_output_" in current_url:
+            target_filename = os.path.basename(current_url).lower()
             
             if target_filename in urls_map:
-                q.image_url = urls_map[target_filename]
                 log_event("artifact_mapped_exactly", {
                     "target_filename": target_filename,
-                    "mapped_url": q.image_url
+                    "mapped_url": urls_map[target_filename]
                 })
+                return urls_map[target_filename]
             elif fallback_idx < len(fallback_urls):
-                q.image_url = fallback_urls[fallback_idx]
+                mapped_url = fallback_urls[fallback_idx]
                 log_event("artifact_fallback_mapping", {
                     "target_filename": target_filename,
-                    "fallback_url": q.image_url
+                    "fallback_url": mapped_url
                 }, level="warning")
                 fallback_idx += 1
+                return mapped_url
+        return current_url
+
+    for group in quiz_data.groups:
+        if getattr(group, "group_image_url", None):
+            group.group_image_url = _map_url(group.group_image_url)
+            
+        for q in getattr(group, "questions", []):
+            if getattr(q, "image_url", None):
+                q.image_url = _map_url(q.image_url)
+                
+            for opt in getattr(q, "options", []):
+                if getattr(opt, "image_url", None):
+                    opt.image_url = _map_url(opt.image_url)

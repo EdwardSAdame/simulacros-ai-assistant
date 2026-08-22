@@ -11,7 +11,7 @@ logger = logging.getLogger(__name__)
 class QuizStreamParser:
     """
     Consumes the OpenAI stream and yields structured events specifically for Quizzes.
-    Intercepts evaluation metadata, creative images, modular plot prompts, and grouped contexts.
+    Intercepts evaluation metadata, creative images, modular plot prompts, grouped contexts, and citations.
     Strictly isolates nested JSON arrays to prevent stack-parser overflow.
     """
 
@@ -24,6 +24,10 @@ class QuizStreamParser:
         
         yielded_image_prompts = set()
         yielded_plot_prompts = set() # (global_q_index, opt_index)
+        
+        yielded_group_image_prompts = set()
+        yielded_group_plot_prompts = set()
+        
         q_format_types = {} # Maps global_q_index -> format_type string
 
         yielded_groups = set()
@@ -31,10 +35,15 @@ class QuizStreamParser:
         global_q_count = 0
 
         # OpenAI Structured Outputs guarantees strict key ordering.
-        # This regex safely captures the group context before the questions array begins.
+        # This regex safely captures the group context, source URL, and optional visual fields 
+        # before the child questions array begins.
         group_pattern = re.compile(
             r'"group_title"\s*:\s*(null|"(?:[^"\\]|\\.)*")\s*,\s*'
             r'"context_text"\s*:\s*(null|"(?:[^"\\]|\\.)*")\s*,\s*'
+            r'(?:"group_source_url"\s*:\s*(null|"(?:[^"\\]|\\.)*")\s*,\s*)?'
+            r'(?:"group_plot_prompt"\s*:\s*(?:null|"(?:[^"\\]|\\.)*")\s*,\s*)?'
+            r'(?:"group_image_prompt"\s*:\s*(?:null|"(?:[^"\\]|\\.)*")\s*,\s*)?'
+            r'(?:"group_image_url"\s*:\s*(?:null|"(?:[^"\\]|\\.)*")\s*,\s*)?'
             r'"questions"\s*:\s*\['
         )
 
@@ -61,7 +70,41 @@ class QuizStreamParser:
                     if actual_q_index not in q_format_types:
                         q_format_types[actual_q_index] = match.group(1)
 
-                # 3. Intercept Creative Images (Stem Only)
+                # 3. Intercept Parent-Level Group Images
+                group_image_matches = re.finditer(r'"group_image_prompt"\s*:\s*"((?:[^"\\]|\\.)*)"', buffer)
+                for match in group_image_matches:
+                    groups_before = buffer.count('"group_title"', 0, match.start())
+                    group_idx = max(0, groups_before - 1)
+                    
+                    if group_idx not in yielded_group_image_prompts:
+                        prompt_text = match.group(1).replace('\\"', '"').replace('\\n', '\n').replace('\\/', '/')
+                        if prompt_text and prompt_text.lower() not in ["null", "", "none"]:
+                            yield {
+                                "type": "image_request", 
+                                "group_index": group_idx,
+                                "is_group_level": True,
+                                "prompt": prompt_text
+                            }
+                        yielded_group_image_prompts.add(group_idx)
+
+                # 4. Intercept Parent-Level Group Plots
+                group_plot_matches = re.finditer(r'"group_plot_prompt"\s*:\s*"((?:[^"\\]|\\.)*)"', buffer)
+                for match in group_plot_matches:
+                    groups_before = buffer.count('"group_title"', 0, match.start())
+                    group_idx = max(0, groups_before - 1)
+                    
+                    if group_idx not in yielded_group_plot_prompts:
+                        prompt_text = match.group(1).replace('\\"', '"').replace('\\n', '\n').replace('\\/', '/')
+                        if prompt_text and prompt_text.lower() not in ["null", "", "none"]:
+                            yield {
+                                "type": "plot_request", 
+                                "group_index": group_idx,
+                                "is_group_level": True,
+                                "prompt": prompt_text
+                            }
+                        yielded_group_plot_prompts.add(group_idx)
+
+                # 5. Intercept Child-Level Creative Images (Stem Only)
                 prompt_matches = re.finditer(r'"image_prompt"\s*:\s*"((?:[^"\\]|\\.)*)"', buffer)
                 for match in prompt_matches:
                     q_titles_before = buffer.count('"question_title"', 0, match.start())
@@ -73,10 +116,15 @@ class QuizStreamParser:
                     if is_allowed and actual_q_index not in yielded_image_prompts:
                         prompt_text = match.group(1).replace('\\"', '"').replace('\\n', '\n').replace('\\/', '/')
                         if prompt_text and prompt_text.lower() not in ["null", "", "none"]:
-                            yield {"type": "image_request", "index": actual_q_index, "prompt": prompt_text}
+                            yield {
+                                "type": "image_request", 
+                                "index": actual_q_index,
+                                "is_group_level": False,
+                                "prompt": prompt_text
+                            }
                         yielded_image_prompts.add(actual_q_index)
 
-                # 4. Intercept Modular Plot Prompts (Stem & Options)
+                # 6. Intercept Child-Level Modular Plot Prompts (Stem & Options)
                 plot_matches = re.finditer(r'"plot_prompt"\s*:\s*"((?:[^"\\]|\\.)*)"', buffer)
                 for match in plot_matches:
                     q_titles_before = buffer.count('"question_title"', 0, match.start())
@@ -106,18 +154,19 @@ class QuizStreamParser:
                                 "type": "plot_request", 
                                 "index": actual_q_index, 
                                 "opt_index": opt_index,
+                                "is_group_level": False,
                                 "prompt": prompt_text
                             }
                         yielded_plot_prompts.add(tracker_key)
 
-                # 5. Detect Intro Message
+                # 7. Detect Intro Message
                 if not intro_yielded and '"groups"' in buffer:
                     match = re.search(r'"intro_message"\s*:\s*"(.*?)"', buffer, re.DOTALL)
                     if match:
                         yield {"type": "intro", "text": match.group(1).replace('\\"', '"')}
                         intro_yielded = True
 
-                # 6. Detect and Parse Evaluation Metadata
+                # 8. Detect and Parse Evaluation Metadata
                 if not metadata_yielded and '"evaluation_metadata"' in buffer:
                     start_idx = buffer.find('"evaluation_metadata"')
                     brace_idx = buffer.find('{', start_idx)
@@ -158,7 +207,7 @@ class QuizStreamParser:
                             except json.JSONDecodeError:
                                 pass
 
-                # 7. Detect and Parse Groups and their Nested Questions
+                # 9. Detect and Parse Groups and their Nested Questions
                 group_matches = list(group_pattern.finditer(buffer))
                 
                 for i, match in enumerate(group_matches):
@@ -168,15 +217,18 @@ class QuizStreamParser:
                     if group_idx not in yielded_groups:
                         title_raw = match.group(1)
                         context_raw = match.group(2)
+                        source_raw = match.group(3)
                         
-                        group_title = json.loads(title_raw) if title_raw != "null" else None
-                        context_text = json.loads(context_raw) if context_raw != "null" else None
+                        group_title = json.loads(title_raw) if title_raw and title_raw != "null" else None
+                        context_text = json.loads(context_raw) if context_raw and context_raw != "null" else None
+                        group_source_url = json.loads(source_raw) if source_raw and source_raw != "null" else None
                         
                         yield {
                             "type": "group_start", 
                             "group_index": group_idx, 
                             "group_title": group_title, 
-                            "context_text": context_text
+                            "context_text": context_text,
+                            "group_source_url": group_source_url
                         }
                         yielded_groups.add(group_idx)
 
@@ -211,7 +263,7 @@ class QuizStreamParser:
                         global_q_count += 1
                         group_checkpoints[group_idx] = new_ckpt
 
-            # 8. Retrieve Final Response
+            # 10. Retrieve Final Response
             yield from BaseStreamParser.finalize_stream(stream, has_refused)
 
         except Exception as e:
