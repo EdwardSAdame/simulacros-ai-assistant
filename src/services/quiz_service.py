@@ -1,3 +1,4 @@
+# src/services/quiz_service.py
 from typing import Dict, Any, List, Tuple
 import math
 import random
@@ -420,25 +421,38 @@ class QuizService:
                             group_index=event.get("group_index", 0),
                             group_title=event.get("group_title"),
                             context_text=event.get("context_text"),
-                            group_source_url=event.get("group_source_url") # Update applied here
+                            group_source_url=event.get("group_source_url")
                         )
 
                     elif evt_type == "question":
                         q_data = event.get("data")
-                        q_dict = q_data.dict() if hasattr(q_data, 'dict') else q_data
+                        
+                        # Determine if data is a Pydantic model and safely dump to dictionary
+                        if hasattr(q_data, 'model_dump'):
+                            q_dict = q_data.model_dump()
+                        elif hasattr(q_data, 'dict'):
+                            q_dict = q_data.dict()
+                        else:
+                            # It is a partial dict from ijson, create a shallow copy to prevent mutation
+                            q_dict = dict(q_data)
+                            
                         idx = event.get("index", 0)
                         group_idx = event.get("group_index", 0)
                         
-                        if idx not in allowed_stem_visuals:
-                            q_dict["image_prompt"] = None
-                            q_dict["plot_prompt"] = None
-                            q_dict["image_url"] = None
-                            
-                        if idx not in allowed_opt_visuals:
-                            for opt in q_dict.get("options", []):
-                                if isinstance(opt, dict):
-                                    opt["plot_prompt"] = None
-                                    opt["image_url"] = None
+                        # Prevent inflating partial WebSocket typing events with null visual keys
+                        is_full_question = "options" in q_dict
+                        
+                        if is_full_question:
+                            if idx not in allowed_stem_visuals:
+                                q_dict["image_prompt"] = None
+                                q_dict["plot_prompt"] = None
+                                q_dict["image_url"] = None
+                                
+                            if idx not in allowed_opt_visuals:
+                                for opt in q_dict.get("options", []):
+                                    if isinstance(opt, dict):
+                                        opt["plot_prompt"] = None
+                                        opt["image_url"] = None
 
                         stream_manager.send_quiz_item(question_data=q_dict, index=idx, group_index=group_idx)
                             
@@ -489,9 +503,21 @@ class QuizService:
                 if parsed_response:
                     if hasattr(parsed_response, 'evaluation_metadata'):
                         meta_obj = parsed_response.evaluation_metadata
-                        evaluation_metadata = meta_obj.dict() if hasattr(meta_obj, 'dict') else meta_obj
+                        if hasattr(meta_obj, 'model_dump'):
+                            evaluation_metadata = meta_obj.model_dump()
+                        elif hasattr(meta_obj, 'dict'):
+                            evaluation_metadata = meta_obj.dict()
+                        else:
+                            evaluation_metadata = meta_obj
 
-                    accumulated_groups = [g.dict() if hasattr(g, 'dict') else g for g in parsed_response.groups]
+                    accumulated_groups = []
+                    for g in parsed_response.groups:
+                        if hasattr(g, 'model_dump'):
+                            accumulated_groups.append(g.model_dump())
+                        elif hasattr(g, 'dict'):
+                            accumulated_groups.append(g.dict())
+                        else:
+                            accumulated_groups.append(g)
                     
                     global_q_idx = 0
                     for g_idx, group in enumerate(accumulated_groups):
@@ -553,9 +579,22 @@ class QuizService:
                     cls._log_usage(usage_data, user_id, actual_conversation_id, mode)
 
                 meta_obj = getattr(quiz_model, 'evaluation_metadata', None)
-                evaluation_metadata = meta_obj.dict() if hasattr(meta_obj, 'dict') else meta_obj
+                if hasattr(meta_obj, 'model_dump'):
+                    evaluation_metadata = meta_obj.model_dump()
+                elif hasattr(meta_obj, 'dict'):
+                    evaluation_metadata = meta_obj.dict()
+                else:
+                    evaluation_metadata = meta_obj
                 
-                accumulated_groups = [g.dict() if hasattr(g, 'dict') else g for g in quiz_model.groups]
+                accumulated_groups = []
+                for g in quiz_model.groups:
+                    if hasattr(g, 'model_dump'):
+                        accumulated_groups.append(g.model_dump())
+                    elif hasattr(g, 'dict'):
+                        accumulated_groups.append(g.dict())
+                    else:
+                        accumulated_groups.append(g)
+
                 global_q_idx = 0
                 for group in accumulated_groups:
                     group["group_image_url"] = group.get("group_image_url")
