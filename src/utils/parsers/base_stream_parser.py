@@ -44,8 +44,6 @@ class BaseStreamParser:
                         except Exception:
                             pass
                         obj_start = -1
-            elif char == '\\':
-                escape = True
             else:
                 if escape:
                     escape = False

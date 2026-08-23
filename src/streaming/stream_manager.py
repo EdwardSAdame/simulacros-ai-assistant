@@ -33,6 +33,21 @@ class StreamManager:
             return False
 
         payload_str = json.dumps(payload, ensure_ascii=False)
+        payload_bytes = payload_str.encode('utf-8')
+        
+        # AWS API Gateway strict frame limit is 32KB (32768 bytes).
+        # We use 31000 as a safe threshold to account for protocol overhead.
+        if len(payload_bytes) > 31000:
+            logger.warning(f"StreamManager: Payload size {len(payload_bytes)} bytes exceeds 32KB limit. Action: {payload.get('action')}")
+            
+            # Prevent Lambda crash by converting the oversized payload into a safe error notification
+            error_payload = {
+                "action": "stream_error",
+                "error": "A generated chunk exceeded the 32KB WebSocket frame limit and was dropped."
+            }
+            payload_str = json.dumps(error_payload)
+            payload_bytes = payload_str.encode('utf-8')
+
         success_count = 0
         dead_connections = []
 
@@ -40,7 +55,7 @@ class StreamManager:
             try:
                 self.client.post_to_connection(
                     ConnectionId=connection_id,
-                    Data=payload_str
+                    Data=payload_bytes
                 )
                 success_count += 1
             except Exception as e:
