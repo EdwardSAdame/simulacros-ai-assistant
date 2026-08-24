@@ -26,8 +26,6 @@ class BytesGeneratorStream:
             self._buffer = b""
             return b"".join(chunks)
 
-        # Block ONLY until at least 1 byte is available in the buffer,
-        # ignoring the requested size threshold to prevent stream blocking.
         while not self._buffer:
             try:
                 chunk = next(self._gen)
@@ -39,7 +37,6 @@ class BytesGeneratorStream:
         if not self._buffer:
             return b""
 
-        # Return whatever chunk is currently available up to the requested size
         data = self._buffer[:size]
         self._buffer = self._buffer[size:]
         return data
@@ -48,7 +45,7 @@ class BytesGeneratorStream:
 class QuizStreamParser:
     """
     Consumes the OpenAI stream and yields structured events specifically for Quizzes.
-    Utilizes ijson for robust, incremental JSON parsing to stream questions in real-time.
+    Yields full question objects at once to prevent frontend UI jitter.
     """
 
     @staticmethod
@@ -121,6 +118,7 @@ class QuizStreamParser:
                         option_idx = -1
                         current_question = {"options": []}
                     elif event == "end_map":
+                        # Yield the COMPLETE question only when the map ends
                         try:
                             q_obj = QuizQuestion(**current_question)
                             yield {
@@ -143,14 +141,7 @@ class QuizStreamParser:
                     if event in ("string", "number", "boolean", "null") and key != "options":
                         current_question[key] = value
 
-                        if key == "question_text" and value:
-                            yield {
-                                "type": "question",
-                                "index": question_idx,
-                                "group_index": group_idx,
-                                "data": {"question_text": value, "originalIndex": question_idx}
-                            }
-
+                        # Keep yielding visual requests immediately so workers start processing early
                         if key == "image_prompt" and value:
                             yield {
                                 "type": "image_request",
