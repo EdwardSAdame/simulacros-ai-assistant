@@ -1,5 +1,6 @@
 import logging
 import ijson
+import traceback
 from typing import Generator, Dict, Any
 
 from src.schemas.quiz_schemas import QuizQuestion
@@ -167,5 +168,7 @@ class QuizStreamParser:
             yield from BaseStreamParser.finalize_stream(stream, has_refused)
 
         except Exception as e:
-            logger.error(f"QuizStreamParser parsing failed: {e}")
-            yield {"type": "error", "error": str(e)}
+            # 🟢 SENIOR DEV FIX: Capture the actual traceback to instantly locate future issues
+            error_trace = traceback.format_exc()
+            logger.error(f"QuizStreamParser parsing failed: {e}\nTraceback:\n{error_trace}")
+            yield {"type": "error", "error": f"Stream Parsing Error: {str(e)}"}
