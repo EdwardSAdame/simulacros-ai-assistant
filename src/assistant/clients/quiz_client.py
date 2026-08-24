@@ -3,11 +3,11 @@ from typing import List, Dict, Any, Tuple, Generator
 
 from src.config.settings import get_openai_client
 from src.config.model_config import get_model_config
-from src.schemas.quiz_schemas import QuizResponse
+from src.schemas.quiz_schemas import QuizResponse, QuizQuestion
 
 from src.services.signal_service import build_runtime_signals
 from src.assistant.artifact_handler import handle_generated_files, assign_urls_to_quiz
-from src.utils.stream_parser import StreamParser
+from src.utils.parsers.quiz_stream_parser import QuizStreamParser
 
 from .base_client import BaseAssistantClient
 
@@ -65,8 +65,6 @@ class QuizClient:
         )
 
         req = BaseAssistantClient.build_request_payload(cfg, api_input, tools=tools)
-        
-        # Keep text_format to preserve shared framework orchestration
         req["text_format"] = QuizResponse
         
         try:
@@ -130,24 +128,25 @@ class QuizClient:
         )
 
         req = BaseAssistantClient.build_request_payload(cfg, api_input, tools=tools)
-        
-        # Keep text_format to preserve shared framework orchestration
         req["text_format"] = QuizResponse
         
         streamed_questions = []
 
         try:
             with client.responses.stream(**req) as stream:
-                parser_generator = StreamParser.parse_quiz_stream(stream)
+                parser_generator = QuizStreamParser.parse(stream)
                 
                 for event in parser_generator:
-                    if event["type"] == "question":
-                        q_obj = event["data"]
-                        streamed_questions.append(q_obj)
+                    event_type = event.get("type")
+                    
+                    if event_type == "question":
+                        q_data = event.get("data")
+                        if isinstance(q_data, QuizQuestion):
+                            streamed_questions.append(q_data)
                         yield event
                     
-                    elif event["type"] == "done":
-                        final_parsed = event["full_response"]
+                    elif event_type == "done":
+                        final_parsed = event.get("full_response")
                         
                         generated_urls = []
                         if hasattr(stream, 'get_final_response'):
@@ -160,7 +159,7 @@ class QuizClient:
                         
                         if final_parsed and hasattr(final_parsed, 'questions') and streamed_questions:
                             if len(final_parsed.questions) == len(streamed_questions):
-                                final_parsed.questions = streamed_questions 
+                                final_parsed.questions = streamed_questions
 
                         if final_parsed and generated_urls:
                             assign_urls_to_quiz(final_parsed, generated_urls)
