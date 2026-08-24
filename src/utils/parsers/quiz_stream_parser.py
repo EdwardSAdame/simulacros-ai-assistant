@@ -45,7 +45,8 @@ class BytesGeneratorStream:
 class QuizStreamParser:
     """
     Consumes the OpenAI stream and yields structured events specifically for Quizzes.
-    Yields full question objects at once to prevent frontend UI jitter.
+    Implements Cluster Buffering: Standalone questions stream instantly, while 
+    clustered questions (sharing a reading passage) wait until the entire block forms.
     """
 
     @staticmethod
@@ -78,6 +79,8 @@ class QuizStreamParser:
             group_idx = -1
             question_idx = -1
             option_idx = -1
+            
+            buffered_questions = []
 
             for prefix, event, value in parser:
                 while control_events:
@@ -96,6 +99,11 @@ class QuizStreamParser:
                     if event == "start_map":
                         group_idx += 1
                         current_group = {"questions": []}
+                    elif event == "end_map":
+                        # FLUSH BUFFER: Yield all questions for this clustered group at once
+                        for q_event in buffered_questions:
+                            yield q_event
+                        buffered_questions.clear()
 
                 elif prefix.startswith("groups.item") and len(prefix.split(".")) == 3:
                     key = prefix.split(".")[2]
@@ -118,30 +126,41 @@ class QuizStreamParser:
                         option_idx = -1
                         current_question = {"options": []}
                     elif event == "end_map":
-                        # Yield the COMPLETE question only when the map ends
                         try:
                             q_obj = QuizQuestion(**current_question)
-                            yield {
-                                "type": "question",
-                                "index": question_idx,
-                                "group_index": group_idx,
-                                "data": q_obj
-                            }
+                            q_payload = q_obj
                         except Exception as e:
                             logger.warning(f"Validation skipped for partial question {question_idx}: {e}")
-                            yield {
-                                "type": "question",
-                                "index": question_idx,
-                                "group_index": group_idx,
-                                "data": current_question
-                            }
+                            q_payload = current_question
+
+                        q_event = {
+                            "type": "question",
+                            "index": question_idx,
+                            "group_index": group_idx,
+                            "data": q_payload
+                        }
+
+                        # Detect if this is a clustered group
+                        has_context = bool(
+                            current_group.get("group_title") or 
+                            current_group.get("context_text") or 
+                            current_group.get("group_image_prompt") or 
+                            current_group.get("group_plot_prompt")
+                        )
+
+                        if has_context:
+                            # Buffer it to prevent UI shifting
+                            buffered_questions.append(q_event)
+                        else:
+                            # Stream instantly for standalone questions
+                            yield q_event
 
                 elif prefix.startswith("groups.item.questions.item") and len(prefix.split(".")) == 5:
                     key = prefix.split(".")[4]
                     if event in ("string", "number", "boolean", "null") and key != "options":
                         current_question[key] = value
 
-                        # Keep yielding visual requests immediately so workers start processing early
+                        # Yield visual requests immediately so workers run concurrently
                         if key == "image_prompt" and value:
                             yield {
                                 "type": "image_request",
