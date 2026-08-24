@@ -1,4 +1,3 @@
-import io
 import logging
 import traceback
 import ijson
@@ -10,33 +9,33 @@ from .base_stream_parser import BaseStreamParser
 logger = logging.getLogger(__name__)
 
 
-class BytesGeneratorStream(io.RawIOBase):
+class BytesGeneratorStream:
     """
-    Adapts a generator yielding bytes into a file-like stream object
-    with a .read() method compatible with ijson.
+    Duck-typed stream adapter that wraps a byte generator and exposes
+    a .read() interface required by ijson.
     """
 
     def __init__(self, generator):
-        self.generator = generator
-        self.buffer = b""
-
-    def readable(self) -> bool:
-        return True
+        self._gen = generator
+        self._buffer = b""
 
     def read(self, size: int = -1) -> bytes:
         if size == -1:
-            data = self.buffer + b"".join(self.generator)
-            self.buffer = b""
-            return data
+            chunks = [self._buffer]
+            chunks.extend(self._gen)
+            self._buffer = b""
+            return b"".join(chunks)
 
-        while len(self.buffer) < size:
+        while len(self._buffer) < size:
             try:
-                self.buffer += next(self.generator)
+                chunk = next(self._gen)
+                if chunk:
+                    self._buffer += chunk
             except StopIteration:
                 break
 
-        data = self.buffer[:size]
-        self.buffer = self.buffer[size:]
+        data = self._buffer[:size]
+        self._buffer = self._buffer[size:]
         return data
 
 
@@ -65,7 +64,6 @@ class QuizStreamParser:
                     yield delta.encode('utf-8')
 
         try:
-            # Wrap generator in a file-like stream interface for ijson
             stream_adapter = BytesGeneratorStream(_byte_generator())
             parser = ijson.parse(stream_adapter)
 
@@ -79,11 +77,10 @@ class QuizStreamParser:
             option_idx = -1
 
             for prefix, event, value in parser:
-                # 1. Yield control events intercepted during byte generation
                 while control_events:
                     yield control_events.pop(0)
 
-                # 2. Evaluation Metadata Tracking
+                # 1. Evaluation Metadata Tracking
                 if prefix.startswith("evaluation_metadata"):
                     if event in ("string", "number", "boolean", "null") and len(prefix.split(".")) == 2:
                         key = prefix.split(".")[1]
@@ -91,7 +88,7 @@ class QuizStreamParser:
                     elif prefix == "evaluation_metadata" and event == "end_map":
                         yield {"type": "evaluation_metadata", "data": eval_metadata}
 
-                # 3. Group Tracking
+                # 2. Group Tracking
                 elif prefix == "groups.item":
                     if event == "start_map":
                         group_idx += 1
@@ -111,7 +108,7 @@ class QuizStreamParser:
                         "group_source_url": current_group.get("group_source_url")
                     }
 
-                # 4. Question Tracking
+                # 3. Question Tracking
                 elif prefix == "groups.item.questions.item":
                     if event == "start_map":
                         question_idx += 1
@@ -164,7 +161,7 @@ class QuizStreamParser:
                                 "prompt": value
                             }
 
-                # 5. Options Tracking
+                # 4. Options Tracking
                 elif prefix == "groups.item.questions.item.options.item":
                     if event == "start_map":
                         option_idx += 1
