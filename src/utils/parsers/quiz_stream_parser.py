@@ -1,6 +1,7 @@
+import io
 import logging
-import ijson
 import traceback
+import ijson
 from typing import Generator, Dict, Any
 
 from src.schemas.quiz_schemas import QuizQuestion
@@ -8,11 +9,41 @@ from .base_stream_parser import BaseStreamParser
 
 logger = logging.getLogger(__name__)
 
+
+class BytesGeneratorStream(io.RawIOBase):
+    """
+    Adapts a generator yielding bytes into a file-like stream object
+    with a .read() method compatible with ijson.
+    """
+
+    def __init__(self, generator):
+        self.generator = generator
+        self.buffer = b""
+
+    def readable(self) -> bool:
+        return True
+
+    def read(self, size: int = -1) -> bytes:
+        if size == -1:
+            data = self.buffer + b"".join(self.generator)
+            self.buffer = b""
+            return data
+
+        while len(self.buffer) < size:
+            try:
+                self.buffer += next(self.generator)
+            except StopIteration:
+                break
+
+        data = self.buffer[:size]
+        self.buffer = self.buffer[size:]
+        return data
+
+
 class QuizStreamParser:
     """
     Consumes the OpenAI stream and yields structured events specifically for Quizzes.
-    Utilizes ijson for robust, incremental JSON parsing to stream questions in real-time,
-    eliminating the fragility of regex-based extraction.
+    Utilizes ijson for robust, incremental JSON parsing to stream questions in real-time.
     """
 
     @staticmethod
@@ -20,12 +51,11 @@ class QuizStreamParser:
         has_refused = False
         control_events = []
 
-        # Helper to intercept SDK control events and yield pure bytes to ijson
         def _byte_generator():
             nonlocal has_refused
             for event in stream:
                 event_to_yield, is_refusal, delta = BaseStreamParser.handle_common_events(event)
-                
+
                 if event_to_yield:
                     control_events.append(event_to_yield)
                 if is_refusal:
@@ -35,21 +65,21 @@ class QuizStreamParser:
                     yield delta.encode('utf-8')
 
         try:
-            # ijson.parse yields (prefix, event, value) 
-            # e.g., ("groups.item.questions.item.question_text", "string", "What is...")
-            parser = ijson.parse(_byte_generator())
-            
+            # Wrap generator in a file-like stream interface for ijson
+            stream_adapter = BytesGeneratorStream(_byte_generator())
+            parser = ijson.parse(stream_adapter)
+
             eval_metadata = {}
             current_group = {}
             current_question = {}
             current_option = {}
-            
+
             group_idx = -1
             question_idx = -1
             option_idx = -1
 
             for prefix, event, value in parser:
-                # 1. Yield any control events (like status updates) intercepted during byte generation
+                # 1. Yield control events intercepted during byte generation
                 while control_events:
                     yield control_events.pop(0)
 
@@ -66,13 +96,12 @@ class QuizStreamParser:
                     if event == "start_map":
                         group_idx += 1
                         current_group = {"questions": []}
-                        
+
                 elif prefix.startswith("groups.item") and len(prefix.split(".")) == 3:
                     key = prefix.split(".")[2]
                     if event in ("string", "number", "boolean", "null") and key != "questions":
                         current_group[key] = value
-                        
-                # Yield group_start the moment the questions array begins
+
                 elif prefix == "groups.item.questions" and event == "start_array":
                     yield {
                         "type": "group_start",
@@ -86,11 +115,10 @@ class QuizStreamParser:
                 elif prefix == "groups.item.questions.item":
                     if event == "start_map":
                         question_idx += 1
-                        option_idx = -1  # Reset local option index for the new question
+                        option_idx = -1
                         current_question = {"options": []}
                     elif event == "end_map":
                         try:
-                            # Validate the completed dictionary against your Pydantic schema
                             q_obj = QuizQuestion(**current_question)
                             yield {
                                 "type": "question",
@@ -111,8 +139,7 @@ class QuizStreamParser:
                     key = prefix.split(".")[4]
                     if event in ("string", "number", "boolean", "null") and key != "options":
                         current_question[key] = value
-                        
-                        # Maintain real-time typing effect on the frontend for the question text
+
                         if key == "question_text" and value:
                             yield {
                                 "type": "question",
@@ -121,7 +148,6 @@ class QuizStreamParser:
                                 "data": {"question_text": value, "originalIndex": question_idx}
                             }
 
-                        # Trigger visual worker pipelines instantly without waiting for the full question
                         if key == "image_prompt" and value:
                             yield {
                                 "type": "image_request",
@@ -145,13 +171,12 @@ class QuizStreamParser:
                         current_option = {}
                     elif event == "end_map":
                         current_question["options"].append(current_option)
-                        
+
                 elif prefix.startswith("groups.item.questions.item.options.item") and len(prefix.split(".")) == 7:
                     key = prefix.split(".")[6]
                     if event in ("string", "number", "boolean", "null"):
                         current_option[key] = value
-                        
-                        # Trigger visual worker for individual option graphs
+
                         if key == "plot_prompt" and value:
                             yield {
                                 "type": "plot_request",
@@ -161,14 +186,12 @@ class QuizStreamParser:
                                 "prompt": value
                             }
 
-            # Yield any remaining control events
             while control_events:
                 yield control_events.pop(0)
 
             yield from BaseStreamParser.finalize_stream(stream, has_refused)
 
         except Exception as e:
-            # 🟢 SENIOR DEV FIX: Capture the actual traceback to instantly locate future issues
             error_trace = traceback.format_exc()
             logger.error(f"QuizStreamParser parsing failed: {e}\nTraceback:\n{error_trace}")
             yield {"type": "error", "error": f"Stream Parsing Error: {str(e)}"}
