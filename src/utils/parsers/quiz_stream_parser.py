@@ -12,7 +12,7 @@ logger = logging.getLogger(__name__)
 class BytesGeneratorStream:
     """
     Duck-typed stream adapter that wraps a byte generator and exposes
-    a .read() interface required by ijson.
+    a non-blocking .read() interface required by ijson for real-time streaming.
     """
 
     def __init__(self, generator):
@@ -26,7 +26,9 @@ class BytesGeneratorStream:
             self._buffer = b""
             return b"".join(chunks)
 
-        while len(self._buffer) < size:
+        # Block ONLY until at least 1 byte is available in the buffer,
+        # ignoring the requested size threshold to prevent stream blocking.
+        while not self._buffer:
             try:
                 chunk = next(self._gen)
                 if chunk:
@@ -34,6 +36,10 @@ class BytesGeneratorStream:
             except StopIteration:
                 break
 
+        if not self._buffer:
+            return b""
+
+        # Return whatever chunk is currently available up to the requested size
         data = self._buffer[:size]
         self._buffer = self._buffer[size:]
         return data
