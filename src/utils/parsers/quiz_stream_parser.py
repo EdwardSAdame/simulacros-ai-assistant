@@ -1,3 +1,4 @@
+# FILE: src/utils/parsers/quiz_stream_parser.py
 import logging
 import traceback
 import ijson
@@ -81,6 +82,7 @@ class QuizStreamParser:
             option_idx = -1
             
             buffered_questions = []
+            group_started_sent = set()
 
             for prefix, event, value in parser:
                 while control_events:
@@ -110,14 +112,20 @@ class QuizStreamParser:
                     if event in ("string", "number", "boolean", "null") and key != "questions":
                         current_group[key] = value
 
-                elif prefix == "groups.item.questions" and event == "start_array":
-                    yield {
-                        "type": "group_start",
-                        "group_index": group_idx,
-                        "group_title": current_group.get("group_title"),
-                        "context_text": current_group.get("context_text"),
-                        "group_source_url": current_group.get("group_source_url")
-                    }
+                # Eagerly evaluate and yield group start as soon as group properties accumulate metadata
+                if group_idx >= not -1 and group_idx not in group_started_sent:
+                    has_meta = current_group.get("group_title") or current_group.get("context_text")
+                    if has_meta:
+                        group_started_sent.add(group_idx)
+                        yield {
+                            "type": "group_start",
+                            "group_index": group_idx,
+                            "group_title": current_group.get("group_title"),
+                            "context_text": current_group.get("context_text"),
+                            "group_source_url": current_group.get("group_source_url"),
+                            "group_plot_prompt": current_group.get("group_plot_prompt"),
+                            "group_image_prompt": current_group.get("group_image_prompt")
+                        }
 
                 # 3. Question Tracking
                 elif prefix == "groups.item.questions.item":
@@ -140,7 +148,19 @@ class QuizStreamParser:
                             "data": q_payload
                         }
 
-                        # Detect if this is a clustered group
+                        # Fallback safeguard: if group start hasn't fired yet for a context group, force it now
+                        if group_idx not in group_started_sent:
+                            group_started_sent.add(group_idx)
+                            yield {
+                                "type": "group_start",
+                                "group_index": group_idx,
+                                "group_title": current_group.get("group_title"),
+                                "context_text": current_group.get("context_text"),
+                                "group_source_url": current_group.get("group_source_url"),
+                                "group_plot_prompt": current_group.get("group_plot_prompt"),
+                                "group_image_prompt": current_group.get("group_image_prompt")
+                            }
+
                         has_context = bool(
                             current_group.get("group_title") or 
                             current_group.get("context_text") or 
@@ -149,10 +169,8 @@ class QuizStreamParser:
                         )
 
                         if has_context:
-                            # Buffer it to prevent UI shifting
                             buffered_questions.append(q_event)
                         else:
-                            # Stream instantly for standalone questions
                             yield q_event
 
                 elif prefix.startswith("groups.item.questions.item") and len(prefix.split(".")) == 5:
@@ -160,7 +178,6 @@ class QuizStreamParser:
                     if event in ("string", "number", "boolean", "null") and key != "options":
                         current_question[key] = value
 
-                        # Yield visual requests immediately so workers run concurrently
                         if key == "image_prompt" and value:
                             yield {
                                 "type": "image_request",

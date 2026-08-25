@@ -1,4 +1,4 @@
-# src/services/quiz_service.py
+# FILE: src/services/quiz_service.py
 from typing import Dict, Any, List, Tuple
 import math
 import random
@@ -421,7 +421,9 @@ class QuizService:
                             group_index=event.get("group_index", 0),
                             group_title=event.get("group_title"),
                             context_text=event.get("context_text"),
-                            group_source_url=event.get("group_source_url")
+                            group_source_url=event.get("group_source_url"),
+                            group_plot_prompt=event.get("group_plot_prompt"),
+                            group_image_prompt=event.get("group_image_prompt")
                         )
 
                     elif evt_type == "question":

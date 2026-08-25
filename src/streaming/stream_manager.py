@@ -1,3 +1,4 @@
+# FILE: src/streaming/stream_manager.py
 import json
 import logging
 from typing import Any, Dict, List, Union, Optional
@@ -104,7 +105,15 @@ class StreamManager:
     # ------------------------------------------------------------------
     # QUIZ STREAMING METHODS
     # ------------------------------------------------------------------
-    def send_group_start(self, group_index: int, group_title: Optional[str], context_text: Optional[str], group_source_url: Optional[str] = None):
+    def send_group_start(
+        self, 
+        group_index: int, 
+        group_title: Optional[str], 
+        context_text: Optional[str], 
+        group_source_url: Optional[str] = None,
+        group_plot_prompt: Optional[str] = None,
+        group_image_prompt: Optional[str] = None
+    ):
         """
         Streams the beginning of a new QuestionGroup, including the shared reading passage and citation.
         The frontend uses this to render the split-screen context pane before questions arrive.
@@ -114,7 +123,9 @@ class StreamManager:
             "group_index": group_index,
             "group_title": group_title,
             "context_text": context_text,
-            "group_source_url": group_source_url
+            "group_source_url": group_source_url,
+            "group_plot_prompt": group_plot_prompt,
+            "group_image_prompt": group_image_prompt
         }
         self._send(payload)
 
