@@ -112,10 +112,10 @@ class QuizStreamParser:
                     if event in ("string", "number", "boolean", "null") and key != "questions":
                         current_group[key] = value
 
-                # Eagerly evaluate and yield group start as soon as group properties accumulate metadata
-                if group_idx > -1 and group_idx not in group_started_sent:
-                    has_meta = current_group.get("group_title") or current_group.get("context_text")
-                    if has_meta:
+                # The safest point to emit group metadata is exactly when the questions array starts,
+                # ensuring all preceding parent fields (title, context, images) have been fully parsed.
+                elif prefix == "groups.item.questions" and event == "start_array":
+                    if group_idx > -1 and group_idx not in group_started_sent:
                         group_started_sent.add(group_idx)
                         yield {
                             "type": "group_start",
