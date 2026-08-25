@@ -113,7 +113,7 @@ class QuizStreamParser:
                         current_group[key] = value
 
                 # Eagerly evaluate and yield group start as soon as group properties accumulate metadata
-                if group_idx >= not -1 and group_idx not in group_started_sent:
+                if group_idx > -1 and group_idx not in group_started_sent:
                     has_meta = current_group.get("group_title") or current_group.get("context_text")
                     if has_meta:
                         group_started_sent.add(group_idx)
