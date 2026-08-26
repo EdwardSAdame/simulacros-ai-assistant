@@ -9,7 +9,6 @@ from .base_stream_parser import BaseStreamParser
 
 logger = logging.getLogger(__name__)
 
-
 class BytesGeneratorStream:
     """
     Duck-typed stream adapter that wraps a byte generator and exposes
@@ -112,6 +111,22 @@ class QuizStreamParser:
                     if event in ("string", "number", "boolean", "null") and key != "questions":
                         current_group[key] = value
 
+                        # FIX: Yield group-level visual requests immediately when parsed
+                        if key == "group_image_prompt" and value:
+                            yield {
+                                "type": "image_request",
+                                "group_index": group_idx,
+                                "is_group_level": True,
+                                "prompt": value
+                            }
+                        if key == "group_plot_prompt" and value:
+                            yield {
+                                "type": "plot_request",
+                                "group_index": group_idx,
+                                "is_group_level": True,
+                                "prompt": value
+                            }
+
                 # The safest point to emit group metadata is exactly when the questions array starts,
                 # ensuring all preceding parent fields (title, context, images) have been fully parsed.
                 elif prefix == "groups.item.questions" and event == "start_array":
@@ -132,7 +147,8 @@ class QuizStreamParser:
                     if event == "start_map":
                         question_idx += 1
                         option_idx = -1
-                        current_question = {"options": []}
+                        # Initialize psychometric_params to prevent KeyError
+                        current_question = {"options": [], "psychometric_params": {}}
                     elif event == "end_map":
                         try:
                             q_obj = QuizQuestion(**current_question)
@@ -175,7 +191,7 @@ class QuizStreamParser:
 
                 elif prefix.startswith("groups.item.questions.item") and len(prefix.split(".")) == 5:
                     key = prefix.split(".")[4]
-                    if event in ("string", "number", "boolean", "null") and key != "options":
+                    if event in ("string", "number", "boolean", "null") and key not in ("options", "psychometric_params"):
                         current_question[key] = value
 
                         if key == "image_prompt" and value:
@@ -193,6 +209,12 @@ class QuizStreamParser:
                                 "is_group_level": False,
                                 "prompt": value
                             }
+
+                # 3a. FIX: Safely parse nested psychometric_params
+                elif prefix.startswith("groups.item.questions.item.psychometric_params") and len(prefix.split(".")) == 6:
+                    key = prefix.split(".")[5]
+                    if event in ("string", "number", "boolean", "null"):
+                        current_question["psychometric_params"][key] = value
 
                 # 4. Options Tracking
                 elif prefix == "groups.item.questions.item.options.item":

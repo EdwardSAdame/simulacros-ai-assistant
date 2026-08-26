@@ -126,12 +126,14 @@ class VisualWorkerService:
             final_url = None
             
             for bg_event in bg_stream:
-                if getattr(bg_event, "type", "") == "response.completed":
+                event_type = getattr(bg_event, "type", "")
+                
+                if event_type == "response.completed":
                     resp_obj = getattr(bg_event, "response", bg_event)
                     usage_obj = getattr(resp_obj, "usage", None)
                     self._log_token_usage(usage_obj)
                     
-                    # Extract the final high-resolution image from the completed event
+                    # Fix: Extract the final high-resolution image from the completed event
                     outputs = getattr(resp_obj, "output", [])
                     for out in outputs:
                         if getattr(out, "type", "") == "image_generation_call":
@@ -146,7 +148,7 @@ class VisualWorkerService:
                                 except Exception as upload_err:
                                     logger.warning(f"BG final image upload failed: {upload_err}")
 
-                elif getattr(bg_event, "type", "") == "response.image_generation_call.partial_image":
+                elif event_type == "response.image_generation_call.partial_image":
                     bg_b64 = getattr(bg_event, "partial_image_b64", "")
                     if bg_b64:
                         try:
@@ -204,7 +206,7 @@ class VisualWorkerService:
 
         while True:
             item = self.plot_queue.get()
-            if item is None: # Poison pill received
+            if item is None: 
                 break
                 
             plot_prompt, q_index, opt_index = item
