@@ -130,8 +130,23 @@ class VisualWorkerService:
                     resp_obj = getattr(bg_event, "response", bg_event)
                     usage_obj = getattr(resp_obj, "usage", None)
                     self._log_token_usage(usage_obj)
+                    
+                    # Extract the final high-resolution image from the completed event
+                    outputs = getattr(resp_obj, "output", [])
+                    for out in outputs:
+                        if getattr(out, "type", "") == "image_generation_call":
+                            final_b64 = getattr(out, "result", None)
+                            if final_b64:
+                                try:
+                                    img_bytes = base64.b64decode(final_b64)
+                                    s3_url = storage_service.upload_image_from_bytes(img_bytes, "image/png", folder="quiz_assets")
+                                    if self.stream_manager:
+                                        self.stream_manager.send_partial_image(index=q_index, b64_data=s3_url, opt_index=None)
+                                    final_url = s3_url
+                                except Exception as upload_err:
+                                    logger.warning(f"BG final image upload failed: {upload_err}")
 
-                if getattr(bg_event, "type", "") == "response.image_generation_call.partial_image":
+                elif getattr(bg_event, "type", "") == "response.image_generation_call.partial_image":
                     bg_b64 = getattr(bg_event, "partial_image_b64", "")
                     if bg_b64:
                         try:
@@ -140,9 +155,8 @@ class VisualWorkerService:
                             # Creative images are ONLY for the stem, so opt_index is None
                             if self.stream_manager:
                                 self.stream_manager.send_partial_image(index=q_index, b64_data=s3_url, opt_index=None)
-                            final_url = s3_url
                         except Exception as upload_err:
-                            logger.warning(f"BG image upload failed: {upload_err}")
+                            logger.warning(f"BG image partial upload failed: {upload_err}")
             
             if final_url: 
                 self.image_urls_map[(q_index, None)] = final_url
