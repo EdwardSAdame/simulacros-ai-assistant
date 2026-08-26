@@ -1,3 +1,4 @@
+# FILE: src/schemas/quiz_schemas.py
 from pydantic import BaseModel, Field
 from typing import List, Optional, Literal
 
@@ -42,7 +43,7 @@ class QuizOption(BaseModel):
         description=(
             "The literal answer choice text that the student will select. "
             "CRITICAL KERNEL RULE: If the question format is `text_to_text` or `image_to_text`, this field MUST NOT BE NULL. "
-            "Only leave this as a literal JSON null if you are writing a `plot_prompt` for this specific option."
+            "STRICT MUTUAL EXCLUSIVITY: If you are populating `plot_prompt` for this option (formats `image_to_image` or `text_to_image`), this field MUST BE EXACTLY NULL. Do not provide both."
         )
     )
     
@@ -50,7 +51,7 @@ class QuizOption(BaseModel):
         None, 
         description=(
             "A NATURAL LANGUAGE description of the graph needed for THIS SPECIFIC OPTION. "
-            "Leave null if the question's `format_type` is `text_to_text` or `image_to_text`."
+            "STRICT MUTUAL EXCLUSIVITY: Leave exactly null if the question's `format_type` is `text_to_text` or `image_to_text`. If populated, the `text` field MUST be null."
         )
     )
 

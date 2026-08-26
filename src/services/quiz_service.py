@@ -43,7 +43,7 @@ class QuizService:
             TokenUsageService().log_token_usage(
                 user_id=current_user,
                 conversation_id=conversation_id, 
-                source="quiz",                
+                    source="quiz",                 
                 tier=active_mode,   
                 engine=engine_name, 
                 input_tokens=usage_dict["input_tokens"],
@@ -455,6 +455,10 @@ class QuizService:
                                     if isinstance(opt, dict):
                                         opt["plot_prompt"] = None
                                         opt["image_url"] = None
+                            else:
+                                for opt in q_dict.get("options", []):
+                                    if isinstance(opt, dict):
+                                        opt["text"] = None
 
                         stream_manager.send_quiz_item(question_data=q_dict, index=idx, group_index=group_idx)
                             
@@ -543,6 +547,10 @@ class QuizService:
                                     if isinstance(opt, dict):
                                         opt["plot_prompt"] = None
                                         opt["image_url"] = None
+                            else:
+                                for opt in q_dict.get("options", []):
+                                    if isinstance(opt, dict):
+                                        opt["text"] = None
 
                             # Assign resolved image URLs from worker using global child index
                             if (global_q_idx, None) in worker.image_urls_map:
@@ -612,6 +620,10 @@ class QuizService:
                                 if isinstance(opt, dict):
                                     opt["plot_prompt"] = None
                                     opt["image_url"] = None
+                        else:
+                            for opt in q_dict.get("options", []):
+                                if isinstance(opt, dict):
+                                    opt["text"] = None
                         global_q_idx += 1
 
                 quiz_data = {
