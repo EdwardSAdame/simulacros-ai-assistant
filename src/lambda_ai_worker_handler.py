@@ -1,4 +1,4 @@
-# FILE: src/lambda_ai_worker_handler.py
+# FILE: src/lambda_ai_worker_handler.py 
 
 import json
 import logging
