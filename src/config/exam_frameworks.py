@@ -47,7 +47,7 @@ ICFES_DOMAINS = {
   - Part 5 (16%): Literal reading comprehension (Basic text).
   - Part 6 (11%): Inferential reading comprehension (Complex text, author's intent).
   - Part 7 (22%): Advanced lexico-grammatical cloze (Vocabulary in context).
-- Strategy: State explicitly which of the 7 parts is being simulated. Adhere strictly to the format of that part."""
+  - Strategy: State explicitly which of the 7 parts is being simulated. Adhere strictly to the format of that part."""
 }
 
 UNAL_GLOBAL = """## ACADEMIC FRAMEWORK: Universidad Nacional de Colombia (UNAL) Admission Exam
@@ -84,13 +84,14 @@ UNAL_DOMAINS = {
 - Strategy: CRITICAL: Do not generate pure, heavy mathematical or algebraic calculations. The UNAL exam focuses on qualitative, phenomenological, and conceptual reasoning. You MUST provide a rich, paragraph-length scientific text, historical context, or experimental description in the `context_text` field. Base each question on interpreting that stimulus, applying scientific laws, or analyzing qualitative relationships.
 - Distractor Logic: Incorrect options must represent plausible scientific misconceptions, procedural missteps, or misinterpretations of the provided text or diagram. Obvious or trivial options are strictly prohibited.""",
 
-    "ciencias_sociales": """### DOMAIN: SOCIAL SCIENCES
-- Overview: Structural, chronological, and theoretical analysis of history, geography, sociology, philosophy, and formal logic.
-- Components:
-  - History & Geography: Global and Colombian history, comparative chronological benchmarks, economic models, sociology of communication and mass media, and spatial/political geography.
-  - Philosophy & Logic: Classical to Contemporary thought, moral philosophy (emotivism, care ethics, character education), philosophical disciplines (ethics, epistemology, aesthetics, axiology). Strict evaluation of formal propositional logic, symbolic translation, De Morgan's laws in natural language, syllogisms, argument soundness (validity vs. truth of premises), and argument validity (deductive vs. inductive).
-- Strategy: Present complex social scenarios, historical excerpts, philosophical postulates, or geopolitical maps in the context. Do not rely on isolated trivia. Require the student to apply formal logic to philosophical arguments, interpret historical phenomena from specific theoretical frameworks, or map geographical data based on visual evidence.
-- Distractor Logic: Incorrect options must represent plausible analytical errors. For history/geography, use anachronisms, inverted causalities, or misapplied geopolitical models. For philosophy/logic, distractors must represent formal logical fallacies, incorrect logical negations, or misattributions of philosophical concepts.""",
+    "ciencias_sociales": """### DOMAIN: SOCIAL SCIENCES AND PHILOSOPHY (UNAL FORMAT)
+- Overview: Evaluates historical knowledge, geographical context, and philosophical/logical deduction strictly through deep reading comprehension and academic analysis.
+- Structure: ALWAYS generate an academic base text discussing a historical event, a geographical/economic phenomenon, or a philosophical concept.
+- Competencies: Inferential reading, historical causality, spatial/geographical orientation, and formal logic/philosophical reasoning.
+- Topics: Universal History, Colombian History, Economic Geography, and Philosophy.
+- Strategy: 
+  1. Base Text: Write an objective, rigorous academic passage simulating a textbook or historical article. 
+  2. Question Design: Avoid isolated trivia. Questions must require the user to infer the author's intent, identify spatial/geographical relationships, deduce logical equivalents, or determine historical causes/effects based on the text.""",
 
     "analisis_imagen": """### DOMAIN: IMAGE ANALYSIS
 - Overview: Pure abstract logical reasoning, visuospatial cognition, and fluid intelligence. This is a unique hallmark of the UNAL exam.
