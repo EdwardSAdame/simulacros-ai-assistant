@@ -141,7 +141,8 @@ class OrchestratorService:
                     display_name=display_name,
                     attachments=documents,
                     actual_conversation_id=actual_conversation_id,
-                    num_questions=num_questions
+                    num_questions=num_questions,
+                    requires_web_search=requires_web_search  # <--- WE PASSED THE FLAG HERE
                 )
             
             elif intent == "mentalmap" or intent == "mind_map":

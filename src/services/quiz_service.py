@@ -66,7 +66,8 @@ class QuizService:
         is_general_subject: bool = False,
         exam_context: str = "GENERAL",
         custom_topic: str = "",
-        is_document_grounded: bool = False
+        is_document_grounded: bool = False,
+        requires_web_search: bool = False
     ) -> Dict[str, Any]:
         
         format_map = format_map or {}
@@ -82,7 +83,17 @@ class QuizService:
             grouping_instructions += (
                 "SCENARIO A: SHARED CONTEXT (Nested Architecture)\n"
                 "This is a reading-heavy subject requiring shared stimulus blocks.\n"
-                "1. For EACH group you create, populate `context_text` with a unique reading passage.\n"
+            )
+            
+            if requires_web_search:
+                grouping_instructions += (
+                    "0. CRITICAL: Use your Web Search tool to fetch a real-world article, historical text, or news piece about the requested topic BEFORE generating the questions.\n"
+                    "1. For EACH group you create, populate `context_text` EXACTLY with the text you retrieved from the web search to act as the reading passage.\n"
+                )
+            else:
+                grouping_instructions += "1. For EACH group you create, populate `context_text` with a unique reading passage.\n"
+                
+            grouping_instructions += (
                 "2. If the passage requires a visual, populate `group_image_prompt` or `group_plot_prompt`. If not, leave them null.\n"
                 "3. Attach 3 to 5 dependent `QuizQuestion` objects inside that group's `questions` array.\n"
                 f"4. Continue creating new groups until you reach exactly {num_questions} total questions across all groups.\n"
@@ -241,11 +252,12 @@ class QuizService:
         actual_conversation_id: str | None = None,
         num_questions: int = 0,
         custom_topic: str = "",
-        is_document_grounded: bool = False
+        is_document_grounded: bool = False,
+        requires_web_search: bool = False
     ) -> Tuple[str, Dict | None]:
         
         has_attachments = bool(attachments and len(attachments) > 0)
-        is_doc_grounded = is_document_grounded or has_attachments
+        is_doc_grounded = is_document_grounded or has_attachments or requires_web_search
         
         topic_hint = category if category else "General Knowledge"
         
@@ -324,6 +336,7 @@ class QuizService:
             "is_visual_subject": is_visual_subject,
             "is_creative_subject": is_creative_subject,
             "is_document_grounded": is_doc_grounded,
+            "requires_web_search": requires_web_search,
             "num_questions_requested": num_questions,
             "target_visuals_enforced": target_visuals,
             "format_map": format_map
@@ -348,12 +361,20 @@ class QuizService:
             is_general_subject=is_general_subject,
             exam_context=exam_context,
             custom_topic=custom_topic,
-            is_document_grounded=is_doc_grounded
+            is_document_grounded=is_doc_grounded,
+            requires_web_search=requires_web_search
         )
         conversation_input.append(system_instruction)
 
         selected_vector_stores = get_stores_for_page(page)
         web_search_config = get_search_filters(exam_context)
+        
+        # Override the web search config dynamically based on the router flag
+        if requires_web_search:
+            if web_search_config is None:
+                web_search_config = {"scope": "open_web", "search_enabled": True}
+            else:
+                web_search_config["search_enabled"] = True
 
         quiz_data = None
         final_reply_text = "Aqui tienes tu simulacro."
