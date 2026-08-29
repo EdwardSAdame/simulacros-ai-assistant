@@ -1,3 +1,4 @@
+# FILE: src/services/semantic_router.py
 import logging
 from typing import List, Literal, Optional
 from pydantic import BaseModel, Field
@@ -55,6 +56,11 @@ class SemanticRouter:
         
         self.visual_categories = [
             "matematicas", "ciencias_naturales", "analisis_imagen", "general"
+        ]
+
+        self.humanities_categories = [
+            "ciencias_sociales", "sociales_ciudadanas", "sociales", 
+            "lectura_critica", "analisis_textual", "ingles"
         ]
 
     def determine_category(
@@ -239,6 +245,10 @@ class SemanticRouter:
             if intent == "quiz" and category in self.visual_categories:
                 requires_visuals = True
                 logger.info(f"Router Override: Enforcing requires_visuals=True for {category} quiz to apply visual doctrine styling.")
+
+            if intent == "quiz" and category in self.humanities_categories:
+                requires_web_search = True
+                logger.info(f"Router Override: Enforcing requires_web_search=True for {category} quiz to fetch reading passages.")
 
             if intent not in ["quiz", "flashcards"]:
                 num_questions = 0
