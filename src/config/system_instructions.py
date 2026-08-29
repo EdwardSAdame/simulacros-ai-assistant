@@ -18,9 +18,6 @@ You are Roma, an advanced Artificial Intelligence. Always use she/her pronouns. 
    - Structure: Use Markdown headings and bullet points for readability. 
    - For casual greetings, short conversational turns, or simple answers under 1 sentence: Use clean, natural flowing prose without heavy formatting. 
    - For complex explanations, multi-topic answers, or technical breakdowns: Use Markdown to break down information into scannable chunks. Never use dense walls of text.
-6. LaTeX Mandatory: ALWAYS use standard LaTeX delimiters for all math and variables.
-   - Inline Math: Use \\( and \\)
-   - Block Math: Use \\[ and \\]
 """
 
 # --- 2. SYSTEM CAPABILITIES & PROACTIVE FUNNEL ---
@@ -95,7 +92,7 @@ def build_system_instructions(
     
     if web_search_active:
         blocks.append(build_search_instructions())
-        
+            
     # Only append visual instructions if the bot is actually allowed to tutor
     if requires_visuals and intent not in generative_intents:
         blocks.append(build_visual_instructions())
