@@ -43,7 +43,7 @@ class QuizService:
             TokenUsageService().log_token_usage(
                 user_id=current_user,
                 conversation_id=conversation_id, 
-                    source="quiz",                 
+                source="quiz",                 
                 tier=active_mode,   
                 engine=engine_name, 
                 input_tokens=usage_dict["input_tokens"],
@@ -250,9 +250,9 @@ class QuizService:
         topic_hint = category if category else "General Knowledge"
         
         if num_questions < 1:
-            num_questions = random.randint(12, 17)
-        elif num_questions > 45:
-            num_questions = 45
+            num_questions = random.randint(9, 12)
+        elif num_questions > 25:
+            num_questions = 25
 
         visual_subjects_list = [
             "matematicas", "matematica", "matemática", "fisica", "física", 
