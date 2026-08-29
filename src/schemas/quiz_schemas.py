@@ -2,6 +2,11 @@
 from pydantic import BaseModel, Field
 from typing import List, Optional, Literal
 
+LATEX_INSTRUCTION = (
+    " CRITICAL MATH FORMATTING: All mathematical expressions, variables, numbers, and equations MUST be formatted "
+    "using escaped LaTeX delimiters. Use \\( and \\) for inline math. Use \\[ and \\] for display math. "
+)
+
 class ScaleConfig(BaseModel):
     min_score: float = Field(..., description="Minimum possible score on this standardized scale.")
     max_score: float = Field(..., description="Maximum possible score on this standardized scale.")
@@ -35,7 +40,7 @@ class QuizOption(BaseModel):
     feedback: str = Field(..., description=(
         "Short feedback explaining exactly why this specific option is right or wrong. "
         "By writing this first, you anchor the logical trap or solution this option represents. "
-        "Speak directly to the student. DO NOT put the literal answer choice here."
+        "Speak directly to the student. DO NOT put the literal answer choice here." + LATEX_INSTRUCTION
     ))
 
     text: Optional[str] = Field(
@@ -43,7 +48,7 @@ class QuizOption(BaseModel):
         description=(
             "The literal answer choice text that the student will select. "
             "CRITICAL KERNEL RULE: If the question format is `text_to_text` or `image_to_text`, this field MUST NOT BE NULL. "
-            "STRICT MUTUAL EXCLUSIVITY: If you are populating `plot_prompt` for this option (formats `image_to_image` or `text_to_image`), this field MUST BE EXACTLY NULL. Do not provide both."
+            "STRICT MUTUAL EXCLUSIVITY: If you are populating `plot_prompt` for this option (formats `image_to_image` or `text_to_image`), this field MUST BE EXACTLY NULL. Do not provide both." + LATEX_INSTRUCTION
         )
     )
     
@@ -73,14 +78,14 @@ class QuizQuestion(BaseModel):
         description="The required structural layout for this individual question."
     )
 
-    explanation: str = Field(..., description="Internal reasoning and structural blueprint. Write this before generating the question text.")
+    explanation: str = Field(..., description="Internal reasoning and structural blueprint. Write this before generating the question text." + LATEX_INSTRUCTION)
 
     context_text: Optional[str] = Field(
         None, 
         description=(
             "Optional question-specific setup or formula premise. "
             "CRITICAL RULE: For shared reading passages, do NOT place the passage here. "
-            "Place it in the parent QuestionGroup's context_text field instead."
+            "Place it in the parent QuestionGroup's context_text field instead." + LATEX_INSTRUCTION
         )
     )
 
@@ -89,7 +94,7 @@ class QuizQuestion(BaseModel):
         description="The exact URL of the web search. Leave null if no search was performed."
     )
 
-    question_text: str = Field(..., description="The specific interrogative sentence or direct command.")
+    question_text: str = Field(..., description="The specific interrogative sentence or direct command." + LATEX_INSTRUCTION)
 
     plot_prompt: Optional[str] = Field(
         None, 
@@ -124,7 +129,7 @@ class QuestionGroup(BaseModel):
         None, 
         description=(
             "The shared reading passage, case study, dataset, or stimulus text for this group of questions. "
-            "For standalone 1-on-1 questions without a shared reading passage, leave this field as null."
+            "For standalone 1-on-1 questions without a shared reading passage, leave this field as null." + LATEX_INSTRUCTION
         )
     )
 
