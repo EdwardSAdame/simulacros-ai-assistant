@@ -9,7 +9,6 @@ from src.utils.logging_utils import log_event
 from src.services.storage_service import storage_service
 from src.assistant.assistant_client import generate_structured_quiz, stream_structured_quiz
 from src.config.page_vectorstores import get_stores_for_page
-from src.config.web_search_config import get_search_filters
 from src.config.model_config import get_model_config 
 from src.services.token_usage_service import TokenUsageService
 from src.services.container_usage_service import ContainerUsageService
@@ -367,14 +366,13 @@ class QuizService:
         conversation_input.append(system_instruction)
 
         selected_vector_stores = get_stores_for_page(page)
-        web_search_config = get_search_filters(exam_context)
         
-        # Override the web search config dynamically based on the router flag
+        # STRICT OVERRIDE: The semantic router is the absolute source of truth.
+        # We bypass get_search_filters() completely for quizzes to prevent exposing unused tools.
         if requires_web_search:
-            if web_search_config is None:
-                web_search_config = {"scope": "open_web", "search_enabled": True}
-            else:
-                web_search_config["search_enabled"] = True
+            web_search_config = {"scope": "open_web", "search_enabled": True}
+        else:
+            web_search_config = None
 
         quiz_data = None
         final_reply_text = "Aqui tienes tu simulacro."
