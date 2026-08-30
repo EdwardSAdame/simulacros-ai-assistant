@@ -16,6 +16,7 @@ from src.services.container_usage_service import ContainerUsageService
 from src.assistant.clients.base_client import BaseAssistantClient
 from src.services.visual_worker_service import VisualWorkerService
 from src.config.exam_reasoning_doctrine import VISUAL_REASONING_DOCTRINE, ANALYTICAL_REASONING_DOCTRINE
+from src.config.search_instructions import build_search_instructions
 
 logger = logging.getLogger(__name__)
 
@@ -66,7 +67,8 @@ class QuizService:
         exam_context: str = "GENERAL",
         custom_topic: str = "",
         is_document_grounded: bool = False,
-        requires_web_search: bool = False
+        requires_web_search: bool = False,
+        category: str = "general"
     ) -> Dict[str, Any]:
         
         format_map = format_map or {}
@@ -209,6 +211,10 @@ class QuizService:
                 "Force yourself to switch academic domains logically.\n\n"
             )
 
+        search_doctrine = ""
+        if requires_web_search:
+            search_doctrine = build_search_instructions(intent="quiz", category=category)
+
         instruction_text = (
             f"## IMMEDIATE RUNTIME MISSION\n"
             f"The user requested a quiz/exam about '{active_display_name}'. You must generate exactly {num_questions} questions in total.\n\n"
@@ -223,7 +229,8 @@ class QuizService:
             "- SOURCES: Keep `source_url` null unless you hold a verified URL.\n"
             "- OPTION TEXT vs FEEDBACK: The `text` field in the options is the literal answer the student clicks. The `feedback` is the explanation. Do NOT put the answer inside the feedback and leave the text null. For `text_to_text` and `image_to_text` formats, the `text` field MUST BE POPULATED.\n\n"
             f"{psychometric_doctrine}\n"
-            f"{general_doctrine}"
+            f"{general_doctrine}\n"
+            f"{search_doctrine}\n"
             "## SMART FOLLOW-UP PROTOCOL\n"
             "Generate 3 'Ghost Prompts' (easier_payload, harder_payload, retry_payload) in the EXACT SAME LANGUAGE as the quiz.\n"
         )
@@ -361,7 +368,8 @@ class QuizService:
             exam_context=exam_context,
             custom_topic=custom_topic,
             is_document_grounded=is_doc_grounded,
-            requires_web_search=requires_web_search
+            requires_web_search=requires_web_search,
+            category=category
         )
         conversation_input.append(system_instruction)
 
@@ -664,4 +672,4 @@ class QuizService:
             final_reply_text = "**Error**: No pudimos generar el simulacro."
             quiz_data = None
 
-        return final_reply_text, quiz_data
+        return final_reply_text, quiz_data  

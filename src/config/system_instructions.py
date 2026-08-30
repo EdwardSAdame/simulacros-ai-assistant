@@ -91,7 +91,8 @@ def build_system_instructions(
     ))
     
     if web_search_active:
-        blocks.append(build_search_instructions())
+        # Pass intent and category to resolve domain-specific and cross-lingual search rules
+        blocks.append(build_search_instructions(intent=intent, category=category))
             
     # Only append visual instructions if the bot is actually allowed to tutor
     if requires_visuals and intent not in generative_intents:
