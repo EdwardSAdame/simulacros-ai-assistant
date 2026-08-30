@@ -76,6 +76,15 @@ class QuizService:
         is_custom = is_document_grounded or bool(custom_topic.strip())
         active_display_name = custom_topic.strip().title() if custom_topic.strip() else display_name
         
+        search_protocol_instructions = ""
+        if is_creative_subject and not is_general_subject and requires_web_search:
+            search_protocol_instructions = (
+                "## 0. WEB SEARCH PROTOCOL (STIMULUS ACQUISITION)\n"
+                "1. Execution Command: You MUST execute the `web_search` tool immediately to fetch a real-world reading passage, article, or stimulus to ground your quiz questions.\n"
+                "2. Citations: Append the source URL as an inline Markdown link at the end of your context blocks.\n"
+                "3. Academic Authority Sourcing: For this specific quiz, you MUST prioritize renowned, serious academic publications, institutional databases, and high-end cultural sites. Maintain an open search scope, but heavily filter for high-authority domains.\n\n"
+            )
+
         # 1. The Grouping Architecture: Dictate the Parent-Child Permutations
         grouping_instructions = "## 1. GROUP ARCHITECTURE & PERMUTATIONS (CRITICAL)\n"
         grouping_instructions += "You operate on a polymorphic, hierarchical schema. ALL questions must be wrapped inside `QuestionGroup` objects.\n"
@@ -88,7 +97,6 @@ class QuizService:
             
             if requires_web_search:
                 grouping_instructions += (
-                    "0. CRITICAL: Use your Web Search tool to fetch a real-world article, historical text, or news piece about the requested topic BEFORE generating the questions.\n"
                     "1. For EACH group you create, populate `context_text` EXACTLY with the text you retrieved from the web search to act as the reading passage.\n"
                 )
             else:
@@ -218,6 +226,7 @@ class QuizService:
         instruction_text = (
             f"## IMMEDIATE RUNTIME MISSION\n"
             f"The user requested a quiz/exam about '{active_display_name}'. You must generate exactly {num_questions} questions in total.\n\n"
+            f"{search_protocol_instructions}"
             f"{grouping_instructions}\n"
             f"{format_instructions}\n"
             f"## 4. SUBJECT SPECIFIC DOCTRINES\n"
@@ -290,6 +299,10 @@ class QuizService:
         is_creative_subject = any(subj in topic_lower for subj in creative_categories)
         is_analisis_imagen = "analisis_imagen" in topic_lower
         
+        # DETERMINISTIC OVERRIDE: Force web search for humanities reading passages
+        if is_creative_subject and not is_general_subject:
+            requires_web_search = True
+
         requires_creative_images = is_creative_subject or is_general_subject
 
         max_visuals = 0
