@@ -292,7 +292,7 @@ class QuizService:
         if is_analisis_imagen:
             max_visuals = num_questions
             target_visuals = num_questions
-            image_to_text_indices = list(range(num_questions))
+            image_to_image_indices = list(range(num_questions))
         elif is_general_subject or is_visual_subject or is_creative_subject:
             max_visuals = math.floor(num_questions * 0.4)
             target_visuals = random.randint(0, max_visuals) if max_visuals > 0 else 0
