@@ -1,10 +1,13 @@
-# FILE: src/schemas/quiz_schemas.py
-from pydantic import BaseModel, Field
 from typing import List, Optional, Literal
+from pydantic import BaseModel, Field
 
 LATEX_INSTRUCTION = (
     "CRITICAL MATH FORMATTING: All mathematical expressions, variables, and numbers MUST be formatted "
     "using escaped LaTeX delimiters. Use \\( and \\) for inline math. Use \\[ and \\] for display math. "
+)
+
+MARKDOWN_INSTRUCTION = (
+    "MARKDOWN FORMATTING: You MUST format this text using Markdown for readability. "
 )
 
 class ScaleConfig(BaseModel):
@@ -89,6 +92,7 @@ class QuizQuestion(BaseModel):
         None, 
         description=(
             LATEX_INSTRUCTION +
+            MARKDOWN_INSTRUCTION +
             "Optional question-specific setup or formula premise. "
             "CRITICAL RULE: For shared reading passages, do NOT place the passage here. "
             "Place it in the parent QuestionGroup's context_text field instead."
@@ -138,6 +142,7 @@ class QuestionGroup(BaseModel):
         None, 
         description=(
             LATEX_INSTRUCTION +
+            MARKDOWN_INSTRUCTION +
             "The shared reading passage, case study, dataset, or stimulus text for this group of questions. "
             "For standalone 1-on-1 questions without a shared reading passage, leave this field as null."
         )
