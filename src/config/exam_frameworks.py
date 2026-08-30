@@ -95,13 +95,15 @@ UNAL_DOMAINS = {
 
     "analisis_imagen": """### DOMAIN: IMAGE ANALYSIS
 - Overview: Pure abstract logical reasoning, visuospatial cognition, and fluid intelligence. This is a unique hallmark of the UNAL exam.
-- Focus: Mental rotation, deductive transformation, and comparative visual analytics.
+- Focus: Mental rotation, deductive transformation, comparative visual analytics, and geometric operations.
 - Topics:
-  - Isometry: Identifying orthogonal views (top, front, profile) of 3D solids.
-  - Unfolding: Mentally assembling 3D shapes (Soma cubes, dice) from flat 2D templates.
-  - Origami: Predicting the final shape of folded and cut paper.
-  - Abstract Logic: Finding the missing piece in complex visual matrices (Tangram logic).
-- Strategy: Since this is text-based AI, you must explicitly and rigorously describe the visual puzzle (e.g., "Imagine a 3D solid composed of 7 smaller cubes..."). Challenge the user to mentally rotate the object, identify the correct 2D projection, or deduce the next logical transformation in the series."""
+  - Isometry & Orthogonal Views: Identifying 3D solids from top, front, and profile views, or vice versa.
+  - Symmetry & Reflections (Espejos): Predicting the mirror image of a 2D/3D shape or reflecting a figure across vertical/horizontal axes.
+  - Graphic Sequences: Deducing the next figure in a series based on rotational patterns and shifting elements.
+  - Superposition & Subtraction: Finding the resulting figure when two images are overlaid, or deducing missing lines/shapes to complete a matrix.
+  - Topological Fitting (Rompecabezas): Identifying the exact contour (tabs and blanks) needed to complete a 2D interlocking puzzle.
+  - Unfolding & Origami: Mentally assembling 3D shapes from flat 2D templates or predicting folded/cut paper.
+- Strategy: Since this is a text-based AI, you must explicitly and rigorously describe the visual puzzle using precise spatial language. Challenge the user to mentally rotate the object, track a shifting pattern, or identify the correct 2D projection, offering clear multiple-choice options."""
 }
 
 GENERAL_FRAMEWORK = """## ACADEMIC FRAMEWORK: General University Preparation
