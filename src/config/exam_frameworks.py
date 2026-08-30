@@ -122,7 +122,8 @@ def get_exam_framework(
 ) -> str:
     """
     Returns the appropriate pedagogical framework based on exam context, category, and intent.
-    Respects custom_topic and document attachments to bypass strict multi-subject rules.
+    Consistently applies domain-specific instructions across both chat and quiz intents.
+    Appends custom topics or document constraints without overriding the domain logic.
     """
     is_custom = is_document_grounded or bool(custom_topic.strip())
 
@@ -130,33 +131,29 @@ def get_exam_framework(
     if is_custom:
         focus = custom_topic.strip() if custom_topic.strip() else "the attached document"
         custom_doctrine = (
-            f"### DOMAIN: CUSTOM FOCUS ({focus.upper()})\n"
+            f"\n\n### DOMAIN: CUSTOM FOCUS ({focus.upper()})\n"
             f"- Overview: You must generate this artifact EXCLUSIVELY about '{focus}'.\n"
             "- Strategy: Completely ignore standard multi-subject distribution rules. Every single question/interaction must be grounded in this specific custom topic or the provided document."
         )
 
     if exam_context == "UNAL":
-        if intent != "quiz":
-            return UNAL_GLOBAL
-
-        if is_custom:
-            return UNAL_GLOBAL + "\n\n" + custom_doctrine
-
-        if category == "general" or category not in UNAL_DOMAINS:
-            return UNAL_GLOBAL + "\n\n" + "\n\n".join(UNAL_DOMAINS.values())
-        else:
-            return UNAL_GLOBAL + "\n\n" + UNAL_DOMAINS[category]
+        base_framework = UNAL_GLOBAL
+        
+        if category != "general" and category in UNAL_DOMAINS:
+            base_framework += "\n\n" + UNAL_DOMAINS[category]
+        elif category == "general" and intent == "quiz":
+            base_framework += "\n\n" + "\n\n".join(UNAL_DOMAINS.values())
+            
+        return base_framework + custom_doctrine
 
     elif exam_context == "ICFES":
-        if intent != "quiz":
-            return ICFES_GLOBAL
-
-        if is_custom:
-            return ICFES_GLOBAL + "\n\n" + custom_doctrine
-
-        if category == "general" or category not in ICFES_DOMAINS:
-            return ICFES_GLOBAL + "\n\n" + "\n\n".join(ICFES_DOMAINS.values())
-        else:
-            return ICFES_GLOBAL + "\n\n" + ICFES_DOMAINS[category]
+        base_framework = ICFES_GLOBAL
+        
+        if category != "general" and category in ICFES_DOMAINS:
+            base_framework += "\n\n" + ICFES_DOMAINS[category]
+        elif category == "general" and intent == "quiz":
+            base_framework += "\n\n" + "\n\n".join(ICFES_DOMAINS.values())
+            
+        return base_framework + custom_doctrine
 
     return GENERAL_FRAMEWORK.strip()

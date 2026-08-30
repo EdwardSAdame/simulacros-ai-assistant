@@ -9,7 +9,7 @@ from src.utils.logging_utils import log_event
 from src.services.storage_service import storage_service
 from src.assistant.assistant_client import generate_structured_quiz, stream_structured_quiz
 from src.config.page_vectorstores import get_stores_for_page
-from src.config.model_config import get_model_config 
+from src.config.model_config import get_model_config
 from src.services.token_usage_service import TokenUsageService
 from src.services.container_usage_service import ContainerUsageService
 
@@ -263,7 +263,9 @@ class QuizService:
     ) -> Tuple[str, Dict | None]:
         
         has_attachments = bool(attachments and len(attachments) > 0)
-        is_doc_grounded = is_document_grounded or has_attachments or requires_web_search
+        
+        # Enforce SRP: Web search routing should not trigger the custom document grounding logic
+        is_doc_grounded = is_document_grounded or has_attachments
         
         topic_hint = category if category else "General Knowledge"
         
@@ -672,4 +674,4 @@ class QuizService:
             final_reply_text = "**Error**: No pudimos generar el simulacro."
             quiz_data = None
 
-        return final_reply_text, quiz_data  
+        return final_reply_text, quiz_data
