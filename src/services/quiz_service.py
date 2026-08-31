@@ -20,6 +20,19 @@ from src.config.search_instructions import build_search_instructions
 
 logger = logging.getLogger(__name__)
 
+# Module-level constants for subject categorization
+VISUAL_SUBJECTS = {
+    "matematicas", "matematica", "matemática", "fisica", "física", 
+    "quimica", "química", "biologia", "biología", 
+    "ciencias_naturales", "analisis_imagen"
+}
+
+CREATIVE_SUBJECTS = {
+    "ciencias_sociales", "sociales_ciudadanas", "sociales", 
+    "lectura_critica", "analisis_textual", "ingles"
+}
+
+
 def _normalize_email_for_storage(val):
     if val is None: return None
     if isinstance(val, str) and val.strip() == "": return None
@@ -236,7 +249,8 @@ class QuizService:
             f"{VISUAL_REASONING_DOCTRINE}\n\n"
             "## 6. SCHEMA & FIELD RESTRICTIONS\n"
             "- SOURCES: Keep `source_url` null unless you hold a verified URL.\n"
-            "- OPTION TEXT vs FEEDBACK: The `text` field in the options is the literal answer the student clicks. The `feedback` is the explanation. Do NOT put the answer inside the feedback and leave the text null. For `text_to_text` and `image_to_text` formats, the `text` field MUST BE POPULATED.\n\n"
+            "- OPTION TEXT vs FEEDBACK: The `text` field in the options is the literal answer the student clicks. The `feedback` is the explanation. Do NOT put the answer inside the feedback and leave the text null. For `text_to_text` and `image_to_text` formats, the `text` field MUST BE POPULATED.\n"
+            "- GLOBAL LANGUAGE LOCK: All generated text fields, specifically `context_text`, `question_text`, `text`, and `feedback`, MUST strictly match the language of the user's prompt. Never output mixed languages unless the subject is specifically foreign language evaluation.\n\n"
             f"{psychometric_doctrine}\n"
             f"{general_doctrine}\n"
             f"{search_doctrine}\n"
@@ -283,20 +297,10 @@ class QuizService:
         elif num_questions > 25:
             num_questions = 25
 
-        visual_subjects_list = [
-            "matematicas", "matematica", "matemática", "fisica", "física", 
-            "quimica", "química", "biologia", "biología", 
-            "ciencias_naturales", "analisis_imagen"
-        ]
-        creative_categories = [
-            "ciencias_sociales", "sociales_ciudadanas", "sociales", 
-            "lectura_critica", "analisis_textual", "ingles"
-        ]
-
         topic_lower = topic_hint.lower()
         is_general_subject = "general" in topic_lower
-        is_visual_subject = any(subj in topic_lower for subj in visual_subjects_list)
-        is_creative_subject = any(subj in topic_lower for subj in creative_categories)
+        is_visual_subject = any(subj in topic_lower for subj in VISUAL_SUBJECTS)
+        is_creative_subject = any(subj in topic_lower for subj in CREATIVE_SUBJECTS)
         is_analisis_imagen = "analisis_imagen" in topic_lower
         
         # DETERMINISTIC OVERRIDE: Force web search for humanities reading passages
