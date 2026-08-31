@@ -67,13 +67,18 @@ UNAL_DOMAINS = {
 - Strategy: Use dense, academic paragraphs. Force the user to logically deconstruct the argument, identify logical fallacies, or deduce semantic implications that are deeply buried in the text's syntax.""",
 
     "matematicas": """### DOMAIN: MATHEMATICS
-- Overview: Rigorous evaluation of mathematical modeling, abstract logic, and procedural execution. The exam balances applied word problems with pure, formal mathematical abstraction requiring multi-step reasoning.
-- Competencies Evaluated: Numerical, Spatial, Metric, Random, and Variational thinking.
-- Topics: Set theory and real number intervals, arithmetic operations with rational numbers and exponents, advanced number theory (prime factorization, divisibility, Diophantine equations), linear systems, polynomial remainder theorem, quadratic discriminants and nature of roots, rational inequalities and expression simplification, analytic geometry (conic sections, collinearity, line-conic intersections, interior point testing), Euclidean and spatial geometry (circular sectors, arc lengths, composite areas, volumes, unit conversions), function transformations, trigonometry (ratios and fundamental identities), probability, and combinatorics.
-- Dual Format Strategy (CRITICAL): You must dynamically alternate between two distinct question structures:
-  1. Applied Modeling: Present a concise real-world scenario. Require the student to translate natural language parameters into a mathematical model to find the solution.
-  2. Formal Abstraction: Present raw equations, geometric axioms, coordinate sets, or rational inequalities directly. Require the student to execute polynomial division, identify asymptotes, evaluate truth values of mathematical postulates, or solve algebraic expressions without any real-world narrative.
-- Distractor Logic: Incorrect options must represent plausible procedural fallacies and cognitive traps. Each distractor must logically correspond to a specific misstep, such as selecting a valid intermediate calculation before completing the final conceptual step, applying a theorem under invalid conditions, making standard algebraic manipulation errors, or misinterpreting the problem parameters.""",
+- Core Cognitive Profile: Rigorous evaluation of abstract logic, spatial reasoning, and procedural endurance. Never ask for direct, single-step mechanical calculations. Obscure the primary mathematical operation behind foundational definitions, constraints, or geometric axioms.
+- Domain Blending (CRITICAL): Erase boundaries between mathematical silos. Dynamically require the output of one mathematical concept to serve as the input for another within the same question. Force the integration of algebraic agility with geometric properties or number theory.
+- Execution Formats: Dynamically alternate between three distinct structural frameworks:
+  1. Formal Abstraction: Present raw equations, coordinate planes, or inequalities. Demand the execution of function transformations, polynomial evaluation, or root analysis without narrative context.
+  2. Theoretical Logic Testing: Present abstract geometric or algebraic postulates. Evaluate the student's grasp of foundational theorems using structured logical evaluations.
+  3. Constrained Modeling: Present concise scenarios requiring optimization or spatial modeling. Establish restrictive parameters that force the student to construct mathematical models to find the solution.
+- Thematic Clusters (Competencies Evaluated):
+  * Pre-Calculus & Variational Foundations: Function transformations, rational inequalities, conic sections, asymptotes, and trigonometric identities.
+  * Spatial & Analytic Geometry: Line-conic intersections, collinearity, composite areas, spatial volumes, and coordinate geometry.
+  * Algebraic Agility & Number Theory: Diophantine equations, polynomial remainder theorem, prime factorization, and linear systems.
+  * Discrete Mathematics: Combinatorics, probability, set theory, and intervals.
+- Distractor Logic: Incorrect options must be highly plausible. Generate distractors by executing specific, predictable cognitive fallacies: stopping at a valid intermediate calculation, inverting functional shifts, applying geometric theorems under invalid edge cases, or executing common sign-switching algebraic errors.""",
 
     "ciencias_naturales": """### DOMAIN: NATURAL SCIENCES
 - Overview: Hard science evaluation requiring deep conceptual understanding, phenomenological reasoning, and reading comprehension applied to microscopic and macroscopic natural phenomena.
