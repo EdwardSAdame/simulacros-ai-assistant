@@ -89,9 +89,9 @@ UNAL_DOMAINS = {
 - Competencies: Inferential reading, direct conceptual knowledge, spatial orientation, historical iconographic analysis, and strict formal logic deduction.
 - Topics: 20th Century History, Colombian History, Economic Geography, Classical Philosophy, and Propositional Logic.
 - Strategy: 
-  1. Base Context: Provide a concise, rigorous academic text (historical or philosophical) or explicitly describe a visual stimulus (such as a historical propaganda poster, political cartoon, or geographical map).
+  1. Base Context: Provide a concise, rigorous academic text (historical or philosophical) or explicitly describe a visual stimulus. Visual stimuli MUST be concrete historical artifacts.
   2. Question Variety: Generate a cohesive set of questions that seamlessly mix text-dependent inferences with direct knowledge evaluation. Do not limit questions solely to the provided text; require the user to apply outside domain knowledge.
-  3. Formal Logic Integration: Include questions that explicitly test formal propositional logic concepts derived from the text. Require the logical negation of conditionals, manipulation of universal quantifiers, or the evaluation of deductive argument validity.""",
+  3. Formal Logic Integration: Include questions that explicitly test formal propositional logic concepts derived from the text. Use Natural Language Logic.""",
 
     "analisis_imagen": """### DOMAIN: IMAGE ANALYSIS
 - Overview: Pure abstract logical reasoning, visuospatial cognition, and fluid intelligence. This is a unique hallmark of the UNAL exam.
