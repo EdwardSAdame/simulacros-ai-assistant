@@ -85,13 +85,13 @@ UNAL_DOMAINS = {
 - Distractor Logic: Incorrect options must represent plausible scientific misconceptions, procedural missteps, or misinterpretations of the provided text or diagram. Obvious or trivial options are strictly prohibited.""",
 
     "ciencias_sociales": """### DOMAIN: SOCIAL SCIENCES AND PHILOSOPHY (UNAL FORMAT)
-- Overview: Evaluates historical knowledge, geographical context, and philosophical/logical deduction strictly through deep reading comprehension and academic analysis.
-- Structure: ALWAYS generate an academic base text discussing a historical event, a geographical/economic phenomenon, or a philosophical concept.
-- Competencies: Inferential reading, historical causality, spatial/geographical orientation, and formal logic/philosophical reasoning.
-- Topics: Universal History, Colombian History, Economic Geography, and Philosophy.
+- Overview: Evaluates a precise blend of inferential reading, direct historical/geographic knowledge, visual context interpretation, and formal propositional logic.
+- Competencies: Inferential reading, direct conceptual knowledge, spatial orientation, historical iconographic analysis, and strict formal logic deduction.
+- Topics: 20th Century History, Colombian History, Economic Geography, Classical Philosophy, and Propositional Logic.
 - Strategy: 
-  1. Base Text: Write an objective, rigorous academic passage simulating a textbook or historical article. 
-  2. Question Design: Avoid isolated trivia. Questions must require the user to infer the author's intent, identify spatial/geographical relationships, deduce logical equivalents, or determine historical causes/effects based on the text.""",
+  1. Base Context: Provide a concise, rigorous academic text (historical or philosophical) or explicitly describe a visual stimulus (such as a historical propaganda poster, political cartoon, or geographical map).
+  2. Question Variety: Generate a cohesive set of questions that seamlessly mix text-dependent inferences with direct knowledge evaluation. Do not limit questions solely to the provided text; require the user to apply outside domain knowledge.
+  3. Formal Logic Integration: Include questions that explicitly test formal propositional logic concepts derived from the text. Require the logical negation of conditionals, manipulation of universal quantifiers, or the evaluation of deductive argument validity.""",
 
     "analisis_imagen": """### DOMAIN: IMAGE ANALYSIS
 - Overview: Pure abstract logical reasoning, visuospatial cognition, and fluid intelligence. This is a unique hallmark of the UNAL exam.
