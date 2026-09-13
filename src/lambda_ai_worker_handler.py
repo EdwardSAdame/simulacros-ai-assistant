@@ -1,5 +1,3 @@
-# FILE: src/lambda_ai_worker_handler.py 
-
 import json
 import logging
 import boto3
@@ -14,11 +12,12 @@ from src.services.semantic_router import semantic_router
 from src.services.token_usage_service import TokenUsageService
 from src.services.context_resolution import determine_exam_context
 from src.storage.conversations_table import get_conversation_metadata
-
 from src.services.history_service import build_history_list 
-
 from src.services.audio_usage_service import AudioUsageService
 from src.config.model_config import get_model_config
+
+# 🟢 NEW: Import the Quota Service
+from src.services.quota_service import quota_service
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
@@ -74,7 +73,7 @@ def lambda_handler(event, context):
                     audio_svc.log_audio_usage(
                         user_id=user_id or "anonymous", 
                         conversation_id=conv_id_in or "unknown", 
-                        source="telemetry",                      
+                        source="telemetry",                    
                         tier=ai_mode,                            
                         engine=cfg.audio_transcription_model,   
                         duration_seconds=int(audio_duration),
@@ -177,6 +176,40 @@ def lambda_handler(event, context):
                     requires_web_search = routing_result.get("requires_web_search", False)
                     num_questions = routing_result.get("num_questions", 5)
                     exam_type = routing_result.get("exam_type", "unknown")
+
+                    # 🟢 NEW: Hard Paywall & Quota Intercept
+                    has_media = bool(attachments or media_items)
+                    quota_result = quota_service.evaluate_quota(
+                        user_id=user_id or "anonymous",
+                        intent=intent,
+                        has_attachments=has_media,
+                        user_tier=ai_mode
+                    )
+
+                    # If quota exceeded, stream the error payload and halt execution
+                    if not quota_result.get("allowed", True):
+                        log_event("hard_paywall_triggered", {
+                            "user_id": user_id, 
+                            "limit_type": quota_result.get("limit_type")
+                        }, level="warning")
+                        
+                        if connection_ids and not is_hidden:
+                            quota_payload = json.dumps({
+                                "action": "quota_exceeded",
+                                "limit_type": quota_result.get("limit_type"),
+                                "reset_timestamp": quota_result.get("reset_timestamp"),
+                                "conversation_id": conv_id_in,
+                                "client_row_id": client_row_id
+                            }, default=str)
+                            
+                            for conn_id in connection_ids:
+                                try:
+                                    api_gateway_client.post_to_connection(ConnectionId=conn_id, Data=quota_payload)
+                                except Exception:
+                                    pass
+                        
+                        # Skip processing the rest of this record
+                        continue
                     
                     client_action = None
                     if intent == "quiz":
@@ -256,6 +289,13 @@ def lambda_handler(event, context):
                 is_hidden=is_hidden, 
                 num_questions=num_questions
             )
+
+            # 🟢 NEW: Soft Paywall Injection
+            # If the quota service determined this request hit the upsell threshold, inject it into the payload
+            if quota_result.get("show_upsell"):
+                if meta_payload is None:
+                    meta_payload = {}
+                meta_payload["show_upsell"] = True
 
             if connection_ids and not is_hidden:
                 for conn_id in connection_ids:
