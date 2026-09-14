@@ -285,20 +285,12 @@ def lambda_handler(event, context):
                 arena_id=arena_id,
                 exam_id=exam_id, 
                 is_hidden=is_hidden, 
-                num_questions=num_questions
+                num_questions=num_questions,
+                quota_result=quota_result
             )
 
-            # Predictive Paywall and Soft Paywall Injection
-            if meta_payload is None:
-                meta_payload = {}
-                
-            if quota_result.get("limit_reached_now"):
-                meta_payload["limit_reached"] = True
-                meta_payload["limit_type"] = quota_result.get("limit_type")
-                meta_payload["reset_timestamp"] = quota_result.get("reset_timestamp")
-                meta_payload["show_upsell"] = False
-            elif quota_result.get("show_upsell"):
-                meta_payload["show_upsell"] = True
+            # We removed the manual injection block from here because the Orchestrator
+            # now correctly embeds the quota flags into meta_payload before persisting to DB.
 
             if connection_ids and not is_hidden:
                 for conn_id in connection_ids:

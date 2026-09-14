@@ -50,7 +50,8 @@ class OrchestratorService:
         arena_id: str | None = None,
         exam_id: str | None = None,  
         is_hidden: bool = False,
-        num_questions: int = 0
+        num_questions: int = 0,
+        quota_result: Dict | None = None  # 🟢 NEW: Pass quota evaluation to the orchestrator
     ) -> Tuple[str, str, str, Dict | None]:
         
         # 1. Normalize Media
@@ -142,7 +143,7 @@ class OrchestratorService:
                     attachments=documents,
                     actual_conversation_id=actual_conversation_id,
                     num_questions=num_questions,
-                    requires_web_search=requires_web_search  # <--- WE PASSED THE FLAG HERE
+                    requires_web_search=requires_web_search 
                 )
             
             elif intent == "mentalmap" or intent == "mind_map":
@@ -225,6 +226,19 @@ class OrchestratorService:
             logger.error(f"Domain Service Execution Failed: {e}")
             final_reply_text = "**Error**: Ha ocurrido un error interno de sistema. Intenta de nuevo."
             log_event("orchestrator_failure", {"error": str(e)}, level="error")
+
+        # 🟢 NEW: Inject Predictive Paywall metadata BEFORE DB Persistence
+        if quota_result:
+            if meta_payload is None:
+                meta_payload = {}
+                
+            if quota_result.get("limit_reached_now"):
+                meta_payload["limit_reached"] = True
+                meta_payload["limit_type"] = quota_result.get("limit_type")
+                meta_payload["reset_timestamp"] = quota_result.get("reset_timestamp")
+                meta_payload["show_upsell"] = False
+            elif quota_result.get("show_upsell"):
+                meta_payload["show_upsell"] = True
 
         # 7. Persist AI Response 
         assistant_timestamp = ConversationService.save_assistant_message(
