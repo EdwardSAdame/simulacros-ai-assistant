@@ -6,7 +6,7 @@ class QuotaConfig:
 
     # Free tier limits
     FREE_HIGH_COMPUTE_LIMIT = int(os.environ.get("FREE_HIGH_COMPUTE_LIMIT", 2))
-    FREE_STANDARD_TEXT_LIMIT = int(os.environ.get("FREE_STANDARD_TEXT_LIMIT", 30))
+    FREE_STANDARD_TEXT_LIMIT = int(os.environ.get("FREE_STANDARD_TEXT_LIMIT", 15))
 
     # Soft paywall trigger point (e.g., show after 1st deliverable is consumed)
     SOFT_PAYWALL_TRIGGER_COUNT = int(os.environ.get("SOFT_PAYWALL_TRIGGER_COUNT", 1))
