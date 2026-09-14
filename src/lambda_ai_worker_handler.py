@@ -16,7 +16,7 @@ from src.services.history_service import build_history_list
 from src.services.audio_usage_service import AudioUsageService
 from src.config.model_config import get_model_config
 
-# 🟢 NEW: Import the Quota Service
+# Import the Quota Service
 from src.services.quota_service import quota_service
 
 logger = logging.getLogger()
@@ -177,7 +177,6 @@ def lambda_handler(event, context):
                     num_questions = routing_result.get("num_questions", 5)
                     exam_type = routing_result.get("exam_type", "unknown")
 
-                    # 🟢 NEW: Hard Paywall & Quota Intercept
                     has_media = bool(attachments or media_items)
                     quota_result = quota_service.evaluate_quota(
                         user_id=user_id or "anonymous",
@@ -186,9 +185,9 @@ def lambda_handler(event, context):
                         user_tier=ai_mode
                     )
 
-                    # If quota exceeded, stream the error payload and halt execution
+                    # Reactive Fallback: If quota exceeded before computation, stream the error payload and halt
                     if not quota_result.get("allowed", True):
-                        log_event("hard_paywall_triggered", {
+                        log_event("hard_paywall_triggered_reactively", {
                             "user_id": user_id, 
                             "limit_type": quota_result.get("limit_type")
                         }, level="warning")
@@ -208,7 +207,6 @@ def lambda_handler(event, context):
                                 except Exception:
                                     pass
                         
-                        # Skip processing the rest of this record
                         continue
                     
                     client_action = None
@@ -290,11 +288,16 @@ def lambda_handler(event, context):
                 num_questions=num_questions
             )
 
-            # 🟢 NEW: Soft Paywall Injection
-            # If the quota service determined this request hit the upsell threshold, inject it into the payload
-            if quota_result.get("show_upsell"):
-                if meta_payload is None:
-                    meta_payload = {}
+            # Predictive Paywall and Soft Paywall Injection
+            if meta_payload is None:
+                meta_payload = {}
+                
+            if quota_result.get("limit_reached_now"):
+                meta_payload["limit_reached"] = True
+                meta_payload["limit_type"] = quota_result.get("limit_type")
+                meta_payload["reset_timestamp"] = quota_result.get("reset_timestamp")
+                meta_payload["show_upsell"] = False
+            elif quota_result.get("show_upsell"):
                 meta_payload["show_upsell"] = True
 
             if connection_ids and not is_hidden:

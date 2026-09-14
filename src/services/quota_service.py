@@ -17,7 +17,6 @@ class QuotaService:
         is_free_tier = user_tier.lower() in ["omega", "free"]
         
         # 1. Intent Classification
-        # High compute is triggered by files OR any intent that is not standard chat
         is_high_compute = has_attachments or (intent and intent.lower() != "chat")
         
         # 2. Retrieve Configuration Limits
@@ -28,17 +27,17 @@ class QuotaService:
         current_usage = user_usage_table.get_usage(user_id, window_duration)
         
         if not current_usage:
-            # Failsafe: if DB read fails, allow access to prevent false lockouts
             return {"allowed": True, "show_upsell": False, "is_high_compute": is_high_compute}
 
         current_count = int(current_usage.get('HighComputeCount', 0)) if is_high_compute else int(current_usage.get('StandardTextCount', 0))
         reset_timestamp = int(current_usage.get('ExpiresAt', int(time.time()) + window_duration))
 
-        # 4. Hard Paywall Check (Pre-computation intercept)
+        # 4. Reactive Hard Paywall Check (Pre-computation intercept)
         if current_count >= limit:
             return {
                 "allowed": False,
                 "limit_reached": True,
+                "limit_reached_now": False,
                 "limit_type": "high_compute" if is_high_compute else "standard_text",
                 "reset_timestamp": reset_timestamp,
                 "show_upsell": False,
@@ -54,17 +53,22 @@ class QuotaService:
         # Extract the new count after incrementing
         new_count = int(updated_attributes.get('HighComputeCount', current_count + 1)) if is_high_compute else int(updated_attributes.get('StandardTextCount', current_count + 1))
 
-        # 6. Soft Paywall Check (Post-computation injection)
+        # 6. Predictive Hard Paywall Check (Zero balance reached on this exact request)
+        limit_reached_now = (new_count >= limit)
+
+        # 7. Soft Paywall Check (Post-computation injection)
         show_upsell = False
-        if is_free_tier and is_high_compute and new_count == QuotaConfig.SOFT_PAYWALL_TRIGGER_COUNT:
+        if is_free_tier and is_high_compute and new_count == QuotaConfig.SOFT_PAYWALL_TRIGGER_COUNT and not limit_reached_now:
             show_upsell = True
 
         return {
             "allowed": True,
             "limit_reached": False,
+            "limit_reached_now": limit_reached_now,
             "show_upsell": show_upsell,
             "reset_timestamp": reset_timestamp,
-            "is_high_compute": is_high_compute
+            "is_high_compute": is_high_compute,
+            "limit_type": "high_compute" if is_high_compute else "standard_text"
         }
 
 # Create a singleton instance to be imported into lambda handlers
