@@ -7,6 +7,7 @@ import requests
 from src.config.settings import settings
 from src.config.audio_config import get_audio_profile
 from src.utils.logging_utils import log_event, set_invocation_context
+from src.services.quota_service import quota_service
 
 logger = logging.getLogger(__name__)
 
@@ -26,8 +27,27 @@ def handler(event, context):
         except json.JSONDecodeError:
             body_data = {}
             
+        user_id = body_data.get('userId')
         profile_name = body_data.get('profile_name', body_data.get('mode', 'transcription'))
         ai_tier = body_data.get('ai_mode', body_data.get('tier', 'omega'))
+        
+        # PRE-FLIGHT QUOTA CHECK
+        if user_id:
+            quota_status = quota_service.check_voice_quota(user_id=user_id, user_tier=ai_tier)
+            
+            if not quota_status.get("allowed", True):
+                log_event("audio_token_rejected_quota", {"user_id": user_id, "tier": ai_tier}, level="warning")
+                if apigw_client:
+                    apigw_client.post_to_connection(
+                        ConnectionId=connection_id,
+                        Data=json.dumps({
+                            "action": "error",
+                            "message": "Voice quota limit reached.",
+                            "limit_type": quota_status.get("limit_type", "voice"),
+                            "reset_timestamp": quota_status.get("reset_timestamp")
+                        })
+                    )
+                return {'statusCode': 403, 'body': 'Voice quota exceeded'}
         
         profile = get_audio_profile(profile_name, ai_tier)
         if not profile:
@@ -69,7 +89,7 @@ def handler(event, context):
                 }
             }
         else:
-            # 🟢 THE FIX: Use the dedicated GA transcription schema!
+            # THE FIX: Use the dedicated GA transcription schema
             session_config = {
                 "type": "transcription",
                 "audio": {

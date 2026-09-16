@@ -1,5 +1,4 @@
 # src/lambda_save_voice_handler.py
-
 import json
 import logging
 from src.storage.messages_table import save_message
@@ -8,6 +7,7 @@ from src.storage.conversations_table import (
     get_conversation_metadata,
     save_conversation
 )
+from src.services.quota_service import quota_service
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
@@ -35,7 +35,7 @@ def handler(event, context):
         # 3. Validate required fields
         if not conversation_id or not role or not text:
             logger.warning(f"Missing required fields for voice save. Body received: {body}")
-            return {'statusCode': 400, 'body': 'Missing conversationId, role, or text'}
+            return {'statusCode': 400, 'body': json.dumps({'error': 'Missing conversationId, role, or text'})}
 
         logger.info(f"Saving {role} voice message to conversation {conversation_id}")
 
@@ -49,8 +49,22 @@ def handler(event, context):
             metadata=metadata
         )
 
-        # 5. Handle the Conversation Header (History List)
+        # 5. Handle the Conversation Header and Quota Increment
+        quota_metadata = {}
+        
         if user_id:
+            # Increment quota ONLY for user turns to prevent double-counting
+            if role == 'user':
+                try:
+                    quota_result = quota_service.evaluate_voice_turn(user_id=user_id, user_tier=ai_mode)
+                    quota_metadata = {
+                        "limit_reached_now": quota_result.get("limit_reached_now", False),
+                        "limit_reached": quota_result.get("limit_reached", False),
+                        "current_count": quota_result.get("current_count", 0)
+                    }
+                except Exception as qe:
+                    logger.error(f"Error evaluating voice quota for {user_id}: {qe}")
+
             # Check if the conversation already exists
             existing_meta = get_conversation_metadata(user_id=user_id, conversation_id=conversation_id)
             
@@ -61,7 +75,7 @@ def handler(event, context):
                 # Only allow the 'user' payload to create the header to prevent race duplicates
                 if role == 'user':
                     
-                    # 🟢 THE FIX: Dynamically generate the title from the first spoken sentence
+                    # Dynamically generate the title from the first spoken sentence
                     dynamic_title = text[:40] + ("..." if len(text) > 40 else "")
                     
                     logger.info(f"Creating new conversation header: {conversation_id} with title: {dynamic_title}")
@@ -70,7 +84,7 @@ def handler(event, context):
                         user_id=user_id,
                         name=user_name,       
                         email=user_email,     
-                        title=dynamic_title,  # 🟢 Use the dynamic title here!
+                        title=dynamic_title,  
                         page=user_page,       
                         conversation_id=conversation_id,
                         arena_id=arena_id,    
@@ -80,11 +94,21 @@ def handler(event, context):
                 else:
                     logger.info(f"Skipping header creation for 'assistant' message to prevent race duplicate: {conversation_id}")
 
-        return {'statusCode': 200, 'body': 'Voice message saved successfully'}
+        # 6. Return success with optional quota metadata
+        response_body = {
+            "message": "Voice message saved successfully",
+            "quota": quota_metadata
+        }
+        
+        return {
+            'statusCode': 200, 
+            'body': json.dumps(response_body),
+            'headers': {'Content-Type': 'application/json'}
+        }
 
     except json.JSONDecodeError:
         logger.error("Failed to parse JSON body")
-        return {'statusCode': 400, 'body': 'Invalid JSON'}
+        return {'statusCode': 400, 'body': json.dumps({'error': 'Invalid JSON'})}
     except Exception as e:
         logger.error(f"Internal error saving voice message: {e}", exc_info=True)
-        return {'statusCode': 500, 'body': 'Internal server error'}
+        return {'statusCode': 500, 'body': json.dumps({'error': 'Internal server error'})}

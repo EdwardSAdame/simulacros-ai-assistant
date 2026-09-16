@@ -25,6 +25,7 @@ class UserUsageTable:
                     'UserId': user_id,
                     'StandardTextCount': 0,
                     'HighComputeCount': 0,
+                    'VoiceCount': 0,
                     'WindowStartTime': current_time,
                     'ExpiresAt': current_time + window_duration
                 }
@@ -39,14 +40,24 @@ class UserUsageTable:
             )
             return None
 
-    def increment_usage(self, user_id: str, is_high_compute: bool, window_duration: int) -> dict:
+    def increment_usage(self, user_id: str, usage_type, window_duration: int) -> dict:
         """
-        Atomically increments the appropriate bucket if the rolling window is still valid.
+        Atomically increments the appropriate bucket if the fixed window is still valid.
         If the window has expired or the user is new, it catches the condition failure 
         and safely initializes a new tracking window.
         """
         current_time = int(time.time())
-        count_attribute = 'HighComputeCount' if is_high_compute else 'StandardTextCount'
+        
+        # Determine the target attribute based on the usage type
+        # Fallback to boolean check safely handles legacy calls (is_high_compute)
+        if isinstance(usage_type, bool):
+            count_attribute = 'HighComputeCount' if usage_type else 'StandardTextCount'
+        elif usage_type == "voice":
+            count_attribute = 'VoiceCount'
+        elif usage_type == "high_compute":
+            count_attribute = 'HighComputeCount'
+        else:
+            count_attribute = 'StandardTextCount'
 
         try:
             # Atomic update: Adds 1 directly in the database to prevent race conditions
@@ -70,6 +81,7 @@ class UserUsageTable:
                     'UserId': user_id,
                     'StandardTextCount': 0,
                     'HighComputeCount': 0,
+                    'VoiceCount': 0,
                     'WindowStartTime': current_time,
                     'ExpiresAt': expires_at
                 }
