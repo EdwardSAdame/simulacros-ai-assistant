@@ -1,6 +1,7 @@
-# src/lambda_save_voice_handler.py
 import json
 import logging
+import boto3
+import os
 from src.storage.messages_table import save_message
 from src.storage.conversations_table import (
     update_conversation_last_active,
@@ -12,8 +13,15 @@ from src.services.quota_service import quota_service
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
+# Initialize API Gateway client for WebSocket push
+APIGW_ENDPOINT_URL = os.environ.get('APIGW_AUDIO_ENDPOINT_URL', os.environ.get('APIGW_ENDPOINT_URL'))
+apigw_client = boto3.client('apigatewaymanagementapi', endpoint_url=APIGW_ENDPOINT_URL) if APIGW_ENDPOINT_URL else None
+
 def handler(event, context):
     try:
+        # Extract the WebSocket connection ID for active pushes
+        ws_connection_id = event.get('requestContext', {}).get('connectionId')
+
         # 1. Parse the incoming WebSocket body
         body_str = event.get('body', '{}')
         body = json.loads(body_str)
@@ -57,11 +65,32 @@ def handler(event, context):
             if role == 'user':
                 try:
                     quota_result = quota_service.evaluate_voice_turn(user_id=user_id, user_tier=ai_mode)
+                    
+                    is_limit_reached = quota_result.get("limit_reached", False) or quota_result.get("limit_reached_now", False)
+                    
                     quota_metadata = {
                         "limit_reached_now": quota_result.get("limit_reached_now", False),
                         "limit_reached": quota_result.get("limit_reached", False),
-                        "current_count": quota_result.get("current_count", 0)
+                        "current_count": quota_result.get("current_count", 0),
+                        "reset_timestamp": quota_result.get("reset_timestamp")
                     }
+
+                    # MID-CONVERSATION PUSH: Actively notify the frontend if the limit was just hit
+                    if is_limit_reached and apigw_client and ws_connection_id:
+                        logger.info(f"Voice quota reached for user {user_id}. Pushing termination signal to frontend.")
+                        try:
+                            apigw_client.post_to_connection(
+                                ConnectionId=ws_connection_id,
+                                Data=json.dumps({
+                                    "action": "error",
+                                    "message": "Voice quota limit reached.",
+                                    "limit_type": "voice",
+                                    "reset_timestamp": quota_result.get("reset_timestamp")
+                                })
+                            )
+                        except Exception as push_err:
+                            logger.error(f"Failed to push quota error to client {ws_connection_id}: {push_err}")
+
                 except Exception as qe:
                     logger.error(f"Error evaluating voice quota for {user_id}: {qe}")
 
