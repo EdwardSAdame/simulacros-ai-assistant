@@ -1,3 +1,4 @@
+# FILE: src/lambda_save_voice_handler.py
 import json
 import logging
 import boto3
@@ -14,7 +15,9 @@ logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
 # Initialize API Gateway client for WebSocket push
-APIGW_ENDPOINT_URL = os.environ.get('APIGW_AUDIO_ENDPOINT_URL', os.environ.get('APIGW_ENDPOINT_URL'))
+# FIX: The frontend sends save_voice_message via the main chat WebSocket.
+# We must push the error back through the WEBSOCKET_API_ENDPOINT, not the audio endpoint.
+APIGW_ENDPOINT_URL = os.environ.get('WEBSOCKET_API_ENDPOINT', os.environ.get('APIGW_ENDPOINT_URL'))
 apigw_client = boto3.client('apigatewaymanagementapi', endpoint_url=APIGW_ENDPOINT_URL) if APIGW_ENDPOINT_URL else None
 
 def handler(event, context):
