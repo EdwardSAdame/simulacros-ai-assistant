@@ -1,4 +1,3 @@
-# FILE: src/services/quota_service.py
 import logging
 import time
 from typing import Any, Dict
@@ -17,7 +16,7 @@ class QuotaService:
     Enforces Hard Paywalls (blocking) and Soft Paywalls (upsell metadata).
     """
 
-    def check_voice_quota(self, user_id: str, user_tier: str = "omega") -> Dict[str, Any]:
+    def check_voice_quota(self, user_id: str, user_tier: str = "omega", is_paid: bool = False) -> Dict[str, Any]:
         """
         Performs a pre-flight read-only validation for voice interactions.
         Does not increment the usage counter. Used prior to generating real-time audio tokens.
@@ -25,6 +24,17 @@ class QuotaService:
         window_duration = QuotaConfig.get_window_duration()
         limit = QuotaConfig.get_voice_limit(user_tier)
         current_time = int(time.time())
+
+        # Database Bypass for Paid Subscribers
+        if is_paid:
+            return {
+                "allowed": True,
+                "limit_reached": False,
+                "current_count": 0,
+                "limit": limit,
+                "limit_type": "voice",
+                "reset_timestamp": current_time + window_duration
+            }
 
         current_usage = user_usage_table.get_usage(user_id, window_duration)
         if not current_usage:
@@ -50,7 +60,7 @@ class QuotaService:
             "reset_timestamp": reset_timestamp
         }
 
-    def evaluate_voice_turn(self, user_id: str, user_tier: str = "omega") -> Dict[str, Any]:
+    def evaluate_voice_turn(self, user_id: str, user_tier: str = "omega", is_paid: bool = False) -> Dict[str, Any]:
         """
         Convenience method to evaluate and atomically increment voice quota.
         Called when a transcribed user turn is successfully persisted.
@@ -60,7 +70,8 @@ class QuotaService:
             intent="chat",
             has_attachments=False,
             user_tier=user_tier,
-            channel="voice"
+            channel="voice",
+            is_paid=is_paid
         )
 
     def evaluate_quota(
@@ -69,11 +80,13 @@ class QuotaService:
         intent: str = "chat",
         has_attachments: bool = False,
         user_tier: str = "omega",
-        channel: str = "text"
+        channel: str = "text",
+        is_paid: bool = False
     ) -> Dict[str, Any]:
         """
         Evaluates current limits and atomically increments usage if authorized.
         Supports standard text, high compute, and voice channels.
+        Bypasses usage tracking entirely for paid subscribers.
         """
         tier_normalized = (user_tier or "omega").lower()
         is_free_tier = tier_normalized in ["omega", "free"]
@@ -100,7 +113,21 @@ class QuotaService:
             count_key = "StandardTextCount"
             storage_usage_type = "standard_text"
 
-        # 2. Retrieve Current Usage State
+        # 2. Database Bypass for Paid Subscribers
+        if is_paid:
+            return {
+                "allowed": True,
+                "limit_reached": False,
+                "limit_reached_now": False,
+                "show_upsell": False,
+                "is_high_compute": is_high_compute,
+                "limit_type": limit_type,
+                "reset_timestamp": current_time + window_duration,
+                "current_count": 0,
+                "limit": limit
+            }
+
+        # 3. Retrieve Current Usage State
         current_usage = user_usage_table.get_usage(user_id, window_duration)
         if not current_usage:
             return {
@@ -116,7 +143,7 @@ class QuotaService:
         current_count = int(current_usage.get(count_key, 0))
         reset_timestamp = int(current_usage.get("ExpiresAt", current_time + window_duration))
 
-        # 3. Reactive Hard Paywall Check (Pre-computation intercept)
+        # 4. Reactive Hard Paywall Check (Pre-computation intercept)
         if current_count >= limit:
             return {
                 "allowed": False,
@@ -130,7 +157,7 @@ class QuotaService:
                 "limit": limit
             }
 
-        # 4. Atomic Increment (Execution is authorized)
+        # 5. Atomic Increment (Execution is authorized)
         updated_attributes = user_usage_table.increment_usage(
             user_id=user_id,
             usage_type=storage_usage_type,
@@ -150,10 +177,10 @@ class QuotaService:
 
         new_count = int(updated_attributes.get(count_key, current_count + 1))
 
-        # 5. Predictive Hard Paywall Check (Zero balance reached on this exact request)
+        # 6. Predictive Hard Paywall Check (Zero balance reached on this exact request)
         limit_reached_now = (new_count >= limit)
 
-        # 6. Soft Paywall Check (Post-computation injection)
+        # 7. Soft Paywall Check (Post-computation injection)
         show_upsell = False
         if is_free_tier and is_high_compute and new_count == QuotaConfig.SOFT_PAYWALL_TRIGGER_COUNT and not limit_reached_now:
             show_upsell = True

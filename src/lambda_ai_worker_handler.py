@@ -2,7 +2,6 @@ import json
 import logging
 import boto3
 import os
-from datetime import datetime, timezone
 
 from src.services.orchestrator_service import OrchestratorService
 from src.storage.ws_connections_table import WsConnectionsTable
@@ -15,8 +14,6 @@ from src.storage.conversations_table import get_conversation_metadata
 from src.services.history_service import build_history_list 
 from src.services.audio_usage_service import AudioUsageService
 from src.config.model_config import get_model_config
-
-# Import the Quota Service
 from src.services.quota_service import quota_service
 
 logger = logging.getLogger()
@@ -58,6 +55,7 @@ def lambda_handler(event, context):
             conv_id_in = payload.get("conversation_id")
             
             ai_mode = payload.get("mode", "omega")
+            is_paid = payload.get("is_paid", False)
             
             audio_duration = payload.get("audioDurationSeconds")
             sts_in_text = payload.get("stsInputText")
@@ -178,14 +176,15 @@ def lambda_handler(event, context):
                     exam_type = routing_result.get("exam_type", "unknown")
 
                     has_media = bool(attachments or media_items)
+                    
                     quota_result = quota_service.evaluate_quota(
                         user_id=user_id or "anonymous",
                         intent=intent,
                         has_attachments=has_media,
-                        user_tier=ai_mode
+                        user_tier=ai_mode,
+                        is_paid=is_paid
                     )
 
-                    # Reactive Fallback: If quota exceeded before computation, stream the error payload and halt
                     if not quota_result.get("allowed", True):
                         log_event("hard_paywall_triggered_reactively", {
                             "user_id": user_id, 
@@ -289,9 +288,6 @@ def lambda_handler(event, context):
                 quota_result=quota_result
             )
 
-            # We removed the manual injection block from here because the Orchestrator
-            # now correctly embeds the quota flags into meta_payload before persisting to DB.
-
             if connection_ids and not is_hidden:
                 for conn_id in connection_ids:
                     try:
@@ -355,7 +351,7 @@ def lambda_handler(event, context):
             error_str = str(e).lower()
             if "429" in error_str or "quota" in error_str or "insufficient" in error_str:
                 log_event("ai_quota_exceeded_handled", {"user_id": user_id, "error": str(e)}, level="warning")
-                fallback_msg = "**Señal nula. Vacío de sistema. Intenta luego.**"
+                fallback_msg = "**System empty. Try again later.**"
                 
                 if connection_ids:
                     for conn_id in connection_ids:

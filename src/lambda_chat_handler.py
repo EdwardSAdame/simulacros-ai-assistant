@@ -1,6 +1,3 @@
-# Backend: simulacros-ai-assistant
-# File: src/lambda_chat_handler.py
-
 import json
 import logging
 import boto3
@@ -84,16 +81,19 @@ def lambda_handler(event, context):
         email = _none_if_empty(email)
         page = page or "/"
 
-        if ai_mode == "alpha":
-            is_paid = is_user_paid(user_id)
-            if not is_paid:
-                log_event("unauthorized_mode_access", {"user_id": user_id, "requested_mode": "alpha"}, level="warning")
-                ai_mode = "omega"
+        # 1. Universal Entitlement Check
+        is_paid = is_user_paid(user_id)
+
+        # 2. Mode Degradation
+        if ai_mode == "alpha" and not is_paid:
+            log_event("unauthorized_mode_access", {"user_id": user_id, "requested_mode": "alpha"}, level="warning")
+            ai_mode = "omega"
 
         if not message and not attachments and not media_items and audio_duration is None and sts_in_text is None and sts_in_audio is None:
             log_event("input_validation_failed", {"reason": "Missing message or media"}, level="warning")
             return response(400, {"error": "Missing message or media"})
 
+        # 3. Enriched SQS Payload
         payload = {
             "message": message,
             "user_id": user_id,
@@ -105,6 +105,7 @@ def lambda_handler(event, context):
             "media_items": media_items, 
             "client_row_id": client_row_id,
             "mode": ai_mode,
+            "is_paid": is_paid,
             "arena_id": arena_id,
             "exam_id": exam_id, 
             "exam_state": exam_state,
@@ -125,6 +126,7 @@ def lambda_handler(event, context):
             "user_id": user_id,
             "conversation_id": conversation_id_in,
             "mode": ai_mode,
+            "is_paid": is_paid,
             "has_media_items": bool(media_items),
             "attachment_count": len(attachments),
             "arena_id": arena_id,

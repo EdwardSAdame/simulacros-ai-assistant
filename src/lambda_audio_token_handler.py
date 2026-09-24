@@ -1,4 +1,3 @@
-# src/lambda_audio_token_handler.py
 import json
 import logging
 import boto3
@@ -8,6 +7,7 @@ from src.config.settings import settings
 from src.config.audio_config import get_audio_profile
 from src.utils.logging_utils import log_event, set_invocation_context
 from src.services.quota_service import quota_service
+from src.services.purchase_service import is_user_paid
 
 logger = logging.getLogger(__name__)
 
@@ -33,7 +33,8 @@ def handler(event, context):
         
         # PRE-FLIGHT QUOTA CHECK
         if user_id:
-            quota_status = quota_service.check_voice_quota(user_id=user_id, user_tier=ai_tier)
+            is_paid = is_user_paid(user_id)
+            quota_status = quota_service.check_voice_quota(user_id=user_id, user_tier=ai_tier, is_paid=is_paid)
             
             if not quota_status.get("allowed", True):
                 log_event("audio_token_rejected_quota", {"user_id": user_id, "tier": ai_tier}, level="warning")
@@ -89,7 +90,6 @@ def handler(event, context):
                 }
             }
         else:
-            # THE FIX: Use the dedicated GA transcription schema
             session_config = {
                 "type": "transcription",
                 "audio": {
@@ -102,7 +102,6 @@ def handler(event, context):
                             "silence_duration_ms": int(profile.get("silence_duration_ms", 2000))
                         },
                         "transcription": {
-                            # Move the transcription model (e.g. gpt-4o-mini-transcribe) in here
                             "model": profile.get("model") 
                         }
                     }
