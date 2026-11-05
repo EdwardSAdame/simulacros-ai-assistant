@@ -270,8 +270,15 @@ class BaseAssistantClient:
             (cfg.reasoning_effort is not None and cfg.reasoning_effort.lower() != "none")
         )
         
+        has_image_tool = False
+        if tools:
+            for tool in tools:
+                if tool.get("type") == "image_generation":
+                    has_image_tool = True
+                    break
+        
         if is_reasoning:
-            if cfg.reasoning_effort: 
+            if cfg.reasoning_effort and not has_image_tool: 
                 req["reasoning"] = {"effort": cfg.reasoning_effort}
         else:
             req["temperature"] = cfg.temperature
