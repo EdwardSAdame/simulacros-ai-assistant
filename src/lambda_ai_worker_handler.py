@@ -1,3 +1,4 @@
+# FILE: src/lambda_ai_worker_handler.py
 import json
 import logging
 import boto3
@@ -45,6 +46,8 @@ def lambda_handler(event, context):
         connection_ids = []  
         conv_id_in = None
         client_row_id = None
+        quota_result = None  # FIX: Initialize variable to prevent UnboundLocalError when is_hidden is True
+        current_exam_context = None # FIX: Initialize variable to prevent UnboundLocalError
         
         try:
             body_raw = record.get("body", "{}")
