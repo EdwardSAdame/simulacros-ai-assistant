@@ -51,7 +51,7 @@ class OrchestratorService:
         exam_id: str | None = None,  
         is_hidden: bool = False,
         num_questions: int = 0,
-        quota_result: Dict | None = None  # 🟢 NEW: Pass quota evaluation to the orchestrator
+        quota_result: Dict | None = None
     ) -> Tuple[str, str, str, Dict | None]:
         
         # 1. Normalize Media
@@ -75,11 +75,7 @@ class OrchestratorService:
             else:
                 documents.append(item)
 
-        # 2. Hidden Context Fast-Path
-        if is_hidden:
-            return ConversationService.save_hidden_context(conversation_id or "temp", message)
-
-        # 3. Resolve Context and Database State
+        # 2. Resolve Context and Database State
         # Isolate the explicit LLM intent. If unknown, pass None to preserve the locked database state.
         if exam_type and exam_type.strip().lower() not in ["", "unknown"]:
             resolved_exam_context = exam_type.strip().upper()
@@ -99,8 +95,15 @@ class OrchestratorService:
             intent=intent
         )
 
-        # 4. Save User Input (Save all attachments to DB so the frontend history parser can read them)
+        # 3. Save User Input (Save all attachments to DB so the frontend history parser can read them)
         ConversationService.save_user_message(actual_conversation_id, message, attachments)
+
+        # 4. Hidden Context Fast-Path
+        # Intercept here AFTER the message is safely saved to the database.
+        # This prevents the LLM from executing and wasting tokens, while guaranteeing memory persistence.
+        if is_hidden:
+            log_event("hidden_context_saved_to_db", {"conversation_id": actual_conversation_id})
+            return "**System empty. Try again later.**", actual_conversation_id, "", {"is_hidden": True}
 
         # 5. Build Conversation History
         conversation_input = build_history_list(actual_conversation_id)
@@ -227,7 +230,6 @@ class OrchestratorService:
             final_reply_text = "**Error**: Ha ocurrido un error interno de sistema. Intenta de nuevo."
             log_event("orchestrator_failure", {"error": str(e)}, level="error")
 
-        # 🟢 NEW: Inject Predictive Paywall metadata BEFORE DB Persistence
         if quota_result:
             if meta_payload is None:
                 meta_payload = {}
