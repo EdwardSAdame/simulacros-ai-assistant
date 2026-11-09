@@ -15,9 +15,9 @@ def decimal_default(obj):
 
 def build_history_list(conversation_id: str, max_user: int = 30, max_assistant: int = 30, include_system_logs: bool = True) -> List[Dict[str, Any]]:
     """
-    Retrieves recent messages from the database and formats them for the OpenAI API.
-    Handles hidden context injection for assistant messages with metadata to prevent History Desync.
-    Restores media items (PDFs and Images) into the context window for ongoing analysis.
+    Retrieves recent messages from the database and formats them for the AI API.
+    Handles hidden context injection for both user directives and assistant metadata 
+    to prevent History Desync while preserving model boundaries.
     """
     try:
         msgs = get_recent_messages(conversation_id=conversation_id, limit=100, ascending=True)
@@ -35,10 +35,17 @@ def build_history_list(conversation_id: str, max_user: int = 30, max_assistant: 
             role = m.get("Role", "user")
             text_content = m.get("MessageText", "")
             
-            # Inject metadata context if available (Assistant only)
+            # Extract metadata
             metadata = m.get("Metadata") or m.get("Meta") or {}
+            is_hidden = metadata.get("is_hidden") is True or metadata.get("isHidden") is True
             
-            # ONLY inject the system log if include_system_logs is True
+            # 1. Handle User-side Hidden Contexts (Exam starts, dynamic rules, etc.)
+            if role == "user" and is_hidden:
+                # Ensure the AI recognizes this as a strict system directive, not user dialogue
+                if not text_content.startswith("["):
+                    text_content = f"[CONTEXTO INTERNO DEL SISTEMA: {text_content}]"
+            
+            # 2. Handle Assistant-side UI Metadata Contexts
             if role == "assistant" and metadata and include_system_logs:
                 try:
                     metadata_str = json.dumps(metadata, default=decimal_default)
